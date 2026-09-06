@@ -1,0 +1,4 @@
+interface:
+  display_name: "Studio Director"
+  short_description: "Coordinate game priorities and bounded handoffs"
+  default_prompt: "Use $studio-director to inspect the portfolio and carry out the next useful authorized step."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Retrospective"
+  short_description: "Turn game outcomes into evidence-based next steps"
+  default_prompt: "Use $game-retrospective to review this game's results and recommend the next practical action."

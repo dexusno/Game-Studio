@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Release"
+  short_description: "Prepare verified builds and practical store launches"
+  default_prompt: "Use $game-release to prepare and verify the current game's next authorized release step."

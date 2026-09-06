@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Research"
+  short_description: "Compare game opportunities with dated evidence"
+  default_prompt: "Use $game-research to produce an evidence-backed shortlist of small game opportunities."

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "latchline",
+  "title": "Latchline",
+  "status": "draft",
+  "hook": "Hold to latch a tiny courier to the next overhead rail, release to sling across the gap, and risk one more delivery before banking the run.",
+  "audience": "Arcade players who like immediate retries, short mastery sessions and a visible risk-versus-safety choice.",
+  "core_loop": "Time a latch, build a swing, release through a delivery gate, choose a safer bank gate or a harder bonus route, then retry a sixty-second course with a local best score.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {"demand": 2, "distinctiveness": 2, "fun_potential": 2, "scope_fit": 4, "distribution": 2},
+  "score_notes": {
+    "demand": "A low-priced score-attack comparable is on sale; that is weak indirect evidence for this control scheme and audience.",
+    "distinctiveness": "Tether games already exist; the delivery-versus-bank choice needs a close competitor search before claiming meaningful novelty.",
+    "fun_potential": "Control feel and readability dominate the pitch and have not been tested.",
+    "scope_fit": "A side-view course and one input keep the proposed prototype small, conditional on stable, readable movement.",
+    "distribution": "A successful risky delivery might be understandable in a short clip, but no creator/player response has been measured."
+  },
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/732430/Superflight/?cc=us&l=english",
+      "accessed_on": "2026-09-06",
+      "claim": "The inspected US/English listing offered Superflight at USD 2.99 and displayed user reviews. This is a dated visible offer, not its realized receipt, lifetime pricing, sales volume or a recommended Latchline price.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/732430/Superflight/?cc=us&l=english",
+      "accessed_on": "2026-09-06",
+      "claim": "The developer describes brief score-chasing sessions and riskier proximity manoeuvres. That supports a compact arcade comparable; the source does not validate tether controls or our delivery mechanic.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Movement can feel frustrating unless attachment selection, release timing and collision feedback are consistent.",
+    "The score loop may become repetitive without excellent feel and varied but readable routes.",
+    "Competition from free browser and mobile arcade games may weaken willingness to pay.",
+    "Local scoring avoids online service work, but may reduce the appeal to competitive players.",
+    "This is not a trend finding; two records from one listing are not independent sources. Working title and originality are unverified."
+  ],
+  "next_test": "If authorized, build a side-view greybox with one input, a ten-second practice section and one sixty-second course. Observe five arcade players. Continue if four complete a latch-release-delivery sequence within two minutes without coaching and three voluntarily restart at least twice; record missed-input causes and ask whether banking changed a decision. If control confusion dominates, fix feel before adding content.",
+  "decision_reason": "Draft alternative for the studio's research pilot. No build, selected game or tested willingness to pay.",
+  "commercial_hypothesis": "Test a very small premium PC arcade game and a browser-playable sample. USD 2.99-4.99 is only a price hypothesis pending content and audience tests; a full free browser release would require a different commercial case.",
+  "prototype_envelope": {"estimated_agent_days": 1, "estimated_owner_hours": 1.5, "cash_commitment_usd": 0, "scope": "One course, one input, explicit attachment preview, bank gate, instant retry and local score; no online leaderboard, upgrades or level editor."},
+  "budget_note": "Unvalidated prototype estimate, excluding participant recruitment, final movement polish, art/audio, commercial content, marketing, compatibility QA and release lead time. No spend authorized.",
+  "pilot_run": "research/runs/2026-09-06-studio-pilot/README.md",
+  "decision_history": [{"date": "2026-09-06", "status": "draft", "reason": "Created as an active arcade alternative; not selected."}]
+}

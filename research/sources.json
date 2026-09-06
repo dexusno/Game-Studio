@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "updated_on": "2026-09-06",
+  "notes": "Catalog of useful public entry points. Access is descriptive, not a promise of a working integration. Only entries explicitly verified were inspected in the pilot; verify the exact page before relying on a claim.",
+  "sources": [
+    {
+      "id": "steam-store",
+      "name": "Steam game pages and search",
+      "url": "https://store.steampowered.com/search/",
+      "purpose": "Find close competitors, user tags, positioning, release dates, advertised scope, regional pricing and visible review response. Include recent or weak comparables as well as hits.",
+      "access": "Public web. Three individual game pages were verified on 2026-09-06; search entry point itself was not tested. Region, language, age gates and cache may affect results.",
+      "query_recipe": "Search a mechanic plus player promise; inspect each game's canonical page. Record currency, filters, access date and whether the source was a cached web result."
+    },
+    {
+      "id": "steam-charts",
+      "name": "Steam charts",
+      "url": "https://store.steampowered.com/charts/",
+      "purpose": "Broad current visibility and activity signals; repeated comparable observations may inform timing, but chart presence alone is not opportunity validation.",
+      "access": "Public entry point; not tested in this pilot. Charts may be dynamic or regional."
+    },
+    {
+      "id": "steam-reviews-docs",
+      "name": "Steamworks user reviews documentation",
+      "url": "https://partner.steamgames.com/doc/store/reviews",
+      "purpose": "Understand review eligibility, displayed scores and feedback limitations before comparing review evidence.",
+      "access": "Public official documentation; opened successfully on 2026-09-06.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "steam-coming-soon",
+      "name": "Steamworks Coming Soon documentation",
+      "url": "https://partner.steamgames.com/doc/store/coming_soon",
+      "purpose": "Check release visibility requirements and audience-building lead time separately from development time.",
+      "access": "Public official documentation; opened successfully on 2026-09-06. Recheck before scheduling a launch.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "steam-next-fest",
+      "name": "Steamworks Next Fest documentation",
+      "url": "https://partner.steamgames.com/doc/marketing/upcoming_events/nextfest",
+      "purpose": "Explore demo discovery opportunities and verify current event dates and eligibility.",
+      "access": "Public official documentation entry point; not tested in this pilot. Event dates and eligibility are not assumed."
+    },
+    {
+      "id": "itch-games",
+      "name": "itch.io games",
+      "url": "https://itch.io/games",
+      "purpose": "Browse small experimental games by tag; examine comparable hooks, available demos and visible feedback beyond Steam incumbents.",
+      "access": "Public browsing entry point; not tested in this pilot. Rankings are platform-specific; downloads, revenue and private analytics are not presumed available."
+    },
+    {
+      "id": "itch-jams",
+      "name": "itch.io jams",
+      "url": "https://itch.io/jams",
+      "purpose": "Find constrained mechanics, recent prototypes and jam feedback. A jam ranking is not a commercial demand measurement.",
+      "access": "Public entry point; not tested in this pilot. Individual entries or voting pages may have access limits."
+    },
+    {
+      "id": "google-trends",
+      "name": "Google Trends",
+      "url": "https://trends.google.com/trends/explore",
+      "purpose": "Compare repeated search-interest observations for themes or mechanics with explicit period and geography; distinguish a franchise/news spike from a durable player need.",
+      "access": "Public interactive interface; not tested in this pilot. JavaScript or rate limits may prevent extraction. Search coverage is secondary evidence and must be labeled."
+    },
+    {
+      "id": "exploding-topics",
+      "name": "Exploding Topics public blog",
+      "url": "https://explodingtopics.com/blog",
+      "purpose": "Find theme leads for further game-specific validation; broad consumer interest is not evidence of game purchases.",
+      "access": "Public blog entry point; not tested in this pilot. Some data may be paid or inaccessible; do not imply access to paid metrics."
+    },
+    {
+      "id": "reddit-player-communities",
+      "name": "Reddit player communities",
+      "url": "https://www.reddit.com/",
+      "purpose": "Look for specific player requests, frustrations and vocabulary in relevant genre communities. Treat anecdotes as anecdotes and search for disagreement.",
+      "access": "Public search/browser access where available; not tested in this pilot. No account access or permission to post is implied.",
+      "query_recipe": "Use scoped web searches such as site:reddit.com/r/CozyGamers <mechanic> or site:reddit.com/r/IndieGaming <game> with an explicit date range. Record the exact post URL, not the search page."
+    },
+    {
+      "id": "youtube-gameplay",
+      "name": "YouTube gameplay and developer channels",
+      "url": "https://www.youtube.com/",
+      "purpose": "Inspect first-minute clarity, visible play friction and creator-friendly moments; compare channels and dates before interpreting attention.",
+      "access": "Public entry point; not tested in this pilot. Views are neither players nor purchases. A title or thumbnail alone cannot substantiate what happens in a video."
+    },
+    {
+      "id": "max-inferno-press",
+      "name": "Max Inferno press kit",
+      "url": "https://www.maxinferno.com/press",
+      "purpose": "Primary developer description of A Little to the Left: interaction, content and presentation expectations for a tactile puzzle comparable.",
+      "access": "Public developer page; opened successfully on 2026-09-06. Some copy differs internally on puzzle counts; avoid treating the page as a current inventory.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "product-hunt",
+      "name": "Product Hunt",
+      "url": "https://www.producthunt.com/",
+      "purpose": "Optional early theme or interaction leads inherited from the Appdrip approach. Maker interest is weak evidence of a game-buying audience and requires game-specific checks.",
+      "access": "Public entry point; not tested in this pilot. Dynamic pages or account restrictions may limit access."
+    }
+  ]
+}

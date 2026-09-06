@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T15:06:23.764494+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 1629520,
+      "name": "A Little to the Left",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1629520&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1629520?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 14.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 15416,
+        "total_negative": 1387,
+        "total_reviews": 16803
+      }
+    },
+    {
+      "app_id": 1046030,
+      "name": "ISLANDERS",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1046030&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1046030?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 15198,
+        "total_negative": 897,
+        "total_reviews": 16095
+      }
+    },
+    {
+      "app_id": 732430,
+      "name": "Superflight",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=732430&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/732430?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 10646,
+        "total_negative": 396,
+        "total_reviews": 11042
+      }
+    }
+  ]
+}

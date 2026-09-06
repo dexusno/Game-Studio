@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "parcel-paradox",
+  "title": "Parcel Paradox",
+  "status": "draft",
+  "hook": "Pack a tiny delivery crate where magical parcels change the rules of their neighbours: a snow globe cools one square, a sleepy dragon warms two, and the customer's promise must survive the trip.",
+  "audience": "Players who enjoy tactile organizing puzzles and short, readable logic challenges without a timer.",
+  "core_loop": "Read three illustrated delivery conditions, drag and rotate six parcels into a small crate, preview neighbour effects, dispatch, then improve the packing or try the next rule combination.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {"demand": 2, "distinctiveness": 3, "fun_potential": 2, "scope_fit": 4, "distribution": 2},
+  "score_notes": {
+    "demand": "An established paid organizing-puzzle comparable exists; demand for magical packing has not been measured.",
+    "distinctiveness": "Visible interactions between parcels could separate this from pure spatial tidying; close packing competitors still need a deliberate search.",
+    "fun_potential": "The prediction/reveal loop is a hypothesis, with no playable test.",
+    "scope_fit": "One reusable board and six object rules bound the proposed prototype; commercial level authoring may still dominate effort.",
+    "distribution": "Packing consequences could read in a short clip, but no audience test or channel access has been demonstrated."
+  },
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/1629520/A_Little_to_the_Left/",
+      "accessed_on": "2026-09-06",
+      "claim": "The inspected Steam listing presents a released, purchasable organizing puzzle game with visible user review activity. This establishes a comparable, not sales or demand for this proposal.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://www.maxinferno.com/press",
+      "accessed_on": "2026-09-06",
+      "claim": "The developer describes drag-and-drop puzzles, multiple solutions, illustration and sound design. This is a reminder that puzzle content and sensory polish need effort even when controls are simple.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "This may overlap closely with existing packing or inventory puzzles; originality and the working title are not cleared.",
+    "Icon-heavy rules may be hard to read without text, color-independent cues and a useful preview.",
+    "A small set of rules may exhaust its interesting combinations quickly; handcrafted content is a potential production cost.",
+    "A known competitor's reception does not establish willingness to pay for our concept."
+  ],
+  "next_test": "If authorized, build one greybox crate with six parcels and three contracts. Observe five target players for ten minutes each. Continue only if at least four predict a neighbour effect without coaching after the introduction and at least three voluntarily try another contract; otherwise simplify rules or hold. These are directional discovery thresholds, not statistical market validation.",
+  "decision_reason": "Studio pilot draft only; no selection, customer research or playtest has occurred.",
+  "commercial_hypothesis": "Test a small premium PC puzzle package with a sample puzzle/demo. An initial USD 3.99-5.99 price question is an assumption to test against finished content, not a launch recommendation.",
+  "prototype_envelope": {"estimated_agent_days": 1.5, "estimated_owner_hours": 1.5, "cash_commitment_usd": 0, "scope": "One crate, six parcel types, three authored contracts, undo and effect preview; no campaign or online service."},
+  "budget_note": "Unvalidated prototype planning estimate only; excludes participant recruitment and full production, art/audio, marketing, storefront work and release calendar lead time. No spend authorized.",
+  "pilot_run": "research/runs/2026-09-06-studio-pilot/README.md",
+  "decision_history": [{"date": "2026-09-06", "status": "draft", "reason": "Created as one of three varied research examples; next game remains undecided."}]
+}

@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.mp4 binary
+*.glb binary
+*.blend binary
+*.uasset binary
+*.umap binary

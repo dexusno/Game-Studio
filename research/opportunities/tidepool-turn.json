@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "tidepool-turn",
+  "title": "Tidepool Turn",
+  "status": "draft",
+  "hook": "Build a living tidepool on a five-by-five board, then watch the next tide move everything: the clever placement is the one that still works after the water returns.",
+  "audience": "Players seeking calm, compact turn-based strategy with visible chain reactions and short replayable sessions.",
+  "core_loop": "Choose one of two creature or rock tiles, place it with a forecast of the next tide, resolve one water movement, preserve compatible neighbours, and complete a six-tide run with a local score.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {"demand": 2, "distinctiveness": 3, "fun_potential": 2, "scope_fit": 3, "distribution": 2},
+  "score_notes": {
+    "demand": "A paid minimalist placement-strategy comparable is visible, but the proposed ecological audience and purchase intent remain untested.",
+    "distinctiveness": "A shared forecasted movement step changes the placement problem; this difference has not been checked against all close competitors.",
+    "fun_potential": "Planning for the tide may create satisfying reversals, or simply obscure consequences; a prototype must decide.",
+    "scope_fit": "A fixed board bounds art and interaction, while cascade ordering, fairness and replay balance create meaningful implementation risk.",
+    "distribution": "The before-and-after tide transformation is a possible short visual hook; its readability and appeal are unmeasured."
+  },
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/1046030/ISLANDERS/",
+      "accessed_on": "2026-09-06",
+      "claim": "The inspected Steam listing presents ISLANDERS as a released paid minimalist strategy game with visible user review activity. It is a category comparable, not evidence of Tidepool Turn's sales potential.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1046030/ISLANDERS/",
+      "accessed_on": "2026-09-06",
+      "claim": "The publisher's description links placement rewards to nearby buildings and describes repeated runs. Our moving-water step is a proposed mechanical difference, not a feature claimed by this source.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "The two evidence records describe one source and are not independent confirmation of demand.",
+    "Resolving several ecological effects can make outcomes feel arbitrary unless forecast and ordering are clear.",
+    "Procedural variety may be unbalanced or repetitive; a small tile set does not guarantee replay value.",
+    "The game should present fictional rules rather than imply scientific accuracy it has not established.",
+    "Working title and nearby tile-placement competitors require clearance and comparison."
+  ],
+  "next_test": "If authorized, make a paper or greybox five-by-five board with three species and one deterministic tide rule. Observe five target players completing two six-tide runs. Continue if four can explain why one tile moved and three choose a different placement because of the forecast; hold or redesign if choices remain guesswork. Voluntary replay is recorded separately and fun remains unvalidated until observed.",
+  "decision_reason": "Studio pilot draft; attractive visual/mechanical hypothesis with no measured trend or selected production commitment.",
+  "commercial_hypothesis": "Test a finite premium strategy toy with local seeded runs and no live-service promise. USD 3.99-5.99 is a preliminary price question, not a revenue forecast.",
+  "prototype_envelope": {"estimated_agent_days": 2, "estimated_owner_hours": 1.5, "cash_commitment_usd": 0, "scope": "One board, three species, rocks, one tide rule, deterministic forecast and two test seeds; no persistent ecosystem or content progression."},
+  "budget_note": "Prototype estimate is unvalidated and excludes recruitment, commercial balance/content, final art/audio, compatibility QA, store work and release lead time. No spend authorized.",
+  "pilot_run": "research/runs/2026-09-06-studio-pilot/README.md",
+  "decision_history": [{"date": "2026-09-06", "status": "draft", "reason": "Created for comparison, not greenlit."}]
+}

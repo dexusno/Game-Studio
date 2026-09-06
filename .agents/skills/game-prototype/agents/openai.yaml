@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Prototype"
+  short_description: "Build and test a focused playable game experiment"
+  default_prompt: "Use $game-prototype to build the smallest playable test of the selected game's core loop."

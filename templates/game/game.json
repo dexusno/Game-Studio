@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "slug": "template",
+  "title": "Unselected game template",
+  "engine": "undecided",
+  "platforms": ["undecided"],
+  "stage": "concept",
+  "created_on": "2000-01-01",
+  "source_opportunity": null,
+  "budget": {
+    "target_days": 0,
+    "human_hours": 0,
+    "cash_usd": 0
+  }
+}

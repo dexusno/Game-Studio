@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game Production"
+  short_description: "Ship scoped game increments with independent QA"
+  default_prompt: "Use $game-production to complete the next scoped increment of the current game and verify it."
