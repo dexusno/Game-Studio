@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "id": "false-signal",
+  "title": "False Signal",
+  "status": "shortlisted",
+  "hook": "Two callers claim the same identity. Choose which evidence to request, compare their accounts with the line log, and decide whose door to unlock.",
+  "audience": "Players who enjoy short deduction thrillers, analog interfaces and consequential decisions from incomplete but fair evidence.",
+  "core_loop": "Receive a suspicious call; inspect its recording and route log; choose one of two questions; make an evidence-based routing decision; see a brief consequence; carry one consequence flag into the next call.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "working_title_note": "Working name; no name or trademark clearance established.",
+  "evidence_limits": "Desk research only. No competitor hands-on session, own playable build, target-player interview, fun validation or purchase-intent measurement. Historical topic growth is distinct from a verified current trend phase.",
+  "commercial_hypothesis": "Offline premium Windows microgame. USD 3.99-4.99 is the initial question for six substantial calls and a complete compact story. USD 9.99 is the owner ceiling, conditional on genre/price evidence and achievable worthwhile scope; this proposal does not yet justify that price.",
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "possible_steam_fee_usd": 100,
+    "optional_original_audio_or_asset_allowance_usd": 50,
+    "note": "Planning inputs only, no spending authorized. Existing machine/tools assumed; subscription/compute costs not measured. Steam fee and any applicable store tax separate from optional assets."
+  },
+  "calendar_note": "Build estimates include the prototype, final-direction art/audio, finite content, save/settings, packaged Windows QA and draft store media. Steam onboarding/review/waiting and recruitment are separate; no launch date committed.",
+  "support_estimate": "Reserve 1–2 owner hours around launch for triage/review, with agent implementation as needed; actual demand and defect burden unknown.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Research recommendation only; owner has not selected a game or authorized a prototype."
+    },
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Third recommended experiment in the wider slate for a contrasting short thriller with a clear authentication choice. Current trend timing, writing/audio quality and value of six cases remain substantial uncertainties; no selection."
+    }
+  ],
+  "score_notes": {
+    "demand": "Short low-price horror has strong purchaser response through The Exit 8 and The Cabin Factory. Home Safety Hotline and DEAD LETTER DEPT. are closer desk-horror references but USD 14.99, above ceiling; Telephone Call is a low-response counterexample. No direct paid-unit evidence for our exact phone-deduction format.",
+    "distinctiveness": "Caller authentication, limited questions and persistent evidence differ from matching household hazards to a database, but phone horror is crowded.",
+    "fun_potential": "Fair evidence choices could sustain tension, but no test shows this avoids rote checklists.",
+    "scope_fit": "Even six substantial calls require clear writing, audio, captions and clue QA; 5–7 days is conditional and riskier than the craft candidates.",
+    "distribution": "A contradictory pair of callers is an understandable trailer premise. Searchers seeking an AI security tool may have no interest in fiction."
+  },
+  "inspiration": {
+    "topic": "AI voice authenticity and concern about manipulated media",
+    "connection": "The player tests a caller's claimed identity through consistent evidence; the uncertainty is the game activity.",
+    "historical_signal_confidence": "low",
+    "current_phase_confidence": "low",
+    "why_phase_unverified": "Exploding Topics' public topic displays +24% across a two-year selector; other articles use different terms/periods. They are one provider and no current series was exported.",
+    "evergreen_promise": "A finite, fair deduction thriller works as a story about impostors even after AI headlines cool. No continuing news feed is needed.",
+    "searchable_name": "Optional. The product should clearly be described as a fictional game, not sold as a working voice detector."
+  },
+  "evidence": [
+    {
+      "url": "https://explodingtopics.com/topic/ai-voice-detector",
+      "accessed_on": "2026-09-06",
+      "claim": "The public topic page displays a two-year selector, +24% growth and 3.6K volume, accessed September 6. Exact geographic coverage, monthly curve and seasonal adjustment were unavailable. This is provider-reported interest in a tool-related query.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://explodingtopics.com/blog/trending-topics",
+      "accessed_on": "2026-09-06",
+      "claim": "The August 24, 2026 US list includes AI voice detection. Its +3,200% headline uses an unspecified comparison horizon, so that percentage is not used to claim current acceleration or combined with the topic page.",
+      "kind": "observed",
+      "published_on": "2026-08-24"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2357910/Home_Safety_Hotline/",
+      "accessed_on": "2026-09-06",
+      "claim": "Home Safety Hotline sells telephone-based deduction through a catalog. The saved snapshot has 2,754 all-language Steam-purchase reviews, 2,494 positive, at USD 14.99; it is an audience reference with substantially broader content.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1627350/DEAD_LETTER_DEPT/",
+      "accessed_on": "2026-09-06",
+      "claim": "The developer advertises typing-based horror with rich audio and roughly 120-minute runs, illustrating the writing and sound expectations of this adjacent audience.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2893680/",
+      "accessed_on": "2026-09-06",
+      "claim": "Nightmare Collection: Telephone Call is a paid short phone-horror comparable. The saved API snapshot has 17 Steam-purchase reviews, 7 positive, at USD 2.99. A telephone and horror theme alone do not establish appeal.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1692340/Unknown_Number_A_First_Person_Talker/",
+      "accessed_on": "2026-09-06",
+      "claim": "Unknown Number's developer advertises microphone-controlled phone calls and hardware requirements; the saved snapshot has only 18 Steam-purchase reviews. We avoid adding voice-input compatibility work.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://steamcommunity.com/profiles/76561198993809006/recommended/2357910/",
+      "accessed_on": "2026-09-06",
+      "claim": "One sampled positive Home Safety Hotline review likes follow-up calls after errors but finds repeat play less compelling once scenarios are known. This is an anecdote from a small purposive sample, not a prevalence estimate.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://steamcommunity.com/profiles/76561198218720481/recommended/2357910/",
+      "accessed_on": "2026-09-06",
+      "claim": "One sampled negative Home Safety Hotline review finds repeated call-to-database matching dull. This motivates testing information choices before adding story content, not a claim about the average player.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3311740/",
+      "accessed_on": "2026-09-06",
+      "claim": "The Cabin Factory: USD 2.99 regular / 2.09 current, 3,435 all-language Steam-purchase reviews, 90.9% positive. Short-horror price-format reference, not same mechanic.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2653790/",
+      "accessed_on": "2026-09-06",
+      "claim": "The Exit 8: USD 3.99 regular / 2.79 current, 10,874 reviews, 93.0% positive. Short-horror reference in the allowed price band.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://playism.com/en/game/platform-8/",
+      "accessed_on": "2026-09-06",
+      "claim": "Publisher describes The Exit 8 as having sold over one million copies on PC and Switch. Platform 8 page discusses its November 2024 console release; exact disclosure publication date unavailable. Not Steam-only sales.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://blog.trampolinetales.com/whats-the-password-is-now-profitable-budget-breakdown/",
+      "accessed_on": "2026-09-06",
+      "claim": "May 30, 2026 developer post reports about 1,000 Steam copies of What's the Password? in its first 48 hours at USD 7.99 regular / 6.95 launch offer, with some additional bundle discounts. Adjacent deduction evidence, not phone-horror or few-day production proof.",
+      "kind": "reported"
+    }
+  ],
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "estimated_owner_hours": 0.75,
+    "cash_commitment_usd": 0,
+    "scope": "One desk, three calls, two clue rules, one meaningful question choice, captions and at least one exchange with finished-direction audio."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      5,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One shift of six substantial calls, three explicit clue rules, maximum two question choices per case, one persistent consequence flag, one ending with brief outcome variations; fixed recordings and complete clue-equivalent captions.",
+    "cuts": [
+      "Twelve-case branching campaign",
+      "Microphone input",
+      "Live AI or external API",
+      "Real-time voice cloning",
+      "Multiplayer",
+      "Walking environment",
+      "Large cast",
+      "Ongoing episodes"
+    ],
+    "owner_note": "Includes fairness/story/audio review. Revisions to clue logic can push beyond the allowance."
+  },
+  "risks": [
+    "The weakest trend link in this shortlist: tool searches may have little overlap with players seeking fiction, and current growth phase is unknown.",
+    "Phone-operator horror has close competitors; insufficient meaningful decisions would make this a derivative checklist.",
+    "Branching and voiced content can expand rapidly; an independent challenge cut the initial twelve cases to six.",
+    "A twist must not invalidate taught evidence rules; every decisive clue needs caption parity.",
+    "Six calls is a scope cap, not a promised duration or price justification. Writing and sound quality must be demonstrated early."
+  ],
+  "next_test": "If chosen, test a one-day three-call slice with one finished-direction audio exchange. With five available players, continue if 4/5 explain decisive evidence, 3/5 choose a question for an information reason and 3/5 request another case. Log every wrong answer defensible from the supplied evidence and fix ambiguity before adding cases. Hold if tension needs unfair surprises or the questions are rote.",
+  "independent_challenge": "The market-analyst challenged topic-to-audience transfer and rejected the original twelve-case/three-shift budget. Adopted six-call cap, one consequence flag, fixed recordings and clue-equivalent captions. No independent playtest occurred.",
+  "decision_reason": "Third recommended experiment in the wider slate for a contrasting short thriller with a clear authentication choice. Current trend timing, writing/audio quality and value of six cases remain substantial uncertainties; no selection."
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "scrap-swing",
+  "title": "Scrap Swing",
+  "status": "held",
+  "hook": "Each recovered piece widens a swinging magnetic load: fit it back through a wreck, bank it, or risk another pickup.",
+  "audience": "Players who like tactile retrieval and short skill-based risk decisions.",
+  "core_loop": "Swing, retrieve snapped cargo, return through the gap, bank or take another piece.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "working_title_note": "Working name; no name or trademark clearance established.",
+  "evidence_limits": "Desk research only. No competitor hands-on session, own playable build, target-player interview, fun validation or purchase-intent measurement. Historical topic growth is distinct from a verified current trend phase.",
+  "commercial_hypothesis": "Offline premium Windows microgame. USD 3.99–5.99 is a price hypothesis to test against the finished experience, not an agreed price or sales forecast. No sales volume estimated.",
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "possible_steam_fee_usd": 100,
+    "optional_original_audio_or_asset_allowance_usd": 50,
+    "note": "Planning inputs only, no spending authorized. Existing machine/tools assumed; subscription/compute costs not measured. Steam fee and any applicable store tax separate from optional assets."
+  },
+  "calendar_note": "Build estimates include the prototype, final-direction art/audio, finite content, save/settings, packaged Windows QA and draft store media. Steam onboarding/review/waiting and recruitment are separate; no launch date committed.",
+  "support_estimate": "Reserve 1–2 owner hours around launch for triage/review, with agent implementation as needed; actual demand and defect burden unknown.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "held",
+      "reason": "Not rejected as a game; outside the corrected trend-first discovery shortlist."
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/2356780/Dungeon_Clawler/",
+      "accessed_on": "2026-09-06",
+      "claim": "Claw-driven play has a paid adjacent reference, but its combat and buildcraft are not the proposed salvage mechanic.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2456120/Claw_Machine_Sim/",
+      "accessed_on": "2026-09-06",
+      "claim": "Small purposive review sampling in tactile-notes.md found complaints about shallow content; one crane interaction does not ensure a complete product.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/4794370/",
+      "accessed_on": "2026-09-06",
+      "claim": "A recent crane comparable has one Steam-purchase review in our consistent snapshot. That is limited visible response, not sales data.",
+      "kind": "observed"
+    }
+  ],
+  "risks": [
+    "No rising search/activity signal established; developed during the initial store-first pass.",
+    "Cargo physics and replay/value remain untested."
+  ],
+  "next_test": "Revisit only if an activity trend naturally suggests this interaction, or the owner chooses an evergreen arcade experiment. One-day test of fixed snapped cargo and clear gap clearance; no freeform chains.",
+  "decision_reason": "Held from this shortlist because it was discovered from game comparisons and has no verified topic-growth connection. Preserve as an evergreen alternative.",
+  "production_envelope": {
+    "estimated_agent_days": [
+      5,
+      6
+    ],
+    "scope": "One pendulum body, six-piece cargo cap, three layouts, eight contracts. See tactile-notes.md."
+  }
+}

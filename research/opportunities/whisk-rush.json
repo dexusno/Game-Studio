@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "id": "whisk-rush",
+  "title": "Whisk Rush",
+  "status": "shortlisted",
+  "hook": "Whisk one shared batch and race to turn it into layered drinks before either the foam or the customers lose patience.",
+  "audience": "Cooking and time-management players who enjoy physical preparation and recovering a difficult service.",
+  "core_loop": "Choose a small menu; prepare shared batches; pour and serve competing orders; trade preparation against freshness; buy one equipment improvement; retry short shifts for a better service.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "score_notes": "See management-trends.md for independent source periods, scope breakdown and counterevidence.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "inspiration": {
+    "topic": "Speciality drinks, including matcha and hojicha",
+    "connection": "Ingredients and satisfying preparation come from the trend; service timing, shared resources and recovery provide the enduring game.",
+    "evergreen_promise": "Preparation, triage, dexterity and equipment tradeoffs can work with any drink menu.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      4.99,
+      6.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day prototype with two recipes, two cup slots and a shared bowl. With five available service-game players, continue if four serve independently, three make a deliberate freshness-versus-preparation tradeoff and three choose another shift. Check the whisk action after twenty drinks. Hold if repeated motion is an obstruction or speed-clicking solves all orders."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      5,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One fixed 2D counter, four recipes, three short shifts plus seeded score replay, two cup slots initially and three equipment choices, save/settings/tutorial and package.",
+    "cuts": [
+      "Fluid simulation",
+      "Cafe construction",
+      "Employee AI",
+      "Large ingredient library",
+      "Roguelite travel map",
+      "Multiplayer"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://explodingtopics.com/blog/trending-products",
+      "accessed_on": "2026-09-06",
+      "claim": "Updated August 25, 2026: banana matcha latte +6,900% over five years with 1.3K monthly searches; exact endpoints and total geography unspecified. Not evidence of current acceleration.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://squareup.com/us/en/press/fall-restaurant-report-2025",
+      "accessed_on": "2026-09-06",
+      "claim": "November 13, 2025 Square US report: matcha orders +36.5% year over year in Q3 2025 versus +44.3% in Q2, indicating slower growth. Cohort details incomplete; neither PC game demand nor banana-specific data.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1847510/",
+      "accessed_on": "2026-09-06",
+      "claim": "Boba Simulator: USD 3.99 regular / 3.11 current, 315 consistently filtered reviews. Lower-price but broader idle management competition.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2649080/",
+      "accessed_on": "2026-09-06",
+      "claim": "Coffee Caravan: USD 11.99 regular/current, 1,395 reviews. Close service competitor above the owner's price ceiling; useful for overlap and quality, not in-band price proof.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3683770/",
+      "accessed_on": "2026-09-06",
+      "claim": "Boba Cafe Simulator: USD 15.99 regular / 14.39 current, 1,155 reviews. Recent larger competitor, above ceiling.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://www.patreon.com/Dodoot/posts/reupload-minami-133882684",
+      "accessed_on": "2026-09-06",
+      "claim": "Developer postmortem reuploaded July 11, 2025, originally around June 2024: Minami Lane sold 50,000 copies in its first month, regular price USD 4.99, made in less than six months by a programmer and artist with commissioned audio. Adjacent management sales evidence, not proof of our development time.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Coffee Caravan already includes matcha; the ingredient is not a mechanical gap.",
+    "Close hands-on competitors offer more systems; USD 9.99 is not yet justified.",
+    "A repeated whisk gesture could become tiring.",
+    "The independent Square order data ends in 2025 and shows deceleration."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "One-day prototype with two recipes, two cup slots and a shared bowl. With five available service-game players, continue if four serve independently, three make a deliberate freshness-versus-preparation tradeoff and three choose another shift. Check the whisk action after twenty drinks. Hold if repeated motion is an obstruction or speed-clicking solves all orders.",
+  "decision_reason": "Second recommended experiment for a clear service fantasy, trend-inspired materials and an established low-price management audience; the shared-batch decision must distinguish it.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Second recommended experiment for a clear service fantasy, trend-inspired materials and an established low-price management audience; the shared-batch decision must distinguish it. Research only; no game selected."
+    }
+  ]
+}

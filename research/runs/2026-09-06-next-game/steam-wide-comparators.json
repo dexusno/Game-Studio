@@ -1,0 +1,432 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T20:42:40.063013+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 2649080,
+      "name": "Coffee Caravan",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2649080&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2649080?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 11.99,
+        "current": 11.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1293,
+        "total_negative": 102,
+        "total_reviews": 1395
+      }
+    },
+    {
+      "app_id": 1847510,
+      "name": "Boba Simulator : Idle Shop Management",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1847510&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1847510?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 3.99,
+        "current": 3.11,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 265,
+        "total_negative": 50,
+        "total_reviews": 315
+      }
+    },
+    {
+      "app_id": 3683770,
+      "name": "Boba Cafe Simulator",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3683770&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3683770?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 15.99,
+        "current": 14.39,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1071,
+        "total_negative": 84,
+        "total_reviews": 1155
+      }
+    },
+    {
+      "app_id": 946720,
+      "name": "To The Rescue!",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=946720&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/946720?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 19.99,
+        "current": 19.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1232,
+        "total_negative": 632,
+        "total_reviews": 1864
+      }
+    },
+    {
+      "app_id": 1207480,
+      "name": "Pupper park",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1207480&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1207480?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 33,
+        "total_negative": 5,
+        "total_reviews": 38
+      }
+    },
+    {
+      "app_id": 3257310,
+      "name": "10S FOREVER",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3257310&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3257310?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 7.99,
+        "current": 7.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 93,
+        "total_negative": 1,
+        "total_reviews": 94
+      }
+    },
+    {
+      "app_id": 1382320,
+      "name": "Antonball Deluxe",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1382320&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1382320?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 742,
+        "total_negative": 33,
+        "total_reviews": 775
+      }
+    },
+    {
+      "app_id": 3782400,
+      "name": "Hyper Paddle",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3782400&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3782400?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1,
+        "total_negative": 0,
+        "total_reviews": 1
+      }
+    },
+    {
+      "app_id": 732430,
+      "name": "Superflight",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=732430&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/732430?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 10647,
+        "total_negative": 396,
+        "total_reviews": 11043
+      }
+    },
+    {
+      "app_id": 1611900,
+      "name": "Wandering Trails: A Hiking Game",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1611900&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1611900?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1,
+        "total_negative": 2,
+        "total_reviews": 3
+      }
+    },
+    {
+      "app_id": 3527290,
+      "name": "PEAK",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3527290&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3527290?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 7.99,
+        "current": 7.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 282049,
+        "total_negative": 16018,
+        "total_reviews": 298067
+      }
+    },
+    {
+      "app_id": 3244220,
+      "name": "A Game About Digging A Hole™",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3244220&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3244220?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 16724,
+        "total_negative": 2019,
+        "total_reviews": 18743
+      }
+    },
+    {
+      "app_id": 2678990,
+      "name": "Minami Lane",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2678990&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2678990?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 5904,
+        "total_negative": 156,
+        "total_reviews": 6060
+      }
+    },
+    {
+      "app_id": 1942280,
+      "name": "Brotato",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1942280&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1942280?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 106516,
+        "total_negative": 4412,
+        "total_reviews": 110928
+      }
+    },
+    {
+      "app_id": 915310,
+      "name": "SNKRX",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=915310&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/915310?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 3969,
+        "total_negative": 228,
+        "total_reviews": 4197
+      }
+    },
+    {
+      "app_id": 1404850,
+      "name": "Luck be a Landlord",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1404850&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1404850?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 9545,
+        "total_negative": 659,
+        "total_reviews": 10204
+      }
+    },
+    {
+      "app_id": 1127500,
+      "name": "Mini Motorways",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1127500&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1127500?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 22646,
+        "total_negative": 876,
+        "total_reviews": 23522
+      }
+    },
+    {
+      "app_id": 780210,
+      "name": "Freeways",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=780210&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/780210?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1941,
+        "total_negative": 206,
+        "total_reviews": 2147
+      }
+    },
+    {
+      "app_id": 1102580,
+      "name": "Traffix",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1102580&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1102580?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 36,
+        "total_negative": 21,
+        "total_reviews": 57
+      }
+    },
+    {
+      "app_id": 3311740,
+      "name": "The Cabin Factory",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3311740&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3311740?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.09,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 3123,
+        "total_negative": 312,
+        "total_reviews": 3435
+      }
+    },
+    {
+      "app_id": 2653790,
+      "name": "The Exit 8",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2653790&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2653790?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 3.99,
+        "current": 2.79,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 10118,
+        "total_negative": 756,
+        "total_reviews": 10874
+      }
+    },
+    {
+      "app_id": 2835570,
+      "name": "Buckshot Roulette",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2835570&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2835570?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 104241,
+        "total_negative": 5283,
+        "total_reviews": 109524
+      }
+    }
+  ]
+}

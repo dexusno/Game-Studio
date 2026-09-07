@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "scrapstorm",
+  "title": "Scrapstorm",
+  "status": "shortlisted",
+  "hook": "A tiny magnetic robot turns loose rubbish into an orbiting shield, then throws that protection away as its main attack.",
+  "audience": "Players of compact arena action roguelites who enjoy readable risk, aiming and build combinations.",
+  "core_loop": "Position against biters and telegraphed shooters; hold a finite scrap ring as protection or launch its held pieces; recover globally in motion and choose whether to fire a partial ring; select two early upgrades across four cleared encounters; defeat the finale and retry. A 5-7-minute run is a tuning target, not a minimum duration.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "score_notes": "Demand: paid genre supported, our product untested. Distinctiveness: protection sacrificed to attack, contingent on meaningful choice. Fun: no build. Scope: balance/content and readability could exceed seven days. Distribution: a short gather-throw-recover clip is legible; reach unmeasured.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-07",
+  "design_brief": "research/runs/2026-09-07-scrapstorm-design/README.md",
+  "design_stage": "Detailed exploration requested by owner; no prototype or production selection.",
+  "inspiration": {
+    "topic": "Miniatures made from discarded materials and upcycling",
+    "connection": "The trend inspires the toy-scale world, found-object weapons and making discarded parts useful. The game is arena combat, not a craft simulator.",
+    "evergreen_promise": "The shield-versus-attack decision and recoveries should remain enjoyable without interest in upcycling.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      4.99,
+      4.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts.",
+    "higher_price_condition": "USD 6.99 can be reconsidered only after observed replay depth and presentation justify it; do not add scope solely to reach a price."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day three-minute arena with two complementary enemies, six conserved pieces, deterministic shielding, aimed launch, global recall at full movement speed, partial recovery, death and instant retry. First test without progression; compare one early Return Teeth toggle if harmless recall feels like reload work."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      6,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One 2D arena and robot, four bounded encounters, two ordinary enemy types plus a simple finale, six conserved scrap pieces, six upgrade definitions with two selected per run, local records/save and a packaged Windows build. A harder preset is cuttable; typical 5-7-minute run length is unproved and must not be padded.",
+    "cuts": [
+      "Freeform building",
+      "Individual rigid-body scrap chains",
+      "Multiple biomes",
+      "Large weapon catalogue",
+      "Permanent stat grind",
+      "Multiplayer",
+      "Online services",
+      "Three arena variants in the first product",
+      "Twelve to sixteen upgrades in the first product",
+      "Multiple simulated debris behaviours",
+      "Five upgrade picks that make small-pool builds converge",
+      "Limited-radius recall and compulsory movement slowdown",
+      "Passive damage from orbiting or blocking",
+      "Mandatory cleanup between encounters",
+      "Fixed minimum run duration"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://newsroom.pinterest.com/news/2026-pinterest-hobbies-trend-report/",
+      "accessed_on": "2026-09-06",
+      "claim": "Published August 25, 2026: miniatures from trash searches +437%, global text searches May 2026 versus May 2025. This supplies inspiration, not September acceleration or game purchase intent.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1942280/",
+      "accessed_on": "2026-09-06",
+      "claim": "Brotato: USD 4.99 regular / 2.99 current, 110,928 all-language Steam-purchase reviews in the dated snapshot. Arena action and upgrade reference, not our achievable content inventory.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://www.nintendo-town.fr/2023/04/26/space-gladiators-arrive-sur-nintendo-switch-le-4-mai/",
+      "accessed_on": "2026-09-06",
+      "claim": "April 26, 2023 Blobfish/Seaven press release reproduced by Nintendo-Town reports Brotato sold over 1.5 million copies. Platform split and realized purchase prices not supplied; this is a reported disclosure, not an independently audited total.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/915310/",
+      "accessed_on": "2026-09-06",
+      "claim": "SNKRX: USD 2.99 regular/current and 4,197 consistently filtered reviews. Compact arena/build reference; no primary paid-unit total found.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/4764640/",
+      "accessed_on": "2026-09-06",
+      "claim": "Spreadsheet Survivors launched July 31, 2026 and has two Steam-purchase reviews in this run. A distinctive thematic wrapper in this genre does not ensure visibility.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2602450/",
+      "accessed_on": "2026-09-06",
+      "claim": "Spellbound Survivors supplies another lower-response arena action comparator; prices and review totals are saved in steam-arena-counterexamples.json.",
+      "kind": "observed"
+    }
+  ],
+  "risks": [
+    "Genre incumbents offer much more content below USD 5.",
+    "Orbiting weapons alone are familiar; an active sacrifice-and-retrieve decision must matter.",
+    "Scrap collection may be busywork; unrestricted physics would exceed the budget.",
+    "The physical miniature audience may not want a digital combat game."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "Use the one-day combat slice before progression. With five available players, seek four who explain protection/ammunition, three who deliberately vary launch or recovery and three who voluntarily retry. Ask which moment they want again and which action feels like work. Compare harmless recall with a bounded return-damage toggle; if that supplies the enjoyment, revise the core rather than locking it behind progression. Hold or redesign if both remain rote or frustrating after a focused tuning pass. No fun or price-value claim follows from designer agreement.",
+  "decision_reason": "Owner requested detailed exploration and two designers discussing improvements. Their exchange produced a concrete 17-point brief and a smaller run with more deliberate recovery choices. The concept remains shortlisted; fun, sufficient commercial replay and the production estimate are unproved.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "First recommended experiment for an active, immediately visible hook and strong paid genre evidence. Trend-to-buyer transfer, fun and production duration remain unproved. Research only; no game selected."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "shortlisted",
+      "reason": "Detailed design exploration after an explicit two-designer exchange. Conserved ammo, global full-speed recall, partial volleys, four encounters and two choices from six upgrades replace the larger initial outline. Prototype and production are not selected."
+    }
+  ],
+  "independent_challenge": "On September 7, two game designers directly exchanged a proposal, challenge and revision. They removed recall chores, shield-gap randomness, passive block damage and a guaranteed retained-shield upgrade. Both retained the objection that the game may be a gun with an annoying reload and that a short run with two enemy types has unproven commercial depth. Return-path damage is an early comparative experiment, not an established fun result."
+}

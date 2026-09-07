@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T20:50:47.367145+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 737870,
+      "name": "Conduct DELUXE!",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=737870&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/737870?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 174,
+        "total_negative": 35,
+        "total_reviews": 209
+      }
+    },
+    {
+      "app_id": 3747530,
+      "name": "Orbital Arena",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3747530&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3747530?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 1.99,
+        "current": 1.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 0,
+        "total_negative": 0,
+        "total_reviews": 0
+      }
+    }
+  ]
+}

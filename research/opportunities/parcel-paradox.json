@@ -2,13 +2,19 @@
   "schema_version": 1,
   "id": "parcel-paradox",
   "title": "Parcel Paradox",
-  "status": "draft",
+  "status": "held",
   "hook": "Pack a tiny delivery crate where magical parcels change the rules of their neighbours: a snow globe cools one square, a sleepy dragon warms two, and the customer's promise must survive the trip.",
   "audience": "Players who enjoy tactile organizing puzzles and short, readable logic challenges without a timer.",
   "core_loop": "Read three illustrated delivery conditions, drag and rotate six parcels into a small crate, preview neighbour effects, dispatch, then improve the packing or try the next rule combination.",
   "trend_stage": "unverified",
   "confidence": "low",
-  "scores": {"demand": 2, "distinctiveness": 3, "fun_potential": 2, "scope_fit": 4, "distribution": 2},
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 4,
+    "distribution": 2
+  },
   "score_notes": {
     "demand": "An established paid organizing-puzzle comparable exists; demand for magical packing has not been measured.",
     "distinctiveness": "Visible interactions between parcels could separate this from pure spatial tidying; close packing competitors still need a deliberate search.",
@@ -37,10 +43,28 @@
     "A known competitor's reception does not establish willingness to pay for our concept."
   ],
   "next_test": "If authorized, build one greybox crate with six parcels and three contracts. Observe five target players for ten minutes each. Continue only if at least four predict a neighbour effect without coaching after the introduction and at least three voluntarily try another contract; otherwise simplify rules or hold. These are directional discovery thresholds, not statistical market validation.",
-  "decision_reason": "Studio pilot draft only; no selection, customer research or playtest has occurred.",
+  "decision_reason": "Held after the expanded comparison found strong packing/adjacency overlap and no independent trend origin. Preserve the pilot idea; no game selected.",
   "commercial_hypothesis": "Test a small premium PC puzzle package with a sample puzzle/demo. An initial USD 3.99-5.99 price question is an assumption to test against finished content, not a launch recommendation.",
-  "prototype_envelope": {"estimated_agent_days": 1.5, "estimated_owner_hours": 1.5, "cash_commitment_usd": 0, "scope": "One crate, six parcel types, three authored contracts, undo and effect preview; no campaign or online service."},
+  "prototype_envelope": {
+    "estimated_agent_days": 1.5,
+    "estimated_owner_hours": 1.5,
+    "cash_commitment_usd": 0,
+    "scope": "One crate, six parcel types, three authored contracts, undo and effect preview; no campaign or online service."
+  },
   "budget_note": "Unvalidated prototype planning estimate only; excludes participant recruitment and full production, art/audio, marketing, storefront work and release calendar lead time. No spend authorized.",
   "pilot_run": "research/runs/2026-09-06-studio-pilot/README.md",
-  "decision_history": [{"date": "2026-09-06", "status": "draft", "reason": "Created as one of three varied research examples; next game remains undecided."}]
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "draft",
+      "reason": "Created as one of three varied research examples; next game remains undecided."
+    },
+    {
+      "date": "2026-09-06",
+      "status": "held",
+      "reason": "Held after the expanded comparison found strong packing/adjacency overlap and no independent trend origin. Preserve the pilot idea; no game selected."
+    }
+  ],
+  "updated_on": "2026-09-06",
+  "latest_research_run": "research/runs/2026-09-06-next-game/README.md"
 }

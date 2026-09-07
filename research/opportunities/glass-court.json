@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "id": "glass-court",
+  "title": "Glass Court",
+  "status": "shortlisted",
+  "hook": "Let an awkward ball rebound behind you, dash into position and turn a last-second return into a multiplier-building bank shot.",
+  "audience": "Players of short arcade score attacks and expressive ball-control games.",
+  "core_loop": "Serve; move and time returns through glowing wall targets; recover increasingly awkward rebounds; miss ends the chain; retry a 60–120-second rally or another challenge.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "score_notes": "See action-trends.md. Commercial confidence is low; build estimate remains conditional on day-one ball feel.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "inspiration": {
+    "topic": "Padel and wider racket-sport participation",
+    "connection": "Borrow padel's playable back-wall recovery and glass-court identity for an arcade game; realistic sport simulation is not required.",
+    "evergreen_promise": "Learning timing, angles and recovery should reward mastery even after the real sport's growth slows.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      3.99,
+      4.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day greybox, three fresh players for ten minutes each. Hold if two cannot explain misses as position versus swing timing or two do not want another run. Require a ten-second capture to communicate bank-and-recover rather than generic ball bouncing."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      5,
+      6
+    ],
+    "estimated_owner_hours": [
+      3,
+      4
+    ],
+    "scope": "One top-down/oblique 2D court, one ball, six authored challenge patterns, arcade trajectories, local medals and records.",
+    "cuts": [
+      "Opponent AI",
+      "Realistic spin or ball-height physics",
+      "Multiplayer",
+      "Sports licences",
+      "Campaign",
+      "Bosses",
+      "Online leaderboards"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://www.padelfip.com/2025/12/online-the-fip-world-padel-report-2025-a-comprehensive-analysis-of-a-sport-in-constant-growth/",
+      "accessed_on": "2026-09-06",
+      "claim": "December 2, 2025 FIP release reports global clubs +16.1% and courts +15.2% in the 2025 federation survey. Exact common census cutoff incomplete.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.padelfip.com/2026/06/padel-celebrates-olympic-day-the-numbers-behind-a-global-sport-on-the-path-to-its-dream/",
+      "accessed_on": "2026-09-06",
+      "claim": "June 23, 2026 FIP release reports 38 million players, 85,000 courts and 27,000 clubs globally. These annual summaries do not establish September acceleration.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3257310/",
+      "accessed_on": "2026-09-06",
+      "claim": "10S FOREVER: USD 7.99 regular/current, 94 Steam-purchase reviews, 98.9% positive. Eight stages, bosses and local co-op exceed our scope.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1382320/",
+      "accessed_on": "2026-09-06",
+      "claim": "Antonball Deluxe: USD 4.99 regular/current, 775 reviews, 95.7% positive. Three modes and 69 levels make the value comparison demanding.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3782400/",
+      "accessed_on": "2026-09-06",
+      "claim": "Hyper Paddle: USD 2.99 regular/current, one review, despite advertising 50 levels and a control twist. Low visible response is not a measured sales total.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://owch.itch.io/10sf",
+      "accessed_on": "2026-09-06",
+      "claim": "Developer sells 10S FOREVER on itch.io as well as Steam. A second storefront, not an independent sales disclosure.",
+      "kind": "observed"
+    }
+  ],
+  "risks": [
+    "10S FOREVER and Antonball Deluxe offer substantially more content at low prices.",
+    "A tiny rally challenge could feel like a free minigame.",
+    "Participation growth does not establish interest in a PC sports game.",
+    "No primary paid-unit disclosure found for the close ball-control comparators."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "One-day greybox, three fresh players for ten minutes each. Hold if two cannot explain misses as position versus swing timing or two do not want another run. Require a ten-second capture to communicate bank-and-recover rather than generic ball bouncing.",
+  "decision_reason": "Shortlisted as the cheapest focused active-skill alternative; historical sport growth is better supported than demand for our exact small product.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Shortlisted as the cheapest focused active-skill alternative; historical sport growth is better supported than demand for our exact small product. Research only; no game selected."
+    }
+  ]
+}
