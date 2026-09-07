@@ -1,15 +1,16 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-09-07",
-  "notes": "Catalog of useful public entry points. Access is descriptive, not a promise of a working integration. Verification dates apply to the exact entries, not the entire catalog; verify the exact page before relying on a claim.",
+  "updated_on": "2026-09-06",
+  "notes": "Public discovery and validation entry points, not a category allowlist or promise of paid access. All trend subjects are eligible. Access refreshed for inspected sources in the 2026-09-06 next-game run; untested sources stay explicitly untested.",
   "sources": [
     {
       "id": "steam-store",
       "name": "Steam game pages and search",
       "url": "https://store.steampowered.com/search/",
       "purpose": "Find close competitors, user tags, positioning, release dates, advertised scope, regional pricing and visible review response. Include recent or weak comparables as well as hits.",
-      "access": "Public web. Three individual game pages were verified on 2026-09-06; search entry point itself was not tested. Region, language, age gates and cache may affect results.",
-      "query_recipe": "Search a mechanic plus player promise; inspect each game's canonical page. Record currency, filters, access date and whether the source was a cached web result."
+      "access": "Canonical game pages and US app-details / all-language Steam-purchase review endpoints inspected on 2026-09-06. Timestamped JSON snapshots in the run. Cache/locales differ; do not mix filters or infer paid units.",
+      "query_recipe": "Search a mechanic plus player promise; inspect each game's canonical page. Record currency, filters, access date and whether the source was a cached web result.",
+      "last_verified_on": "2026-09-06"
     },
     {
       "id": "steam-charts",
@@ -46,7 +47,7 @@
       "name": "itch.io games",
       "url": "https://itch.io/games",
       "purpose": "Browse small experimental games by tag; examine comparable hooks, available demos and visible feedback beyond Steam incumbents.",
-      "access": "Public browsing entry point; not tested in this pilot. Rankings are platform-specific; downloads, revenue and private analytics are not presumed available."
+      "access": "Broad browsing entry point not tested. The 10S FOREVER developer sales page at owch.itch.io/10sf was inspected on 2026-09-06. Store availability is not a unit-sales disclosure."
     },
     {
       "id": "itch-jams",
@@ -60,14 +61,16 @@
       "name": "Google Trends",
       "url": "https://trends.google.com/trends/explore",
       "purpose": "Compare repeated search-interest observations for themes or mechanics with explicit period and geography; distinguish a franchise/news spike from a durable player need.",
-      "access": "Public interactive interface; not tested in this pilot. JavaScript or rate limits may prevent extraction. Search coverage is secondary evidence and must be labeled."
+      "access": "On 2026-09-06, Trending Now US all categories was readable; Explore web rendering failed, browser timed out and one ordinary public Explore API request returned HTTP 429. Stopped requests. No exported numeric series or paid access.",
+      "last_verified_on": "2026-09-06"
     },
     {
       "id": "exploding-topics",
       "name": "Exploding Topics public blog",
       "url": "https://explodingtopics.com/blog",
       "purpose": "Find theme leads for further game-specific validation; broad consumer interest is not evidence of game purchases.",
-      "access": "Public blog entry point; not tested in this pilot. Some data may be paid or inaccessible; do not imply access to paid metrics."
+      "access": "Public broad top-100, trending-products articles and topic catalog inspected on 2026-09-06. Some individual topics fail or are gated. Record underlying growth period; recent article update dates can conceal stale context.",
+      "last_verified_on": "2026-09-06"
     },
     {
       "id": "reddit-player-communities",
@@ -75,7 +78,7 @@
       "url": "https://www.reddit.com/",
       "purpose": "Look for specific player requests, frustrations and vocabulary in relevant genre communities. Treat anecdotes as anecdotes and search for disagreement.",
       "access": "Public search/browser access where available; not tested in this pilot. No account access or permission to post is implied.",
-      "query_recipe": "Use scoped web searches such as site:reddit.com/r/CozyGamers <mechanic> or site:reddit.com/r/IndieGaming <game> with an explicit date range. Record the exact post URL, not the search page."
+      "query_recipe": "Search relevant player communities across genres and wider interest communities, with an explicit topic and date window. Include disagreement. Record exact post URL, author context and anecdotal limits; do not start every query from cozy or puzzle communities."
     },
     {
       "id": "youtube-gameplay",
@@ -90,6 +93,54 @@
       "url": "https://www.maxinferno.com/press",
       "purpose": "Primary developer description of A Little to the Left: interaction, content and presentation expectations for a tactile puzzle comparable.",
       "access": "Public developer page; opened successfully on 2026-09-06. Some copy differs internally on puzzle counts; avoid treating the page as a current inventory.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "product-hunt",
+      "name": "Product Hunt",
+      "url": "https://www.producthunt.com/",
+      "purpose": "Optional early theme or interaction leads inherited from the Appdrip approach. Maker interest is weak evidence of a game-buying audience and requires game-specific checks.",
+      "access": "Games category inspected on 2026-09-06 (page updated September 2). Mixed games, tools, maker interest and older entries; not paid game sales evidence.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "pinterest-trends",
+      "name": "Pinterest newsroom and trend reports",
+      "url": "https://newsroom.pinterest.com/",
+      "purpose": "Find cultural, lifestyle, visual and activity inspiration across subjects; record search language, geography, normalized metric and comparison windows.",
+      "access": "August 25, 2026 hobbies report verified from ordinary public HTML after regional renderer redirect. Predicts report also inspected; these sources have different underlying periods. No trend dashboard curve exported.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "etsy-trends",
+      "name": "Etsy seller trend reports",
+      "url": "https://www.etsy.com/seller-handbook",
+      "purpose": "Find consumer, cultural, fashion and activity leads; distinguish searches from transactions and digital-game demand.",
+      "access": "March 17, 2026 spring/summer report inspected September 6. Data as of February 10, prior three months versus year earlier, US signed-in normalized searches.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "rising-trends",
+      "name": "Rising Trends public reports",
+      "url": "https://www.risingtrends.co/",
+      "purpose": "Additional cross-topic discovery; verify metric consistency, period and geography.",
+      "access": "July 13, 2026 pet report inspected September 6. Incomplete endpoints/geography and some internal inconsistencies lower confidence. No paid dashboard accessed.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "primary-sector-reports",
+      "name": "Primary sector and platform reports",
+      "url": "https://nielseniq.com/global/en/insights/",
+      "purpose": "Corroborate broad trend leads with retail data, participation, platform behaviour or adoption. Select the organization after the topic; do not restrict inspiration to one sector.",
+      "access": "NIQ retail, Square transactions, FIP/SFIA participation, Strava clubs and Waymo expansion inspected in the September 6 run. Metrics retain dates and limits in the run; corporate/federation claims are reported, not independent audits.",
+      "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "developer-sales-postmortems",
+      "name": "Developer announcements and commercial postmortems",
+      "url": "https://store.steampowered.com/news/",
+      "purpose": "Seek reported paid units, regular/discount prices, development time, team and distribution context. Include modest outcomes. Players, downloads and units remain distinct.",
+      "access": "Public disclosures for Minami Lane, Mini Motorways, PEAK, Brotato, The Exit 8 and What's the Password? inspected September 6 through canonical developer/publisher pages or explicitly attributed press-release reproductions. Steam news entry point itself not tested.",
       "last_verified_on": "2026-09-06"
     },
     {
@@ -131,13 +182,6 @@
       "purpose": "Verify CC0 terms for material, lighting and model inputs, separately from website images and branding.",
       "access": "Official page inspected on 2026-09-07. No assets downloaded or integrated.",
       "last_verified_on": "2026-09-07"
-    },
-    {
-      "id": "product-hunt",
-      "name": "Product Hunt",
-      "url": "https://www.producthunt.com/",
-      "purpose": "Optional early theme or interaction leads inherited from the Appdrip approach. Maker interest is weak evidence of a game-buying audience and requires game-specific checks.",
-      "access": "Public entry point; not tested in this pilot. Dynamic pages or account restrictions may limit access."
     }
   ]
 }

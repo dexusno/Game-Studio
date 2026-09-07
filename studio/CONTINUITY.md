@@ -27,7 +27,7 @@ Do not copy the full conversation into every document or create a writable globa
 ## What the agent does at startup
 
 1. Read applicable instructions and run `python scripts/studio.py context`. Resolve the requested game or candidate explicitly; a qualified target such as `opportunity:reactor-raider` avoids collisions.
-2. Run `context TARGET`, read its short handoff, and inspect the relevant linked sources. The command prints reference paths without loading every document. Open the attachment catalogue only for equipment/reward work.
+2. Run `context TARGET`, read its short handoff, and inspect the relevant linked sources. The command prints reference paths without adding their full contents to model context; it reads listed sources locally to compare fingerprints. Open the attachment catalogue only for equipment/reward work. The checkpoint covers the owning record and its listed sources, not every linked document in the archive.
 3. Check the reported checkpoint and the actual checkout before trusting a continuation. If records changed, reconcile the handoff with those changes. If no checkpoint exists, report freshness unverified. An older branch with internally consistent files can still be behind the intended integration branch; a hash alone cannot detect that.
 4. State the immediate outcome and continue within existing authorization. Do not ask Klaus to choose first person or the combined weapon/shield again. Identify an actual unresolved preference only when it materially blocks the requested work.
 

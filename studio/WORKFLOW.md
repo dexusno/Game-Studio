@@ -4,7 +4,7 @@ This is a set of useful completion checks, not a requirement to run every stage 
 
 | Stage | Work and evidence | Durable record | Decision |
 |---|---|---|---|
-| Discover | Scan relevant sources; compare a small group of games; propose about three distinct hooks; assess audience, scope, timing, and uncertainty | Dated research run plus opportunity JSONs | Recommend one experiment; preserve alternatives |
+| Discover | Find rising-interest topics in trend sources; derive original playable hooks; then compare games and assess audience, scope, timing, and uncertainty | Dated research run plus opportunity JSONs | Recommend one experiment; preserve alternatives |
 | Define | Describe the player fantasy, core loop, difference, cut list, target platform, budget, and what the prototype must teach us | Game brief and manifest | Choose the smallest useful playable test |
 | Prototype | Implement controls, feedback, success/failure, and restart; expose tuning values; test the riskiest mechanic first | Runnable build, BUILD.md, STATUS.md | Playtest, revise, or park |
 | Prove the feel | Observe a real play session; note input latency, comprehension, frustration, and voluntary replay | QA.md with build and observations | Call fun promising only with evidence; record missing human feedback |
@@ -15,7 +15,7 @@ This is a set of useful completion checks, not a requirement to run every stage 
 
 ## Research and selection
 
-Use [the research method](../research/README.md). Keep commercial potential, confidence, and fun evidence separate. A near-peak opportunity can work if its attention window outlasts development, store lead time, and promotion. Have an evergreen reason to play after the topic cools. Reuse a theme only in an original expression with suitable rights.
+Use [the research method](../research/README.md). For next-game discovery, scan trends across all subjects before deriving varied game concepts, then compare paid games and check scope. A trend can inspire mechanics, setting, visuals or other elements; literal simulation is optional. A searchable name is optional too. The core game must remain enjoyable after the trend fades; potential organic discovery is an upside, not a sales forecast. The owner's USD 9.99 ceiling is conditional on genre/price evidence and a worthwhile product achievable within the work budget; it is not a target price. Keep commercial potential, confidence, and fun evidence separate. A near-peak opportunity can work if its attention window outlasts development, store lead time, and promotion. Reuse a theme only in an original expression with suitable rights.
 
 Do not silently select a project when asked only to research. If the owner authorizes autonomous selection or prototyping within a budget, record the choice and proceed. A candidate status and a game stage answer different questions; link the selected candidate with `source_opportunity` in the game manifest.
 

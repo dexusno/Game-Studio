@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "id": "a-good-mend",
+  "title": "A Good Mend",
+  "status": "shortlisted",
+  "hook": "Turn a tear into the most beautiful part of a garment: choose a continuous stitch that secures the cloth around a keepsake emblem, then pull it tight.",
+  "audience": "Players who enjoy calm spatial puzzles, tactile restoration and making a personal object look better.",
+  "core_loop": "Inspect a tear and two requirements; preview a stitch route; sew and tighten; see what is secured; undo or keep the repair in a gallery; try a new commission.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "working_title_note": "Working name; no name or trademark clearance established.",
+  "evidence_limits": "Desk research only. No competitor hands-on session, own playable build, target-player interview, fun validation or purchase-intent measurement. Historical topic growth is distinct from a verified current trend phase.",
+  "commercial_hypothesis": "Offline premium Windows microgame. USD 3.99-5.99 is an initial price question. Owner ceiling USD 9.99 is conditional on genre/price evidence and a worthwhile few-day product; no basis to charge the ceiling yet.",
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "possible_steam_fee_usd": 100,
+    "optional_original_audio_or_asset_allowance_usd": 50,
+    "note": "Planning inputs only, no spending authorized. Existing machine/tools assumed; subscription/compute costs not measured. Steam fee and any applicable store tax separate from optional assets."
+  },
+  "calendar_note": "Build estimates include the prototype, final-direction art/audio, finite content, save/settings, packaged Windows QA and draft store media. Steam onboarding/review/waiting and recruitment are separate; no launch date committed.",
+  "support_estimate": "Reserve 1–2 owner hours around launch for triage/review, with agent implementation as needed; actual demand and defect burden unknown.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Research recommendation only; owner has not selected a game or authorized a prototype."
+    },
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Retained among eight as a tightly bounded tactile-puzzle alternative. Its earlier first-place ranking was superseded by the wider genre/price comparison. Direct low-price PC sewing response is weak; the interaction remains unplayed."
+    }
+  ],
+  "score_notes": {
+    "demand": "Reassessed under the USD 9.99 ceiling: stitch. is close but not Steam unit evidence; Calico is USD 19.99 and above ceiling. Sewing Stuff has only 15 Steam-purchase reviews. Adjacent tactile games support the format, not our repair demand.",
+    "distinctiveness": "Chosen functional/decorative tear repair differs from numbered embroidery regions and timed point tracing, but neither sewing nor thread puzzles are novel by themselves.",
+    "fun_potential": "Planning a repair and seeing it tighten is untested; it may collapse to tracing.",
+    "scope_fit": "4–6-day estimate is conditional on a convincing fake-cloth reveal and fast authored repairs. No real cloth simulation.",
+    "distribution": "A torn-to-repaired before/after has a natural connection to visible-mending content. No creator interest or conversion measured."
+  },
+  "inspiration": {
+    "topic": "Visible mending, sashiko and clothing upcycling",
+    "connection": "The player performs the source activity: repairing cloth while making the repair expressive.",
+    "historical_signal_confidence": "medium",
+    "current_phase_confidence": "low",
+    "why_phase_unverified": "Pinterest reports May-to-May growth; Etsy offers adjacent earlier evidence. No monthly series proving September acceleration or a future peak.",
+    "evergreen_promise": "Spatial planning, the transformation from damaged to repaired, and collecting personally chosen patterns remain meaningful after fashion attention changes.",
+    "searchable_name": "Optional. Prefer an appealing title; visible mending and stitching can appear naturally in truthful descriptions."
+  },
+  "evidence": [
+    {
+      "url": "https://newsroom.pinterest.com/news/2026-pinterest-hobbies-trend-report/",
+      "accessed_on": "2026-09-06",
+      "claim": "Pinterest reports sashiko ideas +1,509%, darning stitch +91% and refashion clothes upcycling +230%; global text searches, May 2026 versus May 2025. Report published August 25, 2026. This is historical growth, not a measured September slope.",
+      "kind": "reported",
+      "published_on": "2026-08-25",
+      "measurement_period": "May 2026 versus May 2025",
+      "geography": "Global",
+      "access_note": "Direct public HTML verified after web-tool regional redirect."
+    },
+    {
+      "url": "https://www.etsy.com/se-en/seller-handbook/article/1473931456647",
+      "accessed_on": "2026-09-06",
+      "claim": "Etsy describes interest in stitched craft and reports beginner needlepoint kits +175%. Data as of February 10, 2026 compares the preceding three months with a year earlier, using US signed-in normalized searches. This is adjacent corroboration, not exact mending-game demand.",
+      "kind": "reported",
+      "published_on": "2026-03-17"
+    },
+    {
+      "url": "https://www.lykkestudios.com/stitch",
+      "accessed_on": "2026-09-06",
+      "claim": "The developer presents numbered embroidery puzzles and free stitching. This establishes a close tactile reference; our functional tear repair is a proposed difference.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://developer.apple.com/news/?id=mc4d1ufa",
+      "accessed_on": "2026-09-06",
+      "claim": "Apple's June 5, 2023 developer interview describes the material and accessibility work behind stitch.; sensory quality is part of the production burden.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3203860/Sewing_Stuff/",
+      "accessed_on": "2026-09-06",
+      "claim": "Sewing Stuff already sells restoring objects through point connections with time pressure. Our API snapshot has 15 all-language Steam-purchase reviews, 11 positive. The small response is counterevidence to assuming sewing alone attracts buyers.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1993180/Quilts_and_Cats_of_Calico/",
+      "accessed_on": "2026-09-06",
+      "claim": "The paid fabric-pattern board game is an adjacent audience reference, with 405 consistently filtered reviews, 379 positive, in the saved API snapshot. It has a broader scope than our proposed product.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2322180/",
+      "accessed_on": "2026-09-06",
+      "claim": "A Tiny Sticker Tale: USD 9.99 regular/current, 471 all-language Steam-purchase reviews, 97.2% positive in this run. Adjacent tactile puzzle/adventure, not direct repair demand or disclosed unit sales.",
+      "kind": "observed"
+    }
+  ],
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "estimated_owner_hours": 0.5,
+    "cash_commitment_usd": 0,
+    "scope": "One cloth surface, three tears, one stitch rule, preview, undo and one finished-direction tightening reveal."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      4,
+      6
+    ],
+    "estimated_owner_hours": [
+      3,
+      5
+    ],
+    "scope": "One 2D work surface, three reusable cloth sets, up to 18 small repair cards, one core stitch rule and at most two modifiers, completion gallery and local save.",
+    "cuts": [
+      "Real cloth simulation",
+      "Open-ended drawing editor",
+      "Shop economy",
+      "Large garment library",
+      "Online services",
+      "Daily content",
+      "Multiple launch platforms"
+    ],
+    "owner_note": "Agent branch estimated 1.5–2 hours for play/presentation review; producer allows 3–5 including repeat feedback and store-material review. Recruitment/account-verification time remains unknown."
+  },
+  "risks": [
+    "Reported interest includes a desire for physical, screen-free hobbies; a PC game may not satisfy that audience.",
+    "Stitches may look decorative without providing a meaningful decision.",
+    "Convincing material feedback and clear failure explanation could exceed the estimate.",
+    "18 repair cards is a cap, not proof of sufficient value; content authorship must be tested.",
+    "Current trend stage, organic reach, willingness to pay and actual fun remain unverified."
+  ],
+  "next_test": "If chosen, use the one-day prototype for a 15-minute owner playtest, followed by four other target players when available. Continue if 4/5 can predict what a stitch secures without coaching and 3/5 voluntarily start another repair. Require at least one deliberate choice between a functional and decorative route. Hold if two tuning passes still yield obvious tracing or confusing repairs. These are directional criteria, not statistical validation.",
+  "decision_reason": "Retained among eight as a tightly bounded tactile-puzzle alternative. Its earlier first-place ranking was superseded by the wider genre/price comparison. Direct low-price PC sewing response is weak; the interaction remains unplayed."
+}

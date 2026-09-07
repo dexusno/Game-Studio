@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "id": "kettle-ridge",
+  "title": "Kettle Ridge",
+  "status": "shortlisted",
+  "hook": "Carry an absurdly large kettle to a summit picnic, counterleaning through near-falls to arrive with the tea still inside.",
+  "audience": "Physical-comedy and movement-challenge players who enjoy recoverable mistakes and quick retries.",
+  "core_loop": "Climb one ridge; balance the load through steps and gusts; recover a tip or spill tea; rest at a checkpoint; finish; retry for a full kettle or faster arrival.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "score_notes": "See action-trends.md. All current phase and product confidence remain low.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "inspiration": {
+    "topic": "Social hiking and outdoor clubs",
+    "connection": "Hiking supplies the summit outing and awkward shared picnic load. The game borrows the experience to create a solo movement challenge.",
+    "evergreen_promise": "Readable balance, saved near-disasters and route mastery should carry the game without trend attention.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      3.99,
+      4.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day movement and balance prototype, three fresh players for ten minutes. Continue if two deliberately recover a near-tip and explain the action, and two request another attempt. Hold if failures feel arbitrary or one completion exhausts the appeal."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      6,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One fixed-side-view 8–12-minute authored ridge, three checkpoints, a kinematic hiker, one explicit balance model, simple tilt-based tea loss and challenge medals.",
+    "cuts": [
+      "Fluid simulation",
+      "Full ragdoll",
+      "Per-foot controls",
+      "Open world",
+      "Survival crafting",
+      "Co-op",
+      "Wildlife AI",
+      "Equipment economy"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://press.strava.com/articles/strava-releases-12th-annual-year-in-sport-trend-report-2025",
+      "accessed_on": "2026-09-06",
+      "claim": "December 2025 global platform report: hiking clubs grew 5.8 times in 2025. Clubs are not unique hikers; baseline and exact cutoff absent. June 2026 repeat is not new growth.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/732430/",
+      "accessed_on": "2026-09-06",
+      "claim": "Superflight: USD 2.99 regular/current, 11,043 Steam-purchase reviews, 96.4% positive. Compact movement mastery reference; production time and unit sales not established.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/3527290/",
+      "accessed_on": "2026-09-06",
+      "claim": "PEAK: USD 7.99 regular/current, 298,067 reviews. Its co-op and larger content package are outside this scope.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://steamcommunity.com/games/3527290/announcements/detail/498325386812195120",
+      "accessed_on": "2026-09-06",
+      "claim": "Developer announcement June 25, 2025 reports two million copies sold in nine days. Exact realized prices not disclosed. Public announcement HTML directly inspected by independent scout.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1611900/",
+      "accessed_on": "2026-09-06",
+      "claim": "Wandering Trails: USD 4.99 regular/current, three Steam-purchase reviews, one positive. A nature setting and larger landscape alone do not establish commercial appeal.",
+      "kind": "observed"
+    }
+  ],
+  "risks": [
+    "PEAK's actual sales are heavily confounded by co-op, content and studio reputation.",
+    "The trend report emphasises real-world movement and less screen time.",
+    "Convincing control and readable recovery may exceed the work budget.",
+    "A short scenic course needs replay value, not just medals added to pad length."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "One-day movement and balance prototype, three fresh players for ten minutes. Continue if two deliberately recover a near-tip and explain the action, and two request another attempt. Hold if failures feel arbitrary or one completion exhausts the appeal.",
+  "decision_reason": "Shortlisted for a distinct physical-comedy option with a clear clip; higher implementation risk and weaker transfer from the hit comparator.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Shortlisted for a distinct physical-comedy option with a clear clip; higher implementation risk and weaker transfer from the hit comparator. Research only; no game selected."
+    }
+  ]
+}

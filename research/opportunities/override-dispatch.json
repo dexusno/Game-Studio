@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "id": "override-dispatch",
+  "title": "Override Dispatch",
+  "status": "shortlisted",
+  "hook": "The delivery robots can drive themselves—until three need your help at once. Take over one and decide which deliveries can wait.",
+  "audience": "Players of compact real-time logistics and time-management games.",
+  "core_loop": "Monitor three robots following fixed routes; read warnings; take manual control to avoid a hazard, reroute or recharge one; trade lateness against perishability; complete a short shift and choose an operational upgrade.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 2
+  },
+  "score_notes": "Market pricing is better evidenced than the distinct interaction, current trend timing or production feasibility.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "inspiration": {
+    "topic": "Autonomous services and human supervision of automation",
+    "connection": "The growth of autonomous transport inspires a fictional operator's limited-attention problem. Robots are expressive pieces in a strategy game, not claims about the reliability of a real company.",
+    "evergreen_promise": "Anticipation, prioritisation and recovering cascading delays can remain enjoyable without an AI news cycle.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      4.99,
+      4.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts.",
+    "higher_price_condition": "USD 7.99 requires demonstrated systemic depth beyond three short shifts; USD 9.99 is not justified by the current scope."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day graph with two bots and two visible complications. With five available strategy players, continue if four explain why intervention was necessary, three choose between competing priorities and three voluntarily restart. Hold if players describe repetitive errands, want to drive everything manually or blame incompetent bots rather than their decisions."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      6,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One fixed 2D street graph, three curated short shifts, three robots and two readable complication types, delivery deadlines and bounded replay variations. Charging is added only if a distinct decision is demonstrated.",
+    "cuts": [
+      "Open road drawing",
+      "Real traffic simulation",
+      "Vehicle physics",
+      "Machine learning",
+      "Live APIs",
+      "Open-world city",
+      "Complex procedural generation",
+      "Multiplayer",
+      "Three layouts and six authored shifts initially",
+      "Charging before a distinct choice is established"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://explodingtopics.com/blog/trending-topics",
+      "accessed_on": "2026-09-06",
+      "claim": "August 24, 2026 US trend list includes autonomous-trucking company Waabi with +950% growth; the headline's horizon is unspecified. A discovery lead, not a measured September trajectory.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://explodingtopics.com/blog/future-of-transportation",
+      "accessed_on": "2026-09-06",
+      "claim": "Updated February 8, 2024: robotaxi searches +667% over five years. Too stale for current timing; retained only as the earlier broad-technology lead.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://waymo.com/blog/2025/12/2025-year-in-review/",
+      "accessed_on": "2026-09-06",
+      "claim": "December 10, 2025 company review says 2025 annual rides more than tripled to 15 million by year end; phrasing includes a year-end figure before year end. Historical company-reported scale, not independent search demand.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://waymo.com/blog/2026/09/ride-in-denver-san-diego-tampa/",
+      "accessed_on": "2026-09-06",
+      "claim": "September 1, 2026 company announcement adds public riders in Denver, San Diego and Tampa, bringing public rider cities to 14. Current expansion corroborates the technology topic, not search acceleration or interest in the proposed game.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1127500/",
+      "accessed_on": "2026-09-06",
+      "claim": "Mini Motorways: USD 9.99 regular/current and 23,522 Steam-purchase reviews in the dated snapshot.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://dinopoloclub.com/2021/05/24/mini-motorways-steam-launch-round-trip-update/",
+      "accessed_on": "2026-09-06",
+      "claim": "Developer May 24, 2021 launch announcement specifies USD 9.99 regular price with 10% launch discount.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.nzgda.com/blog/news/dinosaur-polo-club-makes-deloittes-fast-50-as-mini-motorways-surpasses-500000-copies-sold",
+      "accessed_on": "2026-09-06",
+      "claim": "November 2021 developer announcement reproduced by NZGDA reports 500,000 Mini Motorways copies sold on Steam; commercial price-band evidence, not a few-day production precedent.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/780210/",
+      "accessed_on": "2026-09-06",
+      "claim": "Freeways: USD 4.99 regular/current, 2,147 reviews, 90.4% positive. Close routing competitor has 160 levels today.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1102580/",
+      "accessed_on": "2026-09-06",
+      "claim": "Traffix: USD 4.99 regular/current, 57 reviews, 63.2% positive. A compact traffic theme does not ensure strong reception.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/737870/",
+      "accessed_on": "2026-09-06",
+      "claim": "Conduct DELUXE! already offers time-pressure control of multiple vehicles with start/stop and switches, a campaign and an editor. Normalized US price/reviews saved in steam-challenge-comparators.json. Its mobile-predecessor player count is not Steam unit evidence.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Autonomy adoption is not verified search acceleration; the freshest trend-site headline has an unclear horizon.",
+    "Mini Motorways has much broader systemic depth and years of development.",
+    "Traffic and delivery mechanics are crowded; switching direct control may not distinguish the game.",
+    "Unfair automation failures could feel like deliberately broken AI rather than a strategy."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "One-day graph with two bots and two visible complications. With five available strategy players, continue if four explain why intervention was necessary, three choose between competing priorities and three voluntarily restart. Hold if players describe repetitive errands, want to drive everything manually or blame incompetent bots rather than their decisions.",
+  "decision_reason": "Shortlisted as a technology-inspired strategy option, but a lower-priority experiment until supervision is an enjoyable anticipatory decision.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Shortlisted as a technology-inspired strategy option, but a lower-priority experiment until supervision is an enjoyable anticipatory decision. Research only; no game selected."
+    }
+  ],
+  "independent_challenge": "Market analyst found scope fragile even at six to seven days and reduced layouts/shifts. Bots should normally be competent; complications need advance information. Conduct DELUXE! is a closer multi-vehicle time-pressure competitor than Mini Motorways."
+}

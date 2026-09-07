@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "id": "good-dog-shift",
+  "title": "Good Dog Shift",
+  "status": "shortlisted",
+  "hook": "Keep a small dog daycare happy by throwing toys, maintaining activities and finding the right moment to give each personality a rest.",
+  "audience": "Pet-simulation and active management players who enjoy expressive creatures and juggling needs.",
+  "core_loop": "Accept a small group; move an attendant and aim throws; refill activities and water; manage play, attention and rest; choose one equipment improvement between short shifts.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 3,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "score_notes": "See management-trends.md. Six to seven days is a conditional upper end; four days is not credible from scratch.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "inspiration": {
+    "topic": "Pet enrichment and interactive care",
+    "connection": "Enrichment activities inspire the creature behaviours and hands-on service, without copying a branded toy or claiming real training advice.",
+    "evergreen_promise": "Readable personalities, humorous reactions and balancing competing needs remain appealing beyond the product trend.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline",
+    "conditional_price_usd": [
+      3.99,
+      5.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Genre/price evidence and a worthwhile finished experience within the work budget are both required. These are test prices, not selected prices or sales forecasts."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "scope": "One-day slice with three dogs, one toy and one rest zone. Continue only if four of five available target players predict two different reactions and three deliberately alter play/rest or toy use to resolve a conflict and choose another shift. Hold if dogs feel like status bars or convincing reactions require a much larger animation system."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      6,
+      7
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "One 2D yard with fixed zones, three fictional temperaments, fetch plus two activity stations and a rest area, three shifts with seeded dog arrivals, simple upgrades and local save.",
+    "cuts": [
+      "Breeding",
+      "Adoption narrative",
+      "Disease simulation",
+      "Large breed library",
+      "Open yard editor",
+      "Realistic training simulation",
+      "Multiplayer"
+    ],
+    "note": "Includes prototype, original modest art/audio, finite content, controls/settings/save, packaged Windows QA and draft store media. Calendar onboarding/review, recruitment and unforeseen rework are separate. Estimate is not demonstrated."
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "note": "Existing tools assumed. No purchases or cash allocation. Steam fee and optional assets remain separate planning inputs in the run."
+  },
+  "support_estimate": "Allow 1–2 owner hours for launch-month triage/review, plus agent fixes as needed; actual burden unknown.",
+  "evidence": [
+    {
+      "url": "https://nielseniq.com/global/en/insights/analysis/2026/paws-for-thought-why-your-pet-aisle-is-bleeding-cash-to-the-internet/",
+      "accessed_on": "2026-09-06",
+      "claim": "August 27, 2026 US retail article reports electronic pet toys +27% year over year and treat-dispensing toys +15%; exact endpoint and unit-versus-value basis unspecified.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.risingtrends.co/trends/pet-trends-2026",
+      "accessed_on": "2026-09-06",
+      "claim": "Updated July 13, 2026: table reports private dog park searches +50% over one year and lick mat +21%. Geography/endpoints incomplete and internal inconsistencies in other entries limit confidence.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1207480/",
+      "accessed_on": "2026-09-06",
+      "claim": "Pupper park: USD 2.99 regular/current, 38 Steam-purchase reviews, 86.8% positive; developer positions a 15–30-minute play session.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/946720/",
+      "accessed_on": "2026-09-06",
+      "claim": "To The Rescue!: USD 19.99 regular/current, 1,864 reviews, 66.1% positive. Larger dog-care management reference above ceiling; causes of mixed reception not investigated.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://www.patreon.com/Dodoot/posts/reupload-minami-133882684",
+      "accessed_on": "2026-09-06",
+      "claim": "Minami Lane developer's USD 4.99 / 50,000 first-month sales postmortem supports the wider small-management audience, not direct demand for this dog loop or few-day feasibility.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "The close low-priced Pupper park has only 38 Steam-purchase reviews.",
+    "To The Rescue! has mixed response at a higher price; pet appeal alone is insufficient.",
+    "Dog pathing, expressive animation and legible needs are core costs.",
+    "Retail enrichment growth is not PC game purchase intent."
+  ],
+  "evidence_limits": "Desk research only. No own playable build, competitor hands-on test, measured organic conversion, target-player willingness to pay or validated production time. Current names are working titles without clearance.",
+  "next_test": "One-day slice with three dogs, one toy and one rest zone. Continue only if four of five available target players predict two different reactions and three deliberately alter play/rest or toy use to resolve a conflict and choose another shift. Hold if dogs feel like status bars or convincing reactions require a much larger animation system.",
+  "decision_reason": "Shortlisted for a hands-on pet simulation choice; charming reactions are the central unproved production dependency.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Shortlisted for a hands-on pet simulation choice; charming reactions are the central unproved production dependency. Research only; no game selected."
+    }
+  ]
+}

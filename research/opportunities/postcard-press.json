@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "postcard-press",
+  "title": "Postcard Press",
+  "status": "held",
+  "hook": "Stamp one postcard; use the ink caught on the paper masks to complete the second. Every impression has two consequences.",
+  "audience": "Players who enjoy visual logic, paper craft, satisfying reveals and compact untimed puzzles.",
+  "core_loop": "Study two small target cards; arrange a stamp and paper mask; press; peel and transfer the printed scrap to the second card; undo or complete the pair.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-06",
+  "working_title_note": "Working name; no name or trademark clearance established.",
+  "evidence_limits": "Desk research only. No competitor hands-on session, own playable build, target-player interview, fun validation or purchase-intent measurement. Historical topic growth is distinct from a verified current trend phase.",
+  "commercial_hypothesis": "Offline premium Windows microgame. USD 3.99–5.99 is a price hypothesis to test against the finished experience, not an agreed price or sales forecast. No sales volume estimated.",
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": 0,
+    "possible_steam_fee_usd": 100,
+    "optional_original_audio_or_asset_allowance_usd": 50,
+    "note": "Planning inputs only, no spending authorized. Existing machine/tools assumed; subscription/compute costs not measured. Steam fee and any applicable store tax separate from optional assets."
+  },
+  "calendar_note": "Build estimates include the prototype, final-direction art/audio, finite content, save/settings, packaged Windows QA and draft store media. Steam onboarding/review/waiting and recruitment are separate; no launch date committed.",
+  "support_estimate": "Reserve 1–2 owner hours around launch for triage/review, with agent implementation as needed; actual demand and defect burden unknown.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "Research recommendation only; owner has not selected a game or authorized a prototype."
+    },
+    {
+      "date": "2026-09-06",
+      "status": "held",
+      "reason": "Held as a paper-puzzle reserve after the owner requested a broader genre slate. Older source windows and Factory Balls masking/ordering overlap weaken its priority; the paired-card test remains available."
+    }
+  ],
+  "score_notes": {
+    "demand": "Sticky Business and A Tiny Sticker Tale show paid responses to paper/sticker play. Stamp Collector cautions against treating tactile presentation alone as demand.",
+    "distinctiveness": "Factory Balls Go! already uses masking and operation order. Coupling two cards through printed scraps is a specific but untested difference.",
+    "fun_potential": "The two-card deduction may create an aha moment or unnecessary bookkeeping; no playable evidence.",
+    "scope_fit": "4–6 days is conditional on ten good paired puzzles, limited stamps and grid-constrained masks. Puzzle authorship is the main risk.",
+    "distribution": "A single press and peel revealing two usable images could suit craft and cozy-game clips. Hobby-to-game audience overlap is unmeasured."
+  },
+  "inspiration": {
+    "topic": "Decorative correspondence, paper keepsakes and analog journaling",
+    "connection": "Stamping, masking, peeling and reusing scraps are the player's central actions.",
+    "historical_signal_confidence": "medium",
+    "current_phase_confidence": "low",
+    "why_phase_unverified": "Pinterest's correspondence window ends August 2025; Etsy's adjacent journaling data ends February 2026. Current September momentum has not been verified.",
+    "evergreen_promise": "Two interdependent images create visual planning problems, while the press-and-peel reveal provides tactile payoff.",
+    "searchable_name": "Optional; choose an appealing name and describe actual postcard and paper-craft actions."
+  },
+  "evidence": [
+    {
+      "url": "https://business.pinterest.com/en-au/pdf/pinterest-predicts/2026-trend-report/",
+      "accessed_on": "2026-09-06",
+      "claim": "Pinterest's Pen Pals forecast reports cute stamps +105% and snail mail gifts +110%. Its global English normalized searches compare September 2024–August 2025 against the preceding year; it is an older historical signal.",
+      "kind": "reported",
+      "measurement_period": "September 2024–August 2025 versus September 2023–August 2024",
+      "geography": "Global, English searches"
+    },
+    {
+      "url": "https://www.etsy.com/se-en/seller-handbook/article/1473931456647",
+      "accessed_on": "2026-09-06",
+      "claim": "Etsy reports memory journals +189% and traveler-journal searches doubling in its March 17, 2026 report. US signed-in normalized search data ends February 10, 2026. Journaling is adjacent to postcards, not a measurement of postcard-game demand.",
+      "kind": "reported",
+      "published_on": "2026-03-17"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2303350/Sticky_Business/",
+      "accessed_on": "2026-09-06",
+      "claim": "Sticky Business advertises designing, printing and packing stickers. The saved API snapshot has 5,987 all-language Steam-purchase reviews, 5,727 positive; current USD 4.99, list USD 9.99.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2322180/A_Tiny_Sticker_Tale/",
+      "accessed_on": "2026-09-06",
+      "claim": "A Tiny Sticker Tale uses stickers to change the environment and solve puzzles; it is a distinct complete adventure, not a comparable few-day content budget.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/4460470/Factory_Balls_Go/",
+      "accessed_on": "2026-09-06",
+      "claim": "Factory Balls Go! already offers masking and ordered transformations, advertising 100 levels. Our paired-card constraint must earn its difference; a change of surface alone is insufficient.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/4610420/Stamp_Collector/",
+      "accessed_on": "2026-09-06",
+      "claim": "Stamp Collector is a recent paid stamping/collection comparable. The consistent API snapshot has 10 Steam-purchase reviews, only 3 positive, at USD 1.99; topic and tactile action do not guarantee a good game.",
+      "kind": "observed"
+    }
+  ],
+  "prototype_envelope": {
+    "estimated_agent_days": 1,
+    "estimated_owner_hours": 0.5,
+    "cash_commitment_usd": 0,
+    "scope": "Two small grids, one ink, two stamps, one rectangular mask, three paired targets, undo and press/peel feedback."
+  },
+  "production_envelope": {
+    "estimated_agent_days": [
+      4,
+      6
+    ],
+    "estimated_owner_hours": [
+      4,
+      6
+    ],
+    "scope": "Ten authored paired puzzles, at most four geometric stamps and two mask shapes, constrained movement/rotation, two inks only if needed, local album/save and a consistent desk presentation.",
+    "cuts": [
+      "Freehand cutting",
+      "Paper physics",
+      "Shop simulation",
+      "Online pen pals",
+      "Long written correspondence",
+      "Large illustration library",
+      "Daily generated content"
+    ],
+    "owner_note": "Includes short repeat playtests, visual review and draft store-media review; recruitment is separate."
+  },
+  "risks": [
+    "Physical paper rituals may appeal specifically because they use fewer screens.",
+    "Masking already has strong incumbents; the second card could add effort without pleasure.",
+    "A ten-pair game could be too slight at the proposed price; expanding content before measuring authorship would break scope.",
+    "Overlapping colors and printed scraps may be difficult to read; geometry and non-color cues must carry the rules.",
+    "Independent sources corroborate a broad analog interest but do not prove the exact query is currently accelerating."
+  ],
+  "next_test": "If chosen, test three paired puzzles after one agent day. With five available target players, continue if 4/5 predict where ink will land on both pieces after introduction and 3/5 voluntarily try another pair. Then author three more nontrivial pairs in at most two agent hours without a new mechanic. Hold if the second card feels like cleanup, solutions rely on trial and error, or authorship exceeds that cap.",
+  "decision_reason": "Held as a paper-puzzle reserve after the owner requested a broader genre slate. Older source windows and Factory Balls masking/ordering overlap weaken its priority; the paired-card test remains available.",
+  "latest_research_run": "research/runs/2026-09-06-next-game/README.md"
+}
