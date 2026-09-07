@@ -70,7 +70,7 @@
     "power_and_rewards": "Owner explicitly wants a large combinable mod/magic catalog and genuinely overpowered builds earned through creativity, difficult acquisition and smart combinations. Boss, elite and rare loot should introduce fresh abilities worth trying; preserve powerful payoffs and earned ownership.",
     "art_style": "B — sculpted painterly 3D: substantial modeled shapes, tactile materials, broad painted color transitions and expressive lighting across fantasy and technology; exact Unreal fidelity unproven",
     "art_style_selected_on": "2026-09-08",
-    "open_design": "Exact lore, weapon/world visual designs, transfer rules, campaign scope and implementation brief",
+    "open_design": "Exact lore, possible weapon self-awareness through technology/magic (under discussion; not selected), weapon/world visual designs, transfer rules, campaign scope and implementation brief",
     "current_design": "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md"
   },
   "identifier_note": "The reactor-raider id is preserved from the initial comparison; the working concept has evolved through explicit owner steering.",
@@ -95,10 +95,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-07T22:44:03+00:00",
-      "record_sha256": "9914c411fdae94c8be7402954690e06af2d715772eaf8df57a78c661ff90c7b0",
+      "captured_at": "2026-09-07T22:46:30+00:00",
+      "record_sha256": "e96c4201301ee6431d7a14a97306c2d1333b0d8b5208f5dd47fd52c3d8529567",
       "files": {
-        "research/runs/2026-09-07-depth-reset/STATUS.md": "cf9175a0cccfd152e8a714e4063bcdaf4af0129c6d356dd56fe4fe610100e47b",
+        "research/runs/2026-09-07-depth-reset/STATUS.md": "3775c35ed7fa70c9905319a6e81034e5dcbec8da034a88b46aa7b66baf291f25",
         "studio/CHARTER.md": "7640e16b7f83f3007bd9edab8270e115ac865d18d66a0ab0dcc92cc1bcf531bd",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",

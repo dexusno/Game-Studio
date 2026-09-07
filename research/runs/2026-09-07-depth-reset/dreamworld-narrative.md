@@ -24,6 +24,16 @@ Dreams transmit incomplete sensory contact, not a controllable remote body. Some
 
 The weapon/shield began as a forearm tool for bracing unstable gates and directing stored force. Its adaptable interface accepts an engineered component or a magically bound material through different local craft traditions. A smith understands it as an oath-bearing shield; a cybernetic surgeon recognises a configurable actuator. Neither explanation has to invalidate the other. Adapting an attachment should involve learning its use, not automatically copying every ability encountered.
 
+## Weapon self-awareness — proposal for discussion, 2026-09-08
+
+Klaus asked whether the combined weapon/shield should be self-aware and blend technology with magic. This is an open question, not an owner-selected foundation. Recommend exploring a quiet, gradually awakening companion: an engineered protective intelligence becomes a new person through contact with a magical bond. The machine and enchantment contribute to one developing identity. Its exact origin remains open, and this proposal does not replace the dream/borrowed-senses explanation by assumption.
+
+Make self-awareness matter to discovery and attachment. A first major magical crystal might let the weapon experience a sensation it could previously only measure. Exceptional loot can reveal a memory or perception alongside a combat ability. It may recognise a landmark neither traveller remembers visiting, adding a clue to the dream mystery. Memories and personality development persist when attachments are swapped; equipment experimentation must not erase the companion or require an affection grind.
+
+Prefer curiosity, protectiveness and occasional unsettling recognition, with sparse speech and subtle core/plate animation. Preserve player-selected attacks, defense, aim and timing; personality never introduces refusal or unrequested input changes. Hints should encourage experiments without explaining every combination. Avoid constant commentary, repeated reveal dialogue on subsequent expeditions, or a separate voiced response for every possible build. Adjustable chatter and accessible text can keep the character pleasant across repeat play.
+
+A bounded first test could contain one awakening beat, a few contextual reactions and one reward that changes both combat behavior and the companion's understanding. Evaluate whether this creates attachment and anticipation without distracting from encounters. This adds writing, audio and animation work; it is not implemented, approved canon or a requirement for live AI dialogue.
+
 ## An opening the player participates in
 
 During enforced rest, the player hears someone coughing inside a sealed wall. Looking toward it briefly replaces the cell with a cold forge: a woman shelters behind an overturned table while something heavy tests its door. The player taps their shield against the bedframe. Three knocks answer through the metal.

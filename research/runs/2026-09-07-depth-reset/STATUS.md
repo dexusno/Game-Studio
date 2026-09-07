@@ -21,6 +21,8 @@ The writer's leading explanation is borrowed senses from real people. Exact lore
 
 The [art comparison](dreamworld-art-direction.md#visual-comparison--2026-09-08) shows cinematic realism (A), selected sculpted painterly (B) and graphic 3D (C) across fantasy and technology. Klaus asked whether the fidelity can actually be delivered before endorsing B. The board is generated concept art, not Unreal output. An actual small Unreal scene viewed in motion is the next evidence for the quality target; no such sample exists yet. Selecting B does not settle exact weapon geometry or guarantee the concept images' polish.
 
+Klaus is exploring whether the weapon/shield should be self-aware through a blend of technology and magic; **sentience is not yet selected**. The [narrative proposal](dreamworld-narrative.md#weapon-self-awareness--proposal-for-discussion-2026-09-08) recommends a quiet, gradually awakening companion whose discoveries add meaning to major attachments and the dream mystery. Preserve player control, creative builds and remembered experiences across equipment changes; avoid constant chatter. This is a discussion proposal, not implemented character behavior.
+
 The reward system proposes knowable pursuits alongside surprises, immediately usable major rewards, persistent learned patterns/milestones and clearly identified temporary amplification. Effect chains may trigger compatible effects; prevent duplicate consumption and nontermination without imposing an automatic damage ceiling.
 
 ## Evidence and environment
