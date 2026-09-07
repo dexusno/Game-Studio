@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-09-06",
-  "notes": "Catalog of useful public entry points. Access is descriptive, not a promise of a working integration. Only entries explicitly verified were inspected in the pilot; verify the exact page before relying on a claim.",
+  "updated_on": "2026-09-07",
+  "notes": "Catalog of useful public entry points. Access is descriptive, not a promise of a working integration. Verification dates apply to the exact entries, not the entire catalog; verify the exact page before relying on a claim.",
   "sources": [
     {
       "id": "steam-store",
@@ -91,6 +91,46 @@
       "purpose": "Primary developer description of A Little to the Left: interaction, content and presentation expectations for a tactile puzzle comparable.",
       "access": "Public developer page; opened successfully on 2026-09-06. Some copy differs internally on puzzle counts; avoid treating the page as a current inventory.",
       "last_verified_on": "2026-09-06"
+    },
+    {
+      "id": "unreal-editor-python",
+      "name": "Epic editor Python documentation",
+      "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-the-unreal-editor-using-python",
+      "purpose": "Verify editor automation, unattended scripting and content-production workflows against the installed engine version.",
+      "access": "Official page opened on 2026-09-07. A separate local UE 5.8.2 editor scripting probe executed successfully; this does not establish an asset import or game build.",
+      "last_verified_on": "2026-09-07"
+    },
+    {
+      "id": "blender-license",
+      "name": "Blender licensing and output rights",
+      "url": "https://www.blender.org/about/license/",
+      "purpose": "Distinguish artwork/output rights from Blender and add-on code licensing before using original modeling in a game.",
+      "access": "Official page inspected on 2026-09-07. Blender was not executed locally during this research; several current English manual fetches failed.",
+      "last_verified_on": "2026-09-07"
+    },
+    {
+      "id": "quaternius-scifi-megakit",
+      "name": "Quaternius Modular Sci-Fi Megakit",
+      "url": "https://quaternius.com/packs/modularscifimegakit.html",
+      "purpose": "Compare a coherent editable sci-fi environment route, exact free/paid contents, formats and CC0 rights.",
+      "access": "Creator page inspected on 2026-09-07. No download or import. The complete Source offering's Unreal integration must not be attributed to the partial free offering.",
+      "last_verified_on": "2026-09-07"
+    },
+    {
+      "id": "fab-standard-license",
+      "name": "Fab Standard License",
+      "url": "https://www.fab.com/eula",
+      "purpose": "Check modification, commercial use, collaborator sharing and source redistribution limits for the exact acquired asset.",
+      "access": "Official public license page inspected on 2026-09-07. Acquisition-specific terms, other license types and entitlements still need verification before use.",
+      "last_verified_on": "2026-09-07"
+    },
+    {
+      "id": "polyhaven-license",
+      "name": "Poly Haven asset license",
+      "url": "https://polyhaven.com/license",
+      "purpose": "Verify CC0 terms for material, lighting and model inputs, separately from website images and branding.",
+      "access": "Official page inspected on 2026-09-07. No assets downloaded or integrated.",
+      "last_verified_on": "2026-09-07"
     },
     {
       "id": "product-hunt",

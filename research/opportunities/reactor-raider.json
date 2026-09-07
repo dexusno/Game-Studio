@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "id": "reactor-raider",
+  "title": "Cyborg between worlds — working concept",
+  "status": "draft",
+  "hook": "A first-person cyborg discovers its dreams reveal real worlds, reshapes one modular weapon/shield with their technology and magic, and chooses which abilities to carry into the next destination.",
+  "audience": "Players seeking skilled aimed combat, transformative equipment, build discovery, exploration, meaningful achievements and varied expeditions.",
+  "core_loop": "Explore a procedurally varied world, fight using freely chosen attacks and defense, earn ability-changing attachments, choose or discover synergies, defeat a guardian, preserve learned patterns and campaign milestones, and select active powers for a crossing.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 2
+  },
+  "score_notes": "Provisional indirect anchors only. This is an owner-fit/mechanics inspiration pass, not a market or trend study. Fun is untested; originality is limited by comparators; exact production/animation cost and distribution response are unmeasured. Ranking in the research report is qualitative and does not select a game.",
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/692890/Roboquest/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer listing describes movement/aiming, class upgrades, weapon variety, mixed authored/random environments and persistent Basecamp unlocks; an inspiration, not validation of our concept.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1217060/Gunfire_Reborn/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer listing describes hero abilities, weapon drops and varied stages as part of build-based FPS runs; our charge-allocation design is an untested proposal.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.battleshapers.com/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer describes FPS combat, boss cores, build enhancers and tower reward/trap manipulation; a close originality challenge for our proposals, not sales evidence.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "One safe attack/guard or automatic-effect routine could remain optimal across different worlds and attachment names.",
+    "First-person transforming equipment, enemy animation/navigation and disparate world art need substantial integration and coherent readability.",
+    "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
+    "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
+  ],
+  "next_test": "Refine the integrated cyborg/worlds design into an implementation brief, then test a representative generated world with obtainable contrasting attachment builds, a boss/earned milestone and a compact playable crossing that demonstrates selected carryover.",
+  "decision_reason": "Klaus chose first person and one modular weapon/shield, then supplied the cyborg/real-dream-worlds premise and requested writer, art director and producer refinement. Lore, transfer rules and production scope remain draft; no new playable game or fun validation.",
+  "research_run": "research/runs/2026-09-07-depth-reset/README.md",
+  "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
+  "scope_note": "Substantially greater ambition; no literal 10x multiplier, feature quota or hard development/owner-time cap. Several distinct worlds are the campaign direction; counts, transfer allowance and final length remain in refinement.",
+  "prototype_envelope": {
+    "scope": "Proposed: a short escape/discovery, one substantial procedurally varied realm with meaningful attachment progression and a boss, plus compact playable arrival elsewhere to test carrying an earned ability. This is not two complete biomes or a finished campaign.",
+    "estimated_agent_days": null,
+    "estimated_owner_hours": null,
+    "cash_commitment_usd": 0
+  },
+  "commercial_hypothesis": "Unassessed in this inspiration pass; no price, sales forecast or acquisition expenditure selected.",
+  "title_note": "Descriptive internal research label; naming/originality clearance not performed.",
+  "procedural_generation": {
+    "owner_refinement_on": "2026-09-07",
+    "direction": "Designed 3D encounter modules with generated routes, compatible room configurations, encounters, objectives and rewards under playability and pacing constraints.",
+    "next_test_refinement": "Replay multiple generated versions of the representative biome; compare tactics, build choices, fairness and replay interest. Verify seed reproduction, save/resume, dependencies and actual in-engine traversal.",
+    "evidence": "Design proposal only; generator and procedural gameplay unimplemented and untested. Candidate remains draft."
+  },
+  "owner_selected_foundations": {
+    "date": "2026-09-07",
+    "camera": "First person",
+    "equipment": "One modular weapon that also forms a shield, with freely chosen attack and defense",
+    "equipment_growth": "The weapon/shield is the central evolving object. Explore extensive technology, magic, crystals, jewelry, stackable enhancements and behavioral evolution; final counts, sockets and rank rules are not selected.",
+    "story_seed": "A cyborg's apparent dreams reveal real reachable worlds with different technology, magic and biomes",
+    "power_and_rewards": "Owner explicitly wants a large combinable mod/magic catalog and genuinely overpowered builds earned through creativity, difficult acquisition and smart combinations. Boss, elite and rare loot should introduce fresh abilities worth trying; preserve powerful payoffs and earned ownership.",
+    "open_design": "Exact lore, art style, transfer rules, campaign scope and implementation brief",
+    "current_design": "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md"
+  },
+  "identifier_note": "The reactor-raider id is preserved from the initial comparison; the working concept has evolved through explicit owner steering.",
+  "updated_on": "2026-09-08",
+  "context": {
+    "entrypoint": "research/runs/2026-09-07-depth-reset/STATUS.md",
+    "read_first": [
+      "studio/CHARTER.md",
+      "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md",
+      "research/runs/2026-09-07-depth-reset/weapon-shield-design.md",
+      "research/runs/2026-09-07-depth-reset/attachment-catalogue.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-07T22:20:09+00:00",
+      "record_sha256": "0437698d22cbc15c636cfb80580a5f42682cc76833d7341f14a8bfca2ce55635",
+      "files": {
+        "research/runs/2026-09-07-depth-reset/STATUS.md": "49d17711b55fd7c2ecf4cffda7f1600a9b6e419446f5873f328d72d8b3a4af02",
+        "studio/CHARTER.md": "7640e16b7f83f3007bd9edab8270e115ac865d18d66a0ab0dcc92cc1bcf531bd",
+        "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "7da7281a374bb7e3cd27fee25e1ec5f92f11c1d8f775a2b29d968b5cb9f1f9bd",
+        "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",
+        "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75"
+      }
+    }
+  },
+  "attachment_design": {
+    "catalogue": "research/runs/2026-09-07-depth-reset/attachment-catalogue.md",
+    "component_and_enhancement_ideas": 120,
+    "behavior_or_rule_concepts": 100,
+    "supporting_enhancement_types": 20,
+    "status": "Original unimplemented proposals; some concepts overlap and may merge. Ranks are not separate abilities. This is neither a validated ability count nor a release-scope commitment."
+  },
+  "decision_history": [
+    {
+      "date": "2026-09-07",
+      "status": "draft",
+      "reason": "Recommended research direction for owner fit; no game selected, no market/price validation and no human test of this concept."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "draft",
+      "reason": "Owner selected first person and a combined modular weapon/shield, then proposed a cyborg discovering and visiting real worlds from its dreams. Integrated writer, art and producer proposals; preserve unresolved lore and carryover rules without claiming implementation."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "draft",
+      "reason": "Owner endorsed the basic direction and explicitly requested broad creative combinations, earned OP builds and fresh boss/elite/rare abilities. Revised overly restrictive effect rules and identified an earned power-spike test; implementation and fun remain unverified."
+    }
+  ]
+}

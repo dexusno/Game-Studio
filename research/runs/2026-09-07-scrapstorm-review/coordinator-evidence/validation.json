@@ -1,0 +1,39 @@
+{
+  "checked_at_utc": "2026-09-07T00:11:36.393628+00:00",
+  "scope": "Corrected research documents and snapshot consistency; not a game build or playtest",
+  "markdown_files_checked": 7,
+  "relative_file_links_checked": 24,
+  "snapshots": [
+    {
+      "file": "gameplay-evidence/steam-comparators.json",
+      "captured_at": "2026-09-06T23:37:17.443090+00:00",
+      "apps": 9
+    },
+    {
+      "file": "commercial-evidence/steam-snapshot.json",
+      "captured_at": "2026-09-06T23:37:23.268189+00:00",
+      "apps": 9
+    },
+    {
+      "file": "commercial-evidence/steam-rocket-fist.json",
+      "captured_at": "2026-09-06T23:42:35.798759+00:00",
+      "apps": 1
+    }
+  ],
+  "distinct_priced_apps": 12,
+  "source_integrity": [
+    {
+      "source_record": "research/runs/2026-09-07-scrapstorm-design/README.md",
+      "unchanged_from_start": true,
+      "sha256": "A429D5C7D53F8213751AF4EFC9B48E482FDBE624575AAC742CED2D3B9CA54B72"
+    },
+    {
+      "source_record": "research/opportunities/scrapstorm.json",
+      "unchanged_from_start": true,
+      "sha256": "2E76DA3AED6BE1D2A0ACB8E122E6F4E105672F98784C0255618AC501D3408184"
+    }
+  ],
+  "errors": [],
+  "result": "pass",
+  "external_link_scope": "Pivotal sources and three review records spot-checked by coordinator during the research; all external links not exhaustively retested."
+}

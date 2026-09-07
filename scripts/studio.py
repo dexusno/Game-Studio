@@ -5,10 +5,11 @@ from __future__ import annotations
 import argparse
 import csv
 import ctypes
+import hashlib
 import json
 import math
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 import shutil
 import sys
@@ -30,6 +31,10 @@ GAME_FILES = ("game.json", "AGENTS.md", "README.md", "BRIEF.md", "STATUS.md", "D
 GAME_DIRS = ("src", "marketing")
 ASSET_COLUMNS = ("asset_id", "path", "source_url", "creator", "license", "proof_path", "modifications", "approval_status")
 RESERVED = {"con", "prn", "aux", "nul", *(f"com{i}" for i in range(1, 10)), *(f"lpt{i}" for i in range(1, 10))}
+CONTEXT_MAX_FILES = 24
+CONTEXT_MAX_INDEX = 40
+CONTEXT_OUTPUT_CHARS = 12000
+CONTEXT_EXCERPT_CHARS = 8000
 
 
 class StudioError(Exception):
@@ -71,6 +76,44 @@ def web_url(value):
 
 def within(path, base):
     return path.resolve().is_relative_to(base.resolve())
+
+
+def check_context_shape(data, path):
+    """Optional context metadata lives in the existing game/opportunity record."""
+    if "context" not in data:
+        return []
+    context = data["context"]
+    if not isinstance(context, dict):
+        return [f"{path}: context: provide an object with entrypoint and optional read_first/checkpoint"]
+    errors = []
+    if not nonempty(context.get("entrypoint")):
+        errors.append(f"{path}: context.entrypoint: provide a repository-relative handoff file")
+    read_first = context.get("read_first", [])
+    if (not isinstance(read_first, list) or len(read_first) > CONTEXT_MAX_FILES
+            or not all(nonempty(item) for item in read_first)):
+        errors.append(f"{path}: context.read_first: provide up to {CONTEXT_MAX_FILES} repository-relative file paths")
+    checkpoint = context.get("checkpoint")
+    if "checkpoint" in context:
+        if not isinstance(checkpoint, dict):
+            errors.append(f"{path}: context.checkpoint: expected an object written by context --checkpoint")
+        else:
+            if type(checkpoint.get("schema_version")) is not int or checkpoint["schema_version"] != 1:
+                errors.append(f"{path}: context.checkpoint.schema_version: expected integer 1")
+            captured_at = checkpoint.get("captured_at")
+            try:
+                stamp = datetime.fromisoformat(captured_at) if isinstance(captured_at, str) else None
+                if stamp is None or stamp.tzinfo is None:
+                    raise ValueError("missing timezone")
+            except ValueError:
+                errors.append(f"{path}: context.checkpoint.captured_at: expected an ISO timestamp with timezone")
+            if not isinstance(checkpoint.get("record_sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", checkpoint["record_sha256"]):
+                errors.append(f"{path}: context.checkpoint.record_sha256: expected a SHA256 digest")
+            files = checkpoint.get("files")
+            if (not isinstance(files, dict) or not files or len(files) > CONTEXT_MAX_FILES + 1
+                    or not all(nonempty(key) and isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
+                               for key, value in files.items())):
+                errors.append(f"{path}: context.checkpoint.files: expected repository-relative paths mapped to SHA256 digests")
+    return errors
 
 
 def check_record(data, path, kind):
@@ -121,6 +164,7 @@ def check_record(data, path, kind):
                 check(iso_date(item.get("accessed_on")), prefix + ".accessed_on", "use a valid YYYY-MM-DD date")
                 check(nonempty(item.get("claim")), prefix + ".claim", "state what this source supports")
                 check(item.get("kind") in ("observed", "reported", "estimated", "hypothesis"), prefix + ".kind", "choose observed, reported, estimated or hypothesis")
+    errors.extend(check_context_shape(data, path))
     return errors
 
 
@@ -280,6 +324,8 @@ def validate(root):
         try:
             data = read_json(path)
             errors.extend(check_record(data, path, "candidate"))
+            if isinstance(data, dict) and "context" in data and not check_context_shape(data, path):
+                context_sources(root, data, path, "opportunity")
             if isinstance(data, dict) and nonempty(data.get("id")):
                 if data["id"] in candidates:
                     errors.append(f"{path}: duplicate candidate id {data['id']!r}")
@@ -305,6 +351,8 @@ def validate(root):
                 try:
                     data = read_json(path)
                     errors.extend(check_record(data, path, "game"))
+                    if isinstance(data, dict) and "context" in data and not check_context_shape(data, path):
+                        context_sources(root, data, path, "game")
                     if isinstance(data, dict):
                         if data.get("slug") != folder.name:
                             errors.append(f"{path}: slug must match folder name {folder.name!r}")
@@ -429,6 +477,229 @@ def status(root):
     return int(bool(failures))
 
 
+def context_path(root, value):
+    """Resolve an existing public text source without permitting traversal or escapes."""
+    if (not nonempty(value) or len(value) > 512 or "\\" in value or ":" in value
+            or any(ord(character) < 32 for character in value)
+            or value.startswith("/") or PureWindowsPath(value).drive
+            or any(part in ("", ".", "..") for part in value.split("/"))):
+        raise StudioError(f"Unsafe context path {value!r}: use a repository-relative file path with forward slashes; no traversal or absolute paths")
+    path = root / value
+    try:
+        resolved = path.resolve(strict=True)
+    except (OSError, RuntimeError) as exc:
+        raise StudioError(f"Missing or invalid context file {value!r}: {exc}") from exc
+    if not resolved.is_relative_to(root.resolve()) or not resolved.is_file():
+        raise StudioError(f"Unsafe context file {value!r}: must be an existing file confined to this repository (including symlink targets)")
+    for relative in (Path(value), resolved.relative_to(root.resolve())):
+        if any(part.casefold() in (".git", ".local", "config.local.json") or part.casefold().startswith(".env") for part in relative.parts):
+            raise StudioError(f"Private configuration is not a context source: {value!r}")
+    return path
+
+
+def context_sources(root, data, path, kind):
+    """Return ordered (relative path, resolved path) sources, with old-record fallbacks."""
+    problems = check_context_shape(data, path)
+    if problems:
+        raise StudioError("; ".join(problems))
+    context = data.get("context")
+    if context is not None:
+        relatives = [context["entrypoint"], *context.get("read_first", [])]
+    elif kind == "game":
+        relatives = [(path.parent / "STATUS.md").relative_to(root).as_posix()]
+    else:
+        owner = data.get("owner_selected_foundations", {})
+        design = owner.get("current_design") if isinstance(owner, dict) else None
+        fallback = design if nonempty(design) else data.get("research_run")
+        relatives = [fallback] if nonempty(fallback) else []
+    sources = [(relative, context_path(root, relative)) for relative in dict.fromkeys(relatives)]
+    if any(source.resolve() == path.resolve() for _, source in sources):
+        raise StudioError("Do not list the owning JSON record as a context source; it is already hashed separately without its checkpoint")
+    return sources
+
+
+def context_records(root):
+    """Discover both authoritative record kinds; no separate active-project registry."""
+    records, errors = [], []
+    for kind, pattern in (("game", "games/*/game.json"), ("opportunity", "research/opportunities/*.json")):
+        for path in sorted(root.glob(pattern)):
+            if path.parent.name.startswith(".") or path.name.startswith("."):
+                continue
+            try:
+                context_path(root, path.relative_to(root).as_posix())
+                data = read_json(path)
+                problems = check_record(data, path, "game" if kind == "game" else "candidate")
+                if problems:
+                    raise StudioError("; ".join(problems))
+                identifier = data["slug"] if kind == "game" else data["id"]
+                if not slug_ok(identifier):
+                    raise StudioError(f"{path}: context target id must be a lowercase slug, not a path")
+                if kind == "game" and identifier != path.parent.name:
+                    raise StudioError(f"{path}: slug must match game directory name")
+                records.append({"kind": kind, "id": identifier, "path": path, "data": data})
+            except StudioError as exc:
+                errors.append(str(exc))
+    if errors:
+        report = "\n".join(errors[:8])
+        if len(errors) > 8:
+            report += f"\n... {len(errors) - 8} more record errors; run validate for details."
+        raise StudioError(report[:6000])
+    seen = set()
+    for record in records:
+        key = (record["kind"], record["id"])
+        if key in seen:
+            raise StudioError(f"Duplicate context target {key[0]}:{key[1]}; fix the authoritative records before resuming")
+        seen.add(key)
+    return records
+
+
+def compact_text(value, limit=300):
+    text = " ".join(str(value).split())
+    return text if len(text) <= limit else text[:limit - 3] + "..."
+
+
+def print_context(lines):
+    text = "\n".join(lines)
+    if len(text) > CONTEXT_OUTPUT_CHARS:
+        text = text[:CONTEXT_OUTPUT_CHARS].rsplit("\n", 1)[0] + "\n[Output shortened; open the record and listed handoff files for the rest.]"
+    print(text)
+
+
+def context_fingerprint(data, sources):
+    """Hash record semantics and UTF-8 source text, independent of checkout newlines."""
+    canonical = dict(data)
+    if "context" in canonical:
+        canonical["context"] = {key: value for key, value in canonical["context"].items() if key != "checkpoint"}
+    try:
+        encoded = json.dumps(canonical, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    except (ValueError, TypeError) as exc:
+        raise StudioError(f"Cannot checkpoint noncanonical record data: {exc}") from exc
+    files = {}
+    for relative, path in sources:
+        digest = hashlib.sha256()
+        try:
+            # Universal newlines normalize CRLF/LF, including across chunk boundaries.
+            with path.open(encoding="utf-8-sig", newline=None) as handle:
+                while chunk := handle.read(65536):
+                    digest.update(chunk.encode("utf-8"))
+        except (OSError, UnicodeError) as exc:
+            raise StudioError(f"Cannot checkpoint context text {relative!r}: {exc}") from exc
+        files[relative] = digest.hexdigest()
+    return {"record_sha256": hashlib.sha256(encoded).hexdigest(), "files": files}
+
+
+def save_context_checkpoint(path, data, expected_bytes):
+    """Replace only the chosen record, refusing an observed concurrent record change."""
+    staged = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", newline="\n", prefix=".context-", suffix=".json", dir=path.parent, delete=False) as handle:
+            staged = Path(handle.name)
+            json.dump(data, handle, ensure_ascii=False, indent=2, allow_nan=False)
+            handle.write("\n")
+        if path.read_bytes() != expected_bytes:
+            raise StudioError("Record changed while checkpointing; review the updated handoff and run the command again")
+        os.replace(staged, path)
+    finally:
+        if staged is not None:
+            staged.unlink(missing_ok=True)
+
+
+def project_context(root, target=None, checkpoint=False):
+    if checkpoint and target is None:
+        raise StudioError("--checkpoint requires an explicit target after reviewing its handoff; no project is selected automatically")
+    if target is not None:
+        qualifier, separator, identifier = target.partition(":")
+        if not separator:
+            qualifier, identifier = None, target
+        if (qualifier is not None and qualifier not in ("game", "opportunity")) or not slug_ok(identifier):
+            raise StudioError("Invalid context target: use an exact id, game:ID or opportunity:ID; paths and partial matches are not accepted")
+    root = root.resolve()
+    if not root.is_dir():
+        raise StudioError(f"Repository root does not exist: {root}")
+    records = context_records(root)
+    if target is None:
+        lines = ["Project context index (recorded stage/status; nothing selected or resumed):"]
+        for record in records[:CONTEXT_MAX_INDEX]:
+            data = record["data"]
+            state = data["stage"] if record["kind"] == "game" else data["status"]
+            lines.append(f"- {record['kind']}:{record['id']} | {compact_text(data['title'], 120)} | {state}")
+        if not records:
+            lines.append("No game or opportunity records found.")
+        if len(records) > CONTEXT_MAX_INDEX:
+            lines.append(f"... {len(records) - CONTEXT_MAX_INDEX} additional records; inspect games/ and research/opportunities/ or use an exact target.")
+        lines.append("Open one: python scripts/studio.py context game:ID or opportunity:ID")
+        lines.append("This index does not verify handoff freshness. Parked/rejected records retain their status.")
+        print_context(lines)
+        return 0
+    matches = [record for record in records if record["id"] == identifier and (qualifier is None or record["kind"] == qualifier)]
+    if not matches:
+        raise StudioError(f"Unknown context target {target!r}; run context without a target to see recorded ids")
+    if len(matches) > 1:
+        raise StudioError(f"Ambiguous context target {target!r}; use game:{identifier} or opportunity:{identifier}")
+    record = matches[0]
+    data, path, kind = record["data"], record["path"], record["kind"]
+    expected_bytes = path.read_bytes()
+    # Do not overwrite a record changed between discovery and this read.
+    if read_json(path) != data:
+        raise StudioError("Record changed during context discovery; retry after reviewing the new record")
+    sources = context_sources(root, data, path, kind)
+    if checkpoint and not sources:
+        raise StudioError("No handoff is configured; add context.entrypoint to this record before checkpointing")
+    excerpt = ""
+    if sources:
+        with sources[0][1].open(encoding="utf-8-sig", newline=None) as handle:
+            excerpt = handle.read(CONTEXT_EXCERPT_CHARS + 1)
+    if checkpoint:
+        if "context" not in data:
+            data["context"] = {"entrypoint": sources[0][0], "read_first": []}
+        data["context"]["checkpoint"] = {
+            "schema_version": 1, "captured_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            **context_fingerprint(data, sources),
+        }
+        save_context_checkpoint(path, data, expected_bytes)
+    context = data.get("context", {})
+    saved = context.get("checkpoint")
+    qualified = f"{kind}:{record['id']}"
+    state = data["stage"] if kind == "game" else data["status"]
+    lines = [f"{qualified} | {compact_text(data['title'], 180)}", f"Recorded {'stage' if kind == 'game' else 'status'}: {state}",
+             f"Record: {path.relative_to(root).as_posix()}"]
+    if saved:
+        actual = context_fingerprint(data, sources)
+        changed = (["record metadata"] if actual["record_sha256"] != saved["record_sha256"] else [])
+        changed.extend(relative for relative in sorted(actual["files"].keys() | saved["files"].keys()) if actual["files"].get(relative) != saved["files"].get(relative))
+        if changed:
+            lines.append(f"Freshness: STALE - content changed since checkpoint {saved['captured_at']}.")
+            lines.append("Changed: " + compact_text("; ".join(changed), 1200))
+        else:
+            lines.append(f"Freshness: content unchanged since checkpoint {saved['captured_at']}.")
+        lines.append("A checkpoint compares saved content; it does not establish completeness, correctness or gameplay quality.")
+    else:
+        lines.append("Freshness: unverified - no content checkpoint. Review the record and handoff before relying on them.")
+    if checkpoint:
+        lines.append("Checkpoint saved in the same record. Stage/status and other record fields were preserved.")
+    next_action = data.get("next_action") or data.get("next_test")
+    if not nonempty(next_action):
+        match = re.search(r"(?im)^Next(?: concrete action)?\s*:\s*(.+)$", excerpt)
+        next_action = match[1] if match else (f"Read the next action/resume section in {sources[0][0]}" if sources else "No handoff or next action is recorded")
+    lines.append("Next: " + compact_text(next_action, 500))
+    owner = data.get("owner_selected_foundations", {})
+    if isinstance(owner, dict):
+        for key in ("camera", "equipment", "equipment_growth", "story_seed", "power_and_rewards", "open_design"):
+            if nonempty(owner.get(key)):
+                lines.append(f"Owner {key.replace('_', ' ')}: {compact_text(owner[key], 240)}")
+    if sources:
+        lines.extend(["", "Handoff first; reference files only as needed (supporting content is not concatenated):"])
+        lines.extend(f"{index}. {relative}" for index, (relative, _) in enumerate(sources, 1))
+        lines.extend(["", "Handoff excerpt:", excerpt[:CONTEXT_EXCERPT_CHARS].rstrip()])
+        if len(excerpt) > CONTEXT_EXCERPT_CHARS:
+            lines.append("[Handoff excerpt shortened; open the entrypoint for the rest.]")
+        lines.append("Open supporting files only as needed. This command does not read config.local.json or launch tools.")
+    else:
+        lines.append("No handoff configured. Add context.entrypoint to this record to provide a resumable reading order.")
+    print_context(lines)
+    return 0
+
+
 def doctor(root):
     print(f"Required Python: {sys.version.split()[0]} ({sys.executable})")
     git = shutil.which("git")
@@ -535,6 +806,9 @@ def parser():
     command.add_argument("--title", required=True, help="Human-readable title")
     command.add_argument("--engine", choices=ENGINES, required=True, help="Planning metadata; no engine install")
     rooted("status", "Discover game.json manifests and show each game's stage and resume file.")
+    command = rooted("context", "Show a bounded game/opportunity index or an explicit target's handoff and content freshness; no project is resumed automatically.")
+    command.add_argument("target", nargs="?", help="Exact id, game:ID or opportunity:ID; qualify ids shared by both record kinds")
+    command.add_argument("--checkpoint", action="store_true", help="After reviewing an explicit target's handoff, record its content hashes in that same record")
     rooted("validate", "Check repository layout, JSON schemas, native agent TOML, skill frontmatter and local references.")
     command = commands.add_parser("score", help="Validate and score one opportunity; scores are not sales forecasts.")
     command.add_argument("path", type=Path, help="Path to an opportunity JSON file")
@@ -546,6 +820,9 @@ def parser():
 
 
 def main(argv=None):
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     args = parser().parse_args(argv)
     try:
         if args.command == "new-game":
@@ -553,6 +830,8 @@ def main(argv=None):
             print("Engine project is not implemented. Start with BRIEF.md and STATUS.md.")
         elif args.command == "status":
             return status(args.root)
+        elif args.command == "context":
+            return project_context(args.root, args.target, args.checkpoint)
         elif args.command == "validate":
             errors = validate(args.root.resolve())
             if errors:

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T23:37:23.268189+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 884260,
+      "name": "Akane",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=884260&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/884260?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 2630,
+        "total_negative": 124,
+        "total_reviews": 2754
+      }
+    },
+    {
+      "app_id": 422970,
+      "name": "Devil Daggers",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=422970&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/422970?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 7151,
+        "total_negative": 283,
+        "total_reviews": 7434
+      }
+    },
+    {
+      "app_id": 2337660,
+      "name": "Boomerang Battles",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2337660&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2337660?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 5.99,
+        "current": 5.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 6,
+        "total_negative": 0,
+        "total_reviews": 6
+      }
+    },
+    {
+      "app_id": 1942280,
+      "name": "Brotato",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1942280&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1942280?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 106522,
+        "total_negative": 4412,
+        "total_reviews": 110934
+      }
+    },
+    {
+      "app_id": 915310,
+      "name": "SNKRX",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=915310&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/915310?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 3969,
+        "total_negative": 228,
+        "total_reviews": 4197
+      }
+    },
+    {
+      "app_id": 2602450,
+      "name": "Spellbound Survivors",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2602450&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2602450?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 34,
+        "total_negative": 4,
+        "total_reviews": 38
+      }
+    },
+    {
+      "app_id": 3747530,
+      "name": "Orbital Arena",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3747530&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3747530?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 1.99,
+        "current": 1.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 0,
+        "total_negative": 0,
+        "total_reviews": 0
+      }
+    },
+    {
+      "app_id": 1170060,
+      "name": "Boomerang X",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1170060&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1170060?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 19.99,
+        "current": 19.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1166,
+        "total_negative": 58,
+        "total_reviews": 1224
+      }
+    },
+    {
+      "app_id": 297130,
+      "name": "Titan Souls",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=297130&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/297130?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 14.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 6580,
+        "total_negative": 1409,
+        "total_reviews": 7989
+      }
+    }
+  ]
+}

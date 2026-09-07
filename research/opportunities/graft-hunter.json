@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "graft-hunter",
+  "title": "Graft hunter — research label",
+  "status": "draft",
+  "hook": "Choose which monster parts to disable for safety and which to preserve for a valuable combat graft, then use the harvested ability during the hunt.",
+  "audience": "Players seeking third-person melee mastery, expressive equipment, purposeful hunts and build choices.",
+  "core_loop": "Explore a region, select quarry for desired rewards, fight with deliberate melee and aimed tools, make part-break tradeoffs, combine grafts, defeat a guardian and preserve recipes/access at the sanctuary.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 2
+  },
+  "score_notes": "Provisional indirect anchors only. This is an owner-fit/mechanics inspiration pass, not a market or trend study. Fun is untested; originality is limited by comparators; exact production/animation cost and distribution response are unmeasured. Ranking in the research report is qualitative and does not select a game.",
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/924070/Arboria/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer listing already combines third-person combat, biological weapons/mutations and persistent benefits; the broad combination is not new.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.remnantgame.com/en/news/article/11537003",
+      "accessed_on": "2026-09-07",
+      "claim": "Historical official Archetypes Breakdown describes combat resources and independently progressing archetypes; inspiration for loadout identity, not a proposed content inventory. Indexed primary text was accessible when direct rendering was sparse.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Highest animation/creature/camera burden of the shortlist.",
+    "Part preservation can become slow ingredient farming if it only delays health depletion.",
+    "Mutation roguelites already exist; the harvest-versus-disable decision must earn its distinction."
+  ],
+  "next_test": "A representative sanctuary region with two weapon disciplines, aimed binding tool, authored part-break choices, immediately usable graft combinations, mixed threats, guardian, recipe/save and re-entry.",
+  "decision_reason": "Strong alternative for visible character growth and deliberate melee; no selection or proven asset/animation pipeline.",
+  "research_run": "research/runs/2026-09-07-depth-reset/README.md",
+  "engine_direction": "Unreal5.8.2; full3D first-/third-person according to the candidate",
+  "scope_note": "Substantially greater ambition; no literal10x multiplier, feature quota or hard development/owner-time cap. Counts and final campaign length are not selected.",
+  "prototype_envelope": {
+    "scope": "A representative sanctuary region with two weapon disciplines, aimed binding tool, authored part-break choices, immediately usable graft combinations, mixed threats, guardian, recipe/save and re-entry.",
+    "estimated_agent_days": null,
+    "estimated_owner_hours": null,
+    "cash_commitment_usd": 0
+  },
+  "commercial_hypothesis": "Unassessed in this inspiration pass; no price, sales forecast or acquisition expenditure selected.",
+  "title_note": "Descriptive internal research label; naming/originality clearance not performed.",
+  "procedural_generation": {
+    "owner_refinement_on": "2026-09-07",
+    "direction": "Designed 3D encounter modules with generated routes, compatible room configurations, encounters, objectives and rewards under playability and pacing constraints.",
+    "next_test_refinement": "Replay multiple generated versions of the representative biome; compare tactics, build choices, fairness and replay interest. Verify seed reproduction, save/resume, dependencies and actual in-engine traversal.",
+    "evidence": "Design proposal only; generator and procedural gameplay unimplemented and untested. Candidate remains draft."
+  },
+  "updated_on": "2026-09-07",
+  "decision_history": [
+    {
+      "date": "2026-09-07",
+      "status": "draft",
+      "reason": "Strong alternative for visible character growth and deliberate melee; no selection or proven asset/animation pipeline."
+    }
+  ]
+}

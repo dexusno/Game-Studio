@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T20:24:28.289368+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 3203860,
+      "name": "Sewing Stuff",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3203860&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3203860?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 4.99,
+        "current": 0.69,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 11,
+        "total_negative": 4,
+        "total_reviews": 15
+      }
+    },
+    {
+      "app_id": 1993180,
+      "name": "Quilts and Cats of Calico",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1993180&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1993180?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 19.99,
+        "current": 19.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 379,
+        "total_negative": 26,
+        "total_reviews": 405
+      }
+    },
+    {
+      "app_id": 4610420,
+      "name": "Stamp Collector",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=4610420&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/4610420?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 1.99,
+        "current": 1.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 3,
+        "total_negative": 7,
+        "total_reviews": 10
+      }
+    },
+    {
+      "app_id": 2303350,
+      "name": "Sticky Business",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2303350&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2303350?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 4.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 5727,
+        "total_negative": 260,
+        "total_reviews": 5987
+      }
+    },
+    {
+      "app_id": 2322180,
+      "name": "A Tiny Sticker Tale",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2322180&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2322180?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 458,
+        "total_negative": 13,
+        "total_reviews": 471
+      }
+    },
+    {
+      "app_id": 4460470,
+      "name": "Factory Balls Go!",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=4460470&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/4460470?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 3.99,
+        "current": 3.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 34,
+        "total_negative": 2,
+        "total_reviews": 36
+      }
+    },
+    {
+      "app_id": 2357910,
+      "name": "Home Safety Hotline",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2357910&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2357910?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 14.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 2494,
+        "total_negative": 260,
+        "total_reviews": 2754
+      }
+    },
+    {
+      "app_id": 1692340,
+      "name": "Unknown Number: A First Person Talker",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1692340&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1692340?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 14.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 17,
+        "total_negative": 1,
+        "total_reviews": 18
+      }
+    },
+    {
+      "app_id": 2893680,
+      "name": "Nightmare Collection: Telephone Call",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2893680&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2893680?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 2.99,
+        "current": 2.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 7,
+        "total_negative": 10,
+        "total_reviews": 17
+      }
+    },
+    {
+      "app_id": 1627350,
+      "name": "DEAD LETTER DEPT.",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1627350&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1627350?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 14.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 1686,
+        "total_negative": 87,
+        "total_reviews": 1773
+      }
+    },
+    {
+      "app_id": 3262910,
+      "name": "Terrarium",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3262910&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3262910?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 3.99,
+        "current": 3.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 12,
+        "total_negative": 3,
+        "total_reviews": 15
+      }
+    }
+  ]
+}

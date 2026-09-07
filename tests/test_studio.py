@@ -226,6 +226,382 @@ class StudioTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("IMPLEMENTATION-CONTRACT", error)
 
+    def context_candidate(self, identifier="small-idea", with_context=True):
+        data = candidate()
+        data["id"] = identifier
+        path = self.root / "research/opportunities" / f"{identifier}.json"
+        if with_context:
+            data["context"] = {
+                "entrypoint": f"research/runs/{identifier}/STATUS.md",
+                "read_first": [f"research/runs/{identifier}/design.md"],
+            }
+            write(self.root / data["context"]["entrypoint"], "# Current handoff\n\nNext: Try the blocking mechanic.\n")
+            write(self.root / data["context"]["read_first"][0], "Supporting detail is deliberately not concatenated.\n")
+        write_json(path, data)
+        return path, data
+
+    def context_cli(self, *args):
+        return self.run_cli(["context", *args, "--root", str(self.root)])
+
+    def test_context_discovers_research_without_games_or_automatic_selection(self):
+        path, data = self.context_candidate()
+        before = path.read_bytes()
+        code, output, error = self.context_cli()
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("opportunity:small-idea", output)
+        self.assertIn("draft", output)
+        self.assertIn("nothing selected or resumed", output)
+        self.assertIn("does not verify handoff freshness", output)
+        self.assertEqual(path.read_bytes(), before)
+        self.assertFalse((self.root / "games").exists())
+
+    def test_context_empty_index_is_explicit(self):
+        code, output, _ = self.context_cli()
+        self.assertEqual(code, 0)
+        self.assertIn("No game or opportunity records", output)
+
+    def test_context_parked_game_stays_parked_and_uses_existing_status(self):
+        folder = studio.new_game(self.root, "parked-game", "Parked Game", "web")
+        data = studio.read_json(folder / "game.json")
+        data["stage"] = "parked"
+        write_json(folder / "game.json", data)
+        write(folder / "STATUS.md", "# Parked\nNext: Preserve this build and research another concept.\n")
+        before = (folder / "game.json").read_bytes()
+        code, output, error = self.context_cli("game:parked-game")
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("Recorded stage: parked", output)
+        self.assertIn("Next: Preserve this build", output)
+        self.assertIn("games/parked-game/STATUS.md", output)
+        self.assertEqual((folder / "game.json").read_bytes(), before)
+
+    def test_context_shared_ids_require_qualifier(self):
+        studio.new_game(self.root, "small-idea", "Small Game", "web")
+        self.context_candidate()
+        code, _, error = self.context_cli("small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("Ambiguous", error)
+        self.assertIn("game:small-idea", error)
+        self.assertIn("opportunity:small-idea", error)
+        for target, expected in (("game:small-idea", "Recorded stage: concept"),
+                                 ("opportunity:small-idea", "Recorded status: draft")):
+            with self.subTest(target=target):
+                code, output, error = self.context_cli(target)
+                self.assertEqual((code, error), (0, ""))
+                self.assertIn(expected, output)
+
+    def test_context_missing_and_malformed_targets_fail_without_fuzzy_matching(self):
+        self.context_candidate()
+        for target in ("small", "absent", "game:small-idea"):
+            with self.subTest(target=target):
+                code, _, error = self.context_cli(target)
+                self.assertEqual(code, 1)
+                self.assertIn("Unknown context target", error)
+        for target in ("", "../small-idea", "opportunity:", "candidate:small-idea", "game:small-idea:extra", "Small-Idea"):
+            with self.subTest(target=target):
+                code, _, error = self.context_cli(target)
+                self.assertEqual(code, 1)
+                self.assertIn("Invalid context target", error)
+
+    def test_context_malformed_records_and_duplicate_same_kind_ids_are_errors(self):
+        path, data = self.context_candidate()
+        write(path, "{invalid")
+        code, _, error = self.context_cli()
+        self.assertEqual(code, 1)
+        self.assertIn("cannot read JSON", error)
+        write_json(path, data)
+        write_json(self.root / "research/opportunities/duplicate.json", data)
+        code, _, error = self.context_cli("opportunity:small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("Duplicate context target", error)
+
+    def test_context_rejects_malformed_context_metadata(self):
+        path, original = self.context_candidate()
+        for value in (None, [], {}, {"entrypoint": 42}, {"entrypoint": "README.md", "read_first": "README.md"},
+                      {"entrypoint": "README.md", "read_first": ["README.md"] * (studio.CONTEXT_MAX_FILES + 1)},
+                      {"entrypoint": "README.md", "checkpoint": {}},
+                      {"entrypoint": "README.md", "checkpoint": None}):
+            with self.subTest(context=value):
+                data = copy.deepcopy(original)
+                data["context"] = value
+                write_json(path, data)
+                code, _, error = self.context_cli("small-idea")
+                self.assertEqual(code, 1)
+                self.assertIn("context", error)
+
+    def test_context_paths_refuse_traversal_absolute_and_nonfiles(self):
+        path, original = self.context_candidate()
+        unsafe = ("../README.md", "research/../../README.md", "/README.md", "C:/secret.txt",
+                  "C:secret.txt", r"\\server\share\secret.txt", r"research\README.md", "./README.md",
+                  "README.md:secret", "research//README.md", "research", "")
+        for relative in unsafe:
+            with self.subTest(relative=relative):
+                data = copy.deepcopy(original)
+                data["context"]["entrypoint"] = relative
+                write_json(path, data)
+                code, _, error = self.context_cli("small-idea")
+                self.assertEqual(code, 1)
+                self.assertTrue("context" in error.lower(), error)
+        data = copy.deepcopy(original)
+        data["context"]["read_first"] = ["../README.md"]
+        write_json(path, data)
+        self.assertEqual(self.context_cli("small-idea")[0], 1)
+
+    def test_context_missing_configured_handoff_is_error_without_fallback(self):
+        path, data = self.context_candidate()
+        data["research_run"] = "README.md"
+        data["context"]["entrypoint"] = "research/missing.md"
+        write_json(path, data)
+        code, _, error = self.context_cli("small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("Missing or invalid context file", error)
+        self.assertTrue(any("Missing or invalid context file" in issue for issue in studio.validate(self.root)))
+
+    def test_context_symlink_escape_refused_for_handoffs_and_records(self):
+        outside = tempfile.TemporaryDirectory()
+        self.addCleanup(outside.cleanup)
+        outside_root = Path(outside.name)
+        write(outside_root / "secret.md", "Outside content must not be read")
+        path, data = self.context_candidate()
+        link = self.root / "escaped.md"
+        try:
+            link.symlink_to(outside_root / "secret.md")
+        except (OSError, NotImplementedError):
+            self.skipTest("Host does not permit creating symlinks")
+        data["context"]["entrypoint"] = "escaped.md"
+        write_json(path, data)
+        code, output, error = self.context_cli("small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("confined", error)
+        self.assertNotIn("Outside content", output)
+        path.unlink()
+        write_json(outside_root / "record.json", candidate())
+        path.symlink_to(outside_root / "record.json")
+        code, _, error = self.context_cli()
+        self.assertEqual(code, 1)
+        self.assertIn("confined", error)
+
+    def test_context_legacy_opportunity_fallback_order_and_no_handoff(self):
+        path, data = self.context_candidate(with_context=False)
+        code, output, _ = self.context_cli("small-idea")
+        self.assertEqual(code, 0)
+        self.assertIn("No handoff configured", output)
+        self.assertIn("Freshness: unverified", output)
+        data["research_run"] = "README.md"
+        write_json(path, data)
+        self.assertIn("1. README.md", self.context_cli("small-idea")[1])
+        data["owner_selected_foundations"] = {"current_design": "studio/CHARTER.md"}
+        write_json(path, data)
+        self.assertIn("1. studio/CHARTER.md", self.context_cli("small-idea")[1])
+        data["owner_selected_foundations"]["current_design"] = "missing-design.md"
+        write_json(path, data)
+        self.assertEqual(self.context_cli("small-idea")[0], 1)
+
+    def test_context_resolved_aliases_cannot_escape_or_read_private_config(self):
+        # Exercise confinement on hosts where native symlink creation is unavailable.
+        link = self.root / "alias.md"
+        write(link, "Nominal public path")
+        write(self.root / "config.local.json", "Private configuration")
+        original_resolve = Path.resolve
+        for destination, message in ((self.root.parent / "outside.md", "confined"),
+                                     (self.root / "config.local.json", "Private configuration")):
+            with self.subTest(destination=destination):
+                def resolved_alias(path, *args, **kwargs):
+                    return destination if path == link else original_resolve(path, *args, **kwargs)
+                with patch.object(Path, "resolve", resolved_alias):
+                    with self.assertRaisesRegex(studio.StudioError, message):
+                        studio.context_path(self.root, "alias.md")
+
+    def test_context_private_paths_are_case_insensitive(self):
+        path, data = self.context_candidate()
+        for relative in ("CONFIG.LOCAL.JSON", ".LOCAL/private.txt", ".GIT/config", ".ENV.LOCAL"):
+            with self.subTest(relative=relative):
+                write(self.root / relative, "Private source")
+                data["context"]["entrypoint"] = relative
+                write_json(path, data)
+                code, output, error = self.context_cli("small-idea")
+                self.assertEqual(code, 1)
+                self.assertIn("Private configuration", error)
+                self.assertNotIn("Private source", output)
+
+    def test_cli_configures_real_text_streams_as_utf8(self):
+        raw_output, raw_error = io.BytesIO(), io.BytesIO()
+        output = io.TextIOWrapper(raw_output, encoding="ascii")
+        error = io.TextIOWrapper(raw_error, encoding="ascii")
+        self.context_candidate()
+        path = self.root / "research/opportunities/small-idea.json"
+        data = studio.read_json(path)
+        data["title"] = "Cyborg — owner’s world"
+        write_json(path, data)
+        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(error):
+            code = studio.main(["context", "--root", str(self.root)])
+            output.flush()
+        self.assertEqual(code, 0)
+        self.assertIn("Cyborg — owner’s world", raw_output.getvalue().decode("utf-8"))
+        self.assertEqual(error.encoding, "utf-8")
+
+    def test_context_read_only_and_private_configuration_not_read(self):
+        path, _ = self.context_candidate()
+        private = self.root / "config.local.json"
+        write(private, "Private invalid JSON that must never be parsed by context")
+        before = {file.relative_to(self.root): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
+        code, output, error = self.context_cli("small-idea")
+        after = {file.relative_to(self.root): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
+        self.assertEqual((code, error), (0, ""))
+        self.assertEqual(before, after)
+        self.assertNotIn("Private invalid JSON", output)
+        self.assertNotIn("Supporting detail is deliberately", output)
+        data = studio.read_json(path)
+        for relative in ("config.local.json", ".local/private.txt", ".env"):
+            write(self.root / relative, "Private source must not be displayed")
+            data["context"]["entrypoint"] = relative
+            write_json(path, data)
+            code, output, error = self.context_cli("small-idea")
+            self.assertEqual(code, 1)
+            self.assertIn("Private configuration", error)
+            self.assertNotIn("Private source", output)
+
+    def test_context_checkpoint_only_changes_chosen_record_and_preserves_status(self):
+        path, original = self.context_candidate()
+        self.context_candidate("other-idea")
+        original["status"] = "held"
+        original["custom_owner_field"] = {"keep": [1, 2, 3]}
+        write_json(path, original)
+        before = {file.relative_to(self.root): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
+        code, output, error = self.context_cli("opportunity:small-idea", "--checkpoint")
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("Checkpoint saved in the same record", output)
+        self.assertIn("content unchanged since checkpoint", output)
+        updated = studio.read_json(path)
+        checkpoint = updated["context"].pop("checkpoint")
+        self.assertEqual(updated, original)
+        self.assertEqual(checkpoint["schema_version"], 1)
+        self.assertEqual(set(checkpoint["files"]), {original["context"]["entrypoint"], *original["context"]["read_first"]})
+        self.assertEqual(studio.validate(self.root), [])
+        after = {file.relative_to(self.root): file.read_bytes() for file in self.root.rglob("*") if file.is_file()}
+        changed = [relative for relative in before.keys() | after.keys() if before.get(relative) != after.get(relative)]
+        self.assertEqual(changed, [path.relative_to(self.root)])
+
+    def test_context_fresh_checkpoint_read_is_unchanged_and_read_only(self):
+        path, _ = self.context_candidate()
+        self.assertEqual(self.context_cli("small-idea", "--checkpoint")[0], 0)
+        before = path.read_bytes()
+        code, output, error = self.context_cli("small-idea")
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("content unchanged since checkpoint", output)
+        self.assertNotIn("Freshness: STALE", output)
+        self.assertEqual(path.read_bytes(), before)
+
+    def test_context_same_day_source_change_is_stale_without_timestamp_heuristics(self):
+        path, data = self.context_candidate()
+        self.assertEqual(self.context_cli("small-idea", "--checkpoint")[0], 0)
+        source = self.root / data["context"]["read_first"][0]
+        before_record = path.read_bytes()
+        stamp = source.stat()
+        write(source, "Different source content on the same day.\n")
+        studio.os.utime(source, ns=(stamp.st_atime_ns, stamp.st_mtime_ns))
+        code, output, error = self.context_cli("small-idea")
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("Freshness: STALE", output)
+        self.assertIn(data["context"]["read_first"][0], output)
+        self.assertEqual(path.read_bytes(), before_record)
+
+    def test_context_record_metadata_and_routing_changes_are_stale(self):
+        path, original = self.context_candidate()
+        for field in ("record", "routing"):
+            with self.subTest(field=field):
+                write_json(path, original)
+                self.assertEqual(self.context_cli("small-idea", "--checkpoint")[0], 0)
+                data = studio.read_json(path)
+                if field == "record":
+                    data["next_test"] = "A new next action without changing a date"
+                else:
+                    data["context"]["read_first"] = ["README.md"]
+                write_json(path, data)
+                code, output, _ = self.context_cli("small-idea")
+                self.assertEqual(code, 0)
+                self.assertIn("Freshness: STALE", output)
+                self.assertIn("record metadata", output)
+
+    def test_context_checkpoint_normalizes_newlines_bom_and_json_formatting(self):
+        path, data = self.context_candidate()
+        sources = [self.root / data["context"]["entrypoint"], self.root / data["context"]["read_first"][0]]
+        for source in sources:
+            source.write_bytes(b"\xef\xbb\xbf# Source\r\n\r\nTwo lines.\r\n")
+        self.assertEqual(self.context_cli("small-idea", "--checkpoint")[0], 0)
+        for source in sources:
+            source.write_bytes(b"# Source\n\nTwo lines.\n")
+        data = studio.read_json(path)
+        path.write_bytes(json.dumps(data, sort_keys=True, separators=(",", ":")).encode("utf-8"))
+        code, output, error = self.context_cli("small-idea")
+        self.assertEqual((code, error), (0, ""))
+        self.assertIn("content unchanged since checkpoint", output)
+
+    def test_context_checkpoint_requires_target_and_real_handoff(self):
+        path, _ = self.context_candidate(with_context=False)
+        before = path.read_bytes()
+        code, _, error = self.context_cli("--checkpoint")
+        self.assertEqual(code, 1)
+        self.assertIn("requires an explicit target", error)
+        code, _, error = self.context_cli("small-idea", "--checkpoint")
+        self.assertEqual(code, 1)
+        self.assertIn("No handoff", error)
+        self.assertEqual(path.read_bytes(), before)
+
+    def test_context_checkpoint_cannot_hash_its_own_record_recursively(self):
+        path, data = self.context_candidate()
+        data["context"]["read_first"].append(path.relative_to(self.root).as_posix())
+        write_json(path, data)
+        before = path.read_bytes()
+        code, _, error = self.context_cli("small-idea", "--checkpoint")
+        self.assertEqual(code, 1)
+        self.assertIn("already hashed separately", error)
+        self.assertEqual(path.read_bytes(), before)
+
+    def test_context_checkpoint_can_adopt_legacy_handoff_without_changing_other_fields(self):
+        path, original = self.context_candidate(with_context=False)
+        original["research_run"] = "README.md"
+        write_json(path, original)
+        code, output, error = self.context_cli("small-idea", "--checkpoint")
+        self.assertEqual((code, error), (0, ""))
+        updated = studio.read_json(path)
+        self.assertEqual(updated["context"]["entrypoint"], "README.md")
+        updated.pop("context")
+        self.assertEqual(updated, original)
+        self.assertIn("content unchanged since checkpoint", output)
+
+    def test_context_checkpoint_failed_write_and_observed_concurrent_change_preserve_record(self):
+        path, _ = self.context_candidate()
+        before = path.read_bytes()
+        with patch.object(studio.os, "replace", side_effect=OSError("disk error")):
+            code, _, error = self.context_cli("small-idea", "--checkpoint")
+        self.assertEqual(code, 1)
+        self.assertIn("disk error", error)
+        self.assertEqual(path.read_bytes(), before)
+        self.assertFalse(list(path.parent.glob(".context-*")))
+        with self.assertRaisesRegex(studio.StudioError, "Record changed while checkpointing"):
+            studio.save_context_checkpoint(path, studio.read_json(path), b"older content")
+        self.assertEqual(path.read_bytes(), before)
+        self.assertFalse(list(path.parent.glob(".context-*")))
+
+    def test_context_output_is_bounded_and_supporting_files_are_not_dumped(self):
+        path, data = self.context_candidate()
+        write(self.root / data["context"]["entrypoint"], "Long handoff " * 10000)
+        write(self.root / data["context"]["read_first"][0], "SECRET-TO-EXCERPT " * 10000)
+        data["owner_selected_foundations"] = {"equipment": "Many abilities " * 10000}
+        data["next_test"] = "Long next action " * 10000
+        write_json(path, data)
+        code, output, error = self.context_cli("small-idea")
+        self.assertEqual((code, error), (0, ""))
+        self.assertLess(len(output), studio.CONTEXT_OUTPUT_CHARS + 150)
+        self.assertIn("Handoff excerpt shortened", output)
+        self.assertNotIn("SECRET-TO-EXCERPT", output)
+        for number in range(studio.CONTEXT_MAX_INDEX + 5):
+            self.context_candidate(f"idea-{number}", with_context=False)
+        code, output, _ = self.context_cli()
+        self.assertEqual(code, 0)
+        self.assertIn("additional records", output)
+        self.assertLess(len(output), studio.CONTEXT_OUTPUT_CHARS + 150)
+
     def test_doctor_missing_optional_tools_does_not_fail(self):
         def which(name):
             return "/usr/bin/git" if name == "git" else None

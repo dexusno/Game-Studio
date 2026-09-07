@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "id": "breach-engineer",
+  "title": "Breach engineer — research label",
+  "status": "draft",
+  "hook": "Spend scarce expedition power on a safer fight, a route advantage or extraction while weapon/device builds change how the same machinery can be used.",
+  "audience": "Players seeking third-person action, environmental tactics, exploration and consequential expedition choices.",
+  "core_loop": "Scout a partially powered ruin, choose route and power allocation, fight with guns and deployables, disrupt machinery/enemy components, take a signposted security risk, extract and restore persistent workshop functions.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 2
+  },
+  "score_notes": "Provisional indirect anchors only. This is an owner-fit/mechanics inspiration pass, not a market or trend study. Fun is untested; originality is limited by comparators; exact production/animation cost and distribution response are unmeasured. Ranking in the research report is qualitative and does not select a game.",
+  "evidence": [
+    {
+      "url": "https://store.steampowered.com/app/3156770/Witchfire/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer describes gun/spell expeditions, exploration, extraction and persistent arsenal development; Early Access and our own untested implementation limit inference.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://www.battleshapers.com/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer describes FPS combat, boss cores, build enhancers and tower reward/trap manipulation; a close originality challenge for our proposals, not sales evidence.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/632360/Risk_of_Rain_2/",
+      "accessed_on": "2026-09-07",
+      "claim": "Developer listing describes interacting run items, varied survivor kits and unlockable rules; a design reference, not guaranteed replay for our proposal.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Can become obligatory switch pressing instead of tactical agency.",
+    "Saveable machinery states, altered navigation and interaction combinations create significant QA work.",
+    "Combat energy and route power must be distinct enough to avoid softlocks or confusing chores."
+  ],
+  "next_test": "A representative freight district with alternative power routes, useful weapon/deployable choices, jammer/pursuer combinations, optional risk, security finale, extraction and saved workshop/access progress.",
+  "decision_reason": "Third-ranked research alternative; appealing systemic exploration but greatest risk of chore-like interactions. No game selected.",
+  "research_run": "research/runs/2026-09-07-depth-reset/README.md",
+  "engine_direction": "Unreal5.8.2; full3D first-/third-person according to the candidate",
+  "scope_note": "Substantially greater ambition; no literal10x multiplier, feature quota or hard development/owner-time cap. Counts and final campaign length are not selected.",
+  "prototype_envelope": {
+    "scope": "A representative freight district with alternative power routes, useful weapon/deployable choices, jammer/pursuer combinations, optional risk, security finale, extraction and saved workshop/access progress.",
+    "estimated_agent_days": null,
+    "estimated_owner_hours": null,
+    "cash_commitment_usd": 0
+  },
+  "commercial_hypothesis": "Unassessed in this inspiration pass; no price, sales forecast or acquisition expenditure selected.",
+  "title_note": "Descriptive internal research label; naming/originality clearance not performed.",
+  "procedural_generation": {
+    "owner_refinement_on": "2026-09-07",
+    "direction": "Designed 3D encounter modules with generated routes, compatible room configurations, encounters, objectives and rewards under playability and pacing constraints.",
+    "next_test_refinement": "Replay multiple generated versions of the representative biome; compare tactics, build choices, fairness and replay interest. Verify seed reproduction, save/resume, dependencies and actual in-engine traversal.",
+    "evidence": "Design proposal only; generator and procedural gameplay unimplemented and untested. Candidate remains draft."
+  },
+  "updated_on": "2026-09-07",
+  "decision_history": [
+    {
+      "date": "2026-09-07",
+      "status": "draft",
+      "reason": "Third-ranked research alternative; appealing systemic exploration but greatest risk of chore-like interactions. No game selected."
+    }
+  ]
+}

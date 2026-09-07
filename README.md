@@ -13,6 +13,8 @@ Open a task in the **Game-Studio** Codex project at `D:\Game-Studio`. For exampl
 
 Codex reads the studio instructions and uses the relevant skills and specialist roles. You do not need to run commands or manage nine separate conversations. Start a fresh task in this project to pick up the new project-scoped skills and agents; roles can also be delegated through the collaboration tools available in the session.
 
+**Continuing the current game:** start a new task in this project and say “Continue the cyborg game from its project handoff.” The [current handoff](research/runs/2026-09-07-depth-reset/STATUS.md) preserves settled choices, open questions, evidence and the next step. [Working across tasks](studio/CONTINUITY.md) explains how agents keep that record current and carry it between project copies. The cyborg design is in refinement; the earlier Sixfold Recoil beta is parked.
+
 ## The working loop
 
 ```mermaid
@@ -35,6 +37,7 @@ Research considers **rising trends, near-peak opportunities, and established nic
 |---|---|
 | [Studio charter](studio/CHARTER.md) | Working preferences, scope, quality, and economic assumptions |
 | [Workflow](studio/WORKFLOW.md) | What makes each stage complete and how to resume |
+| [Working across tasks](studio/CONTINUITY.md) | Short handoffs, context loading and bringing work into the next task |
 | [Team](studio/TEAM.md) | Nine specialist roles, used as needed |
 | [Research](research/README.md) | Sources, scoring, evidence rules, and opportunity history |
 | [Initial research pilot](research/runs/2026-09-06-studio-pilot/README.md) | Three draft examples that exercise the process |
@@ -50,6 +53,8 @@ The Python studio helper creates consistent game folders, validates the workspac
 
 ```powershell
 python scripts/studio.py status
+python scripts/studio.py context
+python scripts/studio.py context opportunity:reactor-raider
 python scripts/studio.py doctor
 python scripts/studio.py validate
 python -m unittest discover -s tests -v

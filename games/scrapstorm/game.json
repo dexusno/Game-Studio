@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "slug": "scrapstorm",
+  "title": "Sixfold Recoil",
+  "engine": "web",
+  "platforms": [
+    "Windows browser (offline HTML)"
+  ],
+  "stage": "parked",
+  "created_on": "2026-09-07",
+  "source_opportunity": "scrapstorm",
+  "budget": {
+    "target_days": 0,
+    "human_hours": 0,
+    "cash_usd": 0
+  },
+  "budget_note": "No hard development/owner-time cap and no numeric day/hour allocation. Zero denotes no allocation/commitment, not zero effort/deadline. No purchases; measure actual increments, charges and attention.",
+  "authorized_scope": "One-level beta for owner playtest; full production/publication undecided.",
+  "prototype_version": "0.1.0-beta",
+  "prototype_artifact": "build/Sixfold-Recoil-Beta.html",
+  "prototype_source_sha256": "467e2a4ca6c3e1b039f0d04ad9a5fe262b83ed2252005d5d46937cff1fd9d55f",
+  "human_playtest": "2026-09-07: owner reported the delivered demo boring, too narrow and visually below the studio target; session details not supplied",
+  "production_decision": "Current concept rejected after owner playtest; preserve build and evidence, research substantially deeper Unreal 3D directions",
+  "parked_on": "2026-09-07"
+}

@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "captured_at": "2026-09-06T20:14:13.835876+00:00",
+  "review_filter": {
+    "language": "all",
+    "purchase_type": "steam",
+    "review_type": "all",
+    "filter": "all"
+  },
+  "note": "Observed Steam prices and review counts, not sales or revenue estimates.",
+  "apps": [
+    {
+      "app_id": 2356780,
+      "name": "Dungeon Clawler",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2356780&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2356780?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 14.99,
+        "current": 7.49,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 3254,
+        "total_negative": 426,
+        "total_reviews": 3680
+      }
+    },
+    {
+      "app_id": 2456120,
+      "name": "Claw Machine Sim",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2456120&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2456120?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 6.99,
+        "current": 4.89,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 223,
+        "total_negative": 13,
+        "total_reviews": 236
+      }
+    },
+    {
+      "app_id": 4794370,
+      "name": "Let's Aim! Crane Game",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=4794370&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/4794370?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 7.99,
+        "current": 7.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 0,
+        "total_negative": 1,
+        "total_reviews": 1
+      }
+    },
+    {
+      "app_id": 2240080,
+      "name": "Spilled!",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2240080&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2240080?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 5.99,
+        "current": 5.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 4570,
+        "total_negative": 306,
+        "total_reviews": 4876
+      }
+    },
+    {
+      "app_id": 3035120,
+      "name": "Is This Seat Taken?",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3035120&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3035120?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 9.99,
+        "current": 9.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 8783,
+        "total_negative": 255,
+        "total_reviews": 9038
+      }
+    },
+    {
+      "app_id": 3084150,
+      "name": "Packit List",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=3084150&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/3084150?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 3.99,
+        "current": 3.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 110,
+        "total_negative": 7,
+        "total_reviews": 117
+      }
+    },
+    {
+      "app_id": 1970580,
+      "name": "Backpack Hero",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1970580&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1970580?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 19.99,
+        "current": 19.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 6367,
+        "total_negative": 1045,
+        "total_reviews": 7412
+      }
+    },
+    {
+      "app_id": 1922020,
+      "name": "Land Above Sea Below",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=1922020&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/1922020?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 7.99,
+        "current": 7.99,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 82,
+        "total_negative": 37,
+        "total_reviews": 119
+      }
+    },
+    {
+      "app_id": 2109270,
+      "name": "Preserve",
+      "source_urls": {
+        "details": "https://store.steampowered.com/api/appdetails?appids=2109270&cc=us&l=english",
+        "reviews": "https://store.steampowered.com/appreviews/2109270?json=1&language=all&purchase_type=steam&filter=all&num_per_page=0&review_type=all"
+      },
+      "price_usd": {
+        "currency": "USD",
+        "list": 12.49,
+        "current": 6.24,
+        "is_free": false
+      },
+      "reviews": {
+        "total_positive": 632,
+        "total_negative": 54,
+        "total_reviews": 686
+      }
+    }
+  ]
+}

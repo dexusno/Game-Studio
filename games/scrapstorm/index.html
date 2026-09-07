@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#162426">
+  <title>Sixfold Recoil — Playtest Beta</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <canvas id="game" aria-label="Sixfold Recoil combat arena" tabindex="0"></canvas>
+  <header class="topbar">
+    <div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 35 12v17L20 37 5 28V12Z"/><path d="m12 16 8-5 8 5v9l-8 5-8-5Z"/></svg><div>SIXFOLD RECOIL<small>OPEN TRAY <span>·</span> PLAYTEST BETA</small></div></div>
+    <div id="stage-hud" hidden><span id="stage-label">OPENING</span><div id="stage-steps" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+    <div class="top-actions"><span id="clock" hidden>0:00</span><button id="fullscreen" class="icon-button" title="Toggle fullscreen (F)" aria-label="Toggle fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button><button id="pause-button" class="icon-button" title="Pause (Esc)" aria-label="Pause" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button></div>
+  </header>
+
+  <main id="home" class="screen home-screen">
+    <section class="intro">
+      <div class="eyebrow"><span class="status-dot"></span> ONE LEVEL. SIX USEFUL PIECES.</div>
+      <h1>THROW YOUR<br><span>PROTECTION.</span></h1>
+      <p class="lede">Your shield is your ammunition.<br>Aim the scrap. Dodge the machinery.<br>Snap every piece back home.</p>
+      <fieldset class="recall-picker"><legend>RECALL STYLE</legend><label><input type="radio" name="recall" value="recover" checked><span><b>Recover</b><small>Quick, harmless returns</small></span></label><label><input type="radio" name="recall" value="cutting"><span><b>Cut through</b><small>Slower returns that hit</small></span></label></fieldset>
+      <div class="start-row"><button id="start" class="primary">Play the demo <span>↗</span></button><button id="home-settings" class="secondary">Settings</button></div>
+      <div class="intro-controls"><span><kbd>W A S D</kbd> MOVE</span><span><kbd>LMB</kbd> THROW</span><span><kbd>RMB</kbd> HOLD TO RECALL</span></div>
+      <p class="intro-note">A first playable combat test. No grind. Instant retry.</p>
+    </section>
+    <div class="hero-caption"><span>MEET PIP</span><p>Small robot.<br>Very attached to its junk.</p></div>
+  </main>
+
+  <section id="pause-screen" class="screen modal-screen" hidden aria-label="Paused">
+    <div class="panel"><span class="eyebrow" id="pause-reason">TAKE A BREATHER</span><h2>Paused.</h2><p>Your scrap can wait.</p><div class="button-stack"><button id="resume" class="primary">Back to the tray <span>↗</span></button><button id="pause-settings" class="secondary">Settings</button><div class="button-pair"><button id="restart" class="secondary">Restart level</button><button id="quit" class="text-button">Main menu</button></div></div><span class="panel-footnote">Escape to resume</span></div>
+  </section>
+
+  <section id="settings-screen" class="screen modal-screen" hidden aria-label="Settings">
+    <div class="panel settings-panel"><span class="eyebrow">MAKE YOURSELF COMFORTABLE</span><h2>Settings.</h2>
+      <label class="slider-row" for="effects-volume"><span>Effects <output id="effects-value">75%</output></span><input id="effects-volume" type="range" min="0" max="100" value="75"></label>
+      <label class="slider-row" for="music-volume"><span>Music <output id="music-value">30%</output></span><input id="music-volume" type="range" min="0" max="100" value="30"></label>
+      <label class="toggle-row"><span>Camera shake<small>Small impact movements</small></span><input id="shake" type="checkbox" checked></label>
+      <label class="toggle-row"><span>Throw interrupts recall<small>Try a different button rhythm · next attempt</small></span><input id="interrupt" type="checkbox"></label>
+      <div class="control-reference"><b>KEYBOARD & MOUSE</b><p>WASD / arrows · Move<br>Mouse · Aim &nbsp; Left click · Throw<br>Hold right mouse · Recall &nbsp; Esc · Pause</p><b>STANDARD GAMEPAD</b><p>Left stick · Move &nbsp; Right stick · Aim<br>RT · Throw &nbsp; Hold LT · Recall<br>Menu · Pause &nbsp; A · Select &nbsp; B · Back</p></div>
+      <button id="settings-back" class="primary">Done <span>↗</span></button>
+      <p id="storage-note" class="panel-footnote">Settings and records stay on this device.</p>
+    </div>
+  </section>
+
+  <section id="results-screen" class="screen modal-screen" hidden aria-label="Level results">
+    <div class="panel results-panel"><span class="eyebrow" id="result-eyebrow">OPEN TRAY</span><h2 id="result-title">Line cleared.</h2><p id="result-message">Six pieces, all accounted for.</p>
+      <div class="result-metrics"><div><small>ACTIVE TIME</small><b id="result-time">0:00</b></div><div><small>HULL LEFT</small><b id="result-hull">3 / 3</b></div><div><small>RECALL</small><b id="result-mode">Recover</b></div></div>
+      <div id="best-note" class="best-note"></div>
+      <button id="retry" class="primary">One more try <span>↻</span></button>
+      <button id="switch-mode" class="secondary">Try cutting recall</button>
+      <div class="button-pair"><button id="save-run" class="text-button">Save run details</button><button id="results-menu" class="text-button">Main menu</button></div>
+      <p class="panel-footnote">What felt good? What got in the way?</p>
+    </div>
+  </section>
+
+  <footer id="combat-hud" hidden>
+    <div class="play-controls"><span><kbd>WASD</kbd> MOVE</span><span><kbd>LMB</kbd> THROW</span><span><kbd>RMB</kbd> RECALL</span></div>
+    <div class="scrap-status"><div class="scrap-count"><b id="held-count">6</b><span>/ 6</span></div><div><span id="protection-label">PROTECTION READY</span><div id="piece-marks" aria-label="Six scrap piece states"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+    <div class="hull-status"><span>HULL</span><div id="hull-pips" aria-label="Hull"><i></i><i></i><i></i></div></div>
+  </footer>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="pad-status" hidden>GAMEPAD CONNECTED</div>
+  <div class="build-label" id="build-label">BETA 0.1 · LOCAL PLAYTEST</div>
+  <script src="src/core.js"></script>
+  <script src="src/audio.js"></script>
+  <script src="src/render.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "id": "scrapstorm",
+  "title": "Sixfold Recoil",
+  "status": "rejected",
+  "hook": "A tiny magnetic robot aims and throws its six shield pieces, dodges while exposed, and pulls the same objects home.",
+  "audience": "Players seeking active aiming, short arcade mastery, readable danger and quick retries, with light run-build variation.",
+  "core_loop": "Choose an arena course; aim and launch all held shield/ammo pieces; move and globally recall them; release recall to throw a useful partial volley or retain protection; clear five finite encounters with three early card choices; defeat the Foreman and pursue comparable clears or fixed challenges. Duration emerges from play, without a scripted minimum.",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 3,
+    "fun_potential": 1,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "score_notes": "Demand/distribution remain indirect. The owner played the delivered beta and rejected its narrow decision space, missing progression and simple visuals; fun_potential is reduced to 1 for this current proposal. The technical build passed, which does not establish owner fit. New full3D alternatives remain untested hypotheses with no numeric complexity or time cap.",
+  "research_run": "research/runs/2026-09-06-next-game/README.md",
+  "updated_on": "2026-09-07",
+  "design_brief": "research/runs/2026-09-07-scrapstorm-design/README.md",
+  "design_stage": "Current concept rejected after the 2026-09-07 owner playtest; game parked and historical design preserved.",
+  "inspiration": {
+    "topic": "Miniatures made from discarded materials and upcycling",
+    "connection": "The trend inspires the toy-scale world, found-object weapons and making discarded parts useful. The game is arena combat, not a craft simulator.",
+    "evergreen_promise": "Aim, exposure, recovery and improving execution should earn play without interest in upcycling; a comfortable repeated rhythm can be enjoyable.",
+    "current_timing": "Historical source growth or current expansion is recorded separately; September search slope and future peak are unverified."
+  },
+  "commercial_hypothesis": {
+    "platform": "Windows premium offline; proposed Steam release",
+    "conditional_price_usd": [
+      4.99,
+      4.99
+    ],
+    "owner_price_ceiling_usd": 9.99,
+    "condition": "Test the actual complete package and representative play at USD 4.99. Enjoyment, credible buyer value and plausible obtainable proceeds relative to measured actual costs must support further commitment. No sales forecast or chosen live price.",
+    "higher_price_condition": "USD 6.99-9.99 may be reconsidered when the actual package earns sustained repeat interest and current genre/price evidence plus value response justify it. Proposed content counts and agent opinions do not establish that case."
+  },
+  "prototype_envelope": {
+    "estimated_agent_days": null,
+    "hard_development_time_cap": false,
+    "scope": "Authorized one-level beta: one Open Tray arena, six conserved shield/ammo pieces, Biter and Spitter, three finite groups then a Pin/Fork Foreman, H/D return comparison, input arbitration, original visual/audio feedback, pause, victory/defeat and immediate retry. No cards/progression. Duration emerges from play; there is no game timer, development allocation or owner-time cap.",
+    "measurement": "Measure the actual delivered increment, verification and rework with this AI workflow; keep active execution, calendar, owner attention and incremental cash separate."
+  },
+  "production_envelope": {
+    "estimated_agent_days": null,
+    "estimated_owner_hours": null,
+    "hard_development_time_cap": false,
+    "hard_owner_time_cap": false,
+    "scope": "Recommended v0.2 baseline: one robot; three arena courses (Open Tray, Split Bench, Crossbelt); five encounters/run; four ordinary enemy roles plus Foreman; twelve ordinary encounter templates; eight cards with three early picks; Standard and Overdrive; six fixed challenges, practice, comparable local records, settings/saves, coherent original art/audio, and a verified Windows package with keyboard/mouse and gamepad.",
+    "return_damage_branch": "H is the specified initial baseline. Compare D before content. If evidence supports promoting damaging returns to core, remove Return Teeth without a filler replacement: seven cards, three picks; one speed factor, unchanged one-return-hit cycle cap; revise Crossing Lines loadout and retest enemy/boss/card pacing.",
+    "reduced_pool": "Explicit smaller content experiment only: lance/scatter/coil/treads with two picks; previously declined cards may be reoffered to ensure two distinct compatible choices. This is not the advertised complete package.",
+    "cuts": [
+      "Redundant background detail or cosmetic shapes",
+      "Repeated story staging",
+      "Cards or encounters that do not change wanted play",
+      "Freeform construction and rigid-body debris piles",
+      "Permanent power grind",
+      "Multiplayer and online services",
+      "Passive orbit/block damage",
+      "Mandatory cleanup or fixed minimum run duration"
+    ],
+    "note": "No replacement day/hour ceiling. The core experiment is not a content cap. Retain meaningful added threats, layouts, goals and presentation when actual player value and measured AI/cash/attention/support costs justify them. Cutting a course or replay goal changes the product/value test rather than being a free scope reduction.",
+    "status": "Historical unselected proposal; current game parked after negative playtest"
+  },
+  "cash_assumptions": {
+    "committed_usd": 0,
+    "prototype_incremental_cash_usd": null,
+    "note": "No spending authorized or committed by this design task. Future actual extra AI/tool/asset/release/support charges are unknown. Record included subscription capacity/allocation separately from new cash payments; no human programmer wage is imputed to AI execution."
+  },
+  "support_estimate": "Unknown. Measure compatibility/save issues, actual defect triage, agent fixes, extra cash and owner attention separately; no owner-hour cap or human-wage proxy.",
+  "evidence": [
+    {
+      "url": "https://newsroom.pinterest.com/news/2026-pinterest-hobbies-trend-report/",
+      "accessed_on": "2026-09-06",
+      "claim": "Published August 25, 2026: miniatures from trash searches +437%, global text searches May 2026 versus May 2025. This supplies inspiration, not September acceleration or game purchase intent.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/1942280/",
+      "accessed_on": "2026-09-06",
+      "claim": "Brotato: USD 4.99 regular / 2.99 current, 110,928 all-language Steam-purchase reviews in the dated snapshot. Arena action and upgrade reference, not our achievable content inventory.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://www.nintendo-town.fr/2023/04/26/space-gladiators-arrive-sur-nintendo-switch-le-4-mai/",
+      "accessed_on": "2026-09-06",
+      "claim": "April 26, 2023 Blobfish/Seaven press release reproduced by Nintendo-Town reports Brotato sold over 1.5 million copies. Platform split and realized purchase prices not supplied; this is a reported disclosure, not an independently audited total.",
+      "kind": "reported"
+    },
+    {
+      "url": "https://store.steampowered.com/app/915310/",
+      "accessed_on": "2026-09-06",
+      "claim": "September 6 snapshot: SNKRX USD 2.99 regular/current and 4,197 consistently filtered reviews. No primary paid-unit total was found during that pass; the September 7 review found the developer unit disclosure recorded below.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/4764640/",
+      "accessed_on": "2026-09-06",
+      "claim": "Spreadsheet Survivors launched July 31, 2026 and has two Steam-purchase reviews in this run. A distinctive thematic wrapper in this genre does not ensure visibility.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/2602450/",
+      "accessed_on": "2026-09-06",
+      "claim": "Spellbound Survivors supplies another lower-response arena action comparator; prices and review totals are saved in steam-arena-counterexamples.json.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/5122440/Scrapstorm/",
+      "accessed_on": "2026-09-07",
+      "claim": "A different Scrapstorm by Pixiliated is listed Coming soon in the action-roguelite neighbourhood. Rechecked by the bounded naming task; this establishes an exact title collision, not sales or a legal conclusion.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/search/?term=Sixfold%20Recoil",
+      "accessed_on": "2026-09-07",
+      "claim": "Public Steam search returned zero results for Sixfold Recoil in the bounded title check. itch/indexed-web searches also surfaced no exact replacement title; fuzzy indexing and hidden/unpublished listings limit this negative result. Details in naming-check.md.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/884260/",
+      "accessed_on": "2026-09-07",
+      "claim": "Review US snapshot: Akane USD 4.99 regular/current, one arena with five enemy types and equipment goals advertised. Compact paid mastery is a plausible format, not proof of this product's value.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://store.steampowered.com/app/413500/",
+      "accessed_on": "2026-09-07",
+      "claim": "Review US snapshot: Rocket Fist USD 4.99 regular/current and 29 all-language Steam-purchase reviews. Close robot throw/recovery precedent with social modes and a larger solo adventure; sales/profitability unknown.",
+      "kind": "observed"
+    },
+    {
+      "url": "https://a327ex.com/posts/snkrx_log",
+      "accessed_on": "2026-09-07",
+      "claim": "The current review verified the developer log's July 9, 2021 entry reporting 80,781 units sold. Historical attributed units support paid compact formats, not our sales, net proceeds or AI schedule.",
+      "kind": "reported"
+    }
+  ],
+  "risks": [
+    "Launch/recovery may remain unwanted reload work; partial shots may be accidental or offer no useful window.",
+    "Recall-priority inputs may discard intended throws; the alternative may create unwanted launches and needs an isolated comparison.",
+    "Damaging recall may win preference through extra power instead of useful crossings; contact and toggle behavior require real collision checks.",
+    "Stationary/corner shielding, close-range cycles or perimeter routes may remove skill/pressure; a comfortable mastered rhythm alone is not failure.",
+    "Proposed cards, courses and goals may be redundant or fail to earn post-clear/later-session play despite larger inventory.",
+    "Enemy/arena combinations may obscure danger or trap an empty player, especially with belts, slower returns and Overdrive.",
+    "Cheap build-heavy incumbents and low-response retrieval games challenge buyer value and obtainable demand; review counts are not sales.",
+    "Toy materials or the provisional name may suggest crafting or recoil movement rather than active aim/throw/recall.",
+    "Game-specific AI iteration, extra charges, owner attention, packaging and support costs are unmeasured; no deadline-based rejection is justified."
+  ],
+  "evidence_limits": "An actual beta, technical tests and negative direct owner feedback exist. No session recording/run export, exact duration/outcome/mode, competitor hands-on test, later-session replay study, price test, measured reach or revenue result is available. The feedback rejects this experiment; it does not establish that all retrieval mechanics or top-down games are unfun.",
+  "next_test": "Use the depth-reset research to choose a substantially more ambitious Unreal concept. Do not expand this prototype by default.",
+  "decision_reason": "Klaus rejected the delivered one-level beta as boring, strategically narrow, missing powerups/progression and visually below the studio target. Park the game and research substantially deeper first-/third-person Unreal directions. The complexity comparison was explicitly qualitative, not a numeric requirement.",
+  "decision_history": [
+    {
+      "date": "2026-09-06",
+      "status": "shortlisted",
+      "reason": "First recommended experiment for an active, immediately visible hook and strong paid genre evidence. Trend-to-buyer transfer, fun and production duration remain unproved. Research only; no game selected."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "shortlisted",
+      "reason": "Detailed design exploration after an explicit two-designer exchange. Conserved ammo, global full-speed recall, partial volleys, four encounters and two choices from six upgrades replace the larger initial outline. Prototype and production are not selected."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "shortlisted",
+      "version": "0.2",
+      "title": "Sixfold Recoil",
+      "reason": "2026-09-07 v0.2 incorporates the corrected review: proceed is a recommendation for a focused playable core test, not selection. Renamed provisionally to Sixfold Recoil after exact/close collision checks; specified input/contact/recovery rules, reliable card offers, a stronger mastery package, and an unscripted finale. No hard development/owner-time cap; old day/hour figures are superseded planning hypotheses. USD 4.99 and fun/replay remain unvalidated; useful expansion is permitted when actual cost/value supports it.",
+      "superseded_planning_hypotheses": {
+        "prototype_agent_days": 1,
+        "production_agent_days": [
+          6,
+          7
+        ],
+        "owner_hours": [
+          4,
+          6
+        ],
+        "interpretation": "Preserved as prior hypotheses only; never owner-imposed hard limits and no longer current estimates. Use measured local AI increments and actual costs/value instead."
+      }
+    },
+    {
+      "date": "2026-09-07",
+      "status": "selected",
+      "reason": "Klaus requested a playable one-level beta to determine whether the core is fun enough for a whole game. Selection applies to the prototype only; confidence and fun score unchanged. No publication or purchases."
+    },
+    {
+      "date": "2026-09-07",
+      "status": "rejected",
+      "reason": "Klaus rejected the delivered one-level beta as boring, strategically narrow, missing powerups/progression and visually below the studio target. Park the game and research substantially deeper first-/third-person Unreal directions. The complexity comparison was explicitly qualitative, not a numeric requirement."
+    }
+  ],
+  "independent_challenge": "On September 7, two game designers directly exchanged a proposal, challenge and revision. They removed recall chores, shield-gap randomness, passive block damage and a guaranteed retained-shield upgrade. Both retained the objection that the game may be a gun with an annoying reload and that a short run with two enemy types has unproven commercial depth. Return-path damage is an early comparative experiment, not an established fun result. The subsequent two-reviewer gameplay/commercial review and coordinator audit corrected the time-cap premise and recommended a focused core test. Their completed peer exchange is preserved in the linked review. v0.2 resolves paper ambiguities and proposes stronger mastery content; no additional peer-review cycle or human fun test is claimed.",
+  "title_history": [
+    {
+      "date": "2026-09-06",
+      "title": "Scrapstorm",
+      "note": "Original working title; stable opportunity ID retained."
+    },
+    {
+      "date": "2026-09-07",
+      "title": "Sixfold Recoil",
+      "note": "Provisional v0.2 replacement after exact Steam collision and bounded comparison of alternative names."
+    }
+  ],
+  "design_revision": {
+    "version": "0.2",
+    "date": "2026-09-07",
+    "review": "research/runs/2026-09-07-scrapstorm-review/README.md",
+    "original_brief_archive": "research/runs/2026-09-07-scrapstorm-design/v0.1.md",
+    "naming_evidence": "research/runs/2026-09-07-scrapstorm-design/naming-check.md",
+    "current_evidence": "v0.2 was a paper design. A subsequent beta passed technical checks but was rejected by the owner on 2026-09-07; QA.md records the feedback and STATUS.md the parked state."
+  },
+  "prototype_game": "games/scrapstorm/game.json",
+  "owner_playtest": {
+    "date": "2026-09-07",
+    "delivered_build": "467e2a4ca6c3",
+    "source": "Direct conversation feedback; games/scrapstorm/QA.md",
+    "outcome": "negative",
+    "summary": "Klaus rejected the delivered one-level beta as boring, strategically narrow, missing powerups/progression and visually below the studio target. Park the game and research substantially deeper first-/third-person Unreal directions. The complexity comparison was explicitly qualitative, not a numeric requirement.",
+    "unknown": [
+      "duration",
+      "completion outcome",
+      "recall mode",
+      "input device",
+      "retry count"
+    ]
+  },
+  "replacement_research": "research/runs/2026-09-07-depth-reset/README.md"
+}
