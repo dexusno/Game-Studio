@@ -518,13 +518,14 @@ def context_sources(root, data, path, kind):
     return sources
 
 
-def context_records(root):
+def context_records(root, qualified_target=None):
     """Discover both authoritative record kinds; no separate active-project registry."""
     records, errors = [], []
     for kind, pattern in (("game", "games/*/game.json"), ("opportunity", "research/opportunities/*.json")):
         for path in sorted(root.glob(pattern)):
             if path.parent.name.startswith(".") or path.name.startswith("."):
                 continue
+            data = None
             try:
                 context_path(root, path.relative_to(root).as_posix())
                 data = read_json(path)
@@ -538,18 +539,32 @@ def context_records(root):
                     raise StudioError(f"{path}: slug must match game directory name")
                 records.append({"kind": kind, "id": identifier, "path": path, "data": data})
             except StudioError as exc:
-                errors.append(str(exc))
-    if errors:
-        report = "\n".join(errors[:8])
-        if len(errors) > 8:
-            report += f"\n... {len(errors) - 8} more record errors; run validate for details."
-        raise StudioError(report[:6000])
+                identifier = data.get("slug" if kind == "game" else "id") if isinstance(data, dict) else None
+                errors.append({"kind": kind, "id": identifier, "path": path, "message": str(exc)})
     seen = set()
     for record in records:
         key = (record["kind"], record["id"])
         if key in seen:
-            raise StudioError(f"Duplicate context target {key[0]}:{key[1]}; fix the authoritative records before resuming")
+            errors.append({**record, "message": f"Duplicate context target {key[0]}:{key[1]}; fix the authoritative records before resuming"})
         seen.add(key)
+    fatal = errors
+    if qualified_target is not None:
+        kind, identifier = qualified_target
+        # A broken record's conventional filename still identifies a possible match.
+        # Parsed ids also catch invalid duplicates stored under a different filename.
+        fatal = [error for error in errors if error["kind"] == kind and
+                 (error["id"] == identifier or (error["path"].parent.name if kind == "game" else error["path"].stem) == identifier)]
+    if fatal:
+        report = "\n".join(error["message"] for error in fatal[:8])
+        if len(fatal) > 8:
+            report += f"\n... {len(fatal) - 8} more record errors; run validate for details."
+        raise StudioError(report[:6000])
+    if errors:
+        print(f"WARNING: skipped {len(errors)} unrelated invalid record(s) while reading {qualified_target[0]}:{qualified_target[1]}; run validate for details.", file=sys.stderr)
+        for error in errors[:3]:
+            print(f"- {compact_text(error['path'].relative_to(root).as_posix(), 160)}: {compact_text(error['message'], 240)}", file=sys.stderr)
+        if len(errors) > 3:
+            print(f"- {len(errors) - 3} additional unrelated record errors omitted.", file=sys.stderr)
     return records
 
 
@@ -616,7 +631,12 @@ def project_context(root, target=None, checkpoint=False):
     root = root.resolve()
     if not root.is_dir():
         raise StudioError(f"Repository root does not exist: {root}")
-    records = context_records(root)
+    try:
+        records = context_records(root, (qualifier, identifier) if target is not None and qualifier is not None else None)
+    except StudioError as exc:
+        if target is not None and qualifier is None:
+            raise StudioError(f"{exc}\nCannot confidently resolve a bare id while records are invalid; use game:{identifier} or opportunity:{identifier}.") from exc
+        raise
     if target is None:
         lines = ["Project context index (recorded stage/status; nothing selected or resumed):"]
         for record in records[:CONTEXT_MAX_INDEX]:
@@ -672,7 +692,7 @@ def project_context(root, target=None, checkpoint=False):
             lines.append("Changed: " + compact_text("; ".join(changed), 1200))
         else:
             lines.append(f"Freshness: content unchanged since checkpoint {saved['captured_at']}.")
-        lines.append("A checkpoint compares saved content; it does not establish completeness, correctness or gameplay quality.")
+        lines.append("A checkpoint compares the owning record and listed sources; it does not establish completeness, correctness or gameplay quality.")
     else:
         lines.append("Freshness: unverified - no content checkpoint. Review the record and handoff before relying on them.")
     if checkpoint:

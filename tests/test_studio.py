@@ -314,6 +314,46 @@ class StudioTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIn("Duplicate context target", error)
 
+    def test_qualified_context_remains_readable_with_unrelated_invalid_records(self):
+        path, _ = self.context_candidate()
+        before = path.read_bytes()
+        write(self.root / "research/opportunities/other-idea.json", "<<<<<<< unresolved merge")
+        write(self.root / "games/other-game/game.json", "{invalid")
+        code, output, error = self.context_cli("opportunity:small-idea")
+        self.assertEqual(code, 0)
+        self.assertIn("opportunity:small-idea", output)
+        self.assertIn("WARNING: skipped 2 unrelated invalid record(s)", error)
+        self.assertIn("other-idea.json", error)
+        self.assertEqual(path.read_bytes(), before)
+        self.assertEqual(self.context_cli()[0], 1)
+
+    def test_context_invalid_competing_record_cannot_hide_bare_id_ambiguity(self):
+        self.context_candidate()
+        write(self.root / "games/small-idea/game.json", "{invalid")
+        code, _, error = self.context_cli("small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("Cannot confidently resolve a bare id", error)
+        self.assertIn("opportunity:small-idea", error)
+        self.assertEqual(self.context_cli("opportunity:small-idea")[0], 0)
+        code, _, error = self.context_cli("game:small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("cannot read JSON", error)
+
+    def test_qualified_context_rejects_invalid_target_and_known_duplicate(self):
+        path, data = self.context_candidate()
+        write(path, "{invalid")
+        code, _, error = self.context_cli("opportunity:small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("cannot read JSON", error)
+        write_json(path, data)
+        duplicate = copy.deepcopy(data)
+        duplicate.pop("title")
+        write_json(self.root / "research/opportunities/differently-named.json", duplicate)
+        code, _, error = self.context_cli("opportunity:small-idea")
+        self.assertEqual(code, 1)
+        self.assertIn("title", error)
+        self.assertNotIn("WARNING: skipped", error)
+
     def test_context_rejects_malformed_context_metadata(self):
         path, original = self.context_candidate()
         for value in (None, [], {}, {"entrypoint": 42}, {"entrypoint": "README.md", "read_first": "README.md"},
