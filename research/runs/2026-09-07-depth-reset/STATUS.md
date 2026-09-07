@@ -6,6 +6,7 @@ Updated 2026-09-08. **Current work: design refinement for a first-person Unreal 
 
 - First person. One modular weapon also forms a shield, with freely chosen attacks and defense. The weapon is the central evolving object; no compulsory shoot-everything/recall cycle.
 - Challenge, learnable skill, tactical decisions, exploration, rewarding upgrades and lasting achievements are essential. The prior beta was boring to Klaus despite passing technical tests. Attractive full 3D Unreal presentation is required; the old Canvas/SVG style does not meet the bar.
+- Art style selected on 2026-09-08: **B — sculpted painterly 3D**, endorsed with “B looks great.” Substantial modeled shapes, tactile materials, painted color transitions and expressive lighting unite fantasy and technology; world palettes may differ. Actual in-engine finish remains to be demonstrated.
 - A cyborg's apparent dreams reveal real reachable places. Different worlds can have their own technology, magic and biomes. This is the accepted story foundation; exact explanations and characters remain proposals.
 - Procedurally varied levels and expeditions should change decisions while remaining navigable, readable and enjoyable. Meaningful campaign progress and an eventual ending matter. No replacement campaign duration is established; the earlier 90-minute discussion is not its completion estimate.
 - Extensive attachments, tech, magic and possible crystals/jewelry should create fresh behaviors. Klaus welcomes earned OP combinations. Difficult acquisition, smart assembly and execution can lead to room clears or boss melts; do not secretly cancel a successful build.
@@ -16,9 +17,9 @@ Updated 2026-09-08. **Current work: design refinement for a first-person Unreal 
 
 The integrated design proposes a short technological escape, one substantial generated medieval realm and a compact playable arrival elsewhere to test using a transferred reward. This is a beta proposal, not two full promised worlds.
 
-The writer's leading explanation is borrowed senses from real people; the art proposal is richly modeled painterly 3D. Exact lore, final title, art treatment, baseline control details, active equipment capacity, fusion/evolution rules and cross-world transfer remain open. **Two carried attachments was an experiment, not an owner-selected limit.** Preserve meaningful learned ownership and enough of a rewarding build when testing transfers.
+The writer's leading explanation is borrowed senses from real people. Exact lore, final title, specific weapon/world visual designs, baseline control details, active equipment capacity, fusion/evolution rules and cross-world transfer remain open. **Two carried attachments was an experiment, not an owner-selected limit.** Preserve meaningful learned ownership and enough of a rewarding build when testing transfers.
 
-The [art comparison](dreamworld-art-direction.md#visual-comparison--2026-09-08) now shows cinematic realism (A), sculpted painterly (B) and graphic 3D (C) across fantasy and technology. B is recommended; Klaus has not selected a style and asked whether its fidelity can actually be delivered. The board is generated concept art, not Unreal output. An actual small Unreal scene viewed in motion is the proposed next evidence for the quality target; no such sample exists yet.
+The [art comparison](dreamworld-art-direction.md#visual-comparison--2026-09-08) shows cinematic realism (A), selected sculpted painterly (B) and graphic 3D (C) across fantasy and technology. Klaus asked whether the fidelity can actually be delivered before endorsing B. The board is generated concept art, not Unreal output. An actual small Unreal scene viewed in motion is the next evidence for the quality target; no such sample exists yet. Selecting B does not settle exact weapon geometry or guarantee the concept images' polish.
 
 The reward system proposes knowable pursuits alongside surprises, immediately usable major rewards, persistent learned patterns/milestones and clearly identified temporary amplification. Effect chains may trigger compatible effects; prevent duplicate consumption and nontermination without imposing an automatic damage ceiling.
 
@@ -34,7 +35,7 @@ The old Sixfold beta passed 33 core/audio checks and 11 browser suites; Klaus th
 
 ## Next concrete action
 
-Current discussion: agree a visual direction with Klaus while distinguishing the generated comparison from demonstrated in-game quality. Propose a bounded Unreal visual sample to evaluate a preferred direction before promising the pictured polish.
+Visual direction agreed: B. Next, create a bounded Unreal visual sample with finished stone/metal/ceramic materials, a representative weapon section, lighting and first-person movement. Evaluate close-up finish, combat visibility and performance before committing to a production fidelity target. Keep this focused enough to support the gameplay beta rather than become a separate content-expansion project.
 
 Turn the current equipment/reward proposal into a reviewable first-beta implementation brief: define the base attack/guard/movement interaction, choose a coherent subset of attachments, and map their acquisition through encounters and a boss. Include contrasting builds, a useful duplicate/evolution, an earned power spike and the consequence of a crossing. Reuse the existing specialist work. Resolve only consequential remaining choices with Klaus; proceed with reversible preparation.
 

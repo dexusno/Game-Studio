@@ -1,6 +1,6 @@
 # The cyborg between worlds — integrated working design
 
-2026-09-07. **Creative design in refinement; no new game implemented or playtested.** Owner decisions: first person; one modular weapon that also forms a shield, with freely chosen attack and defense; deep ability-changing upgrades and meaningful achievement; procedurally varied levels/runs. Owner story seed: a cyborg's dreams reveal real places, reachable after escaping its current confinement. Worlds may have radically different technology, magic and biomes. The exact explanation, story, art style, transfer rules and campaign scope remain proposals.
+Updated 2026-09-08. **Creative design in refinement; no new game implemented or playtested.** Owner decisions: first person; one modular weapon that also forms a shield, with freely chosen attack and defense; deep ability-changing upgrades and meaningful achievement; procedurally varied levels/runs; B — sculpted painterly 3D art direction. Owner story seed: a cyborg's dreams reveal real places, reachable after escaping its current confinement. Worlds may have radically different technology, magic and biomes. The exact explanation, story, weapon/world visual designs, transfer rules and campaign scope remain proposals.
 
 This integrates the owner-requested [narrative writer](dreamworld-narrative.md), [art director](dreamworld-art-direction.md) and [producer review](dreamworld-production-review.md) with the [weapon/shield design](weapon-shield-design.md) and [progression review](progression-review.md). The old Sixfold prototype remains parked. Earlier camera alternatives and the reactor-raider label are historical research context; do not ask the owner to choose the viewport or combined/separate equipment again.
 
@@ -69,7 +69,7 @@ On defeat, clearly show what was learned and kept and which temporary expedition
 
 ## Worlds and the visual thread
 
-The art director recommends richly modeled, painterly 3D with tactile surfaces and strong lighting. This is a style proposal, not a finished look. Keep the cyborg's central silhouette, wear, material response and weapon construction consistent. Make attachments visibly change its shape, deployment and energy behavior. First-person guarding must preserve a readable view of enemies; custom transitions and interruption behavior are central production work.
+Klaus selected B — sculpted painterly 3D on 2026-09-08: richly modeled forms, tactile surfaces, broad painted color transitions and expressive lighting. The generated comparison establishes direction; the actual Unreal finish remains unproven. Keep the cyborg's central silhouette, wear, material response and weapon construction consistent while world palettes vary. Make attachments visibly change its shape, deployment and energy behavior. First-person guarding must preserve a readable view of enemies; custom transitions and interruption behavior are central production work.
 
 Three possible world families from the art exploration:
 
@@ -89,4 +89,4 @@ Internal experiments first resolve weapon/guard feel, contrasting combinations, 
 
 The decisive owner observations are whether a new ability changes a tactical choice, whether the next reward makes another choice interesting, whether the boss feels earned, whether a crossing feels exciting, and whether the next world invites another expedition. The strongest shared warning from the reviewers is that one safe attack/guard routine could remain optimal through all the scenery changes. Resolve that before increasing the world or attachment count.
 
-No final title, ending, art treatment, transfer allowance, campaign length, content total or build schedule is selected here. The owner-selected first-person combined weapon/shield and the real-world dream premise are the foundation for further design and an implementation brief. No purchases, installations, game builds or media generation occurred in this design work.
+No final title, ending, exact weapon/world visual design, transfer allowance, campaign length, content total or build schedule is selected here. The owner-selected first-person combined weapon/shield, real-world dream premise and sculpted painterly 3D style are the foundation for further design and an implementation brief. An art comparison has been generated; it is not a rendered game build. See the handoff for current tooling and production evidence.

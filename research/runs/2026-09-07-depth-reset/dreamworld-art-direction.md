@@ -1,18 +1,18 @@
 # The cyborg between worlds — art direction
 
-2026-09-07. **Concept directions, unapproved.** Owner-selected foundations: first person, one modular weapon that also forms a shield, freely chosen attack/defense, and a confined cyborg whose dreams reveal real reachable places. The visual choices below are proposals; lore, transfer rules and campaign scope remain with design integration. This is an art specification, not rendered or implemented work. Production evidence and asset constraints: [art-pipeline.md](art-pipeline.md).
+Updated 2026-09-08. **Owner-selected style: B — sculpted painterly 3D.** Klaus endorsed B in the comparison: “B looks great.” Other selected foundations: first person, one modular weapon that also forms a shield, freely chosen attack/defense, and a confined cyborg whose dreams reveal real reachable places. Specific weapon geometry, world designs and palettes below remain proposals; lore, transfer rules and campaign scope remain with design integration. Generated concepts illustrate the direction; actual Unreal quality is still unproven. Production evidence and asset constraints: [art-pipeline.md](art-pipeline.md).
 
 ## Visual comparison — 2026-09-08
 
 ![Three proposed styles shown in fantasy and technological settings](assets/art-style-comparison-v1.png)
 
-The comparison shows A: cinematic realism, B: sculpted painterly, and C: graphic 3D. B remains the recommendation, not an owner selection. These are generated concept images, not Unreal renders, finished models or evidence of achievable runtime fidelity. [Generation prompt and provenance](art-style-comparison-prompt.txt); [asset manifest](assets/manifest.csv).
+The comparison shows A: cinematic realism, B: sculpted painterly, and C: graphic 3D. Klaus selected B on 2026-09-08. A and C remain comparison alternatives. These are generated concept images, not Unreal renders, finished models or evidence of achievable runtime fidelity. [Generation prompt and provenance](art-style-comparison-prompt.txt); [asset manifest](assets/manifest.csv).
 
 Klaus asked whether we can realistically create this appearance in the game. B is a plausible direction, but our ability to deliver the pictured polish is unproven. Recommend a small actual Unreal sample before committing to the quality target: a first-person room with finished stone/metal/ceramic materials, a representative weapon section, lighting and movement. Judge close-up quality, visibility during motion and performance. This recommendation does not mean the sample has been built or that the exact concept-image quality is promised.
 
 The board holds scenes and palettes broadly constant to compare treatments; it does not prescribe warm brown palettes for every world or settle the weapon's mechanical design. B and C are relatively close in this study. Any stronger graphic treatment would need a further targeted comparison if preferred.
 
-## Recommendation: one recognizable traveler, radically different places
+## Selected direction: one recognizable traveler, radically different places
 
 Make the cyborg and transforming weapon the visual thread through every realm. Their wear accumulates while the architecture, creatures, weather and combat spaces change profoundly. A medieval enchantment should inhabit the same recognizable machine that later accepts cybernetic technology. The player should read their journey directly from the object in their hands.
 
@@ -22,7 +22,7 @@ Make the cyborg and transforming weapon the visual thread through every realm. T
 | Sculpted, painterly PBR | Substantial modeled forms, tactile metal/stone/fabric, selectively painted surfaces and expressive silhouettes under rich 3D lighting. Works across fantasy and technology. | Needs deliberate material and shape unification; “stylized” cannot become flat colors on primitive meshes. |
 | Graphic 3D | Strong value grouping, deliberate edges and illustrated shadow treatment with substantial 3D forms. | Surface and lighting treatment must stay consistent across imported assets; outlines and effects must preserve combat readability. |
 
-**Recommend painterly PBR.** Give it beveled forms, surface depth, layered materials and strong animation. Use restrained atmospheric lighting and contact shadows; avoid making outlines or an experimental toon shader the foundation. This supports a distinctive world while allowing reusable environment kits and original hero assets.
+**Selected: sculpted painterly 3D, implemented with tactile PBR materials.** Give it beveled forms, surface depth, broad painted color transitions, layered materials and strong animation. Use expressive directional lighting and contact shadows with controlled surface noise; avoid making outlines or an experimental toon shader the foundation. Worlds can have distinct palettes and architecture while sharing this treatment. Keep enemies, attack cues and attachment changes readable during movement. This supports a distinctive world while allowing reusable environment kits and original hero assets.
 
 ## Hands and weapon: the object the player learns
 
