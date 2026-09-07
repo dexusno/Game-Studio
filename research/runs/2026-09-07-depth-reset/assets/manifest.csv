@@ -1,0 +1,2 @@
+asset_id,path,source_url,creator,license,proof_path,modifications,approval_status
+art-style-comparison-v1,art-style-comparison-v1.png,,OpenAI built-in image generation (backend model not exposed),Generated concept artwork; production usage terms not reviewed,../art-style-comparison-prompt.txt,None; original PNG copied unchanged,Concept only; style not approved

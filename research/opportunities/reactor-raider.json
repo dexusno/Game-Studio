@@ -78,7 +78,9 @@
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
     "direction": "Blender assembly and finishing; Fusion selectively for mechanical geometry; GPT Image 2 visual references; Meshy first image-to-3D static-prop trial candidate, with Tripo as an alternative",
     "evidence": "Blender 5.2.1 LTS background modeling, blend save, FBX and GLB export observed. Fusion availability owner-reported. AI 3D generation, quality, and Unreal import not yet tested.",
-    "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md"
+    "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md",
+    "style_review": "A/B/C comparison generated on 2026-09-08: cinematic realism, sculpted painterly, graphic 3D. B is recommended, not selected by Klaus. Generated concepts do not prove in-game fidelity; recommend a bounded Unreal sample to evaluate the target before committing to pictured polish.",
+    "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
   },
   "context": {
     "entrypoint": "research/runs/2026-09-07-depth-reset/STATUS.md",
@@ -91,10 +93,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-07T22:32:21+00:00",
-      "record_sha256": "ffdf9e8fde9187681e075de5334e7db1626e5ed7a63980c4d338bf420002bc2b",
+      "captured_at": "2026-09-07T22:40:06+00:00",
+      "record_sha256": "2771a97bb07c7a0743b961f058e73d24a0e35860794873b7b1afbb1c7f571c60",
       "files": {
-        "research/runs/2026-09-07-depth-reset/STATUS.md": "5ba96e35b142cc1fbfdf5ec9d38329ddec6797c1e25c28cc13dcd5b3594b3600",
+        "research/runs/2026-09-07-depth-reset/STATUS.md": "b5e456f0085c960faf037476dcc376eee01e1aab128dd0e40420722cf1897dfa",
         "studio/CHARTER.md": "7640e16b7f83f3007bd9edab8270e115ac865d18d66a0ab0dcc92cc1bcf531bd",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "7da7281a374bb7e3cd27fee25e1ec5f92f11c1d8f775a2b29d968b5cb9f1f9bd",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",

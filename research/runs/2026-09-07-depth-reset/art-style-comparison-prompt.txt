@@ -1,0 +1,25 @@
+Art style comparison v1
+Generated 2026-09-08 with the built-in image generation tool; the backend model was not exposed.
+Text-to-image generation, no reference images. One generation, no edits.
+Output: assets/art-style-comparison-v1.png
+Purpose: owner discussion of visual direction. This is concept art, not Unreal output or production-quality evidence.
+
+FINAL PROMPT
+
+Use case: stylized-concept.
+Create a polished visual comparison board for selecting the art style of an original first-person fantasy/science-fiction game. This is exploratory concept art, not a screenshot or finished game.
+
+Layout: one wide landscape board, three equal columns and two equal rows of large images. Small clean column headings above the images read exactly "A  CINEMATIC REALISM", "B  SCULPTED PAINTERLY", "C  GRAPHIC 3D". A discreet footer reads exactly "ART DIRECTION STUDIES — NOT GAME FOOTAGE". Six scenes total. Keep text minimal, neat and legible. Prioritize generous image area.
+
+Critical comparison rule: each column depicts the SAME two scenes, same first-person camera position, same architecture and landmarks, same weapon design, same light direction and broadly the same colors. Change rendering style, shape treatment and texture treatment between columns. Do not make one option lower quality or less detailed.
+
+Top row scene: first-person view entering a medieval courtyard through a stone arch. Huge tree roots embrace a cracked bronze bell; stone stairs climb along one side, a clear navigable central path and restrained cool magical light. Warm late-afternoon sunlight, pale limestone, deep green vegetation, bronze details. An imposing armored guardian waits in middle distance, readable against the stone.
+Bottom row scene: the same first-person cyborg in a layered cyberpunk transit courtyard, wet stone/concrete, bronze-colored machinery, ceramic wall panels and a few cyan/magenta signs without readable lettering. A clear central route and stairs evoke the top row layout. Atmospheric evening light with warm illumination and cool accents. A mechanical guardian occupies the equivalent middle-distance position. Keep the scene visible, not swallowed in darkness.
+
+The foreground in EVERY panel shows the same recognizable right cyborg forearm and ONE combined weapon/shield occupying only the lower-right quarter: ivory ceramic plates over dark mechanical joints, copper repairs, a split-ring core with a cool blue crystal and articulated metal panels forming a compact asymmetric guard around a forward attack channel. Show a clearly engineered object with purposeful hinges and functional attachments. No separate gun plus separate shield. Preserve visibility of the environment and guardian. Exact assembly is a proposal.
+
+Column A: photorealistic cinematic game art. Natural proportions, finely layered physically plausible metal/stone/ceramic surfaces, subtle wear, rich but restrained illumination, realistic material reflections. Sharp readable gameplay view, no depth-of-field blur.
+Column B: high-end sculpted painterly 3D game art. Substantial beveled modeled shapes, slightly emphasized proportions and silhouettes, broad carefully painted color transitions on surfaces, reduced noisy microdetail, tactile materials, naturalistic depth, rich directional light and contact shadows. This MUST look like sophisticated dimensional 3D, not a flat digital painting, basic low-poly model, toy, or mobile cartoon. No black outlines.
+Column C: sophisticated graphic 3D game art. Confident angular/sculpted shapes, deliberate clean value grouping, crisp cel-like shadow boundaries and very restrained contour accents, rich materials and layered environmental detail, mature illustrated science-fantasy identity. Still convincing solid 3D forms and spatial depth, not vector art or an icon game.
+
+Overall: three equally accomplished, appealing alternatives. Original designs only, no recognizable existing franchise characters or weapons. No logos, no HUD, no fake metrics. This board must let an owner compare an immersive realistic treatment, a tactile painterly treatment, and a bold graphic treatment while seeing whether each unifies medieval magic and futuristic technology.

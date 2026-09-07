@@ -18,6 +18,8 @@ The integrated design proposes a short technological escape, one substantial gen
 
 The writer's leading explanation is borrowed senses from real people; the art proposal is richly modeled painterly 3D. Exact lore, final title, art treatment, baseline control details, active equipment capacity, fusion/evolution rules and cross-world transfer remain open. **Two carried attachments was an experiment, not an owner-selected limit.** Preserve meaningful learned ownership and enough of a rewarding build when testing transfers.
 
+The [art comparison](dreamworld-art-direction.md#visual-comparison--2026-09-08) now shows cinematic realism (A), sculpted painterly (B) and graphic 3D (C) across fantasy and technology. B is recommended; Klaus has not selected a style and asked whether its fidelity can actually be delivered. The board is generated concept art, not Unreal output. An actual small Unreal scene viewed in motion is the proposed next evidence for the quality target; no such sample exists yet.
+
 The reward system proposes knowable pursuits alongside surprises, immediately usable major rewards, persistent learned patterns/milestones and clearly identified temporary amplification. Effect chains may trigger compatible effects; prevent duplicate consumption and nontermination without imposing an automatic damage ceiling.
 
 ## Evidence and environment
@@ -31,6 +33,8 @@ Klaus authorized computer control for Unreal work and playtesting. Prefer backgr
 The old Sixfold beta passed 33 core/audio checks and 11 browser suites; Klaus then rejected its fun and presentation. Those results do not validate this replacement. Design specialists reviewed narrative, art, production, progression and combinations. The 120-entry catalogue was counted and linked records checked; none of those ideas has gameplay validation.
 
 ## Next concrete action
+
+Current discussion: agree a visual direction with Klaus while distinguishing the generated comparison from demonstrated in-game quality. Propose a bounded Unreal visual sample to evaluate a preferred direction before promising the pictured polish.
 
 Turn the current equipment/reward proposal into a reviewable first-beta implementation brief: define the base attack/guard/movement interaction, choose a coherent subset of attachments, and map their acquisition through encounters and a boss. Include contrasting builds, a useful duplicate/evolution, an earned power spike and the consequence of a crossing. Reuse the existing specialist work. Resolve only consequential remaining choices with Klaus; proceed with reversible preparation.
 
