@@ -83,10 +83,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-07T22:20:09+00:00",
+      "captured_at": "2026-09-07T22:24:49+00:00",
       "record_sha256": "0437698d22cbc15c636cfb80580a5f42682cc76833d7341f14a8bfca2ce55635",
       "files": {
-        "research/runs/2026-09-07-depth-reset/STATUS.md": "49d17711b55fd7c2ecf4cffda7f1600a9b6e419446f5873f328d72d8b3a4af02",
+        "research/runs/2026-09-07-depth-reset/STATUS.md": "30098cb47000a8c6ac04935fcf35bd138fcf17bf48e9367d8bc6d99d008c2462",
         "studio/CHARTER.md": "7640e16b7f83f3007bd9edab8270e115ac865d18d66a0ab0dcc92cc1bcf531bd",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "7da7281a374bb7e3cd27fee25e1ec5f92f11c1d8f775a2b29d968b5cb9f1f9bd",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",

@@ -32,7 +32,7 @@ The old Sixfold beta passed 33 core/audio checks and 11 browser suites; Klaus th
 
 Turn the current equipment/reward proposal into a reviewable first-beta implementation brief: define the base attack/guard/movement interaction, choose a coherent subset of attachments, and map their acquisition through encounters and a boss. Include contrasting builds, a useful duplicate/evolution, an earned power spike and the consequence of a crossing. Reuse the existing specialist work. Resolve only consequential remaining choices with Klaus; proceed with reversible preparation.
 
-The most recent task establishes continuity across new tasks: startup routing, this handoff, a context command and local integration. It adds no game runtime. No additional owner answer is required to use the handoff.
+The continuity task added startup routing, this handoff, a bounded context command and local integration. A reviewer given no game conversation recovered the settled choices, open proposals, actual evidence and next action from project files. CLI checks cover changed content, path handling and record preservation; native symlink creation is unavailable on this Windows host, with alias behavior also checked through mocks. It adds no game runtime. No additional owner answer is required to use the handoff.
 
 ## Read only what the assignment needs
 
