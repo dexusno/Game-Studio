@@ -1,6 +1,31 @@
 # Art pipeline for the studio's higher ambition
 
-Research date: **2026-09-07**. This is a production recommendation, not acquired art or a verified Unreal build. No packs were purchased or downloaded, no agreements were accepted, and no tools were installed. All linked public sources were accessed on this date. Publisher descriptions are reported capabilities; our production choices are hypotheses until inspected in the game.
+Original research: **2026-09-07**; workflow update: **2026-09-08**. This is a production recommendation, not acquired art or a verified Unreal build. The original report's sources were accessed September 7; sources in the update below were accessed September 8. Publisher descriptions are reported capabilities, not our own mesh-quality tests.
+
+## Current workflow decision — 2026-09-08
+
+Klaus installed Blender, reported Fusion 360 available, and delegated the choice of a practical art workflow, including AI-generated reference images and image-to-3D. **Use Blender as the main assembly/finishing tool, Fusion selectively for mechanical geometry, GPT Image 2 for visual development, and Meshy as the first image-to-3D candidate to trial on a static prop.** Tripo is an alternative for comparison if the first candidate disappoints. This selects a working approach, not a subscription or a claim that generated models already meet the game's quality bar. First person is settled; the older camera comparison below is historical.
+
+| Asset | Chosen approach | Reason |
+|---|---|---|
+| Transforming weapon/shield, hinges and common attachment mounts | Deliberate Blender modeling; use Fusion when dimensioned solids or repeated mechanical fits help, then prepare the resulting mesh in Blender | Preserve separate moving pieces, fit, pivots, silhouette and close-up quality across upgrades |
+| Crystals, carved relics, decorative ruins and other static props | Clear original/reference-based concept image, optional consistent views, image-to-3D trial, then Blender cleanup | A useful place to test accelerated shape creation without making the core weapon depend on it |
+| Rooms, doors and combat geometry | Coherent authored or appropriately licensed modular kit, with exact connection and collision rules | Generated geometry must not dictate whether the level is playable |
+| Characters and enemies | Purpose-built or suitable rigged foundations, adapted in Blender | Generated appearance alone does not establish deformation, attacks or readable movement |
+
+GPT Image 2 supports generation and editing; OpenAI also documents consistency and composition limitations. Use reference images to establish one object and material family. For a mechanical hero object, a simple 3D blockout can anchor proportions before image exploration. Additional generated views must agree on shape and part positions; they are design hypotheses rather than measurements. [OpenAI image generation](https://developers.openai.com/api/docs/guides/image-generation).
+
+Meshy's documentation describes single/multiple-image inputs, polygon control and segmented outputs. These make it a relevant first trial, but its “game-ready” language is a vendor claim. Tripo similarly documents multiple views and topology controls. Neither service has generated an asset for this project, and no callable Meshy/Tripo connection was found in this session. [Meshy image-to-3D](https://docs.meshy.ai/en/webapp/image-to-3d), [Tripo Smart Mesh](https://www.tripo3d.ai/blog/smart-mesh-tutorial).
+
+Use a single isolated object with clear lighting for the first trial: a carved crystal reliquary or ruined shrine component. Retain a controlled mechanical mount made in Blender/Fusion. Inspect the generated object from behind and close up, repair geometry/materials as needed, and judge it under the game's Unreal lighting. Keep it only if the finished result saves useful work and fits the art direction. No batch generation before that example proves useful. Input/output rights and required credit belong in the asset manifest when assets are adopted.
+
+Photogrammetry is a separate option for real objects we can photograph from many overlapping positions. A single generated picture asks a model to infer unseen geometry; it is not a measured scan. RealityScan's guidance requires coverage from different positions with substantial overlap. Use scanning for suitable real stone, wood or props when it contributes to the chosen look. [Epic capture guidance](https://dev.epicgames.com/documentation/realityscan-mobile/Photogrammetry-Camera-Movement?lang=en-US).
+
+Fusion can export solid/surface/mesh bodies as OBJ, providing a route into Blender. CAD geometry still needs review for polygon density, shading, textures, pivots and moving-part behavior before Unreal. Fusion availability is owner-reported here; its local automation/export has not been exercised. [Autodesk mesh export](https://help.autodesk.com/cloudhelp/ENU/Fusion-Mesh/files/MESH-EXPORT-TOOLS.htm).
+
+**Observed Blender evidence:** Blender 5.2.1 LTS launched in background, created a small mesh, applied transforms, saved a .blend and exported FBX (11,980 bytes) and GLB (1,868 bytes), with exit code 0. Two bundled brush-material relative-path warnings appeared while saving; exports completed. The diagnostic files remain ignored under `.local/blender-pipeline-probe/`. This proves local scripting and basic export, not visual quality, rigging or Unreal import. Private tool paths are recorded in ignored config.local.json.
+
+## Original report — September 7
 
 Klaus rejected the Sixfold Recoil beta's narrow interaction and simple presentation. The next direction should support full 3D, including first or third person, skill, challenge, strategy and meaningful progression. “Ten times” expresses a substantial increase in ambition, not a feature count or literal multiplier. Neither the top-down camera nor the workbench theme is a constraint.
 

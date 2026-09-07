@@ -22,7 +22,9 @@ The reward system proposes knowable pursuits alongside surprises, immediately us
 
 ## Evidence and environment
 
-Unreal 5.8.2 and background editor-Python execution were verified locally on 2026-09-07. This was a tooling probe, not a new rendered or packaged game. Breakout supplies historical build/cook/package/native-input testing notes. Actual tool paths belong in ignored config.local.json; check that configuration before claiming Unreal is unavailable. Blender was not found in the specific checks and has not been installed by this work.
+Unreal 5.8.2 and background editor-Python execution were verified locally on 2026-09-07. This was a tooling probe, not a new rendered or packaged game. Breakout supplies historical build/cook/package/native-input testing notes. Actual tool paths belong in ignored config.local.json; check that configuration before claiming Unreal is unavailable. Klaus subsequently installed Blender: **5.2.1 LTS background modeling and FBX/GLB export were verified on 2026-09-08**. Fusion 360 is also available according to Klaus; local Fusion operation has not been tested.
+
+Klaus delegated the art workflow choice. The [updated pipeline](art-pipeline.md) uses Blender for assembly/finishing, Fusion selectively for precise mechanical parts, GPT Image 2 for reference-based visual development, and Meshy as the first image-to-3D candidate for a static-prop trial. Keep the transforming weapon's functional geometry controlled. AI 3D quality and end-to-end Unreal integration remain untested; no Meshy/Tripo connection was available in this session.
 
 Klaus authorized computer control for Unreal work and playtesting. Prefer background work where practical and coordinate foreground input when needed. No new purchase, asset download, publication or installation was made in the current design work.
 
