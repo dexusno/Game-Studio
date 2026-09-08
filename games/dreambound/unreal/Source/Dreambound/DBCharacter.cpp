@@ -862,7 +862,7 @@ void ADBCharacter::ReceiveAttack(float Damage, FVector Source, bool bUnblockable
             if (HasUpgrade(CapacitorId)) EmpoweredShots = GetUpgradeRank(CapacitorId) >= 2 ? 5 : 3;
             ParryFlashTime = .32f;
             Recoil = -.8f;
-            SetCombatMessage(HasUpgrade(MirrorId) ? TEXT("PERFECT GUARD - force banked for shield contact") : TEXT("PERFECT GUARD - punish the opening"), 1.2f);
+            SetCombatMessage(HasUpgrade(MirrorId) ? FString::Printf(TEXT("PERFECT BLOCK - %d charge%s stored"), StoredShots, StoredShots == 1 ? TEXT("") : TEXT("s")) : TEXT("PERFECT GUARD - punish the opening"), 1.2f);
             PlayCombatSound(ParrySound, .9f);
             if (ADBEnemy* Enemy = Cast<ADBEnemy>(Attacker))
             {
@@ -1030,7 +1030,7 @@ FString ADBCharacter::GetUpgradeDescription(FName Id, int32 Rank)
 {
     Rank = FMath::Clamp(Rank, 1, 3);
     if (Id == MirrorId)
-        return Rank == 1 ? TEXT("Timed guards bank enemy force. Your next physical shield contact spends it. Store 2 payloads.")
+        return Rank == 1 ? TEXT("Raise your shield within 0.20s before a hit to store 1 charge (max 2). Your next shield hit spends 1 charge, adding 180% of the blocked attack's damage.")
             : Rank == 2 ? TEXT("Held ranged blocks also bank force. Store 3 payloads; wider timed-guard window.")
             : TEXT("Released force arcs from the physical impact into 2 nearby enemies. Store 4 payloads.");
     if (Id == RamId)
