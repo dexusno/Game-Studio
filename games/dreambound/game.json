@@ -19,18 +19,20 @@
     "entrypoint": "games/dreambound/STATUS.md",
     "read_first": [
       "games/dreambound/BRIEF.md",
+      "games/dreambound/SHIELD-DESIGN.md",
       "games/dreambound/IMPLEMENTATION.md",
       "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T11:26:14+00:00",
-      "record_sha256": "f0d84b6ac65f103546d3bd90c4a9ac7576e2f076fc4e790108c65ec553ae43c8",
+      "captured_at": "2026-09-08T11:48:23+00:00",
+      "record_sha256": "e144d257342ae24a029512ae7e1d0cd29faf00756c22862edf595f37c31c5aee",
       "files": {
-        "games/dreambound/STATUS.md": "69da96958a5463de44cb8d9e6bcedd876272adb0b941e623b8bcb4322c467cd3",
-        "games/dreambound/BRIEF.md": "22e80e1f94c9a37ff53c91da543a4b589e2b5baccf4eb350902a47bbf49f9c8b",
-        "games/dreambound/IMPLEMENTATION.md": "5897913c3b94d8375aaaa4394ed89b3707e445ae8a38bc4d2fb848d9fc0c887e",
-        "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md": "0323d0b3e9e2eaddd376295b8001e72fb1154071d95d32f8b01198d458576d4f"
+        "games/dreambound/STATUS.md": "4db2d50926ed1a444ecd2bb6961e992dbfb32cae86a5774590936580bcea6247",
+        "games/dreambound/BRIEF.md": "272401fdf09e0dd1f08c0ad37fba95952f500739c39d871ec6a9ae2ee179f824",
+        "games/dreambound/SHIELD-DESIGN.md": "021580d93a4531d665c027b0bfa5c8f8aec639a48f4df1ce596ac513d8ee0369",
+        "games/dreambound/IMPLEMENTATION.md": "7121dfbf378c7a058568255c4826b08a56575a605b6829eb31c0fdc491901cae",
+        "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md": "7f76d7d49bb97fd2e2fa7d24a0ffb09b78361176216a1e108a435368ff712044"
       }
     }
   }

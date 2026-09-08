@@ -1034,23 +1034,23 @@ FString ADBCharacter::GetUpgradeDescription(FName Id, int32 Rank)
             : Rank == 2 ? TEXT("Held ranged blocks also bank force. Store 3 payloads; wider timed-guard window.")
             : TEXT("Released force arcs from the physical impact into 2 nearby enemies. Store 4 payloads.");
     if (Id == RamId)
-        return Rank == 1 ? TEXT("Q becomes a committed rushing bash. Thrown shield hits harder and travels faster.")
-            : Rank == 2 ? TEXT("Physical contacts restore guard energy. The heavy bash recovers faster.")
+        return Rank == 1 ? TEXT("Q with shield in hand: rush into enemies. Q while it is away recalls it. Thrown hits gain damage and speed.")
+            : Rank == 2 ? TEXT("Q with shield in hand: rush. Shield hits restore guard energy. Rush cooldown is 1.3s (was 1.65s). Q while it is away recalls it.")
             : TEXT("The opened rim sweeps a wider path in flight; the rush catches nearby flankers.");
     if (Id == EchoId)
         return Rank == 1 ? TEXT("Shield contact leaves a delayed local rim-impact echo.")
             : Rank == 2 ? TEXT("The echo follows its struck target a short distance from the original impact.")
             : TEXT("Each physical contact leaves two delayed impact echoes.");
     if (Id == FrostId)
-        return Rank == 1 ? TEXT("Shield contact chills. A later impact shatters existing chill. R changes cores.")
+        return Rank == 1 ? TEXT("AUTOMATIC: Shield hits slow an enemy for 4s. Hit it again while chilled for bonus shatter damage. R cycles cores if you own more than one.")
             : Rank == 2 ? TEXT("Every third contact spreads frost into nearby enemies.")
             : TEXT("Shattering chilled enemies creates another local frost burst.");
     if (Id == EmberId)
-        return Rank == 1 ? TEXT("The rim ignites on contact. Leave enemies burning while you reposition. R changes cores.")
+        return Rank == 1 ? TEXT("AUTOMATIC: Shield hits set enemies burning for 4s. You can move away while fire damages them. R cycles cores if you own more than one.")
             : Rank == 2 ? TEXT("Every third contact spreads flame to nearby enemies.")
             : TEXT("Directly killing a burning enemy causes a spreading fire explosion.");
     if (Id == StormId)
-        return Rank == 1 ? TEXT("The rim marks enemies with storm; a later contact discharges arcs. R changes cores.")
+        return Rank == 1 ? TEXT("AUTOMATIC: Hit an enemy twice within 5s to arc to up to 2 other enemies within 6.2m and in sight. A lone enemy produces no arc.")
             : Rank == 2 ? TEXT("Every third contact seeds nearby enemies with storm.")
             : TEXT("Storm contacts replenish guard energy for your return to close combat.");
     if (Id == FractureId)
@@ -1066,7 +1066,7 @@ FString ADBCharacter::GetUpgradeDescription(FName Id, int32 Rank)
             : Rank == 2 ? TEXT("A perfect guard empowers 5 contacts. Captured-force storage gains 2 slots.")
             : TEXT("An empowered contact also restores your dash, rewarding aggressive repositioning.");
     if (Id == AnchorId)
-        return Rank == 1 ? TEXT("Your shield plants as frontal cover with finite integrity. Recall sacrifices that cover. Flanks and heavy attacks bypass it.")
+        return Rank == 1 ? TEXT("Throw and let the shield stop between you and a shooter. It blocks bolts crossing its front until broken. Q recalls it; melee and heavy attacks bypass it.")
             : Rank == 2 ? TEXT("Anchored blocks bank enemy force for later physical shield contacts.")
             : TEXT("A broken anchor erupts in a local impact burst before the shield returns.");
     return TEXT("");

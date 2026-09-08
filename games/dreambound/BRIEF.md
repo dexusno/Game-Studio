@@ -1,6 +1,12 @@
 # Cyborg between worlds — first beta
 Updated 2026-09-08. Klaus authorized building the beta. Internal directory name dreambound is not the final title.
 
+## Latest owner refinement — segmented shield and procedural art
+
+The next combat foundation is the [segmented shield](SHIELD-DESIGN.md): holding LMB lights individual pieces sequentially, release launches the lit pieces, and the remainder stays available for defense. Spent defensive pieces and projectiles destroyed by qualifying enemies each start their own regeneration; intact deployed pieces can be recalled and visibly reattach. The whole-disc implementation below is current evidence, not the final selected mechanic. Exact piece count, durability, timings and additional bindings are proposals.
+
+Rewards must state their input or automatic trigger, visibly demonstrate their effects, and retain those instructions after acquisition and ranking up. Klaus could not tell how to activate the study's rewards or see their special effects. The art target remains B, with a substantial observed gap. The same finished modules must work across different generated layouts with readable encounters; a static beauty scene cannot satisfy the procedural requirement. Premium tools and Unreal-specific libraries are now explicitly part of the research, with purchases still requiring a concrete approved choice.
+
 ## Owner playtest correction — 2026-09-08
 Klaus rejected beta2's gun-like weapon, weak feedback, shallow/confusing combat, plain enemies and graphics far below anchor B. Its existing pulse/guard implementation and eight-room content pass are historical implementation choices, not an accepted gameplay or art foundation. Movement was usable but felt generic. [Evidence and next experiment](RETROSPECTIVE.md).
 

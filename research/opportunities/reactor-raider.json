@@ -15,7 +15,7 @@
     "scope_fit": 2,
     "distribution": 2
   },
-  "score_notes": "Original scores are provisional indirect inspiration estimates, not market evidence. The owner rejected beta2. A physical shield courtyard correction now has packaged technical evidence, but owner enjoyment and attainment of the selected art standard remain unproven. No commercial result or reliable full-production cost forecast exists.",
+  "score_notes": "Original scores remain provisional indirect inspiration estimates, not market evidence. Owner rejected beta2 and reports the corrective whole-disc study still falls far below art B with unclear/invisible rewards. A segmented shield is the newly selected direction, not implemented or tested. No commercial result or reliable production-cost forecast exists.",
   "evidence": [
     {
       "url": "https://store.steampowered.com/app/692890/Roboquest/",
@@ -42,7 +42,7 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Play the physical shield courtyard study: compare held strikes/guard with throwing/recall, earn contrasting attachments, and assess the mixed/heavy encounters. Continue visual work against anchor B from actual Unreal frames; do not expand the campaign until the corrected interaction earns positive owner evidence. Resume from games/dreambound/STATUS.md.",
+  "next_test": "Implement the segmented shield interaction and visibly demonstrate one earned reward combination; correct reward instructions/readiness/effect feedback. Establish art B using credible modular assets and custom shield/arm pieces in different generated playable layouts. Premium tools and Unreal libraries are being researched; no purchase is authorized. Resume from games/dreambound/STATUS.md and SHIELD-DESIGN.md.",
   "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
@@ -64,7 +64,7 @@
   "owner_selected_foundations": {
     "date": "2026-09-07",
     "camera": "First person",
-    "equipment": "First-person modular shield used physically as the weapon, with freely chosen close attacks/defense, meaningful commitment of protection when attacking, and launch/recall. Clarified by owner after beta2 playtest on 2026-09-08; do not restore a compulsory all-at-once throw/recall loop.",
+    "equipment": "First-person modular shield made of individual pieces. Holding LMB lights pieces sequentially; release launches exactly the lit pieces and retains the rest for defense. Spent blocking pieces and projectiles destroyed by certain enemies each begin independent timed regeneration. Surviving deployed pieces recall and visibly reattach. Freely chosen close offense/guard and creative upgrades remain; no mandatory all-at-once loop. Count, timings and detailed bindings remain proposals.",
     "equipment_growth": "The weapon/shield is the central evolving object. Explore extensive technology, magic, crystals, jewelry, stackable enhancements and behavioral evolution; final counts, sockets and rank rules are not selected.",
     "story_seed": "A cyborg's apparent dreams reveal real reachable worlds with different technology, magic and biomes",
     "power_and_rewards": "Owner explicitly wants a large combinable mod/magic catalog and genuinely overpowered builds earned through creativity, difficult acquisition and smart combinations. Boss, elite and rare loot should introduce fresh abilities worth trying; preserve powerful payoffs and earned ownership.",
@@ -95,15 +95,15 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T11:26:14+00:00",
-      "record_sha256": "ca4515b2e087c611a31afeb15707458a0106278d3d7c33521e53ab15a93b6237",
+      "captured_at": "2026-09-08T11:48:24+00:00",
+      "record_sha256": "58b91fb287bb8c3d68515c55062bef731a19675694cfee15e89f49acb6aa1bff",
       "files": {
-        "games/dreambound/STATUS.md": "69da96958a5463de44cb8d9e6bcedd876272adb0b941e623b8bcb4322c467cd3",
+        "games/dreambound/STATUS.md": "4db2d50926ed1a444ecd2bb6961e992dbfb32cae86a5774590936580bcea6247",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
-        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "7d270ff68bf53bef13664a8151235799e9041ebc9d68883dd86fa24371ebf872"
+        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "94c4c5d30c78cf383460bc7c456c69dd3cf286cb819e4ba78c9d9c6d8cadf89f"
       }
     }
   },

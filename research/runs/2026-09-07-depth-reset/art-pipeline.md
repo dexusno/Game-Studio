@@ -1,5 +1,41 @@
 # Art pipeline for the studio's higher ambition
 
+## Latest review: premium tools and procedural asset libraries — 2026-09-08
+
+Klaus explicitly asks for the strongest suitable tools, including paid software he might buy, and Unreal-specific libraries. He reiterates that levels must be procedural. This is authorization to research a purchase, not to spend. The selected art remains B. The current shield study visibly misses B; buying a tool alone is not evidence that we can deliver it. The new [segmented shield](../../../games/dreambound/SHIELD-DESIGN.md) requires separate finished moving pieces with precise mounting and recall, not an indivisible generated model.
+
+Recommendation: use a coherent modular environment kit as the first candidate for a visible quality improvement, with bespoke shield/arm work and deliberate material finishing. **Substance 3D Painter is the first paid creation-app candidate** for our surface work. **ZBrush** is the specialist sculpting candidate; **Houdini** is the strongest procedural authoring/automation candidate. These are complementary roles, not a promise of comparable output from every application. Existing Blender/Fusion and Unreal remain useful.
+
+| Tool | What it adds | Practical limitation for us |
+| --- | --- | --- |
+| [Substance 3D Painter](https://www.adobe.com/products/substance3d/apps/painter.html) | Layered painting, material definition and controlled wear on original shield and environment models | Needs good models, UVs and artistic decisions. [Python and external control](https://experienceleague.adobe.com/en/docs/substance-3d-painter/using/scripting-and-development/scripts-and-plugins/remote-control-with-scripting) automate a running app; they do not demonstrate our brushwork. |
+| [Maxon ZBrush](https://www.maxon.net/en/zbrush-plan-options) | Detailed sculpting of roots, stone, ornament and creatures; painted sculpt surfaces and retopology | Its ceiling is high, but our sculpting output is unproven. [Current Python SDK](https://developers.maxon.net/docs/zbrush/py/2026_0_0/manuals/man_getting_started.html) supports scripts/plugins and launch automation; this is capability evidence only. |
+| [Houdini Indie](https://www.sidefx.com/products/houdini-indie/) | Rule-based manufacture of richer architectural, terrain and organic asset variants | Excellent [Python/batch support](https://www.sidefx.com/docs/houdini/hom/commandline.html), with license constraints. Its Unreal plugin is an authoring integration, not runtime generation inside the shipped game. |
+
+Official prices accessed September 8: [Adobe's published Texturing rates](https://helpx.adobe.com/substance-3d/pricing-change.html) list US$24.99/month or US$249.88 annual prepaid; the page describes rates effective March 2025. Houdini Indie lists US$299/year or US$449/two years, subject to eligibility. A reliable localized ZBrush amount was not exposed. These are reference figures, not Norwegian tax-inclusive checkout quotes. No trial output has been produced here with these apps.
+
+### Libraries worth evaluating
+
+- **[Fab](https://www.fab.com/o/about)** provides Unreal-specific environment, character, animation, material, VFX and tool content, available through the launcher/editor. Candidate [Stylized Village Builder - Ruins Pack](https://www.fab.com/listings/0d852e64-1739-44c9-b83a-1f3e471cd89d) lists 95 meshes and configurable Blueprints/materials, but excludes landscape, foliage, rocks and VFX used in its showcase. Candidate [Stylized - Stone Ruins Pack](https://www.fab.com/listings/5c0e9f53-1b8e-43de-bd96-7105c9e16b79) lists modular architecture, props, foliage and an assembled Unreal example environment. Both are candidates, not inspected/purchased meshes or verified B matches; their current prices/5.8 integration remain unresolved.
+- **[KitBash3D Enchanted](https://kitbash3d.com/products/enchanted)** lists 129 models and 127 materials, with an Unreal Gameplay Ready option supporting collisions, instancing and Nanite. Its displayed base price is US$245, with license tier and checkout still to resolve. The vendor says Unreal demo scenes are not included. Its fantasy architecture is a candidate foundation; assess proportions, useful component granularity, material adaptation and first-person close-ups before selection.
+- **Quixel/Megascans on Fab** offers scanned environment material and nature foundations. The [European Beech listing](https://www.fab.com/listings/d11cc01d-9422-41b7-950f-416c9ce79caf?lang=en) describes 17 tree assets and configurable seasonal/wind materials. This could help organic detail, but requires visual unification with B; do not assume every Megascans asset is currently free or already owned.
+- **[Epic Paragon assets](https://www.unrealengine.com/paragon?lang=en)** are a free character/environment foundation worth evaluating. The older UE4 origin still requires retargeting/integration and style review. Existing character identities are not new game lore.
+- **[Poly Haven](https://polyhaven.com/license)** supplies CC0 models, materials and HDRIs for supporting art. Assets have broad reuse rights; its library is not a ready-made painterly Unreal level.
+
+The Fab listings and vendor documentation were read; a browser preview attempt timed out. This review does not claim visual inspection of those candidate meshes, practical compatibility, performance or entitlement. [Fab's license summary](https://www.fab.com/eula?lang=en) permits incorporation into distributed projects but not standalone redistribution of restricted source assets. Record the exact acquired license and keep those source assets outside public Git. No acquisition occurred, so there are no new asset-manifest entries.
+
+### AI-generated geometry
+
+[Rodin Gen-2.5](https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5) and [Meshy image-to-3D](https://docs.meshy.ai/en/api/image-to-3d) are current candidates for a controlled original-prop comparison. Both document programmable generation and mesh/material outputs; those features do not establish a quality winner. Start with the same isolated original relic/reference, inspect all sides and judge the imported Unreal result and cleanup effort. Build the segmented shield's moving interfaces deliberately even if generated sculpt detail is later reused. Neither service has generated a model for this game, and purchase/credit costs remain separate decisions.
+
+### Procedural levels constrain the purchase
+
+Choose editable modular pieces with compatible dimensions, connectors, collision and material families. Assemble playable route/encounter graphs with entry/exit, height, cover and spawn constraints; use [Unreal PCG](https://dev.epicgames.com/documentation/en-us/unreal-engine/procedural-content-generation-overview) for controlled dressing and biome variation. Authored compositions can be reusable room/landmark templates rather than one fixed showcase level.
+
+Houdini can manufacture and bake variant assets before shipping. [SideFX explicitly distinguishes its Unreal integration from a runtime solution](https://www.sidefx.com/products/houdini-engine/plug-ins/unreal-plug-in/); the shipped game must generate from prepared assets/rules. Validate visual coherence and navigability in several meaningfully different seeds. A fixed attractive map and random prop scattering each leave the procedural requirement unproven.
+
+The sections below preserve earlier research and proposals. Their tooling uncertainties predate the actual Blender/Unreal imports; the game's STATUS.md is authoritative for current runtime evidence. This review changes no gameplay, imported art or approved cash budget.
+
 Original research: **2026-09-07**; workflow update: **2026-09-08**. This is a production recommendation, not acquired art or a verified Unreal build. The original report's sources were accessed September 7; sources in the update below were accessed September 8. Publisher descriptions are reported capabilities, not our own mesh-quality tests.
 
 ## Current workflow decision — 2026-09-08

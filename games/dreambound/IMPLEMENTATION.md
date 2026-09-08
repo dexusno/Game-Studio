@@ -1,6 +1,8 @@
 # Current integration contract
 Updated 2026-09-08. All workers share the workspace; preserve concurrent changes. The default build is the physical shield courtyard study. The previous pulse-gun route is retained only behind `-DBLegacyBeta`, and is not an accepted design or current QA target.
 
+**Pending replacement:** Klaus selected sequentially lit, individually launched/protecting/recallable/regenerating pieces in [SHIELD-DESIGN.md](SHIELD-DESIGN.md). The global whole-disc state and Q/LMB context rules below describe the existing executable only. A future implementation needs per-piece identity/state and concurrent held/flight/reconstruction; do not treat these current constraints as approved segmented-shield design. Source-only reward wording fixes are also pending packaging; the effect/readiness defects in STATUS.md remain unfixed.
+
 ## Ownership and runtime
 Integration owns DBGameMode.*, DBRecoveryScene.cpp, DBMotionDemo.cpp, DBHUD.*, configuration, packaging and shared records. Combat owns DBCharacter.* and DBThrownShield.*. Enemy work owns DBEnemy.* and DBProjectile.*. Art owns art/ and create_art.py/import_art.py. QA owns DBShieldChecks.* and its focused report. Root launches Unreal/imports and integrates all work.
 
