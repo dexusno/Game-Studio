@@ -15,7 +15,7 @@
     "scope_fit": 2,
     "distribution": 2
   },
-  "score_notes": "Provisional indirect anchors only. This is an owner-fit/mechanics inspiration pass, not a market or trend study. Fun is untested; originality is limited by comparators; exact production/animation cost and distribution response are unmeasured. Ranking in the research report is qualitative and does not select a game.",
+  "score_notes": "Original scores are provisional indirect inspiration estimates, not market evidence. The owner rejected the first implemented beta for feel, shield identity and presentation; the corrected interaction remains untested. No commercial results or reliable production-cost forecast are available.",
   "evidence": [
     {
       "url": "https://store.steampowered.com/app/692890/Roboquest/",
@@ -42,8 +42,8 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Continue the authorized Unreal beta from games/dreambound/STATUS.md; verify imported art, actual first-person gameplay, rewards, saves and packaged play before owner delivery.",
-  "decision_reason": "Klaus authorized building the beta on 2026-09-08; implementation now lives in games/dreambound. Exact full-campaign scope and fun remain unvalidated.",
+  "next_test": "Replace the rejected pulse-gun foundation with a physical shield combat experiment in one representative authored Bellroot courtyard. Demonstrate attack/protection commitment, spatial recall, convincing animation/sound, readable threats and two earned behavioral upgrades against art anchor B before content expansion. Resume from games/dreambound/STATUS.md.",
+  "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
   "scope_note": "Substantially greater ambition; no literal 10x multiplier, feature quota or hard development/owner-time cap. Several distinct worlds are the campaign direction; counts, transfer allowance and final length remain in refinement.",
@@ -59,18 +59,18 @@
     "owner_refinement_on": "2026-09-07",
     "direction": "Designed 3D encounter modules with generated routes, compatible room configurations, encounters, objectives and rewards under playability and pacing constraints.",
     "next_test_refinement": "Replay multiple generated versions of the representative biome; compare tactics, build choices, fairness and replay interest. Verify seed reproduction, save/resume, dependencies and actual in-engine traversal.",
-    "evidence": "Design proposal only; generator and procedural gameplay unimplemented and untested. Candidate remains draft."
+    "evidence": "Beta2 implemented a seeded route through eight authored footprints and staged traversal/state checks; owner rejected repetitive scenery and stale play. Meaningful variation across ordinary full runs remains unverified. The project is selected and its current handoff is games/dreambound/STATUS.md."
   },
   "owner_selected_foundations": {
     "date": "2026-09-07",
     "camera": "First person",
-    "equipment": "One modular weapon that also forms a shield, with freely chosen attack and defense",
+    "equipment": "First-person modular shield used physically as the weapon, with freely chosen close attacks/defense, meaningful commitment of protection when attacking, and launch/recall. Clarified by owner after beta2 playtest on 2026-09-08; do not restore a compulsory all-at-once throw/recall loop.",
     "equipment_growth": "The weapon/shield is the central evolving object. Explore extensive technology, magic, crystals, jewelry, stackable enhancements and behavioral evolution; final counts, sockets and rank rules are not selected.",
     "story_seed": "A cyborg's apparent dreams reveal real reachable worlds with different technology, magic and biomes",
     "power_and_rewards": "Owner explicitly wants a large combinable mod/magic catalog and genuinely overpowered builds earned through creativity, difficult acquisition and smart combinations. Boss, elite and rare loot should introduce fresh abilities worth trying; preserve powerful payoffs and earned ownership.",
     "art_style": "B — sculpted painterly 3D: substantial modeled shapes, tactile materials, broad painted color transitions and expressive lighting across fantasy and technology; exact Unreal fidelity unproven",
     "art_style_selected_on": "2026-09-08",
-    "open_design": "Exact lore, possible weapon self-awareness through technology/magic (under discussion; not selected), weapon/world visual designs, transfer rules, campaign scope and implementation brief",
+    "open_design": "Exact antagonist identities/motives and reasons for fighting (explicitly deferred), wider lore, weapon self-awareness, revised control/timing and attachment rules, transfer rules and campaign scope. Existing story sketches remain proposals.",
     "current_design": "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md"
   },
   "identifier_note": "The reactor-raider id is preserved from the initial comparison; the working concept has evolved through explicit owner steering.",
@@ -78,10 +78,10 @@
   "art_workflow": {
     "decision_on": "2026-09-08",
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
-    "direction": "Blender assembly and finishing; Fusion selectively for mechanical geometry; GPT Image 2 visual references; Meshy first image-to-3D static-prop trial candidate, with Tripo as an alternative",
-    "evidence": "Blender 5.2.1 LTS background modeling, blend save, FBX and GLB export observed. Fusion availability owner-reported. AI 3D generation, quality, and Unreal import not yet tested.",
+    "direction": "After the failed procedural kit, properly author and animate the hero shield/enemy and compose a representative courtyard around a bell/tree landmark. Qualify coherent supporting assets for rights and style before use. Blender/Unreal remain installed production tools; AI image-to-3D remains an untested optional experiment.",
+    "evidence": "Original Blender kit, Unreal imports and packaged rendering were completed. Comparison with anchor B and the owner playtest found a substantial failure in form, composition, materials and animation. Ability to reach the anchor polish remains unproven.",
     "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md",
-    "style_review": "Klaus selected B — sculpted painterly 3D on 2026-09-08 after the A/B/C comparison and a discussion of feasibility. Generated concepts do not prove in-game fidelity; a bounded Unreal sample should evaluate the target before committing to pictured polish.",
+    "style_review": "B remains owner-selected. Klaus rejected beta2 as nowhere near the anchor. Future fidelity claims require actual moving Unreal gameplay with the intended weapon, enemy, authored scene and sound.",
     "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
   },
   "context": {
@@ -95,13 +95,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T05:39:26+00:00",
-      "record_sha256": "17fcc71f0bc6ddfbc736d33a4267f1e34189105aa58befc690d4e6ed1e3d3d06",
+      "captured_at": "2026-09-08T08:58:29+00:00",
+      "record_sha256": "7f4ae4cc72f9bcde36ab2036c570c40bdf71c7afe830d48a4cdb3620717f4109",
       "files": {
-        "games/dreambound/STATUS.md": "1174e0673e738515ab05fde411f57d96aee9b14f8d6a348a7342896631d7a1d4",
+        "games/dreambound/STATUS.md": "a6d226f1f30bbba3d67913508aa12ffe0bd67d63b142b50ca6cdcced6933736d",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
-        "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",
+        "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
         "research/runs/2026-09-07-depth-reset/art-pipeline.md": "7d270ff68bf53bef13664a8151235799e9041ebc9d68883dd86fa24371ebf872"
       }
@@ -134,6 +134,11 @@
       "date": "2026-09-08",
       "status": "draft",
       "reason": "Klaus endorsed style B with 'B looks great' after reviewing generated comparisons and discussing feasibility. Adopt sculpted painterly 3D as the art direction; exact weapon/world design and actual in-engine fidelity remain unproven."
+    },
+    {
+      "date": "2026-09-08",
+      "status": "selected",
+      "reason": "Owner rejected beta2 and clarified physical shield offense/recall with real attack-defense commitment. Preserve the broader selected game while replacing the failed combat/art approach. Antagonist and conflict development is explicitly deferred."
     }
   ],
   "selected_game": "dreambound"

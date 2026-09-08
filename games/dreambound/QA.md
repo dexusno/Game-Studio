@@ -1,6 +1,13 @@
 # Cyborg between worlds — beta QA
 
-2026-09-08. **Shipping 0.1.0-beta2 passes staged checks and has native menu, save/relaunch and resume evidence.** Native movement, focus-loss handling, an ordinary whole journey, audio listening and fun remain unverified. QA owns this report; production fixes belong to integration/combat owners.
+2026-09-08. **Klaus played and rejected Shipping 0.1.0-beta2 for combat feel/identity and presentation.** Its staged checks and native menu/save evidence remain valid technical observations. They are not evidence of enjoyable play. Production fixes belong to integration/combat owners.
+
+## Owner playtest — 2026-09-08
+Klaus reported usable but generic movement; confusing/simple combat; a gun with right-button defense rather than a shield used as a weapon; missing attack/defense tradeoff and expected shield recall; no felt recoil; a thin, weak laser sound; plain/stale enemies; and repetitive, janky pillars and plant geometry far below anchor B. He found no sense of power or an engaging world. These are direct owner reports, not additional agent input tests. Seed, elapsed time, acquired loadout and full-route completion were not supplied; do not invent them.
+
+Root compared the retained gameplay capture with anchor B and inspected world placement. The scene uses repeated columns, uniformly tiled rooms and strongly scaled root instances instead of the anchor's composed architecture, organic structure and material detail. Combat source review confirms a pulse/hitscan baseline that can fire while guarding and no physically launched/returning shield. This supports the identity mismatch; code inspection does not quantify how bad it feels. [Retrospective](RETROSPECTIVE.md).
+
+Klaus also identified missing established antagonists and reasons to fight, and requested that story work later. No enemy faction or campaign conflict has been selected by that feedback.
 
 ## Identity and coverage
 
@@ -56,6 +63,6 @@ The corrected fixture flipped one checksum byte in the newest journal's CRC enve
 
 ## Remaining evidence gaps
 
-Beta2 identity, post-fix menu framing and saved-profile relaunch/resume are recorded above. Native evidence still does not establish sustained movement, dash/jump/guard, focus capture/release or minimize, ordinary acquisition/combat, save-error UI or a completed route through the guardian and Rainstack. Future QA should retain isolated `DBQA_` save slots and distinguish ordinary input from staged actor/state setup.
+Beta2 identity, post-fix menu framing and saved-profile relaunch/resume are recorded above. Agent native evidence still does not establish sustained movement, dash/jump/guard, focus capture/release or minimize, ordinary acquisition/combat, save-error UI or a completed route through the guardian and Rainstack. The owner's usable-movement and negative combat/feel report is separate evidence; it does not supply a full-route result. Future QA should retain isolated `DBQA_` save slots and distinguish ordinary input from staged actor/state setup.
 
-Audio listening, human pacing (including the provisional 15–25 minutes), challenge and willingness to try another build remain untested. Staged checks and brief native actions cannot establish those outcomes.
+Owner listening/interaction feedback is negative on weapon sound, power and enjoyment. Agent listening, measured human pacing (including the provisional 15–25 minutes), completed-route difficulty and voluntary replay remain unverified. Staged checks and brief native actions cannot replace those observations.

@@ -1,6 +1,8 @@
 # Beta integration contract
 Updated 2026-09-08. Current task owns integration. All workers share the workspace; do not revert other edits.
 
+This contract describes the rejected beta2 implementation. Before modifying combat or art, read the owner correction in [BRIEF.md](BRIEF.md) and [RETROSPECTIVE.md](RETROSPECTIVE.md). Its pulse/muzzle interfaces and gun-shaped geometry are historical constraints to replace where needed, not accepted design requirements.
+
 ## Owned paths
 - Integration: project metadata/Config, DBGameMode.*, DBHUD.*, DBTypes.h, world generation, progression/save, build scripts and shared records.
 - Combat worker: Source/Dreambound/DBCharacter.h and .cpp only; own optional separate combat helper files.

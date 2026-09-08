@@ -1,5 +1,7 @@
 # Weapon, shield and reward design
 
+**2026-09-08 owner correction after beta2:** the shield itself must be the physical weapon, including launch/recall and meaningful attack/defense commitment. Klaus rejected the implemented gun-with-guard interpretation. Freely chosen close attacks/guarding must remain viable; the old compulsory shoot-everything/recall rhythm stays rejected. The pulse/frame examples below are historical proposals, not the current baseline. Resume from the [game brief](../../../games/dreambound/BRIEF.md) and [playtest correction](../../../games/dreambound/RETROSPECTIVE.md).
+
 2026-09-07. **Design proposal, unimplemented and untested.** This refines the owner's request for engaging combat, extensive ability-changing attachments, meaningful loot and achievements, procedural biomes, story and visual identity. Klaus subsequently selected **first person and one modular weapon that forms a shield, with freely chosen attack and defense**. The [integrated cyborg/worlds proposal](cyborg-worlds-design.md) adds his dream-of-real-worlds premise and compares carryover rules. The rejected Sixfold beta remains parked. Labels are working descriptions, not cleared game or product names.
 
 ## The player promise

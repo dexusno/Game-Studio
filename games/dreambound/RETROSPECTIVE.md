@@ -1,0 +1,42 @@
+# Beta2 owner playtest — 2026-09-08
+
+**Outcome: rejected for experience and presentation.** Klaus tested the delivered 0.1.0-beta2. His feedback establishes a failed owner playtest, not a measured market result or proof that the larger concept cannot work. No corrective implementation was made during this review.
+
+## Expected and observed
+
+| Expected | What happened |
+| --- | --- |
+| One recognizable shield used creatively as a weapon | Default repeating shots, guarding while shooting and beam counterfire. No physical throw or recall. Klaus experienced a generic gun with a defense button. |
+| Skill and meaningful attack/defense decisions | Klaus found play confusing and simple. Movement was usable but generic. Adding attachment ranks did not establish the missing central interaction. |
+| Weight and power | Klaus reported no felt recoil and a weak laser sound. A source-level pose/effect trigger is not proof of a convincing attack, hit or catch. |
+| Sculpted painterly art B | The [actual capture](evidence/beta-0.1.0-first-view.png) has uniform tiles, repeated columns, stretched roots and a plain segmented enemy. [Anchor B, middle column](../../research/runs/2026-09-07-depth-reset/assets/art-style-comparison-v1.png) has composed enclosing architecture, a monumental bell/tree, organic growth, layered materials, articulated equipment and deliberate detail. |
+| A world with stakes | The dream-world premise has no established enemy faction, motive or player-facing explanation for these fights. Archived institution/recovery-officer ideas are proposals, not accepted canon. Klaus requested this story work later. |
+
+The 31 staged technical checks cover selected combat/save/collision invariants. They did not test whether the signature interaction existed, whether the sound had impact, or whether the scene met B. The prototype was offered to Klaus before demonstrating those central qualities. That was an integration and quality-judgment failure, not missing permission, a lack of installed tools or insufficient owner guidance.
+
+The implementation also misread the rejection of Sixfold's forced shoot-all/recall cadence as a reason to remove physical shield offense. The latest owner clarification restores the shield itself as the hero while retaining free choice. The generated kit favored asset coverage, repeated profiles and shared surface noise over deliberate modeling, composition and animation.
+
+## Working correction to test
+
+- **Held:** the shield face guards/parries; its rim delivers close strikes and counters. Committing to a strike opens a readable vulnerability. Close fighting remains a useful strategy.
+- **Deployed:** deliberately launch the actual shield. Broad protection leaves with it; movement and cover matter. The player can choose a short direct hit or a longer spatial setup. No free substitute gun/guard should erase that commitment.
+- **Returning:** recall toward the player's current position so repositioning shapes a damaging return path. Early recall restores defense; delay can line up a stronger return. Recovery must remain reliable around obstacles without attacking freely through walls.
+- **Caught:** a visible, forceful catch returns protection; a timing bonus may support immediate counterplay, with ordinary catches remaining dependable. Exact inputs/timings and whole-shield versus segmented implementations need focused testing.
+
+Two possible earned rewards are an **anchor** that turns a deliberately placed shield into temporary directional cover, and a **stored-force rim** that spends successful timed-defense energy through a strike, throw or recall impact. They demonstrate spatial and counterattack builds. Names, implementation and numbers are proposals; broad future tech/magic/elemental combinations and earned overpowering payoffs remain intended.
+
+## Next production proof
+
+Build one representative Bellroot courtyard with an enclosing arch, bell/tree landmark, useful elevation and coherent paths. Author the hero shield and one enemy family with contrasting close/ranged roles: purposeful silhouette, topology/UVs, sculpted/baked detail, painted masks and animation. Use a small supporting masonry kit with designed damage/proportion variants. Secondary foliage, rubble, textures or animation foundations may be sourced after rights and style checks; no purchase is authorized. More random prop placement or another material-noise pass cannot supply the missing composition.
+
+Show uninterrupted actual packaged gameplay with audible sound: entry, close fighting, heavy blocked hit, exposed launch, repositioned damaging recall, catch, enemy stagger/defeat, earned upgrade and a changed tactic. Inspect release/impact/catch weight, enemy tells, motion readability, input response and frame times. Match the anchor from the actual gameplay camera and multiple positions; a new concept image or selected still does not establish this result.
+
+Use contextual action prompts and an encounter that makes the protection/attack choice understandable. Keep attacks viable before loot. The small proof is a production correction, not a new small-game mandate, campaign-duration decision or return to the rejected arcade concept. Do not expand procedural room count or the catalogue until this actual interaction and presentation justify it.
+
+## Open story work — explicitly later
+
+Define the opposition's identities and motives, the cyborg's immediate reason to fight, relationships between local inhabitants and any cross-world adversary, and the role of bosses and recurring expeditions. Explain conflict through visible behavior and objectives. Do not declare every world's inhabitants hostile by default or silently canonize a placeholder enemy. No antagonist proposal was selected during this review.
+
+## Limits and resources
+
+This review used Klaus's direct report, the saved images, relevant source and focused combat/art specialist analysis. It did not run another build or repeat the technical suite. No new assets, downloads, purchases, publication or software installation occurred. The prior adjustable two-agent-day estimate describes the initial checkpoint, not a proven cost or deadline for achieving B. Actual total effort and play duration are unmeasured. Our ability to achieve the anchor's polish remains unproven; demonstrate the next actual slice rather than promise it from the tools alone.

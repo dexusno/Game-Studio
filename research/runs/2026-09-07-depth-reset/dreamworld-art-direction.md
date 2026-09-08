@@ -1,5 +1,7 @@
 # The cyborg between worlds — art direction
 
+**2026-09-08 actual result:** Klaus rejected the first Unreal beta as nowhere near B. Its repetitive primitive-based kit, plain enemies and gun-like framing do not establish this style. B remains selected; the [game's playtest review and next production proof](../../../games/dreambound/RETROSPECTIVE.md) now govern implementation. The weapon transformation geometry below remains historical proposal; the latest owner clarification requires physical shield offense and recall.
+
 Updated 2026-09-08. **Owner-selected style: B — sculpted painterly 3D.** Klaus endorsed B in the comparison: “B looks great.” Other selected foundations: first person, one modular weapon that also forms a shield, freely chosen attack/defense, and a confined cyborg whose dreams reveal real reachable places. Specific weapon geometry, world designs and palettes below remain proposals; lore, transfer rules and campaign scope remain with design integration. Generated concepts illustrate the direction; actual Unreal quality is still unproven. Production evidence and asset constraints: [art-pipeline.md](art-pipeline.md).
 
 ## Visual comparison — 2026-09-08
