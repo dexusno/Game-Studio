@@ -596,6 +596,130 @@
         "M_DarkMetal"
       ],
       "collision_hulls": 0
+    },
+    {
+      "name": "SM_GardenCliffBank",
+      "path": "/Game/Art/Meshes/SM_GardenCliffBank.SM_GardenCliffBank",
+      "dimensions_cm": [
+        945.844482421875,
+        538.7478332519531,
+        895.9055786132812
+      ],
+      "bounds_origin_cm": [
+        -21.620513916015625,
+        -6.3960723876953125,
+        440.9527893066406
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss",
+        "M_Root"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_GardenButtress",
+      "path": "/Game/Art/Meshes/SM_GardenButtress.SM_GardenButtress",
+      "dimensions_cm": [
+        247.0,
+        224.0,
+        672.4461669921875
+      ],
+      "bounds_origin_cm": [
+        0.0,
+        0.0,
+        336.22308349609375
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss",
+        "M_Mortar"
+      ],
+      "collision_hulls": 8
+    },
+    {
+      "name": "SM_GardenRockCluster",
+      "path": "/Game/Art/Meshes/SM_GardenRockCluster.SM_GardenRockCluster",
+      "dimensions_cm": [
+        494.6747741699219,
+        361.804931640625,
+        230.18267822265625
+      ],
+      "bounds_origin_cm": [
+        6.3594207763671875,
+        -23.069015502929688,
+        109.09133911132812
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss"
+      ],
+      "collision_hulls": 3
+    },
+    {
+      "name": "SM_GardenUnderstory",
+      "path": "/Game/Art/Meshes/SM_GardenUnderstory.SM_GardenUnderstory",
+      "dimensions_cm": [
+        223.1620330810547,
+        196.9779281616211,
+        78.57875575125217
+      ],
+      "bounds_origin_cm": [
+        7.458580017089844,
+        5.474849700927734,
+        39.10793047398329
+      ],
+      "materials": [
+        "M_Root",
+        "M_Leaf",
+        "M_LeafLight",
+        "M_LeafGold",
+        "M_RootDark"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_GardenGrassDrift",
+      "path": "/Game/Art/Meshes/SM_GardenGrassDrift.SM_GardenGrassDrift",
+      "dimensions_cm": [
+        387.13511657714844,
+        224.0859146118164,
+        44.410349279642105
+      ],
+      "bounds_origin_cm": [
+        7.072593688964844,
+        -5.930568695068359,
+        22.651682659983635
+      ],
+      "materials": [
+        "M_LeafLight",
+        "M_LeafGold"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_GardenBough",
+      "path": "/Game/Art/Meshes/SM_GardenBough.SM_GardenBough",
+      "dimensions_cm": [
+        1001.3883666992188,
+        691.7139587402344,
+        358.6051330566406
+      ],
+      "bounds_origin_cm": [
+        50.242095947265625,
+        27.476791381835938,
+        89.96940612792969
+      ],
+      "materials": [
+        "M_Root",
+        "M_Leaf",
+        "M_LeafLight",
+        "M_LeafGold"
+      ],
+      "collision_hulls": 0
     }
   ],
   "materials": [

@@ -15,7 +15,7 @@
     "scope_fit": 2,
     "distribution": 2
   },
-  "score_notes": "Original scores remain provisional indirect inspiration estimates, not market evidence. Owner rejected beta2 and found the whole-disc study far below art B with unclear rewards. The segmented experiment is implemented and passes staged technical checks; ordinary play, fun and art acceptance remain unverified. No commercial result or reliable production-cost forecast exists.",
+  "score_notes": "Provisional indirect estimates, not market evidence. Klaus rejected beta2 and found the subsequent studies lacking in combat feedback and art B. The folding correction passes technical checks; ordinary enjoyment and a repeatable high-quality art pipeline remain unproved.",
   "evidence": [
     {
       "url": "https://store.steampowered.com/app/692890/Roboquest/",
@@ -42,7 +42,7 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Playtest the new segmented shield: choose partial allocations, retain protection, recall survivors and use independent rebuilds; assess whether earned abilities change tactics. Then establish a credible art-B modular environment across generated layouts. A sourced premium-tool/Unreal-library review exists; no purchase is authorized. Resume games/dreambound/STATUS.md.",
+  "next_test": "Assess the0.3.1 folding shield, full-charge payoff and useful melee. Establish a guided creation pipeline across distinct procedural biomes: first proposed Rodin/Blender asset trial must be inspected as actual Unreal geometry. A ruins kit is not the selected solution. Resume games/dreambound/STATUS.md.",
   "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
@@ -78,8 +78,8 @@
   "art_workflow": {
     "decision_on": "2026-09-08",
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
-    "direction": "After the failed procedural kit, properly author and animate the hero shield/enemy and compose a representative courtyard around a bell/tree landmark. Qualify coherent supporting assets for rights and style before use. Blender/Unreal remain installed production tools; AI image-to-3D remains an untested optional experiment.",
-    "evidence": "The segmented experiment adds original Blender armor arcs, inlays and a gripped hub with validated FBX import and actual Unreal capture. The earlier environment/enemy kit remains, substantially below B. Presentation corrections and native/staged evidence are recorded in the game handoff; no external kit or paid tool was acquired.",
+    "direction": "Owner requires repeatable high-quality asset creation across procedural biomes and rejects a ruins kit as the general solution. Recommended trial: guided Rodin Gen-2.5 source mesh, Blender finishing/materials and actual Unreal inspection before expanding to another biome. No tool quality winner is established.",
+    "evidence": "Folding shield, new original garden geometry and rendered0.3.1 combat capture exist; environment/enemy detail still falls substantially below B. Official Rodin/Tripo/Meshy capabilities were researched. Rodin Start Creating leads to login; no account, AI model, subscription or purchase was acquired.",
     "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md",
     "style_review": "B remains owner-selected. Klaus rejected beta2 as nowhere near the anchor. Future fidelity claims require actual moving Unreal gameplay with the intended weapon, enemy, authored scene and sound.",
     "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
@@ -95,15 +95,15 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T13:26:54+00:00",
-      "record_sha256": "b54a68bb43560108a7d0f2cb677cad2ffedbdca10bdb7ec8fc3f3be8dd7b1701",
+      "captured_at": "2026-09-08T15:56:16+00:00",
+      "record_sha256": "6da29d380f8db7fb9398e65c22ee56cc9e62b9fea7966ccf13c5a65b38cb8983",
       "files": {
-        "games/dreambound/STATUS.md": "04421c76985433c4dbe54a52e680e6d9748a94e44abc52b0d8af324a63fc0625",
+        "games/dreambound/STATUS.md": "91a54728acda4cc2144d2c4bc2e26745f42412aeaac0d5cd6dfc51388a1647e2",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
-        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "94c4c5d30c78cf383460bc7c456c69dd3cf286cb819e4ba78c9d9c6d8cadf89f"
+        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "c741b2792e54d303838173bbd4a67ae48e9f31195f5cf5d216907d2f1060415f"
       }
     }
   },

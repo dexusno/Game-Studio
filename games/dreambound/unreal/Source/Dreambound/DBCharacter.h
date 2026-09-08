@@ -6,11 +6,13 @@
 #include "DBCharacter.generated.h"
 
 class UCameraComponent;
+class UAudioComponent;
 class UPointLightComponent;
 class UStaticMesh;
 class UStaticMeshComponent;
 class UMaterialInterface;
 class USoundBase;
+class USoundConcurrency;
 class ADBEnemy;
 class ADBThrownShield;
 
@@ -29,6 +31,7 @@ class DREAMBOUND_API ADBCharacter : public ACharacter
 public:
     ADBCharacter();
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -56,7 +59,9 @@ public:
     void RecallShield();
     FVector GetShieldCatchLocation() const;
     void OnShieldCaught(bool bEmergency = false);
-    bool ApplyPhysicalShieldHit(ADBEnemy* Enemy, const FDBHit& Hit);
+    bool ApplyPhysicalShieldHit(ADBEnemy* Enemy, const FDBHit& Hit, bool bHeavyFeedback = false);
+    void TriggerFullVolleyImpact(uint32 VolleyId, FVector Location, ADBEnemy* DirectTarget = nullptr);
+    void PlayShieldImpactFeedback(FVector Location, bool bHeavy = false);
     void BankAnchoredForce(float Damage);
     static constexpr int32 ShieldPieceCount = 6;
     int32 GetShieldPieceCount() const { return ShieldPieceCount; }
@@ -69,6 +74,15 @@ public:
     ADBThrownShield* GetPieceFlight(int32 Index) const;
     float GetTotalAnchorIntegrity() const;
     FVector GetPieceCatchLocation(int32 Index) const;
+    FTransform GetPieceSocketTransform(int32 Index) const;
+    static FVector GetPieceMeshCentre() { return FVector(-.794f, 0.f, 24.818f); }
+    static float GetSelectionHoldTime(int32 Count);
+    static float GetFullChargeHoldTime() { return GetSelectionHoldTime(ShieldPieceCount); }
+    float GetChargeHoldTime() const { return ChargeHeld; }
+    float GetChargeProgress() const;
+    bool IsFullChargeReady() const;
+    float GetShieldExpansion() const { return GuardBlend; }
+    bool IsChargeLoopPlaying() const;
     void OnShieldPieceCaught(int32 Index, ADBThrownShield* Flight, bool bEmergency = false);
     void OnShieldPieceDestroyed(int32 Index, ADBThrownShield* Flight);
     void OnShieldPieceFlightState(int32 Index, ADBThrownShield* Flight, EDBShieldPieceState State);
@@ -151,6 +165,16 @@ private:
     UPROPERTY() TObjectPtr<USoundBase> HurtSound;
     UPROPERTY() TObjectPtr<USoundBase> CatchSound;
     UPROPERTY() TObjectPtr<USoundBase> RecallSound;
+    UPROPERTY() TObjectPtr<UAudioComponent> ChargeAudio;
+    UPROPERTY() TObjectPtr<USoundBase> ChargeLoopSound;
+    UPROPERTY() TObjectPtr<USoundBase> ChargeTickSound;
+    UPROPERTY() TObjectPtr<USoundBase> ChargeReadySound;
+    UPROPERTY() TObjectPtr<USoundBase> FullReleaseSound;
+    UPROPERTY() TObjectPtr<USoundBase> MeleeSwingSound;
+    UPROPERTY() TObjectPtr<USoundBase> HeavyImpactSound;
+    UPROPERTY() TObjectPtr<USoundConcurrency> ImpactConcurrency;
+    UPROPERTY() TObjectPtr<USoundConcurrency> HeavyImpactConcurrency;
+    UPROPERTY() TObjectPtr<USoundConcurrency> CatchConcurrency;
 
     TArray<float> EffectLife;
     TArray<FEchoShot> EchoShots;
@@ -160,6 +184,7 @@ private:
     TArray<float> PieceDockPulse;
     TArray<int32> SelectionQueue;
     TArray<uint64> ReceivedAttackKeys;
+    TArray<uint32> ResolvedFullVolleys;
     TSet<TWeakObjectPtr<ADBEnemy>> RushVictims;
     bool bWantsFire = false;
     bool bWantsGuard = false;
@@ -170,6 +195,21 @@ private:
     bool bWasMenuBlocked = false;
     bool bRushActive = false;
     bool bReforgeUsed = false;
+    bool bChargeReadyAnnounced = false;
+    bool bChargeAudioStopping = false;
+    bool bExpansionTarget = false;
+    bool bMeleeFinisher = false;
+    uint32 NextVolleyId = 0;
+    int32 MeleeChainStep = 0;
+    float MeleeChainWindow = 0.f;
+    float MeleeSide = 1.f;
+    float MeleeStepRemaining = 0.f;
+    float ImpactSoundCooldown = 0.f;
+    float HeavySoundCooldown = 0.f;
+    float CameraKick = 0.f;
+    float CameraSideKick = 0.f;
+    float ReleasePose = 0.f;
+    FVector MeleeStepDirection = FVector::ForwardVector;
     int32 SelectionCursor = 0;
     int32 NextBlockPiece = 0;
     float CatchSoundCooldown = 0.f;
@@ -220,6 +260,10 @@ private:
     void ShieldImpact();
     void ResolveRush();
     void UpdateWeapon(float DeltaSeconds);
+    FTransform GetPieceLocalTransform(int32 Index) const;
+    void UpdateChargeAudio();
+    void StopChargeAudio(bool bImmediate = false);
+    void UpdateMeleeStep(float DeltaSeconds);
     void UpdateEffects(float DeltaSeconds);
     void UpdateEchoes(float DeltaSeconds);
     void CaptureEnergy(float Damage);

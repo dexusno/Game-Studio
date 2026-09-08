@@ -236,7 +236,7 @@ def fastener(name, radius, angle, x, front=False, size=.8):
         "M_ShieldBronze", bevel=.018, roll=-angle)
 
 
-def finalize(name, slots, pivot):
+def finalize(name, slots, pivot, collisions=()):
     global PARTS
     active(PARTS[0])
     for part in PARTS:
@@ -291,7 +291,7 @@ def finalize(name, slots, pivot):
     meta = {"name": name, "dimensions_cm": [round(hi[i] - lo[i], 5) for i in range(3)],
             "bounds_min_cm": list(lo), "bounds_max_cm": list(hi),
             "vertices": len(obj.data.vertices), "triangles": len(obj.data.loop_triangles),
-            "pivot": pivot, "materials": slots, "collision_hulls": 0,
+            "pivot": pivot, "materials": slots, "collision_hulls": len(collisions),
             "recommended_attachment_cm": [0, 0, 0],
             "vertex_channels": {"R": "painted value", "G": "exposed edge wear", "B": "recess/weathering", "A": "opaque"},
             "uv_channels": [layer.name for layer in obj.data.uv_layers],
@@ -300,6 +300,9 @@ def finalize(name, slots, pivot):
             "vertex_channel_min": [min(c[i] for c in colors) for i in range(4)],
             "vertex_channel_max": [max(c[i] for c in colors) for i in range(4)]}
     active(obj)
+    for i, collider in enumerate(collisions):
+        collider.name = f"UCX_{name}_{i:02d}"
+        collider.select_set(True)
     images = [(node, node.image) for mat in obj.data.materials for node in mat.node_tree.nodes if node.type == "TEX_IMAGE"]
     for node, _ in images:
         node.image = None
@@ -312,6 +315,8 @@ def finalize(name, slots, pivot):
     finally:
         for node, image in images:
             node.image = image
+    for collider in collisions:
+        bpy.data.objects.remove(collider, do_unlink=True)
     meta["sha256"] = hashlib.sha256((OUT / (name + ".fbx")).read_bytes()).hexdigest()
     ASSETS[name] = {"object": obj, "meta": meta}
     PARTS = []
@@ -326,7 +331,10 @@ def audit_exports():
         before = set(bpy.data.objects)
         bpy.ops.import_scene.fbx(filepath=str(OUT / (name + ".fbx")), use_anim=False)
         imported = [obj for obj in bpy.data.objects if obj not in before]
-        meshes = [obj for obj in imported if obj.type == "MESH"]
+        colliders = [obj for obj in imported if obj.type == "MESH" and obj.name.startswith("UCX_")]
+        if len(colliders) != meta["collision_hulls"]:
+            raise RuntimeError("FBX custom collision count mismatch: " + name)
+        meshes = [obj for obj in imported if obj.type == "MESH" and not obj.name.startswith("UCX_")]
         if len(meshes) != 1:
             raise RuntimeError("Expected exactly one mesh in " + name)
         obj = meshes[0]

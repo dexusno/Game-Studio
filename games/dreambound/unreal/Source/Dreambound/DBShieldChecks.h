@@ -27,7 +27,8 @@ private:
         Prepare, HalfCharge, LaunchRecovery, Paused, SecondBlock, FirstRebuild, LastRebuild,
         FirstPartial, SecondReady, CatchDuringCharge, RecallSurvivors,
         CoreStrike, EliteWait, EliteCharge, EliteContact, FrostCharge, FrostOutbound, FrostReturn,
-        Storm, Route, FirstEncounter, FirstPractice, SecondEncounter, SecondPractice,
+        FoldIdle, FoldGuard, FoldReturn, FiveCharge, FiveContact, FullCharge, FullContact,
+        MeleeFirst, MeleeSecond, MeleeThird, MeleeCover, Storm, Route, FirstEncounter, FirstPractice, SecondEncounter, SecondPractice,
         SaveCharge, Journal, FinalEncounter, Victory, Finished
     };
     struct FCheck { FString Scenario; FString Id; bool bPassed = false; FString Detail; };
@@ -37,6 +38,7 @@ private:
     UPROPERTY() TObjectPtr<ADBCharacter> Player;
     UPROPERTY() TObjectPtr<ADBEnemy> Target;
     UPROPERTY() TObjectPtr<ADBEnemy> OtherTarget;
+    UPROPERTY() TObjectPtr<ADBEnemy> BlockedBlastTarget;
     UPROPERTY() TObjectPtr<AActor> Cover;
     UPROPERTY() TArray<TObjectPtr<AActor>> FixtureActors;
     TWeakObjectPtr<ADBThrownShield> Flight;
@@ -52,6 +54,10 @@ private:
     float PhaseAge = 0.f;
     float TargetBefore = 0.f;
     float OutwardHealth = 0.f;
+    float PartialVolleyDamage = 0.f;
+    float FirstMeleeDamage = 0.f;
+    float SecondMeleeDamage = 0.f;
+    float FoldedSpan = 0.f;
     float HealthBefore = 0.f;
     float IntegrityBefore = 0.f;
     float MaxFlightStep = 0.f;

@@ -1,0 +1,384 @@
+{
+  "SM_GardenCliffBank": {
+    "name": "SM_GardenCliffBank",
+    "dimensions_cm": [
+      945.84448,
+      538.74783,
+      895.90558
+    ],
+    "bounds_min_cm": [
+      -494.5427551269531,
+      -262.97784423828125,
+      -7.0
+    ],
+    "bounds_max_cm": [
+      451.3017272949219,
+      275.7699890136719,
+      888.9055786132812
+    ],
+    "vertices": 5358,
+    "triangles": 10628,
+    "pivot": "Ground center; X long width/Y depth; inward detailed face +Y; scenery behind existing collision walls",
+    "materials": [
+      "M_Stone",
+      "M_StoneLight",
+      "M_Moss",
+      "M_Root"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.794062614440918,
+      0.00800000037997961,
+      0.07699999958276749,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.36000001430511475,
+      0.41999998688697815,
+      1.0
+    ],
+    "sha256": "8e598c1ec698c2501e86c49f3ae13f5235c79eb3ebc513cdabb0b0b061055bd4"
+  },
+  "SM_GardenButtress": {
+    "name": "SM_GardenButtress",
+    "dimensions_cm": [
+      247.0,
+      224.0,
+      672.44617
+    ],
+    "bounds_min_cm": [
+      -123.5,
+      -112.0,
+      0.0
+    ],
+    "bounds_max_cm": [
+      123.5,
+      112.0,
+      672.4461669921875
+    ],
+    "vertices": 2571,
+    "triangles": 5066,
+    "pivot": "Ground center; carved front +Y; solid support outside doorway clearance",
+    "materials": [
+      "M_Stone",
+      "M_StoneLight",
+      "M_Moss",
+      "M_Mortar"
+    ],
+    "collision_hulls": 8,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.8700000047683716,
+      0.00800000037997961,
+      0.05249999836087227,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.36000001430511475,
+      0.41999998688697815,
+      1.0
+    ],
+    "sha256": "7ce925b6d2f6653aa9fcbff8dbb4753aaf9b3f38482e1e3140734bab00cb9e7e"
+  },
+  "SM_GardenRockCluster": {
+    "name": "SM_GardenRockCluster",
+    "dimensions_cm": [
+      494.67477,
+      361.80493,
+      230.18268
+    ],
+    "bounds_min_cm": [
+      -240.97796630859375,
+      -157.8334503173828,
+      -6.0
+    ],
+    "bounds_max_cm": [
+      253.69680786132812,
+      203.9714813232422,
+      224.18267822265625
+    ],
+    "vertices": 3885,
+    "triangles": 7698,
+    "pivot": "Ground center; solid layered corner rock bed; keep outside combat lanes",
+    "materials": [
+      "M_Stone",
+      "M_StoneLight",
+      "M_Moss"
+    ],
+    "collision_hulls": 3,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.7770651578903198,
+      0.00800000037997961,
+      0.07699999958276749,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.36000001430511475,
+      0.41999998688697815,
+      1.0
+    ],
+    "sha256": "45c40cf5053cfbe53dd250fab2ff7896805861a49a459e33abd2732c9063f585"
+  },
+  "SM_GardenUnderstory": {
+    "name": "SM_GardenUnderstory",
+    "dimensions_cm": [
+      223.16203,
+      196.97793,
+      78.57876
+    ],
+    "bounds_min_cm": [
+      -104.1224365234375,
+      -103.96381378173828,
+      -0.18144740164279938
+    ],
+    "bounds_max_cm": [
+      119.03959655761719,
+      93.01411437988281,
+      78.39730834960938
+    ],
+    "vertices": 4938,
+    "triangles": 8548,
+    "pivot": "Ground center; ferns/sedge/gold flowers; always noncolliding; place in planting beds away from practice targets",
+    "materials": [
+      "M_Root",
+      "M_Leaf",
+      "M_LeafLight",
+      "M_LeafGold",
+      "M_RootDark"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.9203126430511475,
+      0.00800000037997961,
+      0.017500000074505806,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.36000001430511475,
+      0.15000000596046448,
+      1.0
+    ],
+    "sha256": "bef646d2c4c0f7b44e8e9c8eb3554523ecb70b1fa7377921d84b46f39a12de47"
+  },
+  "SM_GardenGrassDrift": {
+    "name": "SM_GardenGrassDrift",
+    "dimensions_cm": [
+      387.13512,
+      224.08591,
+      44.41035
+    ],
+    "bounds_min_cm": [
+      -186.49496459960938,
+      -106.11238861083984,
+      0.4465080201625824
+    ],
+    "bounds_max_cm": [
+      200.64015197753906,
+      117.97352600097656,
+      44.85685729980469
+    ],
+    "vertices": 3432,
+    "triangles": 5720,
+    "pivot": "Ground center; broad low sedge drift; always noncolliding; cross-court approach lanes stay clear",
+    "materials": [
+      "M_LeafLight",
+      "M_LeafGold"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.9203125834465027,
+      0.00800000037997961,
+      0.05999999865889549,
+      1.0
+    ],
+    "vertex_channel_max": [
+      0.9513998031616211,
+      0.00800000037997961,
+      0.05999999865889549,
+      1.0
+    ],
+    "sha256": "3f0660446b936642fc06ce5088e4d3b00141cdc0d96e1450e994628a90dd8f5a"
+  },
+  "SM_GardenBough": {
+    "name": "SM_GardenBough",
+    "dimensions_cm": [
+      1001.38837,
+      691.71396,
+      358.60513
+    ],
+    "bounds_min_cm": [
+      -450.45208740234375,
+      -373.3337707519531,
+      -89.33316040039062
+    ],
+    "bounds_max_cm": [
+      550.936279296875,
+      318.38018798828125,
+      269.27197265625
+    ],
+    "vertices": 11520,
+    "triangles": 19260,
+    "pivot": "Branch attachment center; foliage above/around origin; always noncolliding; lowest limb at local Z-76",
+    "materials": [
+      "M_Root",
+      "M_Leaf",
+      "M_LeafLight",
+      "M_LeafGold"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.897466778755188,
+      0.00800000037997961,
+      0.05999999865889549,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.00800000037997961,
+      0.15000000596046448,
+      1.0
+    ],
+    "sha256": "4ec5d4fff8a9fbd22b046716137f47f7584086866901d0e828c16b6bae868ca9"
+  }
+}

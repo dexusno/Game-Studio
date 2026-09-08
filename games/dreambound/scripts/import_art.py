@@ -172,6 +172,7 @@ def material(name, spec, pigment, normal):
 
 
 def import_mesh(name, meta, materials, source=GENERATED):
+    solid_garden = name in ('SM_GardenRockCluster', 'SM_GardenButtress')
     options = unreal.FbxImportUI()
     options.set_editor_property('import_mesh', True)
     options.set_editor_property('import_as_skeletal', False)
@@ -234,6 +235,8 @@ def import_mesh(name, meta, materials, source=GENERATED):
         hull_count = len(geom.get_editor_property('convex_elems'))
     if meta['collision_hulls'] and (hull_count is not None and hull_count < meta['collision_hulls']):
         raise RuntimeError(f'Missing custom collision on {name}: expected {meta["collision_hulls"]}, got {hull_count}')
+    if solid_garden and not hull_count:
+        raise RuntimeError('Missing authored solid collision on ' + name)
     # The arch imports separate side/stone hulls, never a solid opening blocker.
     LIB.save_loaded_asset(asset)
     REPORT['imported'].append({'name': name, 'path': asset.get_path_name(), 'dimensions_cm': dimensions, 'bounds_origin_cm': origin,
@@ -254,9 +257,10 @@ def main():
     unreal.SystemLibrary.execute_console_command(None, flag+' 0')
     try:
         for name, meta in METADATA.items(): import_mesh(name, meta, materials)
-        segmented = ROOT / 'art' / 'segmented'
-        for name, meta in json.loads((segmented / 'asset-metadata.json').read_text(encoding='utf-8')).items():
-            import_mesh(name, meta, materials, segmented)
+        for family in ('segmented', 'garden'):
+            source = ROOT / 'art' / family
+            for name, meta in json.loads((source / 'asset-metadata.json').read_text(encoding='utf-8')).items():
+                import_mesh(name, meta, materials, source)
     finally:
         unreal.SystemLibrary.execute_console_command(None, flag+' '+str(previous))
     LIB.save_directory(DEST, only_if_is_dirty=True, recursive=True)

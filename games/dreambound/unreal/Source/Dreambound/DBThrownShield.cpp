@@ -8,6 +8,7 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Materials/MaterialInterface.h"
+#include "Materials/MaterialInstanceDynamic.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 
@@ -35,19 +36,22 @@ void ADBThrownShield::BeginPlay()
     BlockSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Guard.S_Guard"));
 }
 
-void ADBThrownShield::Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId)
+void ADBThrownShield::Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId, uint32 InVolleyId, bool bInFullCharge)
 {
     Bearer = InBearer;
     PieceId = InPieceId;
+    VolleyId = InVolleyId;
+    bFullCharge = bInFullCharge && VolleyId != 0;
     SetOwner(InBearer);
     if (!Bearer || PieceId < 0 || PieceId >= Bearer->GetShieldPieceCount()) { Destroy(); return; }
     FlightDirection = Direction.GetSafeNormal();
     if (FlightDirection.IsNearlyZero()) FlightDirection = FVector::ForwardVector;
     Charge = FMath::Clamp(Charge, 0.f, 1.f);
     const int32 RamRank = Bearer->GetUpgradeRank(TEXT("Ram"));
-    Speed = 1800.f + Charge * 350.f + RamRank * 90.f;
-    Damage = 23.f + Charge * 4.f + RamRank * 3.f;
-    Range = 1400.f + Charge * 400.f;
+    Speed = 1800.f + Charge * 350.f + RamRank * 90.f + (bFullCharge ? 400.f : 0.f);
+    Damage = (23.f + Charge * 4.f + RamRank * 3.f) * (bFullCharge ? 1.65f : 1.f);
+    Range = 1400.f + Charge * 400.f + (bFullCharge ? 300.f : 0.f);
+    LaunchSocketRotation = Bearer->GetPieceSocketTransform(PieceId).GetRotation();
     Ricochets = Bearer->GetUpgradeRank(TEXT("Split"));
     bAnchor = Bearer->HasUpgrade(TEXT("Anchor"));
     AnchorIntegrity = 30.f + 15.f * Bearer->GetUpgradeRank(TEXT("Anchor"));
@@ -67,6 +71,18 @@ void ADBThrownShield::UpdateMaterial()
 {
     if (!Bearer) return;
     LastElement = Bearer->CurrentElement;
+    if (bFullCharge)
+    {
+        if (!ChargedMaterial)
+        {
+            if (UMaterialInterface* Parent = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow")))
+            {
+                ChargedMaterial = UMaterialInstanceDynamic::Create(Parent, this);
+                ChargedMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(1.f,.58f,.06f));
+            }
+        }
+        if (ChargedMaterial) { Core->SetMaterial(0, ChargedMaterial); return; }
+    }
     const TCHAR* Name = LastElement == EDBElement::Frost ? TEXT("M_Frost")
         : LastElement == EDBElement::Storm ? TEXT("M_Storm")
         : LastElement == EDBElement::Ember ? TEXT("M_Ember") : TEXT("M_Core");
@@ -107,20 +123,25 @@ void ADBThrownShield::UpdatePiecePose(float DeltaSeconds)
 {
     if (!Bearer) return;
     if (!bLodged) Spin += DeltaSeconds * (bReturning ? 740.f : 620.f);
-    const FQuat DockRotation = FRotator(0.f, 0.f, PieceId * 60.f).Quaternion();
     FQuat PieceRotation = FRotator(0.f, 0.f, PieceId * 60.f + (bLodged ? 0.f : Spin)).Quaternion();
     FQuat FrameRotation = (bLodged ? AnchorForward : FlightDirection).Rotation().Quaternion();
     if (bReturning)
     {
         const float Alpha = FMath::Clamp(1.f - FVector::Distance(GetActorLocation(), Bearer->GetPieceCatchLocation(PieceId)) / 240.f, 0.f, 1.f);
-        PieceRotation = FQuat::Slerp(PieceRotation, DockRotation, Alpha);
-        FrameRotation = FQuat::Slerp(FrameRotation, Bearer->WeaponRoot->GetComponentQuat(), Alpha);
+        PieceRotation = FQuat::Slerp(PieceRotation, FQuat::Identity, Alpha);
+        FrameRotation = FQuat::Slerp(FrameRotation, Bearer->GetPieceSocketTransform(PieceId).GetRotation(), Alpha);
+    }
+    else if (!bLodged && OutwardTime < .18f)
+    {
+        const float Alpha = FMath::SmoothStep(0.f, .18f, OutwardTime);
+        PieceRotation = FQuat::Slerp(FQuat::Identity, PieceRotation, Alpha);
+        FrameRotation = FQuat::Slerp(LaunchSocketRotation, FrameRotation, Alpha);
     }
     SetActorRotation(FrameRotation);
     // The FBX pivot is at shield centre, while collision follows the actual arc's centre.
     // Translate by the rotated centroid so spin never sweeps an invisible full disc.
     Disc->SetRelativeRotation(PieceRotation);
-    Disc->SetRelativeLocation(-PieceRotation.RotateVector(FVector(0.f, 0.f, 26.f)));
+    Disc->SetRelativeLocation(-PieceRotation.RotateVector(ADBCharacter::GetPieceMeshCentre()));
     Disc->SetHiddenInGame(bEmergencyReturn);
     Core->SetHiddenInGame(false);
 }
@@ -174,7 +195,8 @@ bool ADBThrownShield::SweepTravel(FVector Destination, bool bOnReturn)
                 Contact.Source = Start;
                 Contact.Direction = (Destination - Start).GetSafeNormal();
                 Contact.InstigatorActor = Bearer;
-                Bearer->ApplyPhysicalShieldHit(Enemy, Contact);
+                Bearer->ApplyPhysicalShieldHit(Enemy, Contact, bFullCharge);
+                if (bFullCharge && !bOnReturn) Bearer->TriggerFullVolleyImpact(VolleyId, Hit.ImpactPoint, Enemy);
                 if (!Bearer->CanAct()) { SetActorLocation(Hit.Location); return false; }
                 // A final kill can request recall from inside this damage callback.
                 if (!bOnReturn && bReturning) { SetActorLocation(Hit.Location); return false; }
@@ -245,7 +267,8 @@ void ADBThrownShield::Lodge(FVector Location, FVector SurfaceNormal)
         Location.Z += 100.f; // The magical anchor suspends a ground placement at standing chest height.
     SetActorLocation(Location);
     OutwardPath.Add(Location);
-    if (ImpactSound) UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, Location, .8f, .72f);
+    Bearer->PlayShieldImpactFeedback(Location, bFullCharge);
+    if (bFullCharge) Bearer->TriggerFullVolleyImpact(VolleyId, Location);
     Bearer->OnShieldPieceFlightState(PieceId, this, EDBShieldPieceState::Lodged);
     Bearer->LastCombatMessage = bAnchor ? TEXT("ANCHOR PIECE SET - its visible arc blocks frontal bolts / Q recalls") : TEXT("PIECE DEPLOYED - Q recalls / remaining pieces stay usable");
     Bearer->MessageTime = 2.4f;

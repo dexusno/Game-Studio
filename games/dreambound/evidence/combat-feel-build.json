@@ -1,0 +1,162 @@
+{
+  "version": "0.3.1-combat1",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "package_path": "BuildOutput/CombatFeel/Windows",
+  "recorded_on_utc": "2026-09-08T15:55:20.166121+00:00",
+  "scope": "Folding six-piece shield, full-charge payoff, melee reach/chain, replacement audio, original garden additions; art below B",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166249472,
+      "sha256": "F08751A84E35DD71E5511CB774702F5D04E7C48767332BEE233520D774F74965"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11224509,
+      "sha256": "DD4C415378B9CE83FE30200E91A01EC9D453C616DAE338DB2616431EB5D51EC8"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 215909360,
+      "sha256": "D2E9B6029009A94EC64EBF591DB399C77271C2EFE98D1B26340B8B768EF9F1A8"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 215638,
+      "sha256": "675DC2E154194D9EBC7AACCF609E256FC394362B0B3560F9AE7E11CE98B9EBFD"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211600,
+      "sha256": "49B72DECF7F09AA8F307ED7802AADE0DC1E6CDDE944772189AD5A9E9A4A6E438"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "CC931FD5A1828F0CB4D61D1CC8F99BA213F0889371E56DD9183F232D7A4DE3F8"
+    }
+  ],
+  "runtime_scenarios": {
+    "passed": 19,
+    "failed": 0,
+    "assertions": 67,
+    "complete": true,
+    "report": "evidence/combat-feel-checks.json",
+    "sha256": "33EA651BCA9D13C3BA3CD242D03995DF8BD0C868EF753B22A182EE3E2D414885",
+    "independent_executions": 1,
+    "utc_start": "2026-09-08T15:43:23.423Z",
+    "utc_end": "2026-09-08T15:43:32.287Z",
+    "process_exit": 0,
+    "scope": "Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."
+  },
+  "build_attempts": {
+    "editor": 1,
+    "package": 2,
+    "content": 4,
+    "note": "Editor and both packages succeeded. Two intermediate content imports failed while adding solid garden collision: automatic FBX collision retained an empty body; the explicit editor subsystem was unavailable in a commandlet. Authored Blender UCX fixed both; final import verified8 buttress and3 rock hulls."
+  },
+  "audio": {
+    "source_report": "assets/audio-generation.json",
+    "notes": "assets/audio-notes.md",
+    "original_wavs": 22,
+    "generator_signal_assertions": 51,
+    "listening_assessment": false
+  },
+  "rendered_capture": {
+    "path": "evidence/combat-feel-scripted.mp4",
+    "metadata": "evidence/combat-feel-capture.json",
+    "executions": 2,
+    "final_frames": 334,
+    "final_audio": {
+      "channels": 2,
+      "sample_rate": 48000,
+      "seconds": 35.946666666666665,
+      "peak_amplitude": 0.227081298828125,
+      "full_scale_samples": 0,
+      "peak_dbfs": -12.876,
+      "rms_dbfs": -39.833,
+      "windows": {
+        "partial_release": {
+          "seconds": [
+            5.85,
+            6.85
+          ],
+          "peak_dbfs": -19.886,
+          "rms_dbfs": -38.924
+        },
+        "full_release": {
+          "seconds": [
+            12.3,
+            13.4
+          ],
+          "peak_dbfs": -15.627,
+          "rms_dbfs": -30.501
+        },
+        "charge": {
+          "seconds": [
+            11,
+            11.7
+          ],
+          "peak_dbfs": -23.323,
+          "rms_dbfs": -35.713
+        },
+        "heavy": {
+          "seconds": [
+            20,
+            21
+          ],
+          "peak_dbfs": -12.886,
+          "rms_dbfs": -34.023
+        },
+        "dash": {
+          "seconds": [
+            22,
+            22.5
+          ],
+          "peak_dbfs": -32.001,
+          "rms_dbfs": -47.521
+        }
+      }
+    },
+    "note": "First capture prompted a lower/farther resting pose and removal of an irrelevant E-start prompt from the staged fixture. Final idle, guard, transition, full release and scene frames inspected. Real engine loop state starts/rises and stops after release. Staged safe practice, no earned-progress or performance claim."
+  },
+  "native_input": {
+    "profile": "DreamboundQA_CombatInput",
+    "observed_seed": 748202,
+    "observed": [
+      "normal title",
+      "mouse start",
+      "folded rest",
+      "F strike pose and cooldown",
+      "Tab controls/equipment",
+      "save and exit"
+    ],
+    "note": "Final binary tested with actual Windows input. Initial hidden launch exposed no targetable window and was terminated in its isolated profile; visible interactive launch passed. No held OS-input, normal complete journey or listening claim."
+  },
+  "source_art": {
+    "garden_meshes": 6,
+    "report": "art/import-report.json",
+    "blender_roundtrip": "art/garden/export-checks.json",
+    "note": "Garden FBXs passed roundtrip; final source blend was recovered from the complete Blender .blend@ save after a Windows rename failure. Generator now saves through a separate output name. Existing stair tangent/binormal warnings remain."
+  },
+  "previous_packages_preserved": [
+    "BuildOutput/SegmentedShield",
+    "BuildOutput/ShieldStudy",
+    "BuildOutput/Shipping"
+  ],
+  "graphics_next": "Guided creation pipeline across biomes; Rodin Gen-2.5 website trial plus Blender and Unreal proposed, no generated model or purchase yet",
+  "purchase_or_publication": false,
+  "limits": [
+    "No normal full playthrough or measured completion time",
+    "No subjective sound or fun verdict",
+    "No performance benchmark",
+    "Art remains substantially below anchor B",
+    "New AI modeling pipeline unproven"
+  ]
+}

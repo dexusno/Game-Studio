@@ -10,6 +10,7 @@ class ADBEnemy;
 class UStaticMeshComponent;
 class USceneComponent;
 class USoundBase;
+class UMaterialInstanceDynamic;
 
 /** One identified shield segment. Its physical centre is the actor origin. */
 UCLASS()
@@ -20,10 +21,12 @@ public:
     ADBThrownShield();
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
-    void Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId = 0);
+    void Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId = 0, uint32 InVolleyId = 0, bool bInFullCharge = false);
     void Recall();
     void DestroyPiece();
     int32 GetPieceId() const { return PieceId; }
+    bool IsFullyCharged() const { return bFullCharge; }
+    uint32 GetVolleyId() const { return VolleyId; }
     bool InterceptProjectile(FVector Start, FVector End, float Damage, bool bUnblockable);
     bool IsReturning() const { return bReturning; }
     bool IsAnchored() const { return bLodged && bAnchor; }
@@ -36,6 +39,7 @@ private:
     UPROPERTY() TObjectPtr<ADBCharacter> Bearer;
     UPROPERTY() TObjectPtr<USoundBase> ImpactSound;
     UPROPERTY() TObjectPtr<USoundBase> BlockSound;
+    UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> ChargedMaterial;
     TArray<FVector> OutwardPath;
     TArray<FVector> BearerPath;
     TSet<TWeakObjectPtr<ADBEnemy>> OutwardVictims;
@@ -43,6 +47,7 @@ private:
     FVector FlightDirection = FVector::ForwardVector;
     FVector AnchorForward = FVector::ForwardVector;
     FVector LastBearerPoint = FVector::ZeroVector;
+    FQuat LaunchSocketRotation = FQuat::Identity;
     float Speed = 1800.f;
     float Damage = 60.f;
     float Range = 1500.f;
@@ -62,6 +67,8 @@ private:
     bool bFollowingBearerTrail = false;
     bool bResolved = false;
     bool bEmergencyReturn = false;
+    bool bFullCharge = false;
+    uint32 VolleyId = 0;
     int32 PieceId = INDEX_NONE;
     EDBElement LastElement = EDBElement::Neutral;
 

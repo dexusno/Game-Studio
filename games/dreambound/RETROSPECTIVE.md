@@ -1,5 +1,13 @@
 # Beta2 owner playtest — 2026-09-08
 
+## Segmented experiment feedback and folding correction — 2026-09-08
+
+Klaus found 0.3.0-segments1's basic allocation concept acceptable but its experience still lacking: obstructive idle shield, oversized/repetitive whooshes, no convincing rising charge, weak full attacks and dull very-short-range melee. He asked for stronger presentation and suggested a secondary weapon if shield combat could not become satisfying. He then explicitly selected a collapsed default/weapon form that animates into full defense on RMB.
+
+0.3.1-combat1 tests that form change, a 1.8-second six-piece commitment with a distinct single-blast payoff, wider/longer aimed melee with a short wall-safe step and third-strike finisher, and separate mechanically voiced actions with a real rising charge loop. New original environment pieces improve enclosure and planting depth. These address specific failures but do not establish enjoyment. Current enemy art and the environment's surface detail still fall substantially below anchor B. Klaus subsequently rejected the kit-first recommendation. The next art proof is a guided AI/source-modeling and Blender workflow that can create distinct biome assets, assessed as real geometry in Unreal.
+
+Technical fixtures and recorded mix levels can establish transitions, damage, collision and signal behavior. They cannot establish satisfying sound or combat; do not promote a green suite into another positive playtest claim. Assess whether partial versus full commitment changes decisions, whether the folded form keeps targets readable, and whether the new melee offers a useful alternative before expanding content.
+
 ## Shield-study visual comparison — 2026-09-08
 
 Klaus describes the corrective study's graphics as slightly better and asks for an honest comparison with the selected anchor. Direct visual inspection of [anchor B, middle column](../../research/runs/2026-09-07-depth-reset/assets/art-style-comparison-v1.png) and the [actual shield-study frame](evidence/shield-study-courtyard.png) confirms that the gap remains substantial.

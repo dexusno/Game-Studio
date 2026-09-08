@@ -15,6 +15,12 @@ for source in sorted((game/"assets"/"audio").glob("*.wav")):
     task.save=True
     tasks.append(task)
 unreal.AssetToolsHelpers.get_asset_tools().import_asset_tasks(tasks)
+# The mechanical charge is the only continuous voice. Its component owns
+# start/stop and pitch; importing it as a loop preserves that lifecycle.
+charge=unreal.EditorAssetLibrary.load_asset('/Game/Audio/S_ChargeLoop')
+if isinstance(charge,unreal.SoundWave):
+    charge.set_editor_property('looping',True)
+    unreal.EditorAssetLibrary.save_loaded_asset(charge)
 editor=unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 asset="/Game/Maps/Bellroot"
 if unreal.EditorAssetLibrary.does_asset_exist(asset):

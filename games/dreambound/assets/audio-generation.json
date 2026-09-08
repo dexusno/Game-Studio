@@ -1,118 +1,958 @@
 {
-  "method": "original deterministic modal/contact synthesis; no external samples",
+  "revision": "shield-mechanism-v2",
+  "method": "Original deterministic synthesis; no recordings, external samples, presets or network generation.",
   "rate": 48000,
+  "channels": 1,
+  "bits_per_sample": 16,
+  "generator_sha256": "9a880e221cb97149a312be3d083c16cf554d53888acac6a1344483c6c3075d5c",
+  "dependencies": {
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "purpose": "Existing local DSP/analysis libraries; no packaged runtime dependency."
+  },
+  "reproduce": "python games/dreambound/scripts/create_audio.py",
+  "verify": "python games/dreambound/scripts/create_audio.py --check",
   "files": [
     {
       "asset": "S_Attack",
-      "seconds": 0.62,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -15.98,
-      "clipped_samples": 0
+      "seconds": 0.26,
+      "recipe": "dry spring release, ceramic rim and short torsion snap; one event per partial volley",
+      "sha256": "66337c322fc8a5e6a0392ad29f5bc899cfbfd9c4b8fe48948ee961e8580b3c3b",
+      "bytes": 25004,
+      "target_rms_dbfs": -20.5,
+      "true_peak_ceiling_dbtp": -8.0,
+      "suggested_runtime_gain": 0.72,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -8.006,
+      "true_peak_4x_dbtp": -8.001,
+      "rms_dbfs": -24.156,
+      "crest_db": 16.15,
+      "dc_dbfs": -68.213,
+      "energy90_seconds": 0.0412,
+      "energy_below_100hz_percent": 0.267,
+      "energy_above_6000hz_percent": 0.029,
+      "energy_centroid_hz": 351.7
     },
     {
       "asset": "S_Guard",
-      "seconds": 0.52,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -16.67,
-      "clipped_samples": 0
+      "seconds": 0.26,
+      "recipe": "bright short metal clash with restrained low body",
+      "sha256": "c5802e7ad27455d99bdfdbfa56333d49f352a69a88dc94451763a675ba293c62",
+      "bytes": 25004,
+      "target_rms_dbfs": -20.0,
+      "true_peak_ceiling_dbtp": -7.0,
+      "suggested_runtime_gain": 0.58,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -7.011,
+      "true_peak_4x_dbtp": -7.0,
+      "rms_dbfs": -26.106,
+      "crest_db": 19.094,
+      "dc_dbfs": -66.742,
+      "energy90_seconds": 0.0462,
+      "energy_below_100hz_percent": 1.797,
+      "energy_above_6000hz_percent": 0.545,
+      "energy_centroid_hz": 650.3
     },
     {
       "asset": "S_Parry",
-      "seconds": 1.05,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -17.88,
-      "clipped_samples": 0
+      "seconds": 0.66,
+      "recipe": "crossed-plate strike resolving into an open harmonic ring",
+      "sha256": "fbf874b9926ab5d18f87fbd541336b4241f47de76fd7cf893034aa232d94fece",
+      "bytes": 63404,
+      "target_rms_dbfs": -21.5,
+      "true_peak_ceiling_dbtp": -5.5,
+      "suggested_runtime_gain": 0.72,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -5.709,
+      "true_peak_4x_dbtp": -5.703,
+      "rms_dbfs": -21.5,
+      "crest_db": 15.792,
+      "dc_dbfs": -90.616,
+      "energy90_seconds": 0.2755,
+      "energy_below_100hz_percent": 0.003,
+      "energy_above_6000hz_percent": 0.059,
+      "energy_centroid_hz": 653.2
     },
     {
       "asset": "S_Dash",
-      "seconds": 0.46,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -10.62,
-      "clipped_samples": 0
+      "seconds": 0.16,
+      "recipe": "160 ms narrow servo with three dry pins; no air, broadband swell or sub bass",
+      "sha256": "f81b39498c194c46c731dbf53b366ca02a53e50cacafe6ae70360c178cbfc322",
+      "bytes": 15404,
+      "target_rms_dbfs": -31.0,
+      "true_peak_ceiling_dbtp": -19.0,
+      "suggested_runtime_gain": 0.75,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -20.406,
+      "true_peak_4x_dbtp": -20.401,
+      "rms_dbfs": -31.0,
+      "crest_db": 10.594,
+      "dc_dbfs": -89.939,
+      "energy90_seconds": 0.0792,
+      "energy_below_100hz_percent": 0.004,
+      "energy_above_6000hz_percent": 0.036,
+      "energy_centroid_hz": 416.3
     },
     {
       "asset": "S_Impact",
-      "seconds": 0.92,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -17.99,
-      "clipped_samples": 0
+      "seconds": 0.3,
+      "recipe": "short damped iron plate, midrange knock and localized grit",
+      "sha256": "04ae769aaf27cf1c7bddf06100769543aa26464c10cb06c47bdf491092a6ecc9",
+      "bytes": 28844,
+      "target_rms_dbfs": -21.5,
+      "true_peak_ceiling_dbtp": -8.0,
+      "suggested_runtime_gain": 0.48,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -8.033,
+      "true_peak_4x_dbtp": -8.0,
+      "rms_dbfs": -25.472,
+      "crest_db": 17.438,
+      "dc_dbfs": -63.543,
+      "energy90_seconds": 0.0681,
+      "energy_below_100hz_percent": 1.888,
+      "energy_above_6000hz_percent": 0.001,
+      "energy_centroid_hz": 270.2
     },
     {
       "asset": "S_Catch",
-      "seconds": 0.78,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -17.75,
-      "clipped_samples": 0
+      "seconds": 0.22,
+      "recipe": "damped docking socket, pin engagement and tiny second lock",
+      "sha256": "10c54f1833604f9caec54966086cfaa8243af2444622719a8c49b1cac7191577",
+      "bytes": 21164,
+      "target_rms_dbfs": -24.5,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.66,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -12.021,
+      "true_peak_4x_dbtp": -12.001,
+      "rms_dbfs": -28.316,
+      "crest_db": 16.295,
+      "dc_dbfs": -61.83,
+      "energy90_seconds": 0.0411,
+      "energy_below_100hz_percent": 4.955,
+      "energy_above_6000hz_percent": 0.088,
+      "energy_centroid_hz": 292.0
     },
     {
       "asset": "S_Recall",
-      "seconds": 0.75,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -11.05,
-      "clipped_samples": 0
+      "seconds": 0.31,
+      "recipe": "accelerating ratchet over restrained geared motor; no air rush",
+      "sha256": "5a35b428243b0abadbf86ae43f4d766ddc1d6af1e1fcb36d2ffe2380e341b8b1",
+      "bytes": 29804,
+      "target_rms_dbfs": -26.0,
+      "true_peak_ceiling_dbtp": -14.0,
+      "suggested_runtime_gain": 0.7,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -14.041,
+      "true_peak_4x_dbtp": -14.0,
+      "rms_dbfs": -29.756,
+      "crest_db": 15.715,
+      "dc_dbfs": -77.857,
+      "energy90_seconds": 0.204,
+      "energy_below_100hz_percent": 0.026,
+      "energy_above_6000hz_percent": 0.215,
+      "energy_centroid_hz": 610.4
     },
     {
       "asset": "S_Equip",
-      "seconds": 1.6,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -18.16,
-      "clipped_samples": 0
+      "seconds": 0.62,
+      "recipe": "three quiet indexing locks followed by a harmonic confirmation",
+      "sha256": "71d3bb87f1cc39dee6ef75c27436ad0f51d433b64a21d35d4159ad52fb1e5ce1",
+      "bytes": 59564,
+      "target_rms_dbfs": -26.0,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.68,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -12.066,
+      "true_peak_4x_dbtp": -12.001,
+      "rms_dbfs": -29.288,
+      "crest_db": 17.222,
+      "dc_dbfs": -95.266,
+      "energy90_seconds": 0.3299,
+      "energy_below_100hz_percent": 0.001,
+      "energy_above_6000hz_percent": 0.147,
+      "energy_centroid_hz": 971.9
     },
     {
       "asset": "S_Hurt",
-      "seconds": 0.5,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -16.74,
-      "clipped_samples": 0
+      "seconds": 0.27,
+      "recipe": "muffled body impact with low filtered cloth displacement",
+      "sha256": "6ed516707f82cd52d70d16faa8b3d6f96fd3c02a8f304ac98872b107e9dd881d",
+      "bytes": 25964,
+      "target_rms_dbfs": -23.0,
+      "true_peak_ceiling_dbtp": -10.0,
+      "suggested_runtime_gain": 0.64,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -10.242,
+      "true_peak_4x_dbtp": -10.237,
+      "rms_dbfs": -23.0,
+      "crest_db": 12.758,
+      "dc_dbfs": -55.928,
+      "energy90_seconds": 0.0664,
+      "energy_below_100hz_percent": 86.9,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 82.9
     },
     {
       "asset": "S_Encounter",
-      "seconds": 2.5,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -19.31,
-      "clipped_samples": 0
+      "seconds": 1.8,
+      "recipe": "restrained low bronze bell with irregular decaying modes",
+      "sha256": "fdb29c5165501274b3240cf597fb6d9621318c9848938df1f8ef49f5b6196ff0",
+      "bytes": 172844,
+      "target_rms_dbfs": -27.0,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.65,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -12.541,
+      "true_peak_4x_dbtp": -12.535,
+      "rms_dbfs": -27.0,
+      "crest_db": 14.459,
+      "dc_dbfs": -94.69,
+      "energy90_seconds": 0.6088,
+      "energy_below_100hz_percent": 81.502,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 116.7
     },
     {
       "asset": "S_Clear",
-      "seconds": 3.0,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -18.7,
-      "clipped_samples": 0
+      "seconds": 2.2,
+      "recipe": "soft resolving bell intervals; no new music system",
+      "sha256": "77eae67b54c5fa18a2737c0022f3ee0fd7133ed33b05183bca4194c4576bd4a9",
+      "bytes": 211244,
+      "target_rms_dbfs": -28.0,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.65,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -15.37,
+      "true_peak_4x_dbtp": -15.365,
+      "rms_dbfs": -28.0,
+      "crest_db": 12.63,
+      "dc_dbfs": -112.34,
+      "energy90_seconds": 0.8018,
+      "energy_below_100hz_percent": 0.002,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 274.6
     },
     {
       "asset": "S_EnemyFire",
-      "seconds": 0.58,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -19.26,
-      "clipped_samples": 0
+      "seconds": 0.36,
+      "recipe": "hollow ceramic resonator and expelled short pulse",
+      "sha256": "e0f6f4cc2b73731a6a36a457bec2ea34c81e156997795b8cb43f6c1933a09acd",
+      "bytes": 34604,
+      "target_rms_dbfs": -24.5,
+      "true_peak_ceiling_dbtp": -11.0,
+      "suggested_runtime_gain": 0.6,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -11.006,
+      "true_peak_4x_dbtp": -11.0,
+      "rms_dbfs": -29.6,
+      "crest_db": 18.594,
+      "dc_dbfs": -65.456,
+      "energy90_seconds": 0.0657,
+      "energy_below_100hz_percent": 10.922,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 349.4
     },
     {
       "asset": "S_EnemyHit",
-      "seconds": 0.58,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -17.36,
-      "clipped_samples": 0
+      "seconds": 0.25,
+      "recipe": "dry brittle armor chip and small loose fragments",
+      "sha256": "9b18c6503741cd8e82f96a60756ba4c434efbfe6e30a76090dad6c7421829dd2",
+      "bytes": 24044,
+      "target_rms_dbfs": -25.0,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.36,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -12.098,
+      "true_peak_4x_dbtp": -12.0,
+      "rms_dbfs": -32.646,
+      "crest_db": 20.548,
+      "dc_dbfs": -86.17,
+      "energy90_seconds": 0.0255,
+      "energy_below_100hz_percent": 0.037,
+      "energy_above_6000hz_percent": 5.346,
+      "energy_centroid_hz": 1729.9
     },
     {
       "asset": "S_BossTell",
-      "seconds": 1.3,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -19.08,
-      "clipped_samples": 0
+      "seconds": 0.94,
+      "recipe": "three accelerating low strained pulses into a tension crest",
+      "sha256": "cacb3e3537b64c57d8a4d47b9fad841e7c6fdb320922dbfc774c7170dc2df650",
+      "bytes": 90284,
+      "target_rms_dbfs": -23.0,
+      "true_peak_ceiling_dbtp": -9.0,
+      "suggested_runtime_gain": 0.62,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -10.688,
+      "true_peak_4x_dbtp": -10.683,
+      "rms_dbfs": -23.0,
+      "crest_db": 12.312,
+      "dc_dbfs": -91.901,
+      "energy90_seconds": 0.5531,
+      "energy_below_100hz_percent": 24.708,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 124.9
     },
     {
       "asset": "S_EnemyTell",
-      "seconds": 0.7,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -16.05,
-      "clipped_samples": 0
+      "seconds": 0.48,
+      "recipe": "rising taut-metal flex and final commitment click",
+      "sha256": "b51386c7a9d5b68016c06daf3ec2484f7fc3edaa5c928cafd62a347f9d491976",
+      "bytes": 46124,
+      "target_rms_dbfs": -25.5,
+      "true_peak_ceiling_dbtp": -12.0,
+      "suggested_runtime_gain": 0.6,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -12.03,
+      "true_peak_4x_dbtp": -12.001,
+      "rms_dbfs": -26.306,
+      "crest_db": 14.277,
+      "dc_dbfs": -81.839,
+      "energy90_seconds": 0.341,
+      "energy_below_100hz_percent": 0.541,
+      "energy_above_6000hz_percent": 0.096,
+      "energy_centroid_hz": 466.0
     },
     {
       "asset": "S_EnemyDefeat",
-      "seconds": 1.3,
-      "peak_dbfs": -1.51,
-      "rms_dbfs": -18.13,
-      "clipped_samples": 0
+      "seconds": 0.98,
+      "recipe": "weighted body fall, irregular armor debris and floor contact",
+      "sha256": "6df9dae4769f633a934dbce07a830c6cf0b5d9c22090f96256b0cecaf0cafb67",
+      "bytes": 94124,
+      "target_rms_dbfs": -23.5,
+      "true_peak_ceiling_dbtp": -8.0,
+      "suggested_runtime_gain": 0.56,
+      "maximum_family_voices": 2,
+      "clipped_samples": 0,
+      "peak_dbfs": -8.006,
+      "true_peak_4x_dbtp": -8.001,
+      "rms_dbfs": -25.576,
+      "crest_db": 17.57,
+      "dc_dbfs": -65.725,
+      "energy90_seconds": 0.1494,
+      "energy_below_100hz_percent": 79.176,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 113.7
+    },
+    {
+      "asset": "S_ChargeLoop",
+      "seconds": 1.0,
+      "recipe": "periodic energized motor, harmonic pressure and fine flux; runtime pitch supplies rise",
+      "sha256": "91157c53a3d0aaae190db3b7683769484b819b23d11702881bdce6b05d71944f",
+      "bytes": 96044,
+      "target_rms_dbfs": -20.0,
+      "true_peak_ceiling_dbtp": -11.0,
+      "suggested_runtime_gain": 0.48,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -11.207,
+      "true_peak_4x_dbtp": -11.201,
+      "rms_dbfs": -20.0,
+      "crest_db": 8.793,
+      "dc_dbfs": -148.086,
+      "energy90_seconds": 0.9133,
+      "energy_below_100hz_percent": 4.795,
+      "energy_above_6000hz_percent": 0.0,
+      "energy_centroid_hz": 378.8,
+      "loop": {
+        "seam_step_dbfs": -33.532,
+        "seam_step_fraction_of_largest_internal_step": 1.0,
+        "seam_curvature_fraction_of_largest_curvature": 0.0,
+        "minimum_50ms_rms_dbfs": -21.082,
+        "maximum_50ms_rms_dbfs": -19.088,
+        "design": "Integer oscillator/modulation cycles and periodic FFT noise; no edge fade, silent seam or baked pitch reset."
+      }
+    },
+    {
+      "asset": "S_ChargeTick",
+      "seconds": 0.085,
+      "recipe": "short two-stage selection latch, distinct from catch",
+      "sha256": "ffe44a8697bff085f628a5668a0b5c15dd7bf6de6d85a9c11e7b371273afdf97",
+      "bytes": 8204,
+      "target_rms_dbfs": -25.0,
+      "true_peak_ceiling_dbtp": -13.0,
+      "suggested_runtime_gain": 0.7,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -13.029,
+      "true_peak_4x_dbtp": -13.0,
+      "rms_dbfs": -27.624,
+      "crest_db": 14.594,
+      "dc_dbfs": -84.826,
+      "energy90_seconds": 0.0297,
+      "energy_below_100hz_percent": 0.004,
+      "energy_above_6000hz_percent": 0.233,
+      "energy_centroid_hz": 1688.9
+    },
+    {
+      "asset": "S_ChargeReady",
+      "seconds": 0.42,
+      "recipe": "upward three-note energy confirmation with a terminal lock",
+      "sha256": "c3216bfe5f68417d8ab6ce7c0b093f4777e6bd14826baf3da7a2cda282e097f5",
+      "bytes": 40364,
+      "target_rms_dbfs": -22.5,
+      "true_peak_ceiling_dbtp": -8.0,
+      "suggested_runtime_gain": 0.68,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -8.006,
+      "true_peak_4x_dbtp": -8.001,
+      "rms_dbfs": -22.844,
+      "crest_db": 14.838,
+      "dc_dbfs": -107.394,
+      "energy90_seconds": 0.2702,
+      "energy_below_100hz_percent": 0.0,
+      "energy_above_6000hz_percent": 0.019,
+      "energy_centroid_hz": 757.3
+    },
+    {
+      "asset": "S_FullRelease",
+      "seconds": 0.58,
+      "recipe": "magnetic rupture, low-mid recoil and flexing launch rim",
+      "sha256": "a6f15d9ef70bb05b2e935c2fed9b8dda427571b1929759498c90b16b6c4502b5",
+      "bytes": 55724,
+      "target_rms_dbfs": -15.5,
+      "true_peak_ceiling_dbtp": -3.0,
+      "suggested_runtime_gain": 0.66,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -3.006,
+      "true_peak_4x_dbtp": -3.0,
+      "rms_dbfs": -17.202,
+      "crest_db": 14.196,
+      "dc_dbfs": -49.994,
+      "energy90_seconds": 0.1374,
+      "energy_below_100hz_percent": 52.994,
+      "energy_above_6000hz_percent": 0.096,
+      "energy_centroid_hz": 187.3
+    },
+    {
+      "asset": "S_MeleeSwing",
+      "seconds": 0.235,
+      "recipe": "short rim drag and strained joint movement; no launch blast or hit body",
+      "sha256": "886684360883bdb54fed8e72c605f46b782c9b8240332288f4c15e5fbeb48a43",
+      "bytes": 22604,
+      "target_rms_dbfs": -25.0,
+      "true_peak_ceiling_dbtp": -11.0,
+      "suggested_runtime_gain": 0.64,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -11.312,
+      "true_peak_4x_dbtp": -11.289,
+      "rms_dbfs": -25.0,
+      "crest_db": 13.688,
+      "dc_dbfs": -86.417,
+      "energy90_seconds": 0.1199,
+      "energy_below_100hz_percent": 0.004,
+      "energy_above_6000hz_percent": 0.002,
+      "energy_centroid_hz": 498.5
+    },
+    {
+      "asset": "S_HeavyImpact",
+      "seconds": 0.72,
+      "recipe": "deep bending armor, crunch, sharp contact edge and late plate flex",
+      "sha256": "5fefd3bfcb6c7d52bc4904bd933b69cf1d1427c71d8cc70109b2d97a0af17bfd",
+      "bytes": 69164,
+      "target_rms_dbfs": -16.5,
+      "true_peak_ceiling_dbtp": -2.5,
+      "suggested_runtime_gain": 0.64,
+      "maximum_family_voices": 1,
+      "clipped_samples": 0,
+      "peak_dbfs": -2.515,
+      "true_peak_4x_dbtp": -2.5,
+      "rms_dbfs": -20.485,
+      "crest_db": 17.97,
+      "dc_dbfs": -53.132,
+      "energy90_seconds": 0.1376,
+      "energy_below_100hz_percent": 74.0,
+      "energy_above_6000hz_percent": 0.112,
+      "energy_centroid_hz": 167.6
     }
+  ],
+  "dry_mix_fixtures": [
+    {
+      "fixture": "full_charge_release_close_heavy_contact",
+      "true_peak_4x_dbtp": -1.167,
+      "over_full_scale_samples": 0,
+      "events": 5,
+      "passed": true
+    },
+    {
+      "fixture": "partial_throw_two_contacts_and_dash",
+      "true_peak_4x_dbtp": -10.854,
+      "over_full_scale_samples": 0,
+      "events": 6,
+      "passed": true
+    },
+    {
+      "fixture": "recall_six_catches_throttled_55ms",
+      "true_peak_4x_dbtp": -15.055,
+      "over_full_scale_samples": 0,
+      "events": 7,
+      "passed": true
+    },
+    {
+      "fixture": "full_contact_guard_and_enemy_volley",
+      "true_peak_4x_dbtp": -3.741,
+      "over_full_scale_samples": 0,
+      "events": 6,
+      "passed": true
+    },
+    {
+      "fixture": "release_plus_heavy_delays_0_to_150ms",
+      "offsets": 151,
+      "sample_peak_dbfs": -0.721,
+      "passed": true
+    }
+  ],
+  "checks": [
+    {
+      "check": "S_Attack_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Attack_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Guard_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Guard_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Parry_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Parry_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Dash_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Dash_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Impact_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Impact_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Catch_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Catch_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Recall_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Recall_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Equip_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Equip_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Hurt_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Hurt_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Encounter_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Encounter_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_Clear_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_Clear_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyFire_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyFire_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyHit_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyHit_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_BossTell_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_BossTell_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyTell_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyTell_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyDefeat_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_EnemyDefeat_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "charge_loop_seam_and_no_silent_window",
+      "passed": true
+    },
+    {
+      "check": "S_ChargeLoop_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_ChargeTick_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_ChargeTick_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_ChargeReady_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_ChargeReady_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_FullRelease_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_FullRelease_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_MeleeSwing_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_MeleeSwing_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "S_HeavyImpact_zero_endpoints",
+      "passed": true
+    },
+    {
+      "check": "S_HeavyImpact_finite_unclipped_level",
+      "passed": true
+    },
+    {
+      "check": "full_charge_release_close_heavy_contact",
+      "passed": true
+    },
+    {
+      "check": "partial_throw_two_contacts_and_dash",
+      "passed": true
+    },
+    {
+      "check": "recall_six_catches_throttled_55ms",
+      "passed": true
+    },
+    {
+      "check": "full_contact_guard_and_enemy_volley",
+      "passed": true
+    },
+    {
+      "check": "release_plus_heavy_delays_0_to_150ms",
+      "passed": true
+    },
+    {
+      "check": "dash_average_at_least_12db_below_full_release",
+      "passed": true
+    },
+    {
+      "check": "all_asset_pcm_hashes_unique",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "manifest_rows_for_integration_owner": [
+    {
+      "asset_id": "s_attack",
+      "path": "assets/audio/S_Attack.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; dry spring release, ceramic rim and short torsion snap; one event per partial volley; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_guard",
+      "path": "assets/audio/S_Guard.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; bright short metal clash with restrained low body; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_parry",
+      "path": "assets/audio/S_Parry.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; crossed-plate strike resolving into an open harmonic ring; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_dash",
+      "path": "assets/audio/S_Dash.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; 160 ms narrow servo with three dry pins; no air, broadband swell or sub bass; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_impact",
+      "path": "assets/audio/S_Impact.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; short damped iron plate, midrange knock and localized grit; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_catch",
+      "path": "assets/audio/S_Catch.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; damped docking socket, pin engagement and tiny second lock; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_recall",
+      "path": "assets/audio/S_Recall.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; accelerating ratchet over restrained geared motor; no air rush; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_equip",
+      "path": "assets/audio/S_Equip.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; three quiet indexing locks followed by a harmonic confirmation; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_hurt",
+      "path": "assets/audio/S_Hurt.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; muffled body impact with low filtered cloth displacement; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_encounter",
+      "path": "assets/audio/S_Encounter.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; restrained low bronze bell with irregular decaying modes; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_clear",
+      "path": "assets/audio/S_Clear.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; soft resolving bell intervals; no new music system; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_enemyfire",
+      "path": "assets/audio/S_EnemyFire.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; hollow ceramic resonator and expelled short pulse; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_enemyhit",
+      "path": "assets/audio/S_EnemyHit.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; dry brittle armor chip and small loose fragments; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_bosstell",
+      "path": "assets/audio/S_BossTell.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; three accelerating low strained pulses into a tension crest; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_enemytell",
+      "path": "assets/audio/S_EnemyTell.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; rising taut-metal flex and final commitment click; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_enemydefeat",
+      "path": "assets/audio/S_EnemyDefeat.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; weighted body fall, irregular armor debris and floor contact; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_chargeloop",
+      "path": "assets/audio/S_ChargeLoop.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; periodic energized motor, harmonic pressure and fine flux; runtime pitch supplies rise; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_chargetick",
+      "path": "assets/audio/S_ChargeTick.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; short two-stage selection latch, distinct from catch; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_chargeready",
+      "path": "assets/audio/S_ChargeReady.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; upward three-note energy confirmation with a terminal lock; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_fullrelease",
+      "path": "assets/audio/S_FullRelease.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; magnetic rupture, low-mid recoil and flexing launch rim; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_meleeswing",
+      "path": "assets/audio/S_MeleeSwing.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; short rim drag and strained joint movement; no launch blast or hit body; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    },
+    {
+      "asset_id": "s_heavyimpact",
+      "path": "assets/audio/S_HeavyImpact.wav",
+      "source_url": "",
+      "creator": "Game Studio with OpenAI Codex",
+      "license": "Original project-authored audio; no third-party samples",
+      "proof_path": "assets/audio-generation.json",
+      "modifications": "48 kHz mono PCM16; deep bending armor, crunch, sharp contact edge and late plate flex; deterministic scripts/create_audio.py",
+      "approval_status": "original"
+    }
+  ],
+  "limitations": [
+    "Signals measured, not heard by this agent; timbre, power and harshness still require audition.",
+    "No Unreal launch, import, runtime trigger or final submix verification by this worker.",
+    "Dry linear mix fixtures use documented gains/throttles; arbitrary overlap, spatialization and limiting remain separate checks.",
+    "4x oversampled peak is an estimate; no integrated LUFS claim for short effects."
   ]
 }

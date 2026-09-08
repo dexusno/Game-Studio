@@ -1,0 +1,468 @@
+{
+	"suite": "folding-shield-combat-route-v2",
+	"scope": "Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence.",
+	"engine": "5.8.2-56702186+++UE5+Release-5.8",
+	"executable": "Dreambound-Win64-Shipping",
+	"platform": "Windows",
+	"save_slot": "DreamboundQA_CombatFeel",
+	"seed": 833283,
+	"null_rhi": true,
+	"complete": true,
+	"aborted": false,
+	"last_step": 38,
+	"elapsed_wall_seconds": 6.5550113990902901,
+	"passed": 19,
+	"failed": 0,
+	"checks": [
+		{
+			"id": "isolated_setup",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "isolated_slot",
+					"passed": true,
+					"detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+				},
+				{
+					"id": "recovery_world",
+					"passed": true,
+					"detail": "Actual world, possessed character, camera and three connected rooms."
+				},
+				{
+					"id": "journal_backup",
+					"passed": true,
+					"detail": "Prior QA bytes backed up; empty isolated profile established."
+				},
+				{
+					"id": "collision_fixture",
+					"passed": true,
+					"detail": "Stationary real enemy and separate QA floor, 100 m above courtyard."
+				},
+				{
+					"id": "qa_journals_restored",
+					"passed": true,
+					"detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+				}
+			]
+		},
+		{
+			"id": "allocation_and_retained_guard",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "hold_selects_three",
+					"passed": true,
+					"detail": "Ordinary hold observed 0.8721s; third-piece threshold from charge tuning."
+				},
+				{
+					"id": "release_launches_selected_three",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "launch_ownership",
+					"passed": true,
+					"detail": "held=3 selected=0 deployed=3 rebuilding=0 unique flight actors=3"
+				},
+				{
+					"id": "remainder_blocks_without_health_loss",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "attack_identity",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "same_attack_id_spends_once",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "different_attack_id_spends_another",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "pause_freezes_flight_and_rebuild",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "pause_preserves_position_and_timer",
+					"passed": true,
+					"detail": "Ordinary pause menu; runner advances while character/flight remain frozen."
+				}
+			]
+		},
+		{
+			"id": "independent_reconstruction",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "staggered_losses_have_separate_timers",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "older_piece_rebuilds_without_waiting_for_newer",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "later_piece_finishes_own_timer",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "concurrent_throws_and_unselected_catch",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "first_partial_throw",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "catch_during_hold_docks_unselected",
+					"passed": true,
+					"detail": "One physical return docks during a second hold; original three lit pieces remain selected."
+				},
+				{
+					"id": "second_throw_launches_only_lit_pieces",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "destroyed_piece_and_survivor_recall",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "only_survivors_return_no_duplicate_replacement",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "recall_ownership",
+					"passed": true,
+					"detail": "held=5 selected=0 deployed=0 rebuilding=1 unique flight actors=0"
+				}
+			]
+		},
+		{
+			"id": "zero_piece_core_offense",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "six_distinct_blocks_spend_six_pieces",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "core_tap_hits_without_guard_pieces",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "elite_directional_interception",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "actual_ai_enters_signalled_counter",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "rear_and_flank_do_not_consume_counter",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "physical_salvo_loses_exactly_one_other_pieces_hit",
+					"passed": true,
+					"detail": "Real outbound collision; active stance frozen after normal telegraph to isolate interception semantics."
+				}
+			]
+		},
+		{
+			"id": "frost_launch_and_return_shatter",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "ordinary_enemy_hit_chills_without_destroying_piece",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "physical_return_consumes_chill_and_adds_shatter_damage",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "folding_shield_pose",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "idle_is_collapsed",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "guard_separates_physical_piece_sockets",
+					"passed": true,
+					"detail": "folded span 37.54cm, expanded 49.64cm"
+				},
+				{
+					"id": "release_refolds",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "full_charge_payoff",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "five_pieces_are_not_full_power",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "partial_volley_hits_and_keeps_armor",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "full_power_requires_long_hold",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "one_full_volley_commits_all_armor",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "release_stops_charge_component",
+					"passed": true,
+					"detail": "Lifecycle state only; NullRHI/nosound does not assess sound."
+				},
+				{
+					"id": "full_release_more_than_piece_count_bonus",
+					"passed": true,
+					"detail": "five-piece damage 168.5, full six 468.9; minimum 1.5x damage per piece"
+				},
+				{
+					"id": "one_shared_blast_hits_neighbor_once",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "blast_respects_cover",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "reachable_melee_chain",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "tap_reaches_enemy_275cm_away",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "unobstructed_melee_actually_steps_forward",
+					"passed": true,
+					"detail": "forward displacement 50.0cm"
+				},
+				{
+					"id": "second_tap_connects",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "third_tap_has_stronger_payoff",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "melee_and_forward_step_respect_wall",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "finite_lethal_storm_chain",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "lethal_root_arcs_to_two_without_recursive_chain",
+					"passed": true,
+					"detail": "Four physically visible, pre-marked enemies; lethal root and two lethal secondary hits; fourth untouched; isolated RoomId=-1."
+				}
+			]
+		},
+		{
+			"id": "seeded_connected_route",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "same_seed_reproduces_route_and_cover",
+					"passed": true,
+					"detail": "route:0,-1/cover0:2/cover1:1/cover2:1"
+				},
+				{
+					"id": "alternate_seed_changes_layout",
+					"passed": true,
+					"detail": "Up to three nearby seeds sampled; not exhaustive procedural validation."
+				},
+				{
+					"id": "connected_collision_and_floor",
+					"passed": true,
+					"detail": "Three linked rooms; player-sized door/corridor sweeps (closed progression gates explicitly ignored), 34 floor probes; gates initially closed."
+				},
+				{
+					"id": "reachable_garden_rocks_block_capsules",
+					"passed": true,
+					"detail": "Actual capsule sweep against one corner rock cluster in each generated court."
+				}
+			]
+		},
+		{
+			"id": "earned_rewards_and_safe_practice",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "encounter_0_starts_once",
+					"passed": true,
+					"detail": "ActivateRoom staging, actual ward interaction spawned 1 threats; repeated E leaves 1."
+				},
+				{
+					"id": "encounter_0_clear",
+					"passed": true,
+					"detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+				},
+				{
+					"id": "earned_Mirror_stays_in_room",
+					"passed": true,
+					"detail": "Clear, ward, actual choice/claim: one installation, retained pattern, same room, practice instruction and next gate opened."
+				},
+				{
+					"id": "Mirror_practice_is_safe",
+					"passed": true,
+					"detail": "2 actual practice targets survive lethal contact; RoomId=-1; no kill/clear progression."
+				},
+				{
+					"id": "encounter_1_starts_once",
+					"passed": true,
+					"detail": "ActivateRoom staging, actual ward interaction spawned 3 threats; repeated E leaves 3."
+				},
+				{
+					"id": "encounter_1_clear",
+					"passed": true,
+					"detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+				},
+				{
+					"id": "earned_Frost_stays_in_room",
+					"passed": true,
+					"detail": "Clear, ward, actual choice/claim: one installation, retained pattern, same room, practice instruction and next gate opened."
+				},
+				{
+					"id": "Frost_practice_is_safe",
+					"passed": true,
+					"detail": "2 actual practice targets survive lethal contact; RoomId=-1; no kill/clear progression."
+				}
+			]
+		},
+		{
+			"id": "checkpoint_resume",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "save_with_piece_deployed",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "resume_restores_earned_build_at_connected_room_entry",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "crc_checkpoint_fallback",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "corrupt_latest_loads_previous_earned_checkpoint",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "completion_death_and_reset",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "encounter_2_starts_once",
+					"passed": true,
+					"detail": "ActivateRoom staging, actual ward interaction spawned 2 threats; repeated E leaves 2."
+				},
+				{
+					"id": "encounter_2_clear",
+					"passed": true,
+					"detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+				},
+				{
+					"id": "final_clear_allows_return_before_results",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "victory_is_inactive_saved_attempt",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "same_seed_retry_retains_patterns_resets_pieces",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "death_saves_inactive_attempt",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "death_retry_restores_usable_six_piece_shield",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "reset_ownership",
+					"passed": true,
+					"detail": "held=6 selected=0 deployed=0 rebuilding=0 unique flight actors=0"
+				}
+			]
+		}
+	],
+	"not_run": "Ordinary inputs, graphics/audio/feel, performance and an unstaged full journey."
+}

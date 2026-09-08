@@ -1,4 +1,14 @@
-# Current segmented shield QA
+# Current folding shield/combat-feel QA
+
+0.3.1-combat1 final Shipping binary independently passed **19 scenario groups /67 assertions /0 failures** in exactly one packaged suite execution. [Report](evidence/combat-feel-checks.json), [build identity and attempt record](evidence/combat-feel-build.json). QA observed a37.54cm folded socket span,49.64cm expanded span and return to folded; five-piece fixture damage168.5 versus full-six468.9; a single80-damage neighboring burst with a covered neighbor untouched; target hits from275cm, a stronger third strike, actual50cm open step and collision-limited wall step. Route coverage includes34 floor probes and sampled solid rocks in all three courts.
+
+Independent review caught disabled movement in the new step fixture and an inconsistent wall-distance assertion. Integration corrected the fixture before the single packaged run; no scenario was weakened to hide a production failure. Additional loop-stop assertion waits for fade completion. NullRHI/nosound cannot establish audio playback: the separate rendered CSV records actual component start/stop and full-charge state.
+
+Root inspected final rendered idle, hinge transition, expanded guard, full release and scene. The first of two capture passes prompted further resting-pose clearance and removal of a fixture-only central E prompt. Final capture uses safe practice and artificial positions/damage; it is not an ordinary run. Engine mix:35.947s, peak0.2271, zero full-scale samples; selected full release averages8.4dB above the partial window. These are signal observations; no listening-quality claim. Native Windows title/start, F strike/cooldown, Tab instructions and save/exit worked on the exact final binary in an isolated profile.
+
+Known limits: no held OS-input/full normal playthrough, performance benchmark, completion-time measurement, exhaustive upgrade combinations or positive fun claim. Enemy/detail quality and overall environment remain substantially below B. Owner rejects a ruins-kit purchase as the general graphics solution; the newly proposed guided AI/Blender creation pipeline has no model-generation or Unreal trial evidence yet. Earlier records follow as history.
+
+# Historical segmented shield QA
 
 0.3.0-segments1 replaces the whole-disc study as the active experiment. The packaged staged runner covers 16 scenarios. [Current result](evidence/segmented-shield-checks.json) and [exact build/execution record](evidence/segmented-shield-build.json) are authoritative for the delivered package. Five packaged executions occurred as renderer inspection prompted camera/HUD/forearm and practice-placement fixes; all passed 16/0. This repetition is recorded with its purpose and the final hash.
 

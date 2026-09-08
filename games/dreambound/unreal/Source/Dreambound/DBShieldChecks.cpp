@@ -7,6 +7,8 @@
 #include "Camera/CameraComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
 #include "Dom/JsonObject.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
@@ -302,7 +304,7 @@ bool ADBShieldCheckRunner::CheckRouteGeometry()
 void ADBShieldCheckRunner::DestroyFixtures()
 {
     for (AActor* Actor : FixtureActors) if (IsValid(Actor)) Actor->Destroy();
-    FixtureActors.Reset(); Target = nullptr; OtherTarget = nullptr; Cover = nullptr;
+    FixtureActors.Reset(); Target = nullptr; OtherTarget = nullptr; BlockedBlastTarget = nullptr; Cover = nullptr;
 }
 
 void ADBShieldCheckRunner::Tick(float DeltaSeconds)
@@ -320,9 +322,9 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         Scenario = TEXT("allocation_and_retained_guard");
         Target->Destroy(); Target = nullptr; Player->PressFire(); Go(EStep::HalfCharge); break;
     case EStep::HalfCharge:
-        if (PhaseAge < .52f) break;
+        if (PhaseAge < Player->GetSelectionHoldTime(3) + .02f) break;
         Check(Player->GetSelectedPieceCount() == 3 && Player->GetAttachedPieceCount() == 6 && !Player->bGuarding,
-            TEXT("hold_selects_three"), FString::Printf(TEXT("Ordinary hold observed %.4fs; expected thresholds .22/.36/.50."), PhaseAge));
+            TEXT("hold_selects_three"), FString::Printf(TEXT("Ordinary hold observed %.4fs; third-piece threshold from charge tuning."), PhaseAge));
         Player->ReleaseFire();
         Check(Player->GetDeployedPieceCount() == 3 && Player->GetAttachedPieceCount() == 3 && Player->GetSelectedPieceCount() == 0,
             TEXT("release_launches_selected_three"));
@@ -377,7 +379,7 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         if (PhaseAge < .24f) break;
         Player->PressFire(); Player->RecallShield(); Go(EStep::CatchDuringCharge); break;
     case EStep::CatchDuringCharge:
-        if (PhaseAge < .52f) break;
+        if (PhaseAge < Player->GetSelectionHoldTime(3) + .02f) break;
         Check(Player->GetPieceState(CaughtPiece) == EDBShieldPieceState::Attached && Player->GetSelectedPieceCount() == 3,
             TEXT("catch_during_hold_docks_unselected"), TEXT("One physical return docks during a second hold; original three lit pieces remain selected."));
         Player->ReleaseFire();
@@ -424,7 +426,7 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         Aim((Target->GetActorLocation() - Player->ViewCamera->GetComponentLocation()).Rotation());
         TargetBefore = Target->Health; Player->PressFire(); Go(EStep::EliteCharge); break;
     case EStep::EliteCharge:
-        if (PhaseAge < .52f) break;
+        if (PhaseAge < Player->GetSelectionHoldTime(3) + .02f) break;
         Player->ReleaseFire(); Go(EStep::EliteContact); break;
     case EStep::EliteContact:
         if (PhaseAge < .8f) break;
@@ -447,7 +449,92 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         if (Player->GetDeployedPieceCount() > 0 && PhaseAge < 2.f) break;
         Check(Player->GetAttachedPieceCount() == 6 && OutwardHealth - Target->Health > TargetBefore - OutwardHealth
             && Mode->EventText.Contains(TEXT("SHATTER")), TEXT("physical_return_consumes_chill_and_adds_shatter_damage"));
-        Target->Destroy(); ResetPlayer(Origin + FVector(-900, 0, 93)); Go(EStep::Storm); break;
+        Target->Destroy(); ResetPlayer(Origin + FVector(-900, 0, 93)); Go(EStep::FoldIdle); break;
+    case EStep::FoldIdle:
+        if (PhaseAge < .6f) break;
+        Scenario = TEXT("folding_shield_pose");
+        Check(Player->GetShieldExpansion() < .03f && !Player->bGuarding, TEXT("idle_is_collapsed"));
+        FoldedSpan = 0.f;
+        for (int32 I=0;I<6;++I) for (int32 J=I+1;J<6;++J)
+            FoldedSpan=FMath::Max(FoldedSpan,float(FVector::Dist(Player->GetPieceCatchLocation(I),Player->GetPieceCatchLocation(J))));
+        Player->PressGuard(); Go(EStep::FoldGuard); break;
+    case EStep::FoldGuard:
+    {
+        if (PhaseAge < .6f) break;
+        float ExpandedSpan=0.f;
+        for (int32 I=0;I<6;++I) for (int32 J=I+1;J<6;++J)
+            ExpandedSpan=FMath::Max(ExpandedSpan,float(FVector::Dist(Player->GetPieceCatchLocation(I),Player->GetPieceCatchLocation(J))));
+        Check(Player->bGuarding && Player->GetShieldExpansion()>.97f && ExpandedSpan>FoldedSpan*1.25f,
+            TEXT("guard_separates_physical_piece_sockets"),FString::Printf(TEXT("folded span %.2fcm, expanded %.2fcm"),FoldedSpan,ExpandedSpan));
+        Player->ReleaseGuard(); Go(EStep::FoldReturn); break;
+    }
+    case EStep::FoldReturn:
+        if (PhaseAge < .6f) break;
+        Check(Player->GetShieldExpansion()<.03f && !Player->bGuarding,TEXT("release_refolds"));
+        Target=MakeTarget(Origin+FVector(-260,0,110));TargetBefore=Target->Health;
+        Aim((Target->GetActorLocation()+FVector(0,0,35)-Player->GetPawnViewLocation()).Rotation());
+        Scenario=TEXT("full_charge_payoff");Player->PressFire();Go(EStep::FiveCharge);break;
+    case EStep::FiveCharge:
+        if(PhaseAge<Player->GetSelectionHoldTime(5)+.02f)break;
+        Check(Player->GetSelectedPieceCount()==5&&!Player->IsFullChargeReady(),TEXT("five_pieces_are_not_full_power"));
+        Player->ReleaseFire();Go(EStep::FiveContact);break;
+    case EStep::FiveContact:
+        if(PhaseAge<.7f)break;
+        PartialVolleyDamage=TargetBefore-Target->Health;
+        Check(PartialVolleyDamage>0.f&&Player->GetAttachedPieceCount()==1,TEXT("partial_volley_hits_and_keeps_armor"));
+        ResetPlayer(Origin+FVector(-900,0,93));Target->Health=TargetBefore;
+        OtherTarget=MakeTarget(Origin+FVector(-260,220,110));
+        BlockedBlastTarget=MakeTarget(Origin+FVector(-260,-220,110));
+        Cover=MakeBox(Origin+FVector(-260,-110,140),FVector(150,15,140));
+        Aim((Target->GetActorLocation()+FVector(0,0,35)-Player->GetPawnViewLocation()).Rotation());
+        Player->PressFire();Go(EStep::FullCharge);break;
+    case EStep::FullCharge:
+    {
+        if(PhaseAge<Player->GetFullChargeHoldTime()+.03f)break;
+        Check(Player->IsFullChargeReady()&&PhaseAge>=1.7f,TEXT("full_power_requires_long_hold"));
+        Player->ReleaseFire();bool AllEmpowered=true;TSet<uint32> Volleys;
+        for(int32 I=0;I<6;++I){auto* F=Player->GetPieceFlight(I);AllEmpowered&=F&&F->IsFullyCharged();if(F)Volleys.Add(F->GetVolleyId());}
+        Check(AllEmpowered&&Volleys.Num()==1&&Player->GetAttachedPieceCount()==0,TEXT("one_full_volley_commits_all_armor"));
+        Go(EStep::FullContact);break;
+    }
+    case EStep::FullContact:
+    {
+        if(PhaseAge<.7f)break;
+        Check(!Player->IsChargeLoopPlaying(),TEXT("release_stops_charge_component"),TEXT("Lifecycle state only; NullRHI/nosound does not assess sound."));
+        const float FullDamage=TargetBefore-Target->Health;
+        Check(FullDamage/6.f>PartialVolleyDamage/5.f*1.5f,TEXT("full_release_more_than_piece_count_bonus"),
+            FString::Printf(TEXT("five-piece damage %.1f, full six %.1f; minimum 1.5x damage per piece"),PartialVolleyDamage,FullDamage));
+        Check(FMath::IsNearlyEqual(OtherTarget->MaxHealth-OtherTarget->Health,80.f,.1f),TEXT("one_shared_blast_hits_neighbor_once"));
+        Check(BlockedBlastTarget->Health==BlockedBlastTarget->MaxHealth,TEXT("blast_respects_cover"));
+        OtherTarget->Destroy();BlockedBlastTarget->Destroy();Cover->Destroy();
+        Target->Destroy();ResetPlayer(Origin+FVector(-900,0,93));Target=MakeTarget(Origin+FVector(-625,0,110));
+        Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+        Aim((Target->GetActorLocation()+FVector(0,0,35)-Player->GetPawnViewLocation()).Rotation());
+        TargetBefore=Target->Health;Scenario=TEXT("reachable_melee_chain");Player->PressFire();Player->ReleaseFire();Go(EStep::MeleeFirst);break;
+    }
+    case EStep::MeleeFirst:
+        if(PhaseAge<.6f)break;
+        FirstMeleeDamage=TargetBefore-Target->Health;
+        Check(FirstMeleeDamage>0,TEXT("tap_reaches_enemy_275cm_away"));
+        Check(Player->GetActorLocation().X>Origin.X-875.f&&Player->GetActorLocation().X<Origin.X-825.f,
+            TEXT("unobstructed_melee_actually_steps_forward"),FString::Printf(TEXT("forward displacement %.1fcm"),Player->GetActorLocation().X-Origin.X+900.f));
+        PlacePlayer(Origin+FVector(-900,0,93));TargetBefore=Target->Health;Player->PressFire();Player->ReleaseFire();Go(EStep::MeleeSecond);break;
+    case EStep::MeleeSecond:
+        if(PhaseAge<.6f)break;
+        SecondMeleeDamage=TargetBefore-Target->Health;
+        Check(SecondMeleeDamage>0,TEXT("second_tap_connects"));
+        PlacePlayer(Origin+FVector(-900,0,93));TargetBefore=Target->Health;Player->PressFire();Player->ReleaseFire();Go(EStep::MeleeThird);break;
+    case EStep::MeleeThird:
+        if(PhaseAge<.8f)break;
+        Check(TargetBefore-Target->Health>FMath::Max(FirstMeleeDamage,SecondMeleeDamage)*1.2f,TEXT("third_tap_has_stronger_payoff"));
+        ResetPlayer(Origin+FVector(-900,0,93));TargetBefore=Target->Health;
+        Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+        Cover=MakeBox(Origin+FVector(-835,0,140),FVector(15,200,140));
+        Player->PressFire();Player->ReleaseFire();Go(EStep::MeleeCover);break;
+    case EStep::MeleeCover:
+        if(PhaseAge<.6f)break;
+        Check(Target->Health==TargetBefore&&Player->GetActorLocation().X<Origin.X-875.f&&Player->GetActorLocation().X>Origin.X-899.f,TEXT("melee_and_forward_step_respect_wall"));
+        Target->Destroy();Cover->Destroy();ResetPlayer(Origin+FVector(-900,0,93));Go(EStep::Storm);break;
     case EStep::Storm:
     {
         Scenario = TEXT("finite_lethal_storm_chain");
@@ -480,7 +567,19 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         for (int32 I = 1; I <= 3 && !Changed; ++I) { Mode->Seed = OriginalSeed + I; Mode->BuildWorld(); Changed = OriginalLayout != Mode->LayoutSignature; }
         Check(Changed, TEXT("alternate_seed_changes_layout"), TEXT("Up to three nearby seeds sampled; not exhaustive procedural validation."));
         Mode->Seed = OriginalSeed; Mode->StartingPattern = NAME_None; Mode->LearnedPatterns.Reset(); Mode->StartNewRun(true);
-        Player->GetCharacterMovement()->DisableMovement(); CheckRouteGeometry(); Go(EStep::FirstEncounter); break;
+        Player->GetCharacterMovement()->DisableMovement(); CheckRouteGeometry();
+        {
+            bool SolidRocks=true;
+            for(const auto& R:Mode->Rooms){
+                FHitResult Hit;FCollisionQueryParams P(SCENE_QUERY_STAT(DBGardenRock),false,Player);
+                const bool HitRock=GetWorld()->SweepSingleByChannel(Hit,R.Center+FVector(940,1370,110),R.Center+FVector(1490,1370,110),
+                    FQuat::Identity,ECC_Visibility,FCollisionShape::MakeCapsule(32.f,88.f),P);
+                const auto* MeshComponent=Cast<UStaticMeshComponent>(Hit.GetComponent());
+                SolidRocks&=HitRock&&MeshComponent&&MeshComponent->GetStaticMesh()&&MeshComponent->GetStaticMesh()->GetFName()==FName(TEXT("SM_GardenRockCluster"));
+            }
+            Check(SolidRocks,TEXT("reachable_garden_rocks_block_capsules"),TEXT("Actual capsule sweep against one corner rock cluster in each generated court."));
+        }
+        Go(EStep::FirstEncounter); break;
     }
     case EStep::FirstEncounter:
         Scenario = TEXT("earned_rewards_and_safe_practice");
@@ -588,7 +687,7 @@ void ADBShieldCheckRunner::Finish(bool bAbort)
 void ADBShieldCheckRunner::WriteResult(bool bComplete) const
 {
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
-    Report->SetStringField(TEXT("suite"), TEXT("segmented-shield-connected-route-v1"));
+    Report->SetStringField(TEXT("suite"), TEXT("folding-shield-combat-route-v2"));
     Report->SetStringField(TEXT("scope"), TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
     Report->SetStringField(TEXT("engine"), FEngineVersion::Current().ToString());
     Report->SetStringField(TEXT("executable"), FPlatformProcess::ExecutableName());
@@ -635,7 +734,7 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     FJsonSerializer::Serialize(Report, Writer);
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("QA");
     IFileManager::Get().MakeDirectory(*Directory, true);
-    const FString Path = Directory / TEXT("segmented-shield-checks.json");
+    const FString Path = Directory / TEXT("combat-feel-checks.json");
     const bool bWritten = FFileHelper::SaveStringToFile(Json, *Path);
     UE_LOG(LogTemp, Display, TEXT("DB_SHIELD_QA_RESULT complete=%d aborted=%d passed=%d failed=%d written=%d path=%s"),
         bComplete, bAborted, Passed, Failed, bWritten, *Path);

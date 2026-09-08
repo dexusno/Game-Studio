@@ -47,29 +47,29 @@ void ADBHUD::DrawHUD(){
    Panel(62,H-115,324,7,FLinearColor(0.2,0.13,0.12));Panel(62,H-115,324*FMath::Clamp(P->Health/P->MaxHealth,0.f,1.f),7,FLinearColor(0.77,0.4,0.31));
    Label(FString::Printf(TEXT("%d PIECES AVAILABLE TO BLOCK"),P->GetAttachedPieceCount()),62,H-89,18,Mint);
    FString E=StaticEnum<EDBElement>()->GetNameStringByValue(int64(P->CurrentElement)).ToUpper();
-   Panel(1290,H-228,575,192,FLinearColor(.02f,.035f,.04f,.9f));
-   Label(P->GetSelectedPieceCount()>0?FString::Printf(TEXT("RELEASE LMB / LAUNCH %d"),P->GetSelectedPieceCount()):P->GetShieldStateLabel(),1314,H-211,22,P->GetSelectedPieceCount()>0?Gold:Mint);
+   Panel(1400,H-201,465,165,FLinearColor(.02f,.035f,.04f,.9f));
+   Label(P->IsFullChargeReady()?TEXT("FULL CHARGE / RELEASE!"):P->GetSelectedPieceCount()>0?FString::Printf(TEXT("RELEASE / %d PIECES"),P->GetSelectedPieceCount()):P->bGuarding?TEXT("SHIELD / EXPANDED"):TEXT("WEAPON / FOLDED"),1420,H-185,20,P->GetSelectedPieceCount()>0?Gold:Mint);
+   if(P->GetChargeHoldTime()>0){Panel(1420,H-155,410,5,FLinearColor(.1,.15,.17));Panel(1420,H-155,410*P->GetChargeProgress(),5,Gold);}
    for(int32 I=0;I<P->GetShieldPieceCount();++I){
-    const auto State=P->GetPieceState(I);const float X=1315+I*62;
+    const auto State=P->GetPieceState(I);const float X=1420+I*62;
     FLinearColor C=State==EDBShieldPieceState::Selected?Gold:State==EDBShieldPieceState::Attached?Mint:State==EDBShieldPieceState::Regenerating?FLinearColor(.22,.3,.36):FLinearColor(.54,.63,.83);
-    Panel(X,H-170,48,33,FLinearColor(.06,.09,.11));
-    if(State==EDBShieldPieceState::Regenerating)Panel(X,H-170,48*P->GetPieceRegenerationProgress(I),33,C);
-    else Panel(X,H-170,48,33,C);
-    Label(FString::FromInt(I+1),X+17,H-167,21,State==EDBShieldPieceState::Regenerating?Ivory:FLinearColor(.015,.03,.04));
-    Label(State==EDBShieldPieceState::Regenerating?TEXT("REGEN"):State==EDBShieldPieceState::Returning?TEXT("BACK"):State==EDBShieldPieceState::Attached?TEXT("HELD"):State==EDBShieldPieceState::Selected?TEXT("LIT"):TEXT("AWAY"),X,H-129,12,C);
+    Panel(X,H-140,48,28,FLinearColor(.06,.09,.11));
+    if(State==EDBShieldPieceState::Regenerating)Panel(X,H-140,48*P->GetPieceRegenerationProgress(I),28,C);
+    else Panel(X,H-140,48,28,C);
+    Label(FString::FromInt(I+1),X+17,H-139,20,State==EDBShieldPieceState::Regenerating?Ivory:FLinearColor(.015,.03,.04));
+    Label(State==EDBShieldPieceState::Regenerating?TEXT("REGEN"):State==EDBShieldPieceState::Returning?TEXT("BACK"):State==EDBShieldPieceState::Attached?TEXT("HELD"):State==EDBShieldPieceState::Selected?TEXT("LIT"):TEXT("AWAY"),X,H-106,12,C);
    }
-   Label(FString::Printf(TEXT("%d held / %d away / %d rebuilding"),P->GetAttachedPieceCount(),P->GetDeployedPieceCount(),P->GetRegeneratingPieceCount()),1314,H-101,18,Ivory);
+   Label(FString::Printf(TEXT("%d held / %d away / %d rebuilding"),P->GetAttachedPieceCount(),P->GetDeployedPieceCount(),P->GetRegeneratingPieceCount()),1420,H-84,16,Ivory);
    const float Wait=FMath::Max(P->SpecialCooldown,P->AttackRecovery);
-   Label((P->HasUpgrade("Ram")?FString(TEXT("F / RAM")):FString(TEXT("F / HEAVY BASH")))+(Wait>0?FString::Printf(TEXT(" / %.1fs"),Wait):TEXT(" / READY")),1314,H-72,18,Wait>0?Gold:Mint);
-   if(P->StoredShots>0||P->HasUpgrade("Mirror"))Label(FString::Printf(TEXT("MIRROR / %d charges"),P->StoredShots),1314,H-260,20,Gold);
-   if(P->GetTotalAnchorIntegrity()>0)Label(FString::Printf(TEXT("ANCHOR COVER / %.0f integrity"),P->GetTotalAnchorIntegrity()),1314,H-292,19,Mint);
+   Label((P->HasUpgrade("Ram")?FString(TEXT("F / RAM")):FString(TEXT("F / HEAVY BASH")))+(Wait>0?FString::Printf(TEXT(" / %.1fs"),Wait):TEXT(" / READY")),1420,H-61,17,Wait>0?Gold:Mint);
+   if(P->StoredShots>0||P->HasUpgrade("Mirror"))Label(FString::Printf(TEXT("MIRROR / %d charges"),P->StoredShots),1420,H-228,20,Gold);
+   if(P->GetTotalAnchorIntegrity()>0)Label(FString::Printf(TEXT("ANCHOR COVER / %.0f integrity"),P->GetTotalAnchorIntegrity()),1420,H-257,19,Mint);
    Label(P->GetElementLabel()+(P->CurrentElement==EDBElement::Neutral?TEXT(" / R CYCLES CORES"):TEXT(" / ON HIT")),62,H-58,17,P->CurrentElement==EDBElement::Frost?FLinearColor(.4,.85,1):P->CurrentElement==EDBElement::Ember?FLinearColor(1,.5,.2):P->CurrentElement==EDBElement::Storm?FLinearColor(.8,.5,1):Mint);
    if(P->HitMarkerTime>0){float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;DrawLine(X-6,Y-6,X+6,Y+6,Gold,2);DrawLine(X-6,Y+6,X+6,Y-6,Gold,2);}
    if(P->HurtFlashTime>0)Panel(0,0,1920,H,FLinearColor(0.8f,0.08f,0.035f,FMath::Min(0.16f,P->HurtFlashTime*.45f)));
-   Panel(590,H-100,670,100,FLinearColor(.02,.035,.04,.82));
-   Label(TEXT("Tap LMB / strike    Hold / select pieces"),610,H-86,19,Ivory);
-   Label(TEXT("Q / recall    F / heavy bash    RMB / guard"),610,H-59,19,Ivory);
-   Label(TEXT("Shift / dash    Tab / abilities    Esc / pause"),610,H-32,17,Gold);
+   Panel(530,H-72,820,68,FLinearColor(.02,.035,.04,.65));
+   Label(TEXT("LMB tap / strike   Hold 1.8s / full charge   RMB / unfold & block"),550,H-62,18,Ivory);
+   Label(TEXT("Q / recall    F / heavy    Shift / dash    Tab / abilities    Esc / pause"),550,H-34,17,Gold);
    if(!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&!G->bWon&&!G->bDefeated) {
     float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;
     FLinearColor C=P->IsShieldAway()?Gold:P->bGuarding?Mint:Ivory;
@@ -126,10 +126,10 @@ void ADBHUD::DrawHUD(){
  }
  if(G->bTitle){
   Panel(0,0,920,H,FLinearColor(0.012,0.024,0.028,0.92));
-  Label(G->bRecoverySlice?TEXT("THE SHIELD / SEGMENTED PLAYTEST"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
+  Label(G->bRecoverySlice?TEXT("THE SHIELD / COMBAT PLAYTEST"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
   Label(TEXT("BETWEEN"),108,153,79,Ivory);Label(TEXT("WORLDS"),108,230,79,Ivory);
   Label(G->bRecoverySlice?TEXT("Your defense becomes your attack."):TEXT("The places you dream about are real."),115,343,29,Ivory);
-  Label(G->bRecoverySlice?TEXT("Choose what to throw. Keep what you need."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
+  Label(G->bRecoverySlice?TEXT("Fold to strike. Unfold to defend. Commit to power."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
   Button("Resume",G->bCanResume?TEXT("Resume expedition"):G->bRecoverySlice?TEXT("Enter the courtyard"):TEXT("Begin expedition"),115,475,625,70,true);
   if(G->bCanResume)Button("New",TEXT("New expedition"),115,560,625,65);
   float PatternY=G->bCanResume?645:560;
@@ -166,7 +166,7 @@ void ADBHUD::DrawHUD(){
  else if(G->bPaused||G->bShowingBuild){
   Panel(0,0,1920,H,FLinearColor(0.012,0.025,0.03,0.93));
   Label(G->bShowingBuild?TEXT("YOUR ABILITIES"):TEXT("PAUSED"),190,90,52,Ivory);
-  Label(TEXT("Light pieces with LMB. Release to launch. Q recalls. F bashes."),190,163,24,Mint);
+  Label(TEXT("LMB taps chain strikes. Hold 1.8s for full power. RMB unfolds to block."),190,163,24,Mint);
   if(G->bShowingBuild){
    TArray<FName> Keys;if(P)P->Upgrades.GetKeys(Keys);Keys.Sort(FNameLexicalLess());
    const int32 Pages=FMath::Max(1,FMath::DivideAndRoundUp(Keys.Num(),4));EquipmentPage=FMath::Clamp(EquipmentPage,0,Pages-1);

@@ -1,0 +1,220 @@
+{
+  "tool": "5.2.1 LTS",
+  "kind": "Blender FBX roundtrip; not Unreal or playtest evidence",
+  "assets": {
+    "SM_GardenCliffBank": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -494.5427551269531,
+        -262.97784423828125,
+        -7.0
+      ],
+      "bounds_max_cm": [
+        451.3017272949219,
+        275.7699890136719,
+        888.9055786132812
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss",
+        "M_Root"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 22,
+      "minimum_component_volume_cm3": 1112.3874421144615,
+      "sha256": "8e598c1ec698c2501e86c49f3ae13f5235c79eb3ebc513cdabb0b0b061055bd4"
+    },
+    "SM_GardenButtress": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -123.50000762939453,
+        -112.00000762939453,
+        0.0
+      ],
+      "bounds_max_cm": [
+        123.50000762939453,
+        112.00000762939453,
+        672.4461669921875
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss",
+        "M_Mortar"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 19,
+      "minimum_component_volume_cm3": 68.48897775014575,
+      "sha256": "7ce925b6d2f6653aa9fcbff8dbb4753aaf9b3f38482e1e3140734bab00cb9e7e"
+    },
+    "SM_GardenRockCluster": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -240.97796630859375,
+        -157.8334503173828,
+        -6.0
+      ],
+      "bounds_max_cm": [
+        253.69680786132812,
+        203.9714813232422,
+        224.18267822265625
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight",
+        "M_Moss"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 18,
+      "minimum_component_volume_cm3": 128.02511944373373,
+      "sha256": "45c40cf5053cfbe53dd250fab2ff7896805861a49a459e33abd2732c9063f585"
+    },
+    "SM_GardenUnderstory": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -104.12244415283203,
+        -103.96381378173828,
+        -0.18144740164279938
+      ],
+      "bounds_max_cm": [
+        119.03959655761719,
+        93.01411437988281,
+        78.39730834960938
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Root",
+        "M_Leaf",
+        "M_LeafLight",
+        "M_LeafGold",
+        "M_RootDark"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 332,
+      "minimum_component_volume_cm3": 1.7572453816731652,
+      "sha256": "bef646d2c4c0f7b44e8e9c8eb3554523ecb70b1fa7377921d84b46f39a12de47"
+    },
+    "SM_GardenGrassDrift": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -186.49496459960938,
+        -106.11238861083984,
+        0.4465080201625824
+      ],
+      "bounds_max_cm": [
+        200.64015197753906,
+        117.97352600097656,
+        44.85685729980469
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_LeafLight",
+        "M_LeafGold"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 286,
+      "minimum_component_volume_cm3": 2.8068436483541355,
+      "sha256": "3f0660446b936642fc06ce5088e4d3b00141cdc0d96e1450e994628a90dd8f5a"
+    },
+    "SM_GardenBough": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -450.45208740234375,
+        -373.3337707519531,
+        -89.33316040039062
+      ],
+      "bounds_max_cm": [
+        550.936279296875,
+        318.38018798828125,
+        269.27197265625
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Root",
+        "M_Leaf",
+        "M_LeafLight",
+        "M_LeafGold"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 945,
+      "minimum_component_volume_cm3": 116.61031262079618,
+      "sha256": "4ec5d4fff8a9fbd22b046716137f47f7584086866901d0e828c16b6bae868ca9"
+    }
+  }
+}

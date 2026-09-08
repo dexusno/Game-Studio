@@ -1,6 +1,6 @@
 # Segmented shield: selected direction and next experiment
 
-Updated 2026-09-08. Owner direction, now implemented as the six-piece 0.3.0-segments1 experiment; STATUS.md records verification. Exact tuning remains provisional. This supersedes that build's all-or-nothing deployment and global loss of guarding; it does not restore Sixfold's mandatory shoot-all/recall loop.
+Updated 2026-09-08. Owner direction, now implemented as the folding six-piece 0.3.1-combat1 experiment; STATUS.md records verification. Exact tuning remains provisional. This supersedes that build's all-or-nothing deployment and global loss of guarding; it does not restore Sixfold's mandatory shoot-all/recall loop.
 
 ## What Klaus selected
 
@@ -11,7 +11,9 @@ Updated 2026-09-08. Owner direction, now implemented as the six-piece 0.3.0-segm
 
 ## Implemented baseline to test
 
-The experiment uses six pieces, solely as a readable starting count. One ordinary successful block spends one piece; more durable pieces are an alternative to test. Current tuning: 0.22s initial selection, 0.14s per next piece, 0.22s throw recovery, 3s independent regeneration. Q recalls and F bashes/rushes. These are playtest choices, not final balance.
+Klaus selected a collapsed weapon form that unfolds into the broad shield while blocking. Independent piece transforms animate that transition and provide the current docking sockets. A longer full charge earns a stronger volley and one shared impact burst; early release preserves the partial-attack tradeoff. Full power requires all six selected pieces. Close combat uses alternating sweeps and a stronger third strike, with a short forward step constrained by collision. These tuning choices still require owner playtesting.
+
+The experiment uses six pieces, solely as a readable starting count. One ordinary successful block spends one piece; more durable pieces are an alternative to test. Current tuning: 0.22s initial selection, 0.316s per next piece (1.80s for all six), 0.22s throw recovery, 3s independent regeneration. Q recalls and F bashes/rushes. These are playtest choices, not final balance.
 
 The lit count is literal: three lit means three launch, even when the shield is incomplete. Caught or regenerated pieces arrive unlit. Release uses the pieces actually present and lit at that moment; a piece lost while selecting cannot be launched. A second partial throw remains available while earlier pieces are away.
 

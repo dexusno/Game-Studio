@@ -1,0 +1,150 @@
+{
+  "fixture": "36-second safe practice; artificial positions and injected block; no ordinary full run",
+  "capture_summary": "Scripted moving renderer/audio capture. No ordinary-input, complete-run or fun claim.\nframes=334 seconds=36.036 engine_fps_cap=60\nScreenshot requests stall rendering; this is not a performance measurement.\n",
+  "frames": 334,
+  "audio": {
+    "channels": 2,
+    "sample_rate": 48000,
+    "seconds": 35.946666666666665,
+    "peak_amplitude": 0.227081298828125,
+    "full_scale_samples": 0,
+    "peak_dbfs": -12.876,
+    "rms_dbfs": -39.833,
+    "windows": {
+      "partial_release": {
+        "seconds": [
+          5.85,
+          6.85
+        ],
+        "peak_dbfs": -19.886,
+        "rms_dbfs": -38.924
+      },
+      "full_release": {
+        "seconds": [
+          12.3,
+          13.4
+        ],
+        "peak_dbfs": -15.627,
+        "rms_dbfs": -30.501
+      },
+      "charge": {
+        "seconds": [
+          11,
+          11.7
+        ],
+        "peak_dbfs": -23.323,
+        "rms_dbfs": -35.713
+      },
+      "heavy": {
+        "seconds": [
+          20,
+          21
+        ],
+        "peak_dbfs": -12.886,
+        "rms_dbfs": -34.023
+      },
+      "dash": {
+        "seconds": [
+          22,
+          22.5
+        ],
+        "peak_dbfs": -32.001,
+        "rms_dbfs": -47.521
+      }
+    }
+  },
+  "state_transitions": [
+    {
+      "audio_seconds": "0.021333",
+      "shield_expansion": "0.000",
+      "selected": "0",
+      "full_charge": "0",
+      "charge_audio": "0"
+    },
+    {
+      "audio_seconds": "5.248000",
+      "shield_expansion": "0.000",
+      "selected": "1",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "5.568000",
+      "shield_expansion": "0.000",
+      "selected": "2",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "5.888000",
+      "shield_expansion": "0.000",
+      "selected": "0",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "6.122667",
+      "shield_expansion": "0.000",
+      "selected": "0",
+      "full_charge": "0",
+      "charge_audio": "0"
+    },
+    {
+      "audio_seconds": "10.261333",
+      "shield_expansion": "0.000",
+      "selected": "1",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "10.602667",
+      "shield_expansion": "0.000",
+      "selected": "2",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "10.816000",
+      "shield_expansion": "0.000",
+      "selected": "3",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "11.157333",
+      "shield_expansion": "0.000",
+      "selected": "4",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "11.498667",
+      "shield_expansion": "0.000",
+      "selected": "5",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "11.818667",
+      "shield_expansion": "0.000",
+      "selected": "6",
+      "full_charge": "1",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "12.373333",
+      "shield_expansion": "0.000",
+      "selected": "0",
+      "full_charge": "0",
+      "charge_audio": "1"
+    },
+    {
+      "audio_seconds": "12.480000",
+      "shield_expansion": "0.000",
+      "selected": "0",
+      "full_charge": "0",
+      "charge_audio": "0"
+    }
+  ],
+  "limits": "Source and engine mix levels are signal measurements, not listening or fun evidence. Frame readbacks prevent performance claims."
+}

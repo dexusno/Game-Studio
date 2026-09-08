@@ -1,6 +1,9 @@
-# Segmented shield playtest
+# Folding shield combat playtest
 
-Open `BuildOutput/SegmentedShield/Windows/Dreambound.exe`. This is the new six-piece experiment. The older whole-disc study remains in `BuildOutput/ShieldStudy`.
+The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
+
+
+Open `BuildOutput/CombatFeel/Windows/Dreambound.exe`. This is the folding six-piece combat experiment (0.3.1-combat1). The older whole-disc study remains in `BuildOutput/ShieldStudy`.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 
@@ -18,7 +21,7 @@ Approach the glowing ward stone and press **E**. Clear the first court, return t
 | Cycle owned elemental cores and kinetic | R |
 | Read current ability instructions / pause | Tab / Escape |
 
-Six pieces are the starting tuning. Selection begins after 0.22 seconds and lights another every 0.14 seconds. Charging lowers your guard; after the throw's brief recovery, the pieces you kept can protect you. Each ordinary frontal block spends one piece. Its own three-second rebuilding timer starts immediately, independently of other losses. The HUD shows each piece as held, lit, away, returning or rebuilding. You can still move and strike with the core at zero pieces.
+Six pieces are the starting tuning. Selection begins after 0.22 seconds and lights another every 0.316 seconds. Charging lowers your guard; after the throw's brief recovery, the pieces you kept can protect you. Each ordinary frontal block spends one piece. Its own three-second rebuilding timer starts immediately, independently of other losses. The HUD shows each piece as held, lit, away, returning or rebuilding. You can still move and strike with the core at zero pieces.
 
 Q recalls every surviving piece through space toward you. Reposition to make the return cross an enemy. A destroyed piece reconstructs instead of returning. The heavy sentinel can warn and raise a frontal interception: it destroys one incoming piece, then recovers. Delay, flank, close in or sacrifice one piece to consume that counter.
 
@@ -35,4 +38,4 @@ Acquiring a core activates it. R also cycles through kinetic; the lower-left HUD
 
 Learned patterns survive defeat. Select one as your starting attachment on later expeditions. Same-seed retry repeats the generated route; a new seed changes route and cover. The `DreamboundSegments` save profile is separate from previous prototypes. A resumed fight restarts from its entry checkpoint; a resumed claimed ward restores its reward practice. Losing focus pauses. Mouse sensitivity is adjustable in pause.
 
-This remains a mechanics playtest with one biome and a small modular kit. The environment has not reached art anchor B, and this is not the full game's content or duration. The key question is: **Why did you choose that many pieces, and did losing one change your next decision or merely make you wait?**
+This remains a mechanics playtest with one biome and a small modular kit. The environment has not reached art anchor B, and this is not the full game's content or duration. For this playtest, try the folded strikes, repeated melee taps, a partial throw and a fully charged release. Judge whether each action feels distinct and forceful while keeping enemies visible.

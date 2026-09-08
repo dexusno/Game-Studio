@@ -1,10 +1,48 @@
 # Art pipeline for the studio's higher ambition
 
+## Current direction: create art across procedural biomes — September 8
+
+Klaus rejects a ruins kit as the answer to the production problem. We need to create high-quality assets for distinct biomes under a common art direction, potentially using guided AI. This supersedes the kit-first recommendations below. Supporting libraries remain optional; no pack is selected for purchase. Actual output still falls well below B, and no new creation tool has yet proved a repeatable B-quality workflow here.
+
+**Trial recommendation: Rodin Gen-2.5 through its website, then Blender finishing and actual UE5.8 inspection.** This is based on documented controls, not an observed quality comparison. Its [official API](https://docs.hyper3d.ai/en/api-specification/rodin-gen2-5) supports direction-labeled reference views, faithful guidance, bounds conditioning and PBR output. These controls could preserve an approved design while producing useful sculpted detail; output topology, hidden surfaces and material quality still require inspection. Shield joints and moving parts must remain deliberately authored.
+
+[Tripo H3.1](https://developers.tripo3d.ai/en/models) is a second candidate: [multiview, PBR and editable parts](https://developers.tripo3d.ai/en/docs/generation-multiview-to-model/standard), with restrictions on combining those output modes. [Meshy 7](https://docs.meshy.ai/en/api/multi-image-to-3d) provides geometry/texture reference views, lighting removal and remeshing. Neither vendor's rigging claim proves correct deformation for our cyborg or unusual creatures. All sources were checked September 8, 2026; none has generated a model for this game.
+
+Rodin's [trial FAQ](https://hyper3d.ai/features/image-to-3d) advertises free credits, real model export and no card requirement. Root opened the site and observed Start Creating leads to login; actual account allowance, advanced controls and export remain unverified. No account or purchase was created. Its [pricing](https://hyper3d.ai/pricing?lang=en) advertises Creator at US$30/month and full API at Business US$120/month. [Terms](https://hyper3d.ai/legal/terms) still mention a two-month minimum, so do not promise a US$30 total paid trial. The FAQ/terms differ on free commercial use; treat a free export as evaluation until its attached license is established. Website trials do not require Business API. [Meshy](https://www.meshy.ai/pricing) lists Pro at US$20/month and CC BY 4.0 free output; multiview is paid. [Tripo commercial use](https://www.tripo3d.ai/help/privacy-policy/how-to-use-tripo-models-commercially) requires a paid plan. Prices are vendor observations, not local checkout commitments.
+
+### Repeatable creation and assembly
+
+1. Define each biome's large forms, medium details, material relationships and lighting within B. Roots, manufactured technology and crystal growth need different geometry families.
+2. Use dimensioned Blender blockouts and coherent reference views to guide source modeling. Image generation can develop design/surface references; check that every view describes the same object.
+3. Generate source geometry, then finish it in Blender: repair joins, openings and backsides; establish pivots/connectors, separate moving parts, UV/bake useful detail, fit collision and control complexity.
+4. Unify materials across the asset family. Blender is available now. [Substance Painter/Designer](https://www.adobe.com/products/substance3d/apps/designer.html) and [Sampler](https://experienceleague.adobe.com/en/docs/substance-3d-sampler/using/filters/tools/image-to-material) are complementary material tools if needed, not required first purchases.
+5. Build controlled variations with Blender Geometry Nodes and assemble accepted assets using seeded Unreal placement/PCG. Routes, floor support, doorways, sightlines, spawning and clearance constrain dressing. [Houdini](https://www.sidefx.com/products/houdini-engine/plug-ins/unreal-plug-in/) can later author/bake richer rules; its Unreal integration is not runtime Houdini in a shipped game.
+6. Judge the actual playable result in several layouts before expanding the family. A successful attractive prop is only the first step toward a coherent generated biome.
+
+### First concrete trial
+
+Create one two-metre root-wrapped stone waymarker with a recessed bronze plate in B's sculpted painterly style. It tests organic form, carving, material separation and exposed backside without introducing rigging. Modeling reference prompt: "One complete freestanding stone waymarker, approximately two metres tall, broad worn carved planes with designed edge chips, thick interwoven roots with readable gaps, a recessed weathered bronze plate, restrained moss in sheltered joints; tactile sculpted painterly game art, coherent construction on all sides, neutral diffuse studio light, isolated background, no environment or dramatic baked shadow. Preserve the form across front, back and side references."
+
+Proposed internal trial budget: up to three generations and 90 minutes of cleanup, recording actual credits/time. Inspect eight angles at 0.5m, 2m and 6m in Unreal under neutral and warm/cool lighting. Require a coherent backside, real recesses, no major fused roots or painted holes, sound UVs/normals and fitted collision. Start with 50k triangles, three material slots and 2K PBR for this prop; adjust with evidence. Only an acceptable in-engine asset justifies a second-biome trial. Klaus has not approved any new output.
+
+[Microsoft TRELLIS.2](https://github.com/microsoft/TRELLIS.2) is a local fallback candidate: upstream specifies Linux and at least 24GB NVIDIA VRAM. The machine has an RTX4090, but Linux/model setup and output have not been tested. Do not add substantial setup before the simpler website trial resolves the immediate quality question.
+
+## Superseded kit recommendation after visual inspection — September 8
+
+First candidate: [Modular Medieval Ruins by archafizov](https://www.fab.com/listings/d87c7ff2-753d-4974-aac2-b2470c470bf9). The Fab listing specifies 226 meshes, including architecture, props and vegetation; six base materials, 45 instances, 109 textures up to 2K, automatic collisions/LODs, wind and two example maps. Browser inspection of its stone steps, broken arches, roots and ivy shows much stronger surface and silhouette work than our current kit. This is my visual judgment from vendor renders, not imported mesh testing or proof of anchor-B fidelity.
+
+On the observed Norwegian page: Personal **NOK 289.54 including VAT**, Professional **NOK 405.38 including VAT**, sale ending September 11 at 23:00 local. Listed compatibility is UE **5.0–5.5**, not verified 5.8.2. No license was selected, agreement accepted, asset acquired or money spent. Exact eligible tier and checkout remain for acquisition.
+
+The superseded proposal was to purchase this before another creation application: a coherent vocabulary of dressed walls, stairs, broken variants and foliage can replace the weakest geometry. Integration must rework automatic collisions around arches, establish grid/pivot connectors, adapt tint and first-person texel density, and build reusable room compositions for our seeded layout. Keep restricted pack source outside public Git. The hero shield, characters and animation still need separate work.
+
+The prior Village Builder ruins candidate omits showcase landscape, rocks and foliage; its appearance would require additional purchases. Modular Medieval Ruins is therefore the narrower first test. Do not buy a bundle of tools on the assumption that it guarantees the target image.
+
+
 ## Latest review: premium tools and procedural asset libraries — 2026-09-08
 
 Klaus explicitly asks for the strongest suitable tools, including paid software he might buy, and Unreal-specific libraries. He reiterates that levels must be procedural. This is authorization to research a purchase, not to spend. The selected art remains B. The current shield study visibly misses B; buying a tool alone is not evidence that we can deliver it. The new [segmented shield](../../../games/dreambound/SHIELD-DESIGN.md) requires separate finished moving pieces with precise mounting and recall, not an indivisible generated model.
 
-Recommendation: use a coherent modular environment kit as the first candidate for a visible quality improvement, with bespoke shield/arm work and deliberate material finishing. **Substance 3D Painter is the first paid creation-app candidate** for our surface work. **ZBrush** is the specialist sculpting candidate; **Houdini** is the strongest procedural authoring/automation candidate. These are complementary roles, not a promise of comparable output from every application. Existing Blender/Fusion and Unreal remain useful.
+Previous recommendation (superseded above): use a coherent modular environment kit as the first candidate for a visible quality improvement, with bespoke shield/arm work and deliberate material finishing. **Substance 3D Painter is the first paid creation-app candidate** for our surface work. **ZBrush** is the specialist sculpting candidate; **Houdini** is the strongest procedural authoring/automation candidate. These are complementary roles, not a promise of comparable output from every application. Existing Blender/Fusion and Unreal remain useful.
 
 | Tool | What it adds | Practical limitation for us |
 | --- | --- | --- |
