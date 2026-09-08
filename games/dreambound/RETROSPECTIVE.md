@@ -1,5 +1,19 @@
 # Beta2 owner playtest — 2026-09-08
 
+## Shield-study visual comparison — 2026-09-08
+
+Klaus describes the corrective study's graphics as slightly better and asks for an honest comparison with the selected anchor. Direct visual inspection of [anchor B, middle column](../../research/runs/2026-09-07-depth-reset/assets/art-style-comparison-v1.png) and the [actual shield-study frame](evidence/shield-study-courtyard.png) confirms that the gap remains substantial.
+
+- B encloses the view with arches, stairs, upper architecture and a monumental rooted bell. The study exposes a broad, flat rectangular court with repeated low arches and large empty sky.
+- B's roots weave into masonry and have varied, layered silhouettes. The study's tree and bell remain simple central forms with sparse repeated foliage.
+- B distinguishes worn ceramic, worked metal and weathered stone through designed edges, surface detail and color variation. The study's foreground shield and walls appear smooth, uniform and insufficiently detailed at gameplay distance.
+- B uses shaded framing, warm light, cooler shadows and distance to separate foreground, landmark and background. The study's broad exposure and sparse background flatten the scene.
+- B's first-person equipment has overlapping armor, visible fasteners, joints, grip support and construction detail. The current shield reads as a decorative wheel; the central core and radial spokes do not establish that mechanical identity.
+
+Integration assessment: the current scripted kit has not demonstrated the chosen style. The next art work needs a representative authored playable view with substantially better hero geometry, architecture, material definition and lighting. Compare it directly with B in Unreal before multiplying assets or rooms. This review inspected the two existing images; no new build, gameplay test, asset creation or claim of improved fidelity occurred. Enemy detail and animation were not assessed from the empty courtyard still.
+
+## Historical beta2 review
+
 **Outcome: rejected for experience and presentation.** Klaus tested the delivered 0.1.0-beta2. His feedback establishes a failed owner playtest, not a measured market result or proof that the larger concept cannot work. No corrective implementation was made during this review.
 
 ## Expected and observed

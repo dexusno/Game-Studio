@@ -95,10 +95,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T11:21:39+00:00",
+      "captured_at": "2026-09-08T11:26:14+00:00",
       "record_sha256": "ca4515b2e087c611a31afeb15707458a0106278d3d7c33521e53ab15a93b6237",
       "files": {
-        "games/dreambound/STATUS.md": "43c25a3c3a3fe44cfd8428cb733f8103bf6a10ce577002034ee9ee7db7c7b6b5",
+        "games/dreambound/STATUS.md": "69da96958a5463de44cb8d9e6bcedd876272adb0b941e623b8bcb4322c467cd3",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
