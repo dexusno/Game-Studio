@@ -410,7 +410,12 @@ void ADBGameMode::ClaimReward(FName Id) {
 }
 void ADBGameMode::SetMenuInput(bool On) {
  On=On||bSaveFailed;
- if(Player){Player->SuspendCombatInput();Player->GetCharacterMovement()->StopMovementImmediately();}
+ if(Player){
+  Player->SuspendCombatInput();Player->GetCharacterMovement()->StopMovementImmediately();
+  // Menus use the world as their backdrop; the first-person assembly belongs
+  // to active play and can otherwise render before its first camera update.
+  Player->SetActorHiddenInGame(On);
+ }
  auto* PC=UGameplayStatics::GetPlayerController(this,0);if(!PC)return;
  PC->bShowMouseCursor=On;PC->bEnableClickEvents=true;
  PC->ResetIgnoreMoveInput();PC->ResetIgnoreLookInput();

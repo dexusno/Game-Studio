@@ -24,10 +24,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T00:09:40+00:00",
+      "captured_at": "2026-09-08T05:39:26+00:00",
       "record_sha256": "f0d84b6ac65f103546d3bd90c4a9ac7576e2f076fc4e790108c65ec553ae43c8",
       "files": {
-        "games/dreambound/STATUS.md": "e2dc878f5c57f0bfff5c4f87ed9d22ca5f95685ba3323d4ecb7bc5f23815c3de",
+        "games/dreambound/STATUS.md": "1174e0673e738515ab05fde411f57d96aee9b14f8d6a348a7342896631d7a1d4",
         "games/dreambound/BRIEF.md": "e805e0fb82a159b36680971a72ea825755d8f03fea6865174e732d69da0220d3",
         "games/dreambound/IMPLEMENTATION.md": "dc4f3e78f37f72a0783e5f4996dfd97b8d3bf1da91c058266e4d9e36f85087a4",
         "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md": "bffbee2d14245c0b6a44bc164506eb04380f04aee97c31f0553aab642e7d33ed"

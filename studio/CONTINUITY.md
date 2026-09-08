@@ -20,7 +20,7 @@ A task is a working conversation with context. A project supplies the files and 
 | Existing design, decisions, build and QA documents | Detailed reasoning, history and reproducible evidence, opened only for relevant work |
 | Ignored config.local.json | Machine-specific tool paths; never a source of game design or a public memory file |
 
-For the current concept, [the candidate](../research/opportunities/reactor-raider.json) points to [the handoff](../research/runs/2026-09-07-depth-reset/STATUS.md). The reactor-raider identifier is retained for continuity; it is not the title. The [old game](../games/scrapstorm/STATUS.md) stays parked.
+For the current game, [the game record](../games/dreambound/game.json) and [the selected candidate](../research/opportunities/reactor-raider.json) point to [the game handoff](../games/dreambound/STATUS.md). Use `context game:dreambound` to resume. These identifiers are retained for continuity; neither is the final title. The [old game](../games/scrapstorm/STATUS.md) stays parked.
 
 Do not copy the full conversation into every document or create a writable global task dashboard. Keep the handoff concise; move detailed completed explanations into their existing topic documents and link them. A useful startup is the handoff plus a few relevant sections, not every design file and research result.
 

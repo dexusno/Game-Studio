@@ -1,16 +1,16 @@
 {
-  "version": "0.1.0-beta1",
+  "version": "0.1.0-beta2",
   "engine": "5.8.2",
   "configuration": "Shipping",
   "platform": "Windows",
   "staged_checks": "31 passed, 0 failed",
-  "ordinary_input": "pending Windows prompt dismissal",
+  "ordinary_input": "native start, mouse aim/pulse, Q pose, menus, sensitivity and save/exit/resume observed; held movement/guard, dash and full focus-loss coverage unverified",
   "ordinary_full_journey": "unverified",
   "files": [
     {
       "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
       "bytes": 166044160,
-      "sha256": "2DF5EF573C7DACC94D94732F57E15BCE37BC7A8D86678EAC0B26BD2AC1731F76"
+      "sha256": "6BE6C949F1A732278343560A81906A077F6CD88A1D53F04432A474DEF7C910BE"
     },
     {
       "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",

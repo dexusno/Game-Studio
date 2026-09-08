@@ -1,20 +1,38 @@
 # Cyborg between worlds — beta QA
 
-2026-09-08. **The Shipping beta is built and its packaged staged checks pass; normal-input readiness remains blocked.** No ordinary whole journey, audio listening or human fun result is claimed here. QA owns this report; production fixes belong to integration/combat owners.
+2026-09-08. **Shipping 0.1.0-beta2 passes staged checks and has native menu, save/relaunch and resume evidence.** Native movement, focus-loss handling, an ordinary whole journey, audio listening and fun remain unverified. QA owns this report; production fixes belong to integration/combat owners.
 
 ## Identity and coverage
 
-Reviewed [BRIEF.md](BRIEF.md), [IMPLEMENTATION.md](IMPLEMENTATION.md) and the game mode, HUD, character and enemy integration. Final candidate: **beta 0.1.0, Windows Shipping**, built successfully. Binary: [Dreambound-Win64-Shipping.exe](BuildOutput/Shipping/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe), 166,044,160 bytes, written September 8 at 00:03:18 UTC. Read-only SHA-256 verification: `2DF5EF573C7DACC94D94732F57E15BCE37BC7A8D86678EAC0B26BD2AC1731F76`.
+Reviewed [BRIEF.md](BRIEF.md), [IMPLEMENTATION.md](IMPLEMENTATION.md) and the game mode, HUD, character and enemy integration. Current artifact: **0.1.0-beta2, Windows Shipping**, after the menu-only rebuild. Binary: [Dreambound-Win64-Shipping.exe](BuildOutput/Shipping/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe), 166,044,160 bytes, written September 8 at 05:33:04 UTC. Integration-reported SHA-256: `6BE6C949F1A732278343560A81906A077F6CD88A1D53F04432A474DEF7C910BE`.
 
-Environment: Windows, Unreal `5.8.2-56702186`. Integration executed the actual Shipping package's staged driver; QA inspected the retained [packaged report](evidence/beta-0.1.0-staged-checks.txt), which identifies isolated slot `DreamboundQA_Shipping`. The earlier editor run also passed under `UnrealEditor-Cmd.exe` with `-game -NullRHI -DBVerify -DBSaveSlot=DreamboundQA_Staged -DBSeed=833282 -unattended -nosound -nosplash`; editor evidence is superseded by the packaged report. Intended controls remain WASD/mouse, LMB/RMB/Q, Shift, Space, E, 1–3, R, Tab and Escape. Staged checks called input APIs, not Windows input.
+Environment: Windows, Unreal `5.8.2-56702186`. Integration reports the rebuilt Shipping package's staged driver passed 31/0 and maintains the retained [packaged report](evidence/beta-0.1.0-staged-checks.txt). QA inspected earlier packaged/editor reports; beta2 execution and native observations below are attributed to integration. The earlier editor run used `-game -NullRHI -DBVerify -DBSaveSlot=DreamboundQA_Staged -DBSeed=833282 -unattended -nosound -nosplash`. Intended controls remain WASD/mouse, LMB/RMB/Q, Shift, Space, E, 1–3, R, Tab and Escape. Staged checks called input APIs, not Windows input.
 
 ## Current startup/input boundary
 
-Integration observed the packaged title startup through Computer Use. Normal input testing is blocked by an orphaned Windows Security network prompt from a prior Development build's trace port 1985. The owner has been asked to Cancel it because the computer-use skill prohibits the agent from handling that security prompt. It has not been bypassed or counted as a completed input test.
+The earlier Windows Security prompt is gone. Integration verified these native results on rebuilt beta2; independent QA did not operate the session:
+
+| Input/state | Observed result on beta2 |
+| --- | --- |
+| Title | The oversized weapon is correctly hidden. A saved QA profile exposes Resume. |
+| Resume | Returned to Expedition 1, seed 124055, Waking Cell at the entry checkpoint. The weapon was visible with normal rest framing during play. |
+| Escape pause | Pause hid the weapon assembly. |
+| Save/exit/relaunch | Sensitivity 1.10 survived. Resume restored the saved expedition as above. |
+
+Earlier native observations on beta1 remain useful limited evidence, rather than automatic beta2 rechecks:
+
+| Input | Observed result |
+| --- | --- |
+| Begin expedition | Entered the Waking Cell normally. |
+| Mouse movement/click and LMB | Aim visibly changed; firing raised heat. Enemy damage was not established by this observation. |
+| Escape and pause plus button | Pause opened/closed; sensitivity changed from 1.00 to 1.10. Persistence was not checked. |
+| Tab | Build inspection opened/closed. |
+| Q | Impact pose visibly began; a successful combat hit was not established. |
+| W and Shift_L/Shift taps | Movement was not established. `@oai/sky` provided taps/chords without a hold duration, so this leaves movement coverage unresolved; it does not prove broken movement or a playable whole journey. |
 
 The Shipping game requires no network for this offline beta. Integration's read-only `Get-NetTCPConnection`/`Get-NetUDPEndpoint` check of Shipping PID 85008 reported zero TCP and zero UDP endpoints at that snapshot; this is not a claim about every process or all times.
 
-Integration fixed initial paused-camera origin by setting the player view target and calling `PlayerCameraManager->UpdateCamera` before pausing. The source fix precedes this Shipping binary; ordinary title/camera/controls recheck remains pending. Offscreen packaged capture was underway at this handoff and is not counted as a finished visual assessment.
+Beta1's title showed an oversized weapon despite camera priming. `DBGameMode::SetMenuInput` now hides the player assembly in menus and restores it during play; beta2's observed title, pause and resumed-play framing confirm that correction. Beta1's native Save checkpoint/exit also closed the process normally. An attempted minimize while the mouse was captured changed aim, so neither minimize nor focus-loss handling counts as tested.
 
 ## Findings and source rechecks
 
@@ -28,7 +46,7 @@ Initial findings came from source review; the status column distinguishes source
 | Medium | Save failure hidden from the player. Deny a test slot write, claim a reward or choose Save checkpoint/exit. | Failed persistence should be visible before exit or relying on a checkpoint. Initially `SaveNotice` only reached internal state/logs; Quit proceeded. | `bSaveFailed` now blocks ordinary exit/new-run loss and exposes a HUD banner, retry and explicit unsaved exit. Source recheck supports the fix; runtime retest pending. |
 | Medium, geometry risk | Tech-room boundary gaps. Walk between perimeter panels in Waking Cell/Rainstack. | Room boundaries should not expose accidental exits into the void. Initial 400 cm panel spacing against 239 cm mesh width implied 161 cm gaps. | X scale 1.75 fix passed actual player-capsule seam sweeps in both tech rooms and both tested layout parities. Ordinary traversal remains pending. |
 
-Final packaged staged result: **31 passed, 0 failed** (integration checks 9/0; independent driver 22/0). Coverage includes guard direction/timing/capture, Q consumption, pause intent, imported corridor/tech-edge physics, wave re-entry, reward caps/claims, replay, journal roundtrip and CRC-failure recovery. No staged failure remains. Normal focus/input and menu interactions, audio listening, post-camera-fix ordinary startup and a whole journey remain unverified; the earlier title startup observation is attributed to integration.
+Rebuilt beta2 packaged staged result, reported by integration: **31 passed, 0 failed** (integration checks 9/0; independent driver 22/0). Coverage includes guard direction/timing/capture, Q consumption, pause intent, imported corridor/tech-edge physics, wave re-entry, reward caps/claims, replay, journal roundtrip and CRC-failure recovery. Native observations above are separate, limited checks; held movement/dash, focus behavior, audio listening and a whole journey remain unverified.
 
 ## Save-recovery fixture correction — recheck passed
 
@@ -36,15 +54,8 @@ Final packaged staged result: **31 passed, 0 failed** (integration checks 9/0; i
 
 The corrected fixture flipped one checksum byte in the newest journal's CRC envelope while preserving its serialized payload. The packaged recheck passed: mutation succeeded on 2,651 bytes; revision 18 was expected and selected; restored health was 73, Ram rank 0, learned Ram absent, Frost rank 2, and boss milestone retained. The previous usable checkpoint and equipment were reconstructed through ordinary load/resume methods. QA journal backup/restoration also passed. This verifies the staged CRC-rejection path, not all possible disk failures or the visible save-error interface.
 
-## Minimal runtime handoff
+## Remaining evidence gaps
 
-Use the actual Windows package and a unique `-DBSaveSlot=DBQA_<session>` so owner progress stays isolated. Record package identity, commands, inputs and observed outcome.
+Beta2 identity, post-fix menu framing and saved-profile relaunch/resume are recorded above. Native evidence still does not establish sustained movement, dash/jump/guard, focus capture/release or minimize, ordinary acquisition/combat, save-error UI or a completed route through the guardian and Rainstack. Future QA should retain isolated `DBQA_` save slots and distinguish ordinary input from staged actor/state setup.
 
-1. **First launch and input:** normal menu start, find/claim the first core, capture/release mouse, pulse/guard/Q/dash/jump, pause/build/reward screens, focus loss and fresh input after resume. Check prompts and audible feedback in a coordinated session.
-2. **Reachability and finite encounters:** walk the main and optional routes on one seed of each layout parity; verify gates, floor/collision and tech-room edges. Leave/re-enter an active second wave and confirm the encounter clears once.
-3. **Rewards and persistence:** acquire contrasting behaviors through ordinary claims, evolve one to cap, revisit its altar, and check the offered descriptions/effect. Exit mid-encounter, relaunch/resume, verify seed/claims/health/equipment/core and restart at the intended checkpoint without duplicate rewards.
-4. **Failure/replay:** die after earning a pattern, select it for immediate same-seed practice/new expedition, then relaunch. Preserve learned ownership and boss milestone; confirm new-seed variation changes the journey.
-5. **Save recovery:** with disposable slots, fail a write and corrupt only the newest checkpoint after keeping a backup. Verify visible failure and usable prior-checkpoint recovery; inspect restored equipment rather than just save-file fields.
-6. **Completion:** defeat the guardian, claim its capacitor, carry the build into Rainstack, complete the arrival, and verify result/replay/exit. Separate ordinary play from any direct state fixture used to reach an edge case.
-
-Automated verification that counts rooms or grants upgrades directly cannot establish traversable routes, earned reward quality or fun. Human pacing (including the provisional 15–25 minutes), challenge and willingness to try another build remain untested.
+Audio listening, human pacing (including the provisional 15–25 minutes), challenge and willingness to try another build remain untested. Staged checks and brief native actions cannot establish those outcomes.

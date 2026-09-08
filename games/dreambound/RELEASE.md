@@ -8,8 +8,8 @@ Validate the enjoyable interaction before preparing a commercial release. The ac
 
 ## Readiness evidence
 
-- Reproducible package/build: Windows beta 0.1.0-beta1, Unreal Shipping configuration; local package is ignored by Git.
-- Scope and quality acceptance: brief defined; ordinary input, full journey and owner assessment pending.
+- Reproducible package/build: Windows beta 0.1.0-beta2, Unreal Shipping configuration; local package is ignored by Git.
+- Scope and quality acceptance: brief defined; native startup/menu/save observations and staged checks recorded. Held movement, full journey and owner assessment remain pending.
 - Human playtesting: not performed.
 - Asset rights and credits: original project-created kit, textures, material recipes and audio recorded in [manifest](assets/manifest.csv).
 - Store assets and metadata: not prepared.

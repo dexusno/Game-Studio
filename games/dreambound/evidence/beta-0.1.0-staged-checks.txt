@@ -28,7 +28,7 @@ PASS runtime / capped Mirror is absent from trial choices
 PASS runtime / fully capped trial restores resources without inventing a learned attachment
 PASS runtime / same-seed replay resets the attempt and installs only the retained selected pattern
 PASS runtime / journal reload reconstructs checkpoint claims, rank, active core and health
-PASS runtime / corrupt newest journal falls back to the previous usable checkpoint and equipment / mutation=1 bytes=2651 expected revision=18 selected=18 health=73.0 ram=0 learned ram=0 frost=2 boss=1
+PASS runtime / corrupt newest journal falls back to the previous usable checkpoint and equipment / mutation=1 bytes=2651 expected revision=21 selected=21 health=73.0 ram=0 learned ram=0 frost=2 boss=1
 PASS runtime / isolated journal fixtures restored; end-play saving suppressed
 RUNTIME RESULT 22 passed 0 failed
 RESULT 31 passed 0 failed
