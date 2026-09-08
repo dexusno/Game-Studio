@@ -24,6 +24,8 @@ Klaus explicitly rejects a ruins-kit purchase as the solution for varied procedu
 
 The next graphics proof uses the same root-wrapped carved waymarker references across current candidates, inspecting raw exports and finished assets from all sides under changing lights at first-person distance in Unreal. Record actual cost/cleanup time, then try a distinct second biome if successful. Account allowances/export rights remain unverified. Latest open models are not all unrestricted commercial pipelines: resolve the documented runtime licenses before adoption; Hunyuan2.1 also expressly restricts output distribution by territory. No installation, generation or purchase occurred in the research. The brief and acceptance limits are in the pipeline record; purchases require Klaus's approval.
 
+Klaus agrees to test that shortlist and use multiple tools if appropriate. Quality takes priority over modest cost differences; local TRELLIS.2 is not selected as the production solution. A local RTX 4090 and a networked RTX 3090 available most weekdays during the day are available for consideration; inference setup/remote access and performance are unverified. The review now includes current monthly/API prices and an illustrative $55.50 subscription/usage comparison (roughly $60 pre-tax allowance proposed, no spending approved). Compare real exports against B before choosing a generator or investing in local batch setup.
+
 The combat package is ready for assessing whether folded sightlines, partial/full commitment and reachable melee improve decisions and power. It is a corrective experiment, not a claim that the broader graphics/fun target has been met.
 
 ## Preserved direction and continuity
