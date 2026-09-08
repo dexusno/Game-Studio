@@ -95,15 +95,15 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T15:56:16+00:00",
+      "captured_at": "2026-09-08T17:25:17+00:00",
       "record_sha256": "6da29d380f8db7fb9398e65c22ee56cc9e62b9fea7966ccf13c5a65b38cb8983",
       "files": {
-        "games/dreambound/STATUS.md": "91a54728acda4cc2144d2c4bc2e26745f42412aeaac0d5cd6dfc51388a1647e2",
+        "games/dreambound/STATUS.md": "d06cb76d1cad45e746536e29933c591537e8a053b09ecd848e37c54d354b3281",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
-        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "c741b2792e54d303838173bbd4a67ae48e9f31195f5cf5d216907d2f1060415f"
+        "research/runs/2026-09-07-depth-reset/art-pipeline.md": "6ff3967af432bfc1f176205224bf6d96660431832ebb5495e6ba8218ce43c0a0"
       }
     }
   },
