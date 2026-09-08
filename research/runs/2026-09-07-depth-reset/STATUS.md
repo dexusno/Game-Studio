@@ -1,6 +1,6 @@
 # Cyborg between worlds — resume here
 
-Updated 2026-09-08. **Current work: design refinement for a first-person Unreal game. No replacement game has been implemented or playtested.** The authoritative candidate is [reactor-raider.json](../../opportunities/reactor-raider.json), still recorded as draft; its legacy identifier is not a final title. This is the ongoing game concept. [Sixfold Recoil](../../../games/scrapstorm/STATUS.md) remains parked.
+Updated 2026-09-08. **Klaus authorized the beta; current implementation resumes at [games/dreambound/STATUS.md](../../../games/dreambound/STATUS.md).** An actual Unreal C++ project has compiled; rendered/package and playtest evidence belong in that game's records. This document retains the design foundations. The selected candidate is [reactor-raider.json](../../opportunities/reactor-raider.json); both identifiers are internal, not a final title. [Sixfold Recoil](../../../games/scrapstorm/STATUS.md) remains parked.
 
 ## Owner decisions and constraints to retain
 

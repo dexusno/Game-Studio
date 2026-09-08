@@ -1,0 +1,32 @@
+{
+  "imported": [],
+  "materials": [
+    "/Game/Art/Materials/M_Ceramic",
+    "/Game/Art/Materials/M_Bronze",
+    "/Game/Art/Materials/M_DarkMetal",
+    "/Game/Art/Materials/M_Patina",
+    "/Game/Art/Materials/M_Stone",
+    "/Game/Art/Materials/M_StoneLight",
+    "/Game/Art/Materials/M_Mortar",
+    "/Game/Art/Materials/M_Root",
+    "/Game/Art/Materials/M_RootDark",
+    "/Game/Art/Materials/M_Moss",
+    "/Game/Art/Materials/M_Wood",
+    "/Game/Art/Materials/M_Cloth",
+    "/Game/Art/Materials/M_Core",
+    "/Game/Art/Materials/M_Crystal",
+    "/Game/Art/Materials/M_Frost",
+    "/Game/Art/Materials/M_Storm",
+    "/Game/Art/Materials/M_Ember",
+    "/Game/Art/Materials/M_CombatGlow"
+  ],
+  "textures": [
+    "/Game/Art/Textures/T_PaintedSurface.T_PaintedSurface",
+    "/Game/Art/Textures/T_SculptedNormal.T_SculptedNormal"
+  ],
+  "warnings": [],
+  "scope": "/Game/Art",
+  "mode": "materials_and_textures_only",
+  "all_instancing_enabled": true,
+  "success": true
+}

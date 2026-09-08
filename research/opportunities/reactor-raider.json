@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "reactor-raider",
   "title": "Cyborg between worlds — working concept",
-  "status": "draft",
+  "status": "selected",
   "hook": "A first-person cyborg discovers its dreams reveal real worlds, reshapes one modular weapon/shield with their technology and magic, and chooses which abilities to carry into the next destination.",
   "audience": "Players seeking skilled aimed combat, transformative equipment, build discovery, exploration, meaningful achievements and varied expeditions.",
   "core_loop": "Explore a procedurally varied world, fight using freely chosen attacks and defense, earn ability-changing attachments, choose or discover synergies, defeat a guardian, preserve learned patterns and campaign milestones, and select active powers for a crossing.",
@@ -42,8 +42,8 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Create a bounded first-person Unreal visual sample of selected style B to evaluate materials, weapon appearance, motion readability and performance. Continue the implementation brief toward a representative generated world with obtainable contrasting attachment builds, a boss/earned milestone and a compact playable crossing demonstrating selected carryover.",
-  "decision_reason": "Klaus chose first person and one modular weapon/shield, then supplied the cyborg/real-dream-worlds premise and requested writer, art director and producer refinement. Lore, transfer rules and production scope remain draft; no new playable game or fun validation.",
+  "next_test": "Continue the authorized Unreal beta from games/dreambound/STATUS.md; verify imported art, actual first-person gameplay, rewards, saves and packaged play before owner delivery.",
+  "decision_reason": "Klaus authorized building the beta on 2026-09-08; implementation now lives in games/dreambound. Exact full-campaign scope and fun remain unvalidated.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
   "scope_note": "Substantially greater ambition; no literal 10x multiplier, feature quota or hard development/owner-time cap. Several distinct worlds are the campaign direction; counts, transfer allowance and final length remain in refinement.",
@@ -85,7 +85,7 @@
     "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
   },
   "context": {
-    "entrypoint": "research/runs/2026-09-07-depth-reset/STATUS.md",
+    "entrypoint": "games/dreambound/STATUS.md",
     "read_first": [
       "studio/CHARTER.md",
       "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md",
@@ -95,11 +95,11 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-07T22:46:30+00:00",
-      "record_sha256": "e96c4201301ee6431d7a14a97306c2d1333b0d8b5208f5dd47fd52c3d8529567",
+      "captured_at": "2026-09-08T00:09:41+00:00",
+      "record_sha256": "17fcc71f0bc6ddfbc736d33a4267f1e34189105aa58befc690d4e6ed1e3d3d06",
       "files": {
-        "research/runs/2026-09-07-depth-reset/STATUS.md": "3775c35ed7fa70c9905319a6e81034e5dcbec8da034a88b46aa7b66baf291f25",
-        "studio/CHARTER.md": "7640e16b7f83f3007bd9edab8270e115ac865d18d66a0ab0dcc92cc1bcf531bd",
+        "games/dreambound/STATUS.md": "e2dc878f5c57f0bfff5c4f87ed9d22ca5f95685ba3323d4ecb7bc5f23815c3de",
+        "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "2d7a70f4777865c2ab5b842659ddbf0cf962beebf9d30f4548385affda49d4bc",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
@@ -135,5 +135,6 @@
       "status": "draft",
       "reason": "Klaus endorsed style B with 'B looks great' after reviewing generated comparisons and discussing feasibility. Adopt sculpted painterly 3D as the art direction; exact weapon/world design and actual in-engine fidelity remain unproven."
     }
-  ]
+  ],
+  "selected_game": "dreambound"
 }

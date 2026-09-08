@@ -1,0 +1,5 @@
+# Reproducible Unreal imports contain machine-specific source metadata.
+# Build.ps1 -Stage Content rebuilds them from the tracked original kit and audio.
+unreal/Content/
+art/*.blend1
+art/*.blend2

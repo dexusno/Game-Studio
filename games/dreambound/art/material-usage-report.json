@@ -1,0 +1,82 @@
+{
+  "imported": [],
+  "materials": [
+    {
+      "path": "/Game/Art/Materials/M_Ceramic",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Bronze",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_DarkMetal",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Patina",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Stone",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_StoneLight",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Mortar",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Root",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_RootDark",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Moss",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Wood",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Cloth",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Core",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Crystal",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Frost",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Storm",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_Ember",
+      "used_with_instanced_static_meshes": true
+    },
+    {
+      "path": "/Game/Art/Materials/M_CombatGlow",
+      "used_with_instanced_static_meshes": true
+    }
+  ],
+  "textures": [],
+  "warnings": [],
+  "scope": "/Game/Art",
+  "mode": "material_usage_only",
+  "success": true
+}

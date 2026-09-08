@@ -1,0 +1,288 @@
+{
+  "environment": "Blender 5.2.1 LTS FBX exporter/importer",
+  "verified_on": "2026-09-08",
+  "passed": 20,
+  "checks": [
+    {
+      "name": "SM_WeaponBody",
+      "world_dimensions_cm": [
+        60.45000171661377,
+        22.60000514984131,
+        36.110262870788574
+      ],
+      "maximum_dimension_error_cm": 0.0002628707885747872,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "5047f3be9ca5312d1e71fff66ff0ea2b0719e84b4c7fba0f4d291a4636d2c3f8"
+    },
+    {
+      "name": "SM_ShieldPlate",
+      "world_dimensions_cm": [
+        9.400003433227539,
+        47.19907760620117,
+        48.33111381530762
+      ],
+      "maximum_dimension_error_cm": 0.00011381530761411796,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "487e9a325769b6df7e1234a60d3845a80533589942291e8542e0188d4550a9bd"
+    },
+    {
+      "name": "SM_Core",
+      "world_dimensions_cm": [
+        5.6216936111450195,
+        12.600000381469727,
+        12.600000381469727
+      ],
+      "maximum_dimension_error_cm": 0.00030638885498035506,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "0f20a5bd61aea255dcdc36694fd579e4fac6b0c5d869fc37a9190f789b75d8dd"
+    },
+    {
+      "name": "SM_Forearm",
+      "world_dimensions_cm": [
+        35.00000083446503,
+        21.600003242492676,
+        21.736406326293945
+      ],
+      "maximum_dimension_error_cm": 0.0004063262939446588,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "9546cec778d041d79c23403f02abec8e9c10bec7a08daee349cdc807b3e8da5a"
+    },
+    {
+      "name": "SM_GuardianBody",
+      "world_dimensions_cm": [
+        47.16463661193848,
+        62.000003814697266,
+        76.5
+      ],
+      "maximum_dimension_error_cm": 0.00036338806152258485,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "da88cc9f1785a57ccd753c4c6e21a19c258efc3bd3f47738c0ec306d5dcf64d1"
+    },
+    {
+      "name": "SM_GuardianHead",
+      "world_dimensions_cm": [
+        28.526269912719727,
+        33.245673179626465,
+        44.45230484008789
+      ],
+      "maximum_dimension_error_cm": 0.00032682037353737314,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "ada98ab345a10b764b5c142b8bce73201d123c34bd444c579ff4cfec672db586"
+    },
+    {
+      "name": "SM_GuardianArm",
+      "world_dimensions_cm": [
+        35.46644592285156,
+        41.28984451293945,
+        98.5
+      ],
+      "maximum_dimension_error_cm": 0.00044592285156142,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "2e6b4cd27ebfedb80dffd2fdbe720b3fb966906552e121607d84c101d484f87f"
+    },
+    {
+      "name": "SM_GuardianLeg",
+      "world_dimensions_cm": [
+        38.00000286102295,
+        28.00000286102295,
+        102.0
+      ],
+      "maximum_dimension_error_cm": 2.86102294921875e-06,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "bfacd862715c8debfb91c3dfc41b231826bf9b59b56988a13df11f81efcb295f"
+    },
+    {
+      "name": "SM_StoneTile",
+      "world_dimensions_cm": [
+        200.00001525878906,
+        200.00001525878906,
+        24.106843948364258
+      ],
+      "maximum_dimension_error_cm": 0.00015605163574150538,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "893340c8afa4f41a314318e0f3686383f2b4173b669337a0982448e9361c8abb"
+    },
+    {
+      "name": "SM_Wall",
+      "world_dimensions_cm": [
+        400.0,
+        72.16070938110352,
+        320.22425842285156
+      ],
+      "maximum_dimension_error_cm": 0.00029061889648573924,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "5afa913e76d54a5e39f2289361f6e81cee82c4c14f35d4c4272be90dc89d6547"
+    },
+    {
+      "name": "SM_Pillar",
+      "world_dimensions_cm": [
+        115.1594352722168,
+        115.1317024230957,
+        380.13488483428955
+      ],
+      "maximum_dimension_error_cm": 0.0004352722167908496,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "2301815a3416b32cbc29e6e07a76338f61711fda5263d66940a2980e858328a5"
+    },
+    {
+      "name": "SM_Arch",
+      "world_dimensions_cm": [
+        455.1886444091797,
+        94.19697952270508,
+        437.11327743530273
+      ],
+      "maximum_dimension_error_cm": 0.0003555908203338731,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 15,
+      "private_path_in_fbx": false,
+      "sha256": "ad9f797eb46fa5a5c1bfded83fd7c539d3b140f996373512d11c6bfec4d15b9b"
+    },
+    {
+      "name": "SM_Bell",
+      "world_dimensions_cm": [
+        136.00001525878906,
+        136.00001525878906,
+        150.7436118721962
+      ],
+      "maximum_dimension_error_cm": 0.00038812780380226286,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "d1c59b2daecadab25af68e9b381f0cef62953f70d2bc06066cc8343cd0d42a99"
+    },
+    {
+      "name": "SM_Root",
+      "world_dimensions_cm": [
+        437.42285346984863,
+        153.6015281677246,
+        84.07538414001465
+      ],
+      "maximum_dimension_error_cm": 0.0005281677246102845,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "f940037ce776f7a2d9bb362c71ef655797b3867e5258d46f05de73799d629301"
+    },
+    {
+      "name": "SM_Crate",
+      "world_dimensions_cm": [
+        91.00000762939453,
+        82.00000762939453,
+        86.5
+      ],
+      "maximum_dimension_error_cm": 7.62939453125e-06,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "cb1f222c9190828a876d533e5caa38f6e5efcdb2f80cde738465b5c96981805b"
+    },
+    {
+      "name": "SM_Crystal",
+      "world_dimensions_cm": [
+        30.400004386901855,
+        28.000001907348633,
+        50.0
+      ],
+      "maximum_dimension_error_cm": 4.3869018568898355e-06,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "414457ca6ca481e664cc04ffb8ae4183670008bc6e382912d88dca4536785e01"
+    },
+    {
+      "name": "SM_TechPanel",
+      "world_dimensions_cm": [
+        239.0,
+        65.0000171661377,
+        319.0
+      ],
+      "maximum_dimension_error_cm": 1.71661376953125e-05,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "638badd8b159c6ada0871b823fcdcaf642649b2bf438565b3dd1cd0b14930503"
+    },
+    {
+      "name": "SM_Grass",
+      "world_dimensions_cm": [
+        65.76033782958984,
+        55.66858100891113,
+        41.00096130371094
+      ],
+      "maximum_dimension_error_cm": 0.00041899108886411796,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "4b93e427e88d736a76f8c79225f1dccc7811ae6885feae10f03e50d2f5a33c8b"
+    },
+    {
+      "name": "SM_TelegraphRing",
+      "world_dimensions_cm": [
+        200.00001525878906,
+        200.00001525878906,
+        1.0
+      ],
+      "maximum_dimension_error_cm": 1.52587890625e-05,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "5db868497cd560b7ecb1af9d4f27a18a533219d7101d3805ee28e93b86b61bcc"
+    },
+    {
+      "name": "SM_TelegraphDisk",
+      "world_dimensions_cm": [
+        200.00001525878906,
+        200.00001525878906,
+        0.5
+      ],
+      "maximum_dimension_error_cm": 1.52587890625e-05,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "838426445ece4e7603c1a715df58b4d3a69a601b50ac4b79b896e0c62dad9a23"
+    }
+  ],
+  "unreal_import": "See ../import-report.json for actual successful Unreal5.8.2 import"
+}

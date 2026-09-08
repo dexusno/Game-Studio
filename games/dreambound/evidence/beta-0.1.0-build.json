@@ -1,0 +1,31 @@
+{
+  "version": "0.1.0-beta1",
+  "engine": "5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "staged_checks": "31 passed, 0 failed",
+  "ordinary_input": "pending Windows prompt dismissal",
+  "ordinary_full_journey": "unverified",
+  "files": [
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166044160,
+      "sha256": "2DF5EF573C7DACC94D94732F57E15BCE37BC7A8D86678EAC0B26BD2AC1731F76"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11220413,
+      "sha256": "D3CE0C20C4F601E9F10533B565BCD9DCD3E0922E295AF943B0407ED2DB944F8B"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 200934,
+      "sha256": "F30D5A9C3930079B999930BDFA7CDAA8495CC629EC7140E8853F459B72437C5E"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 203775392,
+      "sha256": "4A1773A26159B1B08846317398D66640620BBBBC3D8FE6C7B086B7343BA09B42"
+    }
+  ]
+}
