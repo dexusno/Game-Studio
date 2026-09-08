@@ -1,8 +1,10 @@
 # Cyborg between worlds — beta
 
-Planning scaffold created 2026-09-08. Slug: `dreambound`. Engine preference: `unreal`.
+First-person Unreal 5.8.2 prototype. Internal identifier `dreambound`; final title undecided.
 
-No playable game or working engine project is included yet. Scaffold creation does not approve production or select an opportunity.
+A real Windows beta package, C++ game, original Blender kit and audio now exist. The weapon/shield supports combinable behavioral attachments, earned patterns and a seeded journey through a medieval dream realm to a technological arrival. Read [STATUS.md](STATUS.md) for evidence and the remaining native-input check before calling technical readiness complete.
+
+Local player build: `BuildOutput/Shipping/Windows/Dreambound.exe`. [Controls and playtest guide](PLAY.md). Generated Unreal Content and packages are kept out of Git and rebuilt with the included scripts.
 
 - [Brief and player experience](BRIEF.md)
 - [Current state and resume instructions](STATUS.md)
@@ -12,4 +14,4 @@ No playable game or working engine project is included yet. Scaffold creation do
 - [Release preparation](RELEASE.md)
 - [Asset licensing register](assets/manifest.csv)
 
-Place implementation in `src/` once a concept and prototype scope are agreed. Place store copy and campaign materials in `marketing/`.
+Implementation lives in `unreal/Source/`. Art sources and reproducible imports live in `art/` and `scripts/`. The previous Sixfold Recoil browser prototype remains parked.
