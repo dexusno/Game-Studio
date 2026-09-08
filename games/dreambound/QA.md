@@ -1,3 +1,13 @@
+# Current segmented shield QA
+
+0.3.0-segments1 replaces the whole-disc study as the active experiment. The packaged staged runner covers 16 scenarios. [Current result](evidence/segmented-shield-checks.json) and [exact build/execution record](evidence/segmented-shield-build.json) are authoritative for the delivered package. Five packaged executions occurred as renderer inspection prompted camera/HUD/forearm and practice-placement fixes; all passed 16/0. This repetition is recorded with its purpose and the final hash.
+
+Checks use ordinary world ticks and real piece sweeps/input APIs, artificial positions and lethal progression hits. Elite AI produces its actual warning/stance, which is then frozen to isolate one-piece interception. Route tests compare seed signatures and sweep the character capsule through connectors with floor probes; progression deliberately calls ActivateRoom, so that is not a normal walk through every room. Three original shield FBXs passed Blender export roundtrip and Unreal units/pivot/material import checks.
+
+Rendered inspection found and fixed excess shield cropping, weak text contrast, difficult-to-distinguish selection lights and the newly exposed rear forearm cap. The final controlled fixture demonstrates selection, partial deployment, retained block/depletion, recall, destruction/rebuild, Frost and the retained Tab description. It grants the core and stages incoming damage, so it cannot be described as naturally earned gameplay. Frame capture affects timing/performance; audio level checks are signal measurements, not a listening assessment.
+
+No ordinary full playthrough, all-seed navigation proof, challenge/pacing assessment, exhaustive testing of every upgrade rank/combination, sound-quality verdict or positive fun claim. The current environment remains far below B and enemy geometry remains the prior kit. Klaus's assessment is the next evidence of enjoyment. Prior prototype results follow as history.
+
 # Current physical shield study QA
 
 0.2.0-study1 supersedes the rejected pulse-gun beta as the active experiment. Final packaged runtime results:14 scenarios passed,0 failed. Four runs were executed as integration, capture and menu corrections landed; no scenario failed. [Exact package](evidence/shield-study-build.json), [staged result](evidence/shield-study-checks.json), [fixture scope](qa/physical-shield-checks.md).

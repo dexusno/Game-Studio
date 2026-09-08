@@ -17,6 +17,9 @@ class ADBThrownShield;
 UENUM(BlueprintType)
 enum class EDBShieldState : uint8 { Held, Charging, Outbound, Lodged, Returning };
 
+UENUM(BlueprintType)
+enum class EDBShieldPieceState : uint8 { Attached, Selected, Outbound, Lodged, Returning, Regenerating };
+
 /** First-person combined weapon/shield. Acquisition and run state belong to DBGameMode. */
 UCLASS()
 class DREAMBOUND_API ADBCharacter : public ACharacter
@@ -32,7 +35,7 @@ public:
     void ApplyUpgrade(FName Id);
     bool HasUpgrade(FName Id) const;
     int32 GetUpgradeRank(FName Id) const;
-    void ReceiveAttack(float Damage, FVector Source, bool bUnblockable = false, AActor* Attacker = nullptr);
+    void ReceiveAttack(float Damage, FVector Source, bool bUnblockable = false, AActor* Attacker = nullptr, uint32 AttackId = 0);
     FVector GetAimDirection() const;
     FVector GetMuzzleLocation() const;
     void OnRunReset();
@@ -55,6 +58,20 @@ public:
     void OnShieldCaught(bool bEmergency = false);
     bool ApplyPhysicalShieldHit(ADBEnemy* Enemy, const FDBHit& Hit);
     void BankAnchoredForce(float Damage);
+    static constexpr int32 ShieldPieceCount = 6;
+    int32 GetShieldPieceCount() const { return ShieldPieceCount; }
+    int32 GetAttachedPieceCount() const;
+    int32 GetSelectedPieceCount() const;
+    int32 GetDeployedPieceCount() const;
+    int32 GetRegeneratingPieceCount() const;
+    EDBShieldPieceState GetPieceState(int32 Index) const;
+    float GetPieceRegenerationProgress(int32 Index) const;
+    ADBThrownShield* GetPieceFlight(int32 Index) const;
+    float GetTotalAnchorIntegrity() const;
+    FVector GetPieceCatchLocation(int32 Index) const;
+    void OnShieldPieceCaught(int32 Index, ADBThrownShield* Flight, bool bEmergency = false);
+    void OnShieldPieceDestroyed(int32 Index, ADBThrownShield* Flight);
+    void OnShieldPieceFlightState(int32 Index, ADBThrownShield* Flight, EDBShieldPieceState State);
     FString GetShieldStateLabel() const;
     FString GetSpecialLabel() const;
     FString GetElementLabel() const;
@@ -109,6 +126,10 @@ private:
     };
 
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> ShieldPlates;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> ShieldHub;
+    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> PieceGlows;
+    UPROPERTY() TArray<EDBShieldPieceState> PieceStates;
+    UPROPERTY() TArray<TObjectPtr<ADBThrownShield>> PieceFlights;
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> AttachmentParts;
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> CombatEffects;
     UPROPERTY() TObjectPtr<UStaticMesh> BeamMesh;
@@ -117,6 +138,7 @@ private:
     UPROPERTY() TObjectPtr<UMaterialInterface> BronzeMaterial;
     UPROPERTY() TObjectPtr<UMaterialInterface> DarkMaterial;
     UPROPERTY() TObjectPtr<UMaterialInterface> CoreMaterial;
+    UPROPERTY() TObjectPtr<UMaterialInterface> SelectedPieceMaterial;
     UPROPERTY() TObjectPtr<UMaterialInterface> FrostMaterial;
     UPROPERTY() TObjectPtr<UMaterialInterface> StormMaterial;
     UPROPERTY() TObjectPtr<UMaterialInterface> EmberMaterial;
@@ -133,6 +155,11 @@ private:
     TArray<float> EffectLife;
     TArray<FEchoShot> EchoShots;
     TArray<float> StoredDamage;
+    TArray<float> PieceRegenRemaining;
+    TArray<float> PieceRegenDuration;
+    TArray<float> PieceDockPulse;
+    TArray<int32> SelectionQueue;
+    TArray<uint64> ReceivedAttackKeys;
     TSet<TWeakObjectPtr<ADBEnemy>> RushVictims;
     bool bWantsFire = false;
     bool bWantsGuard = false;
@@ -142,6 +169,10 @@ private:
     bool bStrikePoseActive = false;
     bool bWasMenuBlocked = false;
     bool bRushActive = false;
+    bool bReforgeUsed = false;
+    int32 SelectionCursor = 0;
+    int32 NextBlockPiece = 0;
+    float CatchSoundCooldown = 0.f;
     float FireCooldown = 0.f;
     float ChargeHeld = 0.f;
     float StrikeDelay = 0.f;
@@ -180,6 +211,12 @@ private:
     void StartRimStrike(bool bHeavy);
     void ResolveRimStrike();
     void LaunchShield();
+    void ClearPieceSelection();
+    void UpdatePieces(float DeltaSeconds);
+    void RefreshAggregateShieldState();
+    void StartPieceRegeneration(int32 Index);
+    bool SpendGuardPiece();
+    bool AdvancePieceRegeneration(float Seconds);
     void ShieldImpact();
     void ResolveRush();
     void UpdateWeapon(float DeltaSeconds);

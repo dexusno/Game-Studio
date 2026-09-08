@@ -14,82 +14,84 @@
 #include "Components/AudioComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-// One authored place is shared by three encounter chapters. Chapter indices
-// retain the existing reward/journal semantics without regenerating the scenery.
+// Seeded assembly uses connected room modules with protected door axes.
+// Layouts change routes and cover placement; authored meshes retain their scale.
 void ADBGameMode::BuildRecoveryCourtyard()
 {
- ResetActors();Rooms.Reset();SpawnedRooms.Reset();RoomWaves.Reset();Random.Initialize(Seed);
- const TCHAR* Names[]={TEXT("Bellroot courtyard"),TEXT("The resonant ward"),TEXT("Beneath the ancient bell")};
- for(int32 I=0;I<3;++I){FDBRoom R;R.Center=FVector::ZeroVector;R.Name=Names[I];R.Parent=I-1;Rooms.Add(R);}
- FRandomStream Art(77231); // authored composition is stable; encounters and rewards use the run seed.
-
- // Ground carries small broken flagstones, with a continuous foundation below
- // the decorative joints. No scaled tile towers masquerade as stairs.
- Mesh("/Engine/BasicShapes/Cube.Cube",FVector(0,0,-70),FRotator::ZeroRotator,FVector(37,31,1),true,"M_Mortar");
- for(int32 X=-8;X<=8;++X)for(int32 Y=-7;Y<=7;++Y){
-  const float Jx=Art.FRandRange(-5,5),Jy=Art.FRandRange(-5,5);
-  Instance(Art.FRand()<.52f?"SM_StoneTile":"SM_StoneTile_B",FVector(X*200+Jx,Y*200+Jy,-24+Art.FRandRange(-1.5,1.5)),FRotator(0,Art.RandRange(0,3)*90.f,0),FVector(.995,.995,1));
+ ResetActors();Rooms.Reset();SpawnedRooms.Reset();RoomWaves.Reset();RoomLayoutVariants.Reset();Random.Initialize(Seed);
+ FRandomStream Layout(Seed);
+ const FVector First=Layout.RandRange(0,1)?FVector(1,0,0):FVector(0,1,0);
+ const int32 Turn=Layout.RandRange(-1,1);
+ const FVector Second=FRotator(0,Turn*90.f,0).RotateVector(First);
+ const FVector Centers[]={FVector::ZeroVector,First*4200,First*4200+Second*4200};
+ const TCHAR* Names[]={TEXT("Bellroot court"),TEXT("The split cloister"),TEXT("The sentinel garden")};
+ LayoutSignature=FString::Printf(TEXT("route:%d,%d"),First.X>.5f?0:1,Turn);
+ for(int32 I=0;I<3;++I){
+  FDBRoom R;R.Center=Centers[I];R.Name=Names[I];R.Parent=I-1;Rooms.Add(R);
+  const int32 Variant=Layout.RandRange(0,2);RoomLayoutVariants.Add(I,Variant);
+  LayoutSignature+=FString::Printf(TEXT("/cover%d:%d"),I,Variant);
  }
-
- // Walls form a sheltered court rather than a horizon full of duplicated pillars.
- for(int32 X=-4;X<=4;++X){
-  Instance("SM_Wall",FVector(X*400,1460,0),FRotator::ZeroRotator,FVector(1,1,1.25));
-  Instance("SM_Wall",FVector(X*400,-1460,0),FRotator::ZeroRotator,FVector(1,1,1.05));
+ for(int32 RoomIndex=0;RoomIndex<Rooms.Num();++RoomIndex){
+  auto& R=Rooms[RoomIndex];const FVector C=R.Center;const int32 Variant=RoomLayoutVariants[RoomIndex];
+  FRandomStream Art(Seed+RoomIndex*1709);
+  Mesh("/Engine/BasicShapes/Cube.Cube",C+FVector(0,0,-70),FRotator::ZeroRotator,FVector(37,37,1),true,"M_Mortar");
+  for(int32 X=-8;X<=8;++X)for(int32 Y=-8;Y<=8;++Y)
+   Instance(Art.FRand()<.52f?"SM_StoneTile":"SM_StoneTile_B",C+FVector(X*200+Art.FRandRange(-4,4),Y*200+Art.FRandRange(-4,4),-24),FRotator(0,Art.RandRange(0,3)*90.f,0),FVector(.995,.995,1));
+  TArray<FVector> Doors;
+  if(R.Parent>=0)Doors.Add((Rooms[R.Parent].Center-C).GetSafeNormal2D());
+  if(RoomIndex+1<Rooms.Num())Doors.Add((Rooms[RoomIndex+1].Center-C).GetSafeNormal2D());
+  for(int32 Side=0;Side<4;++Side){
+   const FVector Out=FRotator(0,Side*90.f,0).Vector(),T(-Out.Y,Out.X,0);
+   bool Door=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Door=true;
+   for(int32 K=-4;K<=4;++K){
+    if(Door&&K==0)continue;
+    Instance("SM_Wall",C+Out*1760+T*K*400,FRotator(0,Side*90.f+90,0),FVector(1,1,Side==0?1.65:1.25));
+    if(FMath::Abs(K)==3)Instance("SM_Ivy",C+Out*1670+T*K*400+FVector(0,0,310),FRotator(0,Side*90.f,0),FVector(1.2));
+   }
+   if(Door)Instance("SM_Arch",C+Out*1760,FRotator(0,Side*90.f+90,0),FVector(.82,1.1,1.3));
+  }
+  // All variants leave +/-X and +/-Y door approaches clear. The two cover
+  // banks move between three configurations, changing close and recall lanes.
+  const FVector CoverA[]={FVector(-690,620,0),FVector(-810,800,0),FVector(-650,540,0)};
+  const FVector CoverB[]={FVector(810,-860,0),FVector(650,-780,0),FVector(880,-1000,0)};
+  Instance("SM_Wall",C+CoverA[Variant],FRotator(0,Variant==1?90:0,0),FVector(1.3,1,.43));
+  Instance("SM_Wall",C+CoverB[Variant],FRotator(0,Variant==2?90:0,0),FVector(1.15,1,.46));
+  Instance("SM_Rubble",C+CoverA[Variant]+FVector(250,-60,0),FRotator(0,32,0),FVector(1.2));
+  const FVector Tree=C+FVector(Variant==1?920:600,Variant==2?1150:940,0);
+  Instance("SM_BellTree",Tree,FRotator(0,-12+RoomIndex*37,0),FVector(1.2));
+  Instance("SM_Canopy",Tree+FVector(0,0,744),FRotator(0,-12+RoomIndex*37,0),FVector(1.38));
+  Instance("SM_Bell",Tree+FVector(-20,-130,344),FRotator(0,-9,-6),FVector(RoomIndex==2?1.9:1.5));
+  // A corner gallery creates height and shadow without blocking the exits.
+  for(int32 K=0;K<2;++K){
+   Instance("SM_Arch",C+FVector(-1130+K*470,1340,0),FRotator::ZeroRotator,FVector(.88,1,1.2));
+   Instance("SM_Wall",C+FVector(-1130+K*470,1590,375),FRotator::ZeroRotator,FVector(1.2,1,.55));
+  }
+  Instance("SM_PillarBroken",C+FVector(1260,-1230,0),FRotator(0,17,0),FVector(1.1));
+  Instance("SM_Arch",C+FVector(1440,1480,390),FRotator(0,30,0),FVector(1.1,1,1.4));
+  for(int32 Corner=0;Corner<4;++Corner){
+   FVector Growth=C+FRotator(0,Corner*90.f,0).RotateVector(FVector(1350,1350,0));
+   for(int32 J=0;J<4;++J){
+    FVector P=Growth+FVector(Art.FRandRange(-140,140),Art.FRandRange(-140,140),0);
+    Instance("SM_Fern",P,FRotator(0,Art.FRandRange(0,360),0),FVector(Art.FRandRange(.7,1.25)));
+    for(int32 K=0;K<3;++K)Instance("SM_Grass",P+FVector(Art.FRandRange(-80,80),Art.FRandRange(-80,80),0),FRotator(0,Art.FRandRange(0,360),0),FVector(Art.FRandRange(.7,1.2)));
+   }
+  }
+  FVector Ward=C+FVector(-1120,-430,76);
+  if(R.Parent>=0){FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();Ward=C+Back*1120+FVector(-Back.Y,Back.X,0)*300+FVector(0,0,76);}
+  Instance("SM_Rubble",Ward-FVector(0,0,76),FRotator(0,24,0),FVector(1.05,1.05,.55));
+  R.Altar=Mesh("SM_Crystal",Ward,FRotator::ZeroRotator,FVector(1.4),false,"M_Crystal");
  }
- for(int32 Y=-3;Y<=3;++Y){
-  Instance("SM_Wall",FVector(1760,Y*400,0),FRotator(0,90,0),FVector(1,1,1.65));
-  Instance("SM_Wall",FVector(-1760,Y*400,0),FRotator(0,90,0),FVector(1,1,1.35));
+ for(int32 I=1;I<Rooms.Num();++I){
+  const FVector A=Rooms[I-1].Center,B=Rooms[I].Center,D=(B-A).GetSafeNormal2D(),T(-D.Y,D.X,0);
+  const float Yaw=D.Rotation().Yaw;
+  Mesh("/Engine/BasicShapes/Cube.Cube",(A+B)*.5+FVector(0,0,-70),FRotator(0,Yaw,0),FVector(9,6,1),true,"M_Mortar");
+  for(int32 K=0;K<4;++K)for(int32 Across=-1;Across<=1;++Across)
+   Instance("SM_StoneTile_B",A+D*(1800+K*200)+T*Across*190+FVector(0,0,-24),FRotator(0,Yaw,0),FVector(1,.95,1));
+  for(int32 Side:{-1,1})for(int32 K=0;K<2;++K)
+   Instance("SM_Wall",A+D*(1900+K*400)+T*350*Side,FRotator(0,Yaw,0),FVector(1,1,.8));
+  Rooms[I].Gates.Add(Mesh("/Engine/BasicShapes/Cube.Cube",(A+B)*.5+FVector(0,0,170),FRotator(0,Yaw,0),FVector(.18,6,3.4),true,"M_Core"));
  }
- // A nearer arch frames the first-person entrance and the bell-tree beyond it.
- Instance("SM_Arch",FVector(-1420,-650,0),FRotator(0,90,0),FVector(1.35,1.15,1.35));
- for(float Y:{-1135.f,-170.f})Instance("SM_Pillar",FVector(-1420,Y,0),FRotator::ZeroRotator,FVector(.95,.95,1.2));
-
- // Northern cloister: evenly supported architecture with a walkable arcade,
- // broken edges and shaded depth behind the arches.
- for(int32 I=0;I<4;++I){
-  float X=-1050+I*610;
-  Instance("SM_Arch",FVector(X,1060,0),FRotator::ZeroRotator,FVector(1.15,1,1.1));
-  Instance("SM_Wall",FVector(X,1390,340),FRotator::ZeroRotator,FVector(1.5,1,.62));
-  if(I!=1)Instance("SM_Ivy",FVector(X-140,1320,455),FRotator(0,I*63.f,0),FVector(1.35));
- }
- // Authored masonry treads rise toward the far gallery. The continuous
- // support is covered by the sculpted stair and irregular landing stones.
- Instance("SM_Stair",FVector(1020,-1040,0),FRotator(0,-90,0),FVector(2.8,1.8,1.6667));
- Mesh("/Engine/BasicShapes/Cube.Cube",FVector(1570,-1000,65),FRotator::ZeroRotator,FVector(3.8,8.5,1.9),true,"M_Stone");
- for(int32 X=0;X<2;++X)for(int32 Y=0;Y<4;++Y)Instance("SM_StoneTile_B",FVector(1470+X*175,-1300+Y*190,136),FRotator(0,90,0),FVector(.87,.95,1));
- Instance("SM_Arch",FVector(1610,-700,160),FRotator(0,90,0),FVector(.9,1,1.18));
-
- // Landmark silhouette and its canopy are authored meshes. Roots visibly grow
- // from this trunk; they are not stretched strips placed across the skyline.
- Instance("SM_BellTree",FVector(360,260,0),FRotator(0,-12,0),FVector(1.35));
- Instance("SM_Canopy",FVector(360,260,837),FRotator(0,-12,0),FVector(1.5));
- Instance("SM_Bell",FVector(350,110,386),FRotator(0,-9,-6),FVector(1.7));
- // Upper ruins sit behind enclosing walls to add depth and silhouette.
- Instance("SM_Arch",FVector(1310,1680,350),FRotator(0,-7,0),FVector(1.5,1.2,1.45));
- Instance("SM_Wall",FVector(1530,1890,0),FRotator::ZeroRotator,FVector(2.5,1.6,2.6));
- Instance("SM_Pillar",FVector(900,1830,0),FRotator(0,0,-2),FVector(1.3,1.3,2.7));
- Instance("SM_Pillar",FVector(2070,1830,0),FRotator(0,0,2),FVector(1.3,1.3,2.4));
- Instance("SM_BellTree",FVector(-1850,1900,-20),FRotator(0,134,0),FVector(1.8));
- Instance("SM_Canopy",FVector(-1850,1900,1100),FRotator(0,134,0),FVector(2));
-
- // Low cover creates two readable return lanes around the central tree.
- Instance("SM_Wall",FVector(-120,-850,0),FRotator(0,-14,0),FVector(1.05,1,.43));
- Instance("SM_Rubble",FVector(160,-860,0),FRotator(0,32,0),FVector(1.3));
- Instance("SM_Wall",FVector(1280,20,0),FRotator(0,77,0),FVector(.65,1,.48));
- Instance("SM_PillarBroken",FVector(-780,1040,0),FRotator(0,17,0),FVector(1.1));
- Instance("SM_Ivy",FVector(-1630,-1210,275),FRotator(0,90,0),FVector(1.4));
- const FVector Growth[]={FVector(-1550,1050,0),FVector(-950,1210,0),FVector(-420,1210,0),FVector(660,970,0),FVector(1350,1150,0),FVector(1570,750,0),FVector(980,310,0),FVector(420,630,0),FVector(0,430,0),FVector(-1550,-1230,0),FVector(-1150,-1270,0),FVector(-300,-1230,0),FVector(-1450,-150,0),FVector(-1240,490,0),FVector(-520,-830,0),FVector(270,-170,0),FVector(720,-200,0),FVector(1460,-330,0)};
- for(int32 I=0;I<UE_ARRAY_COUNT(Growth);++I){
-  Instance("SM_Fern",Growth[I],FRotator(0,Art.FRandRange(0,360),0),FVector(Art.FRandRange(.8,1.25)));
-  if(I%2==0)Instance("SM_Rubble",Growth[I]+FVector(130,85,-5),FRotator(0,Art.FRandRange(0,360),0),FVector(Art.FRandRange(.65,1.15)));
-  for(int32 J=0;J<6;++J)Instance("SM_Grass",Growth[I]+FVector(Art.FRandRange(-120,120),Art.FRandRange(-100,100),0),FRotator(0,Art.FRandRange(0,360),0),FVector(Art.FRandRange(.8,1.2)));
- }
-
- // One conspicuous ward stone serves all phases; the glow is quiet until a
- // decision is available. Current stage chooses which shared-position actor shows.
- Instance("SM_Rubble",FVector(-1120,-430,0),FRotator(0,24,0),FVector(1.05,1.05,.55));
- for(int32 I=0;I<Rooms.Num();++I)Rooms[I].Altar=Mesh("SM_Crystal",FVector(-1120,-430,76),FRotator::ZeroRotator,FVector(1.4),false,"M_Crystal");
-
+ UE_LOG(LogTemp,Display,TEXT("DB_LAYOUT seed=%d %s"),Seed,*LayoutSignature);
  auto* Sun=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,3000),FRotator(-38,-42,0));
  Sun->GetLightComponent()->SetMobility(EComponentMobility::Movable);
  Sun->GetLightComponent()->SetIntensity(5.7f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.84,.62));

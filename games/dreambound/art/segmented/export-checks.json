@@ -1,0 +1,109 @@
+{
+  "tool": "5.2.1 LTS",
+  "kind": "Blender FBX roundtrip; not Unreal or playtest evidence",
+  "assets": {
+    "SM_ShieldSegment": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -6.9499993324279785,
+        -16.45486831665039,
+        11.735420227050781
+      ],
+      "bounds_max_cm": [
+        5.3614182472229,
+        16.45486831665039,
+        37.900001525878906
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_ShieldCeramic",
+        "M_ShieldBronze",
+        "M_DarkMetal"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 34,
+      "minimum_component_volume_cm3": 0.001029384322464466,
+      "sha256": "e90faa85d9949d38b7607f86ee68bed41ef3d9a8e558ea848b7cdf4510476c9f"
+    },
+    "SM_ShieldSegmentGlow": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -6.460000514984131,
+        -6.0772223472595215,
+        17.248037338256836
+      ],
+      "bounds_max_cm": [
+        5.530000686645508,
+        5.978031635284424,
+        29.200000762939453
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_Core"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 5,
+      "minimum_component_volume_cm3": 0.09225585932532943,
+      "sha256": "2f633f1c364fb5d245d9cba402158e046fc165b73b9a64507ea0d686fbf8769e"
+    },
+    "SM_ShieldHub": {
+      "status": "pass",
+      "bounds_min_cm": [
+        -14.05000114440918,
+        -14.899999618530273,
+        -15.100000381469727
+      ],
+      "bounds_max_cm": [
+        5.810000419616699,
+        14.899999618530273,
+        14.99485969543457
+      ],
+      "pivot_cm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "M_ShieldCeramic",
+        "M_ShieldBronze",
+        "M_DarkMetal"
+      ],
+      "uv_channels": [
+        "CraftUV"
+      ],
+      "tangent_audit": {
+        "bad_faces": [],
+        "nearly_zero_tangent_loops_on_valid_geometry": 0,
+        "nearly_zero_tangents_on_submicron_geometry": 0,
+        "non_finite_tangent_loops": 0
+      },
+      "closed_outward_components": 50,
+      "minimum_component_volume_cm3": 0.0010252778765789047,
+      "sha256": "962becd4e8c1e886834f6c5cb672567ca5fbfcfb74d97496f6f408e37f8452a5"
+    }
+  }
+}

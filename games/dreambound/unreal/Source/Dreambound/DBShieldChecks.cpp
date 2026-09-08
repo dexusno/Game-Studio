@@ -60,7 +60,7 @@ bool ADBShieldCheckRunner::Initialize(ADBGameMode& InMode)
     if (!Check(bSafe, TEXT("isolated_slot"), TEXT("Requires -DBVerify and an explicit matching QA save-slot prefix.")))
     { Finish(true); return false; }
     if (!Check(Mode->bRecoverySlice && Mode->Rooms.Num() == 3 && IsValid(Player)
-        && Player->GetController() && Player->ViewCamera, TEXT("recovery_world"), TEXT("Actual world, possessed character, camera and three courtyard phases.")))
+        && Player->GetController() && Player->ViewCamera, TEXT("recovery_world"), TEXT("Actual world, possessed character, camera and three connected rooms.")))
     { Finish(true); return false; }
 
     for (const TCHAR* Suffix : {TEXT("_0"), TEXT("_1"), TEXT("_settings")})
@@ -149,7 +149,7 @@ ADBEnemy* ADBShieldCheckRunner::MakeTarget(FVector Location)
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
     ADBEnemy* Enemy = GetWorld()->SpawnActor<ADBEnemy>(Location, FRotator(0, 180, 0), Params);
     if (!Enemy) return nullptr;
-    Enemy->Configure(EDBEnemyKind::Melee, Mode->CurrentRoomId, 1.f);
+    Enemy->Configure(EDBEnemyKind::Melee, INDEX_NONE, 1.f);
     Enemy->SetActorLocation(Location);
     Enemy->Health = Enemy->MaxHealth = 2000.f; // Prevent death/progression during contact checks.
     Enemy->SetActorTickEnabled(false);
@@ -169,46 +169,43 @@ ADBProjectile* ADBShieldCheckRunner::FireBolt(FVector Start, FVector Direction)
     return Projectile;
 }
 
-void ADBShieldCheckRunner::BeginReturn()
+int32 ADBShieldCheckRunner::FindPiece(EDBShieldPieceState State) const
 {
-    Flight = Player->ThrownShield.Get();
-    LastFlightPoint = Flight.IsValid() ? Flight->GetActorLocation() : FVector::ZeroVector;
-    MaxFlightStep = 0.f;
-    LastCatchDistance = MAX_flt;
-    bSawReturnTravel = false;
-    Player->UseSpecial(); // Ordinary Q action, not a direct state mutation.
+    for (int32 I = 0; I < Player->GetShieldPieceCount(); ++I)
+        if (Player->GetPieceState(I) == State) return I;
+    return INDEX_NONE;
 }
 
-void ADBShieldCheckRunner::SampleReturn()
+bool ADBShieldCheckRunner::CheckPieceOwnership(const TCHAR* Id)
 {
-    if (!Flight.IsValid() || Flight->IsActorBeingDestroyed()) return;
-    const FVector Point = Flight->GetActorLocation();
-    const float Distance = FVector::Distance(Point, LastFlightPoint);
-    MaxFlightStep = FMath::Max(MaxFlightStep, Distance);
-    bSawReturnTravel |= Distance > 1.f;
-    LastCatchDistance = FVector::Distance(Point, Player->GetShieldCatchLocation());
-    LastFlightPoint = Point;
-}
-
-bool ADBShieldCheckRunner::CheckCatch(const TCHAR* Id)
-{
-    return Check(Player->ShieldState == EDBShieldState::Held && !IsValid(Player->ThrownShield)
-        && bSawReturnTravel && LastCatchDistance <= 215.f && MaxFlightStep <= 145.f && PhaseAge < 4.4f,
-        Id, FString::Printf(TEXT("return=%.3fs last catch gap=%.1fcm max sampled travel=%.1fcm; excludes timeout reconstitution"),
-            PhaseAge, LastCatchDistance, MaxFlightStep));
+    TSet<ADBThrownShield*> Actors;
+    bool Good = Player->GetShieldPieceCount() == 6;
+    for (int32 I = 0; I < 6; ++I)
+    {
+        const EDBShieldPieceState State = Player->GetPieceState(I);
+        ADBThrownShield* Piece = Player->GetPieceFlight(I);
+        const bool Away = State == EDBShieldPieceState::Outbound || State == EDBShieldPieceState::Lodged || State == EDBShieldPieceState::Returning;
+        Good &= Away == IsValid(Piece);
+        if (Piece) { Good &= Piece->GetPieceId() == I && !Actors.Contains(Piece); Actors.Add(Piece); }
+    }
+    Good &= Player->GetAttachedPieceCount() + Player->GetDeployedPieceCount() + Player->GetRegeneratingPieceCount() == 6;
+    return Check(Good, Id, FString::Printf(TEXT("held=%d selected=%d deployed=%d rebuilding=%d unique flight actors=%d"),
+        Player->GetAttachedPieceCount(), Player->GetSelectedPieceCount(), Player->GetDeployedPieceCount(), Player->GetRegeneratingPieceCount(), Actors.Num()));
 }
 
 bool ADBShieldCheckRunner::StartEncounter(int32 Index, int32 ExpectedCount)
 {
     if (!Mode->Rooms.IsValidIndex(Index) || !IsValid(Mode->Rooms[Index].Altar)) return false;
+    Mode->ClearRewardPractice();
+    Mode->ActivateRoom(Index); // Explicit staging; corridor collision is checked separately, not a claimed walk-through.
     PlacePlayer(Mode->Rooms[Index].Altar->GetActorLocation() + FVector(-180, 0, 35));
-    Mode->Interact(); // Must start via ward interaction, not SpawnWave or cleared flags.
+    Mode->Interact();
     int32 Count = 0;
     for (TActorIterator<ADBEnemy> It(GetWorld()); It; ++It)
         if (!It->bDead && It->RoomId == Index)
         {
-            ++Count;
-            It->SetActorTickEnabled(false);
+            ++Count; It->SetActorTickEnabled(false);
+            It->GetCharacterMovement()->StopMovementImmediately();
             It->GetCharacterMovement()->DisableMovement();
         }
     Mode->Interact();
@@ -217,337 +214,338 @@ bool ADBShieldCheckRunner::StartEncounter(int32 Index, int32 ExpectedCount)
     return Check(!Mode->bSliceAwaitingStart && Count == ExpectedCount && Again == Count
         && !Mode->bChoosingReward && !Mode->ClaimedRooms.Contains(Index),
         *FString::Printf(TEXT("encounter_%d_starts_once"), Index),
-        FString::Printf(TEXT("ward interaction spawned %d actual threats; repeated E leaves %d; no unearned reward"), Count, Again));
+        FString::Printf(TEXT("ActivateRoom staging, actual ward interaction spawned %d threats; repeated E leaves %d."), Count, Again));
 }
 
 bool ADBShieldCheckRunner::ClearEncounter(int32 Index)
 {
     TArray<ADBEnemy*> Enemies;
     for (TActorIterator<ADBEnemy> It(GetWorld()); It; ++It) if (!It->bDead && It->RoomId == Index) Enemies.Add(*It);
-    const int32 BeforeKills = Mode->Kills;
+    const int32 Before = Mode->Kills;
     for (ADBEnemy* Enemy : Enemies)
     {
-        FDBHit Hit;
-        Hit.Damage = 100000.f;
-        Hit.Source = Player->GetActorLocation();
-        Hit.Direction = FVector::ForwardVector;
-        Hit.InstigatorActor = Player;
-        Enemy->ApplyCombatHit(Hit); // Staged lethal damage tests progression, not player combat success.
-        Enemy->ApplyCombatHit(Hit); // Dead actors must not notify/award twice.
+        FDBHit Hit; Hit.Damage = 100000.f; Hit.Source = Player->GetActorLocation(); Hit.InstigatorActor = Player;
+        Enemy->ApplyCombatHit(Hit); Enemy->ApplyCombatHit(Hit);
     }
-    return Check(!Enemies.IsEmpty() && Mode->ClearedRooms.Contains(Index) && Mode->Kills == BeforeKills + Enemies.Num(),
-        *FString::Printf(TEXT("encounter_%d_clear"), Index),
-        FString::Printf(TEXT("%d spawned enemies defeated with staged lethal hits; kill notices remain unique"), Enemies.Num()));
+    return Check(!Enemies.IsEmpty() && Mode->ClearedRooms.Contains(Index) && Mode->Kills == Before + Enemies.Num(),
+        *FString::Printf(TEXT("encounter_%d_clear"), Index), TEXT("Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."));
 }
 
-bool ADBShieldCheckRunner::TakeReward(FName Id, int32 ExpectedNextPhase)
+bool ADBShieldCheckRunner::TakeReward(FName Id, int32 Room)
 {
     Mode->Interact();
     int32 Choice = INDEX_NONE;
     for (int32 I = 0; I < Mode->Offers.Num(); ++I) if (Mode->Offers[I].Id == Id) Choice = I;
-    const bool bOfferedAfterClear = Mode->bChoosingReward && Choice != INDEX_NONE;
+    const bool Offered = Mode->bChoosingReward && Choice != INDEX_NONE;
     const int32 Before = Player->GetUpgradeRank(Id);
-    Mode->ChooseReward(Choice);
-    Mode->ChooseReward(Choice);
-    return Check(bOfferedAfterClear && Player->GetUpgradeRank(Id) == Before + 1
-        && Mode->LearnedPatterns.Contains(Id) && Mode->ClaimedRooms.Contains(ExpectedNextPhase - 1)
-        && Mode->CurrentRoomId == ExpectedNextPhase && Mode->bSliceAwaitingStart && !Mode->bChoosingReward,
-        *FString::Printf(TEXT("earned_%s"), *Id.ToString()), TEXT("Clear, ward, ordinary reward choice, installation, retained pattern and next ready phase; duplicate input ignored."));
+    Mode->ChooseReward(Choice); Mode->ChooseReward(Choice);
+    bool Open = Mode->Rooms.IsValidIndex(Room + 1) && !Mode->Rooms[Room + 1].Gates.IsEmpty();
+    if (Open) for (AActor* Gate : Mode->Rooms[Room + 1].Gates) Open &= IsValid(Gate) && !Gate->GetActorEnableCollision();
+    return Check(Offered && Player->GetUpgradeRank(Id) == Before + 1 && Mode->LearnedPatterns.Contains(Id)
+        && Mode->ClaimedRooms.Contains(Room) && Mode->CurrentRoomId == Room && !Mode->bChoosingReward
+        && Mode->PracticeReward == Id && !Mode->PracticeInstruction.IsEmpty() && Open,
+        *FString::Printf(TEXT("earned_%s_stays_in_room"), *Id.ToString()),
+        TEXT("Clear, ward, actual choice/claim: one installation, retained pattern, same room, practice instruction and next gate opened."));
+}
+
+bool ADBShieldCheckRunner::CheckPractice(FName Id, int32 Room)
+{
+    const int32 BeforeKills = Mode->Kills;
+    const TArray<int32> BeforeCleared = Mode->ClearedRooms;
+    int32 Count = 0; bool Safe = true;
+    for (TActorIterator<ADBEnemy> It(GetWorld()); It; ++It)
+        if (It->bPracticeTarget)
+        {
+            ++Count; Safe &= It->RoomId == INDEX_NONE;
+            FDBHit Hit; Hit.Damage = 100000.f; Hit.InstigatorActor = Player; Hit.Source = Player->GetActorLocation();
+            It->ApplyCombatHit(Hit);
+            Safe &= !It->bDead && It->Health > 0.f;
+        }
+    return Check(Count > 0 && Safe && Mode->PracticeReward == Id && Mode->CurrentRoomId == Room
+        && Mode->Kills == BeforeKills && Mode->ClearedRooms == BeforeCleared && !Mode->bDefeated && Player->CanAct(),
+        *FString::Printf(TEXT("%s_practice_is_safe"), *Id.ToString()),
+        FString::Printf(TEXT("%d actual practice targets survive lethal contact; RoomId=-1; no kill/clear progression."), Count));
+}
+
+bool ADBShieldCheckRunner::CheckRouteGeometry()
+{
+    bool Connected = Mode->Rooms.Num() == 3, Clear = true, Floored = true, Closed = true;
+    int32 Samples = 0; FString Failures;
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(DBSegmentRouteQA), false, Player);
+    for (const FDBRoom& Room : Mode->Rooms) for (AActor* Gate : Room.Gates) Params.AddIgnoredActor(Gate);
+    for (int32 I = 1; I < Mode->Rooms.Num(); ++I)
+    {
+        const FVector A = Mode->Rooms[I - 1].Center, B = Mode->Rooms[I].Center;
+        const FVector D = (B - A).GetSafeNormal2D();
+        Connected &= Mode->Rooms[I].Parent == I - 1 && FMath::IsNearlyEqual(FVector::Distance(A, B), 4200.f, 1.f);
+        const FVector Start = A + D * 1300.f + FVector(0, 0, 110), End = B - D * 1300.f + FVector(0, 0, 110);
+        FHitResult Obstacle;
+        if (GetWorld()->SweepSingleByChannel(Obstacle, Start, End, FQuat::Identity, ECC_Pawn,
+            FCollisionShape::MakeCapsule(Player->GetCapsuleComponent()->GetScaledCapsuleRadius(), Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()), Params))
+        {
+            Clear = false; Failures += FString::Printf(TEXT(" link%d blocked by %s;"), I, *GetNameSafe(Obstacle.GetActor()));
+        }
+        for (int32 S = 0; S <= 16; ++S)
+        {
+            const FVector P = FMath::Lerp(Start, End, S / 16.f); FHitResult Floor;
+            Floored &= GetWorld()->LineTraceSingleByChannel(Floor, P, P - FVector(0, 0, 350), ECC_Visibility, Params)
+                && Floor.ImpactNormal.Z > .65f;
+            ++Samples;
+        }
+        Closed &= !Mode->Rooms[I].Gates.IsEmpty();
+        for (AActor* Gate : Mode->Rooms[I].Gates) Closed &= IsValid(Gate) && Gate->GetActorEnableCollision();
+    }
+    return Check(Connected && Clear && Floored && Closed, TEXT("connected_collision_and_floor"),
+        FString::Printf(TEXT("Three linked rooms; player-sized door/corridor sweeps (closed progression gates explicitly ignored), %d floor probes; gates initially closed.%s"), Samples, *Failures));
 }
 
 void ADBShieldCheckRunner::DestroyFixtures()
 {
     for (AActor* Actor : FixtureActors) if (IsValid(Actor)) Actor->Destroy();
-    FixtureActors.Reset();
-    Target = nullptr;
-    Cover = nullptr;
+    FixtureActors.Reset(); Target = nullptr; OtherTarget = nullptr; Cover = nullptr;
 }
 
 void ADBShieldCheckRunner::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!bInitialized || bFinished) return;
-    if (FPlatformTime::Seconds() - StartedAt > 55.0)
+    if (FPlatformTime::Seconds() - StartedAt > 150.0)
     { Check(false, TEXT("bounded_timeout"), FString::Printf(TEXT("step=%d"), int32(Step))); Finish(true); return; }
-    if (!IsValid(Mode) || !IsValid(Player))
-    { Check(false, TEXT("runtime_actor_lost")); Finish(true); return; }
+    if (!IsValid(Mode) || !IsValid(Player)) { Check(false, TEXT("runtime_actor_lost")); Finish(true); return; }
     PhaseAge += DeltaSeconds;
     switch (Step)
     {
     case EStep::Prepare:
         if (PhaseAge < .08f) break;
-        Scenario = TEXT("held_attack_defense_tradeoff");
-        Player->PressGuard();
-        HealthBefore = Player->Health;
-        Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0));
-        Check(Player->bGuarding && Player->Health == HealthBefore && Player->ParryFlashTime > 0.f,
-            TEXT("held_front_guard"), TEXT("Fresh raised shield protects from the staged frontal attack."));
-        Player->ReleaseGuard();
-        TargetBefore = Target->Health;
-        Player->PressFire(); Player->ReleaseFire();
-        Player->PressGuard();
-        Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0));
-        Check(!Player->bGuarding && Player->AttackRecovery > 0.f && Player->Health < HealthBefore,
-            TEXT("strike_commits_protection"), TEXT("Tap attacks; held guard cannot cancel its exposed recovery."));
-        Go(EStep::Strike);
-        break;
-    case EStep::Strike:
-        if (PhaseAge < .65f) break;
-        Check(Target->Health < TargetBefore && Player->bGuarding && Player->AttackRecovery <= 0.f,
-            TEXT("rim_contact_and_guard_recovery"), FString::Printf(TEXT("real nearby target health %.1f -> %.1f; held guard restored after recovery"), TargetBefore, Target->Health));
-        Player->ReleaseGuard();
-        Target->SetActorLocation(Origin + FVector(-100, 0, 88));
-        TargetBefore = Target->Health;
-        Player->PressFire();
-        HealthBefore = Player->Health;
-        Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0));
-        Check(Player->ShieldState == EDBShieldState::Charging && !Player->bGuarding && Player->Health < HealthBefore,
-            TEXT("charge_exposes_player"));
-        Go(EStep::Charge);
-        break;
-    case EStep::Charge:
-        if (PhaseAge < .45f) break;
-        Scenario = TEXT("launch_exposure_and_pause");
+        Scenario = TEXT("allocation_and_retained_guard");
+        Target->Destroy(); Target = nullptr; Player->PressFire(); Go(EStep::HalfCharge); break;
+    case EStep::HalfCharge:
+        if (PhaseAge < .52f) break;
+        Check(Player->GetSelectedPieceCount() == 3 && Player->GetAttachedPieceCount() == 6 && !Player->bGuarding,
+            TEXT("hold_selects_three"), FString::Printf(TEXT("Ordinary hold observed %.4fs; expected thresholds .22/.36/.50."), PhaseAge));
         Player->ReleaseFire();
-        Flight = Player->ThrownShield.Get();
-        if (!Check(Flight.IsValid() && Player->ShieldState == EDBShieldState::Outbound, TEXT("release_launches_physical_actor")))
-        { Finish(true); return; }
-        HealthBefore = Player->Health;
-        Player->PressGuard();
-        Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0));
-        Check(!Player->bGuarding && Player->Health < HealthBefore, TEXT("away_has_no_guard"));
-        PausedPoint = Flight->GetActorLocation();
-        Mode->TogglePause();
-        Go(EStep::PausedFlight);
-        break;
-    case EStep::PausedFlight:
-        if (FPlatformTime::Seconds() - PhaseStartedAt < .15) break;
-        HealthBefore = Player->Health;
-        Player->PressFire(); Player->UseSpecial(); Player->PressGuard();
-        Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation());
-        Check(Flight.IsValid() && Mode->bPaused && Player->ShieldState == EDBShieldState::Outbound
-            && Flight->GetActorLocation().Equals(PausedPoint, .01f) && Player->Health == HealthBefore,
-            TEXT("pause_preserves_deployment"), TEXT("Paused real actor stops; attack/recall/damage calls cannot recover it."));
-        Mode->TogglePause();
-        Go(EStep::Outward);
-        break;
-    case EStep::Outward:
-        if (Player->ShieldState != EDBShieldState::Lodged && PhaseAge < 3.2f) break;
-        Scenario = TEXT("outward_return_contacts_and_catch");
-        if (!Check(Flight.IsValid() && Player->ShieldState == EDBShieldState::Lodged && Target->Health < TargetBefore,
-            TEXT("outward_swept_hit"), FString::Printf(TEXT("target %.1f -> %.1f through tick-driven physical travel"), TargetBefore, Target->Health)))
-        { Finish(true); return; }
-        OutwardHealth = Target->Health;
-        Go(EStep::Lodged);
-        break;
-    case EStep::Lodged:
-        if (PhaseAge < .2f) break;
-        Check(Target->Health == OutwardHealth, TEXT("lodged_no_repeat_damage"));
-        BeginReturn();
-        Check(Flight.IsValid() && Flight->IsReturning() && Player->ShieldState == EDBShieldState::Returning,
-            TEXT("q_recalls_same_actor"));
-        Go(EStep::Return);
-        break;
-    case EStep::Return:
-        SampleReturn();
-        if (Player->ShieldState != EDBShieldState::Held && PhaseAge < 5.f) break;
-        CheckCatch(TEXT("physical_return_catch"));
-        Check(Target->Health < OutwardHealth, TEXT("return_swept_hit"), FString::Printf(TEXT("same target %.1f -> %.1f on return pass"), OutwardHealth, Target->Health));
-        Go(EStep::CatchRecovery);
-        break;
-    case EStep::CatchRecovery:
-        if (PhaseAge < .4f) break;
-        Player->PressGuard();
-        Check(Player->bGuarding && Player->bShieldReady, TEXT("caught_shield_usable"));
-        Scenario = TEXT("physical_recall_around_cover");
-        Target->Destroy(); Target = nullptr;
-        ResetPlayer(Origin + FVector(-800, -700, 93));
-        Cover = MakeBox(Origin + FVector(0, 0, 200), FVector(90, 450, 200));
-        Player->PressFire();
-        Go(EStep::CoverCharge);
-        break;
-    case EStep::CoverCharge:
-        if (PhaseAge < .45f) break;
-        Player->ReleaseFire(); Flight = Player->ThrownShield.Get();
-        Go(EStep::CoverOutward);
-        break;
-    case EStep::CoverOutward:
-        if (Player->ShieldState != EDBShieldState::Lodged && PhaseAge < 3.2f) break;
-        if (!Check(Flight.IsValid() && Player->ShieldState == EDBShieldState::Lodged, TEXT("cover_route_deployed")))
-        { Finish(true); return; }
-        MoveDestination = Origin + FVector(-800, 150, 93);
-        MoveSamples = 0;
-        Go(EStep::CoverMove);
-        break;
-    case EStep::CoverMove:
-    {
-        const FVector Before = Player->GetActorLocation();
-        const FVector Delta = MoveDestination - Before;
-        FHitResult MovementHit;
-        Player->SetActorLocation(Before + Delta.GetClampedToMaxSize(FMath::Min(35.f, 650.f * DeltaSeconds)), true, &MovementHit);
-        ++MoveSamples;
-        if (FVector::Distance(Player->GetActorLocation(), MoveDestination) > 5.f && PhaseAge < 3.f) break;
-        FCollisionQueryParams Params(SCENE_QUERY_STAT(DBQACover), false, this);
-        Params.AddIgnoredActor(Player); Params.AddIgnoredActor(Flight.Get());
-        FHitResult Obstruction;
-        const bool bBlocked = Flight.IsValid() && GetWorld()->SweepSingleByChannel(Obstruction,
-            Flight->GetActorLocation(), Player->GetShieldCatchLocation(), FQuat::Identity, ECC_Visibility,
-            FCollisionShape::MakeSphere(20.f), Params);
-        if (!Check(bBlocked && Obstruction.GetActor() == Cover && MoveSamples > 5
-            && FVector::Distance(Player->GetActorLocation(), MoveDestination) <= 5.f,
-            TEXT("moved_behind_real_cover"), TEXT("Swept lateral route recorded by deployed shield; its direct catch line hits the QA wall.")))
-        { Finish(true); return; }
-        BeginReturn(); Go(EStep::CoverReturn);
-        break;
-    }
-    case EStep::CoverReturn:
-        SampleReturn();
-        if (Player->ShieldState != EDBShieldState::Held && PhaseAge < 5.f) break;
-        CheckCatch(TEXT("recall_recovers_around_cover"));
-        Scenario = TEXT("anchor_front_projectile_crossing");
-        if (IsValid(Cover)) Cover->Destroy();
-        ResetPlayer(Origin + FVector(-800, 0, 93));
-        Player->ApplyUpgrade(TEXT("Anchor")); Player->ApplyUpgrade(TEXT("Anchor"));
-        Player->PressFire(); Go(EStep::AnchorCharge);
-        break;
-    case EStep::AnchorCharge:
-        if (PhaseAge < .45f) break;
-        Player->ReleaseFire(); Flight = Player->ThrownShield.Get();
-        Go(EStep::AnchorOutward);
-        break;
-    case EStep::AnchorOutward:
-        if (Player->ShieldState != EDBShieldState::Lodged && PhaseAge < 3.2f) break;
-        if (!Check(Flight.IsValid() && Flight->IsAnchored(), TEXT("physical_anchor_deploys"), TEXT("Rank 2 is granted only for this deterministic mechanics fixture.")))
-        { Finish(true); return; }
-        PlacePlayer(Flight->GetActorLocation() + FVector(-450, 0, 0));
-        IntegrityBefore = Flight->GetAnchorIntegrity(); HealthBefore = Player->Health; BankBefore = Player->StoredShots;
-        Bolt = FireBolt(Flight->GetActorLocation() + FVector(300, 0, 0), -FVector::ForwardVector);
-        Go(EStep::AnchorFront);
-        break;
-    case EStep::AnchorFront:
-        if (PhaseAge < 1.05f) break;
-        if (!Flight.IsValid()) { Check(false, TEXT("anchor_actor_lost")); Finish(true); return; }
-        Check(Flight.IsValid() && FMath::IsNearlyEqual(Flight->GetAnchorIntegrity(), IntegrityBefore - 17.f)
-            && Player->Health == HealthBefore && Player->StoredShots == BankBefore + 1
-            && (!Bolt.IsValid() || Bolt->IsActorBeingDestroyed()),
-            TEXT("anchor_stops_crossing_projectile"), TEXT("Actual front-crossing bolt spent integrity and banked force; player behind it took no damage."));
-        Scenario = TEXT("anchor_flank_and_back_exposure");
-        PlacePlayer(Flight->GetActorLocation() + FVector(-450, 150, 0));
-        IntegrityBefore = Flight->GetAnchorIntegrity(); HealthBefore = Player->Health; BankBefore = Player->StoredShots;
-        Bolt = FireBolt(Flight->GetActorLocation() + FVector(300, 150, 0), -FVector::ForwardVector);
-        Go(EStep::AnchorFlank);
-        break;
-    case EStep::AnchorFlank:
-        if (PhaseAge < 1.05f) break;
-        if (!Flight.IsValid()) { Check(false, TEXT("anchor_actor_lost")); Finish(true); return; }
-        Check(Flight.IsValid() && Flight->GetAnchorIntegrity() == IntegrityBefore
-            && FMath::IsNearlyEqual(Player->Health, HealthBefore - 17.f) && Player->StoredShots == BankBefore,
-            TEXT("anchor_flank_remains_exposed"), TEXT("Parallel real bolt 150 cm outside the disk reaches the unguarded player."));
-        PlacePlayer(Flight->GetActorLocation() + FVector(450, 0, 0));
-        IntegrityBefore = Flight->GetAnchorIntegrity(); HealthBefore = Player->Health;
-        Bolt = FireBolt(Flight->GetActorLocation() + FVector(-300, 0, 0), FVector::ForwardVector);
-        Go(EStep::AnchorRear);
-        break;
-    case EStep::AnchorRear:
-        if (PhaseAge < 1.05f) break;
-        if (!Flight.IsValid()) { Check(false, TEXT("anchor_actor_lost")); Finish(true); return; }
-        Check(Flight.IsValid() && Flight->GetAnchorIntegrity() == IntegrityBefore
-            && FMath::IsNearlyEqual(Player->Health, HealthBefore - 17.f),
-            TEXT("anchor_back_face_remains_exposed"), TEXT("Actual reverse crossing is not omnidirectional protection."));
-        Player->OnRunReset(); DestroyFixtures();
-        Mode->LearnedPatterns.Reset(); Mode->StartingPattern = NAME_None;
-        Mode->StartNewRun(true);
-        Player->GetCharacterMovement()->DisableMovement();
-        Go(EStep::FirstEncounter);
-        break;
-    case EStep::FirstEncounter:
-        Scenario = TEXT("first_earned_attachment");
-        Mode->ChooseReward(0);
-        Check(Player->Upgrades.IsEmpty() && Mode->ClaimedRooms.IsEmpty() && Mode->bSliceAwaitingStart,
-            TEXT("fresh_run_has_no_free_reward"));
-        if (!StartEncounter(0, 1) || !ClearEncounter(0) || !TakeReward(TEXT("Anchor"), 1))
-        { Finish(true); return; }
-        Check(Mode->StartingPattern == TEXT("Anchor"), TEXT("first_earned_pattern_selected"));
-        Go(EStep::SecondEncounter);
-        break;
-    case EStep::SecondEncounter:
-        Scenario = TEXT("second_earned_attachment");
-        if (!StartEncounter(1, 3) || !ClearEncounter(1) || !TakeReward(TEXT("Frost"), 2))
-        { Finish(true); return; }
-        Check(Player->GetUpgradeRank(TEXT("Anchor")) == 1 && Player->GetUpgradeRank(TEXT("Frost")) == 1
-            && Player->CurrentElement == EDBElement::Frost, TEXT("two_earned_attachments_combine"));
-        Player->Health = 73.f;
-        Player->PressFire(); Go(EStep::SaveCharge);
-        break;
-    case EStep::SaveCharge:
+        Check(Player->GetDeployedPieceCount() == 3 && Player->GetAttachedPieceCount() == 3 && Player->GetSelectedPieceCount() == 0,
+            TEXT("release_launches_selected_three"));
+        CheckPieceOwnership(TEXT("launch_ownership")); Go(EStep::LaunchRecovery); break;
+    case EStep::LaunchRecovery:
+        if (PhaseAge < .25f) break;
+        HealthBefore = Player->Health; Player->PressGuard();
+        Player->ReceiveAttack(17.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0), false, nullptr, 101);
+        FirstLost = FindPiece(EDBShieldPieceState::Regenerating);
+        Check(Player->Health == HealthBefore && Player->GetAttachedPieceCount() == 2 && Player->GetRegeneratingPieceCount() == 1,
+            TEXT("remainder_blocks_without_health_loss"));
+        Scenario = TEXT("attack_identity");
+        Player->ReceiveAttack(17.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0), false, nullptr, 101);
+        Check(Player->GetRegeneratingPieceCount() == 1 && Player->Health == HealthBefore, TEXT("same_attack_id_spends_once"));
+        Flight = Player->GetPieceFlight(0);
+        PausedPoint = Flight.IsValid() ? Flight->GetActorLocation() : FVector::ZeroVector;
+        PausedProgress = Player->GetPieceRegenerationProgress(FirstLost);
+        Mode->TogglePause(); Go(EStep::Paused); break;
+    case EStep::Paused:
         if (PhaseAge < .35f) break;
-        Scenario = TEXT("fresh_checkpoint_restores_physical_build");
-        Player->ReleaseFire(); Flight = Player->ThrownShield.Get();
-        if (!Check(Flight.IsValid() && Player->IsShieldAway(), TEXT("checkpoint_with_deployed_shield")))
-        { Finish(true); return; }
-        Mode->SaveProgress(true);
-        Mode->StoredSave = nullptr;
-        Mode->LoadProgress(); Mode->ResumeRun();
+        Scenario = TEXT("pause_freezes_flight_and_rebuild");
+        Check(Mode->bPaused && Flight.IsValid() && FVector::Dist(Flight->GetActorLocation(), PausedPoint) < .01f
+            && FMath::IsNearlyEqual(Player->GetPieceRegenerationProgress(FirstLost), PausedProgress, .0001f),
+            TEXT("pause_preserves_position_and_timer"), TEXT("Ordinary pause menu; runner advances while character/flight remain frozen."));
+        Mode->TogglePause(); Player->PressGuard(); Go(EStep::SecondBlock); break;
+    case EStep::SecondBlock:
+        if (PhaseAge < .6f) break;
+        Scenario = TEXT("attack_identity");
+        Player->ReceiveAttack(17.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0), false, nullptr, 102);
+        for (int32 I = 0; I < 6; ++I) if (I != FirstLost && Player->GetPieceState(I) == EDBShieldPieceState::Regenerating) SecondLost = I;
+        Check(SecondLost != INDEX_NONE && Player->GetRegeneratingPieceCount() == 2 && Player->Health == HealthBefore,
+            TEXT("different_attack_id_spends_another"));
+        Scenario = TEXT("independent_reconstruction");
+        Check(Player->GetPieceRegenerationProgress(FirstLost) > .15f && Player->GetPieceRegenerationProgress(SecondLost) < .03f,
+            TEXT("staggered_losses_have_separate_timers"));
+        Player->ReleaseGuard(); Go(EStep::FirstRebuild); break;
+    case EStep::FirstRebuild:
+        if (Player->GetPieceState(FirstLost) == EDBShieldPieceState::Regenerating && PhaseAge < 3.f) break;
+        Check(Player->GetPieceState(FirstLost) == EDBShieldPieceState::Attached
+            && Player->GetPieceState(SecondLost) == EDBShieldPieceState::Regenerating && Player->GetDeployedPieceCount() == 3,
+            TEXT("older_piece_rebuilds_without_waiting_for_newer")); Go(EStep::LastRebuild); break;
+    case EStep::LastRebuild:
+        if (Player->GetPieceState(SecondLost) == EDBShieldPieceState::Regenerating && PhaseAge < 1.f) break;
+        Check(Player->GetRegeneratingPieceCount() == 0 && Player->GetAttachedPieceCount() == 3, TEXT("later_piece_finishes_own_timer"));
+        ResetPlayer(Origin + FVector(-900, 0, 93));
+        Scenario = TEXT("concurrent_throws_and_unselected_catch"); Player->PressFire(); Go(EStep::FirstPartial); break;
+    case EStep::FirstPartial:
+        if (PhaseAge < .24f) break;
+        Player->ReleaseFire(); CaughtPiece = FindPiece(EDBShieldPieceState::Outbound);
+        Check(Player->GetDeployedPieceCount() == 1, TEXT("first_partial_throw")); Go(EStep::SecondReady); break;
+    case EStep::SecondReady:
+        if (PhaseAge < .24f) break;
+        Player->PressFire(); Player->RecallShield(); Go(EStep::CatchDuringCharge); break;
+    case EStep::CatchDuringCharge:
+        if (PhaseAge < .52f) break;
+        Check(Player->GetPieceState(CaughtPiece) == EDBShieldPieceState::Attached && Player->GetSelectedPieceCount() == 3,
+            TEXT("catch_during_hold_docks_unselected"), TEXT("One physical return docks during a second hold; original three lit pieces remain selected."));
+        Player->ReleaseFire();
+        Check(Player->GetDeployedPieceCount() == 3 && Player->GetAttachedPieceCount() == 3
+            && Player->GetPieceState(CaughtPiece) == EDBShieldPieceState::Attached, TEXT("second_throw_launches_only_lit_pieces"));
+        FirstLost = FindPiece(EDBShieldPieceState::Outbound);
+        if (ADBThrownShield* Lost = Player->GetPieceFlight(FirstLost))
+        {
+            Lost->DestroyPiece();
+            Player->OnShieldPieceDestroyed(FirstLost, Lost); Player->OnShieldPieceCaught(FirstLost, Lost);
+        }
+        Player->RecallShield(); Go(EStep::RecallSurvivors); break;
+    case EStep::RecallSurvivors:
+        if (Player->GetDeployedPieceCount() > 0 && PhaseAge < 1.5f) break;
+        Scenario = TEXT("destroyed_piece_and_survivor_recall");
+        Check(Player->GetDeployedPieceCount() == 0 && Player->GetAttachedPieceCount() == 5
+            && Player->GetPieceState(FirstLost) == EDBShieldPieceState::Regenerating, TEXT("only_survivors_return_no_duplicate_replacement"));
+        CheckPieceOwnership(TEXT("recall_ownership"));
+        ResetPlayer(Origin + FVector(-900, 0, 93)); Target = MakeTarget(Origin + FVector(-720, 0, 88));
+        Scenario = TEXT("zero_piece_core_offense"); Player->PressGuard(); HealthBefore = Player->Health;
+        for (uint32 I = 0; I < 6; ++I) Player->ReceiveAttack(10.f, Player->ViewCamera->GetComponentLocation() + FVector(300, 0, 0), false, nullptr, 200 + I);
+        Check(Player->GetAttachedPieceCount() == 0 && Player->GetRegeneratingPieceCount() == 6 && Player->Health == HealthBefore,
+            TEXT("six_distinct_blocks_spend_six_pieces"));
+        TargetBefore = Target->Health; Player->PressFire(); Player->ReleaseFire(); Go(EStep::CoreStrike); break;
+    case EStep::CoreStrike:
+        if (PhaseAge < .4f) break;
+        Check(Target->Health < TargetBefore && Player->GetAttachedPieceCount() == 0 && !Player->bGuarding,
+            TEXT("core_tap_hits_without_guard_pieces"));
+        Target->Destroy(); ResetPlayer(Origin + FVector(-900, 0, 93)); Player->Health = 100000.f;
+        Target = MakeTarget(Origin + FVector(-100, 0, 100)); Target->Configure(EDBEnemyKind::Boss, INDEX_NONE, 1.f);
+        Target->SetArenaBounds(Origin, FVector2D(2500, 2500)); Target->Health = Target->MaxHealth = 2000.f;
+        Target->SetActorTickEnabled(true); bSawEliteTell = false;
+        Scenario = TEXT("elite_directional_interception"); Go(EStep::EliteWait); break;
+    case EStep::EliteWait:
+        bSawEliteTell |= Target->Phase == EDBEnemyPhase::Telegraph && Target->Telegraph.Contains(TEXT("INTERCEPT"));
+        if (!Target->bShieldInterceptionReady && PhaseAge < 18.f) break;
+        Check(bSawEliteTell && Target->bShieldInterceptionReady && Target->Phase == EDBEnemyPhase::Attack,
+            TEXT("actual_ai_enters_signalled_counter"));
+        // Freeze only after the real AI entered its stance; test direction and simultaneous piece consumption separately from timing difficulty.
+        Target->SetActorTickEnabled(false); Target->GetCharacterMovement()->StopMovementImmediately();
+        Check(!Target->TryInterceptShieldPiece(Target->GetActorForwardVector())
+            && !Target->TryInterceptShieldPiece(FVector::CrossProduct(Target->GetActorForwardVector(), FVector::UpVector))
+            && Target->bShieldInterceptionReady, TEXT("rear_and_flank_do_not_consume_counter"));
+        Aim((Target->GetActorLocation() - Player->ViewCamera->GetComponentLocation()).Rotation());
+        TargetBefore = Target->Health; Player->PressFire(); Go(EStep::EliteCharge); break;
+    case EStep::EliteCharge:
+        if (PhaseAge < .52f) break;
+        Player->ReleaseFire(); Go(EStep::EliteContact); break;
+    case EStep::EliteContact:
+        if (PhaseAge < .8f) break;
+        Check(Player->GetRegeneratingPieceCount() == 1 && Player->GetDeployedPieceCount() == 2
+            && !Target->bShieldInterceptionReady && Target->Health < TargetBefore,
+            TEXT("physical_salvo_loses_exactly_one_other_pieces_hit"), TEXT("Real outbound collision; active stance frozen after normal telegraph to isolate interception semantics."));
+        Target->Destroy(); ResetPlayer(Origin + FVector(-900, 0, 93)); Player->ApplyUpgrade(TEXT("Frost"));
+        Target = MakeTarget(Origin + FVector(-350, 0, 100)); TargetBefore = Target->Health;
+        Scenario = TEXT("frost_launch_and_return_shatter"); Player->PressFire(); Go(EStep::FrostCharge); break;
+    case EStep::FrostCharge:
+        if (PhaseAge < .24f) break;
+        Player->ReleaseFire(); Go(EStep::FrostOutbound); break;
+    case EStep::FrostOutbound:
+        if (PhaseAge < .55f) break;
+        OutwardHealth = Target->Health;
+        Check(OutwardHealth < TargetBefore && Target->ChillStacks == 1 && Player->GetRegeneratingPieceCount() == 0,
+            TEXT("ordinary_enemy_hit_chills_without_destroying_piece"));
+        Player->RecallShield(); Go(EStep::FrostReturn); break;
+    case EStep::FrostReturn:
+        if (Player->GetDeployedPieceCount() > 0 && PhaseAge < 2.f) break;
+        Check(Player->GetAttachedPieceCount() == 6 && OutwardHealth - Target->Health > TargetBefore - OutwardHealth
+            && Mode->EventText.Contains(TEXT("SHATTER")), TEXT("physical_return_consumes_chill_and_adds_shatter_damage"));
+        Target->Destroy(); ResetPlayer(Origin + FVector(-900, 0, 93)); Go(EStep::Storm); break;
+    case EStep::Storm:
+    {
+        Scenario = TEXT("finite_lethal_storm_chain");
+        TArray<ADBEnemy*> Chain;
+        const FVector Points[] = {FVector(0, 0, 100), FVector(0, 180, 100), FVector(0, -180, 100), FVector(350, 0, 100)};
+        for (const FVector& P : Points)
+        {
+            ADBEnemy* E = MakeTarget(Origin + P); E->Health = E->MaxHealth = 10.f; Chain.Add(E);
+            FDBHit Prime; Prime.Damage = 1.f; Prime.Element = EDBElement::Storm; Prime.InstigatorActor = Player;
+            E->ApplyCombatHit(Prime);
+        }
+        const int32 BeforeKills = Mode->Kills;
+        FDBHit Lethal; Lethal.Damage = 100.f; Lethal.Element = EDBElement::Storm; Lethal.InstigatorActor = Player;
+        Chain[0]->ApplyCombatHit(Lethal); Chain[0]->ApplyCombatHit(Lethal);
+        Check(Chain[0]->bDead && Chain[1]->bDead && Chain[2]->bDead && !Chain[3]->bDead
+            && FMath::IsNearlyEqual(Chain[3]->Health, 9.f) && Mode->Kills == BeforeKills,
+            TEXT("lethal_root_arcs_to_two_without_recursive_chain"), TEXT("Four physically visible, pre-marked enemies; lethal root and two lethal secondary hits; fourth untouched; isolated RoomId=-1."));
+        DestroyFixtures(); Player->OnRunReset(); Go(EStep::Route); break;
+    }
+    case EStep::Route:
+    {
+        Scenario = TEXT("seeded_connected_route");
+        OriginalLayout = Mode->LayoutSignature;
+        TArray<FVector> Centers; for (const FDBRoom& R : Mode->Rooms) Centers.Add(R.Center);
+        Mode->BuildWorld();
+        bool Same = OriginalLayout == Mode->LayoutSignature && Centers.Num() == Mode->Rooms.Num();
+        for (int32 I = 0; I < Centers.Num() && Mode->Rooms.IsValidIndex(I); ++I) Same &= Centers[I].Equals(Mode->Rooms[I].Center, .1f);
+        Check(Same, TEXT("same_seed_reproduces_route_and_cover"), OriginalLayout);
+        bool Changed = false;
+        for (int32 I = 1; I <= 3 && !Changed; ++I) { Mode->Seed = OriginalSeed + I; Mode->BuildWorld(); Changed = OriginalLayout != Mode->LayoutSignature; }
+        Check(Changed, TEXT("alternate_seed_changes_layout"), TEXT("Up to three nearby seeds sampled; not exhaustive procedural validation."));
+        Mode->Seed = OriginalSeed; Mode->StartingPattern = NAME_None; Mode->LearnedPatterns.Reset(); Mode->StartNewRun(true);
+        Player->GetCharacterMovement()->DisableMovement(); CheckRouteGeometry(); Go(EStep::FirstEncounter); break;
+    }
+    case EStep::FirstEncounter:
+        Scenario = TEXT("earned_rewards_and_safe_practice");
+        if (!StartEncounter(0, 1) || !ClearEncounter(0) || !TakeReward(TEXT("Mirror"), 0)) { Finish(true); return; }
+        Go(EStep::FirstPractice); break;
+    case EStep::FirstPractice:
+        if (PhaseAge < .35f) break;
+        CheckPractice(TEXT("Mirror"), 0); Go(EStep::SecondEncounter); break;
+    case EStep::SecondEncounter:
+        if (!StartEncounter(1, 3) || !ClearEncounter(1) || !TakeReward(TEXT("Frost"), 1)) { Finish(true); return; }
+        Go(EStep::SecondPractice); break;
+    case EStep::SecondPractice:
+        if (PhaseAge < .35f) break;
+        CheckPractice(TEXT("Frost"), 1); Mode->ClearRewardPractice(); Mode->ActivateRoom(2);
+        PlacePlayer(Mode->GetRoomEntryPoint(2)); Aim(FRotator::ZeroRotator);
+        Player->Health = 73.f; Player->PressFire(); Go(EStep::SaveCharge); break;
+    case EStep::SaveCharge:
+        if (PhaseAge < .24f) break;
+        Scenario = TEXT("checkpoint_resume"); Player->ReleaseFire(); Flight = Player->GetPieceFlight(0);
+        Check(Player->GetDeployedPieceCount() == 1, TEXT("save_with_piece_deployed"));
+        Mode->SaveProgress(true); Mode->StoredSave = nullptr; Mode->LoadProgress(); Mode->ResumeRun();
         Check(!Mode->bSaveFailed && Mode->CurrentRoomId == 2 && Mode->bSliceAwaitingStart
             && Mode->ClaimedRooms.Contains(0) && Mode->ClaimedRooms.Contains(1)
-            && Player->GetUpgradeRank(TEXT("Anchor")) == 1 && Player->GetUpgradeRank(TEXT("Frost")) == 1
+            && Player->GetUpgradeRank(TEXT("Mirror")) == 1 && Player->GetUpgradeRank(TEXT("Frost")) == 1
             && FMath::IsNearlyEqual(Player->Health, 73.f) && Player->CurrentElement == EDBElement::Frost
-            && Player->ShieldState == EDBShieldState::Held && !IsValid(Player->ThrownShield)
-            && (!Flight.IsValid() || Flight->IsActorBeingDestroyed()),
-            TEXT("fresh_journal_resume_restores_build"), TEXT("Cache cleared before actual load/resume; checkpoint/build restored, deployed actor removed."));
-        Player->GetCharacterMovement()->DisableMovement();
-        Go(EStep::Journal);
-        break;
+            && Player->GetAttachedPieceCount() == 6 && Player->GetDeployedPieceCount() == 0 && Player->GetRegeneratingPieceCount() == 0
+            && (!Flight.IsValid() || Flight->IsActorBeingDestroyed()) && Mode->LayoutSignature == OriginalLayout
+            && FVector::Distance(Player->GetActorLocation(), Mode->GetRoomEntryPoint(2)) < 30.f,
+            TEXT("resume_restores_earned_build_at_connected_room_entry"));
+        Player->GetCharacterMovement()->DisableMovement(); Go(EStep::Journal); break;
     case EStep::Journal:
     {
-        Scenario = TEXT("crc_checkpoint_recovery");
-        Player->Health = 73.f; Mode->SaveProgress(true);
+        Scenario = TEXT("crc_checkpoint_fallback"); Player->Health = 73.f; Mode->SaveProgress(true);
         const int32 ExpectedRevision = Mode->SaveRevision;
-        Player->Health = 61.f; Player->ApplyUpgrade(TEXT("Ram")); Mode->LearnedPatterns.AddUnique(TEXT("Ram"));
-        Mode->SaveProgress(true);
-        const FString NewestSlot = Mode->SlotBase + FString::Printf(TEXT("_%d"), Mode->SaveRevision % 2);
-        TArray<uint8> Bytes;
-        bool bMutated = UGameplayStatics::LoadDataFromSlot(Bytes, NewestSlot, 0) && Bytes.Num() >= 44;
-        if (bMutated) { Bytes[8] ^= 1; bMutated = UGameplayStatics::SaveDataToSlot(Bytes, NewestSlot, 0); }
+        Player->Health = 61.f; Player->ApplyUpgrade(TEXT("Ram")); Mode->LearnedPatterns.AddUnique(TEXT("Ram")); Mode->SaveProgress(true);
+        const FString Slot = Mode->SlotBase + FString::Printf(TEXT("_%d"), Mode->SaveRevision % 2);
+        TArray<uint8> Bytes; bool Mutated = UGameplayStatics::LoadDataFromSlot(Bytes, Slot, 0) && Bytes.Num() >= 44;
+        if (Mutated) { Bytes[8] ^= 1; Mutated = UGameplayStatics::SaveDataToSlot(Bytes, Slot, 0); }
         Mode->StoredSave = nullptr; Mode->LoadProgress();
-        const bool bPrevious = Mode->StoredSave && Mode->StoredSave->Revision == ExpectedRevision;
-        if (bPrevious) Mode->ResumeRun();
-        Check(bMutated && bPrevious && Mode->CurrentRoomId == 2 && FMath::IsNearlyEqual(Player->Health, 73.f)
-            && Player->GetUpgradeRank(TEXT("Anchor")) == 1 && Player->GetUpgradeRank(TEXT("Frost")) == 1
-            && !Player->HasUpgrade(TEXT("Ram")) && !Mode->LearnedPatterns.Contains(TEXT("Ram")),
-            TEXT("crc_fallback_preserves_earned_build"), FString::Printf(TEXT("checksum mutation=%d, previous revision=%d, selected=%d, bytes=%d"),
-                bMutated, ExpectedRevision, Mode->StoredSave ? Mode->StoredSave->Revision : -1, Bytes.Num()));
-        Player->GetCharacterMovement()->DisableMovement();
-        Go(EStep::FinalEncounter);
-        break;
+        const bool Previous = Mode->StoredSave && Mode->StoredSave->Revision == ExpectedRevision;
+        if (Previous) Mode->ResumeRun();
+        Check(Mutated && Previous && Mode->CurrentRoomId == 2 && FMath::IsNearlyEqual(Player->Health, 73.f)
+            && Player->HasUpgrade(TEXT("Mirror")) && Player->HasUpgrade(TEXT("Frost")) && !Player->HasUpgrade(TEXT("Ram"))
+            && !Mode->LearnedPatterns.Contains(TEXT("Ram")), TEXT("corrupt_latest_loads_previous_earned_checkpoint"));
+        Player->GetCharacterMovement()->DisableMovement(); Go(EStep::FinalEncounter); break;
     }
     case EStep::FinalEncounter:
-        Scenario = TEXT("courtyard_completion");
+        Scenario = TEXT("completion_death_and_reset");
         if (!StartEncounter(2, 2) || !ClearEncounter(2)) { Finish(true); return; }
-        Check(!Mode->bWon && Mode->bBossWon && Mode->LearnedPatterns.Contains(TEXT("Capacitor")),
-            TEXT("final_clear_allows_catch_before_results"));
-        Go(EStep::Victory);
-        break;
+        Check(!Mode->bWon && Mode->bBossWon && Mode->LearnedPatterns.Contains(TEXT("Capacitor")), TEXT("final_clear_allows_return_before_results"));
+        Go(EStep::Victory); break;
     case EStep::Victory:
         if (!Mode->bWon && PhaseAge < 2.5f) break;
-        Check(Mode->bWon && !Mode->bCanResume && !Player->CanAct(), TEXT("courtyard_success_results"));
-        Scenario = TEXT("retry_and_death_recovery");
+        Check(Mode->bWon && !Mode->bCanResume && !Player->CanAct(), TEXT("victory_is_inactive_saved_attempt"));
         Mode->StartNewRun(true);
-        Check(Mode->Seed == OriginalSeed && Mode->CurrentRoomId == 0 && Mode->bSliceAwaitingStart
-            && Mode->ClaimedRooms.IsEmpty() && Mode->ClearedRooms.IsEmpty() && !Mode->bWon
-            && Player->Upgrades.Num() == 1 && Player->GetUpgradeRank(TEXT("Anchor")) == 1
-            && Player->ShieldState == EDBShieldState::Held && Player->StoredShots == 0
-            && Mode->LearnedPatterns.Contains(TEXT("Frost")) && Mode->bBossWon,
-            TEXT("same_seed_retry_resets_attempt_retains_patterns"));
+        Check(Mode->Seed == OriginalSeed && Mode->LayoutSignature == OriginalLayout && Mode->ClaimedRooms.IsEmpty()
+            && Mode->ClearedRooms.IsEmpty() && Player->GetAttachedPieceCount() == 6 && Player->GetUpgradeRank(TEXT("Mirror")) == 1
+            && Mode->LearnedPatterns.Contains(TEXT("Frost")) && Mode->bBossWon, TEXT("same_seed_retry_retains_patterns_resets_pieces"));
         Player->ReceiveAttack(100000.f, Player->GetActorLocation(), true);
-        Check(Player->bDead && Mode->bDefeated && !Mode->bCanResume, TEXT("death_records_inactive_attempt"));
+        Check(Player->bDead && Mode->bDefeated && !Mode->bCanResume, TEXT("death_saves_inactive_attempt"));
         Mode->StartNewRun(true);
         Check(!Player->bDead && !Mode->bDefeated && Player->CanAct() && Player->Health == Player->MaxHealth
-            && Player->ShieldState == EDBShieldState::Held && Player->AttackRecovery == 0.f
-            && Player->GetUpgradeRank(TEXT("Anchor")) == 1 && Mode->LearnedPatterns.Contains(TEXT("Frost")),
-            TEXT("death_retry_restores_usable_shield"));
-        Finish();
-        break;
+            && Player->GetAttachedPieceCount() == 6 && Player->GetDeployedPieceCount() == 0 && Player->GetRegeneratingPieceCount() == 0
+            && Player->AttackRecovery == 0.f, TEXT("death_retry_restores_usable_six_piece_shield"));
+        CheckPieceOwnership(TEXT("reset_ownership")); Finish(); break;
     default: break;
     }
 }
@@ -566,7 +564,7 @@ void ADBShieldCheckRunner::Finish(bool bAbort)
     DestroyFixtures();
     if (bHaveJournalCopies)
     {
-        Scenario = TEXT("qa_save_restoration");
+        Scenario = TEXT("isolated_setup");
         bool bRestored = true;
         for (const FJournalCopy& Copy : JournalCopies)
         {
@@ -590,8 +588,8 @@ void ADBShieldCheckRunner::Finish(bool bAbort)
 void ADBShieldCheckRunner::WriteResult(bool bComplete) const
 {
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
-    Report->SetStringField(TEXT("suite"), TEXT("physical-shield-courtyard-v1"));
-    Report->SetStringField(TEXT("scope"), TEXT("Staged actual-world ticks, real sweeps/input APIs and artificial positions/lethal progression hits. No OS input, normal run or fun evidence."));
+    Report->SetStringField(TEXT("suite"), TEXT("segmented-shield-connected-route-v1"));
+    Report->SetStringField(TEXT("scope"), TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
     Report->SetStringField(TEXT("engine"), FEngineVersion::Current().ToString());
     Report->SetStringField(TEXT("executable"), FPlatformProcess::ExecutableName());
     Report->SetStringField(TEXT("platform"), TEXT("Windows"));
@@ -637,7 +635,7 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     FJsonSerializer::Serialize(Report, Writer);
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("QA");
     IFileManager::Get().MakeDirectory(*Directory, true);
-    const FString Path = Directory / TEXT("physical-shield-checks.json");
+    const FString Path = Directory / TEXT("segmented-shield-checks.json");
     const bool bWritten = FFileHelper::SaveStringToFile(Json, *Path);
     UE_LOG(LogTemp, Display, TEXT("DB_SHIELD_QA_RESULT complete=%d aborted=%d passed=%d failed=%d written=%d path=%s"),
         bComplete, bAborted, Passed, Failed, bWritten, *Path);

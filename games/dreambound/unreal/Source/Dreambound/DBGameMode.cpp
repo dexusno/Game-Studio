@@ -101,7 +101,7 @@ void ADBGameMode::BeginPlay() {
  UE_LOG(LogTemp,Display,TEXT("DREAMBOUND_READY seed=%d rooms=%d saved=%d"),Seed,Rooms.Num(),bCanResume);
 }
 void ADBGameMode::EndPlay(const EEndPlayReason::Type Reason) {
- if(!bVerify&&!bChecksRunning&&!bCapture&&!bTitle&&!bDefeated&&(ClearedRooms.Contains(CurrentRoomId)||CurrentRoomId==0)) SaveProgress(!bWon);
+ if(!bVerify&&!bChecksRunning&&!bCapture&&!bTitle&&!bDefeated&&(ClearedRooms.Contains(CurrentRoomId)||(bRecoverySlice?bSliceAwaitingStart:CurrentRoomId==0))) SaveProgress(!bWon);
  bEnding=true; Super::EndPlay(Reason);
 }
 AActor* ADBGameMode::Mesh(const FString& Name,FVector Loc,FRotator Rot,FVector Scale,bool Collision,const FString& Mat) {
@@ -143,6 +143,7 @@ void ADBGameMode::Instance(const FString& Name,FVector Loc,FRotator Rot,FVector 
  C->AddInstance(FTransform(Rot,Loc,Scale),true);
 }
 void ADBGameMode::ResetActors() {
+ ClearRewardPractice();
  for(auto* A:Generated)if(IsValid(A))A->Destroy();
  Generated.Reset();MeshBatches.Reset();
  for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)It->Destroy();
@@ -257,6 +258,10 @@ void ADBGameMode::MakeCorridor(int32 From,int32 To) {
 }
 void ADBGameMode::UpdateGates() {
  if(bRecoverySlice){
+  for(int32 I=1;I<Rooms.Num();++I){
+   bool Open=ClaimedRooms.Contains(Rooms[I].Parent)&&!(I==CurrentRoomId&&SpawnedRooms.Contains(I)&&!IsCleared(I));
+   for(auto* Gate:Rooms[I].Gates)if(IsValid(Gate)){Gate->SetActorHiddenInGame(Open);Gate->SetActorEnableCollision(!Open);}
+  }
   for(int32 I=0;I<Rooms.Num();++I)if(IsValid(Rooms[I].Altar))
    Rooms[I].Altar->SetActorHiddenInGame(I!=CurrentRoomId||(!bSliceAwaitingStart&&!IsCleared(I))||ClaimedRooms.Contains(I));
   return;
@@ -286,17 +291,17 @@ void ADBGameMode::SpawnWave(int32 Index,int32 Wave) {
  for(int32 I=0;I<Count;++I) {
   float Angle=(I*360.f/Count+Rng.FRandRange(-20,20))*PI/180;
   FVector Pos=Rooms[Index].Center+FVector(FMath::Cos(Angle)*850,FMath::Sin(Angle)*850,110);
-  if(bRecoverySlice){const FVector Points[]={FVector(440,-580,110),FVector(1420,620,110),FVector(-300,860,110)};Pos=Points[I%3]+FVector(0,(Seed%2?1:-1)*Rng.FRandRange(0,140),0);}
+  if(bRecoverySlice){const FVector Points[]={FVector(420,-580,110),FVector(1260,660,110),FVector(-340,860,110)};Pos=Rooms[Index].Center+Points[I%3]+FVector(0,(Seed%2?1:-1)*Rng.FRandRange(0,100),0);}
   if(Player&&FVector::Dist2D(Pos,Player->GetActorLocation())<650)Pos=Rooms[Index].Center+(Rooms[Index].Center-Player->GetActorLocation()).GetSafeNormal2D()*650+FVector(0,0,110);
   EDBEnemyKind Kind=(Index==5&&Wave==0)?EDBEnemyKind::Boss:static_cast<EDBEnemyKind>(Rng.RandRange(0,2));
   if(bRecoverySlice)Kind=Index==2?(I==0?EDBEnemyKind::Boss:EDBEnemyKind::Caster):I==0?EDBEnemyKind::Melee:I==1?EDBEnemyKind::Caster:EDBEnemyKind::Hunter;
   FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
   auto* E=GetWorld()->SpawnActor<ADBEnemy>(Pos,FRotator::ZeroRotator,Params);
-  if(E){E->Configure(Kind,Index,bRecoverySlice?(Index==0?0.85f:Index==2?0.9f:1.f):Index==5?1.f:0.9f+Index*0.08f);E->SetArenaBounds(Rooms[Index].Center,bRecoverySlice?FVector2D(1540,1230):FVector2D(1250,1250));}
+  if(E){E->Configure(Kind,Index,bRecoverySlice?(Index==0?0.85f:Index==2?0.9f:1.f):Index==5?1.f:0.9f+Index*0.08f);E->SetArenaBounds(Rooms[Index].Center,bRecoverySlice?FVector2D(1540,1540):FVector2D(1250,1250));}
  }
 }
 void ADBGameMode::NotifyEnemyKilled(ADBEnemy* Enemy) {
- if(!Enemy||bEnding||bDefeated)return;
+ if(!Enemy||Enemy->RoomId<0||bEnding||bDefeated)return;
  ++Kills;int32 Room=Enemy->RoomId;
  int32 Living=0;for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&It->RoomId==Room)++Living;
  if(Living==0) {
@@ -306,13 +311,16 @@ void ADBGameMode::NotifyEnemyKilled(ADBEnemy* Enemy) {
 }
 void ADBGameMode::FinishRoom(int32 Index) {
  ClearedRooms.AddUnique(Index);
+ // Defeating the last opponent resolves its remaining bolts too. A late
+ // projectile must not change an earned clear into defeat during the result delay.
+ for(TActorIterator<ADBProjectile> It(GetWorld());It;++It)It->Destroy();
  if(Player)Player->Health=FMath::Min(Player->MaxHealth,Player->Health+30);
  if(Index==5){bBossWon=true;LearnedPatterns.AddUnique("Capacitor");}
  if((bRecoverySlice&&Index==2)||(!bRecoverySlice&&Index==6)){
   ClaimedRooms.AddUnique(Index);
   if(bRecoverySlice){bBossWon=true;LearnedPatterns.AddUnique("Capacitor");}
   NotifyEvent(bRecoverySlice?TEXT("COURTYARD CLEARED / your patterns endure"):TEXT("CROSSING COMPLETE / your discoveries endured"),FLinearColor(0.55,1,0.85));
-  if(bRecoverySlice){VictoryDelay=1.4f;if(Player)Player->RecallShield();}
+  if(bRecoverySlice){SaveProgress(false);VictoryDelay=1.4f;if(Player)Player->RecallShield();}
   else {bWon=true;SaveProgress(false);SetMenuInput(true);}
  } else {
   UpdateGates();SaveProgress(true);
@@ -321,6 +329,7 @@ void ADBGameMode::FinishRoom(int32 Index) {
  if(auto* S=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/S_Clear.S_Clear")))UGameplayStatics::PlaySound2D(this,S,0.8f);
 }
 void ADBGameMode::NotifyPlayerDied() {
+ if(!PracticeReward.IsNone()&&Player){Player->Health=Player->MaxHealth;Player->bDead=false;return;}
  if(bDefeated)return;
  bDefeated=true;bCanResume=false;SaveProgress(false);SetMenuInput(true);
  NotifyEvent(TEXT("Connection lost / learned patterns remain"),FLinearColor(1,0.48,0.38));
@@ -329,6 +338,7 @@ void ADBGameMode::NotifyEvent(const FString& Text,FLinearColor Color){EventText=
 void ADBGameMode::Tick(float Dt) {
  Super::Tick(Dt);PulseTime+=Dt;
  if(!Player)Player=Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this,0));
+ if(bDefeated)VictoryDelay=0;
  if(VictoryDelay>0){VictoryDelay=FMath::Max(0.f,VictoryDelay-Dt);if(VictoryDelay==0){bWon=true;SaveProgress(false);SetMenuInput(true);}}
  if(bVerify&&PulseTime>3){bVerify=false;RunVerification();return;}
  if(bMotionCapture){TickMotionDemo(Dt);return;}
@@ -348,7 +358,17 @@ void ADBGameMode::Tick(float Dt) {
   if(IsValid(Rooms[I].Altar)){Rooms[I].Altar->AddActorLocalRotation(FRotator(0,Dt*20,0));}
  }
  if(Player->GetActorLocation().Z<-400){Player->ReceiveAttack(99999,Player->GetActorLocation(),true);return;}
- if(bRecoverySlice)return;
+ if(bRecoverySlice){
+  if(!PracticeReward.IsNone())Player->Health=Player->MaxHealth;
+  for(int32 I=0;I<Rooms.Num();++I){
+   FVector D=Player->GetActorLocation()-Rooms[I].Center;
+   if(I!=CurrentRoomId&&FMath::Abs(D.X)<1510&&FMath::Abs(D.Y)<1510&&(I==0||ClaimedRooms.Contains(Rooms[I].Parent)||IsCleared(I))){
+    ClearRewardPractice();ActivateRoom(I);SaveProgress(true);
+    NotifyEvent(FString::Printf(TEXT("%s / approach the ward stone"),*Rooms[I].Name),FLinearColor(.72,.9,.83));break;
+   }
+  }
+  return;
+ }
  for(int32 I=0;I<Rooms.Num();++I) {
   FVector D=Player->GetActorLocation()-Rooms[I].Center;
   if(FMath::Abs(D.X)<1250&&FMath::Abs(D.Y)<1250&&I!=CurrentRoomId) {
@@ -363,7 +383,7 @@ void ADBGameMode::Interact() {
  if(bRecoverySlice){
   auto* Altar=Rooms[CurrentRoomId].Altar;
   if(!IsValid(Altar)||FVector::Dist(Player->GetActorLocation(),Altar->GetActorLocation())>430)return;
-  if(bSliceAwaitingStart){bSliceAwaitingStart=false;SpawnedRooms.Add(CurrentRoomId);SaveProgress(true);SpawnWave(CurrentRoomId,0);UpdateGates();NotifyEvent(CurrentRoomId==0?TEXT("Hold the face to the strike. Throw only when you can give up protection."):TEXT("Choose your angle / the shield returns to where you move."),FLinearColor(.93,.78,.49));return;}
+  if(bSliceAwaitingStart){ClearRewardPractice();bSliceAwaitingStart=false;SpawnedRooms.Add(CurrentRoomId);SaveProgress(true);SpawnWave(CurrentRoomId,0);UpdateGates();NotifyEvent(CurrentRoomId==0?TEXT("Hold LMB to light pieces. Release to throw them. RMB guards with the rest."):TEXT("Choose how many pieces to risk. Q recalls; F is your heavy strike."),FLinearColor(.93,.78,.49));return;}
   if(IsCleared(CurrentRoomId)&&!ClaimedRooms.Contains(CurrentRoomId))ShowOffers(CurrentRoomId);
   return;
  }
@@ -389,9 +409,9 @@ FString ADBGameMode::ObjectiveText() const {
  if(bRecoverySlice){
   if(bWon)return TEXT("The court is clear. Your learned patterns remain.");
   if(bSliceAwaitingStart)return TEXT("Approach the ward stone / E when ready");
-  if(IsCleared(CurrentRoomId))return TEXT("Attachment earned / return to the ward stone");
+  if(IsCleared(CurrentRoomId))return ClaimedRooms.Contains(CurrentRoomId)?TEXT("Practice your new ability or follow the open passage"):TEXT("Attachment earned / return to the ward stone");
   int32 N=0;for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(It->RoomId==CurrentRoomId&&!It->bDead)++N;
-  return FString::Printf(TEXT("%d %s / thrown shield means exposed defense"),N,N==1?TEXT("threat remains"):TEXT("threats remain"));
+  return FString::Printf(TEXT("%d %s / kept pieces are your protection"),N,N==1?TEXT("threat remains"):TEXT("threats remain"));
  }
  if(bWon)return TEXT("The dreams were real. So is what you brought with you.");
  if(CurrentRoomId==0)return ClaimedRooms.Contains(0)?TEXT("Leave the cell / follow the light through the arch"):TEXT("Recover the dormant core / approach the crystal");
@@ -446,11 +466,12 @@ void ADBGameMode::ClaimReward(FName Id) {
  if(Id=="Restore"){Player->Health=Player->MaxHealth;Player->GuardEnergy=Player->MaxGuardEnergy;}
  else {Player->ApplyUpgrade(Id);LearnedPatterns.AddUnique(Id);if(StartingPattern.IsNone())StartingPattern=Id;}
  ClaimedRooms.AddUnique(RewardRoom);ClearedRooms.AddUnique(RewardRoom);
+ EarnedRoomRewards.Add(RewardRoom,Id);
  if(RewardRoom==5)bBossWon=true;
  bChoosingReward=false;Offers.Reset();UpdateGates();SaveProgress(true);SetMenuInput(false);
  NotifyEvent(Id=="Restore"?TEXT("Health and guard restored / passage opened"):FString::Printf(TEXT("%s / pattern learned and installed"),*DescribeUpgrade(Id).Name),DescribeUpgrade(Id).Color);
  if(RewardRoom==5)NotifyEvent(TEXT("The passage is open / take your build into Rainstack"),FLinearColor(0.8,1,0.9));
- if(bRecoverySlice&&RewardRoom<2){CurrentRoomId=RewardRoom+1;bSliceAwaitingStart=true;UpdateGates();SaveProgress(true);NotifyEvent(TEXT("Installed / try your attachment, then return to the ward stone"),FLinearColor(.64,.94,.82));}
+ if(bRecoverySlice&&RewardRoom<2){BeginRewardPractice(Id);NotifyEvent(TEXT("Installed / practice here, then follow the open passage"),FLinearColor(.64,.94,.82));}
 }
 void ADBGameMode::SetMenuInput(bool On) {
  On=On||bSaveFailed;
@@ -490,7 +511,7 @@ void ADBGameMode::StartNewRun(bool SameSeed) {
  if(bSaveFailed){SaveProgress(!bDefeated&&!bWon);if(bSaveFailed)return;}
  UGameplayStatics::SetGamePaused(this,false);
  if(!SameSeed)Seed=FMath::RandRange(10000,999999);
- ++Expeditions;ClearedRooms.Reset();ClaimedRooms.Reset();Offers.Reset();CurrentRoomId=0;CurrentWave=0;Kills=0;RunSeconds=0;
+ ++Expeditions;ClearedRooms.Reset();ClaimedRooms.Reset();EarnedRoomRewards.Reset();Offers.Reset();CurrentRoomId=0;CurrentWave=0;Kills=0;RunSeconds=0;
  bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;VictoryDelay=0;
  BuildWorld();
  if(Player){Player->Upgrades.Reset();Player->CurrentElement=EDBElement::Neutral;Player->OnRunReset();Player->MouseSensitivity=Sensitivity;
@@ -498,12 +519,12 @@ void ADBGameMode::StartNewRun(bool SameSeed) {
   if(!StartingPattern.IsNone()&&LearnedPatterns.Contains(StartingPattern))Player->ApplyUpgrade(StartingPattern);
  }
  ActivateRoom(0);SaveProgress(true);SetMenuInput(false);
- NotifyEvent(bRecoverySlice?TEXT("Tap to strike. Hold and release to throw. Q recalls your shield."):TEXT("Find the core / E to recover / Tab to inspect controls"),FLinearColor(0.78,0.88,1));
+ NotifyEvent(bRecoverySlice?TEXT("Hold LMB to select pieces; release to throw. Q recalls. F heavy strike."):TEXT("Find the core / E to recover / Tab to inspect controls"),FLinearColor(0.78,0.88,1));
 }
 void ADBGameMode::ResumeRun() {
  if(!StoredSave||!StoredSave->bActiveRun){StartNewRun();return;}
  UDBSave* S=StoredSave;
- Seed=S->Seed;ClearedRooms=S->Cleared;ClaimedRooms=S->Claimed;
+ Seed=S->Seed;ClearedRooms=S->Cleared;ClaimedRooms=S->Claimed;EarnedRoomRewards=S->RoomRewards;
  CurrentRoomId=FMath::Clamp(S->CurrentRoom,0,bRecoverySlice?2:7);
  bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;VictoryDelay=0;
  BuildWorld();
@@ -511,17 +532,21 @@ void ADBGameMode::ResumeRun() {
   for(auto& P:S->Upgrades)for(int32 I=0;I<P.Value;++I)Player->ApplyUpgrade(P.Key);
   Player->CurrentElement=static_cast<EDBElement>(S->Element);Player->RefreshEquipmentVisuals();Player->Health=S->Health;
   FVector Entry=Rooms[CurrentRoomId].Parent>=0?(Rooms[Rooms[CurrentRoomId].Parent].Center-Rooms[CurrentRoomId].Center).GetSafeNormal()*1000:FVector(-750,0,0);
-  if(bRecoverySlice)Entry=FVector(-1390,-720,0);
+  if(bRecoverySlice)Entry=GetRoomEntryPoint(CurrentRoomId)-Rooms[CurrentRoomId].Center-FVector(0,0,110);
   Player->SetActorLocation(Rooms[CurrentRoomId].Center+Entry+FVector(0,0,100));
   Player->GetController()->SetControlRotation((-Entry).Rotation());
  }
  int32 R=CurrentRoomId;ActivateRoom(R);SetMenuInput(false);
+ if(bRecoverySlice&&ClaimedRooms.Contains(R)&&EarnedRoomRewards.Contains(R))BeginRewardPractice(EarnedRoomRewards[R]);
+ if(bRecoverySlice&&ClaimedRooms.Contains(2)){bWon=true;SaveProgress(false);SetMenuInput(true);return;}
  NotifyEvent(TEXT("Connection restored / current encounter restarts at its checkpoint"),FLinearColor(0.65,0.9,1));
 }
 void ADBGameMode::SaveProgress(bool Active) {
  if(bVerify||bCapture)return;
+ if(bRecoverySlice&&ClaimedRooms.Contains(2))Active=false;
  auto* S=Cast<UDBSave>(UGameplayStatics::CreateSaveGameObject(UDBSave::StaticClass()));
  S->Revision=++SaveRevision;S->Seed=Seed;S->CurrentRoom=CurrentRoomId;S->Cleared=ClearedRooms;S->Claimed=ClaimedRooms;
+ S->RoomRewards=EarnedRoomRewards;
  S->Patterns=LearnedPatterns;S->bActiveRun=Active;S->bBossWon=bBossWon;S->Expeditions=Expeditions;S->Sensitivity=Sensitivity;
  if(Player){S->Upgrades=Player->Upgrades;S->Health=Player->Health;S->Element=static_cast<int32>(Player->CurrentElement);}
  FString Slot=SlotBase+FString::Printf(TEXT("_%d"),S->Revision%2);
@@ -540,7 +565,7 @@ void ADBGameMode::LoadProgress() {
 }
 void ADBGameMode::QuitGame(bool bWithoutSaving) {
  if(bWithoutSaving){FGenericPlatformMisc::RequestExit(false);return;}
- if(!bDefeated&&!bWon&&!bTitle&&(IsCleared(CurrentRoomId)||CurrentRoomId==0))SaveProgress(true);
+ if(!bDefeated&&!bWon&&!bTitle&&(IsCleared(CurrentRoomId)||(bRecoverySlice?bSliceAwaitingStart:CurrentRoomId==0)))SaveProgress(true);
  if(bSaveFailed)return;
  FGenericPlatformMisc::RequestExit(false);
 }

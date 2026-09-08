@@ -1,6 +1,7 @@
 #include "DBEnemy.h"
 
 #include "DBCharacter.h"
+#include "DBCombatEffect.h"
 #include "DBGameMode.h"
 #include "DBProjectile.h"
 #include "Components/CapsuleComponent.h"
@@ -25,6 +26,18 @@ namespace
     const FLinearColor OpenColor(0.12f, 1.f, 0.77f);
     const FLinearColor FrostColor(0.28f, 0.75f, 1.f);
     const FLinearColor StormColor(0.58f, 0.3f, 1.f);
+    const FLinearColor InterceptColor(1.f, 0.66f, 0.12f);
+    uint32 EnemyAttackSequence = 0;
+
+    void AddElementShard(UInstancedStaticMeshComponent* Component, FVector At, FRotator Rotation, FVector Size)
+    {
+        if (!Component->GetStaticMesh()) return;
+        const FBoxSphereBounds Bounds = Component->GetStaticMesh()->GetBounds();
+        const FVector MeshSize = Bounds.BoxExtent * 2.f;
+        const FVector Scale(Size.X / FMath::Max(1.0, MeshSize.X), Size.Y / FMath::Max(1.0, MeshSize.Y),
+            Size.Z / FMath::Max(1.0, MeshSize.Z));
+        Component->AddInstance(FTransform(Rotation, At - Rotation.RotateVector(Bounds.Origin * Scale), Scale), true);
+    }
 
     void FitPart(UStaticMeshComponent* Part, const TCHAR* Asset, UStaticMesh* Fallback,
         FVector FallbackSize, FVector FallbackCenter, float AuthoredScale = 1.f)
@@ -118,11 +131,23 @@ ADBEnemy::ADBEnemy()
     EffectMarks->SetupAttachment(GetCapsuleComponent());
     EffectMarks->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     EffectMarks->SetCastShadow(false);
+    FrostMarks = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("PersistentFrost"));
+    EmberMarks = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("PersistentEmber"));
+    for (UInstancedStaticMeshComponent* Component : { FrostMarks.Get(), EmberMarks.Get() })
+    {
+        Component->SetupAttachment(GetCapsuleComponent());
+        Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        Component->SetGenerateOverlapEvents(false);
+        Component->SetCastShadow(false);
+        Component->SetCanEverAffectNavigation(false);
+    }
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube.Cube"));
     if (Cube.Succeeded())
     {
         WarningMarks->SetStaticMesh(Cube.Object);
         EffectMarks->SetStaticMesh(Cube.Object);
+        FrostMarks->SetStaticMesh(Cube.Object);
+        EmberMarks->SetStaticMesh(Cube.Object);
         for (UStaticMeshComponent* P : { BodyPart.Get(), HeadPart.Get(), LeftArmPart.Get(),
             RightArmPart.Get(), LeftLegPart.Get(), RightLegPart.Get(), CorePart.Get(), ChargePart.Get() }) P->SetStaticMesh(Cube.Object);
     }
@@ -159,6 +184,7 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     bHitAttempted = false;
     bChillStaggered = false;
     bAimLocked = false;
+    bShieldInterceptionReady = false;
     Attack = EAttack::None;
     ChillStacks = StormMarks = ShotsRemaining = BossAttackIndex = 0;
     ChillRemaining = StormRemaining = BurnRemaining = BurnTickTime = DeathTime = 0.f;
@@ -167,10 +193,13 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     TellTime = TellDuration = PhaseTime = AttackElapsed = 0.f;
     SteeringTime = StuckTime = GroundPulseTime = NextShotTime = VisualTime = 0.f;
     BurnTickDamage = 4.f;
+    BurnPulse = ElementSoundCooldown = 0.f;
+    InterceptionCooldown = 3.f;
+    ActiveAttackId = 0;
     BurnInstigator.Reset();
     SteeringDirection = FVector::ZeroVector;
     ChargePart->SetVisibility(false);
-    ArcVisuals.Reset();
+    ClearElementVisuals();
     DeathStartPose.Reset();
     Telegraph.Empty();
     Phase = EDBEnemyPhase::Dormant;
@@ -256,10 +285,8 @@ void ADBEnemy::BuildVisuals()
     if (Glow)
     {
         WarningMaterial = UMaterialInstanceDynamic::Create(Glow, this);
-        EffectMaterial = UMaterialInstanceDynamic::Create(Glow, this);
         CoreMaterial = UMaterialInstanceDynamic::Create(Glow, this);
         WarningMarks->SetMaterial(0, WarningMaterial);
-        EffectMarks->SetMaterial(0, EffectMaterial);
         for (int32 Index = 0; Index < CorePart->GetNumMaterials(); ++Index)
         {
             const TArray<FStaticMaterial>& Slots = CorePart->GetStaticMesh()->GetStaticMaterials();
@@ -268,9 +295,20 @@ void ADBEnemy::BuildVisuals()
         }
         for (int32 Index = 0; Index < ChargePart->GetNumMaterials(); ++Index) ChargePart->SetMaterial(Index, WarningMaterial);
         WarningMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 2.f);
-        EffectMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 3.f);
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 1.7f);
     }
+    if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal")))
+    {
+        FrostMarks->SetStaticMesh(Crystal);
+        EmberMarks->SetStaticMesh(Crystal);
+    }
+    // Element silhouettes have their own materials; hit and recovery flashes cannot recolor them.
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Frost.M_Frost")))
+        for (int32 Index = 0; Index < FrostMarks->GetNumMaterials(); ++Index) FrostMarks->SetMaterial(Index, Material);
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Ember.M_Ember")))
+        for (int32 Index = 0; Index < EmberMarks->GetNumMaterials(); ++Index) EmberMarks->SetMaterial(Index, Material);
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Storm.M_Storm")))
+        EffectMarks->SetMaterial(0, Material);
 }
 
 bool ADBEnemy::IsRoomActive() const
@@ -278,7 +316,8 @@ bool ADBEnemy::IsRoomActive() const
     if (!GetWorld()) return false;
     if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
         return !Mode->bPaused && !Mode->bChoosingReward && !Mode->bShowingBuild
-            && !Mode->bTitle && !Mode->bWon && !Mode->bDefeated && Mode->CurrentRoomId == RoomId;
+            && !Mode->bTitle && !Mode->bWon && !Mode->bDefeated
+            && (RoomId == INDEX_NONE || Mode->CurrentRoomId == RoomId);
     return true;
 }
 
@@ -336,7 +375,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
         GetCharacterMovement()->StopMovementImmediately();
         ConsumeMovementInputVector();
         WarningMarks->ClearInstances();
-        EffectMarks->ClearInstances();
+        ClearElementVisuals();
         ChargePart->SetVisibility(false);
         return;
     }
@@ -346,6 +385,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
         GetCharacterMovement()->StopMovementImmediately();
         Phase = EDBEnemyPhase::Dormant;
         WarningMarks->ClearInstances();
+        ClearElementVisuals();
         ChargePart->SetVisibility(false);
         return;
     }
@@ -353,9 +393,20 @@ void ADBEnemy::Tick(float DeltaSeconds)
     UpdateStatusEffects(Dt);
     if (bDead) return;
     Cooldown = FMath::Max(0.f, Cooldown - Dt);
+    InterceptionCooldown = FMath::Max(0.f, InterceptionCooldown - Dt);
+    ElementSoundCooldown = FMath::Max(0.f, ElementSoundCooldown - Dt);
     KnockbackTime = FMath::Max(0.f, KnockbackTime - Dt);
     GetCharacterMovement()->GroundFriction = KnockbackTime > 0.f ? 2.5f : 9.f;
     GetCharacterMovement()->BrakingDecelerationWalking = KnockbackTime > 0.f ? 450.f : 2200.f;
+    if (bPracticeTarget)
+    {
+        GetCharacterMovement()->StopMovementImmediately();
+        ConsumeMovementInputVector();
+        PhaseTime = FMath::Max(0.f, PhaseTime - Dt);
+        if (PhaseTime <= 0.f) { Phase = EDBEnemyPhase::Dormant; bVulnerable = false; Telegraph.Empty(); }
+        UpdateVisuals(Dt);
+        return;
+    }
     switch (Phase)
     {
     case EDBEnemyPhase::Approach: UpdateApproach(Dt); break;
@@ -503,7 +554,9 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     {
         if (Cooldown <= 0.f && bSight && Distance < 2100.f)
         {
-            if (Distance < 420.f) BeginTell(EAttack::Slam, 1.1f);
+            if (InterceptionCooldown <= 0.f && Distance > 300.f && Distance < 1700.f)
+                BeginTell(EAttack::Intercept, 1.f);
+            else if (Distance < 420.f) BeginTell(EAttack::Slam, 1.1f);
             else if (BossAttackIndex % 3 == 0) BeginTell(EAttack::Salvo, 1.35f);
             else BeginTell(EAttack::Ground, 1.5f);
             BossAttackIndex++;
@@ -527,12 +580,32 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     }
 }
 
+bool ADBEnemy::TryInterceptShieldPiece(FVector IncomingDirection)
+{
+    if (bDead || bPracticeTarget || Kind != EDBEnemyKind::Boss || !IsRoomActive()
+        || Phase != EDBEnemyPhase::Attack || Attack != EAttack::Intercept || !bShieldInterceptionReady
+        || IncomingDirection.ContainsNaN()) return false;
+    const FVector Incoming = IncomingDirection.GetSafeNormal();
+    if (Incoming.IsNearlyZero() || FVector::DotProduct(-Incoming, GetActorForwardVector()) < 0.45f) return false;
+    // Consume before returning to the flight callback: simultaneous later pieces pass normally.
+    bShieldInterceptionReady = false;
+    ADBCombatEffect::SpawnBurst(GetWorld(), GetActorLocation() + GetActorForwardVector()
+        * (GetCapsuleComponent()->GetScaledCapsuleRadius() + 25.f), EDBElement::Neutral, RoomId, 0.85f);
+    if (BodyImpactSound) UGameplayStatics::PlaySoundAtLocation(this, BodyImpactSound, GetActorLocation(), 0.85f, 0.6f);
+    BeginRecovery(1.8f);
+    Telegraph = TEXT("INTERCEPT SPENT - EXPOSED");
+    if (ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
+        Mode->NotifyEvent(TEXT("ONE PIECE BROKEN - SENTINEL EXPOSED"), InterceptColor);
+    return true;
+}
+
 void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
 {
     Attack = InAttack;
     Phase = EDBEnemyPhase::Telegraph;
     TellTime = TellDuration = Duration;
     bVulnerable = false;
+    bShieldInterceptionReady = false;
     MeleeSetupTime = 0.f;
     bRepositioning = false;
     GetCharacterMovement()->StopMovementImmediately();
@@ -546,6 +619,11 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
     case EAttack::Bolt: Telegraph = TEXT("CHARGING VOLLEY - MOVE / RETURN SHIELD"); break;
     case EAttack::Lunge: Telegraph = TEXT("LUNGE - SIDESTEP / DEFLECT"); break;
     case EAttack::Salvo: Telegraph = TEXT("AIMED SALVO - LEAVE THE LANES"); break;
+    case EAttack::Intercept:
+        Telegraph = TEXT("INTERCEPT WINDUP - WAIT / FLANK / STRIKE CLOSE");
+        InterceptionCooldown = 8.f;
+        TellRadius = 125.f;
+        break;
     case EAttack::Slam:
         Telegraph = TEXT("SLAM - JUMP OR DASH OUT"); TellRadius = 380.f; TellTarget = GroundBelow(GetActorLocation()); break;
     case EAttack::Ground:
@@ -557,7 +635,8 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
         if (BossTellSound) UGameplayStatics::PlaySoundAtLocation(this, BossTellSound, GetActorLocation(), 0.6f,
             Attack == EAttack::Salvo ? 1.f : Attack == EAttack::Ground ? 0.85f : 0.7f);
         if (ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
-            Mode->NotifyEvent(Telegraph, Attack == EAttack::Slam || Attack == EAttack::Ground ? GroundColor : DangerColor);
+            Mode->NotifyEvent(Telegraph, Attack == EAttack::Intercept ? InterceptColor
+                : Attack == EAttack::Slam || Attack == EAttack::Ground ? GroundColor : DangerColor);
     }
     else if (EnemyTellSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyTellSound, GetActorLocation(),
         Kind == EDBEnemyKind::Caster ? 0.8f : 0.65f, Kind == EDBEnemyKind::Caster ? 1.08f : 0.82f);
@@ -587,6 +666,13 @@ void ADBEnemy::BeginAttack()
     NextShotTime = 0.f;
     ShotsRemaining = Attack == EAttack::Salvo ? 3 : Attack == EAttack::Bolt ? 2 : 1;
     bHitAttempted = false;
+    EnemyAttackSequence = (EnemyAttackSequence + 1u) & 0x7fffffffu;
+    ActiveAttackId = 0x80000000u | EnemyAttackSequence;
+    if (Attack == EAttack::Intercept)
+    {
+        bShieldInterceptionReady = true;
+        Telegraph = TEXT("INTERCEPT READY - BREAKS ONE FRONTAL PIECE");
+    }
     if (Attack == EAttack::Lunge)
     {
         LockedDirection.Z = 0.f;
@@ -616,7 +702,7 @@ bool ADBEnemy::TryMeleeHit(float Range, float ConeCosine, float Damage, bool bUn
     if (Difference.Size2D() > Range || FMath::Abs(Difference.Z) > 165.f) return false;
     if (FVector::DotProduct(Difference.GetSafeNormal2D(), LockedDirection.GetSafeNormal2D()) < ConeCosine) return false;
     if (!HasSightTo(Target->GetActorLocation(), Target.Get())) return false;
-    Target->ReceiveAttack(Damage, GetActorLocation(), bUnblockable, this);
+    Target->ReceiveAttack(Damage, GetActorLocation(), bUnblockable, this, ActiveAttackId);
     return true;
 }
 
@@ -629,13 +715,18 @@ void ADBEnemy::DetonateGround()
     const bool bNear = FVector::DistSquared2D(PlayerFeet, TellTarget) < FMath::Square(TellRadius + 16.f);
     const bool bLow = PlayerFeet.Z < TellTarget.Z + 98.f;
     if (bNear && bLow && HasSightTo(Target->GetActorLocation(), Target.Get()))
-        Target->ReceiveAttack(AttackDamage * (Attack == EAttack::Slam ? 1.6f : 1.25f), TellTarget, true, this);
+        Target->ReceiveAttack(AttackDamage * (Attack == EAttack::Slam ? 1.6f : 1.25f), TellTarget, true, this, ActiveAttackId);
 }
 
 void ADBEnemy::UpdateAttack(float DeltaSeconds)
 {
     AttackElapsed += DeltaSeconds;
-    if (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
+    if (Attack == EAttack::Intercept)
+    {
+        GetCharacterMovement()->StopMovementImmediately();
+        if (AttackElapsed >= 0.75f) BeginRecovery(1.8f);
+    }
+    else if (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
     {
         while (ShotsRemaining > 0 && AttackElapsed >= NextShotTime)
         {
@@ -688,6 +779,7 @@ void ADBEnemy::BeginRecovery(float Duration)
     PhaseTime = Duration;
     RecoveryDuration = Duration;
     bVulnerable = true;
+    bShieldInterceptionReady = false;
     Telegraph = TEXT("EXPOSED - COUNTERATTACK");
     TellTime = 0.f;
     GetCharacterMovement()->MaxAcceleration = 2200.f;
@@ -703,6 +795,7 @@ void ADBEnemy::Stagger(float Duration)
     // The guardian retains committed tells but still takes damage and every elemental status.
     if (Kind == EDBEnemyKind::Boss && (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack)) return;
     Phase = EDBEnemyPhase::Staggered;
+    bShieldInterceptionReady = false;
     PhaseTime = FMath::Min(1.2f, FMath::Max(PhaseTime, Duration));
     RecoveryDuration = PhaseTime;
     bVulnerable = true;
@@ -723,18 +816,22 @@ void ADBEnemy::ApplyHitReaction(const FDBHit& Hit)
     if (Away.IsNearlyZero()) Away = -GetActorForwardVector();
     LastHitDirection = Away;
     ReactionLocalDirection = GetActorRotation().UnrotateVector(Away);
-    ReactionDuration = Hit.bImpact ? 0.48f : 0.26f;
+    const bool bFrostPiece = Hit.Element == EDBElement::Frost && !Hit.bSecondary;
+    const bool bPhysicalContact = Hit.bImpact || bFrostPiece;
+    ReactionDuration = bPhysicalContact ? 0.48f : 0.26f;
     ReactionTime = ReactionDuration;
-    ReactionStrength = Hit.bImpact ? FMath::Clamp(0.75f + Hit.Damage / 160.f, 0.8f, 1.45f) : 0.38f;
+    ReactionStrength = bPhysicalContact ? FMath::Clamp(0.75f + Hit.Damage / 160.f, 0.8f, 1.45f) : 0.38f;
     if (Kind == EDBEnemyKind::Boss) ReactionStrength *= 0.65f;
-    if (Hit.bImpact)
+    if (bPhysicalContact)
     {
         // A physical echo/parry may move a body even though it cannot recursively proc statuses.
-        Stagger(Kind == EDBEnemyKind::Boss ? 0.32f : Hit.bSecondary ? 0.62f : 0.72f);
+        Stagger(Kind == EDBEnemyKind::Boss ? 0.32f : !Hit.bImpact ? 0.32f : Hit.bSecondary ? 0.62f : 0.72f);
+        if (bPracticeTarget) return;
         KnockbackTime = Kind == EDBEnemyKind::Boss ? 0.16f : 0.24f;
         GetCharacterMovement()->GroundFriction = 2.5f;
         GetCharacterMovement()->BrakingDecelerationWalking = 450.f;
-        GetCharacterMovement()->AddImpulse(Away * (Kind == EDBEnemyKind::Boss ? 175.f : Hit.bSecondary ? 380.f : 560.f), true);
+        GetCharacterMovement()->AddImpulse(Away * (Kind == EDBEnemyKind::Boss ? 175.f
+            : !Hit.bImpact ? 320.f : Hit.bSecondary ? 380.f : 560.f), true);
     }
 }
 
@@ -752,6 +849,7 @@ void ADBEnemy::UpdateStatusEffects(float DeltaSeconds)
         while (BurnTickTime >= 0.65f && !bDead)
         {
             BurnTickTime -= 0.65f;
+            BurnPulse = 0.28f;
             DealHealthDamage(BurnTickDamage);
         }
     }
@@ -762,6 +860,7 @@ void ADBEnemy::ApplyCombatHit(const FDBHit& Hit)
     if (bDead || !IsRoomActive() || !FMath::IsFinite(Hit.Damage) || Hit.Damage <= 0.f) return;
     const int32 PreviousChill = ChillStacks;
     const int32 PreviousStorm = StormMarks;
+    const bool bWasBurning = BurnRemaining > 0.f;
     int32 ConsumedChill = 0;
     int32 ConsumedStorm = 0;
     bool bFracture = false;
@@ -813,8 +912,10 @@ void ADBEnemy::ApplyCombatHit(const FDBHit& Hit)
         {
             if (BurnRemaining <= 0.f) BurnTickTime = 0.f;
             BurnRemaining = 4.f;
+            BurnPulse = 0.3f;
             BurnTickDamage = FMath::Max(BurnTickDamage, FMath::Clamp(Hit.Damage * 0.22f, 3.f, 14.f));
             BurnInstigator = Hit.InstigatorActor;
+            if (!bWasBurning) ADBCombatEffect::SpawnBurst(GetWorld(), GetActorLocation(), EDBElement::Ember, RoomId, 0.6f);
         }
         else if (Hit.Element == EDBElement::Storm)
         {
@@ -829,13 +930,23 @@ void ADBEnemy::ApplyCombatHit(const FDBHit& Hit)
     else if (ConsumedStorm > 0)
         ChainToNearby(Hit.Damage * 0.42f + ConsumedStorm * 6.f, 2, 620.f, Hit.InstigatorActor);
     if (ShatterBonus > 0.f)
+    {
+        ADBCombatEffect::SpawnBurst(GetWorld(), GetActorLocation() + FVector(0.f, 0.f, 25.f),
+            EDBElement::Frost, RoomId, 0.8f + ConsumedChill * 0.15f);
+        if (BodyImpactSound && ElementSoundCooldown <= 0.f)
+        {
+            UGameplayStatics::PlaySoundAtLocation(this, BodyImpactSound, GetActorLocation(), 0.8f, 1.45f);
+            ElementSoundCooldown = 0.16f;
+        }
         if (ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode())) Mode->NotifyEvent(TEXT("SHATTER - CHILL CONSUMED"), FrostColor);
+    }
 }
 
 void ADBEnemy::ChainToNearby(float Damage, int32 MaxTargets, float Radius, AActor* HitInstigator)
 {
     TArray<TPair<float, ADBEnemy*>> Candidates;
     const FVector Start = GetActorLocation() + FVector(0.f, 0.f, 20.f);
+    ADBCombatEffect::SpawnBurst(GetWorld(), Start, EDBElement::Storm, RoomId, 0.55f);
     for (TActorIterator<ADBEnemy> It(GetWorld()); It; ++It)
     {
         ADBEnemy* Other = *It;
@@ -860,7 +971,7 @@ void ADBEnemy::ChainToNearby(float Damage, int32 MaxTargets, float Radius, AActo
         Secondary.Source = Start;
         Secondary.Direction = (End - Start).GetSafeNormal();
         Secondary.InstigatorActor = HitInstigator;
-        ArcVisuals.Add({Start, End, 0.3f});
+        ADBCombatEffect::SpawnArc(GetWorld(), Start, End, RoomId);
         Other->ApplyCombatHit(Secondary);
     }
 }
@@ -869,13 +980,25 @@ void ADBEnemy::DealHealthDamage(float Damage)
 {
     if (bDead || Damage <= 0.f) return;
     Health = FMath::Max(0.f, Health - Damage);
-    if (Health <= 0.f) Die();
+    if (Health <= 0.f)
+    {
+        if (bPracticeTarget)
+        {
+            Health = MaxHealth;
+            HitFlash = 0.3f;
+            const EDBElement Element = BurnRemaining > 0.f ? EDBElement::Ember
+                : ChillStacks > 0 ? EDBElement::Frost : StormMarks > 0 ? EDBElement::Storm : EDBElement::Neutral;
+            ADBCombatEffect::SpawnBurst(GetWorld(), GetActorLocation(), Element, RoomId, 0.8f);
+        }
+        else Die();
+    }
 }
 
 void ADBEnemy::Die()
 {
     if (bDead) return;
     bDead = true;
+    bShieldInterceptionReady = false;
     Phase = EDBEnemyPhase::Dead;
     bVulnerable = false;
     DeathTime = 0.f;
@@ -890,6 +1013,7 @@ void ADBEnemy::Die()
     ChargePart->SetVisibility(false);
     Telegraph.Empty();
     WarningMarks->ClearInstances();
+    ClearElementVisuals();
     GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     GetCharacterMovement()->DisableMovement();
     if (!bDeathNotified)
@@ -967,8 +1091,35 @@ void ADBEnemy::AddRing(UInstancedStaticMeshComponent* Component, FVector Center,
 void ADBEnemy::UpdateWarningGeometry()
 {
     WarningMarks->ClearInstances();
-    if (Phase != EDBEnemyPhase::Telegraph && GroundPulseTime <= 0.f) return;
+    if (Phase != EDBEnemyPhase::Telegraph && !bShieldInterceptionReady && GroundPulseTime <= 0.f) return;
     const float Progress = TellDuration > 0.f ? 1.f - TellTime / TellDuration : 1.f;
+    if (Attack == EAttack::Intercept && (Phase == EDBEnemyPhase::Telegraph || bShieldInterceptionReady))
+    {
+        if (WarningMaterial)
+        {
+            WarningMaterial->SetVectorParameterValue(TEXT("Color"), InterceptColor * (bShieldInterceptionReady ? 1.8f : 0.8f));
+            WarningMaterial->SetVectorParameterValue(TEXT("Tint"), InterceptColor);
+        }
+        const FVector Center = GetActorLocation() + GetActorForwardVector()
+            * (GetCapsuleComponent()->GetScaledCapsuleRadius() + 22.f) + FVector(0.f, 0.f, 25.f);
+        const FVector Side = GetActorRightVector() * (52.f * VisualScale);
+        const FVector Up(0.f, 0.f, 49.f * VisualScale);
+        AddLine(WarningMarks, Center - Side, Center + Up, 5.f);
+        AddLine(WarningMarks, Center + Up, Center + Side, 5.f);
+        AddLine(WarningMarks, Center + Side, Center - Up, 5.f);
+        AddLine(WarningMarks, Center - Up, Center - Side, 5.f);
+        const float Cross = bShieldInterceptionReady ? 0.75f : 0.2f + Progress * 0.5f;
+        AddLine(WarningMarks, Center - (Side + Up) * Cross, Center + (Side + Up) * Cross, bShieldInterceptionReady ? 8.f : 4.f);
+        AddLine(WarningMarks, Center - (Side - Up) * Cross, Center + (Side - Up) * Cross, bShieldInterceptionReady ? 8.f : 4.f);
+        const FVector Floor = FeetLocation() + FVector(0.f, 0.f, 6.f);
+        for (int32 Index = -4; Index < 4; ++Index)
+        {
+            const FVector A = GetActorForwardVector().RotateAngleAxis(Index * 15.f, FVector::UpVector);
+            const FVector B = GetActorForwardVector().RotateAngleAxis((Index + 0.8f) * 15.f, FVector::UpVector);
+            AddLine(WarningMarks, Floor + A * 185.f, Floor + B * 185.f, 6.f);
+        }
+        return;
+    }
     const bool bGround = Attack == EAttack::Ground || Attack == EAttack::Slam;
     if (WarningMaterial)
     {
@@ -1065,7 +1216,15 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     float HeadPitch = -BodyPitch * 0.65f;
     if (Phase == EDBEnemyPhase::Telegraph)
     {
-        if (Attack == EAttack::Swing)
+        if (Attack == EAttack::Intercept)
+        {
+            LeftArmPitch = 50.f + Windup * 40.f;
+            RightArmPitch = 60.f + Windup * 33.f;
+            LeftArmRoll = 28.f; RightArmRoll = -28.f;
+            BodyPitch = -5.f; BodyYaw = 0.f; BodyDrop = Windup * 5.f;
+            HeadPitch = 5.f;
+        }
+        else if (Attack == EAttack::Swing)
         {
             RightArmPitch = FMath::Lerp(-40.f, -155.f, Windup);
             RightArmRoll = FMath::Lerp(16.f, 30.f, Windup);
@@ -1101,7 +1260,13 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     }
     else if (Phase == EDBEnemyPhase::Attack)
     {
-        if (Attack == EAttack::Swing)
+        if (Attack == EAttack::Intercept)
+        {
+            LeftArmPitch = 90.f; RightArmPitch = 93.f;
+            LeftArmRoll = 28.f; RightArmRoll = -28.f;
+            BodyPitch = -5.f; BodyYaw = 0.f; BodyDrop = 5.f; HeadPitch = 5.f;
+        }
+        else if (Attack == EAttack::Swing)
         {
             // The striking forearm crosses in front exactly as the active hit window opens.
             const float Strike = FMath::SmoothStep(0.f, 0.18f, AttackElapsed);
@@ -1184,26 +1349,60 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), bVulnerable ? 3.5f : 1.7f);
     }
     UpdateWarningGeometry();
+    UpdateElementVisuals(DeltaSeconds);
+}
+
+void ADBEnemy::ClearElementVisuals()
+{
+    FrostMarks->ClearInstances();
+    EmberMarks->ClearInstances();
     EffectMarks->ClearInstances();
-    if (EffectMaterial)
+}
+
+void ADBEnemy::UpdateElementVisuals(float DeltaSeconds)
+{
+    ClearElementVisuals();
+    BurnPulse = FMath::Max(0.f, BurnPulse - DeltaSeconds);
+    const FTransform Frame = VisualRoot->GetComponentTransform();
+    if (ChillStacks > 0)
     {
-        EffectMaterial->SetVectorParameterValue(TEXT("Color"), StormColor);
-        EffectMaterial->SetVectorParameterValue(TEXT("Tint"), StormColor);
+        // Static ice attaches to the silhouette; it remains blue during white hits and green recovery.
+        const int32 Count = 6 + ChillStacks * 2;
+        for (int32 Index = 0; Index < Count; ++Index)
+        {
+            const float Angle = Index * 2.f * PI / Count;
+            const float Height = Index % 2 ? 42.f : 111.f;
+            const FVector At = Frame.TransformPosition(FVector(FMath::Cos(Angle) * 36.f, FMath::Sin(Angle) * 40.f, Height));
+            AddElementShard(FrostMarks, At, FRotator(12.f, FMath::RadiansToDegrees(Angle), Index % 2 ? 15.f : -15.f),
+                FVector(10.f, 12.f, 23.f + ChillStacks * 5.f) * VisualScale);
+        }
+        const FVector Crown = Frame.TransformPosition(FVector(0.f, 0.f, 216.f));
+        AddElementShard(FrostMarks, Crown, FRotator::ZeroRotator, FVector(11.f, 11.f, 29.f) * VisualScale);
+        AddElementShard(FrostMarks, Crown, FRotator(90.f, GetActorRotation().Yaw, 0.f), FVector(7.f, 7.f, 30.f) * VisualScale);
     }
-    for (int32 Index = ArcVisuals.Num() - 1; Index >= 0; --Index)
+    if (BurnRemaining > 0.f)
     {
-        FArcVisual& Arc = ArcVisuals[Index];
-        Arc.Remaining -= DeltaSeconds;
-        if (Arc.Remaining <= 0.f) { ArcVisuals.RemoveAtSwap(Index); continue; }
-        const FVector Middle = (Arc.Start + Arc.End) * 0.5f + FVector(0.f, 0.f, 35.f);
-        AddLine(EffectMarks, Arc.Start, Middle, 6.f);
-        AddLine(EffectMarks, Middle, Arc.End, 6.f);
+        for (int32 Index = 0; Index < 9; ++Index)
+        {
+            const float Rise = FMath::Fmod(VisualTime * 0.95f + Index * 0.137f, 1.f);
+            const float Angle = Index * 2.f * PI / 9.f + FMath::Sin(VisualTime * 2.f + Index) * 0.12f;
+            const FVector At = Frame.TransformPosition(FVector(FMath::Cos(Angle) * 32.f,
+                FMath::Sin(Angle) * 36.f, 28.f + Rise * 133.f));
+            const float Flame = FMath::Max(0.15f, 1.f - Rise) * (1.f + BurnPulse);
+            AddElementShard(EmberMarks, At, FRotator(10.f * FMath::Sin(VisualTime * 7.f + Index), Index * 37.f, 0.f),
+                FVector(13.f, 12.f, 43.f) * (VisualScale * Flame));
+        }
     }
-    const FVector Crown = GetActorLocation() + FVector(0.f, 0.f, GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + 24.f);
-    for (int32 Mark = 0; Mark < ChillStacks + StormMarks; ++Mark)
+    for (int32 Mark = 0; Mark < StormMarks; ++Mark)
     {
-        const float Angle = VisualTime * 1.5f + Mark * 2.f * PI / FMath::Max(1, ChillStacks + StormMarks);
-        const FVector At = Crown + FVector(FMath::Cos(Angle) * 35.f, FMath::Sin(Angle) * 35.f, 0.f);
-        AddLine(EffectMarks, At - FVector(0.f, 0.f, 8.f), At + FVector(0.f, 0.f, 8.f), Mark < ChillStacks ? 6.f : 10.f);
+        // A lightning zig-zag across the chest is distinct from ice and rising flame.
+        const FVector Center(45.f, (Mark - (StormMarks - 1) * 0.5f) * 24.f, 128.f);
+        const FVector A = Frame.TransformPosition(Center + FVector(0.f, -8.f, 17.f));
+        const FVector B = Frame.TransformPosition(Center + FVector(0.f, 5.f, 2.f));
+        const FVector C = Frame.TransformPosition(Center + FVector(0.f, -4.f, -2.f));
+        const FVector D = Frame.TransformPosition(Center + FVector(0.f, 7.f, -17.f));
+        AddLine(EffectMarks, A, B, 4.8f * VisualScale);
+        AddLine(EffectMarks, B, C, 4.8f * VisualScale);
+        AddLine(EffectMarks, C, D, 4.8f * VisualScale);
     }
 }

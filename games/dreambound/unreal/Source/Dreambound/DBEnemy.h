@@ -28,6 +28,8 @@ public:
     void Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty);
     void SetArenaBounds(FVector Center, FVector2D HalfSize);
     void ApplyCombatHit(const FDBHit& Hit);
+    /** True consumes this stance. The caller destroys only its own outbound piece. */
+    bool TryInterceptShieldPiece(FVector IncomingDirection);
 
     UPROPERTY(BlueprintReadOnly, Category="Combat") EDBEnemyKind Kind = EDBEnemyKind::Melee;
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 RoomId = 0;
@@ -46,18 +48,14 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 StormMarks = 0;
     UPROPERTY(BlueprintReadOnly, Category="Combat") float BurnRemaining = 0.f;
     UPROPERTY(BlueprintReadOnly, Category="Combat") bool bRepositioning = false;
+    UPROPERTY(BlueprintReadOnly, Category="Combat") bool bShieldInterceptionReady = false;
+    UPROPERTY(BlueprintReadWrite, Category="Combat") bool bPracticeTarget = false;
 
 protected:
     virtual void BeginPlay() override;
 
 private:
-    enum class EAttack : uint8 { None, Swing, Bolt, Lunge, Salvo, Slam, Ground };
-    struct FArcVisual
-    {
-        FVector Start = FVector::ZeroVector;
-        FVector End = FVector::ZeroVector;
-        float Remaining = 0.f;
-    };
+    enum class EAttack : uint8 { None, Swing, Bolt, Lunge, Salvo, Slam, Ground, Intercept };
 
     UPROPERTY() TObjectPtr<USceneComponent> VisualRoot;
     UPROPERTY() TObjectPtr<USceneComponent> BodyPivot;
@@ -76,8 +74,9 @@ private:
     UPROPERTY() TObjectPtr<UStaticMeshComponent> ChargePart;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> WarningMarks;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> EffectMarks;
+    UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> FrostMarks;
+    UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> EmberMarks;
     UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> WarningMaterial;
-    UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> EffectMaterial;
     UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> CoreMaterial;
     UPROPERTY() TObjectPtr<USoundBase> EnemyHitSound;
     UPROPERTY() TObjectPtr<USoundBase> EnemyFireSound;
@@ -88,7 +87,6 @@ private:
 
     TWeakObjectPtr<ADBCharacter> Target;
     TWeakObjectPtr<AActor> BurnInstigator;
-    TArray<FArcVisual> ArcVisuals;
     TArray<FTransform> DeathStartPose;
     EAttack Attack = EAttack::None;
     FVector ArenaCenter = FVector::ZeroVector;
@@ -130,6 +128,10 @@ private:
     float AttackKick = 0.f;
     float VisualScale = 0.9f;
     float SteeringTime = 0.f;
+    float InterceptionCooldown = 3.f;
+    float BurnPulse = 0.f;
+    float ElementSoundCooldown = 0.f;
+    uint32 ActiveAttackId = 0;
     int32 ShotsRemaining = 0;
     int32 BossAttackIndex = 0;
     bool bConfigured = false;
@@ -154,6 +156,8 @@ private:
     void ChooseRepositionTarget();
     void UpdateWarningGeometry();
     void UpdateStatusEffects(float DeltaSeconds);
+    void UpdateElementVisuals(float DeltaSeconds);
+    void ClearElementVisuals();
     void MoveToward(FVector Point, float DeltaSeconds, float SpeedMultiplier = 1.f);
     void MoveDirection(FVector Direction, float DeltaSeconds, float SpeedMultiplier = 1.f);
     void UpdateApproach(float DeltaSeconds);

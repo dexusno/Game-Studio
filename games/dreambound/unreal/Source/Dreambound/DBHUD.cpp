@@ -22,10 +22,19 @@ void ADBHUD::Button(FName Id,const FString& Text,float X,float Y,float W,float H
  Label(Text,X+24,Y+H/2-14,27,FLinearColor(0.94,0.9,0.79));
  AddHitBox(FVector2D(X,Y)*UIScale,FVector2D(W,H)*UIScale,Id,true);
 }
+void ADBHUD::WrappedLabel(const FString& Text,float X,float Y,float Width,float Size,FLinearColor Color){
+ UFont* Font=LoadObject<UFont>(nullptr,TEXT("/Engine/EngineFonts/RobotoDistanceField.RobotoDistanceField"));
+ if(!Font)Font=GEngine->GetMediumFont();
+ const float Scale=Size/FMath::Max(1.f,float(Font->GetMaxCharHeight()));
+ TArray<FString> Words;Text.ParseIntoArrayWS(Words);FString Line;
+ for(const auto& Word:Words){FString Candidate=Line.IsEmpty()?Word:Line+TEXT(" ")+Word;float W=0,H=0;GetTextSize(Candidate,W,H,Font,Scale);
+  if(!Line.IsEmpty()&&W>Width){Label(Line,X,Y,Size,Color);Y+=Size+7;Line=Word;}else Line=Candidate;}
+ if(!Line.IsEmpty())Label(Line,X,Y,Size,Color);
+}
 void ADBHUD::DrawHUD(){
  Super::DrawHUD();if(!Canvas)return;
  auto* G=Cast<ADBGameMode>(UGameplayStatics::GetGameMode(this));if(!G)return;
- auto* P=G->Player;UIScale=Canvas->SizeX/1920.f;float H=Canvas->SizeY/UIScale;
+ auto* P=G->Player;UIScale=FMath::Min(Canvas->SizeX/1920.f,Canvas->SizeY/1080.f);float H=Canvas->SizeY/UIScale;
  FLinearColor Ivory(0.94,0.91,0.82),Gold(0.84,0.67,0.39),Mint(0.5,0.9,0.83);
  if(!G->bTitle){
   Panel(40,32,650,112,FLinearColor(0.02,0.035,0.04,0.72));
@@ -36,19 +45,31 @@ void ADBHUD::DrawHUD(){
    Panel(42,H-170,370,129,FLinearColor(0.02,0.035,0.04,0.8));
    Label(FString::Printf(TEXT("%d  /  %d"),FMath::CeilToInt(P->Health),FMath::CeilToInt(P->MaxHealth)),62,H-155,27,Ivory);
    Panel(62,H-115,324,7,FLinearColor(0.2,0.13,0.12));Panel(62,H-115,324*FMath::Clamp(P->Health/P->MaxHealth,0.f,1.f),7,FLinearColor(0.77,0.4,0.31));
-   Label(TEXT("GUARD"),62,H-94,16,Mint);Panel(137,H-87,249,5,FLinearColor(0.1,0.22,0.23));
-   Panel(137,H-87,249*FMath::Clamp(P->GuardEnergy/P->MaxGuardEnergy,0.f,1.f),5,Mint);
+   Label(FString::Printf(TEXT("%d PIECES AVAILABLE TO BLOCK"),P->GetAttachedPieceCount()),62,H-89,18,Mint);
    FString E=StaticEnum<EDBElement>()->GetNameStringByValue(int64(P->CurrentElement)).ToUpper();
-   Panel(1400,H-163,468,123,FLinearColor(0.02f,0.035f,0.04f,0.8f));
-   Label(P->GetShieldStateLabel(),1430,H-140,25,P->IsShieldAway()?Gold:Mint);
-   Label(P->GetSpecialLabel(),1430,H-103,20,Ivory);
-   Panel(1430,H-61,300,5,FLinearColor(0.12f,0.16f,0.17f));
-   Panel(1430,H-61,300*FMath::Clamp(P->ThrowCharge>0?P->ThrowCharge:P->bShieldReady?1.f:0.f,0.f,1.f),5,P->IsShieldAway()?FLinearColor(.9f,.4f,.2f):Mint);
-   if(P->CurrentElement!=EDBElement::Neutral)Label(E,1750,H-76,17,Mint);
+   Panel(1290,H-228,575,192,FLinearColor(.02f,.035f,.04f,.9f));
+   Label(P->GetSelectedPieceCount()>0?FString::Printf(TEXT("RELEASE LMB / LAUNCH %d"),P->GetSelectedPieceCount()):P->GetShieldStateLabel(),1314,H-211,22,P->GetSelectedPieceCount()>0?Gold:Mint);
+   for(int32 I=0;I<P->GetShieldPieceCount();++I){
+    const auto State=P->GetPieceState(I);const float X=1315+I*62;
+    FLinearColor C=State==EDBShieldPieceState::Selected?Gold:State==EDBShieldPieceState::Attached?Mint:State==EDBShieldPieceState::Regenerating?FLinearColor(.22,.3,.36):FLinearColor(.54,.63,.83);
+    Panel(X,H-170,48,33,FLinearColor(.06,.09,.11));
+    if(State==EDBShieldPieceState::Regenerating)Panel(X,H-170,48*P->GetPieceRegenerationProgress(I),33,C);
+    else Panel(X,H-170,48,33,C);
+    Label(FString::FromInt(I+1),X+17,H-167,21,State==EDBShieldPieceState::Regenerating?Ivory:FLinearColor(.015,.03,.04));
+    Label(State==EDBShieldPieceState::Regenerating?TEXT("REGEN"):State==EDBShieldPieceState::Returning?TEXT("BACK"):State==EDBShieldPieceState::Attached?TEXT("HELD"):State==EDBShieldPieceState::Selected?TEXT("LIT"):TEXT("AWAY"),X,H-129,12,C);
+   }
+   Label(FString::Printf(TEXT("%d held / %d away / %d rebuilding"),P->GetAttachedPieceCount(),P->GetDeployedPieceCount(),P->GetRegeneratingPieceCount()),1314,H-101,18,Ivory);
+   const float Wait=FMath::Max(P->SpecialCooldown,P->AttackRecovery);
+   Label((P->HasUpgrade("Ram")?FString(TEXT("F / RAM")):FString(TEXT("F / HEAVY BASH")))+(Wait>0?FString::Printf(TEXT(" / %.1fs"),Wait):TEXT(" / READY")),1314,H-72,18,Wait>0?Gold:Mint);
+   if(P->StoredShots>0||P->HasUpgrade("Mirror"))Label(FString::Printf(TEXT("MIRROR / %d charges"),P->StoredShots),1314,H-260,20,Gold);
+   if(P->GetTotalAnchorIntegrity()>0)Label(FString::Printf(TEXT("ANCHOR COVER / %.0f integrity"),P->GetTotalAnchorIntegrity()),1314,H-292,19,Mint);
+   Label(P->GetElementLabel()+(P->CurrentElement==EDBElement::Neutral?TEXT(" / R CYCLES CORES"):TEXT(" / ON HIT")),62,H-58,17,P->CurrentElement==EDBElement::Frost?FLinearColor(.4,.85,1):P->CurrentElement==EDBElement::Ember?FLinearColor(1,.5,.2):P->CurrentElement==EDBElement::Storm?FLinearColor(.8,.5,1):Mint);
    if(P->HitMarkerTime>0){float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;DrawLine(X-6,Y-6,X+6,Y+6,Gold,2);DrawLine(X-6,Y+6,X+6,Y-6,Gold,2);}
    if(P->HurtFlashTime>0)Panel(0,0,1920,H,FLinearColor(0.8f,0.08f,0.035f,FMath::Min(0.16f,P->HurtFlashTime*.45f)));
-   Label(P->IsShieldAway()?TEXT("Q / recall    Move to shape the return path"):TEXT("Tap LMB / strike    Hold + release / throw"),670,H-61,19,Ivory);
-   Label(TEXT("RMB / guard    Shift / dash    Tab / build    Esc / pause"),650,H-32,17,Gold);
+   Panel(590,H-100,670,100,FLinearColor(.02,.035,.04,.82));
+   Label(TEXT("Tap LMB / strike    Hold / select pieces"),610,H-86,19,Ivory);
+   Label(TEXT("Q / recall    F / heavy bash    RMB / guard"),610,H-59,19,Ivory);
+   Label(TEXT("Shift / dash    Tab / abilities    Esc / pause"),610,H-32,17,Gold);
    if(!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&!G->bWon&&!G->bDefeated) {
     float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;
     FLinearColor C=P->IsShieldAway()?Gold:P->bGuarding?Mint:Ivory;
@@ -58,12 +79,15 @@ void ADBHUD::DrawHUD(){
     if(!Interact.IsEmpty()){Panel(630,H*0.67f,660,60,FLinearColor(0.02,0.05,0.05,0.92));Label(Interact,660,H*0.67f+16,25,Ivory);}
    }
   }
-  for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&It->RoomId==G->CurrentRoomId){
+  for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&(It->RoomId==G->CurrentRoomId||It->RoomId==INDEX_NONE)){
    if(P&&FVector::Dist(P->GetActorLocation(),It->GetActorLocation())<2200){
     FVector Mark=Project(It->GetActorLocation()+FVector(0,0,150));float MX=Mark.X/UIScale,MY=Mark.Y/UIScale;
     if(Mark.Z>0&&MX>70&&MX<1850&&MY>155&&MY<H-200){
      if(It->Kind!=EDBEnemyKind::Boss){Panel(MX-46,MY,92,4,FLinearColor(0.14f,0.08f,0.05f));Panel(MX-46,MY,92*FMath::Clamp(It->Health/It->MaxHealth,0.f,1.f),4,Gold);}
      if(!It->Telegraph.IsEmpty())Label(It->Telegraph,MX-75,MY-30,18,Gold);
+     FString Status;if(It->ChillStacks>0)Status+=FString::Printf(TEXT("CHILLED x%d  "),It->ChillStacks);if(It->BurnRemaining>0)Status+=TEXT("BURNING  ");if(It->StormMarks>0)Status+=TEXT("STORM MARKED");
+     if(!Status.IsEmpty())Label(Status,MX-85,MY+13,16,It->ChillStacks>0?FLinearColor(.4,.85,1):It->BurnRemaining>0?FLinearColor(1,.5,.2):FLinearColor(.8,.5,1));
+     if(It->bPracticeTarget)Label(TEXT("PRACTICE TARGET"),MX-85,MY-54,16,Mint);
     }
    }
    if(It->Kind==EDBEnemyKind::Boss){
@@ -73,8 +97,17 @@ void ADBHUD::DrawHUD(){
     Panel(640,88,620*FMath::Clamp(It->Health/It->MaxHealth,0.f,1.f),7,FLinearColor(0.95,0.54,0.26));
    }
   }
-  if(G->EventRemaining>0&&!G->bChoosingReward){Panel(570,165,780,56,FLinearColor(0.025,0.045,0.045,0.82));Label(G->EventText,594,184,21,G->EventColor);}
-  if(G->bRecoverySlice&&!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&(G->bSliceAwaitingStart||G->ClearedRooms.Contains(G->CurrentRoomId))){
+  if(G->EventRemaining>0&&!G->bChoosingReward){Panel(570,165,870,86,FLinearColor(0.025,0.045,0.045,0.82));WrappedLabel(G->EventText,594,181,822,21,G->EventColor);}
+  if(!G->PracticeInstruction.IsEmpty()&&!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild){
+   Panel(42,170,480,192,FLinearColor(.02,.045,.05,.94));Label(TEXT("TRY YOUR REWARD / SAFE PRACTICE"),62,188,19,Mint);
+   WrappedLabel(G->PracticeInstruction,62,223,436,20,Ivory);Label(TEXT("Leave through the passage when ready."),62,325,17,Gold);
+  }
+  if(G->bRecoverySlice&&G->ClaimedRooms.Contains(G->CurrentRoomId)&&G->Rooms.IsValidIndex(G->CurrentRoomId+1)){
+   const FVector D=(G->Rooms[G->CurrentRoomId+1].Center-G->Rooms[G->CurrentRoomId].Center).GetSafeNormal();
+   FVector Mark=Project(G->Rooms[G->CurrentRoomId].Center+D*1600+FVector(0,0,230));
+   if(Mark.Z>0)Label(TEXT("NEXT WARD / PASSAGE OPEN"),Mark.X/UIScale-130,Mark.Y/UIScale,19,Mint);
+  }
+  if(G->bRecoverySlice&&!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&!G->ClaimedRooms.Contains(G->CurrentRoomId)&&(G->bSliceAwaitingStart||G->ClearedRooms.Contains(G->CurrentRoomId))){
    if(auto* A=G->Rooms[G->CurrentRoomId].Altar){FVector Mark=Project(A->GetActorLocation()+FVector(0,0,140));float MX=Mark.X/UIScale,MY=Mark.Y/UIScale;
     if(Mark.Z>0&&MX>120&&MX<1730&&MY>160&&MY<H-190)Label(G->bSliceAwaitingStart?TEXT("WARD STONE"):TEXT("EARNED ATTACHMENT"),MX-70,MY,18,Mint);
    }
@@ -89,21 +122,21 @@ void ADBHUD::DrawHUD(){
     if(Mark.Z>0&&MX>120&&MX<1730&&MY>225&&MY<H-190){Label(Reward?TEXT("RECOVER"):Room.bOptional?TEXT("OPTIONAL / MIRROR TRIAL"):TEXT("PASSAGE"),MX-50,MY,18,Mint);}
    }
   }
-  if(P&&P->MessageTime>0&&!G->bChoosingReward)Label(P->LastCombatMessage,770,H*0.58f,26,Gold);
+  if(P&&P->MessageTime>0&&!G->bChoosingReward){Panel(590,H*.60f-12,752,P->LastCombatMessage.Len()>90?90:54,FLinearColor(.02,.035,.04,.85));WrappedLabel(P->LastCombatMessage,610,H*0.60f,710,21,Gold);}
  }
  if(G->bTitle){
   Panel(0,0,920,H,FLinearColor(0.012,0.024,0.028,0.92));
-  Label(G->bRecoverySlice?TEXT("THE SHIELD / COURTYARD STUDY"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
+  Label(G->bRecoverySlice?TEXT("THE SHIELD / SEGMENTED PLAYTEST"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
   Label(TEXT("BETWEEN"),108,153,79,Ivory);Label(TEXT("WORLDS"),108,230,79,Ivory);
   Label(G->bRecoverySlice?TEXT("Your defense becomes your attack."):TEXT("The places you dream about are real."),115,343,29,Ivory);
-  Label(G->bRecoverySlice?TEXT("Strike. Commit the shield. Shape its return."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
+  Label(G->bRecoverySlice?TEXT("Choose what to throw. Keep what you need."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
   Button("Resume",G->bCanResume?TEXT("Resume expedition"):G->bRecoverySlice?TEXT("Enter the courtyard"):TEXT("Begin expedition"),115,475,625,70,true);
   if(G->bCanResume)Button("New",TEXT("New expedition"),115,560,625,65);
   float PatternY=G->bCanResume?645:560;
   if(!G->LearnedPatterns.IsEmpty())Button("Pattern",TEXT("Starting pattern: ")+G->DescribeUpgrade(G->StartingPattern).Name,115,PatternY,625,60);
   Button("Quit",TEXT("Exit"),115,H-135,200,52);
   Label(TEXT("Mouse + keyboard  /  Headphones recommended"),115,H-190,19,Gold);
-  Label(G->bRecoverySlice?TEXT("Three encounters. Earn two attachments. Keep your learned patterns."):TEXT("First beta: combat, rewards and a crossing."),115,H-60,18,Ivory);
+  Label(G->bRecoverySlice?TEXT("Three connected wards. Seeded routes. Two earned abilities."):TEXT("First beta: combat, rewards and a crossing."),115,H-60,18,Ivory);
  }
  else if(G->bChoosingReward){
   Panel(0,0,1920,H,FLinearColor(0.01,0.02,0.025,0.88));
@@ -111,14 +144,12 @@ void ADBHUD::DrawHUD(){
   Label(TEXT("Install now. Learn its pattern for future expeditions."),260,H*0.18f+59,23,Mint);
   for(int32 I=0;I<G->Offers.Num();++I){
    const auto& O=G->Offers[I];float X=260+I*477,Y=H*0.34f;
-   Panel(X,Y,440,370,FLinearColor(0.06,0.09,0.095,0.98));Panel(X,Y,440,5,O.Color);
+   Panel(X,Y,440,410,FLinearColor(0.06,0.09,0.095,0.98));Panel(X,Y,440,5,O.Color);
    Label(FString::Printf(TEXT("0%d"),I+1),X+28,Y+30,25,O.Color);Label(O.Name,X+28,Y+84,32,Ivory);
-   TArray<FString> Words;O.Description.ParseIntoArrayWS(Words);FString Line;float LY=Y+146;
-   for(const auto& Word:Words){if(Line.Len()+Word.Len()>38){Label(Line,X+28,LY,21,Ivory);LY+=29;Line.Empty();}if(!Line.IsEmpty())Line+=" ";Line+=Word;}
-   if(!Line.IsEmpty())Label(Line,X+28,LY,21,Ivory);
+   WrappedLabel(O.Description,X+28,Y+146,384,21,Ivory);
    int32 Rank=P?P->GetUpgradeRank(O.Id):0;
-   Label(O.Id=="Restore"?TEXT("RESTORATION"):Rank>0?FString::Printf(TEXT("EVOLVE / RANK %d"),Rank+1):TEXT("NEW BEHAVIOR"),X+28,Y+296,18,O.Color);
-   AddHitBox(FVector2D(X,Y)*UIScale,FVector2D(440,370)*UIScale,FName(*FString::Printf(TEXT("Offer%d"),I)),true);
+   Label(O.Id=="Restore"?TEXT("RESTORATION"):Rank>0?FString::Printf(TEXT("EVOLVE / RANK %d"),Rank+1):TEXT("NEW BEHAVIOR"),X+28,Y+354,18,O.Color);
+   AddHitBox(FVector2D(X,Y)*UIScale,FVector2D(440,410)*UIScale,FName(*FString::Printf(TEXT("Offer%d"),I)),true);
   }
  }
  else if(G->bWon||G->bDefeated){
@@ -134,20 +165,28 @@ void ADBHUD::DrawHUD(){
  }
  else if(G->bPaused||G->bShowingBuild){
   Panel(0,0,1920,H,FLinearColor(0.012,0.025,0.03,0.93));
-  Label(G->bShowingBuild?TEXT("YOUR LIVING INSTRUMENT"):TEXT("PAUSED"),190,100,52,Ivory);
-  Label(TEXT("Attack and defense remain yours to choose."),190,177,25,Mint);
-  int32 I=0;if(P)for(const auto& Pair:P->Upgrades){
-   auto O=G->DescribeUpgrade(Pair.Key);
-   Label(FString::Printf(TEXT("%s  /  %d"),*O.Name,Pair.Value),190,250+I*49,27,O.Color);++I;
+  Label(G->bShowingBuild?TEXT("YOUR ABILITIES"):TEXT("PAUSED"),190,90,52,Ivory);
+  Label(TEXT("Light pieces with LMB. Release to launch. Q recalls. F bashes."),190,163,24,Mint);
+  if(G->bShowingBuild){
+   TArray<FName> Keys;if(P)P->Upgrades.GetKeys(Keys);Keys.Sort(FNameLexicalLess());
+   const int32 Pages=FMath::Max(1,FMath::DivideAndRoundUp(Keys.Num(),4));EquipmentPage=FMath::Clamp(EquipmentPage,0,Pages-1);
+   for(int32 I=0;I<4&&Keys.IsValidIndex(EquipmentPage*4+I);++I){FName Id=Keys[EquipmentPage*4+I];const int32 Rank=P->GetUpgradeRank(Id);auto O=G->DescribeUpgrade(Id);float X=190+(I%2)*805,Y=225+(I/2)*249;
+    Panel(X,Y,765,223,FLinearColor(.055,.085,.095));Label(O.Name+FString::Printf(TEXT(" / RANK %d"),Rank),X+22,Y+20,27,O.Color);
+    WrappedLabel(ADBCharacter::GetUpgradeDescription(Id,Rank),X+22,Y+69,716,22,Ivory);
+   }
+   if(Keys.IsEmpty())Label(TEXT("Earn an attachment at a cleared ward to begin your build."),190,260,25,Ivory);
+   Label(FString::Printf(TEXT("PAGE %d / %d"),EquipmentPage+1,Pages),190,750,20,Gold);
+   if(Pages>1){Button("BuildPrev",TEXT("Previous"),430,737,230,51);Button("BuildNext",TEXT("Next"),680,737,230,51);}
+  }else{
+   Label(TEXT("LMB / tap to strike; hold to light pieces; release to throw"),190,257,23,Ivory);
+   Label(TEXT("RMB / guard with attached pieces; a block spends one"),190,305,23,Ivory);
+   Label(TEXT("Q / recall surviving pieces     F / heavy bash or Ram"),190,353,23,Ivory);
+   Label(TEXT("Destroyed pieces regenerate independently."),190,401,23,Mint);
+   Label(TEXT("Shift / dash    Space / jump    R / cycle owned cores"),190,449,23,Ivory);
+   Button("Equipment",TEXT("Read my ability instructions"),190,530,650,62,true);
+   Label(FString::Printf(TEXT("Mouse sensitivity: %.2f"),G->Sensitivity),1130,270,25,Gold);
+   Button("SensDown",TEXT("-"),1130,326,100,50);Button("SensUp",TEXT("+"),1250,326,100,50);
   }
-  if(I==0)Label(TEXT("Recover an attachment to begin shaping your build."),190,250,24,Ivory);
-  Label(TEXT("LMB / tap to strike; hold and release to throw"),1030,255,22,Ivory);
-  Label(TEXT("RMB / guard while the shield is held"),1030,304,22,Ivory);
-  Label(TEXT("Q / recall when away; heavy bash while held"),1030,353,22,Ivory);
-  Label(TEXT("Shift / dash    Space / jump    R / change core"),1030,402,22,Ivory);
-  Label(TEXT("E / interact    1 / 2 / 3 reward    Tab / build"),1030,451,22,Ivory);
-  Label(FString::Printf(TEXT("Mouse sensitivity: %.2f"),G->Sensitivity),1030,536,25,Gold);
-  Button("SensDown",TEXT("-"),1030,590,100,50);Button("SensUp",TEXT("+"),1150,590,100,50);
   Label(TEXT("After exiting, the current encounter resumes from its entry checkpoint."),190,H-220,20,Gold);
   Button("Back",TEXT("Return to the world"),190,H-160,650,65,true);
   Button("Quit",TEXT("Save checkpoint / exit"),1030,H-160,550,65);
@@ -171,6 +210,9 @@ void ADBHUD::NotifyHitBoxRelease(FName Box){
  else if(Box=="Back"){if(G->bShowingBuild)G->ToggleBuild();else G->TogglePause();}
  else if(Box=="SensDown")G->AdjustSensitivity(-0.1f);
  else if(Box=="SensUp")G->AdjustSensitivity(0.1f);
+ else if(Box=="Equipment"){G->bPaused=false;G->bShowingBuild=true;EquipmentPage=0;G->SetMenuInput(true);}
+ else if(Box=="BuildPrev")EquipmentPage=FMath::Max(0,EquipmentPage-1);
+ else if(Box=="BuildNext")++EquipmentPage;
  else if(Box=="Pattern"&&!G->LearnedPatterns.IsEmpty()){
   int32 I=G->LearnedPatterns.IndexOfByKey(G->StartingPattern);G->StartingPattern=G->LearnedPatterns[(I+1)%G->LearnedPatterns.Num()];
  }

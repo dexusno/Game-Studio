@@ -36,6 +36,7 @@ public:
  UPROPERTY() TArray<int32> Cleared;
  UPROPERTY() TArray<int32> Claimed;
  UPROPERTY() TMap<FName,int32> Upgrades;
+ UPROPERTY() TMap<int32,FName> RoomRewards;
  UPROPERTY() TArray<FName> Patterns;
  UPROPERTY() float Health=100.f;
  UPROPERTY() int32 Element=0;
@@ -76,6 +77,9 @@ public:
  void UpdateGates();
  void RunVerification();
  void BuildRecoveryCourtyard();
+ void BeginRewardPractice(FName Reward);
+ void ClearRewardPractice();
+ FVector GetRoomEntryPoint(int32 RoomIndex) const;
  void TickMotionDemo(float DeltaSeconds);
  FDBOffer DescribeUpgrade(FName Id) const;
  FString ObjectiveText() const;
@@ -88,17 +92,23 @@ public:
  bool bRecoverySlice=true,bSliceAwaitingStart=true;
  bool bSaveFailed=false;
  FString EventText;
+ FString PracticeInstruction;
+ FName PracticeReward=NAME_None;
+ FString LayoutSignature;
+ TMap<int32,int32> RoomLayoutVariants;
  FLinearColor EventColor=FLinearColor::White;
  float EventRemaining=0;
  TArray<FDBRoom> Rooms;
  TArray<FDBOffer> Offers;
  TArray<int32> ClearedRooms,ClaimedRooms;
+ TMap<int32,FName> EarnedRoomRewards;
  TArray<FName> LearnedPatterns;
  FName StartingPattern=NAME_None;
  ADBCharacter* Player=nullptr;
  FString SaveNotice;
 private:
  TArray<AActor*> Generated;
+ UPROPERTY() TArray<TObjectPtr<ADBEnemy>> PracticeActors;
  TMap<FString,UHierarchicalInstancedStaticMeshComponent*> MeshBatches;
  TSet<int32> SpawnedRooms;
  TMap<int32,int32> RoomWaves;
@@ -113,7 +123,7 @@ private:
  FString DemoFrameTimes;
  float DemoTime=0.f;
  int32 DemoFrame=0,DemoAction=0;
- FString SlotBase="DreamboundShieldStudy";
+ FString SlotBase="DreamboundSegments";
  FRandomStream Random;
  AActor* Mesh(const FString& Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,FVector Scale=FVector::OneVector,bool bCollision=true,const FString& Material="");
  void Instance(const FString& Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,FVector Scale=FVector::OneVector,const FString& Material="");

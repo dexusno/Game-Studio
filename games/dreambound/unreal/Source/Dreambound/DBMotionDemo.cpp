@@ -1,6 +1,7 @@
 #include "DBGameMode.h"
 #include "DBCharacter.h"
 #include "DBEnemy.h"
+#include "DBThrownShield.h"
 #include "Engine/World.h"
 #include "Engine/Engine.h"
 #include "EngineUtils.h"
@@ -46,23 +47,30 @@ void ADBGameMode::TickMotionDemo(float Dt)
   return;
  }
  auto* PC=Cast<APlayerController>(Player->GetController());if(!PC)return;
- FVector Aim(360,260,490);ADBEnemy* Nearest=nullptr;float Best=BIG_NUMBER;
- for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&It->RoomId==CurrentRoomId){float D=FVector::DistSquared(It->GetActorLocation(),Player->GetActorLocation());if(D<Best){Best=D;Nearest=*It;}}
- if(Nearest&&DemoTime>6)Aim=Nearest->GetActorLocation()+FVector(0,0,35);
- const FRotator Target=(Aim-Player->GetPawnViewLocation()).Rotation();
- PC->SetControlRotation(FMath::RInterpTo(PC->GetControlRotation(),Target,Dt,DemoTime<6?1.5f:6.f));
- FVector Destination(-1180,-530,110);
- if(DemoTime>6&&DemoTime<11)Destination=FVector(-320,-460,110);
- else if(DemoTime>=11&&DemoTime<16)Destination=FVector(-230,-1160,110);
- else if(DemoTime>=16&&DemoTime<21)Destination=FVector(190,-670,110);
- else if(DemoTime>=21)Destination=FVector(-650,-330,110);
- if(FVector::Dist2D(Player->GetActorLocation(),Destination)>90&&!(DemoTime>9&&DemoTime<11))Player->AddMovementInput((Destination-Player->GetActorLocation()).GetSafeNormal2D(),.55f);
- struct FAction{float At;int32 Kind;};
- static const FAction Actions[]={{3,0},{7,1},{9.6f,2},{10,3},{10.10f,4},{11,3},{11.7f,4},{13,5},{14.5f,1},{16,2},{16.2f,6},{18,3},{18.75f,4},{20,5},{21,1},{22,2},{22.2f,3},{22.3f,4},{23.5f,6}};
- while(DemoAction<UE_ARRAY_COUNT(Actions)&&DemoTime>=Actions[DemoAction].At){
-  switch(Actions[DemoAction].Kind){case 0:Interact();break;case 1:Player->PressGuard();break;case 2:Player->ReleaseGuard();break;case 3:Player->PressFire();break;case 4:Player->ReleaseFire();break;case 5:Player->RecallShield();break;case 6:Player->UseSpecial();break;}
-  ++DemoAction;
+ FVector Aim(-280,-500,160);
+ PC->SetControlRotation(FMath::RInterpTo(PC->GetControlRotation(),(Aim-Player->GetPawnViewLocation()).Rotation(),Dt,4.f));
+ // This controlled fixture makes each state visible. Upgrades and incoming
+ // damage here are scripted, independently of the earned-progression checks.
+ if(DemoAction==0){
+  Player->SetActorLocation(FVector(-1000,-500,110));Player->GetCharacterMovement()->StopMovementImmediately();
+  Player->ApplyUpgrade("Frost");BeginRewardPractice("Frost");PracticeInstruction="SCRIPTED CAPTURE / partial throw, retained guard, independent rebuild and Frost return. This is a controlled fixture.";
+  EventRemaining=0;DemoAction=1;
  }
+ else if(DemoAction==1&&DemoTime>2){Player->PressFire();DemoAction=2;}
+ else if(DemoAction==2&&Player->GetSelectedPieceCount()>=3){Player->ReleaseFire();DemoAction=3;}
+ else if(DemoAction==3&&DemoTime>4){Player->PressGuard();DemoAction=4;}
+ else if(DemoAction==4&&DemoTime>5){Player->ReceiveAttack(16,Player->GetPawnViewLocation()+Player->GetAimDirection()*500,false,nullptr,12001);DemoAction=5;}
+ else if(DemoAction==5&&DemoTime>6.4f){Player->RecallShield();DemoAction=6;}
+ else if(DemoAction==6&&DemoTime>9){Player->ReleaseGuard();Player->PressFire();DemoAction=7;}
+ else if(DemoAction==7&&Player->GetSelectedPieceCount()>=2){Player->ReleaseFire();DemoAction=8;}
+ else if(DemoAction==8&&DemoTime>11){for(int32 I=0;I<6;++I)if(auto* F=Player->GetPieceFlight(I)){F->DestroyPiece();break;}DemoAction=9;}
+ else if(DemoAction==9&&DemoTime>12){Player->RecallShield();DemoAction=10;}
+ else if(DemoAction==10&&DemoTime>15){ToggleBuild();DemoAction=11;}
+ else if(DemoAction==11&&DemoTime>18){ToggleBuild();DemoAction=12;}
+ else if(DemoAction==12&&DemoTime>19){Player->PressFire();DemoAction=13;}
+ else if(DemoAction==13&&Player->GetSelectedPieceCount()==6){Player->ReleaseFire();DemoAction=14;}
+ else if(DemoAction==14&&DemoTime>22){Player->RecallShield();DemoAction=15;}
+ else if(DemoAction==15&&DemoTime>24){Player->PressGuard();DemoAction=16;}
  if(!FScreenshotRequest::IsScreenshotRequested()){
   double AudioTime=0;if(auto Device=GetWorld()->GetAudioDevice())AudioTime=Device->GetAudioClock()-DemoAudioStartedAt;
   DemoFrameTimes+=FString::Printf(TEXT("%d,%.6f,%.6f\n"),DemoFrame,DemoTime,AudioTime);

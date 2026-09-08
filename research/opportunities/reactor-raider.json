@@ -15,7 +15,7 @@
     "scope_fit": 2,
     "distribution": 2
   },
-  "score_notes": "Original scores remain provisional indirect inspiration estimates, not market evidence. Owner rejected beta2 and reports the corrective whole-disc study still falls far below art B with unclear/invisible rewards. A segmented shield is the newly selected direction, not implemented or tested. No commercial result or reliable production-cost forecast exists.",
+  "score_notes": "Original scores remain provisional indirect inspiration estimates, not market evidence. Owner rejected beta2 and found the whole-disc study far below art B with unclear rewards. The segmented experiment is implemented and passes staged technical checks; ordinary play, fun and art acceptance remain unverified. No commercial result or reliable production-cost forecast exists.",
   "evidence": [
     {
       "url": "https://store.steampowered.com/app/692890/Roboquest/",
@@ -42,7 +42,7 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Implement the segmented shield interaction and visibly demonstrate one earned reward combination; correct reward instructions/readiness/effect feedback. Establish art B using credible modular assets and custom shield/arm pieces in different generated playable layouts. Premium tools and Unreal libraries are being researched; no purchase is authorized. Resume from games/dreambound/STATUS.md and SHIELD-DESIGN.md.",
+  "next_test": "Playtest the new segmented shield: choose partial allocations, retain protection, recall survivors and use independent rebuilds; assess whether earned abilities change tactics. Then establish a credible art-B modular environment across generated layouts. A sourced premium-tool/Unreal-library review exists; no purchase is authorized. Resume games/dreambound/STATUS.md.",
   "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
@@ -59,7 +59,7 @@
     "owner_refinement_on": "2026-09-07",
     "direction": "Designed 3D encounter modules with generated routes, compatible room configurations, encounters, objectives and rewards under playability and pacing constraints.",
     "next_test_refinement": "Replay multiple generated versions of the representative biome; compare tactics, build choices, fairness and replay interest. Verify seed reproduction, save/resume, dependencies and actual in-engine traversal.",
-    "evidence": "Beta2 implemented a seeded route through eight authored footprints and staged traversal/state checks; owner rejected repetitive scenery and stale play. Meaningful variation across ordinary full runs remains unverified. The project is selected and its current handoff is games/dreambound/STATUS.md."
+    "evidence": "0.3.0-segments1 assembles three physically connected courts with seeded route direction/turn and cover variants. Staged engine checks cover seed reproduction, alternate layout signatures, capsule sweeps and connector floor probes; progression uses explicit room activation. Ordinary varied-run enjoyment and full multi-biome generation remain unverified."
   },
   "owner_selected_foundations": {
     "date": "2026-09-07",
@@ -79,7 +79,7 @@
     "decision_on": "2026-09-08",
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
     "direction": "After the failed procedural kit, properly author and animate the hero shield/enemy and compose a representative courtyard around a bell/tree landmark. Qualify coherent supporting assets for rights and style before use. Blender/Unreal remain installed production tools; AI image-to-3D remains an untested optional experiment.",
-    "evidence": "The corrective build replaces the gun with a complete held/thrown disc and a new authored shield/guardian/tree/masonry kit. Actual Unreal inspection found and corrected exposure and UV export defects. It still does not establish anchor B fidelity; native and scripted observations are separated in game evidence.",
+    "evidence": "The segmented experiment adds original Blender armor arcs, inlays and a gripped hub with validated FBX import and actual Unreal capture. The earlier environment/enemy kit remains, substantially below B. Presentation corrections and native/staged evidence are recorded in the game handoff; no external kit or paid tool was acquired.",
     "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md",
     "style_review": "B remains owner-selected. Klaus rejected beta2 as nowhere near the anchor. Future fidelity claims require actual moving Unreal gameplay with the intended weapon, enemy, authored scene and sound.",
     "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
@@ -95,10 +95,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T11:48:24+00:00",
-      "record_sha256": "58b91fb287bb8c3d68515c55062bef731a19675694cfee15e89f49acb6aa1bff",
+      "captured_at": "2026-09-08T13:26:54+00:00",
+      "record_sha256": "b54a68bb43560108a7d0f2cb677cad2ffedbdca10bdb7ec8fc3f3be8dd7b1701",
       "files": {
-        "games/dreambound/STATUS.md": "4db2d50926ed1a444ecd2bb6961e992dbfb32cae86a5774590936580bcea6247",
+        "games/dreambound/STATUS.md": "04421c76985433c4dbe54a52e680e6d9748a94e44abc52b0d8af324a63fc0625",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",

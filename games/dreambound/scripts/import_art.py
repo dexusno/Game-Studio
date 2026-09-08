@@ -171,7 +171,7 @@ def material(name, spec, pigment, normal):
     return asset
 
 
-def import_mesh(name, meta, materials):
+def import_mesh(name, meta, materials, source=GENERATED):
     options = unreal.FbxImportUI()
     options.set_editor_property('import_mesh', True)
     options.set_editor_property('import_as_skeletal', False)
@@ -194,7 +194,7 @@ def import_mesh(name, meta, materials):
     }.items():
         data.set_editor_property(key, value)
     task = unreal.AssetImportTask()
-    task.filename = str(GENERATED / (name + '.fbx'))
+    task.filename = str(source / (name + '.fbx'))
     task.destination_path = DEST + '/Meshes'; task.destination_name = name
     task.automated = True; task.replace_existing = True; task.replace_existing_settings = True
     task.save = True; task.factory = unreal.FbxFactory(); task.options = options
@@ -254,6 +254,9 @@ def main():
     unreal.SystemLibrary.execute_console_command(None, flag+' 0')
     try:
         for name, meta in METADATA.items(): import_mesh(name, meta, materials)
+        segmented = ROOT / 'art' / 'segmented'
+        for name, meta in json.loads((segmented / 'asset-metadata.json').read_text(encoding='utf-8')).items():
+            import_mesh(name, meta, materials, segmented)
     finally:
         unreal.SystemLibrary.execute_console_command(None, flag+' '+str(previous))
     LIB.save_directory(DEST, only_if_is_dirty=True, recursive=True)

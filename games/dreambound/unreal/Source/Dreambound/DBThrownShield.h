@@ -11,7 +11,7 @@ class UStaticMeshComponent;
 class USceneComponent;
 class USoundBase;
 
-/** The same shield leaves the arm, collides along its flight, and returns through space. */
+/** One identified shield segment. Its physical centre is the actor origin. */
 UCLASS()
 class DREAMBOUND_API ADBThrownShield : public AActor
 {
@@ -20,8 +20,10 @@ public:
     ADBThrownShield();
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
-    void Initialize(ADBCharacter* InBearer, FVector Direction, float Charge);
+    void Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId = 0);
     void Recall();
+    void DestroyPiece();
+    int32 GetPieceId() const { return PieceId; }
     bool InterceptProjectile(FVector Start, FVector End, float Damage, bool bUnblockable);
     bool IsReturning() const { return bReturning; }
     bool IsAnchored() const { return bLodged && bAnchor; }
@@ -34,7 +36,6 @@ private:
     UPROPERTY() TObjectPtr<ADBCharacter> Bearer;
     UPROPERTY() TObjectPtr<USoundBase> ImpactSound;
     UPROPERTY() TObjectPtr<USoundBase> BlockSound;
-    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> FlightAttachments;
     TArray<FVector> OutwardPath;
     TArray<FVector> BearerPath;
     TSet<TWeakObjectPtr<ADBEnemy>> OutwardVictims;
@@ -59,6 +60,9 @@ private:
     bool bLodged = false;
     bool bAnchor = false;
     bool bFollowingBearerTrail = false;
+    bool bResolved = false;
+    bool bEmergencyReturn = false;
+    int32 PieceId = INDEX_NONE;
     EDBElement LastElement = EDBElement::Neutral;
 
     void UpdateMaterial();
@@ -70,4 +74,5 @@ private:
     bool ClearWorldPath(FVector From, FVector To, float Radius = 20.f) const;
     bool RedirectToEnemy(ADBEnemy* Previous);
     void Catch(bool bEmergency);
+    void UpdatePiecePose(float DeltaSeconds);
 };

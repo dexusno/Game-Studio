@@ -1,0 +1,189 @@
+{
+  "SM_ShieldSegment": {
+    "name": "SM_ShieldSegment",
+    "dimensions_cm": [
+      12.31142,
+      32.90974,
+      26.16458
+    ],
+    "bounds_min_cm": [
+      -6.949999809265137,
+      -16.45486831665039,
+      11.735420227050781
+    ],
+    "bounds_max_cm": [
+      5.3614182472229,
+      16.45486831665039,
+      37.900001525878906
+    ],
+    "vertices": 4295,
+    "triangles": 8454,
+    "pivot": "Shield center (0,0,0); face +X/back -X; base crescent centered +Z; repeat roll about X by 60 degrees",
+    "materials": [
+      "M_ShieldCeramic",
+      "M_ShieldBronze",
+      "M_DarkMetal"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.8372285962104797,
+      0.00800000037997961,
+      0.017500000074505806,
+      1.0
+    ],
+    "vertex_channel_max": [
+      0.9855492115020752,
+      0.36000001430511475,
+      0.23999999463558197,
+      1.0
+    ],
+    "sha256": "e90faa85d9949d38b7607f86ee68bed41ef3d9a8e558ea848b7cdf4510476c9f"
+  },
+  "SM_ShieldSegmentGlow": {
+    "name": "SM_ShieldSegmentGlow",
+    "dimensions_cm": [
+      11.99,
+      12.05525,
+      11.95196
+    ],
+    "bounds_min_cm": [
+      -6.460000038146973,
+      -6.07722282409668,
+      17.248037338256836
+    ],
+    "bounds_max_cm": [
+      5.53000020980835,
+      5.978031158447266,
+      29.200000762939453
+    ],
+    "vertices": 640,
+    "triangles": 1260,
+    "pivot": "Exactly the segment's shield-center origin and +Z base orientation; copy its transform/state",
+    "materials": [
+      "M_Core"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.992073655128479,
+      0.00800000037997961,
+      0.0,
+      1.0
+    ],
+    "vertex_channel_max": [
+      1.0,
+      0.36000001430511475,
+      0.0,
+      1.0
+    ],
+    "sha256": "2f633f1c364fb5d245d9cba402158e046fc165b73b9a64507ea0d686fbf8769e"
+  },
+  "SM_ShieldHub": {
+    "name": "SM_ShieldHub",
+    "dimensions_cm": [
+      19.86,
+      29.8,
+      30.09486
+    ],
+    "bounds_min_cm": [
+      -14.050000190734863,
+      -14.899999618530273,
+      -15.100000381469727
+    ],
+    "bounds_max_cm": [
+      5.810000419616699,
+      14.899999618530273,
+      14.99485969543457
+    ],
+    "vertices": 6548,
+    "triangles": 12912,
+    "pivot": "Shield center (0,0,0); remains held; grip bar center(-12,0,-12), axis Y; existing SM_Core fits(-6,0,0)",
+    "materials": [
+      "M_ShieldCeramic",
+      "M_ShieldBronze",
+      "M_DarkMetal"
+    ],
+    "collision_hulls": 0,
+    "recommended_attachment_cm": [
+      0,
+      0,
+      0
+    ],
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "uv_channels": [
+      "CraftUV"
+    ],
+    "uv_faces_repaired": 0,
+    "tangent_audit": {
+      "bad_faces": [],
+      "nearly_zero_tangent_loops_on_valid_geometry": 0,
+      "nearly_zero_tangents_on_submicron_geometry": 0,
+      "non_finite_tangent_loops": 0
+    },
+    "boundary_edges": 0,
+    "nonmanifold_edges": 0,
+    "vertex_channel_min": [
+      0.8898153901100159,
+      0.00800000037997961,
+      0.017500000074505806,
+      1.0
+    ],
+    "vertex_channel_max": [
+      0.970496416091919,
+      0.36000001430511475,
+      0.20000000298023224,
+      1.0
+    ],
+    "sha256": "962becd4e8c1e886834f6c5cb672567ca5fbfcfb74d97496f6f408e37f8452a5"
+  }
+}

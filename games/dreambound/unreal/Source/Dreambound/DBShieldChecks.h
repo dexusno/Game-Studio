@@ -9,6 +9,7 @@ class ADBCharacter;
 class ADBEnemy;
 class ADBThrownShield;
 class ADBProjectile;
+enum class EDBShieldPieceState : uint8;
 
 /** Staged physical-shield checks, advanced by ordinary world ticks. Never ticks the world itself. */
 UCLASS()
@@ -23,10 +24,11 @@ public:
 private:
     enum class EStep : uint8
     {
-        Prepare, Strike, Charge, PausedFlight, Outward, Lodged, Return, CatchRecovery,
-        CoverCharge, CoverOutward, CoverMove, CoverReturn,
-        AnchorCharge, AnchorOutward, AnchorFront, AnchorFlank, AnchorRear,
-        FirstEncounter, SecondEncounter, SaveCharge, Journal, FinalEncounter, Victory, Finished
+        Prepare, HalfCharge, LaunchRecovery, Paused, SecondBlock, FirstRebuild, LastRebuild,
+        FirstPartial, SecondReady, CatchDuringCharge, RecallSurvivors,
+        CoreStrike, EliteWait, EliteCharge, EliteContact, FrostCharge, FrostOutbound, FrostReturn,
+        Storm, Route, FirstEncounter, FirstPractice, SecondEncounter, SecondPractice,
+        SaveCharge, Journal, FinalEncounter, Victory, Finished
     };
     struct FCheck { FString Scenario; FString Id; bool bPassed = false; FString Detail; };
     struct FJournalCopy { FString Slot; bool bExisted = false; TArray<uint8> Bytes; };
@@ -34,6 +36,7 @@ private:
     UPROPERTY() TObjectPtr<ADBGameMode> Mode;
     UPROPERTY() TObjectPtr<ADBCharacter> Player;
     UPROPERTY() TObjectPtr<ADBEnemy> Target;
+    UPROPERTY() TObjectPtr<ADBEnemy> OtherTarget;
     UPROPERTY() TObjectPtr<AActor> Cover;
     UPROPERTY() TArray<TObjectPtr<AActor>> FixtureActors;
     TWeakObjectPtr<ADBThrownShield> Flight;
@@ -56,6 +59,12 @@ private:
     int32 BankBefore = 0;
     int32 OriginalSeed = 0;
     int32 MoveSamples = 0;
+    int32 FirstLost = INDEX_NONE;
+    int32 SecondLost = INDEX_NONE;
+    int32 CaughtPiece = INDEX_NONE;
+    float PausedProgress = 0.f;
+    FString OriginalLayout;
+    bool bSawEliteTell = false;
     double StartedAt = 0;
     double PhaseStartedAt = 0;
     bool bInitialized = false;
@@ -74,12 +83,13 @@ private:
     AActor* MakeBox(FVector Center, FVector Extent);
     ADBEnemy* MakeTarget(FVector Location);
     ADBProjectile* FireBolt(FVector Start, FVector Direction);
-    void SampleReturn();
-    void BeginReturn();
-    bool CheckCatch(const TCHAR* Id);
     bool StartEncounter(int32 Index, int32 ExpectedCount);
     bool ClearEncounter(int32 Index);
-    bool TakeReward(FName Id, int32 ExpectedNextPhase);
+    bool TakeReward(FName Id, int32 Room);
+    bool CheckPieceOwnership(const TCHAR* Id);
+    int32 FindPiece(EDBShieldPieceState State) const;
+    bool CheckRouteGeometry();
+    bool CheckPractice(FName Id, int32 Room);
     void DestroyFixtures();
 };
 

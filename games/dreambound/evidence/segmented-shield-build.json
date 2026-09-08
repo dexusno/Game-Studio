@@ -1,0 +1,94 @@
+{
+  "version": "0.3.0-segments1",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "built_on_utc": "2026-09-08T13:24:30.376626+00:00",
+  "scope": "Six-piece combat experiment; three seeded modular courts; art below anchor B",
+  "package_path": "BuildOutput/SegmentedShield/Windows",
+  "files": [
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166221824,
+      "sha256": "078951A7F28EEA399937E3E2F54C262F815F9EEC8D50FAC0B48EAD1526FF7036"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11222461,
+      "sha256": "DD8C2F8DD4B07CC146A7C478FD1CF9CB0B8089D82D2107C33DC6A2AB5BBA2655"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 211147296,
+      "sha256": "EB9E96406FBF62808A0A10CA153A7A6BE31E7EF08DC668B3ADBC6C10F29B7CB9"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 211038,
+      "sha256": "F65499DAE906271C11A708B142031CB8F871322509EC332D4CAA6673A70401D2"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211536,
+      "sha256": "CCD0B4C7BE2BCB303351FBC23DDD4A8FBE7371A5E8DEC87A397915B8AC8F2C34"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "53C1639BB97AD7C4C6BCCD820858A9AE7113130BEAB500CF9A4544229079C3B8"
+    }
+  ],
+  "runtime_scenarios": {
+    "passed": 16,
+    "failed": 0,
+    "complete": true,
+    "report": "evidence/segmented-shield-checks.json",
+    "executions_this_increment": 5,
+    "scope": "Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence.",
+    "note": "16 scenarios on each successive package; all passed. Later executions followed renderer-driven camera/HUD/forearm and practice-target placement fixes. Final report comes from the copied saved-project package."
+  },
+  "source_build_attempts": {
+    "editor": 2,
+    "note": "First editor attempt exposed a TObjectPtr loop deduction error in root practice cleanup; fixed. Second succeeded.",
+    "package": 5,
+    "package_note": "Five successful build/cook/archive passes as actual rendering exposed presentation defects; first UAT recovered a transient Zen connection failure automatically."
+  },
+  "previous_packages_preserved": [
+    "BuildOutput/ShieldStudy/Windows",
+    "BuildOutput/Shipping/Windows"
+  ],
+  "purchase_or_publication": false,
+  "native_input": "Normal title/start, F heavy strike with visible cooldown, Tab ability screen, and save/exit observed in the isolated QA input profile. This preceded only the final forearm-angle and practice-target placement changes; input/menu code unchanged. No held OS-input or full ordinary journey claim. Final package then launched through Dreambound.exe in the normal owner profile and its title screen was inspected and left ready.",
+  "rendered_capture": {
+    "path": "evidence/segmented-shield-scripted.mp4",
+    "source_exe_sha256": "078951A7F28EEA399937E3E2F54C262F815F9EEC8D50FAC0B48EAD1526FF7036",
+    "frames": 352,
+    "wall_seconds": 25.969467,
+    "audio_seconds": 25.941333333333333,
+    "audio_peak": 0.999847412109375,
+    "clipped_pcm_samples": 0,
+    "samples": {
+      "full": {
+        "frame": 12,
+        "wall_seconds": 0.984038,
+        "path": "evidence/segmented-shield-full.png"
+      },
+      "selection": {
+        "frame": 29,
+        "wall_seconds": 2.385216,
+        "path": "evidence/segmented-shield-selection.png"
+      },
+      "partial": {
+        "frame": 66,
+        "wall_seconds": 5.473915,
+        "path": "evidence/segmented-shield-partial.png"
+      },
+      "abilities": {
+        "frame": 217,
+        "wall_seconds": 16.483322,
+        "path": "evidence/segmented-shield-abilities.png"
+      }
+    },
+    "scope": "Controlled actual Unreal renderer/audio fixture; granted Frost/practice targets and staged incoming damage/destruction. Not earned-play, performance, listening-quality or fun evidence."
+  },
+  "copied_package_verified": true
+}

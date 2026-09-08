@@ -538,6 +538,64 @@
         "M_CombatGlow"
       ],
       "collision_hulls": 0
+    },
+    {
+      "name": "SM_ShieldSegment",
+      "path": "/Game/Art/Meshes/SM_ShieldSegment.SM_ShieldSegment",
+      "dimensions_cm": [
+        12.311418056488037,
+        32.90973663330078,
+        26.164581298828125
+      ],
+      "bounds_origin_cm": [
+        -0.7942907810211182,
+        0.0,
+        24.817710876464844
+      ],
+      "materials": [
+        "M_ShieldCeramic",
+        "M_ShieldBronze",
+        "M_DarkMetal"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_ShieldSegmentGlow",
+      "path": "/Game/Art/Meshes/SM_ShieldSegmentGlow.SM_ShieldSegmentGlow",
+      "dimensions_cm": [
+        11.990000247955322,
+        12.055253982543945,
+        11.951963424682617
+      ],
+      "bounds_origin_cm": [
+        -0.4649999141693115,
+        0.04959583282470703,
+        23.224019050598145
+      ],
+      "materials": [
+        "M_Core"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_ShieldHub",
+      "path": "/Game/Art/Meshes/SM_ShieldHub.SM_ShieldHub",
+      "dimensions_cm": [
+        19.860000610351562,
+        29.799999237060547,
+        30.094860076904297
+      ],
+      "bounds_origin_cm": [
+        -4.119999885559082,
+        0.0,
+        -0.052570343017578125
+      ],
+      "materials": [
+        "M_ShieldCeramic",
+        "M_ShieldBronze",
+        "M_DarkMetal"
+      ],
+      "collision_hulls": 0
     }
   ],
   "materials": [

@@ -88,7 +88,8 @@ void ADBProjectile::Initialize(FVector Direction, float Speed, float Damage, boo
     bImpacted = false;
     Streak->SetVisibility(true);
     Visual->SetRelativeScale3D(BaseVisualScale);
-    if (const ADBEnemy* Enemy = Cast<ADBEnemy>(OwnerEnemy)) SpawnRoomId = Enemy->RoomId;
+    const ADBEnemy* Enemy = Cast<ADBEnemy>(OwnerEnemy);
+    if (Enemy && Enemy->RoomId >= 0) SpawnRoomId = Enemy->RoomId;
     else if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode())) SpawnRoomId = Mode->CurrentRoomId;
     SetActorRotation(Velocity.Rotation());
     bInitialized = true;
@@ -147,23 +148,39 @@ void ADBProjectile::Tick(float DeltaSeconds)
     const bool bWorldContact = GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility,
         FCollisionShape::MakeSphere(Collision->GetScaledSphereRadius()), Params);
     const FVector UnobstructedEnd = bWorldContact ? Hit.Location : End;
-    // Only a planted disk crossed by this real flight segment can intercept. A disk behind
-    // the first wall/player contact is excluded, and the shield owns facing/integrity rules.
-    for (TActorIterator<ADBThrownShield> It(GetWorld()); It; ++It)
+    // Query every deployed identity, not the legacy first-flight pointer. Sort crossings so
+    // the nearest valid anchor takes the bolt, once, before any farther overlapping piece.
+    const FVector Segment = UnobstructedEnd - Start;
+    TArray<TPair<float, ADBThrownShield*>> Crossings;
+    TSet<ADBThrownShield*> SeenPieces;
+    for (TActorIterator<ADBCharacter> It(GetWorld()); It; ++It)
     {
-        ADBThrownShield* Shield = *It;
-        if (Shield->InterceptProjectile(Start, UnobstructedEnd, HitDamage, bPiercesGuard))
+        for (int32 Index = 0; Index < It->GetShieldPieceCount(); ++Index)
         {
-            Impact(FMath::ClosestPointOnSegment(Shield->GetActorLocation(), Start, UnobstructedEnd));
-            return;
+            ADBThrownShield* Piece = It->GetPieceFlight(Index);
+            if (!IsValid(Piece) || !Piece->IsAnchored() || SeenPieces.Contains(Piece)) continue;
+            SeenPieces.Add(Piece);
+            const FVector Normal = Piece->GetActorForwardVector();
+            const double Denominator = FVector::DotProduct(Segment, Normal);
+            if (FMath::Abs(Denominator) < 0.001) continue;
+            const double Fraction = FVector::DotProduct(Piece->GetActorLocation() - Start, Normal) / Denominator;
+            if (Fraction >= 0.0 && Fraction <= 1.0) Crossings.Emplace(static_cast<float>(Fraction), Piece);
         }
     }
+    Crossings.Sort([](const TPair<float, ADBThrownShield*>& A, const TPair<float, ADBThrownShield*>& B)
+    { return A.Key == B.Key ? A.Value->GetUniqueID() < B.Value->GetUniqueID() : A.Key < B.Key; });
+    for (const TPair<float, ADBThrownShield*>& Crossing : Crossings)
+        if (IsValid(Crossing.Value) && Crossing.Value->InterceptProjectile(Start, UnobstructedEnd, HitDamage, bPiercesGuard))
+        {
+            Impact(Start + Segment * Crossing.Key);
+            return;
+        }
     if (bWorldContact)
     {
         if (ADBCharacter* Player = Cast<ADBCharacter>(Hit.GetActor()))
         {
             const FVector IncomingSource = Player->GetPawnViewLocation() - Velocity.GetSafeNormal() * 300.f;
-            if (!Player->bDead) Player->ReceiveAttack(HitDamage, IncomingSource, bPiercesGuard, SourceEnemy.Get());
+            if (!Player->bDead) Player->ReceiveAttack(HitDamage, IncomingSource, bPiercesGuard, SourceEnemy.Get(), GetUniqueID());
         }
         Impact(Hit.Location);
         return;
