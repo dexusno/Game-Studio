@@ -1,259 +1,708 @@
 {
   "environment": "Blender 5.2.1 LTS FBX exporter/importer",
   "verified_on": "2026-09-08",
-  "passed": 20,
+  "revision": "Bellroot physical shield correction",
+  "passed": 27,
   "checks": [
-    {
-      "name": "SM_WeaponBody",
-      "world_dimensions_cm": [
-        60.45000171661377,
-        22.60000514984131,
-        36.110262870788574
-      ],
-      "maximum_dimension_error_cm": 0.0002628707885747872,
-      "uv_layers": 1,
-      "vertex_color_layers": 1,
-      "collision_hulls": 0,
-      "private_path_in_fbx": false,
-      "sha256": "5047f3be9ca5312d1e71fff66ff0ea2b0719e84b4c7fba0f4d291a4636d2c3f8"
-    },
     {
       "name": "SM_ShieldPlate",
       "world_dimensions_cm": [
-        9.400003433227539,
-        47.19907760620117,
-        48.33111381530762
+        21.30000638961792,
+        85.0,
+        85.0
       ],
-      "maximum_dimension_error_cm": 0.00011381530761411796,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 6.389617919211332e-06,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8632,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5647
+        ],
+        [
+          0.0,
+          0.2346
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "487e9a325769b6df7e1234a60d3845a80533589942291e8542e0188d4550a9bd"
+      "sha256": "fb14e4a0859915a13ea00f42d1bac88e09de64187073e263001b59626a3f2b3d"
     },
     {
       "name": "SM_Core",
       "world_dimensions_cm": [
-        5.6216936111450195,
-        12.600000381469727,
-        12.600000381469727
+        4.836376667022705,
+        18.399999618530273,
+        18.399999618530273
       ],
-      "maximum_dimension_error_cm": 0.00030638885498035506,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.0003766670227047797,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8963,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5089
+        ],
+        [
+          0.0185,
+          0.1384
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "0f20a5bd61aea255dcdc36694fd579e4fac6b0c5d869fc37a9190f789b75d8dd"
+      "sha256": "22ac9f4b7ac6257422b52a5f4d0f466733d90fafaff3c8b4b461d21f627dbafa"
     },
     {
       "name": "SM_Forearm",
       "world_dimensions_cm": [
-        35.00000083446503,
-        21.600003242492676,
-        21.736406326293945
+        59.338759899139404,
+        18.76052951812744,
+        20.96896457672119
       ],
-      "maximum_dimension_error_cm": 0.0004063262939446588,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.00047048187255782636,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8714,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6038
+        ],
+        [
+          0.0273,
+          0.3005
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "9546cec778d041d79c23403f02abec8e9c10bec7a08daee349cdc807b3e8da5a"
+      "sha256": "c363a7f0fe2f9d78c97c9f4d690d92b20fb1f02127b2c9783cb7743a58a7cf38"
     },
     {
       "name": "SM_GuardianBody",
       "world_dimensions_cm": [
-        47.16463661193848,
-        62.000003814697266,
-        76.5
+        48.56000328063965,
+        57.16370964050293,
+        131.5454559326172
       ],
-      "maximum_dimension_error_cm": 0.00036338806152258485,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.00045593261720000555,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8632,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6445
+        ],
+        [
+          0.0,
+          0.2462
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "da88cc9f1785a57ccd753c4c6e21a19c258efc3bd3f47738c0ec306d5dcf64d1"
+      "sha256": "7446db003ab349722a8b320bf777872695042e0dcd7e35dfdb89fb41f9ccd9a6"
     },
     {
       "name": "SM_GuardianHead",
       "world_dimensions_cm": [
-        28.526269912719727,
-        33.245673179626465,
-        44.45230484008789
+        32.7000036239624,
+        32.90000343322754,
+        49.0
       ],
-      "maximum_dimension_error_cm": 0.00032682037353737314,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 3.623962399501579e-06,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8632,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5776
+        ],
+        [
+          0.0,
+          0.2159
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "ada98ab345a10b764b5c142b8bce73201d123c34bd444c579ff4cfec672db586"
+      "sha256": "819d704d4cfee30b6547a3c198be4707c703b4476f0d45f7ddc95ad00549ef1d"
     },
     {
       "name": "SM_GuardianArm",
       "world_dimensions_cm": [
-        35.46644592285156,
-        41.28984451293945,
-        98.5
+        37.7000036239624,
+        37.67110061645508,
+        101.22248840332031
       ],
-      "maximum_dimension_error_cm": 0.00044592285156142,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.000488403320318298,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.855,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5906
+        ],
+        [
+          0.0,
+          0.1845
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "2e6b4cd27ebfedb80dffd2fdbe720b3fb966906552e121607d84c101d484f87f"
+      "sha256": "c2ebb996cf82356acb32542479404dd7a14b0c9b2692512181be86714f692e51"
     },
     {
       "name": "SM_GuardianLeg",
       "world_dimensions_cm": [
-        38.00000286102295,
-        28.00000286102295,
+        39.36379528045654,
+        25.690720558166504,
         102.0
       ],
-      "maximum_dimension_error_cm": 2.86102294921875e-06,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.00027944183349504215,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8714,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5583
+        ],
+        [
+          0.0,
+          0.162
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "bfacd862715c8debfb91c3dfc41b231826bf9b59b56988a13df11f81efcb295f"
+      "sha256": "166ff412efeb30bde0c40ca903444644dcf7bac27185b0087e896a0a6dbeedb1"
     },
     {
       "name": "SM_StoneTile",
       "world_dimensions_cm": [
         200.00001525878906,
         200.00001525878906,
-        24.106843948364258
+        24.28400230407715
       ],
-      "maximum_dimension_error_cm": 0.00015605163574150538,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 1.52587890625e-05,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.7758,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5972
+        ],
+        [
+          0.0,
+          0.3763
+        ]
+      ],
       "collision_hulls": 1,
       "private_path_in_fbx": false,
-      "sha256": "893340c8afa4f41a314318e0f3686383f2b4173b669337a0982448e9361c8abb"
+      "sha256": "ecf6125acf335ed7ac57541f8d0ca30b015c0cdecd4d4c831b36c2b94ca5620f"
+    },
+    {
+      "name": "SM_StoneTile_B",
+      "world_dimensions_cm": [
+        200.00001525878906,
+        200.00001525878906,
+        24.404150009155273
+      ],
+      "maximum_dimension_error_cm": 0.00015000915527352277,
+      "uv_layers": 2,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8228,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5972
+        ],
+        [
+          0.0,
+          0.3325
+        ]
+      ],
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "42a084cd4f5cd05747e0a8688aebc7c0705bde6c1d57d43b72908da7cb705fde"
     },
     {
       "name": "SM_Wall",
       "world_dimensions_cm": [
-        400.0,
-        72.16070938110352,
-        320.22425842285156
+        401.36566162109375,
+        69.98356628417969,
+        315.8994100689888
       ],
-      "maximum_dimension_error_cm": 0.00029061889648573924,
+      "maximum_dimension_error_cm": 0.0004337158203071567,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.7913,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5906
+        ],
+        [
+          0.0,
+          0.4508
+        ]
+      ],
       "collision_hulls": 1,
       "private_path_in_fbx": false,
-      "sha256": "5afa913e76d54a5e39f2289361f6e81cee82c4c14f35d4c4272be90dc89d6547"
+      "sha256": "ef49f43ff2546f6b092d0430e8898b5bdb0c73a7dcc0a8b4cd42e26947f280e2"
     },
     {
       "name": "SM_Pillar",
       "world_dimensions_cm": [
-        115.1594352722168,
-        115.1317024230957,
-        380.13488483428955
+        104.5707893371582,
+        104.87262344360352,
+        350.9262755513191
       ],
-      "maximum_dimension_error_cm": 0.0004352722167908496,
+      "maximum_dimension_error_cm": 0.00037655639648903616,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8388,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6172
+        ],
+        [
+          0.0,
+          0.3916
+        ]
+      ],
       "collision_hulls": 1,
       "private_path_in_fbx": false,
-      "sha256": "2301815a3416b32cbc29e6e07a76338f61711fda5263d66940a2980e858328a5"
+      "sha256": "c3136f8a5c97d78a12148c5f5d68e9e5b765bb4696474cf6ed44c45bd60027b4"
+    },
+    {
+      "name": "SM_PillarBroken",
+      "world_dimensions_cm": [
+        104.07773208618164,
+        105.30361557006836,
+        157.29931926727295
+      ],
+      "maximum_dimension_error_cm": 0.00038442993164267136,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.7835,
+          0.9823
+        ],
+        [
+          0.0123,
+          0.6376
+        ],
+        [
+          0.0,
+          0.3515
+        ]
+      ],
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "c6d9f42f93ec6feacb32a60bf01967b03e05fb81f836ea7b156bd4ed9c5d6124"
+    },
+    {
+      "name": "SM_Stair",
+      "world_dimensions_cm": [
+        201.65596771240234,
+        193.9245960712433,
+        96.97397416830063
+      ],
+      "maximum_dimension_error_cm": 0.00040392875672523587,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.7835,
+          1.0
+        ],
+        [
+          0.0123,
+          0.624
+        ],
+        [
+          0.0,
+          0.3231
+        ]
+      ],
+      "collision_hulls": 6,
+      "private_path_in_fbx": false,
+      "sha256": "4bc89e6d207d28ccab345532e1cf63d3eede87c937fd76dd31a668ae704f2274"
     },
     {
       "name": "SM_Arch",
       "world_dimensions_cm": [
-        455.1886444091797,
-        94.19697952270508,
-        437.11327743530273
+        447.65440368652344,
+        93.46244812011719,
+        444.3740614056587
       ],
-      "maximum_dimension_error_cm": 0.0003555908203338731,
+      "maximum_dimension_error_cm": 0.0004481201171842031,
       "uv_layers": 1,
       "vertex_color_layers": 1,
-      "collision_hulls": 15,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.7682,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5972
+        ],
+        [
+          0.0,
+          0.3864
+        ]
+      ],
+      "collision_hulls": 17,
       "private_path_in_fbx": false,
-      "sha256": "ad9f797eb46fa5a5c1bfded83fd7c539d3b140f996373512d11c6bfec4d15b9b"
+      "sha256": "5d4fadfd822848c044cf04c578307dcaeab261656bd5cb072fcd9d76ad8ef9a6"
     },
     {
       "name": "SM_Bell",
       "world_dimensions_cm": [
-        136.00001525878906,
-        136.00001525878906,
-        150.7436118721962
+        141.85116577148438,
+        141.85116577148438,
+        189.94694757461548
       ],
-      "maximum_dimension_error_cm": 0.00038812780380226286,
-      "uv_layers": 1,
+      "maximum_dimension_error_cm": 0.0001657714843759095,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8714,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6376
+        ],
+        [
+          0.0,
+          0.2623
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "d1c59b2daecadab25af68e9b381f0cef62953f70d2bc06066cc8343cd0d42a99"
+      "sha256": "71b20597a2016ff95ab33ee59fb7920e49742a867661cba709bdcda0644d9e4f"
+    },
+    {
+      "name": "SM_BellTree",
+      "world_dimensions_cm": [
+        762.303466796875,
+        647.313232421875,
+        686.3982729911804
+      ],
+      "maximum_dimension_error_cm": 0.0004667968750027285,
+      "uv_layers": 2,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8632,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.1441
+        ]
+      ],
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "47fcdb7db89d753e7ea171aa62d38c97cc74879c094afa9218c2fa02b7ef0c8e"
+    },
+    {
+      "name": "SM_Canopy",
+      "world_dimensions_cm": [
+        1021.6213073730469,
+        748.4047241210938,
+        269.79530334472656
+      ],
+      "maximum_dimension_error_cm": 0.0003073730468940994,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8469,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.159
+        ]
+      ],
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "d116d01df565b5c3b53ad5116961e8f400aaf2f37fc8c5ab184c9898cd188e6a"
+    },
+    {
+      "name": "SM_Fern",
+      "world_dimensions_cm": [
+        137.2915496826172,
+        123.57603454589844,
+        84.50060897320509
+      ],
+      "maximum_dimension_error_cm": 0.0004503173828140916,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8796,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.1441
+        ]
+      ],
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "30d855cb9407f02faa1457a92036e91e7578c081c24a5d91cfb03b5708bf2a28"
+    },
+    {
+      "name": "SM_Ivy",
+      "world_dimensions_cm": [
+        79.57330703735352,
+        17.617968678474426,
+        175.03545707464218
+      ],
+      "maximum_dimension_error_cm": 0.0004570746421848071,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8714,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.1022
+        ]
+      ],
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "de74f8c2eb4ead712a0953a5cf1d072da2a665e2dd5362661a7d2abacb3bd65c"
+    },
+    {
+      "name": "SM_Rubble",
+      "world_dimensions_cm": [
+        131.06867218017578,
+        93.37655639648438,
+        52.083282470703125
+      ],
+      "maximum_dimension_error_cm": 0.00044360351562033884,
+      "uv_layers": 1,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8228,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6445
+        ],
+        [
+          0.0,
+          0.3663
+        ]
+      ],
+      "collision_hulls": 0,
+      "private_path_in_fbx": false,
+      "sha256": "c0c2ea61b7626b229ff1bbce5801532b229768baf84fd4f8f0ae7d0a44a0ed37"
     },
     {
       "name": "SM_Root",
       "world_dimensions_cm": [
-        437.42285346984863,
-        153.6015281677246,
-        84.07538414001465
+        283.6959228515625,
+        110.17655563354492,
+        79.90575695037842
       ],
-      "maximum_dimension_error_cm": 0.0005281677246102845,
+      "maximum_dimension_error_cm": 0.0004443664550848325,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.855,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.1274
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "f940037ce776f7a2d9bb362c71ef655797b3867e5258d46f05de73799d629301"
+      "sha256": "d3c43324f3d6fff9db69a80a33a2a5776ac572f40e1fc0d2778f8eec140c4c58"
     },
     {
       "name": "SM_Crate",
       "world_dimensions_cm": [
-        91.00000762939453,
-        82.00000762939453,
-        86.5
+        88.00000762939453,
+        79.50000762939453,
+        81.75
       ],
       "maximum_dimension_error_cm": 7.62939453125e-06,
-      "uv_layers": 1,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8632,
+          1.0
+        ],
+        [
+          0.0123,
+          0.5972
+        ],
+        [
+          0.0,
+          0.2664
+        ]
+      ],
       "collision_hulls": 1,
       "private_path_in_fbx": false,
-      "sha256": "cb1f222c9190828a876d533e5caa38f6e5efcdb2f80cde738465b5c96981805b"
+      "sha256": "a224d9bdd88abaf1e43928200fa9b93b590b84ef9ccbd15223b37118db00a4f5"
     },
     {
       "name": "SM_Crystal",
       "world_dimensions_cm": [
-        30.400004386901855,
-        28.000001907348633,
-        50.0
+        34.7000036239624,
+        30.400002479553223,
+        45.0
       ],
-      "maximum_dimension_error_cm": 4.3869018568898355e-06,
+      "maximum_dimension_error_cm": 3.623962399501579e-06,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8963,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6172
+        ],
+        [
+          0.0,
+          0.1812
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "414457ca6ca481e664cc04ffb8ae4183670008bc6e382912d88dca4536785e01"
-    },
-    {
-      "name": "SM_TechPanel",
-      "world_dimensions_cm": [
-        239.0,
-        65.0000171661377,
-        319.0
-      ],
-      "maximum_dimension_error_cm": 1.71661376953125e-05,
-      "uv_layers": 1,
-      "vertex_color_layers": 1,
-      "collision_hulls": 1,
-      "private_path_in_fbx": false,
-      "sha256": "638badd8b159c6ada0871b823fcdcaf642649b2bf438565b3dd1cd0b14930503"
+      "sha256": "f7accfdb2eb3b503ea613cfba10e2135ccc70afb509b971119137c8d6949ab46"
     },
     {
       "name": "SM_Grass",
       "world_dimensions_cm": [
-        65.76033782958984,
-        55.66858100891113,
-        41.00096130371094
+        46.77902793884277,
+        46.47409439086914,
+        28.658331932500005
       ],
-      "maximum_dimension_error_cm": 0.00041899108886411796,
+      "maximum_dimension_error_cm": 0.0003319325000035178,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.9387,
+          1.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0844
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "4b93e427e88d736a76f8c79225f1dccc7811ae6885feae10f03e50d2f5a33c8b"
+      "sha256": "be5c6133d20663191c7e7baba648be904261c4bbd7f5ddf036b998bb66010d04"
+    },
+    {
+      "name": "SM_TechPanel",
+      "world_dimensions_cm": [
+        227.0,
+        55.50001525878906,
+        313.0
+      ],
+      "maximum_dimension_error_cm": 1.52587890625e-05,
+      "uv_layers": 2,
+      "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8469,
+          1.0
+        ],
+        [
+          0.0123,
+          0.6105
+        ],
+        [
+          0.0,
+          0.3095
+        ]
+      ],
+      "collision_hulls": 1,
+      "private_path_in_fbx": false,
+      "sha256": "0279322f28f382cdcbe61d255ab13990e796480fcf990c6d67ee82635b341fc0"
     },
     {
       "name": "SM_TelegraphRing",
@@ -265,9 +714,23 @@
       "maximum_dimension_error_cm": 1.52587890625e-05,
       "uv_layers": 1,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.9131,
+          1.0
+        ],
+        [
+          0.0123,
+          0.0123
+        ],
+        [
+          0.0,
+          0.2542
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "5db868497cd560b7ecb1af9d4f27a18a533219d7101d3805ee28e93b86b61bcc"
+      "sha256": "11965b7079d10a438d5c516cc08df79d0ea7db0e908cc5a8a25423588d4abb5a"
     },
     {
       "name": "SM_TelegraphDisk",
@@ -277,12 +740,25 @@
         0.5
       ],
       "maximum_dimension_error_cm": 1.52587890625e-05,
-      "uv_layers": 1,
+      "uv_layers": 2,
       "vertex_color_layers": 1,
+      "vertex_value_wear_weather_ranges": [
+        [
+          0.8796,
+          0.9911
+        ],
+        [
+          0.0123,
+          0.0123
+        ],
+        [
+          0.0,
+          0.2542
+        ]
+      ],
       "collision_hulls": 0,
       "private_path_in_fbx": false,
-      "sha256": "838426445ece4e7603c1a715df58b4d3a69a601b50ac4b79b896e0c62dad9a23"
+      "sha256": "406a15a72c388e520fcb8e4d690bd777e4874e8f5c029def3ea70bed4cb07f24"
     }
-  ],
-  "unreal_import": "See ../import-report.json for actual successful Unreal5.8.2 import"
+  ]
 }

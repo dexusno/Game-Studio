@@ -1,26 +1,23 @@
 # Build and run
 
-Unreal 5.8.2 on Windows; Blender 5.2.1 LTS. Unreal discovered the installed Visual Studio 2022 C++ toolchain and Windows SDK. Private tool paths belong in root `config.local.json` under `tools.unreal` and `tools.blender`.
+Unreal 5.8.2 on Windows, Blender 5.2.1 LTS, Visual Studio 2022 and the Windows SDK. Tool paths belong in ignored root config.local.json under tools.unreal and tools.blender.
 
 ## Reproduce
-1. Generate the original kit with configured Blender in background using `scripts/create_art.py`. Tracked FBX/textures already contain the accepted kit; regenerate only after source changes.
-2. Generate original audio with `python scripts/create_audio.py` if tracked WAVs need rebuilding.
-3. Run `scripts/Build.ps1 -Stage Editor` for C++ editor compilation.
-4. Run `scripts/Build.ps1 -Stage Content` for meshes/materials/audio and the Bellroot map. Generated Unreal Content is ignored because import metadata contains machine paths; originals and import scripts are tracked.
-5. Run `scripts/Build.ps1 -Stage Package`. The default player package is `BuildOutput/Shipping/Windows/Dreambound.exe`. Optional `-PackageConfiguration Development` retains diagnostics in a separate directory.
+1. Tracked FBXs/textures/WAVs are the source assets. Regenerate art only after authoring changes, using configured Blender in background with scripts/create_art.py. The generator now preserves the intended first UV channel and repairs degenerate surface UVs. Audio regenerates with python scripts/create_audio.py.
+2. Run scripts/Build.ps1 -Stage Editor for C++ editor compilation.
+3. Run scripts/Build.ps1 -Stage Content for meshes, materials, audio and the Bellroot map. Generated Unreal Content is ignored because import metadata contains local paths.
+4. Run scripts/Build.ps1 -Stage Package. The default package is BuildOutput/ShieldStudy/Windows/Dreambound.exe. For a diagnostic build use -PackageConfiguration Development -OutputName ShieldStudyDev. Keep the whole Windows directory together.
 
-Shipping is a build configuration for this internal beta, not an external release. Development builds start an Unreal trace listener and may prompt Windows for network access. The offline player build omits that listener; no firewall modification is required.
+Shipping is the internal player configuration, not an external release. The rejected beta2 stays separately at BuildOutput/Shipping; do not overwrite or confuse it with the courtyard study.
 
-## Verification
-Use `-NullRHI -DBVerify -DBSaveSlot=DreamboundQA_Shipping -DBSeed=833283 -unattended -nosound` for the staged fixture. Read `Verification.txt` in the game's Saved directory and require zero failed checks; process exit alone is not the check result. Editor/Development saves reside under the project/package; Shipping uses local application data Dreambound/Saved. QA slots are isolated from owner progress.
+## Verification and evidence
+The current suite is -NullRHI -DBVerify -DBSaveSlot=DreamboundQA_PhysicalShield -DBSeed=833283 -unattended -nosound. It advances actual actors through engine ticks with staged targets/positions and lethal progression hits. Require Saved/QA/physical-shield-checks.json complete=true, aborted=false and failed=0; a process exit is insufficient. The old 31 fixture is for the rejected route and does not certify this build. Shipping Saved resides below the local application data Dreambound directory; QA requires an explicit isolated profile and restores its prior journal bytes.
 
-`-RenderOffscreen -DBCapture -DBSaveSlot=DreamboundQA_Visual -DBSeed=833282 -windowed -ResX=1600 -ResY=900 -ForceRes -unattended -nosound` captures a staged first-person art view and exits after twelve seconds. This grants sample attachments and stages a stationary enemy; it is not ordinary combat footage.
+Use -RenderOffscreen -DBMotionCapture -DBSaveSlot=DreamboundQA_Motion -DBSeed=833283 -windowed -ResX=1280 -ResY=720 -ForceRes -unattended for scripted movement/combat and the engine master-audio recording. Outputs are Saved/MotionCapture/Frames.csv, Frame_*.png, CourtyardMix.wav and Capture.txt. Capture disables submix auto-disable so silent buffers stay in the soundtrack. Raw output is ignored. Frame requests impose substantial overhead; this is not a performance measurement or normal playthrough. CSV timestamps preserve capture cadence; do not assume the requested engine FPS equals capture FPS.
 
-For native testing, launch normally with `-DBSaveSlot=DreamboundQA_Input`. For Klaus's actual playtest, omit QA flags. Keep the whole Windows package together; its root executable depends on adjacent engine/game files. [Controls](PLAY.md).
+-DBCapture instead poses a static enemy and grants sample upgrades for an art view. It must not be presented as naturally earned equipment. Native input tests use a separate DreamboundQA_PhysicalInput profile. Owner play omits QA flags. Controls and current scope are in PLAY.md.
 
-## Observed result — 2026-09-08
-Editor compilation, content import and Windows Development/Shipping build/cook/stage/archive succeeded. Final Shipping staged report: **31 passed, 0 failed**, including CRC corruption recovery into the previous checkpoint and equipment. [Report](evidence/beta-0.1.0-staged-checks.txt). Art import and material-pass reports are under art/.
+## Current result
+The 0.2.0-study1 player package compiled, cooked, staged and archived successfully. Focused runtime scenarios pass 14/0; exact tested identity, report and coverage are in evidence/shield-study-build.json, evidence/shield-study-checks.json and QA.md. Exposure, exported surface UVs and menu-input leakage were corrected after actual visual/native inspection. Two remaining tiny-tangent warnings concern the unchanged stair bevel geometry; no material compilation failure remains.
 
-The menu correction was packaged as 0.1.0-beta2 and the packaged staged checks passed again, 31/0. Actual first-person rendering, corrected title/pause presentation, normal start, mouse aim/pulse, build menu, sensitivity adjustment, save/exit and relaunch/resume were inspected. The earlier Windows prompt is gone. Held movement/guard and dash, full focus-loss behavior, a complete ordinary journey, audio listening, performance benchmarking and enjoyment remain unverified. See [STATUS.md](STATUS.md) and [QA.md](QA.md).
-
-Subsequent owner playtest: Klaus reported usable but generic movement and rejected combat identity/feel, weak audio and visual quality. The earlier limits above describe agent coverage, not absence of owner feedback. The package remains the rejected baseline; this review produced no rebuilt game. [Corrective direction](RETROSPECTIVE.md).
+Native startup/menu and scripted combat evidence are separate. Human challenge, complete ordinary play, subjective sound quality and anchor-B fidelity are not established. No purchase, publication or firewall modification was needed.

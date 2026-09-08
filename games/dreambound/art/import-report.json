@@ -1,45 +1,25 @@
 {
   "imported": [
     {
-      "name": "SM_WeaponBody",
-      "path": "/Game/Art/Meshes/SM_WeaponBody.SM_WeaponBody",
-      "dimensions_cm": [
-        60.45000076293945,
-        22.600000381469727,
-        36.110262870788574
-      ],
-      "bounds_origin_cm": [
-        22.225000381469727,
-        0.0,
-        3.2448678016662598
-      ],
-      "materials": [
-        "M_DarkMetal",
-        "M_Bronze",
-        "M_Patina",
-        "M_Ceramic",
-        "M_Cloth"
-      ],
-      "collision_hulls": 3
-    },
-    {
       "name": "SM_ShieldPlate",
       "path": "/Game/Art/Meshes/SM_ShieldPlate.SM_ShieldPlate",
       "dimensions_cm": [
-        9.399999618530273,
-        47.19907760620117,
-        48.33111381530762
+        21.300000190734863,
+        85.0,
+        85.0
       ],
       "bounds_origin_cm": [
+        -2.8499999046325684,
         0.0,
-        -0.5995388031005859,
-        -0.007508277893066406
+        0.0
       ],
       "materials": [
-        "M_Bronze",
+        "M_ShieldBronze",
         "M_DarkMetal",
-        "M_Ceramic",
-        "M_Patina"
+        "M_ShieldCeramic",
+        "M_Patina",
+        "M_Core",
+        "M_Cloth"
       ],
       "collision_hulls": 0
     },
@@ -47,9 +27,9 @@
       "name": "SM_Core",
       "path": "/Game/Art/Meshes/SM_Core.SM_Core",
       "dimensions_cm": [
-        5.621692657470703,
-        12.600000381469727,
-        12.600000381469727
+        4.8363752365112305,
+        18.399999618530273,
+        18.399999618530273
       ],
       "bounds_origin_cm": [
         0.0,
@@ -57,7 +37,7 @@
         0.0
       ],
       "materials": [
-        "M_Bronze",
+        "M_ShieldBronze",
         "M_Core",
         "M_DarkMetal"
       ],
@@ -67,14 +47,14 @@
       "name": "SM_Forearm",
       "path": "/Game/Art/Meshes/SM_Forearm.SM_Forearm",
       "dimensions_cm": [
-        35.0,
-        21.600000381469727,
-        21.736406326293945
+        59.338759422302246,
+        18.760525703430176,
+        20.96896457672119
       ],
       "bounds_origin_cm": [
-        -18.5,
-        0.0,
-        -2.9317970275878906
+        -25.06482744216919,
+        -0.08026266098022461,
+        -3.1844820976257324
       ],
       "materials": [
         "M_Cloth",
@@ -88,21 +68,22 @@
       "name": "SM_GuardianBody",
       "path": "/Game/Art/Meshes/SM_GuardianBody.SM_GuardianBody",
       "dimensions_cm": [
-        47.16463279724121,
-        62.0,
-        76.5
+        48.55999946594238,
+        57.163705825805664,
+        131.5454559326172
       ],
       "bounds_origin_cm": [
-        4.5823163986206055,
-        0.0,
-        30.25
+        5.880000114440918,
+        9.5367431640625e-07,
+        4.227272033691406
       ],
       "materials": [
         "M_DarkMetal",
         "M_Bronze",
         "M_Ceramic",
         "M_Patina",
-        "M_Core"
+        "M_Core",
+        "M_Cloth"
       ],
       "collision_hulls": 0
     },
@@ -110,19 +91,19 @@
       "name": "SM_GuardianHead",
       "path": "/Game/Art/Meshes/SM_GuardianHead.SM_GuardianHead",
       "dimensions_cm": [
-        28.526267051696777,
-        33.24567222595215,
-        44.45230484008789
+        32.70000076293945,
+        32.900001525878906,
+        49.0
       ],
       "bounds_origin_cm": [
-        2.792532444000244,
-        -3.122836112976074,
-        20.773847579956055
+        4.350000381469727,
+        0.0,
+        24.5
       ],
       "materials": [
         "M_DarkMetal",
         "M_Core",
-        "M_Ceramic",
+        "M_Patina",
         "M_Bronze"
       ],
       "collision_hulls": 0
@@ -131,14 +112,14 @@
       "name": "SM_GuardianArm",
       "path": "/Game/Art/Meshes/SM_GuardianArm.SM_GuardianArm",
       "dimensions_cm": [
-        35.4664421081543,
-        41.28984069824219,
-        98.5
+        37.70000076293945,
+        37.67109680175781,
+        101.22248840332031
       ],
       "bounds_origin_cm": [
+        3.8500003814697266,
         0.0,
-        0.0,
-        -29.25
+        -33.611244201660156
       ],
       "materials": [
         "M_DarkMetal",
@@ -151,19 +132,20 @@
       "name": "SM_GuardianLeg",
       "path": "/Game/Art/Meshes/SM_GuardianLeg.SM_GuardianLeg",
       "dimensions_cm": [
-        38.0,
-        28.0,
+        39.363792419433594,
+        25.690717697143555,
         102.0
       ],
       "bounds_origin_cm": [
-        8.0,
+        6.830738067626953,
         0.0,
         -43.0
       ],
       "materials": [
         "M_DarkMetal",
         "M_Bronze",
-        "M_Ceramic"
+        "M_Ceramic",
+        "M_Patina"
       ],
       "collision_hulls": 0
     },
@@ -173,12 +155,32 @@
       "dimensions_cm": [
         200.0,
         200.0,
-        24.106843948364258
+        24.28400230407715
       ],
       "bounds_origin_cm": [
         0.0,
         0.0,
-        12.053421974182129
+        12.142001152038574
+      ],
+      "materials": [
+        "M_Mortar",
+        "M_Stone",
+        "M_StoneLight"
+      ],
+      "collision_hulls": 1
+    },
+    {
+      "name": "SM_StoneTile_B",
+      "path": "/Game/Art/Meshes/SM_StoneTile_B.SM_StoneTile_B",
+      "dimensions_cm": [
+        200.0,
+        200.0,
+        24.404150009155273
+      ],
+      "bounds_origin_cm": [
+        0.0,
+        0.0,
+        12.202075004577637
       ],
       "materials": [
         "M_Mortar",
@@ -191,14 +193,14 @@
       "name": "SM_Wall",
       "path": "/Game/Art/Meshes/SM_Wall.SM_Wall",
       "dimensions_cm": [
-        400.0,
-        72.16067886352539,
-        320.22425842285156
+        401.36566162109375,
+        69.98353576660156,
+        315.8994100689888
       ],
       "bounds_origin_cm": [
-        0.0,
-        -0.024171829223632812,
-        159.98223114013672
+        0.1535491943359375,
+        -0.11169052124023438,
+        157.52899369597435
       ],
       "materials": [
         "M_Mortar",
@@ -211,14 +213,14 @@
       "name": "SM_Pillar",
       "path": "/Game/Art/Meshes/SM_Pillar.SM_Pillar",
       "dimensions_cm": [
-        115.15942764282227,
-        115.13169479370117,
-        380.13488483428955
+        104.57078170776367,
+        104.87261581420898,
+        350.9262755513191
       ],
       "bounds_origin_cm": [
-        0.04416465759277344,
-        -0.009817123413085938,
-        190.02746725082397
+        -0.15526771545410156,
+        -0.027257919311523438,
+        174.9004791676998
       ],
       "materials": [
         "M_Stone",
@@ -227,36 +229,74 @@
       "collision_hulls": 1
     },
     {
-      "name": "SM_Arch",
-      "path": "/Game/Art/Meshes/SM_Arch.SM_Arch",
+      "name": "SM_PillarBroken",
+      "path": "/Game/Art/Meshes/SM_PillarBroken.SM_PillarBroken",
       "dimensions_cm": [
-        455.1886444091797,
-        94.19694137573242,
-        437.11327743530273
+        104.07772445678711,
+        105.30360794067383,
+        157.29931926727295
       ],
       "bounds_origin_cm": [
-        0.02185821533203125,
-        -0.0023899078369140625,
-        218.54718208312988
+        0.33735084533691406,
+        0.016992568969726562,
+        78.05694437026978
       ],
       "materials": [
         "M_Stone",
         "M_StoneLight"
       ],
-      "collision_hulls": 15
+      "collision_hulls": 1
+    },
+    {
+      "name": "SM_Stair",
+      "path": "/Game/Art/Meshes/SM_Stair.SM_Stair",
+      "dimensions_cm": [
+        201.65595245361328,
+        193.92458844184875,
+        96.97397416830063
+      ],
+      "bounds_origin_cm": [
+        0.046108245849609375,
+        -95.9253705739975,
+        47.91513541340828
+      ],
+      "materials": [
+        "M_StoneLight",
+        "M_Stone"
+      ],
+      "collision_hulls": 6
+    },
+    {
+      "name": "SM_Arch",
+      "path": "/Game/Art/Meshes/SM_Arch.SM_Arch",
+      "dimensions_cm": [
+        447.65440368652344,
+        93.46241760253906,
+        444.3740614056587
+      ],
+      "bounds_origin_cm": [
+        -0.04576873779296875,
+        0.175018310546875,
+        221.7757988870144
+      ],
+      "materials": [
+        "M_Stone",
+        "M_StoneLight"
+      ],
+      "collision_hulls": 17
     },
     {
       "name": "SM_Bell",
       "path": "/Game/Art/Meshes/SM_Bell.SM_Bell",
       "dimensions_cm": [
-        136.0,
-        136.0,
-        150.7436118721962
+        141.8511505126953,
+        141.8511505126953,
+        189.94694757461548
       ],
       "bounds_origin_cm": [
         0.0,
         0.0,
-        75.6281940639019
+        95.22652316093445
       ],
       "materials": [
         "M_Bronze",
@@ -266,17 +306,117 @@
       "collision_hulls": 0
     },
     {
+      "name": "SM_BellTree",
+      "path": "/Game/Art/Meshes/SM_BellTree.SM_BellTree",
+      "dimensions_cm": [
+        762.3034057617188,
+        647.3131713867188,
+        686.3982729911804
+      ],
+      "bounds_origin_cm": [
+        -1.520965576171875,
+        -12.9912109375,
+        335.55592942237854
+      ],
+      "materials": [
+        "M_Root",
+        "M_RootDark",
+        "M_RootLight"
+      ],
+      "collision_hulls": 1
+    },
+    {
+      "name": "SM_Canopy",
+      "path": "/Game/Art/Meshes/SM_Canopy.SM_Canopy",
+      "dimensions_cm": [
+        1021.6212158203125,
+        748.4046630859375,
+        269.79530334472656
+      ],
+      "bounds_origin_cm": [
+        12.07037353515625,
+        -113.38015747070312,
+        29.237937927246094
+      ],
+      "materials": [
+        "M_Leaf",
+        "M_LeafLight",
+        "M_LeafGold",
+        "M_Root"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_Fern",
+      "path": "/Game/Art/Meshes/SM_Fern.SM_Fern",
+      "dimensions_cm": [
+        137.2915382385254,
+        123.57602310180664,
+        84.50060897320509
+      ],
+      "bounds_origin_cm": [
+        -9.608503341674805,
+        -7.188299179077148,
+        42.21382972970605
+      ],
+      "materials": [
+        "M_Moss",
+        "M_Leaf",
+        "M_LeafLight"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_Ivy",
+      "path": "/Game/Art/Meshes/SM_Ivy.SM_Ivy",
+      "dimensions_cm": [
+        79.57330703735352,
+        17.617961883544922,
+        175.03545707464218
+      ],
+      "bounds_origin_cm": [
+        -0.18366432189941406,
+        7.538654327392578,
+        -87.13842990994453
+      ],
+      "materials": [
+        "M_RootDark",
+        "M_LeafLight",
+        "M_Leaf"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_Rubble",
+      "path": "/Game/Art/Meshes/SM_Rubble.SM_Rubble",
+      "dimensions_cm": [
+        131.06866455078125,
+        93.37654876708984,
+        52.083282470703125
+      ],
+      "bounds_origin_cm": [
+        -1.3279495239257812,
+        -8.33089828491211,
+        13.10525131225586
+      ],
+      "materials": [
+        "M_StoneLight",
+        "M_Stone"
+      ],
+      "collision_hulls": 0
+    },
+    {
       "name": "SM_Root",
       "path": "/Game/Art/Meshes/SM_Root.SM_Root",
       "dimensions_cm": [
-        437.42284965515137,
-        153.60149765014648,
-        84.07538414001465
+        283.6959180831909,
+        110.1765365600586,
+        79.90575695037842
       ],
       "bounds_origin_cm": [
-        191.71142673492432,
-        -18.206697463989258,
-        37.05546283721924
+        128.59817743301392,
+        4.8386993408203125,
+        36.91532373428345
       ],
       "materials": [
         "M_Root",
@@ -289,14 +429,14 @@
       "name": "SM_Crate",
       "path": "/Game/Art/Meshes/SM_Crate.SM_Crate",
       "dimensions_cm": [
-        91.0,
-        82.0,
-        86.5
+        88.0,
+        79.5,
+        81.75
       ],
       "bounds_origin_cm": [
         0.0,
-        0.5,
-        42.25
+        0.0,
+        42.375
       ],
       "materials": [
         "M_DarkMetal",
@@ -309,14 +449,14 @@
       "name": "SM_Crystal",
       "path": "/Game/Art/Meshes/SM_Crystal.SM_Crystal",
       "dimensions_cm": [
-        30.40000057220459,
-        28.0,
-        50.0
+        34.70000076293945,
+        30.399999618530273,
+        45.0
       ],
       "bounds_origin_cm": [
-        0.40000009536743164,
+        1.8500003814697266,
         0.0,
-        27.0
+        22.5
       ],
       "materials": [
         "M_Crystal",
@@ -325,17 +465,35 @@
       "collision_hulls": 0
     },
     {
+      "name": "SM_Grass",
+      "path": "/Game/Art/Meshes/SM_Grass.SM_Grass",
+      "dimensions_cm": [
+        46.77902412414551,
+        46.474090576171875,
+        28.658331932500005
+      ],
+      "bounds_origin_cm": [
+        -0.9631490707397461,
+        -0.3927955627441406,
+        14.3187718084082
+      ],
+      "materials": [
+        "M_Moss"
+      ],
+      "collision_hulls": 0
+    },
+    {
       "name": "SM_TechPanel",
       "path": "/Game/Art/Meshes/SM_TechPanel.SM_TechPanel",
       "dimensions_cm": [
-        239.0,
-        65.0,
-        319.0
+        227.0,
+        55.5,
+        313.0
       ],
       "bounds_origin_cm": [
         0.0,
-        6.5,
-        159.5
+        5.25,
+        157.0
       ],
       "materials": [
         "M_DarkMetal",
@@ -344,24 +502,6 @@
         "M_Core"
       ],
       "collision_hulls": 1
-    },
-    {
-      "name": "SM_Grass",
-      "path": "/Game/Art/Meshes/SM_Grass.SM_Grass",
-      "dimensions_cm": [
-        65.76033210754395,
-        55.66857719421387,
-        41.00096130371094
-      ],
-      "bounds_origin_cm": [
-        2.93405818939209,
-        -1.280348777770996,
-        20.50048065185547
-      ],
-      "materials": [
-        "M_Moss"
-      ],
-      "collision_hulls": 0
     },
     {
       "name": "SM_TelegraphRing",
@@ -418,11 +558,25 @@
     "/Game/Art/Materials/M_Frost",
     "/Game/Art/Materials/M_Storm",
     "/Game/Art/Materials/M_Ember",
-    "/Game/Art/Materials/M_CombatGlow"
+    "/Game/Art/Materials/M_CombatGlow",
+    "/Game/Art/Materials/M_RootLight",
+    "/Game/Art/Materials/M_Leaf",
+    "/Game/Art/Materials/M_LeafLight",
+    "/Game/Art/Materials/M_LeafGold",
+    "/Game/Art/Materials/M_ShieldCeramic",
+    "/Game/Art/Materials/M_ShieldBronze"
   ],
   "textures": [
     "/Game/Art/Textures/T_PaintedSurface.T_PaintedSurface",
-    "/Game/Art/Textures/T_SculptedNormal.T_SculptedNormal"
+    "/Game/Art/Textures/T_SculptedNormal.T_SculptedNormal",
+    "/Game/Art/Textures/T_MetalCraft.T_MetalCraft",
+    "/Game/Art/Textures/T_MetalCraftNormal.T_MetalCraftNormal",
+    "/Game/Art/Textures/T_MasonryCraft.T_MasonryCraft",
+    "/Game/Art/Textures/T_MasonryCraftNormal.T_MasonryCraftNormal",
+    "/Game/Art/Textures/T_BarkCraft.T_BarkCraft",
+    "/Game/Art/Textures/T_BarkCraftNormal.T_BarkCraftNormal",
+    "/Game/Art/Textures/T_ShieldCraft.T_ShieldCraft",
+    "/Game/Art/Textures/T_ShieldCraftNormal.T_ShieldCraftNormal"
   ],
   "warnings": [],
   "scope": "/Game/Art",

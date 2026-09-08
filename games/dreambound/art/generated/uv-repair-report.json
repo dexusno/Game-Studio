@@ -1,0 +1,528 @@
+{
+  "operation": "UV-only repair; geometry, material slots, vertex masks and custom collision retained",
+  "tool": "Blender 5.2.1 LTS",
+  "assets": [
+    {
+      "name": "SM_ShieldPlate",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 4868
+      },
+      "reprojected_faces": 2410,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Core",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 244
+      },
+      "reprojected_faces": 54,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Forearm",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 656
+      },
+      "reprojected_faces": 186,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_GuardianBody",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 240
+      },
+      "reprojected_faces": 66,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_GuardianHead",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 272
+      },
+      "reprojected_faces": 60,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_GuardianArm",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 2704
+      },
+      "reprojected_faces": 128,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_GuardianLeg",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 1856
+      },
+      "reprojected_faces": 18,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_StoneTile",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 1332
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_StoneTile_B",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 1468
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Wall",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Pillar",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_PillarBroken",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Stair",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Arch",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Bell",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 84
+      },
+      "reprojected_faces": 18,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_BellTree",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV",
+          "UVMap"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 602
+      },
+      "reprojected_faces": 56,
+      "unwrapped_seam_loops": 60,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Canopy",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 380
+      },
+      "reprojected_faces": 74,
+      "unwrapped_seam_loops": 48,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Fern",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 56
+      },
+      "reprojected_faces": 14,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Ivy",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 32
+      },
+      "reprojected_faces": 8,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Rubble",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Root",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 78
+      },
+      "reprojected_faces": 10,
+      "unwrapped_seam_loops": 20,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Crate",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 176,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Crystal",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_Grass",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_TechPanel",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 2496
+      },
+      "reprojected_faces": 26,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_TelegraphRing",
+      "before": {
+        "active_uv": "CraftUV",
+        "layers": [
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": false,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    },
+    {
+      "name": "SM_TelegraphDisk",
+      "before": {
+        "active_uv": "UVMap",
+        "layers": [
+          "UVMap",
+          "CraftUV"
+        ],
+        "collapsed_or_extremely_stretched_triangles": 0
+      },
+      "reprojected_faces": 0,
+      "unwrapped_seam_loops": 0,
+      "changed": true,
+      "after_collapsed_triangles": 0,
+      "tangents": {
+        "not_repeated": "UV-only correction; see known_limitation"
+      },
+      "geometry_masks_slots_unchanged": true
+    }
+  ],
+  "changed_meshes": [
+    "SM_ShieldPlate",
+    "SM_Core",
+    "SM_Forearm",
+    "SM_GuardianBody",
+    "SM_GuardianHead",
+    "SM_GuardianArm",
+    "SM_GuardianLeg",
+    "SM_StoneTile",
+    "SM_StoneTile_B",
+    "SM_Bell",
+    "SM_BellTree",
+    "SM_Canopy",
+    "SM_Fern",
+    "SM_Ivy",
+    "SM_Root",
+    "SM_Crate",
+    "SM_TechPanel",
+    "SM_TelegraphDisk"
+  ],
+  "success": true,
+  "known_limitation": "A few geometric bevel slivers remain unchanged by this UV-only pass. Prior native Blender tangent audit found 2 zero-tangent loops on Wall, 4 on Stair and 2 on submicron Head geometry. Native Unreal follow-up is required; no warning-free native result is claimed."
+}

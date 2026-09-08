@@ -1,0 +1,118 @@
+{
+  "method": "original deterministic modal/contact synthesis; no external samples",
+  "rate": 48000,
+  "files": [
+    {
+      "asset": "S_Attack",
+      "seconds": 0.62,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -15.98,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Guard",
+      "seconds": 0.52,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -16.67,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Parry",
+      "seconds": 1.05,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -17.88,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Dash",
+      "seconds": 0.46,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -10.62,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Impact",
+      "seconds": 0.92,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -17.99,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Catch",
+      "seconds": 0.78,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -17.75,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Recall",
+      "seconds": 0.75,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -11.05,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Equip",
+      "seconds": 1.6,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -18.16,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Hurt",
+      "seconds": 0.5,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -16.74,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Encounter",
+      "seconds": 2.5,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -19.31,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_Clear",
+      "seconds": 3.0,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -18.7,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_EnemyFire",
+      "seconds": 0.58,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -19.26,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_EnemyHit",
+      "seconds": 0.58,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -17.36,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_BossTell",
+      "seconds": 1.3,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -19.08,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_EnemyTell",
+      "seconds": 0.7,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -16.05,
+      "clipped_samples": 0
+    },
+    {
+      "asset": "S_EnemyDefeat",
+      "seconds": 1.3,
+      "peak_dbfs": -1.51,
+      "rms_dbfs": -18.13,
+      "clipped_samples": 0
+    }
+  ]
+}

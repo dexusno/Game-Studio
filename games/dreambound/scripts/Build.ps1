@@ -1,5 +1,6 @@
 param([ValidateSet('Editor','Content','Package','All')][string]$Stage='All',
- [ValidateSet('Development','Shipping')][string]$PackageConfiguration='Shipping')
+ [ValidateSet('Development','Shipping')][string]$PackageConfiguration='Shipping',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='ShieldStudy')
 $ErrorActionPreference='Stop'
 $betaGameRoot=Split-Path -Parent $PSScriptRoot
 $betaRepoRoot=[IO.Path]::GetFullPath((Join-Path $betaGameRoot '../..'))
@@ -16,6 +17,6 @@ if($Stage -eq 'Content' -or $Stage -eq 'All'){
  if($LASTEXITCODE -ne 0){throw 'Content import failed'}
 }
 if($Stage -eq 'Package' -or $Stage -eq 'All'){
- & (Join-Path $betaEngineRoot 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$betaProject" -nop4 -platform=Win64 "-clientconfig=$PackageConfiguration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$betaGameRoot/BuildOutput/$PackageConfiguration" -utf8output
+ & (Join-Path $betaEngineRoot 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$betaProject" -nop4 -platform=Win64 "-clientconfig=$PackageConfiguration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$betaGameRoot/BuildOutput/$OutputName" -utf8output
  if($LASTEXITCODE -ne 0){throw 'Unreal packaging failed'}
 }

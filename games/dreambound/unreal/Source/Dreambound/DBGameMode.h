@@ -48,6 +48,7 @@ UCLASS()
 class DREAMBOUND_API ADBGameMode : public AGameModeBase {
  GENERATED_BODY()
  friend FIntPoint DBRunRuntimeChecks(ADBGameMode&,FString&);
+ friend class ADBShieldCheckRunner;
 public:
  ADBGameMode();
  virtual void BeginPlay() override;
@@ -74,6 +75,8 @@ public:
  void ClaimReward(FName Id);
  void UpdateGates();
  void RunVerification();
+ void BuildRecoveryCourtyard();
+ void TickMotionDemo(float DeltaSeconds);
  FDBOffer DescribeUpgrade(FName Id) const;
  FString ObjectiveText() const;
  FString InteractText() const;
@@ -82,6 +85,7 @@ public:
  int32 CurrentRoomId=0,Seed=0,Kills=0,CurrentWave=0,Expeditions=0;
  float RunSeconds=0.f,Sensitivity=1.f;
  bool bBossWon=false,bCanResume=false;
+ bool bRecoverySlice=true,bSliceAwaitingStart=true;
  bool bSaveFailed=false;
  FString EventText;
  FLinearColor EventColor=FLinearColor::White;
@@ -102,7 +106,14 @@ private:
  int32 SaveRevision=0,RewardRoom=0;
  float PulseTime=0,CheckTimer=0;
  bool bEnding=false,bVerify=false,bCapture=false,bHadFocus=true,bInitialEntry=false,bCapturedFrame=false;
- FString SlotBase="DreamboundBeta";
+ bool bMotionCapture=false,bDemoRecording=false,bDemoStopped=false,bChecksRunning=false;
+ float VictoryDelay=0.f;
+ double DemoStartedAt=0;
+ double DemoAudioStartedAt=0;
+ FString DemoFrameTimes;
+ float DemoTime=0.f;
+ int32 DemoFrame=0,DemoAction=0;
+ FString SlotBase="DreamboundShieldStudy";
  FRandomStream Random;
  AActor* Mesh(const FString& Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,FVector Scale=FVector::OneVector,bool bCollision=true,const FString& Material="");
  void Instance(const FString& Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,FVector Scale=FVector::OneVector,const FString& Material="");

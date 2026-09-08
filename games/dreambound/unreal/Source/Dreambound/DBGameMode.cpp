@@ -4,6 +4,7 @@
 #include "DBProjectile.h"
 #include "DBHUD.h"
 #include "DBRuntimeChecks.h"
+#include "DBShieldChecks.h"
 #include "Engine/World.h"
 #include "Engine/Engine.h"
 #include "Engine/StaticMeshActor.h"
@@ -67,24 +68,28 @@ ADBGameMode::ADBGameMode() {
 }
 void ADBGameMode::BeginPlay() {
  Super::BeginPlay();
+ bRecoverySlice=!FParse::Param(FCommandLine::Get(),TEXT("DBLegacyBeta"));
+ if(!bRecoverySlice)SlotBase=TEXT("DreamboundBeta");
  FParse::Value(FCommandLine::Get(),TEXT("DBSaveSlot="),SlotBase);
  bVerify=FParse::Param(FCommandLine::Get(),TEXT("DBVerify"));
  if(bVerify&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_Auto");
  bCapture=FParse::Param(FCommandLine::Get(),TEXT("DBCapture"));
+ bMotionCapture=FParse::Param(FCommandLine::Get(),TEXT("DBMotionCapture"));
+ bCapture=bCapture||bMotionCapture;
  Player=Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this,0));
  LoadProgress();
  Seed=bCanResume?StoredSave->Seed:FMath::RandRange(10000,999999);
  FParse::Value(FCommandLine::Get(),TEXT("DBSeed="),Seed);
  BuildWorld();
  if(Player) {
-  Player->SetActorLocation(Rooms[0].Center+FVector(-700,0,100));
-  Player->GetController()->SetControlRotation(FRotator(0,0,0));
+  Player->SetActorLocation(Rooms[0].Center+(bRecoverySlice?FVector(-1540,-800,110):FVector(-700,0,100)));
+  Player->GetController()->SetControlRotation(FRotator(0,bRecoverySlice?18:0,0));
   Player->MouseSensitivity=Sensitivity;
  }
  bTitle=true; bPaused=true; SetMenuInput(true);
  if(bCapture||bVerify) {
   bTitle=false;bPaused=false;SetMenuInput(false); StartNewRun(true);
-  if(bCapture&&Player) {
+  if(bCapture&&Player&&!bMotionCapture) {
    CurrentRoomId=1;Player->SetActorLocation(Rooms[1].Center+FVector(-980,-850,100));
    Player->GetController()->SetControlRotation(FRotator(-3,38,0));
    Player->ApplyUpgrade("Frost");Player->ApplyUpgrade("Mirror");
@@ -96,7 +101,7 @@ void ADBGameMode::BeginPlay() {
  UE_LOG(LogTemp,Display,TEXT("DREAMBOUND_READY seed=%d rooms=%d saved=%d"),Seed,Rooms.Num(),bCanResume);
 }
 void ADBGameMode::EndPlay(const EEndPlayReason::Type Reason) {
- if(!bVerify&&!bCapture&&!bTitle&&!bDefeated&&(ClearedRooms.Contains(CurrentRoomId)||CurrentRoomId==0)) SaveProgress(!bWon);
+ if(!bVerify&&!bChecksRunning&&!bCapture&&!bTitle&&!bDefeated&&(ClearedRooms.Contains(CurrentRoomId)||CurrentRoomId==0)) SaveProgress(!bWon);
  bEnding=true; Super::EndPlay(Reason);
 }
 AActor* ADBGameMode::Mesh(const FString& Name,FVector Loc,FRotator Rot,FVector Scale,bool Collision,const FString& Mat) {
@@ -128,7 +133,7 @@ void ADBGameMode::Instance(const FString& Name,FVector Loc,FRotator Rot,FVector 
   C->SetStaticMesh(Asset);C->SetMobility(EComponentMobility::Static);
   C->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
   C->SetCollisionObjectType(ECC_WorldStatic);C->SetCollisionResponseToAllChannels(ECR_Block);
-  if(Name=="SM_Grass"||Name=="SM_Root")C->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+  if(Name=="SM_Grass"||Name=="SM_Root"||Name=="SM_Canopy"||Name=="SM_Fern"||Name=="SM_Rubble")C->SetCollisionEnabled(ECollisionEnabled::NoCollision);
   if(!Mat.IsEmpty()) {
    FString MP=FString::Printf(TEXT("/Game/Art/Materials/%s.%s"),*Mat,*Mat);
    if(auto* M=LoadObject<UMaterialInterface>(nullptr,*MP))for(int32 I=0;I<C->GetNumMaterials();++I)C->SetMaterial(I,M);
@@ -144,6 +149,7 @@ void ADBGameMode::ResetActors() {
  for(TActorIterator<ADBProjectile> It(GetWorld());It;++It)It->Destroy();
 }
 void ADBGameMode::BuildWorld() {
+ if(bRecoverySlice){BuildRecoveryCourtyard();return;}
  ResetActors();Rooms.Reset();SpawnedRooms.Reset();RoomWaves.Reset(); Random.Initialize(Seed);
  const int32 S=(Seed%2)?1:-1;
  const TArray<FVector> Centers={FVector(-3600,0,0),FVector(0,0,0),FVector(3600,0,0),FVector(3600,S*3600,0),FVector(7200,S*3600,0),FVector(10800,S*3600,0),FVector(14400,S*3600,0),FVector(3600,-S*3600,0)};
@@ -250,6 +256,11 @@ void ADBGameMode::MakeCorridor(int32 From,int32 To) {
  }
 }
 void ADBGameMode::UpdateGates() {
+ if(bRecoverySlice){
+  for(int32 I=0;I<Rooms.Num();++I)if(IsValid(Rooms[I].Altar))
+   Rooms[I].Altar->SetActorHiddenInGame(I!=CurrentRoomId||(!bSliceAwaitingStart&&!IsCleared(I))||ClaimedRooms.Contains(I));
+  return;
+ }
  for(int32 I=1;I<Rooms.Num();++I){
   bool Open=ClaimedRooms.Contains(Rooms[I].Parent)||I==7;
   for(auto* G:Rooms[I].Gates)if(IsValid(G)){G->SetActorHiddenInGame(Open);G->SetActorEnableCollision(!Open);}
@@ -259,6 +270,7 @@ void ADBGameMode::UpdateGates() {
 }
 void ADBGameMode::ActivateRoom(int32 Index) {
  CurrentRoomId=Index;CurrentWave=RoomWaves.FindRef(Index);
+ if(bRecoverySlice){bSliceAwaitingStart=!IsCleared(Index)&&!SpawnedRooms.Contains(Index);UpdateGates();return;}
  if(Index==0){ClearedRooms.AddUnique(0);UpdateGates();return;}
  if(IsCleared(Index)||SpawnedRooms.Contains(Index))return;
  SpawnedRooms.Add(Index);
@@ -269,16 +281,18 @@ void ADBGameMode::ActivateRoom(int32 Index) {
 void ADBGameMode::SpawnWave(int32 Index,int32 Wave) {
  RoomWaves.Add(Index,Wave);if(CurrentRoomId==Index)CurrentWave=Wave;
  FRandomStream Rng(Seed+Index*7919+Wave*67);
- int32 Count=Index==5?1:Index==6?3:Index==7?5:3+Index;
+ int32 Count=bRecoverySlice?(Index==0?1:Index==1?3:2):Index==5?1:Index==6?3:Index==7?5:3+Index;
  if(Wave>0)Count=Index==5?2:2+Index/2;
  for(int32 I=0;I<Count;++I) {
   float Angle=(I*360.f/Count+Rng.FRandRange(-20,20))*PI/180;
   FVector Pos=Rooms[Index].Center+FVector(FMath::Cos(Angle)*850,FMath::Sin(Angle)*850,110);
+  if(bRecoverySlice){const FVector Points[]={FVector(440,-580,110),FVector(1420,620,110),FVector(-300,860,110)};Pos=Points[I%3]+FVector(0,(Seed%2?1:-1)*Rng.FRandRange(0,140),0);}
   if(Player&&FVector::Dist2D(Pos,Player->GetActorLocation())<650)Pos=Rooms[Index].Center+(Rooms[Index].Center-Player->GetActorLocation()).GetSafeNormal2D()*650+FVector(0,0,110);
   EDBEnemyKind Kind=(Index==5&&Wave==0)?EDBEnemyKind::Boss:static_cast<EDBEnemyKind>(Rng.RandRange(0,2));
+  if(bRecoverySlice)Kind=Index==2?(I==0?EDBEnemyKind::Boss:EDBEnemyKind::Caster):I==0?EDBEnemyKind::Melee:I==1?EDBEnemyKind::Caster:EDBEnemyKind::Hunter;
   FActorSpawnParameters Params;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
   auto* E=GetWorld()->SpawnActor<ADBEnemy>(Pos,FRotator::ZeroRotator,Params);
-  if(E){E->Configure(Kind,Index,Index==5?1.f:0.9f+Index*0.08f);E->SetArenaBounds(Rooms[Index].Center,FVector2D(1250,1250));}
+  if(E){E->Configure(Kind,Index,bRecoverySlice?(Index==0?0.85f:Index==2?0.9f:1.f):Index==5?1.f:0.9f+Index*0.08f);E->SetArenaBounds(Rooms[Index].Center,bRecoverySlice?FVector2D(1540,1230):FVector2D(1250,1250));}
  }
 }
 void ADBGameMode::NotifyEnemyKilled(ADBEnemy* Enemy) {
@@ -286,7 +300,7 @@ void ADBGameMode::NotifyEnemyKilled(ADBEnemy* Enemy) {
  ++Kills;int32 Room=Enemy->RoomId;
  int32 Living=0;for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&It->RoomId==Room)++Living;
  if(Living==0) {
-  if(RoomWaves.FindRef(Room)==0&&(Room==3||Room==4)) {SpawnWave(Room,1);NotifyEvent(TEXT("The ward answers / reinforcements"),FLinearColor(1,0.56,0.31));}
+  if(!bRecoverySlice&&RoomWaves.FindRef(Room)==0&&(Room==3||Room==4)) {SpawnWave(Room,1);NotifyEvent(TEXT("The ward answers / reinforcements"),FLinearColor(1,0.56,0.31));}
   else FinishRoom(Room);
  }
 }
@@ -294,10 +308,12 @@ void ADBGameMode::FinishRoom(int32 Index) {
  ClearedRooms.AddUnique(Index);
  if(Player)Player->Health=FMath::Min(Player->MaxHealth,Player->Health+30);
  if(Index==5){bBossWon=true;LearnedPatterns.AddUnique("Capacitor");}
- if(Index==6){
-  ClaimedRooms.AddUnique(6);bWon=true;
-  NotifyEvent(TEXT("CROSSING COMPLETE / your discoveries endured"),FLinearColor(0.55,1,0.85));
-  SaveProgress(false);SetMenuInput(true);
+ if((bRecoverySlice&&Index==2)||(!bRecoverySlice&&Index==6)){
+  ClaimedRooms.AddUnique(Index);
+  if(bRecoverySlice){bBossWon=true;LearnedPatterns.AddUnique("Capacitor");}
+  NotifyEvent(bRecoverySlice?TEXT("COURTYARD CLEARED / your patterns endure"):TEXT("CROSSING COMPLETE / your discoveries endured"),FLinearColor(0.55,1,0.85));
+  if(bRecoverySlice){VictoryDelay=1.4f;if(Player)Player->RecallShield();}
+  else {bWon=true;SaveProgress(false);SetMenuInput(true);}
  } else {
   UpdateGates();SaveProgress(true);
   NotifyEvent(Index==5?TEXT("GUARDIAN BROKEN / claim its living capacitor"):TEXT("WARD BROKEN / recover an attachment"),FLinearColor(0.5,1,0.77));
@@ -313,12 +329,14 @@ void ADBGameMode::NotifyEvent(const FString& Text,FLinearColor Color){EventText=
 void ADBGameMode::Tick(float Dt) {
  Super::Tick(Dt);PulseTime+=Dt;
  if(!Player)Player=Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this,0));
+ if(VictoryDelay>0){VictoryDelay=FMath::Max(0.f,VictoryDelay-Dt);if(VictoryDelay==0){bWon=true;SaveProgress(false);SetMenuInput(true);}}
  if(bVerify&&PulseTime>3){bVerify=false;RunVerification();return;}
+ if(bMotionCapture){TickMotionDemo(Dt);return;}
  if(bCapture){
   if(PulseTime>8&&!bCapturedFrame){bCapturedFrame=true;FScreenshotRequest::RequestScreenshot(TEXT("Dreambound_FirstView.png"),true,false);}
   if(PulseTime>12)FGenericPlatformMisc::RequestExit(false);
  }
- if(!bCapture&&!bVerify&&!bTitle&&!bDefeated&&!bWon&&GEngine&&GEngine->GameViewport) {
+ if(!bCapture&&!bVerify&&!bChecksRunning&&!bTitle&&!bDefeated&&!bWon&&GEngine&&GEngine->GameViewport) {
   UGameViewportClient* V=GEngine->GameViewport;auto W=V->GetWindow();
   bool Focus=FSlateApplication::IsInitialized()&&FSlateApplication::Get().IsActive()&&W.IsValid()&&W->IsActive();
   if(bHadFocus&&!Focus&&!bPaused&&!bChoosingReward&&!bShowingBuild){bPaused=true;SetMenuInput(true);}
@@ -330,6 +348,7 @@ void ADBGameMode::Tick(float Dt) {
   if(IsValid(Rooms[I].Altar)){Rooms[I].Altar->AddActorLocalRotation(FRotator(0,Dt*20,0));}
  }
  if(Player->GetActorLocation().Z<-400){Player->ReceiveAttack(99999,Player->GetActorLocation(),true);return;}
+ if(bRecoverySlice)return;
  for(int32 I=0;I<Rooms.Num();++I) {
   FVector D=Player->GetActorLocation()-Rooms[I].Center;
   if(FMath::Abs(D.X)<1250&&FMath::Abs(D.Y)<1250&&I!=CurrentRoomId) {
@@ -341,17 +360,39 @@ void ADBGameMode::Tick(float Dt) {
 void ADBGameMode::Interact() {
  if(bTitle){if(bCanResume)ResumeRun();else StartNewRun();return;}
  if(bPaused||bChoosingReward||bShowingBuild||bDefeated||bWon||!Player)return;
+ if(bRecoverySlice){
+  auto* Altar=Rooms[CurrentRoomId].Altar;
+  if(!IsValid(Altar)||FVector::Dist(Player->GetActorLocation(),Altar->GetActorLocation())>430)return;
+  if(bSliceAwaitingStart){bSliceAwaitingStart=false;SpawnedRooms.Add(CurrentRoomId);SaveProgress(true);SpawnWave(CurrentRoomId,0);UpdateGates();NotifyEvent(CurrentRoomId==0?TEXT("Hold the face to the strike. Throw only when you can give up protection."):TEXT("Choose your angle / the shield returns to where you move."),FLinearColor(.93,.78,.49));return;}
+  if(IsCleared(CurrentRoomId)&&!ClaimedRooms.Contains(CurrentRoomId))ShowOffers(CurrentRoomId);
+  return;
+ }
  for(int32 I=0;I<Rooms.Num();++I)
   if(!ClaimedRooms.Contains(I)&&(I==0||IsCleared(I))&&IsValid(Rooms[I].Altar)&&FVector::Dist(Player->GetActorLocation(),Rooms[I].Altar->GetActorLocation())<420){ShowOffers(I);return;}
 }
 FString ADBGameMode::InteractText() const {
  if(!Player||bTitle)return "";
+ if(bRecoverySlice){
+  auto* A=Rooms[CurrentRoomId].Altar;
+  if(IsValid(A)&&FVector::Dist(Player->GetActorLocation(),A->GetActorLocation())<430){
+   if(bSliceAwaitingStart)return CurrentRoomId==0?TEXT("E  Begin the encounter"):CurrentRoomId==1?TEXT("E  Test your new attachment"):TEXT("E  Face the heavy sentinel");
+   if(IsCleared(CurrentRoomId)&&!ClaimedRooms.Contains(CurrentRoomId))return TEXT("E  Claim your earned attachment");
+  }
+  return "";
+ }
  for(int32 I=0;I<Rooms.Num();++I)if(!ClaimedRooms.Contains(I)&&(I==0||IsCleared(I))&&IsValid(Rooms[I].Altar)&&FVector::Dist(Player->GetActorLocation(),Rooms[I].Altar->GetActorLocation())<420)
  return I==5?TEXT("E  Claim the guardian's capacitor"):TEXT("E  Recover an attachment");
  return "";
 }
 FString ADBGameMode::ObjectiveText() const {
  if(!Rooms.IsValidIndex(CurrentRoomId))return "";
+ if(bRecoverySlice){
+  if(bWon)return TEXT("The court is clear. Your learned patterns remain.");
+  if(bSliceAwaitingStart)return TEXT("Approach the ward stone / E when ready");
+  if(IsCleared(CurrentRoomId))return TEXT("Attachment earned / return to the ward stone");
+  int32 N=0;for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(It->RoomId==CurrentRoomId&&!It->bDead)++N;
+  return FString::Printf(TEXT("%d %s / thrown shield means exposed defense"),N,N==1?TEXT("threat remains"):TEXT("threats remain"));
+ }
  if(bWon)return TEXT("The dreams were real. So is what you brought with you.");
  if(CurrentRoomId==0)return ClaimedRooms.Contains(0)?TEXT("Leave the cell / follow the light through the arch"):TEXT("Recover the dormant core / approach the crystal");
  if(IsCleared(CurrentRoomId))return ClaimedRooms.Contains(CurrentRoomId)?Rooms[CurrentRoomId].bOptional?TEXT("Trial complete / return to the Split Cloister"):TEXT("Ward open / follow the passage to the next realm anchor"):TEXT("Claim the ward's attachment / approach the crystal");
@@ -359,24 +400,26 @@ FString ADBGameMode::ObjectiveText() const {
  return FString::Printf(TEXT("%s / %d defenders remain"),CurrentRoomId==5?TEXT("Break the Bell Guardian"):CurrentRoomId==6?TEXT("Test your carried power"):TEXT("Break the ward"),N);
 }
 FDBOffer ADBGameMode::DescribeUpgrade(FName Id) const {
- FDBOffer O;O.Id=Id;O.Name=Id.ToString();O.Color=FLinearColor(0.7,0.85,1);
- if(Id=="Mirror"){O.Name="Mirror Facet";O.Description="A timed guard captures enemy fire. Aim and press Q to return it. Guard + Q keeps your impact available.";O.Color=FLinearColor(0.7,0.93,1);}
- else if(Id=="Ram"){O.Name="Ram Edge";O.Description="Q becomes a committed shield rush. Impact consumes chill for a shattering hit. Direction and timing matter.";O.Color=FLinearColor(1,0.74,0.43);}
- else if(Id=="Echo"){O.Name="Echo Chamber";O.Description="A delayed second attack repeats your recorded aim. It inherits your element and compatible effects.";O.Color=FLinearColor(0.82,0.66,1);}
- else if(Id=="Frost"){O.Name="Frost Core";O.Description="Pulses build chill and slow a threat. Follow with an impact to consume chill in a shatter.";O.Color=FLinearColor(0.48,0.86,1);}
- else if(Id=="Storm"){O.Name="Storm Core";O.Description="Mark targets with your pulses. Further hits discharge existing marks into nearby enemies.";O.Color=FLinearColor(0.88,0.75,1);}
- else if(Id=="Ember"){O.Name="Ember Core";O.Description="Pulses ignite enemies, dealing damage while you reposition. R cycles cores you already own.";O.Color=FLinearColor(1,0.48,0.26);}
- else if(Id=="Stormfracture"){O.Name="Stormfracture";O.Description="Consuming prepared chill or storm marks releases a powerful nearby lightning cascade. Find and group your targets.";O.Color=FLinearColor(0.61,1,0.78);}
- else if(Id=="Split"){O.Name="Split Prism";O.Description="Your attack branches into multiple aimed rays. Close range and enemy alignment turn this into concentrated pressure.";O.Color=FLinearColor(1,0.85,0.51);}
- else if(Id=="Capacitor"){O.Name="Living Capacitor";O.Description="Perfect guard vents heat and charges your next pulses. Combine it with captured fire, echoes and elemental reactions.";O.Color=FLinearColor(1,0.91,0.55);}
- if(Id=="Restore"){O.Name="Restore the instrument";O.Description="All offered attachments are fully evolved. Restore health and guard, then open the next passage.";}
- else if(Player)O.Description=ADBCharacter::GetUpgradeDescription(Id,FMath::Min(3,Player->GetUpgradeRank(Id)+1));
+ FDBOffer O;O.Id=Id;O.Name=Id.ToString();O.Color=FLinearColor(.7f,.85f,1.f);
+ if(Id=="Mirror"){O.Name="Mirror Facet";O.Color=FLinearColor(.7f,.93f,1.f);}
+ else if(Id=="Anchor"){O.Name="Anchor Spindle";O.Color=FLinearColor(.48f,.9f,.77f);}
+ else if(Id=="Ram"){O.Name="Ram Edge";O.Color=FLinearColor(1.f,.74f,.43f);}
+ else if(Id=="Echo"){O.Name="Echo Chamber";O.Color=FLinearColor(.82f,.66f,1.f);}
+ else if(Id=="Frost"){O.Name="Frost Core";O.Color=FLinearColor(.48f,.86f,1.f);}
+ else if(Id=="Storm"){O.Name="Storm Core";O.Color=FLinearColor(.88f,.75f,1.f);}
+ else if(Id=="Ember"){O.Name="Ember Core";O.Color=FLinearColor(1.f,.48f,.26f);}
+ else if(Id=="Stormfracture"){O.Name="Stormfracture";O.Color=FLinearColor(.61f,1.f,.78f);}
+ else if(Id=="Split"){O.Name="Split Prism";O.Color=FLinearColor(1.f,.85f,.51f);}
+ else if(Id=="Capacitor"){O.Name="Living Capacitor";O.Color=FLinearColor(1.f,.91f,.55f);}
+ if(Id=="Restore"){O.Name="Restore the instrument";O.Description="All offered attachments are fully evolved. Restore health and guard.";}
+ else O.Description=ADBCharacter::GetUpgradeDescription(Id,FMath::Min(3,(Player?Player->GetUpgradeRank(Id):0)+1));
  return O;
 }
 void ADBGameMode::ShowOffers(int32 Index) {
  RewardRoom=Index;Offers.Reset();
  TArray<FName> Pool;
- if(Index==0)Pool={"Frost","Ram","Echo","Mirror","Split"};
+ if(bRecoverySlice)Pool=Index==0?TArray<FName>{"Anchor","Mirror","Ram"}:TArray<FName>{"Frost","Storm","Ember"};
+ else if(Index==0)Pool={"Frost","Ram","Echo","Mirror","Split"};
  else if(Index==5)Pool={"Capacitor"};
  else if(Index==7)Pool={"Mirror","Storm","Echo"};
  else Pool={"Mirror","Ram","Echo","Frost","Storm","Ember","Split","Stormfracture"};
@@ -407,6 +450,7 @@ void ADBGameMode::ClaimReward(FName Id) {
  bChoosingReward=false;Offers.Reset();UpdateGates();SaveProgress(true);SetMenuInput(false);
  NotifyEvent(Id=="Restore"?TEXT("Health and guard restored / passage opened"):FString::Printf(TEXT("%s / pattern learned and installed"),*DescribeUpgrade(Id).Name),DescribeUpgrade(Id).Color);
  if(RewardRoom==5)NotifyEvent(TEXT("The passage is open / take your build into Rainstack"),FLinearColor(0.8,1,0.9));
+ if(bRecoverySlice&&RewardRoom<2){CurrentRoomId=RewardRoom+1;bSliceAwaitingStart=true;UpdateGates();SaveProgress(true);NotifyEvent(TEXT("Installed / try your attachment, then return to the ward stone"),FLinearColor(.64,.94,.82));}
 }
 void ADBGameMode::SetMenuInput(bool On) {
  On=On||bSaveFailed;
@@ -447,26 +491,27 @@ void ADBGameMode::StartNewRun(bool SameSeed) {
  UGameplayStatics::SetGamePaused(this,false);
  if(!SameSeed)Seed=FMath::RandRange(10000,999999);
  ++Expeditions;ClearedRooms.Reset();ClaimedRooms.Reset();Offers.Reset();CurrentRoomId=0;CurrentWave=0;Kills=0;RunSeconds=0;
- bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;
+ bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;VictoryDelay=0;
  BuildWorld();
  if(Player){Player->Upgrades.Reset();Player->CurrentElement=EDBElement::Neutral;Player->OnRunReset();Player->MouseSensitivity=Sensitivity;
-  Player->SetActorLocation(Rooms[0].Center+FVector(-750,0,100));Player->GetController()->SetControlRotation(FRotator(0,0,0));
+  Player->SetActorLocation(Rooms[0].Center+(bRecoverySlice?FVector(-1540,-800,110):FVector(-750,0,100)));Player->GetController()->SetControlRotation(FRotator(0,bRecoverySlice?18:0,0));
   if(!StartingPattern.IsNone()&&LearnedPatterns.Contains(StartingPattern))Player->ApplyUpgrade(StartingPattern);
  }
  ActivateRoom(0);SaveProgress(true);SetMenuInput(false);
- NotifyEvent(TEXT("Find the core / E to recover / Tab to inspect controls"),FLinearColor(0.78,0.88,1));
+ NotifyEvent(bRecoverySlice?TEXT("Tap to strike. Hold and release to throw. Q recalls your shield."):TEXT("Find the core / E to recover / Tab to inspect controls"),FLinearColor(0.78,0.88,1));
 }
 void ADBGameMode::ResumeRun() {
  if(!StoredSave||!StoredSave->bActiveRun){StartNewRun();return;}
  UDBSave* S=StoredSave;
  Seed=S->Seed;ClearedRooms=S->Cleared;ClaimedRooms=S->Claimed;
- CurrentRoomId=FMath::Clamp(S->CurrentRoom,0,7);
- bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;
+ CurrentRoomId=FMath::Clamp(S->CurrentRoom,0,bRecoverySlice?2:7);
+ bTitle=bPaused=bChoosingReward=bShowingBuild=bWon=bDefeated=false;VictoryDelay=0;
  BuildWorld();
  if(Player){Player->OnRunReset();Player->MouseSensitivity=Sensitivity;Player->Upgrades.Reset();
   for(auto& P:S->Upgrades)for(int32 I=0;I<P.Value;++I)Player->ApplyUpgrade(P.Key);
   Player->CurrentElement=static_cast<EDBElement>(S->Element);Player->RefreshEquipmentVisuals();Player->Health=S->Health;
   FVector Entry=Rooms[CurrentRoomId].Parent>=0?(Rooms[Rooms[CurrentRoomId].Parent].Center-Rooms[CurrentRoomId].Center).GetSafeNormal()*1000:FVector(-750,0,0);
+  if(bRecoverySlice)Entry=FVector(-1390,-720,0);
   Player->SetActorLocation(Rooms[CurrentRoomId].Center+Entry+FVector(0,0,100));
   Player->GetController()->SetControlRotation((-Entry).Rotation());
  }
@@ -500,6 +545,7 @@ void ADBGameMode::QuitGame(bool bWithoutSaving) {
  FGenericPlatformMisc::RequestExit(false);
 }
 void ADBGameMode::RunVerification() {
+ if(bRecoverySlice){bChecksRunning=true;DBStartPhysicalShieldChecks(*this);return;}
  // Executed in the real game world with an isolated save slot; no fun claim.
  FString Result;int32 Passed=0,Failed=0;
  auto Check=[&](bool Good,const TCHAR* Name){Result+=FString::Printf(TEXT("%s %s\n"),Good?TEXT("PASS"):TEXT("FAIL"),Name);Good?++Passed:++Failed;};

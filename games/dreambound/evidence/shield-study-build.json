@@ -1,0 +1,62 @@
+{
+  "version": "0.2.0-study1",
+  "engine": "Unreal5.8.2",
+  "configuration": "Shipping",
+  "scope": "Physical shield courtyard correction, not the full campaign or accepted art target",
+  "built_on_utc": "2026-09-08T10:58:40.546760+00:00",
+  "package_path": "BuildOutput/ShieldStudy/Windows",
+  "files": [
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166155776,
+      "sha256": "3D6B826D204A05BC3FA55FC3E945C8165817BE8A8EADE31D8996C0775CC516A0"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11222461,
+      "sha256": "CF2FC3D4DEBAD969DFAAACF63C126AA1EC3390B44F5CACB312DCDD1D190A71A9"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 210465184,
+      "sha256": "F77EF9AC7DB73B3C029940547019515F79F8B9ECB18645E350E9E64725E839AE"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 209997,
+      "sha256": "1B9DF73BF1C153E7696C1736815F4A49D3473098507E368E10079143F5ACDFF2"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3210448,
+      "sha256": "BB8C69CD0845A39C082B596A023B004491352B5B5A62E7B688C2DEDD029DDDB5"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 782,
+      "sha256": "5B9F94A274C981445A62D64BA8C51B7FE7F142C43152A35E51D4F343EABEE047"
+    }
+  ],
+  "runtime_scenarios": {
+    "passed": 14,
+    "failed": 0,
+    "complete": true,
+    "report": "evidence/shield-study-checks.json",
+    "runs_this_increment": 4,
+    "note": "Four runs as implementation, capture and final control-label corrections landed;14 focused scenarios per run. No executed scenario failures. Staged actors, not an ordinary complete playthrough."
+  },
+  "old_beta_preserved_at": "BuildOutput/Shipping/Windows",
+  "purchase_or_publication": false,
+  "native_input": "Normal title/start, Tab equipment menu and save/exit observed. Title mouse-up correction prevents an unintended opening strike. Held controls and a full ordinary run are untested by agent.",
+  "capture": {
+    "path": "evidence/shield-study-scripted.mp4",
+    "source_exe_sha256": "C23E46BC3DFE612149201F33F4404F2ECFC4DAD6422328733D7327B61DB8F307",
+    "note": "Final gameplay/art/audio code; only two menu label strings changed after this capture. Scripted movement/input APIs, normal moving enemy, first encounter cleared. Not an ordinary playthrough or performance measurement.",
+    "sample_frames": 283,
+    "wall_seconds": 26.015,
+    "audio_seconds": 25.92,
+    "audio_peak": 0.64849853515625,
+    "audio_clipped_pcm_samples": 0,
+    "listening_assessment": "Unavailable to agent; owner listening required."
+  }
+}

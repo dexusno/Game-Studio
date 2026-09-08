@@ -18,7 +18,19 @@
       1.03,
       1.02,
       1.0
-    ]
+    ],
+    "vertex_masks": true,
+    "wear_color": [
+      0.9659999999999999,
+      0.9453,
+      0.8141999999999999
+    ],
+    "weather_color": [
+      0.46199999999999997,
+      0.45210000000000006,
+      0.3894
+    ],
+    "weather_amount": 0.48
   },
   "M_Bronze": {
     "color": [
@@ -28,13 +40,37 @@
     ],
     "roughness": 0.43,
     "metallic": 0.8,
-    "normal_strength": 0.2,
+    "normal_strength": 0.55,
     "patina_color": [
       0.055,
       0.215,
       0.17
     ],
-    "patina_amount": 0.22
+    "patina_amount": 0.22,
+    "vertex_masks": true,
+    "wear_color": [
+      0.5658,
+      0.24287999999999996,
+      0.09383999999999999
+    ],
+    "weather_color": [
+      0.036,
+      0.13,
+      0.105
+    ],
+    "weather_amount": 0.48,
+    "texture": "T_MetalCraft",
+    "normal_texture": "T_MetalCraftNormal",
+    "tone_low": [
+      0.72,
+      0.75,
+      0.7
+    ],
+    "tone_high": [
+      1.13,
+      1.08,
+      1.0
+    ]
   },
   "M_DarkMetal": {
     "color": [
@@ -44,7 +80,19 @@
     ],
     "roughness": 0.51,
     "metallic": 0.68,
-    "normal_strength": 0.15
+    "normal_strength": 0.15,
+    "vertex_masks": true,
+    "wear_color": [
+      0.049679999999999995,
+      0.08417999999999999,
+      0.09935999999999999
+    ],
+    "weather_color": [
+      0.036,
+      0.13,
+      0.105
+    ],
+    "weather_amount": 0.48
   },
   "M_Patina": {
     "color": [
@@ -54,13 +102,25 @@
     ],
     "roughness": 0.78,
     "metallic": 0.3,
-    "normal_strength": 0.3
+    "normal_strength": 0.3,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0759,
+      0.33809999999999996,
+      0.27599999999999997
+    ],
+    "weather_color": [
+      0.0363,
+      0.1617,
+      0.132
+    ],
+    "weather_amount": 0.48
   },
   "M_Stone": {
     "color": [
-      0.155,
-      0.205,
-      0.225
+      0.19,
+      0.22,
+      0.215
     ],
     "roughness": 0.88,
     "metallic": 0,
@@ -74,13 +134,27 @@
       1.06,
       1.05,
       1.0
-    ]
+    ],
+    "wear_color": [
+      0.36,
+      0.36,
+      0.305
+    ],
+    "weather_color": [
+      0.1,
+      0.135,
+      0.058
+    ],
+    "vertex_masks": true,
+    "weather_amount": 0.7,
+    "texture": "T_MasonryCraft",
+    "normal_texture": "T_MasonryCraftNormal"
   },
   "M_StoneLight": {
     "color": [
-      0.29,
-      0.355,
-      0.365
+      0.32,
+      0.335,
+      0.3
     ],
     "roughness": 0.85,
     "metallic": 0,
@@ -94,7 +168,21 @@
       1.04,
       1.04,
       1.0
-    ]
+    ],
+    "wear_color": [
+      0.43,
+      0.425,
+      0.35
+    ],
+    "weather_color": [
+      0.12,
+      0.15,
+      0.065
+    ],
+    "vertex_masks": true,
+    "weather_amount": 0.7,
+    "texture": "T_MasonryCraft",
+    "normal_texture": "T_MasonryCraftNormal"
   },
   "M_Mortar": {
     "color": [
@@ -104,17 +192,53 @@
     ],
     "roughness": 0.97,
     "metallic": 0,
-    "normal_strength": 0.25
+    "normal_strength": 0.25,
+    "vertex_masks": true,
+    "wear_color": [
+      0.08693999999999999,
+      0.11867999999999998,
+      0.12005999999999999
+    ],
+    "weather_color": [
+      0.04158,
+      0.05676,
+      0.05742
+    ],
+    "weather_amount": 0.48
   },
   "M_Root": {
     "color": [
-      0.12,
-      0.1,
-      0.068
+      0.115,
+      0.078,
+      0.039
     ],
     "roughness": 0.89,
     "metallic": 0,
-    "normal_strength": 0.45
+    "normal_strength": 0.9,
+    "vertex_masks": true,
+    "wear_color": [
+      0.1587,
+      0.10763999999999999,
+      0.05381999999999999
+    ],
+    "weather_color": [
+      0.07590000000000001,
+      0.051480000000000005,
+      0.025740000000000002
+    ],
+    "weather_amount": 0.48,
+    "texture": "T_BarkCraft",
+    "normal_texture": "T_BarkCraftNormal",
+    "tone_low": [
+      0.42,
+      0.43,
+      0.4
+    ],
+    "tone_high": [
+      1.22,
+      1.18,
+      1.1
+    ]
   },
   "M_RootDark": {
     "color": [
@@ -124,7 +248,31 @@
     ],
     "roughness": 0.95,
     "metallic": 0,
-    "normal_strength": 0.35
+    "normal_strength": 0.9,
+    "vertex_masks": true,
+    "wear_color": [
+      0.06486,
+      0.0552,
+      0.03864
+    ],
+    "weather_color": [
+      0.031020000000000002,
+      0.026400000000000003,
+      0.01848
+    ],
+    "weather_amount": 0.48,
+    "texture": "T_BarkCraft",
+    "normal_texture": "T_BarkCraftNormal",
+    "tone_low": [
+      0.42,
+      0.43,
+      0.4
+    ],
+    "tone_high": [
+      1.22,
+      1.18,
+      1.1
+    ]
   },
   "M_Moss": {
     "color": [
@@ -135,7 +283,20 @@
     "roughness": 0.95,
     "metallic": 0,
     "two_sided": true,
-    "normal_strength": 0.2
+    "normal_strength": 0.2,
+    "vertex_masks": true,
+    "wear_color": [
+      0.10901999999999999,
+      0.24839999999999998,
+      0.0759
+    ],
+    "weather_color": [
+      0.052140000000000006,
+      0.1188,
+      0.0363
+    ],
+    "weather_amount": 0.48,
+    "foliage": true
   },
   "M_Wood": {
     "color": [
@@ -145,17 +306,41 @@
     ],
     "roughness": 0.82,
     "metallic": 0,
-    "normal_strength": 0.3
+    "normal_strength": 0.3,
+    "vertex_masks": true,
+    "wear_color": [
+      0.3174,
+      0.16559999999999997,
+      0.08417999999999999
+    ],
+    "weather_color": [
+      0.15180000000000002,
+      0.0792,
+      0.040260000000000004
+    ],
+    "weather_amount": 0.48
   },
   "M_Cloth": {
     "color": [
-      0.025,
-      0.038,
-      0.044
+      0.029,
+      0.066,
+      0.061
     ],
     "roughness": 0.96,
     "metallic": 0,
-    "normal_strength": 0.2
+    "normal_strength": 0.2,
+    "vertex_masks": true,
+    "wear_color": [
+      0.04002,
+      0.09108,
+      0.08417999999999999
+    ],
+    "weather_color": [
+      0.01914,
+      0.04356,
+      0.040260000000000004
+    ],
+    "weather_amount": 0.48
   },
   "M_Core": {
     "color": [
@@ -165,7 +350,19 @@
     ],
     "roughness": 0.24,
     "metallic": 0.3,
-    "emissive": 0.9
+    "emissive": 0.9,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0483,
+      0.4416,
+      0.8969999999999999
+    ],
+    "weather_color": [
+      0.023100000000000002,
+      0.21120000000000003,
+      0.42900000000000005
+    ],
+    "weather_amount": 0.48
   },
   "M_Crystal": {
     "color": [
@@ -175,7 +372,19 @@
     ],
     "roughness": 0.2,
     "metallic": 0.23,
-    "emissive": 0.32
+    "emissive": 0.32,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0897,
+      0.3519,
+      0.5244
+    ],
+    "weather_color": [
+      0.0429,
+      0.1683,
+      0.2508
+    ],
+    "weather_amount": 0.48
   },
   "M_Frost": {
     "color": [
@@ -185,7 +394,19 @@
     ],
     "roughness": 0.27,
     "metallic": 0.12,
-    "emissive": 1.5
+    "emissive": 1.5,
+    "vertex_masks": true,
+    "wear_color": [
+      0.2622,
+      0.8555999999999999,
+      1
+    ],
+    "weather_color": [
+      0.1254,
+      0.4092,
+      0.5346000000000001
+    ],
+    "weather_amount": 0.48
   },
   "M_Storm": {
     "color": [
@@ -195,7 +416,19 @@
     ],
     "roughness": 0.29,
     "metallic": 0.22,
-    "emissive": 2.2
+    "emissive": 2.2,
+    "vertex_masks": true,
+    "wear_color": [
+      0.33119999999999994,
+      0.1035,
+      0.9107999999999999
+    ],
+    "weather_color": [
+      0.1584,
+      0.0495,
+      0.43560000000000004
+    ],
+    "weather_amount": 0.48
   },
   "M_Ember": {
     "color": [
@@ -205,7 +438,19 @@
     ],
     "roughness": 0.36,
     "metallic": 0.1,
-    "emissive": 2.2
+    "emissive": 2.2,
+    "vertex_masks": true,
+    "wear_color": [
+      1,
+      0.207,
+      0.03174
+    ],
+    "weather_color": [
+      0.5412,
+      0.099,
+      0.01518
+    ],
+    "weather_amount": 0.48
   },
   "M_CombatGlow": {
     "color": [
@@ -217,6 +462,189 @@
     "metallic": 0,
     "emissive": 3,
     "two_sided": true,
-    "parameter": "Color"
+    "parameter": "Color",
+    "vertex_masks": true,
+    "wear_color": [
+      0.06899999999999999,
+      0.5519999999999999,
+      1
+    ],
+    "weather_color": [
+      0.033,
+      0.264,
+      0.561
+    ],
+    "weather_amount": 0.48
+  },
+  "M_RootLight": {
+    "color": [
+      0.22,
+      0.148,
+      0.068
+    ],
+    "roughness": 0.92,
+    "metallic": 0,
+    "normal_strength": 0.9,
+    "vertex_masks": true,
+    "wear_color": [
+      0.3036,
+      0.20423999999999998,
+      0.09383999999999999
+    ],
+    "weather_color": [
+      0.1452,
+      0.09768,
+      0.04488
+    ],
+    "weather_amount": 0.48,
+    "texture": "T_BarkCraft",
+    "normal_texture": "T_BarkCraftNormal",
+    "tone_low": [
+      0.42,
+      0.43,
+      0.4
+    ],
+    "tone_high": [
+      1.22,
+      1.18,
+      1.1
+    ]
+  },
+  "M_Leaf": {
+    "color": [
+      0.07,
+      0.13,
+      0.025
+    ],
+    "roughness": 0.82,
+    "metallic": 0,
+    "normal_strength": 0.08,
+    "two_sided": true,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0966,
+      0.1794,
+      0.034499999999999996
+    ],
+    "weather_color": [
+      0.046200000000000005,
+      0.0858,
+      0.0165
+    ],
+    "weather_amount": 0.48,
+    "foliage": true
+  },
+  "M_LeafLight": {
+    "color": [
+      0.145,
+      0.21,
+      0.044
+    ],
+    "roughness": 0.84,
+    "metallic": 0,
+    "normal_strength": 0.08,
+    "two_sided": true,
+    "vertex_masks": true,
+    "wear_color": [
+      0.20009999999999997,
+      0.28979999999999995,
+      0.06071999999999999
+    ],
+    "weather_color": [
+      0.0957,
+      0.1386,
+      0.02904
+    ],
+    "weather_amount": 0.48,
+    "foliage": true
+  },
+  "M_LeafGold": {
+    "color": [
+      0.255,
+      0.238,
+      0.055
+    ],
+    "roughness": 0.87,
+    "metallic": 0,
+    "normal_strength": 0.08,
+    "two_sided": true,
+    "vertex_masks": true,
+    "wear_color": [
+      0.3519,
+      0.32843999999999995,
+      0.0759
+    ],
+    "weather_color": [
+      0.1683,
+      0.15708,
+      0.0363
+    ],
+    "weather_amount": 0.48,
+    "foliage": true
+  },
+  "M_ShieldCeramic": {
+    "color": [
+      0.66,
+      0.64,
+      0.53
+    ],
+    "roughness": 0.43,
+    "metallic": 0.02,
+    "normal_strength": 0.1,
+    "roughness_variation": 0.035,
+    "tone_low": [
+      0.95,
+      0.96,
+      0.95
+    ],
+    "tone_high": [
+      1.03,
+      1.02,
+      1.0
+    ],
+    "texture": "T_ShieldCraft",
+    "normal_texture": "T_ShieldCraftNormal",
+    "wear_color": [
+      0.4,
+      0.36,
+      0.265
+    ],
+    "weather_color": [
+      0.21,
+      0.2,
+      0.145
+    ],
+    "vertex_masks": true,
+    "weather_amount": 0.48
+  },
+  "M_ShieldBronze": {
+    "color": [
+      0.41,
+      0.176,
+      0.068
+    ],
+    "roughness": 0.43,
+    "metallic": 0.8,
+    "normal_strength": 0.2,
+    "patina_color": [
+      0.055,
+      0.215,
+      0.17
+    ],
+    "patina_amount": 0.22,
+    "texture": "T_ShieldCraft",
+    "normal_texture": "T_ShieldCraftNormal",
+    "wear_color": [
+      0.6,
+      0.355,
+      0.135
+    ],
+    "weather_color": [
+      0.033,
+      0.16,
+      0.12
+    ],
+    "vertex_masks": true,
+    "weather_amount": 0.48
   }
 }

@@ -1,4 +1,5 @@
 #include "DBCharacter.h"
+#include "DBThrownShield.h"
 
 #include "DBEnemy.h"
 #include "DBGameMode.h"
@@ -26,6 +27,7 @@ namespace
     const FName FractureId(TEXT("Stormfracture"));
     const FName SplitId(TEXT("Split"));
     const FName CapacitorId(TEXT("Capacitor"));
+    const FName AnchorId(TEXT("Anchor"));
 
     FName ElementId(EDBElement Element)
     {
@@ -91,30 +93,30 @@ ADBCharacter::ADBCharacter()
     WeaponRoot = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponPivot"));
     WeaponRoot->SetupAttachment(ViewCamera);
     // Keep the cuff behind the receiver in screen space, rather than across the near plane.
-    WeaponRoot->SetRelativeLocation(FVector(50.f, 30.f, -32.f));
-    WeaponRoot->SetRelativeRotation(FRotator(0.f, -13.f, -8.f));
+    WeaponRoot->SetRelativeLocation(FVector(85.f, -52.f, -38.f));
+    WeaponRoot->SetRelativeRotation(FRotator(-8.f, -34.f, -12.f));
 
     Forearm = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CyborgForearm"));
     Forearm->SetupAttachment(WeaponRoot);
-    Forearm->SetRelativeLocation(FVector(0.f, 1.5f, -3.f));
-    Forearm->SetRelativeScale3D(FVector(1.f, .82f, .82f));
+    Forearm->SetRelativeLocation(FVector(-12.f, 0.f, -12.f));
     PrepareViewMesh(Forearm);
     WeaponBody = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponBody"));
     WeaponBody->SetupAttachment(WeaponRoot);
     PrepareViewMesh(WeaponBody);
+    WeaponBody->SetHiddenInGame(true);
     WeaponCore = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponCore"));
     WeaponCore->SetupAttachment(WeaponRoot);
-    WeaponCore->SetRelativeLocation(FVector(33.f, 0.f, 10.f));
+    WeaponCore->SetRelativeLocation(FVector(-6.f, 0.f, 0.f));
     PrepareViewMesh(WeaponCore);
 
-    for (int32 Index = 0; Index < 5; ++Index)
+    for (int32 Index = 0; Index < 1; ++Index)
     {
         UStaticMeshComponent* Plate = CreateDefaultSubobject<UStaticMeshComponent>(*FString::Printf(TEXT("ShieldPetal%d"), Index));
         Plate->SetupAttachment(WeaponRoot);
         PrepareViewMesh(Plate);
         ShieldPlates.Add(Plate);
     }
-    for (int32 Index = 0; Index < 9; ++Index)
+    for (int32 Index = 0; Index < 10; ++Index)
     {
         UStaticMeshComponent* Part = CreateDefaultSubobject<UStaticMeshComponent>(*FString::Printf(TEXT("Attachment%d"), Index));
         Part->SetupAttachment(WeaponRoot);
@@ -143,15 +145,14 @@ void ADBCharacter::BeginPlay()
     StormMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Storm.M_Storm"));
     EmberMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Ember.M_Ember"));
 
-    UStaticMesh* BodyMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_WeaponBody.SM_WeaponBody"));
     UStaticMesh* ArmMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Forearm.SM_Forearm"));
     UStaticMesh* CoreMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"));
     UStaticMesh* PlateMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldPlate.SM_ShieldPlate"));
     UStaticMesh* CrystalMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal"));
-    WeaponBody->SetStaticMesh(BodyMesh ? BodyMesh : BeamMesh.Get());
+    // Keep the legacy component for callers, but there is no gun body in this version.
+    WeaponBody->SetStaticMesh(nullptr);
     Forearm->SetStaticMesh(ArmMesh ? ArmMesh : BeamMesh.Get());
     WeaponCore->SetStaticMesh(CoreMesh ? CoreMesh : SparkMesh.Get());
-    if (!BodyMesh) WeaponBody->SetRelativeScale3D(FVector(.55f, .16f, .15f));
     if (!ArmMesh)
     {
         Forearm->SetRelativeLocation(FVector(-24.f, 0.f, -4.f));
@@ -181,6 +182,8 @@ void ADBCharacter::BeginPlay()
     ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Impact.S_Impact"));
     EquipSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Equip.S_Equip"));
     HurtSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Hurt.S_Hurt"));
+    CatchSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Catch.S_Catch"));
+    RecallSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Recall.S_Recall"));
     RefreshEquipmentVisuals();
     // The title can pause gameplay before the first active Tick. Initialize the folded
     // assembly now so its imported default transforms never appear behind the menu.
@@ -219,6 +222,7 @@ bool ADBCharacter::CanAct() const
         && !Mode->bTitle && !Mode->bWon && !Mode->bDefeated);
 }
 
+
 void ADBCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -233,7 +237,8 @@ void ADBCharacter::Tick(float DeltaSeconds)
         return;
     }
     bWasMenuBlocked = false;
-    FireCooldown = FMath::Max(0.f, FireCooldown - DeltaSeconds);
+    AttackRecovery = FMath::Max(0.f, AttackRecovery - DeltaSeconds);
+    if (AttackRecovery <= 0.f) bStrikePoseActive = false;
     GuardRaiseCooldown = FMath::Max(0.f, GuardRaiseCooldown - DeltaSeconds);
     DashCooldown = FMath::Max(0.f, DashCooldown - DeltaSeconds);
     SpecialCooldown = FMath::Max(0.f, SpecialCooldown - DeltaSeconds);
@@ -243,16 +248,46 @@ void ADBCharacter::Tick(float DeltaSeconds)
     HurtFlashTime = FMath::Max(0.f, HurtFlashTime - DeltaSeconds);
     ParryFlashTime = FMath::Max(0.f, ParryFlashTime - DeltaSeconds);
     MessageTime = FMath::Max(0.f, MessageTime - DeltaSeconds);
-    SinceFired += DeltaSeconds;
     SinceGuarded += DeltaSeconds;
     SinceDamaged += DeltaSeconds;
+    Heat = 0.f;
+    bOverheated = false; // Legacy save/HUD compatibility: there is no gun heat cycle.
+    if (IsShieldAway() && !IsValid(ThrownShield)) OnShieldCaught(true);
 
-    const float HeatCooling = bOverheated ? 41.f : (SinceFired > .2f ? 29.f : 7.f);
-    Heat = FMath::Max(0.f, Heat - HeatCooling * DeltaSeconds);
-    if (bOverheated && Heat <= 18.f)
+    if (bStrikePending)
     {
-        bOverheated = false;
-        SetCombatMessage(TEXT("Core vented"), 1.f);
+        StrikeDelay -= DeltaSeconds;
+        if (StrikeDelay <= 0.f)
+        {
+            bStrikePending = false;
+            ResolveRimStrike();
+        }
+    }
+    if (!CanAct()) return;
+    if (AttackRecovery <= 0.f && ShieldState == EDBShieldState::Held)
+    {
+        if (bStrikeBuffered)
+        {
+            bStrikeBuffered = false;
+            StartRimStrike(false);
+        }
+        else if (bWantsFire)
+        {
+            ShieldState = EDBShieldState::Charging;
+            ChargeHeld = 0.f;
+        }
+        else if (bWantsGuard && !bGuarding && GuardBreakTime <= 0.f && GuardEnergy >= 8.f)
+        {
+            // Holding guard through an attack restores ordinary protection, not a free parry.
+            bGuarding = true;
+            SinceGuarded = 1.f;
+            GuardEnergy -= 3.f;
+        }
+    }
+    if (ShieldState == EDBShieldState::Charging && bWantsFire)
+    {
+        ChargeHeld += DeltaSeconds;
+        ThrowCharge = FMath::Clamp((ChargeHeld - .22f) / .65f, 0.f, 1.f);
     }
     if (bGuarding)
     {
@@ -260,18 +295,18 @@ void ADBCharacter::Tick(float DeltaSeconds)
         if (GuardEnergy <= 0.f)
         {
             bGuarding = false;
+            bWantsGuard = false;
             GuardBreakTime = 1.5f;
             SetCombatMessage(TEXT("GUARD BROKEN - dash to recover"));
         }
     }
     else if (SinceDamaged > .65f && GuardBreakTime <= 0.f)
-    {
         GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + (HasUpgrade(CapacitorId) ? 27.f : 21.f) * DeltaSeconds);
-    }
+
     DashTime = FMath::Max(0.f, DashTime - DeltaSeconds);
     GetCharacterMovement()->GroundFriction = DashTime > 0.f ? 0.f : 8.f;
     GetCharacterMovement()->BrakingDecelerationFalling = DashTime > 0.f ? 0.f : 600.f;
-    GetCharacterMovement()->MaxWalkSpeed = bGuarding ? 285.f : 590.f;
+    GetCharacterMovement()->MaxWalkSpeed = bGuarding ? 320.f : 590.f;
     if (bRushActive)
     {
         RushTime -= DeltaSeconds;
@@ -283,7 +318,7 @@ void ADBCharacter::Tick(float DeltaSeconds)
         }
     }
     UpdateEchoes(DeltaSeconds);
-    if (bWantsFire && FireCooldown <= 0.f) FirePulse();
+    bShieldReady = !IsShieldAway() && ShieldState == EDBShieldState::Held && AttackRecovery <= 0.f;
     UpdateWeapon(DeltaSeconds);
     UpdateEffects(DeltaSeconds);
 }
@@ -317,36 +352,74 @@ void ADBCharacter::LookUp(float Value)
 void ADBCharacter::BeginJump() { if (CanAct()) Jump(); }
 void ADBCharacter::EndJump() { StopJumping(); }
 
+
 void ADBCharacter::PressFire()
 {
     if (!CanAct()) return;
+    if (IsShieldAway()) { RecallShield(); return; }
+    if (AttackRecovery > .18f) return;
     bWantsFire = true;
-    if (FireCooldown <= 0.f) FirePulse();
+    ChargeHeld = 0.f;
+    ThrowCharge = 0.f;
+    bGuarding = false;
+    if (AttackRecovery <= 0.f) ShieldState = EDBShieldState::Charging;
 }
 
-void ADBCharacter::ReleaseFire() { bWantsFire = false; }
+void ADBCharacter::ReleaseFire()
+{
+    if (!bWantsFire) return;
+    bWantsFire = false;
+    if (!CanAct() || IsShieldAway()) return;
+    if (AttackRecovery > 0.f)
+    {
+        bStrikeBuffered = true;
+        return;
+    }
+    if (ChargeHeld >= .22f) LaunchShield();
+    else StartRimStrike(false);
+}
 
 void ADBCharacter::PressGuard()
 {
-    if (!CanAct() || GuardBreakTime > 0.f || GuardRaiseCooldown > 0.f || GuardEnergy < 8.f || bGuarding) return;
+    if (!CanAct()) return;
+    if (IsShieldAway())
+    {
+        SetCombatMessage(TEXT("SHIELD AWAY - evade / Q or LMB recalls"), 1.f);
+        return;
+    }
+    bWantsGuard = true;
+    if (AttackRecovery > 0.f || GuardBreakTime > 0.f || GuardRaiseCooldown > 0.f || GuardEnergy < 8.f || bGuarding) return;
+    bWantsFire = false;
+    ChargeHeld = ThrowCharge = 0.f;
+    ShieldState = EDBShieldState::Held;
     bGuarding = true;
     SinceGuarded = 0.f;
     GuardRaiseCooldown = .38f;
     GuardEnergy -= 3.f;
-    PlayCombatSound(GuardSound, .5f, 1.12f);
+    PlayCombatSound(GuardSound, .65f, .95f);
 }
 
-void ADBCharacter::ReleaseGuard() { bGuarding = false; }
+void ADBCharacter::ReleaseGuard()
+{
+    bWantsGuard = false;
+    bGuarding = false;
+}
 
 void ADBCharacter::SuspendCombatInput()
 {
     bWantsFire = false;
+    bWantsGuard = false;
+    bStrikeBuffered = false;
+    bStrikePending = false;
     bGuarding = false;
     bRushActive = false;
+    ChargeHeld = ThrowCharge = 0.f;
+    if (ShieldState == EDBShieldState::Charging) ShieldState = EDBShieldState::Held;
     RushVictims.Reset();
     EchoShots.Reset();
     StopJumping();
     ConsumeMovementInputVector();
+    // A launched shield stays where it is while paused; opening a menu cannot recover it.
 }
 
 void ADBCharacter::Interact()
@@ -386,9 +459,58 @@ FVector ADBCharacter::GetAimDirection() const
     return ViewCamera ? ViewCamera->GetForwardVector() : GetControlRotation().Vector();
 }
 
+
 FVector ADBCharacter::GetMuzzleLocation() const
 {
-    return WeaponRoot ? WeaponRoot->GetComponentTransform().TransformPosition(FVector(64.f, 0.f, 3.f)) : GetActorLocation() + GetAimDirection() * 85.f;
+    return GetShieldCatchLocation(); // Compatibility with older diagnostics; this is not a gun muzzle.
+}
+
+FVector ADBCharacter::GetShieldCatchLocation() const
+{
+    return WeaponRoot->GetComponentLocation();
+}
+
+bool ADBCharacter::IsShieldAway() const
+{
+    return ShieldState == EDBShieldState::Outbound || ShieldState == EDBShieldState::Lodged || ShieldState == EDBShieldState::Returning;
+}
+
+void ADBCharacter::RecallShield()
+{
+    if (!CanAct() || !IsShieldAway()) return;
+    if (!IsValid(ThrownShield)) { OnShieldCaught(true); return; }
+    if (ShieldState == EDBShieldState::Returning) return;
+    ThrownShield->Recall();
+    PlayCombatSound(RecallSound, .85f);
+    SetCombatMessage(TEXT("RECALL - move to cut a new return line"), 1.2f);
+}
+
+void ADBCharacter::OnShieldCaught(bool bEmergency)
+{
+    ThrownShield = nullptr;
+    ShieldState = EDBShieldState::Held;
+    bShieldReady = false;
+    AttackRecovery = .25f;
+    bStrikePoseActive = false;
+    bGuarding = false;
+    CatchPose = 1.f;
+    Recoil = 1.2f;
+    ThrowCharge = 0.f;
+    PlayCombatSound(CatchSound ? CatchSound.Get() : GuardSound.Get(), .9f, bEmergency ? .8f : 1.f);
+    SetCombatMessage(bEmergency ? TEXT("RECONSTITUTED - return route obstructed") : TEXT("CAUGHT - shield ready"), 1.f);
+    UpdateWeapon(0.f);
+}
+
+FString ADBCharacter::GetShieldStateLabel() const
+{
+    switch (ShieldState)
+    {
+    case EDBShieldState::Charging: return TEXT("CHARGING THROW - release LMB");
+    case EDBShieldState::Outbound: return TEXT("SHIELD IN FLIGHT - guard unavailable");
+    case EDBShieldState::Lodged: return HasUpgrade(AnchorId) ? TEXT("ANCHOR SET - Q recalls / cover has one facing") : TEXT("SHIELD AWAY - Q or LMB recalls");
+    case EDBShieldState::Returning: return TEXT("RETURNING - reposition for the cut");
+    default: return AttackRecovery > 0.f ? TEXT("COMMITTED - guard recovering") : (bGuarding ? TEXT("GUARDING") : TEXT("SHIELD IN HAND"));
+    }
 }
 
 FVector ADBCharacter::FindAimPoint() const
@@ -421,123 +543,189 @@ bool ADBCharacter::HitEnemy(ADBEnemy* Enemy, const FDBHit& Hit)
     return true;
 }
 
-ADBEnemy* ADBCharacter::TraceAttack(const FVector& AimPoint, const FDBHit& Hit, float BeamWidth)
+
+bool ADBCharacter::ApplyPhysicalShieldHit(ADBEnemy* Enemy, const FDBHit& Hit)
 {
-    if (!CanAct()) return nullptr;
-    const FVector Muzzle = GetMuzzleLocation();
-    const FVector CameraLocation = ViewCamera->GetComponentLocation();
-    FCollisionQueryParams Params(SCENE_QUERY_STAT(DBPulse), false, this);
-    FHitResult Impact;
-    FVector End = AimPoint;
-    // A weapon poked through cover cannot fire from the far side of that cover.
-    bool bBlocked = GetWorld()->LineTraceSingleByChannel(Impact, CameraLocation, Muzzle, ECC_Visibility, Params);
-    if (!bBlocked)
-        bBlocked = GetWorld()->LineTraceSingleByChannel(Impact, Muzzle, AimPoint + (AimPoint - Muzzle).GetSafeNormal() * 4.f, ECC_Visibility, Params);
-    ADBEnemy* Enemy = nullptr;
-    if (bBlocked)
+    if (!CanAct() || !IsValid(Enemy) || Enemy->bDead) return false;
+    FDBHit Contact = Hit;
+    const int32 PreviousChill = Enemy->ChillStacks;
+    const bool bHadBurn = Enemy->BurnRemaining > 0.f;
+    bool bReleasedForce = false;
+    if (!Contact.bSecondary)
     {
-        End = Impact.ImpactPoint;
-        Enemy = Cast<ADBEnemy>(Impact.GetActor());
-        FDBHit ActualHit = Hit;
-        ActualHit.Source = Muzzle;
-        ActualHit.Direction = (End - Muzzle).GetSafeNormal();
-        ActualHit.InstigatorActor = this;
-        if (Enemy) HitEnemy(Enemy, ActualHit);
-        DrawSpark(End, Hit.Element, Enemy ? 10.f : 5.f);
-    }
-    DrawBeam(Muzzle, End, Hit.Element, BeamWidth);
-    return Enemy;
-}
-
-void ADBCharacter::FirePulse()
-{
-    if (!CanAct() || FireCooldown > 0.f || bOverheated) return;
-    if (bGuarding && GuardEnergy < 5.f)
-    {
-        SetCombatMessage(TEXT("Release guard to fire and recover"), .8f);
-        FireCooldown = .25f;
-        return;
-    }
-    const FVector AimPoint = FindAimPoint();
-    const int32 SplitRank = GetUpgradeRank(SplitId);
-    const int32 CoreRank = GetUpgradeRank(ElementId(CurrentElement));
-    const bool bEmpowered = EmpoweredShots > 0;
-    if (bEmpowered) --EmpoweredShots;
-    ++PulseSequence;
-
-    FDBHit Hit;
-    Hit.Damage = bEmpowered ? 48.f : 27.f;
-    Hit.Element = CurrentElement;
-    Hit.bImpact = bEmpowered || (CurrentElement == EDBElement::Frost && CoreRank >= 3 && PulseSequence % 3 == 0);
-    Hit.bStormfracture = HasUpgrade(FractureId);
-    Hit.Source = GetMuzzleLocation();
-    Hit.InstigatorActor = this;
-    ADBEnemy* CentreEnemy = TraceAttack(AimPoint, Hit, bEmpowered ? 4.f : 2.f);
-
-    if (SplitRank > 0 && CanAct())
-    {
-        // Finite independent side rays retain accuracy/positioning choices; no automatic homing.
-        const int32 SideCount = SplitRank >= 2 ? 4 : 2;
-        const FVector Forward = (AimPoint - ViewCamera->GetComponentLocation()).GetSafeNormal();
-        const FVector Right = ViewCamera->GetRightVector();
-        const FVector Up = ViewCamera->GetUpVector();
-        const float Spread = (SplitRank >= 3 && bGuarding) ? .019f : .061f;
-        FDBHit Fragment = Hit;
-        Fragment.Damage *= .54f;
-        Fragment.bSecondary = true;
-        for (int32 Index = 0; Index < SideCount && CanAct(); ++Index)
+        ++PulseSequence;
+        if (StoredShots > 0 && (HasUpgrade(MirrorId) || GetUpgradeRank(AnchorId) >= 2))
         {
-            const FVector Offset = Index < 2 ? Right * (Index == 0 ? -Spread : Spread) : Up * (Index == 2 ? -Spread : Spread);
-            TraceAttack(ViewCamera->GetComponentLocation() + (Forward + Offset).GetSafeNormal() * 16000.f, Fragment, 1.25f);
+            const float Force = StoredDamage.Num() ? StoredDamage[0] : 20.f;
+            if (StoredDamage.Num()) StoredDamage.RemoveAt(0);
+            --StoredShots;
+            Contact.Damage += Force * 1.8f;
+            bReleasedForce = true;
+        }
+        if (EmpoweredShots > 0)
+        {
+            --EmpoweredShots;
+            Contact.Damage *= 1.75f;
+            bReleasedForce = true;
+            if (GetUpgradeRank(CapacitorId) >= 3) DashCooldown = 0.f;
         }
     }
+    if (!HitEnemy(Enemy, Contact)) return false;
+    DrawSpark(Enemy->GetActorLocation() + FVector(0,0,20), Contact.Element, bReleasedForce ? 38.f : 20.f);
+    PlayCombatSound(ImpactSound, bReleasedForce ? 1.f : .78f, bReleasedForce ? .75f : .95f);
+    if (bReleasedForce) SetCombatMessage(TEXT("STORED FORCE RELEASED"), .8f);
+    if (Contact.bSecondary || !CanAct()) return true;
+
+    if (bReleasedForce && GetUpgradeRank(MirrorId) >= 3)
+    {
+        FDBHit ForceArc = Contact;
+        ForceArc.Damage *= .5f;
+        ForceArc.bSecondary = true;
+        ApplyAreaHit(Enemy->GetActorLocation(), 500.f, ForceArc, Enemy, 2);
+        if (!CanAct()) return true;
+    }
+
+    if (GetUpgradeRank(RamId) >= 2) GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + 9.f);
+    if (CurrentElement == EDBElement::Storm && GetUpgradeRank(StormId) >= 3)
+        GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + 7.f);
+
     const int32 EchoRank = GetUpgradeRank(EchoId);
-    if (EchoRank > 0 && CanAct())
+    if (EchoRank > 0 && EchoShots.Num() < 20)
     {
         FEchoShot Echo;
-        Echo.Delay = .19f;
-        Echo.AimPoint = AimPoint;
-        Echo.Target = CentreEnemy;
-        Echo.Element = CurrentElement;
-        Echo.Damage = Hit.Damage * .62f;
+        Echo.Delay = .23f;
+        Echo.AimPoint = Enemy->GetActorLocation() + FVector(0,0,15);
+        Echo.Target = Enemy;
+        Echo.Element = Contact.Element;
+        Echo.Damage = Contact.Damage * .55f;
         Echo.bTrack = EchoRank >= 2;
-        Echo.bStormfracture = Hit.bStormfracture;
-        if (EchoShots.Num() < 16) EchoShots.Add(Echo);
-        if (EchoRank >= 3 && EchoShots.Num() < 16)
+        Echo.bStormfracture = Contact.bStormfracture;
+        EchoShots.Add(Echo);
+        if (EchoRank >= 3 && EchoShots.Num() < 20)
         {
-            Echo.Delay = .38f;
+            Echo.Delay = .46f;
             Echo.Damage *= .8f;
             EchoShots.Add(Echo);
         }
     }
-    if (CentreEnemy && CoreRank >= 2 && PulseSequence % 3 == 0 && CanAct())
+    const int32 CoreRank = GetUpgradeRank(ElementId(CurrentElement));
+    const bool bFrostShatter = CurrentElement == EDBElement::Frost && CoreRank >= 3 && PreviousChill > 0;
+    const bool bEmberDeath = CurrentElement == EDBElement::Ember && CoreRank >= 3 && bHadBurn && Enemy->bDead;
+    if ((CoreRank >= 2 && PulseSequence % 3 == 0) || bFrostShatter || bEmberDeath)
     {
-        FDBHit Bloom = Hit;
+        FDBHit Bloom = Contact;
         Bloom.bSecondary = true;
         Bloom.bImpact = false;
-        Bloom.Damage = CurrentElement == EDBElement::Ember ? 18.f : 11.f;
-        ApplyAreaHit(CentreEnemy->GetActorLocation(), 260.f, Bloom, CentreEnemy, 4);
-        DrawSpark(CentreEnemy->GetActorLocation(), CurrentElement, 36.f);
+        Bloom.Damage = bEmberDeath ? 36.f : (bFrostShatter ? 25.f : 14.f);
+        ApplyAreaHit(Enemy->GetActorLocation(), bEmberDeath ? 340.f : 270.f, Bloom, Enemy, 6);
     }
-    if (CurrentElement == EDBElement::Storm && CoreRank >= 3 && CentreEnemy)
-        GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + 4.f);
-    if (CurrentElement == EDBElement::Ember && CoreRank >= 3 && CentreEnemy && CentreEnemy->bDead)
-        Heat = FMath::Max(0.f, Heat - 22.f);
-
-    Heat = FMath::Min(MaxHeat, Heat + (SplitRank > 0 ? 16.5f : 11.5f) + (bGuarding ? 3.f : 0.f));
-    if (Heat >= MaxHeat)
-    {
-        bOverheated = true;
-        SetCombatMessage(TEXT("CORE OVERHEATED - guard or reposition"), 2.f);
-        PlayCombatSound(GuardSound, .8f, .58f);
-    }
-    if (bGuarding) GuardEnergy = FMath::Max(0.f, GuardEnergy - 4.f);
-    FireCooldown = bGuarding ? .33f : .245f;
-    SinceFired = 0.f;
-    Recoil = FMath::Min(1.8f, Recoil + (bEmpowered ? 1.25f : .8f));
-    AddControllerPitchInput(bGuarding ? -.08f : -.16f);
-    PlayCombatSound(AttackSound, bEmpowered ? .85f : .6f, bEmpowered ? .82f : 1.f + FMath::Sin(PulseSequence * 2.1f) * .025f);
+    return true;
 }
+
+void ADBCharacter::StartRimStrike(bool bHeavy)
+{
+    if (!CanAct() || IsShieldAway() || AttackRecovery > 0.f) return;
+    ShieldState = EDBShieldState::Held;
+    bShieldReady = false;
+    bWantsFire = false;
+    bGuarding = false;
+    ThrowCharge = ChargeHeld = 0.f;
+    bHeavyStrike = bHeavy;
+    bStrikePoseActive = true;
+    StrikeTotal = bHeavy ? .8f : .5f;
+    AttackRecovery = StrikeTotal;
+    StrikeDelay = bHeavy ? .28f : .18f;
+    bStrikePending = true;
+    RushVictims.Reset();
+    PlayCombatSound(AttackSound, bHeavy ? .9f : .72f, bHeavy ? .68f : .9f);
+}
+
+void ADBCharacter::ResolveRimStrike()
+{
+    if (!CanAct() || IsShieldAway()) return;
+    const FVector Eye = ViewCamera->GetComponentLocation();
+    const FVector Forward = GetAimDirection();
+    const FVector Right = ViewCamera->GetRightVector();
+    const FVector Up = ViewCamera->GetUpVector();
+    const FVector Start = Eye + Forward * 55.f - Up * 24.f + (bHeavyStrike ? FVector::ZeroVector : -Right * 68.f);
+    const FVector End = Eye + Forward * (bHeavyStrike ? 195.f : 140.f) - Up * 20.f
+        + (bHeavyStrike ? FVector::ZeroVector : Right * 65.f);
+    TArray<FHitResult> Contacts;
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(DBShieldRim), false, this);
+    FCollisionObjectQueryParams Objects;
+    Objects.AddObjectTypesToQuery(ECC_Pawn);
+    GetWorld()->SweepMultiByObjectType(Contacts, Start, End, FQuat::Identity, Objects,
+        FCollisionShape::MakeSphere(bHeavyStrike ? 48.f : 38.f), Params);
+    FDBHit Contact;
+    Contact.Damage = bHeavyStrike ? (HasUpgrade(RamId) ? 90.f : 66.f) : 48.f;
+    Contact.Element = CurrentElement;
+    Contact.bImpact = true;
+    Contact.bStormfracture = HasUpgrade(FractureId);
+    Contact.Source = GetActorLocation();
+    Contact.Direction = Forward;
+    Contact.InstigatorActor = this;
+    for (const FHitResult& Result : Contacts)
+    {
+        ADBEnemy* Enemy = Cast<ADBEnemy>(Result.GetActor());
+        if (!Enemy || Enemy->bDead || RushVictims.Contains(Enemy) || !HasLineOfSight(Eye, Enemy)) continue;
+        RushVictims.Add(Enemy);
+        ApplyPhysicalShieldHit(Enemy, Contact);
+        if (!CanAct()) return;
+    }
+    ImpactPose = 1.f;
+    Recoil = .9f;
+    if (bHeavyStrike && HasUpgrade(RamId))
+    {
+        RushDirection = Forward.GetSafeNormal2D();
+        RushDamage = 90.f;
+        RushTime = .24f;
+        DashTime = .24f;
+        InvulnerabilityTime = .09f;
+        bRushActive = true;
+        GetCharacterMovement()->GroundFriction = 0.f;
+        LaunchCharacter(RushDirection * 1320.f + FVector(0,0,25), true, false);
+    }
+}
+
+void ADBCharacter::LaunchShield()
+{
+    if (!CanAct() || IsShieldAway() || AttackRecovery > 0.f) return;
+    const FVector Eye = ViewCamera->GetComponentLocation();
+    FVector Origin = GetShieldCatchLocation();
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(DBShieldLaunchRoom), false, this);
+    FHitResult Cover;
+    if (GetWorld()->SweepSingleByChannel(Cover, Eye, Origin, FQuat::Identity, ECC_Visibility,
+        FCollisionShape::MakeSphere(20.f), Params))
+        Origin = Cover.Location + Cover.Normal * 3.f;
+    const FVector Direction = (FindAimPoint() - Origin).GetSafeNormal();
+    FActorSpawnParameters Spawn;
+    Spawn.Owner = this;
+    Spawn.Instigator = this;
+    Spawn.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    ThrownShield = GetWorld()->SpawnActor<ADBThrownShield>(ADBThrownShield::StaticClass(), Origin, Direction.Rotation(), Spawn);
+    if (!ThrownShield)
+    {
+        ShieldState = EDBShieldState::Held;
+        ThrowCharge = 0.f;
+        return;
+    }
+    const float Charge = ThrowCharge;
+    ShieldState = EDBShieldState::Outbound;
+    bShieldReady = false;
+    bGuarding = false;
+    bWantsGuard = false;
+    bWantsFire = false;
+    AttackRecovery = .3f;
+    bStrikePoseActive = false;
+    bStrikePending = false;
+    ThrownShield->Initialize(this, Direction, Charge);
+    ImpactPose = 1.f;
+    ThrowCharge = ChargeHeld = 0.f;
+    PlayCombatSound(AttackSound, .95f, .72f);
+    SetCombatMessage(TEXT("LAUNCHED - no guard / Q recalls through your new position"), 1.5f);
+    UpdateWeapon(0.f);
+}
+
 
 void ADBCharacter::UpdateEchoes(float DeltaSeconds)
 {
@@ -547,103 +735,51 @@ void ADBCharacter::UpdateEchoes(float DeltaSeconds)
         if (EchoShots[Index].Delay > 0.f) continue;
         const FEchoShot Echo = EchoShots[Index];
         EchoShots.RemoveAtSwap(Index);
-        const FVector TargetPoint = Echo.bTrack && Echo.Target.IsValid() && !Echo.Target->bDead
-            ? Echo.Target->GetActorLocation() + FVector(0.f, 0.f, 35.f) : Echo.AimPoint;
+        FVector Point = Echo.AimPoint;
+        if (Echo.bTrack && Echo.Target.IsValid() && !Echo.Target->bDead
+            && FVector::DistSquared(Echo.Target->GetActorLocation(), Point) < FMath::Square(240.f))
+            Point = Echo.Target->GetActorLocation() + FVector(0,0,15);
         FDBHit Hit;
         Hit.Damage = Echo.Damage;
         Hit.Element = Echo.Element;
+        Hit.bImpact = true;
         Hit.bSecondary = true;
         Hit.bStormfracture = Echo.bStormfracture;
         Hit.InstigatorActor = this;
-        TraceAttack(TargetPoint, Hit, 1.1f);
-        // Killing the last enemy can open a reward and clear the remaining echoes.
+        // A local repetition of physical contact, not another shot from the player's view.
+        ApplyAreaHit(Point, 125.f, Hit, nullptr, 4);
+        if (ShieldPlates.Num() && ShieldPlates[0]->GetStaticMesh() && CombatEffects.Num() < 96)
+        {
+            UStaticMeshComponent* Afterimage = NewObject<UStaticMeshComponent>(this);
+            AddInstanceComponent(Afterimage);
+            Afterimage->SetStaticMesh(ShieldPlates[0]->GetStaticMesh());
+            Afterimage->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            Afterimage->SetCastShadow(false);
+            if (UMaterialInterface* Material = GetElementMaterial(Echo.Element)) Afterimage->SetMaterial(0, Material);
+            Afterimage->RegisterComponent();
+            Afterimage->SetWorldLocation(Point);
+            Afterimage->SetWorldRotation(FRotator(35.f, GetActorRotation().Yaw, 45.f));
+            Afterimage->SetWorldScale3D(FVector(.7f));
+            CombatEffects.Add(Afterimage);
+            EffectLife.Add(.1f);
+        }
+        PlayCombatSound(ImpactSound, .38f, 1.4f);
         if (!CanAct()) return;
     }
 }
 
 void ADBCharacter::UseSpecial()
 {
-    if (!CanAct() || SpecialCooldown > 0.f) return;
-    if (HasUpgrade(MirrorId) && StoredShots > 0 && !bGuarding) Counterfire();
-    else ShieldImpact();
-}
-
-void ADBCharacter::Counterfire()
-{
-    if (!CanAct() || StoredShots <= 0) return;
-    const float Payload = StoredDamage.Num() ? StoredDamage[0] : 18.f;
-    if (StoredDamage.Num()) StoredDamage.RemoveAt(0);
-    StoredShots = FMath::Max(0, StoredShots - 1);
-    FDBHit Hit;
-    Hit.Damage = 43.f + FMath::Min(Payload, 65.f) * 1.8f;
-    Hit.Element = CurrentElement;
-    Hit.bImpact = true;
-    Hit.bStormfracture = HasUpgrade(FractureId);
-    Hit.InstigatorActor = this;
-    ADBEnemy* Target = TraceAttack(FindAimPoint(), Hit, 7.f);
-    if (Target && GetUpgradeRank(MirrorId) >= 3 && CanAct())
-    {
-        FDBHit Ricochet = Hit;
-        Ricochet.bSecondary = true;
-        Ricochet.Damage *= .75f;
-        ApplyAreaHit(Target->GetActorLocation(), 650.f, Ricochet, Target, 2);
-    }
-    Heat = FMath::Max(0.f, Heat - 17.f);
-    Recoil = 1.8f;
-    SpecialCooldown = .42f;
-    ImpactPose = .35f;
-    PlayCombatSound(ImpactSound, .9f, 1.25f);
-    SetCombatMessage(TEXT("RETURNED FORCE"), .7f);
+    if (!CanAct()) return;
+    if (IsShieldAway()) { RecallShield(); return; }
+    if (SpecialCooldown > 0.f || AttackRecovery > 0.f) return;
+    ShieldImpact();
 }
 
 void ADBCharacter::ShieldImpact()
 {
-    const int32 RamRank = GetUpgradeRank(RamId);
-    const bool bChargedImpact = GetUpgradeRank(CapacitorId) >= 3 && EmpoweredShots > 0;
-    if (bChargedImpact) --EmpoweredShots;
-    ImpactPose = 1.f;
-    SpecialCooldown = RamRank >= 2 ? 1.9f : 2.7f;
-    PlayCombatSound(ImpactSound, .8f, RamRank > 0 ? .8f : 1.f);
-    FDBHit Hit;
-    Hit.Damage = bChargedImpact ? 92.f : (RamRank > 0 ? 60.f : 36.f);
-    RushDamage = Hit.Damage;
-    Hit.Element = CurrentElement;
-    Hit.bImpact = true;
-    Hit.bStormfracture = HasUpgrade(FractureId);
-    Hit.Source = GetActorLocation();
-    Hit.Direction = GetAimDirection();
-    Hit.InstigatorActor = this;
-
-    for (TActorIterator<ADBEnemy> It(GetWorld()); It && CanAct(); ++It)
-    {
-        ADBEnemy* Enemy = *It;
-        const FVector Delta = Enemy->GetActorLocation() - GetActorLocation();
-        if (!Enemy->bDead && Delta.SizeSquared() <= FMath::Square(250.f)
-            && FVector::DotProduct(Delta.GetSafeNormal(), GetAimDirection()) > .3f
-            && HasLineOfSight(ViewCamera->GetComponentLocation(), Enemy))
-        {
-            if (HitEnemy(Enemy, Hit))
-            {
-                RushVictims.Add(Enemy);
-                DrawSpark(Enemy->GetActorLocation(), CurrentElement, 32.f);
-                if (RamRank >= 2) GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + 14.f);
-            }
-        }
-    }
-    if (RamRank > 0 && CanAct())
-    {
-        RushDirection = GetAimDirection();
-        RushDirection.Z = 0.f;
-        RushDirection.Normalize();
-        bRushActive = true;
-        RushTime = .3f;
-        DashTime = .28f;
-        InvulnerabilityTime = .13f;
-        GetCharacterMovement()->GroundFriction = 0.f;
-        LaunchCharacter(RushDirection * 1520.f + FVector(0.f, 0.f, 35.f), true, false);
-        Heat = FMath::Max(0.f, Heat - 14.f);
-    }
-    else RushVictims.Reset();
+    StartRimStrike(true);
+    SpecialCooldown = GetUpgradeRank(RamId) >= 2 ? 1.3f : 1.65f;
 }
 
 void ADBCharacter::ResolveRush()
@@ -667,7 +803,7 @@ void ADBCharacter::ResolveRush()
         if (FVector::DotProduct(Delta.GetSafeNormal(), RushDirection) < (bWide ? -.15f : .1f)) continue;
         if (!HasLineOfSight(ViewCamera->GetComponentLocation(), Enemy)) continue;
         RushVictims.Add(Enemy);
-        if (HitEnemy(Enemy, Hit))
+        if (ApplyPhysicalShieldHit(Enemy, Hit))
         {
             DrawSpark(Enemy->GetActorLocation(), CurrentElement, bWide ? 48.f : 30.f);
             if (GetUpgradeRank(RamId) >= 2)
@@ -693,11 +829,16 @@ void ADBCharacter::Dash()
 
 void ADBCharacter::CaptureEnergy(float Damage)
 {
-    if (!HasUpgrade(MirrorId)) return;
-    const int32 Capacity = 1 + GetUpgradeRank(MirrorId) + (GetUpgradeRank(CapacitorId) >= 2 ? 2 : 0);
+    if (!HasUpgrade(MirrorId) && GetUpgradeRank(AnchorId) < 2) return;
+    const int32 Capacity = FMath::Max(2, 1 + GetUpgradeRank(MirrorId)) + (GetUpgradeRank(CapacitorId) >= 2 ? 2 : 0);
     if (StoredShots >= Capacity) return;
     StoredDamage.Add(Damage);
     ++StoredShots;
+}
+
+void ADBCharacter::BankAnchoredForce(float Damage)
+{
+    if (GetUpgradeRank(AnchorId) >= 2) CaptureEnergy(Damage);
 }
 
 void ADBCharacter::ReceiveAttack(float Damage, FVector Source, bool bUnblockable, AActor* Attacker)
@@ -705,7 +846,8 @@ void ADBCharacter::ReceiveAttack(float Damage, FVector Source, bool bUnblockable
     if (!CanAct() || Damage <= 0.f || InvulnerabilityTime > 0.f) return;
     const FVector ToSource = (Source - ViewCamera->GetComponentLocation()).GetSafeNormal();
     const bool bFacing = FVector::DotProduct(GetAimDirection(), ToSource) >= .38f;
-    const bool bCanBlock = bGuarding && GuardBreakTime <= 0.f && bFacing && !bUnblockable;
+    const bool bCanBlock = bGuarding && !IsShieldAway() && ShieldState == EDBShieldState::Held
+        && AttackRecovery <= 0.f && GuardBreakTime <= 0.f && bFacing && !bUnblockable;
     SinceDamaged = 0.f;
     if (bCanBlock)
     {
@@ -716,12 +858,11 @@ void ADBCharacter::ReceiveAttack(float Damage, FVector Source, bool bUnblockable
             // with its remaining pellets taking the ordinary held-guard path.
             SinceGuarded = ParryWindow + 1.f;
             GuardEnergy = FMath::Min(MaxGuardEnergy, GuardEnergy + 13.f);
-            Heat = FMath::Max(0.f, Heat - (HasUpgrade(CapacitorId) ? 35.f : 12.f));
-            CaptureEnergy(Damage);
+            if (HasUpgrade(MirrorId)) CaptureEnergy(Damage);
             if (HasUpgrade(CapacitorId)) EmpoweredShots = GetUpgradeRank(CapacitorId) >= 2 ? 5 : 3;
             ParryFlashTime = .32f;
             Recoil = -.8f;
-            SetCombatMessage(HasUpgrade(MirrorId) ? TEXT("PERFECT GUARD - energy captured [Q]") : TEXT("PERFECT GUARD"), 1.2f);
+            SetCombatMessage(HasUpgrade(MirrorId) ? TEXT("PERFECT GUARD - force banked for shield contact") : TEXT("PERFECT GUARD - punish the opening"), 1.2f);
             PlayCombatSound(ParrySound, .9f);
             if (ADBEnemy* Enemy = Cast<ADBEnemy>(Attacker))
             {
@@ -826,7 +967,7 @@ int32 ADBCharacter::GetUpgradeRank(FName Id) const
 void ADBCharacter::ApplyUpgrade(FName Id)
 {
     const bool bKnown = Id == MirrorId || Id == RamId || Id == EchoId || Id == FrostId || Id == EmberId
-        || Id == StormId || Id == FractureId || Id == SplitId || Id == CapacitorId;
+        || Id == StormId || Id == FractureId || Id == SplitId || Id == CapacitorId || Id == AnchorId;
     if (!bKnown) return;
     const int32 Rank = GetUpgradeRank(Id);
     if (Rank >= 3) return;
@@ -874,61 +1015,72 @@ FString ADBCharacter::GetElementLabel() const
     case EDBElement::Frost: return TEXT("FROST");
     case EDBElement::Storm: return TEXT("STORM");
     case EDBElement::Ember: return TEXT("EMBER");
-    default: return TEXT("PULSE");
+    default: return TEXT("KINETIC");
     }
 }
 
+
 FString ADBCharacter::GetSpecialLabel() const
 {
-    if (HasUpgrade(MirrorId) && StoredShots > 0 && !bGuarding) return TEXT("Q  RETURN FORCE");
-    return HasUpgrade(RamId) ? TEXT("Q  RAM RUSH") : TEXT("Q  SHIELD IMPACT");
+    if (IsShieldAway()) return ShieldState == EDBShieldState::Returning ? TEXT("RETURNING SHIELD") : TEXT("Q / LMB  RECALL");
+    return HasUpgrade(RamId) ? TEXT("Q  RAM BASH") : TEXT("Q  HEAVY BASH");
 }
 
 FString ADBCharacter::GetUpgradeDescription(FName Id, int32 Rank)
 {
     Rank = FMath::Clamp(Rank, 1, 3);
     if (Id == MirrorId)
-        return Rank == 1 ? TEXT("Perfect guards store 2 attacks. Q returns one; RMB+Q keeps your impact.")
-            : Rank == 2 ? TEXT("Held ranged blocks also capture. 3 stored attacks; wider perfect-guard window.")
-            : TEXT("Returned force ricochets to 2 nearby targets. Store 4 attacks.");
+        return Rank == 1 ? TEXT("Timed guards bank enemy force. Your next physical shield contact spends it. Store 2 payloads.")
+            : Rank == 2 ? TEXT("Held ranged blocks also bank force. Store 3 payloads; wider timed-guard window.")
+            : TEXT("Released force arcs from the physical impact into 2 nearby enemies. Store 4 payloads.");
     if (Id == RamId)
-        return Rank == 1 ? TEXT("Impact becomes a rushing breach. Strike foes in your path; vent weapon heat.")
-            : Rank == 2 ? TEXT("Rushing hits restore guard energy. Ram recovers faster.")
-            : TEXT("The rushing shield throws a wide shock front that catches flanking enemies.");
+        return Rank == 1 ? TEXT("Q becomes a committed rushing bash. Thrown shield hits harder and travels faster.")
+            : Rank == 2 ? TEXT("Physical contacts restore guard energy. The heavy bash recovers faster.")
+            : TEXT("The opened rim sweeps a wider path in flight; the rush catches nearby flankers.");
     if (Id == EchoId)
-        return Rank == 1 ? TEXT("Pulses leave a delayed second shot at the aimed point.")
-            : Rank == 2 ? TEXT("An echo tracks its original target, unless cover blocks the return shot.")
-            : TEXT("Every pulse leaves two delayed echoes.");
+        return Rank == 1 ? TEXT("Shield contact leaves a delayed local rim-impact echo.")
+            : Rank == 2 ? TEXT("The echo follows its struck target a short distance from the original impact.")
+            : TEXT("Each physical contact leaves two delayed impact echoes.");
     if (Id == FrostId)
-        return Rank == 1 ? TEXT("Pulses chill and eventually freeze. Impact shatters chilled enemies. R changes cores.")
-            : Rank == 2 ? TEXT("Every third pulse spreads frost to nearby enemies.")
-            : TEXT("Every third frost pulse also shatters: build chill, then break it at range.");
+        return Rank == 1 ? TEXT("Shield contact chills. A later impact shatters existing chill. R changes cores.")
+            : Rank == 2 ? TEXT("Every third contact spreads frost into nearby enemies.")
+            : TEXT("Shattering chilled enemies creates another local frost burst.");
     if (Id == EmberId)
-        return Rank == 1 ? TEXT("Pulses ignite enemies. Leave them burning while you reposition. R changes cores.")
-            : Rank == 2 ? TEXT("Every third pulse blooms into nearby targets, spreading flame.")
-            : TEXT("Direct ember kills vent heat, sustaining an aggressive burning build.");
+        return Rank == 1 ? TEXT("The rim ignites on contact. Leave enemies burning while you reposition. R changes cores.")
+            : Rank == 2 ? TEXT("Every third contact spreads flame to nearby enemies.")
+            : TEXT("Directly killing a burning enemy causes a spreading fire explosion.");
     if (Id == StormId)
-        return Rank == 1 ? TEXT("Mark enemies with storm; strike again to arc to nearby targets. R changes cores.")
-            : Rank == 2 ? TEXT("Every third pulse seeds nearby enemies with storm.")
-            : TEXT("Storm hits return guard energy, supporting fire through raised defense.");
+        return Rank == 1 ? TEXT("The rim marks enemies with storm; a later contact discharges arcs. R changes cores.")
+            : Rank == 2 ? TEXT("Every third contact seeds nearby enemies with storm.")
+            : TEXT("Storm contacts replenish guard energy for your return to close combat.");
     if (Id == FractureId)
-        return Rank == 1 ? TEXT("Elemental hits consume existing chill and storm marks in a finite chain burst.")
-            : Rank == 2 ? TEXT("Impacts and returned force release an elemental aftershock to nearby foes.")
-            : TEXT("Every direct elemental shot also spreads an additional bloom to nearby foes.");
+        return Rank == 1 ? TEXT("Shield impacts consume existing chill and storm marks in a finite chain burst.")
+            : Rank == 2 ? TEXT("Physical impacts release another elemental aftershock into nearby foes.")
+            : TEXT("Every direct elemental contact also spreads a local bloom.");
     if (Id == SplitId)
-        return Rank == 1 ? TEXT("Add two angled pulse fragments. Close range concentrates the spread; more heat.")
-            : Rank == 2 ? TEXT("Add two vertical fragments as well as the side fragments.")
-            : TEXT("Raised guard focuses all fragments into a tight precision cluster.");
+        return Rank == 1 ? TEXT("Your shield ricochets once toward another enemy ahead, or off a wall when not anchored.")
+            : Rank == 2 ? TEXT("Your shield can ricochet twice before you call it back.")
+            : TEXT("Three ricochets can seek enemies across a wider angle. Your return path remains a separate attack.");
     if (Id == CapacitorId)
-        return Rank == 1 ? TEXT("Perfect guards supercharge 3 pulses into impacts and vent heat. Guard recovers faster.")
-            : Rank == 2 ? TEXT("A perfect guard supercharges 5 pulses. Mirror storage gains 2 slots.")
-            : TEXT("Supercharge also powers a devastating close impact; all earlier effects remain.");
+        return Rank == 1 ? TEXT("Perfect guards empower 3 physical contacts. Guard energy recovers faster.")
+            : Rank == 2 ? TEXT("A perfect guard empowers 5 contacts. Captured-force storage gains 2 slots.")
+            : TEXT("An empowered contact also restores your dash, rewarding aggressive repositioning.");
+    if (Id == AnchorId)
+        return Rank == 1 ? TEXT("Your shield plants as frontal cover with finite integrity. Recall sacrifices that cover. Flanks and heavy attacks bypass it.")
+            : Rank == 2 ? TEXT("Anchored blocks bank enemy force for later physical shield contacts.")
+            : TEXT("A broken anchor erupts in a local impact burst before the shield returns.");
     return TEXT("");
 }
 
 void ADBCharacter::OnRunReset()
 {
     SuspendCombatInput();
+    if (IsValid(ThrownShield)) ThrownShield->Destroy();
+    ThrownShield = nullptr;
+    ShieldState = EDBShieldState::Held;
+    bShieldReady = true;
+    bStrikePoseActive = false;
+    AttackRecovery = ChargeHeld = ThrowCharge = StrikeDelay = CatchPose = 0.f;
     Health = MaxHealth;
     GuardEnergy = MaxGuardEnergy;
     Heat = 0.f;
@@ -969,9 +1121,10 @@ UMaterialInterface* ADBCharacter::GetElementMaterial(EDBElement Element) const
     }
 }
 
+
 void ADBCharacter::RefreshEquipmentVisuals()
 {
-    if (!WeaponBody) return;
+    if (!WeaponCore) return;
     if (CurrentElement != EDBElement::Neutral && !HasUpgrade(ElementId(CurrentElement))) CurrentElement = EDBElement::Neutral;
     if (GetElementMaterial(CurrentElement))
     {
@@ -980,29 +1133,29 @@ void ADBCharacter::RefreshEquipmentVisuals()
         WeaponCore->SetMaterial(GlowSlot, GetElementMaterial(CurrentElement));
     }
     CoreLight->SetLightColor(ElementColor(CurrentElement));
-    const FName Ids[] = { MirrorId, RamId, EchoId, FrostId, EmberId, StormId, FractureId, SplitId, CapacitorId };
+    const FName Ids[] = { MirrorId, RamId, EchoId, FrostId, EmberId, StormId, FractureId, SplitId, CapacitorId, AnchorId };
     const FVector Locations[] = {
-        FVector(25,-11,3), FVector(48,1,-8), FVector(8,0,12),
-        FVector(22,-8,5), FVector(32,8,4), FVector(40,-8,4),
-        FVector(15,9,5), FVector(55,0,3), FVector(9,0,-11)
+        FVector(-9,-24,12), FVector(-3,0,-34), FVector(-9,24,12),
+        FVector(-8,-14,27), FVector(-8,14,27), FVector(-8,-30,-8),
+        FVector(-8,30,-8), FVector(-6,0,36), FVector(-9,0,-24), FVector(-7,25,-25)
     };
     const FVector Sizes[] = {
-        FVector(18,12,3), FVector(28,5,6), FVector(10,10,10),
+        FVector(7,14,14), FVector(14,27,12), FVector(10,13,13),
         FVector(5,5,8.5), FVector(5,5,8.5), FVector(5,5,8.5),
-        FVector(7,7,8), FVector(9,14,14), FVector(12,12,12)
+        FVector(7,7,8), FVector(8,11,11), FVector(12,12,12), FVector(7,7,12)
     };
     for (int32 Index = 0; Index < AttachmentParts.Num(); ++Index)
     {
         UStaticMeshComponent* Part = AttachmentParts[Index];
         const int32 Rank = GetUpgradeRank(Ids[Index]);
         Part->SetVisibility(Rank > 0);
+        Part->SetHiddenInGame(IsShieldAway() || Rank == 0);
         Part->SetRelativeLocation(Locations[Index]);
-        Part->SetRelativeRotation(Index == 0 ? FRotator(0,0,50)
-            : (Index >= 3 && Index <= 6 ? FRotator(-22.f,0.f,0.f) : FRotator::ZeroRotator));
+        Part->SetRelativeRotation(Index >= 3 && Index <= 6 ? FRotator(-20.f,0.f,0.f) : FRotator::ZeroRotator);
         if (const UStaticMesh* PartMesh = Part->GetStaticMesh())
         {
             const FVector Size = PartMesh->GetBounds().BoxExtent * 2.f;
-            const FVector Desired = Sizes[Index] * (1.f + .12f * FMath::Max(0, Rank - 1));
+            const FVector Desired = Sizes[Index] * (1.f + .1f * FMath::Max(0, Rank - 1));
             Part->SetRelativeScale3D(FVector(Desired.X / FMath::Max(1.f, Size.X),
                 Desired.Y / FMath::Max(1.f, Size.Y), Desired.Z / FMath::Max(1.f, Size.Z)));
         }
@@ -1010,38 +1163,81 @@ void ADBCharacter::RefreshEquipmentVisuals()
         if (Ids[Index] == FrostId) Material = FrostMaterial;
         else if (Ids[Index] == EmberId) Material = EmberMaterial;
         else if (Ids[Index] == StormId || Ids[Index] == FractureId) Material = StormMaterial;
-        else if (Ids[Index] == MirrorId || Ids[Index] == CapacitorId) Material = CoreMaterial;
+        else if (Ids[Index] == MirrorId || Ids[Index] == CapacitorId || Ids[Index] == AnchorId) Material = CoreMaterial;
         if (Material) Part->SetMaterial(0, Material);
     }
 }
 
 void ADBCharacter::UpdateWeapon(float DeltaSeconds)
 {
-    GuardBlend = FMath::FInterpTo(GuardBlend, bGuarding ? 1.f : 0.f, DeltaSeconds, bGuarding ? 17.f : 10.f);
-    Recoil = FMath::FInterpTo(Recoil, 0.f, DeltaSeconds, 13.f);
-    ImpactPose = FMath::FInterpTo(ImpactPose, 0.f, DeltaSeconds, 9.f);
+    GuardBlend = FMath::FInterpTo(GuardBlend, bGuarding ? 1.f : 0.f, DeltaSeconds, bGuarding ? 19.f : 12.f);
+    Recoil = FMath::FInterpTo(Recoil, 0.f, DeltaSeconds, 12.f);
+    ImpactPose = FMath::FInterpTo(ImpactPose, 0.f, DeltaSeconds, 8.f);
+    CatchPose = FMath::FInterpTo(CatchPose, 0.f, DeltaSeconds, 8.f);
     EquipPose = FMath::FInterpTo(EquipPose, 0.f, DeltaSeconds, 3.5f);
     LookSwayX = FMath::FInterpTo(LookSwayX, 0.f, DeltaSeconds, 10.f);
     LookSwayY = FMath::FInterpTo(LookSwayY, 0.f, DeltaSeconds, 10.f);
     const float SpeedFraction = FMath::Clamp(GetVelocity().Size2D() / 590.f, 0.f, 1.f);
-    BobPhase += DeltaSeconds * FMath::Lerp(1.5f, 10.f, SpeedFraction);
+    BobPhase += DeltaSeconds * FMath::Lerp(1.5f, 9.f, SpeedFraction);
     const float Bob = FMath::Sin(BobPhase) * .8f * SpeedFraction;
-    const FVector Rest(50.f, 30.f, -32.f);
-    const FVector Guard(47.f, 31.f, -33.f);
-    WeaponRoot->SetRelativeLocation(FMath::Lerp(Rest, Guard, GuardBlend)
-        + FVector(-Recoil * 5.f + ImpactPose * 17.f, -LookSwayX + Bob * .7f, Bob + LookSwayY - EquipPose * 9.f));
-    WeaponRoot->SetRelativeRotation(FRotator(Recoil * 5.f - ImpactPose * 8.f - EquipPose * 13.f,
-        -13.f + GuardBlend * 5.f, -8.f - GuardBlend * 6.f + Bob));
-    WeaponCore->SetRelativeRotation(FRotator(0.f, 0.f, GetWorld()->GetTimeSeconds() * (bOverheated ? 90.f : 18.f)));
-    CoreLight->SetIntensity((bOverheated ? 95.f : 40.f) + Recoil * 60.f + ParryFlashTime * 220.f);
+    FVector Pose = FMath::Lerp(FVector(85,-52,-38), FVector(73,-51,-32), GuardBlend);
+    FRotator Rotation = FMath::Lerp(FRotator(-8,-34,-12), FRotator(0,-7,-8), GuardBlend);
+
+    if (ShieldState == EDBShieldState::Charging)
+    {
+        const float Anticipation = FMath::Clamp(ChargeHeld / .22f, 0.f, 1.f) * .65f + ThrowCharge * .35f;
+        Pose += FVector(-23,-10,9) * Anticipation;
+        Rotation += FRotator(-12,-18,-20) * Anticipation;
+    }
+    else if (IsShieldAway())
+    {
+        Pose = FVector(105,-43,-22);
+        Rotation = FRotator(-6,3,14);
+    }
+    else if (bStrikePoseActive && AttackRecovery > 0.f)
+    {
+        const float Phase = 1.f - FMath::Clamp(AttackRecovery / StrikeTotal, 0.f, 1.f);
+        const FVector Windup(58,-70,-29);
+        const FVector Contact = bHeavyStrike ? FVector(125,-24,-23) : FVector(107,20,-20);
+        const FRotator WindupRotation(-18,-62,-28);
+        const FRotator ContactRotation = bHeavyStrike ? FRotator(0,-8,0) : FRotator(6,55,64);
+        if (Phase < .18f)
+        {
+            Pose = FMath::Lerp(Pose, Windup, Phase / .18f);
+            Rotation = FMath::Lerp(Rotation, WindupRotation, Phase / .18f);
+        }
+        else if (Phase < .42f)
+        {
+            const float Alpha = (Phase - .18f) / .24f;
+            Pose = FMath::Lerp(Windup, Contact, Alpha);
+            Rotation = FMath::Lerp(WindupRotation, ContactRotation, Alpha);
+        }
+        else
+        {
+            const float Alpha = FMath::SmoothStep(0.f, 1.f, (Phase - .42f) / .58f);
+            Pose = FMath::Lerp(Contact, Pose, Alpha);
+            Rotation = FMath::Lerp(ContactRotation, Rotation, Alpha);
+        }
+    }
+    Pose += FVector(-Recoil * 4.f - CatchPose * 18.f, -LookSwayX + Bob * .6f + CatchPose * 10.f, Bob + LookSwayY - EquipPose * 8.f + CatchPose * 6.f);
+    Rotation += FRotator(Recoil * 5.f - EquipPose * 10.f, CatchPose * 15.f, Bob);
+    WeaponRoot->SetRelativeLocation(Pose);
+    WeaponRoot->SetRelativeRotation(Rotation);
+
+    WeaponBody->SetHiddenInGame(true);
+    WeaponCore->SetHiddenInGame(IsShieldAway());
+    WeaponCore->SetRelativeRotation(FRotator(0,0,GetWorld()->GetTimeSeconds() * (ShieldState == EDBShieldState::Charging ? 65.f : 10.f)));
+    CoreLight->SetVisibility(!IsShieldAway());
+    CoreLight->SetIntensity(40.f + ThrowCharge * 70.f + ParryFlashTime * 220.f);
     for (int32 Index = 0; Index < ShieldPlates.Num(); ++Index)
     {
-        if (Index != 0) continue;
-        const FVector Folded(14.f, 0.f, -10.f);
-        const FVector Open(31.f, 0.f, 10.f);
-        ShieldPlates[Index]->SetRelativeLocation(FMath::Lerp(Folded, Open, GuardBlend));
-        ShieldPlates[Index]->SetRelativeRotation(FRotator((1.f - GuardBlend) * 85.f, 0.f, 0.f));
+        ShieldPlates[Index]->SetHiddenInGame(IsShieldAway() || Index != 0);
+        ShieldPlates[Index]->SetRelativeLocation(FVector::ZeroVector);
+        ShieldPlates[Index]->SetRelativeRotation(FRotator::ZeroRotator);
     }
+    const FName Ids[] = { MirrorId, RamId, EchoId, FrostId, EmberId, StormId, FractureId, SplitId, CapacitorId, AnchorId };
+    for (int32 Index = 0; Index < AttachmentParts.Num(); ++Index)
+        AttachmentParts[Index]->SetHiddenInGame(IsShieldAway() || !HasUpgrade(Ids[Index]));
     ViewCamera->SetFieldOfView(FMath::FInterpTo(ViewCamera->FieldOfView, DashTime > 0.f ? 100.f : 94.f, DeltaSeconds, 9.f));
 }
 

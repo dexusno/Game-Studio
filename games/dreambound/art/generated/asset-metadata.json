@@ -1,164 +1,157 @@
 {
-  "SM_WeaponBody": {
-    "name": "SM_WeaponBody",
+  "SM_ShieldPlate": {
+    "name": "SM_ShieldPlate",
     "dimensions_cm": [
-      60.45,
-      22.6,
-      36.11
+      21.3,
+      85.0,
+      85.0
     ],
     "bounds_min_cm": [
-      -8.0,
-      -11.300000190734863,
-      -14.810263633728027
+      -13.5,
+      -42.5,
+      -42.5
     ],
     "bounds_max_cm": [
-      52.45000076293945,
-      11.300000190734863,
-      21.299999237060547
+      7.800000190734863,
+      42.5,
+      42.5
     ],
-    "vertices": 6156,
-    "triangles": 12156,
-    "pivot": "Grip; +X forward",
+    "vertices": 16760,
+    "triangles": 33200,
+    "pivot": "Complete physical shield; face +X; centered disc; rear grip(-12,0,-12)",
     "materials": [
+      "M_ShieldBronze",
+      "M_Core",
       "M_DarkMetal",
-      "M_Bronze",
       "M_Patina",
-      "M_Ceramic",
+      "M_ShieldCeramic",
       "M_Cloth"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
       0,
       0,
       0
     ]
   },
-  "SM_ShieldPlate": {
-    "name": "SM_ShieldPlate",
-    "dimensions_cm": [
-      9.4,
-      47.199,
-      48.331
-    ],
-    "bounds_min_cm": [
-      -4.699999809265137,
-      -23.0,
-      -24.173065185546875
-    ],
-    "bounds_max_cm": [
-      4.699999809265137,
-      24.199077606201172,
-      24.158048629760742
-    ],
-    "vertices": 4080,
-    "triangles": 8072,
-    "pivot": "Central deployment pivot; plate lies in YZ",
-    "materials": [
-      "M_Bronze",
-      "M_DarkMetal",
-      "M_Ceramic",
-      "M_Patina"
-    ],
-    "collision_hulls": 0,
-    "recommended_attachment_cm": [
-      31,
-      0,
-      10
-    ]
-  },
   "SM_Core": {
     "name": "SM_Core",
     "dimensions_cm": [
-      5.622,
-      12.6,
-      12.6
+      4.836,
+      18.4,
+      18.4
     ],
     "bounds_min_cm": [
-      -2.8108463287353516,
-      -6.300000190734863,
-      -6.300000190734863
+      -2.4181876182556152,
+      -9.199999809265137,
+      -9.199999809265137
     ],
     "bounds_max_cm": [
-      2.8108463287353516,
-      6.300000190734863,
-      6.300000190734863
+      2.4181876182556152,
+      9.199999809265137,
+      9.199999809265137
     ],
-    "vertices": 2484,
-    "triangles": 4908,
-    "pivot": "Core center; disc normal +X",
+    "vertices": 2340,
+    "triangles": 4604,
+    "pivot": "Core center; shield attachment(-6,0,0)",
     "materials": [
-      "M_Bronze",
+      "M_ShieldBronze",
       "M_Core",
       "M_DarkMetal"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
-      33,
+      -6,
       0,
-      10
+      0
     ]
   },
   "SM_Forearm": {
     "name": "SM_Forearm",
     "dimensions_cm": [
-      35.0,
-      21.6,
-      21.736
+      59.339,
+      18.761,
+      20.969
     ],
     "bounds_min_cm": [
-      -36.0,
-      -10.800000190734863,
-      -13.800000190734863
+      -54.73420715332031,
+      -9.300000190734863,
+      -13.668964385986328
     ],
     "bounds_max_cm": [
-      -1.0,
-      10.800000190734863,
-      7.936406135559082
+      4.604552268981934,
+      9.460525512695312,
+      7.300000190734863
     ],
-    "vertices": 2068,
-    "triangles": 4088,
-    "pivot": "Wrist/grip origin, cuff extends -X",
+    "vertices": 3888,
+    "triangles": 7576,
+    "pivot": "Grip origin; curled hand around Y bar; forearm extends -X",
     "materials": [
       "M_Cloth",
-      "M_Bronze",
       "M_DarkMetal",
+      "M_Bronze",
       "M_Ceramic"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
+      -12,
       0,
-      0,
-      -1
+      -12
     ]
   },
   "SM_GuardianBody": {
     "name": "SM_GuardianBody",
     "dimensions_cm": [
-      47.165,
-      62.0,
-      76.5
+      48.56,
+      57.164,
+      131.545
     ],
     "bounds_min_cm": [
-      -19.0,
-      -31.0,
-      -8.0
+      -18.399999618530273,
+      -28.58185386657715,
+      -61.54545593261719
     ],
     "bounds_max_cm": [
-      28.16463279724121,
-      31.0,
-      68.5
+      30.15999984741211,
+      28.581851959228516,
+      70.0
     ],
-    "vertices": 1860,
-    "triangles": 3640,
-    "pivot": "Hip center",
+    "vertices": 3340,
+    "triangles": 6576,
+    "pivot": "Hip center; +X front; source feet+94",
     "materials": [
       "M_DarkMetal",
+      "M_Core",
       "M_Bronze",
       "M_Ceramic",
       "M_Patina",
-      "M_Core"
+      "M_Cloth"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
       0,
       0,
@@ -168,30 +161,36 @@
   "SM_GuardianHead": {
     "name": "SM_GuardianHead",
     "dimensions_cm": [
-      28.526,
-      33.246,
-      44.452
+      32.7,
+      32.9,
+      49.0
     ],
     "bounds_min_cm": [
-      -11.470601081848145,
-      -13.5,
-      -1.4523048400878906
+      -12.0,
+      -16.450000762939453,
+      0.0
     ],
     "bounds_max_cm": [
-      17.055665969848633,
-      19.74567222595215,
-      43.0
+      20.700000762939453,
+      16.450000762939453,
+      49.0
     ],
-    "vertices": 792,
-    "triangles": 1548,
-    "pivot": "Neck center; front +X",
+    "vertices": 1263,
+    "triangles": 2458,
+    "pivot": "Neck base; +X front; source feet+156",
     "materials": [
+      "M_Bronze",
       "M_DarkMetal",
       "M_Core",
-      "M_Ceramic",
-      "M_Bronze"
+      "M_Patina"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
       0,
       0,
@@ -201,29 +200,35 @@
   "SM_GuardianArm": {
     "name": "SM_GuardianArm",
     "dimensions_cm": [
-      35.466,
-      41.29,
-      98.5
+      37.7,
+      37.671,
+      101.222
     ],
     "bounds_min_cm": [
-      -17.73322105407715,
-      -20.644920349121094,
-      -78.5
+      -15.0,
+      -18.835548400878906,
+      -84.22248840332031
     ],
     "bounds_max_cm": [
-      17.73322105407715,
-      20.644920349121094,
-      20.0
+      22.700000762939453,
+      18.835548400878906,
+      17.0
     ],
-    "vertices": 1848,
-    "triangles": 3640,
-    "pivot": "Shoulder center; hangs toward -Z; symmetric left/right",
+    "vertices": 2452,
+    "triangles": 4804,
+    "pivot": "Shoulder center; arm hangs -Z; symmetric reuse",
     "materials": [
       "M_DarkMetal",
-      "M_Ceramic",
-      "M_Bronze"
+      "M_Bronze",
+      "M_Ceramic"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
       0,
       36,
@@ -233,29 +238,36 @@
   "SM_GuardianLeg": {
     "name": "SM_GuardianLeg",
     "dimensions_cm": [
-      38.0,
-      28.0,
+      39.364,
+      25.691,
       102.0
     ],
     "bounds_min_cm": [
-      -11.0,
-      -14.0,
+      -12.851158142089844,
+      -12.845358848571777,
       -94.0
     ],
     "bounds_max_cm": [
-      27.0,
-      14.0,
+      26.51263427734375,
+      12.845358848571777,
       8.0
     ],
-    "vertices": 844,
-    "triangles": 1644,
-    "pivot": "Hip joint; lowest sole -94cm",
+    "vertices": 1260,
+    "triangles": 2468,
+    "pivot": "Hip joint; sole -94cm; common guardian scale .90",
     "materials": [
       "M_DarkMetal",
       "M_Bronze",
-      "M_Ceramic"
+      "M_Ceramic",
+      "M_Patina"
     ],
     "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
     "recommended_attachment_cm": [
       0,
       18,
@@ -267,7 +279,7 @@
     "dimensions_cm": [
       200.0,
       200.0,
-      24.107
+      24.284
     ],
     "bounds_min_cm": [
       -100.0,
@@ -277,256 +289,581 @@
     "bounds_max_cm": [
       100.0,
       100.0,
-      24.106843948364258
+      24.28400230407715
     ],
-    "vertices": 1848,
-    "triangles": 3628,
-    "pivot": "Base center; top approximately +24cm",
+    "vertices": 742,
+    "triangles": 1440,
+    "pivot": "Ground center; upper walking surface near +24cm",
     "materials": [
       "M_Mortar",
       "M_Stone",
       "M_StoneLight"
     ],
-    "collision_hulls": 1
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_StoneTile_B": {
+    "name": "SM_StoneTile_B",
+    "dimensions_cm": [
+      200.0,
+      200.0,
+      24.404
+    ],
+    "bounds_min_cm": [
+      -100.0,
+      -100.0,
+      0.0
+    ],
+    "bounds_max_cm": [
+      100.0,
+      100.0,
+      24.404150009155273
+    ],
+    "vertices": 812,
+    "triangles": 1576,
+    "pivot": "Ground center; upper walking surface near +24cm",
+    "materials": [
+      "M_Mortar",
+      "M_Stone",
+      "M_StoneLight"
+    ],
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Wall": {
     "name": "SM_Wall",
     "dimensions_cm": [
-      400.0,
-      72.161,
-      320.224
+      401.366,
+      69.984,
+      315.899
     ],
     "bounds_min_cm": [
-      -200.0,
-      -36.05616760253906,
-      -0.1298980712890625
+      -200.52928161621094,
+      -34.88007736206055,
+      -0.42071133852005005
     ],
     "bounds_max_cm": [
-      200.0,
-      36.10451126098633,
-      320.0943603515625
+      200.8363800048828,
+      35.103458404541016,
+      315.47869873046875
     ],
-    "vertices": 1512,
-    "triangles": 2916,
-    "pivot": "Ground center; X width, Y thickness",
+    "vertices": 2984,
+    "triangles": 5860,
+    "pivot": "Ground center; X width; broken crown and irregular ashlar",
     "materials": [
-      "M_Mortar",
-      "M_Stone",
-      "M_StoneLight"
+      "M_StoneLight",
+      "M_Stone"
     ],
-    "collision_hulls": 1
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Pillar": {
     "name": "SM_Pillar",
     "dimensions_cm": [
-      115.159,
-      115.132,
-      380.135
+      104.571,
+      104.873,
+      350.926
     ],
     "bounds_min_cm": [
-      -57.53554916381836,
-      -57.5560302734375,
-      -0.03997516632080078
+      -52.44065856933594,
+      -52.40904998779297,
+      -0.5626586079597473
     ],
     "bounds_max_cm": [
-      57.623878479003906,
-      57.57566452026367,
-      380.09490966796875
+      52.130123138427734,
+      52.463565826416016,
+      350.3636169433594
     ],
-    "vertices": 1200,
-    "triangles": 2348,
-    "pivot": "Ground center",
+    "vertices": 1672,
+    "triangles": 3328,
+    "pivot": "Ground center; single shaft, height350cm",
     "materials": [
       "M_Stone",
       "M_StoneLight"
     ],
-    "collision_hulls": 1
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_PillarBroken": {
+    "name": "SM_PillarBroken",
+    "dimensions_cm": [
+      104.078,
+      105.304,
+      157.299
+    ],
+    "bounds_min_cm": [
+      -51.70151138305664,
+      -52.66879653930664,
+      -0.5927152633666992
+    ],
+    "bounds_max_cm": [
+      52.37621307373047,
+      52.63481140136719,
+      156.70660400390625
+    ],
+    "vertices": 1392,
+    "triangles": 2772,
+    "pivot": "Ground center; broken shaft; decorative cover",
+    "materials": [
+      "M_Stone",
+      "M_StoneLight"
+    ],
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_Stair": {
+    "name": "SM_Stair",
+    "dimensions_cm": [
+      201.656,
+      193.925,
+      96.974
+    ],
+    "bounds_min_cm": [
+      -100.78186798095703,
+      -1.0369236469268799,
+      -0.5718516707420349
+    ],
+    "bounds_max_cm": [
+      100.87408447265625,
+      192.88766479492188,
+      96.4021224975586
+    ],
+    "vertices": 1944,
+    "triangles": 3816,
+    "pivot": "Lower-front origin; ascend +Y; six16cm rises; 200cm width",
+    "materials": [
+      "M_StoneLight",
+      "M_Stone"
+    ],
+    "collision_hulls": 6,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Arch": {
     "name": "SM_Arch",
     "dimensions_cm": [
-      455.189,
-      94.197,
-      437.113
+      447.654,
+      93.462,
+      444.374
     ],
     "bounds_min_cm": [
-      -227.5724639892578,
-      -47.0960807800293,
-      -0.009456634521484375
+      -223.8729705810547,
+      -46.906227111816406,
+      -0.4112318158149719
     ],
     "bounds_max_cm": [
-      227.61618041992188,
-      47.100860595703125,
-      437.10382080078125
+      223.78143310546875,
+      46.556190490722656,
+      443.96282958984375
     ],
-    "vertices": 2144,
-    "triangles": 4176,
-    "pivot": "Ground center; walk through along Y; X spans opening",
+    "vertices": 3324,
+    "triangles": 6520,
+    "pivot": "Ground center; open passage along Y; worn voussoirs; crown~444cm",
     "materials": [
-      "M_Stone",
-      "M_StoneLight"
+      "M_StoneLight",
+      "M_Stone"
     ],
-    "collision_hulls": 15
+    "collision_hulls": 17,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Bell": {
     "name": "SM_Bell",
     "dimensions_cm": [
-      136.0,
-      136.0,
-      150.744
+      141.851,
+      141.851,
+      189.947
     ],
     "bounds_min_cm": [
-      -68.0,
-      -68.0,
-      0.2563881278038025
+      -70.92557525634766,
+      -70.92557525634766,
+      0.253049373626709
     ],
     "bounds_max_cm": [
-      68.0,
-      68.0,
-      151.0
+      70.92557525634766,
+      70.92557525634766,
+      190.1999969482422
     ],
-    "vertices": 5114,
-    "triangles": 10172,
-    "pivot": "Lower lip center; hang by eye at Z135",
+    "vertices": 6798,
+    "triangles": 13556,
+    "pivot": "Lower lip origin; suspension eye Z148; tree attach(-8,-112,286)",
     "materials": [
       "M_Bronze",
       "M_DarkMetal",
       "M_Patina"
     ],
-    "collision_hulls": 0
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_BellTree": {
+    "name": "SM_BellTree",
+    "dimensions_cm": [
+      762.303,
+      647.313,
+      686.398
+    ],
+    "bounds_min_cm": [
+      -382.67266845703125,
+      -310.6653747558594,
+      -7.64320707321167
+    ],
+    "bounds_max_cm": [
+      379.6307373046875,
+      336.6477966308594,
+      678.7550659179688
+    ],
+    "vertices": 7715,
+    "triangles": 15314,
+    "pivot": "Grounded trunk origin; roots and controlled branches; one trunk-base hull",
+    "materials": [
+      "M_Root",
+      "M_RootDark",
+      "M_RootLight"
+    ],
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_Canopy": {
+    "name": "SM_Canopy",
+    "dimensions_cm": [
+      1021.621,
+      748.405,
+      269.795
+    ],
+    "bounds_min_cm": [
+      -498.740234375,
+      -260.8221740722656,
+      -105.65971374511719
+    ],
+    "bounds_max_cm": [
+      522.8809814453125,
+      487.5824890136719,
+      164.13558959960938
+    ],
+    "vertices": 29607,
+    "triangles": 33198,
+    "pivot": "Leaf crown center; attach to BellTree at local Z620",
+    "materials": [
+      "M_Leaf",
+      "M_LeafLight",
+      "M_LeafGold",
+      "M_Root"
+    ],
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    },
+    "recommended_attachment_cm": [
+      0,
+      0,
+      620
+    ]
+  },
+  "SM_Fern": {
+    "name": "SM_Fern",
+    "dimensions_cm": [
+      137.292,
+      123.576,
+      84.501
+    ],
+    "bounds_min_cm": [
+      -78.2542724609375,
+      -54.59971237182617,
+      -0.03647475689649582
+    ],
+    "bounds_max_cm": [
+      59.03726577758789,
+      68.97631072998047,
+      84.4641342163086
+    ],
+    "vertices": 2352,
+    "triangles": 2912,
+    "pivot": "Ground center; seven curved fronds with paired leaflets",
+    "materials": [
+      "M_Moss",
+      "M_Leaf",
+      "M_LeafLight"
+    ],
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_Ivy": {
+    "name": "SM_Ivy",
+    "dimensions_cm": [
+      79.573,
+      17.618,
+      175.035
+    ],
+    "bounds_min_cm": [
+      -39.97031784057617,
+      -16.34763526916504,
+      -174.65615844726562
+    ],
+    "bounds_max_cm": [
+      39.602989196777344,
+      1.2703266143798828,
+      0.3792986273765564
+    ],
+    "vertices": 912,
+    "triangles": 1248,
+    "pivot": "Top anchor; hanging foliage descends -Z, front -Y",
+    "materials": [
+      "M_RootDark",
+      "M_LeafLight",
+      "M_Leaf"
+    ],
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_Rubble": {
+    "name": "SM_Rubble",
+    "dimensions_cm": [
+      131.069,
+      93.377,
+      52.083
+    ],
+    "bounds_min_cm": [
+      -66.8622817993164,
+      -38.35737609863281,
+      -12.936389923095703
+    ],
+    "bounds_max_cm": [
+      64.20638275146484,
+      55.01917266845703,
+      39.14689254760742
+    ],
+    "vertices": 888,
+    "triangles": 1740,
+    "pivot": "Ground-centered loose cut masonry; decorative, no blocking collision",
+    "materials": [
+      "M_StoneLight",
+      "M_Stone"
+    ],
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Root": {
     "name": "SM_Root",
     "dimensions_cm": [
-      437.423,
-      153.601,
-      84.075
+      283.696,
+      110.177,
+      79.906
     ],
     "bounds_min_cm": [
-      -26.999998092651367,
-      -58.594051361083984,
-      -4.982229232788086
+      -13.249781608581543,
+      -59.92696762084961,
+      -3.0375547409057617
     ],
     "bounds_max_cm": [
-      410.4228515625,
-      95.0074462890625,
-      79.09315490722656
+      270.4461364746094,
+      50.249568939208984,
+      76.86820220947266
     ],
-    "vertices": 2233,
-    "triangles": 4414,
-    "pivot": "Root crown at origin; extends +X; decoration, no blocking collision",
+    "vertices": 868,
+    "triangles": 1716,
+    "pivot": "Crown contact at origin; a rooted buttress, never repeat as a horizontal strip",
     "materials": [
       "M_Root",
-      "M_Moss",
       "M_RootDark"
     ],
-    "collision_hulls": 0
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Crate": {
     "name": "SM_Crate",
     "dimensions_cm": [
-      91.0,
-      82.0,
-      86.5
+      88.0,
+      79.5,
+      81.75
     ],
     "bounds_min_cm": [
-      -45.5,
-      -41.5,
-      -1.0
+      -44.0,
+      -39.75,
+      1.5
     ],
     "bounds_max_cm": [
-      45.5,
-      40.5,
-      85.5
+      44.0,
+      39.75,
+      83.25
     ],
-    "vertices": 2240,
-    "triangles": 4344,
-    "pivot": "Base center",
+    "vertices": 2800,
+    "triangles": 5448,
+    "pivot": "Ground center; supporting timber prop",
     "materials": [
       "M_DarkMetal",
       "M_Wood",
       "M_Bronze"
     ],
-    "collision_hulls": 1
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_Crystal": {
     "name": "SM_Crystal",
     "dimensions_cm": [
+      34.7,
       30.4,
-      28.0,
-      50.0
+      45.0
     ],
     "bounds_min_cm": [
-      -14.80000114440918,
-      -14.0,
-      2.0
+      -15.5,
+      -15.199999809265137,
+      0.0
     ],
     "bounds_max_cm": [
-      15.600001335144043,
-      14.0,
-      52.0
+      19.200000762939453,
+      15.199999809265137,
+      45.0
     ],
-    "vertices": 582,
-    "triangles": 1104,
-    "pivot": "Base center; crystal cluster height 52cm",
+    "vertices": 716,
+    "triangles": 1372,
+    "pivot": "Base origin; attachment or pickup",
     "materials": [
       "M_Crystal",
       "M_Bronze"
     ],
-    "collision_hulls": 0
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
+  },
+  "SM_Grass": {
+    "name": "SM_Grass",
+    "dimensions_cm": [
+      46.779,
+      46.474,
+      28.658
+    ],
+    "bounds_min_cm": [
+      -24.3526611328125,
+      -22.844249725341797,
+      -0.010394157841801643
+    ],
+    "bounds_max_cm": [
+      22.426362991333008,
+      23.629840850830078,
+      28.647937774658203
+    ],
+    "vertices": 180,
+    "triangles": 192,
+    "pivot": "Ground center; small supporting grass tuft",
+    "materials": [
+      "M_Moss"
+    ],
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_TechPanel": {
     "name": "SM_TechPanel",
     "dimensions_cm": [
-      239.0,
-      65.0,
-      319.0
+      227.0,
+      55.5,
+      313.0
     ],
     "bounds_min_cm": [
-      -119.5,
-      -39.0,
-      0.0
+      -113.5,
+      -33.0,
+      0.5
     ],
     "bounds_max_cm": [
-      119.5,
-      26.0,
-      319.0
+      113.5,
+      22.5,
+      313.5
     ],
-    "vertices": 2816,
-    "triangles": 5532,
-    "pivot": "Base center; X width, front -Y",
+    "vertices": 2432,
+    "triangles": 4796,
+    "pivot": "Ground center; contrasting arrival, front -Y",
     "materials": [
       "M_DarkMetal",
       "M_Bronze",
       "M_Ceramic",
       "M_Core"
     ],
-    "collision_hulls": 1
-  },
-  "SM_Grass": {
-    "name": "SM_Grass",
-    "dimensions_cm": [
-      65.76,
-      55.669,
-      41.001
-    ],
-    "bounds_min_cm": [
-      -29.946107864379883,
-      -26.553939819335938,
-      0.0
-    ],
-    "bounds_max_cm": [
-      35.81422424316406,
-      29.11463737487793,
-      41.00096130371094
-    ],
-    "vertices": 180,
-    "triangles": 180,
-    "pivot": "Ground center; two-sided decoration, no collision",
-    "materials": [
-      "M_Moss"
-    ],
-    "collision_hulls": 0
+    "collision_hulls": 1,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_TelegraphRing": {
     "name": "SM_TelegraphRing",
@@ -551,7 +888,13 @@
     "materials": [
       "M_CombatGlow"
     ],
-    "collision_hulls": 0
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   },
   "SM_TelegraphDisk": {
     "name": "SM_TelegraphDisk",
@@ -576,6 +919,12 @@
     "materials": [
       "M_CombatGlow"
     ],
-    "collision_hulls": 0
+    "collision_hulls": 0,
+    "vertex_channels": {
+      "R": "painted value",
+      "G": "exposed edge wear",
+      "B": "recess/weathering",
+      "A": "opaque"
+    }
   }
 }

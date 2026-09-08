@@ -32,8 +32,8 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="Combat") EDBEnemyKind Kind = EDBEnemyKind::Melee;
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 RoomId = 0;
     UPROPERTY(BlueprintReadOnly, Category="Combat") bool bDead = false;
-    UPROPERTY(BlueprintReadOnly, Category="Combat") float Health = 92.f;
-    UPROPERTY(BlueprintReadOnly, Category="Combat") float MaxHealth = 92.f;
+    UPROPERTY(BlueprintReadOnly, Category="Combat") float Health = 220.f;
+    UPROPERTY(BlueprintReadOnly, Category="Combat") float MaxHealth = 220.f;
     UPROPERTY(BlueprintReadOnly, Category="Combat") EDBEnemyPhase Phase = EDBEnemyPhase::Dormant;
     UPROPERTY(BlueprintReadOnly, Category="Combat") FString Telegraph;
     UPROPERTY(BlueprintReadOnly, Category="Combat") float TellTime = 0.f;
@@ -45,6 +45,7 @@ public:
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 ChillStacks = 0;
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 StormMarks = 0;
     UPROPERTY(BlueprintReadOnly, Category="Combat") float BurnRemaining = 0.f;
+    UPROPERTY(BlueprintReadOnly, Category="Combat") bool bRepositioning = false;
 
 protected:
     virtual void BeginPlay() override;
@@ -72,6 +73,7 @@ private:
     UPROPERTY() TObjectPtr<UStaticMeshComponent> LeftLegPart;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> RightLegPart;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> CorePart;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> ChargePart;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> WarningMarks;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> EffectMarks;
     UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> WarningMaterial;
@@ -80,15 +82,24 @@ private:
     UPROPERTY() TObjectPtr<USoundBase> EnemyHitSound;
     UPROPERTY() TObjectPtr<USoundBase> EnemyFireSound;
     UPROPERTY() TObjectPtr<USoundBase> BossTellSound;
+    UPROPERTY() TObjectPtr<USoundBase> EnemyTellSound;
+    UPROPERTY() TObjectPtr<USoundBase> EnemyDefeatSound;
+    UPROPERTY() TObjectPtr<USoundBase> BodyImpactSound;
 
     TWeakObjectPtr<ADBCharacter> Target;
     TWeakObjectPtr<AActor> BurnInstigator;
     TArray<FArcVisual> ArcVisuals;
+    TArray<FTransform> DeathStartPose;
     EAttack Attack = EAttack::None;
     FVector ArenaCenter = FVector::ZeroVector;
     FVector2D ArenaHalfSize = FVector2D(1180.f, 1050.f);
     FVector HomePosition = FVector::ZeroVector;
     FVector LockedDirection = FVector::ForwardVector;
+    FVector RepositionTarget = FVector::ZeroVector;
+    FVector LastHitDirection = -FVector::ForwardVector;
+    FVector ReactionLocalDirection = -FVector::ForwardVector;
+    FVector DeathLocalDirection = -FVector::ForwardVector;
+    FVector SteeringDirection = FVector::ZeroVector;
     float DifficultyScale = 1.f;
     float BaseSpeed = 245.f;
     float AttackDamage = 18.f;
@@ -107,6 +118,18 @@ private:
     float GroundPulseTime = 0.f;
     float StuckTime = 0.f;
     float AvoidanceSide = 1.f;
+    float MeleeSetupTime = 0.f;
+    float RepositionTime = 0.f;
+    float GaitPhase = 0.f;
+    float GaitBlend = 0.f;
+    float ReactionTime = 0.f;
+    float ReactionDuration = 0.4f;
+    float ReactionStrength = 0.f;
+    float KnockbackTime = 0.f;
+    float RecoveryDuration = 1.f;
+    float AttackKick = 0.f;
+    float VisualScale = 0.9f;
+    float SteeringTime = 0.f;
     int32 ShotsRemaining = 0;
     int32 BossAttackIndex = 0;
     bool bConfigured = false;
@@ -115,6 +138,8 @@ private:
     bool bHitAttempted = false;
     bool bChillStaggered = false;
     bool bDeathNotified = false;
+    bool bNeedsReposition = false;
+    bool bDeathLanded = false;
 
     bool IsRoomActive() const;
     bool HasSightTo(FVector Point, const AActor* AllowedActor = nullptr) const;
@@ -124,6 +149,9 @@ private:
     FVector ShotOrigin() const;
     void BuildVisuals();
     void UpdateVisuals(float DeltaSeconds);
+    void UpdateDeath(float DeltaSeconds);
+    void ApplyHitReaction(const FDBHit& Hit);
+    void ChooseRepositionTarget();
     void UpdateWarningGeometry();
     void UpdateStatusEffects(float DeltaSeconds);
     void MoveToward(FVector Point, float DeltaSeconds, float SpeedMultiplier = 1.f);

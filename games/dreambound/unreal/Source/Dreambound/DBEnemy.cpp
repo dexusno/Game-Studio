@@ -27,18 +27,26 @@ namespace
     const FLinearColor StormColor(0.58f, 0.3f, 1.f);
 
     void FitPart(UStaticMeshComponent* Part, const TCHAR* Asset, UStaticMesh* Fallback,
-        FVector DesiredSize, FVector DesiredCenter)
+        FVector FallbackSize, FVector FallbackCenter, float AuthoredScale = 1.f)
     {
         UStaticMesh* Mesh = LoadObject<UStaticMesh>(nullptr, Asset);
+        if (Mesh)
+        {
+            // Preserve the authored shoulder/hip/neck pivot and proportions.
+            Part->SetStaticMesh(Mesh);
+            Part->SetRelativeScale3D(FVector(AuthoredScale));
+            Part->SetRelativeLocation(FVector::ZeroVector);
+            return;
+        }
         if (!Mesh) Mesh = Fallback;
         if (!Mesh) return;
         Part->SetStaticMesh(Mesh);
         const FBoxSphereBounds Bounds = Mesh->GetBounds();
         const FVector Size = Bounds.BoxExtent * 2.f;
-        const FVector Scale(DesiredSize.X / FMath::Max(1.f, Size.X),
-            DesiredSize.Y / FMath::Max(1.f, Size.Y), DesiredSize.Z / FMath::Max(1.f, Size.Z));
+        const FVector Scale(FallbackSize.X / FMath::Max(1.f, Size.X),
+            FallbackSize.Y / FMath::Max(1.f, Size.Y), FallbackSize.Z / FMath::Max(1.f, Size.Z));
         Part->SetRelativeScale3D(Scale);
-        Part->SetRelativeLocation(DesiredCenter - Bounds.Origin * Scale);
+        Part->SetRelativeLocation(FallbackCenter - Bounds.Origin * Scale);
     }
 }
 
@@ -74,12 +82,15 @@ ADBEnemy::ADBEnemy()
         Result->SetRelativeLocation(Location);
         return Result;
     };
-    BodyPivot = Pivot(TEXT("BodyPivot"), FVector(0.f, 0.f, 102.f));
-    HeadPivot = Pivot(TEXT("HeadPivot"), FVector(5.f, 0.f, 151.f));
-    LeftArmPivot = Pivot(TEXT("LeftShoulder"), FVector(0.f, -48.f, 131.f));
-    RightArmPivot = Pivot(TEXT("RightShoulder"), FVector(0.f, 48.f, 131.f));
-    LeftLegPivot = Pivot(TEXT("LeftHip"), FVector(0.f, -21.f, 65.f));
-    RightLegPivot = Pivot(TEXT("RightHip"), FVector(0.f, 21.f, 65.f));
+    BodyPivot = Pivot(TEXT("BodyPivot"), FVector(0.f, 0.f, 94.f));
+    HeadPivot = Pivot(TEXT("HeadPivot"), FVector(0.f, 0.f, 62.f));
+    HeadPivot->SetupAttachment(BodyPivot);
+    LeftArmPivot = Pivot(TEXT("LeftShoulder"), FVector(0.f, -36.f, 52.f));
+    LeftArmPivot->SetupAttachment(BodyPivot);
+    RightArmPivot = Pivot(TEXT("RightShoulder"), FVector(0.f, 36.f, 52.f));
+    RightArmPivot->SetupAttachment(BodyPivot);
+    LeftLegPivot = Pivot(TEXT("LeftHip"), FVector(0.f, -18.f, 94.f));
+    RightLegPivot = Pivot(TEXT("RightHip"), FVector(0.f, 18.f, 94.f));
     auto Part = [this](const TCHAR* Name, USceneComponent* Parent)
     {
         UStaticMeshComponent* Result = CreateDefaultSubobject<UStaticMeshComponent>(FName(Name));
@@ -94,8 +105,11 @@ ADBEnemy::ADBEnemy()
     RightArmPart = Part(TEXT("RightArm"), RightArmPivot);
     LeftLegPart = Part(TEXT("LeftLeg"), LeftLegPivot);
     RightLegPart = Part(TEXT("RightLeg"), RightLegPivot);
-    CorePart = Part(TEXT("ExposedCore"), VisualRoot);
+    CorePart = Part(TEXT("ExposedCore"), BodyPivot);
     CorePart->SetCastShadow(false);
+    ChargePart = Part(TEXT("ChargedVolley"), BodyPivot);
+    ChargePart->SetCastShadow(false);
+    ChargePart->SetVisibility(false);
     WarningMarks = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("AttackWarning"));
     WarningMarks->SetupAttachment(GetCapsuleComponent());
     WarningMarks->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -110,7 +124,7 @@ ADBEnemy::ADBEnemy()
         WarningMarks->SetStaticMesh(Cube.Object);
         EffectMarks->SetStaticMesh(Cube.Object);
         for (UStaticMeshComponent* P : { BodyPart.Get(), HeadPart.Get(), LeftArmPart.Get(),
-            RightArmPart.Get(), LeftLegPart.Get(), RightLegPart.Get(), CorePart.Get() }) P->SetStaticMesh(Cube.Object);
+            RightArmPart.Get(), LeftLegPart.Get(), RightLegPart.Get(), CorePart.Get(), ChargePart.Get() }) P->SetStaticMesh(Cube.Object);
     }
     Tags.Add(TEXT("DBEnemy"));
 }
@@ -130,16 +144,35 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     DifficultyScale = FMath::Clamp(Difficulty, 0.65f, 2.5f);
     switch (Kind)
     {
-    case EDBEnemyKind::Caster: MaxHealth = 78.f; BaseSpeed = 205.f; AttackDamage = 14.f; break;
-    case EDBEnemyKind::Hunter: MaxHealth = 110.f; BaseSpeed = 365.f; AttackDamage = 17.f; break;
-    case EDBEnemyKind::Boss: MaxHealth = 820.f; BaseSpeed = 230.f; AttackDamage = 21.f; break;
-    default: MaxHealth = 92.f; BaseSpeed = 245.f; AttackDamage = 18.f; break;
+    case EDBEnemyKind::Caster: MaxHealth = 185.f; BaseSpeed = 285.f; AttackDamage = 15.f; break;
+    case EDBEnemyKind::Hunter: MaxHealth = 240.f; BaseSpeed = 365.f; AttackDamage = 17.f; break;
+    case EDBEnemyKind::Boss: MaxHealth = 650.f; BaseSpeed = 230.f; AttackDamage = 21.f; break;
+    default: MaxHealth = 220.f; BaseSpeed = 280.f; AttackDamage = 23.f; break;
     }
     MaxHealth *= DifficultyScale;
     AttackDamage *= FMath::Sqrt(DifficultyScale);
     Health = MaxHealth;
     bDead = false;
     bDeathNotified = false;
+    bDeathLanded = false;
+    bNeedsReposition = bRepositioning = false;
+    bHitAttempted = false;
+    bChillStaggered = false;
+    bAimLocked = false;
+    Attack = EAttack::None;
+    ChillStacks = StormMarks = ShotsRemaining = BossAttackIndex = 0;
+    ChillRemaining = StormRemaining = BurnRemaining = BurnTickTime = DeathTime = 0.f;
+    ReactionTime = ReactionStrength = KnockbackTime = HitFlash = HitSoundCooldown = 0.f;
+    MeleeSetupTime = RepositionTime = GaitPhase = GaitBlend = AttackKick = 0.f;
+    TellTime = TellDuration = PhaseTime = AttackElapsed = 0.f;
+    SteeringTime = StuckTime = GroundPulseTime = NextShotTime = VisualTime = 0.f;
+    BurnTickDamage = 4.f;
+    BurnInstigator.Reset();
+    SteeringDirection = FVector::ZeroVector;
+    ChargePart->SetVisibility(false);
+    ArcVisuals.Reset();
+    DeathStartPose.Reset();
+    Telegraph.Empty();
     Phase = EDBEnemyPhase::Dormant;
     bVulnerable = false;
     HomePosition = GetActorLocation();
@@ -155,7 +188,20 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     // Configure follows SpawnActor; growing the guardian must preserve the spawned foot height.
     SetActorLocation(GetActorLocation() + FVector(0.f, 0.f, 88.f * Size - PreviousHalfHeight), false);
     VisualRoot->SetRelativeLocation(FVector(0.f, 0.f, -88.f * Size));
-    VisualRoot->SetRelativeScale3D(FVector(Size));
+    VisualScale = 0.9f * Size;
+    VisualRoot->SetRelativeScale3D(FVector(VisualScale));
+    VisualRoot->SetRelativeRotation(FRotator::ZeroRotator);
+    BodyPivot->SetRelativeLocation(FVector(0.f, 0.f, 94.f));
+    HeadPivot->SetRelativeLocation(FVector(0.f, 0.f, 62.f));
+    LeftLegPivot->SetRelativeLocation(FVector(0.f, -18.f, 94.f));
+    RightLegPivot->SetRelativeLocation(FVector(0.f, 18.f, 94.f));
+    for (USceneComponent* Joint : { BodyPivot.Get(), HeadPivot.Get(), LeftArmPivot.Get(),
+        RightArmPivot.Get(), LeftLegPivot.Get(), RightLegPivot.Get() }) Joint->SetRelativeRotation(FRotator::ZeroRotator);
+    GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+    GetCharacterMovement()->StopMovementImmediately();
+    GetCharacterMovement()->GroundFriction = 9.f;
+    GetCharacterMovement()->BrakingDecelerationWalking = 2200.f;
     GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
     GetCharacterMovement()->SetAvoidanceEnabled(true);
     bConfigured = true;
@@ -177,23 +223,32 @@ void ADBEnemy::BuildVisuals()
     EnemyHitSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyHit.S_EnemyHit"));
     EnemyFireSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyFire.S_EnemyFire"));
     BossTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_BossTell.S_BossTell"));
-    UStaticMesh* Fallback = BodyPart->GetStaticMesh();
+    EnemyTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyTell.S_EnemyTell"));
+    EnemyDefeatSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyDefeat.S_EnemyDefeat"));
+    BodyImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Impact.S_Impact"));
+    UStaticMesh* Fallback = WarningMarks->GetStaticMesh();
     const bool bHunter = Kind == EDBEnemyKind::Hunter;
     const bool bCaster = Kind == EDBEnemyKind::Caster;
     FitPart(BodyPart, TEXT("/Game/Art/Meshes/SM_GuardianBody.SM_GuardianBody"), Fallback,
-        bHunter ? FVector(62.f, 49.f, 76.f) : bCaster ? FVector(65.f, 58.f, 84.f) : FVector(78.f, 61.f, 80.f), FVector::ZeroVector);
+        FVector(48.f, 62.f, 76.f), FVector(0.f, 0.f, 30.f));
     FitPart(HeadPart, TEXT("/Game/Art/Meshes/SM_GuardianHead.SM_GuardianHead"), Fallback,
-        bCaster ? FVector(48.f, 58.f, 57.f) : FVector(53.f, 54.f, 46.f), FVector::ZeroVector);
+        FVector(28.f, 29.f, 39.f), FVector(0.f, 0.f, 19.5f), bCaster ? 1.07f : 1.f);
     FitPart(LeftArmPart, TEXT("/Game/Art/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
-        FVector(29.f, 31.f, 72.f), FVector(0.f, 0.f, -33.f));
+        FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : 1.f);
     FitPart(RightArmPart, TEXT("/Game/Art/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
-        FVector(29.f, 31.f, 72.f), FVector(0.f, 0.f, -33.f));
+        FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : bHunter ? 1.f : 1.06f);
     FitPart(LeftLegPart, TEXT("/Game/Art/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
-        FVector(31.f, 33.f, 65.f), FVector(0.f, 0.f, -31.f));
+        FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
     FitPart(RightLegPart, TEXT("/Game/Art/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
-        FVector(31.f, 33.f, 65.f), FVector(0.f, 0.f, -31.f));
+        FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
     FitPart(CorePart, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"), Fallback,
-        FVector(24.f, 24.f, 25.f), FVector(43.f, 0.f, 110.f));
+        FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.45f);
+    CorePart->SetRelativeLocation(FVector(29.f, 0.f, 39.f));
+    FitPart(ChargePart, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"), Fallback,
+        FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.5f);
+    ChargePart->SetRelativeLocation(FVector(78.f, 0.f, 37.f));
+    LeftArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? -31.f : -39.f, 52.f));
+    RightArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? 31.f : 39.f, 52.f));
     UMaterialInterface* Glow = LoadObject<UMaterialInterface>(nullptr,
         TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow"));
     if (!Glow) Glow = LoadObject<UMaterialInterface>(nullptr,
@@ -205,7 +260,13 @@ void ADBEnemy::BuildVisuals()
         CoreMaterial = UMaterialInstanceDynamic::Create(Glow, this);
         WarningMarks->SetMaterial(0, WarningMaterial);
         EffectMarks->SetMaterial(0, EffectMaterial);
-        CorePart->SetMaterial(0, CoreMaterial);
+        for (int32 Index = 0; Index < CorePart->GetNumMaterials(); ++Index)
+        {
+            const TArray<FStaticMaterial>& Slots = CorePart->GetStaticMesh()->GetStaticMaterials();
+            const FName Slot = Slots.IsValidIndex(Index) ? Slots[Index].MaterialSlotName : NAME_None;
+            if (Slot.ToString().Contains(TEXT("Core")) || CorePart->GetNumMaterials() == 1) CorePart->SetMaterial(Index, CoreMaterial);
+        }
+        for (int32 Index = 0; Index < ChargePart->GetNumMaterials(); ++Index) ChargePart->SetMaterial(Index, WarningMaterial);
         WarningMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 2.f);
         EffectMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 3.f);
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 1.7f);
@@ -216,7 +277,8 @@ bool ADBEnemy::IsRoomActive() const
 {
     if (!GetWorld()) return false;
     if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
-        return !Mode->bPaused && !Mode->bChoosingReward && !Mode->bShowingBuild && Mode->CurrentRoomId == RoomId;
+        return !Mode->bPaused && !Mode->bChoosingReward && !Mode->bShowingBuild
+            && !Mode->bTitle && !Mode->bWon && !Mode->bDefeated && Mode->CurrentRoomId == RoomId;
     return true;
 }
 
@@ -245,6 +307,7 @@ FVector ADBEnemy::KeepInsideArena(FVector Point) const
 
 FVector ADBEnemy::ShotOrigin() const
 {
+    if (bVisualsBuilt && Kind == EDBEnemyKind::Caster && ChargePart) return ChargePart->GetComponentLocation();
     return GetActorLocation() + FVector(0.f, 0.f, Kind == EDBEnemyKind::Boss ? 48.f : 26.f)
         + GetActorForwardVector() * (GetCapsuleComponent()->GetScaledCapsuleRadius() + 18.f);
 }
@@ -265,10 +328,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
     {
         if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
             if (Mode->bPaused || Mode->bShowingBuild) return;
-        DeathTime += Dt;
-        UpdateVisuals(Dt);
-        VisualRoot->SetRelativeRotation(FRotator(0.f, 0.f, FMath::Min(88.f, DeathTime * 150.f)));
-        if (DeathTime > 2.5f) Destroy();
+        UpdateDeath(Dt);
         return;
     }
     if (!IsRoomActive())
@@ -277,6 +337,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
         ConsumeMovementInputVector();
         WarningMarks->ClearInstances();
         EffectMarks->ClearInstances();
+        ChargePart->SetVisibility(false);
         return;
     }
     if (!Target.IsValid()) Target = Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
@@ -285,12 +346,16 @@ void ADBEnemy::Tick(float DeltaSeconds)
         GetCharacterMovement()->StopMovementImmediately();
         Phase = EDBEnemyPhase::Dormant;
         WarningMarks->ClearInstances();
+        ChargePart->SetVisibility(false);
         return;
     }
     if (Phase == EDBEnemyPhase::Dormant) Phase = EDBEnemyPhase::Approach;
     UpdateStatusEffects(Dt);
     if (bDead) return;
     Cooldown = FMath::Max(0.f, Cooldown - Dt);
+    KnockbackTime = FMath::Max(0.f, KnockbackTime - Dt);
+    GetCharacterMovement()->GroundFriction = KnockbackTime > 0.f ? 2.5f : 9.f;
+    GetCharacterMovement()->BrakingDecelerationWalking = KnockbackTime > 0.f ? 450.f : 2200.f;
     switch (Phase)
     {
     case EDBEnemyPhase::Approach: UpdateApproach(Dt); break;
@@ -299,7 +364,9 @@ void ADBEnemy::Tick(float DeltaSeconds)
     case EDBEnemyPhase::Recovery:
     case EDBEnemyPhase::Staggered:
         PhaseTime -= Dt;
-        GetCharacterMovement()->StopMovementImmediately();
+        // A struck body keeps its collision-resolved impulse during the first recovery beat.
+        ConsumeMovementInputVector();
+        if (KnockbackTime <= 0.f) GetCharacterMovement()->StopMovementImmediately();
         if (PhaseTime <= 0.f) { Phase = EDBEnemyPhase::Approach; bVulnerable = false; Telegraph.Empty(); }
         break;
     default: break;
@@ -331,24 +398,72 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
             End + FVector(0.f, 0.f, 7.f), FQuat::Identity, ECC_Visibility,
             FCollisionShape::MakeCapsule(Radius * 0.88f, FMath::Max(Radius, Half - 12.f)), Params);
     };
-    FVector Chosen = Direction;
+    SteeringTime = FMath::Max(0.f, SteeringTime - DeltaSeconds);
+    FVector Chosen = SteeringTime > 0.f && RouteClear(SteeringDirection) ? SteeringDirection : Direction;
     if (!RouteClear(Chosen))
     {
         bool bFound = false;
-        for (float Angle : { 42.f, -42.f, 78.f, -78.f, 112.f, -112.f })
+        for (float Angle : { 38.f, -38.f, 72.f, -72.f, 108.f, -108.f, 145.f, -145.f, 180.f })
         {
             const FVector Candidate = Direction.RotateAngleAxis(Angle * AvoidanceSide, FVector::UpVector);
-            if (RouteClear(Candidate)) { Chosen = Candidate; bFound = true; break; }
+            if (RouteClear(Candidate))
+            {
+                Chosen = Candidate; SteeringDirection = Chosen; SteeringTime = 0.32f;
+                bFound = true; break;
+            }
         }
-        if (!bFound) { GetCharacterMovement()->StopMovementImmediately(); return; }
+        if (!bFound)
+        {
+            StuckTime += DeltaSeconds;
+            if (StuckTime > 0.45f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
+            // Let CharacterMovement depenetrate a close contact instead of disabling motion forever.
+            const FVector Escape = (KeepInsideArena(Start - Direction * 100.f) - Start).GetSafeNormal2D();
+            AddMovementInput(Escape, 0.45f, true);
+            return;
+        }
     }
     if (GetVelocity().SizeSquared2D() < FMath::Square(25.f)) StuckTime += DeltaSeconds;
     else StuckTime = 0.f;
     if (StuckTime > 0.8f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
     GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * (1.f - ChillStacks * 0.16f);
     AddMovementInput(Chosen, 1.f, true);
-    const FRotator Face(0.f, Direction.Rotation().Yaw, 0.f);
+    const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || bRepositioning)
+        && FVector::DistSquared2D(Start, Target->GetActorLocation()) < FMath::Square(1200.f)
+        ? Target->GetActorLocation() - Start : Chosen;
+    const FRotator Face(0.f, Facing.Rotation().Yaw, 0.f);
     SetActorRotation(FMath::RInterpTo(GetActorRotation(), Face, DeltaSeconds, 7.f));
+}
+
+void ADBEnemy::ChooseRepositionTarget()
+{
+    if (!Target.IsValid()) return;
+    const FVector PlayerPosition = Target->GetActorLocation();
+    const FVector Radial = (GetActorLocation() - PlayerPosition).GetSafeNormal2D();
+    float BestScore = TNumericLimits<float>::Max();
+    FVector Best = KeepInsideArena(GetActorLocation() + FVector::CrossProduct(Radial, FVector::UpVector) * 380.f * AvoidanceSide);
+    FCollisionQueryParams Params(SCENE_QUERY_STAT(DBCasterPosition), false, this);
+    Params.AddIgnoredActor(Target.Get());
+    for (float Angle : { 38.f, -38.f, 66.f, -66.f, 96.f, -96.f })
+    {
+        FVector Candidate = KeepInsideArena(PlayerPosition + Radial.RotateAngleAxis(Angle * AvoidanceSide, FVector::UpVector) * 850.f);
+        Candidate.Z = GetActorLocation().Z;
+        const float Travel = FVector::Dist2D(Candidate, GetActorLocation());
+        if (Travel < 180.f) continue;
+        if (GetWorld()->OverlapBlockingTestByChannel(Candidate, FQuat::Identity, ECC_Visibility,
+            FCollisionShape::MakeCapsule(GetCapsuleComponent()->GetScaledCapsuleRadius(),
+                GetCapsuleComponent()->GetScaledCapsuleHalfHeight() - 12.f), Params)) continue;
+        FHitResult CoverHit, RouteHit;
+        const bool bCovered = GetWorld()->LineTraceSingleByChannel(CoverHit, Candidate + FVector(0.f,0.f,28.f),
+            PlayerPosition, ECC_Visibility, Params);
+        const bool bBlockedRoute = GetWorld()->SweepSingleByChannel(RouteHit, GetActorLocation() + FVector(0.f,0.f,8.f),
+            Candidate + FVector(0.f,0.f,8.f), FQuat::Identity, ECC_Visibility,
+            FCollisionShape::MakeSphere(GetCapsuleComponent()->GetScaledCapsuleRadius()), Params);
+        const float Score = FMath::Abs(Travel - 420.f) + (bCovered ? 550.f : 0.f) + (bBlockedRoute ? 300.f : 0.f);
+        if (Score < BestScore) { BestScore = Score; Best = Candidate; }
+    }
+    RepositionTarget = Best;
+    RepositionTime = 0.f;
+    bRepositioning = true;
 }
 
 void ADBEnemy::UpdateApproach(float DeltaSeconds)
@@ -359,10 +474,24 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     const bool bSight = HasSightTo(Target->GetActorLocation(), Target.Get());
     if (Kind == EDBEnemyKind::Caster)
     {
-        if (Cooldown <= 0.f && Distance < 1650.f && bSight) { BeginTell(EAttack::Bolt, 1.02f); return; }
-        if (Distance < 620.f) MoveDirection(-ToPlayer, DeltaSeconds);
-        else if (Distance > 1100.f || !bSight) MoveToward(Target->GetActorLocation(), DeltaSeconds);
-        else GetCharacterMovement()->StopMovementImmediately();
+        if (bNeedsReposition)
+        {
+            if (!bRepositioning) ChooseRepositionTarget();
+            RepositionTime += DeltaSeconds;
+            if (FVector::DistSquared2D(GetActorLocation(), RepositionTarget) > FMath::Square(85.f) && RepositionTime < 2.4f)
+            { MoveToward(RepositionTarget, DeltaSeconds); return; }
+            bNeedsReposition = bRepositioning = false;
+        }
+        if (Cooldown <= 0.f && Distance >= 380.f && Distance < 1250.f && bSight)
+        { BeginTell(EAttack::Bolt, 1.18f); return; }
+        if (Distance < 500.f)
+        {
+            bNeedsReposition = true;
+            ChooseRepositionTarget();
+            MoveToward(RepositionTarget, DeltaSeconds);
+        }
+        else if (Distance > 1000.f || !bSight) MoveToward(Target->GetActorLocation(), DeltaSeconds);
+        else MoveDirection(FVector::CrossProduct(ToPlayer.GetSafeNormal2D(), FVector::UpVector) * AvoidanceSide, DeltaSeconds, 0.55f);
     }
     else if (Kind == EDBEnemyKind::Hunter)
     {
@@ -384,8 +513,17 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     }
     else
     {
-        if (Cooldown <= 0.f && Distance < 200.f && bSight) { BeginTell(EAttack::Swing, 0.73f); return; }
-        MoveToward(Target->GetActorLocation(), DeltaSeconds);
+        if (Distance < 360.f && bSight)
+        {
+            MeleeSetupTime += DeltaSeconds;
+            if (Cooldown <= 0.f && MeleeSetupTime >= 0.32f && Distance < 225.f)
+            { BeginTell(EAttack::Swing, 0.88f); return; }
+            const FVector Toward = ToPlayer.GetSafeNormal2D();
+            const FVector Circle = FVector::CrossProduct(Toward, FVector::UpVector) * AvoidanceSide;
+            MoveDirection(Toward * FMath::Clamp((Distance - 180.f) / 85.f, -0.65f, 1.f) + Circle * 0.65f,
+                DeltaSeconds, 0.7f);
+        }
+        else { MeleeSetupTime = 0.f; MoveToward(Target->GetActorLocation(), DeltaSeconds); }
     }
 }
 
@@ -395,6 +533,8 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
     Phase = EDBEnemyPhase::Telegraph;
     TellTime = TellDuration = Duration;
     bVulnerable = false;
+    MeleeSetupTime = 0.f;
+    bRepositioning = false;
     GetCharacterMovement()->StopMovementImmediately();
     LockedDirection = Target.IsValid() ? (Target->GetActorLocation() - ShotOrigin()).GetSafeNormal() : GetActorForwardVector();
     bAimLocked = InAttack == EAttack::Ground || InAttack == EAttack::Slam;
@@ -402,8 +542,8 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
     TellRadius = 0.f;
     switch (Attack)
     {
-    case EAttack::Swing: Telegraph = TEXT("SWING - DEFLECT / STEP BACK"); TellRadius = 185.f; break;
-    case EAttack::Bolt: Telegraph = TEXT("AIMED BOLT - DEFLECT / MOVE"); break;
+    case EAttack::Swing: Telegraph = TEXT("HEAVY SWING - PARRY / STEP BACK"); TellRadius = 190.f; break;
+    case EAttack::Bolt: Telegraph = TEXT("CHARGING VOLLEY - MOVE / RETURN SHIELD"); break;
     case EAttack::Lunge: Telegraph = TEXT("LUNGE - SIDESTEP / DEFLECT"); break;
     case EAttack::Salvo: Telegraph = TEXT("AIMED SALVO - LEAVE THE LANES"); break;
     case EAttack::Slam:
@@ -419,6 +559,8 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
         if (ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
             Mode->NotifyEvent(Telegraph, Attack == EAttack::Slam || Attack == EAttack::Ground ? GroundColor : DangerColor);
     }
+    else if (EnemyTellSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyTellSound, GetActorLocation(),
+        Kind == EDBEnemyKind::Caster ? 0.8f : 0.65f, Kind == EDBEnemyKind::Caster ? 1.08f : 0.82f);
 }
 
 void ADBEnemy::UpdateTell(float DeltaSeconds)
@@ -429,7 +571,7 @@ void ADBEnemy::UpdateTell(float DeltaSeconds)
     {
         LockedDirection = (Target->GetActorLocation() - ShotOrigin()).GetSafeNormal();
         TellTarget = Target->GetActorLocation();
-        if (TellTime <= TellDuration * 0.5f) bAimLocked = true;
+        if (TellTime <= (Attack == EAttack::Swing ? 0.37f : TellDuration * 0.5f)) bAimLocked = true;
     }
     if (Attack != EAttack::Ground && Attack != EAttack::Slam)
         SetActorRotation(FRotator(0.f, LockedDirection.Rotation().Yaw, 0.f));
@@ -443,7 +585,7 @@ void ADBEnemy::BeginAttack()
     bAimLocked = true;
     AttackElapsed = 0.f;
     NextShotTime = 0.f;
-    ShotsRemaining = Attack == EAttack::Salvo ? 3 : 1;
+    ShotsRemaining = Attack == EAttack::Salvo ? 3 : Attack == EAttack::Bolt ? 2 : 1;
     bHitAttempted = false;
     if (Attack == EAttack::Lunge)
     {
@@ -457,13 +599,14 @@ void ADBEnemy::BeginAttack()
 void ADBEnemy::FireBolt(FVector Direction, float Damage, FLinearColor Color)
 {
     if (!Target.IsValid() || Target->bDead) return;
-    if (EnemyFireSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyFireSound, ShotOrigin(), 0.42f,
+    AttackKick = 1.f;
+    if (EnemyFireSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyFireSound, ShotOrigin(), 0.78f,
         Kind == EDBEnemyKind::Boss ? 0.82f : 1.f);
     FActorSpawnParameters Params;
     Params.Owner = this;
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
     if (ADBProjectile* Bolt = GetWorld()->SpawnActor<ADBProjectile>(ShotOrigin(), Direction.Rotation(), Params))
-        Bolt->Initialize(Direction, Kind == EDBEnemyKind::Boss ? 900.f : 790.f, Damage, false, this, Color);
+        Bolt->Initialize(Direction, Kind == EDBEnemyKind::Boss ? 900.f : 690.f, Damage, false, this, Color);
 }
 
 bool ADBEnemy::TryMeleeHit(float Range, float ConeCosine, float Damage, bool bUnblockable)
@@ -496,13 +639,13 @@ void ADBEnemy::UpdateAttack(float DeltaSeconds)
     {
         while (ShotsRemaining > 0 && AttackElapsed >= NextShotTime)
         {
-            const float Spread = Attack == EAttack::Salvo ? (2 - ShotsRemaining) * 7.f : 0.f;
+            const float Spread = Attack == EAttack::Salvo ? (2 - ShotsRemaining) * 7.f : (ShotsRemaining == 2 ? -3.f : 3.f);
             FireBolt(LockedDirection.RotateAngleAxis(Spread, FVector::UpVector), AttackDamage, DangerColor);
             ShotsRemaining--;
-            NextShotTime += 0.2f;
+            NextShotTime += Attack == EAttack::Salvo ? 0.2f : 0.27f;
         }
-        if (AttackElapsed >= (Attack == EAttack::Salvo ? 0.65f : 0.18f))
-            BeginRecovery(Kind == EDBEnemyKind::Boss ? 1.7f : 1.35f);
+        if (AttackElapsed >= (Attack == EAttack::Salvo ? 0.65f : 0.64f))
+            BeginRecovery(Kind == EDBEnemyKind::Boss ? 1.7f : 1.15f);
     }
     else if (Attack == EAttack::Lunge)
     {
@@ -511,21 +654,31 @@ void ADBEnemy::UpdateAttack(float DeltaSeconds)
         if (FVector::DistSquared2D(Next, KeepInsideArena(Next)) < 1.f)
             AddMovementInput(LockedDirection, 1.f, true);
         if (!bHitAttempted && TryMeleeHit(150.f, 0.15f, AttackDamage)) bHitAttempted = true;
+        if (Phase != EDBEnemyPhase::Attack || bDead) return;
         if (AttackElapsed >= 0.43f || (AttackElapsed > 0.15f && GetVelocity().Size2D() < 30.f)) BeginRecovery(1.05f);
     }
     else if (Attack == EAttack::Swing)
     {
-        if (!bHitAttempted && AttackElapsed >= 0.065f)
+        if (AttackElapsed < 0.19f)
         {
-            TryMeleeHit(190.f, 0.25f, AttackDamage);
-            bHitAttempted = true;
+            const FVector Step = LockedDirection.GetSafeNormal2D();
+            const FVector Next = GetActorLocation() + Step * 70.f;
+            if (FVector::DistSquared2D(Next, KeepInsideArena(Next)) < 1.f)
+            {
+                GetCharacterMovement()->MaxWalkSpeed = 360.f * (1.f - ChillStacks * 0.16f);
+                AddMovementInput(Step, 1.f, true);
+            }
         }
-        if (AttackElapsed > 0.28f) BeginRecovery(0.85f);
+        else GetCharacterMovement()->StopMovementImmediately();
+        if (!bHitAttempted && AttackElapsed >= 0.14f && AttackElapsed <= 0.28f)
+            bHitAttempted = TryMeleeHit(190.f, 0.4f, AttackDamage);
+        if (Phase != EDBEnemyPhase::Attack || bDead) return;
+        if (AttackElapsed > 0.55f) BeginRecovery(1.2f);
     }
     else
     {
-        if (!bHitAttempted) { DetonateGround(); bHitAttempted = true; }
-        if (AttackElapsed > 0.36f) BeginRecovery(1.85f);
+        if (!bHitAttempted && AttackElapsed >= 0.16f) { DetonateGround(); bHitAttempted = true; }
+        if (AttackElapsed > 0.44f) BeginRecovery(1.85f);
     }
 }
 
@@ -533,12 +686,15 @@ void ADBEnemy::BeginRecovery(float Duration)
 {
     Phase = EDBEnemyPhase::Recovery;
     PhaseTime = Duration;
+    RecoveryDuration = Duration;
     bVulnerable = true;
     Telegraph = TEXT("EXPOSED - COUNTERATTACK");
     TellTime = 0.f;
     GetCharacterMovement()->MaxAcceleration = 2200.f;
     GetCharacterMovement()->StopMovementImmediately();
-    Cooldown = 0.2f;
+    Cooldown = 0.35f;
+    MeleeSetupTime = 0.f;
+    if (Kind == EDBEnemyKind::Caster) { bNeedsReposition = true; bRepositioning = false; }
 }
 
 void ADBEnemy::Stagger(float Duration)
@@ -548,10 +704,38 @@ void ADBEnemy::Stagger(float Duration)
     if (Kind == EDBEnemyKind::Boss && (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack)) return;
     Phase = EDBEnemyPhase::Staggered;
     PhaseTime = FMath::Min(1.2f, FMath::Max(PhaseTime, Duration));
+    RecoveryDuration = PhaseTime;
     bVulnerable = true;
     Telegraph = TEXT("STAGGERED - COUNTERATTACK");
+    TellTime = 0.f;
+    ShotsRemaining = 0;
+    bAimLocked = false;
     GetCharacterMovement()->StopMovementImmediately();
     GetCharacterMovement()->MaxAcceleration = 2200.f;
+    if (Kind == EDBEnemyKind::Caster) { bNeedsReposition = true; bRepositioning = false; }
+}
+
+void ADBEnemy::ApplyHitReaction(const FDBHit& Hit)
+{
+    FVector Away = Hit.Direction;
+    if (Away.ContainsNaN() || Away.IsNearlyZero()) Away = GetActorLocation() - Hit.Source;
+    Away = Away.GetSafeNormal2D();
+    if (Away.IsNearlyZero()) Away = -GetActorForwardVector();
+    LastHitDirection = Away;
+    ReactionLocalDirection = GetActorRotation().UnrotateVector(Away);
+    ReactionDuration = Hit.bImpact ? 0.48f : 0.26f;
+    ReactionTime = ReactionDuration;
+    ReactionStrength = Hit.bImpact ? FMath::Clamp(0.75f + Hit.Damage / 160.f, 0.8f, 1.45f) : 0.38f;
+    if (Kind == EDBEnemyKind::Boss) ReactionStrength *= 0.65f;
+    if (Hit.bImpact)
+    {
+        // A physical echo/parry may move a body even though it cannot recursively proc statuses.
+        Stagger(Kind == EDBEnemyKind::Boss ? 0.32f : Hit.bSecondary ? 0.62f : 0.72f);
+        KnockbackTime = Kind == EDBEnemyKind::Boss ? 0.16f : 0.24f;
+        GetCharacterMovement()->GroundFriction = 2.5f;
+        GetCharacterMovement()->BrakingDecelerationWalking = 450.f;
+        GetCharacterMovement()->AddImpulse(Away * (Kind == EDBEnemyKind::Boss ? 175.f : Hit.bSecondary ? 380.f : 560.f), true);
+    }
 }
 
 void ADBEnemy::UpdateStatusEffects(float DeltaSeconds)
@@ -603,10 +787,15 @@ void ADBEnemy::ApplyCombatHit(const FDBHit& Hit)
     HitFlash = 0.16f;
     if (EnemyHitSound && HitSoundCooldown <= 0.f)
     {
-        UGameplayStatics::PlaySoundAtLocation(this, EnemyHitSound, GetActorLocation(), 0.32f, Hit.bImpact ? 0.8f : 1.f);
+        UGameplayStatics::PlaySoundAtLocation(this, EnemyHitSound, GetActorLocation(), Hit.bImpact ? 0.92f : 0.55f,
+            Hit.bImpact ? 0.82f : 1.f);
         HitSoundCooldown = 0.085f;
     }
     const float Damage = Hit.Damage * (bVulnerable ? 1.35f : 1.f) + ShatterBonus;
+    // Store the impact direction before a lethal hit creates its collapse pose.
+    LastHitDirection = Hit.Direction.GetSafeNormal2D();
+    if (LastHitDirection.IsNearlyZero()) LastHitDirection = (GetActorLocation() - Hit.Source).GetSafeNormal2D();
+    if (LastHitDirection.IsNearlyZero()) LastHitDirection = -GetActorForwardVector();
     DealHealthDamage(Damage);
     if (!bDead)
     {
@@ -632,12 +821,8 @@ void ADBEnemy::ApplyCombatHit(const FDBHit& Hit)
             StormMarks = FMath::Min(3, StormMarks + 1);
             StormRemaining = 5.f;
         }
-        if (Hit.bImpact && !Hit.bSecondary)
-        {
-            Stagger(Kind == EDBEnemyKind::Boss ? 0.25f : 0.45f);
-            const FVector Away = (GetActorLocation() - Hit.Source).GetSafeNormal2D();
-            LaunchCharacter(Away * (Kind == EDBEnemyKind::Boss ? 100.f : 290.f), true, false);
-        }
+        // Apply the physical impulse after status stagger, which clears prior velocity.
+        ApplyHitReaction(Hit);
     }
     if (bFracture)
         ChainToNearby(Hit.Damage * 0.55f + ConsumedChill * 6.f + ConsumedStorm * 8.f, 3, 720.f, Hit.InstigatorActor);
@@ -693,6 +878,16 @@ void ADBEnemy::Die()
     bDead = true;
     Phase = EDBEnemyPhase::Dead;
     bVulnerable = false;
+    DeathTime = 0.f;
+    bDeathLanded = false;
+    DeathStartPose.Reset();
+    for (USceneComponent* Joint : { BodyPivot.Get(), HeadPivot.Get(), LeftArmPivot.Get(),
+        RightArmPivot.Get(), LeftLegPivot.Get(), RightLegPivot.Get() }) DeathStartPose.Add(Joint->GetRelativeTransform());
+    DeathLocalDirection = GetActorRotation().UnrotateVector(LastHitDirection);
+    if (DeathLocalDirection.IsNearlyZero()) DeathLocalDirection = -FVector::ForwardVector;
+    if (EnemyDefeatSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyDefeatSound, GetActorLocation(), 0.95f,
+        Kind == EDBEnemyKind::Boss ? 0.7f : 0.92f);
+    ChargePart->SetVisibility(false);
     Telegraph.Empty();
     WarningMarks->ClearInstances();
     GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -702,6 +897,51 @@ void ADBEnemy::Die()
         bDeathNotified = true;
         if (ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode())) Mode->NotifyEnemyKilled(this);
     }
+}
+
+void ADBEnemy::UpdateDeath(float DeltaSeconds)
+{
+    DeathTime += DeltaSeconds;
+    const float Kneel = FMath::SmoothStep(0.f, 0.48f, DeathTime);
+    const float Fall = FMath::SmoothStep(0.25f, 0.92f, DeathTime);
+    const float Settle = FMath::Exp(-FMath::Max(0.f, DeathTime - 0.65f) * 8.f)
+        * FMath::Sin(FMath::Max(0.f, DeathTime - 0.65f) * 20.f);
+    const float Side = DeathLocalDirection.Y >= 0.f ? 1.f : -1.f;
+    const float Back = DeathLocalDirection.X >= 0.f ? -1.f : 1.f;
+    const float Pelvis = FMath::Lerp(94.f, 38.f, Kneel);
+    BodyPivot->SetRelativeLocation(FVector(Fall * -Back * 12.f, Side * Fall * 10.f, Pelvis));
+    BodyPivot->SetRelativeRotation(FRotator(Back * (15.f * Kneel + 66.f * Fall + Settle * 3.f),
+        Side * Fall * 14.f, Side * Fall * 16.f));
+    HeadPivot->SetRelativeRotation(FRotator(-Back * (Kneel * 18.f - Fall * 8.f), Side * 9.f * Fall, Side * 14.f * Fall));
+    LeftArmPivot->SetRelativeRotation(FRotator(Back * (65.f * Kneel - Fall * 24.f), -18.f * Fall, -20.f - 28.f * Fall));
+    RightArmPivot->SetRelativeRotation(FRotator(Back * (40.f * Kneel + Fall * 14.f), 24.f * Fall, 15.f + 34.f * Fall));
+    LeftLegPivot->SetRelativeLocation(FVector(0.f, -18.f, Pelvis));
+    RightLegPivot->SetRelativeLocation(FVector(8.f * Fall, 18.f, Pelvis));
+    LeftLegPivot->SetRelativeRotation(FRotator(Back * 69.f * Kneel, -10.f * Fall, -5.f * Fall));
+    RightLegPivot->SetRelativeRotation(FRotator(Back * 73.f * Kneel, 14.f * Fall, 9.f * Fall));
+    if (DeathTime < 0.18f && DeathStartPose.Num() == 6)
+    {
+        const float Blend = FMath::SmoothStep(0.f, 0.18f, DeathTime);
+        int32 Index = 0;
+        for (USceneComponent* Joint : { BodyPivot.Get(), HeadPivot.Get(), LeftArmPivot.Get(),
+            RightArmPivot.Get(), LeftLegPivot.Get(), RightLegPivot.Get() })
+        {
+            const FTransform StartPose = DeathStartPose[Index++];
+            Joint->SetRelativeLocation(FMath::Lerp(StartPose.GetLocation(), Joint->GetRelativeLocation(), Blend));
+            Joint->SetRelativeRotation(FQuat::Slerp(StartPose.GetRotation(), Joint->GetRelativeRotation().Quaternion(), Blend));
+        }
+    }
+    WarningMarks->ClearInstances();
+    EffectMarks->ClearInstances();
+    if (CoreMaterial) CoreMaterial->SetVectorParameterValue(TEXT("Color"), DangerColor * FMath::Max(0.015f, 1.f - DeathTime * 1.5f));
+    if (!bDeathLanded && DeathTime >= 0.64f)
+    {
+        bDeathLanded = true;
+        if (BodyImpactSound) UGameplayStatics::PlaySoundAtLocation(this, BodyImpactSound, FeetLocation(), 0.58f, 0.62f);
+    }
+    // Keep the fallen body visible through the immediate follow-up/catch and reward beat.
+    const bool bFar = !Target.IsValid() || FVector::DistSquared2D(GetActorLocation(), Target->GetActorLocation()) > FMath::Square(950.f);
+    if (DeathTime > 18.f || (DeathTime > 9.f && bFar)) Destroy();
 }
 
 void ADBEnemy::AddLine(UInstancedStaticMeshComponent* Component, FVector Start, FVector End, float Thickness)
@@ -751,22 +991,31 @@ void ADBEnemy::UpdateWarningGeometry()
         {
             const FVector A = LockedDirection.GetSafeNormal2D().RotateAngleAxis(Index * 14.f, FVector::UpVector);
             const FVector B = LockedDirection.GetSafeNormal2D().RotateAngleAxis(Index * 14.f + 10.f, FVector::UpVector);
-            AddLine(WarningMarks, Center + A * 185.f, Center + B * 185.f, 5.f);
+            AddLine(WarningMarks, Center + A * TellRadius, Center + B * TellRadius, 5.f);
         }
     }
     else
     {
         const FVector Start = ShotOrigin();
         const float Range = Attack == EAttack::Lunge ? 490.f : 1600.f;
-        const int32 Lanes = Attack == EAttack::Salvo ? 3 : 1;
+        const int32 Lanes = Attack == EAttack::Salvo ? 3 : Attack == EAttack::Bolt ? 2 : 1;
         for (int32 Lane = 0; Lane < Lanes; ++Lane)
         {
-            FVector Direction = LockedDirection.RotateAngleAxis(Lanes == 3 ? (Lane - 1) * 7.f : 0.f, FVector::UpVector);
+            const float Spread = Lanes == 3 ? (Lane - 1) * 7.f : Lanes == 2 ? (Lane == 0 ? -3.f : 3.f) : 0.f;
+            FVector Direction = LockedDirection.RotateAngleAxis(Spread, FVector::UpVector);
             FVector End = Start + Direction * Range;
             FHitResult Hit;
             FCollisionQueryParams Params(SCENE_QUERY_STAT(DBWarningLane), false, this);
             if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, Params)) End = Hit.ImpactPoint;
-            AddLine(WarningMarks, Start, End, bAimLocked ? 3.8f : 2.f);
+            if (Attack == EAttack::Bolt)
+            {
+                // The held charge is the first tell; the locked volley shows short separated lanes.
+                if (bAimLocked)
+                    for (float Distance = 85.f; Distance < FVector::Dist(Start, End); Distance += 180.f)
+                        AddLine(WarningMarks, Start + Direction * Distance,
+                            Start + Direction * FMath::Min(Distance + 48.f, FVector::Dist(Start, End)), 2.5f);
+            }
+            else AddLine(WarningMarks, Start, End, bAimLocked ? 3.8f : 2.f);
             if (Attack == EAttack::Lunge)
             {
                 const FVector FloorStart = FeetLocation() + FVector(0.f, 0.f, 5.f);
@@ -785,27 +1034,143 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     HitFlash = FMath::Max(0.f, HitFlash - DeltaSeconds);
     HitSoundCooldown = FMath::Max(0.f, HitSoundCooldown - DeltaSeconds);
     GroundPulseTime = FMath::Max(0.f, GroundPulseTime - DeltaSeconds);
-    const float Walking = FMath::Clamp(GetVelocity().Size2D() / FMath::Max(1.f, BaseSpeed), 0.f, 1.f);
-    const float Stride = FMath::Sin(VisualTime * (Kind == EDBEnemyKind::Hunter ? 12.f : 8.f)) * Walking;
-    const float TellProgress = Phase == EDBEnemyPhase::Telegraph && TellDuration > 0.f ? 1.f - TellTime / TellDuration : 0.f;
-    float LeftArmPitch = Stride * 25.f;
-    float RightArmPitch = -Stride * 25.f;
+    AttackKick = FMath::Max(0.f, AttackKick - DeltaSeconds * 5.5f);
+    ReactionTime = FMath::Max(0.f, ReactionTime - DeltaSeconds);
+    const bool bCaster = Kind == EDBEnemyKind::Caster;
+    const bool bHunter = Kind == EDBEnemyKind::Hunter;
+    const float Speed = GetVelocity().Size2D();
+    const bool bWalking = Phase == EDBEnemyPhase::Approach || (Phase == EDBEnemyPhase::Attack && Attack == EAttack::Lunge);
+    const float Walking = bWalking ? FMath::Clamp(Speed / FMath::Max(1.f, BaseSpeed), 0.f, 1.f) : 0.f;
+    GaitBlend = FMath::FInterpTo(GaitBlend, Walking, DeltaSeconds, 12.f);
+    // Travel advances the gait; a blocked or stationary body never marches in place.
+    if (Speed > 4.f && bWalking) GaitPhase += Speed * DeltaSeconds * (2.f * PI / (bHunter ? 185.f : 170.f));
+    const float Stride = FMath::Sin(GaitPhase) * GaitBlend;
+    const float LegPitch = Stride * (bCaster ? 21.f : 27.f);
+    const float Pelvis = 94.f * FMath::Cos(FMath::DegreesToRadians(LegPitch));
+    const float Lift = FMath::Cos(GaitPhase) * 6.f * GaitBlend;
+    const FVector LocalVelocity = GetActorRotation().UnrotateVector(GetVelocity()) / FMath::Max(1.f, BaseSpeed);
+    const float TellProgress = Phase == EDBEnemyPhase::Telegraph && TellDuration > 0.f
+        ? FMath::Clamp(1.f - TellTime / TellDuration, 0.f, 1.f) : 0.f;
+    const float Windup = FMath::SmoothStep(0.f, 1.f, TellProgress);
+    const float Recover = (Phase == EDBEnemyPhase::Recovery || Phase == EDBEnemyPhase::Staggered)
+        ? FMath::Clamp(PhaseTime / FMath::Max(0.01f, RecoveryDuration), 0.f, 1.f) : 0.f;
+    float LeftArmPitch = bCaster ? 38.f - Stride * 9.f : -Stride * 23.f;
+    float RightArmPitch = bCaster ? 48.f + Stride * 9.f : 12.f + Stride * 23.f;
+    float LeftArmRoll = bCaster ? 14.f : -10.f;
+    float RightArmRoll = bCaster ? -14.f : 13.f;
+    float BodyPitch = (bHunter ? -13.f : -3.f) - FMath::Clamp(LocalVelocity.X, -1.f, 1.f) * GaitBlend * 5.f;
+    float BodyYaw = Stride * (bCaster ? 2.f : 5.f);
+    float BodyRoll = FMath::Clamp(LocalVelocity.Y, -1.f, 1.f) * GaitBlend * 6.f;
+    float BodyDrop = 0.f;
+    float HeadPitch = -BodyPitch * 0.65f;
     if (Phase == EDBEnemyPhase::Telegraph)
     {
-        if (Attack == EAttack::Swing) RightArmPitch = -70.f - TellProgress * 65.f;
-        else if (Attack == EAttack::Ground || Attack == EAttack::Slam) LeftArmPitch = RightArmPitch = -105.f - TellProgress * 55.f;
-        else LeftArmPitch = RightArmPitch = 85.f;
+        if (Attack == EAttack::Swing)
+        {
+            RightArmPitch = FMath::Lerp(-40.f, -155.f, Windup);
+            RightArmRoll = FMath::Lerp(16.f, 30.f, Windup);
+            LeftArmPitch = 48.f + Windup * 12.f;
+            BodyYaw = -32.f * Windup;
+            BodyPitch = 6.f * Windup;
+            BodyDrop = 5.f * Windup;
+            HeadPitch = -8.f;
+        }
+        else if (Attack == EAttack::Ground || Attack == EAttack::Slam)
+        {
+            LeftArmPitch = RightArmPitch = -75.f - Windup * 88.f;
+            LeftArmRoll = -20.f; RightArmRoll = 20.f;
+            BodyPitch = 9.f * Windup;
+            BodyDrop = 9.f * Windup;
+            HeadPitch = -14.f;
+        }
+        else if (Attack == EAttack::Lunge)
+        {
+            LeftArmPitch = -42.f; RightArmPitch = 55.f;
+            BodyPitch = -22.f - Windup * 10.f;
+            BodyDrop = 10.f * Windup;
+            HeadPitch = 18.f;
+        }
+        else
+        {
+            LeftArmPitch = FMath::Lerp(38.f, 70.f, Windup);
+            RightArmPitch = FMath::Lerp(48.f, 82.f, Windup);
+            LeftArmRoll = 19.f; RightArmRoll = -19.f;
+            BodyPitch = -6.f; BodyDrop = 4.f * Windup;
+            HeadPitch = 2.f;
+        }
     }
-    if (Phase == EDBEnemyPhase::Attack && (Attack == EAttack::Swing || Attack == EAttack::Slam))
-        RightArmPitch = LeftArmPitch = FMath::Lerp(-150.f, 25.f, FMath::Clamp(AttackElapsed / 0.18f, 0.f, 1.f));
-    if (bVulnerable) { LeftArmPitch = 18.f; RightArmPitch = 18.f; }
-    LeftArmPivot->SetRelativeRotation(FRotator(LeftArmPitch, 0.f, bVulnerable ? -28.f : -8.f));
-    RightArmPivot->SetRelativeRotation(FRotator(RightArmPitch, 0.f, bVulnerable ? 28.f : 8.f));
-    LeftLegPivot->SetRelativeRotation(FRotator(-Stride * 29.f, 0.f, 0.f));
-    RightLegPivot->SetRelativeRotation(FRotator(Stride * 29.f, 0.f, 0.f));
-    BodyPivot->SetRelativeRotation(FRotator(bVulnerable ? 14.f : Kind == EDBEnemyKind::Hunter ? -15.f : Stride * 3.f,
-        0.f, HitFlash > 0.f ? FMath::Sin(HitFlash * 100.f) * 4.f : Stride * 2.f));
-    HeadPivot->SetRelativeRotation(FRotator(bVulnerable ? 10.f : -TellProgress * 8.f, FMath::Sin(VisualTime * 1.2f) * 3.f, 0.f));
+    else if (Phase == EDBEnemyPhase::Attack)
+    {
+        if (Attack == EAttack::Swing)
+        {
+            // The striking forearm crosses in front exactly as the active hit window opens.
+            const float Strike = FMath::SmoothStep(0.f, 0.18f, AttackElapsed);
+            RightArmPitch = FMath::Lerp(-155.f, 68.f, Strike);
+            RightArmRoll = FMath::Lerp(30.f, -22.f, Strike);
+            LeftArmPitch = 55.f - Strike * 35.f;
+            BodyYaw = FMath::Lerp(-32.f, 29.f, Strike);
+            BodyPitch = -14.f * Strike;
+            BodyDrop = 5.f;
+            HeadPitch = 8.f;
+        }
+        else if (Attack == EAttack::Slam || Attack == EAttack::Ground)
+        {
+            const float Strike = FMath::SmoothStep(0.f, 0.16f, AttackElapsed);
+            LeftArmPitch = RightArmPitch = FMath::Lerp(-163.f, 32.f, Strike);
+            BodyPitch = -22.f * Strike; BodyDrop = 12.f;
+            HeadPitch = 12.f;
+        }
+        else if (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
+        {
+            LeftArmPitch = 78.f - AttackKick * 16.f;
+            RightArmPitch = 86.f - AttackKick * 20.f;
+            LeftArmRoll = 19.f; RightArmRoll = -19.f;
+            BodyPitch = -6.f + AttackKick * 13.f;
+            HeadPitch = -AttackKick * 8.f;
+        }
+        else { BodyPitch = -30.f; LeftArmPitch = -25.f; RightArmPitch = 76.f; HeadPitch = 20.f; }
+    }
+    else if (Recover > 0.f)
+    {
+        LeftArmPitch = FMath::Lerp(LeftArmPitch, 12.f, Recover);
+        RightArmPitch = FMath::Lerp(RightArmPitch, Attack == EAttack::Swing ? 55.f : 15.f, Recover);
+        LeftArmRoll = -22.f * Recover;
+        RightArmRoll = 27.f * Recover;
+        BodyPitch = FMath::Lerp(BodyPitch, Attack == EAttack::Swing ? -13.f : 12.f, Recover);
+        BodyYaw = Attack == EAttack::Swing ? 23.f * Recover : 0.f;
+        HeadPitch = -9.f * Recover;
+        BodyDrop = 6.f * Recover;
+    }
+    const float ReactionProgress = 1.f - ReactionTime / FMath::Max(0.01f, ReactionDuration);
+    const float Recoil = ReactionTime > 0.f ? FMath::SmoothStep(0.f, 0.11f, ReactionProgress)
+        * FMath::Square(1.f - ReactionProgress) * ReactionStrength : 0.f;
+    BodyPitch -= ReactionLocalDirection.X * Recoil * 28.f;
+    BodyRoll += ReactionLocalDirection.Y * Recoil * 24.f;
+    HeadPitch += ReactionLocalDirection.X * Recoil * 17.f;
+    LeftArmPitch -= Recoil * 23.f;
+    RightArmPitch -= Recoil * 31.f;
+    LeftArmRoll -= Recoil * 17.f;
+    RightArmRoll += Recoil * 17.f;
+    const FVector RecoilOffset = ReactionLocalDirection * Recoil * 10.f;
+    BodyPivot->SetRelativeLocation(FVector(RecoilOffset.X, RecoilOffset.Y,
+        Pelvis - BodyDrop + FMath::Sin(VisualTime * 2.3f) * 0.7f));
+    BodyPivot->SetRelativeRotation(FRotator(BodyPitch, BodyYaw, BodyRoll));
+    HeadPivot->SetRelativeRotation(FRotator(HeadPitch, -BodyYaw * 0.65f, -BodyRoll * 0.6f));
+    LeftArmPivot->SetRelativeRotation(FRotator(LeftArmPitch, 0.f, LeftArmRoll));
+    RightArmPivot->SetRelativeRotation(FRotator(RightArmPitch, 0.f, RightArmRoll));
+    LeftLegPivot->SetRelativeLocation(FVector(0.f, -18.f, Pelvis + FMath::Max(0.f, Lift)));
+    RightLegPivot->SetRelativeLocation(FVector(0.f, 18.f, Pelvis + FMath::Max(0.f, -Lift)));
+    LeftLegPivot->SetRelativeRotation(FRotator(LegPitch, 0.f, -GaitBlend * 2.f));
+    RightLegPivot->SetRelativeRotation(FRotator(-LegPitch, 0.f, GaitBlend * 2.f));
+    const bool bCharging = (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
+        && (Phase == EDBEnemyPhase::Telegraph || (Phase == EDBEnemyPhase::Attack && ShotsRemaining > 0));
+    ChargePart->SetVisibility(bCharging);
+    if (bCharging)
+    {
+        const float Charge = Phase == EDBEnemyPhase::Telegraph ? 0.3f + Windup * 1.7f : 1.65f - AttackKick * 0.6f;
+        ChargePart->SetRelativeScale3D(FVector(Charge * (1.f + FMath::Sin(VisualTime * 16.f) * 0.035f)));
+        ChargePart->SetRelativeRotation(FRotator(0.f, 0.f, VisualTime * 75.f));
+    }
     if (CoreMaterial)
     {
         FLinearColor Color = Kind == EDBEnemyKind::Hunter ? FLinearColor(1.f, 0.58f, 0.1f) : DangerColor;

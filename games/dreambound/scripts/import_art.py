@@ -22,6 +22,7 @@ EDIT = unreal.MaterialEditingLibrary
 LIB = unreal.EditorAssetLibrary
 REPORT = {'imported': [], 'materials': [], 'textures': [], 'warnings': [], 'scope': DEST}
 INSTANCED_USAGE = unreal.MaterialUsage.MATUSAGE_INSTANCED_STATIC_MESHES
+TEXTURE_CACHE = {}
 
 
 def enable_instanced_usage(asset):
@@ -41,6 +42,7 @@ def compile_and_save_material(asset):
 
 
 def import_texture(name, normal=False):
+    if name in TEXTURE_CACHE: return TEXTURE_CACHE[name]
     task = unreal.AssetImportTask()
     task.filename = str(GENERATED / (name + '.png'))
     task.destination_path = DEST + '/Textures'
@@ -54,6 +56,7 @@ def import_texture(name, normal=False):
     texture.set_editor_property('compression_settings', unreal.TextureCompressionSettings.TC_NORMALMAP if normal else unreal.TextureCompressionSettings.TC_MASKS)
     LIB.save_loaded_asset(texture)
     REPORT['textures'].append(texture.get_path_name())
+    TEXTURE_CACHE[name] = texture
     return texture
 
 
@@ -83,6 +86,8 @@ def vector(material, value, x, y):
 
 
 def material(name, spec, pigment, normal):
+    if spec.get('texture'): pigment = import_texture(spec['texture'])
+    if spec.get('normal_texture'): normal = import_texture(spec['normal_texture'], normal=True)
     path = DEST + '/Materials/' + name
     asset = LIB.load_asset(path) if LIB.does_asset_exist(path) else None
     if asset and not isinstance(asset, unreal.Material):
@@ -93,6 +98,7 @@ def material(name, spec, pigment, normal):
     enable_instanced_usage(asset)
     EDIT.delete_all_material_expressions(asset)
     asset.set_editor_property('two_sided', bool(spec.get('two_sided', False)))
+    asset.set_editor_property('shading_model', unreal.MaterialShadingModel.MSM_TWO_SIDED_FOLIAGE if spec.get('foliage') else unreal.MaterialShadingModel.MSM_DEFAULT_LIT)
     color = node(asset, unreal.MaterialExpressionVectorParameter, -1100, -360,
                  parameter_name='Color', default_value=unreal.LinearColor(*spec['color'], 1))
     if name == 'M_CombatGlow':
@@ -112,7 +118,7 @@ def material(name, spec, pigment, normal):
         tint = node(asset, unreal.MaterialExpressionMultiply, -560, -280)
         link(color, 'RGB', tint, 'A'); link(shade, '', tint, 'B')
         surface = tint
-        if spec.get('patina_amount'):
+        if spec.get('patina_amount') and not spec.get('vertex_masks'):
             amount = node(asset, unreal.MaterialExpressionMultiply, -550, -60, const_b=float(spec['patina_amount']))
             link(paint, 'B', amount, 'A')
             coat = node(asset, unreal.MaterialExpressionLinearInterpolate, -380, -220)
@@ -121,10 +127,30 @@ def material(name, spec, pigment, normal):
             link(amount, '', coat, 'Alpha')
             surface = coat
         vc = node(asset, unreal.MaterialExpressionVertexColor, -750, -460)
+        if spec.get('vertex_masks'):
+            wear_map = node(asset, unreal.MaterialExpressionMultiply, -600, -600,
+                            const_b=.30 if name.startswith('M_Shield') else .22 if name.startswith('M_Stone') else .06)
+            link(paint, 'B', wear_map, 'A')
+            wear_mask = node(asset, unreal.MaterialExpressionAdd, -400, -600)
+            link(wear_map, '', wear_mask, 'A'); link(vc, 'G', wear_mask, 'B')
+            worn = node(asset, unreal.MaterialExpressionLinearInterpolate, -210, -460)
+            link(surface, '', worn, 'A'); link(vector(asset, spec['wear_color'], -430, -730), '', worn, 'B')
+            link(wear_mask, '', worn, 'Alpha')
+            weather = node(asset, unreal.MaterialExpressionLinearInterpolate, -20, -460)
+            weather_mask = node(asset, unreal.MaterialExpressionMultiply, -400, -900, const_b=float(spec.get('weather_amount', .5)))
+            link(vc, 'B', weather_mask, 'A'); link(worn, '', weather, 'A')
+            link(vector(asset, spec['weather_color'], -210, -930), '', weather, 'B')
+            link(weather_mask, '', weather, 'Alpha')
+            surface = weather
         painted = node(asset, unreal.MaterialExpressionMultiply, -120, -280)
         # VertexColor's RGB pin is unnamed in the installed UE 5.8 source.
-        link(surface, '', painted, 'A'); link(vc, '', painted, 'B')
+        # Authored kit instead packs independent value/wear/recess in R/G/B.
+        link(surface, '', painted, 'A'); link(vc, 'R' if spec.get('vertex_masks') else '', painted, 'B')
         property_link(painted, '', unreal.MaterialProperty.MP_BASE_COLOR)
+        if spec.get('foliage'):
+            leaf_transmission = node(asset, unreal.MaterialExpressionMultiply, 80, -100, const_b=.65)
+            link(painted, '', leaf_transmission, 'A')
+            property_link(leaf_transmission, '', unreal.MaterialProperty.MP_SUBSURFACE_COLOR)
         variation = spec.get('roughness_variation', .08)
         rough = node(asset, unreal.MaterialExpressionLinearInterpolate, -550, 100,
                      const_a=max(.12, spec['roughness'] - variation), const_b=min(1.0, spec['roughness'] + variation))
@@ -197,8 +223,8 @@ def import_mesh(name, meta, materials):
     if not dimensions_ok:
         raise RuntimeError(f'FBX units/axes mismatch for {name}: expected {expected} cm, imported {dimensions} cm')
     expected_origin = [(meta['bounds_min_cm'][i] + meta['bounds_max_cm'][i]) * .5 for i in range(3)]
-    # Size alone cannot detect a backwards gun. Check signed X and Z extents:
-    # its muzzle must remain ahead of the grip, and the cuff must remain behind.
+    # Dimensions alone cannot detect a flipped shield/arm or shifted tree pivot.
+    # Preserve signed X/Z extents as well as each authored bound size.
     if any(abs(origin[i]-expected_origin[i]) > 1.0 for i in (0,2)):
         raise RuntimeError(f'FBX pivot/direction mismatch for {name}: expected X/Z center {expected_origin}, got {origin}')
     body_setup = asset.get_editor_property('body_setup')

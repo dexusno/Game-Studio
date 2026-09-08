@@ -1,0 +1,323 @@
+{
+	"suite": "physical-shield-courtyard-v1",
+	"scope": "Staged actual-world ticks, real sweeps/input APIs and artificial positions/lethal progression hits. No OS input, normal run or fun evidence.",
+	"engine": "5.8.2-56702186+++UE5+Release-5.8",
+	"executable": "Dreambound-Win64-Shipping",
+	"platform": "Windows",
+	"save_slot": "DreamboundQA_PhysicalShield",
+	"seed": 833283,
+	"null_rhi": true,
+	"complete": true,
+	"aborted": false,
+	"last_step": 22,
+	"elapsed_wall_seconds": 4.5391787998378277,
+	"passed": 14,
+	"failed": 0,
+	"checks": [
+		{
+			"id": "isolated_setup",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "isolated_slot",
+					"passed": true,
+					"detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+				},
+				{
+					"id": "recovery_world",
+					"passed": true,
+					"detail": "Actual world, possessed character, camera and three courtyard phases."
+				},
+				{
+					"id": "journal_backup",
+					"passed": true,
+					"detail": "Prior QA bytes backed up; empty isolated profile established."
+				},
+				{
+					"id": "collision_fixture",
+					"passed": true,
+					"detail": "Stationary real enemy and separate QA floor, 100 m above courtyard."
+				}
+			]
+		},
+		{
+			"id": "held_attack_defense_tradeoff",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "held_front_guard",
+					"passed": true,
+					"detail": "Fresh raised shield protects from the staged frontal attack."
+				},
+				{
+					"id": "strike_commits_protection",
+					"passed": true,
+					"detail": "Tap attacks; held guard cannot cancel its exposed recovery."
+				},
+				{
+					"id": "rim_contact_and_guard_recovery",
+					"passed": true,
+					"detail": "real nearby target health 2000.0 -> 1952.0; held guard restored after recovery"
+				},
+				{
+					"id": "charge_exposes_player",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "launch_exposure_and_pause",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "release_launches_physical_actor",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "away_has_no_guard",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "pause_preserves_deployment",
+					"passed": true,
+					"detail": "Paused real actor stops; attack/recall/damage calls cannot recover it."
+				}
+			]
+		},
+		{
+			"id": "outward_return_contacts_and_catch",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "outward_swept_hit",
+					"passed": true,
+					"detail": "target 1952.0 -> 1855.5 through tick-driven physical travel"
+				},
+				{
+					"id": "lodged_no_repeat_damage",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "q_recalls_same_actor",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "physical_return_catch",
+					"passed": true,
+					"detail": "return=0.570s last catch gap=71.1cm max sampled travel=6.2cm; excludes timeout reconstitution"
+				},
+				{
+					"id": "return_swept_hit",
+					"passed": true,
+					"detail": "same target 1855.5 -> 1747.5 on return pass"
+				},
+				{
+					"id": "caught_shield_usable",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "physical_recall_around_cover",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "cover_route_deployed",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "moved_behind_real_cover",
+					"passed": true,
+					"detail": "Swept lateral route recorded by deployed shield; its direct catch line hits the QA wall."
+				},
+				{
+					"id": "recall_recovers_around_cover",
+					"passed": true,
+					"detail": "return=0.700s last catch gap=71.9cm max sampled travel=19.2cm; excludes timeout reconstitution"
+				}
+			]
+		},
+		{
+			"id": "anchor_front_projectile_crossing",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "physical_anchor_deploys",
+					"passed": true,
+					"detail": "Rank 2 is granted only for this deterministic mechanics fixture."
+				},
+				{
+					"id": "anchor_stops_crossing_projectile",
+					"passed": true,
+					"detail": "Actual front-crossing bolt spent integrity and banked force; player behind it took no damage."
+				}
+			]
+		},
+		{
+			"id": "anchor_flank_and_back_exposure",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "anchor_flank_remains_exposed",
+					"passed": true,
+					"detail": "Parallel real bolt 150 cm outside the disk reaches the unguarded player."
+				},
+				{
+					"id": "anchor_back_face_remains_exposed",
+					"passed": true,
+					"detail": "Actual reverse crossing is not omnidirectional protection."
+				}
+			]
+		},
+		{
+			"id": "first_earned_attachment",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "fresh_run_has_no_free_reward",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "encounter_0_starts_once",
+					"passed": true,
+					"detail": "ward interaction spawned 1 actual threats; repeated E leaves 1; no unearned reward"
+				},
+				{
+					"id": "encounter_0_clear",
+					"passed": true,
+					"detail": "1 spawned enemies defeated with staged lethal hits; kill notices remain unique"
+				},
+				{
+					"id": "earned_Anchor",
+					"passed": true,
+					"detail": "Clear, ward, ordinary reward choice, installation, retained pattern and next ready phase; duplicate input ignored."
+				},
+				{
+					"id": "first_earned_pattern_selected",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "second_earned_attachment",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "encounter_1_starts_once",
+					"passed": true,
+					"detail": "ward interaction spawned 3 actual threats; repeated E leaves 3; no unearned reward"
+				},
+				{
+					"id": "encounter_1_clear",
+					"passed": true,
+					"detail": "3 spawned enemies defeated with staged lethal hits; kill notices remain unique"
+				},
+				{
+					"id": "earned_Frost",
+					"passed": true,
+					"detail": "Clear, ward, ordinary reward choice, installation, retained pattern and next ready phase; duplicate input ignored."
+				},
+				{
+					"id": "two_earned_attachments_combine",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "fresh_checkpoint_restores_physical_build",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "checkpoint_with_deployed_shield",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "fresh_journal_resume_restores_build",
+					"passed": true,
+					"detail": "Cache cleared before actual load/resume; checkpoint/build restored, deployed actor removed."
+				}
+			]
+		},
+		{
+			"id": "crc_checkpoint_recovery",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "crc_fallback_preserves_earned_build",
+					"passed": true,
+					"detail": "checksum mutation=1, previous revision=12, selected=12, bytes=2590"
+				}
+			]
+		},
+		{
+			"id": "courtyard_completion",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "encounter_2_starts_once",
+					"passed": true,
+					"detail": "ward interaction spawned 2 actual threats; repeated E leaves 2; no unearned reward"
+				},
+				{
+					"id": "encounter_2_clear",
+					"passed": true,
+					"detail": "2 spawned enemies defeated with staged lethal hits; kill notices remain unique"
+				},
+				{
+					"id": "final_clear_allows_catch_before_results",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "courtyard_success_results",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "retry_and_death_recovery",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "same_seed_retry_resets_attempt_retains_patterns",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "death_records_inactive_attempt",
+					"passed": true,
+					"detail": ""
+				},
+				{
+					"id": "death_retry_restores_usable_shield",
+					"passed": true,
+					"detail": ""
+				}
+			]
+		},
+		{
+			"id": "qa_save_restoration",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "qa_journals_restored",
+					"passed": true,
+					"detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+				}
+			]
+		}
+	],
+	"not_run": "Ordinary inputs, graphics/audio/feel, performance and an unstaged full journey."
+}

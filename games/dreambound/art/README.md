@@ -1,77 +1,41 @@
-# Sculpted courtyard and modular cyborg kit
+# Bellroot shield and courtyard art
 
-Original procedural models for the authorized Dreambound beta, 2026-09-08. The visual direction uses style B's ivory ceramic, aged copper/bronze, broad stone planes and restrained blue mechanisms. These are actual modeled assets. The Blender previews are an asset review under studio lighting; they do not establish final Unreal lighting, first-person composition or concept-image fidelity.
+The current 2026-09-08 kit replaces the rejected gun/crescent kit. It contains a complete throwable shield, articulated gripping hand, rigid sentinel parts, a branching bell tree with a separate canopy, irregular masonry, stairs, ivy and fern clusters. There are 27 meshes, 24 material recipes and 10 original surface textures. No third-party geometry, textures, brushes or material libraries were used.
 
-[Current material-pass courtyard](preview/material-pass-courtyard.png) · [Initial geometry contact sheet](preview/contact-sheet.png) · [Weapon geometry](preview/weapon.png) · [Guardian geometry](preview/guardian.png)
+[Actual shield front](preview/shield-front.png) · [Shield back and hand](preview/shield-back.png) · [Sentinel](preview/sentinel.png) · [Blender first-person composition](preview/bellroot-first-person.png)
 
-The source is [create_art.py](../scripts/create_art.py). It produces 20 FBX meshes, 79,274 source triangles in total, two shared 512×512 textures, material definitions, measurement metadata and a compressed editable [Blender scene](Dreambound_Kit.blend). No third-party meshes, samples, texture packs, image-generation service or downloaded brushes were used. The shared textures are original seeded isotropic spectral pigment/pore fields and periodic surface gradients. [Manifest rows](manifest-rows.csv) are for the integration owner to merge.
+These are rendered views of actual geometry. The Blender reviews predate the final UV correction and do not establish final Unreal appearance or fidelity to the selected style reference. The integration owner maintains actual game captures and build evidence.
 
-## Build and import
+## Current source and import
 
-Run an installed Blender in the background with `--background --factory-startup --python games/dreambound/scripts/create_art.py`. Three Cycles renders use six CPU threads and 40 samples. `-- --skip-renders` regenerates the kit and assembles the sheet from existing previews; use this only when geometry/material appearance has not changed.
+[create_art.py](../scripts/create_art.py) executes the authored profiles in [bellroot.py](source/bellroot.py), exports FBXs and creates the material/texture recipes. Run Blender with `--background --factory-startup --python-exit-code 1 --python games/dreambound/scripts/create_art.py`. The editable [Dreambound_Kit.blend](Dreambound_Kit.blend) uses relative `//generated/` image paths; retain that adjacent folder when moving the source.
 
-`-- --materials-only` updates palette, textures and shaders in the existing Blender scene and renders a courtyard composition from copies of the existing meshes. It never exports or alters geometry. The 2026-09-08 material pass moves stone from ochre to cool slate/green-gray, lifts verdigris, retains ivory/copper equipment, replaces visible diagonal waves with irregular mottling, and uses restrained per-material normal/roughness variation. The original contact sheet predates this palette.
+[import_art.py](../scripts/import_art.py) creates `/Game/Art/Meshes`, `/Game/Art/Materials` and `/Game/Art/Textures`. It assigns stable material slots, enables instanced-static-mesh usage and checks dimensions, signed pivots and custom hull counts. It changes no map, game code or audio. The verified axis settings are +X forward/+Z up, centimeters, legacy FBX import and `force_front_x_axis=False`.
 
-The integration owner runs [import_art.py](../scripts/import_art.py) in Unreal editor Python. It writes only `/Game/Art/Meshes`, `/Game/Art/Materials` and `/Game/Art/Textures`, preserving the requested stable names. It does not edit maps, game code, project settings or audio. It creates a material graph with original surface maps, vertex tint, roughness variation and normal detail, assigns mesh slots, checks centimeter dimensions and checks custom collision hull counts. It writes `art/import-report.json` with actual import results. A failed material compilation or import raises an error.
+The materials use separate per-surface craft maps for shield wear, masonry/mineral marks, longitudinal bark and metal scratches. Vertex `Color` channels are R=painted value, G=exposed edge wear, B=recess/weathering, A=opaque. `M_CombatGlow` exposes a `Color` parameter with emission x3. Element materials retain the requested stable names.
 
-All 18 materials explicitly enable instanced-static-mesh usage, required by the level's HISM batches. The UE 5.8 API is `MaterialEditingLibrary.set_base_material_usage(material, MaterialUsage.MATUSAGE_INSTANCED_STATIC_MESHES, True)`; direct access to the older property is deprecated in this engine. Add `-DreamboundMaterialUsageOnly` to the commandlet arguments to update, compile and save existing materials without changing graphs or reimporting meshes/textures. This mode writes `art/material-usage-report.json`.
+## Physical shield and rigid parts
 
-Use `-DreamboundMaterialsOnly` for a material-quality pass: import only the two shared textures, rebuild/compile/save all 18 graphs, and preserve mesh data and assignments. [Material pass evidence](material-pass-report.json) records the native result.
+`SM_ShieldPlate` is one complete disc, centered at local zero with its face normal +X, 85 cm across. The shell is about 11 cm thick; including its rear structure and grip, overall X depth is 21.3 cm. The front includes a visible core so the same mesh remains complete while flying. The old `SM_WeaponBody` is obsolete and excluded from current metadata/import.
 
-FBX uses centimeter geometry, +X forward/+Z up, with its axis conversion baked at export. The verified Unreal import uses the legacy FBX importer, unit scale 1 and `force_front_x_axis=False`; forcing the axis again or letting Interchange intercept this import swaps X/Y. The script changes the Interchange FBX switch only for its own import and restores it afterward. Preview shader texture links are omitted from FBX to avoid embedding machine-specific paths; the dedicated Unreal importer assigns textures and materials. UVs and neutral vertex tint remain in the mesh.
+Attach `SM_Core` at (-6, 0, 0), measured 4.84 x 18.4 x 18.4 cm. Attach `SM_Forearm` at (-12, 0, -12); its origin is the grasp center, fingers curl around a Y-axis grip bar, and the forearm extends -X. Its overall dimensions are 59.34 x 18.76 x 20.97 cm.
 
-## Rigid part transforms
+Guardian assembly pivots remain body (0, 0, 94), head (0, 0, 156), shoulders (0, +/-36, 146), hips (0, +/-18, 94), relative to feet. All parts face +X and extend from their authored rigid pivots; do not fit their bounds independently. Uniform assembly scale 0.90 produces about 184.5 cm to the crest, including scaled part translations.
 
-All transforms below are local centimeters with identity rotation and unit scale unless noted. These are separate static meshes for rigid animation, with no skeleton or skin weights.
+## Courtyard placement
 
-| Weapon part | Relative location | Pivot and measured size X × Y × Z |
-|---|---:|---|
-| SM_WeaponBody | (0, 0, 0) | Grip; +X forward; 60.45 × 22.60 × 36.11 |
-| SM_ShieldPlate | (31, 0, 10) | Central deployment pivot; 9.40 × 47.20 × 48.33 |
-| SM_Core | (33, 0, 10) | Core center, face normal X; 5.62 × 12.60 × 12.60 |
-| SM_Forearm | (0, 0, -1) | Wrist/grip; extends toward -X; 35.00 × 21.60 × 21.74 |
+Use [asset-metadata.json](generated/asset-metadata.json) for exact bounds, materials and hull counts. `SM_BellTree` has a trunk/base origin, dimensions 762.3 x 647.3 x 686.4 cm, and only one cylindrical base hull (radius 65 cm, height 265 cm). Branches, roots and canopy do not receive a large blocking box. Place `SM_Canopy` at tree-relative Z620; place `SM_Bell` at (-8, -112, 286).
 
-`SM_ShieldPlate` already contains all five ceramic lobes and its bronze frame: instantiate it once. Translate/rotate that whole crescent to fold or deploy it. It is not one petal. Keep its central aperture aligned with the core when guarding. For element changes, replace the named `M_Core` material slot and retain bronze/mechanical slots.
+`SM_StoneTile` and `_B` span 200 cm with their walking surface near Z24; place the base at Z-24. `SM_Stair` ascends +Y in six 16 cm steps and has six separate hulls. The arch is about 447 cm wide and 444 cm high with 17 hulls around, rather than across, its opening. Pillars are about 351 cm tall. Fern, ivy, rubble, the shorter buttress root and broken pillar provide reusable growth/ruin details without repeated long root strips.
 
-| Guardian part | Position relative to feet |
-|---|---:|
-| SM_GuardianBody | (0, 0, 94) |
-| SM_GuardianHead | (0, 0, 156) |
-| SM_GuardianArm, right/left | (0, +36/-36, 146) |
-| SM_GuardianLeg, right/left | (0, +18/-18, 94) |
+## UV correction and evidence
 
-The unscaled assembled guardian reaches approximately 200 cm including its crest; uniform assembly scale **0.90** gives an approximately 180 cm sentinel. Scale both part translations and meshes together, or scale their common visual parent. Arms and legs extend downward from shoulder/hip pivots. The symmetric limb mesh is reusable on either side without negative scale. Front faces +X. Capsule/combat collision belongs to the actor, not the decorative rigid parts.
+Actual Unreal rendering exposed a source defect: several joined meshes exported the primitive `UVMap` channel with zero coordinates on custom faces, although the intended mapping existed in `CraftUV`. Some tube caps and shield rim faces also had collapsed projected UVs.
 
-## Environment measurements
+[uv_tools.py](source/uv_tools.py) now keeps one explicit `CraftUV` channel, projects primitive faces using matching world-space axes, preserves broad shield face mapping and repairs collapsed cap/edge coordinates. Tube side UVs wrap at their seam. The generator calls this same correction so regeneration preserves the fix.
 
-Use [asset-metadata.json](generated/asset-metadata.json) for complete bounds, triangle counts, material-slot order and attachment coordinates. Dimensions below are measured from exported source geometry.
+[repair_uv.py](source/repair_uv.py) applied the correction to the existing editable source and selectively exported 18 affected FBXs without regenerating any geometry. Blender exited 0. [uv-repair-report.json](generated/uv-repair-report.json) records the exact subset, passing surface-UV checks and identical geometry, transforms, vertex masks and material slots. Existing custom collision objects were preserved from their original FBXs.
 
-| Mesh | Size X × Y × Z, cm | Placement/collision |
-|---|---:|---|
-| SM_StoneTile | 200 × 200 × 24.11 | Base origin; surface near Z24; 1 hull |
-| SM_Wall | 400 × 72.12 × 320.23 | Ground center, X spans wall; 1 hull |
-| SM_Pillar | 115.07 × 115.13 × 380.02 | Ground center; 1 hull |
-| SM_Arch | 455.04 × 94.15 × 437.05 | Ground center; opening spans X; walk along Y; 15 hulls |
-| SM_Bell | 136 × 136 × 150.74 | Origin at lower lip; hanging eye near Z135 |
-| SM_Root | 437.42 × 153.60 × 84.08 | Crown origin; extends +X; hide crown against masonry/tree base |
-| SM_Crate | 91 × 82 × 86.5 | Ground center; 1 hull |
-| SM_Crystal | 30.4 × 28 × 50 | Base center; useful as small scaled attachment/prop |
-| SM_TechPanel | 239 × 65 × 319 | Ground center; X width; front -Y; 1 hull |
-| SM_Grass | 65.76 × 55.67 × 41 | Ground center; solid double-sided blades |
-| SM_TelegraphRing | 200 × 200 × 1 | Ground center; outer radius100, inner94 |
-| SM_TelegraphDisk | 200 × 200 × 0.5 | Ground center; radius100 |
+A few geometric bevel slivers remain unchanged: prior native Blender tangent checks found two zero-tangent loops on Wall, four on Stair and two on submicron Head geometry. These are recorded limitations, separate from the repaired UV corruption. The post-correction native Unreal import/render is owned by the integration owner; no warning-free native result is claimed here. The older [round-trip check](generated/roundtrip-check.json) and [import report](import-report.json) describe their recorded runs and may predate this UV pass.
 
-The arch collision consists of two side posts and 13 separate voussoir hulls. No convex hull spans the opening. Decorative roots, vegetation, crystals, bell, weapon, limbs and telegraph meshes have no authored blocking collision. Place them accordingly. Randomize tile yaw by quarter turns and small prop variations to reduce visible repetition; preserve tile spacing.
-
-Required material names include `M_Ceramic`, `M_Bronze`, `M_DarkMetal`, `M_Core`, `M_Frost`, `M_Storm`, `M_Ember` and `M_CombatGlow`. The latter exposes VectorParameter `Color` for base color and emission ×3. Other surface recipes and stable names are in [materials.json](generated/materials.json).
-
-## Observed checks and limits
-
-- Blender 5.2.1 LTS generated and rendered the real kit. Visual inspection led to a second pass: darker guardian armor/single visor, irregular flagstones, bark ridges and lower crystal emission.
-- All 20 FBX files were reimported in a fresh background Blender session. Measured dimensions matched within 0.02 cm; every mesh retained UVs, vertex tint, material names and its expected custom collision count. [Round-trip evidence](generated/roundtrip-check.json).
-- Native Unreal 5.8.2 import passed on 2026-09-08 using the authorized `UnrealEditor-Cmd` Python commandlet with `-unattended -nop4 -nosplash -NullRHI`: **20 meshes, 18 materials and 2 textures**, exit 0, zero errors/warnings. [Import evidence](import-report.json) records dimensions, signed X/Z origins, material assignments and collision hulls. Initial checks found and fixed VertexColor's unnamed output and the Interchange FBX interception/axis mismatch. A subsequent complete rerun also passed, confirming reimport behavior. The gun extends +X from its grip and the cuff remains behind it.
-- The integrated renderer then exposed missing HISM usage flags. A material-only native commandlet enabled the usage on all 18 materials, verified it through `has_material_usage`, recompiled and saved each one: exit 0, zero errors/warnings, no mesh or texture imports. [Material usage evidence](material-usage-report.json). The integration owner repeats the rendered game check to verify shader appearance.
-- The first actual game capture showed beige stone with directional woven-looking texture. The bounded palette/texture pass imported 18 rebuilt materials and two textures successfully: exit 0, zero errors/warnings, instancing still enabled on every material, no mesh imports. Its current Blender review uses existing geometry. Final Unreal appearance depends on the integration owner's simultaneous lighting correction and rendered capture.
-- The final FBX source scan found zero embedded workspace paths across all 20 files. Original shader recipes, image-generation math and asset manifest rows are included; no unresolved third-party input was introduced.
-- Final editable-Blender portability audit passed on 2026-09-08: both file images use Blender-relative `//generated/` paths and resolve to the included PNGs; the two viewer images have empty paths; there are no absolute machine image paths or linked Blender libraries. The accepted `.blend` needed no modification. Keep its adjacent `generated` folder when moving the editable source.
-- No foreground UI or real audio playback was used. First-person attachment pose, animated intersections, Unreal material appearance, camera framing and gameplay collision still require the integrated build check.
+[Manifest rows](manifest-rows.csv) are supplied for the integration owner to merge. All included inputs are original project-authored models, textures and shader recipes created using Blender Python/NumPy and Unreal material nodes; no unresolved third-party rights were introduced.

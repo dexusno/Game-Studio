@@ -1,23 +1,24 @@
-# Between Worlds — first beta
+# Physical shield — courtyard playtest
 
-Start `Dreambound.exe` in the Windows build and choose **Begin expedition**. Reach the glowing crystal in the Waking Cell and press **E** to choose your first attachment. Clearing an encounter reveals its next reward and opens your route onward once you claim it.
+Start `Dreambound.exe` from `BuildOutput/ShieldStudy/Windows` and choose **Enter courtyard**. Approach the glowing ward stone and press **E** to begin. There are three encounters: a close opponent, a mixed group, then a heavy sentinel and caster. After each of the first two encounters, return to the stone and choose an earned attachment. Press E again when ready to test it.
 
 | Action | Control |
 | --- | --- |
 | Move / aim | WASD / mouse |
-| Aimed pulse | Left mouse |
-| Guard / timed deflection | Right mouse |
-| Impact or return captured force | Q |
-| Impact while carrying captured force | Hold right mouse + Q |
+| Close rim strike | Tap left mouse |
+| Charge and throw the shield | Hold left mouse, then release |
+| Guard / timed guard | Hold right mouse while the shield is held |
+| Recall the deployed shield | Q or left mouse |
+| Heavy bash / installed Ram rush | Q while the shield is held |
 | Dash / jump | Shift / Space |
-| Interact / choose a reward | E / 1, 2, 3 |
-| Change between installed elemental cores | R |
-| Inspect build / pause | Tab / Escape |
+| Interact / choose reward | E / 1, 2, 3 |
+| Cycle installed elemental cores | R |
+| Inspect equipment / pause | Tab / Escape |
 
-Try defending just before a projectile arrives. Mirror captures force to return deliberately; Ram makes close impacts stronger; elemental cores create different ways to set up enemies. Attachments coexist, while one elemental core is active at a time. Repeated rewards can evolve attachments up to rank three. The optional Mirror Trial offers a known pursuit alongside the main route.
+Committing to a strike or throw gives up guarding. While the shield is away, reposition to cut a different return line, or recall early to recover protection. You can also keep it in hand and use strikes, guards and counters. Close fighting does not require throwing.
 
-Learned patterns survive defeat. Choose one as starting equipment for a new expedition or practice the same seed. Exiting and resuming restores the current encounter from its entry checkpoint, including your claimed rewards and equipment. The beta carries your current build through its final crossing; the full campaign's transfer rules remain undecided.
+The first earned choice offers Mirror, Ram or Anchor. Mirror stores force from a timed guard for physical attacks. Ram changes the heavy bash into a rush. Anchor turns the deployed disc into limited directional cover against actual projectile crossings; it cannot protect every angle or stop melee. The second choice adds Frost, Ember or Storm. Inspect the descriptions for their contact effects and combinations.
 
-Mouse sensitivity is adjustable in the pause screen. The game pauses when it loses focus.
+Learned attachment patterns survive defeat. Choose a starting pattern for a new attempt or repeat a seed for practice. Checkpoints preserve earned equipment; resuming restarts the current encounter. This study has a separate save profile from the rejected beta2. Sensitivity is adjustable in pause; losing focus pauses the game.
 
-For this first playtest, the useful feedback is where combat becomes repetitive, which reward makes you want to experiment, and whether enemies and their attacks are readable. Human difficulty, pacing and enjoyment still need your assessment.
+This courtyard tests the corrected combat and presentation. Its layout is authored and stable; encounter offsets and offers use the run seed. It is not the planned campaign or proof of procedural world variety. The useful playtest questions are whether held combat and throwing create different useful choices, whether hits and catches feel substantial, and whether the earned attachment makes you want to experiment.

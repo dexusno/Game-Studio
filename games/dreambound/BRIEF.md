@@ -6,14 +6,17 @@ Klaus rejected beta2's gun-like weapon, weak feedback, shallow/confusing combat,
 
 The shield itself must be the physical weapon, with meaningful attack/defense commitment and launch/recall. Free choice remains important: retaining it for close attacks, guarding and counters must be useful, and throwing must not force a single repetitive all-at-once sequence. Broad combinable upgrades remain the direction.
 
-The working next increment is one representative courtyard, a properly authored and animated hero shield, contrasting threats, clear instruction through play and two earned upgrades that change decisions. Demonstrate actual movement, block/strike/launch/recall/catch, powerful synchronized sound/contact reactions and coherent scenery before expanding rooms or the item count. The exact controls, timing, shield topology and two attachment examples are proposals to test. This is a correction to the next implementation step, not a reduction of the eventual game to a small arena.
+The current corrective increment is one representative courtyard, a properly authored and animated hero shield, contrasting threats, clear instruction through play and two earned upgrades that change decisions. Demonstrate actual movement, block/strike/launch/recall/catch, powerful synchronized sound/contact reactions and coherent scenery before expanding rooms or the item count. The exact controls, timing, shield topology and two attachment examples are proposals to test. This is a correction to the next implementation step, not a reduction of the eventual game to a small arena.
 
 Antagonists, their motives, reasons for fighting, world-specific enemy identities and boss/recurrence logic remain unresolved. Klaus explicitly deferred that story work. Existing narrative sketches are not approved canon.
 
 ## Play question
 After earning an attachment, does Klaus change positioning, target selection or defense and want to try another build? If rewards merely increase damage or the same safe loop wins every encounter, revise before expanding the campaign.
 
-## Boundary
+## Corrective study boundary
+The current implementation is one authored courtyard, three escalating encounters and two earned attachment choices. Tap LMB strikes; hold/release throws; RMB guards only while held; Q recalls while away and is a heavy bash/installed Ram action while held. Throws and strikes commit protection. A close-only route remains usable. This study has separate saves and tests combat identity and presentation before another content pass. Its duration and enjoyment remain unmeasured by a normal complete owner playthrough.
+
+## Previous route scope — retained campaign intent
 Windows first-person Unreal 5.8.2. One modular weapon/shield with freely chosen attack and guard, timed defense, a close impact/special, dash and jump. One substantial medieval dream realm assembled from authored encounter spaces, an optional disclosed attachment pursuit, several early reward choices, a boss, and a compact technological arrival where earned equipment remains usable. At least two obtainable contrasting builds; no developer menu substituting for acquisition.
 A complete beta journey is provisionally 15–25 minutes, subject to actual playtesting; this is not the campaign duration. Baseline actions must be viable. Preserve earned attachment patterns and a boss milestone on failure and restart; resume the current seeded journey. New expeditions vary layout/encounters/offers. Same-seed restart is available for practice.
 
@@ -31,4 +34,4 @@ Owner Klaus; integration owner current task. Initial internal implementation che
 No full campaign, multiple complete biomes, dragons, multiplayer, live AI dialogue or exhaustive catalogue. These exclusions do not replace the intended larger game.
 
 ## Acceptance
-Technical requirements remain actual Windows launch, input/focus, earned rewards, failure/retry, persistence and eventual route completion. The next result must also visibly and audibly establish the physical shield fantasy and approach anchor B in an actual authored space. Independent QA distinguishes moving play from staged calls. Klaus's beta2 assessment is negative; no revised build or improved fun has yet been demonstrated.
+Technical requirements remain actual Windows launch, input/focus, earned rewards, failure/retry, persistence and eventual route completion. The next result must also visibly and audibly establish the physical shield fantasy and approach anchor B in an actual authored space. Independent QA distinguishes moving play from staged calls. Klaus's beta2 assessment is negative; the corrective study must earn its own owner assessment. Technical passes cannot establish improved fun.

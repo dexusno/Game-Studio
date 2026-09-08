@@ -1,3 +1,5 @@
+Current internal playtest:0.2.0-study1 at BuildOutput/ShieldStudy/Windows. No publication is authorized or performed. Current identity, limits and evidence are in [STATUS.md](STATUS.md) and [shield-study-build.json](evidence/shield-study-build.json). Prior beta2 release-preparation notes below remain historical.
+
 # Cyborg between worlds — beta — release plan
 
 Public release is not scheduled or approved. An internal Windows beta package exists for Klaus's playtest; no storefront, price or public marketing claims are approved.

@@ -12,6 +12,10 @@ class UStaticMeshComponent;
 class UMaterialInterface;
 class USoundBase;
 class ADBEnemy;
+class ADBThrownShield;
+
+UENUM(BlueprintType)
+enum class EDBShieldState : uint8 { Held, Charging, Outbound, Lodged, Returning };
 
 /** First-person combined weapon/shield. Acquisition and run state belong to DBGameMode. */
 UCLASS()
@@ -45,6 +49,13 @@ public:
     void UseSpecial();
     void Dash();
     void CycleElement();
+    bool IsShieldAway() const;
+    void RecallShield();
+    FVector GetShieldCatchLocation() const;
+    void OnShieldCaught(bool bEmergency = false);
+    bool ApplyPhysicalShieldHit(ADBEnemy* Enemy, const FDBHit& Hit);
+    void BankAnchoredForce(float Damage);
+    FString GetShieldStateLabel() const;
     FString GetSpecialLabel() const;
     FString GetElementLabel() const;
     static FString GetUpgradeDescription(FName Id, int32 Rank = 1);
@@ -77,6 +88,11 @@ public:
     UPROPERTY() bool bOverheated = false;
     UPROPERTY() bool bLastHitKilled = false;
     UPROPERTY() EDBElement CurrentElement = EDBElement::Neutral;
+    UPROPERTY() EDBShieldState ShieldState = EDBShieldState::Held;
+    UPROPERTY() bool bShieldReady = true;
+    UPROPERTY() float ThrowCharge = 0.f;
+    UPROPERTY() float AttackRecovery = 0.f;
+    UPROPERTY() TObjectPtr<ADBThrownShield> ThrownShield;
     UPROPERTY() TMap<FName, int32> Upgrades;
     UPROPERTY() FString LastCombatMessage;
 
@@ -111,15 +127,26 @@ private:
     UPROPERTY() TObjectPtr<USoundBase> ImpactSound;
     UPROPERTY() TObjectPtr<USoundBase> EquipSound;
     UPROPERTY() TObjectPtr<USoundBase> HurtSound;
+    UPROPERTY() TObjectPtr<USoundBase> CatchSound;
+    UPROPERTY() TObjectPtr<USoundBase> RecallSound;
 
     TArray<float> EffectLife;
     TArray<FEchoShot> EchoShots;
     TArray<float> StoredDamage;
     TSet<TWeakObjectPtr<ADBEnemy>> RushVictims;
     bool bWantsFire = false;
+    bool bWantsGuard = false;
+    bool bStrikeBuffered = false;
+    bool bStrikePending = false;
+    bool bHeavyStrike = false;
+    bool bStrikePoseActive = false;
     bool bWasMenuBlocked = false;
     bool bRushActive = false;
     float FireCooldown = 0.f;
+    float ChargeHeld = 0.f;
+    float StrikeDelay = 0.f;
+    float StrikeTotal = .5f;
+    float CatchPose = 0.f;
     float GuardRaiseCooldown = 0.f;
     float SinceFired = 10.f;
     float SinceGuarded = 10.f;
@@ -150,8 +177,9 @@ private:
     void ChooseRewardThree();
     void TogglePause();
     void ToggleBuild();
-    void FirePulse();
-    void Counterfire();
+    void StartRimStrike(bool bHeavy);
+    void ResolveRimStrike();
+    void LaunchShield();
     void ShieldImpact();
     void ResolveRush();
     void UpdateWeapon(float DeltaSeconds);
@@ -160,7 +188,6 @@ private:
     void CaptureEnergy(float Damage);
     void SetCombatMessage(const FString& Text, float Duration = 2.f);
     void PlayCombatSound(USoundBase* Sound, float Volume = 1.f, float Pitch = 1.f);
-    ADBEnemy* TraceAttack(const FVector& AimPoint, const FDBHit& Hit, float BeamWidth = 2.f);
     bool HitEnemy(ADBEnemy* Enemy, const FDBHit& Hit);
     void ApplyAreaHit(const FVector& Centre, float Radius, const FDBHit& Hit, ADBEnemy* Ignore = nullptr, int32 MaxTargets = 12);
     void DrawBeam(const FVector& Start, const FVector& End, EDBElement Element, float Width, float Duration = .085f);

@@ -1,23 +1,23 @@
-# Beta integration contract
-Updated 2026-09-08. Current task owns integration. All workers share the workspace; do not revert other edits.
+# Current integration contract
+Updated 2026-09-08. All workers share the workspace; preserve concurrent changes. The default build is the physical shield courtyard study. The previous pulse-gun route is retained only behind `-DBLegacyBeta`, and is not an accepted design or current QA target.
 
-This contract describes the rejected beta2 implementation. Before modifying combat or art, read the owner correction in [BRIEF.md](BRIEF.md) and [RETROSPECTIVE.md](RETROSPECTIVE.md). Its pulse/muzzle interfaces and gun-shaped geometry are historical constraints to replace where needed, not accepted design requirements.
+## Ownership and runtime
+Integration owns DBGameMode.*, DBRecoveryScene.cpp, DBMotionDemo.cpp, DBHUD.*, configuration, packaging and shared records. Combat owns DBCharacter.* and DBThrownShield.*. Enemy work owns DBEnemy.* and DBProjectile.*. Art owns art/ and create_art.py/import_art.py. QA owns DBShieldChecks.* and its focused report. Root launches Unreal/imports and integrates all work.
 
-## Owned paths
-- Integration: project metadata/Config, DBGameMode.*, DBHUD.*, DBTypes.h, world generation, progression/save, build scripts and shared records.
-- Combat worker: Source/Dreambound/DBCharacter.h and .cpp only; own optional separate combat helper files.
-- Enemy worker: Source/Dreambound/DBEnemy.h/.cpp and DBProjectile.h/.cpp only.
-- Art worker: art/ and scripts/create_art.py plus scripts/import_art.py; return asset manifest rows in art/manifest-rows.csv. Importer may create Content/Art only; no project Config or map ownership.
+The character exposes PressFire/ReleaseFire, PressGuard/ReleaseGuard, RecallShield, UseSpecial, SuspendCombatInput, OnRunReset and existing upgrade/health interfaces. `ShieldState` distinguishes Held, Charging, Outbound, Lodged and Returning. `bShieldReady`, `ThrowCharge`, `AttackRecovery`, IsShieldAway and GetShieldStateLabel drive the HUD. Tap LMB produces a delayed swept close contact; a hold of at least 0.22 seconds and release throws. Q recalls while away and performs the held heavy action otherwise. There is no gun damage path. Heat remains compatibility data, not a displayed resource.
 
-## Shared names
-Project games/dreambound/unreal/Dreambound.uproject; module DREAMBOUND_API.
-Runtime C++ files at unreal/Source/Dreambound. DBTypes.h supplies EDBElement and FDBHit.
-ADBCharacter public: ApplyUpgrade(FName), HasUpgrade(FName) const, GetUpgradeRank(FName) const, ReceiveAttack(float Damage, FVector Source, bool bUnblockable=false, AActor* Attacker=nullptr), GetAimDirection() const, GetMuzzleLocation() const. Expose Health, MaxHealth, GuardEnergy, MaxGuardEnergy, bGuarding, bDead, CurrentElement, TMap<FName,int32> Upgrades, FString LastCombatMessage and float MessageTime. Public OnRunReset and Capture/restore health/upgrades through these fields. Guard/parry determines received damage; projectiles call ReceiveAttack.
-ADBEnemy public: EDBEnemyKind Kind (Melee,Caster,Hunter,Boss), int32 RoomId, bool bDead, float Health/MaxHealth; Configure(EDBEnemyKind,int32,float); ApplyCombatHit(const FDBHit&); Tick/AI combat. Enemy calls game mode NotifyEnemyKilled(this) exactly once. All actors use world coordinates in centimeters, +X forward,+Z up.
-ADBProjectile public: Initialize(FVector Direction,float Speed,float Damage,bool bUnblockable,AActor* OwnerEnemy, FLinearColor Color). Enemy projectiles have travel, collision and finite life. Reflect/capture handling lives in Character ReceiveAttack; returning captured payload uses aimed player hit/effects.
-ADBGameMode public: NotifyEnemyKilled(ADBEnemy*), NotifyPlayerDied(), NotifyEvent(const FString&,FLinearColor=FLinearColor::White), Interact(), ChooseReward(int32 ZeroBasedIndex), TogglePause(), ToggleBuild(), StartNewRun(bool bSameSeed=false), AdjustSensitivity(float Delta). Exposes bPaused,bChoosingReward,bShowingBuild. Player binds E/1/2/3/Esc/Tab via these functions. Mode pauses damage/progression during reward menus and handles cursor/focus. Use UE includes for Color, game mode classes as needed.
+DBThrownShield is the actual traveling disc, with separate outward/return victim sets, cover sweeps, owner-relative return, breadcrumb routing and a non-damaging emergency recovery. Held protection is unavailable while committed/away. Menus freeze the actor and reset destroys it. Installed attachment visuals travel with it. Anchor interception belongs exclusively to the actual unobstructed DBProjectile travel segment; never add a synthetic source-to-camera fallback that catches melee or spends integrity twice.
 
-## Art naming and geometry
-Content/Art/Meshes/SM_WeaponBody, SM_ShieldPlate, SM_Core, SM_Forearm, SM_GuardianBody, SM_GuardianHead, SM_GuardianArm, SM_GuardianLeg, SM_StoneTile, SM_Wall, SM_Pillar, SM_Arch, SM_Bell, SM_Root, SM_Crate, SM_Crystal, SM_TechPanel, SM_Grass.
-Original Blender meshes FBX, materials unified on Unreal import. Weapon mesh origin at grip, +X points at target, dimensions approximately 60 cm long and 22 cm wide; plate separate for deployment. Forearm extends toward -X. Enemies approximately 180cm tall with separate parts pivoted for animation. Document part transforms and dimensions in art/README.md. Procedural generated source assets under art/generated; imported assets under Content/Art. Source script is authoritative and outputs reproducible.
-Return real artifact paths and observed evidence. No claims of engine import, visual quality or gameplay unless actually exercised.
+Mirror stores timed-guard force for physical contact. Ram changes the heavy action. Frost/Ember/Storm, Echo/Split/Stormfracture and Capacitor modify contact behavior with finite secondary chains. Character descriptions are authoritative for implemented ranks, not the older catalogue's proposed mechanics.
+
+Enemies expose Configure, SetArenaBounds, ApplyCombatHit, phase/telegraph/health and once-only death notification. Their actual movement uses capsule sweeps/local steering; no baked navmesh is required. Melee commit/recovery, caster charge/volley/reposition and hunter movement need normal play validation. Collapsed bodies are retained briefly.
+
+## Scene and progression
+DBRecoveryScene creates one authored courtyard with three logical phases sharing it. E at the ward stone starts the current phase; first clear earns Anchor/Mirror/Ram, second clear earns an elemental core, and the final group contains a heavy sentinel. Claimed rewards advance the phase. The final clear leaves a short catch/collapse interval before the victory menu. The court is stable; seeded offsets/offers and learned starting patterns provide limited study variation. This is not the planned procedural campaign.
+
+Default saves use DreamboundShieldStudy, separate from old DreamboundBeta. CRC journal slots, learned patterns and settings persist. Current encounter restarts at its checkpoint. QA requires an explicit isolated slot. DBShieldChecks advances through ordinary engine ticks; it does not recursively tick the world. Its 14 staged scenarios supersede the old 31 fixture for this scene.
+
+## Assets and capture
+SM_ShieldPlate is the complete 85cm disc, face+X, with grip-inclusive 21.3cm depth. Rear SM_Core attaches(-6,0,0), Forearm(-12,0,-12) and extends backward. Meshes carry separate value/edge/recess vertex channels and authored UVs. Keep the intended CraftUV as the exported first channel; the UV export defect found during this correction must not return. Tree collision is only the trunk base; foliage and decorative rubble are passable. Preserve source pivots, material slots and collision hulls on reimport.
+
+Art source and FBXs are tracked. Generated Unreal Content and raw frame/audio captures are ignored. Use Build.ps1 for import/build. `-DBCapture` is a posed art screenshot with granted sample upgrades; `-DBMotionCapture` drives real combat APIs and movement from a script. Neither proves ordinary inputs, full completion, fun or performance. Native input observations and owner feedback must be reported separately. Current evidence and remaining work live in STATUS.md and QA.md.

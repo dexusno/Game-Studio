@@ -15,7 +15,7 @@
     "scope_fit": 2,
     "distribution": 2
   },
-  "score_notes": "Original scores are provisional indirect inspiration estimates, not market evidence. The owner rejected the first implemented beta for feel, shield identity and presentation; the corrected interaction remains untested. No commercial results or reliable production-cost forecast are available.",
+  "score_notes": "Original scores are provisional indirect inspiration estimates, not market evidence. The owner rejected beta2. A physical shield courtyard correction now has packaged technical evidence, but owner enjoyment and attainment of the selected art standard remain unproven. No commercial result or reliable full-production cost forecast exists.",
   "evidence": [
     {
       "url": "https://store.steampowered.com/app/692890/Roboquest/",
@@ -42,7 +42,7 @@
     "Carryover can either invalidate destination challenges or make earned rewards feel confiscated; permanent ownership and active transfer must be clearly separated.",
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
-  "next_test": "Replace the rejected pulse-gun foundation with a physical shield combat experiment in one representative authored Bellroot courtyard. Demonstrate attack/protection commitment, spatial recall, convincing animation/sound, readable threats and two earned behavioral upgrades against art anchor B before content expansion. Resume from games/dreambound/STATUS.md.",
+  "next_test": "Play the physical shield courtyard study: compare held strikes/guard with throwing/recall, earn contrasting attachments, and assess the mixed/heavy encounters. Continue visual work against anchor B from actual Unreal frames; do not expand the campaign until the corrected interaction earns positive owner evidence. Resume from games/dreambound/STATUS.md.",
   "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
@@ -79,7 +79,7 @@
     "decision_on": "2026-09-08",
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
     "direction": "After the failed procedural kit, properly author and animate the hero shield/enemy and compose a representative courtyard around a bell/tree landmark. Qualify coherent supporting assets for rights and style before use. Blender/Unreal remain installed production tools; AI image-to-3D remains an untested optional experiment.",
-    "evidence": "Original Blender kit, Unreal imports and packaged rendering were completed. Comparison with anchor B and the owner playtest found a substantial failure in form, composition, materials and animation. Ability to reach the anchor polish remains unproven.",
+    "evidence": "The corrective build replaces the gun with a complete held/thrown disc and a new authored shield/guardian/tree/masonry kit. Actual Unreal inspection found and corrected exposure and UV export defects. It still does not establish anchor B fidelity; native and scripted observations are separated in game evidence.",
     "details": "research/runs/2026-09-07-depth-reset/art-pipeline.md",
     "style_review": "B remains owner-selected. Klaus rejected beta2 as nowhere near the anchor. Future fidelity claims require actual moving Unreal gameplay with the intended weapon, enemy, authored scene and sound.",
     "style_comparison": "research/runs/2026-09-07-depth-reset/dreamworld-art-direction.md"
@@ -95,10 +95,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-08T08:58:29+00:00",
-      "record_sha256": "7f4ae4cc72f9bcde36ab2036c570c40bdf71c7afe830d48a4cdb3620717f4109",
+      "captured_at": "2026-09-08T11:00:31+00:00",
+      "record_sha256": "ca4515b2e087c611a31afeb15707458a0106278d3d7c33521e53ab15a93b6237",
       "files": {
-        "games/dreambound/STATUS.md": "a6d226f1f30bbba3d67913508aa12ffe0bd67d63b142b50ca6cdcced6933736d",
+        "games/dreambound/STATUS.md": "47a0515ca010a7ed624ceb27a1b2ae0faa3d3501f3158479ad0c5d0a6a35b240",
         "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",

@@ -3,10 +3,12 @@
 #include "DBCharacter.h"
 #include "DBEnemy.h"
 #include "DBGameMode.h"
+#include "DBThrownShield.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Engine/World.h"
+#include "EngineUtils.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
 #include "UObject/ConstructorHelpers.h"
@@ -51,10 +53,10 @@ void ADBProjectile::PrepareVisuals()
     {
         Visual->SetStaticMesh(Crystal);
         const FVector Size = Crystal->GetBounds().BoxExtent * 2.f;
-        const FVector Scale(24.f / FMath::Max(1.f, Size.X),
+        BaseVisualScale = FVector(24.f / FMath::Max(1.f, Size.X),
             20.f / FMath::Max(1.f, Size.Y), 28.f / FMath::Max(1.f, Size.Z));
-        Visual->SetRelativeScale3D(Scale);
-        VisualCenterOffset = -Crystal->GetBounds().Origin * Scale;
+        Visual->SetRelativeScale3D(BaseVisualScale);
+        VisualCenterOffset = -Crystal->GetBounds().Origin * BaseVisualScale;
         Visual->SetRelativeLocation(VisualCenterOffset);
     }
     UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr,
@@ -83,6 +85,9 @@ void ADBProjectile::Initialize(FVector Direction, float Speed, float Damage, boo
     SetOwner(OwnerEnemy);
     BoltColor = Color;
     LifeRemaining = 5.f;
+    bImpacted = false;
+    Streak->SetVisibility(true);
+    Visual->SetRelativeScale3D(BaseVisualScale);
     if (const ADBEnemy* Enemy = Cast<ADBEnemy>(OwnerEnemy)) SpawnRoomId = Enemy->RoomId;
     else if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode())) SpawnRoomId = Mode->CurrentRoomId;
     SetActorRotation(Velocity.Rotation());
@@ -94,6 +99,18 @@ void ADBProjectile::Initialize(FVector Direction, float Speed, float Damage, boo
     }
 }
 
+void ADBProjectile::Impact(FVector Location)
+{
+    if (bImpacted) return;
+    bImpacted = true;
+    Velocity = FVector::ZeroVector;
+    SetActorLocation(Location, false);
+    Streak->SetVisibility(false);
+    LifeRemaining = 0.13f;
+    // The stopped flash remains visible briefly; it cannot deal another contact.
+    if (GlowMaterial) GlowMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(1.f, 0.76f, 0.4f) * 2.f);
+}
+
 void ADBProjectile::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
@@ -101,12 +118,22 @@ void ADBProjectile::Tick(float DeltaSeconds)
     if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
     {
         // Clearing an encounter removes lingering danger before the reward choice.
-        if (Mode->bChoosingReward || (SpawnRoomId != INDEX_NONE && Mode->CurrentRoomId != SpawnRoomId))
+        if (Mode->bChoosingReward || Mode->bTitle || Mode->bWon || Mode->bDefeated
+            || (SpawnRoomId != INDEX_NONE && Mode->CurrentRoomId != SpawnRoomId))
         { Destroy(); return; }
         if (Mode->bPaused || Mode->bShowingBuild) return;
     }
     LifeRemaining -= DeltaSeconds;
     if (LifeRemaining <= 0.f) { Destroy(); return; }
+    if (bImpacted)
+    {
+        const float Fade = FMath::Clamp(LifeRemaining / 0.13f, 0.f, 1.f);
+        const float Expansion = 1.f + (1.f - Fade) * 2.f;
+        Visual->SetRelativeScale3D(BaseVisualScale * Expansion);
+        Visual->SetRelativeLocation(Visual->GetRelativeRotation().RotateVector(VisualCenterOffset * Expansion));
+        if (GlowMaterial) GlowMaterial->SetVectorParameterValue(TEXT("Color"), BoltColor * (Fade * 2.5f));
+        return;
+    }
     VisualTime += DeltaSeconds;
     Visual->AddLocalRotation(FRotator(0.f, 0.f, DeltaSeconds * 210.f));
     Visual->SetRelativeLocation(Visual->GetRelativeRotation().RotateVector(VisualCenterOffset));
@@ -117,16 +144,28 @@ void ADBProjectile::Tick(float DeltaSeconds)
     FCollisionQueryParams Params(SCENE_QUERY_STAT(DBHostileBolt), false, this);
     Params.AddIgnoredActor(SourceEnemy.Get());
     FHitResult Hit;
-    if (GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility,
-        FCollisionShape::MakeSphere(Collision->GetScaledSphereRadius()), Params))
+    const bool bWorldContact = GetWorld()->SweepSingleByChannel(Hit, Start, End, FQuat::Identity, ECC_Visibility,
+        FCollisionShape::MakeSphere(Collision->GetScaledSphereRadius()), Params);
+    const FVector UnobstructedEnd = bWorldContact ? Hit.Location : End;
+    // Only a planted disk crossed by this real flight segment can intercept. A disk behind
+    // the first wall/player contact is excluded, and the shield owns facing/integrity rules.
+    for (TActorIterator<ADBThrownShield> It(GetWorld()); It; ++It)
     {
-        SetActorLocation(Hit.Location);
+        ADBThrownShield* Shield = *It;
+        if (Shield->InterceptProjectile(Start, UnobstructedEnd, HitDamage, bPiercesGuard))
+        {
+            Impact(FMath::ClosestPointOnSegment(Shield->GetActorLocation(), Start, UnobstructedEnd));
+            return;
+        }
+    }
+    if (bWorldContact)
+    {
         if (ADBCharacter* Player = Cast<ADBCharacter>(Hit.GetActor()))
         {
             const FVector IncomingSource = Player->GetPawnViewLocation() - Velocity.GetSafeNormal() * 300.f;
             if (!Player->bDead) Player->ReceiveAttack(HitDamage, IncomingSource, bPiercesGuard, SourceEnemy.Get());
         }
-        Destroy();
+        Impact(Hit.Location);
         return;
     }
     SetActorLocation(End, false);

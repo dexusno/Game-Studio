@@ -1,3 +1,15 @@
+# Current physical shield study QA
+
+0.2.0-study1 supersedes the rejected pulse-gun beta as the active experiment. Final packaged runtime results:14 scenarios passed,0 failed. Four runs were executed as integration, capture and menu corrections landed; no scenario failed. [Exact package](evidence/shield-study-build.json), [staged result](evidence/shield-study-checks.json), [fixture scope](qa/physical-shield-checks.md).
+
+Native normal title/start, equipment menu and save/exit were observed. The start-click leak was fixed by acting on mouse release. The final menu uses plain ASCII labels. These observations are separate from the automated fixture. Holding movement/guard, full focus-loss handling and a full normal run remain outside agent input coverage.
+
+The actual scripted capture contains a moving opponent and an earned first clear through normal combat APIs. It is not a complete ordinary run. [Footage](evidence/shield-study-scripted.mp4), [current scene](evidence/shield-study-courtyard.png). Raw frame requests slow the renderer, so capture cadence is not a performance measurement. Engine audio recording originally omitted silent intervals through submix auto-disable; capture now retains silence. Final audio is25.92s with no clipped PCM samples. No auditory quality verdict is possible from the agent's available input.
+
+Exposure and exported UV errors were corrected after inspecting Unreal output. Correcting UVs preserved geometry/hulls; two tiny-tangent warnings remain on the authored stair. The scene and enemy detail still fall short of the selected anchor. Owner feel, difficulty, complete pacing, upgrade enjoyment and visual acceptance are pending. No complete ordinary playthrough or positive fun claim is made.
+
+The owner feedback and technical evidence below apply to the retained beta2 baseline.
+
 # Cyborg between worlds — beta QA
 
 2026-09-08. **Klaus played and rejected Shipping 0.1.0-beta2 for combat feel/identity and presentation.** Its staged checks and native menu/save evidence remain valid technical observations. They are not evidence of enjoyable play. Production fixes belong to integration/combat owners.
@@ -9,13 +21,13 @@ Root compared the retained gameplay capture with anchor B and inspected world pl
 
 Klaus also identified missing established antagonists and reasons to fight, and requested that story work later. No enemy faction or campaign conflict has been selected by that feedback.
 
-## Identity and coverage
+## Historical beta2 identity and coverage
 
-Reviewed [BRIEF.md](BRIEF.md), [IMPLEMENTATION.md](IMPLEMENTATION.md) and the game mode, HUD, character and enemy integration. Current artifact: **0.1.0-beta2, Windows Shipping**, after the menu-only rebuild. Binary: [Dreambound-Win64-Shipping.exe](BuildOutput/Shipping/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe), 166,044,160 bytes, written September 8 at 05:33:04 UTC. Integration-reported SHA-256: `6BE6C949F1A732278343560A81906A077F6CD88A1D53F04432A474DEF7C910BE`.
+Reviewed [BRIEF.md](BRIEF.md), [IMPLEMENTATION.md](IMPLEMENTATION.md) and the game mode, HUD, character and enemy integration. Historical artifact: **0.1.0-beta2, Windows Shipping**, after the menu-only rebuild. Binary: [Dreambound-Win64-Shipping.exe](BuildOutput/Shipping/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe), 166,044,160 bytes, written September 8 at 05:33:04 UTC. Integration-reported SHA-256: `6BE6C949F1A732278343560A81906A077F6CD88A1D53F04432A474DEF7C910BE`.
 
 Environment: Windows, Unreal `5.8.2-56702186`. Integration reports the rebuilt Shipping package's staged driver passed 31/0 and maintains the retained [packaged report](evidence/beta-0.1.0-staged-checks.txt). QA inspected earlier packaged/editor reports; beta2 execution and native observations below are attributed to integration. The earlier editor run used `-game -NullRHI -DBVerify -DBSaveSlot=DreamboundQA_Staged -DBSeed=833282 -unattended -nosound -nosplash`. Intended controls remain WASD/mouse, LMB/RMB/Q, Shift, Space, E, 1–3, R, Tab and Escape. Staged checks called input APIs, not Windows input.
 
-## Current startup/input boundary
+## Historical beta2 startup/input boundary
 
 The earlier Windows Security prompt is gone. Integration verified these native results on rebuilt beta2; independent QA did not operate the session:
 

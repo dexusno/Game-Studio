@@ -31,6 +31,7 @@ private:
     TWeakObjectPtr<AActor> SourceEnemy;
     FVector Velocity = FVector::ZeroVector;
     FVector VisualCenterOffset = FVector::ZeroVector;
+    FVector BaseVisualScale = FVector(0.28f, 0.22f, 0.22f);
     FLinearColor BoltColor = FLinearColor(1.f, 0.35f, 0.12f);
     float HitDamage = 14.f;
     float LifeRemaining = 5.f;
@@ -38,6 +39,8 @@ private:
     int32 SpawnRoomId = INDEX_NONE;
     bool bPiercesGuard = false;
     bool bInitialized = false;
+    bool bImpacted = false;
 
     void PrepareVisuals();
+    void Impact(FVector Location);
 };
