@@ -123,8 +123,8 @@ def configure():
 
 
 def checked_save(asset):
-    if not asset.get_path_name().startswith("/Game/AI3DInspection/"):
-        raise RuntimeError("Refusing to save an asset outside inspection scope")
+    if not asset.get_path_name().startswith(("/Game/AI3DInspection/", "/Game/Art/Trellis/")):
+        raise RuntimeError("Refusing to save an asset outside the AI3D import scopes")
     if not LIB.save_loaded_asset(asset):
         raise RuntimeError("Save failed: " + asset.get_path_name())
 
@@ -169,9 +169,10 @@ def connect(source, output, target, input_name):
 
 
 def create_material(config, base, mr):
-    path = config["asset_root"] + "/Materials/M_Waymarker_PBR"
+    name = config.get("material_name", "M_Waymarker_PBR")
+    path = config["asset_root"] + "/Materials/" + name
     material = LIB.load_asset(path) if LIB.does_asset_exist(path) else ASSETS.create_asset(
-        "M_Waymarker_PBR", config["asset_root"] + "/Materials", unreal.Material, unreal.MaterialFactoryNew())
+        name, config["asset_root"] + "/Materials", unreal.Material, unreal.MaterialFactoryNew())
     if not isinstance(material, unreal.Material):
         raise RuntimeError("Material creation failed")
     EDIT.delete_all_material_expressions(material)
@@ -236,7 +237,7 @@ def import_mesh(config, material):
     task = unreal.AssetImportTask()
     task.filename = config["fbx"]
     task.destination_path = config["asset_root"] + "/Meshes"
-    task.destination_name = "SM_Waymarker"
+    task.destination_name = config.get("mesh_name", "SM_Waymarker")
     task.automated = True
     task.replace_existing = True
     task.replace_existing_settings = True
@@ -253,7 +254,7 @@ def import_mesh(config, material):
     for path in task.imported_object_paths:
         if not str(path).startswith(config["asset_root"] + "/"):
             raise RuntimeError("Unexpected FBX import destination: " + str(path))
-    mesh = LIB.load_asset(task.destination_path + "/SM_Waymarker")
+    mesh = LIB.load_asset(task.destination_path + "/" + task.destination_name)
     if not isinstance(mesh, unreal.StaticMesh):
         raise RuntimeError("Static mesh import failed")
     for index in range(len(mesh.get_editor_property("static_materials"))):
@@ -733,7 +734,8 @@ def main():
     CALLBACK = unreal.register_slate_post_tick_callback(RUNNER.tick)
 
 
-try:
-    main()
-except Exception as error:
-    fail(error)
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        fail(error)

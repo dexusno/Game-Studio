@@ -572,10 +572,11 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
             bool SolidRocks=true;
             for(const auto& R:Mode->Rooms){
                 FHitResult Hit;FCollisionQueryParams P(SCENE_QUERY_STAT(DBGardenRock),false,Player);
-                const bool HitRock=GetWorld()->SweepSingleByChannel(Hit,R.Center+FVector(940,1370,110),R.Center+FVector(1490,1370,110),
+                const bool HitRock=GetWorld()->SweepSingleByChannel(Hit,R.Center+FVector(1180,1390,110),R.Center+FVector(1450,1390,110),
                     FQuat::Identity,ECC_Visibility,FCollisionShape::MakeCapsule(32.f,88.f),P);
                 const auto* MeshComponent=Cast<UStaticMeshComponent>(Hit.GetComponent());
-                SolidRocks&=HitRock&&MeshComponent&&MeshComponent->GetStaticMesh()&&MeshComponent->GetStaticMesh()->GetFName()==FName(TEXT("SM_GardenRockCluster"));
+                const FName MeshName=MeshComponent&&MeshComponent->GetStaticMesh()?MeshComponent->GetStaticMesh()->GetFName():NAME_None;
+                SolidRocks&=HitRock&&(MeshName==FName(TEXT("SM_Trellis_RootRock"))||MeshName==FName(TEXT("SM_GardenRockCluster")));
             }
             Check(SolidRocks,TEXT("reachable_garden_rocks_block_capsules"),TEXT("Actual capsule sweep against one corner rock cluster in each generated court."));
         }

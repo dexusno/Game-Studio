@@ -27,6 +27,7 @@ import struct
 import subprocess
 import sys
 import time
+import traceback
 
 MODEL_ID = "microsoft/TRELLIS.2-4B"
 MODEL_REVISION = "af44b45f2e35a493886929c6d786e563ec68364d"
@@ -177,9 +178,36 @@ def generate(args, image, image_info):
         report["generation"]["low_vram"] = pipeline.low_vram
         report["timings_seconds"]["load"] = round(time.monotonic() - stage_start, 3)
         stage_start = time.monotonic()
-        meshes, latents = pipeline.run(image, seed=args.seed, num_samples=1,
-                                      pipeline_type=args.quality, max_num_tokens=args.max_num_tokens,
-                                      return_latent=True)
+        decode = pipeline.decode_latent
+        def checkpoint_decode(shape, texture, resolution):
+            checkpoint = {
+                "input_sha256": image_info["sha256"], "model_revision": MODEL_REVISION,
+                "seed": args.seed, "resolution": resolution,
+                "shape_feats": shape.feats.detach().cpu(), "shape_coords": shape.coords.detach().cpu(),
+                "texture_feats": texture.feats.detach().cpu(), "texture_coords": texture.coords.detach().cpu(),
+            }
+            torch.save(checkpoint, out / "latents.pt")
+            del checkpoint
+            print(f"Latents saved; decoding at {resolution}", flush=True)
+            return decode(shape, texture, resolution)
+        pipeline.decode_latent = checkpoint_decode
+        if args.resume_latents:
+            from trellis2.modules.sparse import SparseTensor
+            checkpoint = torch.load(args.resume_latents, map_location="cpu", weights_only=True)
+            if (checkpoint["input_sha256"] != image_info["sha256"] or
+                checkpoint["model_revision"] != MODEL_REVISION or checkpoint["seed"] != args.seed or
+                checkpoint["resolution"] != int(args.quality.split("_")[0])):
+                raise RuntimeError("Latent checkpoint does not match input, model, seed and requested resolution")
+            shape = SparseTensor(feats=checkpoint["shape_feats"].cuda(), coords=checkpoint["shape_coords"].cuda())
+            texture = SparseTensor(feats=checkpoint["texture_feats"].cuda(), coords=checkpoint["texture_coords"].cuda())
+            latents = (shape, texture, checkpoint["resolution"])
+            report["generation"]["resumed_from"] = str(args.resume_latents)
+            del checkpoint
+            meshes = checkpoint_decode(*latents)
+        else:
+            meshes, latents = pipeline.run(image, seed=args.seed, num_samples=1,
+                                          pipeline_type=args.quality, max_num_tokens=args.max_num_tokens,
+                                          return_latent=True)
         mesh = meshes[0]
         actual_resolution = int(latents[2])
         report["generation"].update(actual_resolution=actual_resolution,
@@ -237,6 +265,7 @@ def generate(args, image, image_info):
     except Exception as error:
         report["status"] = "failed"
         report["error"] = f"{type(error).__name__}: {error}"
+        report["traceback"] = traceback.format_exc()
         raise
     finally:
         report["timings_seconds"]["total"] = round(time.monotonic() - start, 3)
@@ -259,6 +288,7 @@ def main() -> int:
     parser.add_argument("--max-num-tokens", type=positive_int, default=49152)
     parser.add_argument("--export-faces", type=positive_int, default=1000000)
     parser.add_argument("--remesh", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--resume-latents", type=Path, help="Resume decoding an exact saved local latents.pt into a new output directory")
     parser.add_argument("--repo", type=Path, default=Path(os.environ.get(
         "TRELLIS2_REPO", Path.home() / ".local/share/game-studio/ai3d/TRELLIS.2")))
     parser.add_argument("--validate-only", action="store_true", help="Check alpha only; no model imports, downloads or GPU work")

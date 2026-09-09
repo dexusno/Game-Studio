@@ -1,19 +1,15 @@
 #include "DBGameMode.h"
 #include "Engine/World.h"
+#include "Engine/StaticMesh.h"
 #include "Engine/DirectionalLight.h"
 #include "Engine/SkyLight.h"
 #include "Components/SkyAtmosphereComponent.h"
 #include "Engine/ExponentialHeightFog.h"
 #include "Engine/PostProcessVolume.h"
-#include "Engine/PointLight.h"
 #include "Components/DirectionalLightComponent.h"
 #include "Components/SkyLightComponent.h"
 #include "Components/ExponentialHeightFogComponent.h"
-#include "Components/PointLightComponent.h"
-#include "Sound/SoundBase.h"
-#include "Components/AudioComponent.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 // Seeded assembly uses connected room modules with protected door axes.
 // Layouts change routes and cover placement; authored meshes retain their scale.
@@ -32,8 +28,46 @@ void ADBGameMode::BuildRecoveryCourtyard()
   const int32 Variant=Layout.RandRange(0,2);RoomLayoutVariants.Add(I,Variant);
   LayoutSignature+=FString::Printf(TEXT("/cover%d:%d"),I,Variant);
  }
- // Foliage remains noncolliding. Reachable stone masses use fitted import
- // hulls; their placement preserves the entrance axes and combat lanes.
+ // Keep this import path local to the recovery scene. The original kit's
+ // Instance helper intentionally resolves /Game/Art/Meshes, not nested kits.
+ // A missing new import falls back to existing art, never an invisible wall.
+ TMap<FString,UStaticMesh*> TrellisAssets;
+ auto Trellis=[this,&TrellisAssets](const TCHAR* Name,FVector Location,FRotator Rotation,FVector Scale)->bool{
+  const FString Key=FString(TEXT("Trellis/"))+Name;
+  UStaticMesh** Cached=TrellisAssets.Find(Key);
+  UStaticMesh* Asset=Cached?*Cached:nullptr;
+  if(!Cached){
+   const FString Path=FString::Printf(TEXT("/Game/Art/Trellis/Meshes/%s.%s"),Name,Name);
+   Asset=LoadObject<UStaticMesh>(nullptr,*Path);TrellisAssets.Add(Key,Asset);
+   if(Asset)UE_LOG(LogTemp,Display,TEXT("DB_TRELLIS %s bounds_cm=%s"),Name,*(Asset->GetBounds().BoxExtent*2).ToString());
+   else UE_LOG(LogTemp,Warning,TEXT("DB_TRELLIS missing %s; using original scene art"),*Path);
+  }
+  if(!Asset)return false;
+  auto** Existing=MeshBatches.Find(Key);
+  auto* Batch=Existing?*Existing:nullptr;
+  if(!Batch){
+   auto* Owner=GetWorld()->SpawnActor<AActor>();if(!Owner)return false;
+   Generated.Add(Owner);
+   Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
+   Owner->SetRootComponent(Batch);Owner->AddInstanceComponent(Batch);
+   Batch->SetStaticMesh(Asset);Batch->SetMobility(EComponentMobility::Static);
+   // Imported UCX bodies supply physical cover. Render triangles and foliage
+   // must not become complex collision; that is part of the import contract.
+   Batch->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+   Batch->SetCollisionObjectType(ECC_WorldStatic);Batch->SetCollisionResponseToAllChannels(ECR_Block);
+   Batch->RegisterComponent();MeshBatches.Add(Key,Batch);
+  }
+  Batch->AddInstance(FTransform(Rotation,Location,Scale),true);
+  return true;
+ };
+ // TRELLIS +Y is the visible front, with width along X and a grounded pivot.
+ // Generated cloisters are optional side galleries, not required route gates:
+ // their opening is narrower than the original protected doorway envelope.
+ auto Cloister=[this,&Trellis](FVector Location,float Yaw,float Scale){
+  if(!Trellis(TEXT("SM_Trellis_Cloister"),Location,FRotator(0,Yaw,0),FVector(Scale)))
+   Instance(TEXT("SM_Arch"),Location,FRotator(0,Yaw,0),FVector(Scale,Scale,Scale*1.12f));
+ };
+ // Foliage remains noncolliding. Reachable stone masses use authored hulls.
  auto Garden=[this](const TCHAR* Name,FVector Location,FRotator Rotation,FVector Scale){
   Instance(Name,Location,Rotation,Scale);
   if(auto** Batch=MeshBatches.Find(FString(Name)))
@@ -46,11 +80,10 @@ void ADBGameMode::BuildRecoveryCourtyard()
   FRandomStream GardenArt(Seed+199903+RoomIndex*8209);
   Mesh("/Engine/BasicShapes/Cube.Cube",C+FVector(0,0,-70),FRotator::ZeroRotator,FVector(37,37,1),true,"M_Mortar");
   for(int32 X=-8;X<=8;++X)for(int32 Y=-8;Y<=8;++Y){
-   // A gently worn broad cross connects every possible seeded entrance. Only
-   // the material changes: tile heights/footprints and foundation stay intact.
-   const float Ribbon=110.f*FMath::Sin((X*200.f+1600.f)*.0018f+RoomIndex*.6f);
-   const bool WornPath=FMath::Abs(Y*200.f-Ribbon)<430.f||FMath::Abs(X*200.f)<350.f;
-   Instance(Art.FRand()<.52f?"SM_StoneTile":"SM_StoneTile_B",C+FVector(X*200+Art.FRandRange(-4,4),Y*200+Art.FRandRange(-4,4),-24),FRotator(0,Art.RandRange(0,3)*90.f,0),FVector(.995,.995,1),WornPath?TEXT(""):TEXT("M_Stone"));
+   // Retain all three authored slots: dark recessed mortar, worn stone and
+   // lighter individual slabs. One blanket M_Stone override erased that depth.
+   // The existing flat collision surface and tile footprints are unchanged.
+   Instance(Art.FRand()<.52f?"SM_StoneTile":"SM_StoneTile_B",C+FVector(X*200+Art.FRandRange(-4,4),Y*200+Art.FRandRange(-4,4),-24),FRotator(0,Art.RandRange(0,3)*90.f,0),FVector(.995,.995,1));
   }
   TArray<FVector> Doors;
   if(R.Parent>=0)Doors.Add((Rooms[R.Parent].Center-C).GetSafeNormal2D());
@@ -60,26 +93,30 @@ void ADBGameMode::BuildRecoveryCourtyard()
    bool Door=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Door=true;
    for(int32 K=-4;K<=4;++K){
     if(Door&&K==0)continue;
-    Instance("SM_Wall",C+Out*1760+T*K*400,FRotator(0,Side*90.f+90,0),FVector(1,1,Side==0?1.65:1.25));
-    if(FMath::Abs(K)==3)Instance("SM_Ivy",C+Out*1670+T*K*400+FVector(0,0,310),FRotator(0,Side*90.f,0),FVector(1.2));
+    // Group the silhouette into low shoulders and taller ends, rather than
+    // stretching every wall into an identical high strip around the arena.
+    const bool TallShoulder=(Side+RoomIndex)%4==1&&K>=1;
+    const float WallHeight=TallShoulder?1.46f:(FMath::Abs(K)>=3?1.16f:1.04f);
+    Instance("SM_Wall",C+Out*1760+T*K*400,FRotator(0,Side*90.f+90,0),FVector(1,1,WallHeight));
+    if(K==((Side+RoomIndex)%2?3:-3))
+     Instance("SM_Ivy",C+Out*1715+T*K*400+FVector(0,0,260),FRotator(0,Side*90.f,0),FVector(1.1));
    }
    if(Door){
     Instance("SM_Arch",C+Out*1760,FRotator(0,Side*90.f+90,0),FVector(.82,1.1,1.3));
-    // Side supports keep a >=354 cm central visual clearance. The upper open
-    // arcade starts at Z480, beyond a normal running/jumping capsule envelope.
+    // Retain the proven doorway, its collision and the connector axis.
     for(int32 Flank:{-1,1})
      Garden(TEXT("SM_GardenButtress"),C+Out*1785+T*(342.f*Flank),FRotator(0,Side*90.f+90,0),FVector(1,1,1.08f));
-    Garden(TEXT("SM_GardenButtress"),C+Out*1845+T*730,FRotator(0,Side*90.f+90,0),FVector(.94f,.96f,1.30f));
-    Instance("SM_Arch",C+Out*1800+FVector(0,0,480),FRotator(0,Side*90.f+90,0),FVector(.90f,1.1f,.72f));
    }else{
-    Garden(TEXT("SM_GardenButtress"),C+Out*1725+T*(Side%2?1080.f:-1020.f),FRotator(0,Side*90.f+90,0),FVector(1.08f,1.04f,1.12f+RoomIndex*.08f));
+    Garden(TEXT("SM_GardenButtress"),C+Out*1785+T*(Side%2?1120.f:-1060.f),FRotator(0,Side*90.f+90,0),FVector(.94f,1.0f,1.08f+RoomIndex*.06f));
    }
-   // A real 7–10 m rock silhouette behind the thin wall, with open space at
-   // every connector. Width/depth bounds are recorded in the art metadata.
-   for(int32 Bank=0;Bank<2;++Bank){
-    const float Along=(Bank==0?-1060.f:1030.f)+(Door?0.f:GardenArt.FRandRange(-100.f,100.f));
-    const float Height=.96f+RoomIndex*.14f+((Side+Bank)%3)*.12f;
-    Garden(TEXT("SM_GardenCliffBank"),C+Out*2290+T*Along,FRotator(0,Side*90.f+90,0),FVector(1.03f,1.03f,Height));
+   // Distant backing belongs to two edges, leaving sky and light around the
+   // bell crown. No continuous ring of repeated rock slabs above every wall.
+   if(Side==(RoomIndex+1)%4||Side==(RoomIndex+2)%4){
+    for(int32 Bank=0;Bank<2;++Bank){
+     const float Along=(Bank==0?-1080.f:1080.f)+GardenArt.FRandRange(-60.f,60.f);
+     const float Height=.88f+RoomIndex*.09f+Bank*.12f;
+     Garden(TEXT("SM_GardenCliffBank"),C+Out*2370+T*Along,FRotator(0,Side*90.f+90,0),FVector(1.03f,1.03f,Height));
+    }
    }
   }
   // All variants leave +/-X and +/-Y door approaches clear. The two cover
@@ -89,39 +126,59 @@ void ADBGameMode::BuildRecoveryCourtyard()
   Instance("SM_Wall",C+CoverA[Variant],FRotator(0,Variant==1?90:0,0),FVector(1.3,1,.43));
   Instance("SM_Wall",C+CoverB[Variant],FRotator(0,Variant==2?90:0,0),FVector(1.15,1,.46));
   Instance("SM_Rubble",C+CoverA[Variant]+FVector(250,-60,0),FRotator(0,32,0),FVector(1.2));
-  const FVector Tree=C+FVector(Variant==1?920:600,Variant==2?1150:940,0);
-  Instance("SM_BellTree",Tree,FRotator(0,-12+RoomIndex*37,0),FVector(1.2));
-  Garden(TEXT("SM_GardenBough"),Tree+FVector(-70,-30,715),FRotator(0,-12+RoomIndex*37,0),FVector(1.20f,1.25f,1.10f));
-  Garden(TEXT("SM_GardenBough"),Tree+FVector(70,30,790),FRotator(0,145+RoomIndex*31,0),FVector(1.02f,1.12f,.96f));
-  Instance("SM_Bell",Tree+FVector(-20,-130,344),FRotator(0,-9,-6),FVector(RoomIndex==2?1.9:1.5));
-  // A corner gallery creates height and shadow without blocking the exits.
-  for(int32 K=0;K<2;++K){
-   Instance("SM_Arch",C+FVector(-1130+K*470,1340,0),FRotator::ZeroRotator,FVector(.88,1,1.2));
-   Instance("SM_Wall",C+FVector(-1130+K*470,1590,375),FRotator::ZeroRotator,FVector(1.2,1,.55));
+  // The root-embraced bell is one coherent textured silhouette, not a trunk,
+  // separate suspended bell and several floating canopy pieces. Different
+  // diagonal quarters keep the three courts identifiable while leaving the
+  // unchanged enemy pads, practice area and axial approaches exposed.
+  const FVector TreeOffsets[]={FVector(750+Variant*60,1000+Variant*70,0),
+   FVector(900+Variant*60,1130-Variant*45,0),FVector(-1020-Variant*40,1230-Variant*45,0)};
+  const FVector Tree=C+TreeOffsets[RoomIndex];
+  const float TreeYaw=(C-Tree).Rotation().Yaw-90.f;
+  const float TreeScale=RoomIndex==2?1.08f:RoomIndex==1?.98f:1.f;
+  if(!Trellis(TEXT("SM_Trellis_BellTree"),Tree,FRotator(0,TreeYaw,0),FVector(TreeScale))){
+   Instance("SM_BellTree",Tree,FRotator(0,TreeYaw+180,0),FVector(1.05f));
+   Instance("SM_Bell",Tree+FRotator(0,TreeYaw+180,0).RotateVector(FVector(-20,-130,344)),FRotator(0,TreeYaw+180,0),FVector(1.5f));
   }
-  Garden(TEXT("SM_GardenButtress"),C+FVector(-1490,1430,0),FRotator::ZeroRotator,FVector(1.0f,1.0f,1.12f));
-  Garden(TEXT("SM_GardenButtress"),C+FVector(-440,1530,0),FRotator::ZeroRotator,FVector(.88f,1.0f,.95f));
-  Garden(TEXT("SM_GardenBough"),C+FVector(-1490,1430,810),FRotator(0,-27-RoomIndex*23,0),FVector(1.25f,1.18f,1.14f));
-  Garden(TEXT("SM_GardenBough"),C+FVector(1080,-1725,850),FRotator(0,137+RoomIndex*17,0),FVector(1.30f,1.14f,1.08f));
-  if(RoomIndex==2)
-   Garden(TEXT("SM_GardenBough"),C+FVector(-1950,-1620,850),FRotator(0,34,0),FVector(1.16f));
-  Instance("SM_PillarBroken",C+FVector(1260,-1230,0),FRotator(0,17,0),FVector(1.1));
-  Instance("SM_Arch",C+FVector(1440,1480,390),FRotator(0,30,0),FVector(1.1,1,1.4));
+
+  // Grounded optional cloisters replace the floating upper arches. The first
+  // court has a close right-hand frame visible from ordinary startup; it sits
+  // south of the approach, so traversing its generated opening is optional.
+  if(RoomIndex==0){
+   Cloister(C+FVector(-1060,-1220,0),54.f,1.f);
+   Cloister(C+FVector(-1040+Variant*45,1550,0),180.f,1.f);
+  }else if(RoomIndex==1){
+   Cloister(C+FVector(-1540,930+Variant*30,0),-90.f,1.f);
+   Cloister(C+FVector(-1540,1460,0),-90.f,.92f);
+  }else{
+   Cloister(C+FVector(1090+Variant*35,-1550,0),0.f,1.08f);
+  }
   for(int32 Corner=0;Corner<4;++Corner){
    const FRotator Around(0,Corner*90.f,0);
-   const FVector Growth=C+Around.RotateVector(FVector(1390,1370,0));
-   // Planted corners have a low stone mass and a broad leafy edge. No new
-   // ground prop enters the central cross, ward/practice area or cover lanes.
-   Garden(TEXT("SM_GardenRockCluster"),Growth,FRotator(0,Corner*90.f+23+RoomIndex*11,0),FVector(.88f,1.0f,.88f));
-   for(int32 J=0;J<5;++J){
-    const FVector Offset=Around.RotateVector(FVector(GardenArt.FRandRange(-155,120),GardenArt.FRandRange(-180,150),0));
-    Garden(TEXT("SM_GardenUnderstory"),Growth+Offset,FRotator(0,GardenArt.FRandRange(0,360),0),FVector(GardenArt.FRandRange(.85f,1.15f)));
+   const FVector Growth=C+Around.RotateVector(FVector(1420,1390,0));
+   const float RockScale=GardenArt.FRandRange(.9f,1.08f);
+   const FRotator RockRotation(0,Corner*90.f+GardenArt.FRandRange(8.f,32.f),0);
+   if(!Trellis(TEXT("SM_Trellis_RootRock"),Growth,RockRotation,FVector(RockScale)))
+    Garden(TEXT("SM_GardenRockCluster"),Growth,RockRotation,FVector(.88f,1.0f,.88f));
+   // New clusters already include roots, moss and ferns. Use fewer companion
+   // plants, in unequal groups, with the same noncolliding foliage policy.
+   for(int32 J=0;J<2+(Corner+RoomIndex)%2;++J){
+    const FVector Offset=Around.RotateVector(FVector(GardenArt.FRandRange(-170,100),GardenArt.FRandRange(-170,100),0));
+    Garden(TEXT("SM_GardenUnderstory"),Growth+Offset,FRotator(0,GardenArt.FRandRange(0,360),0),FVector(GardenArt.FRandRange(.8f,1.05f)));
    }
-   for(int32 J=0;J<3;++J){
-    const FVector Offset=Around.RotateVector(FVector(-280+J*170,-250+J*60,0));
-    Garden(TEXT("SM_GardenGrassDrift"),Growth+Offset,FRotator(0,Corner*90.f+18,0),FVector(.90f));
+   for(int32 J=0;J<2;++J){
+    const FVector Offset=Around.RotateVector(FVector(-210+J*180,-200+J*70,0));
+    Garden(TEXT("SM_GardenGrassDrift"),Growth+Offset,FRotator(0,Corner*90.f+18,0),FVector(.82f));
    }
   }
+  // A readable near-scale carved stone on the opposite side from the ward.
+  // Face the accepted front toward the arrival, and keep the actual altar and
+  // its interaction radius unchanged; this is scenery, not another reward.
+  FVector Marker=C+FVector(-800,-1020,0);
+  if(R.Parent>=0){
+   const FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();
+   Marker=C+Back*1390-FVector(-Back.Y,Back.X,0)*620;
+  }
+  Trellis(TEXT("SM_Trellis_Waymarker"),Marker,FRotator(0,(GetRoomEntryPoint(RoomIndex)-Marker).Rotation().Yaw-90.f,0),FVector::OneVector);
   FVector Ward=C+FVector(-1120,-430,76);
   if(R.Parent>=0){FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();Ward=C+Back*1120+FVector(-Back.Y,Back.X,0)*300+FVector(0,0,76);}
   Instance("SM_Rubble",Ward-FVector(0,0,76),FRotator(0,24,0),FVector(1.05,1.05,.55));
@@ -138,24 +195,29 @@ void ADBGameMode::BuildRecoveryCourtyard()
   Rooms[I].Gates.Add(Mesh("/Engine/BasicShapes/Cube.Cube",(A+B)*.5+FVector(0,0,170),FRotator(0,Yaw,0),FVector(.18,6,3.4),true,"M_Core"));
  }
  UE_LOG(LogTemp,Display,TEXT("DB_LAYOUT seed=%d %s"),Seed,*LayoutSignature);
- auto* Sun=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,3000),FRotator(-31,-38,0));
+ auto* Sun=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,3000),FRotator(-36,-42,0));
  Sun->GetLightComponent()->SetMobility(EComponentMobility::Movable);
- Sun->GetLightComponent()->SetIntensity(4.6f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.86,.66));
+ Sun->GetLightComponent()->SetIntensity(5.2f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.90,.73));
+ Sun->GetLightComponent()->SetIndirectLightingIntensity(1.15f);
  Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->bAtmosphereSunLight=true;
- Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->LightSourceAngle=1.2f;Sun->GetLightComponent()->ShadowSharpen=.25f;Generated.Add(Sun);
+ Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->LightSourceAngle=1.8f;Generated.Add(Sun);
  Generated.Add(GetWorld()->SpawnActor<ASkyAtmosphere>());
  auto* Sky=GetWorld()->SpawnActor<ASkyLight>();Sky->GetLightComponent()->SetMobility(EComponentMobility::Movable);Sky->GetLightComponent()->SetRealTimeCaptureEnabled(true);
- Sky->GetLightComponent()->SetIntensity(.58f);Sky->GetLightComponent()->RecaptureSky();Generated.Add(Sky);
- auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.018f);Fog->GetComponent()->SetFogHeightFalloff(.28f);
- Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.32,.39,.36));Generated.Add(Fog);
+ Sky->GetLightComponent()->SetIntensity(.92f);Sky->GetLightComponent()->SetLightColor(FLinearColor(.72,.84,1));Sky->GetLightComponent()->RecaptureSky();Generated.Add(Sky);
+ // Modest broad fill retains carved relief on the shadow side of bronze and
+ // stone. One warm sun supplies the scene's shadows; this adds no second set.
+ auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-48,138,0));
+ Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);
+ Fill->GetLightComponent()->SetIntensity(.60f);Fill->GetLightComponent()->SetLightColor(FLinearColor(.62,.76,1));
+ Fill->GetLightComponent()->SetCastShadows(false);Generated.Add(Fill);
+ auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.009f);Fog->GetComponent()->SetFogHeightFalloff(.24f);
+ Fog->GetComponent()->SetStartDistance(900.f);Fog->GetComponent()->SetFogMaxOpacity(.42f);
+ Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.31,.39,.46));Generated.Add(Fog);
  auto* Post=GetWorld()->SpawnActor<APostProcessVolume>();Post->bUnbound=true;
  Post->Settings.bOverride_AutoExposureApplyPhysicalCameraExposure=true;Post->Settings.AutoExposureApplyPhysicalCameraExposure=false;
- Post->Settings.bOverride_AutoExposureBias=true;Post->Settings.AutoExposureBias=-.10f;
- Post->Settings.bOverride_BloomIntensity=true;Post->Settings.BloomIntensity=.28f;
- Post->Settings.bOverride_VignetteIntensity=true;Post->Settings.VignetteIntensity=.16f;
- Post->Settings.bOverride_ColorSaturation=true;Post->Settings.ColorSaturation=FVector4(.94,.97,.92,1);
- Post->Settings.bOverride_AmbientOcclusionIntensity=true;Post->Settings.AmbientOcclusionIntensity=.8f;Generated.Add(Post);
- auto* Lamp=GetWorld()->SpawnActor<APointLight>(FVector(-1450,-760,220),FRotator::ZeroRotator);
- Lamp->GetLightComponent()->SetMobility(EComponentMobility::Movable);Lamp->GetLightComponent()->SetIntensity(2600);Lamp->GetLightComponent()->SetLightColor(FLinearColor(1,.61,.29));Cast<UPointLightComponent>(Lamp->GetLightComponent())->SetAttenuationRadius(850);Generated.Add(Lamp);
+ Post->Settings.bOverride_AutoExposureBias=true;Post->Settings.AutoExposureBias=-.05f;
+ Post->Settings.bOverride_BloomIntensity=true;Post->Settings.BloomIntensity=.18f;
+ Post->Settings.bOverride_VignetteIntensity=true;Post->Settings.VignetteIntensity=.10f;
+ Post->Settings.bOverride_AmbientOcclusionIntensity=true;Post->Settings.AmbientOcclusionIntensity=.75f;Generated.Add(Post);
  bSliceAwaitingStart=!IsCleared(CurrentRoomId);UpdateGates();
 }
