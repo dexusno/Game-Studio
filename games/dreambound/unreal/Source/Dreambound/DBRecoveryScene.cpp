@@ -91,6 +91,15 @@ void ADBGameMode::BuildRecoveryCourtyard()
   TArray<FVector> Doors;
   if(R.Parent>=0)Doors.Add((Rooms[R.Parent].Center-C).GetSafeNormal2D());
   if(RoomIndex+1<Rooms.Num())Doors.Add((Rooms[RoomIndex+1].Center-C).GetSafeNormal2D());
+  // Large colliding backdrops cannot occupy the space between linked courts:
+  // their far edge would enter the next arena. Keep two unconnected sides.
+  TArray<int32> BackingSides;
+  for(int32 Offset=0;Offset<4&&BackingSides.Num()<2;++Offset){
+   const int32 Side=(RoomIndex+1+Offset)%4;
+   const FVector Out=FRotator(0,Side*90.f,0).Vector();
+   bool Connected=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Connected=true;
+   if(!Connected)BackingSides.Add(Side);
+  }
   for(int32 Side=0;Side<4;++Side){
    const FVector Out=FRotator(0,Side*90.f,0).Vector(),T(-Out.Y,Out.X,0);
    bool Door=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Door=true;
@@ -114,15 +123,17 @@ void ADBGameMode::BuildRecoveryCourtyard()
    }
    // Distant backing belongs to two edges, leaving sky and light around the
    // bell crown. No continuous ring of repeated rock slabs above every wall.
-   if(Side==(RoomIndex+1)%4||Side==(RoomIndex+2)%4){
+   if(BackingSides.Contains(Side)){
     for(int32 Bank=0;Bank<2;++Bank){
      const float Along=(Bank==0?-1080.f:1080.f)+GardenArt.FRandRange(-60.f,60.f);
-     const FVector Backing=C+Out*2370+T*Along;
      const FRotator BackingRotation(0,Side*90.f+90,0);
      const float BackingScale=3.55f+RoomIndex*.15f+Bank*.30f;
+     // Measured RootRock depth is 344.06 cm. Its nearest edge stays at
+     // 1920 cm, beyond the 1850 cm foundation, at every uniform scale.
+     const FVector Backing=C+Out*(1920.f+172.03f*BackingScale)+T*Along;
      if(!Trellis(TEXT("SM_Trellis_RootRock"),Backing,BackingRotation,FVector(BackingScale))){
       const float Height=.88f+RoomIndex*.09f+Bank*.12f;
-      Garden(TEXT("SM_GardenCliffBank"),Backing,BackingRotation,FVector(1.03f,1.03f,Height));
+      Garden(TEXT("SM_GardenCliffBank"),C+Out*2370+T*Along,BackingRotation,FVector(1.03f,1.03f,Height));
      }
     }
    }
@@ -161,8 +172,12 @@ void ADBGameMode::BuildRecoveryCourtyard()
    Cloister(C+FVector(1090+Variant*35,-1550,0),0.f,1.08f);
   }
   for(int32 Corner=0;Corner<4;++Corner){
+   // The wider paired cloister occupies this planted corner; leave its
+   // opening and approach visible instead of filling them with a rock mass.
+   if(RoomIndex==1&&Corner==1)continue;
    const FRotator Around(0,Corner*90.f,0);
-   const FVector Growth=C+Around.RotateVector(FVector(1420,1390,0));
+   FVector Growth=C+Around.RotateVector(FVector(1420,1390,0));
+   if(RoomIndex==2&&Corner==3)Growth=C+FVector(1500,-1200,0);
    const float RockScale=GardenArt.FRandRange(.9f,1.08f);
    const FRotator RockRotation(0,Corner*90.f+GardenArt.FRandRange(8.f,32.f),0);
    if(!Trellis(TEXT("SM_Trellis_RootRock"),Growth,RockRotation,FVector(RockScale)))

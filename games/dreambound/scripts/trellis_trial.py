@@ -181,11 +181,21 @@ def generate(args, image, image_info):
             # float32 allocation on large sparse decoder outputs without
             # lowering voxel resolution or altering the normalization axis.
             from trellis2.modules.norm import LayerNorm32
-            from trellis2.models.sc_vaes.sparse_unet_vae import SparseUnetVaeDecoder, SparseResBlockC2S3d
+            from trellis2.models.sc_vaes.sparse_unet_vae import SparseUnetVaeDecoder, SparseResBlockC2S3d, SparseConvNeXtBlock3d
+            from trellis2.modules.sparse.conv.conv_flex_gemm import sparse_conv3d_forward
+            from types import SimpleNamespace
             import torch.nn.functional as functional
             norm32_forward = LayerNorm32.forward
             layer_norm = functional.layer_norm
             chunk = args.decode_row_chunk
+            def release_neighbor_cache(value):
+                # SparseTensor replacements alias these per-resolution maps.
+                # Mutate the shared map: clear_spatial_cache only rebinds one
+                # tensor, leaving large buffers alive through other aliases.
+                cache = value.get_spatial_cache()
+                for key in list(cache):
+                    if key.startswith("SubMConv3d_neighbor_cache_"):
+                        del cache[key]
             def chunked_norm32(module, value):
                 if value.ndim != 2 or len(value) <= chunk:
                     return norm32_forward(module, value)
@@ -194,6 +204,18 @@ def generate(args, image, image_info):
                     output[start_row:start_row + chunk] = norm32_forward(module, value[start_row:start_row + chunk])
                 return output
             @torch.no_grad()
+            def chunked_convnext(module, value):
+                if module.training:
+                    raise RuntimeError("Chunked ConvNeXt is inference-only")
+                hidden = module.conv(value)
+                # Normalization, MLP expansion and residual addition are all
+                # per point; retain the global spatial convolution unchanged.
+                for start_row in range(0, len(hidden.feats), chunk):
+                    rows = module.mlp(module.norm(hidden.feats[start_row:start_row + chunk]))
+                    rows = rows + value.feats[start_row:start_row + chunk]
+                    hidden.feats[start_row:start_row + chunk].copy_(rows)
+                return hidden
+            @torch.no_grad()
             def chunked_upsample(module, value, subdiv=None):
                 if module.training:
                     raise RuntimeError("Chunked upsample is inference-only")
@@ -201,10 +223,38 @@ def generate(args, image, image_info):
                     subdiv = module.to_subdiv(value)
                 hidden = value.replace(module.norm1(value.feats))
                 functional.silu(hidden.feats, inplace=True)
-                hidden = module.conv1(hidden)
                 mask = subdiv.replace(subdiv.feats > 0) if subdiv is not None else None
-                hidden = module.updown(hidden, mask)
-                skip = module.updown(value, mask)
+                expanded_bytes = len(hidden.feats) * module.conv1.out_channels * hidden.feats.element_size()
+                if mask is not None and expanded_bytes > 2**30:
+                    # Upstream packs eight child voxels in consecutive output
+                    # channel groups. Compute/gather one group at a time so
+                    # inactive children never require a full expanded volume.
+                    skip = module.updown(value, mask)
+                    selected = mask.feats.nonzero()
+                    packed = torch.empty((len(selected), module.out_channels),
+                                         device=hidden.feats.device, dtype=hidden.feats.dtype)
+                    for child in range(8):
+                        first = child * module.out_channels
+                        last = first + module.out_channels
+                        conv = SimpleNamespace(weight=module.conv1.weight[first:last],
+                            bias=module.conv1.bias[first:last] if module.conv1.bias is not None else None,
+                            dilation=module.conv1.dilation)
+                        values = sparse_conv3d_forward(conv, hidden)
+                        for start_row in range(0, len(selected), chunk):
+                            selection = selected[start_row:start_row + chunk]
+                            rows = selection[:, 1] == child
+                            packed[start_row:start_row + chunk][rows] = values.feats[selection[rows, 0]]
+                        del values, rows, selection
+                    hidden = skip.replace(packed)
+                    del selected, packed
+                else:
+                    hidden = module.conv1(hidden)
+                    hidden = module.updown(hidden, mask)
+                    skip = module.updown(value, mask)
+                # Both upsample branches have finished reading the parent
+                # convolution map. Higher-resolution tensors have their own
+                # map; texture decoding may recompute retired maps as needed.
+                release_neighbor_cache(value)
                 # This is fresh conv1/updown storage, independent of the skip.
                 # Normalize it in row chunks without another full-width copy.
                 for start_row in range(0, len(hidden.feats), chunk):
@@ -238,6 +288,8 @@ def generate(args, image, image_info):
                                 hidden = block(hidden, subdiv=guide_subs[level] if guide_subs is not None else None)
                         else:
                             hidden = block(hidden)
+                    print(f"Decoder level {level}: {len(hidden.feats)} rows, "
+                          f"{torch.cuda.memory_allocated() / 2**30:.2f} GiB live", flush=True)
                 output = torch.empty((len(hidden.feats), module.output_layer.out_features),
                                      device=hidden.feats.device, dtype=value.dtype)
                 for start_row in range(0, len(hidden.feats), chunk):
@@ -250,13 +302,14 @@ def generate(args, image, image_info):
                 # do not retain them through mesh extraction and texture decode.
                 # Guide coordinates and subdivision predictions stay intact.
                 for tensor in (value, hidden, *subdivisions):
-                    tensor.clear_spatial_cache()
+                    release_neighbor_cache(tensor)
                 gc.collect()
                 torch.cuda.empty_cache()
                 return (hidden, subdivisions) if return_subs else hidden
             LayerNorm32.forward = chunked_norm32
             SparseUnetVaeDecoder.forward = chunked_decoder_forward
             SparseResBlockC2S3d._forward = chunked_upsample
+            SparseConvNeXtBlock3d._forward = chunked_convnext
             report["generation"]["normalization_row_chunk"] = chunk
         report["timings_seconds"]["load"] = round(time.monotonic() - stage_start, 3)
         stage_start = time.monotonic()
