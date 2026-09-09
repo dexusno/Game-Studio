@@ -176,6 +176,88 @@ def generate(args, image, image_info):
                                    "revision": getattr(pipeline.image_cond_model.model.config, "_commit_hash", None)}
         pipeline.cuda()
         report["generation"]["low_vram"] = pipeline.low_vram
+        if args.decode_row_chunk:
+            # Layer normalization is independent per row. Bound its temporary
+            # float32 allocation on large sparse decoder outputs without
+            # lowering voxel resolution or altering the normalization axis.
+            from trellis2.modules.norm import LayerNorm32
+            from trellis2.models.sc_vaes.sparse_unet_vae import SparseUnetVaeDecoder, SparseResBlockC2S3d
+            import torch.nn.functional as functional
+            norm32_forward = LayerNorm32.forward
+            layer_norm = functional.layer_norm
+            chunk = args.decode_row_chunk
+            def chunked_norm32(module, value):
+                if value.ndim != 2 or len(value) <= chunk:
+                    return norm32_forward(module, value)
+                output = torch.empty_like(value)
+                for start_row in range(0, len(value), chunk):
+                    output[start_row:start_row + chunk] = norm32_forward(module, value[start_row:start_row + chunk])
+                return output
+            @torch.no_grad()
+            def chunked_upsample(module, value, subdiv=None):
+                if module.training:
+                    raise RuntimeError("Chunked upsample is inference-only")
+                if module.pred_subdiv:
+                    subdiv = module.to_subdiv(value)
+                hidden = value.replace(module.norm1(value.feats))
+                functional.silu(hidden.feats, inplace=True)
+                hidden = module.conv1(hidden)
+                mask = subdiv.replace(subdiv.feats > 0) if subdiv is not None else None
+                hidden = module.updown(hidden, mask)
+                skip = module.updown(value, mask)
+                # This is fresh conv1/updown storage, independent of the skip.
+                # Normalize it in row chunks without another full-width copy.
+                for start_row in range(0, len(hidden.feats), chunk):
+                    rows = hidden.feats[start_row:start_row + chunk]
+                    rows.copy_(module.norm2(rows))
+                functional.silu(hidden.feats, inplace=True)
+                hidden = module.conv2(hidden)
+                repeats = module.out_channels // (module.channels // 8)
+                for start_row in range(0, len(hidden.feats), chunk):
+                    rows = skip.feats[start_row:start_row + chunk].repeat_interleave(repeats, dim=1)
+                    hidden.feats[start_row:start_row + chunk].add_(rows)
+                return (hidden, subdiv) if module.pred_subdiv else hidden
+            @torch.no_grad()
+            def chunked_decoder_forward(module, value, guide_subs=None, return_subs=False):
+                if module.training:
+                    raise RuntimeError("Chunked decoder is inference-only")
+                if (guide_subs is not None and module.pred_subdiv) or (return_subs and not module.pred_subdiv):
+                    raise RuntimeError("Invalid decoder subdivision contract")
+                hidden = module.from_latent(value).type(module.dtype)
+                subdivisions = []
+                # Same pinned upstream decoder blocks and subdivision outputs.
+                # Fuse only its final cast / row normalization / linear head
+                # into chunks, avoiding two full-width float32 volumes at once.
+                for level, blocks in enumerate(module.blocks):
+                    for index, block in enumerate(blocks):
+                        if level < len(module.blocks) - 1 and index == len(blocks) - 1:
+                            if module.pred_subdiv:
+                                hidden, subdivision = block(hidden)
+                                subdivisions.append(subdivision)
+                            else:
+                                hidden = block(hidden, subdiv=guide_subs[level] if guide_subs is not None else None)
+                        else:
+                            hidden = block(hidden)
+                output = torch.empty((len(hidden.feats), module.output_layer.out_features),
+                                     device=hidden.feats.device, dtype=value.dtype)
+                for start_row in range(0, len(hidden.feats), chunk):
+                    rows = hidden.feats[start_row:start_row + chunk].to(value.dtype)
+                    rows = layer_norm(rows, rows.shape[-1:])
+                    output[start_row:start_row + chunk] = functional.linear(
+                        rows, module.output_layer.weight, module.output_layer.bias)
+                hidden = hidden.replace(output)
+                # Neighbor maps from the completed decoder are memoized only;
+                # do not retain them through mesh extraction and texture decode.
+                # Guide coordinates and subdivision predictions stay intact.
+                for tensor in (value, hidden, *subdivisions):
+                    tensor.clear_spatial_cache()
+                gc.collect()
+                torch.cuda.empty_cache()
+                return (hidden, subdivisions) if return_subs else hidden
+            LayerNorm32.forward = chunked_norm32
+            SparseUnetVaeDecoder.forward = chunked_decoder_forward
+            SparseResBlockC2S3d._forward = chunked_upsample
+            report["generation"]["normalization_row_chunk"] = chunk
         report["timings_seconds"]["load"] = round(time.monotonic() - stage_start, 3)
         stage_start = time.monotonic()
         decode = pipeline.decode_latent
@@ -289,6 +371,7 @@ def main() -> int:
     parser.add_argument("--export-faces", type=positive_int, default=1000000)
     parser.add_argument("--remesh", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--resume-latents", type=Path, help="Resume decoding an exact saved local latents.pt into a new output directory")
+    parser.add_argument("--decode-row-chunk", type=positive_int, help="Bound decoder normalization, projection and residual temporaries; no resolution change")
     parser.add_argument("--repo", type=Path, default=Path(os.environ.get(
         "TRELLIS2_REPO", Path.home() / ".local/share/game-studio/ai3d/TRELLIS.2")))
     parser.add_argument("--validate-only", action="store_true", help="Check alpha only; no model imports, downloads or GPU work")
