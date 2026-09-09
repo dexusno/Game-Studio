@@ -14,6 +14,9 @@ records material-usage.json and preserves the existing rendered report.
 Outputs always go below this project's Saved/AI3DInspection/<run_id>. Imported
 assets and the evaluation map stay below /Game/AI3DInspection/<run_id>.
 
+For owner inspection, phase=view opens an interactive courtyard without tests
+or captures and keeps the editor open. Omit -RenderOffscreen and -unattended.
+
 No gameplay, project settings, external assets, or shared status is edited.
 Existing /Game/Art meshes are referenced without changing or resaving them.
 The saved map uses GameModeBase, preserving the real game's procedural maps.
@@ -91,8 +94,8 @@ def configure():
     config.setdefault("settle_seconds", 4.0)
     if not 1 <= config["instance_count"] <= 64:
         raise RuntimeError("Bounded inspection accepts 1â€“64 repeated copies")
-    if config["phase"] not in ("all", "import", "capture", "material"):
-        raise RuntimeError("phase must be all, import, capture or material")
+    if config["phase"] not in ("all", "import", "capture", "material", "view"):
+        raise RuntimeError("phase must be all, import, capture, material or view")
     if config["phase"] == "material":
         REPORT_NAME = "material-usage.json"
     REPORT.update({
@@ -688,6 +691,22 @@ def main():
             raise RuntimeError("Nanite material compile failed: " + str(messages))
     # Save explicitly even when an editor-side auto-fix already enabled usage.
     checked_save(material)
+    if config["phase"] == "view":
+        bounds = mesh.get_bounds()
+        scale = float(config["height_cm"]) / (bounds.box_extent.z * 2)
+        base_z = -(bounds.origin.z - bounds.box_extent.z) * scale
+        scene = make_scene(config, mesh, scale, base_z)
+        position = unreal.Vector(260, 420, 165)
+        rotation = unreal.MathLibrary.find_look_at_rotation(position, unreal.Vector(0, 0, 120))
+        unreal.EditorLevelLibrary.set_level_viewport_camera_info(position, rotation)
+        ACTORS.set_selected_level_actors([scene[1]])
+        LEVEL.save_current_level()
+        REPORT.update({"success": True, "complete": True,
+            "evidence_type": "Interactive editor view prepared for owner inspection",
+            "rendered_captures_requested": False})
+        write_report()
+        unreal.log("AI3D_INTERACTIVE_READY " + config["map"])
+        return
     if config["phase"] == "material":
         REPORT.update({"success": True, "complete": True,
             "evidence_type": "Editor material usage persistence only; no new rendering claim",

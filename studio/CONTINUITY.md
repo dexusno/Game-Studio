@@ -49,6 +49,16 @@ Preserve the relevant changes in a local Git commit and integrate reviewed work 
 
 A new worktree starts from a selected Git state. Another task's uncommitted files are not automatically a shared project memory. Existing worktrees do not automatically advance when the saved project is updated, either. Before reporting a handoff ready, verify it from the receiving checkout or a clean checkout of its starting revision. Make sure required ignored tool-path configuration is available locally; the repository's .worktreeinclude copies only config.local.json for local managed worktrees.
 
+## Installed automation — September 9
+
+[Project hooks](../.codex/hooks.json) call [the dependency-free helper](../scripts/continuity.py). Once trusted, `SessionStart` loads a bounded context index on a new task, or the selected handoff on resume and immediately after compaction. The agent binds an explicit game with `python scripts/continuity.py bind game:dreambound`; bindings are per task, so another game task does not inherit this task's selection. A task started inside a game directory can use that directory's scope.
+
+`PreCompact` and `Stop` save a small local recovery copy of the selected handoff, checkout revision and changed filenames. Each event replaces its previous copy for that task. These copies and routing pointers live in ignored `.local/continuity/`; hooks do not read transcripts, call another model, run tests, block a turn, commit files or start a background service. They copy recorded state; the agent must still write decisions and current progress into the canonical files during work. Unsaved conversation-only reasoning cannot be reconstructed by this helper.
+
+After reviewing the handoff, refreshing its checkpoint, committing and integrating the changes, run `python scripts/continuity.py handoff game:dreambound --focus "the next outcome"`. This writes a ready-to-use prompt in `.local/continuity/handoff-game-dreambound.md` with the exact source revision and reading order. It refuses stale checkpoints and a dirty checkout. This automates prompt preparation; it does not select a milestone, create a task or merge concurrent work. Existing worktrees still need their intended starting revision.
+
+**Activation:** Codex requires a one-time review/trust of each new hook definition before executing it. Hooks are enabled in the local CLI, but installing these files alone is not proof that lifecycle execution is active. In the Codex CLI opened in this project, use `/hooks` to review and trust the three Game Studio hooks. Changed definitions require review again. No trust hashes, permission settings or bypass flags are written by this implementation. If hooks are unavailable or pending review, AGENTS.md and the helper commands remain usable by the agent. [Official hook behavior and trust requirement](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks).
+
 ## Codex guidance behind this workflow
 
 Checked against official documentation on 2026-09-08:

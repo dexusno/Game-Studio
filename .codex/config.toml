@@ -1,0 +1,3 @@
+# Lifecycle handoffs are project-local; no model, permission or global settings.
+[features]
+hooks = true

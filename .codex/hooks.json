@@ -1,0 +1,33 @@
+{
+  "description": "Game Studio context loading and local recovery copies. No network, automatic commits, task creation or extra test runs.",
+  "hooks": {
+    "SessionStart": [{
+      "matcher": "^(startup|resume|clear|compact)$",
+      "hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/scripts/continuity.py\" hook",
+        "commandWindows": "python -c \"import pathlib,runpy,subprocess,sys; p=pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'scripts'; sys.path.insert(0,str(p)); sys.argv=[str(p/'continuity.py'),'hook']; runpy.run_path(sys.argv[0],run_name='__main__')\"",
+        "timeout": 10,
+        "additionalContextLimit": 15000,
+        "statusMessage": "Loading Game Studio handoff"
+      }]
+    }],
+    "PreCompact": [{
+      "hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/scripts/continuity.py\" hook",
+        "commandWindows": "python -c \"import pathlib,runpy,subprocess,sys; p=pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'scripts'; sys.path.insert(0,str(p)); sys.argv=[str(p/'continuity.py'),'hook']; runpy.run_path(sys.argv[0],run_name='__main__')\"",
+        "timeout": 10,
+        "statusMessage": "Saving local context recovery copy"
+      }]
+    }],
+    "Stop": [{
+      "hooks": [{
+        "type": "command",
+        "command": "python3 \"$(git rev-parse --show-toplevel)/scripts/continuity.py\" hook",
+        "commandWindows": "python -c \"import pathlib,runpy,subprocess,sys; p=pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'scripts'; sys.path.insert(0,str(p)); sys.argv=[str(p/'continuity.py'),'hook']; runpy.run_path(sys.argv[0],run_name='__main__')\"",
+        "timeout": 10
+      }]
+    }]
+  }
+}
