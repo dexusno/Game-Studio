@@ -1,0 +1,69 @@
+{
+  "source": "textured.glb",
+  "height_metres": 2.4,
+  "original_triangles": 937810,
+  "removed_damaged_faces": 7090,
+  "repair_boundary_edges": 402,
+  "repair_boundary_components": 3,
+  "new_patch_triangles": 15516,
+  "final_triangles": 945160,
+  "repair_method": "Local rear face/sidewall excision, triangulated rebuilt surface, original rear UV plus adjacent stone UV1; vertex color R blends PBR samples across a 25mm feather while preserving original maps.",
+  "adjacent_stone_donor_faces": 9584,
+  "remaining_boundary_edges": 1574,
+  "remaining_nonmanifold_edges": 5571,
+  "rear_surface_probes": [
+    {
+      "x": -0.05,
+      "z": 0.65,
+      "rear_y": 0.13219964504241943,
+      "normal_y": 0.8720606565475464
+    },
+    {
+      "x": -0.05,
+      "z": 0.8,
+      "rear_y": 0.13227242231369019,
+      "normal_y": 0.9956743121147156
+    },
+    {
+      "x": -0.075,
+      "z": 0.5,
+      "rear_y": 0.13189899921417236,
+      "normal_y": 0.9832998514175415
+    },
+    {
+      "x": -0.06,
+      "z": 0.7,
+      "rear_y": 0.13175880908966064,
+      "normal_y": 0.9932687282562256
+    },
+    {
+      "x": -0.07,
+      "z": 0.85,
+      "rear_y": 0.12973159551620483,
+      "normal_y": 0.9925397634506226
+    },
+    {
+      "x": -0.09,
+      "z": 0.424,
+      "rear_y": 0.13415950536727905,
+      "normal_y": 0.9281583428382874
+    }
+  ],
+  "original_unmodified": true,
+  "mesh_validation_repaired_degenerates": true,
+  "material_contract": {
+    "UV0": "original rear projection / unchanged atlas",
+    "UV1": "adjacent stone donor",
+    "VertexColor.R": "blend weight (linear); 0 on untouched faces",
+    "PBR": "lerp base color and packed MR samples; roughness G, metallic B",
+    "textures": "unchanged original 4K maps",
+    "standard_GLTF_export": false
+  },
+  "collision": {
+    "type": "authored UCX convex boxes",
+    "hulls": 4,
+    "triangles_total": 48,
+    "scope": "coarse obstacle envelope; decorative root gaps intentionally not walkable"
+  },
+  "elapsed_seconds": 14.346
+}

@@ -25,10 +25,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-09T20:31:04+00:00",
+      "captured_at": "2026-09-09T21:34:57+00:00",
       "record_sha256": "e144d257342ae24a029512ae7e1d0cd29faf00756c22862edf595f37c31c5aee",
       "files": {
-        "games/dreambound/STATUS.md": "2f1de94de7df0024808b356369e4de6cad4a729e1596c2230345f4a7b68a4fcd",
+        "games/dreambound/STATUS.md": "d224e4e289d47d679424d262d4ba5e3fe60b4cf701f40884df4894f0caf52b3f",
         "games/dreambound/BRIEF.md": "8baf91d210b5e28ed6d08827a1adcb032b887005f4f17be49120baf531b939a4",
         "games/dreambound/SHIELD-DESIGN.md": "891acd15aea07116ddba0bb101381bc2779628d5b0aa1fab49851cdfa532abf1",
         "games/dreambound/IMPLEMENTATION.md": "7f9717c4aa37b4e90e04663f74f2c6a4555e924830e71c4bdf83adc0ef6e1b46",

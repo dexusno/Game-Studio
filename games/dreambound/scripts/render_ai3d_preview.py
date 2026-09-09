@@ -1,18 +1,32 @@
-"""Render an unchanged generated GLB or raw PLY under neutral studio lighting."""
+"""Render a GLB or raw PLY under neutral studio lighting without editing it."""
+import argparse
 import bpy
+import hashlib
 import json
 import math
 import sys
 from pathlib import Path
 from mathutils import Vector, Matrix
 
-args = sys.argv[sys.argv.index('--') + 1:]
-model, output = Path(args[0]), Path(args[1])
+parser = argparse.ArgumentParser()
+parser.add_argument('model', type=Path)
+parser.add_argument('output', type=Path)
+parser.add_argument('--resolution', type=int, default=1400)
+parser.add_argument('--samples', type=int, default=48)
+parser.add_argument('--rear-close', action='store_true')
+args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+model, output = args.model, args.output
 output.mkdir(parents=True, exist_ok=True)
-bpy.ops.wm.read_factory_settings(use_empty=True)
+if model.suffix.lower() == '.blend':
+    bpy.ops.wm.open_mainfile(filepath=str(model))
+    for obj in list(bpy.context.scene.objects):
+        if obj.type != 'MESH' or obj.name.startswith('UCX_'):
+            bpy.data.objects.remove(obj, do_unlink=True)
+else:
+    bpy.ops.wm.read_factory_settings(use_empty=True)
 if model.suffix.lower() == '.ply':
     bpy.ops.wm.ply_import(filepath=str(model))
-else:
+elif model.suffix.lower() != '.blend':
     bpy.ops.import_scene.gltf(filepath=str(model))
 meshes = [obj for obj in bpy.context.scene.objects if obj.type == 'MESH']
 for obj in meshes:
@@ -30,7 +44,7 @@ for obj in meshes:
 
 scene = bpy.context.scene
 scene.render.engine = 'CYCLES'
-scene.cycles.samples = 48
+scene.cycles.samples = args.samples
 scene.cycles.use_denoising = True
 prefs = bpy.context.preferences.addons['cycles'].preferences
 try:
@@ -41,8 +55,8 @@ try:
     scene.cycles.device = 'GPU'
 except Exception:
     scene.cycles.device = 'CPU'
-scene.render.resolution_x = 1400
-scene.render.resolution_y = 1400
+scene.render.resolution_x = args.resolution
+scene.render.resolution_y = args.resolution
 scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = 'PNG'
 scene.view_settings.view_transform = 'AgX'
@@ -89,11 +103,24 @@ for name, location in [('front-three-quarter', (2.3, -8.0, 3.4)), ('rear-three-q
     scene.render.filepath = str(output / (name + '.png'))
     bpy.ops.render.render(write_still=True)
     print('PREVIEW_SAVED ' + scene.render.filepath, flush=True)
+if args.rear_close:
+    camera.location = (-0.7, 4, 1.2)
+    aim(camera, (-0.04, 0, .97))
+    cam_data.ortho_scale = 1.2
+    scene.render.filepath = str(output / 'rear-repair-close.png')
+    bpy.ops.render.render(write_still=True)
+    print('PREVIEW_SAVED ' + scene.render.filepath, flush=True)
+    cam_data.ortho_scale = 4.1
 camera.location = (2.3, -8.0, 3.4)
 aim(camera, (0, 0, 1.6))
 bpy.ops.wm.save_as_mainfile(filepath=str(output / 'preview-scene.blend'))
+with model.open('rb') as source:
+    source_sha256 = hashlib.file_digest(source, 'sha256').hexdigest()
 (output / 'render-settings.json').write_text(json.dumps({
-    'source_model': model.name, 'renderer': 'Blender Cycles', 'samples': 48,
+    'source_model': model.name, 'renderer': 'Blender Cycles', 'samples': args.samples,
+    'source_sha256': source_sha256,
+    'resolution': [args.resolution, args.resolution],
+    'views': ['front-three-quarter', 'rear-three-quarter'] + (['rear-repair-close'] if args.rear_close else []),
     'generated_mesh_or_material_edits': False,
     'presentation_only': ['uniform scale and centering', 'studio lights', 'neutral floor', 'cameras'],
 }, indent=2), encoding='utf-8')

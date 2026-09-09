@@ -1,0 +1,26 @@
+{
+  "source": "../repaired-v1/repaired-asset.blend",
+  "donor": "../repaired-v1/normalized-source.blend (intact front of original textured.glb)",
+  "method": "Excise rear lower region including shard; fill outer and inner shell boundaries; transfer front lower inlay relief and original atlas UVs across feathered patch, fitting rear depth plane. Original front/roots and materials unchanged.",
+  "removed_faces": 20238,
+  "patch_faces": 145111,
+  "triangles": 1070029,
+  "height_metres": 2.4,
+  "collision_hulls": 4,
+  "material_contract": {
+    "slots": 1,
+    "UV0": "unchanged original atlas + original rear projection at patch perimeter",
+    "UV1": "front lower ornament donor on new patch; existing stone donor outside",
+    "VertexColor.R": "linear blend weight: lerp UV0/UV1 samples of original maps",
+    "roughness": "packed G",
+    "metallic": "packed B",
+    "textures": "unchanged original 4096 base-color and metallic-roughness maps"
+  },
+  "provenance": "Game Studio Blender edit of local TRELLIS.2 generated output, original OpenAI image_gen reference; original model/runtime terms retained, local-evaluation-only. No downloads or generated replacement images.",
+  "visual_verification": "Final1400px front/rear/close renders inspected: continuous inlay; red shard removed; stone and rim seams remain.",
+  "limits": [
+    "Final boundary correction not roundtrip retested",
+    "No v2 Unreal inspection",
+    "No new4K final-variant render; owner requested less testing/detail"
+  ]
+}
