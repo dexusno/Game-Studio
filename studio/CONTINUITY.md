@@ -61,6 +61,8 @@ After reviewing the handoff, refreshing its checkpoint, committing and integrati
 
 ## Codex guidance behind this workflow
 
+Activation confirmed: after Klaus completed the review, Codex reported all three project hooks enabled and trusted, with no discovery errors or warnings. Unchanged hooks in the saved project do not need another approval. The local discovery result is retained in `.local/continuity/hook-discovery.json`.
+
 Checked against official documentation on 2026-09-08:
 
 - Codex reads repository instructions at startup. Keep them concise and route to detailed documents as needed. [Project instructions](https://learn.chatgpt.com/docs/agent-configuration/agents-md), [customization guidance](https://learn.chatgpt.com/docs/customization/overview).
