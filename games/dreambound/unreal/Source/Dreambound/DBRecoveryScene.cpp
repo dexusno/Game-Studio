@@ -39,17 +39,20 @@ void ADBGameMode::BuildRecoveryCourtyard()
   if(!Cached){
    const FString Path=FString::Printf(TEXT("/Game/Art/Trellis/Meshes/%s.%s"),Name,Name);
    Asset=LoadObject<UStaticMesh>(nullptr,*Path);TrellisAssets.Add(Key,Asset);
-   if(Asset)UE_LOG(LogTemp,Display,TEXT("DB_TRELLIS %s bounds_cm=%s"),Name,*(Asset->GetBounds().BoxExtent*2).ToString());
-   else UE_LOG(LogTemp,Warning,TEXT("DB_TRELLIS missing %s; using original scene art"),*Path);
+   if(Asset){
+    UE_LOG(LogTemp,Display,TEXT("DB_TRELLIS %s bounds_cm=%s"),Name,*(Asset->GetBounds().BoxExtent*2).ToString());
+   }else{
+    UE_LOG(LogTemp,Warning,TEXT("DB_TRELLIS missing %s; using original scene art"),*Path);
+   }
   }
   if(!Asset)return false;
   auto** Existing=MeshBatches.Find(Key);
   auto* Batch=Existing?*Existing:nullptr;
   if(!Batch){
-   auto* Owner=GetWorld()->SpawnActor<AActor>();if(!Owner)return false;
-   Generated.Add(Owner);
-   Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
-   Owner->SetRootComponent(Batch);Owner->AddInstanceComponent(Batch);
+   auto* BatchOwner=GetWorld()->SpawnActor<AActor>();if(!BatchOwner)return false;
+   Generated.Add(BatchOwner);
+   Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(BatchOwner);
+   BatchOwner->SetRootComponent(Batch);BatchOwner->AddInstanceComponent(Batch);
    Batch->SetStaticMesh(Asset);Batch->SetMobility(EComponentMobility::Static);
    // Imported UCX bodies supply physical cover. Render triangles and foliage
    // must not become complex collision; that is part of the import contract.
@@ -114,8 +117,13 @@ void ADBGameMode::BuildRecoveryCourtyard()
    if(Side==(RoomIndex+1)%4||Side==(RoomIndex+2)%4){
     for(int32 Bank=0;Bank<2;++Bank){
      const float Along=(Bank==0?-1080.f:1080.f)+GardenArt.FRandRange(-60.f,60.f);
-     const float Height=.88f+RoomIndex*.09f+Bank*.12f;
-     Garden(TEXT("SM_GardenCliffBank"),C+Out*2370+T*Along,FRotator(0,Side*90.f+90,0),FVector(1.03f,1.03f,Height));
+     const FVector Backing=C+Out*2370+T*Along;
+     const FRotator BackingRotation(0,Side*90.f+90,0);
+     const float BackingScale=3.55f+RoomIndex*.15f+Bank*.30f;
+     if(!Trellis(TEXT("SM_Trellis_RootRock"),Backing,BackingRotation,FVector(BackingScale))){
+      const float Height=.88f+RoomIndex*.09f+Bank*.12f;
+      Garden(TEXT("SM_GardenCliffBank"),Backing,BackingRotation,FVector(1.03f,1.03f,Height));
+     }
     }
    }
   }
