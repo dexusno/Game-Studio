@@ -26,6 +26,14 @@
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
 
+namespace
+{
+bool IsTrellisArtCheck()
+{
+    return FParse::Param(FCommandLine::Get(), TEXT("DBArtCheck"));
+}
+}
+
 ADBShieldCheckRunner::ADBShieldCheckRunner()
 {
     PrimaryActorTick.bCanEverTick = true;
@@ -87,6 +95,13 @@ bool ADBShieldCheckRunner::Initialize(ADBGameMode& InMode)
     Mode->bBossWon = false;
     Mode->bCanResume = Mode->bSaveFailed = false;
     Mode->StartNewRun(true);
+    if (IsTrellisArtCheck())
+    {
+        bInitialized = true;
+        Go(EStep::Route);
+        WriteResult(false);
+        return true;
+    }
     MakeBox(Origin + FVector(0, 0, -25), FVector(3000, 3000, 25));
     ResetPlayer(Origin + FVector(-900, 0, 93));
     Target = MakeTarget(Origin + FVector(-720, 0, 88));
@@ -580,6 +595,7 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
             }
             Check(SolidRocks,TEXT("reachable_garden_rocks_block_capsules"),TEXT("Actual capsule sweep against one corner rock cluster in each generated court."));
         }
+        if (IsTrellisArtCheck()) { Finish(false); return; }
         Go(EStep::FirstEncounter); break;
     }
     case EStep::FirstEncounter:
@@ -687,9 +703,17 @@ void ADBShieldCheckRunner::Finish(bool bAbort)
 
 void ADBShieldCheckRunner::WriteResult(bool bComplete) const
 {
+    const bool bArtCheck = IsTrellisArtCheck();
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
-    Report->SetStringField(TEXT("suite"), TEXT("folding-shield-combat-route-v2"));
-    Report->SetStringField(TEXT("scope"), TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
+    Report->SetStringField(TEXT("suite"), bArtCheck ? TEXT("trellis-environment-route-v1") : TEXT("folding-shield-combat-route-v2"));
+    Report->SetStringField(TEXT("scope"), bArtCheck
+        ? TEXT("Filtered existing seeded route/cover checks, player-sized connector capsule sweeps, connector floor probes, initially closed gates and one physical corner-rock sweep in each of three courts. Gates are excluded from connector geometry queries and checked separately for enabled collision. Isolated QA profile is backed up and restored; no combat fixture or ordinary play.")
+        : TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
+    if (bArtCheck)
+    {
+        Report->SetBoolField(TEXT("combat_tested"), false);
+        Report->SetBoolField(TEXT("ordinary_play_tested"), false);
+    }
     Report->SetStringField(TEXT("engine"), FEngineVersion::Current().ToString());
     Report->SetStringField(TEXT("executable"), FPlatformProcess::ExecutableName());
     Report->SetStringField(TEXT("platform"), TEXT("Windows"));
@@ -728,14 +752,17 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     Report->SetNumberField(TEXT("passed"), Passed);
     Report->SetNumberField(TEXT("failed"), Failed);
     Report->SetArrayField(TEXT("checks"), Rows);
-    Report->SetStringField(TEXT("not_run"), bAborted ? TEXT("Remaining steps after last_step; ordinary inputs, graphics/audio/feel and an unstaged full journey.")
-        : TEXT("Ordinary inputs, graphics/audio/feel, performance and an unstaged full journey."));
+    Report->SetStringField(TEXT("not_run"), bArtCheck
+        ? (bAborted ? TEXT("Remaining art checks after last_step; all combat checks, ordinary inputs/play, rendered graphics, audio/feel and performance.")
+                   : TEXT("All combat checks, ordinary inputs/play, rendered graphics, audio/feel and performance."))
+        : (bAborted ? TEXT("Remaining steps after last_step; ordinary inputs, graphics/audio/feel and an unstaged full journey.")
+                    : TEXT("Ordinary inputs, graphics/audio/feel, performance and an unstaged full journey.")));
     FString Json;
     const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Json);
     FJsonSerializer::Serialize(Report, Writer);
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("QA");
     IFileManager::Get().MakeDirectory(*Directory, true);
-    const FString Path = Directory / TEXT("combat-feel-checks.json");
+    const FString Path = Directory / (bArtCheck ? TEXT("trellis-art-checks.json") : TEXT("combat-feel-checks.json"));
     const bool bWritten = FFileHelper::SaveStringToFile(Json, *Path);
     UE_LOG(LogTemp, Display, TEXT("DB_SHIELD_QA_RESULT complete=%d aborted=%d passed=%d failed=%d written=%d path=%s"),
         bComplete, bAborted, Passed, Failed, bWritten, *Path);

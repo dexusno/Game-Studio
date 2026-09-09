@@ -310,6 +310,22 @@ def generate(args, image, image_info):
             SparseUnetVaeDecoder.forward = chunked_decoder_forward
             SparseResBlockC2S3d._forward = chunked_upsample
             SparseConvNeXtBlock3d._forward = chunked_convnext
+            decode_shape = pipeline.decode_shape_slat
+            def offloaded_shape(*shape_args, **shape_kwargs):
+                decoded_meshes, subdivisions = decode_shape(*shape_args, **shape_kwargs)
+                cpu_meshes = [mesh.cpu() for mesh in decoded_meshes]
+                size = sum(mesh.vertices.numel() * mesh.vertices.element_size() +
+                           mesh.faces.numel() * mesh.faces.element_size() for mesh in cpu_meshes)
+                del decoded_meshes
+                gc.collect()
+                torch.cuda.empty_cache()
+                print(f"Decoded geometry held in system RAM during texture decode: {size / 2**30:.2f} GiB", flush=True)
+                report["generation"]["geometry_cpu_offload_bytes"] = size
+                # Upstream fill_holes explicitly moves geometry to CUDA when
+                # needed. Keep it off the GPU during the independent texture
+                # decoder, then restore the complete result before export.
+                return cpu_meshes, subdivisions
+            pipeline.decode_shape_slat = offloaded_shape
             report["generation"]["normalization_row_chunk"] = chunk
         report["timings_seconds"]["load"] = round(time.monotonic() - stage_start, 3)
         stage_start = time.monotonic()
@@ -343,7 +359,7 @@ def generate(args, image, image_info):
             meshes, latents = pipeline.run(image, seed=args.seed, num_samples=1,
                                           pipeline_type=args.quality, max_num_tokens=args.max_num_tokens,
                                           return_latent=True)
-        mesh = meshes[0]
+        mesh = meshes[0].cuda() if args.decode_row_chunk else meshes[0]
         actual_resolution = int(latents[2])
         report["generation"].update(actual_resolution=actual_resolution,
                                      shape_tokens=int(latents[0].coords.shape[0]))
