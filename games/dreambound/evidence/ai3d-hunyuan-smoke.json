@@ -1,0 +1,103 @@
+{
+  "checked_on": "2026-09-09",
+  "model": "Hunyuan3D-2.1",
+  "source_revision": "82920d643c0dc2f7bfd7255f45f62d386edfe60c",
+  "reference": "Upstream assets/demo.png",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "shape": {
+    "elapsed_seconds": 60.353,
+    "peak_allocated_gib": 7.631,
+    "peak_reserved_gib": 8.533
+  },
+  "paint": {
+    "elapsed_seconds": 286.162,
+    "peak_allocated_gib": 12.873,
+    "peak_reserved_gib": 16.383
+  },
+  "export": {
+    "status": "passed",
+    "raw_faces": 744862,
+    "painted_obj_faces": 744862,
+    "painted_glb_faces": 744852,
+    "glb_conversion_face_delta": -10,
+    "raw_mesh_files_preserved": true,
+    "obj_face_count_preserved": true,
+    "embedded_images": [
+      {
+        "name": "painted",
+        "size": [
+          4096,
+          4096
+        ],
+        "format": "PNG"
+      },
+      {
+        "name": "painted_metallic-painted_roughness",
+        "size": [
+          4096,
+          4096
+        ],
+        "format": "PNG"
+      }
+    ],
+    "maps": {
+      "painted.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 16747577,
+        "extrema": [
+          [
+            0,
+            253
+          ],
+          [
+            0,
+            254
+          ],
+          [
+            0,
+            254
+          ]
+        ]
+      },
+      "painted_roughness.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 5463800,
+        "extrema": [
+          18,
+          180
+        ]
+      },
+      "painted_metallic.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 1400422,
+        "extrema": [
+          0,
+          40
+        ]
+      }
+    },
+    "files": {
+      "painted.glb": 54216560,
+      "painted.png": 16747577,
+      "painted_roughness.png": 5463800,
+      "painted_metallic.png": 1400422,
+      "paint-result.json": 1341,
+      "shape-result.json": 983,
+      "painted.obj": 60901739,
+      "painted.mtl": 143,
+      "raw_shape.ply": 14152539,
+      "raw_shape.glb": 13408272
+    }
+  },
+  "preview": "Actual exported GLB rendered with Blender 5.2.1 Cycles; no mesh or material cleanup",
+  "limitation": "Installation sample only; not anchor-B or game-ready asset acceptance"
+}

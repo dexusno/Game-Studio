@@ -1,0 +1,20 @@
+{
+  "checked_at_utc": "2026-09-09T19:15:15.389193+00:00",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "torchvision": "0.21.0+cu124",
+    "flash-attn": "2.7.3",
+    "nvdiffrast": "0.4.0",
+    "transformers": "5.17.0",
+    "cumesh": "0.0.1",
+    "o-voxel": "0.0.1"
+  },
+  "checks": {
+    "flash_attention_matches_pytorch": true,
+    "flash_attention_max_absolute_error": 1.9073486328125e-06,
+    "nvdiffrast_cuda_rasterization": true,
+    "rasterized_triangle_pixels": 968
+  },
+  "limits": "Native-component checks only; no complete TRELLIS generation or art-quality assessment."
+}

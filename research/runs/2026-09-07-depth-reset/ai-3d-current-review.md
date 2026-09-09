@@ -2,6 +2,8 @@
 
 Checked 2026-09-08. Klaus requested online user experience, indie adoption, commercial leaders and the latest open offerings, including rented GPUs and paid APIs. This is desk research: no generator was run, asset imported, account created or purchase made. Quality rankings below are trial priorities, not measured results for our game.
 
+Follow-up 2026-09-09: Klaus authorized local installation of TRELLIS.2 and Hunyuan3D-2.1. Hunyuan completed a bundled sample with dense geometry and verified 4K PBR maps on the 4090; TRELLIS native GPU components pass, while its encoder access is pending. [Installation, actual results and restart handoff](../../../games/dreambound/AI3D.md). This updates installation status without turning the research rankings into measured game-asset quality results.
+
 ## Recommendation for dreambound
 
 Compare **Meshy 7, Rodin Gen-2.5, Tripo Smart Mesh P2.0 Preview and Microsoft TRELLIS.2-4B** against the same approved reference asset. Meshy supplies a major commercial baseline; Rodin tests detailed source geometry; P2.0 tests editability; TRELLIS.2 tests the complete downloadable alternative. H3.1 remains Tripo's high-detail family, but is not its newest topology model. Do not reuse H3 API prices as P2.0 Preview prices or assume a reseller exposes every current setting.
