@@ -1,0 +1,15 @@
+diff --git a/trellis2/modules/image_feature_extractor.py b/trellis2/modules/image_feature_extractor.py
+index c3cb515..2deeb19 100644
+--- a/trellis2/modules/image_feature_extractor.py
++++ b/trellis2/modules/image_feature_extractor.py
+@@ -83,7 +83,9 @@ class DinoV3FeatureExtractor:
+         hidden_states = self.model.embeddings(image, bool_masked_pos=None)
+         position_embeddings = self.model.rope_embeddings(image)
+ 
+-        for i, layer_module in enumerate(self.model.layer):
++        # Transformers 5 nests the same encoder layers under model.
++        encoder = getattr(self.model, "model", self.model)
++        for i, layer_module in enumerate(encoder.layer):
+             hidden_states = layer_module(
+                 hidden_states,
+                 position_embeddings=position_embeddings,

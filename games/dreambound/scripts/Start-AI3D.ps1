@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Trellis', 'Hunyuan', 'Authenticate')]
+    [ValidateSet('Trellis', 'TrellisTrial', 'Hunyuan', 'Authenticate')]
     [string]$Tool = 'Trellis',
     [Parameter(ValueFromRemainingArguments = $true)]
     [string[]]$ToolArguments
@@ -20,6 +20,11 @@ $entry = if ($Tool -eq 'Hunyuan') { 'hunyuan-run' } else { 'trellis-run' }
 $entryPath = $ai3d.wslRoot.TrimEnd('/') + '/' + $entry
 if ($Tool -eq 'Authenticate') {
     & wsl.exe -d $ai3d.wslDistro --exec bash $entryPath --auth
+} elseif ($Tool -eq 'TrellisTrial') {
+    $trialScript = Join-Path $PSScriptRoot 'trellis_trial.py'
+    $wslScript = & wsl.exe -d $ai3d.wslDistro --exec wslpath -a -u $trialScript
+    if ($LASTEXITCODE -ne 0) { throw 'Could not translate the trial script path for WSL.' }
+    & wsl.exe -d $ai3d.wslDistro --exec bash $entryPath --trial $wslScript.Trim() @ToolArguments
 } else {
     & wsl.exe -d $ai3d.wslDistro --exec bash $entryPath @ToolArguments
 }

@@ -1,0 +1,283 @@
+"""Run the installed TRELLIS.2-4B on a genuine transparent RGBA reference.
+
+Use the isolated trellis2 Python environment and its CUDA environment wrapper.
+--validate-only reads the image without importing Torch or loading any models.
+The private pipeline needs the documented load_rembg=False patch; the original
+DINOv3 encoder still requires normal Hugging Face approval and authentication.
+
+Defaults: 1024_cascade, upstream samplers, 1M export faces, remesh=True, 4K PNG
+PBR textures. 1536_cascade is explicit; a token-driven resolution reduction is
+saved as raw data and reported as failure before export. No quality fallback.
+raw_mesh.pt contains lossless CPU tensors and plain metadata (load with
+torch.load(..., weights_only=True)); raw_mesh.ply is the geometry counterpart.
+"""
+from __future__ import annotations
+
+import argparse
+from datetime import datetime, timezone
+import gc
+import hashlib
+import importlib.metadata
+import inspect
+import io
+import json
+import os
+from pathlib import Path
+import struct
+import subprocess
+import sys
+import time
+
+MODEL_ID = "microsoft/TRELLIS.2-4B"
+MODEL_REVISION = "af44b45f2e35a493886929c6d786e563ec68364d"
+SOURCE_REVISION = "75fbf0183001ed9876c8dbb35de6b68552ee08bd"
+ENCODER_ID = "facebook/dinov3-vitl16-pretrain-lvd1689m"
+TEXTURE_SIZE = 4096
+RASTER_FACE_LIMIT = 16777216
+
+
+def positive_int(value: str) -> int:
+    number = int(value)
+    if number < 1:
+        raise argparse.ArgumentTypeError("must be positive")
+    return number
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def validate_image(path: Path):
+    from PIL import Image
+
+    with Image.open(path) as opened:
+        if opened.mode != "RGBA":
+            raise ValueError(f"Expected transparent RGBA input; found {opened.mode}. No background model will be used.")
+        image = opened.copy()
+    histogram = image.getchannel("A").histogram()
+    if histogram[0] == 0:
+        raise ValueError("The RGBA image has no fully transparent pixels; provide a genuine cutout.")
+    # Match upstream's >0.8*255 foreground threshold after its 1024px size cap.
+    scale = min(1.0, 1024 / max(image.size))
+    size = (int(image.width * scale), int(image.height * scale))
+    if min(size) < 2:
+        raise ValueError("Image is too narrow for upstream preprocessing.")
+    probe = image.resize(size, Image.Resampling.LANCZOS) if scale < 1 else image
+    bbox = probe.getchannel("A").point(lambda value: 255 if value > 204 else 0).getbbox()
+    if bbox is None or max(bbox[2] - bbox[0], bbox[3] - bbox[1]) < 3:
+        raise ValueError("No usable foreground remains at upstream's alpha threshold and input size.")
+    return image, {
+        "path": str(path), "sha256": sha256(path), "mode": image.mode,
+        "size": list(image.size), "transparent_pixels": histogram[0],
+        "foreground_pixels_above_alpha_204": sum(histogram[205:]),
+        "upstream_preprocessing_size": list(size), "foreground_bbox": list(bbox),
+        "background_removal": "provided alpha; BRIA not loaded",
+    }
+
+
+def verify_glb(path: Path) -> dict:
+    from PIL import Image
+
+    with path.open("rb") as handle:
+        magic, version, length = struct.unpack("<4sII", handle.read(12))
+        if (magic, version, length) != (b"glTF", 2, path.stat().st_size):
+            raise RuntimeError("Invalid exported GLB header")
+        json_length, chunk_type = struct.unpack("<I4s", handle.read(8))
+        if chunk_type != b"JSON":
+            raise RuntimeError("GLB has no JSON chunk")
+        document = json.loads(handle.read(json_length))
+        _, chunk_type = struct.unpack("<I4s", handle.read(8))
+        if chunk_type != b"BIN\x00":
+            raise RuntimeError("GLB has no embedded binary chunk")
+        binary_start = handle.tell()
+        images = []
+        for item in document.get("images", []):
+            view = document["bufferViews"][item["bufferView"]]
+            handle.seek(binary_start + view.get("byteOffset", 0))
+            with Image.open(io.BytesIO(handle.read(view["byteLength"]))) as image:
+                if image.size != (TEXTURE_SIZE, TEXTURE_SIZE) or image.format != "PNG":
+                    raise RuntimeError(f"Expected embedded 4K PNG; got {image.size}, {image.format}")
+                images.append({"size": list(image.size), "format": image.format})
+        materials = document.get("materials", [])
+        if not materials or not images:
+            raise RuntimeError("GLB has no embedded PBR material")
+        pbr = materials[0].get("pbrMetallicRoughness", {})
+        if "baseColorTexture" not in pbr or "metallicRoughnessTexture" not in pbr:
+            raise RuntimeError("GLB is missing base-color or metallic/roughness texture connections")
+    return {"embedded_images": images, "bytes": path.stat().st_size, "sha256": sha256(path)}
+
+
+def generate(args, image, image_info):
+    repo = args.repo.expanduser().resolve()
+    pipeline_source = repo / "trellis2/pipelines/trellis2_image_to_3d.py"
+    if not pipeline_source.is_file():
+        raise ValueError(f"TRELLIS source not found at {repo}; set --repo or TRELLIS2_REPO")
+    revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
+    if revision != SOURCE_REVISION:
+        raise ValueError(f"Runner targets source {SOURCE_REVISION}; installed HEAD is {revision}")
+    out = args.out.expanduser().resolve()
+    if out.exists() and any(out.iterdir()):
+        raise ValueError(f"Output directory is not empty: {out}. Choose a new trial directory.")
+    out.mkdir(parents=True, exist_ok=True)
+    os.environ.setdefault("OPENCV_IO_ENABLE_OPENEXR", "1")
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+    sys.path.insert(0, str(repo))
+
+    report = {
+        "status": "started", "started_at_utc": datetime.now(timezone.utc).isoformat(),
+        "input": image_info, "source_revision": revision,
+        "pipeline_source_sha256": sha256(pipeline_source), "runner_sha256": sha256(Path(__file__)),
+        "feature_extractor_sha256": sha256(repo / "trellis2/modules/image_feature_extractor.py"),
+        "model_id": MODEL_ID, "model_revision": MODEL_REVISION,
+        "generation": {"pipeline_type": args.quality, "seed": args.seed,
+                       "num_samples": 1, "max_num_tokens": args.max_num_tokens},
+        "export": {"decimation_target_faces": args.export_faces, "texture_size": TEXTURE_SIZE,
+                   "remesh": args.remesh, "remesh_band": 1, "remesh_project": 0,
+                   "aabb": [[-0.5, -0.5, -0.5], [0.5, 0.5, 0.5]],
+                   "extension_webp": False, "texture_encoding": "lossless PNG",
+                   "raster_face_limit": RASTER_FACE_LIMIT},
+        "timings_seconds": {},
+        "limits": "Local asset trial; quality, cleanup needs and Unreal suitability require inspection.",
+    }
+    start = time.monotonic()
+    torch = None
+    cuda_ready = False
+    try:
+        import torch
+        import trimesh
+        from huggingface_hub import hf_hub_download
+        from trellis2.pipelines import Trellis2ImageTo3DPipeline
+        import o_voxel
+
+        if "load_rembg" not in inspect.signature(Trellis2ImageTo3DPipeline.from_pretrained).parameters:
+            raise RuntimeError("Installed pipeline needs the optional load_rembg patch before this alpha-only trial")
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA is unavailable in this Python environment")
+        torch.cuda.reset_peak_memory_stats()
+        cuda_ready = True
+        report["gpu"] = torch.cuda.get_device_name(0)
+        report["packages"] = {name: importlib.metadata.version(name) for name in
+                              ["torch", "torchvision", "transformers", "trimesh", "cumesh", "o-voxel"]}
+        config_path = Path(hf_hub_download(MODEL_ID, "pipeline.json", revision=MODEL_REVISION, local_files_only=True))
+        config = json.loads(config_path.read_text())["args"]
+        if config["image_cond_model"]["args"]["model_name"] != ENCODER_ID:
+            raise RuntimeError("Checkpoint config does not name the expected DINOv3 encoder")
+        report["model_config"] = config
+        report["model_config_sha256"] = sha256(config_path)
+        stage_start = time.monotonic()
+        # Normal gated DINOv3 loading remains intact; only the unused rembg load is optional.
+        pipeline = Trellis2ImageTo3DPipeline.from_pretrained(str(config_path.parent), load_rembg=False)
+        report["image_encoder"] = {"model_id": ENCODER_ID,
+                                   "revision": getattr(pipeline.image_cond_model.model.config, "_commit_hash", None)}
+        pipeline.cuda()
+        report["generation"]["low_vram"] = pipeline.low_vram
+        report["timings_seconds"]["load"] = round(time.monotonic() - stage_start, 3)
+        stage_start = time.monotonic()
+        meshes, latents = pipeline.run(image, seed=args.seed, num_samples=1,
+                                      pipeline_type=args.quality, max_num_tokens=args.max_num_tokens,
+                                      return_latent=True)
+        mesh = meshes[0]
+        actual_resolution = int(latents[2])
+        report["generation"].update(actual_resolution=actual_resolution,
+                                     shape_tokens=int(latents[0].coords.shape[0]))
+        del latents, meshes
+        torch.cuda.synchronize()
+        report["timings_seconds"]["inference"] = round(time.monotonic() - stage_start, 3)
+
+        # Save exact tensors before calling any export simplifier/remesher.
+        stage_start = time.monotonic()
+        raw = {name: getattr(mesh, name).detach().cpu() for name in
+               ["vertices", "faces", "coords", "attrs", "origin"]}
+        raw.update(schema_version=1, voxel_size=mesh.voxel_size, voxel_shape=list(mesh.voxel_shape),
+                   layout={name: [part.start, part.stop, part.step] for name, part in mesh.layout.items()},
+                   coordinate_space="upstream pipeline output; no export axis conversion")
+        torch.save(raw, out / "raw_mesh.pt")
+        trimesh.Trimesh(vertices=raw["vertices"].numpy(), faces=raw["faces"].numpy(),
+                        process=False).export(out / "raw_mesh.ply")
+        report["raw"] = {"tensor_file": "raw_mesh.pt", "geometry_file": "raw_mesh.ply",
+                         "vertices": int(raw["vertices"].shape[0]), "faces": int(raw["faces"].shape[0]),
+                         "attribute_shape": list(raw["attrs"].shape), "voxel_size": mesh.voxel_size,
+                         "note": "Pipeline output includes upstream decode-time hole filling; no export processing applied."}
+        report["timings_seconds"]["raw_save"] = round(time.monotonic() - stage_start, 3)
+        del raw
+        expected_resolution = int(args.quality.split("_")[0])
+        if actual_resolution != expected_resolution:
+            raise RuntimeError(f"Requested {args.quality}, but upstream returned {actual_resolution} because of its token cap. "
+                               "Raw data is saved; GLB export was skipped. Retry with an explicitly larger --max-num-tokens if memory permits.")
+        pipeline.cpu()
+        del pipeline
+        gc.collect()
+        torch.cuda.empty_cache()
+
+        stage_start = time.monotonic()
+        report["export"]["raster_limit_simplification_applied"] = mesh.faces.shape[0] > RASTER_FACE_LIMIT
+        if report["export"]["raster_limit_simplification_applied"]:
+            mesh.simplify(RASTER_FACE_LIMIT)
+        report["export"]["input_faces_after_raster_limit"] = int(mesh.faces.shape[0])
+        exported = o_voxel.postprocess.to_glb(
+            vertices=mesh.vertices, faces=mesh.faces, attr_volume=mesh.attrs,
+            coords=mesh.coords, attr_layout=mesh.layout, voxel_size=mesh.voxel_size,
+            aabb=report["export"]["aabb"], decimation_target=args.export_faces,
+            texture_size=TEXTURE_SIZE, remesh=args.remesh, remesh_band=1, remesh_project=0,
+            verbose=True,
+        )
+        exported.export(str(out / "textured.glb"), extension_webp=False)
+        material = exported.visual.material
+        material.baseColorTexture.save(out / "base_color.png")
+        material.metallicRoughnessTexture.save(out / "metallic_roughness.png")
+        report["export"].update(vertices=len(exported.vertices), faces=len(exported.faces),
+                                 artifact="textured.glb", validation=verify_glb(out / "textured.glb"))
+        torch.cuda.synchronize()
+        report["timings_seconds"]["export"] = round(time.monotonic() - stage_start, 3)
+        report["status"] = "complete"
+    except Exception as error:
+        report["status"] = "failed"
+        report["error"] = f"{type(error).__name__}: {error}"
+        raise
+    finally:
+        report["timings_seconds"]["total"] = round(time.monotonic() - start, 3)
+        if cuda_ready:
+            report["torch_cuda_peaks_gib"] = {
+                "allocated": round(torch.cuda.max_memory_allocated() / 2**30, 3),
+                "reserved": round(torch.cuda.max_memory_reserved() / 2**30, 3),
+                "scope": "Torch allocations; excludes other applications and native allocations outside Torch",
+            }
+        (out / "metadata.json").write_text(json.dumps(report, indent=2) + "\n")
+        print(json.dumps({"status": report["status"], "metadata": str(out / "metadata.json")}, indent=2))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--image", type=Path, required=True)
+    parser.add_argument("--out", type=Path, help="New or empty output directory; required for inference")
+    parser.add_argument("--quality", choices=["1024_cascade", "1536_cascade"], default="1024_cascade")
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--max-num-tokens", type=positive_int, default=49152)
+    parser.add_argument("--export-faces", type=positive_int, default=1000000)
+    parser.add_argument("--remesh", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--repo", type=Path, default=Path(os.environ.get(
+        "TRELLIS2_REPO", Path.home() / ".local/share/game-studio/ai3d/TRELLIS.2")))
+    parser.add_argument("--validate-only", action="store_true", help="Check alpha only; no model imports, downloads or GPU work")
+    args = parser.parse_args()
+    if not args.validate_only and args.out is None:
+        parser.error("--out is required for inference")
+    if not 0 <= args.seed < 2**32:
+        parser.error("--seed must be between 0 and 4294967295")
+    try:
+        image, image_info = validate_image(args.image.expanduser().resolve())
+        if args.validate_only:
+            print(json.dumps({"status": "input_valid", "input": image_info, "quality": args.quality}, indent=2))
+        else:
+            generate(args, image, image_info)
+    except Exception as error:
+        print(f"TRELLIS trial failed: {error}", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

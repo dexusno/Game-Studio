@@ -1,4 +1,4 @@
-"""Render an unchanged generated GLB under neutral studio lighting."""
+"""Render an unchanged generated GLB or raw PLY under neutral studio lighting."""
 import bpy
 import json
 import math
@@ -10,7 +10,10 @@ args = sys.argv[sys.argv.index('--') + 1:]
 model, output = Path(args[0]), Path(args[1])
 output.mkdir(parents=True, exist_ok=True)
 bpy.ops.wm.read_factory_settings(use_empty=True)
-bpy.ops.import_scene.gltf(filepath=str(model))
+if model.suffix.lower() == '.ply':
+    bpy.ops.wm.ply_import(filepath=str(model))
+else:
+    bpy.ops.import_scene.gltf(filepath=str(model))
 meshes = [obj for obj in bpy.context.scene.objects if obj.type == 'MESH']
 for obj in meshes:
     world = obj.matrix_world.copy()
@@ -86,6 +89,9 @@ for name, location in [('front-three-quarter', (2.3, -8.0, 3.4)), ('rear-three-q
     scene.render.filepath = str(output / (name + '.png'))
     bpy.ops.render.render(write_still=True)
     print('PREVIEW_SAVED ' + scene.render.filepath, flush=True)
+camera.location = (2.3, -8.0, 3.4)
+aim(camera, (0, 0, 1.6))
+bpy.ops.wm.save_as_mainfile(filepath=str(output / 'preview-scene.blend'))
 (output / 'render-settings.json').write_text(json.dumps({
     'source_model': model.name, 'renderer': 'Blender Cycles', 'samples': 48,
     'generated_mesh_or_material_edits': False,

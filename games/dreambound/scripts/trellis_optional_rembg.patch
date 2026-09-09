@@ -1,0 +1,38 @@
+diff --git a/trellis2/pipelines/trellis2_image_to_3d.py b/trellis2/pipelines/trellis2_image_to_3d.py
+index a7b84b9..69e8b6a 100644
+--- a/trellis2/pipelines/trellis2_image_to_3d.py
++++ b/trellis2/pipelines/trellis2_image_to_3d.py
+@@ -79,12 +79,13 @@ class Trellis2ImageTo3DPipeline(Pipeline):
+         self._device = 'cpu'
+ 
+     @classmethod
+-    def from_pretrained(cls, path: str, config_file: str = "pipeline.json") -> "Trellis2ImageTo3DPipeline":
++    def from_pretrained(cls, path: str, config_file: str = "pipeline.json", *, load_rembg: bool = True) -> "Trellis2ImageTo3DPipeline":
+         """
+         Load a pretrained model.
+ 
+         Args:
+             path (str): The path to the model. Can be either local path or a Hugging Face repository.
++            load_rembg (bool): Local trial option; False requires a transparent RGBA input.
+         """
+         pipeline = super().from_pretrained(path, config_file)
+         args = pipeline._pretrained_args
+@@ -102,7 +103,8 @@ class Trellis2ImageTo3DPipeline(Pipeline):
+         pipeline.tex_slat_normalization = args['tex_slat_normalization']
+ 
+         pipeline.image_cond_model = getattr(image_feature_extractor, args['image_cond_model']['name'])(**args['image_cond_model']['args'])
+-        pipeline.rembg_model = getattr(rembg, args['rembg_model']['name'])(**args['rembg_model']['args'])
++        # Local alpha-only trial: preserve the image encoder and skip unused background weights.
++        pipeline.rembg_model = getattr(rembg, args['rembg_model']['name'])(**args['rembg_model']['args']) if load_rembg else None
+         
+         pipeline.low_vram = args.get('low_vram', True)
+         pipeline.default_pipeline_type = args.get('default_pipeline_type', '1024_cascade')
+@@ -141,6 +143,8 @@ class Trellis2ImageTo3DPipeline(Pipeline):
+         if has_alpha:
+             output = input
+         else:
++            if self.rembg_model is None:
++                raise ValueError("Background removal is disabled; provide a transparent RGBA image.")
+             input = input.convert('RGB')
+             if self.low_vram:
+                 self.rembg_model.to(self.device)

@@ -1,0 +1,186 @@
+{
+  "checked_on": "2026-09-09",
+  "model": "Hunyuan3D-2.1",
+  "source_revision": "82920d643c0dc2f7bfd7255f45f62d386edfe60c",
+  "model_revision": "0b94677654c57bb9a6b6845cd7b704ccf551d327",
+  "reference": "art/references/waymarker-v1.png",
+  "reference_sha256": "c3ddeff64390ed1c243265d2a75ba03ca8191a61b19f6f76fda1acd7bc73b998",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "settings": {
+    "shape_steps": 50,
+    "shape_guidance": 5.0,
+    "shape_seed": 1234,
+    "octree": 512,
+    "chunks": 8000,
+    "paint_views": 9,
+    "paint_resolution": 768,
+    "paint_steps": 15,
+    "paint_guidance": 3.0,
+    "paint_seed": 0,
+    "paint_sampler": "UniPCMultistepScheduler",
+    "texture_size": 4096,
+    "optional_40k_remesh": false,
+    "stage_cpu_offload": true,
+    "vae_slicing": true,
+    "background_removal": "Original alpha; no remover"
+  },
+  "shape": {
+    "vertices": 369974,
+    "faces": 739960,
+    "elapsed_seconds": 89.623,
+    "peak_allocated_gib": 8.652,
+    "peak_reserved_gib": 9.66
+  },
+  "paint": {
+    "elapsed_seconds": 348.946,
+    "peak_allocated_gib": 13.829,
+    "peak_reserved_gib": 16.76
+  },
+  "export": {
+    "status": "passed",
+    "raw_faces": 739960,
+    "painted_obj_faces": 739960,
+    "painted_glb_faces": 739960,
+    "glb_conversion_face_delta": 0,
+    "raw_mesh_files_preserved": true,
+    "obj_face_count_preserved": true,
+    "embedded_images": [
+      {
+        "name": "painted",
+        "size": [
+          4096,
+          4096
+        ],
+        "format": "PNG"
+      },
+      {
+        "name": "painted_metallic-painted_roughness",
+        "size": [
+          4096,
+          4096
+        ],
+        "format": "PNG"
+      }
+    ],
+    "maps": {
+      "painted.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 26407640,
+        "extrema": [
+          [
+            14,
+            253
+          ],
+          [
+            8,
+            243
+          ],
+          [
+            0,
+            254
+          ]
+        ]
+      },
+      "painted_roughness.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 4059183,
+        "extrema": [
+          193,
+          249
+        ]
+      },
+      "painted_metallic.png": {
+        "size": [
+          4096,
+          4096
+        ],
+        "bytes": 3461324,
+        "extrema": [
+          0,
+          74
+        ]
+      }
+    },
+    "files": {
+      "painted.glb": 63871236,
+      "painted.png": 26407640,
+      "painted_roughness.png": 4059183,
+      "painted_metallic.png": 3461324,
+      "paint-result.json": 1388,
+      "shape-result.json": 1034,
+      "painted.obj": 61052596,
+      "painted.mtl": 143,
+      "raw_shape.ply": 14059389,
+      "raw_shape.glb": 13320028
+    }
+  },
+  "painted_glb_sha256": "4066267b2dca78235b1b687ea2b9069acbb2f16bf89c3b234d9a52ba561e69e0",
+  "preview": "Actual raw and textured GLBs rendered in Blender 5.2.1 Cycles; 48 samples; front and rear; studio lighting and floor only; no mesh or material cleanup",
+  "visual_observations": [
+    "Recognizable stepped stone silhouette and thick roots with some gaps",
+    "Fine carving and plate relief mostly missing from geometry",
+    "Second medallion invented below the single reference plate; symbols distorted",
+    "Decoration repeated on unseen back; no rear reference was provided",
+    "Stone and bark detail softened; metallic values 0-74/255 and roughness 193-249/255 across exported maps"
+  ],
+  "quality_assessment": "Below finished-asset target; useful comparison baseline only",
+  "owner_feedback": "Not even close to good enough; asked whether settings or model capability caused the result",
+  "unreal_imported": false,
+  "model_api_cost_usd": 0,
+  "output_scope": "Private local evaluation; generated model and renders excluded from public repository",
+  "texture_diagnostic": {
+    "method": {
+      "reference": "waymarker-v1.png",
+      "mesh": "painted.obj",
+      "faces": 739960,
+      "geometry_regenerated": false,
+      "existing_textures_used_as_input": false,
+      "sampler": "UniPCMultistepScheduler",
+      "guidance": 3.0,
+      "paint_seed": 0,
+      "resolution": 768,
+      "views": 9,
+      "elevations": [
+        0,
+        0,
+        0,
+        0,
+        90,
+        -90,
+        20,
+        20,
+        -20
+      ],
+      "azimuths": [
+        0,
+        90,
+        180,
+        270,
+        0,
+        180,
+        30,
+        210,
+        120
+      ],
+      "postprocessing": "None; raw generated multiview PNGs before RealESRGAN and texture baking",
+      "runs": [
+        {
+          "steps": 15,
+          "elapsed_seconds": 63.072
+        },
+        {
+          "steps": 30,
+          "elapsed_seconds": 118.39
+        }
+      ]
+    },
+    "observation": "Both stock15 and30step unbaked front-view images contain two medallions; appearance remains very similar. Duplicated ornament precedes superresolution and baking.",
+    "inference": "Increasing sampling alone did not fix this asset. Model conditioning or learned reconstruction limits are implicated; other settings and references remain untested."
+  }
+}
