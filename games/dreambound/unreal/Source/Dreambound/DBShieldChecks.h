@@ -55,6 +55,9 @@ private:
         float SampleSeconds = 0.f;
         float FirstRecovery = -1.f;
         float SavedCooldown = 0.f;
+        float MinTickSeconds = 1.f;
+        float MaxTickSeconds = 0.f;
+        int32 ObservedTicks = 0;
         bool bIdleGood = false;
         bool bDelayGood = false;
         bool bFreshSprintGood = false;

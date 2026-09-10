@@ -402,7 +402,15 @@ void ADBShieldCheckRunner::TickMovement(float DeltaSeconds)
     const FVector Position = Player->GetActorLocation();
     const float Travel = FVector::Dist2D(Position, M.Last);
     M.Distance += Travel;
-    M.PeakSpeed = FMath::Max(M.PeakSpeed, Travel / FMath::Max(DeltaSeconds, .001f));
+    // NullRHI may run sub-millisecond world ticks. A 1ms denominator floor
+    // would under-report real speed despite correct total distance/time.
+    if (DeltaSeconds > UE_SMALL_NUMBER)
+    {
+        M.PeakSpeed = FMath::Max(M.PeakSpeed, Travel / DeltaSeconds);
+        M.MinTickSeconds = FMath::Min(M.MinTickSeconds, DeltaSeconds);
+        M.MaxTickSeconds = FMath::Max(M.MaxTickSeconds, DeltaSeconds);
+        ++M.ObservedTicks;
+    }
     M.MaxZ = FMath::Max(M.MaxZ, float(FMath::Abs(Position.Z - M.Start.Z)));
     if (M.Age > .3f) { M.SampleDistance += Travel; M.SampleSeconds += DeltaSeconds; }
     M.Last = Position;
@@ -439,8 +447,10 @@ void ADBShieldCheckRunner::TickMovement(float DeltaSeconds)
         }
         Player->PressSprint(); GoMovement(EMovementStep::Sprint); break;
     case EMovementStep::Sprint:
-        if (Player->Stamina > .01f && M.Age < 5.6f) break;
-        Check(Player->Stamina <= .01f && !Player->IsSprinting() && bGrounded
+        // Observe the actual exhaustion transition. A nearly-empty bar can
+        // still be sprinting for another tick and has not latched exhaustion.
+        if ((Player->Stamina > 0.f || Player->IsSprinting()) && M.Age < 5.6f) break;
+        Check(Player->Stamina <= 0.f && !Player->IsSprinting() && bGrounded
             && M.Age >= 4.9f && M.Age <= 5.35f && M.Distance > 4200.f && M.Distance < 4700.f
             && M.PeakSpeed > 860.f && M.PeakSpeed < 920.f,
             TEXT("sprint_exhausts_after_physical_run"),
@@ -1063,7 +1073,13 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     Report->SetBoolField(TEXT("aborted"), bAborted);
     Report->SetNumberField(TEXT("last_step"), bMovementCheck ? int32(MovementProbe.Step) : int32(Step));
     Report->SetNumberField(TEXT("elapsed_wall_seconds"), FPlatformTime::Seconds() - StartedAt);
-    if (bMovementCheck) Report->SetNumberField(TEXT("elapsed_tick_seconds"), MovementProbe.Elapsed);
+    if (bMovementCheck)
+    {
+        Report->SetNumberField(TEXT("elapsed_tick_seconds"), MovementProbe.Elapsed);
+        Report->SetNumberField(TEXT("observed_ticks"), MovementProbe.ObservedTicks);
+        Report->SetNumberField(TEXT("minimum_tick_seconds"), MovementProbe.ObservedTicks ? MovementProbe.MinTickSeconds : 0.f);
+        Report->SetNumberField(TEXT("maximum_tick_seconds"), MovementProbe.MaxTickSeconds);
+    }
     TArray<TSharedPtr<FJsonValue>> Rows;
     TMap<FString, TSharedPtr<FJsonObject>> Scenarios;
     for (const FCheck& Result : Checks)
