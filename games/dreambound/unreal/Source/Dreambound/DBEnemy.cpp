@@ -1286,6 +1286,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             Foot.bSwinging = false;
             Foot.Progress = 1.f;
             Foot.Velocity = Foot.SwingStartVelocity = FVector::ZeroVector;
+            Foot.ToeRotation = FQuat::Identity;
+            Foot.LiftPhaseStart = Foot.LiftVelocity = 0.f;
             Foot.bSettling = false;
         }
         bOrganicFeetInitialized = true;
@@ -1364,26 +1366,33 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
         FOrganicFoot& Foot = OrganicFeet[Side];
         if (!Foot.bSwinging) continue;
         const float RemainingTime = (1.f - Foot.Progress) / FMath::Max(.01f, SwingRate(Foot));
-        const FVector ExpectedLanding = LandingFor(Side, RemainingTime, bStopping ? 0.f : Foot.LandingLeadTime);
+        // The body has already moved this tick; the foot's stored phase has
+        // not advanced yet. Its remaining future body travel excludes this
+        // tick, otherwise every retarget lands a movement frame too far ahead.
+        const float FutureTravelTime = FMath::Max(0.f, RemainingTime - DeltaSeconds);
+        const FVector ExpectedLanding = LandingFor(Side, FutureTravelTime, bStopping ? 0.f : Foot.LandingLeadTime);
         const bool bSettleNow = bStopping && !Foot.bSettling;
-        const bool bCourseChanged = !bStopping && Foot.Progress < .90f
-            && FVector::Dist2D(ExpectedLanding, Foot.SwingEnd) > Lengths[Side] * .22f;
+        const bool bCourseChanged = !bStopping
+            && FVector::Dist2D(ExpectedLanding, Foot.SwingEnd) > Lengths[Side] * .04f;
         if (bSettleNow || bCourseChanged)
         {
-            // Preserve the current landing deadline and velocity. Restarting
-            // a minimum .10 s swing with a new lift arc repeatedly delayed
-            // support and lifted an already-raised foot again during turns.
+            // Refit only the base path. Keep the original clearance phase and
+            // peak separate, so an early retarget cannot erase toe clearance
+            // and a later retarget cannot restart it above a raised foot.
+            const float LiftPhase = FMath::Lerp(Foot.LiftPhaseStart, 1.f, Foot.Progress);
+            const float CurrentLift = FMath::Square(FMath::Sin(LiftPhase * PI)) * Foot.LiftHeight * Scale;
             Foot.Duration = FMath::Max(DeltaSeconds, bStopping
                 ? FMath::Min(RemainingTime, bCaster ? .17f : .20f) : RemainingTime);
-            Foot.SwingStart = Foot.Position;
-            Foot.SwingStartVelocity = Foot.Velocity.GetClampedToMaxSize(650.f * Scale);
-            Foot.StartRotation = Foot.Rotation;
+            Foot.SwingStart = Foot.Position - FVector(0.f, 0.f, CurrentLift);
+            Foot.SwingStartVelocity = (Foot.Velocity - FVector(0.f, 0.f, Foot.LiftVelocity)).GetClampedToMaxSize(650.f * Scale);
+            Foot.StartRotation = (Foot.ToeRotation.Inverse() * Foot.Rotation).GetNormalized();
+            Foot.LiftPhaseStart = LiftPhase;
             if (bStopping) Foot.LandingLeadTime = 0.f;
-            Foot.LiftHeight = 0.f;
-            TraceOrganicFoot(LandingFor(Side, Foot.Duration, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
+            const float NewFutureTravelTime = FMath::Max(0.f, Foot.Duration - DeltaSeconds);
+            TraceOrganicFoot(LandingFor(Side, NewFutureTravelTime, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
             Foot.LandingRotation = FQuat::FindBetweenNormals(FVector::UpVector, Foot.LandingNormal)
-                * PredictedTurn(Foot.Duration) * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Side]].GetRotation();
-            Foot.FacingYaw = PredictedYaw(Foot.Duration);
+                * PredictedTurn(NewFutureTravelTime) * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Side]].GetRotation();
+            Foot.FacingYaw = PredictedYaw(NewFutureTravelTime);
             Foot.Progress = 0.f;
             Foot.ExpectedTravel = FMath::Max(1.f, PlanningVelocity.Size2D() * Foot.Duration);
             Foot.bSettling = bStopping;
@@ -1394,18 +1403,23 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             : DeltaSeconds * .4f / Foot.Duration + Distance * .6f / FMath::Max(1.f, Foot.ExpectedTravel);
         Foot.Progress = FMath::Min(1.f, Foot.Progress + Advance);
         const float Blend = FMath::SmoothStep(0.f, 1.f, Foot.Progress);
-        const FVector PreviousPosition = Foot.Position;
         Foot.Position = FMath::Lerp(Foot.SwingStart, Foot.SwingEnd, Blend);
         const float P = Foot.Progress;
         Foot.Position += Foot.SwingStartVelocity * Foot.Duration * (P * P * P - 2.f * P * P + P);
-        const float LiftShape = FMath::Square(FMath::Sin(P * PI));
+        const float LiftPhase = FMath::Lerp(Foot.LiftPhaseStart, 1.f, P);
+        const float LiftShape = FMath::Square(FMath::Sin(LiftPhase * PI));
         const float Lift = LiftShape * Foot.LiftHeight * Scale;
         Foot.Position.Z += Lift;
-        Foot.Velocity = DeltaSeconds > SMALL_NUMBER ? (Foot.Position - PreviousPosition) / DeltaSeconds : FVector::ZeroVector;
+        const float Rate = DeltaSeconds > SMALL_NUMBER ? Advance / DeltaSeconds : 0.f;
+        Foot.LiftVelocity = FMath::Sin(2.f * PI * LiftPhase) * PI * Foot.LiftHeight * Scale
+            * (1.f - Foot.LiftPhaseStart) * Rate;
+        Foot.Velocity = ((Foot.SwingEnd - Foot.SwingStart) * (6.f * P * (1.f - P))
+            + Foot.SwingStartVelocity * Foot.Duration * (3.f * P * P - 4.f * P + 1.f)) * Rate
+            + FVector(0.f, 0.f, Foot.LiftVelocity);
         Foot.Rotation = FQuat::Slerp(Foot.StartRotation, Foot.LandingRotation, Blend).GetNormalized();
         const FVector SwingRight = FRotator(0.f, OrganicFacingYaw, 0.f).RotateVector(FVector::RightVector);
-        const float ToeLift = Foot.LiftHeight > 0.f ? LiftShape : 0.f;
-        Foot.Rotation = (FQuat(SwingRight, FMath::DegreesToRadians(-ToeLift * (bCaster ? 9.f : 13.f))) * Foot.Rotation).GetNormalized();
+        Foot.ToeRotation = FQuat(SwingRight, FMath::DegreesToRadians(-LiftShape * (bCaster ? 9.f : 13.f)));
+        Foot.Rotation = (Foot.ToeRotation * Foot.Rotation).GetNormalized();
         if (Foot.Progress >= 1.f)
         {
             Foot.bSwinging = false;
@@ -1413,6 +1427,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             Foot.Normal = Foot.LandingNormal;
             Foot.Rotation = Foot.LandingRotation;
             Foot.Velocity = FVector::ZeroVector;
+            Foot.LiftVelocity = 0.f;
+            Foot.ToeRotation = FQuat::Identity;
             // Transfer support on this landing update. A second cooldown here
             // kept the old support foot behind the moving hip for another tick.
             OrganicStepCooldown = 0.f;
@@ -1450,6 +1466,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             TraceOrganicFoot(LandingFor(Pick, Foot.Duration, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
             Foot.SwingStart = Foot.Position;
             Foot.SwingStartVelocity = FVector::ZeroVector;
+            Foot.LiftPhaseStart = Foot.LiftVelocity = 0.f;
+            Foot.ToeRotation = FQuat::Identity;
             Foot.bSettling = bStopping;
             Foot.StartRotation = Foot.Rotation;
             Foot.LandingRotation = FQuat::FindBetweenNormals(FVector::UpVector, Foot.LandingNormal)
@@ -1477,7 +1495,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
         const float P = FMath::Min(1.f, Foot.Progress + SwingRate(Foot) * LookAhead);
         FVector Position = FMath::Lerp(Foot.SwingStart, Foot.SwingEnd, FMath::SmoothStep(0.f, 1.f, P));
         Position += Foot.SwingStartVelocity * Foot.Duration * (P * P * P - 2.f * P * P + P);
-        Position.Z += FMath::Square(FMath::Sin(P * PI)) * Foot.LiftHeight * Scale;
+        const float LiftPhase = FMath::Lerp(Foot.LiftPhaseStart, 1.f, P);
+        Position.Z += FMath::Square(FMath::Sin(LiftPhase * PI)) * Foot.LiftHeight * Scale;
         return Position;
     };
     for (int32 Side = 0; Side < 2; ++Side)

@@ -140,6 +140,7 @@ private:
         FQuat Rotation = FQuat::Identity;
         FQuat StartRotation = FQuat::Identity;
         FQuat LandingRotation = FQuat::Identity;
+        FQuat ToeRotation = FQuat::Identity;
         float Progress = 1.f;
         float Duration = 0.22f;
         float ExpectedTravel = 1.f;
@@ -148,6 +149,8 @@ private:
         float FacingYaw = 0.f;
         float LandingLeadTime = 0.f;
         float LiftHeight = 12.f;
+        float LiftPhaseStart = 0.f;
+        float LiftVelocity = 0.f;
         bool bSwinging = false;
         bool bSettling = false;
     };
