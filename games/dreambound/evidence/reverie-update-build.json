@@ -1,0 +1,409 @@
+{
+  "version": "0.4.1-reverie2",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "ba0178e133f98ecbe9912743a8bb23fb9cd242c5",
+  "recorded_on_utc": "2026-09-10T18:41:43.446149+00:00",
+  "package_path": "BuildOutput/ReverieUpdate/Windows",
+  "scope": "Restore the owner-preferred previous cyborg and shield/weapon graphics while retaining the new Reverie environment; ground stairs, aprons, terrace retaining faces, exposed paving and water-feature supports.",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2",
+      "modified_utc": "2026-09-10T18:36:18.762100+00:00"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166290944,
+      "sha256": "6FD210D45DFF11880FAF942A52683A9D3862F4348C5FF05026C55A0C90696348",
+      "modified_utc": "2026-09-10T18:35:55.982595+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11370044,
+      "sha256": "5413B8CF03458FF654CBC6B84254F90C9D6EBD455DF4F6FA582DEDB99C19AEB7",
+      "modified_utc": "2026-09-10T18:36:19.904888+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 392371392,
+      "sha256": "23C80618AAA394424E1AA31D188BD94203E0A6F0E7B773503A2BFCA42D5E832E",
+      "modified_utc": "2026-09-10T18:36:21.730859+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 283135,
+      "sha256": "0118B03211F17C9C4971061F081D265BC232A1EB97A85E9C71BABDC21C0BE350",
+      "modified_utc": "2026-09-10T18:36:21.734857+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211600,
+      "sha256": "49B72DECF7F09AA8F307ED7802AADE0DC1E6CDDE944772189AD5A9E9A4A6E438",
+      "modified_utc": "2026-09-10T18:36:21.730859+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "CC931FD5A1828F0CB4D61D1CC8F99BA213F0889371E56DD9183F232D7A4DE3F8",
+      "modified_utc": "2026-09-10T18:36:21.733858+00:00"
+    }
+  ],
+  "build": {
+    "complete": true,
+    "exit_code": 0,
+    "build_cook_run_seconds": 41.22,
+    "log": ".local/reverie-update-package.log",
+    "package_builds_for_this_revision": 1,
+    "editor_compilation": {
+      "exit_code": 0,
+      "seconds": 7.79,
+      "log": ".local/reverie-update-editor.log"
+    }
+  },
+  "content": {
+    "retained_environment_identity": "evidence/reverie-build.json",
+    "retained_environment_note": "The previous record describes the unchanged Reverie source/import assets, not evidence for this executable. Runtime placement is updated in this revision.",
+    "runtime_namespaces": [
+      "/Game/Art/Reverie",
+      "/Game/Art/PreferredCombat",
+      "/Game/Audio/Reverie"
+    ],
+    "engine_content": [
+      "/Engine/BasicShapes",
+      "/Engine/EngineFonts"
+    ],
+    "previous_environment_imported": false,
+    "preferred_combat": {
+      "complete": true,
+      "scope": "/Game/Art/PreferredCombat",
+      "imported": [
+        {
+          "name": "SM_Forearm",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_Forearm.SM_Forearm",
+          "dimensions_cm": [
+            59.338759422302246,
+            18.760525703430176,
+            20.96896457672119
+          ],
+          "bounds_origin_cm": [
+            -25.06482744216919,
+            -0.08026266098022461,
+            -3.1844820976257324
+          ],
+          "materials": [
+            "M_Cloth",
+            "M_DarkMetal",
+            "M_Bronze",
+            "M_Ceramic"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_Core",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_Core.SM_Core",
+          "dimensions_cm": [
+            4.8363752365112305,
+            18.399999618530273,
+            18.399999618530273
+          ],
+          "bounds_origin_cm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "M_ShieldBronze",
+            "M_Core",
+            "M_DarkMetal"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_Crystal",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_Crystal.SM_Crystal",
+          "dimensions_cm": [
+            34.70000076293945,
+            30.399999618530273,
+            45.0
+          ],
+          "bounds_origin_cm": [
+            1.8500003814697266,
+            0.0,
+            22.5
+          ],
+          "materials": [
+            "M_Crystal",
+            "M_Bronze"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_GuardianBody",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_GuardianBody.SM_GuardianBody",
+          "dimensions_cm": [
+            48.55999946594238,
+            57.163705825805664,
+            131.5454559326172
+          ],
+          "bounds_origin_cm": [
+            5.880000114440918,
+            9.5367431640625e-07,
+            4.227272033691406
+          ],
+          "materials": [
+            "M_DarkMetal",
+            "M_Core",
+            "M_Bronze",
+            "M_Ceramic",
+            "M_Patina",
+            "M_Cloth"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_GuardianHead",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_GuardianHead.SM_GuardianHead",
+          "dimensions_cm": [
+            32.70000076293945,
+            32.900001525878906,
+            49.0
+          ],
+          "bounds_origin_cm": [
+            4.350000381469727,
+            0.0,
+            24.5
+          ],
+          "materials": [
+            "M_Bronze",
+            "M_DarkMetal",
+            "M_Core",
+            "M_Patina"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_GuardianArm",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_GuardianArm.SM_GuardianArm",
+          "dimensions_cm": [
+            37.70000076293945,
+            37.67109680175781,
+            101.22248840332031
+          ],
+          "bounds_origin_cm": [
+            3.8500003814697266,
+            0.0,
+            -33.611244201660156
+          ],
+          "materials": [
+            "M_DarkMetal",
+            "M_Bronze",
+            "M_Ceramic"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_GuardianLeg",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_GuardianLeg.SM_GuardianLeg",
+          "dimensions_cm": [
+            39.363792419433594,
+            25.690717697143555,
+            102.0
+          ],
+          "bounds_origin_cm": [
+            6.830738067626953,
+            0.0,
+            -43.0
+          ],
+          "materials": [
+            "M_DarkMetal",
+            "M_Bronze",
+            "M_Ceramic",
+            "M_Patina"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_ShieldHub",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_ShieldHub.SM_ShieldHub",
+          "dimensions_cm": [
+            19.860000610351562,
+            29.799999237060547,
+            30.094860076904297
+          ],
+          "bounds_origin_cm": [
+            -4.119999885559082,
+            0.0,
+            -0.052570343017578125
+          ],
+          "materials": [
+            "M_ShieldCeramic",
+            "M_ShieldBronze",
+            "M_DarkMetal"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_ShieldSegment",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_ShieldSegment.SM_ShieldSegment",
+          "dimensions_cm": [
+            12.311418056488037,
+            32.90973663330078,
+            26.164581298828125
+          ],
+          "bounds_origin_cm": [
+            -0.7942907810211182,
+            0.0,
+            24.817710876464844
+          ],
+          "materials": [
+            "M_ShieldCeramic",
+            "M_ShieldBronze",
+            "M_DarkMetal"
+          ],
+          "collision_hulls": 0
+        },
+        {
+          "name": "SM_ShieldSegmentGlow",
+          "path": "/Game/Art/PreferredCombat/Meshes/SM_ShieldSegmentGlow.SM_ShieldSegmentGlow",
+          "dimensions_cm": [
+            11.990000247955322,
+            12.055253982543945,
+            11.951963424682617
+          ],
+          "bounds_origin_cm": [
+            -0.4649999141693115,
+            0.04959583282470703,
+            23.224019050598145
+          ],
+          "materials": [
+            "M_Core"
+          ],
+          "collision_hulls": 0
+        }
+      ],
+      "materials": [
+        "/Game/Art/PreferredCombat/Materials/M_Bronze",
+        "/Game/Art/PreferredCombat/Materials/M_Ceramic",
+        "/Game/Art/PreferredCombat/Materials/M_Cloth",
+        "/Game/Art/PreferredCombat/Materials/M_CombatGlow",
+        "/Game/Art/PreferredCombat/Materials/M_Core",
+        "/Game/Art/PreferredCombat/Materials/M_Crystal",
+        "/Game/Art/PreferredCombat/Materials/M_DarkMetal",
+        "/Game/Art/PreferredCombat/Materials/M_Ember",
+        "/Game/Art/PreferredCombat/Materials/M_Frost",
+        "/Game/Art/PreferredCombat/Materials/M_Patina",
+        "/Game/Art/PreferredCombat/Materials/M_ShieldBronze",
+        "/Game/Art/PreferredCombat/Materials/M_ShieldCeramic",
+        "/Game/Art/PreferredCombat/Materials/M_Storm"
+      ],
+      "textures": [
+        "/Game/Art/PreferredCombat/Textures/T_PaintedSurface.T_PaintedSurface",
+        "/Game/Art/PreferredCombat/Textures/T_SculptedNormal.T_SculptedNormal",
+        "/Game/Art/PreferredCombat/Textures/T_MetalCraft.T_MetalCraft",
+        "/Game/Art/PreferredCombat/Textures/T_MetalCraftNormal.T_MetalCraftNormal",
+        "/Game/Art/PreferredCombat/Textures/T_ShieldCraft.T_ShieldCraft",
+        "/Game/Art/PreferredCombat/Textures/T_ShieldCraftNormal.T_ShieldCraftNormal"
+      ],
+      "warnings": [],
+      "reason": "Owner preferred the previous cyborg and weapon graphics after reviewing Reverie."
+    },
+    "preferred_import_identity": {
+      "path": "unreal/Saved/Reverie/preferred-combat-import.json",
+      "bytes": 6268,
+      "sha256": "F478084C54B8EDB60D2271537E677FA03602AA73A36973AFAE08E24D23246866",
+      "modified_utc": "2026-09-10T18:19:35.876588+00:00"
+    },
+    "reproduction": "scripts/CreateContent.py calls import_reverie.py then import_preferred_combat.py and prepares the empty Reverie map."
+  },
+  "ground_contact": [
+    "Stone bedding beneath stairs reaches into soil; low-end paving apron joins the first riser.",
+    "All four terrace sides have retaining faces; intended 160cm playable landing height preserved.",
+    "Exposed paving slab edges have buried inset supports; interior slab tops unchanged.",
+    "Basin hollow foundation, rill bedding and embedded arrival plinth preserve water and ward heights."
+  ],
+  "audio": {
+    "revision": "reverie-foley-v2",
+    "cues": 23,
+    "source": "Unchanged layered CC0 recorded foley from the previous Reverie package.",
+    "source_report": {
+      "path": "assets/audio-reverie/audio-report.json",
+      "bytes": 77146,
+      "sha256": "550BD393268AEE555113A9985C9B169AC6E6E265A4BB74B90498AE28350603ED",
+      "modified_utc": "2026-09-10T16:37:59.062915+00:00"
+    },
+    "suno_integrated": false,
+    "suno_status": "Eight text-prompt alternatives generated on the owner signed-in Pro account. First release officially unlocked; official IAB downloads did not deliver a retrievable local file. Chrome login requested to try ordinary downloads. No stream extraction, purchase or upgrade.",
+    "suno_metadata": "assets/audio-suno/generation-report.json",
+    "subjective_listening_tested": false
+  },
+  "verification": {
+    "report": {
+      "path": "evidence/reverie-update-art-checks.json",
+      "bytes": 3434,
+      "sha256": "95FC9DD3EC27001D88F3457DB93D6BF2BFCAE9FE8B82F6767C0035F13DF9E2E9",
+      "modified_utc": "2026-09-10T18:36:43.452234+00:00"
+    },
+    "package_executions": 1,
+    "scenario_groups": 2,
+    "observations": 11,
+    "failed": 0,
+    "complete": true,
+    "aborted": false,
+    "seed": 833283,
+    "save_slot": "DreamboundQA_ReverieUpdate",
+    "scope": "Seeded route/garden reproduction and variation, three capsule lanes through each gateway/bridge, continuous floors, physical closed gates and enclosing walls, actual new asset instances, functional arch placement, retained spawn/combat/ward pads and side stair floor profiles. Gates are excluded only from passage queries. Isolated QA profile backed up/restored; no combat fixture, visual judgment or ordinary play.",
+    "combat_suite_retested": false,
+    "native_input_tested": false,
+    "ordinary_playthrough": false,
+    "performance_benchmarked": false
+  },
+  "captures": [
+    {
+      "path": "evidence/reverie-update-stairs.png",
+      "bytes": 2748287,
+      "sha256": "F6C51F2466909C509A880B3AA3C211119F9719864932879C5E91A64E6ACBD8CB",
+      "modified_utc": "2026-09-10T18:37:06.076962+00:00",
+      "actual_packaged_binary": true,
+      "seed": 552389,
+      "mode": "-DBCapture -DBDetailView=Stairs -RenderOffscreen -ResX=1600 -ResY=1000 -ForceRes",
+      "save_slot": "DreamboundQA_ReverieUpdateStairs",
+      "exit_code": 0,
+      "root_observation": "Stair/apron/landing masonry meets the soil with no visible open daylight gap in this angle; original cream shield plates and dark frame visible."
+    },
+    {
+      "path": "evidence/reverie-update-combat-view.png",
+      "bytes": 2584217,
+      "sha256": "F3014CF6EE4FB8A1B0B9825AB2B4B9FAE38E4B7AE322C2CC7DB6A7715B675B56",
+      "modified_utc": "2026-09-10T18:39:36.503771+00:00",
+      "actual_packaged_binary": true,
+      "seed": 552389,
+      "mode": "-DBCapture -RenderOffscreen -ResX=1600 -ResY=1000 -ForceRes",
+      "save_slot": "DreamboundQA_ReverieUpdateCombatView",
+      "exit_code": 0,
+      "staged": "Camera and guardian are posed; sample Frost/Mirror upgrades are granted, not earned progression.",
+      "root_observation": "Preferred bronze/cream cyborg and folded cream shield render inside the retained new courtyard."
+    }
+  ],
+  "independent_review": "evidence/reverie-update-qa.md",
+  "saved_profile": {
+    "normal": "DreamboundSegments",
+    "checks": "DreamboundQA_ReverieUpdate",
+    "owner_input_config": {
+      "path": "unreal/Config/DefaultInput.ini",
+      "bytes": 11196,
+      "sha256": "8475ED722AE31C2D9F66D241203BE379433A59F9346C18B2211251CB9093CA67",
+      "modified_utc": "2026-09-09T21:12:58.791171+00:00"
+    },
+    "owner_input_file_modified_by_this_work": false
+  },
+  "previous_running_demo": "Existing 0.4.0 native game left untouched after earlier user-input contention; updated package built separately. This update did not inject native input or close it.",
+  "limits": [
+    "No complete ordinary playthrough or subjective audio assessment.",
+    "Two posed packaged views do not cover all seeds, hidden contacts, guard animation or art/fun acceptance.",
+    "No claim of exact anchor B visual quality. Upper fountain carving remains dark.",
+    "Suno source retrieval and integration require completion after the separate Chrome sign-in."
+  ]
+}

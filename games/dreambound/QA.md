@@ -1,8 +1,16 @@
-# Current Reverie graphics/audio QA
+# Current Reverie update QA
+
+Windows Shipping **0.4.1-reverie2**, source `ba0178e133f98ecbe9912743a8bb23fb9cd242c5`, restores the preferred cyborg/weapon art and grounds sanctuary structures. BuildCookRun succeeded in 41.22 seconds. One packaged focused geometry run passed **2 groups / 11 observations / 0 failures**, including bridge/gate lanes, protected pads and 16 stair probes. [Build identity](evidence/reverie-update-build.json), [results](evidence/reverie-update-art-checks.json).
+
+Root and independent QA inspected the actual [packaged stair view](evidence/reverie-update-stairs.png) and [restored combat view](evidence/reverie-update-combat-view.png). No concrete floating stair/landing gap remains visible in these views; the previous cream shield and bronze/cream guardian render in the new environment. The combat view poses a guardian and grants sample Frost/Mirror. [Independent review](evidence/reverie-update-qa.md) distinguishes the prior Editor inspection, final packaged image review and root-executed geometry check.
+
+No new native input or full combat suite was run. The existing0.4.0 demo was left untouched after earlier user-input contention. No ordinary complete run, subjective listening assessment, performance benchmark, all-seed visual guarantee or owner art/fun approval is claimed. Suno generated eight alternatives, but official browser-file retrieval is still pending; the imported audio remains the disclosed CC0 palette.
+
+# Historical0.4.0 Reverie graphics/audio QA
 
 Windows Shipping **0.4.0-reverie**, source `10e9738586944c561a79b73792d04a9c61d2c878`, passed the final focused packaged check: **2 groups / 11 observations / 0 failures**. Coverage includes seeded routes, functional arches, bridge and gate capsule lanes, continuous floors, protected gameplay pads, actual new asset instances and 16 physical stair probes. A reversed stair placement found in the first candidate was fixed before this package. [Exact build identity](evidence/reverie-build.json), [results](evidence/reverie-art-checks.json), [independent review](evidence/reverie-qa-notes.md).
 
-Root and independent QA inspected the new environment in actual Unreal views; the final [ordinary-spawn capture](evidence/reverie-courtyard.png) comes from this Shipping executable. Corrected stone striping and wall/soil contact are visible; upper fountain detail remains dark. Native startup and Enter into the first court worked on an isolated profile. Further movement/guard/pause/sound-settings checks stopped after the input tool detected user activity; the demo remains open. No ordinary complete run, subjective sound-quality verdict, new performance benchmark or owner acceptance is claimed. Suno sign-in remains unavailable; current replacement WAVs use disclosed CC0 recordings.
+Root and independent QA inspected the new environment in actual Unreal views; the final [ordinary-spawn capture](evidence/reverie-courtyard.png) comes from this Shipping executable. Corrected stone striping and wall/soil contact are visible; upper fountain detail remains dark. Native startup and Enter into the first court worked on an isolated profile. Further movement/guard/pause/sound-settings checks stopped after the input tool detected user activity; the demo remains open. No ordinary complete run, subjective sound-quality verdict, new performance benchmark or owner acceptance is claimed. At that package build, Suno sign-in was unavailable; those replacement WAVs use disclosed CC0 recordings.
 
 The following sections preserve earlier builds' evidence. Their checks and conclusions are historical, not verification of Reverie.
 

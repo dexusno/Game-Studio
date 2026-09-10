@@ -1,0 +1,88 @@
+{
+	"suite": "reverie-environment-route-v2",
+	"scope": "Seeded route/garden reproduction and variation, three capsule lanes through each gateway/bridge, continuous floors, physical closed gates and enclosing walls, actual new asset instances, functional arch placement, retained spawn/combat/ward pads and side stair floor profiles. Gates are excluded only from passage queries. Isolated QA profile backed up/restored; no combat fixture, visual judgment or ordinary play.",
+	"combat_tested": false,
+	"ordinary_play_tested": false,
+	"engine": "5.8.2-56702186+++UE5+Release-5.8",
+	"executable": "Dreambound-Win64-Shipping",
+	"platform": "Windows",
+	"save_slot": "DreamboundQA_ReverieUpdate",
+	"seed": 833283,
+	"null_rhi": true,
+	"complete": true,
+	"aborted": false,
+	"last_step": 30,
+	"elapsed_wall_seconds": 0.04195370152592659,
+	"passed": 2,
+	"failed": 0,
+	"checks": [
+		{
+			"id": "isolated_setup",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "isolated_slot",
+					"passed": true,
+					"detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+				},
+				{
+					"id": "recovery_world",
+					"passed": true,
+					"detail": "Actual world, possessed character, camera and three connected rooms."
+				},
+				{
+					"id": "journal_backup",
+					"passed": true,
+					"detail": "Prior QA bytes backed up; empty isolated profile established."
+				},
+				{
+					"id": "qa_journals_restored",
+					"passed": true,
+					"detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+				}
+			]
+		},
+		{
+			"id": "seeded_connected_route",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "same_seed_reproduces_route_and_gardens",
+					"passed": true,
+					"detail": "reverie-route:0,-1/garden0:2/garden1:1/garden2:1"
+				},
+				{
+					"id": "alternate_seed_changes_layout",
+					"passed": true,
+					"detail": "Up to three nearby seeds sampled; not exhaustive procedural validation."
+				},
+				{
+					"id": "connected_collision_and_floor",
+					"passed": true,
+					"detail": "Three linked rooms; three capsule lanes per gateway/bridge, 102 floor probes, center/+-270cm gate sweeps blocked while closed and clear after opening, enclosing walls on every unconnected cardinal side. Gate collision restored after the isolated open fixture."
+				},
+				{
+					"id": "new_environment_assets_actually_instanced",
+					"passed": true,
+					"detail": "26 loaded/instanced mesh families; two CrownTrees per room; no legacy paths or retired Blender tree/rock/cliff instances; new individual ward/gate actors. Missing: "
+				},
+				{
+					"id": "every_arch_serves_connected_route",
+					"passed": true,
+					"detail": "Exactly four gateway instances, each on a selected room edge with its open local-Y traversal axis aligned to one of two bridges."
+				},
+				{
+					"id": "spawn_combat_and_ward_approaches_clear",
+					"passed": true,
+					"detail": "30 capsule-overlap and physical floor probes at retained entry, encounter, practice and ward approach positions. "
+				},
+				{
+					"id": "terrace_stairs_have_physical_treads",
+					"passed": true,
+					"detail": "16/16 physical tread probes find successive20cm rises. No native-input traversal claim. "
+				}
+			]
+		}
+	],
+	"not_run": "All combat checks, ordinary inputs/play, rendered graphics, audio/feel and performance."
+}

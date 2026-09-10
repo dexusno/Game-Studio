@@ -3,7 +3,7 @@
 The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
 
 
-Open `BuildOutput/Reverie/Windows/Dreambound.exe` for the current **0.4.0-reverie** demo, or run `scripts/Start-Demo.ps1`. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
+Open `BuildOutput/ReverieUpdate/Windows/Dreambound.exe` for the current **0.4.1-reverie2** demo, or run `scripts/Start-Demo.ps1`. This restores the previous cyborg/weapon art and fixes structure-to-ground gaps in the new environment. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 
