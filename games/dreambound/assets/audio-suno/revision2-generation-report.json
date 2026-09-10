@@ -1,0 +1,92 @@
+{
+  "revision": "reverie-suno-prompt-audition-v2",
+  "date": "2026-09-10",
+  "observed_utc": "2026-09-10 19:21 UTC",
+  "status": "two completed source audition batches; not selected or integrated",
+  "provider": "Suno Sounds",
+  "model_ui": "Page selector displayed v6; generated rows labeled SOUND. Sounds model version not independently established.",
+  "account_verification": "Visible account link realdexnorthern matched the existing paid account before Create. This worker did not repeat billing or account inspection.",
+  "browser": {
+    "name": "Chrome",
+    "browser_id": "2",
+    "tab_id": "997003066",
+    "session_name": "🔊 Sound audition",
+    "url": "https://suno.com/create?wid=default",
+    "marked_for_handoff": true,
+    "note": "Root's tab997003059 could not be claimed because it belonged to root's browser session. Root explicitly authorized a new temporary Chrome tab in the same profile. IAB was not controlled."
+  },
+  "settings": {
+    "mode": "Sounds",
+    "type": "One-Shot",
+    "bpm": null,
+    "key": "Any",
+    "uploaded_inputs": false
+  },
+  "batches": [
+    {
+      "role": "release_source",
+      "prompt": "A spring-loaded metal launcher firing once, with a sharp latch snap and forceful rush of air. Dry, close recording.",
+      "type": "One-Shot",
+      "ui_prompt_characters": 115,
+      "outputs": [
+        {
+          "id": "0b094a20-eb0b-42bd-8769-e291fd70a8ce",
+          "url": "https://suno.com/song/0b094a20-eb0b-42bd-8769-e291fd70a8ce",
+          "ui_title": "A Spring-loaded Metal Launcher Firing Once, With A Sharp Latch Snap And Force...",
+          "ui_duration": "0:10",
+          "play_button_enabled": true
+        },
+        {
+          "id": "43c91b8d-2e1c-4ac7-86dc-8607f3286cb5",
+          "url": "https://suno.com/song/43c91b8d-2e1c-4ac7-86dc-8607f3286cb5",
+          "ui_title": "A Spring-loaded Metal Launcher Firing Once, With A Sharp Latch Snap And Force...",
+          "ui_duration": "0:08",
+          "play_button_enabled": true
+        }
+      ]
+    },
+    {
+      "role": "charge_motor_source",
+      "prompt": "An electric servo motor spinning steadily under load. A low mechanical whirr, close and dry.",
+      "type": "One-Shot",
+      "ui_prompt_characters": 92,
+      "outputs": [
+        {
+          "id": "b1506538-bb54-418b-bf43-ba080b6dabb4",
+          "url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+          "ui_title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+          "ui_duration": "0:13",
+          "play_button_enabled": true
+        },
+        {
+          "id": "08d264aa-8b15-4c63-8ee8-4e3a57139913",
+          "url": "https://suno.com/song/08d264aa-8b15-4c63-8ee8-4e3a57139913",
+          "ui_title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+          "ui_duration": "0:10",
+          "play_button_enabled": true
+        }
+      ]
+    }
+  ],
+  "actions": {
+    "create_submissions": 2,
+    "new_outputs": 4,
+    "purchases_or_upgrades": 0,
+    "unlocks": 0,
+    "downloads": 0,
+    "plays_by_worker": 0,
+    "publications_or_shares": 0,
+    "runtime_cue_changes": 0
+  },
+  "verified": "UI showed exactly two new alternatives for each prompt, enabled Play buttons and the recorded durations.",
+  "not_verified": [
+    "subjective sound or improvement",
+    "absence of music, speech or repeated events",
+    "editable source regions or loop seams",
+    "local audio bytes or clipping",
+    "permitted-download commercial status of these four outputs",
+    "owner acceptance"
+  ],
+  "license": "Suno output, not CC0. No permitted download was obtained for any revision2 output in this task. Existing terms and evidence references remain in generation-report.json.",
+  "next": "Owner/root audition the four alternatives using the recognition and editability criteria in prompt-revision.md. Keep unaccepted candidates out of the game; obtain official downloads and inspect actual signals before integration."
+}

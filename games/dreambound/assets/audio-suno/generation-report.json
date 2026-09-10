@@ -1,7 +1,7 @@
 {
   "revision": "reverie-suno-sources-v1",
   "date": "2026-09-10",
-  "status": "generated; official download delivery under investigation",
+  "status": "Original eight candidates under owner-requested prompt review; Chrome authenticated; official export location pending",
   "provider": "Suno Sounds",
   "model_ui": "Sounds mode; page model selector displayed v6; generated rows labeled SOUND",
   "creator": "Game Studio / Klaus using Suno",
@@ -30,8 +30,19 @@
       "type": "One-Shot",
       "prompt": "Single powerful sci-fi shield discharge, six heavy bronze ceramic plates snapping outward together, tight mechanical KRAK then deep pneumatic thrust and bright crystalline splinter shimmer. First-person game weapon SFX, huge tactile punch, weight in low mids, controlled sub bass, short clean one-second decay, dry close recording. One isolated event starting immediately. No music, beat, melody, voices, singing or ambience.",
       "outputs": [
-        {"id": "de39cd92-d524-4698-ba42-9af66a9c1963", "url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963", "ui_duration": "0:04", "detail_created_local": "September 10, 2026 at 8:16 PM", "official_unlock_verified": true},
-        {"id": "d2f8d187-feb8-4175-913f-8916d0b351cd", "url": "https://suno.com/song/d2f8d187-feb8-4175-913f-8916d0b351cd", "ui_duration": "0:06", "official_unlock_verified": false}
+        {
+          "id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+          "url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+          "ui_duration": "0:04",
+          "detail_created_local": "September 10, 2026 at 8:16 PM",
+          "official_unlock_verified": true
+        },
+        {
+          "id": "d2f8d187-feb8-4175-913f-8916d0b351cd",
+          "url": "https://suno.com/song/d2f8d187-feb8-4175-913f-8916d0b351cd",
+          "ui_duration": "0:06",
+          "official_unlock_verified": false
+        }
       ]
     },
     {
@@ -39,8 +50,18 @@
       "type": "Loop",
       "prompt": "Seamless steady sci-fi shield capacitor motor loop. Dense warm magnetic hum under tactile bronze servo gears and delicate glass resonance, gentle irregular mechanical flutter, tense contained power ready to release. Constant intensity, no build or ending, no rhythmic beat. Close dry game sound design, rich low mids, restrained high end. No music, melody, instruments, voices, singing, alarm or background ambience.",
       "outputs": [
-        {"id": "2cff33ee-3f25-49c4-abcb-805deba1c9f7", "url": "https://suno.com/song/2cff33ee-3f25-49c4-abcb-805deba1c9f7", "ui_duration": "0:14", "official_unlock_verified": false},
-        {"id": "87cf484f-b523-4202-9584-f6445323c983", "url": "https://suno.com/song/87cf484f-b523-4202-9584-f6445323c983", "ui_duration": "0:13", "official_unlock_verified": false}
+        {
+          "id": "2cff33ee-3f25-49c4-abcb-805deba1c9f7",
+          "url": "https://suno.com/song/2cff33ee-3f25-49c4-abcb-805deba1c9f7",
+          "ui_duration": "0:14",
+          "official_unlock_verified": false
+        },
+        {
+          "id": "87cf484f-b523-4202-9584-f6445323c983",
+          "url": "https://suno.com/song/87cf484f-b523-4202-9584-f6445323c983",
+          "ui_duration": "0:13",
+          "official_unlock_verified": false
+        }
       ]
     },
     {
@@ -48,8 +69,18 @@
       "type": "One-Shot",
       "prompt": "One massive close impact: a heavy bronze and ceramic shield slams into armored stone, immediate sharp metallic crack over a dense low-mid thud, small crystalline grit and a short bending metal ring, forceful physical weight. Cinematic fantasy game contact sound, dry, clear transient, one-second decay. A single isolated hit starting immediately, silence after. No music, melody, rhythm, percussion track, voices or singing.",
       "outputs": [
-        {"id": "8f74d0dd-52a2-45da-840f-b4a3c9096052", "url": "https://suno.com/song/8f74d0dd-52a2-45da-840f-b4a3c9096052", "ui_duration": "0:04", "official_unlock_verified": false},
-        {"id": "d1896c89-bddf-428a-b328-79163e3a2308", "url": "https://suno.com/song/d1896c89-bddf-428a-b328-79163e3a2308", "ui_duration": "0:03", "official_unlock_verified": false}
+        {
+          "id": "8f74d0dd-52a2-45da-840f-b4a3c9096052",
+          "url": "https://suno.com/song/8f74d0dd-52a2-45da-840f-b4a3c9096052",
+          "ui_duration": "0:04",
+          "official_unlock_verified": false
+        },
+        {
+          "id": "d1896c89-bddf-428a-b328-79163e3a2308",
+          "url": "https://suno.com/song/d1896c89-bddf-428a-b328-79163e3a2308",
+          "ui_duration": "0:03",
+          "official_unlock_verified": false
+        }
       ]
     },
     {
@@ -57,8 +88,18 @@
       "type": "One-Shot",
       "prompt": "One crisp defensive parry: a sword strikes a thick bronze ceramic shield and ricochets, immediate punchy metal CLANG with a short glass-like magical resonance and tiny scattering sparks. Assertive protective feedback, tight dry close sound, warm body with a clean bright accent, decay under one second. Single isolated contact, no whoosh buildup, no music, melody, beat, voices, singing or ambience.",
       "outputs": [
-        {"id": "ca1434c5-54fa-47a4-bc2a-dd2198cc05df", "url": "https://suno.com/song/ca1434c5-54fa-47a4-bc2a-dd2198cc05df", "ui_duration": "0:04", "official_unlock_verified": false},
-        {"id": "291cd12f-84f0-4f98-a7e1-bcc66cf66c02", "url": "https://suno.com/song/291cd12f-84f0-4f98-a7e1-bcc66cf66c02", "ui_duration": "0:11", "official_unlock_verified": false}
+        {
+          "id": "ca1434c5-54fa-47a4-bc2a-dd2198cc05df",
+          "url": "https://suno.com/song/ca1434c5-54fa-47a4-bc2a-dd2198cc05df",
+          "ui_duration": "0:04",
+          "official_unlock_verified": false
+        },
+        {
+          "id": "291cd12f-84f0-4f98-a7e1-bcc66cf66c02",
+          "url": "https://suno.com/song/291cd12f-84f0-4f98-a7e1-bcc66cf66c02",
+          "ui_duration": "0:11",
+          "official_unlock_verified": false
+        }
       ]
     }
   ],
@@ -75,6 +116,13 @@
       "result": "Supported CDP observation after the UI click returned Page.downloadWillBegin and Page.downloadProgress completed with 126837 received of 126837 bytes. Playwright waitForEvent(download), registered before click, timed out after 15 seconds. No file surfaced in Windows Downloads. Source was Suno's official generated download blob, not a playback stream.",
       "download_filename": "Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap....mp3",
       "completed_bytes": 126837,
+      "files_received_by_worker": false
+    },
+    {
+      "output_id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+      "observed_utc": "2026-09-10T19:20:57.299058+00:00",
+      "method": "Signed-in Chrome: More menu contents > Download > WAV > Download, already unlocked",
+      "result": "Official export modal closed. No matching file found in C:/Users/klaus/Downloads. Browser security blocked Chrome download history; owner asked for actual local download folder. No further unlock or purchase.",
       "files_received_by_worker": false
     }
   ],
