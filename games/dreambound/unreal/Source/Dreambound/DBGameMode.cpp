@@ -39,6 +39,7 @@
 #include "Serialization/MemoryReader.h"
 #include "Serialization/MemoryWriter.h"
 #include "Misc/Crc.h"
+#include "AudioDevice.h"
 
 namespace {
 constexpr uint32 DBJournalMagic=0x31534244;
@@ -78,6 +79,7 @@ void ADBGameMode::BeginPlay() {
  bCapture=bCapture||bMotionCapture;
  Player=Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this,0));
  LoadProgress();
+ if(FAudioDeviceHandle Audio=GetWorld()->GetAudioDevice())Audio->SetTransientPrimaryVolume(SoundVolume);
  Seed=bCanResume?StoredSave->Seed:FMath::RandRange(10000,999999);
  FParse::Value(FCommandLine::Get(),TEXT("DBSeed="),Seed);
  BuildWorld();
@@ -90,12 +92,19 @@ void ADBGameMode::BeginPlay() {
  if(bCapture||bVerify) {
   bTitle=false;bPaused=false;SetMenuInput(false); StartNewRun(true);
   if(bCapture&&Player&&!bMotionCapture) {
-   CurrentRoomId=1;Player->SetActorLocation(Rooms[1].Center+FVector(-980,-850,100));
+   FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
+   if(DetailView==TEXT("Fountain")){
+    CurrentRoomId=0;const FVector Position=Rooms[0].Center+FVector(380,400,110);
+    Player->SetActorLocation(Position);
+    Player->GetController()->SetControlRotation((Rooms[0].Center+FVector(1130,1240,330)-Position-FVector(0,0,50)).Rotation());
+   }else if(!FParse::Param(FCommandLine::Get(),TEXT("DBFirstView"))){
+   CurrentRoomId=1;Player->SetActorLocation(Rooms[1].Center+FVector(-980,-650,110));
    Player->GetController()->SetControlRotation(FRotator(-3,38,0));
    Player->ApplyUpgrade("Frost");Player->ApplyUpgrade("Mirror");
    FActorSpawnParameters PoseParams;PoseParams.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
    if(auto* Figure=GetWorld()->SpawnActor<ADBEnemy>(Rooms[1].Center+FVector(120,40,115),FRotator(0,215,0),PoseParams))Figure->Configure(EDBEnemyKind::Melee,99,1.f);
-   NotifyEvent(TEXT("BELLROOT / first Unreal art and combat study"),FLinearColor(0.65,0.86,1));
+   }
+   NotifyEvent(TEXT("REVERIE / sanctuary graphics and audio study"),FLinearColor(0.65,0.86,1));
   }
  }
  UE_LOG(LogTemp,Display,TEXT("DREAMBOUND_READY seed=%d rooms=%d saved=%d"),Seed,Rooms.Num(),bCanResume);
@@ -105,7 +114,7 @@ void ADBGameMode::EndPlay(const EEndPlayReason::Type Reason) {
  bEnding=true; Super::EndPlay(Reason);
 }
 AActor* ADBGameMode::Mesh(const FString& Name,FVector Loc,FRotator Rot,FVector Scale,bool Collision,const FString& Mat) {
- FString Path=Name.StartsWith("/")?Name:FString::Printf(TEXT("/Game/Art/Meshes/%s.%s"),*Name,*Name);
+ FString Path=Name.StartsWith("/")?Name:FString::Printf(TEXT("%s/Meshes/%s.%s"),Name.StartsWith("SM_RV_")?TEXT("/Game/Art/Reverie"):TEXT("/Game/Art"),*Name,*Name);
  UStaticMesh* Asset=LoadObject<UStaticMesh>(nullptr,*Path);
  if(!Asset) Asset=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube"));
  AStaticMeshActor* A=GetWorld()->SpawnActor<AStaticMeshActor>(Loc,Rot);
@@ -115,7 +124,7 @@ AActor* ADBGameMode::Mesh(const FString& Name,FVector Loc,FRotator Rot,FVector S
  C->SetCollisionEnabled(Collision?ECollisionEnabled::QueryAndPhysics:ECollisionEnabled::NoCollision);
  C->SetCollisionObjectType(ECC_WorldStatic); C->SetCollisionResponseToAllChannels(ECR_Block);
  if(!Mat.IsEmpty()) {
-  FString P=FString::Printf(TEXT("/Game/Art/Materials/%s.%s"),*Mat,*Mat);
+  FString P=FString::Printf(TEXT("%s/Materials/%s.%s"),Mat.StartsWith("M_RV_")?TEXT("/Game/Art/Reverie"):TEXT("/Game/Art"),*Mat,*Mat);
   if(auto* M=LoadObject<UMaterialInterface>(nullptr,*P)) for(int32 I=0;I<C->GetNumMaterials();++I)C->SetMaterial(I,M);
  }
  Generated.Add(A);return A;
@@ -125,7 +134,7 @@ void ADBGameMode::Instance(const FString& Name,FVector Loc,FRotator Rot,FVector 
  auto** Existing=MeshBatches.Find(Key);
  UHierarchicalInstancedStaticMeshComponent* C=Existing?*Existing:nullptr;
  if(!C) {
-  FString P=FString::Printf(TEXT("/Game/Art/Meshes/%s.%s"),*Name,*Name);
+  FString P=FString::Printf(TEXT("%s/Meshes/%s.%s"),Name.StartsWith("SM_RV_")?TEXT("/Game/Art/Reverie"):TEXT("/Game/Art"),*Name,*Name);
   auto* Asset=LoadObject<UStaticMesh>(nullptr,*P); if(!Asset)return;
   AActor* A=GetWorld()->SpawnActor<AActor>(); Generated.Add(A);
   C=NewObject<UHierarchicalInstancedStaticMeshComponent>(A);
@@ -135,7 +144,7 @@ void ADBGameMode::Instance(const FString& Name,FVector Loc,FRotator Rot,FVector 
   C->SetCollisionObjectType(ECC_WorldStatic);C->SetCollisionResponseToAllChannels(ECR_Block);
   if(Name=="SM_Grass"||Name=="SM_Root"||Name=="SM_Canopy"||Name=="SM_Fern"||Name=="SM_Rubble")C->SetCollisionEnabled(ECollisionEnabled::NoCollision);
   if(!Mat.IsEmpty()) {
-   FString MP=FString::Printf(TEXT("/Game/Art/Materials/%s.%s"),*Mat,*Mat);
+   FString MP=FString::Printf(TEXT("%s/Materials/%s.%s"),Mat.StartsWith("M_RV_")?TEXT("/Game/Art/Reverie"):TEXT("/Game/Art"),*Mat,*Mat);
    if(auto* M=LoadObject<UMaterialInterface>(nullptr,*MP))for(int32 I=0;I<C->GetNumMaterials();++I)C->SetMaterial(I,M);
   }
   C->RegisterComponent();MeshBatches.Add(Key,C);
@@ -281,7 +290,7 @@ void ADBGameMode::ActivateRoom(int32 Index) {
  SpawnedRooms.Add(Index);
  SaveProgress(true); SpawnWave(Index,0);
  NotifyEvent(Rooms[Index].bOptional?TEXT("MIRROR TRIAL / clear the defenders to learn Mirror Facet"):FString::Printf(TEXT("%s / break the ward"),*Rooms[Index].Name),FLinearColor(0.96,0.79,0.49));
- if(auto* S=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/S_Encounter.S_Encounter")))UGameplayStatics::PlaySound2D(this,S,0.55f);
+ if(auto* S=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/Reverie/S_Encounter.S_Encounter")))UGameplayStatics::PlaySound2D(this,S,0.55f);
 }
 void ADBGameMode::SpawnWave(int32 Index,int32 Wave) {
  RoomWaves.Add(Index,Wave);if(CurrentRoomId==Index)CurrentWave=Wave;
@@ -326,7 +335,7 @@ void ADBGameMode::FinishRoom(int32 Index) {
   UpdateGates();SaveProgress(true);
   NotifyEvent(Index==5?TEXT("GUARDIAN BROKEN / claim its living capacitor"):TEXT("WARD BROKEN / recover an attachment"),FLinearColor(0.5,1,0.77));
  }
- if(auto* S=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/S_Clear.S_Clear")))UGameplayStatics::PlaySound2D(this,S,0.8f);
+ if(auto* S=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/Reverie/S_Clear.S_Clear")))UGameplayStatics::PlaySound2D(this,S,0.8f);
 }
 void ADBGameMode::NotifyPlayerDied() {
  if(!PracticeReward.IsNone()&&Player){Player->Health=Player->MaxHealth;Player->bDead=false;return;}
@@ -343,7 +352,10 @@ void ADBGameMode::Tick(float Dt) {
  if(bVerify&&PulseTime>3){bVerify=false;RunVerification();return;}
  if(bMotionCapture){TickMotionDemo(Dt);return;}
  if(bCapture){
-  if(PulseTime>8&&!bCapturedFrame){bCapturedFrame=true;FScreenshotRequest::RequestScreenshot(TEXT("Dreambound_FirstView.png"),true,false);}
+  if(PulseTime>8&&!bCapturedFrame){
+   bCapturedFrame=true;FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
+   FScreenshotRequest::RequestScreenshot(DetailView==TEXT("Fountain")?TEXT("Reverie_Fountain.png"):TEXT("Dreambound_FirstView.png"),true,false);
+  }
   if(PulseTime>12)FGenericPlatformMisc::RequestExit(false);
  }
  if(!bCapture&&!bVerify&&!bChecksRunning&&!bTitle&&!bDefeated&&!bWon&&GEngine&&GEngine->GameViewport) {
@@ -505,7 +517,13 @@ void ADBGameMode::ToggleBuild() {
 void ADBGameMode::AdjustSensitivity(float Delta) {
  Sensitivity=FMath::Clamp(Sensitivity+Delta,0.25f,2.5f);
  if(Player)Player->MouseSensitivity=Sensitivity;
- if(StoredSave){StoredSave->Sensitivity=Sensitivity;WriteJournal(StoredSave,SlotBase+TEXT("_settings"));}
+ if(StoredSave){StoredSave->Sensitivity=Sensitivity;StoredSave->SoundVolume=SoundVolume;WriteJournal(StoredSave,SlotBase+TEXT("_settings"));}
+}
+void ADBGameMode::AdjustSoundVolume(float Delta) {
+ SoundVolume=FMath::Clamp(SoundVolume+Delta,0.f,1.f);
+ if(FAudioDeviceHandle Audio=GetWorld()->GetAudioDevice())Audio->SetTransientPrimaryVolume(SoundVolume);
+ if(!StoredSave)StoredSave=Cast<UDBSave>(UGameplayStatics::CreateSaveGameObject(UDBSave::StaticClass()));
+ if(StoredSave){StoredSave->SoundVolume=SoundVolume;StoredSave->Sensitivity=Sensitivity;WriteJournal(StoredSave,SlotBase+TEXT("_settings"));}
 }
 void ADBGameMode::StartNewRun(bool SameSeed) {
  if(bSaveFailed){SaveProgress(!bDefeated&&!bWon);if(bSaveFailed)return;}
@@ -547,7 +565,7 @@ void ADBGameMode::SaveProgress(bool Active) {
  auto* S=Cast<UDBSave>(UGameplayStatics::CreateSaveGameObject(UDBSave::StaticClass()));
  S->Revision=++SaveRevision;S->Seed=Seed;S->CurrentRoom=CurrentRoomId;S->Cleared=ClearedRooms;S->Claimed=ClaimedRooms;
  S->RoomRewards=EarnedRoomRewards;
- S->Patterns=LearnedPatterns;S->bActiveRun=Active;S->bBossWon=bBossWon;S->Expeditions=Expeditions;S->Sensitivity=Sensitivity;
+ S->Patterns=LearnedPatterns;S->bActiveRun=Active;S->bBossWon=bBossWon;S->Expeditions=Expeditions;S->Sensitivity=Sensitivity;S->SoundVolume=SoundVolume;
  if(Player){S->Upgrades=Player->Upgrades;S->Health=Player->Health;S->Element=static_cast<int32>(Player->CurrentElement);}
  FString Slot=SlotBase+FString::Printf(TEXT("_%d"),S->Revision%2);
  bool Ok=WriteJournal(S,Slot);
@@ -560,8 +578,8 @@ void ADBGameMode::LoadProgress() {
   auto* S=ReadJournal(SlotBase+FString::Printf(TEXT("_%d"),I));
   if(S&&S->Version==1&&S->Seed>=0&&S->CurrentRoom>=0&&S->CurrentRoom<8&&(!StoredSave||S->Revision>StoredSave->Revision))StoredSave=S;
  }
- if(StoredSave){LearnedPatterns=StoredSave->Patterns;bBossWon=StoredSave->bBossWon;Expeditions=StoredSave->Expeditions;SaveRevision=StoredSave->Revision;Sensitivity=StoredSave->Sensitivity;bCanResume=StoredSave->bActiveRun;if(!LearnedPatterns.IsEmpty())StartingPattern=LearnedPatterns[0];}
- if(auto* Settings=ReadJournal(SlotBase+TEXT("_settings")))Sensitivity=Settings->Sensitivity;
+ if(StoredSave){LearnedPatterns=StoredSave->Patterns;bBossWon=StoredSave->bBossWon;Expeditions=StoredSave->Expeditions;SaveRevision=StoredSave->Revision;Sensitivity=StoredSave->Sensitivity;SoundVolume=FMath::Clamp(StoredSave->SoundVolume,0.f,1.f);bCanResume=StoredSave->bActiveRun;if(!LearnedPatterns.IsEmpty())StartingPattern=LearnedPatterns[0];}
+ if(auto* Settings=ReadJournal(SlotBase+TEXT("_settings"))){Sensitivity=Settings->Sensitivity;SoundVolume=FMath::Clamp(Settings->SoundVolume,0.f,1.f);}
 }
 void ADBGameMode::QuitGame(bool bWithoutSaving) {
  if(bWithoutSaving){FGenericPlatformMisc::RequestExit(false);return;}

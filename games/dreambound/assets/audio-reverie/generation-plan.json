@@ -1,0 +1,15 @@
+{
+  "target_source_downloads": 9,
+  "note": "Working prompts; generation and downloading await authenticated paid access. Each source can supply several edited event cues; download only selected useful variants through Suno's Download UI.",
+  "sources": [
+    {"id": "mechanism", "type": "One Shot", "prompt": "Three distinct dry heavy mechanical clacks separated by silence. A precision bronze sliding bolt locks into a ceramic socket, then a sprung metal latch snaps shut. Close detailed foley, tangible weight, crisp contact, small natural rattle. Four seconds, no music, no voices, no background hiss."},
+    {"id": "impact", "type": "One Shot", "prompt": "One powerful close shield strike on heavy stone and metal armor. Sharp ceramic crack immediately followed by a deep iron body slam, stone grit and a short ringing bronze tail. Two seconds, dry game combat sound effect, no music, no voices, no whoosh."},
+    {"id": "guard", "type": "One Shot", "prompt": "One bright resonant bronze shield parry. Explosive clear metal-on-metal contact, rich bell-like overtones, tiny scattering sparks, rapidly decaying clean ring. Two seconds, forceful and tactile, dry foreground sound effect, no music or voice."},
+    {"id": "release", "type": "One Shot", "prompt": "One forceful magical crystal weapon discharge. Sharp glassy energy crack, compressed air punch and deep short recoil, glittering brittle fragments trail off quickly. Two seconds, isolated video game effect, physical and powerful, no music, no voice, no gunfire."},
+    {"id": "motor", "type": "Loop", "prompt": "Steady low magnetic motor under tension, layered gritty electrical resonance and fine mechanical vibration. Continuous seamless three second loop, restrained and detailed, no rhythm, no beeping, no melody, no music, no voices, no rising or falling pitch."},
+    {"id": "servo", "type": "One Shot", "prompt": "Short heavy articulated robotic mechanism sweeps quickly through air, ratcheting gears accelerate and settle into a firm precision lock. One second detailed mechanical foley, dry and close, small size, no explosion, no musical tone, no voice."},
+    {"id": "collapse", "type": "One Shot", "prompt": "A heavy animated stone statue collapses onto flagstones: one weighted body crash followed by scattered ceramic pieces and loose small bronze plates rattling to a stop. Three seconds, close dry detailed foley, no music, no voice."},
+    {"id": "bell", "type": "One Shot", "prompt": "A single ancient bronze temple bell struck gently, warm low resonant body and delicate crystalline overtones decaying naturally into silence. Four seconds, intimate and mysterious, no melody, no rhythm, no background, no voice."},
+    {"id": "water", "type": "Loop", "prompt": "Gentle clear stream trickling over small stones in a quiet open garden, soft water patter and occasional bubbles, a little breeze rustles nearby leaves. Seamless eight second natural ambience loop, close and calm, no music, no speech, no loud birds."}
+  ]
+}

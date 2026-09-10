@@ -1,0 +1,2271 @@
+{
+  "source": "scripts/create_reverie_environment.py",
+  "destination_meshes": "/Game/Art/Reverie/Meshes",
+  "destination_materials": "/Game/Art/Reverie/Materials",
+  "units": "centimeters",
+  "front": "+Y",
+  "wall_plane": "local X",
+  "traversal": "local Y",
+  "materials": {
+    "M_RV_Stone": {
+      "color": [
+        0.34,
+        0.295,
+        0.22
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_StoneLight": {
+      "color": [
+        0.49,
+        0.423,
+        0.305
+      ],
+      "roughness": 0.83,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_StoneDark": {
+      "color": [
+        0.205,
+        0.19,
+        0.155
+      ],
+      "roughness": 0.93,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Mortar": {
+      "color": [
+        0.105,
+        0.12,
+        0.085
+      ],
+      "roughness": 0.98,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Moss": {
+      "color": [
+        0.105,
+        0.17,
+        0.041
+      ],
+      "roughness": 0.94,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Bark": {
+      "color": [
+        0.19,
+        0.115,
+        0.06
+      ],
+      "roughness": 0.89,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_BarkLight": {
+      "color": [
+        0.29,
+        0.195,
+        0.09
+      ],
+      "roughness": 0.87,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Leaf": {
+      "color": [
+        0.045,
+        0.145,
+        0.027
+      ],
+      "roughness": 0.81,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_LeafLight": {
+      "color": [
+        0.155,
+        0.26,
+        0.05
+      ],
+      "roughness": 0.78,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_LeafGold": {
+      "color": [
+        0.47,
+        0.36,
+        0.062
+      ],
+      "roughness": 0.76,
+      "metallic": 0,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Crystal": {
+      "color": [
+        0.045,
+        0.36,
+        0.39
+      ],
+      "roughness": 0.24,
+      "metallic": 0.1,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_CrystalBase": {
+      "color": [
+        0.08,
+        0.18,
+        0.16
+      ],
+      "roughness": 0.59,
+      "metallic": 0.07,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Bronze": {
+      "color": [
+        0.32,
+        0.17,
+        0.064
+      ],
+      "roughness": 0.43,
+      "metallic": 0.76,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    },
+    "M_RV_Patina": {
+      "color": [
+        0.045,
+        0.19,
+        0.15
+      ],
+      "roughness": 0.7,
+      "metallic": 0.2,
+      "vertex_masks": true,
+      "uv0_scale_cm": 100,
+      "textures": "Root creates a wholly new PBR family; none of the old textures are referenced"
+    }
+  },
+  "assets": {
+    "SM_RV_Tile": {
+      "name": "SM_RV_Tile",
+      "dimensions_cm": [
+        200.0,
+        200.0,
+        20.8
+      ],
+      "bounds_min_cm": [
+        -100.0,
+        -100.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        100.0,
+        100.0,
+        20.799999237060547
+      ],
+      "vertices": 1968,
+      "triangles": 3860,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_Mortar",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 1,
+      "collision": [
+        {
+          "label": "continuous flat paving surface",
+          "bounds_min_cm": [
+            -100.0,
+            -100.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            100.0,
+            100.0,
+            20.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "200x200 footprint. BaseZ0/topZ20. Place atZ-20 for walk surfaceZ0. Single flat UCX.",
+      "sha256": "598db308c199548bc0ab70aa630f3e8dad83272d342a1e1f832bc025c98497e3"
+    },
+    "SM_RV_TileB": {
+      "name": "SM_RV_TileB",
+      "dimensions_cm": [
+        200.0,
+        200.0,
+        20.8
+      ],
+      "bounds_min_cm": [
+        -100.0,
+        -100.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        100.0,
+        100.0,
+        20.799999237060547
+      ],
+      "vertices": 1844,
+      "triangles": 3616,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_Mortar",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 1,
+      "collision": [
+        {
+          "label": "continuous flat paving surface",
+          "bounds_min_cm": [
+            -100.0,
+            -100.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            100.0,
+            100.0,
+            20.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "200x200 footprint. BaseZ0/topZ20. Place atZ-20 for walk surfaceZ0. Single flat UCX.",
+      "sha256": "609d3d05930e61fc2a128bb28f82090523f772f1800c40ce0b5684d234ef705c"
+    },
+    "SM_RV_Wall": {
+      "name": "SM_RV_Wall",
+      "dimensions_cm": [
+        399.966,
+        98.458,
+        600.0
+      ],
+      "bounds_min_cm": [
+        -199.98939514160156,
+        -47.960514068603516,
+        0.0
+      ],
+      "bounds_max_cm": [
+        199.9764862060547,
+        50.497528076171875,
+        600.0
+      ],
+      "vertices": 10749,
+      "triangles": 21066,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Mortar",
+        "M_RV_Bronze",
+        "M_RV_Patina"
+      ],
+      "collision_hulls": 1,
+      "collision": [
+        {
+          "label": "solid wall bay",
+          "bounds_min_cm": [
+            -200.0,
+            -47.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            200.0,
+            47.0,
+            600.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "400W x100D x600H, front+Y. FootZ0. Solid UCX excludes decorative bevel protrusions.",
+      "sha256": "e455b976bc1c5782b4c1063fb9338ead2d8b94d30d484421e071821176f6660f"
+    },
+    "SM_RV_Coping": {
+      "name": "SM_RV_Coping",
+      "dimensions_cm": [
+        419.2,
+        132.0,
+        43.8
+      ],
+      "bounds_min_cm": [
+        -209.60000610351562,
+        -66.0,
+        0.0
+      ],
+      "bounds_max_cm": [
+        209.60000610351562,
+        66.0,
+        43.79999923706055
+      ],
+      "vertices": 2145,
+      "triangles": 4210,
+      "materials": [
+        "M_RV_StoneLight",
+        "M_RV_Moss",
+        "M_RV_Bronze",
+        "M_RV_Patina"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "420W x132D x42H. BaseZ0, front+Y. Overhead trim; no collision.",
+      "sha256": "15d7880101b06f83dba584c0f44948a3852dfbcd5972b2cf86559752fd58653b"
+    },
+    "SM_RV_Buttress": {
+      "name": "SM_RV_Buttress",
+      "dimensions_cm": [
+        181.419,
+        180.157,
+        723.491
+      ],
+      "bounds_min_cm": [
+        -90.5944595336914,
+        -90.16565704345703,
+        0.0
+      ],
+      "bounds_max_cm": [
+        90.82496643066406,
+        89.9908447265625,
+        723.4908447265625
+      ],
+      "vertices": 4490,
+      "triangles": 8804,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Moss",
+        "M_RV_Bronze",
+        "M_RV_Patina"
+      ],
+      "collision_hulls": 3,
+      "collision": [
+        {
+          "label": "buttress load mass",
+          "bounds_min_cm": [
+            -86.0,
+            -85.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            86.0,
+            85.0,
+            218.0
+          ]
+        },
+        {
+          "label": "buttress load mass",
+          "bounds_min_cm": [
+            -74.5,
+            -76.5,
+            219.0
+          ],
+          "bounds_max_cm": [
+            74.5,
+            72.5,
+            451.0
+          ]
+        },
+        {
+          "label": "buttress load mass",
+          "bounds_min_cm": [
+            -59.5,
+            -66.0,
+            446.5
+          ],
+          "bounds_max_cm": [
+            59.5,
+            54.0,
+            691.5
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "180W x180D,~720H. BaseZ0, front+Y. Three compact structural hulls; no broad canopy box.",
+      "sha256": "0f40b6d6a44abf6847d5d0d7c09733f7f5ba9c9f9ed35749f4c5cb50ed5cc5e5"
+    },
+    "SM_RV_Arch": {
+      "name": "SM_RV_Arch",
+      "dimensions_cm": [
+        737.021,
+        160.675,
+        799.103
+      ],
+      "bounds_min_cm": [
+        -368.50726318359375,
+        -80.29470825195312,
+        0.0
+      ],
+      "bounds_max_cm": [
+        368.51416015625,
+        80.38037109375,
+        799.1027221679688
+      ],
+      "vertices": 16506,
+      "triangles": 32188,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Moss",
+        "M_RV_Bronze",
+        "M_RV_Patina"
+      ],
+      "collision_hulls": 26,
+      "collision": [
+        {
+          "label": "gateway side pier; outside440cm clearance",
+          "bounds_min_cm": [
+            -368.0,
+            -70.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            -220.0,
+            70.0,
+            500.0
+          ]
+        },
+        {
+          "label": "gateway side pier; outside440cm clearance",
+          "bounds_min_cm": [
+            220.0,
+            -70.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            368.0,
+            70.0,
+            500.0
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -314.99929125,
+            -69,
+            500.33
+          ],
+          "bounds_max_cm": [
+            -218.52672722222223,
+            69,
+            524.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -312.73304125,
+            -69,
+            518.6633333333333
+          ],
+          "bounds_max_cm": [
+            -213.99839388888887,
+            69,
+            549.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -306.09179124999997,
+            -69,
+            536.9966666666667
+          ],
+          "bounds_max_cm": [
+            -206.41450500000002,
+            69,
+            574.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -295.07554125,
+            -69,
+            555.33
+          ],
+          "bounds_max_cm": [
+            -195.77506055555554,
+            69,
+            599.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -279.68429125,
+            -69,
+            573.6633333333333
+          ],
+          "bounds_max_cm": [
+            -182.08006055555558,
+            69,
+            624.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -259.91804125,
+            -69,
+            591.9966666666667
+          ],
+          "bounds_max_cm": [
+            -165.32950499999998,
+            69,
+            649.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -235.77679125000003,
+            -69,
+            610.3299999999999
+          ],
+          "bounds_max_cm": [
+            -145.52339388888888,
+            69,
+            674.5500000000001
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -207.26054125000002,
+            -69,
+            628.6633333333333
+          ],
+          "bounds_max_cm": [
+            -122.66172722222221,
+            69,
+            699.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -174.36929125000006,
+            -69,
+            646.9966666666667
+          ],
+          "bounds_max_cm": [
+            -96.74450499999998,
+            69,
+            724.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -137.10304125000002,
+            -69,
+            665.3299999999999
+          ],
+          "bounds_max_cm": [
+            -67.7717272222222,
+            69,
+            749.5500000000001
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -95.46179124999999,
+            -69,
+            683.6633333333333
+          ],
+          "bounds_max_cm": [
+            -35.743393888888875,
+            69,
+            774.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            -49.44554125000006,
+            -69,
+            701.9966666666667
+          ],
+          "bounds_max_cm": [
+            -0.6595049999999802,
+            69,
+            799.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            218.52672722222223,
+            -69,
+            500.33
+          ],
+          "bounds_max_cm": [
+            314.99929125,
+            69,
+            524.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            213.99839388888887,
+            -69,
+            518.6633333333333
+          ],
+          "bounds_max_cm": [
+            312.73304125,
+            69,
+            549.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            206.41450500000002,
+            -69,
+            536.9966666666667
+          ],
+          "bounds_max_cm": [
+            306.09179124999997,
+            69,
+            574.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            195.77506055555554,
+            -69,
+            555.33
+          ],
+          "bounds_max_cm": [
+            295.07554125,
+            69,
+            599.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            182.08006055555558,
+            -69,
+            573.6633333333333
+          ],
+          "bounds_max_cm": [
+            279.68429125,
+            69,
+            624.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            165.32950499999998,
+            -69,
+            591.9966666666667
+          ],
+          "bounds_max_cm": [
+            259.91804125,
+            69,
+            649.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            145.52339388888888,
+            -69,
+            610.3299999999999
+          ],
+          "bounds_max_cm": [
+            235.77679125000003,
+            69,
+            674.5500000000001
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            122.66172722222221,
+            -69,
+            628.6633333333333
+          ],
+          "bounds_max_cm": [
+            207.26054125000002,
+            69,
+            699.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            96.74450499999998,
+            -69,
+            646.9966666666667
+          ],
+          "bounds_max_cm": [
+            174.36929125000006,
+            69,
+            724.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            67.7717272222222,
+            -69,
+            665.3299999999999
+          ],
+          "bounds_max_cm": [
+            137.10304125000002,
+            69,
+            749.5500000000001
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            35.743393888888875,
+            -69,
+            683.6633333333333
+          ],
+          "bounds_max_cm": [
+            95.46179124999999,
+            69,
+            774.55
+          ]
+        },
+        {
+          "label": "upper arch stone; minimumZ>=500",
+          "bounds_min_cm": [
+            0.6595049999999802,
+            -69,
+            701.9966666666667
+          ],
+          "bounds_max_cm": [
+            49.44554125000006,
+            69,
+            799.55
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "740W x160D x~800H. Wall planeX, traversalY. Guaranteed clear rectangle440W x500H from ground0. Real connected gateway only.",
+      "sha256": "c70dc1bf964b4f9991d22322575fb190dbbdeba8dd132325b782c0ac85f71311"
+    },
+    "SM_RV_RockBank": {
+      "name": "SM_RV_RockBank",
+      "dimensions_cm": [
+        664.555,
+        383.223,
+        404.795
+      ],
+      "bounds_min_cm": [
+        -326.20751953125,
+        -201.61216735839844,
+        0.0
+      ],
+      "bounds_max_cm": [
+        338.3475036621094,
+        181.61097717285156,
+        404.7951965332031
+      ],
+      "vertices": 1756,
+      "triangles": 3472,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneDark",
+        "M_RV_Moss",
+        "M_RV_Bark"
+      ],
+      "collision_hulls": 3,
+      "collision": [
+        {
+          "label": "tight rock mass",
+          "bounds_min_cm": [
+            -327.59907799523234,
+            -173.21703139607146,
+            0
+          ],
+          "bounds_max_cm": [
+            -22.71550717435491,
+            125.2351056620009,
+            286.43736276185365
+          ]
+        },
+        {
+          "label": "tight rock mass",
+          "bounds_min_cm": [
+            -99.73352101676011,
+            -202.90265091371117,
+            0
+          ],
+          "bounds_max_cm": [
+            242.82912000751566,
+            142.98606234338672,
+            405.7143182657315
+          ]
+        },
+        {
+          "label": "tight rock mass",
+          "bounds_min_cm": [
+            136.9113151438838,
+            -50.83376238014333,
+            0
+          ],
+          "bounds_max_cm": [
+            340.5380725763005,
+            181.8309289920628,
+            223.36913599045167
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Approx650W x420D x400H. Ground0. Three tight convex stone hulls. Plant outside encounter lanes.",
+      "sha256": "58e305e0df479807a17efd0f6e9b9495d8b2ea47f4a54fb9cf7759d0421e7d26"
+    },
+    "SM_RV_Cliff": {
+      "name": "SM_RV_Cliff",
+      "dimensions_cm": [
+        958.977,
+        590.011,
+        1254.645
+      ],
+      "bounds_min_cm": [
+        -468.1415710449219,
+        -315.8497009277344,
+        0.0
+      ],
+      "bounds_max_cm": [
+        490.83514404296875,
+        274.1609191894531,
+        1254.6451416015625
+      ],
+      "vertices": 2071,
+      "triangles": 4094,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Distant layered cliff/~900W x550D x1250H. BaseZ0. Visual only, behind playable banks.",
+      "sha256": "ad5511a909a7095efe1d8a2c016cf633816a048a027d5ec78f0e1cede041e986"
+    },
+    "SM_RV_Tree": {
+      "name": "SM_RV_Tree",
+      "dimensions_cm": [
+        1302.959,
+        1443.395,
+        1199.511
+      ],
+      "bounds_min_cm": [
+        -706.55126953125,
+        -738.56201171875,
+        -22.16119384765625
+      ],
+      "bounds_max_cm": [
+        596.408203125,
+        704.8330078125,
+        1177.3502197265625
+      ],
+      "vertices": 44072,
+      "triangles": 81972,
+      "materials": [
+        "M_RV_Bark",
+        "M_RV_BarkLight",
+        "M_RV_Leaf",
+        "M_RV_LeafLight",
+        "M_RV_LeafGold"
+      ],
+      "collision_hulls": 5,
+      "collision": [
+        {
+          "label": "low root close to trunk",
+          "bounds_min_cm": [
+            25.452220916748047,
+            -5.571070671081543,
+            8.0
+          ],
+          "bounds_max_cm": [
+            208.89743041992188,
+            45.79878616333008,
+            94.0
+          ]
+        },
+        {
+          "label": "low root close to trunk",
+          "bounds_min_cm": [
+            -37.02955627441406,
+            25.452220916748047,
+            8.0
+          ],
+          "bounds_max_cm": [
+            5.571070671081543,
+            157.8115997314453,
+            94.0
+          ]
+        },
+        {
+          "label": "low root close to trunk",
+          "bounds_min_cm": [
+            -186.0505828857422,
+            -41.87696838378906,
+            8.0
+          ],
+          "bounds_max_cm": [
+            -25.452220916748047,
+            5.571070671081543,
+            94.0
+          ]
+        },
+        {
+          "label": "low root close to trunk",
+          "bounds_min_cm": [
+            -5.571070671081543,
+            -167.2436981201172,
+            8.0
+          ],
+          "bounds_max_cm": [
+            38.64863586425781,
+            -25.452220916748047,
+            94.0
+          ]
+        },
+        {
+          "label": "tree trunk only",
+          "bounds_min_cm": [
+            -75.0,
+            -71.32923872213652,
+            0
+          ],
+          "bounds_max_cm": [
+            75.0,
+            71.32923872213652,
+            575
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Mature tree footZ0, broad rooted base~800diam. Trunk/root hulls only; canopy noncolliding. Exact foliage extents in metadata.",
+      "sha256": "9d1c826bbcdbfe768fce6b1f9960e9973a96b82848c562585339b7deab04edd0"
+    },
+    "SM_RV_Bough": {
+      "name": "SM_RV_Bough",
+      "dimensions_cm": [
+        1211.35,
+        1062.135,
+        503.181
+      ],
+      "bounds_min_cm": [
+        -628.385498046875,
+        -527.3230590820312,
+        -13.162598609924316
+      ],
+      "bounds_max_cm": [
+        582.96435546875,
+        534.8116455078125,
+        490.0182800292969
+      ],
+      "vertices": 11886,
+      "triangles": 22008,
+      "materials": [
+        "M_RV_Bark",
+        "M_RV_BarkLight",
+        "M_RV_Leaf",
+        "M_RV_LeafLight",
+        "M_RV_LeafGold"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Overhead leafy bough attachment at origin; no collision. For framing above accessible routes, never ground-level obstruction.",
+      "sha256": "03d596b8622ab9f29c36556a2ed3bfc2707222a95e3f9b3780f0626a9068a0f0"
+    },
+    "SM_RV_Fern": {
+      "name": "SM_RV_Fern",
+      "dimensions_cm": [
+        186.581,
+        192.475,
+        73.21
+      ],
+      "bounds_min_cm": [
+        -88.68067932128906,
+        -89.52550506591797,
+        1.2739534378051758
+      ],
+      "bounds_max_cm": [
+        97.90045166015625,
+        102.94931030273438,
+        74.48406219482422
+      ],
+      "vertices": 10400,
+      "triangles": 18960,
+      "materials": [
+        "M_RV_BarkLight",
+        "M_RV_Leaf",
+        "M_RV_LeafLight"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Grounded fern group; ~240cm spread,~95H. No collision.",
+      "sha256": "94fa2515b21eda6ad8b94afa0897100f83853dd964d791490a91b403f407aae5"
+    },
+    "SM_RV_Grass": {
+      "name": "SM_RV_Grass",
+      "dimensions_cm": [
+        244.448,
+        179.824,
+        71.988
+      ],
+      "bounds_min_cm": [
+        -125.67941284179688,
+        -85.71186065673828,
+        0.8938987851142883
+      ],
+      "bounds_max_cm": [
+        118.76817321777344,
+        94.112548828125,
+        72.88213348388672
+      ],
+      "vertices": 1716,
+      "triangles": 3120,
+      "materials": [
+        "M_RV_Leaf",
+        "M_RV_LeafLight",
+        "M_RV_LeafGold"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Low arched sedge drift; groundZ0; no collision.",
+      "sha256": "32b5a6dd5f52201fae1a0da666c76a97c4a7ecf5a6834a1837bf00f99a2d7065"
+    },
+    "SM_RV_Ivy": {
+      "name": "SM_RV_Ivy",
+      "dimensions_cm": [
+        239.74,
+        29.833,
+        308.139
+      ],
+      "bounds_min_cm": [
+        -127.80966186523438,
+        -8.17930793762207,
+        -305.8739013671875
+      ],
+      "bounds_max_cm": [
+        111.93013000488281,
+        21.654020309448242,
+        2.265338182449341
+      ],
+      "vertices": 2136,
+      "triangles": 3912,
+      "materials": [
+        "M_RV_Bark",
+        "M_RV_Leaf",
+        "M_RV_LeafLight"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Wall vine/front+Y. Origin at upper attachment; trails down~330cm, width~220. No collision.",
+      "sha256": "6b8d19ef5681aca1d16093b00a2818d3c9049668f9a7bb89077d8bbfe0a55af5"
+    },
+    "SM_RV_Flowers": {
+      "name": "SM_RV_Flowers",
+      "dimensions_cm": [
+        199.074,
+        130.691,
+        83.349
+      ],
+      "bounds_min_cm": [
+        -100.85765838623047,
+        -59.46174621582031,
+        -0.33792832493782043
+      ],
+      "bounds_max_cm": [
+        98.21595764160156,
+        71.22897338867188,
+        83.01123809814453
+      ],
+      "vertices": 3380,
+      "triangles": 6120,
+      "materials": [
+        "M_RV_BarkLight",
+        "M_RV_Leaf",
+        "M_RV_LeafGold"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "A grounded flowering understory drift with small restrained gold blooms. No collision.",
+      "sha256": "362e694477a7325fd11dffddceee0060734eb4deef17b077ec1824502e53ef77"
+    },
+    "SM_RV_CrystalCluster": {
+      "name": "SM_RV_CrystalCluster",
+      "dimensions_cm": [
+        189.137,
+        149.992,
+        177.0
+      ],
+      "bounds_min_cm": [
+        -95.75529479980469,
+        -78.77867126464844,
+        0.0
+      ],
+      "bounds_max_cm": [
+        93.38204956054688,
+        71.21285247802734,
+        177.0
+      ],
+      "vertices": 966,
+      "triangles": 1904,
+      "materials": [
+        "M_RV_Moss",
+        "M_RV_Crystal",
+        "M_RV_CrystalBase"
+      ],
+      "collision_hulls": 3,
+      "collision": [
+        {
+          "label": "mineral cluster shaft",
+          "bounds_min_cm": [
+            -77.64,
+            -29.444863728670914,
+            17
+          ],
+          "bounds_max_cm": [
+            -1.0,
+            29.444863728670917,
+            177
+          ]
+        },
+        {
+          "label": "mineral cluster shaft",
+          "bounds_min_cm": [
+            14.521877181599162,
+            -10.40123178998768,
+            14
+          ],
+          "bounds_max_cm": [
+            86.46509176474477,
+            48.43512092888879,
+            134
+          ]
+        },
+        {
+          "label": "mineral cluster shaft",
+          "bounds_min_cm": [
+            -18.359286618259738,
+            -78.96457589690147,
+            10
+          ],
+          "bounds_max_cm": [
+            24.359286618259734,
+            -19.236729783624757,
+            97
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Complementary ground mineral cluster,~210cm wide/~180high. Three mineral collision hulls; teal emission belongs to new material family.",
+      "sha256": "bc2b462833e97f31da3f99939c4695fe0c98936916aee440b81a647c82433b36"
+    },
+    "SM_RV_Basin": {
+      "name": "SM_RV_Basin",
+      "dimensions_cm": [
+        599.372,
+        599.372,
+        98.8
+      ],
+      "bounds_min_cm": [
+        -299.685791015625,
+        -299.685791015625,
+        -15.0
+      ],
+      "bounds_max_cm": [
+        299.685791015625,
+        299.685791015625,
+        83.80000305175781
+      ],
+      "vertices": 2804,
+      "triangles": 5432,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 20,
+      "collision": [
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            218.9552358114155,
+            0.6899989650004658,
+            0
+          ],
+          "bounds_max_cm": [
+            299.9986500010125,
+            91.84873155911478,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            186.47864259000107,
+            71.7298168857892,
+            0
+          ],
+          "bounds_max_cm": [
+            285.0375560854473,
+            175.60666797548149,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            135.74822055877547,
+            135.74822055877547,
+            0
+          ],
+          "bounds_max_cm": [
+            242.17500020680745,
+            242.17500020680745,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            71.7298168857892,
+            186.47864259000107,
+            0
+          ],
+          "bounds_max_cm": [
+            175.60666797548149,
+            285.0375560854473,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            0.6899989650004549,
+            218.95523581141546,
+            0
+          ],
+          "bounds_max_cm": [
+            91.84873155911484,
+            299.9986500010125,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -91.8487315591148,
+            218.95523581141546,
+            0
+          ],
+          "bounds_max_cm": [
+            -0.6899989650004268,
+            299.9986500010125,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -175.6066679754814,
+            186.4786425900011,
+            0
+          ],
+          "bounds_max_cm": [
+            -71.72981688578918,
+            285.03755608544736,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -242.17500020680743,
+            135.7482205587755,
+            0
+          ],
+          "bounds_max_cm": [
+            -135.74822055877547,
+            242.17500020680745,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -285.0375560854473,
+            71.72981688578926,
+            0
+          ],
+          "bounds_max_cm": [
+            -186.47864259000107,
+            175.60666797548149,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -299.9986500010125,
+            0.68999896500052,
+            0
+          ],
+          "bounds_max_cm": [
+            -218.9552358114155,
+            91.84873155911478,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -299.9986500010125,
+            -91.84873155911458,
+            0
+          ],
+          "bounds_max_cm": [
+            -218.95523581141552,
+            -0.6899989650004636,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -285.03755608544736,
+            -175.6066679754814,
+            0
+          ],
+          "bounds_max_cm": [
+            -186.4786425900011,
+            -71.7298168857891,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -242.17500020680748,
+            -242.17500020680743,
+            0
+          ],
+          "bounds_max_cm": [
+            -135.74822055877553,
+            -135.74822055877547,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -175.60666797548149,
+            -285.0375560854473,
+            0
+          ],
+          "bounds_max_cm": [
+            -71.72981688578928,
+            -186.47864259000107,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            -91.8487315591148,
+            -299.9986500010125,
+            0
+          ],
+          "bounds_max_cm": [
+            -0.6899989650005341,
+            -218.95523581141546,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            0.6899989650004497,
+            -299.9986500010125,
+            0
+          ],
+          "bounds_max_cm": [
+            91.8487315591147,
+            -218.9552358114155,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            71.72981688578919,
+            -285.0375560854473,
+            0
+          ],
+          "bounds_max_cm": [
+            175.6066679754814,
+            -186.47864259000113,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            135.74822055877544,
+            -242.17500020680748,
+            0
+          ],
+          "bounds_max_cm": [
+            242.17500020680743,
+            -135.74822055877553,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            186.47864259000104,
+            -175.6066679754815,
+            0
+          ],
+          "bounds_max_cm": [
+            285.0375560854473,
+            -71.72981688578929,
+            76
+          ]
+        },
+        {
+          "label": "basin rim ring segment",
+          "bounds_min_cm": [
+            218.95523581141546,
+            -91.84873155911481,
+            0
+          ],
+          "bounds_max_cm": [
+            299.9986500010125,
+            -0.6899989650005482,
+            76
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "600cm diameter. FootZ0. Interior water planeZ35/radius~230. Ring collision only; actual empty water volume, no opaque top cap.",
+      "sha256": "9f707d89e695f28e45d61f3f83f8b19c465fab80717937e2727169dbbb6c54ee"
+    },
+    "SM_RV_Rill": {
+      "name": "SM_RV_Rill",
+      "dimensions_cm": [
+        599.528,
+        181.075,
+        52.486
+      ],
+      "bounds_min_cm": [
+        -299.8173828125,
+        -90.49848175048828,
+        -40.0
+      ],
+      "bounds_max_cm": [
+        299.71038818359375,
+        90.57659912109375,
+        12.48643684387207
+      ],
+      "vertices": 2000,
+      "triangles": 3928,
+      "materials": [
+        "M_RV_StoneLight",
+        "M_RV_StoneDark"
+      ],
+      "collision_hulls": 3,
+      "collision": [
+        {
+          "label": "rill side bank",
+          "bounds_min_cm": [
+            -300.0,
+            -90.0,
+            -30.0
+          ],
+          "bounds_max_cm": [
+            300.0,
+            -66.0,
+            12.0
+          ]
+        },
+        {
+          "label": "rill side bank",
+          "bounds_min_cm": [
+            -300.0,
+            66.0,
+            -30.0
+          ],
+          "bounds_max_cm": [
+            300.0,
+            90.0,
+            12.0
+          ]
+        },
+        {
+          "label": "rill recessed bed",
+          "bounds_min_cm": [
+            -300.0,
+            -66.0,
+            -40.0
+          ],
+          "bounds_max_cm": [
+            300.0,
+            66.0,
+            -30.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "600longX x180wideY. BedtopZ-30, banktopZ12. WaterplaneZ-15, width~130. Three simple hulls, open channel.",
+      "sha256": "faa17afe6ec5f05d4dde134bc3306b0d87a1a4eb0d17a516c00ea63936846579"
+    },
+    "SM_RV_Bridge": {
+      "name": "SM_RV_Bridge",
+      "dimensions_cm": [
+        700.0,
+        700.888,
+        172.61
+      ],
+      "bounds_min_cm": [
+        -350.0,
+        -350.37420654296875,
+        -140.0
+      ],
+      "bounds_max_cm": [
+        350.0,
+        350.5137634277344,
+        32.61037063598633
+      ],
+      "vertices": 9265,
+      "triangles": 18198,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark"
+      ],
+      "collision_hulls": 5,
+      "collision": [
+        {
+          "label": "bridge edge curb",
+          "bounds_min_cm": [
+            -350.0,
+            -350.0,
+            -12.0
+          ],
+          "bounds_max_cm": [
+            350.0,
+            -316.0,
+            32.0
+          ]
+        },
+        {
+          "label": "bridge edge curb",
+          "bounds_min_cm": [
+            -350.0,
+            316.0,
+            -12.0
+          ],
+          "bounds_max_cm": [
+            350.0,
+            350.0,
+            32.0
+          ]
+        },
+        {
+          "label": "continuous flat bridge decktop0",
+          "bounds_min_cm": [
+            -350.0,
+            -316.0,
+            -58.0
+          ],
+          "bounds_max_cm": [
+            350.0,
+            316.0,
+            0.0
+          ]
+        },
+        {
+          "label": "bridge end foundation",
+          "bounds_min_cm": [
+            -350.0,
+            -315.0,
+            -136.0
+          ],
+          "bounds_max_cm": [
+            -258.0,
+            315.0,
+            -56.0
+          ]
+        },
+        {
+          "label": "bridge end foundation",
+          "bounds_min_cm": [
+            258.0,
+            -315.0,
+            -136.0
+          ],
+          "bounds_max_cm": [
+            350.0,
+            315.0,
+            -56.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "700longX x700wideY. DeckTOP Z0. Solid flat UCX. Decorative curb atY edges rises32; span supports below deck, open central water span.",
+      "sha256": "2d187e90d74889bb92db65a7a6a0612d05f7656536c5ba8a04e76d6e4938fc37"
+    },
+    "SM_RV_ArrivalPlinth": {
+      "name": "SM_RV_ArrivalPlinth",
+      "dimensions_cm": [
+        219.394,
+        219.394,
+        72.121
+      ],
+      "bounds_min_cm": [
+        -109.69677734375,
+        -109.69677734375,
+        0.0
+      ],
+      "bounds_max_cm": [
+        109.69677734375,
+        109.69677734375,
+        72.12112426757812
+      ],
+      "vertices": 720,
+      "triangles": 1380,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_StoneDark",
+        "M_RV_Bronze"
+      ],
+      "collision_hulls": 1,
+      "collision": [
+        {
+          "label": "low plinth footprint",
+          "bounds_min_cm": [
+            -109.0,
+            -109.0,
+            0
+          ],
+          "bounds_max_cm": [
+            109.0,
+            109.0,
+            70
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Diameter220, topZ70. Ground0. Low octagonal UCX. Footing below ward crystal interaction atZ76.",
+      "sha256": "9622c32db715e7dd0e88652d2a5ac07f735bc8a942f2197bcad0a45e2de2f956"
+    },
+    "SM_RV_Steps": {
+      "name": "SM_RV_Steps",
+      "dimensions_cm": [
+        439.94,
+        600.853,
+        160.107
+      ],
+      "bounds_min_cm": [
+        -219.9098663330078,
+        -300.438720703125,
+        0.0
+      ],
+      "bounds_max_cm": [
+        220.03012084960938,
+        300.41424560546875,
+        160.10684204101562
+      ],
+      "vertices": 8960,
+      "triangles": 17600,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight"
+      ],
+      "collision_hulls": 8,
+      "collision": [
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            -300.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            -225.0,
+            20.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            -225.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            -150.0,
+            40.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            -150.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            -75.0,
+            60.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            -75.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            0.0,
+            80.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            0.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            75.0,
+            100.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            75.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            150.0,
+            120.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            150.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            225.0,
+            140.0
+          ]
+        },
+        {
+          "label": "independent20cm stair rise",
+          "bounds_min_cm": [
+            -220.0,
+            225.0,
+            0.0
+          ],
+          "bounds_max_cm": [
+            220.0,
+            300.0,
+            160.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "440wideX x600runY; eight20cm rises, total160. Ascends+Y fromY-300 toY+300. BaseZ0. One box UCX per step.",
+      "sha256": "b37a33b3fc1153ca042aaf5747f3f52eb33e79737777f046b94d562130cf7213"
+    },
+    "SM_RV_Rubble": {
+      "name": "SM_RV_Rubble",
+      "dimensions_cm": [
+        288.738,
+        184.319,
+        96.862
+      ],
+      "bounds_min_cm": [
+        -141.64480590820312,
+        -88.26374053955078,
+        0.0
+      ],
+      "bounds_max_cm": [
+        147.0931396484375,
+        96.05500793457031,
+        96.86170196533203
+      ],
+      "vertices": 2204,
+      "triangles": 4360,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "Grounded low architectural rubble,~300x220x100. No collision; use outside active path.",
+      "sha256": "e7b04738cddad9c727d47a32972b62cd5b816126982e02b505dd832ac75e1641"
+    },
+    "SM_RV_TerrainPatch": {
+      "name": "SM_RV_TerrainPatch",
+      "dimensions_cm": [
+        4445.282,
+        4443.469,
+        268.841
+      ],
+      "bounds_min_cm": [
+        -2203.182861328125,
+        -2209.972900390625,
+        -268.84112548828125
+      ],
+      "bounds_max_cm": [
+        2242.099609375,
+        2233.49658203125,
+        0.0
+      ],
+      "vertices": 5509,
+      "triangles": 10894,
+      "materials": [
+        "M_RV_StoneDark",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "~4400x4400 island footing. Central~3200x3200 nearZ0; irregular perimeter rolls to-80, skirt to-260. Visual only. BedZ-22 under paving/paths.",
+      "sha256": "2848f7e72834544f94225f5aa398af154a59c2726691587c1806420f8352f7f1"
+    },
+    "SM_RV_RuinCrown": {
+      "name": "SM_RV_RuinCrown",
+      "dimensions_cm": [
+        499.66,
+        144.0,
+        482.331
+      ],
+      "bounds_min_cm": [
+        -249.9179229736328,
+        -68.0,
+        0.5
+      ],
+      "bounds_max_cm": [
+        249.74205017089844,
+        76.0,
+        482.8305358886719
+      ],
+      "vertices": 8472,
+      "triangles": 16640,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight",
+        "M_RV_Moss"
+      ],
+      "collision_hulls": 0,
+      "collision": [],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "500W,~145D,~480H. BaseZ0, front+Y. Stepped broken upper masonry, no collision. Ground on existing upper walls only.",
+      "sha256": "060d9ea392c30ff694a6ca2d297b9e01381468cea3fa6a1a05a232ac477fc439"
+    },
+    "SM_RV_WallEnd": {
+      "name": "SM_RV_WallEnd",
+      "dimensions_cm": [
+        200.961,
+        150.774,
+        648.515
+      ],
+      "bounds_min_cm": [
+        -100.4521484375,
+        -75.4521255493164,
+        0.0
+      ],
+      "bounds_max_cm": [
+        100.50860595703125,
+        75.32193756103516,
+        648.51513671875
+      ],
+      "vertices": 1680,
+      "triangles": 3300,
+      "materials": [
+        "M_RV_Stone",
+        "M_RV_StoneLight"
+      ],
+      "collision_hulls": 1,
+      "collision": [
+        {
+          "label": "wall end load core",
+          "bounds_min_cm": [
+            -97.0,
+            -70.5,
+            0.0
+          ],
+          "bounds_max_cm": [
+            97.0,
+            70.5,
+            648.0
+          ]
+        }
+      ],
+      "uv_channels": [
+        "CraftUV",
+        "LightmapUV"
+      ],
+      "uv0_scale_cm": 100,
+      "vertex_channels": {
+        "R": "broad painted value",
+        "G": "actual exposed bevel wear",
+        "B": "recess/weathering",
+        "A": "opaque"
+      },
+      "uv_faces_repaired": 0,
+      "pivot": "Authoring origin; front +Y, width X, centimeters. See placement note.",
+      "placement": "200W x150D x650H. Front+Y, baseZ0. Capped wall terminal with one solid hull.",
+      "sha256": "05a416dbc9cd073de803a33e52f71cc9a6be34056d6f1044095537cb64be0618"
+    }
+  }
+}

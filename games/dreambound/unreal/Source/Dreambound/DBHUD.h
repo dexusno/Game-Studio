@@ -12,6 +12,7 @@ private:
  void Label(const FString& Text,float X,float Y,float Size,FLinearColor Color=FLinearColor::White);
  void WrappedLabel(const FString& Text,float X,float Y,float Width,float Size,FLinearColor Color=FLinearColor::White);
  void Panel(float X,float Y,float W,float H,FLinearColor Color);
+ void Frame(float X,float Y,float W,float H,bool bAccent=false);
  void Button(FName Id,const FString& Text,float X,float Y,float W,float H,bool bAccent=false);
  float UIScale=1;
  int32 EquipmentPage=0;

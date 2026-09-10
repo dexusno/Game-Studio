@@ -1,0 +1,514 @@
+{
+  "SM_RV_ShieldSegment": {
+    "dimensions_cm": [
+      10.249998092651367,
+      29.1492280960083,
+      30.288402557373047
+    ],
+    "bounds_min_cm": [
+      -3.499998092651367,
+      -14.567630767822266,
+      11.0
+    ],
+    "bounds_max_cm": [
+      6.75,
+      14.581597328186035,
+      41.28840255737305
+    ],
+    "materials": [
+      "M_RV_Bronze",
+      "M_RV_Ceramic",
+      "M_RV_Enamel",
+      "M_RV_DarkMetal"
+    ],
+    "collision_hulls": 0,
+    "triangles": 3908,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_ShieldSegmentGlow": {
+    "dimensions_cm": [
+      3.984415054321289,
+      2.5774879455566406,
+      18.101600646972656
+    ],
+    "bounds_min_cm": [
+      2.803480625152588,
+      -1.2887439727783203,
+      19.98729705810547
+    ],
+    "bounds_max_cm": [
+      6.787895679473877,
+      1.2887439727783203,
+      38.088897705078125
+    ],
+    "materials": [
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 120,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_ShieldHub": {
+    "dimensions_cm": [
+      9.999998092651367,
+      26.880762100219727,
+      30.281435012817383
+    ],
+    "bounds_min_cm": [
+      -4.499998092651367,
+      -13.440381050109863,
+      -15.140717506408691
+    ],
+    "bounds_max_cm": [
+      5.5,
+      13.440381050109863,
+      15.140717506408691
+    ],
+    "materials": [
+      "M_RV_Bronze",
+      "M_RV_DarkMetal",
+      "M_RV_Enamel"
+    ],
+    "collision_hulls": 0,
+    "triangles": 1266,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Core": {
+    "dimensions_cm": [
+      6.0,
+      12.33345079421997,
+      12.648079872131348
+    ],
+    "bounds_min_cm": [
+      -3.0,
+      -5.848128318786621,
+      -6.324039936065674
+    ],
+    "bounds_max_cm": [
+      3.0,
+      6.48532247543335,
+      6.324039936065674
+    ],
+    "materials": [
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 402,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Forearm": {
+    "dimensions_cm": [
+      60.10019588470459,
+      21.100000381469727,
+      25.0
+    ],
+    "bounds_min_cm": [
+      -51.999996185302734,
+      -10.550000190734863,
+      -13.0
+    ],
+    "bounds_max_cm": [
+      8.100199699401855,
+      10.550000190734863,
+      12.0
+    ],
+    "materials": [
+      "M_RV_DarkMetal",
+      "M_RV_Ceramic",
+      "M_RV_Bronze"
+    ],
+    "collision_hulls": 0,
+    "triangles": 5344,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Sleeve": {
+    "dimensions_cm": [
+      20.0,
+      22.0,
+      100.0
+    ],
+    "bounds_min_cm": [
+      -10.0,
+      -11.0,
+      -50.0
+    ],
+    "bounds_max_cm": [
+      10.0,
+      11.0,
+      50.0
+    ],
+    "materials": [
+      "M_RV_Cloth",
+      "M_RV_DarkMetal"
+    ],
+    "collision_hulls": 0,
+    "triangles": 6812,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_GuardianBody": {
+    "dimensions_cm": [
+      48.15031623840332,
+      59.0,
+      78.0
+    ],
+    "bounds_min_cm": [
+      -21.0,
+      -29.5,
+      -8.0
+    ],
+    "bounds_max_cm": [
+      27.15031623840332,
+      29.5,
+      70.0
+    ],
+    "materials": [
+      "M_RV_DarkMetal",
+      "M_RV_Bronze",
+      "M_RV_Ceramic"
+    ],
+    "collision_hulls": 0,
+    "triangles": 2784,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_GuardianHead": {
+    "dimensions_cm": [
+      31.532336235046387,
+      28.96085834503174,
+      48.80641174316406
+    ],
+    "bounds_min_cm": [
+      -14.481087684631348,
+      -14.480429649353027,
+      0.0
+    ],
+    "bounds_max_cm": [
+      17.05124855041504,
+      14.480428695678711,
+      48.80641174316406
+    ],
+    "materials": [
+      "M_RV_Ceramic",
+      "M_RV_Bronze",
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 1028,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_GuardianArm": {
+    "dimensions_cm": [
+      29.999998092651367,
+      31.999995231628418,
+      104.66886138916016
+    ],
+    "bounds_min_cm": [
+      -15.0,
+      -15.999995231628418,
+      -87.16886138916016
+    ],
+    "bounds_max_cm": [
+      14.999998092651367,
+      16.0,
+      17.5
+    ],
+    "materials": [
+      "M_RV_DarkMetal",
+      "M_RV_Ceramic",
+      "M_RV_Bronze"
+    ],
+    "collision_hulls": 0,
+    "triangles": 3378,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_GuardianLeg": {
+    "dimensions_cm": [
+      48.999996185302734,
+      34.30768966674805,
+      104.0
+    ],
+    "bounds_min_cm": [
+      -17.0,
+      -17.153844833374023,
+      -97.0
+    ],
+    "bounds_max_cm": [
+      31.999996185302734,
+      17.153844833374023,
+      7.0
+    ],
+    "materials": [
+      "M_RV_DarkMetal",
+      "M_RV_Ceramic",
+      "M_RV_Bronze"
+    ],
+    "collision_hulls": 0,
+    "triangles": 2544,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Crystal": {
+    "dimensions_cm": [
+      24.70562171936035,
+      25.338247299194336,
+      52.0
+    ],
+    "bounds_min_cm": [
+      -11.712594985961914,
+      -12.669123649597168,
+      0.0
+    ],
+    "bounds_max_cm": [
+      12.993026733398438,
+      12.669123649597168,
+      52.0
+    ],
+    "materials": [
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 444,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_WardCrystal": {
+    "dimensions_cm": [
+      61.981895446777344,
+      54.06368637084961,
+      77.28211951255798
+    ],
+    "bounds_min_cm": [
+      -30.990947723388672,
+      -27.031843185424805,
+      -0.2821195125579834
+    ],
+    "bounds_max_cm": [
+      30.990947723388672,
+      27.031843185424805,
+      77.0
+    ],
+    "materials": [
+      "M_RV_Core",
+      "M_RV_Bronze"
+    ],
+    "collision_hulls": 0,
+    "triangles": 1116,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Beam": {
+    "dimensions_cm": [
+      100.0,
+      100.0,
+      100.0
+    ],
+    "bounds_min_cm": [
+      -50.0,
+      -50.0,
+      -50.0
+    ],
+    "bounds_max_cm": [
+      50.0,
+      50.0,
+      50.0
+    ],
+    "materials": [
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 16,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Spark": {
+    "dimensions_cm": [
+      100.0,
+      100.0,
+      100.0
+    ],
+    "bounds_min_cm": [
+      -50.0,
+      -50.0,
+      -50.0
+    ],
+    "bounds_max_cm": [
+      50.0,
+      50.0,
+      50.0
+    ],
+    "materials": [
+      "M_RV_Core"
+    ],
+    "collision_hulls": 0,
+    "triangles": 96,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Gate": {
+    "dimensions_cm": [
+      17.101784706115723,
+      455.5424041748047,
+      500.63185289502144
+    ],
+    "bounds_min_cm": [
+      -8.108719825744629,
+      -227.7715301513672,
+      -0.3444993793964386
+    ],
+    "bounds_max_cm": [
+      8.993064880371094,
+      227.7708740234375,
+      500.287353515625
+    ],
+    "materials": [
+      "M_RV_Bronze",
+      "M_RV_Core"
+    ],
+    "collision_hulls": 1,
+    "triangles": 15488,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_WaterPlane": {
+    "dimensions_cm": [
+      100.0,
+      100.0,
+      0.0
+    ],
+    "bounds_min_cm": [
+      -50.0,
+      -50.0,
+      0.0
+    ],
+    "bounds_max_cm": [
+      50.0,
+      50.0,
+      0.0
+    ],
+    "materials": [
+      "M_RV_Water"
+    ],
+    "collision_hulls": 0,
+    "triangles": 2,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_WaterDisc": {
+    "dimensions_cm": [
+      100.0,
+      100.0,
+      0.0
+    ],
+    "bounds_min_cm": [
+      -50.0,
+      -50.0,
+      0.0
+    ],
+    "bounds_max_cm": [
+      50.0,
+      50.0,
+      0.0
+    ],
+    "materials": [
+      "M_RV_Water"
+    ],
+    "collision_hulls": 0,
+    "triangles": 96,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_Waterfall": {
+    "dimensions_cm": [
+      100.0,
+      18.0,
+      100.0
+    ],
+    "bounds_min_cm": [
+      -50.0,
+      0.0,
+      0.0
+    ],
+    "bounds_max_cm": [
+      50.0,
+      18.0,
+      100.0
+    ],
+    "materials": [
+      "M_RV_Waterfall"
+    ],
+    "collision_hulls": 0,
+    "triangles": 24,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  },
+  "SM_RV_SkyDome": {
+    "dimensions_cm": [
+      99.99996566772461,
+      99.99998474121094,
+      100.0
+    ],
+    "bounds_min_cm": [
+      -49.99997329711914,
+      -49.99998474121094,
+      -50.0
+    ],
+    "bounds_max_cm": [
+      49.99999237060547,
+      50.0,
+      50.0
+    ],
+    "materials": [
+      "M_RV_Sky"
+    ],
+    "collision_hulls": 0,
+    "triangles": 528,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ]
+  }
+}

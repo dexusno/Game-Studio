@@ -1,0 +1,2240 @@
+{
+  "revision": "reverie-foley-v2",
+  "numpy": "1.26.2",
+  "scipy": "1.11.4",
+  "rights_sources": [
+    {
+      "url": "https://help.suno.com/en/articles/10625537",
+      "checked": "2026-09-10",
+      "fact": "Suno Sounds provides one-shot effects and loops from text; two samples per generation."
+    },
+    {
+      "url": "https://help.suno.com/en/articles/9601665",
+      "checked": "2026-09-10",
+      "fact": "Paid downloads permit commercial use, including video games."
+    },
+    {
+      "url": "https://help.suno.com/en/articles/13926209",
+      "checked": "2026-09-10",
+      "fact": "Pro includes 20 monthly song downloads; Premier 60. No extra purchases authorized."
+    },
+    {
+      "url": "https://suno.com/terms-of-service",
+      "checked": "2026-09-10",
+      "effective": "2026-09-03",
+      "fact": "Commercial output must be obtained by Suno's permitted download channel. Retain provenance; incidental editing and conversion allowed. Stream ripping is prohibited."
+    },
+    {
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "checked": "2026-09-10",
+      "fact": "Official Impact Sounds pack and bundled License.txt declare Creative Commons Zero for commercial use."
+    },
+    {
+      "url": "https://kenney.nl/assets/sci-fi-sounds",
+      "checked": "2026-09-10",
+      "fact": "Official Sci-Fi Sounds pack and bundled License.txt declare Creative Commons Zero for commercial use."
+    },
+    {
+      "url": "https://opengameart.org/content/sea-and-river-wave-sounds",
+      "checked": "2026-09-10",
+      "fact": "Author RandomMind identifies this as a river recording and licenses the audio CC0."
+    }
+  ],
+  "sources": {
+    "foley_impactBell_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactBell_heavy_000.ogg",
+      "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactGlass_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactGlass_heavy_000.ogg",
+      "sha256": "b44b39a940e8948e74b9bd3776bff980df43cf220abdaf0d467dc4c43c0244a5",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactGlass_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactGlass_medium_001.ogg",
+      "sha256": "d3d806cb3012c9ddd87010b30295ccb74d6d8b690077d19e67afd09a9d8feb03",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_heavy_000.ogg",
+      "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_light_002": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_light_002.ogg",
+      "sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_medium_001.ogg",
+      "sha256": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMining_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMining_001.ogg",
+      "sha256": "61235a18de3f3d92118235398222dbf51d448f1be70b1c8bc962b10b86f2d9c6",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPlate_heavy_003": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPlate_heavy_003.ogg",
+      "sha256": "59775f8979a396c8a793b0a1db206d5bdc651eae808d858e9acaee8ebda5bc6d",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPlate_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPlate_medium_001.ogg",
+      "sha256": "68ba7701b71ef620f498f3038e832157d71ac8db7ad59424545890b250ceb24e",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPunch_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPunch_heavy_000.ogg",
+      "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactTin_medium_002": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactTin_medium_002.ogg",
+      "sha256": "c1d2c4f9910d4529581ae56a9a9a01454c4619fbb7d6da7616221d8ec58cc0c4",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_doorClose_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/doorClose_000.ogg",
+      "sha256": "c9134651ebbd7c016f90393aee495ff8120bd343bb7569b689a7506987ebd6c2",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_doorOpen_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/doorOpen_000.ogg",
+      "sha256": "5b7e07eccd4413ad9ef3720c2d14f9cc699f4c50111e9b2f48bd60e6f1a164c3",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_engineCircular_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/engineCircular_000.ogg",
+      "sha256": "8ab85f9fa85e9e692287f98acb36b9ac3ba15313b007c039055e286b736f4e3a",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_explosionCrunch_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/explosionCrunch_000.ogg",
+      "sha256": "4b597d658d0ae101f0a030fbeea5fc3a4292ab85f017470a8254a8e7959cbd69",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_forceField_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/forceField_000.ogg",
+      "sha256": "c2916f2a062c8ddd1aca2826d134fe90847037db31342726ffb0f9097afe339c",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_impactMetal_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/impactMetal_000.ogg",
+      "sha256": "956c6612a256aa1a67a2327fffe2454f6b1d82e4c1c2be28fd66916335d5b1d6",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_spaceEngineSmall_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/spaceEngineSmall_000.ogg",
+      "sha256": "2bec8ff75d81f0c37a6b78bd63beea6c70375e49ee30b0bbe7f38d654d576831",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_thrusterFire_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/thrusterFire_000.ogg",
+      "sha256": "0fdc474d93f209debf1fc4ea77765a669dcb7676db31b4d8a0a509685bccf374",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "river_vistula": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/randommind/river-source-excerpt.flac",
+      "source_url": "https://opengameart.org/content/sea-and-river-wave-sounds",
+      "creator": "RandomMind",
+      "license": "CC0 1.0",
+      "license_proof": "sources/randommind/License-evidence.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Downloaded MP3 through the author-provided file link; author page CC0 declaration recorded before editing.",
+      "original_download_sha256": "8c24607e41edd6f018ec3582a07e5a8dbc57347276339cb68440951a0fb4cfb1",
+      "original_download_file": "sources/randommind/VistulaShort_0.mp3",
+      "sha256": "9e03972fc4551e389c87c80155f09d63968c221b0445876b047244874a8843f6",
+      "source_modifications": "Retained local original MP3; excerpt 18.0-42.0 seconds decoded to mono 48 kHz PCM16 lossless FLAC for a compact reproducible source asset."
+    }
+  },
+  "cues": {
+    "S_ChargeLoop": {
+      "seconds": 2.0,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -13.0,
+      "rms_dbfs": -23.999998892428533,
+      "estimated_true_peak_dbtp": -12.956661790920021,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0035501712798284004,
+      "energy_above_8khz_fraction": 0.0016201196072286289,
+      "boundary_step": 0.005900989760256714,
+      "internal_step_99_9_percentile": 0.07197070439772131,
+      "quietest_50ms_rms_dbfs": -28.01663105812263,
+      "sha256": "d5dac173a31345276417d14ee8a5f6e780f1d74cd00905dc731b220c75ecd276",
+      "sources": [
+        "scifi_engineCircular_000"
+      ],
+      "runtime_gain": 0.48,
+      "recipe": {
+        "seconds": 2.25,
+        "peak_dbfs": -13,
+        "runtime_gain": 0.48,
+        "voice_cap": 1,
+        "priority": 70,
+        "description": "Layered mechanical motor texture; steady two-second loop; runtime pitch supplies charge rise",
+        "layers": [
+          {
+            "source": "scifi_engineCircular_000",
+            "region": [
+              0.45,
+              2.7
+            ],
+            "gain_db": 0,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 95,
+            "lowpass": 4300
+          }
+        ],
+        "loop": true,
+        "loop_seconds": 2,
+        "crossfade_seconds": 0.25,
+        "rms_dbfs": -24
+      }
+    },
+    "S_ChargeTick": {
+      "seconds": 0.1,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -13.0,
+      "rms_dbfs": -24.999998041535708,
+      "estimated_true_peak_dbtp": -12.990466064368661,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0019214065204049972,
+      "energy_above_8khz_fraction": 0.00015568457086619192,
+      "edge_sample_peak": 0.0,
+      "sha256": "6e61dd202efa7dabba3b358e156a6f23f937e75419a58a5dae543de661b97501",
+      "sources": [
+        "foley_impactGlass_heavy_000",
+        "foley_impactTin_medium_002"
+      ],
+      "runtime_gain": 0.7,
+      "recipe": {
+        "seconds": 0.1,
+        "peak_dbfs": -13,
+        "runtime_gain": 0.7,
+        "voice_cap": 1,
+        "priority": 40,
+        "description": "Small two-stage metal selection latch with tiny glass pin",
+        "layers": [
+          {
+            "source": "foley_impactTin_medium_002",
+            "region": [
+              0,
+              0.085
+            ],
+            "gain_db": 0,
+            "speed": 1.35,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 8500
+          },
+          {
+            "source": "foley_impactGlass_heavy_000",
+            "region": [
+              0,
+              0.04
+            ],
+            "gain_db": -11,
+            "speed": 1.6,
+            "delay": 0.025,
+            "source_peak_dbfs": -3,
+            "highpass": 1600,
+            "lowpass": 8000
+          }
+        ],
+        "rms_dbfs": -25
+      }
+    },
+    "S_ChargeReady": {
+      "seconds": 0.58,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -23.999993851790112,
+      "estimated_true_peak_dbtp": -9.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00010441397555396203,
+      "energy_above_8khz_fraction": 0.0016703814953386833,
+      "edge_sample_peak": 0.0,
+      "sha256": "576c613f6fb482b38b0426c14d691dd12a11127b986eee95bb100b270c44c5f2",
+      "sources": [
+        "foley_impactMetal_medium_001",
+        "foley_impactPlate_medium_001",
+        "scifi_forceField_000"
+      ],
+      "runtime_gain": 0.68,
+      "recipe": {
+        "seconds": 0.58,
+        "peak_dbfs": -10,
+        "runtime_gain": 0.68,
+        "voice_cap": 1,
+        "priority": 90,
+        "description": "Terminal physical lock and upward crystalline ring for all six pieces",
+        "layers": [
+          {
+            "source": "foley_impactPlate_medium_001",
+            "region": [
+              0,
+              0.55
+            ],
+            "gain_db": -4,
+            "speed": 1.45,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 450,
+            "lowpass": 9000
+          },
+          {
+            "source": "scifi_forceField_000",
+            "region": [
+              0.18,
+              0.65
+            ],
+            "gain_db": -10,
+            "speed": 1.35,
+            "delay": 0.015,
+            "source_peak_dbfs": -3,
+            "attack": 0.08,
+            "release": 0.07
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.13
+            ],
+            "gain_db": -1,
+            "speed": 1.1,
+            "delay": 0.02,
+            "source_peak_dbfs": -3,
+            "lowpass": 8500
+          }
+        ],
+        "rms_dbfs": -24
+      }
+    },
+    "S_FullRelease": {
+      "seconds": 0.9,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -4.5,
+      "rms_dbfs": -17.49998920220556,
+      "estimated_true_peak_dbtp": -4.494472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 5.6340467494759985e-05,
+      "energy_above_8khz_fraction": 0.00034824901216404046,
+      "edge_sample_peak": 0.0,
+      "sha256": "860b71771f8cc03c7c720a11eeb64fef795837e73de53b34da16531eaa6f6856",
+      "sources": [
+        "foley_impactGlass_heavy_000",
+        "foley_impactPlate_heavy_003",
+        "scifi_explosionCrunch_000",
+        "scifi_forceField_000"
+      ],
+      "runtime_gain": 0.66,
+      "recipe": {
+        "seconds": 0.9,
+        "peak_dbfs": -4.5,
+        "runtime_gain": 0.66,
+        "voice_cap": 1,
+        "priority": 90,
+        "description": "Forceful six-piece rupture with sharp glass edge, compressed mechanical body and short recoil tail",
+        "layers": [
+          {
+            "source": "scifi_explosionCrunch_000",
+            "region": [
+              0,
+              0.72
+            ],
+            "gain_db": -3,
+            "speed": 1.25,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 50,
+            "lowpass": 6800
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.34
+            ],
+            "gain_db": 0,
+            "speed": 0.8,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 7200
+          },
+          {
+            "source": "foley_impactGlass_heavy_000",
+            "region": [
+              0,
+              0.23
+            ],
+            "gain_db": -7,
+            "speed": 1.2,
+            "delay": 0.009,
+            "source_peak_dbfs": -3,
+            "highpass": 1500,
+            "lowpass": 11000
+          },
+          {
+            "source": "scifi_forceField_000",
+            "region": [
+              0.06,
+              0.6
+            ],
+            "gain_db": -13,
+            "speed": 1.7,
+            "delay": 0.025,
+            "source_peak_dbfs": -3,
+            "highpass": 100,
+            "lowpass": 3700
+          }
+        ],
+        "rms_dbfs": -17.5
+      }
+    },
+    "S_Attack": {
+      "seconds": 0.42,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -8.000000000000002,
+      "rms_dbfs": -23.888246060653028,
+      "estimated_true_peak_dbtp": -7.977628900778964,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00021733948778489729,
+      "energy_above_8khz_fraction": 0.004433788753381577,
+      "edge_sample_peak": 0.0,
+      "sha256": "b9ae75901b1fe5a189259bd85569153bf996d11f619e51ebcd37ee7069d00e8e",
+      "sources": [
+        "foley_impactMetal_medium_001",
+        "scifi_doorOpen_000",
+        "scifi_forceField_000"
+      ],
+      "runtime_gain": 0.72,
+      "recipe": {
+        "seconds": 0.42,
+        "peak_dbfs": -8,
+        "runtime_gain": 0.72,
+        "voice_cap": 1,
+        "priority": 70,
+        "description": "Partial launch: compressed release mechanism, small energy edge and single metal snap",
+        "layers": [
+          {
+            "source": "scifi_doorOpen_000",
+            "region": [
+              0,
+              0.3
+            ],
+            "gain_db": -4,
+            "speed": 1.5,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 6500
+          },
+          {
+            "source": "scifi_forceField_000",
+            "region": [
+              0.03,
+              0.43
+            ],
+            "gain_db": -10,
+            "speed": 1.6,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 180,
+            "lowpass": 4500
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.135
+            ],
+            "gain_db": 0,
+            "speed": 1.15,
+            "delay": 0.009,
+            "source_peak_dbfs": -3,
+            "lowpass": 8800
+          }
+        ]
+      }
+    },
+    "S_MeleeSwing": {
+      "seconds": 0.3,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -15.0,
+      "rms_dbfs": -27.99998523317665,
+      "estimated_true_peak_dbtp": -14.994472624968928,
+      "full_scale_samples": 0,
+      "dc_offset": 1.2788297550101102e-05,
+      "energy_above_8khz_fraction": 0.055845962526781034,
+      "edge_sample_peak": 0.0,
+      "sha256": "8acab17b2feeac501737e4afc963bc8e6c0fa1b6a9bdd046653fcb9ee8861d7d",
+      "sources": [
+        "scifi_doorOpen_000",
+        "scifi_thrusterFire_000"
+      ],
+      "runtime_gain": 0.64,
+      "recipe": {
+        "seconds": 0.3,
+        "peak_dbfs": -15,
+        "runtime_gain": 0.64,
+        "voice_cap": 1,
+        "priority": 40,
+        "description": "Short articulated mechanism sweep with a quiet localized air edge, no impact body",
+        "layers": [
+          {
+            "source": "scifi_doorOpen_000",
+            "region": [
+              0.04,
+              0.4
+            ],
+            "gain_db": 0,
+            "speed": 1.3,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 240,
+            "lowpass": 3400
+          },
+          {
+            "source": "scifi_thrusterFire_000",
+            "region": [
+              0.6,
+              0.85
+            ],
+            "gain_db": -18,
+            "speed": 1.2,
+            "delay": 0.02,
+            "source_peak_dbfs": -3,
+            "highpass": 750,
+            "lowpass": 6500,
+            "attack": 0.035,
+            "release": 0.06
+          }
+        ],
+        "rms_dbfs": -28
+      }
+    },
+    "S_HeavyImpact": {
+      "seconds": 1.05,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -5.5,
+      "rms_dbfs": -18.999992079737797,
+      "estimated_true_peak_dbtp": -5.49447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00041007630173580387,
+      "energy_above_8khz_fraction": 3.5914822179812095e-05,
+      "edge_sample_peak": 0.0,
+      "sha256": "58a10c7628fb96f7a5ebdd98e3aace066d238a7d078bbd0dbb99680579a3679a",
+      "sources": [
+        "foley_impactGlass_heavy_000",
+        "foley_impactMining_001",
+        "foley_impactPlate_heavy_003",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.64,
+      "recipe": {
+        "seconds": 1.05,
+        "peak_dbfs": -5.5,
+        "runtime_gain": 0.64,
+        "voice_cap": 1,
+        "priority": 90,
+        "description": "Heavy plate contact, weighted body blow and delayed irregular mineral debris",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0,
+              0.61
+            ],
+            "gain_db": -3,
+            "speed": 0.82,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 45,
+            "lowpass": 3100
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.34
+            ],
+            "gain_db": 0,
+            "speed": 0.7,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.04,
+              0.65
+            ],
+            "gain_db": -8,
+            "speed": 0.88,
+            "delay": 0.03,
+            "source_peak_dbfs": -3,
+            "highpass": 500,
+            "lowpass": 7000
+          },
+          {
+            "source": "foley_impactGlass_heavy_000",
+            "region": [
+              0,
+              0.2
+            ],
+            "gain_db": -11,
+            "speed": 0.95,
+            "delay": 0.018,
+            "source_peak_dbfs": -3,
+            "highpass": 1800,
+            "lowpass": 9800
+          }
+        ],
+        "rms_dbfs": -19
+      }
+    },
+    "S_Impact": {
+      "seconds": 0.42,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -9.5,
+      "rms_dbfs": -22.499990895826283,
+      "estimated_true_peak_dbtp": -9.49447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0011404053126271175,
+      "energy_above_8khz_fraction": 0.00010018778033982097,
+      "edge_sample_peak": 0.0,
+      "sha256": "4d72c16092fa6965e0850bdd0807fd49b18acbc250d3f41f0764d62995b9d0af",
+      "sources": [
+        "foley_impactMetal_heavy_000",
+        "foley_impactPlate_heavy_003",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.48,
+      "recipe": {
+        "seconds": 0.42,
+        "peak_dbfs": -9.5,
+        "runtime_gain": 0.48,
+        "voice_cap": 2,
+        "priority": 70,
+        "description": "Firm ordinary armor hit: damped metal contact with mid-body knock",
+        "layers": [
+          {
+            "source": "foley_impactMetal_heavy_000",
+            "region": [
+              0,
+              0.16
+            ],
+            "gain_db": 0,
+            "speed": 0.82,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.21
+            ],
+            "gain_db": -7,
+            "speed": 1.1,
+            "delay": 0.012,
+            "source_peak_dbfs": -3,
+            "lowpass": 8500
+          },
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.02,
+              0.35
+            ],
+            "gain_db": -7,
+            "speed": 1.4,
+            "delay": 0.005,
+            "source_peak_dbfs": -3,
+            "highpass": 75,
+            "lowpass": 2800
+          }
+        ],
+        "rms_dbfs": -22.5
+      }
+    },
+    "S_Guard": {
+      "seconds": 0.52,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -6.5,
+      "rms_dbfs": -23.99999618492499,
+      "estimated_true_peak_dbtp": -6.494191011080076,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00016515379666980976,
+      "energy_above_8khz_fraction": 0.005978681679422937,
+      "edge_sample_peak": 0.0,
+      "sha256": "c5b7a9a462c6232b31a8dea7b245d7346a8033f62131f5ff51f6e02c10f31210",
+      "sources": [
+        "foley_impactGlass_medium_001",
+        "foley_impactMetal_medium_001",
+        "foley_impactPlate_medium_001"
+      ],
+      "runtime_gain": 0.85,
+      "recipe": {
+        "seconds": 0.52,
+        "peak_dbfs": -6.5,
+        "runtime_gain": 0.85,
+        "voice_cap": 2,
+        "priority": 100,
+        "description": "Defensive metal clash with a short ringing edge distinct from player damage",
+        "layers": [
+          {
+            "source": "foley_impactPlate_medium_001",
+            "region": [
+              0,
+              0.61
+            ],
+            "gain_db": 0,
+            "speed": 1.35,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 200,
+            "lowpass": 9000
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.135
+            ],
+            "gain_db": -5,
+            "speed": 1,
+            "delay": 0.012,
+            "source_peak_dbfs": -3,
+            "lowpass": 8500
+          },
+          {
+            "source": "foley_impactGlass_medium_001",
+            "region": [
+              0,
+              0.28
+            ],
+            "gain_db": -15,
+            "speed": 1.4,
+            "delay": 0.01,
+            "source_peak_dbfs": -3,
+            "highpass": 2200,
+            "lowpass": 10000
+          }
+        ],
+        "rms_dbfs": -24
+      }
+    },
+    "S_Parry": {
+      "seconds": 1.2,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -7.0,
+      "rms_dbfs": -23.999987510161844,
+      "estimated_true_peak_dbtp": -6.859505534890067,
+      "full_scale_samples": 0,
+      "dc_offset": 7.556213335170065e-05,
+      "energy_above_8khz_fraction": 0.006040631806499149,
+      "edge_sample_peak": 0.0,
+      "sha256": "122fcb311fda46dd831a83a60a96f2995bcb062ad9a8641f27d0b2d432e66cd1",
+      "sources": [
+        "foley_impactBell_heavy_000",
+        "foley_impactGlass_medium_001",
+        "foley_impactPlate_medium_001"
+      ],
+      "runtime_gain": 0.9,
+      "recipe": {
+        "seconds": 1.2,
+        "peak_dbfs": -7,
+        "runtime_gain": 0.9,
+        "voice_cap": 1,
+        "priority": 100,
+        "description": "Successful perfect guard: crossed bright contact opening into a clean bronze harmonic tail",
+        "layers": [
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              1.4
+            ],
+            "gain_db": -3,
+            "speed": 1.25,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 430,
+            "lowpass": 10000
+          },
+          {
+            "source": "foley_impactPlate_medium_001",
+            "region": [
+              0,
+              0.48
+            ],
+            "gain_db": 0,
+            "speed": 1.6,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 550,
+            "lowpass": 10000
+          },
+          {
+            "source": "foley_impactGlass_medium_001",
+            "region": [
+              0,
+              0.5
+            ],
+            "gain_db": -11,
+            "speed": 1.3,
+            "delay": 0.015,
+            "source_peak_dbfs": -3,
+            "highpass": 1800,
+            "lowpass": 10500
+          }
+        ],
+        "rms_dbfs": -24
+      }
+    },
+    "S_Dash": {
+      "seconds": 0.2,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -19.0,
+      "rms_dbfs": -31.804482059110555,
+      "estimated_true_peak_dbtp": -18.925854818326638,
+      "full_scale_samples": 0,
+      "dc_offset": 4.698008656916948e-06,
+      "energy_above_8khz_fraction": 0.018611616771267665,
+      "edge_sample_peak": 0.0,
+      "sha256": "eeff8e710b404a17ae9104f897bc45f855a2abc1150fb4592686c305ffd41aea",
+      "sources": [
+        "foley_impactTin_medium_002",
+        "scifi_doorOpen_000"
+      ],
+      "runtime_gain": 0.75,
+      "recipe": {
+        "seconds": 0.2,
+        "peak_dbfs": -19,
+        "runtime_gain": 0.75,
+        "voice_cap": 1,
+        "priority": 40,
+        "description": "Compact movement servo and small dry pin, short enough to avoid a repeated wind wash",
+        "layers": [
+          {
+            "source": "scifi_doorOpen_000",
+            "region": [
+              0.02,
+              0.23
+            ],
+            "gain_db": 0,
+            "speed": 1.5,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 300,
+            "lowpass": 3500
+          },
+          {
+            "source": "foley_impactTin_medium_002",
+            "region": [
+              0,
+              0.1
+            ],
+            "gain_db": -15,
+            "speed": 1.5,
+            "delay": 0.012,
+            "source_peak_dbfs": -3,
+            "highpass": 800,
+            "lowpass": 7000
+          }
+        ]
+      }
+    },
+    "S_Recall": {
+      "seconds": 0.68,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -12.0,
+      "rms_dbfs": -29.501321613050187,
+      "estimated_true_peak_dbtp": -11.74658549729597,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0001765111156792202,
+      "energy_above_8khz_fraction": 0.024729015340741133,
+      "edge_sample_peak": 0.0,
+      "sha256": "8f5d2b66b926c2271b78438d6616f978dbc126a00e90552aa3fba482386ceacf",
+      "sources": [
+        "foley_impactMetal_light_002",
+        "foley_impactMetal_medium_001",
+        "scifi_doorOpen_000"
+      ],
+      "runtime_gain": 0.7,
+      "recipe": {
+        "seconds": 0.68,
+        "peak_dbfs": -12,
+        "runtime_gain": 0.7,
+        "voice_cap": 1,
+        "priority": 40,
+        "description": "Returning mechanism winds toward three accelerating precision ratchet locks",
+        "layers": [
+          {
+            "source": "scifi_doorOpen_000",
+            "region": [
+              0,
+              0.52
+            ],
+            "gain_db": -2,
+            "speed": 0.85,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 170,
+            "lowpass": 5800
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.065
+            ],
+            "gain_db": -10,
+            "speed": 1.3,
+            "delay": 0.04,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          },
+          {
+            "source": "foley_impactMetal_light_002",
+            "region": [
+              0,
+              0.1
+            ],
+            "gain_db": -10,
+            "speed": 1.5,
+            "delay": 0.11,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.065
+            ],
+            "gain_db": -8,
+            "speed": 1.7,
+            "delay": 0.19,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          }
+        ]
+      }
+    },
+    "S_Catch": {
+      "seconds": 0.26,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -12.0,
+      "rms_dbfs": -26.99999079573511,
+      "estimated_true_peak_dbtp": -11.987743014379468,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00011556993556852993,
+      "energy_above_8khz_fraction": 0.012284177396329856,
+      "edge_sample_peak": 0.0,
+      "sha256": "0f4fbf303ec4e020c3ce5d7adfbf9ba6a5a48dec50b8b82076484212f7fabe4f",
+      "sources": [
+        "foley_impactMetal_medium_001",
+        "foley_impactTin_medium_002",
+        "scifi_doorClose_000"
+      ],
+      "runtime_gain": 0.66,
+      "recipe": {
+        "seconds": 0.26,
+        "peak_dbfs": -12,
+        "runtime_gain": 0.66,
+        "voice_cap": 2,
+        "priority": 40,
+        "description": "Damped docking socket with a distinct second physical lock",
+        "layers": [
+          {
+            "source": "scifi_doorClose_000",
+            "region": [
+              0.25,
+              0.52
+            ],
+            "gain_db": -4,
+            "speed": 1.8,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 130,
+            "lowpass": 5500
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0.02,
+              0.135
+            ],
+            "gain_db": 0,
+            "speed": 1.4,
+            "delay": 0.026,
+            "source_peak_dbfs": -3,
+            "lowpass": 8000
+          },
+          {
+            "source": "foley_impactTin_medium_002",
+            "region": [
+              0,
+              0.065
+            ],
+            "gain_db": -9,
+            "speed": 1.2,
+            "delay": 0.078,
+            "source_peak_dbfs": -3,
+            "highpass": 850,
+            "lowpass": 6500
+          }
+        ],
+        "rms_dbfs": -27
+      }
+    },
+    "S_Equip": {
+      "seconds": 1.05,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -13.5,
+      "rms_dbfs": -28.499990375890086,
+      "estimated_true_peak_dbtp": -13.42787997732522,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00013917395161097484,
+      "energy_above_8khz_fraction": 0.001456370438198575,
+      "edge_sample_peak": 0.0,
+      "sha256": "04575dffd61ab3c3d78c4dc01d76dc1fd3dc3f3822b20c25be5a3e28b2c8939b",
+      "sources": [
+        "foley_impactBell_heavy_000",
+        "foley_impactMetal_light_002",
+        "foley_impactMetal_medium_001",
+        "foley_impactTin_medium_002"
+      ],
+      "runtime_gain": 0.8,
+      "recipe": {
+        "seconds": 1.05,
+        "peak_dbfs": -13.5,
+        "runtime_gain": 0.8,
+        "voice_cap": 1,
+        "priority": 25,
+        "description": "Three indexed assembly clicks and a short bronze acquisition resonance",
+        "layers": [
+          {
+            "source": "foley_impactTin_medium_002",
+            "region": [
+              0,
+              0.12
+            ],
+            "gain_db": -6,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 7500
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.12
+            ],
+            "gain_db": -6,
+            "speed": 1.1,
+            "delay": 0.1,
+            "source_peak_dbfs": -3,
+            "lowpass": 8000
+          },
+          {
+            "source": "foley_impactMetal_light_002",
+            "region": [
+              0,
+              0.18
+            ],
+            "gain_db": -5,
+            "speed": 1.3,
+            "delay": 0.2,
+            "source_peak_dbfs": -3,
+            "lowpass": 8500
+          },
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0.02,
+              1.05
+            ],
+            "gain_db": -8,
+            "speed": 1.4,
+            "delay": 0.2,
+            "source_peak_dbfs": -3,
+            "highpass": 480,
+            "lowpass": 8500
+          }
+        ],
+        "rms_dbfs": -28.5
+      }
+    },
+    "S_Hurt": {
+      "seconds": 0.62,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -23.99998939339296,
+      "estimated_true_peak_dbtp": -9.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 0.00016416408309109787,
+      "energy_above_8khz_fraction": 1.696678330730442e-06,
+      "edge_sample_peak": 0.0,
+      "sha256": "36bce505deba09f96f13a84520a2fa8b6f702b7bd3fbde3d89681b9b46a01721",
+      "sources": [
+        "foley_impactGlass_heavy_000",
+        "foley_impactPunch_heavy_000",
+        "scifi_doorClose_000"
+      ],
+      "runtime_gain": 0.8,
+      "recipe": {
+        "seconds": 0.62,
+        "peak_dbfs": -10,
+        "runtime_gain": 0.8,
+        "voice_cap": 1,
+        "priority": 100,
+        "description": "Muffled weighted body damage with a restrained armor-fracture edge",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0,
+              0.5
+            ],
+            "gain_db": 0,
+            "speed": 0.85,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 55,
+            "lowpass": 1700
+          },
+          {
+            "source": "foley_impactGlass_heavy_000",
+            "region": [
+              0,
+              0.2
+            ],
+            "gain_db": -14,
+            "speed": 0.75,
+            "delay": 0.014,
+            "source_peak_dbfs": -3,
+            "highpass": 600,
+            "lowpass": 2700
+          },
+          {
+            "source": "scifi_doorClose_000",
+            "region": [
+              0.22,
+              0.4
+            ],
+            "gain_db": -14,
+            "speed": 0.8,
+            "delay": 0.02,
+            "source_peak_dbfs": -3,
+            "highpass": 200,
+            "lowpass": 1500
+          }
+        ],
+        "rms_dbfs": -24
+      }
+    },
+    "S_EnemyFire": {
+      "seconds": 0.62,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -11.0,
+      "rms_dbfs": -24.393099335351348,
+      "estimated_true_peak_dbtp": -10.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 1.0992146571530796e-05,
+      "energy_above_8khz_fraction": 1.522396642421649e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "ea9f55094cf38d17af2a9207023428dfde5d40e4571cd66eed49815e93c90bb6",
+      "sources": [
+        "scifi_forceField_000",
+        "scifi_impactMetal_000"
+      ],
+      "runtime_gain": 0.78,
+      "recipe": {
+        "seconds": 0.62,
+        "peak_dbfs": -11,
+        "runtime_gain": 0.78,
+        "voice_cap": 2,
+        "priority": 70,
+        "description": "Hollow hostile resonator release, separated from the sharp player mechanism",
+        "layers": [
+          {
+            "source": "scifi_forceField_000",
+            "region": [
+              0,
+              0.88
+            ],
+            "gain_db": -2,
+            "speed": 1.6,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 130,
+            "lowpass": 4200
+          },
+          {
+            "source": "scifi_impactMetal_000",
+            "region": [
+              0,
+              0.29
+            ],
+            "gain_db": -7,
+            "speed": 1.35,
+            "delay": 0.01,
+            "source_peak_dbfs": -3,
+            "highpass": 500,
+            "lowpass": 6700
+          }
+        ]
+      }
+    },
+    "S_EnemyHit": {
+      "seconds": 0.3,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -16.0,
+      "rms_dbfs": -30.499989376969438,
+      "estimated_true_peak_dbtp": -15.991587386172569,
+      "full_scale_samples": 0,
+      "dc_offset": 1.4180010618631513e-05,
+      "energy_above_8khz_fraction": 0.002474012170524893,
+      "edge_sample_peak": 0.0,
+      "sha256": "7cc7f47b7155b6de7018275e6476adb28b3d10076948e6257aad82becb3303b3",
+      "sources": [
+        "foley_impactGlass_medium_001",
+        "foley_impactMetal_light_002"
+      ],
+      "runtime_gain": 0.92,
+      "recipe": {
+        "seconds": 0.3,
+        "peak_dbfs": -16,
+        "runtime_gain": 0.92,
+        "voice_cap": 2,
+        "priority": 40,
+        "description": "Small ceramic and metal armor chip underneath confirmed player contact",
+        "layers": [
+          {
+            "source": "foley_impactGlass_medium_001",
+            "region": [
+              0,
+              0.38
+            ],
+            "gain_db": 0,
+            "speed": 1.7,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 600,
+            "lowpass": 8500
+          },
+          {
+            "source": "foley_impactMetal_light_002",
+            "region": [
+              0,
+              0.14
+            ],
+            "gain_db": -11,
+            "speed": 1.2,
+            "delay": 0.005,
+            "source_peak_dbfs": -3,
+            "highpass": 500,
+            "lowpass": 6500
+          }
+        ],
+        "rms_dbfs": -30.5
+      }
+    },
+    "S_EnemyTell": {
+      "seconds": 0.62,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -11.5,
+      "rms_dbfs": -22.983552635025998,
+      "estimated_true_peak_dbtp": -11.49447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 1.2603930796079528e-05,
+      "energy_above_8khz_fraction": 4.965963036589138e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "2c4911e74ab0b682ecb7077d41b7cc677655c3fcd31571be670027fd3d916a45",
+      "sources": [
+        "foley_impactMetal_medium_001",
+        "scifi_spaceEngineSmall_000"
+      ],
+      "runtime_gain": 0.8,
+      "recipe": {
+        "seconds": 0.62,
+        "peak_dbfs": -11.5,
+        "runtime_gain": 0.8,
+        "voice_cap": 2,
+        "priority": 70,
+        "description": "Low strained hostile mechanism grows into a clear commitment click",
+        "layers": [
+          {
+            "source": "scifi_spaceEngineSmall_000",
+            "region": [
+              1.2,
+              1.66
+            ],
+            "gain_db": 0,
+            "speed": 0.92,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "reverse": true,
+            "highpass": 110,
+            "lowpass": 1900,
+            "attack": 0.17,
+            "release": 0.04
+          },
+          {
+            "source": "foley_impactMetal_medium_001",
+            "region": [
+              0,
+              0.135
+            ],
+            "gain_db": -5,
+            "speed": 1.2,
+            "delay": 0.34,
+            "source_peak_dbfs": -3,
+            "highpass": 600,
+            "lowpass": 7000
+          }
+        ]
+      }
+    },
+    "S_BossTell": {
+      "seconds": 1.1,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -10.0,
+      "rms_dbfs": -22.25793728118508,
+      "estimated_true_peak_dbtp": -9.96840193778143,
+      "full_scale_samples": 0,
+      "dc_offset": 2.740617400088369e-05,
+      "energy_above_8khz_fraction": 4.338631377779426e-06,
+      "edge_sample_peak": 0.0,
+      "sha256": "88314d1f82208e7d5724d2443d2e19060aa6264dec19453bbd4f738aac1a636c",
+      "sources": [
+        "foley_impactBell_heavy_000",
+        "foley_impactPlate_heavy_003",
+        "scifi_spaceEngineSmall_000"
+      ],
+      "runtime_gain": 0.6,
+      "recipe": {
+        "seconds": 1.1,
+        "peak_dbfs": -10,
+        "runtime_gain": 0.6,
+        "voice_cap": 1,
+        "priority": 90,
+        "description": "Large threat: growing low resonator and three tightening uneven armor pulses",
+        "layers": [
+          {
+            "source": "scifi_spaceEngineSmall_000",
+            "region": [
+              0.4,
+              1.23
+            ],
+            "gain_db": -4,
+            "speed": 0.85,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 75,
+            "lowpass": 2200,
+            "attack": 0.18,
+            "release": 0.1
+          },
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              0.67
+            ],
+            "gain_db": -12,
+            "speed": 0.72,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 120,
+            "lowpass": 2200
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.25
+            ],
+            "gain_db": -10,
+            "speed": 0.8,
+            "delay": 0.02,
+            "source_peak_dbfs": -3,
+            "highpass": 100,
+            "lowpass": 3500
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.22
+            ],
+            "gain_db": -8,
+            "speed": 0.92,
+            "delay": 0.33,
+            "source_peak_dbfs": -3,
+            "highpass": 130,
+            "lowpass": 4700
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.2
+            ],
+            "gain_db": -6,
+            "speed": 1.1,
+            "delay": 0.67,
+            "source_peak_dbfs": -3,
+            "highpass": 200,
+            "lowpass": 5800
+          }
+        ]
+      }
+    },
+    "S_EnemyDefeat": {
+      "seconds": 1.65,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -9.0,
+      "rms_dbfs": -24.999980729903683,
+      "estimated_true_peak_dbtp": -8.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 8.248638616006666e-05,
+      "energy_above_8khz_fraction": 2.5099723758176852e-05,
+      "edge_sample_peak": 0.0,
+      "sha256": "8ce857a9ca9548f727c522d144096b2ac14a7d5ed9f29c1eb4478281f7f88c6f",
+      "sources": [
+        "foley_impactGlass_medium_001",
+        "foley_impactMining_001",
+        "foley_impactPlate_heavy_003",
+        "scifi_explosionCrunch_000"
+      ],
+      "runtime_gain": 0.95,
+      "recipe": {
+        "seconds": 1.65,
+        "peak_dbfs": -9,
+        "runtime_gain": 0.95,
+        "voice_cap": 2,
+        "priority": 70,
+        "description": "Weighted stone-machine collapse, loose plates and irregular mineral debris",
+        "layers": [
+          {
+            "source": "scifi_explosionCrunch_000",
+            "region": [
+              0,
+              0.74
+            ],
+            "gain_db": -5,
+            "speed": 0.8,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 55,
+            "lowpass": 3600
+          },
+          {
+            "source": "foley_impactPlate_heavy_003",
+            "region": [
+              0,
+              0.34
+            ],
+            "gain_db": 0,
+            "speed": 0.65,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "lowpass": 6500
+          },
+          {
+            "source": "foley_impactGlass_medium_001",
+            "region": [
+              0,
+              0.53
+            ],
+            "gain_db": -7,
+            "speed": 0.75,
+            "delay": 0.16,
+            "source_peak_dbfs": -3,
+            "highpass": 550,
+            "lowpass": 7200
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.12,
+              0.65
+            ],
+            "gain_db": -11,
+            "speed": 0.82,
+            "delay": 0.46,
+            "source_peak_dbfs": -3,
+            "highpass": 600,
+            "lowpass": 6500
+          }
+        ],
+        "rms_dbfs": -25
+      }
+    },
+    "S_Encounter": {
+      "seconds": 2.5,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -12.0,
+      "rms_dbfs": -28.499979587570756,
+      "estimated_true_peak_dbtp": -11.99447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 1.6135008676096863e-05,
+      "energy_above_8khz_fraction": 1.6485467723531787e-08,
+      "edge_sample_peak": 0.0,
+      "sha256": "98d2fb8cfe02646406228066269c68b132e6233466122cddc1acdc2d56698f39",
+      "sources": [
+        "foley_impactBell_heavy_000",
+        "scifi_forceField_000"
+      ],
+      "runtime_gain": 0.55,
+      "recipe": {
+        "seconds": 2.5,
+        "peak_dbfs": -12,
+        "runtime_gain": 0.55,
+        "voice_cap": 1,
+        "priority": 25,
+        "description": "Single low temple bell announcing commitment, no added background music",
+        "layers": [
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              1.46
+            ],
+            "gain_db": 0,
+            "speed": 0.64,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 55,
+            "lowpass": 4200
+          },
+          {
+            "source": "scifi_forceField_000",
+            "region": [
+              0.13,
+              0.7
+            ],
+            "gain_db": -22,
+            "speed": 0.8,
+            "delay": 0.04,
+            "source_peak_dbfs": -3,
+            "highpass": 120,
+            "lowpass": 2400,
+            "attack": 0.08,
+            "release": 0.16
+          }
+        ],
+        "rms_dbfs": -28.5
+      }
+    },
+    "S_Clear": {
+      "seconds": 2.4,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -14.0,
+      "rms_dbfs": -28.999999020633428,
+      "estimated_true_peak_dbtp": -13.99447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 1.648353758719096e-05,
+      "energy_above_8khz_fraction": 1.1665546603050823e-06,
+      "edge_sample_peak": 0.0,
+      "sha256": "d7efdcd512b6958fc95432e393f3745579ebaae1d0e91935214d9c59aea6d87e",
+      "sources": [
+        "foley_impactBell_heavy_000"
+      ],
+      "runtime_gain": 0.8,
+      "recipe": {
+        "seconds": 2.4,
+        "peak_dbfs": -14,
+        "runtime_gain": 0.8,
+        "voice_cap": 1,
+        "priority": 25,
+        "description": "Restrained ascending bronze resonance for earned completion",
+        "layers": [
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              1.46
+            ],
+            "gain_db": -1,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 220,
+            "lowpass": 6300
+          },
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              1.46
+            ],
+            "gain_db": -5,
+            "speed": 1.25,
+            "delay": 0.19,
+            "source_peak_dbfs": -3,
+            "highpass": 280,
+            "lowpass": 7400
+          },
+          {
+            "source": "foley_impactBell_heavy_000",
+            "region": [
+              0,
+              1.46
+            ],
+            "gain_db": -7,
+            "speed": 1.5,
+            "delay": 0.38,
+            "source_peak_dbfs": -3,
+            "highpass": 360,
+            "lowpass": 8000
+          }
+        ],
+        "rms_dbfs": -29
+      }
+    },
+    "S_WaterLoop": {
+      "seconds": 12.0,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -20.0,
+      "rms_dbfs": -30.999984030232145,
+      "estimated_true_peak_dbtp": -19.99447262496893,
+      "full_scale_samples": 0,
+      "dc_offset": 2.7519969468664946e-07,
+      "energy_above_8khz_fraction": 0.0001488857091019723,
+      "boundary_step": 0.006336493090732415,
+      "internal_step_99_9_percentile": 0.023318513143731342,
+      "quietest_50ms_rms_dbfs": -35.932440218969184,
+      "sha256": "e6b8927c403d2ba4cb1f285215554cfa2308743644a39316703fb2c1d77b6711",
+      "sources": [
+        "river_vistula"
+      ],
+      "runtime_gain": 0.55,
+      "recipe": {
+        "seconds": 12.5,
+        "peak_dbfs": -20,
+        "runtime_gain": 0.55,
+        "voice_cap": 2,
+        "priority": 10,
+        "description": "Quiet real river-water bed, equal-gain crossfade into a continuous twelve-second loop",
+        "layers": [
+          {
+            "source": "river_vistula",
+            "region": [
+              4.5,
+              17
+            ],
+            "gain_db": 0,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 160,
+            "lowpass": 7200,
+            "attack": 0.001,
+            "release": 0.001
+          }
+        ],
+        "loop": true,
+        "loop_seconds": 12,
+        "crossfade_seconds": 0.5,
+        "channels": 1,
+        "rms_dbfs": -31
+      }
+    }
+  },
+  "manifest_rows_for_integration_owner": [
+    {
+      "asset_id": "reverie_s_chargeloop",
+      "path": "assets/audio-reverie/S_ChargeLoop.wav",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Layered mechanical motor texture; steady two-second loop; runtime pitch supplies charge rise; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_chargetick",
+      "path": "assets/audio-reverie/S_ChargeTick.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Small two-stage metal selection latch with tiny glass pin; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_chargeready",
+      "path": "assets/audio-reverie/S_ChargeReady.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Terminal physical lock and upward crystalline ring for all six pieces; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_fullrelease",
+      "path": "assets/audio-reverie/S_FullRelease.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Forceful six-piece rupture with sharp glass edge, compressed mechanical body and short recoil tail; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_attack",
+      "path": "assets/audio-reverie/S_Attack.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Partial launch: compressed release mechanism, small energy edge and single metal snap; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_meleeswing",
+      "path": "assets/audio-reverie/S_MeleeSwing.wav",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Short articulated mechanism sweep with a quiet localized air edge, no impact body; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_heavyimpact",
+      "path": "assets/audio-reverie/S_HeavyImpact.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Heavy plate contact, weighted body blow and delayed irregular mineral debris; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_impact",
+      "path": "assets/audio-reverie/S_Impact.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Firm ordinary armor hit: damped metal contact with mid-body knock; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_guard",
+      "path": "assets/audio-reverie/S_Guard.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Defensive metal clash with a short ringing edge distinct from player damage; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_parry",
+      "path": "assets/audio-reverie/S_Parry.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Successful perfect guard: crossed bright contact opening into a clean bronze harmonic tail; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_dash",
+      "path": "assets/audio-reverie/S_Dash.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Compact movement servo and small dry pin, short enough to avoid a repeated wind wash; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_recall",
+      "path": "assets/audio-reverie/S_Recall.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Returning mechanism winds toward three accelerating precision ratchet locks; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_catch",
+      "path": "assets/audio-reverie/S_Catch.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Damped docking socket with a distinct second physical lock; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_equip",
+      "path": "assets/audio-reverie/S_Equip.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Three indexed assembly clicks and a short bronze acquisition resonance; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_hurt",
+      "path": "assets/audio-reverie/S_Hurt.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Muffled weighted body damage with a restrained armor-fracture edge; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_enemyfire",
+      "path": "assets/audio-reverie/S_EnemyFire.wav",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Hollow hostile resonator release, separated from the sharp player mechanism; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_enemyhit",
+      "path": "assets/audio-reverie/S_EnemyHit.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Small ceramic and metal armor chip underneath confirmed player contact; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_enemytell",
+      "path": "assets/audio-reverie/S_EnemyTell.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Low strained hostile mechanism grows into a clear commitment click; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_bosstell",
+      "path": "assets/audio-reverie/S_BossTell.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Large threat: growing low resonator and three tightening uneven armor pulses; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_enemydefeat",
+      "path": "assets/audio-reverie/S_EnemyDefeat.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Weighted stone-machine collapse, loose plates and irregular mineral debris; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_encounter",
+      "path": "assets/audio-reverie/S_Encounter.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Single low temple bell announcing commitment, no added background music; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_clear",
+      "path": "assets/audio-reverie/S_Clear.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Restrained ascending bronze resonance for earned completion; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_waterloop",
+      "path": "assets/audio-reverie/S_WaterLoop.wav",
+      "source_url": "https://opengameart.org/content/sea-and-river-wave-sounds",
+      "creator": "RandomMind; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Quiet real river-water bed, equal-gain crossfade into a continuous twelve-second loop; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    }
+  ],
+  "audition": {
+    "heard_by_agent": false,
+    "in_game_tested": false,
+    "note": "A real source WAV reel was emitted through the available audio tool. Runtime explicitly returned audio content omitted because you do not support audio input. Signal inspection and owner playback remain possible."
+  },
+  "overlap_checks": {
+    "note": "Fixed dry mono sums with source gains, without attenuation; not an exhaustive engine mix. Six catches retain all tails beyond the intended two-voice cap.",
+    "fixtures": {
+      "full_release_close_contact": {
+        "events": [
+          {
+            "cue": "S_FullRelease",
+            "time": 0,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_HeavyImpact",
+            "time": 0.028,
+            "gain": 0.64,
+            "pitch": 1
+          },
+          {
+            "cue": "S_EnemyHit",
+            "time": 0.03,
+            "gain": 0.92,
+            "pitch": 0.82
+          },
+          {
+            "cue": "S_EnemyDefeat",
+            "time": 0.095,
+            "gain": 0.95,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Dash",
+            "time": 0.02,
+            "gain": 0.75,
+            "pitch": 1
+          }
+        ],
+        "sample_peak_dbfs": -1.4465164857734303,
+        "estimated_true_peak_dbtp": -1.4409891107423611,
+        "full_scale_samples": 0
+      },
+      "defense_under_enemy_fire": {
+        "events": [
+          {
+            "cue": "S_Parry",
+            "time": 0,
+            "gain": 0.9,
+            "pitch": 1
+          },
+          {
+            "cue": "S_EnemyFire",
+            "time": 0.01,
+            "gain": 0.78,
+            "pitch": 0.82
+          },
+          {
+            "cue": "S_EnemyTell",
+            "time": 0.08,
+            "gain": 0.8,
+            "pitch": 1.08
+          },
+          {
+            "cue": "S_WaterLoop",
+            "time": 0,
+            "gain": 0.55,
+            "pitch": 1
+          }
+        ],
+        "sample_peak_dbfs": -7.33847370663119,
+        "estimated_true_peak_dbtp": -7.322664102751717,
+        "full_scale_samples": 0
+      },
+      "six_catches_conservative": {
+        "events": [
+          {
+            "cue": "S_Catch",
+            "time": 0.0,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Catch",
+            "time": 0.055,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Catch",
+            "time": 0.11,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Catch",
+            "time": 0.165,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Catch",
+            "time": 0.22,
+            "gain": 0.66,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Catch",
+            "time": 0.275,
+            "gain": 0.66,
+            "pitch": 1
+          }
+        ],
+        "sample_peak_dbfs": -13.754058976709977,
+        "estimated_true_peak_dbtp": -13.600532523278343,
+        "full_scale_samples": 0
+      },
+      "pressure_with_boss_tell": {
+        "events": [
+          {
+            "cue": "S_BossTell",
+            "time": 0,
+            "gain": 0.6,
+            "pitch": 0.7
+          },
+          {
+            "cue": "S_EnemyFire",
+            "time": 0.2,
+            "gain": 0.78,
+            "pitch": 0.82
+          },
+          {
+            "cue": "S_EnemyFire",
+            "time": 0.4,
+            "gain": 0.78,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Guard",
+            "time": 0.4,
+            "gain": 0.85,
+            "pitch": 0.92
+          },
+          {
+            "cue": "S_Attack",
+            "time": 0.6,
+            "gain": 0.72,
+            "pitch": 1
+          },
+          {
+            "cue": "S_Impact",
+            "time": 0.65,
+            "gain": 0.48,
+            "pitch": 0.92
+          },
+          {
+            "cue": "S_EnemyHit",
+            "time": 0.65,
+            "gain": 0.92,
+            "pitch": 0.82
+          }
+        ],
+        "sample_peak_dbfs": -5.81427302419785,
+        "estimated_true_peak_dbtp": -5.79612781337894,
+        "full_scale_samples": 0
+      }
+    }
+  }
+}

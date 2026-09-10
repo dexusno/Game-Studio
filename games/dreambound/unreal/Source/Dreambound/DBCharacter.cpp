@@ -156,34 +156,33 @@ ADBCharacter::ADBCharacter()
 void ADBCharacter::BeginPlay()
 {
     Super::BeginPlay();
-    BeamMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
-    SparkMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere"));
-    CeramicMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Ceramic.M_Ceramic"));
-    BronzeMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Bronze.M_Bronze"));
-    DarkMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_DarkMetal.M_DarkMetal"));
-    CoreMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Core.M_Core"));
-    if (auto* GlowBase = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow")))
+    BeamMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam"));
+    SparkMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Spark.SM_RV_Spark"));
+    CeramicMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Ceramic.M_RV_Ceramic"));
+    BronzeMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Bronze.M_RV_Bronze"));
+    DarkMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_DarkMetal.M_RV_DarkMetal"));
+    CoreMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Core.M_RV_Core"));
+    if (auto* GlowBase = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow")))
     {
         auto* Selection = UMaterialInstanceDynamic::Create(GlowBase, this);
         Selection->SetVectorParameterValue(TEXT("Color"), FLinearColor(1.f,.48f,.045f));
         SelectedPieceMaterial = Selection;
     }
-    FrostMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Frost.M_Frost"));
-    StormMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Storm.M_Storm"));
-    EmberMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Ember.M_Ember"));
+    FrostMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Frost.M_RV_Frost"));
+    StormMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Storm.M_RV_Storm"));
+    EmberMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Ember.M_RV_Ember"));
 
-    UStaticMesh* ArmMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Forearm.SM_Forearm"));
-    UStaticMesh* CoreMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"));
-    UStaticMesh* HubMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldHub.SM_ShieldHub"));
-    UStaticMesh* PlateMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldSegment.SM_ShieldSegment"));
-    UStaticMesh* GlowMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldSegmentGlow.SM_ShieldSegmentGlow"));
-    UStaticMesh* CrystalMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal"));
+    UStaticMesh* ArmMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Forearm.SM_RV_Forearm"));
+    UStaticMesh* CoreMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Core.SM_RV_Core"));
+    UStaticMesh* HubMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_ShieldHub.SM_RV_ShieldHub"));
+    UStaticMesh* PlateMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_ShieldSegment.SM_RV_ShieldSegment"));
+    UStaticMesh* GlowMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_ShieldSegmentGlow.SM_RV_ShieldSegmentGlow"));
+    UStaticMesh* CrystalMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal"));
     // Keep the legacy component for callers, but there is no gun body in this version.
     WeaponBody->SetStaticMesh(nullptr);
     Forearm->SetStaticMesh(ArmMesh ? ArmMesh : BeamMesh.Get());
-    // The clearer shield framing exposes the old forearm's rear cap. Continue
-    // that sleeve behind the camera so the hand stays connected to the bearer.
-    if (auto* SleeveMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cylinder.Cylinder")))
+    // New articulated sleeve continues behind the camera at the retained docking pose.
+    if (auto* SleeveMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Sleeve.SM_RV_Sleeve")))
     {
         auto* Sleeve = NewObject<UStaticMeshComponent>(this, TEXT("ForearmContinuation"));
         AddInstanceComponent(Sleeve);Sleeve->SetupAttachment(WeaponRoot);
@@ -191,7 +190,7 @@ void ADBCharacter::BeginPlay()
         Sleeve->SetCastShadow(false);Sleeve->SetMaterial(0, DarkMaterial);
         Sleeve->SetRelativeLocation(FVector(-75.f,0.f,-62.5f));
         Sleeve->SetRelativeRotation(FRotationMatrix::MakeFromZ(FVector(-30.f,0.f,-91.f)).Rotator());
-        Sleeve->SetRelativeScale3D(FVector(.18f,.20f,.96f));Sleeve->RegisterComponent();
+        Sleeve->SetRelativeScale3D(FVector(.9f,.9f,.96f));Sleeve->RegisterComponent();
     }
     WeaponCore->SetStaticMesh(CoreMesh);
     ShieldHub->SetStaticMesh(HubMesh);
@@ -219,21 +218,21 @@ void ADBCharacter::BeginPlay()
         else if (Index == 2 || Index == 7 || Index == 8) PartMesh = CoreMesh;
         Part->SetStaticMesh(PartMesh ? PartMesh : SparkMesh.Get());
     }
-    AttackSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Attack.S_Attack"));
-    GuardSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Guard.S_Guard"));
-    ParrySound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Parry.S_Parry"));
-    DashSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Dash.S_Dash"));
-    ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Impact.S_Impact"));
-    EquipSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Equip.S_Equip"));
-    HurtSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Hurt.S_Hurt"));
-    CatchSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Catch.S_Catch"));
-    RecallSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Recall.S_Recall"));
-    ChargeLoopSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_ChargeLoop.S_ChargeLoop"));
-    ChargeTickSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_ChargeTick.S_ChargeTick"));
-    ChargeReadySound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_ChargeReady.S_ChargeReady"));
-    FullReleaseSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_FullRelease.S_FullRelease"));
-    MeleeSwingSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_MeleeSwing.S_MeleeSwing"));
-    HeavyImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_HeavyImpact.S_HeavyImpact"));
+    AttackSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Attack.S_Attack"));
+    GuardSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Guard.S_Guard"));
+    ParrySound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Parry.S_Parry"));
+    DashSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Dash.S_Dash"));
+    ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Impact.S_Impact"));
+    EquipSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Equip.S_Equip"));
+    HurtSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Hurt.S_Hurt"));
+    CatchSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Catch.S_Catch"));
+    RecallSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Recall.S_Recall"));
+    ChargeLoopSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_ChargeLoop.S_ChargeLoop"));
+    ChargeTickSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_ChargeTick.S_ChargeTick"));
+    ChargeReadySound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_ChargeReady.S_ChargeReady"));
+    FullReleaseSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_FullRelease.S_FullRelease"));
+    MeleeSwingSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_MeleeSwing.S_MeleeSwing"));
+    HeavyImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_HeavyImpact.S_HeavyImpact"));
     ChargeAudio->SetSound(ChargeLoopSound);
     const auto MakeConcurrency = [this](int32 MaxVoices)
     {
@@ -1643,7 +1642,7 @@ void ADBCharacter::RefreshEquipmentVisuals()
     if (CurrentElement != EDBElement::Neutral && !HasUpgrade(ElementId(CurrentElement))) CurrentElement = EDBElement::Neutral;
     if (GetElementMaterial(CurrentElement))
     {
-        const int32 NamedSlot = WeaponCore->GetMaterialIndex(TEXT("M_Core"));
+        const int32 NamedSlot = WeaponCore->GetMaterialIndex(TEXT("M_RV_Core"));
         const int32 GlowSlot = NamedSlot != INDEX_NONE ? NamedSlot : (WeaponCore->GetNumMaterials() > 1 ? 1 : 0);
         WeaponCore->SetMaterial(GlowSlot, GetElementMaterial(CurrentElement));
     }

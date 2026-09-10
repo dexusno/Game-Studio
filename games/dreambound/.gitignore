@@ -3,3 +3,6 @@
 unreal/Content/
 art/*.blend1
 art/*.blend2
+art/reverie/**/build*.log
+art/reverie/**/*.blend1
+art/reverie/**/*.blend2

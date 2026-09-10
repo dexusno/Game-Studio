@@ -141,17 +141,8 @@ ADBEnemy::ADBEnemy()
         Component->SetCastShadow(false);
         Component->SetCanEverAffectNavigation(false);
     }
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube.Cube"));
-    if (Cube.Succeeded())
-    {
-        WarningMarks->SetStaticMesh(Cube.Object);
-        EffectMarks->SetStaticMesh(Cube.Object);
-        FrostMarks->SetStaticMesh(Cube.Object);
-        EmberMarks->SetStaticMesh(Cube.Object);
-        for (UStaticMeshComponent* P : { BodyPart.Get(), HeadPart.Get(), LeftArmPart.Get(),
-            RightArmPart.Get(), LeftLegPart.Get(), RightLegPart.Get(), CorePart.Get(), ChargePart.Get() }) P->SetStaticMesh(Cube.Object);
-    }
-    Tags.Add(TEXT("DBEnemy"));
+    // Load mutable source assets when the enemy is configured, not in the editor CDO.
+
 }
 
 void ADBEnemy::BeginPlay()
@@ -249,39 +240,39 @@ void ADBEnemy::BuildVisuals()
 {
     if (bVisualsBuilt) return;
     bVisualsBuilt = true;
-    EnemyHitSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyHit.S_EnemyHit"));
-    EnemyFireSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyFire.S_EnemyFire"));
-    BossTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_BossTell.S_BossTell"));
-    EnemyTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyTell.S_EnemyTell"));
-    EnemyDefeatSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_EnemyDefeat.S_EnemyDefeat"));
-    BodyImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Impact.S_Impact"));
-    UStaticMesh* Fallback = WarningMarks->GetStaticMesh();
+    EnemyHitSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_EnemyHit.S_EnemyHit"));
+    EnemyFireSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_EnemyFire.S_EnemyFire"));
+    BossTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_BossTell.S_BossTell"));
+    EnemyTellSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_EnemyTell.S_EnemyTell"));
+    EnemyDefeatSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_EnemyDefeat.S_EnemyDefeat"));
+    BodyImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Impact.S_Impact"));
+    UStaticMesh* Fallback = LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam"));
+    WarningMarks->SetStaticMesh(Fallback);
+    EffectMarks->SetStaticMesh(Fallback);
     const bool bHunter = Kind == EDBEnemyKind::Hunter;
     const bool bCaster = Kind == EDBEnemyKind::Caster;
-    FitPart(BodyPart, TEXT("/Game/Art/Meshes/SM_GuardianBody.SM_GuardianBody"), Fallback,
+    FitPart(BodyPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianBody.SM_RV_GuardianBody"), Fallback,
         FVector(48.f, 62.f, 76.f), FVector(0.f, 0.f, 30.f));
-    FitPart(HeadPart, TEXT("/Game/Art/Meshes/SM_GuardianHead.SM_GuardianHead"), Fallback,
+    FitPart(HeadPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianHead.SM_RV_GuardianHead"), Fallback,
         FVector(28.f, 29.f, 39.f), FVector(0.f, 0.f, 19.5f), bCaster ? 1.07f : 1.f);
-    FitPart(LeftArmPart, TEXT("/Game/Art/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
+    FitPart(LeftArmPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianArm.SM_RV_GuardianArm"), Fallback,
         FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : 1.f);
-    FitPart(RightArmPart, TEXT("/Game/Art/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
+    FitPart(RightArmPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianArm.SM_RV_GuardianArm"), Fallback,
         FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : bHunter ? 1.f : 1.06f);
-    FitPart(LeftLegPart, TEXT("/Game/Art/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
+    FitPart(LeftLegPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianLeg.SM_RV_GuardianLeg"), Fallback,
         FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
-    FitPart(RightLegPart, TEXT("/Game/Art/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
+    FitPart(RightLegPart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_GuardianLeg.SM_RV_GuardianLeg"), Fallback,
         FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
-    FitPart(CorePart, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"), Fallback,
+    FitPart(CorePart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Core.SM_RV_Core"), Fallback,
         FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.45f);
     CorePart->SetRelativeLocation(FVector(29.f, 0.f, 39.f));
-    FitPart(ChargePart, TEXT("/Game/Art/Meshes/SM_Core.SM_Core"), Fallback,
+    FitPart(ChargePart, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Core.SM_RV_Core"), Fallback,
         FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.5f);
     ChargePart->SetRelativeLocation(FVector(78.f, 0.f, 37.f));
     LeftArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? -31.f : -39.f, 52.f));
     RightArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? 31.f : 39.f, 52.f));
     UMaterialInterface* Glow = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow"));
-    if (!Glow) Glow = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
+        TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow"));
     if (Glow)
     {
         WarningMaterial = UMaterialInstanceDynamic::Create(Glow, this);
@@ -297,17 +288,17 @@ void ADBEnemy::BuildVisuals()
         WarningMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 2.f);
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 1.7f);
     }
-    if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal")))
+    if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal")))
     {
         FrostMarks->SetStaticMesh(Crystal);
         EmberMarks->SetStaticMesh(Crystal);
     }
     // Element silhouettes have their own materials; hit and recovery flashes cannot recolor them.
-    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Frost.M_Frost")))
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Frost.M_RV_Frost")))
         for (int32 Index = 0; Index < FrostMarks->GetNumMaterials(); ++Index) FrostMarks->SetMaterial(Index, Material);
-    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Ember.M_Ember")))
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Ember.M_RV_Ember")))
         for (int32 Index = 0; Index < EmberMarks->GetNumMaterials(); ++Index) EmberMarks->SetMaterial(Index, Material);
-    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_Storm.M_Storm")))
+    if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_Storm.M_RV_Storm")))
         EffectMarks->SetMaterial(0, Material);
 }
 

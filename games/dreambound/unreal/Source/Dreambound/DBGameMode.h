@@ -44,6 +44,7 @@ public:
  UPROPERTY() bool bBossWon=false;
  UPROPERTY() int32 Expeditions=0;
  UPROPERTY() float Sensitivity=1.f;
+ UPROPERTY() float SoundVolume=.85f;
 };
 UCLASS()
 class DREAMBOUND_API ADBGameMode : public AGameModeBase {
@@ -64,6 +65,7 @@ public:
  void ToggleBuild();
  void StartNewRun(bool bSameSeed=false);
  void AdjustSensitivity(float Delta);
+ void AdjustSoundVolume(float Delta);
  void ResumeRun();
  void QuitGame(bool bWithoutSaving=false);
  void SetMenuInput(bool bEnable);
@@ -87,7 +89,7 @@ public:
  float GetSensitivity() const { return Sensitivity; }
  bool bPaused=false,bChoosingReward=false,bShowingBuild=false,bTitle=true,bWon=false,bDefeated=false;
  int32 CurrentRoomId=0,Seed=0,Kills=0,CurrentWave=0,Expeditions=0;
- float RunSeconds=0.f,Sensitivity=1.f;
+ float RunSeconds=0.f,Sensitivity=1.f,SoundVolume=.85f;
  bool bBossWon=false,bCanResume=false;
  bool bRecoverySlice=true,bSliceAwaitingStart=true;
  bool bSaveFailed=false;

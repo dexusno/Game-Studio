@@ -10,6 +10,17 @@
 #include "EngineUtils.h"
 
 void ADBHUD::Panel(float X,float Y,float W,float H,FLinearColor C){DrawRect(C,X*UIScale,Y*UIScale,W*UIScale,H*UIScale);}
+void ADBHUD::Frame(float X,float Y,float W,float H,bool Accent){
+ const FLinearColor Edge=Accent?FLinearColor(.79f,.63f,.36f,.88f):FLinearColor(.53f,.61f,.48f,.62f);
+ Panel(X,Y,W,H,Accent?FLinearColor(.047f,.084f,.068f,.96f):FLinearColor(.018f,.035f,.029f,.83f));
+ Panel(X+1,Y+1,W-2,1,FLinearColor(.79f,.73f,.55f,.19f));
+ const float K=16.f;
+ auto Line=[&](float X1,float Y1,float X2,float Y2){DrawLine(X1*UIScale,Y1*UIScale,X2*UIScale,Y2*UIScale,Edge,1.25f*UIScale);};
+ Line(X,Y+K,X,Y);Line(X,Y,X+K,Y);
+ Line(X+W-K,Y,X+W,Y);Line(X+W,Y,X+W,Y+K);
+ Line(X,Y+H-K,X,Y+H);Line(X,Y+H,X+K,Y+H);
+ Line(X+W-K,Y+H,X+W,Y+H);Line(X+W,Y+H,X+W,Y+H-K);
+}
 void ADBHUD::Label(const FString& Text,float X,float Y,float Size,FLinearColor Color) {
  static UFont* CrispFont=LoadObject<UFont>(nullptr,TEXT("/Engine/EngineFonts/RobotoDistanceField.RobotoDistanceField"));
  UFont* Font=CrispFont?CrispFont:GEngine->GetMediumFont();
@@ -17,8 +28,8 @@ void ADBHUD::Label(const FString& Text,float X,float Y,float Size,FLinearColor C
  DrawText(Text,Color,X*UIScale,Y*UIScale,Font,FontScale*UIScale,false);
 }
 void ADBHUD::Button(FName Id,const FString& Text,float X,float Y,float W,float H,bool Accent){
- Panel(X,Y,W,H,Accent?FLinearColor(0.19,0.29,0.29,0.97):FLinearColor(0.06,0.085,0.09,0.97));
- Panel(X,Y,4,H,FLinearColor(0.82,0.64,0.36));
+ Frame(X,Y,W,H,Accent);
+ Panel(X+10,Y+H/2-3,5,6,FLinearColor(.74f,.64f,.40f));
  Label(Text,X+24,Y+H/2-14,27,FLinearColor(0.94,0.9,0.79));
  AddHitBox(FVector2D(X,Y)*UIScale,FVector2D(W,H)*UIScale,Id,true);
 }
@@ -35,28 +46,30 @@ void ADBHUD::DrawHUD(){
  Super::DrawHUD();if(!Canvas)return;
  auto* G=Cast<ADBGameMode>(UGameplayStatics::GetGameMode(this));if(!G)return;
  auto* P=G->Player;UIScale=FMath::Min(Canvas->SizeX/1920.f,Canvas->SizeY/1080.f);float H=Canvas->SizeY/UIScale;
- FLinearColor Ivory(0.94,0.91,0.82),Gold(0.84,0.67,0.39),Mint(0.5,0.9,0.83);
+ FLinearColor Ivory(.93f,.91f,.80f),Gold(.79f,.67f,.43f),Mint(.56f,.77f,.62f);
  if(!G->bTitle){
-  Panel(40,32,650,112,FLinearColor(0.02,0.035,0.04,0.72));
+  Frame(40,32,650,112);
   Label(G->Rooms.IsValidIndex(G->CurrentRoomId)?G->Rooms[G->CurrentRoomId].Name.ToUpper():TEXT("BETWEEN WORLDS"),62,49,31,Ivory);
   Label(G->ObjectiveText(),62,94,20,Gold);
   Label(FString::Printf(TEXT("EXPEDITION %d  /  SEED %d"),G->Expeditions,G->Seed),1520,44,18,Ivory);
   if(P){
-   Panel(42,H-170,370,129,FLinearColor(0.02,0.035,0.04,0.8));
+   Frame(42,H-170,370,129);
    Label(FString::Printf(TEXT("%d  /  %d"),FMath::CeilToInt(P->Health),FMath::CeilToInt(P->MaxHealth)),62,H-155,27,Ivory);
    Panel(62,H-115,324,7,FLinearColor(0.2,0.13,0.12));Panel(62,H-115,324*FMath::Clamp(P->Health/P->MaxHealth,0.f,1.f),7,FLinearColor(0.77,0.4,0.31));
    Label(FString::Printf(TEXT("%d PIECES AVAILABLE TO BLOCK"),P->GetAttachedPieceCount()),62,H-89,18,Mint);
    FString E=StaticEnum<EDBElement>()->GetNameStringByValue(int64(P->CurrentElement)).ToUpper();
-   Panel(1400,H-201,465,165,FLinearColor(.02f,.035f,.04f,.9f));
+   Frame(1400,H-201,465,165);
    Label(P->IsFullChargeReady()?TEXT("FULL CHARGE / RELEASE!"):P->GetSelectedPieceCount()>0?FString::Printf(TEXT("RELEASE / %d PIECES"),P->GetSelectedPieceCount()):P->bGuarding?TEXT("SHIELD / EXPANDED"):TEXT("WEAPON / FOLDED"),1420,H-185,20,P->GetSelectedPieceCount()>0?Gold:Mint);
    if(P->GetChargeHoldTime()>0){Panel(1420,H-155,410,5,FLinearColor(.1,.15,.17));Panel(1420,H-155,410*P->GetChargeProgress(),5,Gold);}
    for(int32 I=0;I<P->GetShieldPieceCount();++I){
     const auto State=P->GetPieceState(I);const float X=1420+I*62;
     FLinearColor C=State==EDBShieldPieceState::Selected?Gold:State==EDBShieldPieceState::Attached?Mint:State==EDBShieldPieceState::Regenerating?FLinearColor(.22,.3,.36):FLinearColor(.54,.63,.83);
-    Panel(X,H-140,48,28,FLinearColor(.06,.09,.11));
-    if(State==EDBShieldPieceState::Regenerating)Panel(X,H-140,48*P->GetPieceRegenerationProgress(I),28,C);
-    else Panel(X,H-140,48,28,C);
-    Label(FString::FromInt(I+1),X+17,H-139,20,State==EDBShieldPieceState::Regenerating?Ivory:FLinearColor(.015,.03,.04));
+    Panel(X,H-140,48,28,FLinearColor(.04f,.065f,.05f));
+    const float Fill=State==EDBShieldPieceState::Regenerating?P->GetPieceRegenerationProgress(I):1.f;
+    Panel(X,H-114,48*Fill,2,C);
+    DrawLine((X+7)*UIScale,(H-135)*UIScale,(X+1)*UIScale,(H-122)*UIScale,C,1.4f*UIScale);
+    DrawLine((X+41)*UIScale,(H-135)*UIScale,(X+47)*UIScale,(H-122)*UIScale,C,1.4f*UIScale);
+    Label(FString::FromInt(I+1),X+17,H-139,20,C);
     Label(State==EDBShieldPieceState::Regenerating?TEXT("REGEN"):State==EDBShieldPieceState::Returning?TEXT("BACK"):State==EDBShieldPieceState::Attached?TEXT("HELD"):State==EDBShieldPieceState::Selected?TEXT("LIT"):TEXT("AWAY"),X,H-106,12,C);
    }
    Label(FString::Printf(TEXT("%d held / %d away / %d rebuilding"),P->GetAttachedPieceCount(),P->GetDeployedPieceCount(),P->GetRegeneratingPieceCount()),1420,H-84,16,Ivory);
@@ -67,7 +80,7 @@ void ADBHUD::DrawHUD(){
    Label(P->GetElementLabel()+(P->CurrentElement==EDBElement::Neutral?TEXT(" / R CYCLES CORES"):TEXT(" / ON HIT")),62,H-58,17,P->CurrentElement==EDBElement::Frost?FLinearColor(.4,.85,1):P->CurrentElement==EDBElement::Ember?FLinearColor(1,.5,.2):P->CurrentElement==EDBElement::Storm?FLinearColor(.8,.5,1):Mint);
    if(P->HitMarkerTime>0){float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;DrawLine(X-6,Y-6,X+6,Y+6,Gold,2);DrawLine(X-6,Y+6,X+6,Y-6,Gold,2);}
    if(P->HurtFlashTime>0)Panel(0,0,1920,H,FLinearColor(0.8f,0.08f,0.035f,FMath::Min(0.16f,P->HurtFlashTime*.45f)));
-   Panel(530,H-72,820,68,FLinearColor(.02,.035,.04,.65));
+   Frame(530,H-72,820,68);
    Label(TEXT("LMB tap / strike   Hold 1.8s / full charge   RMB / unfold & block"),550,H-62,18,Ivory);
    Label(TEXT("Q / recall    F / heavy    Shift / dash    Tab / abilities    Esc / pause"),550,H-34,17,Gold);
    if(!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&!G->bWon&&!G->bDefeated) {
@@ -76,7 +89,7 @@ void ADBHUD::DrawHUD(){
     DrawLine(X-11*UIScale,Y,X-5*UIScale,Y,C,1.6*UIScale);DrawLine(X+5*UIScale,Y,X+11*UIScale,Y,C,1.6*UIScale);
     DrawLine(X,Y-11*UIScale,X,Y-5*UIScale,C,1.6*UIScale);DrawLine(X,Y+5*UIScale,X,Y+11*UIScale,C,1.6*UIScale);
     FString Interact=G->InteractText();
-    if(!Interact.IsEmpty()){Panel(630,H*0.67f,660,60,FLinearColor(0.02,0.05,0.05,0.92));Label(Interact,660,H*0.67f+16,25,Ivory);}
+    if(!Interact.IsEmpty()){Frame(630,H*0.67f,660,60,true);Label(Interact,660,H*0.67f+16,25,Ivory);}
    }
   }
   for(TActorIterator<ADBEnemy> It(GetWorld());It;++It)if(!It->bDead&&(It->RoomId==G->CurrentRoomId||It->RoomId==INDEX_NONE)){
@@ -91,15 +104,15 @@ void ADBHUD::DrawHUD(){
     }
    }
    if(It->Kind==EDBEnemyKind::Boss){
-    Panel(620,44,660,72,FLinearColor(0.025,0.035,0.04,0.85));
+    Frame(620,44,660,72,true);
     Label(G->bRecoverySlice?TEXT("HEAVY SENTINEL"):TEXT("THE BELL GUARDIAN"),640,53,22,Gold);
     Panel(640,88,620,7,FLinearColor(0.22,0.11,0.1));
     Panel(640,88,620*FMath::Clamp(It->Health/It->MaxHealth,0.f,1.f),7,FLinearColor(0.95,0.54,0.26));
    }
   }
-  if(G->EventRemaining>0&&!G->bChoosingReward){Panel(570,165,870,86,FLinearColor(0.025,0.045,0.045,0.82));WrappedLabel(G->EventText,594,181,822,21,G->EventColor);}
+  if(G->EventRemaining>0&&!G->bChoosingReward){Frame(570,165,870,86,true);WrappedLabel(G->EventText,594,181,822,21,G->EventColor);}
   if(!G->PracticeInstruction.IsEmpty()&&!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild){
-   Panel(42,170,480,192,FLinearColor(.02,.045,.05,.94));Label(TEXT("TRY YOUR REWARD / SAFE PRACTICE"),62,188,19,Mint);
+   Frame(42,170,480,192);Label(TEXT("TRY YOUR REWARD / SAFE PRACTICE"),62,188,19,Mint);
    WrappedLabel(G->PracticeInstruction,62,223,436,20,Ivory);Label(TEXT("Leave through the passage when ready."),62,325,17,Gold);
   }
   if(G->bRecoverySlice&&G->ClaimedRooms.Contains(G->CurrentRoomId)&&G->Rooms.IsValidIndex(G->CurrentRoomId+1)){
@@ -122,11 +135,19 @@ void ADBHUD::DrawHUD(){
     if(Mark.Z>0&&MX>120&&MX<1730&&MY>225&&MY<H-190){Label(Reward?TEXT("RECOVER"):Room.bOptional?TEXT("OPTIONAL / MIRROR TRIAL"):TEXT("PASSAGE"),MX-50,MY,18,Mint);}
    }
   }
-  if(P&&P->MessageTime>0&&!G->bChoosingReward){Panel(590,H*.60f-12,752,P->LastCombatMessage.Len()>90?90:54,FLinearColor(.02,.035,.04,.85));WrappedLabel(P->LastCombatMessage,610,H*0.60f,710,21,Gold);}
+  if(P&&P->MessageTime>0&&!G->bChoosingReward){Frame(590,H*.60f-12,752,P->LastCombatMessage.Len()>90?90:54);WrappedLabel(P->LastCombatMessage,610,H*0.60f,710,21,Gold);}
  }
  if(G->bTitle){
-  Panel(0,0,920,H,FLinearColor(0.012,0.024,0.028,0.92));
-  Label(G->bRecoverySlice?TEXT("THE SHIELD / COMBAT PLAYTEST"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
+  Panel(0,0,920,H,FLinearColor(.011f,.024f,.018f,.94f));
+  Panel(875,50,1,H-100,FLinearColor(.56f,.50f,.32f,.40f));
+  // Original six-petal inlay echoes the new folded weapon and sanctuary carving.
+  for(int32 I=0;I<6;++I){
+   const float A=I*PI/3.f;
+   const FVector2D Center(726.f,223.f),D(FMath::Cos(A),FMath::Sin(A)),Side(-D.Y,D.X);
+   const FVector2D V[4]={Center+D*23.f,Center+D*47.f+Side*12.f,Center+D*74.f,Center+D*47.f-Side*12.f};
+   for(int32 J=0;J<4;++J)DrawLine(V[J].X*UIScale,V[J].Y*UIScale,V[(J+1)%4].X*UIScale,V[(J+1)%4].Y*UIScale,Gold,1.6f*UIScale);
+  }
+  Label(G->bRecoverySlice?TEXT("SANCTUARY / REVERIE 0.4.0"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
   Label(TEXT("BETWEEN"),108,153,79,Ivory);Label(TEXT("WORLDS"),108,230,79,Ivory);
   Label(G->bRecoverySlice?TEXT("Your defense becomes your attack."):TEXT("The places you dream about are real."),115,343,29,Ivory);
   Label(G->bRecoverySlice?TEXT("Fold to strike. Unfold to defend. Commit to power."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
@@ -144,7 +165,7 @@ void ADBHUD::DrawHUD(){
   Label(TEXT("Install now. Learn its pattern for future expeditions."),260,H*0.18f+59,23,Mint);
   for(int32 I=0;I<G->Offers.Num();++I){
    const auto& O=G->Offers[I];float X=260+I*477,Y=H*0.34f;
-   Panel(X,Y,440,410,FLinearColor(0.06,0.09,0.095,0.98));Panel(X,Y,440,5,O.Color);
+   Frame(X,Y,440,410,true);Panel(X+25,Y+15,390,2,O.Color);
    Label(FString::Printf(TEXT("0%d"),I+1),X+28,Y+30,25,O.Color);Label(O.Name,X+28,Y+84,32,Ivory);
    WrappedLabel(O.Description,X+28,Y+146,384,21,Ivory);
    int32 Rank=P?P->GetUpgradeRank(O.Id):0;
@@ -171,7 +192,7 @@ void ADBHUD::DrawHUD(){
    TArray<FName> Keys;if(P)P->Upgrades.GetKeys(Keys);Keys.Sort(FNameLexicalLess());
    const int32 Pages=FMath::Max(1,FMath::DivideAndRoundUp(Keys.Num(),4));EquipmentPage=FMath::Clamp(EquipmentPage,0,Pages-1);
    for(int32 I=0;I<4&&Keys.IsValidIndex(EquipmentPage*4+I);++I){FName Id=Keys[EquipmentPage*4+I];const int32 Rank=P->GetUpgradeRank(Id);auto O=G->DescribeUpgrade(Id);float X=190+(I%2)*805,Y=225+(I/2)*249;
-    Panel(X,Y,765,223,FLinearColor(.055,.085,.095));Label(O.Name+FString::Printf(TEXT(" / RANK %d"),Rank),X+22,Y+20,27,O.Color);
+    Frame(X,Y,765,223);Label(O.Name+FString::Printf(TEXT(" / RANK %d"),Rank),X+22,Y+20,27,O.Color);
     WrappedLabel(ADBCharacter::GetUpgradeDescription(Id,Rank),X+22,Y+69,716,22,Ivory);
    }
    if(Keys.IsEmpty())Label(TEXT("Earn an attachment at a cleared ward to begin your build."),190,260,25,Ivory);
@@ -186,6 +207,9 @@ void ADBHUD::DrawHUD(){
    Button("Equipment",TEXT("Read my ability instructions"),190,530,650,62,true);
    Label(FString::Printf(TEXT("Mouse sensitivity: %.2f"),G->Sensitivity),1130,270,25,Gold);
    Button("SensDown",TEXT("-"),1130,326,100,50);Button("SensUp",TEXT("+"),1250,326,100,50);
+   Label(FString::Printf(TEXT("Sound: %d%%"),FMath::RoundToInt(G->SoundVolume*100)),1130,422,25,Gold);
+   Button("SoundDown",TEXT("-"),1130,477,100,50);Button("SoundUp",TEXT("+"),1250,477,100,50);
+   Button("SoundMute",G->SoundVolume>0?TEXT("Mute"):TEXT("Enable sound"),1130,550,330,52);
   }
   Label(TEXT("After exiting, the current encounter resumes from its entry checkpoint."),190,H-220,20,Gold);
   Button("Back",TEXT("Return to the world"),190,H-160,650,65,true);
@@ -210,6 +234,9 @@ void ADBHUD::NotifyHitBoxRelease(FName Box){
  else if(Box=="Back"){if(G->bShowingBuild)G->ToggleBuild();else G->TogglePause();}
  else if(Box=="SensDown")G->AdjustSensitivity(-0.1f);
  else if(Box=="SensUp")G->AdjustSensitivity(0.1f);
+ else if(Box=="SoundDown")G->AdjustSoundVolume(-0.1f);
+ else if(Box=="SoundUp")G->AdjustSoundVolume(0.1f);
+ else if(Box=="SoundMute")G->AdjustSoundVolume(G->SoundVolume>0?-1.f:.85f);
  else if(Box=="Equipment"){G->bPaused=false;G->bShowingBuild=true;EquipmentPage=0;G->SetMenuInput(true);}
  else if(Box=="BuildPrev")EquipmentPage=FMath::Max(0,EquipmentPage-1);
  else if(Box=="BuildNext")++EquipmentPage;

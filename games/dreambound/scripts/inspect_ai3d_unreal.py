@@ -123,7 +123,7 @@ def configure():
 
 
 def checked_save(asset):
-    if not asset.get_path_name().startswith(("/Game/AI3DInspection/", "/Game/Art/Trellis/")):
+    if not asset.get_path_name().startswith(("/Game/AI3DInspection/", "/Game/Art/Trellis/", "/Game/Art/Reverie/")):
         raise RuntimeError("Refusing to save an asset outside the AI3D import scopes")
     if not LIB.save_loaded_asset(asset):
         raise RuntimeError("Save failed: " + asset.get_path_name())

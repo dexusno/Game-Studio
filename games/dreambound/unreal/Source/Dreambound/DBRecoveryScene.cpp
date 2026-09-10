@@ -1,18 +1,28 @@
 #include "DBGameMode.h"
 #include "Engine/World.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/StaticMeshActor.h"
 #include "Engine/DirectionalLight.h"
 #include "Engine/SkyLight.h"
-#include "Components/SkyAtmosphereComponent.h"
+#include "Engine/PointLight.h"
 #include "Engine/ExponentialHeightFog.h"
 #include "Engine/PostProcessVolume.h"
+#include "Components/BoxComponent.h"
+#include "Components/AudioComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Components/DirectionalLightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/SkyLightComponent.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "Components/HierarchicalInstancedStaticMeshComponent.h"
+#include "Materials/MaterialInterface.h"
+#include "Sound/SoundBase.h"
+#include "Sound/SoundAttenuation.h"
 
-// Seeded assembly uses connected room modules with protected door axes.
-// Layouts change routes and cover placement; authored meshes retain their scale.
+// Route topology comes first. The three encounter centers and flat combat pads
+// remain compatible with the game; masonry, soil and water follow that graph.
+// Every visible mesh belongs to Reverie. Hidden boxes only supply soil floors
+// and the earned progression barriers; missing imports never show old assets.
 void ADBGameMode::BuildRecoveryCourtyard()
 {
  ResetActors();Rooms.Reset();SpawnedRooms.Reset();RoomWaves.Reset();RoomLayoutVariants.Reset();Random.Initialize(Seed);
@@ -21,239 +31,398 @@ void ADBGameMode::BuildRecoveryCourtyard()
  const int32 Turn=Layout.RandRange(-1,1);
  const FVector Second=FRotator(0,Turn*90.f,0).RotateVector(First);
  const FVector Centers[]={FVector::ZeroVector,First*4200,First*4200+Second*4200};
- const TCHAR* Names[]={TEXT("Bellroot court"),TEXT("The split cloister"),TEXT("The sentinel garden")};
- LayoutSignature=FString::Printf(TEXT("route:%d,%d"),First.X>.5f?0:1,Turn);
+ const TCHAR* Names[]={TEXT("The spring cloister"),TEXT("The moss terraces"),TEXT("The crown sanctuary")};
+ LayoutSignature=FString::Printf(TEXT("reverie-route:%d,%d"),First.X>.5f?0:1,Turn);
  for(int32 I=0;I<3;++I){
-  FDBRoom R;R.Center=Centers[I];R.Name=Names[I];R.Parent=I-1;Rooms.Add(R);
+  FDBRoom Room;Room.Center=Centers[I];Room.Name=Names[I];Room.Parent=I-1;Rooms.Add(Room);
   const int32 Variant=Layout.RandRange(0,2);RoomLayoutVariants.Add(I,Variant);
-  LayoutSignature+=FString::Printf(TEXT("/cover%d:%d"),I,Variant);
+  LayoutSignature+=FString::Printf(TEXT("/garden%d:%d"),I,Variant);
  }
- // Keep this import path local to the recovery scene. The original kit's
- // Instance helper intentionally resolves /Game/Art/Meshes, not nested kits.
- // A missing new import falls back to existing art, never an invisible wall.
- TMap<FString,UStaticMesh*> TrellisAssets;
- auto Trellis=[this,&TrellisAssets](const TCHAR* Name,FVector Location,FRotator Rotation,FVector Scale)->bool{
-  const FString Key=FString(TEXT("Trellis/"))+Name;
-  UStaticMesh** Cached=TrellisAssets.Find(Key);
-  UStaticMesh* Asset=Cached?*Cached:nullptr;
-  if(!Cached){
-   const FString Path=FString::Printf(TEXT("/Game/Art/Trellis/Meshes/%s.%s"),Name,Name);
-   Asset=LoadObject<UStaticMesh>(nullptr,*Path);TrellisAssets.Add(Key,Asset);
-   if(Asset){
-    UE_LOG(LogTemp,Display,TEXT("DB_TRELLIS %s bounds_cm=%s"),Name,*(Asset->GetBounds().BoxExtent*2).ToString());
-   }else{
-    UE_LOG(LogTemp,Warning,TEXT("DB_TRELLIS missing %s; using original scene art"),*Path);
-   }
+ TMap<FString,UStaticMesh*> Assets;
+ TMap<FString,UMaterialInterface*> Materials;
+ auto Asset=[&Assets](const TCHAR* Name)->UStaticMesh*{
+  if(UStaticMesh** Existing=Assets.Find(Name))return *Existing;
+  const FString Path=FString::Printf(TEXT("/Game/Art/Reverie/Meshes/%s.%s"),Name,Name);
+  UStaticMesh* Result=LoadObject<UStaticMesh>(nullptr,*Path);Assets.Add(Name,Result);
+  if(!Result)UE_LOG(LogTemp,Error,TEXT("DB_REVERIE missing required mesh %s"),*Path);
+  return Result;
+ };
+ auto Material=[&Materials](const TCHAR* Name)->UMaterialInterface*{
+  if(UMaterialInterface** Existing=Materials.Find(Name))return *Existing;
+  const FString Path=FString::Printf(TEXT("/Game/Art/Reverie/Materials/%s.%s"),Name,Name);
+  UMaterialInterface* Result=LoadObject<UMaterialInterface>(nullptr,*Path);Materials.Add(Name,Result);
+  if(!Result)UE_LOG(LogTemp,Error,TEXT("DB_REVERIE missing required material %s"),*Path);
+  return Result;
+ };
+ auto Place=[this,&Asset,&Material](const TCHAR* Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,
+  FVector Scale=FVector::OneVector,bool Collision=true,const TCHAR* Override=nullptr)->bool{
+  UStaticMesh* Model=Asset(Name);if(!Model)return false;
+  if(FString(Name)==TEXT("SM_RV_Wall")||FString(Name)==TEXT("SM_RV_WallEnd")||FString(Name)==TEXT("SM_RV_Buttress")){
+   // Soil sits22cm below paving and its outer shoulder descends another80cm.
+   // Embed masonry through both levels, preserving its existing rendered top
+   // (and every coping/crest attachment) using the imported mesh's own height.
+   const float FootingDepth=112.f;
+   const float ModelTop=Model->GetBounds().Origin.Z+Model->GetBounds().BoxExtent.Z;
+   if(ModelTop>1.f){Location.Z-=FootingDepth;Scale.Z+=FootingDepth/ModelTop;}
   }
-  if(!Asset)return false;
-  auto** Existing=MeshBatches.Find(Key);
+  const FString Key=FString::Printf(TEXT("Reverie/%s/%d/%s"),Name,Collision?1:0,Override?Override:TEXT("authored"));
+  UHierarchicalInstancedStaticMeshComponent** Existing=MeshBatches.Find(Key);
   auto* Batch=Existing?*Existing:nullptr;
   if(!Batch){
-   auto* BatchOwner=GetWorld()->SpawnActor<AActor>();if(!BatchOwner)return false;
-   Generated.Add(BatchOwner);
-   Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(BatchOwner);
-   BatchOwner->SetRootComponent(Batch);BatchOwner->AddInstanceComponent(Batch);
-   Batch->SetStaticMesh(Asset);Batch->SetMobility(EComponentMobility::Static);
-   // Imported UCX bodies supply physical cover. Render triangles and foliage
-   // must not become complex collision; that is part of the import contract.
-   Batch->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+   AActor* Owner=GetWorld()->SpawnActor<AActor>();if(!Owner)return false;
+   Generated.Add(Owner);Owner->Tags.Add(TEXT("DBReverieArt"));
+   Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
+   Owner->SetRootComponent(Batch);Owner->AddInstanceComponent(Batch);
+   Batch->SetStaticMesh(Model);Batch->SetMobility(EComponentMobility::Static);
+   Batch->SetCollisionEnabled(Collision?ECollisionEnabled::QueryAndPhysics:ECollisionEnabled::NoCollision);
    Batch->SetCollisionObjectType(ECC_WorldStatic);Batch->SetCollisionResponseToAllChannels(ECR_Block);
+   if(Override)for(int32 Slot=0;Slot<Model->GetStaticMaterials().Num();++Slot)Batch->SetMaterial(Slot,Material(Override));
+   if(FString(Name).Contains(TEXT("Water"))||FString(Name).Contains(TEXT("Sky")))Batch->SetCastShadow(false);
    Batch->RegisterComponent();MeshBatches.Add(Key,Batch);
   }
-  Batch->AddInstance(FTransform(Rotation,Location,Scale),true);
-  return true;
+  Batch->AddInstance(FTransform(Rotation,Location,Scale),true);return true;
  };
- // TRELLIS +Y is the visible front, with width along X and a grounded pivot.
- // Generated cloisters are optional side galleries, not required route gates:
- // their opening is narrower than the original protected doorway envelope.
- auto Cloister=[this,&Trellis](FVector Location,float Yaw,float Scale){
-  if(!Trellis(TEXT("SM_Trellis_Cloister"),Location,FRotator(0,Yaw,0),FVector(Scale)))
-   Instance(TEXT("SM_Arch"),Location,FRotator(0,Yaw,0),FVector(Scale,Scale,Scale*1.12f));
+ // Altars and gates remain individual actors: progression hides/opens them.
+ auto MovingMesh=[this,&Asset,&Material](const TCHAR* Name,FVector Location,FRotator Rotation,
+  FVector Scale,const TCHAR* Override=nullptr)->AStaticMeshActor*{
+  UStaticMesh* Model=Asset(Name);if(!Model)return nullptr;
+  auto* Actor=GetWorld()->SpawnActor<AStaticMeshActor>(Location,Rotation);if(!Actor)return nullptr;
+  Generated.Add(Actor);Actor->Tags.Add(TEXT("DBReverieArt"));
+  auto* Component=Actor->GetStaticMeshComponent();Component->SetMobility(EComponentMobility::Movable);
+  Component->SetStaticMesh(Model);Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+  Actor->SetActorScale3D(Scale);
+  if(Override)for(int32 Slot=0;Slot<Model->GetStaticMaterials().Num();++Slot)Component->SetMaterial(Slot,Material(Override));
+  return Actor;
  };
- // Foliage remains noncolliding. Reachable stone masses use authored hulls.
- auto Garden=[this](const TCHAR* Name,FVector Location,FRotator Rotation,FVector Scale){
-  Instance(Name,Location,Rotation,Scale);
-  if(auto** Batch=MeshBatches.Find(FString(Name)))
-   (*Batch)->SetCollisionEnabled(FString(Name)==TEXT("SM_GardenRockCluster")||FString(Name)==TEXT("SM_GardenButtress")
-    ?ECollisionEnabled::QueryAndPhysics:ECollisionEnabled::NoCollision);
+ auto Ground=[this](FVector Location,FVector Extents,float Yaw){
+  AActor* Actor=GetWorld()->SpawnActor<AActor>();Generated.Add(Actor);Actor->Tags.Add(TEXT("DBReverieGround"));
+  auto* Box=NewObject<UBoxComponent>(Actor);Actor->SetRootComponent(Box);Actor->AddInstanceComponent(Box);
+  Box->SetBoxExtent(Extents);Box->SetWorldLocationAndRotation(Location,FRotator(0,Yaw,0));
+  Box->SetMobility(EComponentMobility::Static);
+  Box->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);Box->SetCollisionObjectType(ECC_WorldStatic);
+  Box->SetCollisionResponseToAllChannels(ECR_Block);Box->SetHiddenInGame(true);Box->SetVisibility(false);
+  Box->RegisterComponent();
+ };
+ auto DistanceToSegment=[](FVector Point,FVector Start,FVector End){
+  const FVector Delta=End-Start;
+  const float Along=FMath::Clamp(FVector::DotProduct(Point-Start,Delta)/FMath::Max(Delta.SizeSquared2D(),1.0),0.0,1.0);
+  return FVector::Dist2D(Point,Start+Along*Delta);
  };
  for(int32 RoomIndex=0;RoomIndex<Rooms.Num();++RoomIndex){
   auto& R=Rooms[RoomIndex];const FVector C=R.Center;const int32 Variant=RoomLayoutVariants[RoomIndex];
-  FRandomStream Art(Seed+RoomIndex*1709);
-  FRandomStream GardenArt(Seed+199903+RoomIndex*8209);
-  Mesh("/Engine/BasicShapes/Cube.Cube",C+FVector(0,0,-70),FRotator::ZeroRotator,FVector(37,37,1),true,"M_Mortar");
-  for(int32 X=-8;X<=8;++X)for(int32 Y=-8;Y<=8;++Y){
-   // Retain all three authored slots: dark recessed mortar, worn stone and
-   // lighter individual slabs. One blanket M_Stone override erased that depth.
-   // The existing flat collision surface and tile footprints are unchanged.
-   Instance(Art.FRand()<.52f?"SM_StoneTile":"SM_StoneTile_B",C+FVector(X*200+Art.FRandRange(-4,4),Y*200+Art.FRandRange(-4,4),-24),FRotator(0,Art.RandRange(0,3)*90.f,0),FVector(.995,.995,1));
-  }
+  FRandomStream Art(Seed+199903+RoomIndex*8209);
   TArray<FVector> Doors;
   if(R.Parent>=0)Doors.Add((Rooms[R.Parent].Center-C).GetSafeNormal2D());
   if(RoomIndex+1<Rooms.Num())Doors.Add((Rooms[RoomIndex+1].Center-C).GetSafeNormal2D());
-  // Large colliding backdrops cannot occupy the space between linked courts:
-  // their far edge would enter the next arena. Keep two unconnected sides.
-  TArray<int32> BackingSides;
-  for(int32 Offset=0;Offset<4&&BackingSides.Num()<2;++Offset){
-   const int32 Side=(RoomIndex+1+Offset)%4;
-   const FVector Out=FRotator(0,Side*90.f,0).Vector();
-   bool Connected=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Connected=true;
-   if(!Connected)BackingSides.Add(Side);
+  FVector WardOffset(-1120,-430,76);
+  if(R.Parent>=0){const FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();WardOffset=Back*1120+FVector(-Back.Y,Back.X,0)*300+FVector(0,0,76);}
+  const FVector Entry=GetRoomEntryPoint(RoomIndex)-C;
+  auto Reserved=[&Doors,&WardOffset,&Entry](FVector P){
+   if(P.SizeSquared2D()<FMath::Square(800.f)||FVector::Dist2D(P,WardOffset)<290.f||FVector::Dist2D(P,Entry)<300.f)return true;
+   for(const FVector& D:Doors){const FVector T(-D.Y,D.X,0);if(FVector::DotProduct(P,D)>0&&FMath::Abs(FVector::DotProduct(P,T))<360.f)return true;}
+   for(const FVector& Pad:{FVector(420,-580,0),FVector(1260,660,0),FVector(-340,860,0),FVector(-500,-500,0),FVector(-500,-80,0),FVector(700,-650,0)})
+    if(FVector::Dist2D(P,Pad)<270.f)return true;
+   return false;
+  };
+  // An octagonal continuous soil bed 22cm below the paving, with a visible
+  // sculpted earth shoulder descending into the creek between sanctuaries.
+  Ground(C+FVector(0,0,-42),FVector(1850,1100,20),0);
+  Ground(C+FVector(0,0,-42),FVector(1100,1850,20),0);
+  for(int32 Corner=0;Corner<4;++Corner){
+   const FRotator Around(0,Corner*90.f,0);
+   Ground(C+Around.RotateVector(FVector(1312,1312,-42)),FVector(530,230,20),135.f+Corner*90.f);
   }
+  Place(TEXT("SM_RV_TerrainPatch"),C+FVector(0,0,-22),FRotator(0,Variant*90.f,0),FVector(.86,.86,1),false,TEXT("M_RV_Soil"));
+  // Broken-bond paving follows a central gathering space and chosen routes.
+  // Soil remains visible around grouped planting instead of a giant grid.
+  const float GatheringRadius=800.f+Variant*30.f;
+  TArray<FVector> PavingCenters;
+  for(int32 Row=-8;Row<=8;++Row)for(int32 Column=-9;Column<=9;++Column){
+   const FVector P(Column*200.f+(Row%2?100.f:0.f),Row*200.f,0);
+   if(FMath::Abs(P.X)>1740.f||FMath::Abs(P.Y)>1740.f||FMath::Abs(P.X)+FMath::Abs(P.Y)>2710.f)continue;
+   const float Radius=P.Size2D();bool Paved=Radius<GatheringRadius;
+   for(const FVector& D:Doors){const FVector T(-D.Y,D.X,0);Paved|=FVector::DotProduct(P,D)>0&&FMath::Abs(FVector::DotProduct(P,T))<330.f;}
+   Paved|=DistanceToSegment(P,Entry,FVector::ZeroVector)<280.f;
+   Paved|=DistanceToSegment(P,WardOffset,FVector::ZeroVector)<290.f;
+   for(const FVector& Pad:{FVector(420,-580,0),FVector(1260,660,0),FVector(-340,860,0),
+    FVector(-500,-500,0),FVector(-500,-80,0),FVector(700,-650,0)})Paved|=FVector::Dist2D(P,Pad)<290.f;
+   if(!Paved)continue;
+   const bool Accent=(Radius>GatheringRadius-170.f&&Radius<GatheringRadius)||((Column+Row+Variant)%5==0);
+   Place(Accent?TEXT("SM_RV_TileB"):TEXT("SM_RV_Tile"),C+P+FVector(0,0,-20),FRotator(0,Art.RandRange(0,3)*90.f,0));
+   PavingCenters.Add(P);
+  }
+  for(const FVector& D:Doors){const FVector T(-D.Y,D.X,0);
+   for(int32 Across=-1;Across<=1;++Across){
+    const FVector P=D*1760.f+T*Across*200.f;
+    Place(TEXT("SM_RV_TileB"),C+P+FVector(0,0,-20),FRotator(0,D.Rotation().Yaw,0));PavingCenters.Add(P);
+   }
+  }
+  // Small unequal drifts soften exposed paving edges. Their candidates come
+  // from actual slab boundaries, not a uniform lawn scatter, and retain a
+  // foliage-width margin around clear routes, entry/ward and practice pads.
+  FRandomStream EdgeGrowth(Seed+88711+RoomIndex*653);
+  auto SlabDistance=[&PavingCenters](FVector P){
+   float Nearest=10000.f;
+   for(const FVector& Slab:PavingCenters){
+    const float DX=FMath::Max(FMath::Abs(P.X-Slab.X)-100.0,0.0);
+    const float DY=FMath::Max(FMath::Abs(P.Y-Slab.Y)-100.0,0.0);
+    Nearest=FMath::Min(Nearest,FMath::Sqrt(DX*DX+DY*DY));
+   }
+   return Nearest;
+  };
+  auto ClearGrowth=[&Reserved,RoomIndex](FVector P){
+   // Terrain's central authored deck is level here; outer shoulders descend.
+   if(FMath::Abs(P.X)>1350.f||FMath::Abs(P.Y)>1350.f)return false;
+   if(P.X>300.f&&P.Y>975.f)return false; // spring, rill and basin garden
+   if(RoomIndex>0&&P.X<-210.f&&P.Y<-890.f)return false; // side stair/terrace
+   for(const FVector& Margin:{FVector::ZeroVector,FVector(85,0,0),FVector(-85,0,0),FVector(0,85,0),FVector(0,-85,0)})
+    if(Reserved(P+Margin))return false;
+   return true;
+  };
+  TArray<FVector> Drifts;
+  for(int32 Attempt=0;Attempt<160&&Drifts.Num()<9;++Attempt){
+   const FVector Slab=PavingCenters[EdgeGrowth.RandRange(0,PavingCenters.Num()-1)];
+   const FVector Out=FRotator(0,EdgeGrowth.RandRange(0,3)*90.f,0).Vector(),Along(-Out.Y,Out.X,0);
+   const FVector Drift=Slab+Out*EdgeGrowth.FRandRange(165,235)+Along*EdgeGrowth.FRandRange(-65,65);
+   if(!ClearGrowth(Drift)||SlabDistance(Drift)<35.f||SlabDistance(Drift)>160.f)continue;
+   bool NearDrift=false;for(const FVector& Existing:Drifts)NearDrift|=FVector::DistSquared2D(Drift,Existing)<FMath::Square(240.f);
+   if(NearDrift)continue;
+   Drifts.Add(Drift);
+   const int32 Count=EdgeGrowth.RandRange(3,5);
+   for(int32 Plant=0;Plant<Count;++Plant){
+    const FVector Growth=Drift+FVector(EdgeGrowth.FRandRange(-70,70),EdgeGrowth.FRandRange(-70,70),0);
+    if(!ClearGrowth(Growth)||SlabDistance(Growth)<25.f)continue;
+    const float Size=EdgeGrowth.FRandRange(.52f,.85f);
+    Place(Plant==0?TEXT("SM_RV_Fern"):TEXT("SM_RV_Grass"),C+Growth+FVector(0,0,-21),
+     FRotator(0,EdgeGrowth.FRandRange(0,360),0),FVector(Size,Size,Size*.9f),false);
+   }
+  }
+  // Join nearby clumps into short, uneven ribbons of planting. Rejecting
+  // paved/Reserved samples leaves deliberate breaks at every playable route.
+  auto PlantRibbon=[&Place,&ClearGrowth,&SlabDistance,&EdgeGrowth,&C](FVector Start,FVector End){
+   const FVector Side=FRotator(0,90,0).RotateVector((End-Start).GetSafeNormal2D());
+   const int32 Steps=FMath::Max(1,FMath::CeilToInt(FVector::Dist2D(Start,End)/85.f));
+   for(int32 Step=0;Step<=Steps;++Step){
+    const FVector Center=FMath::Lerp(Start,End,Step/float(Steps));
+    for(int32 Row=0;Row<2;++Row){
+     const FVector Growth=Center+Side*((Row?35.f:-35.f)+EdgeGrowth.FRandRange(-24,24));
+     const float EdgeDistance=SlabDistance(Growth);
+     if(!ClearGrowth(Growth)||EdgeDistance<30.f||EdgeDistance>230.f)continue;
+     const float Size=EdgeGrowth.FRandRange(.53f,.79f);
+     Place((Step+Row)%6==0?TEXT("SM_RV_Fern"):TEXT("SM_RV_Grass"),C+Growth+FVector(0,0,-21),
+      FRotator(0,EdgeGrowth.FRandRange(0,360),0),FVector(Size,Size,Size*.82f),false);
+    }
+   }
+  };
+  int32 Ribbons=0;
+  for(int32 I=0;I<Drifts.Num()&&Ribbons<4;++I){
+   int32 Nearest=INDEX_NONE;float Distance=610.f;
+   for(int32 J=I+1;J<Drifts.Num();++J){const float D=FVector::Dist2D(Drifts[I],Drifts[J]);if(D<Distance){Distance=D;Nearest=J;}}
+   if(Nearest!=INDEX_NONE){PlantRibbon(Drifts[I],Drifts[Nearest]);++Ribbons;}
+  }
+  if(RoomIndex==0){
+   const FVector EntryGround(Entry.X,Entry.Y,0);
+   const FVector Inward=(-EntryGround).GetSafeNormal2D(),Left(Inward.Y,-Inward.X,0);
+   PlantRibbon(EntryGround+Inward*250.f+Left*390.f,EntryGround+Inward*1050.f+Left*390.f);
+  }
+  // Only actual graph edges receive arches. Their matching openings face
+  // one another across a bridge; no arch is backed by an impassable panel.
   for(int32 Side=0;Side<4;++Side){
    const FVector Out=FRotator(0,Side*90.f,0).Vector(),T(-Out.Y,Out.X,0);
-   bool Door=false;for(const FVector& D:Doors)if(FVector::DotProduct(D,Out)>.9f)Door=true;
-   for(int32 K=-4;K<=4;++K){
-    if(Door&&K==0)continue;
-    // Group the silhouette into low shoulders and taller ends, rather than
-    // stretching every wall into an identical high strip around the arena.
-    const bool TallShoulder=(Side+RoomIndex)%4==1&&K>=1;
-    const float WallHeight=TallShoulder?1.46f:(FMath::Abs(K)>=3?1.16f:1.04f);
-    Instance("SM_Wall",C+Out*1760+T*K*400,FRotator(0,Side*90.f+90,0),FVector(1,1,WallHeight));
-    if(K==((Side+RoomIndex)%2?3:-3))
-     Instance("SM_Ivy",C+Out*1715+T*K*400+FVector(0,0,260),FRotator(0,Side*90.f,0),FVector(1.1));
-   }
-   if(Door){
-    Instance("SM_Arch",C+Out*1760,FRotator(0,Side*90.f+90,0),FVector(.82,1.1,1.3));
-    // Retain the proven doorway, its collision and the connector axis.
-    for(int32 Flank:{-1,1})
-     Garden(TEXT("SM_GardenButtress"),C+Out*1785+T*(342.f*Flank),FRotator(0,Side*90.f+90,0),FVector(1,1,1.08f));
+   const float Facing=Side*90.f-90.f;
+   bool Connected=false;for(const FVector& D:Doors)Connected|=FVector::DotProduct(D,Out)>.9f;
+   const bool HighSide=((Side+RoomIndex)%4==0)||(!Connected&&(Side+Variant)%2==0);
+   const float Height=HighSide?1.32f:(.82f+.08f*((Side+Variant)%3));
+   if(Connected){
+    Place(TEXT("SM_RV_Arch"),C+Out*1800.f,FRotator(0,Facing,0));
+    // Only the piers receive a below-floor footing. The protected opening
+    // and the bridge threshold retain their exact ground0 clearance.
+    for(int32 Sign:{-1,1})Place(TEXT("SM_RV_Wall"),C+Out*1800.f+T*Sign*294.f+FVector(0,0,-30),
+     FRotator(0,Facing,0),FVector(.37,1.6,.05));
+    for(int32 Sign:{-1,1})for(int32 Bay=0;Bay<2;++Bay){
+     const FVector Wall=C+Out*1800.f+T*Sign*(560.f+Bay*400.f);
+     Place(TEXT("SM_RV_Wall"),Wall,FRotator(0,Facing,0),FVector(1,1,Height));
+     Place(TEXT("SM_RV_Coping"),Wall+FVector(0,0,600.f*Height),FRotator(0,Facing,0),FVector::OneVector,false);
+    }
    }else{
-    Garden(TEXT("SM_GardenButtress"),C+Out*1785+T*(Side%2?1120.f:-1060.f),FRotator(0,Side*90.f+90,0),FVector(.94f,1.0f,1.08f+RoomIndex*.06f));
+    for(int32 Bay=-2;Bay<=2;++Bay){
+     const FVector Wall=C+Out*1800.f+T*Bay*400.f;
+     const float BayHeight=Height+((Bay==2&&HighSide)?.15f:0.f);
+     Place(TEXT("SM_RV_Wall"),Wall,FRotator(0,Facing,0),FVector(1,1,BayHeight));
+     Place(TEXT("SM_RV_Coping"),Wall+FVector(0,0,600.f*BayHeight),FRotator(0,Facing,0),FVector::OneVector,false);
+    }
    }
-   // Distant backing belongs to two edges, leaving sky and light around the
-   // bell crown. No continuous ring of repeated rock slabs above every wall.
-   if(BackingSides.Contains(Side)){
-    for(int32 Bank=0;Bank<2;++Bank){
-     const float Along=(Bank==0?-1080.f:1080.f)+GardenArt.FRandRange(-60.f,60.f);
-     const FRotator BackingRotation(0,Side*90.f+90,0);
-     const float BackingScale=3.55f+RoomIndex*.15f+Bank*.30f;
-     // Measured RootRock depth is 344.06 cm. Its nearest edge stays at
-     // 1920 cm, beyond the 1850 cm foundation, at every uniform scale.
-     const FVector Backing=C+Out*(1920.f+172.03f*BackingScale)+T*Along;
-     if(!Trellis(TEXT("SM_Trellis_RootRock"),Backing,BackingRotation,FVector(BackingScale))){
-      const float Height=.88f+RoomIndex*.09f+Bank*.12f;
-      Garden(TEXT("SM_GardenCliffBank"),C+Out*2370+T*Along,BackingRotation,FVector(1.03f,1.03f,Height));
+   for(int32 Sign:{-1,1}){
+    Place(TEXT("SM_RV_Buttress"),C+Out*1780.f+T*Sign*1020.f,FRotator(0,Facing,0),FVector(.80,.90,Height));
+    Place(TEXT("SM_RV_Ivy"),C+Out*1710.f+T*Sign*850.f+FVector(0,0,510.f*Height),FRotator(0,Facing,0),FVector(1.15,1.15,1.30),false);
+   }
+   if(!Connected){
+    Place(TEXT("SM_RV_RuinCrown"),C+Out*1800.f+T*(Variant-1)*350.f+FVector(0,0,600.f*Height),FRotator(0,Facing,0),FVector(1.1,1.1,.8f+.1f*RoomIndex),false);
+    // New sculpted masses form unequal peaks with overlapping low shoulders.
+    // The source is 540x521.62cm at its rooted base; use the full rotated
+    // envelope rather than the narrower footprint of the retired cliff kit.
+    for(int32 Group=0;Group<2;++Group){
+     const float AlongBase=(Group?940.f:-900.f)+Art.FRandRange(-150,150);
+     const float PeakScale=Art.FRandRange(2.9f,4.0f)+(RoomIndex==2?.20f:0.f);
+     for(int32 Layer=0;Layer<2;++Layer){
+      const float Size=PeakScale*(Layer==0?1.f:.61f);
+      const FRotator Rotation(0,Facing+(Group?12.f:-18.f)+Layer*43.f+Art.FRandRange(-11,11),0);
+      const FVector AxisX=Rotation.RotateVector(FVector(1,0,0)),AxisY=Rotation.RotateVector(FVector(0,1,0));
+      const float HalfOut=(FMath::Abs(FVector::DotProduct(AxisX,Out))*270.f
+       +FMath::Abs(FVector::DotProduct(AxisY,Out))*260.81f)*Size;
+      const float HalfX=(FMath::Abs(AxisX.X)*270.f+FMath::Abs(AxisY.X)*260.81f)*Size;
+      const float HalfY=(FMath::Abs(AxisX.Y)*270.f+FMath::Abs(AxisY.Y)*260.81f)*Size;
+      const float Along=AlongBase+(Layer?(Group?390.f:-310.f):0.f);
+      const FVector Bank=C+Out*((Layer?1870.f:2080.f)+HalfOut)+T*Along+FVector(0,0,Layer?-115.f:-210.f);
+      bool NearOther=false;
+      for(int32 Other=0;Other<Rooms.Num();++Other)if(Other!=RoomIndex){
+       const FVector Delta=Bank-Rooms[Other].Center;
+       NearOther|=FMath::Abs(Delta.X)<1950.f+HalfX&&FMath::Abs(Delta.Y)<1950.f+HalfY;
+      }
+      if(!NearOther)Place(TEXT("SM_RV_SculptedBank"),Bank,Rotation,FVector(Size),false);
      }
     }
    }
   }
-  // All variants leave +/-X and +/-Y door approaches clear. The two cover
-  // banks move between three configurations, changing close and recall lanes.
-  const FVector CoverA[]={FVector(-690,620,0),FVector(-810,800,0),FVector(-650,540,0)};
-  const FVector CoverB[]={FVector(810,-860,0),FVector(650,-780,0),FVector(880,-1000,0)};
-  Instance("SM_Wall",C+CoverA[Variant],FRotator(0,Variant==1?90:0,0),FVector(1.3,1,.43));
-  Instance("SM_Wall",C+CoverB[Variant],FRotator(0,Variant==2?90:0,0),FVector(1.15,1,.46));
-  Instance("SM_Rubble",C+CoverA[Variant]+FVector(250,-60,0),FRotator(0,32,0),FVector(1.2));
-  // The root-embraced bell is one coherent textured silhouette, not a trunk,
-  // separate suspended bell and several floating canopy pieces. Different
-  // quarters keep the three courts identifiable while leaving the
-  // unchanged enemy pads, practice area and axial approaches exposed.
-  // The measured ground roots are 677 x 684 cm. Cardinal facing avoids
-  // expanding that obstacle across the NE caster pad or the cover lanes.
-  const FVector TreeOffsets[]={FVector(760+Variant*10,1100+Variant*30,0),
-   FVector(740+Variant*15,1140+Variant*20,0),FVector(-1260-Variant*10,1190+Variant*25,0)};
-  const FVector Tree=C+TreeOffsets[RoomIndex];
-  const FVector TreeFront=GetRoomEntryPoint(RoomIndex)-Tree;
-  const float TreeYaw=FMath::Abs(TreeFront.X)>FMath::Abs(TreeFront.Y)
-   ?(TreeFront.X>0?-90.f:90.f):(TreeFront.Y>0?0.f:180.f);
-  if(!Trellis(TEXT("SM_Trellis_BellTree"),Tree,FRotator(0,TreeYaw,0),FVector::OneVector)){
-   Instance("SM_BellTree",Tree,FRotator(0,TreeYaw+180,0),FVector(1.05f));
-   Instance("SM_Bell",Tree+FRotator(0,TreeYaw+180,0).RotateVector(FVector(-20,-130,344)),FRotator(0,TreeYaw+180,0),FVector(1.5f));
-  }
-
-  // Grounded carved bays frame the visible perimeter; original walls back
-  // them, so the narrow generated openings never become required passages.
-  // Even the wider bay ends beyond 737 cm from the central door axis.
-  for(int32 Side=0;Side<4;++Side){
-   const FVector Out=FRotator(0,Side*90.f,0).Vector(),T(-Out.Y,Out.X,0);
-   for(int32 Bay=0;Bay<2;++Bay){
-    const float BayScale=Bay==0?1.15f:1.25f;
-    const FVector Gallery=C+Out*1680.f+T*(Bay==0?-1050.f:1050.f);
-    // Measured cloister is 500.29 x 146.06 cm; reserve a further metre
-    // around the full tree root envelope instead of packing bays into it.
-    const float HalfX=(FMath::Abs(Out.X)*73.03f+FMath::Abs(T.X)*250.145f)*BayScale;
-    const float HalfY=(FMath::Abs(Out.Y)*73.03f+FMath::Abs(T.Y)*250.145f)*BayScale;
-    const FVector FromTree=Gallery-Tree;
-    if(FMath::Abs(FromTree.X)<HalfX+450.f&&FMath::Abs(FromTree.Y)<HalfY+450.f)continue;
-    Cloister(Gallery,Side*90.f+90.f,BayScale);
-   }
-  }
-  // A close right-hand frame enters ordinary startup view while keeping a
-  // capsule-width approach to the ward and all four axial routes clear.
-  if(RoomIndex==0)Cloister(C+FVector(-950,-1080,0),63.f,1.20f);
+  // Chamfered corners join wall bays. Stepped crests provide a varied ruin
+  // silhouette while retaining a closed physical boundary at player height.
   for(int32 Corner=0;Corner<4;++Corner){
-   // Keep the split court's open planted edge; the final court's broad tree
-   // now owns its NW corner, so it needs no second rock mass in the roots.
-   if(RoomIndex>0&&Corner==1)continue;
    const FRotator Around(0,Corner*90.f,0);
-   FVector Growth=C+Around.RotateVector(FVector(1420,1390,0));
-   if(RoomIndex==2&&Corner==3)Growth=C+FVector(1500,-1200,0);
-   const float RockScale=GardenArt.FRandRange(.9f,1.08f);
-   const FRotator RockRotation(0,Corner*90.f+GardenArt.FRandRange(8.f,32.f),0);
-   if(!Trellis(TEXT("SM_Trellis_RootRock"),Growth,RockRotation,FVector(RockScale)))
-    Garden(TEXT("SM_GardenRockCluster"),Growth,RockRotation,FVector(.88f,1.0f,.88f));
-   // New clusters already include roots, moss and ferns. Use fewer companion
-   // plants, in unequal groups, with the same noncolliding foliage policy.
-   for(int32 J=0;J<2+(Corner+RoomIndex)%2;++J){
-    const FVector Offset=Around.RotateVector(FVector(GardenArt.FRandRange(-170,100),GardenArt.FRandRange(-170,100),0));
-    Garden(TEXT("SM_GardenUnderstory"),Growth+Offset,FRotator(0,GardenArt.FRandRange(0,360),0),FVector(GardenArt.FRandRange(.8f,1.05f)));
-   }
-   for(int32 J=0;J<2;++J){
-    const FVector Offset=Around.RotateVector(FVector(-210+J*180,-200+J*70,0));
-    Garden(TEXT("SM_GardenGrassDrift"),Growth+Offset,FRotator(0,Corner*90.f+18,0),FVector(.82f));
+   const FVector Start=Around.RotateVector(FVector(1800,1100,0)),End=Around.RotateVector(FVector(1100,1800,0));
+   const float Yaw=(End-Start).Rotation().Yaw;
+   for(int32 Bay=0;Bay<3;++Bay){
+    const float Height=.83f+.14f*((Corner+RoomIndex+Variant)%3);
+    const FVector Wall=C+FMath::Lerp(Start,End,(Bay+.5f)/3.f);
+    Place(TEXT("SM_RV_Wall"),Wall,FRotator(0,Yaw,0),FVector(.87,1,Height));
+    Place(TEXT("SM_RV_Coping"),Wall+FVector(0,0,600*Height),FRotator(0,Yaw,0),FVector(.87,1,1),false);
    }
   }
-  // A readable near-scale carved stone on the opposite side from the ward.
-  // Face the accepted front toward the arrival, and keep the actual altar and
-  // its interaction radius unchanged; this is scenery, not another reward.
-  FVector Marker=C+FVector(-800,-1020,0);
-  if(R.Parent>=0){
-   const FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();
-   Marker=C+Back*1390-FVector(-Back.Y,Back.X,0)*620;
+  // Grouped banks: rock cover, roots and understory share an origin. Retained
+  // encounter/practice pads and door approaches stay free of dense planting.
+  const FVector Banks[]={FVector(-1160,1050,0),FVector(1070,-1130,0)};
+  // CrownTree's measured lower roots span570.39x558.71cm. Move its beds
+  // inward and use cardinal facing so that this base never expands into
+  // a door lane, retained practice pad or chamfered corner wall.
+  const FVector Trees[]={FVector(-1120-Variant*15,1080,0),FVector(1080,-1100+Variant*15,0)};
+  for(int32 Bank=0;Bank<2;++Bank){
+   const FVector P=Banks[Bank]+FVector((Variant-1)*(Bank?55.f:-40.f),0,0);
+   // Uniform scale preserves the generated root/stone proportions. The
+   // deeper base remains within the old cover envelope after rotation.
+   Place(TEXT("SM_RV_SculptedBank"),C+P+FVector(0,0,-48),FRotator(0,Bank?28.f:-20.f,0),FVector(Bank?.65f:.62f));
+   Place(TEXT("SM_RV_CrownTree"),C+Trees[Bank]+FVector(0,0,-22),FRotator(0,Bank?90.f:180.f,0),FVector::OneVector);
+   Place(TEXT("SM_RV_Rubble"),C+P+FVector(Bank?-250.f:260.f,90,-18),FRotator(0,Bank*90.f+35,0),FVector(.65),false);
+   const float BedFront=(-P).Rotation().Yaw;
+   for(int32 Plant=0;Plant<21;++Plant){
+    const float Angle=BedFront-72.f+Plant*7.2f+Art.FRandRange(-3,3);
+    const FVector Growth=P+FRotator(0,Angle,0).Vector()*Art.FRandRange(325,405);
+    if(!ClearGrowth(Growth)||SlabDistance(Growth)<25.f)continue;
+    const TCHAR* Type=Plant%7==0?TEXT("SM_RV_Flowers"):Plant%4==0?TEXT("SM_RV_Fern"):TEXT("SM_RV_Grass");
+    const float Size=Art.FRandRange(.61f,.94f);
+    Place(Type,C+Growth+FVector(0,0,-21),FRotator(0,Art.FRandRange(0,360),0),FVector(Size,Size,Size*.9f),false);
+   }
   }
-  Trellis(TEXT("SM_Trellis_Waymarker"),Marker,FRotator(0,(GetRoomEntryPoint(RoomIndex)-Marker).Rotation().Yaw-90.f,0),FVector::OneVector);
-  FVector Ward=C+FVector(-1120,-430,76);
-  if(R.Parent>=0){FVector Back=(Rooms[R.Parent].Center-C).GetSafeNormal2D();Ward=C+Back*1120+FVector(-Back.Y,Back.X,0)*300+FVector(0,0,76);}
-  Instance("SM_Rubble",Ward-FVector(0,0,76),FRotator(0,24,0),FVector(1.05,1.05,.55));
-  R.Altar=Mesh("SM_Crystal",Ward,FRotator::ZeroRotator,FVector(1.4),false,"M_Crystal");
+  // Raised spring -> rill -> receiving basin is one coherent water feature.
+  // It stays beyond the combat pads and every possible processional axis.
+  const FVector Basin=C+FVector(1130,1240,0);
+  Place(TEXT("SM_RV_Basin"),Basin,FRotator(0,Variant*30.f,0));
+  Place(TEXT("SM_RV_WaterDisc"),Basin+FVector(0,0,35),FRotator::ZeroRotator,FVector(4.85,4.85,1),false,TEXT("M_RV_Water"));
+  const FRotator FountainFacing(0,135.f+Variant*12.f,0);
+  Place(TEXT("SM_RV_FountainHero"),Basin,FountainFacing);
+  // Soft reflected warmth reveals the carved front and bronze bowls without
+  // changing their PBR material or introducing another shadow-casting light.
+  auto* FountainFill=GetWorld()->SpawnActor<APointLight>(Basin+FountainFacing.RotateVector(FVector(-70,330,350)),FRotator::ZeroRotator);
+  auto* FountainLight=Cast<UPointLightComponent>(FountainFill->GetLightComponent());
+  FountainLight->SetMobility(EComponentMobility::Movable);FountainLight->SetIntensity(2200.f);
+  FountainLight->SetLightColor(FLinearColor(1.f,.83f,.64f));FountainLight->SetAttenuationRadius(900.f);
+  FountainLight->SetSourceRadius(110.f);FountainLight->SetSoftSourceRadius(160.f);
+  FountainLight->SetCastShadows(false);Generated.Add(FountainFill);
+  Place(TEXT("SM_RV_Waterfall"),Basin+FountainFacing.RotateVector(FVector(-20,90,160)),FountainFacing,
+   FVector(.50,1,1.90),false,TEXT("M_RV_Waterfall"));
+  Place(TEXT("SM_RV_Waterfall"),Basin+FountainFacing.RotateVector(FVector(10,160,35)),FountainFacing,
+   FVector(.70,1,1.25),false,TEXT("M_RV_Waterfall"));
+  if(auto* WaterSound=LoadObject<USoundBase>(nullptr,TEXT("/Game/Audio/Reverie/S_WaterLoop.S_WaterLoop"))){
+   AActor* WaterActor=GetWorld()->SpawnActor<AActor>();Generated.Add(WaterActor);
+   auto* WaterAudio=NewObject<UAudioComponent>(WaterActor);WaterActor->SetRootComponent(WaterAudio);WaterActor->AddInstanceComponent(WaterAudio);
+   WaterAudio->bAutoActivate=false;WaterAudio->bAutoDestroy=false;WaterAudio->bOverrideAttenuation=true;
+   WaterAudio->AttenuationOverrides.bSpatialize=true;WaterAudio->AttenuationOverrides.AttenuationShape=EAttenuationShape::Sphere;
+   WaterAudio->AttenuationOverrides.AttenuationShapeExtents=FVector(400,0,0);WaterAudio->AttenuationOverrides.FalloffDistance=900.f;
+   WaterAudio->SetWorldLocation(Basin+FVector(0,0,120));WaterAudio->SetSound(WaterSound);WaterAudio->SetVolumeMultiplier(.55f);
+   WaterAudio->RegisterComponent();WaterAudio->Play();
+  }
+  Place(TEXT("SM_RV_Rill"),C+FVector(810,1240,50),FRotator::ZeroRotator);
+  Place(TEXT("SM_RV_WaterPlane"),C+FVector(810,1240,35),FRotator::ZeroRotator,FVector(6,1.14,1),false,TEXT("M_RV_Water"));
+  Place(TEXT("SM_RV_SculptedBank"),C+FVector(460,1240,-25),FRotator(0,20,0),FVector(.43));
+  Place(TEXT("SM_RV_CrystalCluster"),C+FVector(470,1240,112),FRotator(0,Variant*70.f,0),FVector(.75),false);
+  for(int32 Plant=0;Plant<12;++Plant){
+   const FVector Growth=C+FVector(550+Plant*65,Plant%2?1465.f:1050.f,-20);
+   Place(Plant%3==0?TEXT("SM_RV_Flowers"):TEXT("SM_RV_Fern"),Growth,FRotator(0,Art.FRandRange(0,360),0),FVector(.75f),false);
+  }
+  // Later sanctuaries gain a usable side terrace. Eight real shallow treads
+  // reach its paved overlook; this branch rejoins the same open combat floor.
+  // It occupies the unused SW quarter, beyond every retained encounter pad.
+  if(RoomIndex>0){
+   const FVector Terrace=C+FVector(-1200,-1200,0);
+   Ground(Terrace+FVector(0,0,80),FVector(300,300,80),0);
+   for(int32 X=-1;X<=1;++X)for(int32 Y=-1;Y<=1;++Y)
+    Place(TEXT("SM_RV_TileB"),Terrace+FVector(X*200,Y*200,140),FRotator(0,(X+Y)*90.f,0));
+   Place(TEXT("SM_RV_Wall"),Terrace+FVector(300,0,0),FRotator(0,90,0),FVector(1.5,1,.2666667f));
+   Place(TEXT("SM_RV_Wall"),Terrace+FVector(0,300,0),FRotator::ZeroRotator,FVector(1.5,1,.2666667f));
+   Place(TEXT("SM_RV_Steps"),C+FVector(-600,-1200,0),FRotator(0,90,0));
+   Place(TEXT("SM_RV_CrystalCluster"),Terrace+FVector(-150,-130,160),FRotator(0,35+Variant*50.f,0),FVector(.85),false);
+   Place(TEXT("SM_RV_Fern"),Terrace+FVector(-175,80,160),FRotator(0,75,0),FVector(.80),false);
+  }
+  Place(TEXT("SM_RV_ArrivalPlinth"),C+WardOffset-FVector(0,0,76),FRotator(0,20+Variant*30.f,0));
+  R.Altar=MovingMesh(TEXT("SM_RV_WardCrystal"),C+WardOffset,FRotator::ZeroRotator,FVector(1.1));
+  auto* WardLight=GetWorld()->SpawnActor<APointLight>(C+WardOffset+FVector(0,0,75),FRotator::ZeroRotator);
+  WardLight->GetLightComponent()->SetMobility(EComponentMobility::Movable);
+  WardLight->GetLightComponent()->SetIntensity(500.f);WardLight->GetLightComponent()->SetLightColor(FLinearColor(.25f,.82f,.74f));
+  Cast<UPointLightComponent>(WardLight->GetLightComponent())->SetAttenuationRadius(420.f);
+  WardLight->GetLightComponent()->SetCastShadows(false);Generated.Add(WardLight);
  }
  for(int32 I=1;I<Rooms.Num();++I){
   const FVector A=Rooms[I-1].Center,B=Rooms[I].Center,D=(B-A).GetSafeNormal2D(),T(-D.Y,D.X,0);
-  const float Yaw=D.Rotation().Yaw;
-  Mesh("/Engine/BasicShapes/Cube.Cube",(A+B)*.5+FVector(0,0,-70),FRotator(0,Yaw,0),FVector(9,6,1),true,"M_Mortar");
-  for(int32 K=0;K<4;++K)for(int32 Across=-1;Across<=1;++Across)
-   Instance("SM_StoneTile_B",A+D*(1800+K*200)+T*Across*190+FVector(0,0,-24),FRotator(0,Yaw,0),FVector(1,.95,1));
-  for(int32 Side:{-1,1})for(int32 K=0;K<2;++K)
-   Instance("SM_Wall",A+D*(1900+K*400)+T*350*Side,FRotator(0,Yaw,0),FVector(1,1,.8));
-  Rooms[I].Gates.Add(Mesh("/Engine/BasicShapes/Cube.Cube",(A+B)*.5+FVector(0,0,170),FRotator(0,Yaw,0),FVector(.18,6,3.4),true,"M_Core"));
+  const FVector Mid=(A+B)*.5f;const float Yaw=D.Rotation().Yaw;
+  Place(TEXT("SM_RV_Bridge"),Mid,FRotator(0,Yaw,0));
+  Place(TEXT("SM_RV_WaterPlane"),Mid+FVector(0,0,-115),FRotator(0,Yaw,0),FVector(5.45,27,1),false,TEXT("M_RV_Water"));
+  // The mid-bridge barrier spans the full 700cm deck, not just the 440cm
+  // arch opening. Its visible lattice and solid collision both reach curbs.
+  if(AStaticMeshActor* Gate=MovingMesh(TEXT("SM_RV_Gate"),Mid,FRotator(0,Yaw,0),FVector(1,1.6f,1))){
+   auto* Barrier=NewObject<UBoxComponent>(Gate);Gate->AddInstanceComponent(Barrier);
+   // Child collision inherits the actor's Y scale: 218.75*1.6=350cm.
+   Barrier->SetupAttachment(Gate->GetRootComponent());Barrier->SetBoxExtent(FVector(16,350.f/1.6f,250));
+   Barrier->SetRelativeLocation(FVector(0,0,250));Barrier->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+   Barrier->SetCollisionObjectType(ECC_WorldStatic);Barrier->SetCollisionResponseToAllChannels(ECR_Block);
+   Barrier->SetHiddenInGame(true);Barrier->SetVisibility(false);Barrier->RegisterComponent();Rooms[I].Gates.Add(Gate);
+  }
+  for(int32 Sign:{-1,1})Place(TEXT("SM_RV_CrystalCluster"),Mid+T*Sign*370.f+FVector(0,0,65),FRotator(0,Yaw+Sign*30.f,0),FVector(.55),false);
  }
- UE_LOG(LogTemp,Display,TEXT("DB_LAYOUT seed=%d %s"),Seed,*LayoutSignature);
- auto* Sun=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,3000),FRotator(-36,-42,0));
+ // Painted cloud dome, warm sun and cool indirect light replace the former
+ // open blue void. Height fog ties the distant ruin crests to the garden.
+ const FVector SkyCenter=(Centers[0]+Centers[1]+Centers[2])/3.f+FVector(0,0,-200);
+ Place(TEXT("SM_RV_SkyDome"),SkyCenter,FRotator(0,15,0),FVector(1500),false,TEXT("M_RV_Sky"));
+ auto* Sun=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,3000),FRotator(-33,-38,0));
  Sun->GetLightComponent()->SetMobility(EComponentMobility::Movable);
- Sun->GetLightComponent()->SetIntensity(5.2f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.90,.73));
- Sun->GetLightComponent()->SetIndirectLightingIntensity(1.15f);
+ Sun->GetLightComponent()->SetIntensity(5.0f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.80,.53));
+ Sun->GetLightComponent()->SetIndirectLightingIntensity(1.2f);
  Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->SetForwardShadingPriority(1);
- Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->bAtmosphereSunLight=true;
- Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->LightSourceAngle=1.8f;Generated.Add(Sun);
- Generated.Add(GetWorld()->SpawnActor<ASkyAtmosphere>());
- auto* Sky=GetWorld()->SpawnActor<ASkyLight>();Sky->GetLightComponent()->SetMobility(EComponentMobility::Movable);Sky->GetLightComponent()->SetRealTimeCaptureEnabled(true);
- Sky->GetLightComponent()->SetIntensity(.92f);Sky->GetLightComponent()->SetLightColor(FLinearColor(.72,.84,1));Sky->GetLightComponent()->RecaptureSky();Generated.Add(Sky);
- // Modest broad fill retains carved relief on the shadow side of bronze and
- // stone. One warm sun supplies the scene's shadows; this adds no second set.
- auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-48,138,0));
- Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);
- Fill->GetLightComponent()->SetIntensity(.60f);Fill->GetLightComponent()->SetLightColor(FLinearColor(.62,.76,1));
+ Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->LightSourceAngle=2.4f;Generated.Add(Sun);
+ auto* Sky=GetWorld()->SpawnActor<ASkyLight>();Sky->GetLightComponent()->SetMobility(EComponentMobility::Movable);
+ Sky->GetLightComponent()->SetRealTimeCaptureEnabled(true);Sky->GetLightComponent()->SetIntensity(1.1f);
+ Sky->GetLightComponent()->SetLightColor(FLinearColor(.62,.83,.86));Sky->GetLightComponent()->RecaptureSky();Generated.Add(Sky);
+ auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-52,142,0));
+ Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);Fill->GetLightComponent()->SetIntensity(.65f);
+ Fill->GetLightComponent()->SetLightColor(FLinearColor(.53,.75,.83));
  Cast<UDirectionalLightComponent>(Fill->GetLightComponent())->SetForwardShadingPriority(0);
  Fill->GetLightComponent()->SetCastShadows(false);Generated.Add(Fill);
- auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.009f);Fog->GetComponent()->SetFogHeightFalloff(.24f);
- Fog->GetComponent()->SetStartDistance(900.f);Fog->GetComponent()->SetFogMaxOpacity(.42f);
- Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.31,.39,.46));Generated.Add(Fog);
+ auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.016f);
+ Fog->GetComponent()->SetFogHeightFalloff(.27f);Fog->GetComponent()->SetStartDistance(1100.f);
+ Fog->GetComponent()->SetFogMaxOpacity(.58f);Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.29,.40,.40));Generated.Add(Fog);
  auto* Post=GetWorld()->SpawnActor<APostProcessVolume>();Post->bUnbound=true;
  Post->Settings.bOverride_AutoExposureApplyPhysicalCameraExposure=true;Post->Settings.AutoExposureApplyPhysicalCameraExposure=false;
- Post->Settings.bOverride_AutoExposureBias=true;Post->Settings.AutoExposureBias=-.05f;
- Post->Settings.bOverride_BloomIntensity=true;Post->Settings.BloomIntensity=.18f;
- Post->Settings.bOverride_VignetteIntensity=true;Post->Settings.VignetteIntensity=.10f;
- Post->Settings.bOverride_AmbientOcclusionIntensity=true;Post->Settings.AmbientOcclusionIntensity=.75f;Generated.Add(Post);
+ Post->Settings.bOverride_AutoExposureBias=true;Post->Settings.AutoExposureBias=.05f;
+ Post->Settings.bOverride_BloomIntensity=true;Post->Settings.BloomIntensity=.22f;
+ Post->Settings.bOverride_VignetteIntensity=true;Post->Settings.VignetteIntensity=.12f;
+ Post->Settings.bOverride_AmbientOcclusionIntensity=true;Post->Settings.AmbientOcclusionIntensity=.85f;Generated.Add(Post);
+ UE_LOG(LogTemp,Display,TEXT("DB_LAYOUT seed=%d %s / reverie mesh families=%d"),Seed,*LayoutSignature,Assets.Num());
  bSliceAwaitingStart=!IsCleared(CurrentRoomId);UpdateGates();
 }

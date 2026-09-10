@@ -1,0 +1,117 @@
+[
+  {
+    "cue": "S_ChargeLoop",
+    "starts_at_seconds": 0.0,
+    "seconds": 2.0
+  },
+  {
+    "cue": "S_ChargeTick",
+    "starts_at_seconds": 2.333,
+    "seconds": 0.1
+  },
+  {
+    "cue": "S_ChargeReady",
+    "starts_at_seconds": 2.767,
+    "seconds": 0.58
+  },
+  {
+    "cue": "S_FullRelease",
+    "starts_at_seconds": 3.68,
+    "seconds": 0.9
+  },
+  {
+    "cue": "S_Attack",
+    "starts_at_seconds": 4.913,
+    "seconds": 0.42
+  },
+  {
+    "cue": "S_MeleeSwing",
+    "starts_at_seconds": 5.667,
+    "seconds": 0.3
+  },
+  {
+    "cue": "S_HeavyImpact",
+    "starts_at_seconds": 6.3,
+    "seconds": 1.05
+  },
+  {
+    "cue": "S_Impact",
+    "starts_at_seconds": 7.683,
+    "seconds": 0.42
+  },
+  {
+    "cue": "S_Guard",
+    "starts_at_seconds": 8.437,
+    "seconds": 0.52
+  },
+  {
+    "cue": "S_Parry",
+    "starts_at_seconds": 9.29,
+    "seconds": 1.2
+  },
+  {
+    "cue": "S_Dash",
+    "starts_at_seconds": 10.823,
+    "seconds": 0.2
+  },
+  {
+    "cue": "S_Recall",
+    "starts_at_seconds": 11.357,
+    "seconds": 0.68
+  },
+  {
+    "cue": "S_Catch",
+    "starts_at_seconds": 12.37,
+    "seconds": 0.26
+  },
+  {
+    "cue": "S_Equip",
+    "starts_at_seconds": 12.963,
+    "seconds": 1.05
+  },
+  {
+    "cue": "S_Hurt",
+    "starts_at_seconds": 14.347,
+    "seconds": 0.62
+  },
+  {
+    "cue": "S_EnemyFire",
+    "starts_at_seconds": 15.3,
+    "seconds": 0.62
+  },
+  {
+    "cue": "S_EnemyHit",
+    "starts_at_seconds": 16.253,
+    "seconds": 0.3
+  },
+  {
+    "cue": "S_EnemyTell",
+    "starts_at_seconds": 16.887,
+    "seconds": 0.62
+  },
+  {
+    "cue": "S_BossTell",
+    "starts_at_seconds": 17.84,
+    "seconds": 1.1
+  },
+  {
+    "cue": "S_EnemyDefeat",
+    "starts_at_seconds": 19.273,
+    "seconds": 1.65
+  },
+  {
+    "cue": "S_Encounter",
+    "starts_at_seconds": 21.257,
+    "seconds": 2.5
+  },
+  {
+    "cue": "S_Clear",
+    "starts_at_seconds": 24.09,
+    "seconds": 2.4
+  },
+  {
+    "cue": "S_WaterLoop",
+    "starts_at_seconds": 26.823,
+    "seconds": 3.0
+  }
+]

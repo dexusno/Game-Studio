@@ -1,6 +1,6 @@
 param([ValidateSet('Editor','Content','Package','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$PackageConfiguration='Shipping',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='TrellisArt')
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='Reverie')
 $ErrorActionPreference='Stop'
 $betaGameRoot=Split-Path -Parent $PSScriptRoot
 $betaRepoRoot=[IO.Path]::GetFullPath((Join-Path $betaGameRoot '../..'))
@@ -13,8 +13,10 @@ if($Stage -eq 'Editor' -or $Stage -eq 'All'){
  if($LASTEXITCODE -ne 0){throw 'Unreal editor compilation failed'}
 }
 if($Stage -eq 'Content' -or $Stage -eq 'All'){
- & (Join-Path $betaEngineRoot 'Engine/Binaries/Win64/UnrealEditor-Cmd.exe') $betaProject -run=pythonscript "-script=$PSScriptRoot/CreateContent.py" -unattended -nop4 -nosplash -NullRHI
- if($LASTEXITCODE -ne 0){throw 'Content import failed'}
+ # Full editor context is required for authored UCX/Nanite import helpers.
+ $betaContentArgs=@(('"'+$betaProject+'"'),('-ExecutePythonScript="'+$PSScriptRoot+'/CreateContent.py"'),'-unattended','-nop4','-nosplash','-NullRHI')
+ $betaContent=Start-Process -FilePath $betaEditor -ArgumentList $betaContentArgs -WindowStyle Hidden -PassThru -Wait
+ if($betaContent.ExitCode -ne 0){throw 'Content import failed'}
 }
 if($Stage -eq 'Package' -or $Stage -eq 'All'){
  & (Join-Path $betaEngineRoot 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$betaProject" -nop4 -platform=Win64 "-clientconfig=$PackageConfiguration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$betaGameRoot/BuildOutput/$OutputName" -utf8output

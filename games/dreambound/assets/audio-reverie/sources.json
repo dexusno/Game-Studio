@@ -1,0 +1,292 @@
+{
+  "revision": "reverie-foley-v2",
+  "status": "23_cc0_edited_cues_ready_suno_login_pending",
+  "rights_sources": [
+    {
+      "url": "https://help.suno.com/en/articles/10625537",
+      "checked": "2026-09-10",
+      "fact": "Suno Sounds provides one-shot effects and loops from text; two samples per generation."
+    },
+    {
+      "url": "https://help.suno.com/en/articles/9601665",
+      "checked": "2026-09-10",
+      "fact": "Paid downloads permit commercial use, including video games."
+    },
+    {
+      "url": "https://help.suno.com/en/articles/13926209",
+      "checked": "2026-09-10",
+      "fact": "Pro includes 20 monthly song downloads; Premier 60. No extra purchases authorized."
+    },
+    {
+      "url": "https://suno.com/terms-of-service",
+      "checked": "2026-09-10",
+      "effective": "2026-09-03",
+      "fact": "Commercial output must be obtained by Suno's permitted download channel. Retain provenance; incidental editing and conversion allowed. Stream ripping is prohibited."
+    },
+    {
+      "url": "https://kenney.nl/assets/impact-sounds",
+      "checked": "2026-09-10",
+      "fact": "Official Impact Sounds pack and bundled License.txt declare Creative Commons Zero for commercial use."
+    },
+    {
+      "url": "https://kenney.nl/assets/sci-fi-sounds",
+      "checked": "2026-09-10",
+      "fact": "Official Sci-Fi Sounds pack and bundled License.txt declare Creative Commons Zero for commercial use."
+    },
+    {
+      "url": "https://opengameart.org/content/sea-and-river-wave-sounds",
+      "checked": "2026-09-10",
+      "fact": "Author RandomMind identifies this as a river recording and licenses the audio CC0."
+    }
+  ],
+  "sources": {
+    "foley_impactBell_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactBell_heavy_000.ogg",
+      "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactGlass_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactGlass_heavy_000.ogg",
+      "sha256": "b44b39a940e8948e74b9bd3776bff980df43cf220abdaf0d467dc4c43c0244a5",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactGlass_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactGlass_medium_001.ogg",
+      "sha256": "d3d806cb3012c9ddd87010b30295ccb74d6d8b690077d19e67afd09a9d8feb03",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_heavy_000.ogg",
+      "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_light_002": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_light_002.ogg",
+      "sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMetal_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMetal_medium_001.ogg",
+      "sha256": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMining_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMining_001.ogg",
+      "sha256": "61235a18de3f3d92118235398222dbf51d448f1be70b1c8bc962b10b86f2d9c6",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPlate_heavy_003": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPlate_heavy_003.ogg",
+      "sha256": "59775f8979a396c8a793b0a1db206d5bdc651eae808d858e9acaee8ebda5bc6d",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPlate_medium_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPlate_medium_001.ogg",
+      "sha256": "68ba7701b71ef620f498f3038e832157d71ac8db7ad59424545890b250ceb24e",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactPunch_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPunch_heavy_000.ogg",
+      "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactTin_medium_002": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactTin_medium_002.ogg",
+      "sha256": "c1d2c4f9910d4529581ae56a9a9a01454c4619fbb7d6da7616221d8ec58cc0c4",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_doorClose_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/doorClose_000.ogg",
+      "sha256": "c9134651ebbd7c016f90393aee495ff8120bd343bb7569b689a7506987ebd6c2",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_doorOpen_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/doorOpen_000.ogg",
+      "sha256": "5b7e07eccd4413ad9ef3720c2d14f9cc699f4c50111e9b2f48bd60e6f1a164c3",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_engineCircular_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/engineCircular_000.ogg",
+      "sha256": "8ab85f9fa85e9e692287f98acb36b9ac3ba15313b007c039055e286b736f4e3a",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_explosionCrunch_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/explosionCrunch_000.ogg",
+      "sha256": "4b597d658d0ae101f0a030fbeea5fc3a4292ab85f017470a8254a8e7959cbd69",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_forceField_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/forceField_000.ogg",
+      "sha256": "c2916f2a062c8ddd1aca2826d134fe90847037db31342726ffb0f9097afe339c",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_impactMetal_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/impactMetal_000.ogg",
+      "sha256": "956c6612a256aa1a67a2327fffe2454f6b1d82e4c1c2be28fd66916335d5b1d6",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_spaceEngineSmall_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/spaceEngineSmall_000.ogg",
+      "sha256": "2bec8ff75d81f0c37a6b78bd63beea6c70375e49ee30b0bbe7f38d654d576831",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "scifi_thrusterFire_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-scifi/thrusterFire_000.ogg",
+      "sha256": "0fdc474d93f209debf1fc4ea77765a669dcb7676db31b4d8a0a509685bccf374",
+      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-scifi/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "river_vistula": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/randommind/river-source-excerpt.flac",
+      "source_url": "https://opengameart.org/content/sea-and-river-wave-sounds",
+      "creator": "RandomMind",
+      "license": "CC0 1.0",
+      "license_proof": "sources/randommind/License-evidence.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Downloaded MP3 through the author-provided file link; author page CC0 declaration recorded before editing.",
+      "original_download_sha256": "8c24607e41edd6f018ec3582a07e5a8dbc57347276339cb68440951a0fb4cfb1",
+      "original_download_file": "sources/randommind/VistulaShort_0.mp3",
+      "sha256": "9e03972fc4551e389c87c80155f09d63968c221b0445876b047244874a8843f6",
+      "source_modifications": "Retained local original MP3; excerpt 18.0-42.0 seconds decoded to mono 48 kHz PCM16 lossless FLAC for a compact reproducible source asset."
+    }
+  },
+  "audition": {
+    "heard_by_agent": false,
+    "in_game_tested": false,
+    "note": "A real source WAV reel was emitted through the available audio tool. Runtime explicitly returned audio content omitted because you do not support audio input. Signal inspection and owner playback remain possible."
+  }
+}

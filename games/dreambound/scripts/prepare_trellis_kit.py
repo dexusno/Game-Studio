@@ -21,6 +21,7 @@ from mathutils.bvhtree import BVHTree
 
 
 SIZES = {
+    "FountainHero": {"axis": 2, "metres": 6.5},
     "BellTree": {"axis": 2, "metres": 7.0},
     "Cloister": {"axis": 2, "metres": 5.0},
     "RootRock": {"axis": 0, "metres": 2.8},
@@ -170,7 +171,7 @@ def main():
     bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
     if args.yaw_degrees:
         obj.data.transform(Matrix.Rotation(math.radians(args.yaw_degrees), 4, "Z"))
-    obj.name = "SM_Trellis_" + args.asset
+    obj.name = ("SM_RV_" if args.asset == "FountainHero" else "SM_Trellis_") + args.asset
     obj.data.name = obj.name + "_Mesh"
     if len(obj.data.materials) != 1:
         raise RuntimeError("Expected the single TRELLIS atlas material; inspect unexpected material slots")
@@ -206,7 +207,7 @@ def main():
     color.data.foreach_set("color", values.reshape(-1))
     obj.data.color_attributes.active_color = color
     material = obj.data.materials[0]
-    material.name = "M_Trellis_" + args.asset
+    material.name = ("M_RV_" if args.asset == "FountainHero" else "M_Trellis_") + args.asset
     images = list({node.image for node in material.node_tree.nodes if node.type == "TEX_IMAGE" and node.image})
     base = next((im for im in images if im.colorspace_settings.name == "sRGB"), None)
     packed = next((im for im in images if im != base), None)

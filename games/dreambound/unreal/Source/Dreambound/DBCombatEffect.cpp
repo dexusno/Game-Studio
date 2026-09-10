@@ -36,8 +36,7 @@ ADBCombatEffect::ADBCombatEffect()
         Component->SetCastShadow(false);
         Component->SetCanEverAffectNavigation(false);
     }
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube.Cube"));
-    if (Cube.Succeeded()) { Lines->SetStaticMesh(Cube.Object); Shards->SetStaticMesh(Cube.Object); }
+    // Resolve authored visuals on initialization so editor imports remain editable.
     Tags.Add(TEXT("DBTransientCombatEffect"));
 }
 
@@ -70,6 +69,7 @@ void ADBCombatEffect::SpawnArc(UWorld* World, FVector From, FVector To, int32 Ro
 
 void ADBCombatEffect::Initialize(EDBElement Element, int32 RoomId, float Scale)
 {
+    Lines->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam")));
     EffectElement = Element;
     EffectRoomId = RoomId;
     EffectScale = FMath::Clamp(Scale, 0.5f, 2.f);
@@ -79,16 +79,16 @@ void ADBCombatEffect::Initialize(EDBElement Element, int32 RoomId, float Scale)
         Expedition = Mode->Expeditions;
         if (EffectRoomId == INDEX_NONE) EffectRoomId = Mode->CurrentRoomId;
     }
-    if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal")))
+    if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal")))
         Shards->SetStaticMesh(Crystal);
-    const TCHAR* MaterialPath = Element == EDBElement::Frost ? TEXT("/Game/Art/Materials/M_Frost.M_Frost")
-        : Element == EDBElement::Ember ? TEXT("/Game/Art/Materials/M_Ember.M_Ember")
-        : Element == EDBElement::Storm ? TEXT("/Game/Art/Materials/M_Storm.M_Storm")
-        : TEXT("/Game/Art/Materials/M_Core.M_Core");
+    const TCHAR* MaterialPath = Element == EDBElement::Frost ? TEXT("/Game/Art/Reverie/Materials/M_RV_Frost.M_RV_Frost")
+        : Element == EDBElement::Ember ? TEXT("/Game/Art/Reverie/Materials/M_RV_Ember.M_RV_Ember")
+        : Element == EDBElement::Storm ? TEXT("/Game/Art/Reverie/Materials/M_RV_Storm.M_RV_Storm")
+        : TEXT("/Game/Art/Reverie/Materials/M_RV_Core.M_RV_Core");
     if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, MaterialPath))
         for (int32 Index = 0; Index < Shards->GetNumMaterials(); ++Index) Shards->SetMaterial(Index, Material);
     if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow")))
+        TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow")))
     {
         Glow = UMaterialInstanceDynamic::Create(Material, this);
         Lines->SetMaterial(0, Glow);

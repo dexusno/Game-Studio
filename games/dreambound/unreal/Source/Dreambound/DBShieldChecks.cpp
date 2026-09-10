@@ -8,6 +8,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
 #include "Dom/JsonObject.h"
 #include "Engine/World.h"
@@ -286,34 +287,73 @@ bool ADBShieldCheckRunner::CheckPractice(FName Id, int32 Room)
 
 bool ADBShieldCheckRunner::CheckRouteGeometry()
 {
-    bool Connected = Mode->Rooms.Num() == 3, Clear = true, Floored = true, Closed = true;
+    bool Connected = Mode->Rooms.Num() == 3, Clear = true, Floored = true, Closed = true, OpenedClear = true, Bounded = true;
     int32 Samples = 0; FString Failures;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(DBSegmentRouteQA), false, Player);
     for (const FDBRoom& Room : Mode->Rooms) for (AActor* Gate : Room.Gates) Params.AddIgnoredActor(Gate);
     for (int32 I = 1; I < Mode->Rooms.Num(); ++I)
     {
         const FVector A = Mode->Rooms[I - 1].Center, B = Mode->Rooms[I].Center;
-        const FVector D = (B - A).GetSafeNormal2D();
+        const FVector D = (B - A).GetSafeNormal2D(), T(-D.Y, D.X, 0);
         Connected &= Mode->Rooms[I].Parent == I - 1 && FMath::IsNearlyEqual(FVector::Distance(A, B), 4200.f, 1.f);
         const FVector Start = A + D * 1300.f + FVector(0, 0, 110), End = B - D * 1300.f + FVector(0, 0, 110);
-        FHitResult Obstacle;
-        if (GetWorld()->SweepSingleByChannel(Obstacle, Start, End, FQuat::Identity, ECC_Pawn,
-            FCollisionShape::MakeCapsule(Player->GetCapsuleComponent()->GetScaledCapsuleRadius(), Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()), Params))
-        {
-            Clear = false; Failures += FString::Printf(TEXT(" link%d blocked by %s;"), I, *GetNameSafe(Obstacle.GetActor()));
-        }
-        for (int32 S = 0; S <= 16; ++S)
-        {
-            const FVector P = FMath::Lerp(Start, End, S / 16.f); FHitResult Floor;
-            Floored &= GetWorld()->LineTraceSingleByChannel(Floor, P, P - FVector(0, 0, 350), ECC_Visibility, Params)
-                && Floor.ImpactNormal.Z > .65f;
-            ++Samples;
+        for (float Lane : {-130.f, 0.f, 130.f}) {
+            FHitResult Obstacle;
+            if (GetWorld()->SweepSingleByChannel(Obstacle, Start + T * Lane, End + T * Lane, FQuat::Identity, ECC_Pawn,
+                FCollisionShape::MakeCapsule(Player->GetCapsuleComponent()->GetScaledCapsuleRadius(), Player->GetCapsuleComponent()->GetScaledCapsuleHalfHeight()), Params)) {
+                Clear = false;
+                const auto* Component = Cast<UStaticMeshComponent>(Obstacle.GetComponent());
+                Failures += FString::Printf(TEXT(" link%d lane%.0f blocked by %s;"), I, Lane,
+                    Component && Component->GetStaticMesh() ? *Component->GetStaticMesh()->GetName() : *GetNameSafe(Obstacle.GetActor()));
+            }
+            for (int32 S = 0; S <= 16; ++S) {
+                const FVector P = FMath::Lerp(Start, End, S / 16.f) + T * Lane; FHitResult Floor;
+                Floored &= GetWorld()->LineTraceSingleByChannel(Floor, P, P - FVector(0, 0, 350), ECC_Visibility, Params)
+                    && Floor.ImpactNormal.Z > .65f && Floor.ImpactPoint.Z >= -30.f && Floor.ImpactPoint.Z <= 2.f;
+                ++Samples;
+            }
         }
         Closed &= !Mode->Rooms[I].Gates.IsEmpty();
-        for (AActor* Gate : Mode->Rooms[I].Gates) Closed &= IsValid(Gate) && Gate->GetActorEnableCollision();
+        for (AActor* Gate : Mode->Rooms[I].Gates) {
+            if (!IsValid(Gate)) { Closed = false; OpenedClear = false; continue; }
+            const bool WasClosed = Gate->GetActorEnableCollision();
+            FCollisionQueryParams GateQuery(SCENE_QUERY_STAT(DBReverieClosedGate), false, Player);
+            const FCollisionShape Capsule = FCollisionShape::MakeCapsule(32.f,88.f);
+            for (float Lane : {-270.f,0.f,270.f}) {
+                const FVector GateStart=(A+B)*.5f-D*90.f+T*Lane+FVector(0,0,110);
+                const FVector GateEnd=(A+B)*.5f+D*90.f+T*Lane+FVector(0,0,110);
+                FHitResult Hit;
+                const bool Blocked = WasClosed && GetWorld()->SweepSingleByChannel(Hit,GateStart,GateEnd,
+                    FQuat::Identity,ECC_Pawn,Capsule,GateQuery) && Hit.GetActor()==Gate;
+                Closed &= Blocked;
+                if (!Blocked) Failures += FString::Printf(TEXT(" link%d closed gate bypass at lane%.0f;"),I,Lane);
+            }
+            Gate->SetActorEnableCollision(false);
+            for (float Lane : {-270.f,0.f,270.f}) {
+                const FVector GateStart=(A+B)*.5f-D*90.f+T*Lane+FVector(0,0,110);
+                const FVector GateEnd=(A+B)*.5f+D*90.f+T*Lane+FVector(0,0,110);
+                FHitResult Hit;
+                const bool Free = !GetWorld()->SweepSingleByChannel(Hit,GateStart,GateEnd,FQuat::Identity,ECC_Pawn,Capsule,GateQuery);
+                OpenedClear &= Free;
+                if (!Free) Failures += FString::Printf(TEXT(" link%d opened gate blocks lane%.0f;"),I,Lane);
+            }
+            Gate->SetActorEnableCollision(WasClosed);
+        }
     }
-    return Check(Connected && Clear && Floored && Closed, TEXT("connected_collision_and_floor"),
-        FString::Printf(TEXT("Three linked rooms; player-sized door/corridor sweeps (closed progression gates explicitly ignored), %d floor probes; gates initially closed.%s"), Samples, *Failures));
+    for (int32 I = 0; I < Mode->Rooms.Num(); ++I) for (int32 Side = 0; Side < 4; ++Side) {
+        const FVector C = Mode->Rooms[I].Center, Out = FRotator(0, Side*90.f, 0).Vector(), T(-Out.Y, Out.X, 0);
+        bool Door = false;
+        for (int32 Other : {I-1, I+1}) if (Mode->Rooms.IsValidIndex(Other))
+            Door |= FVector::DotProduct((Mode->Rooms[Other].Center-C).GetSafeNormal2D(), Out) > .9f;
+        if (Door) continue;
+        FHitResult Wall;
+        const bool HitWall = GetWorld()->SweepSingleByChannel(Wall, C+Out*1630.f+T*600.f+FVector(0,0,110),
+            C+Out*1950.f+T*600.f+FVector(0,0,110), FQuat::Identity, ECC_Pawn, FCollisionShape::MakeCapsule(32.f,88.f), Params);
+        const auto* Component = Cast<UStaticMeshComponent>(Wall.GetComponent());
+        Bounded &= HitWall && Component && Component->GetStaticMesh() && Component->GetStaticMesh()->GetFName() == FName(TEXT("SM_RV_Wall"));
+    }
+    return Check(Connected && Clear && Floored && Closed && OpenedClear && Bounded, TEXT("connected_collision_and_floor"),
+        FString::Printf(TEXT("Three linked rooms; three capsule lanes per gateway/bridge, %d floor probes, center/+-270cm gate sweeps blocked while closed and clear after opening, enclosing walls on every unconnected cardinal side. Gate collision restored after the isolated open fixture.%s"), Samples, *Failures));
 }
 
 void ADBShieldCheckRunner::DestroyFixtures()
@@ -577,23 +617,93 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
         Mode->BuildWorld();
         bool Same = OriginalLayout == Mode->LayoutSignature && Centers.Num() == Mode->Rooms.Num();
         for (int32 I = 0; I < Centers.Num() && Mode->Rooms.IsValidIndex(I); ++I) Same &= Centers[I].Equals(Mode->Rooms[I].Center, .1f);
-        Check(Same, TEXT("same_seed_reproduces_route_and_cover"), OriginalLayout);
+        Check(Same, TEXT("same_seed_reproduces_route_and_gardens"), OriginalLayout);
         bool Changed = false;
         for (int32 I = 1; I <= 3 && !Changed; ++I) { Mode->Seed = OriginalSeed + I; Mode->BuildWorld(); Changed = OriginalLayout != Mode->LayoutSignature; }
         Check(Changed, TEXT("alternate_seed_changes_layout"), TEXT("Up to three nearby seeds sampled; not exhaustive procedural validation."));
         Mode->Seed = OriginalSeed; Mode->StartingPattern = NAME_None; Mode->LearnedPatterns.Reset(); Mode->StartNewRun(true);
         Player->GetCharacterMovement()->DisableMovement(); CheckRouteGeometry();
         {
-            bool SolidRocks=true;
-            for(const auto& R:Mode->Rooms){
-                FHitResult Hit;FCollisionQueryParams P(SCENE_QUERY_STAT(DBGardenRock),false,Player);
-                const bool HitRock=GetWorld()->SweepSingleByChannel(Hit,R.Center+FVector(1180,1390,110),R.Center+FVector(1450,1390,110),
-                    FQuat::Identity,ECC_Visibility,FCollisionShape::MakeCapsule(32.f,88.f),P);
-                const auto* MeshComponent=Cast<UStaticMeshComponent>(Hit.GetComponent());
-                const FName MeshName=MeshComponent&&MeshComponent->GetStaticMesh()?MeshComponent->GetStaticMesh()->GetFName():NAME_None;
-                SolidRocks&=HitRock&&(MeshName==FName(TEXT("SM_Trellis_RootRock"))||MeshName==FName(TEXT("SM_GardenRockCluster")));
+            TMap<FName,int32> Families;
+            TArray<FVector> ArchSites;
+            bool NewOnly = true, Aligned = true;
+            for (const auto& Pair : Mode->MeshBatches) {
+                const auto* Batch = Pair.Value;
+                if (!Batch || !Batch->GetStaticMesh() || Batch->GetInstanceCount() == 0) continue;
+                const UStaticMesh* Model = Batch->GetStaticMesh();
+                NewOnly &= Model->GetPathName().StartsWith(TEXT("/Game/Art/Reverie/"));
+                NewOnly &= Model->GetFName()!=FName(TEXT("SM_RV_RockBank"))&&Model->GetFName()!=FName(TEXT("SM_RV_Cliff"))
+                    &&Model->GetFName()!=FName(TEXT("SM_RV_Tree"));
+                Families.FindOrAdd(Model->GetFName()) += Batch->GetInstanceCount();
+                if (Model->GetFName() == FName(TEXT("SM_RV_Arch"))) for (int32 Instance = 0; Instance < Batch->GetInstanceCount(); ++Instance) {
+                    FTransform Transform; Batch->GetInstanceTransform(Instance, Transform, true); ArchSites.Add(Transform.GetLocation());
+                    bool OnLink = false;
+                    for (int32 I = 1; I < Mode->Rooms.Num(); ++I) {
+                        const FVector A = Mode->Rooms[I-1].Center, B = Mode->Rooms[I].Center, D = (B-A).GetSafeNormal2D();
+                        OnLink |= (Transform.GetLocation().Equals(A+D*1800.f, 1.f) || Transform.GetLocation().Equals(B-D*1800.f, 1.f))
+                            && FMath::Abs(FVector::DotProduct(Transform.GetUnitAxis(EAxis::Y), D)) > .99f;
+                    }
+                    Aligned &= OnLink;
+                }
             }
-            Check(SolidRocks,TEXT("reachable_garden_rocks_block_capsules"),TEXT("Actual capsule sweep against one corner rock cluster in each generated court."));
+            FString Missing;
+            for (const TCHAR* Name : {TEXT("SM_RV_Tile"),TEXT("SM_RV_TileB"),TEXT("SM_RV_Wall"),TEXT("SM_RV_Arch"),
+                TEXT("SM_RV_Bridge"),TEXT("SM_RV_TerrainPatch"),TEXT("SM_RV_SculptedBank"),TEXT("SM_RV_CrownTree"),
+                TEXT("SM_RV_Fern"),TEXT("SM_RV_Grass"),TEXT("SM_RV_Ivy"),TEXT("SM_RV_Flowers"),TEXT("SM_RV_CrystalCluster"),
+                TEXT("SM_RV_Basin"),TEXT("SM_RV_Rill"),TEXT("SM_RV_FountainHero"),TEXT("SM_RV_Waterfall"),
+                TEXT("SM_RV_WaterDisc"),TEXT("SM_RV_WaterPlane"),TEXT("SM_RV_SkyDome"),TEXT("SM_RV_Steps")})
+                if (Families.FindRef(FName(Name)) <= 0) Missing += FString(Name) + TEXT(" ");
+            for (const auto& R : Mode->Rooms) {
+                const auto* Altar = IsValid(R.Altar) ? R.Altar->FindComponentByClass<UStaticMeshComponent>() : nullptr;
+                NewOnly &= Altar && Altar->GetStaticMesh() && Altar->GetStaticMesh()->GetFName() == FName(TEXT("SM_RV_WardCrystal"));
+                for (const auto* Gate : R.Gates) {
+                    const auto* Mesh = IsValid(Gate) ? Gate->FindComponentByClass<UStaticMeshComponent>() : nullptr;
+                    NewOnly &= Mesh && Mesh->GetStaticMesh() && Mesh->GetStaticMesh()->GetFName() == FName(TEXT("SM_RV_Gate"));
+                }
+            }
+            Check(NewOnly && Missing.IsEmpty() && Families.FindRef(FName(TEXT("SM_RV_CrownTree")))==Mode->Rooms.Num()*2,
+                TEXT("new_environment_assets_actually_instanced"),
+                FString::Printf(TEXT("%d loaded/instanced mesh families; two CrownTrees per room; no legacy paths or retired Blender tree/rock/cliff instances; new individual ward/gate actors. Missing: %s"), Families.Num(), *Missing));
+            for (int32 I=1; I<Mode->Rooms.Num(); ++I) {
+                const FVector A=Mode->Rooms[I-1].Center, B=Mode->Rooms[I].Center, D=(B-A).GetSafeNormal2D();
+                for (const FVector& Expected : {A+D*1800.f, B-D*1800.f}) {
+                    int32 Matches=0; for (const FVector& Site : ArchSites) if (Site.Equals(Expected,1.f)) ++Matches;
+                    Aligned &= Matches==1;
+                }
+            }
+            Check(Aligned && ArchSites.Num() == 4 && Families.FindRef(FName(TEXT("SM_RV_Bridge"))) == 2,
+                TEXT("every_arch_serves_connected_route"), TEXT("Exactly four gateway instances, each on a selected room edge with its open local-Y traversal axis aligned to one of two bridges."));
+
+            bool ClearPads = true, PadFloors = true, TerraceFloors = true;
+            int32 PadCount = 0; FString PadFailures;
+            FCollisionQueryParams P(SCENE_QUERY_STAT(DBReveriePads),false,Player);
+            for (int32 I = 0; I < Mode->Rooms.Num(); ++I) {
+                const FVector C = Mode->Rooms[I].Center;
+                TArray<FVector> Pads = {Mode->GetRoomEntryPoint(I), C+FVector(420,-580,110), C+FVector(1260,660,110),
+                    C+FVector(1260,760,110), C+FVector(1260,560,110), C+FVector(-340,860,110),
+                    C+FVector(-500,-500,110), C+FVector(-500,-80,110), C+FVector(700,-650,110)};
+                if (IsValid(Mode->Rooms[I].Altar)) {
+                    FVector Approach = Mode->Rooms[I].Altar->GetActorLocation();
+                    Approach += (C-Approach).GetSafeNormal2D()*200.f; Approach.Z=110.f; Pads.Add(Approach);
+                }
+                for (const FVector& Point : Pads) {
+                    const bool Free = !GetWorld()->OverlapBlockingTestByChannel(Point,FQuat::Identity,ECC_Pawn,FCollisionShape::MakeCapsule(32.f,88.f),P);
+                    FHitResult Floor;
+                    const bool HasFloor = GetWorld()->LineTraceSingleByChannel(Floor,Point,Point-FVector(0,0,170),ECC_Visibility,P)
+                        && Floor.ImpactNormal.Z>.65f && Floor.ImpactPoint.Z>=-30.f && Floor.ImpactPoint.Z<=2.f;
+                    ClearPads &= Free; PadFloors &= HasFloor; ++PadCount;
+                    if (!Free || !HasFloor) PadFailures += FString::Printf(TEXT("room%d %s clear%d floor%d; "),I,*Point.ToCompactString(),Free,HasFloor);
+                }
+                if (I>0) for (int32 Tread=0; Tread<8; ++Tread) {
+                    const FVector Point=C+FVector(-337.5f-Tread*75.f,-1200,330);
+                    FHitResult Floor;
+                    TerraceFloors &= GetWorld()->LineTraceSingleByChannel(Floor,Point,Point-FVector(0,0,400),ECC_Visibility,P)
+                        && FMath::IsNearlyEqual(Floor.ImpactPoint.Z,20.f*(Tread+1),2.f) && Floor.ImpactNormal.Z>.65f;
+                }
+            }
+            Check(ClearPads && PadFloors,TEXT("spawn_combat_and_ward_approaches_clear"),
+                FString::Printf(TEXT("%d capsule-overlap and physical floor probes at retained entry, encounter, practice and ward approach positions. %s"),PadCount,*PadFailures));
+            Check(TerraceFloors,TEXT("terrace_stairs_have_physical_treads"),TEXT("Sixteen vertical floor queries on the two side staircases find successive20cm rises. This does not establish a native-input traversal."));
         }
         if (IsTrellisArtCheck()) { Finish(false); return; }
         Go(EStep::FirstEncounter); break;
@@ -705,9 +815,9 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
 {
     const bool bArtCheck = IsTrellisArtCheck();
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
-    Report->SetStringField(TEXT("suite"), bArtCheck ? TEXT("trellis-environment-route-v1") : TEXT("folding-shield-combat-route-v2"));
+    Report->SetStringField(TEXT("suite"), bArtCheck ? TEXT("reverie-environment-route-v2") : TEXT("folding-shield-combat-route-v2"));
     Report->SetStringField(TEXT("scope"), bArtCheck
-        ? TEXT("Filtered existing seeded route/cover checks, player-sized connector capsule sweeps, connector floor probes, initially closed gates and one physical corner-rock sweep in each of three courts. Gates are excluded from connector geometry queries and checked separately for enabled collision. Isolated QA profile is backed up and restored; no combat fixture or ordinary play.")
+        ? TEXT("Seeded route/garden reproduction and variation, three capsule lanes through each gateway/bridge, continuous floors, physical closed gates and enclosing walls, actual new asset instances, functional arch placement, retained spawn/combat/ward pads and side stair floor profiles. Gates are excluded only from passage queries. Isolated QA profile backed up/restored; no combat fixture, visual judgment or ordinary play.")
         : TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
     if (bArtCheck)
     {
@@ -762,7 +872,7 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     FJsonSerializer::Serialize(Report, Writer);
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("QA");
     IFileManager::Get().MakeDirectory(*Directory, true);
-    const FString Path = Directory / (bArtCheck ? TEXT("trellis-art-checks.json") : TEXT("combat-feel-checks.json"));
+    const FString Path = Directory / (bArtCheck ? TEXT("reverie-art-checks.json") : TEXT("combat-feel-checks.json"));
     const bool bWritten = FFileHelper::SaveStringToFile(Json, *Path);
     UE_LOG(LogTemp, Display, TEXT("DB_SHIELD_QA_RESULT complete=%d aborted=%d passed=%d failed=%d written=%d path=%s"),
         bComplete, bAborted, Passed, Failed, bWritten, *Path);

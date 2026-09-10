@@ -29,12 +29,7 @@ ADBProjectile::ADBProjectile()
     Streak->SetupAttachment(Collision);
     Streak->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     Streak->SetCastShadow(false);
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere.Sphere"));
-    if (Sphere.Succeeded())
-    {
-        Visual->SetStaticMesh(Sphere.Object);
-        Streak->SetStaticMesh(Sphere.Object);
-    }
+    // Runtime resolves the new visuals before the projectile is displayed.
     Visual->SetRelativeScale3D(FVector(0.28f, 0.22f, 0.22f));
     Streak->SetRelativeLocation(FVector(-33.f, 0.f, 0.f));
     Streak->SetRelativeScale3D(FVector(0.72f, 0.055f, 0.055f));
@@ -48,8 +43,9 @@ void ADBProjectile::BeginPlay()
 
 void ADBProjectile::PrepareVisuals()
 {
+    Streak->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam")));
     if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr,
-        TEXT("/Game/Art/Meshes/SM_Crystal.SM_Crystal")))
+        TEXT("/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal")))
     {
         Visual->SetStaticMesh(Crystal);
         const FVector Size = Crystal->GetBounds().BoxExtent * 2.f;
@@ -60,9 +56,7 @@ void ADBProjectile::PrepareVisuals()
         Visual->SetRelativeLocation(VisualCenterOffset);
     }
     UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow"));
-    if (!Material) Material = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
+        TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow"));
     if (Material)
     {
         GlowMaterial = UMaterialInstanceDynamic::Create(Material, this);

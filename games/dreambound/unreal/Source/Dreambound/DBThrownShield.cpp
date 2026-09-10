@@ -30,10 +30,10 @@ ADBThrownShield::ADBThrownShield()
 void ADBThrownShield::BeginPlay()
 {
     Super::BeginPlay();
-    Disc->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldSegment.SM_ShieldSegment")));
-    Core->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Meshes/SM_ShieldSegmentGlow.SM_ShieldSegmentGlow")));
-    ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Impact.S_Impact"));
-    BlockSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/S_Guard.S_Guard"));
+    Disc->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_ShieldSegment.SM_RV_ShieldSegment")));
+    Core->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/Reverie/Meshes/SM_RV_ShieldSegmentGlow.SM_RV_ShieldSegmentGlow")));
+    ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Impact.S_Impact"));
+    BlockSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Guard.S_Guard"));
 }
 
 void ADBThrownShield::Initialize(ADBCharacter* InBearer, FVector Direction, float Charge, int32 InPieceId, uint32 InVolleyId, bool bInFullCharge)
@@ -75,7 +75,7 @@ void ADBThrownShield::UpdateMaterial()
     {
         if (!ChargedMaterial)
         {
-            if (UMaterialInterface* Parent = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Materials/M_CombatGlow.M_CombatGlow")))
+            if (UMaterialInterface* Parent = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow")))
             {
                 ChargedMaterial = UMaterialInstanceDynamic::Create(Parent, this);
                 ChargedMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(1.f,.58f,.06f));
@@ -83,13 +83,13 @@ void ADBThrownShield::UpdateMaterial()
         }
         if (ChargedMaterial) { Core->SetMaterial(0, ChargedMaterial); return; }
     }
-    const TCHAR* Name = LastElement == EDBElement::Frost ? TEXT("M_Frost")
-        : LastElement == EDBElement::Storm ? TEXT("M_Storm")
-        : LastElement == EDBElement::Ember ? TEXT("M_Ember") : TEXT("M_Core");
-    const FString Path = FString::Printf(TEXT("/Game/Art/Materials/%s.%s"), Name, Name);
+    const TCHAR* Name = LastElement == EDBElement::Frost ? TEXT("M_RV_Frost")
+        : LastElement == EDBElement::Storm ? TEXT("M_RV_Storm")
+        : LastElement == EDBElement::Ember ? TEXT("M_RV_Ember") : TEXT("M_RV_Core");
+    const FString Path = FString::Printf(TEXT("/Game/Art/Reverie/Materials/%s.%s"), Name, Name);
     if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, *Path))
     {
-        const int32 NamedSlot = Core->GetMaterialIndex(TEXT("M_Core"));
+        const int32 NamedSlot = Core->GetMaterialIndex(TEXT("M_RV_Core"));
         Core->SetMaterial(NamedSlot == INDEX_NONE ? 0 : NamedSlot, Material);
     }
 }
