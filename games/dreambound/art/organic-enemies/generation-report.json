@@ -1,0 +1,221 @@
+{
+  "date": "2026-09-10",
+  "tool": "OpenAI image_gen original RGBA references; local TRELLIS.2; Blender 5.2.1",
+  "model_terms": "See AI3D.md; local evaluation, not a commercial release clearance.",
+  "assets": [
+    {
+      "asset": "Briarhide",
+      "reference": "references/briarhide-v1.png",
+      "reference_sha256": "37df3570f6d5e130609a898af7e82b44b05546fc7617eebb6edfa2b3753f557a",
+      "generation": {
+        "status": "complete",
+        "started_at_utc": "2026-09-10T20:13:01.277238+00:00",
+        "source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+        "model_id": "microsoft/TRELLIS.2-4B",
+        "model_revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "generation": {
+          "pipeline_type": "1536_cascade",
+          "seed": 85913,
+          "num_samples": 1,
+          "max_num_tokens": 98304,
+          "inference_frozen_parameters": 7483411862,
+          "low_vram": true,
+          "normalization_row_chunk": 262144,
+          "resumed_from": "briarhide/source-1536/latents.pt",
+          "geometry_cpu_offload_bytes": 1287799620,
+          "actual_resolution": 1536,
+          "shape_tokens": 34981
+        },
+        "export": {
+          "decimation_target_faces": 1000000,
+          "texture_size": 4096,
+          "remesh": true,
+          "remesh_band": 1,
+          "remesh_project": 0,
+          "aabb": [
+            [
+              -0.5,
+              -0.5,
+              -0.5
+            ],
+            [
+              0.5,
+              0.5,
+              0.5
+            ]
+          ],
+          "extension_webp": false,
+          "texture_encoding": "lossless PNG",
+          "raster_face_limit": 16777216,
+          "raster_limit_simplification_applied": true,
+          "input_faces_after_raster_limit": 16645724,
+          "vertices": 983253,
+          "faces": 969358,
+          "artifact": "textured.glb",
+          "validation": {
+            "embedded_images": [
+              {
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              }
+            ],
+            "bytes": 87065776,
+            "sha256": "f64379b43b30cc08b8e7cc75b812310f5db9e2b333cc62babc548e26033423bc"
+          }
+        },
+        "timings_seconds": {
+          "load": 62.393,
+          "inference": 8.744,
+          "raw_save": 15.679,
+          "export": 137.304,
+          "total": 229.202
+        },
+        "torch_cuda_peaks_gib": {
+          "allocated": 17.679,
+          "reserved": 18.416,
+          "scope": "Torch allocations; excludes other applications and native allocations outside Torch"
+        },
+        "raw": {
+          "tensor_file": "raw_mesh.pt",
+          "geometry_file": "raw_mesh.ply",
+          "vertices": 26842808,
+          "faces": 81358736,
+          "attribute_shape": [
+            26713831,
+            6
+          ],
+          "voxel_size": 0.0006510416666666666,
+          "note": "Pipeline output includes upstream decode-time hole filling; no export processing applied."
+        }
+      },
+      "prepared_report": "Briarhide-prep.json"
+    },
+    {
+      "asset": "MireSeer",
+      "reference": "references/mire-seer-v1.png",
+      "reference_sha256": "77bfacae25eb86840da76cee1148d1eadb47d9ad0888b6198977f4adcecaaff5",
+      "generation": {
+        "status": "complete",
+        "started_at_utc": "2026-09-10T20:17:26.308233+00:00",
+        "source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+        "model_id": "microsoft/TRELLIS.2-4B",
+        "model_revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "generation": {
+          "pipeline_type": "1536_cascade",
+          "seed": 72503,
+          "num_samples": 1,
+          "max_num_tokens": 98304,
+          "inference_frozen_parameters": 7483411862,
+          "low_vram": true,
+          "normalization_row_chunk": 262144,
+          "geometry_cpu_offload_bytes": 160275528,
+          "actual_resolution": 1536,
+          "shape_tokens": 11476
+        },
+        "export": {
+          "decimation_target_faces": 1000000,
+          "texture_size": 4096,
+          "remesh": true,
+          "remesh_band": 1,
+          "remesh_project": 0,
+          "aabb": [
+            [
+              -0.5,
+              -0.5,
+              -0.5
+            ],
+            [
+              0.5,
+              0.5,
+              0.5
+            ]
+          ],
+          "extension_webp": false,
+          "texture_encoding": "lossless PNG",
+          "raster_face_limit": 16777216,
+          "raster_limit_simplification_applied": false,
+          "input_faces_after_raster_limit": 9005958,
+          "vertices": 954514,
+          "faces": 982785,
+          "artifact": "textured.glb",
+          "validation": {
+            "embedded_images": [
+              {
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              },
+              {
+                "size": [
+                  4096,
+                  4096
+                ],
+                "format": "PNG"
+              }
+            ],
+            "bytes": 80674924,
+            "sha256": "53e775f931b55f17affe99f928632a09021c9c27eb10d3edae7c9391e6640862"
+          }
+        },
+        "timings_seconds": {
+          "load": 63.766,
+          "inference": 47.024,
+          "raw_save": 2.405,
+          "export": 98.628,
+          "total": 217.323
+        },
+        "torch_cuda_peaks_gib": {
+          "allocated": 5.021,
+          "reserved": 5.357,
+          "scope": "Torch allocations; excludes other applications and native allocations outside Torch"
+        },
+        "raw": {
+          "tensor_file": "raw_mesh.pt",
+          "geometry_file": "raw_mesh.ply",
+          "vertices": 4604346,
+          "faces": 9005958,
+          "attribute_shape": [
+            4565618,
+            6
+          ],
+          "voxel_size": 0.0006510416666666666,
+          "note": "Pipeline output includes upstream decode-time hole filling; no export processing applied."
+        }
+      },
+      "prepared_report": "MireSeer-prep.json"
+    }
+  ],
+  "initial_briarhide_failure": {
+    "error": "RuntimeError: CUDA driver error: device not ready",
+    "generation": {
+      "pipeline_type": "1536_cascade",
+      "seed": 85913,
+      "num_samples": 1,
+      "max_num_tokens": 98304,
+      "low_vram": true,
+      "normalization_row_chunk": 262144
+    },
+    "timings_seconds": {
+      "load": 63.336,
+      "total": 174.86
+    },
+    "torch_cuda_peaks_gib": {
+      "allocated": 18.289,
+      "reserved": 21.23,
+      "scope": "Torch allocations; excludes other applications and native allocations outside Torch"
+    }
+  },
+  "inference_correction": "Freeze pretrained parameter gradients before inference. Installed FlexGEMM checks ctx.needs_input_grad even within no_grad, otherwise requesting unnecessary backward neighbor maps. Same model, seed, saved latents and actual 1536 resolution retained. Driver error does not establish out-of-memory as its cause."
+}

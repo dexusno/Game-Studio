@@ -1,0 +1,271 @@
+{
+  "asset": "Briarhide",
+  "source_sha256": "f64379b43b30cc08b8e7cc75b812310f5db9e2b333cc62babc548e26033423bc",
+  "source": "<windowsOutputRoot>/organic-enemies/briarhide/source-resumed-1536/textured.glb",
+  "fbx": "SK_OE_Briarhide.fbx",
+  "fbx_sha256": "caf897a769c95730c94454258fe022a313ccd5d4330ae60f1b4d0c23b9e15c63",
+  "source_triangles": 969353,
+  "runtime_triangles": 189560,
+  "dimensions_metres": [
+    2.014064073562622,
+    1.0787103176116943,
+    2.202481269836426
+  ],
+  "height_metres": 2.2,
+  "runtime_mesh_yaw": -90,
+  "rig_spec_sha256": "e13f039c90059dce06a6b93dd94a75422065cfc5df9ea40404d56f4a339fd3dd",
+  "weights": {
+    "vertices": 385340,
+    "max_influences": 4,
+    "method": "Anatomical capsule weights, smooth region gates, top four influences normalized",
+    "vertices_per_bone": {
+      "pelvis": 264086,
+      "spine": 302003,
+      "head": 202860,
+      "upperarm_l": 50944,
+      "forearm_l": 14414,
+      "thigh_l": 20898,
+      "shin_l": 12335,
+      "upperarm_r": 54848,
+      "forearm_r": 15023,
+      "thigh_r": 20258,
+      "shin_r": 12225
+    },
+    "throat_mask_vertices": 378
+  },
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0,
+        0,
+        0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.18
+      ]
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.025,
+        0.86
+      ],
+      "tail": [
+        0.0,
+        0.01,
+        1.29
+      ]
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "head": [
+        0.0,
+        0.01,
+        1.29
+      ],
+      "tail": [
+        0.0,
+        -0.065,
+        1.59
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "spine",
+      "head": [
+        0.0,
+        -0.065,
+        1.59
+      ],
+      "tail": [
+        0.0,
+        -0.12,
+        1.96
+      ]
+    },
+    {
+      "name": "upperarm_l",
+      "parent": "spine",
+      "head": [
+        0.405,
+        0.015,
+        1.5
+      ],
+      "tail": [
+        0.655,
+        -0.035,
+        1.105
+      ]
+    },
+    {
+      "name": "forearm_l",
+      "parent": "upperarm_l",
+      "head": [
+        0.655,
+        -0.035,
+        1.105
+      ],
+      "tail": [
+        0.805,
+        -0.045,
+        0.66
+      ]
+    },
+    {
+      "name": "thigh_l",
+      "parent": "pelvis",
+      "head": [
+        0.215,
+        0.03,
+        0.86
+      ],
+      "tail": [
+        0.255,
+        -0.075,
+        0.5
+      ]
+    },
+    {
+      "name": "shin_l",
+      "parent": "thigh_l",
+      "head": [
+        0.255,
+        -0.075,
+        0.5
+      ],
+      "tail": [
+        0.325,
+        0.01,
+        0.11
+      ]
+    },
+    {
+      "name": "upperarm_r",
+      "parent": "spine",
+      "head": [
+        -0.405,
+        0.015,
+        1.5
+      ],
+      "tail": [
+        -0.655,
+        -0.035,
+        1.105
+      ]
+    },
+    {
+      "name": "forearm_r",
+      "parent": "upperarm_r",
+      "head": [
+        -0.655,
+        -0.035,
+        1.105
+      ],
+      "tail": [
+        -0.805,
+        -0.045,
+        0.66
+      ]
+    },
+    {
+      "name": "thigh_r",
+      "parent": "pelvis",
+      "head": [
+        -0.215,
+        0.03,
+        0.86
+      ],
+      "tail": [
+        -0.255,
+        -0.075,
+        0.5
+      ]
+    },
+    {
+      "name": "shin_r",
+      "parent": "thigh_r",
+      "head": [
+        -0.255,
+        -0.075,
+        0.5
+      ],
+      "tail": [
+        -0.325,
+        0.01,
+        0.11
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "file": "base_color.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "df01f0b75e590f4e117840e37923eeced9e0eba3173c38fda84339ac06ae8bbd",
+      "processing": "Unchanged embedded PNG bytes"
+    },
+    {
+      "file": "metallic_roughness.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "e466660f92d30152314d2b9c3f0ee7233f838f225765b402a4fc41bf07a8481d",
+      "processing": "Unchanged embedded PNG bytes"
+    }
+  ],
+  "preview_renders": [
+    "bind-front.png",
+    "bind-side.png",
+    "stride.png",
+    "attack.png"
+  ],
+  "eye_placements": [
+    {
+      "side": -1,
+      "surface_position": [
+        -0.09700000286102295,
+        -0.44866836071014404,
+        1.7510000467300415
+      ],
+      "outward_normal": [
+        -0.30217427015304565,
+        -0.9463357329368591,
+        0.1146264597773552
+      ]
+    },
+    {
+      "side": 1,
+      "surface_position": [
+        0.09700000286102295,
+        -0.4484187364578247,
+        1.7510000467300415
+      ],
+      "outward_normal": [
+        0.2792593240737915,
+        -0.9598670601844788,
+        -0.025872059166431427
+      ]
+    }
+  ],
+  "material_slots": [
+    "M_OE_Briarhide",
+    "M_OE_EyeIris",
+    "M_OE_EyePupil"
+  ],
+  "near_black_pigment_floor": [
+    0.028,
+    0.019,
+    0.01
+  ],
+  "limits": "Automatic anatomical skin weights; no facial/finger rig, cloth, ragdoll or authored mocap. Capsule combat collision remains authoritative. Unreal pose inspection required."
+}

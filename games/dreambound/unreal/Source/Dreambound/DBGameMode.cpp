@@ -93,7 +93,22 @@ void ADBGameMode::BeginPlay() {
   bTitle=false;bPaused=false;SetMenuInput(false); StartNewRun(true);
   if(bCapture&&Player&&!bMotionCapture) {
    FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
-   if(DetailView==TEXT("Fountain")){
+   if(DetailView==TEXT("Creatures")){
+    CurrentRoomId=0;const FVector Center=Rooms[0].Center;
+    const FVector Position=Center+FVector(-680,-170,110);
+    Player->SetActorLocation(Position);
+    Player->GetController()->SetControlRotation((Center+FVector(100,0,150)-Player->GetPawnViewLocation()).Rotation());
+    FActorSpawnParameters Pose;Pose.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    for(int32 Kind=0;Kind<2;++Kind){
+     const FVector At=Center+(Kind==0?FVector(0,-210,110):FVector(180,165,110));
+     if(auto* Figure=GetWorld()->SpawnActor<ADBEnemy>(At,(Position-At).GetSafeNormal2D().Rotation(),Pose))
+      Figure->Configure(Kind==0?EDBEnemyKind::Melee:EDBEnemyKind::Caster,99,1.f);
+    }
+   }else if(DetailView==TEXT("Habitat")){
+    CurrentRoomId=0;const FVector Position=Rooms[0].Center+FVector(430,340,110);
+    Player->SetActorLocation(Position);
+    Player->GetController()->SetControlRotation((Rooms[0].Center+FVector(990,1120,80)-Player->GetPawnViewLocation()).Rotation());
+   }else if(DetailView==TEXT("Fountain")){
     CurrentRoomId=0;const FVector Position=Rooms[0].Center+FVector(380,400,110);
     Player->SetActorLocation(Position);
     Player->GetController()->SetControlRotation((Rooms[0].Center+FVector(1130,1240,330)-Position-FVector(0,0,50)).Rotation());
@@ -358,7 +373,7 @@ void ADBGameMode::Tick(float Dt) {
  if(bCapture){
   if(PulseTime>8&&!bCapturedFrame){
    bCapturedFrame=true;FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
-   FScreenshotRequest::RequestScreenshot(DetailView==TEXT("Fountain")?TEXT("Reverie_Fountain.png"):DetailView==TEXT("Stairs")?TEXT("Reverie_Stairs.png"):TEXT("Dreambound_FirstView.png"),true,false);
+   FScreenshotRequest::RequestScreenshot(DetailView==TEXT("Creatures")?TEXT("Living_Creatures.png"):DetailView==TEXT("Habitat")?TEXT("Living_Habitat.png"):DetailView==TEXT("Fountain")?TEXT("Reverie_Fountain.png"):DetailView==TEXT("Stairs")?TEXT("Reverie_Stairs.png"):TEXT("Dreambound_FirstView.png"),true,false);
   }
   if(PulseTime>12)FGenericPlatformMisc::RequestExit(false);
  }

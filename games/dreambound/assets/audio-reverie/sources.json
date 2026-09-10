@@ -1,6 +1,6 @@
 {
-  "revision": "reverie-suno-v1",
-  "status": "two_owner_supplied_permitted_suno_downloads_plus_21_unchanged_cc0_cues",
+  "revision": "reverie-suno-v1-movement",
+  "status": "two_permitted_suno_cues_21_previous_cc0_cues_and_three_new_cc0_movement_cues",
   "rights_sources": [
     {
       "url": "https://help.suno.com/en/articles/10625537",
@@ -343,6 +343,6 @@
   "audition": {
     "heard_by_agent": false,
     "in_game_tested": false,
-    "note": "Two owner-supplied Suno MP3s edited and inspected as signals. The available runtime previously reported audio input unsupported; no subjective judgment or absence-of-music claim. The exact edited WAV preview is assets/audio-suno/two-cue-preview.wav. Root owns in-engine audition."
+    "note": "Movement addition uses retained verified CC0 body/stone recordings. Existing two-cue Suno preview remains unchanged. Worker audio input is unsupported: signal checks only, no subjective listening claim. Root owns the combined in-engine audition."
   }
 }

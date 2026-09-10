@@ -34,6 +34,7 @@ public:
     virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+    virtual void Landed(const FHitResult& Hit) override;
 
     void ApplyUpgrade(FName Id);
     bool HasUpgrade(FName Id) const;
@@ -54,6 +55,11 @@ public:
     void ReleaseGuard();
     void UseSpecial();
     void Dash();
+    void ReleaseDash();
+    void PressSprint();
+    void ReleaseSprint();
+    bool IsSprinting() const { return bSprinting; }
+    bool IsDashing() const { return DashRootMotionId != 0; }
     void CycleElement();
     bool IsShieldAway() const;
     void RecallShield();
@@ -105,6 +111,8 @@ public:
     UPROPERTY() float Heat = 0.f;
     UPROPERTY() float MaxHeat = 100.f;
     UPROPERTY() float DashCooldown = 0.f;
+    UPROPERTY() float Stamina = 100.f;
+    UPROPERTY() float MaxStamina = 100.f;
     UPROPERTY() float SpecialCooldown = 0.f;
     UPROPERTY() float GuardBreakTime = 0.f;
     UPROPERTY() float HitMarkerTime = 0.f;
@@ -160,6 +168,9 @@ private:
     UPROPERTY() TObjectPtr<USoundBase> GuardSound;
     UPROPERTY() TObjectPtr<USoundBase> ParrySound;
     UPROPERTY() TObjectPtr<USoundBase> DashSound;
+    UPROPERTY() TObjectPtr<USoundBase> FootstepASound;
+    UPROPERTY() TObjectPtr<USoundBase> FootstepBSound;
+    UPROPERTY() TObjectPtr<USoundBase> LandSound;
     UPROPERTY() TObjectPtr<USoundBase> ImpactSound;
     UPROPERTY() TObjectPtr<USoundBase> EquipSound;
     UPROPERTY() TObjectPtr<USoundBase> HurtSound;
@@ -175,6 +186,8 @@ private:
     UPROPERTY() TObjectPtr<USoundConcurrency> ImpactConcurrency;
     UPROPERTY() TObjectPtr<USoundConcurrency> HeavyImpactConcurrency;
     UPROPERTY() TObjectPtr<USoundConcurrency> CatchConcurrency;
+    UPROPERTY() TObjectPtr<USoundConcurrency> FootstepConcurrency;
+    UPROPERTY() TObjectPtr<USoundConcurrency> LandingConcurrency;
 
     TArray<float> EffectLife;
     TArray<FEchoShot> EchoShots;
@@ -188,6 +201,10 @@ private:
     TSet<TWeakObjectPtr<ADBEnemy>> RushVictims;
     bool bWantsFire = false;
     bool bWantsGuard = false;
+    bool bWantsSprint = false;
+    bool bSprinting = false;
+    bool bSprintExhausted = false;
+    bool bDashHeld = false;
     bool bStrikeBuffered = false;
     bool bStrikePending = false;
     bool bHeavyStrike = false;
@@ -223,6 +240,20 @@ private:
     float SinceGuarded = 10.f;
     float SinceDamaged = 10.f;
     float DashTime = 0.f;
+    uint16 DashRootMotionId = 0;
+    float EvasionInvulnerabilityTime = 0.f;
+    float StaminaRecoveryDelay = 0.f;
+    float GroundedSpeed = 0.f;
+    float GaitAmount = 0.f;
+    float SprintBlend = 0.f;
+    float LandingImpact = 0.f;
+    float FootstepDistance = 0.f;
+    float FootstepAudioCooldown = 0.f;
+    float LocomotionAudioHold = .2f;
+    int32 FootstepSequence = 0;
+    FVector PreviousMotionLocation = FVector::ZeroVector;
+    FVector PreviousMotionVelocity = FVector::ZeroVector;
+    FVector MovementLean = FVector::ZeroVector;
     float RushTime = 0.f;
     float RushDamage = 60.f;
     float InvulnerabilityTime = 0.f;
@@ -260,6 +291,8 @@ private:
     void ShieldImpact();
     void ResolveRush();
     void UpdateWeapon(float DeltaSeconds);
+    void UpdateLocomotion(float DeltaSeconds);
+    void EndEvasion(bool bStopImmediately = false);
     FTransform GetPieceLocalTransform(int32 Index) const;
     void UpdateChargeAudio();
     void StopChargeAudio(bool bImmediate = false);

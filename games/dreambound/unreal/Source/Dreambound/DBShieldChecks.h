@@ -31,6 +31,38 @@ private:
         MeleeFirst, MeleeSecond, MeleeThird, MeleeCover, Storm, Route, FirstEncounter, FirstPractice, SecondEncounter, SecondPractice,
         SaveCharge, Journal, FinalEncounter, Victory, Finished
     };
+    enum class EMovementStep : uint8
+    {
+        Settle, Idle, Walk, Sprint, RecoverHeld, ResumeSprint, RejectLowSprint,
+        WallSettle, WallApproach, WallHold, DashSettle, OpenDash, DashCooldown,
+        WallDashSettle, WallDash, PauseSettle, PauseSprint, PauseDash, Paused,
+        Resume, ResetDash, ResetWait
+    };
+    struct FMovementProbe
+    {
+        EMovementStep Step = EMovementStep::Settle;
+        FVector Start = FVector::ZeroVector;
+        FVector Last = FVector::ZeroVector;
+        FVector Input = FVector::ZeroVector;
+        FVector HeldPoint = FVector::ZeroVector;
+        float Age = 0.f;
+        float Elapsed = 0.f;
+        float StartStamina = 0.f;
+        float Distance = 0.f;
+        float PeakSpeed = 0.f;
+        float MaxZ = 0.f;
+        float SampleDistance = 0.f;
+        float SampleSeconds = 0.f;
+        float FirstRecovery = -1.f;
+        float SavedCooldown = 0.f;
+        bool bIdleGood = false;
+        bool bDelayGood = false;
+        bool bFreshSprintGood = false;
+        bool bCooldownBlocked = false;
+        bool bHeldPointSet = false;
+        bool bPauseGood = false;
+        bool bResetStarted = false;
+    };
     struct FCheck { FString Scenario; FString Id; bool bPassed = false; FString Detail; };
     struct FJournalCopy { FString Slot; bool bExisted = false; TArray<uint8> Bytes; };
 
@@ -78,6 +110,8 @@ private:
     bool bHaveJournalCopies = false;
     bool bAborted = false;
     bool bSawReturnTravel = false;
+    bool bMovementCheck = false;
+    FMovementProbe MovementProbe;
 
     void Go(EStep Next);
     bool Check(bool bGood, const TCHAR* Id, const FString& Detail = FString());
@@ -97,6 +131,9 @@ private:
     bool CheckRouteGeometry();
     bool CheckPractice(FName Id, int32 Room);
     void DestroyFixtures();
+    void GoMovement(EMovementStep Next);
+    void TickMovement(float DeltaSeconds);
+    void StageWalkingPlayer(FVector Location);
 };
 
 /** Call only from the recovery-slice -DBVerify branch, then return without running legacy checks/exiting. */

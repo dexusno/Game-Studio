@@ -1,6 +1,6 @@
 {
-  "revision": "reverie-suno-v1",
-  "status": "two_suno_cues_edited_21_cc0_cues_preserved_for_engine_audition",
+  "revision": "reverie-suno-v1-movement",
+  "status": "three_recorded_foley_movement_cues_added_23_existing_wavs_preserved",
   "cues": {
     "S_ChargeLoop": {
       "seconds": 2.25,
@@ -1076,6 +1076,131 @@
       "crossfade_seconds": 0.5,
       "channels": 1,
       "rms_dbfs": -31
+    },
+    "S_FootstepA": {
+      "seconds": 0.17,
+      "peak_dbfs": -15,
+      "runtime_gain": 0.28,
+      "runtime_gain_sprint": 0.4,
+      "voice_cap": 2,
+      "priority": 25,
+      "release": 0.035,
+      "description": "Dry bootfall design from retained CC0 body-contact and stone-debris recordings; trimmed attack and a subdued early grit fragment",
+      "layers": [
+        {
+          "source": "foley_impactPunch_heavy_000",
+          "region": [
+            0.018,
+            0.172
+          ],
+          "gain_db": 0,
+          "speed": 1.02,
+          "delay": 0,
+          "source_peak_dbfs": -3,
+          "highpass": 75,
+          "lowpass": 1500,
+          "attack": 0.001,
+          "release": 0.04
+        },
+        {
+          "source": "foley_impactMining_001",
+          "region": [
+            0.02,
+            0.095
+          ],
+          "gain_db": -17,
+          "speed": 1.25,
+          "delay": 0.012,
+          "source_peak_dbfs": -3,
+          "highpass": 700,
+          "lowpass": 3600,
+          "attack": 0.002,
+          "release": 0.025
+        }
+      ]
+    },
+    "S_FootstepB": {
+      "seconds": 0.18,
+      "peak_dbfs": -15,
+      "runtime_gain": 0.28,
+      "runtime_gain_sprint": 0.4,
+      "voice_cap": 2,
+      "priority": 25,
+      "release": 0.04,
+      "description": "Second dry bootfall with slightly quicker body and a different, quieter late stone-grit fragment; alternates with FootstepA",
+      "layers": [
+        {
+          "source": "foley_impactPunch_heavy_000",
+          "region": [
+            0.02,
+            0.192
+          ],
+          "gain_db": 0,
+          "speed": 1.08,
+          "delay": 0,
+          "source_peak_dbfs": -3,
+          "highpass": 85,
+          "lowpass": 1300,
+          "attack": 0.001,
+          "release": 0.045
+        },
+        {
+          "source": "foley_impactMining_001",
+          "region": [
+            0.075,
+            0.19
+          ],
+          "gain_db": -18,
+          "speed": 1.1,
+          "delay": 0.018,
+          "source_peak_dbfs": -3,
+          "highpass": 800,
+          "lowpass": 3400,
+          "attack": 0.003,
+          "release": 0.03
+        }
+      ]
+    },
+    "S_Land": {
+      "seconds": 0.3,
+      "peak_dbfs": -11,
+      "runtime_gain": 0.48,
+      "voice_cap": 1,
+      "priority": 35,
+      "release": 0.065,
+      "description": "Close firm landing from a slowed dry body contact with low-level initial stone debris; short damped tail, no mechanical or ringing layer",
+      "layers": [
+        {
+          "source": "foley_impactPunch_heavy_000",
+          "region": [
+            0.015,
+            0.275
+          ],
+          "gain_db": 0,
+          "speed": 0.96,
+          "delay": 0,
+          "source_peak_dbfs": -3,
+          "highpass": 60,
+          "lowpass": 1700,
+          "attack": 0.0015,
+          "release": 0.065
+        },
+        {
+          "source": "foley_impactMining_001",
+          "region": [
+            0,
+            0.145
+          ],
+          "gain_db": -14,
+          "speed": 1.05,
+          "delay": 0.015,
+          "source_peak_dbfs": -3,
+          "highpass": 500,
+          "lowpass": 3800,
+          "attack": 0.002,
+          "release": 0.04
+        }
+      ]
     }
   }
 }

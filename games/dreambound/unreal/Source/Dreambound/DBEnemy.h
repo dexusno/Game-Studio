@@ -8,6 +8,7 @@
 class ADBCharacter;
 class UInstancedStaticMeshComponent;
 class UMaterialInstanceDynamic;
+class UPoseableMeshComponent;
 class USceneComponent;
 class UStaticMeshComponent;
 class USoundBase;
@@ -58,6 +59,7 @@ private:
     enum class EAttack : uint8 { None, Swing, Bolt, Lunge, Salvo, Slam, Ground, Intercept };
 
     UPROPERTY() TObjectPtr<USceneComponent> VisualRoot;
+    UPROPERTY() TObjectPtr<UPoseableMeshComponent> OrganicMesh;
     UPROPERTY() TObjectPtr<USceneComponent> BodyPivot;
     UPROPERTY() TObjectPtr<USceneComponent> HeadPivot;
     UPROPERTY() TObjectPtr<USceneComponent> LeftArmPivot;
@@ -88,6 +90,8 @@ private:
     TWeakObjectPtr<ADBCharacter> Target;
     TWeakObjectPtr<AActor> BurnInstigator;
     TArray<FTransform> DeathStartPose;
+    TArray<FTransform> OrganicReferencePose;
+    TArray<FTransform> OrganicReferenceComponentPose;
     EAttack Attack = EAttack::None;
     FVector ArenaCenter = FVector::ZeroVector;
     FVector2D ArenaHalfSize = FVector2D(1180.f, 1050.f);
@@ -151,6 +155,7 @@ private:
     FVector ShotOrigin() const;
     void BuildVisuals();
     void UpdateVisuals(float DeltaSeconds);
+    void UpdateOrganicPose();
     void UpdateDeath(float DeltaSeconds);
     void ApplyHitReaction(const FDBHit& Hit);
     void ChooseRepositionTarget();

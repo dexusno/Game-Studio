@@ -21,7 +21,8 @@
 
 // Route topology comes first. The three encounter centers and flat combat pads
 // remain compatible with the game; masonry, soil and water follow that graph.
-// Every visible mesh belongs to Reverie. Hidden boxes only supply soil floors
+// Reverie architecture is dressed with original LivingWorld habitat props.
+// Hidden boxes only supply soil floors
 // and the earned progression barriers; missing imports never show old assets.
 void ADBGameMode::BuildRecoveryCourtyard()
 {
@@ -42,7 +43,8 @@ void ADBGameMode::BuildRecoveryCourtyard()
  TMap<FString,UMaterialInterface*> Materials;
  auto Asset=[&Assets](const TCHAR* Name)->UStaticMesh*{
   if(UStaticMesh** Existing=Assets.Find(Name))return *Existing;
-  const FString Path=FString::Printf(TEXT("/Game/Art/Reverie/Meshes/%s.%s"),Name,Name);
+  const TCHAR* Family=FString(Name).StartsWith(TEXT("SM_LW_"))?TEXT("LivingWorld"):TEXT("Reverie");
+  const FString Path=FString::Printf(TEXT("/Game/Art/%s/Meshes/%s.%s"),Family,Name,Name);
   UStaticMesh* Result=LoadObject<UStaticMesh>(nullptr,*Path);Assets.Add(Name,Result);
   if(!Result)UE_LOG(LogTemp,Error,TEXT("DB_REVERIE missing required mesh %s"),*Path);
   return Result;
@@ -71,6 +73,7 @@ void ADBGameMode::BuildRecoveryCourtyard()
   if(!Batch){
    AActor* Owner=GetWorld()->SpawnActor<AActor>();if(!Owner)return false;
    Generated.Add(Owner);Owner->Tags.Add(TEXT("DBReverieArt"));
+   if(FString(Name).StartsWith(TEXT("SM_LW_")))Owner->Tags.Add(TEXT("DBLivingWorldArt"));
    Batch=NewObject<UHierarchicalInstancedStaticMeshComponent>(Owner);
    Owner->SetRootComponent(Batch);Owner->AddInstanceComponent(Batch);
    Batch->SetStaticMesh(Model);Batch->SetMobility(EComponentMobility::Static);
@@ -78,6 +81,8 @@ void ADBGameMode::BuildRecoveryCourtyard()
    Batch->SetCollisionObjectType(ECC_WorldStatic);Batch->SetCollisionResponseToAllChannels(ECR_Block);
    if(Override)for(int32 Slot=0;Slot<Model->GetStaticMaterials().Num();++Slot)Batch->SetMaterial(Slot,Material(Override));
    if(FString(Name).Contains(TEXT("Water"))||FString(Name).Contains(TEXT("Sky")))Batch->SetCastShadow(false);
+   if(FString(Name).StartsWith(TEXT("SM_LW_")))Batch->SetCullDistances(4800,6500);
+   if(FString(Name)==TEXT("SM_LW_Dragonfly")||FString(Name)==TEXT("SM_LW_GardenMoth"))Batch->SetCastShadow(false);
    Batch->RegisterComponent();MeshBatches.Add(Key,Batch);
   }
   Batch->AddInstance(FTransform(Rotation,Location,Scale),true);return true;
@@ -420,6 +425,84 @@ void ADBGameMode::BuildRecoveryCourtyard()
   WardLight->GetLightComponent()->SetIntensity(500.f);WardLight->GetLightComponent()->SetLightColor(FLinearColor(.25f,.82f,.74f));
   Cast<UPointLightComponent>(WardLight->GetLightComponent())->SetAttenuationRadius(420.f);
   WardLight->GetLightComponent()->SetCastShadows(false);Generated.Add(WardLight);
+  // LivingWorld: small habitat compositions add ecological and historical
+  // detail to the existing court graph. All new meshes are decorative HISMs;
+  // floor/capsule geometry, stair heights, gateways and encounter pads remain
+  // governed by the structures above. Each footprint is checked, not just its
+  // center, and contact derives from the actual world floor before planting.
+  FRandomStream Habitat(Seed+420041+RoomIndex*1013);
+  int32 LivingInstances=0;
+  auto HabitatClear=[&Reserved,&SlabDistance,RoomIndex](FVector P,float Radius,bool Wet){
+   if(FMath::Abs(P.X)+Radius>1375.f||FMath::Abs(P.Y)+Radius>1375.f)return false;
+   if(!Wet&&P.X>280.f&&P.Y>940.f)return false;
+   if(RoomIndex>0&&P.X-Radius<-205.f&&P.Y-Radius<-875.f)return false;
+   if(SlabDistance(P)<Radius+15.f)return false;
+   for(const FVector& Margin:{FVector::ZeroVector,FVector(Radius,0,0),FVector(-Radius,0,0),FVector(0,Radius,0),FVector(0,-Radius,0)})
+    if(Reserved(P+Margin))return false;
+   return true;
+  };
+  auto SoilProp=[this,&Place,&C,&HabitatClear,&LivingInstances](const TCHAR* Name,FVector P,float Size,float Yaw,float Radius,bool Wet=false){
+   if(!HabitatClear(P,Radius,Wet))return false;
+   FHitResult Contact;
+   if(!GetWorld()->LineTraceSingleByChannel(Contact,C+P+FVector(0,0,240),C+P-FVector(0,0,140),ECC_Visibility))return false;
+   // Bank/cover and rim tops are not planting ground. The existing central
+   // soil/paving contacts lie at -22..0; outer descending shoulders are excluded.
+   if(Contact.ImpactNormal.Z<.88f||Contact.ImpactPoint.Z-C.Z>5.f||Contact.ImpactPoint.Z-C.Z<-25.f)return false;
+   if(Place(Name,Contact.ImpactPoint-FVector(0,0,2),FRotator(0,Yaw,0),FVector(Size),false)){++LivingInstances;return true;}
+   return false;
+  };
+  // The spring has reeds and ferns along its receiving-channel bank, not
+  // plants sprayed over its stone rims. Dry worlds use fewer reeds; the moss
+  // court is dampest, retaining a readable habitat shift inside this one biome.
+  for(int32 Patch=0;Patch<(RoomIndex==1?8:5);++Patch){
+   const FVector P(475.f+Patch*62.f+Habitat.FRandRange(-12,12),1025.f+Habitat.FRandRange(-22,16),0);
+   SoilProp(Patch%3==1?TEXT("SM_LW_FernRosette"):TEXT("SM_LW_Reeds"),P,
+    Habitat.FRandRange(.63f,.85f),Habitat.FRandRange(0,360),51.f,true);
+  }
+  SoilProp(TEXT("SM_LW_FungusLog"),FVector(535,985,0),.72f,12.f+Variant*17.f,76.f,true);
+  SoilProp(TEXT("SM_LW_ShelfFungi"),FVector(415,1055,0),.90f,160.f,29.f,true);
+  // Pads float on the actual 35cm receiving-basin water surface. Their local
+  // footprint and offsets fit within its 242.5cm water disc, clear of the rim.
+  for(int32 Pad=0;Pad<3;++Pad){
+   const float Angle=215.f+Pad*68.f+Variant*7.f;
+   const FVector Offset=FRotator(0,Angle,0).Vector()*(175.f+Pad*5.f);
+   if(Place(TEXT("SM_LW_WaterLily"),Basin+Offset+FVector(0,0,35.7f),FRotator(0,Angle+40,0),FVector(.64f+Pad*.035f),false))++LivingInstances;
+  }
+  for(int32 Insect=0;Insect<3;++Insect){
+   const FVector P(650.f+Insect*170.f,1130.f+Insect*26.f,80.f+Insect*19.f);
+   if(Place(TEXT("SM_LW_Dragonfly"),C+P,FRotator(0,50.f+Insect*95.f,0),FVector(.95f+Insect*.15f),false))++LivingInstances;
+  }
+  // Dry garden islands originate from selected ruin/tree-edge pockets. A
+  // changed seed changes which companion grows around an anchor and its size,
+  // orientation and broken-pot/lintel composition, with protected empty space.
+  const FVector GardenAnchors[]={FVector(-1190,-650,0),FVector(-550,1270,0),FVector(1200,-570,0),
+   FVector(1260,235,0),FVector(-1230,360,0),FVector(-805,-850,0)};
+  for(int32 Island=0;Island<UE_ARRAY_COUNT(GardenAnchors);++Island){
+   const FVector Anchor=GardenAnchors[Island]+FVector(Habitat.FRandRange(-32,32),Habitat.FRandRange(-25,25),0);
+   const bool Damp=(RoomIndex==1||(Island+Variant)%3==0);
+   const TCHAR* Feature=Damp?TEXT("SM_LW_FungusLog"):(Island%2?TEXT("SM_LW_CrackedUrn"):TEXT("SM_LW_FallenLintel"));
+   const float Facing=Habitat.FRandRange(0,360);
+   if(!SoilProp(Feature,Anchor,.78f,Facing,83.f))continue;
+   SoilProp(TEXT("SM_LW_RootFan"),Anchor+FVector(-34,24,0),.88f,Facing+57.f,68.f);
+   for(int32 Companion=0;Companion<5;++Companion){
+    const float A=Facing+Companion*67.f;
+    const FVector P=Anchor+FRotator(0,A,0).Vector()*Habitat.FRandRange(84.f,115.f);
+    const TCHAR* Type=Damp?(Companion%2?TEXT("SM_LW_FernRosette"):TEXT("SM_LW_ShelfFungi")):
+     (Companion==0?TEXT("SM_LW_TwistedScrub"):TEXT("SM_LW_MeadowFlowers"));
+    const float Size=Habitat.FRandRange(.67f,.94f);
+    if(SoilProp(Type,P,Size,A,Companion==0?57.f:42.f)&&!Damp&&Companion==2){
+     if(Place(TEXT("SM_LW_GardenMoth"),C+P+FVector(12,-8,68),FRotator(0,A,0),FVector(1.4f),false))++LivingInstances;
+    }
+   }
+  }
+  // Existing paving-edge ribbons gain occasional divided ferns and flowers;
+  // their slab-distance/footprint checks retain all deliberate path breaks.
+  for(int32 Drift=0;Drift<Drifts.Num();++Drift){
+   const FVector P=Drifts[Drift]+FVector(Habitat.FRandRange(-28,28),Habitat.FRandRange(-25,25),0);
+   SoilProp(Drift%3==0?TEXT("SM_LW_MeadowFlowers"):TEXT("SM_LW_FernRosette"),P,
+    Habitat.FRandRange(.60f,.80f),Habitat.FRandRange(0,360),44.f);
+  }
+  UE_LOG(LogTemp,Display,TEXT("DB_LIVING_WORLD room=%d habitat=%s instances=%d"),RoomIndex,RoomIndex==1?TEXT("damp spring"):TEXT("dry ruin garden"),LivingInstances);
  }
  for(int32 I=1;I<Rooms.Num();++I){
   const FVector A=Rooms[I-1].Center,B=Rooms[I].Center,D=(B-A).GetSafeNormal2D(),T(-D.Y,D.X,0);

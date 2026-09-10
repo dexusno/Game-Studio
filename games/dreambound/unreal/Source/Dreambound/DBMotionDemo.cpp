@@ -12,6 +12,8 @@
 #include "Misc/Paths.h"
 #include "Misc/FileHelper.h"
 #include "Misc/App.h"
+#include "Misc/Parse.h"
+#include "Misc/CommandLine.h"
 #include "HAL/FileManager.h"
 #include "HAL/PlatformTime.h"
 #include "HAL/IConsoleManager.h"
@@ -29,7 +31,7 @@ void ADBGameMode::TickMotionDemo(float Dt)
   // Recording needs silent buffers too; submix auto-disable otherwise removes
   // the pauses between impacts and desynchronizes the exported soundtrack.
   if(auto* RenderSilence=IConsoleManager::Get().FindConsoleVariable(TEXT("au.NeverDisableSubmixes")))RenderSilence->Set(1,ECVF_SetByCode);
-  DemoFrameTimes=TEXT("frame,wall_seconds,audio_seconds,shield_expansion,selected,full_charge,charge_audio\n");
+  DemoFrameTimes=TEXT("frame,wall_seconds,audio_seconds,shield_expansion,selected,full_charge,charge_audio,speed_cm_s,stamina,sprinting,dashing,x,y,z\n");
   if(auto Device=GetWorld()->GetAudioDevice())DemoAudioStartedAt=Device->GetAudioClock();
   UAudioMixerBlueprintLibrary::StartRecordingOutput(this,37.f);
  }
@@ -39,7 +41,8 @@ void ADBGameMode::TickMotionDemo(float Dt)
   if(!bDemoStopped){
    bDemoStopped=true;Player->SuspendCombatInput();Player->GetCharacterMovement()->StopMovementImmediately();
    UAudioMixerBlueprintLibrary::StopRecordingOutput(this,EAudioRecordingExportType::WavFile,TEXT("CourtyardMix"),FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir()/TEXT("CombatFeelCapture")));
-   FString Note=FString::Printf(TEXT("Scripted moving renderer/audio capture. No ordinary-input, complete-run or fun claim.\nframes=%d seconds=%.3f engine_fps_cap=60\nScreenshot requests stall rendering; this is not a performance measurement.\n"),DemoFrame,DemoTime);
+   const bool bAudioOnly=FParse::Param(FCommandLine::Get(),TEXT("DBAudioOnly"));
+   FString Note=FString::Printf(TEXT("Scripted engine audio capture. No ordinary-input, complete-run or fun claim.\nsamples=%d seconds=%.3f engine_fps_cap=60 screenshot_capture=%d\nThis fixture is not a performance measurement.\n"),DemoFrame,DemoTime,bAudioOnly?0:1);
    FFileHelper::SaveStringToFile(Note,*(FPaths::ProjectSavedDir()/TEXT("CombatFeelCapture/Capture.txt")));
    FFileHelper::SaveStringToFile(DemoFrameTimes,*(FPaths::ProjectSavedDir()/TEXT("CombatFeelCapture/Frames.csv")));
   }
@@ -74,12 +77,22 @@ void ADBGameMode::TickMotionDemo(float Dt)
  else if(DemoAction==15&&DemoTime>25){Player->ReceiveAttack(16,Player->GetPawnViewLocation()+Player->GetAimDirection()*500,false,nullptr,12001);DemoAction=16;}
  else if(DemoAction==16&&DemoTime>28.5f){Player->ReleaseGuard();DemoAction=17;}
  else if(DemoAction==17&&DemoTime>30){Player->SetActorLocation(FVector(-1250,-850,110));DemoAction=18;}
+ // The final approach contrasts walking, held sprint and a grounded stop.
+ // Scripted movement uses the ordinary CharacterMovement input path.
+ if(DemoTime>30.f&&DemoTime<33.8f){
+  if(DemoTime>31.2f&&DemoAction==18){Player->PressSprint();DemoAction=19;}
+  const FVector Forward=PC->GetControlRotation().Vector().GetSafeNormal2D();
+  Player->AddMovementInput(Forward,1.f);
+ }
+ if(DemoTime>=33.8f&&DemoAction==19){Player->ReleaseSprint();DemoAction=20;}
  static double NextFrameAt=0;
  if(DemoTime>=NextFrameAt&&!FScreenshotRequest::IsScreenshotRequested()){
   NextFrameAt=DemoTime+.10;
   double AudioTime=0;if(auto Device=GetWorld()->GetAudioDevice())AudioTime=Device->GetAudioClock()-DemoAudioStartedAt;
-  DemoFrameTimes+=FString::Printf(TEXT("%d,%.6f,%.6f,%.3f,%d,%d,%d\n"),DemoFrame,DemoTime,AudioTime,Player->GetShieldExpansion(),Player->GetSelectedPieceCount(),Player->IsFullChargeReady()?1:0,Player->IsChargeLoopPlaying()?1:0);
+  const FVector Location=Player->GetActorLocation();
+  DemoFrameTimes+=FString::Printf(TEXT("%d,%.6f,%.6f,%.3f,%d,%d,%d,%.3f,%.3f,%d,%d,%.3f,%.3f,%.3f\n"),DemoFrame,DemoTime,AudioTime,Player->GetShieldExpansion(),Player->GetSelectedPieceCount(),Player->IsFullChargeReady()?1:0,Player->IsChargeLoopPlaying()?1:0,Player->GetVelocity().Size2D(),Player->Stamina,Player->IsSprinting()?1:0,Player->IsDashing()?1:0,Location.X,Location.Y,Location.Z);
   const FString Frame=FPaths::ProjectSavedDir()/TEXT("CombatFeelCapture")/FString::Printf(TEXT("Frame_%05d.png"),DemoFrame++);
-  FScreenshotRequest::RequestScreenshot(Frame,true,false);
+  // Audio auditions retain event timing without hundreds of GPU readbacks.
+  if(!FParse::Param(FCommandLine::Get(),TEXT("DBAudioOnly")))FScreenshotRequest::RequestScreenshot(Frame,true,false);
  }
 }

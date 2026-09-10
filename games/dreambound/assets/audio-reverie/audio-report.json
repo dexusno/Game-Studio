@@ -1,5 +1,5 @@
 {
-  "revision": "reverie-suno-v1",
+  "revision": "reverie-suno-v1-movement",
   "numpy": "1.26.2",
   "scipy": "1.11.4",
   "rights_sources": [
@@ -1868,6 +1868,188 @@
         "channels": 1,
         "rms_dbfs": -31
       }
+    },
+    "S_FootstepA": {
+      "seconds": 0.17,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -15.0,
+      "rms_dbfs": -28.65239601177764,
+      "estimated_true_peak_dbtp": -14.994472624968928,
+      "full_scale_samples": 0,
+      "dc_offset": 3.86953956473809e-05,
+      "energy_above_8khz_fraction": 2.164359118741935e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "4cd4399c3e049d0a3074b1aea896f0981d36bb87fbbf7ef7780929febcd8bc18",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.28,
+      "recipe": {
+        "seconds": 0.17,
+        "peak_dbfs": -15,
+        "runtime_gain": 0.28,
+        "runtime_gain_sprint": 0.4,
+        "voice_cap": 2,
+        "priority": 25,
+        "release": 0.035,
+        "description": "Dry bootfall design from retained CC0 body-contact and stone-debris recordings; trimmed attack and a subdued early grit fragment",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.018,
+              0.172
+            ],
+            "gain_db": 0,
+            "speed": 1.02,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 75,
+            "lowpass": 1500,
+            "attack": 0.001,
+            "release": 0.04
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.02,
+              0.095
+            ],
+            "gain_db": -17,
+            "speed": 1.25,
+            "delay": 0.012,
+            "source_peak_dbfs": -3,
+            "highpass": 700,
+            "lowpass": 3600,
+            "attack": 0.002,
+            "release": 0.025
+          }
+        ]
+      }
+    },
+    "S_FootstepB": {
+      "seconds": 0.18,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -15.0,
+      "rms_dbfs": -28.86751554139127,
+      "estimated_true_peak_dbtp": -14.994472624968928,
+      "full_scale_samples": 0,
+      "dc_offset": 1.803656467372468e-05,
+      "energy_above_8khz_fraction": 1.7025750340574642e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "368a7b32864a93eeb33e70a217ebcedd2a7f0ab4d53fec0436ffabb76f411e02",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.28,
+      "recipe": {
+        "seconds": 0.18,
+        "peak_dbfs": -15,
+        "runtime_gain": 0.28,
+        "runtime_gain_sprint": 0.4,
+        "voice_cap": 2,
+        "priority": 25,
+        "release": 0.04,
+        "description": "Second dry bootfall with slightly quicker body and a different, quieter late stone-grit fragment; alternates with FootstepA",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.02,
+              0.192
+            ],
+            "gain_db": 0,
+            "speed": 1.08,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 85,
+            "lowpass": 1300,
+            "attack": 0.001,
+            "release": 0.045
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.075,
+              0.19
+            ],
+            "gain_db": -18,
+            "speed": 1.1,
+            "delay": 0.018,
+            "source_peak_dbfs": -3,
+            "highpass": 800,
+            "lowpass": 3400,
+            "attack": 0.003,
+            "release": 0.03
+          }
+        ]
+      }
+    },
+    "S_Land": {
+      "seconds": 0.3,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -11.0,
+      "rms_dbfs": -26.815402325474345,
+      "estimated_true_peak_dbtp": -10.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 1.8500340197734396e-05,
+      "energy_above_8khz_fraction": 3.065685556826614e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "d83f2dddeeaa37483053546fa4ec400d65a1099791d52ffcfbe86e05ba2b6f95",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.48,
+      "recipe": {
+        "seconds": 0.3,
+        "peak_dbfs": -11,
+        "runtime_gain": 0.48,
+        "voice_cap": 1,
+        "priority": 35,
+        "release": 0.065,
+        "description": "Close firm landing from a slowed dry body contact with low-level initial stone debris; short damped tail, no mechanical or ringing layer",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.015,
+              0.275
+            ],
+            "gain_db": 0,
+            "speed": 0.96,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 60,
+            "lowpass": 1700,
+            "attack": 0.0015,
+            "release": 0.065
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0,
+              0.145
+            ],
+            "gain_db": -14,
+            "speed": 1.05,
+            "delay": 0.015,
+            "source_peak_dbfs": -3,
+            "highpass": 500,
+            "lowpass": 3800,
+            "attack": 0.002,
+            "release": 0.04
+          }
+        ]
+      }
     }
   },
   "manifest_rows_for_integration_owner": [
@@ -2100,12 +2282,42 @@
       "proof_path": "assets/audio-reverie/audio-report.json",
       "modifications": "Quiet real river-water bed, equal-gain crossfade into a continuous twelve-second loop; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
       "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_footstepa",
+      "path": "assets/audio-reverie/S_FootstepA.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Dry bootfall design from retained CC0 body-contact and stone-debris recordings; trimmed attack and a subdued early grit fragment; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_footstepb",
+      "path": "assets/audio-reverie/S_FootstepB.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Second dry bootfall with slightly quicker body and a different, quieter late stone-grit fragment; alternates with FootstepA; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_land",
+      "path": "assets/audio-reverie/S_Land.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Close firm landing from a slowed dry body contact with low-level initial stone debris; short damped tail, no mechanical or ringing layer; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
     }
   ],
   "audition": {
     "heard_by_agent": false,
     "in_game_tested": false,
-    "note": "Two owner-supplied Suno MP3s edited and inspected as signals. The available runtime previously reported audio input unsupported; no subjective judgment or absence-of-music claim. The exact edited WAV preview is assets/audio-suno/two-cue-preview.wav. Root owns in-engine audition."
+    "note": "Movement addition uses retained verified CC0 body/stone recordings. Existing two-cue Suno preview remains unchanged. Worker audio input is unsupported: signal checks only, no subjective listening claim. Root owns the combined in-engine audition."
   },
   "overlap_checks": {
     "note": "Fixed dry mono sums with source gains, without attenuation; not an exhaustive engine mix. Six catches retain all tails beyond the intended two-voice cap.",

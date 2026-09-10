@@ -6,10 +6,12 @@
 #include "DBProjectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Components/PoseableMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/SkeletalMesh.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -39,28 +41,6 @@ namespace
         Component->AddInstance(FTransform(Rotation, At - Rotation.RotateVector(Bounds.Origin * Scale), Scale), true);
     }
 
-    void FitPart(UStaticMeshComponent* Part, const TCHAR* Asset, UStaticMesh* Fallback,
-        FVector FallbackSize, FVector FallbackCenter, float AuthoredScale = 1.f)
-    {
-        UStaticMesh* Mesh = LoadObject<UStaticMesh>(nullptr, Asset);
-        if (Mesh)
-        {
-            // Preserve the authored shoulder/hip/neck pivot and proportions.
-            Part->SetStaticMesh(Mesh);
-            Part->SetRelativeScale3D(FVector(AuthoredScale));
-            Part->SetRelativeLocation(FVector::ZeroVector);
-            return;
-        }
-        if (!Mesh) Mesh = Fallback;
-        if (!Mesh) return;
-        Part->SetStaticMesh(Mesh);
-        const FBoxSphereBounds Bounds = Mesh->GetBounds();
-        const FVector Size = Bounds.BoxExtent * 2.f;
-        const FVector Scale(FallbackSize.X / FMath::Max(1.f, Size.X),
-            FallbackSize.Y / FMath::Max(1.f, Size.Y), FallbackSize.Z / FMath::Max(1.f, Size.Z));
-        Part->SetRelativeScale3D(Scale);
-        Part->SetRelativeLocation(FallbackCenter - Bounds.Origin * Scale);
-    }
 }
 
 ADBEnemy::ADBEnemy()
@@ -88,6 +68,14 @@ ADBEnemy::ADBEnemy()
     Movement->AvoidanceWeight = 0.45f;
     VisualRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SculptedParts"));
     VisualRoot->SetupAttachment(GetCapsuleComponent());
+    OrganicMesh = CreateDefaultSubobject<UPoseableMeshComponent>(TEXT("OrganicCreature"));
+    OrganicMesh->SetupAttachment(VisualRoot);
+    OrganicMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    OrganicMesh->SetGenerateOverlapEvents(false);
+    OrganicMesh->SetCanEverAffectNavigation(false);
+    // The proven FBX import convention maps Blender -Y front to Unreal +Y.
+    OrganicMesh->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+    OrganicMesh->SetBoundsScale(1.6f);
     auto Pivot = [this](const TCHAR* Name, FVector Location)
     {
         USceneComponent* Result = CreateDefaultSubobject<USceneComponent>(FName(Name));
@@ -251,23 +239,44 @@ void ADBEnemy::BuildVisuals()
     EffectMarks->SetStaticMesh(Fallback);
     const bool bHunter = Kind == EDBEnemyKind::Hunter;
     const bool bCaster = Kind == EDBEnemyKind::Caster;
-    FitPart(BodyPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianBody.SM_GuardianBody"), Fallback,
-        FVector(48.f, 62.f, 76.f), FVector(0.f, 0.f, 30.f));
-    FitPart(HeadPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianHead.SM_GuardianHead"), Fallback,
-        FVector(28.f, 29.f, 39.f), FVector(0.f, 0.f, 19.5f), bCaster ? 1.07f : 1.f);
-    FitPart(LeftArmPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
-        FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : 1.f);
-    FitPart(RightArmPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianArm.SM_GuardianArm"), Fallback,
-        FVector(35.f, 36.f, 97.f), FVector(0.f, 0.f, -30.f), bCaster ? 0.94f : bHunter ? 1.f : 1.06f);
-    FitPart(LeftLegPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
-        FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
-    FitPart(RightLegPart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_GuardianLeg.SM_GuardianLeg"), Fallback,
-        FVector(39.f, 28.f, 102.f), FVector(0.f, 0.f, -43.f));
-    FitPart(CorePart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_Core.SM_Core"), Fallback,
-        FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.45f);
-    CorePart->SetRelativeLocation(FVector(29.f, 0.f, 39.f));
-    FitPart(ChargePart, TEXT("/Game/Art/PreferredCombat/Meshes/SM_Core.SM_Core"), Fallback,
-        FVector(6.f, 13.f, 13.f), FVector::ZeroVector, 1.5f);
+    USkeletalMesh* Creature = bCaster ? LoadObject<USkeletalMesh>(nullptr,
+        TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer.SK_OE_MireSeer")) : nullptr;
+    if (!Creature) Creature = LoadObject<USkeletalMesh>(nullptr,
+        TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide.SK_OE_Briarhide"));
+    OrganicMesh->SetSkinnedAssetAndUpdate(Creature);
+    CoreMaterial = nullptr;
+    OrganicReferencePose.Reset();
+    OrganicReferenceComponentPose.Reset();
+    if (Creature)
+    {
+        const FReferenceSkeleton& Skeleton = Creature->GetRefSkeleton();
+        OrganicReferencePose = Skeleton.GetRefBonePose();
+        OrganicReferenceComponentPose.SetNum(OrganicReferencePose.Num());
+        for (int32 Index = 0; Index < OrganicReferencePose.Num(); ++Index)
+        {
+            const int32 Parent = Skeleton.GetParentIndex(Index);
+            OrganicReferenceComponentPose[Index] = Parent == INDEX_NONE ? OrganicReferencePose[Index]
+                : OrganicReferencePose[Index] * OrganicReferenceComponentPose[Parent];
+        }
+        if (UMaterialInterface* Skin = OrganicMesh->GetMaterial(0))
+        {
+            CoreMaterial = UMaterialInstanceDynamic::Create(Skin, this);
+            CoreMaterial->SetVectorParameterValue(TEXT("CreatureTint"), bHunter
+                ? FLinearColor(0.87f, 0.91f, 0.8f) : Kind == EDBEnemyKind::Boss
+                ? FLinearColor(0.91f, 0.84f, 0.71f) : FLinearColor::White);
+            OrganicMesh->SetMaterial(0, CoreMaterial);
+        }
+    }
+    else UE_LOG(LogTemp, Error, TEXT("Organic enemy mesh is missing; import_organic_enemies.py must complete before packaging."));
+    // Keep the proven motion pivots as a pose controller, with no old body art.
+    for (UStaticMeshComponent* Part : { BodyPart.Get(), HeadPart.Get(), LeftArmPart.Get(),
+        RightArmPart.Get(), LeftLegPart.Get(), RightLegPart.Get(), CorePart.Get() })
+    {
+        Part->SetStaticMesh(nullptr);
+        Part->SetVisibility(false);
+    }
+    ChargePart->SetStaticMesh(LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere")));
+    ChargePart->SetRelativeScale3D(FVector(0.17f));
     ChargePart->SetRelativeLocation(FVector(78.f, 0.f, 37.f));
     LeftArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? -31.f : -39.f, 52.f));
     RightArmPivot->SetRelativeLocation(FVector(0.f, bCaster ? 31.f : 39.f, 52.f));
@@ -276,17 +285,10 @@ void ADBEnemy::BuildVisuals()
     if (Glow)
     {
         WarningMaterial = UMaterialInstanceDynamic::Create(Glow, this);
-        CoreMaterial = UMaterialInstanceDynamic::Create(Glow, this);
         WarningMarks->SetMaterial(0, WarningMaterial);
-        for (int32 Index = 0; Index < CorePart->GetNumMaterials(); ++Index)
-        {
-            const TArray<FStaticMaterial>& Slots = CorePart->GetStaticMesh()->GetStaticMaterials();
-            const FName Slot = Slots.IsValidIndex(Index) ? Slots[Index].MaterialSlotName : NAME_None;
-            if (Slot.ToString().Contains(TEXT("Core")) || CorePart->GetNumMaterials() == 1) CorePart->SetMaterial(Index, CoreMaterial);
-        }
         for (int32 Index = 0; Index < ChargePart->GetNumMaterials(); ++Index) ChargePart->SetMaterial(Index, WarningMaterial);
         WarningMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 2.f);
-        CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 1.7f);
+        if (CoreMaterial) CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), 0.6f);
     }
     if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr, TEXT("/Game/Art/PreferredCombat/Meshes/SM_Crystal.SM_Crystal")))
     {
@@ -300,6 +302,7 @@ void ADBEnemy::BuildVisuals()
         for (int32 Index = 0; Index < EmberMarks->GetNumMaterials(); ++Index) EmberMarks->SetMaterial(Index, Material);
     if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/PreferredCombat/Materials/M_Storm.M_Storm")))
         EffectMarks->SetMaterial(0, Material);
+    UpdateOrganicPose();
 }
 
 bool ADBEnemy::IsRoomActive() const
@@ -1046,6 +1049,7 @@ void ADBEnemy::UpdateDeath(float DeltaSeconds)
             Joint->SetRelativeRotation(FQuat::Slerp(StartPose.GetRotation(), Joint->GetRelativeRotation().Quaternion(), Blend));
         }
     }
+    UpdateOrganicPose();
     WarningMarks->ClearInstances();
     EffectMarks->ClearInstances();
     if (CoreMaterial) CoreMaterial->SetVectorParameterValue(TEXT("Color"), DangerColor * FMath::Max(0.015f, 1.f - DeathTime * 1.5f));
@@ -1324,7 +1328,7 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     if (bCharging)
     {
         const float Charge = Phase == EDBEnemyPhase::Telegraph ? 0.3f + Windup * 1.7f : 1.65f - AttackKick * 0.6f;
-        ChargePart->SetRelativeScale3D(FVector(Charge * (1.f + FMath::Sin(VisualTime * 16.f) * 0.035f)));
+        ChargePart->SetRelativeScale3D(FVector(0.17f * Charge * (1.f + FMath::Sin(VisualTime * 16.f) * 0.035f)));
         ChargePart->SetRelativeRotation(FRotator(0.f, 0.f, VisualTime * 75.f));
     }
     if (CoreMaterial)
@@ -1339,8 +1343,55 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
         CoreMaterial->SetVectorParameterValue(TEXT("Tint"), Color);
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), bVulnerable ? 3.5f : 1.7f);
     }
+    UpdateOrganicPose();
     UpdateWarningGeometry();
     UpdateElementVisuals(DeltaSeconds);
+}
+
+void ADBEnemy::UpdateOrganicPose()
+{
+    if (!OrganicMesh->GetSkinnedAsset() || OrganicReferencePose.IsEmpty()) return;
+    const FReferenceSkeleton& Skeleton = OrganicMesh->GetSkinnedAsset()->GetRefSkeleton();
+    OrganicMesh->BoneSpaceTransforms = OrganicReferencePose;
+    const FQuat MeshToActor = OrganicMesh->GetRelativeRotation().Quaternion();
+    const FQuat ActorToMesh = MeshToActor.Inverse();
+    auto Pose = [&](const TCHAR* Name, FRotator Rotation, FVector Offset = FVector::ZeroVector)
+    {
+        const int32 Index = Skeleton.FindBoneIndex(FName(Name));
+        if (!OrganicReferencePose.IsValidIndex(Index)) return;
+        const int32 Parent = Skeleton.GetParentIndex(Index);
+        const FQuat ParentBasis = OrganicReferenceComponentPose.IsValidIndex(Parent)
+            ? OrganicReferenceComponentPose[Parent].GetRotation() : FQuat::Identity;
+        const FQuat MeshDelta = ActorToMesh * Rotation.Quaternion() * MeshToActor;
+        FTransform& Bone = OrganicMesh->BoneSpaceTransforms[Index];
+        Bone.SetRotation((ParentBasis.Inverse() * MeshDelta * ParentBasis * Bone.GetRotation()).GetNormalized());
+        Bone.AddToTranslation(ParentBasis.UnrotateVector(ActorToMesh.RotateVector(Offset)));
+    };
+    // The original pivots now drive a continuous skinned body. Their combat
+    // phase/timing remains authoritative; no animation changes damage windows.
+    const FVector PelvisOffset = BodyPivot->GetRelativeLocation() - FVector(0.f, 0.f, 94.f);
+    const float Breath = bDead ? 0.f : FMath::Sin(VisualTime * 2.3f) * 0.7f;
+    Pose(TEXT("pelvis"), FRotator::ZeroRotator, PelvisOffset);
+    Pose(TEXT("spine"), BodyPivot->GetRelativeRotation() + FRotator(Breath, 0.f, 0.f));
+    Pose(TEXT("head"), HeadPivot->GetRelativeRotation());
+    const FRotator LeftArm = LeftArmPivot->GetRelativeRotation();
+    const FRotator RightArm = RightArmPivot->GetRelativeRotation();
+    const float Collapse = bDead ? FMath::SmoothStep(0.f, 0.7f, DeathTime) : 0.f;
+    // Rest the generated A-pose arms against the flanks, with articulated
+    // elbows. The long forearms and antler crown carry the creature silhouette.
+    Pose(TEXT("upperarm_l"), FRotator(LeftArm.Pitch * 0.88f, LeftArm.Yaw, LeftArm.Roll + 16.f));
+    Pose(TEXT("upperarm_r"), FRotator(RightArm.Pitch * 0.88f, RightArm.Yaw, RightArm.Roll - 16.f));
+    Pose(TEXT("forearm_l"), FRotator(-13.f - FMath::Abs(LeftArm.Pitch) * 0.16f - Collapse * 12.f, 0.f, 0.f));
+    Pose(TEXT("forearm_r"), FRotator(-16.f - FMath::Abs(RightArm.Pitch) * 0.16f - Collapse * 8.f, 0.f, 0.f));
+    const FRotator LeftLeg = LeftLegPivot->GetRelativeRotation();
+    const FRotator RightLeg = RightLegPivot->GetRelativeRotation();
+    Pose(TEXT("thigh_l"), LeftLeg);
+    Pose(TEXT("thigh_r"), RightLeg);
+    const float LeftSwing = FMath::Max(0.f, -FMath::Sin(GaitPhase)) * GaitBlend;
+    const float RightSwing = FMath::Max(0.f, FMath::Sin(GaitPhase)) * GaitBlend;
+    Pose(TEXT("shin_l"), FRotator(LeftSwing * 21.f - Collapse * 48.f, 0.f, 0.f));
+    Pose(TEXT("shin_r"), FRotator(RightSwing * 21.f - Collapse * 53.f, 0.f, 0.f));
+    OrganicMesh->RefreshBoneTransforms();
 }
 
 void ADBEnemy::ClearElementVisuals()

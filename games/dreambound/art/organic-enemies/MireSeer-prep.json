@@ -1,0 +1,233 @@
+{
+  "asset": "MireSeer",
+  "source_sha256": "53e775f931b55f17affe99f928632a09021c9c27eb10d3edae7c9391e6640862",
+  "source": "<windowsOutputRoot>/organic-enemies/mire-seer/source-1536/textured.glb",
+  "fbx": "SK_OE_MireSeer.fbx",
+  "fbx_sha256": "6638548818d1f8a03ce5d7e9a7704ca83f0fccbd69e0340e1e67adc9e89c931c",
+  "source_triangles": 982759,
+  "runtime_triangles": 170000,
+  "dimensions_metres": [
+    1.350663423538208,
+    0.6667898893356323,
+    2.201219081878662
+  ],
+  "height_metres": 2.2,
+  "runtime_mesh_yaw": -90,
+  "rig_spec_sha256": "7ddc74452d955bab29bdaef982d32c5c0dd6e6f6d040cf312b0722cb7291c01d",
+  "weights": {
+    "vertices": 338651,
+    "max_influences": 4,
+    "method": "Anatomical capsule weights, smooth region gates, top four influences normalized",
+    "vertices_per_bone": {
+      "pelvis": 241193,
+      "spine": 213134,
+      "head": 167149,
+      "upperarm_l": 42552,
+      "forearm_l": 7086,
+      "thigh_l": 37109,
+      "shin_l": 12788,
+      "upperarm_r": 40309,
+      "forearm_r": 6343,
+      "thigh_r": 36692,
+      "shin_r": 11711
+    },
+    "throat_mask_vertices": 3709
+  },
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0,
+        0,
+        0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.18
+      ]
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.02,
+        1.035
+      ],
+      "tail": [
+        0.0,
+        0.015,
+        1.46
+      ]
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "head": [
+        0.0,
+        0.015,
+        1.46
+      ],
+      "tail": [
+        0.0,
+        -0.025,
+        1.77
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "spine",
+      "head": [
+        0.0,
+        -0.025,
+        1.77
+      ],
+      "tail": [
+        0.0,
+        -0.07,
+        2.11
+      ]
+    },
+    {
+      "name": "upperarm_l",
+      "parent": "spine",
+      "head": [
+        0.24,
+        0.015,
+        1.56
+      ],
+      "tail": [
+        0.405,
+        -0.015,
+        1.23
+      ]
+    },
+    {
+      "name": "forearm_l",
+      "parent": "upperarm_l",
+      "head": [
+        0.405,
+        -0.015,
+        1.23
+      ],
+      "tail": [
+        0.575,
+        -0.03,
+        0.92
+      ]
+    },
+    {
+      "name": "thigh_l",
+      "parent": "pelvis",
+      "head": [
+        0.155,
+        0.025,
+        1.035
+      ],
+      "tail": [
+        0.22,
+        -0.075,
+        0.56
+      ]
+    },
+    {
+      "name": "shin_l",
+      "parent": "thigh_l",
+      "head": [
+        0.22,
+        -0.075,
+        0.56
+      ],
+      "tail": [
+        0.245,
+        0.005,
+        0.1
+      ]
+    },
+    {
+      "name": "upperarm_r",
+      "parent": "spine",
+      "head": [
+        -0.24,
+        0.015,
+        1.56
+      ],
+      "tail": [
+        -0.405,
+        -0.015,
+        1.23
+      ]
+    },
+    {
+      "name": "forearm_r",
+      "parent": "upperarm_r",
+      "head": [
+        -0.405,
+        -0.015,
+        1.23
+      ],
+      "tail": [
+        -0.575,
+        -0.03,
+        0.92
+      ]
+    },
+    {
+      "name": "thigh_r",
+      "parent": "pelvis",
+      "head": [
+        -0.155,
+        0.025,
+        1.035
+      ],
+      "tail": [
+        -0.22,
+        -0.075,
+        0.56
+      ]
+    },
+    {
+      "name": "shin_r",
+      "parent": "thigh_r",
+      "head": [
+        -0.22,
+        -0.075,
+        0.56
+      ],
+      "tail": [
+        -0.245,
+        0.005,
+        0.1
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "file": "base_color.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+      "processing": "Unchanged embedded PNG bytes"
+    },
+    {
+      "file": "metallic_roughness.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+      "processing": "Unchanged embedded PNG bytes"
+    }
+  ],
+  "preview_renders": [
+    "bind-front.png",
+    "bind-side.png",
+    "stride.png",
+    "attack.png"
+  ],
+  "limits": "Automatic anatomical skin weights; no facial/finger rig, cloth, ragdoll or authored mocap. Capsule combat collision remains authoritative. Unreal pose inspection required."
+}

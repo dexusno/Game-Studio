@@ -1,0 +1,289 @@
+{
+  "complete": true,
+  "scope": "/Game/Art/LivingWorld",
+  "imported": [
+    {
+      "name": "SM_LW_Reeds",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_Reeds.SM_LW_Reeds",
+      "dimensions_cm": [
+        118.2183609008789,
+        108.1764030456543,
+        134.67141246795654
+      ],
+      "bounds_origin_cm": [
+        1.1249580383300781,
+        3.537099838256836,
+        64.23758172988892
+      ],
+      "materials": [
+        "M_LW_LeafLight",
+        "M_LW_Reed",
+        "M_LW_Fungus"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_WaterLily",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_WaterLily.SM_LW_WaterLily",
+      "dimensions_cm": [
+        98.61839294433594,
+        95.43070220947266,
+        20.835187792778015
+      ],
+      "bounds_origin_cm": [
+        -4.761928558349609,
+        1.3957023620605469,
+        9.06768137216568
+      ],
+      "materials": [
+        "M_LW_Leaf",
+        "M_LW_LeafLight",
+        "M_LW_Reed",
+        "M_LW_Cream",
+        "M_LW_Petal"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_FungusLog",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_FungusLog.SM_LW_FungusLog",
+      "dimensions_cm": [
+        178.7914810180664,
+        71.07488632202148,
+        78.21151113510132
+      ],
+      "bounds_origin_cm": [
+        -0.001407623291015625,
+        -5.962556838989258,
+        35.59807896614075
+      ],
+      "materials": [
+        "M_LW_Bark",
+        "M_LW_BarkLight",
+        "M_LW_Wood",
+        "M_LW_EndGrain",
+        "M_LW_Fungus",
+        "M_LW_Cream",
+        "M_LW_Moss"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_ShelfFungi",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_ShelfFungi.SM_LW_ShelfFungi",
+      "dimensions_cm": [
+        57.09944725036621,
+        39.07393264770508,
+        53.67630863189697
+      ],
+      "bounds_origin_cm": [
+        -2.3141660690307617,
+        -3.703033447265625,
+        21.748347759246826
+      ],
+      "materials": [
+        "M_LW_Bark",
+        "M_LW_Fungus",
+        "M_LW_Cream"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_FernRosette",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_FernRosette.SM_LW_FernRosette",
+      "dimensions_cm": [
+        117.66237258911133,
+        117.92203521728516,
+        63.6562665104866
+      ],
+      "bounds_origin_cm": [
+        -2.2683658599853516,
+        -4.702922821044922,
+        31.394271224737167
+      ],
+      "materials": [
+        "M_LW_Leaf",
+        "M_LW_LeafLight",
+        "M_LW_Reed"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_MeadowFlowers",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_MeadowFlowers.SM_LW_MeadowFlowers",
+      "dimensions_cm": [
+        78.91508483886719,
+        74.92583084106445,
+        63.667174100875854
+      ],
+      "bounds_origin_cm": [
+        2.8884010314941406,
+        3.7731494903564453,
+        29.722580552101135
+      ],
+      "materials": [
+        "M_LW_Leaf",
+        "M_LW_Reed",
+        "M_LW_Cream",
+        "M_LW_Petal"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_TwistedScrub",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_TwistedScrub.SM_LW_TwistedScrub",
+      "dimensions_cm": [
+        113.54098892211914,
+        112.7901840209961,
+        117.02531719207764
+      ],
+      "bounds_origin_cm": [
+        -2.4481945037841797,
+        -2.8751754760742188,
+        52.9609055519104
+      ],
+      "materials": [
+        "M_LW_LeafLight",
+        "M_LW_Reed",
+        "M_LW_Bark",
+        "M_LW_Fungus"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_CrackedUrn",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_CrackedUrn.SM_LW_CrackedUrn",
+      "dimensions_cm": [
+        116.982421875,
+        69.38480377197266,
+        80.0
+      ],
+      "bounds_origin_cm": [
+        8.159500122070312,
+        0.0,
+        38.0
+      ],
+      "materials": [
+        "M_LW_Bark",
+        "M_LW_Cream",
+        "M_LW_Ceramic",
+        "M_LW_Stone",
+        "M_LW_Moss"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_FallenLintel",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_FallenLintel.SM_LW_FallenLintel",
+      "dimensions_cm": [
+        150.97147369384766,
+        85.11491012573242,
+        34.07242012023926
+      ],
+      "bounds_origin_cm": [
+        6.128307342529297,
+        -3.599943161010742,
+        14.036210060119629
+      ],
+      "materials": [
+        "M_LW_Cream",
+        "M_LW_Stone",
+        "M_LW_Moss"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_RootFan",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_RootFan.SM_LW_RootFan",
+      "dimensions_cm": [
+        134.3507843017578,
+        130.42233276367188,
+        17.69467043876648
+      ],
+      "bounds_origin_cm": [
+        -1.6298904418945312,
+        -1.8210601806640625,
+        5.796747803688049
+      ],
+      "materials": [
+        "M_LW_Reed",
+        "M_LW_Bark",
+        "M_LW_Wood",
+        "M_LW_Moss"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_Dragonfly",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_Dragonfly.SM_LW_Dragonfly",
+      "dimensions_cm": [
+        22.00868797302246,
+        16.115296363830566,
+        3.9909424781799316
+      ],
+      "bounds_origin_cm": [
+        0.0,
+        -1.002331256866455,
+        0.2620251178741455
+      ],
+      "materials": [
+        "M_LW_Insect",
+        "M_LW_Wing"
+      ],
+      "collision_hulls": 0
+    },
+    {
+      "name": "SM_LW_GardenMoth",
+      "path": "/Game/Art/LivingWorld/Meshes/SM_LW_GardenMoth.SM_LW_GardenMoth",
+      "dimensions_cm": [
+        14.00339412689209,
+        10.401350498199463,
+        4.1718257665634155
+      ],
+      "bounds_origin_cm": [
+        0.0,
+        0.32776522636413574,
+        1.0484285950660706
+      ],
+      "materials": [
+        "M_LW_Insect",
+        "M_LW_Wing",
+        "M_LW_WingMark"
+      ],
+      "collision_hulls": 0
+    }
+  ],
+  "materials": [
+    "/Game/Art/LivingWorld/Materials/M_LW_Leaf",
+    "/Game/Art/LivingWorld/Materials/M_LW_LeafLight",
+    "/Game/Art/LivingWorld/Materials/M_LW_Reed",
+    "/Game/Art/LivingWorld/Materials/M_LW_Bark",
+    "/Game/Art/LivingWorld/Materials/M_LW_BarkLight",
+    "/Game/Art/LivingWorld/Materials/M_LW_Wood",
+    "/Game/Art/LivingWorld/Materials/M_LW_EndGrain",
+    "/Game/Art/LivingWorld/Materials/M_LW_Fungus",
+    "/Game/Art/LivingWorld/Materials/M_LW_Cream",
+    "/Game/Art/LivingWorld/Materials/M_LW_Petal",
+    "/Game/Art/LivingWorld/Materials/M_LW_Ceramic",
+    "/Game/Art/LivingWorld/Materials/M_LW_Stone",
+    "/Game/Art/LivingWorld/Materials/M_LW_Moss",
+    "/Game/Art/LivingWorld/Materials/M_LW_Insect",
+    "/Game/Art/LivingWorld/Materials/M_LW_Wing",
+    "/Game/Art/LivingWorld/Materials/M_LW_WingMark"
+  ],
+  "textures": [
+    "/Game/Art/LivingWorld/Textures/T_LW_Leaf.T_LW_Leaf",
+    "/Game/Art/LivingWorld/Textures/T_LW_LeafNormal.T_LW_LeafNormal",
+    "/Game/Art/LivingWorld/Textures/T_LW_Bark.T_LW_Bark",
+    "/Game/Art/LivingWorld/Textures/T_LW_BarkNormal.T_LW_BarkNormal",
+    "/Game/Art/LivingWorld/Textures/T_LW_EndGrain.T_LW_EndGrain",
+    "/Game/Art/LivingWorld/Textures/T_LW_EndGrainNormal.T_LW_EndGrainNormal",
+    "/Game/Art/LivingWorld/Textures/T_LW_Ceramic.T_LW_Ceramic",
+    "/Game/Art/LivingWorld/Textures/T_LW_CeramicNormal.T_LW_CeramicNormal",
+    "/Game/Art/LivingWorld/Textures/T_LW_Stone.T_LW_Stone",
+    "/Game/Art/LivingWorld/Textures/T_LW_StoneNormal.T_LW_StoneNormal"
+  ],
+  "warnings": [],
+  "source": "Original Blender habitat meshes and original analytic texture fields",
+  "collision": "None; decorative HISM placement outside protected paths/pads"
+}

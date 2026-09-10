@@ -172,6 +172,15 @@ def generate(args, image, image_info):
         stage_start = time.monotonic()
         # Normal gated DINOv3 loading remains intact; only the unused rembg load is optional.
         pipeline = Trellis2ImageTo3DPipeline.from_pretrained(str(config_path.parent), load_rembg=False)
+        # FlexGEMM inspects requires_grad on weights even inside no_grad. Leaving
+        # pretrained parameters trainable allocates unused backward neighbor maps
+        # during high-resolution inference. This changes no weights or resolution.
+        frozen_parameters = 0
+        for model in pipeline.models.values():
+            for parameter in model.parameters():
+                parameter.requires_grad_(False)
+                frozen_parameters += parameter.numel()
+        report["generation"]["inference_frozen_parameters"] = frozen_parameters
         report["image_encoder"] = {"model_id": ENCODER_ID,
                                    "revision": getattr(pipeline.image_cond_model.model.config, "_commit_hash", None)}
         pipeline.cuda()

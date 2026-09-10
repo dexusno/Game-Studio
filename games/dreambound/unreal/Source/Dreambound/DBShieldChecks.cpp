@@ -62,6 +62,7 @@ bool ADBShieldCheckRunner::Initialize(ADBGameMode& InMode)
     Player = Mode->Player;
     StartedAt = PhaseStartedAt = FPlatformTime::Seconds();
     OriginalSeed = Mode->Seed;
+    bMovementCheck = FParse::Param(FCommandLine::Get(), TEXT("DBMovementCheck"));
     FString ExplicitSlot;
     const bool bExplicitSlot = FParse::Value(FCommandLine::Get(), TEXT("DBSaveSlot="), ExplicitSlot);
     const bool bSafe = FParse::Param(FCommandLine::Get(), TEXT("DBVerify")) && bExplicitSlot
@@ -96,6 +97,20 @@ bool ADBShieldCheckRunner::Initialize(ADBGameMode& InMode)
     Mode->bBossWon = false;
     Mode->bCanResume = Mode->bSaveFailed = false;
     Mode->StartNewRun(true);
+    if (bMovementCheck)
+    {
+        // Ordinary CharacterMovement ticks on an isolated, level collision fixture.
+        // There is enough runway for a complete stamina bar without teleporting mid-sprint.
+        if (!MakeBox(Origin + FVector(0, 0, -25), FVector(10000, 3000, 25))
+            || !MakeBox(Origin + FVector(350, 1800, 200), FVector(25, 600, 200)))
+        { Check(false, TEXT("movement_fixture"), TEXT("Could not create runway/wall.")); Finish(true); return false; }
+        StageWalkingPlayer(Origin + FVector(-4500, 0, 93));
+        Scenario = TEXT("grounded_locomotion");
+        GoMovement(EMovementStep::Settle);
+        bInitialized = true;
+        WriteResult(false);
+        return true;
+    }
     if (IsTrellisArtCheck())
     {
         bInitialized = true;
@@ -362,13 +377,215 @@ void ADBShieldCheckRunner::DestroyFixtures()
     FixtureActors.Reset(); Target = nullptr; OtherTarget = nullptr; BlockedBlastTarget = nullptr; Cover = nullptr;
 }
 
+void ADBShieldCheckRunner::StageWalkingPlayer(FVector Location)
+{
+    ResetPlayer(Location);
+    Player->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+    MovementProbe.Input = FVector::ZeroVector;
+}
+
+void ADBShieldCheckRunner::GoMovement(EMovementStep Next)
+{
+    FMovementProbe& M = MovementProbe;
+    M.Step = Next;
+    M.Age = M.Distance = M.PeakSpeed = M.MaxZ = M.SampleDistance = M.SampleSeconds = 0.f;
+    M.Start = M.Last = Player->GetActorLocation();
+    M.StartStamina = Player->Stamina;
+}
+
+void ADBShieldCheckRunner::TickMovement(float DeltaSeconds)
+{
+    FMovementProbe& M = MovementProbe;
+    UCharacterMovementComponent* Movement = Player->GetCharacterMovement();
+    M.Age += DeltaSeconds;
+    M.Elapsed += DeltaSeconds;
+    const FVector Position = Player->GetActorLocation();
+    const float Travel = FVector::Dist2D(Position, M.Last);
+    M.Distance += Travel;
+    M.PeakSpeed = FMath::Max(M.PeakSpeed, Travel / FMath::Max(DeltaSeconds, .001f));
+    M.MaxZ = FMath::Max(M.MaxZ, float(FMath::Abs(Position.Z - M.Start.Z)));
+    if (M.Age > .3f) { M.SampleDistance += Travel; M.SampleSeconds += DeltaSeconds; }
+    M.Last = Position;
+    if (M.Elapsed > 24.f)
+    { Check(false, TEXT("movement_world_timeout"), FString::Printf(TEXT("step=%d elapsed=%.3fs"), int32(M.Step), M.Elapsed)); Finish(true); return; }
+
+    const bool bGrounded = Movement->IsMovingOnGround() && Movement->CurrentFloor.IsWalkableFloor();
+    const auto ReadyOnFloor = [&]()
+    {
+        if (M.Age >= .18f && bGrounded && FMath::Abs(Player->GetVelocity().Z) < 1.f) return true;
+        if (M.Age > 1.f)
+        { Check(false, TEXT("walking_floor_ready"), FString::Printf(TEXT("step=%d z=%.2f mode=%d"), int32(M.Step), Position.Z, int32(Movement->MovementMode))); Finish(true); }
+        return false;
+    };
+    switch (M.Step)
+    {
+    case EMovementStep::Settle:
+        if (!ReadyOnFloor()) break;
+        Player->PressSprint(); GoMovement(EMovementStep::Idle); break;
+    case EMovementStep::Idle:
+        if (M.Age < .65f) break;
+        M.bIdleGood = M.Distance < 1.f && !Player->IsSprinting()
+            && FMath::IsNearlyEqual(Player->Stamina, Player->MaxStamina, .1f);
+        Player->ReleaseSprint(); M.Input = FVector::ForwardVector;
+        GoMovement(EMovementStep::Walk); break;
+    case EMovementStep::Walk:
+        if (M.Age < .85f) break;
+        {
+            const float MeasuredSpeed = M.SampleDistance / FMath::Max(M.SampleSeconds, .001f);
+            Check(M.bIdleGood && bGrounded && !Player->IsSprinting()
+                && MeasuredSpeed > 565.f && MeasuredSpeed < 615.f,
+                TEXT("stationary_sprint_and_real_walk"),
+                FString::Printf(TEXT("Stationary Shift retained full stamina=%d; physical walking after acceleration %.1f cm/s over %.3fs."), M.bIdleGood, MeasuredSpeed, M.SampleSeconds));
+        }
+        Player->PressSprint(); GoMovement(EMovementStep::Sprint); break;
+    case EMovementStep::Sprint:
+        if (Player->Stamina > .01f && M.Age < 5.6f) break;
+        Check(Player->Stamina <= .01f && !Player->IsSprinting() && bGrounded
+            && M.Age >= 4.9f && M.Age <= 5.35f && M.Distance > 4200.f && M.Distance < 4700.f
+            && M.PeakSpeed > 860.f && M.PeakSpeed < 920.f,
+            TEXT("sprint_exhausts_after_physical_run"),
+            FString::Printf(TEXT("Full-bar run %.3fs, displacement/path %.1f cm, peak %.1f cm/s, stamina %.3f; expected roughly five seconds at 885 cm/s after acceleration."), M.Age, M.Distance, M.PeakSpeed, Player->Stamina));
+        M.FirstRecovery = -1.f; M.bDelayGood = false;
+        GoMovement(EMovementStep::RecoverHeld); break;
+    case EMovementStep::RecoverHeld:
+        // Keep both movement and the original Shift hold through recovery.
+        if (M.FirstRecovery < 0.f && Player->Stamina > .2f) M.FirstRecovery = M.Age;
+        if (M.Age >= .55f && M.Age <= .7f) M.bDelayGood = Player->Stamina <= .2f && !Player->IsSprinting();
+        if (M.Age < 1.8f) break;
+        Check(M.bDelayGood && M.FirstRecovery >= .76f && M.FirstRecovery <= .92f
+            && Player->Stamina >= 22.f && Player->Stamina <= 28.f && !Player->IsSprinting()
+            && Player->GetVelocity().Size2D() < 615.f,
+            TEXT("delayed_recovery_does_not_restart_held_sprint"),
+            FString::Printf(TEXT("First observed recovery %.3fs; stamina %.2f at %.3fs, speed %.1f cm/s while original Shift remains held. Expected 0.8s delay then 25/s."), M.FirstRecovery, Player->Stamina, M.Age, Player->GetVelocity().Size2D()));
+        Player->ReleaseSprint(); Player->PressSprint();
+        GoMovement(EMovementStep::ResumeSprint); break;
+    case EMovementStep::ResumeSprint:
+        if (M.Age < .45f) break;
+        M.bFreshSprintGood = Player->IsSprinting() && M.PeakSpeed > 820.f
+            && M.StartStamina >= 20.f && Player->Stamina < 20.f;
+        Player->ReleaseSprint(); Player->PressSprint();
+        GoMovement(EMovementStep::RejectLowSprint); break;
+    case EMovementStep::RejectLowSprint:
+        if (M.Age < .3f) break;
+        Check(M.bFreshSprintGood && !Player->IsSprinting() && Player->GetVelocity().Size2D() < 615.f,
+            TEXT("fresh_sprint_requires_recovered_threshold"),
+            FString::Printf(TEXT("Fresh press above 20 produced physical sprint=%d; second fresh press at %.2f stamina stayed walking at %.1f cm/s."), M.bFreshSprintGood, M.StartStamina, Player->GetVelocity().Size2D()));
+        StageWalkingPlayer(Origin + FVector(0, 1800, 93));
+        GoMovement(EMovementStep::WallSettle); break;
+    case EMovementStep::WallSettle:
+        if (!ReadyOnFloor()) break;
+        Player->PressSprint(); M.Input = FVector::ForwardVector;
+        GoMovement(EMovementStep::WallApproach); break;
+    case EMovementStep::WallApproach:
+        if (M.Age < .85f) break;
+        GoMovement(EMovementStep::WallHold); break;
+    case EMovementStep::WallHold:
+        if (M.Age < 1.f) break;
+        Check(M.Distance < 1.f && M.PeakSpeed < 3.f && !Player->IsSprinting()
+            && Player->Stamina >= M.StartStamina - .1f,
+            TEXT("sprint_into_solid_wall_does_not_drain"),
+            FString::Printf(TEXT("After physical contact, held movement/Shift for %.3fs: displacement %.3f cm, stamina %.2f -> %.2f."), M.Age, M.Distance, M.StartStamina, Player->Stamina));
+        Scenario = TEXT("grounded_evasion");
+        StageWalkingPlayer(Origin + FVector(-2500, 0, 93));
+        GoMovement(EMovementStep::DashSettle); break;
+    case EMovementStep::DashSettle:
+        if (!ReadyOnFloor()) break;
+        Player->Dash(); GoMovement(EMovementStep::OpenDash); break;
+    case EMovementStep::OpenDash:
+        if (Player->IsDashing() && M.Age < .6f) break;
+        Check(!Player->IsDashing() && bGrounded && M.Age >= .20f && M.Age <= .34f
+            && M.Distance >= 420.f && M.Distance <= 480.f && M.MaxZ < 2.f && M.PeakSpeed > 1500.f
+            && FMath::IsNearlyEqual(Player->Stamina, M.StartStamina, .1f),
+            TEXT("dash_moves_four_metres_without_hop"),
+            FString::Printf(TEXT("Actual dash %.3fs, path %.2f cm, peak %.1f cm/s, maximum vertical offset %.3f cm, stamina %.2f -> %.2f. Sampling includes the tick that reports source completion."), M.Age, M.Distance, M.PeakSpeed, M.MaxZ, M.StartStamina, Player->Stamina));
+        Player->ReleaseDash(); Player->Dash();
+        M.bCooldownBlocked = !Player->IsDashing() && Player->DashCooldown > .8f;
+        M.bHeldPointSet = false; GoMovement(EMovementStep::DashCooldown); break;
+    case EMovementStep::DashCooldown:
+        if (M.Age > .3f && !M.bHeldPointSet) { M.HeldPoint = Position; M.bHeldPointSet = true; }
+        Player->Dash(); // Repeated calls without ReleaseDash cannot become a new press.
+        if (M.Age < 1.55f) break;
+        {
+            const bool HeldStill = M.bHeldPointSet && FVector::Dist2D(Position, M.HeldPoint) < 1.f
+                && !Player->IsDashing() && Player->DashCooldown <= .001f;
+            Player->ReleaseDash(); Player->Dash();
+            Check(M.bCooldownBlocked && HeldStill && Player->IsDashing(),
+                TEXT("dash_cooldown_and_release_edge"),
+                FString::Printf(TEXT("Early fresh press rejected=%d; held repeat stayed still after cooldown=%d; release/new press starts=%d."), M.bCooldownBlocked, HeldStill, Player->IsDashing()));
+        }
+        StageWalkingPlayer(Origin + FVector(0, 1800, 93));
+        GoMovement(EMovementStep::WallDashSettle); break;
+    case EMovementStep::WallDashSettle:
+        if (!ReadyOnFloor()) break;
+        Player->Dash(); GoMovement(EMovementStep::WallDash); break;
+    case EMovementStep::WallDash:
+        if (M.Age < .45f) break;
+        {
+            const float ContactX = Origin.X + 325.f - Player->GetCapsuleComponent()->GetScaledCapsuleRadius();
+            Check(!Player->IsDashing() && bGrounded && M.Distance > 250.f
+                && Position.X <= ContactX + 1.f && Position.X >= ContactX - 3.f
+                && M.MaxZ < 2.f && Player->GetVelocity().Size2D() < 3.f,
+                TEXT("dash_stops_at_physical_wall"),
+                FString::Printf(TEXT("Path %.2f cm; capsule X %.3f, wall contact limit %.3f; vertical offset %.3f cm, final speed %.3f cm/s."), M.Distance, Position.X, ContactX, M.MaxZ, Player->GetVelocity().Size2D()));
+        }
+        Scenario = TEXT("movement_menu_and_reset");
+        StageWalkingPlayer(Origin + FVector(-2500, 0, 93));
+        GoMovement(EMovementStep::PauseSettle); break;
+    case EMovementStep::PauseSettle:
+        if (!ReadyOnFloor()) break;
+        M.Input = FVector::ForwardVector; Player->PressSprint();
+        GoMovement(EMovementStep::PauseSprint); break;
+    case EMovementStep::PauseSprint:
+        if (M.Age < .3f) break;
+        M.Input = FVector::ZeroVector; Player->ReleaseSprint(); Player->Dash();
+        GoMovement(EMovementStep::PauseDash); break;
+    case EMovementStep::PauseDash:
+        if (M.Age < .07f) break;
+        M.bPauseGood = Player->IsDashing() && M.Distance > 80.f && Player->Stamina < Player->MaxStamina;
+        Mode->TogglePause(); M.SavedCooldown = Player->DashCooldown;
+        GoMovement(EMovementStep::Paused); break;
+    case EMovementStep::Paused:
+        if (M.Age < .35f) break;
+        M.bPauseGood &= Mode->bPaused && !Player->IsDashing() && !Player->IsSprinting()
+            && M.Distance < .01f && FMath::IsNearlyEqual(Player->Stamina, M.StartStamina, .001f)
+            && FMath::IsNearlyEqual(Player->DashCooldown, M.SavedCooldown, .001f);
+        Mode->TogglePause(); GoMovement(EMovementStep::Resume); break;
+    case EMovementStep::Resume:
+        if (M.Age < .35f) break;
+        Check(M.bPauseGood && !Mode->bPaused && !Player->IsDashing() && !Player->IsSprinting()
+            && M.Distance < 1.f && Player->GetVelocity().Size2D() < 1.f,
+            TEXT("pause_suspends_dash_and_resume_has_no_stale_input"),
+            FString::Printf(TEXT("Active dash canceled/frozen with stamina and cooldown retained=%d; resume drift %.3f cm over %.3fs."), M.bPauseGood, M.Distance, M.Age));
+        Player->OnRunReset(); Player->PressSprint(); Player->Dash();
+        GoMovement(EMovementStep::ResetDash); break;
+    case EMovementStep::ResetDash:
+        if (M.Age < .07f) break;
+        M.bResetStarted = Player->IsDashing() && M.Distance > 80.f;
+        Player->OnRunReset(); GoMovement(EMovementStep::ResetWait); break;
+    case EMovementStep::ResetWait:
+        if (M.Age < .35f) break;
+        {
+            const bool Cleared = M.bResetStarted && !Player->IsDashing() && !Player->IsSprinting()
+                && M.Distance < 1.f && FMath::IsNearlyEqual(Player->Stamina, Player->MaxStamina, .001f)
+                && Player->DashCooldown <= .001f && FMath::IsNearlyEqual(Movement->MaxWalkSpeed, 590.f, .1f);
+            Player->Dash();
+            Check(Cleared && Player->IsDashing(), TEXT("run_reset_clears_burst_resources_and_held_latches"),
+                FString::Printf(TEXT("Reset during measured dash; clean resources/stillness=%d, drift %.3f cm; fresh dash accepted without stale held latch=%d."), Cleared, M.Distance, Player->IsDashing()));
+        }
+        Finish(); return;
+    }
+    if (!bFinished && !MovementProbe.Input.IsNearlyZero() && Player->CanAct())
+        Player->AddMovementInput(MovementProbe.Input);
+}
+
 void ADBShieldCheckRunner::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if (!bInitialized || bFinished) return;
-    if (FPlatformTime::Seconds() - StartedAt > 150.0)
+    if (FPlatformTime::Seconds() - StartedAt > (bMovementCheck ? 45.0 : 150.0))
     { Check(false, TEXT("bounded_timeout"), FString::Printf(TEXT("step=%d"), int32(Step))); Finish(true); return; }
     if (!IsValid(Mode) || !IsValid(Player)) { Check(false, TEXT("runtime_actor_lost")); Finish(true); return; }
+    if (bMovementCheck) { TickMovement(DeltaSeconds); return; }
     PhaseAge += DeltaSeconds;
     switch (Step)
     {
@@ -823,13 +1040,15 @@ void ADBShieldCheckRunner::Finish(bool bAbort)
 
 void ADBShieldCheckRunner::WriteResult(bool bComplete) const
 {
-    const bool bArtCheck = IsTrellisArtCheck();
+    const bool bArtCheck = !bMovementCheck && IsTrellisArtCheck();
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
-    Report->SetStringField(TEXT("suite"), bArtCheck ? TEXT("reverie-environment-route-v2") : TEXT("folding-shield-combat-route-v2"));
-    Report->SetStringField(TEXT("scope"), bArtCheck
+    Report->SetStringField(TEXT("suite"), bMovementCheck ? TEXT("grounded-movement-v1") : bArtCheck ? TEXT("reverie-environment-route-v2") : TEXT("folding-shield-combat-route-v2"));
+    Report->SetStringField(TEXT("scope"), bMovementCheck
+        ? TEXT("Ordinary world ticks and real CharacterMovement displacement/collision on a staged level runway and solid wall. Public sprint/dash APIs and AddMovementInput exercise stamina exhaustion/recovery, blocked movement, dash travel, cooldown/held edge, pause and run reset. Isolated QA journals backed up/restored. No legacy combat/route cases, native input, visual or feel evidence.")
+        : bArtCheck
         ? TEXT("Seeded route/garden reproduction and variation, three capsule lanes through each gateway/bridge, continuous floors, physical closed gates and enclosing walls, actual new asset instances, functional arch placement, retained spawn/combat/ward pads and side stair floor profiles. Gates are excluded only from passage queries. Isolated QA profile backed up/restored; no combat fixture, visual judgment or ordinary play.")
         : TEXT("Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."));
-    if (bArtCheck)
+    if (bArtCheck || bMovementCheck)
     {
         Report->SetBoolField(TEXT("combat_tested"), false);
         Report->SetBoolField(TEXT("ordinary_play_tested"), false);
@@ -842,8 +1061,9 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     Report->SetBoolField(TEXT("null_rhi"), FParse::Param(FCommandLine::Get(), TEXT("NullRHI")));
     Report->SetBoolField(TEXT("complete"), bComplete);
     Report->SetBoolField(TEXT("aborted"), bAborted);
-    Report->SetNumberField(TEXT("last_step"), int32(Step));
+    Report->SetNumberField(TEXT("last_step"), bMovementCheck ? int32(MovementProbe.Step) : int32(Step));
     Report->SetNumberField(TEXT("elapsed_wall_seconds"), FPlatformTime::Seconds() - StartedAt);
+    if (bMovementCheck) Report->SetNumberField(TEXT("elapsed_tick_seconds"), MovementProbe.Elapsed);
     TArray<TSharedPtr<FJsonValue>> Rows;
     TMap<FString, TSharedPtr<FJsonObject>> Scenarios;
     for (const FCheck& Result : Checks)
@@ -872,7 +1092,10 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     Report->SetNumberField(TEXT("passed"), Passed);
     Report->SetNumberField(TEXT("failed"), Failed);
     Report->SetArrayField(TEXT("checks"), Rows);
-    Report->SetStringField(TEXT("not_run"), bArtCheck
+    Report->SetStringField(TEXT("not_run"), bMovementCheck
+        ? (bAborted ? TEXT("Remaining movement steps after last_step; combat/immunity, slopes/stairs/ledges, native keyboard/focus, ordinary play, graphics, audio, feel and performance.")
+                    : TEXT("Combat/immunity, slopes/stairs/ledges, native keyboard/focus, ordinary play, graphics, audio, feel and performance."))
+        : bArtCheck
         ? (bAborted ? TEXT("Remaining art checks after last_step; all combat checks, ordinary inputs/play, rendered graphics, audio/feel and performance.")
                    : TEXT("All combat checks, ordinary inputs/play, rendered graphics, audio/feel and performance."))
         : (bAborted ? TEXT("Remaining steps after last_step; ordinary inputs, graphics/audio/feel and an unstaged full journey.")
@@ -882,7 +1105,7 @@ void ADBShieldCheckRunner::WriteResult(bool bComplete) const
     FJsonSerializer::Serialize(Report, Writer);
     const FString Directory = FPaths::ProjectSavedDir() / TEXT("QA");
     IFileManager::Get().MakeDirectory(*Directory, true);
-    const FString Path = Directory / (bArtCheck ? TEXT("reverie-art-checks.json") : TEXT("combat-feel-checks.json"));
+    const FString Path = Directory / (bMovementCheck ? TEXT("movement-checks.json") : bArtCheck ? TEXT("reverie-art-checks.json") : TEXT("combat-feel-checks.json"));
     const bool bWritten = FFileHelper::SaveStringToFile(Json, *Path);
     UE_LOG(LogTemp, Display, TEXT("DB_SHIELD_QA_RESULT complete=%d aborted=%d passed=%d failed=%d written=%d path=%s"),
         bComplete, bAborted, Passed, Failed, bWritten, *Path);

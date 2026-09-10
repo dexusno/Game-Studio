@@ -15,6 +15,7 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/RootMotionSource.h"
 #include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInterface.h"
 #include "Sound/SoundBase.h"
@@ -22,6 +23,16 @@
 
 namespace
 {
+    constexpr float WalkSpeed = 590.f;
+    constexpr float SprintSpeed = 885.f;
+    constexpr float WalkAcceleration = 4500.f;
+    constexpr float WalkBraking = 3600.f;
+    constexpr float WalkFriction = 10.f;
+    constexpr float EvasionSpeed = 1850.f;
+    constexpr float EvasionDuration = .24f;
+    constexpr float SprintDrainPerSecond = 20.f;
+    constexpr float StaminaRecoveryPerSecond = 25.f;
+    constexpr float StaminaRecoveryWait = .8f;
     const FName MirrorId(TEXT("Mirror"));
     const FName RamId(TEXT("Ram"));
     const FName EchoId(TEXT("Echo"));
@@ -75,13 +86,13 @@ ADBCharacter::ADBCharacter()
     bUseControllerRotationYaw = true;
 
     UCharacterMovementComponent* Movement = GetCharacterMovement();
-    Movement->MaxWalkSpeed = 590.f;
-    Movement->MaxAcceleration = 3200.f;
-    Movement->BrakingDecelerationWalking = 2300.f;
-    Movement->GroundFriction = 8.f;
+    Movement->MaxWalkSpeed = WalkSpeed;
+    Movement->MaxAcceleration = WalkAcceleration;
+    Movement->BrakingDecelerationWalking = WalkBraking;
+    Movement->GroundFriction = WalkFriction;
     Movement->JumpZVelocity = 565.f;
-    Movement->GravityScale = 1.55f;
-    Movement->AirControl = .55f;
+    Movement->GravityScale = 1.85f;
+    Movement->AirControl = .25f;
     Movement->MaxStepHeight = 42.f;
 
     ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -156,6 +167,7 @@ ADBCharacter::ADBCharacter()
 void ADBCharacter::BeginPlay()
 {
     Super::BeginPlay();
+    PreviousMotionLocation = GetActorLocation();
     BeamMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
     SparkMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere"));
     CeramicMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/PreferredCombat/Materials/M_Ceramic.M_Ceramic"));
@@ -222,6 +234,9 @@ void ADBCharacter::BeginPlay()
     GuardSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Guard.S_Guard"));
     ParrySound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Parry.S_Parry"));
     DashSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Dash.S_Dash"));
+    FootstepASound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_FootstepA.S_FootstepA"));
+    FootstepBSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_FootstepB.S_FootstepB"));
+    LandSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Land.S_Land"));
     ImpactSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Impact.S_Impact"));
     EquipSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Equip.S_Equip"));
     HurtSound = LoadObject<USoundBase>(nullptr, TEXT("/Game/Audio/Reverie/S_Hurt.S_Hurt"));
@@ -245,6 +260,8 @@ void ADBCharacter::BeginPlay()
     ImpactConcurrency = MakeConcurrency(2);
     HeavyImpactConcurrency = MakeConcurrency(1);
     CatchConcurrency = MakeConcurrency(2);
+    FootstepConcurrency = MakeConcurrency(2);
+    LandingConcurrency = MakeConcurrency(1);
     RefreshEquipmentVisuals();
     // The title can pause gameplay before the first active Tick. Initialize the folded
     // assembly now so its imported default transforms never appear behind the menu.
@@ -271,6 +288,9 @@ void ADBCharacter::SetupPlayerInputComponent(UInputComponent* Input)
     Input->BindAction(TEXT("Special"), IE_Pressed, this, &ADBCharacter::UseSpecial);
     Input->BindAction(TEXT("Recall"), IE_Pressed, this, &ADBCharacter::RecallShield);
     Input->BindAction(TEXT("Dash"), IE_Pressed, this, &ADBCharacter::Dash);
+    Input->BindAction(TEXT("Dash"), IE_Released, this, &ADBCharacter::ReleaseDash).bExecuteWhenPaused = true;
+    Input->BindAction(TEXT("Sprint"), IE_Pressed, this, &ADBCharacter::PressSprint);
+    Input->BindAction(TEXT("Sprint"), IE_Released, this, &ADBCharacter::ReleaseSprint).bExecuteWhenPaused = true;
     Input->BindAction(TEXT("Jump"), IE_Pressed, this, &ADBCharacter::BeginJump);
     Input->BindAction(TEXT("Jump"), IE_Released, this, &ADBCharacter::EndJump).bExecuteWhenPaused = true;
     Input->BindAction(TEXT("Interact"), IE_Pressed, this, &ADBCharacter::Interact);
@@ -312,6 +332,7 @@ void ADBCharacter::Tick(float DeltaSeconds)
     SpecialCooldown = FMath::Max(0.f, SpecialCooldown - DeltaSeconds);
     GuardBreakTime = FMath::Max(0.f, GuardBreakTime - DeltaSeconds);
     InvulnerabilityTime = FMath::Max(0.f, InvulnerabilityTime - DeltaSeconds);
+    EvasionInvulnerabilityTime = FMath::Max(0.f, EvasionInvulnerabilityTime - DeltaSeconds);
     HitMarkerTime = FMath::Max(0.f, HitMarkerTime - DeltaSeconds);
     HurtFlashTime = FMath::Max(0.f, HurtFlashTime - DeltaSeconds);
     ParryFlashTime = FMath::Max(0.f, ParryFlashTime - DeltaSeconds);
@@ -373,9 +394,9 @@ void ADBCharacter::Tick(float DeltaSeconds)
     if (GetAttachedPieceCount() == 0) bGuarding = false;
 
     DashTime = FMath::Max(0.f, DashTime - DeltaSeconds);
-    GetCharacterMovement()->GroundFriction = DashTime > 0.f ? 0.f : 8.f;
+    GetCharacterMovement()->GroundFriction = DashTime > 0.f ? 0.f : WalkFriction;
     GetCharacterMovement()->BrakingDecelerationFalling = DashTime > 0.f ? 0.f : 600.f;
-    GetCharacterMovement()->MaxWalkSpeed = bGuarding ? 320.f : 590.f;
+    UpdateLocomotion(DeltaSeconds);
     if (bRushActive)
     {
         RushTime -= DeltaSeconds;
@@ -418,8 +439,106 @@ void ADBCharacter::LookUp(float Value)
     LookSwayY = FMath::Clamp(LookSwayY + Value * .1f, -2.f, 2.f);
 }
 
-void ADBCharacter::BeginJump() { if (CanAct()) Jump(); }
+void ADBCharacter::BeginJump() { if (CanAct() && !IsDashing()) Jump(); }
 void ADBCharacter::EndJump() { StopJumping(); }
+
+void ADBCharacter::PressSprint()
+{
+    if (!CanAct() || Stamina < 20.f) return;
+    bWantsSprint = true;
+    bSprintExhausted = false;
+}
+
+void ADBCharacter::ReleaseSprint() { bWantsSprint = false; bSprinting = false; }
+
+void ADBCharacter::Landed(const FHitResult& Hit)
+{
+    const float FallSpeed = FMath::Max(0.f, -GetVelocity().Z);
+    if (CanAct() && FallSpeed > 160.f)
+        LandingImpact = FMath::Max(LandingImpact, FMath::Clamp((FallSpeed - 160.f) / 700.f, 0.f, 1.f));
+    if (CanAct() && !IsDashing() && LocomotionAudioHold <= 0.f && FallSpeed >= 180.f
+        && FVector::DistSquared(GetActorLocation(), PreviousMotionLocation) < FMath::Square(300.f))
+    {
+        PlayCombatSound(LandSound, .48f * FMath::Clamp(FallSpeed / 700.f, .25f, 1.f));
+        FootstepDistance = 0.f;
+        FootstepAudioCooldown = .18f;
+    }
+    Super::Landed(Hit);
+}
+
+void ADBCharacter::UpdateLocomotion(float DeltaSeconds)
+{
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    if (DashRootMotionId != 0)
+    {
+        const auto Source = Movement->GetRootMotionSourceByID(DashRootMotionId);
+        if (!Source.IsValid() || Source->Status.HasFlag(ERootMotionSourceStatusFlags::Finished)
+            || Source->Status.HasFlag(ERootMotionSourceStatusFlags::MarkedForRemoval))
+            DashRootMotionId = 0;
+        else if (!Movement->IsMovingOnGround()) EndEvasion();
+    }
+
+    // Measure displacement, not requested velocity: leaning into a wall must
+    // neither spend sprint stamina nor keep the walking gait oscillating.
+    const FVector Delta = GetActorLocation() - PreviousMotionLocation;
+    FootstepAudioCooldown = FMath::Max(0.f, FootstepAudioCooldown - DeltaSeconds);
+    LocomotionAudioHold = FMath::Max(0.f, LocomotionAudioHold - DeltaSeconds);
+    if (Delta.SizeSquared() > FMath::Square(300.f)
+        || (DeltaSeconds > UE_SMALL_NUMBER && Delta.Size2D() / DeltaSeconds > EvasionSpeed * 1.5f))
+        LocomotionAudioHold = .2f;
+    const FVector ActualVelocity = DeltaSeconds > UE_SMALL_NUMBER && Delta.SizeSquared2D() < FMath::Square(300.f)
+        ? FVector(Delta.X, Delta.Y, 0.f) / DeltaSeconds : FVector::ZeroVector;
+    PreviousMotionLocation = GetActorLocation();
+    const bool bGrounded = Movement->IsMovingOnGround();
+    const bool bHasInput = !GetPendingMovementInputVector().IsNearlyZero(.05f)
+        || !GetLastMovementInputVector().IsNearlyZero(.05f);
+    const bool bSprintAllowed = bWantsSprint && !bSprintExhausted && Stamina > 0.f
+        && bGrounded && bHasInput && !bGuarding && !IsDashing() && !bRushActive;
+    bSprinting = bSprintAllowed && ActualVelocity.SizeSquared2D() > FMath::Square(80.f);
+    if (bSprinting)
+    {
+        Stamina = FMath::Max(0.f, Stamina - SprintDrainPerSecond * DeltaSeconds);
+        StaminaRecoveryDelay = StaminaRecoveryWait;
+        if (Stamina <= 0.f) { bSprintExhausted = true; bSprinting = false; }
+    }
+    else
+    {
+        const float RecoveryTime = FMath::Max(0.f, DeltaSeconds - StaminaRecoveryDelay);
+        StaminaRecoveryDelay = FMath::Max(0.f, StaminaRecoveryDelay - DeltaSeconds);
+        Stamina = FMath::Min(MaxStamina, Stamina + StaminaRecoveryPerSecond * RecoveryTime);
+    }
+    // Exhaustion latches until a fresh Shift press; holding an empty bar
+    // cannot alternate tiny sprints and recovery every few frames.
+    Movement->MaxWalkSpeed = bGuarding ? 320.f : bSprintAllowed && !bSprintExhausted ? SprintSpeed : WalkSpeed;
+    GroundedSpeed = bGrounded && !IsDashing() && !bRushActive
+        ? FMath::Min(float(ActualVelocity.Size2D()), SprintSpeed) : 0.f;
+    // Footfalls follow the same measured ground travel as the visible gait.
+    // No catch-up loop: a hitch, teleport or stopped body cannot emit a burst.
+    if (CanAct() && bGrounded && bHasInput && !IsDashing() && !bRushActive
+        && LocomotionAudioHold <= 0.f && GroundedSpeed > 50.f
+        && ActualVelocity.Size2D() <= SprintSpeed * 1.25f)
+    {
+        FootstepDistance += GroundedSpeed * DeltaSeconds;
+        const float Stride = bSprinting ? 260.f : 200.f;
+        if (FootstepDistance >= Stride && FootstepAudioCooldown <= 0.f)
+        {
+            const float Pitches[] = {.98f, 1.03f, 1.f, .97f, 1.02f, .99f};
+            PlayCombatSound(FootstepSequence % 2 ? FootstepBSound.Get() : FootstepASound.Get(),
+                bSprinting ? .40f : .28f, Pitches[FootstepSequence]);
+            FootstepSequence = (FootstepSequence + 1) % static_cast<int32>(UE_ARRAY_COUNT(Pitches));
+            FootstepDistance = FMath::Fmod(FootstepDistance, Stride);
+            FootstepAudioCooldown = .12f;
+        }
+    }
+    else FootstepDistance = 0.f;
+    const FVector LocalAcceleration = GetActorQuat().UnrotateVector(
+        (ActualVelocity - PreviousMotionVelocity) / FMath::Max(DeltaSeconds, .001f));
+    const FVector LeanTarget = bGrounded && !IsDashing() && !bRushActive
+        ? FVector(FMath::Clamp(LocalAcceleration.X / WalkAcceleration, -1.f, 1.f),
+            FMath::Clamp(LocalAcceleration.Y / WalkAcceleration, -1.f, 1.f), 0.f) : FVector::ZeroVector;
+    MovementLean = FMath::VInterpTo(MovementLean, LeanTarget, DeltaSeconds, 12.f);
+    PreviousMotionVelocity = ActualVelocity;
+}
 
 
 void ADBCharacter::PressFire()
@@ -475,6 +594,21 @@ void ADBCharacter::ReleaseGuard()
 
 void ADBCharacter::SuspendCombatInput()
 {
+    EndEvasion(true);
+    bWantsSprint = bSprinting = bDashHeld = false;
+    DashTime = RushTime = EvasionInvulnerabilityTime = 0.f;
+    GroundedSpeed = GaitAmount = SprintBlend = LandingImpact = 0.f;
+    FootstepDistance = FootstepAudioCooldown = 0.f;
+    FootstepSequence = 0;
+    LocomotionAudioHold = .2f;
+    MovementLean = PreviousMotionVelocity = FVector::ZeroVector;
+    PreviousMotionLocation = GetActorLocation();
+    GetCharacterMovement()->GroundFriction = WalkFriction;
+    GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+    GetCharacterMovement()->ClearAccumulatedForces();
+    GetCharacterMovement()->StopMovementImmediately();
+    ViewCamera->ClearAdditiveOffset();
+    ViewCamera->SetFieldOfView(94.f);
     bWantsFire = false;
     bWantsGuard = false;
     bStrikeBuffered = false;
@@ -1064,6 +1198,7 @@ void ADBCharacter::StartRimStrike(bool bHeavy)
 
 void ADBCharacter::UpdateMeleeStep(float DeltaSeconds)
 {
+    if (IsDashing()) return;
     if (!bStrikePending || MeleeStepRemaining <= 0.f || !GetCharacterMovement()->IsMovingOnGround()) return;
     const float Step = FMath::Min(MeleeStepRemaining, DeltaSeconds * 460.f);
     FHitResult Obstruction;
@@ -1148,6 +1283,7 @@ void ADBCharacter::ResolveRimStrike()
     ImpactPose = bMadeContact ? 1.f : .35f;
     if (bHeavyStrike && HasUpgrade(RamId))
     {
+        EndEvasion();
         RushDirection = Forward.GetSafeNormal2D();
         RushDamage = 100.f;
         RushTime = .24f;
@@ -1308,17 +1444,50 @@ void ADBCharacter::ResolveRush()
 
 void ADBCharacter::Dash()
 {
-    if (!CanAct() || DashCooldown > 0.f) return;
-    FVector Direction = GetLastMovementInputVector();
-    if (Direction.IsNearlyZero()) Direction = GetAimDirection();
-    Direction.Z = 0.f;
-    Direction.Normalize();
+    if (!CanAct() || bDashHeld) return;
+    bDashHeld = true;
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    if (DashCooldown > 0.f || IsDashing() || bRushActive || !Movement->IsMovingOnGround()) return;
+    FVector Direction = GetPendingMovementInputVector();
+    if (Direction.IsNearlyZero(.05f)) Direction = GetLastMovementInputVector();
+    if (Direction.IsNearlyZero(.05f)) Direction = FRotator(0.f, GetControlRotation().Yaw, 0.f).Vector();
+    Direction = Direction.GetSafeNormal2D();
+
+    // A finite horizontal root-motion velocity uses CharacterMovement's
+    // normal swept walking/step physics. No launch, teleport or Z impulse.
+    TSharedPtr<FRootMotionSource_ConstantForce> Burst = MakeShared<FRootMotionSource_ConstantForce>();
+    Burst->InstanceName = TEXT("GroundEvasion");
+    Burst->Priority = 500;
+    Burst->AccumulateMode = ERootMotionAccumulateMode::Override;
+    Burst->Force = Direction * EvasionSpeed;
+    Burst->Duration = EvasionDuration;
+    Burst->Settings.SetFlag(ERootMotionSourceSettingsFlags::IgnoreZAccumulate);
+    Burst->Settings.UnSetFlag(ERootMotionSourceSettingsFlags::DisablePartialEndTick);
+    Burst->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::ClampVelocity;
+    Burst->FinishVelocityParams.ClampVelocity = bGuarding ? 320.f : WalkSpeed;
+    DashRootMotionId = Movement->ApplyRootMotionSource(Burst);
+    if (DashRootMotionId == 0) return;
     DashCooldown = 1.45f;
-    DashTime = .21f;
-    InvulnerabilityTime = .13f;
-    GetCharacterMovement()->GroundFriction = 0.f;
-    LaunchCharacter(Direction * 1330.f + FVector(0.f, 0.f, 20.f), true, false);
+    EvasionInvulnerabilityTime = .13f;
+    bSprinting = false;
+    MeleeStepRemaining = 0.f;
     PlayCombatSound(DashSound, .75f);
+}
+
+void ADBCharacter::ReleaseDash() { bDashHeld = false; }
+
+void ADBCharacter::EndEvasion(bool bStopImmediately)
+{
+    if (DashRootMotionId == 0) return;
+    UCharacterMovementComponent* Movement = GetCharacterMovement();
+    const float ExitSpeed = bStopImmediately ? 0.f : bGuarding ? 320.f : WalkSpeed;
+    if (const auto Source = Movement->GetRootMotionSourceByID(DashRootMotionId))
+        // Apply the exit clamp now. A deferred finish clamp must not reduce
+        // a Ram launch that takes over later in this same character tick.
+        Source->FinishVelocityParams.Mode = ERootMotionFinishVelocityMode::MaintainLastRootMotionVelocity;
+    Movement->RemoveRootMotionSourceByID(DashRootMotionId);
+    Movement->Velocity = Movement->Velocity.GetClampedToMaxSize2D(ExitSpeed);
+    DashRootMotionId = 0;
 }
 
 void ADBCharacter::CaptureEnergy(float Damage)
@@ -1347,7 +1516,7 @@ void ADBCharacter::ReceiveAttack(float Damage, FVector Source, bool bUnblockable
         ReceivedAttackKeys.Add(Key);
         if (ReceivedAttackKeys.Num() > 128) ReceivedAttackKeys.RemoveAt(0);
     }
-    if (InvulnerabilityTime > 0.f) return;
+    if (InvulnerabilityTime > 0.f || EvasionInvulnerabilityTime > 0.f) return;
     const FVector ToSource = (Source - ViewCamera->GetComponentLocation()).GetSafeNormal();
     const bool bFacing = FVector::DotProduct(GetAimDirection(), ToSource) >= .38f;
     const bool bCanBlock = bGuarding && GetAttachedPieceCount() > 0 && !bWantsFire
@@ -1597,6 +1766,9 @@ void ADBCharacter::OnRunReset()
     AttackRecovery = ChargeHeld = ThrowCharge = StrikeDelay = CatchPose = 0.f;
     Health = MaxHealth;
     GuardEnergy = MaxGuardEnergy;
+    Stamina = MaxStamina;
+    StaminaRecoveryDelay = 0.f;
+    bSprintExhausted = false;
     Heat = 0.f;
     bDead = false;
     bOverheated = false;
@@ -1617,8 +1789,8 @@ void ADBCharacter::OnRunReset()
     EffectLife.Reset();
     GetCharacterMovement()->StopMovementImmediately();
     GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-    GetCharacterMovement()->GroundFriction = 8.f;
-    GetCharacterMovement()->MaxWalkSpeed = 590.f;
+    GetCharacterMovement()->GroundFriction = WalkFriction;
+    GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
     RefreshEquipmentVisuals();
     ViewCamera->SetFieldOfView(94.f);
     UpdateWeapon(0.f);
@@ -1702,9 +1874,17 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
     EquipPose = FMath::FInterpTo(EquipPose, 0.f, DeltaSeconds, 3.5f);
     LookSwayX = FMath::FInterpTo(LookSwayX, 0.f, DeltaSeconds, 10.f);
     LookSwayY = FMath::FInterpTo(LookSwayY, 0.f, DeltaSeconds, 10.f);
-    const float SpeedFraction = FMath::Clamp(GetVelocity().Size2D() / 590.f, 0.f, 1.f);
-    BobPhase += DeltaSeconds * FMath::Lerp(1.5f, 9.f, SpeedFraction);
-    const float Bob = FMath::Sin(BobPhase) * .55f * SpeedFraction;
+    const bool bGrounded = GetCharacterMovement()->IsMovingOnGround();
+    const float SpeedFraction = FMath::Clamp(GroundedSpeed / SprintSpeed, 0.f, 1.f);
+    GaitAmount = bGrounded && !IsDashing()
+        ? FMath::FInterpTo(GaitAmount, SpeedFraction, DeltaSeconds, 14.f) : 0.f;
+    // Phase follows distance travelled: stationary and airborne poses have
+    // no autonomous walking loop. Head travel stays below1cm even sprinting.
+    if (GroundedSpeed > 8.f) BobPhase += DeltaSeconds * GroundedSpeed * (2.f * PI / 550.f);
+    const float Bob = FMath::Sin(BobPhase * 2.f) * 1.3f * GaitAmount;
+    const float GaitSway = FMath::Sin(BobPhase) * .65f * GaitAmount;
+    SprintBlend = FMath::FInterpTo(SprintBlend, bSprinting ? 1.f : 0.f, DeltaSeconds, 8.f);
+    LandingImpact = FMath::FInterpTo(LandingImpact, 0.f, DeltaSeconds, 11.f);
     const float Brace = FMath::SmoothStep(0.f, 1.f, GuardBlend);
     FVector Pose = FMath::Lerp(FVector(120,-43,-42), FVector(106,-47,-18), Brace);
     FRotator Rotation = FMath::Lerp(FRotator(0,-8,-3), FRotator(0,-7,-8), Brace);
@@ -1751,8 +1931,12 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
         }
     }
     Pose += FVector(-Recoil * 6.f - CatchPose * 12.f - ReleasePose * 8.f,
-        -LookSwayX + Bob * .5f + CatchPose * 5.f, Bob + LookSwayY - EquipPose * 5.f + ReleasePose * 5.f);
-    Rotation += FRotator(Recoil * 4.f - EquipPose * 7.f, CatchPose * 8.f - ReleasePose * 9.f, Bob);
+        -LookSwayX + GaitSway + CatchPose * 5.f, Bob + LookSwayY - EquipPose * 5.f + ReleasePose * 5.f);
+    const float LocomotionWeight = 1.f - Brace * .75f;
+    Pose += FVector(-MovementLean.X * 3.f - SprintBlend * 3.f, -MovementLean.Y * 2.f,
+        -LandingImpact * 4.f - SprintBlend * 1.5f) * LocomotionWeight;
+    Rotation += FRotator(Recoil * 4.f - EquipPose * 7.f - (MovementLean.X + SprintBlend) * LocomotionWeight,
+        CatchPose * 8.f - ReleasePose * 9.f, GaitSway * .4f - MovementLean.Y * .6f * LocomotionWeight);
     WeaponRoot->SetRelativeLocation(Pose);
     WeaponRoot->SetRelativeRotation(Rotation);
 
@@ -1786,8 +1970,11 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
     // Short contact/release impulses recover to zero; aim input never receives artificial drift.
     ViewCamera->ClearAdditiveOffset();
     ViewCamera->AddAdditiveOffset(FTransform(FRotator(-CameraKick,CameraSideKick,CameraSideKick * .3f),
-        FVector(-CameraKick * 2.f,0.f,0.f)), 0.f);
-    const float DesiredFOV = DashTime > 0.f ? 100.f : 94.f - (bWantsFire ? GetChargeProgress() * 3.f : 0.f);
+        FVector(-CameraKick * 2.f - MovementLean.X * .4f,
+            GaitSway * .4f - MovementLean.Y * .25f,
+            Bob * .65f - LandingImpact * 2.2f)), 0.f);
+    const float DesiredFOV = IsDashing() || DashTime > 0.f ? 99.f
+        : 94.f + SprintBlend * 2.f - (bWantsFire ? GetChargeProgress() * 3.f : 0.f);
     ViewCamera->SetFieldOfView(FMath::FInterpTo(ViewCamera->FieldOfView, DesiredFOV, DeltaSeconds, 9.f));
 }
 
@@ -1850,5 +2037,11 @@ void ADBCharacter::SetCombatMessage(const FString& Text, float Duration)
 void ADBCharacter::PlayCombatSound(USoundBase* Sound, float Volume, float Pitch)
 {
     USoundConcurrency* Group = Sound == CatchSound.Get() ? CatchConcurrency.Get() : nullptr;
-    if (Sound) UGameplayStatics::PlaySound2D(this, Sound, Volume, Pitch, 0.f, Group, this);
+    const bool bFootstep = Sound && (Sound == FootstepASound.Get() || Sound == FootstepBSound.Get());
+    const bool bLanding = Sound && Sound == LandSound.Get();
+    if (bFootstep) Group = FootstepConcurrency.Get();
+    if (bLanding) Group = LandingConcurrency.Get();
+    // Locomotion uses gameplay voices, so pausing also silences an in-flight
+    // footfall. The world's existing primary volume remains the master gain.
+    if (Sound) UGameplayStatics::PlaySound2D(this, Sound, Volume, Pitch, 0.f, Group, this, !(bFootstep || bLanding));
 }

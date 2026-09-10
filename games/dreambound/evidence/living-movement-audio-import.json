@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "imported": [],
+  "materials": [],
+  "textures": [],
+  "warnings": [],
+  "audio": [
+    "S_FootstepA",
+    "S_FootstepB",
+    "S_Land"
+  ],
+  "scope": "audio_only",
+  "audio_revision": "reverie-suno-v1-movement",
+  "audio_settings": {
+    "S_FootstepA": {
+      "voice_cap": 2,
+      "limit_to_owner": false,
+      "priority": 25,
+      "looping": false,
+      "attenuation": null,
+      "source_sha256": "4cd4399c3e049d0a3074b1aea896f0981d36bb87fbbf7ef7780929febcd8bc18",
+      "duration_seconds": 0.17000000178813934
+    },
+    "S_FootstepB": {
+      "voice_cap": 2,
+      "limit_to_owner": false,
+      "priority": 25,
+      "looping": false,
+      "attenuation": null,
+      "source_sha256": "368a7b32864a93eeb33e70a217ebcedd2a7f0ab4d53fec0436ffabb76f411e02",
+      "duration_seconds": 0.18000000715255737
+    },
+    "S_Land": {
+      "voice_cap": 1,
+      "limit_to_owner": false,
+      "priority": 35,
+      "looping": false,
+      "attenuation": null,
+      "source_sha256": "d83f2dddeeaa37483053546fa4ec400d65a1099791d52ffcfbe86e05ba2b6f95",
+      "duration_seconds": 0.30000001192092896
+    }
+  }
+}

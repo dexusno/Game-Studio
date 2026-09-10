@@ -1,0 +1,329 @@
+{
+  "revision": "reverie-suno-v1-movement",
+  "baseline_wav_sha256": {
+    "S_Attack.wav": "b9ae75901b1fe5a189259bd85569153bf996d11f619e51ebcd37ee7069d00e8e",
+    "S_BossTell.wav": "88314d1f82208e7d5724d2443d2e19060aa6264dec19453bbd4f738aac1a636c",
+    "S_Catch.wav": "0f4fbf303ec4e020c3ce5d7adfbf9ba6a5a48dec50b8b82076484212f7fabe4f",
+    "S_ChargeLoop.wav": "0717d1c6200823ec1b04189552d82b2d3764f1dba824c1cf97a7050924b81302",
+    "S_ChargeReady.wav": "576c613f6fb482b38b0426c14d691dd12a11127b986eee95bb100b270c44c5f2",
+    "S_ChargeTick.wav": "6e61dd202efa7dabba3b358e156a6f23f937e75419a58a5dae543de661b97501",
+    "S_Clear.wav": "d7efdcd512b6958fc95432e393f3745579ebaae1d0e91935214d9c59aea6d87e",
+    "S_Dash.wav": "eeff8e710b404a17ae9104f897bc45f855a2abc1150fb4592686c305ffd41aea",
+    "S_Encounter.wav": "98d2fb8cfe02646406228066269c68b132e6233466122cddc1acdc2d56698f39",
+    "S_EnemyDefeat.wav": "8ce857a9ca9548f727c522d144096b2ac14a7d5ed9f29c1eb4478281f7f88c6f",
+    "S_EnemyFire.wav": "ea9f55094cf38d17af2a9207023428dfde5d40e4571cd66eed49815e93c90bb6",
+    "S_EnemyHit.wav": "7cc7f47b7155b6de7018275e6476adb28b3d10076948e6257aad82becb3303b3",
+    "S_EnemyTell.wav": "2c4911e74ab0b682ecb7077d41b7cc677655c3fcd31571be670027fd3d916a45",
+    "S_Equip.wav": "04575dffd61ab3c3d78c4dc01d76dc1fd3dc3f3822b20c25be5a3e28b2c8939b",
+    "S_FullRelease.wav": "c659557e4f567d3488a29dcad8df7addb16b580d946b0d30ae73f99adce4b839",
+    "S_Guard.wav": "c5b7a9a462c6232b31a8dea7b245d7346a8033f62131f5ff51f6e02c10f31210",
+    "S_HeavyImpact.wav": "58a10c7628fb96f7a5ebdd98e3aace066d238a7d078bbd0dbb99680579a3679a",
+    "S_Hurt.wav": "36bce505deba09f96f13a84520a2fa8b6f702b7bd3fbde3d89681b9b46a01721",
+    "S_Impact.wav": "4d72c16092fa6965e0850bdd0807fd49b18acbc250d3f41f0764d62995b9d0af",
+    "S_MeleeSwing.wav": "8acab17b2feeac501737e4afc963bc8e6c0fa1b6a9bdd046653fcb9ee8861d7d",
+    "S_Parry.wav": "122fcb311fda46dd831a83a60a96f2995bcb062ad9a8641f27d0b2d432e66cd1",
+    "S_Recall.wav": "8f5d2b66b926c2271b78438d6616f978dbc126a00e90552aa3fba482386ceacf",
+    "S_WaterLoop.wav": "e6b8927c403d2ba4cb1f285215554cfa2308743644a39316703fb2c1d77b6711"
+  },
+  "status": "three_final_wavs_ready_for_root_import_and_combined_engine_audition",
+  "date": "2026-09-10",
+  "scope": "Exactly three new movement cues; all 23 existing cue WAVs are byte-identical to the captured baseline, including the Suno charge and full release.",
+  "cues": {
+    "S_FootstepA": {
+      "file": "S_FootstepA.wav",
+      "engine_asset": "/Game/Audio/Reverie/S_FootstepA",
+      "seconds": 0.17,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -15.0,
+      "rms_dbfs": -28.65239601177764,
+      "estimated_true_peak_dbtp": -14.994472624968928,
+      "full_scale_samples": 0,
+      "dc_offset": 3.86953956473809e-05,
+      "energy_above_8khz_fraction": 2.164359118741935e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "4cd4399c3e049d0a3074b1aea896f0981d36bb87fbbf7ef7780929febcd8bc18",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.28,
+      "recipe": {
+        "seconds": 0.17,
+        "peak_dbfs": -15,
+        "runtime_gain": 0.28,
+        "runtime_gain_sprint": 0.4,
+        "voice_cap": 2,
+        "priority": 25,
+        "release": 0.035,
+        "description": "Dry bootfall design from retained CC0 body-contact and stone-debris recordings; trimmed attack and a subdued early grit fragment",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.018,
+              0.172
+            ],
+            "gain_db": 0,
+            "speed": 1.02,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 75,
+            "lowpass": 1500,
+            "attack": 0.001,
+            "release": 0.04
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.02,
+              0.095
+            ],
+            "gain_db": -17,
+            "speed": 1.25,
+            "delay": 0.012,
+            "source_peak_dbfs": -3,
+            "highpass": 700,
+            "lowpass": 3600,
+            "attack": 0.002,
+            "release": 0.025
+          }
+        ]
+      }
+    },
+    "S_FootstepB": {
+      "file": "S_FootstepB.wav",
+      "engine_asset": "/Game/Audio/Reverie/S_FootstepB",
+      "seconds": 0.18,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -15.0,
+      "rms_dbfs": -28.86751554139127,
+      "estimated_true_peak_dbtp": -14.994472624968928,
+      "full_scale_samples": 0,
+      "dc_offset": 1.803656467372468e-05,
+      "energy_above_8khz_fraction": 1.7025750340574642e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "368a7b32864a93eeb33e70a217ebcedd2a7f0ab4d53fec0436ffabb76f411e02",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.28,
+      "recipe": {
+        "seconds": 0.18,
+        "peak_dbfs": -15,
+        "runtime_gain": 0.28,
+        "runtime_gain_sprint": 0.4,
+        "voice_cap": 2,
+        "priority": 25,
+        "release": 0.04,
+        "description": "Second dry bootfall with slightly quicker body and a different, quieter late stone-grit fragment; alternates with FootstepA",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.02,
+              0.192
+            ],
+            "gain_db": 0,
+            "speed": 1.08,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 85,
+            "lowpass": 1300,
+            "attack": 0.001,
+            "release": 0.045
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0.075,
+              0.19
+            ],
+            "gain_db": -18,
+            "speed": 1.1,
+            "delay": 0.018,
+            "source_peak_dbfs": -3,
+            "highpass": 800,
+            "lowpass": 3400,
+            "attack": 0.003,
+            "release": 0.03
+          }
+        ]
+      }
+    },
+    "S_Land": {
+      "file": "S_Land.wav",
+      "engine_asset": "/Game/Audio/Reverie/S_Land",
+      "seconds": 0.3,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -11.0,
+      "rms_dbfs": -26.815402325474345,
+      "estimated_true_peak_dbtp": -10.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 1.8500340197734396e-05,
+      "energy_above_8khz_fraction": 3.065685556826614e-07,
+      "edge_sample_peak": 0.0,
+      "sha256": "d83f2dddeeaa37483053546fa4ec400d65a1099791d52ffcfbe86e05ba2b6f95",
+      "sources": [
+        "foley_impactMining_001",
+        "foley_impactPunch_heavy_000"
+      ],
+      "runtime_gain": 0.48,
+      "recipe": {
+        "seconds": 0.3,
+        "peak_dbfs": -11,
+        "runtime_gain": 0.48,
+        "voice_cap": 1,
+        "priority": 35,
+        "release": 0.065,
+        "description": "Close firm landing from a slowed dry body contact with low-level initial stone debris; short damped tail, no mechanical or ringing layer",
+        "layers": [
+          {
+            "source": "foley_impactPunch_heavy_000",
+            "region": [
+              0.015,
+              0.275
+            ],
+            "gain_db": 0,
+            "speed": 0.96,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 60,
+            "lowpass": 1700,
+            "attack": 0.0015,
+            "release": 0.065
+          },
+          {
+            "source": "foley_impactMining_001",
+            "region": [
+              0,
+              0.145
+            ],
+            "gain_db": -14,
+            "speed": 1.05,
+            "delay": 0.015,
+            "source_peak_dbfs": -3,
+            "highpass": 500,
+            "lowpass": 3800,
+            "attack": 0.002,
+            "release": 0.04
+          }
+        ]
+      }
+    }
+  },
+  "source_provenance": {
+    "foley_impactPunch_heavy_000": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactPunch_heavy_000.ogg",
+      "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    },
+    "foley_impactMining_001": {
+      "kind": "cc0_sample",
+      "status": "verified_cc0",
+      "file": "sources/kenney-impact/impactMining_001.ogg",
+      "sha256": "61235a18de3f3d92118235398222dbf51d448f1be70b1c8bc962b10b86f2d9c6",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney",
+      "license": "CC0 1.0",
+      "license_proof": "sources/kenney-impact/License.txt",
+      "downloaded_at": "2026-09-10",
+      "download_evidence": "Retrieved official pack download and verified bundled License.txt before extraction; original selected OGG bytes retained."
+    }
+  },
+  "source_note": "Uses only retained source bytes with recorded CC0 provenance. No new downloads, Suno generations or spending. Exact regions, EQ, speed, gain and fades are in each cue recipe; units are decoded seconds, Hz and dB.",
+  "playback": {
+    "footsteps": {
+      "cues": [
+        "S_FootstepA",
+        "S_FootstepB"
+      ],
+      "variation": "alternate A/B",
+      "walk_gain": 0.28,
+      "sprint_gain": 0.4,
+      "priority": 25,
+      "shared_voice_cap": 2,
+      "looping": false,
+      "trigger": "Advance stride distance only while grounded and moving. Suppress during idle, airborne, pause and focus loss. Reset partial stride distance on teleport or restart to avoid a burst. Root owns exact distance thresholds and surface-contact integration."
+    },
+    "landing": {
+      "cue": "S_Land",
+      "gain": 0.48,
+      "priority": 35,
+      "voice_cap": 1,
+      "looping": false,
+      "trigger": "One cue on airborne-to-ground contact after a meaningful fall or jump; do not retrigger on every ground probe. Suppress a coincident footstep when landing fires. Root owns the contact and fall threshold."
+    },
+    "controls": "Use existing game sound volume and mute controls. No separate movement bus or new control required.",
+    "mix_note": "Footsteps sit below landing and combat. Treat the two-voice footstep limit as shared across A/B rather than two independent groups."
+  },
+  "verification": {
+    "render_command": "python games/dreambound/scripts/prepare_reverie_audio.py",
+    "render_exit_code": 0,
+    "render_runs": 1,
+    "check_command": "python games/dreambound/scripts/prepare_reverie_audio.py --check",
+    "check_exit_code": 0,
+    "check_runs": 1,
+    "palette_cue_count": 26,
+    "unchanged_existing_wav_count": 23,
+    "changed_existing_wavs": [],
+    "new_cues_full_scale_samples": 0,
+    "new_cues_edge_sample_peak": 0,
+    "format": "mono 48000 Hz PCM16 WAV",
+    "heard_by_agent": false,
+    "in_game_tested_by_agent": false,
+    "limitation": "Audio input was unavailable. Signal and regeneration checks establish file headroom and reproducibility, not subjective sound quality. Existing automatic overlap fixtures do not cover the new movement cues; root will perform one combined engine audition.",
+    "metadata_only_correction_after_check": "FootstepB description changed from shorter-pitched to quicker; all rendering parameters and audio bytes are unchanged."
+  },
+  "preview_note": "The default palette audition reel/index were updated by the existing generator. The separate Suno two-cue preview and its helper/metadata were not edited.",
+  "manifest_rows_for_integration_owner": [
+    {
+      "asset_id": "reverie_s_footstepa",
+      "path": "assets/audio-reverie/S_FootstepA.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Dry bootfall design from retained CC0 body-contact and stone-debris recordings; trimmed attack and a subdued early grit fragment; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_footstepb",
+      "path": "assets/audio-reverie/S_FootstepB.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Second dry bootfall with slightly quicker body and a different, quieter late stone-grit fragment; alternates with FootstepA; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    },
+    {
+      "asset_id": "reverie_s_land",
+      "path": "assets/audio-reverie/S_Land.wav",
+      "source_url": "https://kenney.nl/assets/impact-sounds",
+      "creator": "Kenney; Game Studio audio editing",
+      "license": "CC0 1.0 source samples",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Close firm landing from a slowed dry body contact with low-level initial stone debris; short damped tail, no mechanical or ringing layer; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "licensed-cc0-edited"
+    }
+  ],
+  "remaining_integration": [
+    "Root adds these three manifest rows and imports the three new WAVs.",
+    "Root wires distance/contact triggers with the listed gains, priorities and voice limits.",
+    "Root performs the combined engine audition and records the result in shared STATUS."
+  ]
+}

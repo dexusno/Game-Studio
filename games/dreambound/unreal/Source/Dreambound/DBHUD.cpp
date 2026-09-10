@@ -53,6 +53,14 @@ void ADBHUD::DrawHUD(){
   Label(G->ObjectiveText(),62,94,20,Gold);
   Label(FString::Printf(TEXT("EXPEDITION %d  /  SEED %d"),G->Expeditions,G->Seed),1520,44,18,Ivory);
   if(P){
+   Frame(42,H-258,370,80);
+   const FLinearColor StaminaColor=P->Stamina<20.f?Gold:Mint;
+   Label(FString::Printf(TEXT("%s / %d%%"),P->IsSprinting()?TEXT("SPRINTING"):TEXT("STAMINA"),
+    FMath::RoundToInt(100.f*P->Stamina/FMath::Max(1.f,P->MaxStamina))),62,H-246,17,StaminaColor);
+   Panel(62,H-217,324,6,FLinearColor(.09f,.14f,.11f));
+   Panel(62,H-217,324*FMath::Clamp(P->Stamina/FMath::Max(1.f,P->MaxStamina),0.f,1.f),6,StaminaColor);
+   Label(P->IsDashing()?TEXT("ALT / EVADING"):P->DashCooldown>0.f
+    ?FString::Printf(TEXT("ALT / DASH  %.1fs"),P->DashCooldown):TEXT("ALT / DASH  READY"),62,H-204,16,P->DashCooldown>0.f?Gold:Mint);
    Frame(42,H-170,370,129);
    Label(FString::Printf(TEXT("%d  /  %d"),FMath::CeilToInt(P->Health),FMath::CeilToInt(P->MaxHealth)),62,H-155,27,Ivory);
    Panel(62,H-115,324,7,FLinearColor(0.2,0.13,0.12));Panel(62,H-115,324*FMath::Clamp(P->Health/P->MaxHealth,0.f,1.f),7,FLinearColor(0.77,0.4,0.31));
@@ -82,7 +90,7 @@ void ADBHUD::DrawHUD(){
    if(P->HurtFlashTime>0)Panel(0,0,1920,H,FLinearColor(0.8f,0.08f,0.035f,FMath::Min(0.16f,P->HurtFlashTime*.45f)));
    Frame(530,H-72,820,68);
    Label(TEXT("LMB tap / strike   Hold 1.8s / full charge   RMB / unfold & block"),550,H-62,18,Ivory);
-   Label(TEXT("Q / recall    F / heavy    Shift / dash    Tab / abilities    Esc / pause"),550,H-34,17,Gold);
+   Label(TEXT("Q recall   F heavy   Shift sprint   Alt dash   Space jump   Tab abilities   Esc pause"),550,H-34,16,Gold);
    if(!G->bPaused&&!G->bChoosingReward&&!G->bShowingBuild&&!G->bWon&&!G->bDefeated) {
     float X=Canvas->SizeX/2,Y=Canvas->SizeY/2;
     FLinearColor C=P->IsShieldAway()?Gold:P->bGuarding?Mint:Ivory;
@@ -203,7 +211,8 @@ void ADBHUD::DrawHUD(){
    Label(TEXT("RMB / guard with attached pieces; a block spends one"),190,305,23,Ivory);
    Label(TEXT("Q / recall surviving pieces     F / heavy bash or Ram"),190,353,23,Ivory);
    Label(TEXT("Destroyed pieces regenerate independently."),190,401,23,Mint);
-   Label(TEXT("Shift / dash    Space / jump    R / cycle owned cores"),190,449,23,Ivory);
+   Label(TEXT("Shift / sprint    Left Alt / dash    Space / jump    R / cycle cores"),190,449,23,Ivory);
+   Label(TEXT("Sprint drains stamina. After exhaustion, recover and press Shift again."),190,489,20,Mint);
    Button("Equipment",TEXT("Read my ability instructions"),190,530,650,62,true);
    Label(FString::Printf(TEXT("Mouse sensitivity: %.2f"),G->Sensitivity),1130,270,25,Gold);
    Button("SensDown",TEXT("-"),1130,326,100,50);Button("SensUp",TEXT("+"),1250,326,100,50);

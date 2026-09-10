@@ -113,5 +113,20 @@
     "cue": "S_WaterLoop",
     "starts_at_seconds": 27.073,
     "seconds": 3.0
+  },
+  {
+    "cue": "S_FootstepA",
+    "starts_at_seconds": 30.407,
+    "seconds": 0.17
+  },
+  {
+    "cue": "S_FootstepB",
+    "starts_at_seconds": 30.91,
+    "seconds": 0.18
+  },
+  {
+    "cue": "S_Land",
+    "starts_at_seconds": 31.423,
+    "seconds": 0.3
   }
 ]

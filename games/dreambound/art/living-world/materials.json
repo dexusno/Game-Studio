@@ -1,0 +1,564 @@
+{
+  "M_LW_Leaf": {
+    "color": [
+      0.068,
+      0.19,
+      0.063
+    ],
+    "roughness": 0.73,
+    "metallic": 0,
+    "foliage": true,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "breeze",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0884,
+      0.24700000000000003,
+      0.0819
+    ],
+    "weather_color": [
+      0.04216,
+      0.1178,
+      0.03906
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_LeafLight": {
+    "color": [
+      0.19,
+      0.31,
+      0.087
+    ],
+    "roughness": 0.72,
+    "metallic": 0,
+    "foliage": true,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "breeze",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.24700000000000003,
+      0.403,
+      0.11309999999999999
+    ],
+    "weather_color": [
+      0.1178,
+      0.1922,
+      0.053939999999999995
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Reed": {
+    "color": [
+      0.31,
+      0.34,
+      0.12
+    ],
+    "roughness": 0.8,
+    "metallic": 0,
+    "foliage": true,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "breeze",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.403,
+      0.44200000000000006,
+      0.156
+    ],
+    "weather_color": [
+      0.1922,
+      0.21080000000000002,
+      0.0744
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Bark": {
+    "color": [
+      0.17,
+      0.105,
+      0.066
+    ],
+    "roughness": 0.91,
+    "metallic": 0,
+    "texture": "T_LW_Bark",
+    "normal_texture": "T_LW_BarkNormal",
+    "normal_strength": 0.67,
+    "vertex_masks": true,
+    "wear_color": [
+      0.22100000000000003,
+      0.1365,
+      0.0858
+    ],
+    "weather_color": [
+      0.10540000000000001,
+      0.06509999999999999,
+      0.040920000000000005
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.43,
+      0.4,
+      0.34
+    ],
+    "tone_high": [
+      1.4,
+      1.25,
+      1.12
+    ]
+  },
+  "M_LW_BarkLight": {
+    "color": [
+      0.26,
+      0.165,
+      0.084
+    ],
+    "roughness": 0.91,
+    "metallic": 0,
+    "texture": "T_LW_Bark",
+    "normal_texture": "T_LW_BarkNormal",
+    "normal_strength": 0.67,
+    "vertex_masks": true,
+    "wear_color": [
+      0.338,
+      0.21450000000000002,
+      0.1092
+    ],
+    "weather_color": [
+      0.1612,
+      0.1023,
+      0.05208
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.43,
+      0.4,
+      0.34
+    ],
+    "tone_high": [
+      1.4,
+      1.25,
+      1.12
+    ]
+  },
+  "M_LW_Wood": {
+    "color": [
+      0.43,
+      0.28,
+      0.13
+    ],
+    "roughness": 0.89,
+    "metallic": 0,
+    "texture": "T_LW_Bark",
+    "normal_texture": "T_LW_BarkNormal",
+    "normal_strength": 0.67,
+    "vertex_masks": true,
+    "wear_color": [
+      0.559,
+      0.36400000000000005,
+      0.169
+    ],
+    "weather_color": [
+      0.2666,
+      0.1736,
+      0.0806
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.43,
+      0.4,
+      0.34
+    ],
+    "tone_high": [
+      1.4,
+      1.25,
+      1.12
+    ]
+  },
+  "M_LW_EndGrain": {
+    "color": [
+      0.39,
+      0.245,
+      0.11
+    ],
+    "roughness": 0.91,
+    "metallic": 0,
+    "texture": "T_LW_EndGrain",
+    "normal_texture": "T_LW_EndGrainNormal",
+    "normal_strength": 0.67,
+    "vertex_masks": true,
+    "wear_color": [
+      0.507,
+      0.3185,
+      0.14300000000000002
+    ],
+    "weather_color": [
+      0.24180000000000001,
+      0.1519,
+      0.0682
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.43,
+      0.4,
+      0.34
+    ],
+    "tone_high": [
+      1.4,
+      1.25,
+      1.12
+    ]
+  },
+  "M_LW_Fungus": {
+    "color": [
+      0.38,
+      0.18,
+      0.089
+    ],
+    "roughness": 0.77,
+    "metallic": 0,
+    "texture": "T_LW_Leaf",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.49400000000000005,
+      0.23399999999999999,
+      0.1157
+    ],
+    "weather_color": [
+      0.2356,
+      0.11159999999999999,
+      0.05518
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Cream": {
+    "color": [
+      0.66,
+      0.55,
+      0.32
+    ],
+    "roughness": 0.78,
+    "metallic": 0,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.8580000000000001,
+      0.7150000000000001,
+      0.41600000000000004
+    ],
+    "weather_color": [
+      0.4092,
+      0.341,
+      0.1984
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Petal": {
+    "color": [
+      0.65,
+      0.25,
+      0.14
+    ],
+    "roughness": 0.62,
+    "metallic": 0,
+    "foliage": true,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "breeze",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.8450000000000001,
+      0.325,
+      0.18200000000000002
+    ],
+    "weather_color": [
+      0.403,
+      0.155,
+      0.0868
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Ceramic": {
+    "color": [
+      0.29,
+      0.41,
+      0.34
+    ],
+    "roughness": 0.53,
+    "metallic": 0,
+    "texture": "T_LW_Ceramic",
+    "normal_texture": "T_LW_CeramicNormal",
+    "normal_strength": 0.47,
+    "vertex_masks": true,
+    "wear_color": [
+      0.377,
+      0.533,
+      0.44200000000000006
+    ],
+    "weather_color": [
+      0.1,
+      0.13,
+      0.06
+    ],
+    "weather_amount": 0.7,
+    "tone_low": [
+      0.61,
+      0.64,
+      0.53
+    ],
+    "tone_high": [
+      1.28,
+      1.24,
+      1.15
+    ]
+  },
+  "M_LW_Stone": {
+    "color": [
+      0.43,
+      0.37,
+      0.26
+    ],
+    "roughness": 0.87,
+    "metallic": 0,
+    "texture": "T_LW_Stone",
+    "normal_texture": "T_LW_StoneNormal",
+    "normal_strength": 0.47,
+    "vertex_masks": true,
+    "wear_color": [
+      0.559,
+      0.481,
+      0.338
+    ],
+    "weather_color": [
+      0.1,
+      0.13,
+      0.06
+    ],
+    "weather_amount": 0.7,
+    "tone_low": [
+      0.61,
+      0.64,
+      0.53
+    ],
+    "tone_high": [
+      1.28,
+      1.24,
+      1.15
+    ]
+  },
+  "M_LW_Moss": {
+    "color": [
+      0.16,
+      0.22,
+      0.071
+    ],
+    "roughness": 0.95,
+    "metallic": 0,
+    "texture": "T_LW_Leaf",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.20800000000000002,
+      0.28600000000000003,
+      0.0923
+    ],
+    "weather_color": [
+      0.0992,
+      0.1364,
+      0.04402
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Insect": {
+    "color": [
+      0.063,
+      0.26,
+      0.27
+    ],
+    "roughness": 0.38,
+    "metallic": 0.15,
+    "texture": "T_LW_Leaf",
+    "motion": "insect_body",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0819,
+      0.338,
+      0.35100000000000003
+    ],
+    "weather_color": [
+      0.03906,
+      0.1612,
+      0.16740000000000002
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_Wing": {
+    "color": [
+      0.52,
+      0.62,
+      0.48
+    ],
+    "roughness": 0.4,
+    "metallic": 0.08,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "insect_wing",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.676,
+      0.806,
+      0.624
+    ],
+    "weather_color": [
+      0.3224,
+      0.3844,
+      0.2976
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  },
+  "M_LW_WingMark": {
+    "color": [
+      0.063,
+      0.26,
+      0.27
+    ],
+    "roughness": 0.38,
+    "metallic": 0.15,
+    "two_sided": true,
+    "texture": "T_LW_Leaf",
+    "motion": "insect_wing",
+    "normal_texture": "T_LW_LeafNormal",
+    "normal_strength": 0.24,
+    "vertex_masks": true,
+    "wear_color": [
+      0.0819,
+      0.338,
+      0.35100000000000003
+    ],
+    "weather_color": [
+      0.03906,
+      0.1612,
+      0.16740000000000002
+    ],
+    "weather_amount": 0.42,
+    "tone_low": [
+      0.78,
+      0.82,
+      0.76
+    ],
+    "tone_high": [
+      1.13,
+      1.1,
+      1.03
+    ]
+  }
+}

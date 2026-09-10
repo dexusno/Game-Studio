@@ -1,0 +1,480 @@
+{
+  "SM_LW_Reeds": {
+    "name": "SM_LW_Reeds",
+    "vertices": 5321,
+    "triangles": 9008,
+    "dimensions_cm": [
+      118.218,
+      108.176,
+      134.671
+    ],
+    "bounds_min_cm": [
+      -57.984222412109375,
+      -57.625301361083984,
+      -3.0981245040893555
+    ],
+    "bounds_max_cm": [
+      60.23413848876953,
+      50.55110168457031,
+      131.5732879638672
+    ],
+    "materials": [
+      "M_LW_LeafLight",
+      "M_LW_Reed",
+      "M_LW_Fungus"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 130,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Damp soil margin; bury base 2 cm. 1.4 m irregular curved reed and seedhead clump.",
+    "sha256": "c73b263b6d403d780c5ddba1127ed4f84523dccb8dabfa2727beefd8a6acc2e3"
+  },
+  "SM_LW_WaterLily": {
+    "name": "SM_LW_WaterLily",
+    "vertices": 2720,
+    "triangles": 4108,
+    "dimensions_cm": [
+      98.618,
+      95.431,
+      20.835
+    ],
+    "bounds_min_cm": [
+      -54.071126172628695,
+      -49.11105293013358,
+      -1.3499125803449497
+    ],
+    "bounds_max_cm": [
+      44.54726634791458,
+      46.319647773842306,
+      19.485275268554688
+    ],
+    "materials": [
+      "M_LW_Leaf",
+      "M_LW_LeafLight",
+      "M_LW_Reed",
+      "M_LW_Cream",
+      "M_LW_Petal"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 134,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Water surface pivot; place at water Z + 0.7 cm. Five notched pads and a many-petal flower; no collision.",
+    "sha256": "4fcd694105ea8e08110b09eafdc216ee474ca07f4ccb25ada5a570c7fc81a2c6"
+  },
+  "SM_LW_FungusLog": {
+    "name": "SM_LW_FungusLog",
+    "vertices": 9569,
+    "triangles": 14420,
+    "dimensions_cm": [
+      178.791,
+      71.075,
+      78.212
+    ],
+    "bounds_min_cm": [
+      -89.39714813232422,
+      -29.574885912435036,
+      -3.5076766946064097
+    ],
+    "bounds_max_cm": [
+      89.39433288574219,
+      41.5,
+      74.7038345336914
+    ],
+    "materials": [
+      "M_LW_Bark",
+      "M_LW_BarkLight",
+      "M_LW_Wood",
+      "M_LW_EndGrain",
+      "M_LW_Fungus",
+      "M_LW_Cream",
+      "M_LW_Moss"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 156,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Forest/spring soil; pivot base, bury 3 cm. Hollow splintered log with bark ridges, branch stubs and shelf fungi.",
+    "sha256": "9df96f992878238153fca5b3aa0a70e6ef3b42d84567aca0ae9e6c80d6b032e8"
+  },
+  "SM_LW_ShelfFungi": {
+    "name": "SM_LW_ShelfFungi",
+    "vertices": 2596,
+    "triangles": 3156,
+    "dimensions_cm": [
+      57.099,
+      39.074,
+      53.676
+    ],
+    "bounds_min_cm": [
+      -30.863889694213867,
+      -15.833932876586914,
+      -5.08980655670166
+    ],
+    "bounds_max_cm": [
+      26.235557556152344,
+      23.239999771118164,
+      48.58650207519531
+    ],
+    "materials": [
+      "M_LW_Bark",
+      "M_LW_Fungus",
+      "M_LW_Cream"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 114,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Damp soil or root-bed anchor, bury 2 cm. Stump and tiered fan fungi with rounded rims and modeled gills.",
+    "sha256": "7df21473776a563f1da8561cbd60f3fb0fbe37939c8ce991cd5e2340638b6697"
+  },
+  "SM_LW_FernRosette": {
+    "name": "SM_LW_FernRosette",
+    "vertices": 7932,
+    "triangles": 10484,
+    "dimensions_cm": [
+      117.662,
+      117.922,
+      63.656
+    ],
+    "bounds_min_cm": [
+      -61.099552154541016,
+      -54.258094787597656,
+      -0.43386203050613403
+    ],
+    "bounds_max_cm": [
+      56.56282043457031,
+      63.6639404296875,
+      63.22240447998047
+    ],
+    "materials": [
+      "M_LW_Leaf",
+      "M_LW_LeafLight",
+      "M_LW_Reed"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 28,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Moist understory ground; root base -2 cm; eleven divided fronds and coiled new growth.",
+    "sha256": "fa73fa309b48b69b5d653472c17a45059a106bb7ab22e44abb59371920fcf2c6"
+  },
+  "SM_LW_MeadowFlowers": {
+    "name": "SM_LW_MeadowFlowers",
+    "vertices": 6006,
+    "triangles": 8708,
+    "dimensions_cm": [
+      78.915,
+      74.926,
+      63.667
+    ],
+    "bounds_min_cm": [
+      -36.56914138793945,
+      -41.23606491088867,
+      -2.111006498336792
+    ],
+    "bounds_max_cm": [
+      42.345943450927734,
+      33.68976593017578,
+      61.55616760253906
+    ],
+    "materials": [
+      "M_LW_Leaf",
+      "M_LW_Reed",
+      "M_LW_Cream",
+      "M_LW_Petal"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 140,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Dry ruin garden / light understory. Root pivot -2 cm, seven drooping bell clusters and broad veined leaves.",
+    "sha256": "b304232b4c24cdef468c6c8fe996ae07d7a07a3b9504ff3856a13e7bd2a777c7"
+  },
+  "SM_LW_TwistedScrub": {
+    "name": "SM_LW_TwistedScrub",
+    "vertices": 24405,
+    "triangles": 46798,
+    "dimensions_cm": [
+      113.541,
+      112.79,
+      117.025
+    ],
+    "bounds_min_cm": [
+      -59.21868896484375,
+      -53.51991653442383,
+      -5.551753044128418
+    ],
+    "bounds_max_cm": [
+      54.32229995727539,
+      59.270267486572266,
+      111.47356414794922
+    ],
+    "materials": [
+      "M_LW_LeafLight",
+      "M_LW_Reed",
+      "M_LW_Bark",
+      "M_LW_Fungus"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 41,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Dry garden rooted base -3 cm, 1.1 m high; five sinuous stems with forks, small leaves and seedpods.",
+    "sha256": "886957cda7782e6f25923e8a7f07041deb84dc3e5a73995eb5cb585f792c046c"
+  },
+  "SM_LW_CrackedUrn": {
+    "name": "SM_LW_CrackedUrn",
+    "vertices": 4061,
+    "triangles": 7434,
+    "dimensions_cm": [
+      116.982,
+      69.385,
+      80
+    ],
+    "bounds_min_cm": [
+      -50.33171081542969,
+      -34.69240188598633,
+      -2
+    ],
+    "bounds_max_cm": [
+      66.6507143540832,
+      34.69240188598633,
+      78
+    ],
+    "materials": [
+      "M_LW_Bark",
+      "M_LW_Cream",
+      "M_LW_Ceramic",
+      "M_LW_Stone",
+      "M_LW_Moss"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 106,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Dry ruin edge; base at -2 cm. Hollow 80 cm ceramic urn, asymmetric broken rim, carved ribs, handles and three fallen sherds.",
+    "sha256": "561c23ae618ce9ffec132bdc8865905434ea2bef41a1dcf4f9fd413c2bb90bb8"
+  },
+  "SM_LW_FallenLintel": {
+    "name": "SM_LW_FallenLintel",
+    "vertices": 2603,
+    "triangles": 4538,
+    "dimensions_cm": [
+      150.971,
+      85.115,
+      34.072
+    ],
+    "bounds_min_cm": [
+      -69.35743116039238,
+      -38.95751277123326,
+      -3
+    ],
+    "bounds_max_cm": [
+      81.61404100223437,
+      46.1573981118316,
+      31.072420120239258
+    ],
+    "materials": [
+      "M_LW_Cream",
+      "M_LW_Stone",
+      "M_LW_Moss"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 22,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Dry ruin ground; bury 3 cm. Chipped carved limestone, scalloped relief border and layered rubble; decorative only.",
+    "sha256": "876c9c75cb2e69de72d57829c2eb86151d3d02745b16de27ee3d15d28e0b2325"
+  },
+  "SM_LW_RootFan": {
+    "name": "SM_LW_RootFan",
+    "vertices": 3418,
+    "triangles": 6160,
+    "dimensions_cm": [
+      134.351,
+      130.422,
+      17.695
+    ],
+    "bounds_min_cm": [
+      -68.80528259277344,
+      -63.390106201171875,
+      -3.0505874156951904
+    ],
+    "bounds_max_cm": [
+      65.54550170898438,
+      67.0322265625,
+      14.644083023071289
+    ],
+    "materials": [
+      "M_LW_Reed",
+      "M_LW_Bark",
+      "M_LW_Wood",
+      "M_LW_Moss"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 32,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Tree/ruin dry soil; all endpoints dip under ground. Sinuous tapering roots with forks, moss and curled leaf litter.",
+    "sha256": "34974b79ffdf5ffa0d580b557fe5eea567d4b5efba7fb217f84596b6c6271711"
+  },
+  "SM_LW_Dragonfly": {
+    "name": "SM_LW_Dragonfly",
+    "vertices": 890,
+    "triangles": 1584,
+    "dimensions_cm": [
+      22.009,
+      16.115,
+      3.991
+    ],
+    "bounds_min_cm": [
+      -11.00434398651123,
+      -7.055316925048828,
+      -1.7334461212158203
+    ],
+    "bounds_max_cm": [
+      11.00434398651123,
+      9.059979438781738,
+      2.2574963569641113
+    ],
+    "materials": [
+      "M_LW_Insect",
+      "M_LW_Wing"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 30,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Airborne at damp margins, 20 cm wing span; wing-tip material flutter plus common body bob, no collision or AI.",
+    "sha256": "c91c103722efbac924ebf371d440e8fdd5f979d639fa22f375f5f2b4ff171ac0"
+  },
+  "SM_LW_GardenMoth": {
+    "name": "SM_LW_GardenMoth",
+    "vertices": 550,
+    "triangles": 884,
+    "dimensions_cm": [
+      14.003,
+      10.401,
+      4.172
+    ],
+    "bounds_min_cm": [
+      -7.001697063446045,
+      -5.528440475463867,
+      -1.0374842882156372
+    ],
+    "bounds_max_cm": [
+      7.001697063446045,
+      4.872910022735596,
+      3.1343414783477783
+    ],
+    "materials": [
+      "M_LW_Insect",
+      "M_LW_Wing",
+      "M_LW_WingMark"
+    ],
+    "collision_hulls": 0,
+    "uv_channels": [
+      "CraftUV",
+      "LightmapUV"
+    ],
+    "uv_faces_repaired": 6,
+    "vertex_channels": {
+      "R": "authored value",
+      "G": "wear",
+      "B": "recess",
+      "A": "wind/wing tip weight"
+    },
+    "placement": "Airborne above dry flower clumps; pale broad scalloped wings with inset teal eyespots; material wing flutter and body bob.",
+    "sha256": "4a00c66109eb50084eabdb2961e5619b48a296742a0675223845384de81e2f0e"
+  }
+}
