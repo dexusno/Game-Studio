@@ -1,30 +1,38 @@
 # Suno shield sound sources
 
-September 10, 2026. This directory is owned by the Suno audio worker; root owns final audio recipes, importer/runtime, the shared manifest and build evidence. Four prompt batches produced eight alternatives in the owner's signed-in Suno Sounds session. The generation report records actual IDs, lengths and source links. They are original text-prompt generations, with no uploaded audio or remixes.
+Revision `reverie-suno-v1`, September 10, 2026. Two edited gameplay WAVs are delivered for root's engine import and Klaus's audition: `S_ChargeLoop.wav` and `S_FullRelease.wav` under `assets/audio-reverie/`. The other 21 cue files remain byte-identical. This worker changed audio recipes/assets and notes only; root owns engine integration, the shared manifest and build evidence.
 
-## Current handoff
+## Delivered sources and rights
 
-The first full-release output `de39cd92-d524-4698-ba42-9af66a9c1963` is officially unlocked. Suno's Download UI produced a completed 126,837-byte MP3 download event, but the subagent browser's supported download API returned no artifact. Root has since authenticated Chrome to the same existing account and requested WAV through its official Download UI. No file appeared in the known local Downloads directory; the actual download folder has been requested from Klaus. **No local audio file, signal inspection, usable excerpt or listening result is claimed yet.** The other seven original alternatives have not been unlocked.
+Klaus supplied two actual downloaded MP3s in `assets/audio` and explicitly invited experimentation. Their untouched bytes are retained under `audio-reverie/sources/suno/` with clean names; owner originals are unchanged. Embedded Suno tags confirm the IDs and creator. `two-cue-integration.json` retains the complete source hashes, tags, download evidence, recipes, measurements and the two manifest rows root should integrate.
 
-Klaus then said the prompts need reconsideration after trying the results. The original batch is under review, not approved sound content. `prompt-revision.md` replaces the overloaded material/layer descriptions with concise physical actions. A small release/motor audition is complete as two One-Shot batches with four alternatives; its IDs and observed UI lengths are in `revision2-generation-report.json`. No listening, source-file or editability verdict is claimed. Do not integrate either batch solely because generation succeeded. Browser security blocked Chrome's download-history page; no native, CDP or alternate-surface workaround for that action is permitted. Retrieve only actual permitted local exports once their folder is known.
+| Retained original | Suno generation | Bytes | SHA-256 |
+|---|---|---:|---|
+| `servo_motor.mp3` | `b1506538-bb54-418b-bf43-ba080b6dabb4` | 334,316 | `edfafbe5a8592250b8c152a03c537a359a8e3c5ccf7427acbca1d27a07a2dbcf` |
+| `shield_release.mp3` | `de39cd92-d524-4698-ba42-9af66a9c1963` | 126,837 | `9fdf3917c944fd0e427966ab16118761470326bb516d554e5c46b7d5f62295fd` |
 
-Keep untouched official downloads in ignored `.local/suno-reverie/`, then record their SHA-256 and bytes here. Put only short selected lossless source excerpts and their precise source regions in this directory. The audio manifest must identify Suno paid-tier generation, the prompt/ID, permitted-download evidence and subsequent edits. These sources are not CC0. Generation without a permitted download is not sufficient for commercial use under the current [Suno terms](https://suno.com/terms-of-service); the [paid rights page](https://help.suno.com/en/articles/9601665) also applies. The account UI showed Pro with 27 downloads available before the first unlock. No purchase, upgrade, publication or share occurred.
+The existing Pro account was verified before generation. The release's official unlock and completed download were also observed by the agent; the motor's download was provided by the owner, not observed by this worker. This is paid-tier Suno output, **not CC0**. Source URLs and applicable [Suno terms effective September 3, 2026](https://suno.com/terms-of-service) remain attached to the assets. No purchase, upgrade, publication or share was made. Other generated alternatives remain unevaluated. Historical browser-delivery problems are retained in the generation reports; no browser work was needed for these supplied files.
 
-## Edit targets once downloads are available
+## Exact edits and checks
 
-| Source role | First alternative | Game use | Target edit / level |
-|---|---|---|---|
-| Full release | `de39cd92-d524-4698-ba42-9af66a9c1963` | `S_FullRelease`; possibly a lighter partial-attack layer | Trim to the first complete transient, preserve 2–5 ms before attack; 0.9–1.2 s total, 25–45 ms end fade. Target roughly -17.5 dBFS RMS, true peak at or below -5 dBTP. Avoid a long pre-launch swell. |
-| Charge motor | `2cff33ee-3f25-49c4-abcb-805deba1c9f7` | `S_ChargeLoop`; mechanism body | Select a steady 2.25 s region, overlap 250 ms to a 2 s loop; retain motion through the boundary. Approximately -24 dBFS RMS, true peak at or below -8 dBTP. Reject a musical beat or repeated hard hits. |
-| Heavy impact | `8f74d0dd-52a2-45da-840f-b4a3c9096052` | `S_HeavyImpact`; quieter ordinary contact variant only if distinct | Use one hit, not a sequence; 0.8–1.1 s total. Approximately -19 dBFS RMS, true peak at or below -5 dBTP. Keep bronze body and crystal debris without a long metallic whistle. |
-| Guard/parry | `ca1434c5-54fa-47a4-bc2a-dd2198cc05df` | `S_Guard` and brighter `S_Parry` | Guard 0.45–0.6 s; parry up to 1.2 s. Fast contact onset, short resonance. True peak at or below -6 dBTP because defense uses higher runtime gain. Preserve an obvious difference from launch and heavy impact. |
+All source-region times refer to FFmpeg's decoded PCM timeline, which excludes codec padding. Container durations are 13.488 s and 4.440 s; decoded durations are 13.4535 s and 4.4135 s respectively.
 
-These are edit targets, not measurements or accepted selections. The second alternative for each role is recorded in `generation-report.json`. Prefer the shorter parry alternative initially: the other has an 11 s UI duration and may contain a sequence. Do not infer voices, musical content or perceived quality from duration alone. Audition where supported; the prior worker's runtime explicitly did not support audio input.
+| Cue | Edit | Measured result |
+|---|---|---|
+| Charge loop | Motor 5.04-7.29 s; 65 Hz highpass, 3.2 kHz lowpass; no per-region edge fade; 250 ms linear overlap to a 2 s loop. Existing runtime pitch supplies the charge rise. | Mono 48 kHz PCM16; peak -13.00 dBFS, RMS -22.87 dBFS, estimated true peak -12.99 dBTP. |
+| Full release | Attack 0.437-0.717 s, 150 Hz highpass / 9 kHz lowpass, 1.5 ms attack and 60 ms tail fade. Its own body 1.30-2.43 s starts 18 ms later at -7 dB relative layer gain, 55 Hz highpass / 4.2 kHz lowpass, 16 ms attack and 280 ms tail fade. The final edit lasts 1.15 s with a 120 ms end fade. | Mono 48 kHz PCM16; peak -5.50 dBFS, RMS -18.50 dBFS, estimated true peak -5.44 dBTP. Starts and ends at zero. |
 
-Two optional next source prompts, if the four downloaded families do not provide enough mechanism/threat variety:
+The release edit brings the source attack forward and moves its delayed body underneath it, avoiding the original lead-in and long separated bloom. Both cues use the existing authored-level preparation function; full-release RMS target is -18.5 dBFS. Motor's retained -24 dBFS target is a floor in that function, not an exact loudness match: the actual result is -22.87 dBFS and is reported as measured.
 
-- **Recall/docking, One-Shot:** `One compact sci-fi magnetic recall: six small heavy bronze ceramic shield plates whip inward with a tight reverse-air suction, fast servo zip, and a satisfying solid clack as they dock. Precise physical mechanism, glass dust accent, warm metal body, under one second, isolated dry close game SFX. No music, tune, beat, voices, singing or ambient background.`
-- **Enemy warning, One-Shot:** `One ominous armored construct attack warning: strained bronze gears lock, a short rising glass-energy rasp tightens, then a low mechanical knock. Distinct readable half-second anticipation before a dangerous strike. Dry close fantasy-tech game SFX, narrow controlled high end, no explosion or long reverb. No music, melody, rhythmic beat, voices or singing.`
+The loop boundary step is 0.001257, **23.3%** of its ordinary internal 99.9-percentile step; the quietest 50 ms window is -26.67 dBFS, with no silent gap. Neither cue has full-scale samples. Four fixed dry overlap fixtures pass, with maximum estimated true peak **-1.44 dBTP**. These finite checks do not prove every engine mix safe or establish perceived quality.
+
+`python games/dreambound/scripts/prepare_reverie_audio.py` rendered the palette successfully. One subsequent `--check` passed exact-byte regeneration. Baseline hashes prove only the two assigned WAVs changed. Runtime gains, priorities, caps and event timing remain unchanged.
+
+## Preview and remaining audition
+
+[Play the 11-second two-cue preview](two-cue-preview.wav). It uses the exact edited WAVs at runtime cue gains: three constant-pitch motor loops from 0-6 s, the release at 6.35 s, then a charge pitch/gain ramp followed by release from 8.1 s. Only the two edited cues are present; this is a local preview, not an engine recording. `two-cue-preview.json` records timing, PCM hashes and measurements. Rebuild with `python games/dreambound/assets/audio-suno/build_two_cue_preview.py`.
+
+**Listening limitation:** audio input is unsupported in this worker runtime. Signal plots and measurements were inspected, but the worker has not heard these edits and cannot confirm whether their character is satisfying, musical or distracting. Root should import only these two cues and make the bounded in-engine audition for Klaus. The remaining Suno candidates and the wider palette need no new generation for this experiment.
 
 ## Runtime relationships
 

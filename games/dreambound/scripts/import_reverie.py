@@ -6,8 +6,10 @@ the preceding kit. The generated fountain source lives in config.local.json's
 existing private output root.
 """
 import ast
+import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import traceback
 import unreal
@@ -20,8 +22,12 @@ ASSET_TOOLS=unreal.AssetToolsHelpers.get_asset_tools()
 EDIT=unreal.MaterialEditingLibrary
 LIB=unreal.EditorAssetLibrary
 REPORT={'complete':False,'imported':[],'materials':[],'textures':[],'warnings':[],'audio':[]}
-SURFACES_ONLY='-ReverieSurfacesOnly' in unreal.SystemLibrary.get_command_line()
-REPORT['scope']='materials_and_audio' if SURFACES_ONLY else 'complete_kit'
+COMMAND_LINE=unreal.SystemLibrary.get_command_line()
+SURFACES_ONLY='-ReverieSurfacesOnly' in COMMAND_LINE
+AUDIO_ONLY='-ReverieAudioOnly' in COMMAND_LINE
+cue_filter=re.search(r'(?:^|\s)-ReverieAudioCues=([A-Za-z0-9_,]+)(?:\s|$)',COMMAND_LINE)
+AUDIO_CUES=set(cue_filter.group(1).split(',')) if cue_filter else None
+REPORT['scope']='audio_only' if AUDIO_ONLY else 'materials_and_audio' if SURFACES_ONLY else 'complete_kit'
 INSTANCED_USAGE=unreal.MaterialUsage.MATUSAGE_INSTANCED_STATIC_MESHES
 
 # Reuse the tested FBX transport and its dimension/UCX checks, not old assets.
@@ -146,7 +152,7 @@ def sculpted_landmarks():
    'dimensions_cm':[v*2 for v in helper.vec(mesh.get_bounds().box_extent)],'textures':[{'path':t.get_path_name(),'width':t.blueprint_get_size_x(),'height':t.blueprint_get_size_y(),'srgb':t.get_editor_property('srgb')} for t in (base,packed)]}
  REPORT['warnings'].extend(helper.REPORT.get('warnings',[]))
 
-def main():
+def import_graphics():
  for p in ('/Meshes','/Materials','/Textures'):LIB.make_directory(DEST+p)
  palette={}
  for family in ('environment','characters'):
@@ -171,7 +177,13 @@ def main():
     for name,data in metadata.items():import_mesh(name,data,materials,folder)
   finally:unreal.SystemLibrary.execute_console_command(None,flag+' '+str(prev))
   sculpted_landmarks()
+ LIB.save_directory(DEST,only_if_is_dirty=True,recursive=True)
+
+def import_audio():
  audio_report=json.loads((ROOT/'assets/audio-reverie/audio-report.json').read_text(encoding='utf-8'))
+ if AUDIO_CUES and not AUDIO_CUES.issubset(audio_report['cues']):
+  raise RuntimeError('Unknown audio cues: '+','.join(sorted(AUDIO_CUES-set(audio_report['cues']))))
+ REPORT['audio_revision']=audio_report['revision']
  REPORT['audio_settings']={}
  attenuation_path='/Game/Audio/Reverie/A_RV_Threats'
  attenuation=LIB.load_asset(attenuation_path) if LIB.does_asset_exist(attenuation_path) else ASSET_TOOLS.create_asset('A_RV_Threats','/Game/Audio/Reverie',unreal.SoundAttenuation,unreal.SoundAttenuationFactory())
@@ -181,6 +193,7 @@ def main():
  spatial.set_editor_property('falloff_distance',1850.0)
  attenuation.set_editor_property('attenuation',spatial);LIB.save_loaded_asset(attenuation)
  for source in sorted((ROOT/'assets/audio-reverie').glob('S_*.wav')):
+  if AUDIO_CUES is not None and source.stem not in AUDIO_CUES:continue
   task=unreal.AssetImportTask();task.filename=str(source);task.destination_path='/Game/Audio/Reverie';task.destination_name=source.stem
   task.automated=True;task.replace_existing=True;task.save=True;ASSET_TOOLS.import_asset_tasks([task])
   sound=LIB.load_asset('/Game/Audio/Reverie/'+source.stem)
@@ -203,9 +216,14 @@ def main():
    # 400+900cm attenuation at 4200cm spacing leaves only one audible region.
    sound.set_editor_property('virtualization_mode',unreal.VirtualizationMode.PLAY_WHEN_SILENT)
   assigned=sound.get_editor_property('attenuation_settings')
-  REPORT['audio_settings'][source.stem]={'voice_cap':cap,'limit_to_owner':False,'priority':recipe['priority'],'looping':bool(sound.get_editor_property('looping')),'attenuation':assigned.get_path_name() if assigned else None}
+  REPORT['audio_settings'][source.stem]={'voice_cap':cap,'limit_to_owner':False,'priority':recipe['priority'],'looping':bool(sound.get_editor_property('looping')),'attenuation':assigned.get_path_name() if assigned else None,
+   'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'duration_seconds':float(sound.get_editor_property('duration'))}
   LIB.save_loaded_asset(sound);REPORT['audio'].append(source.stem)
- LIB.save_directory(DEST,only_if_is_dirty=True,recursive=True)
+ if AUDIO_CUES and set(REPORT['audio'])!=AUDIO_CUES:raise RuntimeError('Selected audio source WAV is missing')
+
+def main():
+ if not AUDIO_ONLY:import_graphics()
+ import_audio()
  REPORT['complete']=True
  unreal.log('REVERIE_CONTENT_READY '+json.dumps({'scope':REPORT['scope'],'meshes':len(REPORT['imported'])+len(REPORT.get('sculpted_landmarks',{})),'sounds':len(REPORT['audio'])}))
 
@@ -213,4 +231,4 @@ if __name__=='__main__':
  output=Path(unreal.Paths.project_saved_dir()).resolve()/'Reverie';output.mkdir(parents=True,exist_ok=True)
  try:main()
  except Exception as error:REPORT['error']=str(error);REPORT['traceback']=traceback.format_exc();raise
- finally:(output/('surfaces-import.json' if SURFACES_ONLY else 'import.json')).write_text(json.dumps(REPORT,indent=2)+'\n',encoding='utf-8')
+ finally:(output/('audio-import.json' if AUDIO_ONLY else 'surfaces-import.json' if SURFACES_ONLY else 'import.json')).write_text(json.dumps(REPORT,indent=2)+'\n',encoding='utf-8')

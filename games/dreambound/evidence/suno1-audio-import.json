@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "imported": [],
+  "materials": [],
+  "textures": [],
+  "warnings": [],
+  "audio": [
+    "S_ChargeLoop",
+    "S_FullRelease"
+  ],
+  "scope": "audio_only",
+  "audio_revision": "reverie-suno-v1",
+  "audio_settings": {
+    "S_ChargeLoop": {
+      "voice_cap": 1,
+      "limit_to_owner": false,
+      "priority": 70,
+      "looping": true,
+      "attenuation": null,
+      "source_sha256": "0717d1c6200823ec1b04189552d82b2d3764f1dba824c1cf97a7050924b81302",
+      "duration_seconds": 2.0
+    },
+    "S_FullRelease": {
+      "voice_cap": 1,
+      "limit_to_owner": false,
+      "priority": 90,
+      "looping": false,
+      "attenuation": null,
+      "source_sha256": "c659557e4f567d3488a29dcad8df7addb16b580d946b0d30ae73f99adce4b839",
+      "duration_seconds": 1.149999976158142
+    }
+  }
+}

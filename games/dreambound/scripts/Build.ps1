@@ -1,6 +1,7 @@
-param([ValidateSet('Editor','Content','Package','All')][string]$Stage='All',
+param([ValidateSet('Editor','Content','Audio','Package','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$PackageConfiguration='Shipping',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='ReverieUpdate')
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='ReverieUpdate',
+ [ValidatePattern('^S_[A-Za-z0-9_]+$')][string[]]$AudioCues=@())
 $ErrorActionPreference='Stop'
 $betaGameRoot=Split-Path -Parent $PSScriptRoot
 $betaRepoRoot=[IO.Path]::GetFullPath((Join-Path $betaGameRoot '../..'))
@@ -17,6 +18,14 @@ if($Stage -eq 'Content' -or $Stage -eq 'All'){
  $betaContentArgs=@(('"'+$betaProject+'"'),('-ExecutePythonScript="'+$PSScriptRoot+'/CreateContent.py"'),'-unattended','-nop4','-nosplash','-NullRHI')
  $betaContent=Start-Process -FilePath $betaEditor -ArgumentList $betaContentArgs -WindowStyle Hidden -PassThru -Wait
  if($betaContent.ExitCode -ne 0){throw 'Content import failed'}
+}
+if($Stage -eq 'Audio'){
+ $betaAudioArgs=@(('"'+$betaProject+'"'),('-ExecutePythonScript="'+$PSScriptRoot+'/import_reverie.py"'),'-ReverieAudioOnly','-unattended','-nop4','-nosplash','-NullRHI')
+ if($AudioCues.Count){$betaAudioArgs+=('-ReverieAudioCues='+($AudioCues -join ','))}
+ $betaAudio=Start-Process -FilePath $betaEditor -ArgumentList $betaAudioArgs -WindowStyle Hidden -PassThru -Wait
+ if($betaAudio.ExitCode -ne 0){throw 'Audio import failed'}
+ $betaAudioReport=Get-Content -LiteralPath (Join-Path $betaGameRoot 'unreal/Saved/Reverie/audio-import.json') -Raw | ConvertFrom-Json
+ if(-not $betaAudioReport.complete){throw 'Audio import did not complete'}
 }
 if($Stage -eq 'Package' -or $Stage -eq 'All'){
  & (Join-Path $betaEngineRoot 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$betaProject" -nop4 -platform=Win64 "-clientconfig=$PackageConfiguration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$betaGameRoot/BuildOutput/$OutputName" -utf8output

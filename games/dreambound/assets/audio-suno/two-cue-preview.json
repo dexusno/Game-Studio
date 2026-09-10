@@ -1,0 +1,64 @@
+{
+  "revision": "reverie-suno-v1",
+  "description": "Exact gameplay PCM at runtime cue gains; three charge-loop cycles, isolated release, then an approximated charge/release pitch sequence. No other gameplay cues or master-volume multiplier.",
+  "source_wav_sha256": {
+    "S_ChargeLoop": "0717d1c6200823ec1b04189552d82b2d3764f1dba824c1cf97a7050924b81302",
+    "S_FullRelease": "c659557e4f567d3488a29dcad8df7addb16b580d946b0d30ae73f99adce4b839"
+  },
+  "segments": [
+    {
+      "start": 0,
+      "end": 6,
+      "cue": "S_ChargeLoop",
+      "gain": 0.48,
+      "pitch": 1,
+      "loop_joins": [
+        2,
+        4
+      ]
+    },
+    {
+      "start": 6.35,
+      "end": 7.5,
+      "cue": "S_FullRelease",
+      "gain": 0.66,
+      "pitch": 1
+    },
+    {
+      "start": 8.1,
+      "end": 9.9,
+      "cue": "S_ChargeLoop",
+      "gain": [
+        0.34,
+        0.48
+      ],
+      "pitch": [
+        0.7,
+        1.6
+      ]
+    },
+    {
+      "start": 9.9,
+      "end": 11.05,
+      "cue": "S_FullRelease",
+      "gain": 0.66,
+      "pitch": 1
+    }
+  ],
+  "sha256": "e4835a9e78e61bd0241ac642424cf061de71a455609e181b0c730c6ddf8891fb",
+  "measurements": {
+    "seconds": 11.05,
+    "channels": 1,
+    "sample_rate": 48000,
+    "pcm_bits": 16,
+    "peak_dbfs": -9.10936625032445,
+    "rms_dbfs": -26.8570515185915,
+    "estimated_true_peak_dbtp": -9.051386327036667,
+    "full_scale_samples": 0,
+    "dc_offset": 0.00012025315872188063,
+    "energy_above_8khz_fraction": 0.0063268034419795465,
+    "edge_sample_peak": 0.0
+  },
+  "heard_by_agent": false,
+  "note": "Audio input is unavailable in this worker runtime. This file is for owner/root playback, not proof of subjective quality or an engine recording."
+}

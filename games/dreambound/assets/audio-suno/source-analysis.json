@@ -1,0 +1,522 @@
+{
+  "servo_motor": {
+    "original_path": "games/dreambound/assets/audio/An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,....mp3",
+    "retained_file": "games/dreambound/assets/audio-reverie/sources/suno/servo_motor.mp3",
+    "sha256": "edfafbe5a8592250b8c152a03c537a359a8e3c5ccf7427acbca1d27a07a2dbcf",
+    "bytes": 334316,
+    "decoded_seconds": 13.4535,
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mp3",
+          "codec_long_name": "MP3 (MPEG audio layer 3)",
+          "codec_type": "audio",
+          "codec_tag_string": "[0][0][0][0]",
+          "codec_tag": "0x0000",
+          "sample_fmt": "fltp",
+          "sample_rate": "48000",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/14112000",
+          "start_pts": 324870,
+          "start_time": "0.023021",
+          "duration_ts": 190342656,
+          "duration": "13.488000",
+          "bit_rate": "172954",
+          "disposition": {
+            "default": 0,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "encoder": "Lavc60.31"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "mjpeg",
+          "codec_long_name": "Motion JPEG",
+          "profile": "Baseline",
+          "codec_type": "video",
+          "codec_tag_string": "[0][0][0][0]",
+          "codec_tag": "0x0000",
+          "width": 360,
+          "height": 360,
+          "coded_width": 360,
+          "coded_height": 360,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "1:1",
+          "pix_fmt": "yuvj420p",
+          "level": -99,
+          "color_range": "pc",
+          "color_space": "bt470bg",
+          "chroma_location": "center",
+          "refs": 1,
+          "r_frame_rate": "90000/1",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/90000",
+          "start_pts": 2072,
+          "start_time": "0.023022",
+          "duration_ts": 1213920,
+          "duration": "13.488000",
+          "bits_per_raw_sample": "8",
+          "disposition": {
+            "default": 0,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 1,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "title": "Cover",
+            "comment": "Cover (front)"
+          }
+        }
+      ],
+      "format": {
+        "filename": "games\\dreambound\\assets\\audio-reverie\\sources\\suno\\servo_motor.mp3",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "format_name": "mp3",
+        "format_long_name": "MP2/3 (MPEG audio layer 2/3)",
+        "start_time": "0.023021",
+        "duration": "13.488000",
+        "size": "334316",
+        "bit_rate": "198289",
+        "probe_score": 51,
+        "tags": {
+          "title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+          "artist": "realdexnorthern",
+          "encoder": "Lavf60.16.100",
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "comment": "made with suno; created=2026-09-10T19:21:00Z; id=b1506538-bb54-418b-bf43-ba080b6dabb4"
+        }
+      }
+    },
+    "mono_peak_dbfs": -1.9018096110770943,
+    "mono_rms_dbfs": -19.834577311733916,
+    "high_energy_windows": [
+      {
+        "time": 0.11,
+        "rms_dbfs": -7.6152872235425795
+      },
+      {
+        "time": 0.41,
+        "rms_dbfs": -7.870760938140827
+      },
+      {
+        "time": 0.64,
+        "rms_dbfs": -9.015315030535952
+      },
+      {
+        "time": 0.79,
+        "rms_dbfs": -9.693310189812163
+      },
+      {
+        "time": 0.97,
+        "rms_dbfs": -12.196901110284022
+      },
+      {
+        "time": 1.13,
+        "rms_dbfs": -10.63888537943344
+      },
+      {
+        "time": 1.31,
+        "rms_dbfs": -10.983413878314742
+      },
+      {
+        "time": 1.46,
+        "rms_dbfs": -12.516515131348614
+      },
+      {
+        "time": 1.74,
+        "rms_dbfs": -11.584789180609432
+      },
+      {
+        "time": 1.89,
+        "rms_dbfs": -12.594638287620485
+      },
+      {
+        "time": 2.04,
+        "rms_dbfs": -15.397740138496541
+      },
+      {
+        "time": 2.32,
+        "rms_dbfs": -15.140620052212272
+      },
+      {
+        "time": 2.5,
+        "rms_dbfs": -16.399305728243196
+      },
+      {
+        "time": 2.96,
+        "rms_dbfs": -18.07797908175004
+      },
+      {
+        "time": 3.14,
+        "rms_dbfs": -19.12830897324855
+      },
+      {
+        "time": 3.66,
+        "rms_dbfs": -20.92413556983766
+      },
+      {
+        "time": 3.87,
+        "rms_dbfs": -22.804176426871834
+      },
+      {
+        "time": 4.08,
+        "rms_dbfs": -24.568512450946862
+      },
+      {
+        "time": 4.36,
+        "rms_dbfs": -24.714168615769655
+      },
+      {
+        "time": 4.51,
+        "rms_dbfs": -25.464739221712712
+      },
+      {
+        "time": 4.72,
+        "rms_dbfs": -26.433651229735805
+      },
+      {
+        "time": 5.65,
+        "rms_dbfs": -27.10957783565594
+      },
+      {
+        "time": 6.05,
+        "rms_dbfs": -27.211695086765154
+      },
+      {
+        "time": 6.48,
+        "rms_dbfs": -28.70329835677176
+      },
+      {
+        "time": 7.27,
+        "rms_dbfs": -25.933168248193578
+      },
+      {
+        "time": 7.46,
+        "rms_dbfs": -25.805896715594887
+      },
+      {
+        "time": 7.61,
+        "rms_dbfs": -24.311721996935756
+      },
+      {
+        "time": 8.0,
+        "rms_dbfs": -22.867148628637043
+      },
+      {
+        "time": 8.25,
+        "rms_dbfs": -22.96614236379334
+      },
+      {
+        "time": 8.43,
+        "rms_dbfs": -22.643161088639122
+      },
+      {
+        "time": 8.6,
+        "rms_dbfs": -24.247653481293277
+      },
+      {
+        "time": 8.81,
+        "rms_dbfs": -21.341504760489588
+      },
+      {
+        "time": 9.04,
+        "rms_dbfs": -21.186447866204098
+      },
+      {
+        "time": 9.26,
+        "rms_dbfs": -18.702694320863106
+      },
+      {
+        "time": 9.41,
+        "rms_dbfs": -17.4094525670395
+      },
+      {
+        "time": 9.59,
+        "rms_dbfs": -16.25374799052069
+      },
+      {
+        "time": 9.99,
+        "rms_dbfs": -15.88189157157155
+      },
+      {
+        "time": 10.27,
+        "rms_dbfs": -18.013678089650504
+      },
+      {
+        "time": 10.47,
+        "rms_dbfs": -19.397843147236348
+      },
+      {
+        "time": 10.65,
+        "rms_dbfs": -19.95056312337286
+      },
+      {
+        "time": 10.84,
+        "rms_dbfs": -22.682330614056028
+      },
+      {
+        "time": 11.14,
+        "rms_dbfs": -22.907765106808846
+      },
+      {
+        "time": 11.32,
+        "rms_dbfs": -25.94355312305831
+      },
+      {
+        "time": 11.57,
+        "rms_dbfs": -25.978093610910552
+      }
+    ],
+    "energy_bands": {
+      "0-50": 0.041402506394710964,
+      "50-150": 0.66335188981283,
+      "150-500": 0.28620150712412123,
+      "500-2000": 0.008445985523822305,
+      "2000-6000": 0.0005979395077227831,
+      "6000-10000": 8.156132470287003e-08,
+      "10000-24001": 9.00754680277377e-08
+    }
+  },
+  "shield_release": {
+    "original_path": "games/dreambound/assets/audio/Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap....mp3",
+    "retained_file": "games/dreambound/assets/audio-reverie/sources/suno/shield_release.mp3",
+    "sha256": "9fdf3917c944fd0e427966ab16118761470326bb516d554e5c46b7d5f62295fd",
+    "bytes": 126837,
+    "decoded_seconds": 4.4135,
+    "probe": {
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "mp3",
+          "codec_long_name": "MP3 (MPEG audio layer 3)",
+          "codec_type": "audio",
+          "codec_tag_string": "[0][0][0][0]",
+          "codec_tag": "0x0000",
+          "sample_fmt": "fltp",
+          "sample_rate": "48000",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 0,
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/14112000",
+          "start_pts": 324870,
+          "start_time": "0.023021",
+          "duration_ts": 62657280,
+          "duration": "4.440000",
+          "bit_rate": "181492",
+          "disposition": {
+            "default": 0,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "encoder": "Lavc60.31"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "mjpeg",
+          "codec_long_name": "Motion JPEG",
+          "profile": "Baseline",
+          "codec_type": "video",
+          "codec_tag_string": "[0][0][0][0]",
+          "codec_tag": "0x0000",
+          "width": 360,
+          "height": 360,
+          "coded_width": 360,
+          "coded_height": 360,
+          "closed_captions": 0,
+          "film_grain": 0,
+          "has_b_frames": 0,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "1:1",
+          "pix_fmt": "yuvj420p",
+          "level": -99,
+          "color_range": "pc",
+          "color_space": "bt470bg",
+          "chroma_location": "center",
+          "refs": 1,
+          "r_frame_rate": "90000/1",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/90000",
+          "start_pts": 2072,
+          "start_time": "0.023022",
+          "duration_ts": 399600,
+          "duration": "4.440000",
+          "bits_per_raw_sample": "8",
+          "disposition": {
+            "default": 0,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 1,
+            "timed_thumbnails": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0
+          },
+          "tags": {
+            "title": "Cover",
+            "comment": "Cover (front)"
+          }
+        }
+      ],
+      "format": {
+        "filename": "games\\dreambound\\assets\\audio-reverie\\sources\\suno\\shield_release.mp3",
+        "nb_streams": 2,
+        "nb_programs": 0,
+        "format_name": "mp3",
+        "format_long_name": "MP2/3 (MPEG audio layer 2/3)",
+        "start_time": "0.023021",
+        "duration": "4.440000",
+        "size": "126837",
+        "bit_rate": "228535",
+        "probe_score": 51,
+        "tags": {
+          "title": "Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap...",
+          "artist": "realdexnorthern",
+          "encoder": "Lavf60.16.100",
+          "major_brand": "isom",
+          "minor_version": "512",
+          "compatible_brands": "isomiso2mp41",
+          "comment": "made with suno; created=2026-09-10T18:16:07Z; id=de39cd92-d524-4698-ba42-9af66a9c1963"
+        }
+      }
+    },
+    "mono_peak_dbfs": -0.09139115613652193,
+    "mono_rms_dbfs": -17.565964032017753,
+    "high_energy_windows": [
+      {
+        "time": 0.49,
+        "rms_dbfs": -10.241367639771617
+      },
+      {
+        "time": 0.77,
+        "rms_dbfs": -12.727216541064568
+      },
+      {
+        "time": 1.1,
+        "rms_dbfs": -10.092210286999146
+      },
+      {
+        "time": 1.34,
+        "rms_dbfs": -9.99050533393312
+      },
+      {
+        "time": 1.49,
+        "rms_dbfs": -9.886354504889734
+      },
+      {
+        "time": 1.7,
+        "rms_dbfs": -11.837256391727175
+      },
+      {
+        "time": 2.04,
+        "rms_dbfs": -12.487645005132356
+      },
+      {
+        "time": 2.23,
+        "rms_dbfs": -14.554436423452355
+      },
+      {
+        "time": 2.38,
+        "rms_dbfs": -16.39538480457179
+      },
+      {
+        "time": 2.68,
+        "rms_dbfs": -15.825986025155924
+      },
+      {
+        "time": 2.91,
+        "rms_dbfs": -19.392790275586357
+      },
+      {
+        "time": 3.06,
+        "rms_dbfs": -21.182348567943983
+      },
+      {
+        "time": 3.29,
+        "rms_dbfs": -23.0332208926986
+      },
+      {
+        "time": 3.45,
+        "rms_dbfs": -23.90872313540143
+      }
+    ],
+    "energy_bands": {
+      "0-50": 0.4951100503675372,
+      "50-150": 0.3784111619149731,
+      "150-500": 0.0811571103579193,
+      "500-2000": 0.010572028344102842,
+      "2000-6000": 0.014864164431001126,
+      "6000-10000": 0.007778862662887372,
+      "10000-24001": 0.01210662192157922
+    }
+  }
+}

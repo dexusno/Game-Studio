@@ -1,7 +1,7 @@
 {
   "revision": "reverie-suno-sources-v1",
   "date": "2026-09-10",
-  "status": "Original eight candidates under owner-requested prompt review; Chrome authenticated; official export location pending",
+  "status": "historical first generation batches; owner supplied release MP3 now edited into reverie-suno-v1",
   "provider": "Suno Sounds",
   "model_ui": "Sounds mode; page model selector displayed v6; generated rows labeled SOUND",
   "creator": "Game Studio / Klaus using Suno",
@@ -127,5 +127,12 @@
     }
   ],
   "audio_audition": "No subjective audition yet; local audio artifact retrieval not complete. Prior runtime reports audio input unsupported.",
-  "next": "Root to resolve supported IAB download delivery. Then officially download selected alternatives, inspect signal and listening where available, retain raw downloads privately, and make short game excerpts. Only one output is currently unlocked."
+  "next": "Root in-engine audition of the supplied release and revised servo motor; do not integrate the other candidates solely because generation succeeded.",
+  "owner_delivery_update": {
+    "date": "2026-09-10",
+    "id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+    "retained_mp3": "assets/audio-reverie/sources/suno/shield_release.mp3",
+    "integration_record": "assets/audio-suno/two-cue-integration.json",
+    "note": "Earlier download-retrieval observations remain historical; owner has now supplied the original MP3 locally. Other first-batch outputs remain unevaluated."
+  }
 }

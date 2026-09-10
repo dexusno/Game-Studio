@@ -2,7 +2,7 @@
   "revision": "reverie-suno-prompt-audition-v2",
   "date": "2026-09-10",
   "observed_utc": "2026-09-10 19:21 UTC",
-  "status": "two completed source audition batches; not selected or integrated",
+  "status": "historical revised audition; owner supplied first charge-motor MP3 for reverie-suno-v1 editing; other3 candidates unevaluated",
   "provider": "Suno Sounds",
   "model_ui": "Page selector displayed v6; generated rows labeled SOUND. Sounds model version not independently established.",
   "account_verification": "Visible account link realdexnorthern matched the existing paid account before Create. This worker did not repeat billing or account inspection.",
@@ -10,7 +10,7 @@
     "name": "Chrome",
     "browser_id": "2",
     "tab_id": "997003066",
-    "session_name": "🔊 Sound audition",
+    "session_name": "\ud83d\udd0a Sound audition",
     "url": "https://suno.com/create?wid=default",
     "marked_for_handoff": true,
     "note": "Root's tab997003059 could not be claimed because it belonged to root's browser session. Root explicitly authorized a new temporary Chrome tab in the same profile. IAB was not controlled."
@@ -88,5 +88,12 @@
     "owner acceptance"
   ],
   "license": "Suno output, not CC0. No permitted download was obtained for any revision2 output in this task. Existing terms and evidence references remain in generation-report.json.",
-  "next": "Owner/root audition the four alternatives using the recognition and editability criteria in prompt-revision.md. Keep unaccepted candidates out of the game; obtain official downloads and inspect actual signals before integration."
+  "next": "Root in-engine audition of the supplied motor and original release; other revised candidates remain unevaluated.",
+  "owner_delivery_update": {
+    "date": "2026-09-10",
+    "id": "b1506538-bb54-418b-bf43-ba080b6dabb4",
+    "retained_mp3": "assets/audio-reverie/sources/suno/servo_motor.mp3",
+    "integration_record": "assets/audio-suno/two-cue-integration.json",
+    "note": "No download was performed during the recorded generation task; the owner subsequently supplied this original MP3."
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "revision": "reverie-foley-v2",
+  "revision": "reverie-suno-v1",
   "numpy": "1.26.2",
   "scipy": "1.11.4",
   "rights_sources": [
@@ -283,6 +283,62 @@
       "original_download_file": "sources/randommind/VistulaShort_0.mp3",
       "sha256": "9e03972fc4551e389c87c80155f09d63968c221b0445876b047244874a8843f6",
       "source_modifications": "Retained local original MP3; excerpt 18.0-42.0 seconds decoded to mono 48 kHz PCM16 lossless FLAC for a compact reproducible source asset."
+    },
+    "suno_servo_b1506538": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/servo_motor.mp3",
+      "sha256": "edfafbe5a8592250b8c152a03c537a359a8e3c5ccf7427acbca1d27a07a2dbcf",
+      "bytes": 334316,
+      "source_url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The servo download click was performed by the owner, not observed by this worker; paid-account identity and original generation were independently verified.",
+      "owner_original": "games/dreambound/assets/audio/An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,....mp3",
+      "embedded_tags": {
+        "title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T19:21:00Z; id=b1506538-bb54-418b-bf43-ba080b6dabb4"
+      },
+      "decoded_seconds": 13.4535,
+      "container_seconds": 13.488,
+      "prompt_record": "../audio-suno/revision2-generation-report.json"
+    },
+    "suno_release_de39cd92": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/shield_release.mp3",
+      "sha256": "9fdf3917c944fd0e427966ab16118761470326bb516d554e5c46b7d5f62295fd",
+      "bytes": 126837,
+      "source_url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The agent also observed this release unlocked in the official Download UI and a completed 126837-byte MP3 download event.",
+      "owner_original": "games/dreambound/assets/audio/Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap....mp3",
+      "embedded_tags": {
+        "title": "Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T18:16:07Z; id=de39cd92-d524-4698-ba42-9af66a9c1963"
+      },
+      "decoded_seconds": 4.4135,
+      "container_seconds": 4.44,
+      "prompt_record": "../audio-suno/generation-report.json"
     }
   },
   "cues": {
@@ -292,17 +348,17 @@
       "sample_rate": 48000,
       "pcm_bits": 16,
       "peak_dbfs": -13.0,
-      "rms_dbfs": -23.999998892428533,
-      "estimated_true_peak_dbtp": -12.956661790920021,
+      "rms_dbfs": -22.869219203146272,
+      "estimated_true_peak_dbtp": -12.994472624968932,
       "full_scale_samples": 0,
-      "dc_offset": 0.0035501712798284004,
-      "energy_above_8khz_fraction": 0.0016201196072286289,
-      "boundary_step": 0.005900989760256714,
-      "internal_step_99_9_percentile": 0.07197070439772131,
-      "quietest_50ms_rms_dbfs": -28.01663105812263,
-      "sha256": "d5dac173a31345276417d14ee8a5f6e780f1d74cd00905dc731b220c75ecd276",
+      "dc_offset": 0.0002936974271368118,
+      "energy_above_8khz_fraction": 4.9343206040558834e-09,
+      "boundary_step": 0.001256894131620459,
+      "internal_step_99_9_percentile": 0.0053948729809895676,
+      "quietest_50ms_rms_dbfs": -26.66534520196072,
+      "sha256": "0717d1c6200823ec1b04189552d82b2d3764f1dba824c1cf97a7050924b81302",
       "sources": [
-        "scifi_engineCircular_000"
+        "suno_servo_b1506538"
       ],
       "runtime_gain": 0.48,
       "recipe": {
@@ -311,20 +367,22 @@
         "runtime_gain": 0.48,
         "voice_cap": 1,
         "priority": 70,
-        "description": "Layered mechanical motor texture; steady two-second loop; runtime pitch supplies charge rise",
+        "description": "Suno servo motor; stable decoded 5.04-7.29s region, 65Hz highpass and 3.2kHz lowpass, 250ms crossfade into a sustaining two-second loop; runtime supplies pitch rise",
         "layers": [
           {
-            "source": "scifi_engineCircular_000",
+            "source": "suno_servo_b1506538",
             "region": [
-              0.45,
-              2.7
+              5.04,
+              7.29
             ],
             "gain_db": 0,
             "speed": 1,
             "delay": 0,
             "source_peak_dbfs": -3,
-            "highpass": 95,
-            "lowpass": 4300
+            "highpass": 65,
+            "lowpass": 3200,
+            "attack": 0,
+            "release": 0
           }
         ],
         "loop": true,
@@ -458,86 +516,63 @@
       }
     },
     "S_FullRelease": {
-      "seconds": 0.9,
+      "seconds": 1.15,
       "channels": 1,
       "sample_rate": 48000,
       "pcm_bits": 16,
-      "peak_dbfs": -4.5,
-      "rms_dbfs": -17.49998920220556,
-      "estimated_true_peak_dbtp": -4.494472624968932,
+      "peak_dbfs": -5.5,
+      "rms_dbfs": -18.49998738941376,
+      "estimated_true_peak_dbtp": -5.442159964426107,
       "full_scale_samples": 0,
-      "dc_offset": 5.6340467494759985e-05,
-      "energy_above_8khz_fraction": 0.00034824901216404046,
+      "dc_offset": 0.0001841093823770535,
+      "energy_above_8khz_fraction": 0.010187563110504443,
       "edge_sample_peak": 0.0,
-      "sha256": "860b71771f8cc03c7c720a11eeb64fef795837e73de53b34da16531eaa6f6856",
+      "sha256": "c659557e4f567d3488a29dcad8df7addb16b580d946b0d30ae73f99adce4b839",
       "sources": [
-        "foley_impactGlass_heavy_000",
-        "foley_impactPlate_heavy_003",
-        "scifi_explosionCrunch_000",
-        "scifi_forceField_000"
+        "suno_release_de39cd92"
       ],
       "runtime_gain": 0.66,
       "recipe": {
-        "seconds": 0.9,
-        "peak_dbfs": -4.5,
+        "seconds": 1.15,
+        "peak_dbfs": -5.5,
         "runtime_gain": 0.66,
         "voice_cap": 1,
         "priority": 90,
-        "description": "Forceful six-piece rupture with sharp glass edge, compressed mechanical body and short recoil tail",
+        "description": "Suno six-piece release; immediate attack from decoded 0.437-0.717s over its own 1.30-2.43s body, body offset 18ms; removes lead-in and shortens the separate bloom to one 1.15-second release",
         "layers": [
           {
-            "source": "scifi_explosionCrunch_000",
+            "source": "suno_release_de39cd92",
             "region": [
-              0,
-              0.72
-            ],
-            "gain_db": -3,
-            "speed": 1.25,
-            "delay": 0,
-            "source_peak_dbfs": -3,
-            "highpass": 50,
-            "lowpass": 6800
-          },
-          {
-            "source": "foley_impactPlate_heavy_003",
-            "region": [
-              0,
-              0.34
+              0.437,
+              0.717
             ],
             "gain_db": 0,
-            "speed": 0.8,
+            "speed": 1,
             "delay": 0,
             "source_peak_dbfs": -3,
-            "lowpass": 7200
+            "highpass": 150,
+            "lowpass": 9000,
+            "attack": 0.0015,
+            "release": 0.06
           },
           {
-            "source": "foley_impactGlass_heavy_000",
+            "source": "suno_release_de39cd92",
             "region": [
-              0,
-              0.23
+              1.3,
+              2.43
             ],
             "gain_db": -7,
-            "speed": 1.2,
-            "delay": 0.009,
+            "speed": 1,
+            "delay": 0.018,
             "source_peak_dbfs": -3,
-            "highpass": 1500,
-            "lowpass": 11000
-          },
-          {
-            "source": "scifi_forceField_000",
-            "region": [
-              0.06,
-              0.6
-            ],
-            "gain_db": -13,
-            "speed": 1.7,
-            "delay": 0.025,
-            "source_peak_dbfs": -3,
-            "highpass": 100,
-            "lowpass": 3700
+            "highpass": 55,
+            "lowpass": 4200,
+            "attack": 0.016,
+            "release": 0.28
           }
         ],
-        "rms_dbfs": -17.5
+        "rms_dbfs": -18.5,
+        "release": 0.12
       }
     },
     "S_Attack": {
@@ -1839,12 +1874,12 @@
     {
       "asset_id": "reverie_s_chargeloop",
       "path": "assets/audio-reverie/S_ChargeLoop.wav",
-      "source_url": "https://kenney.nl/assets/sci-fi-sounds",
-      "creator": "Kenney; Game Studio audio editing",
-      "license": "CC0 1.0 source samples",
+      "source_url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "creator": "Klaus / realdexnorthern via Suno Sounds; Game Studio audio editing",
+      "license": "Suno permitted paid-tier downloads; terms effective 2026-09-03",
       "proof_path": "assets/audio-reverie/audio-report.json",
-      "modifications": "Layered mechanical motor texture; steady two-second loop; runtime pitch supplies charge rise; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
-      "approval_status": "licensed-cc0-edited"
+      "modifications": "Suno servo motor; stable decoded 5.04-7.29s region, 65Hz highpass and 3.2kHz lowpass, 250ms crossfade into a sustaining two-second loop; runtime supplies pitch rise; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "generated-permitted-download"
     },
     {
       "asset_id": "reverie_s_chargetick",
@@ -1869,12 +1904,12 @@
     {
       "asset_id": "reverie_s_fullrelease",
       "path": "assets/audio-reverie/S_FullRelease.wav",
-      "source_url": "https://kenney.nl/assets/impact-sounds;https://kenney.nl/assets/sci-fi-sounds",
-      "creator": "Kenney; Game Studio audio editing",
-      "license": "CC0 1.0 source samples",
+      "source_url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+      "creator": "Klaus / realdexnorthern via Suno Sounds; Game Studio audio editing",
+      "license": "Suno permitted paid-tier downloads; terms effective 2026-09-03",
       "proof_path": "assets/audio-reverie/audio-report.json",
-      "modifications": "Forceful six-piece rupture with sharp glass edge, compressed mechanical body and short recoil tail; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
-      "approval_status": "licensed-cc0-edited"
+      "modifications": "Suno six-piece release; immediate attack from decoded 0.437-0.717s over its own 1.30-2.43s body, body offset 18ms; removes lead-in and shortens the separate bloom to one 1.15-second release; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "generated-permitted-download"
     },
     {
       "asset_id": "reverie_s_attack",
@@ -2070,7 +2105,7 @@
   "audition": {
     "heard_by_agent": false,
     "in_game_tested": false,
-    "note": "A real source WAV reel was emitted through the available audio tool. Runtime explicitly returned audio content omitted because you do not support audio input. Signal inspection and owner playback remain possible."
+    "note": "Two owner-supplied Suno MP3s edited and inspected as signals. The available runtime previously reported audio input unsupported; no subjective judgment or absence-of-music claim. The exact edited WAV preview is assets/audio-suno/two-cue-preview.wav. Root owns in-engine audition."
   },
   "overlap_checks": {
     "note": "Fixed dry mono sums with source gains, without attenuation; not an exhaustive engine mix. Six catches retain all tails beyond the intended two-voice cap.",
@@ -2108,8 +2143,8 @@
             "pitch": 1
           }
         ],
-        "sample_peak_dbfs": -1.4465164857734303,
-        "estimated_true_peak_dbtp": -1.4409891107423611,
+        "sample_peak_dbfs": -1.449175551608062,
+        "estimated_true_peak_dbtp": -1.4436481765769926,
         "full_scale_samples": 0
       },
       "defense_under_enemy_fire": {

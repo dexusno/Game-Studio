@@ -1,6 +1,11 @@
 # Cyborg between worlds — first beta
 Updated 2026-09-08. Klaus authorized building the beta. Internal directory name dreambound is not the final title.
 
+## Current owner refinement — September 10
+Klaus asks for a higher art bar informed by AAA/high-end indie references, detailed organic enemies (only the player is established as a cyborg), and more reusable props, fauna and habitat-specific variation. Keep the preferred player arms/weapon. The next increment adds wet spring and dry ruin dressing to the existing connected procedural layout and new biological enemy art; broader realms remain future scope and creature lore is not settled.
+
+Movement needs physical weight. Shift is hold-to-sprint with stamina depletion, delayed recovery and an on-screen meter. Dash has a separate button and a brief forceful collision-swept evasive burst. Left Alt is the current implementation choice. Ground-speed-driven gait, landing and acceleration response should communicate a body moving through the world while preserving mouse control and the existing combat loop. Two owner-supplied Suno downloads are being tested for charge/release sound.
+
 ## Latest owner refinement — segmented shield and procedural art
 
 Klaus's latest playtest found the idle shield obstructive, charge too quick/weak, sound poor and melee too short/boring. He selected a collapsed default weapon form with animated expansion for guarding. The current corrective increment folds the physical pieces, slows full commitment to 1.8s with a distinct full-volley payoff, improves melee reach/combos and replaces the audio palette. A secondary weapon is only a fallback to consider if this still fails to carry combat. He asked whether tools/packs would help: his subsequent correction requires an art-creation pipeline across biomes; a ruins kit is insufficient. His latest research request covers current developer experience, commercial leaders and latest open models, including cloud GPUs/APIs. The resulting proposal compares Meshy 7, Rodin Gen-2.5, Tripo P2.0 Preview and TRELLIS.2 with Blender finishing; no purchase or quality winner is established. These changes are hypotheses for play, not evidence of fun or anchor-B quality.

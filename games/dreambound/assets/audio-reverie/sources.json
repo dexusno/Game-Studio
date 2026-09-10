@@ -1,6 +1,6 @@
 {
-  "revision": "reverie-foley-v2",
-  "status": "23_cc0_edited_cues_ready_suno_login_pending",
+  "revision": "reverie-suno-v1",
+  "status": "two_owner_supplied_permitted_suno_downloads_plus_21_unchanged_cc0_cues",
   "rights_sources": [
     {
       "url": "https://help.suno.com/en/articles/10625537",
@@ -282,11 +282,67 @@
       "original_download_file": "sources/randommind/VistulaShort_0.mp3",
       "sha256": "9e03972fc4551e389c87c80155f09d63968c221b0445876b047244874a8843f6",
       "source_modifications": "Retained local original MP3; excerpt 18.0-42.0 seconds decoded to mono 48 kHz PCM16 lossless FLAC for a compact reproducible source asset."
+    },
+    "suno_servo_b1506538": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/servo_motor.mp3",
+      "sha256": "edfafbe5a8592250b8c152a03c537a359a8e3c5ccf7427acbca1d27a07a2dbcf",
+      "bytes": 334316,
+      "source_url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The servo download click was performed by the owner, not observed by this worker; paid-account identity and original generation were independently verified.",
+      "owner_original": "games/dreambound/assets/audio/An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,....mp3",
+      "embedded_tags": {
+        "title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T19:21:00Z; id=b1506538-bb54-418b-bf43-ba080b6dabb4"
+      },
+      "decoded_seconds": 13.4535,
+      "container_seconds": 13.488,
+      "prompt_record": "../audio-suno/revision2-generation-report.json"
+    },
+    "suno_release_de39cd92": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/shield_release.mp3",
+      "sha256": "9fdf3917c944fd0e427966ab16118761470326bb516d554e5c46b7d5f62295fd",
+      "bytes": 126837,
+      "source_url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The agent also observed this release unlocked in the official Download UI and a completed 126837-byte MP3 download event.",
+      "owner_original": "games/dreambound/assets/audio/Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap....mp3",
+      "embedded_tags": {
+        "title": "Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T18:16:07Z; id=de39cd92-d524-4698-ba42-9af66a9c1963"
+      },
+      "decoded_seconds": 4.4135,
+      "container_seconds": 4.44,
+      "prompt_record": "../audio-suno/generation-report.json"
     }
   },
   "audition": {
     "heard_by_agent": false,
     "in_game_tested": false,
-    "note": "A real source WAV reel was emitted through the available audio tool. Runtime explicitly returned audio content omitted because you do not support audio input. Signal inspection and owner playback remain possible."
+    "note": "Two owner-supplied Suno MP3s edited and inspected as signals. The available runtime previously reported audio input unsupported; no subjective judgment or absence-of-music claim. The exact edited WAV preview is assets/audio-suno/two-cue-preview.wav. Root owns in-engine audition."
   }
 }

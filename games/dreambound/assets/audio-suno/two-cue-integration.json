@@ -1,0 +1,228 @@
+{
+  "revision": "reverie-suno-v1",
+  "date": "2026-09-10",
+  "status": "two usable edited WAVs and preview delivered for in-engine owner audition; subjective acceptance pending",
+  "owner_authorization": "Owner supplied the two downloaded MP3 files in assets/audio and explicitly invited experimentation. Root delegated only ChargeLoop and FullRelease editing.",
+  "source_evidence": {
+    "suno_servo_b1506538": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/servo_motor.mp3",
+      "sha256": "edfafbe5a8592250b8c152a03c537a359a8e3c5ccf7427acbca1d27a07a2dbcf",
+      "bytes": 334316,
+      "source_url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The servo download click was performed by the owner, not observed by this worker; paid-account identity and original generation were independently verified.",
+      "owner_original": "games/dreambound/assets/audio/An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,....mp3",
+      "embedded_tags": {
+        "title": "An Electric Servo Motor Spinning Steadily Under Load. A Low Mechanical Whirr,...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T19:21:00Z; id=b1506538-bb54-418b-bf43-ba080b6dabb4"
+      },
+      "decoded_seconds": 13.4535,
+      "container_seconds": 13.488,
+      "prompt_record": "../audio-suno/revision2-generation-report.json"
+    },
+    "suno_release_de39cd92": {
+      "kind": "suno_generated",
+      "status": "permitted_download",
+      "file": "sources/suno/shield_release.mp3",
+      "sha256": "9fdf3917c944fd0e427966ab16118761470326bb516d554e5c46b7d5f62295fd",
+      "bytes": 126837,
+      "source_url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+      "creator": "Klaus / realdexnorthern via Suno Sounds",
+      "license": "Suno permitted paid-tier download; terms effective 2026-09-03; not CC0",
+      "license_proof": "../audio-suno/two-cue-integration.json",
+      "song_id": "de39cd92-d524-4698-ba42-9af66a9c1963",
+      "downloaded_at": "2026-09-10 (owner-provided download; exact download time not captured)",
+      "plan": "Pro; verified in Suno account UI before generation",
+      "download_evidence": "Owner provided the actual downloaded MP3 in assets/audio and explicitly authorized experimentation. Embedded Suno comment confirms this generation ID; retained source copy is byte-identical to the supplied file. The agent also observed this release unlocked in the official Download UI and a completed 126837-byte MP3 download event.",
+      "owner_original": "games/dreambound/assets/audio/Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap....mp3",
+      "embedded_tags": {
+        "title": "Single Powerful Sci-fi Shield Discharge, Six Heavy Bronze Ceramic Plates Snap...",
+        "artist": "realdexnorthern",
+        "encoder": "Lavf60.16.100",
+        "major_brand": "isom",
+        "minor_version": "512",
+        "compatible_brands": "isomiso2mp41",
+        "comment": "made with suno; created=2026-09-10T18:16:07Z; id=de39cd92-d524-4698-ba42-9af66a9c1963"
+      },
+      "decoded_seconds": 4.4135,
+      "container_seconds": 4.44,
+      "prompt_record": "../audio-suno/generation-report.json"
+    }
+  },
+  "rights_note": "Original paid-account generations. Owner-supplied official download provenance plus unchanged embedded IDs and source hashes retained; release unlock was also observed independently. These assets are Suno paid-tier output, not CC0. Other Suno candidates have not been evaluated or integrated.",
+  "cues": {
+    "S_ChargeLoop": {
+      "seconds": 2.0,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -13.0,
+      "rms_dbfs": -22.869219203146272,
+      "estimated_true_peak_dbtp": -12.994472624968932,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0002936974271368118,
+      "energy_above_8khz_fraction": 4.9343206040558834e-09,
+      "boundary_step": 0.001256894131620459,
+      "internal_step_99_9_percentile": 0.0053948729809895676,
+      "quietest_50ms_rms_dbfs": -26.66534520196072,
+      "sha256": "0717d1c6200823ec1b04189552d82b2d3764f1dba824c1cf97a7050924b81302",
+      "sources": [
+        "suno_servo_b1506538"
+      ],
+      "runtime_gain": 0.48,
+      "recipe": {
+        "seconds": 2.25,
+        "peak_dbfs": -13,
+        "runtime_gain": 0.48,
+        "voice_cap": 1,
+        "priority": 70,
+        "description": "Suno servo motor; stable decoded 5.04-7.29s region, 65Hz highpass and 3.2kHz lowpass, 250ms crossfade into a sustaining two-second loop; runtime supplies pitch rise",
+        "layers": [
+          {
+            "source": "suno_servo_b1506538",
+            "region": [
+              5.04,
+              7.29
+            ],
+            "gain_db": 0,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 65,
+            "lowpass": 3200,
+            "attack": 0,
+            "release": 0
+          }
+        ],
+        "loop": true,
+        "loop_seconds": 2,
+        "crossfade_seconds": 0.25,
+        "rms_dbfs": -24
+      }
+    },
+    "S_FullRelease": {
+      "seconds": 1.15,
+      "channels": 1,
+      "sample_rate": 48000,
+      "pcm_bits": 16,
+      "peak_dbfs": -5.5,
+      "rms_dbfs": -18.49998738941376,
+      "estimated_true_peak_dbtp": -5.442159964426107,
+      "full_scale_samples": 0,
+      "dc_offset": 0.0001841093823770535,
+      "energy_above_8khz_fraction": 0.010187563110504443,
+      "edge_sample_peak": 0.0,
+      "sha256": "c659557e4f567d3488a29dcad8df7addb16b580d946b0d30ae73f99adce4b839",
+      "sources": [
+        "suno_release_de39cd92"
+      ],
+      "runtime_gain": 0.66,
+      "recipe": {
+        "seconds": 1.15,
+        "peak_dbfs": -5.5,
+        "runtime_gain": 0.66,
+        "voice_cap": 1,
+        "priority": 90,
+        "description": "Suno six-piece release; immediate attack from decoded 0.437-0.717s over its own 1.30-2.43s body, body offset 18ms; removes lead-in and shortens the separate bloom to one 1.15-second release",
+        "layers": [
+          {
+            "source": "suno_release_de39cd92",
+            "region": [
+              0.437,
+              0.717
+            ],
+            "gain_db": 0,
+            "speed": 1,
+            "delay": 0,
+            "source_peak_dbfs": -3,
+            "highpass": 150,
+            "lowpass": 9000,
+            "attack": 0.0015,
+            "release": 0.06
+          },
+          {
+            "source": "suno_release_de39cd92",
+            "region": [
+              1.3,
+              2.43
+            ],
+            "gain_db": -7,
+            "speed": 1,
+            "delay": 0.018,
+            "source_peak_dbfs": -3,
+            "highpass": 55,
+            "lowpass": 4200,
+            "attack": 0.016,
+            "release": 0.28
+          }
+        ],
+        "rms_dbfs": -18.5,
+        "release": 0.12
+      }
+    }
+  },
+  "loop_join_ratio_to_internal_step_99_9": 0.2329793743151132,
+  "verification": {
+    "preparation_script": "scripts/prepare_reverie_audio.py",
+    "render_exit_code": 0,
+    "check_command": "python games/dreambound/scripts/prepare_reverie_audio.py --check",
+    "check_exit_code": 0,
+    "check_runs": 1,
+    "byte_identical_other_cue_count": 21,
+    "changed_cues": [
+      "S_ChargeLoop.wav",
+      "S_FullRelease.wav"
+    ],
+    "baseline_hashes_file": "assets/audio-suno/two-cue-baseline-hashes.json",
+    "source_originals_unchanged": true,
+    "runtime_gains_priorities_voice_caps_unchanged": true,
+    "all_final_cues_have_no_full_scale_samples": true,
+    "fixed_dry_overlap_max_true_peak_dbtp": -1.4436481765769926,
+    "engine_playback_verified_by_worker": false,
+    "heard_by_agent": false,
+    "audio_limitation": "Audio input is unsupported in this worker runtime. Signal inspection does not establish absence of music, repeated character or subjective sound quality."
+  },
+  "preview": {
+    "wav": "assets/audio-suno/two-cue-preview.wav",
+    "index": "assets/audio-suno/two-cue-preview.json",
+    "rebuild": "python games/dreambound/assets/audio-suno/build_two_cue_preview.py",
+    "seconds": 11.05,
+    "actual_gameplay_wavs_used": true,
+    "engine_recording": false
+  },
+  "manifest_rows_for_integration_owner": [
+    {
+      "asset_id": "reverie_s_chargeloop",
+      "path": "assets/audio-reverie/S_ChargeLoop.wav",
+      "source_url": "https://suno.com/song/b1506538-bb54-418b-bf43-ba080b6dabb4",
+      "creator": "Klaus / realdexnorthern via Suno Sounds; Game Studio audio editing",
+      "license": "Suno permitted paid-tier downloads; terms effective 2026-09-03",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Suno servo motor; stable decoded 5.04-7.29s region, 65Hz highpass and 3.2kHz lowpass, 250ms crossfade into a sustaining two-second loop; runtime supplies pitch rise; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "generated-permitted-download"
+    },
+    {
+      "asset_id": "reverie_s_fullrelease",
+      "path": "assets/audio-reverie/S_FullRelease.wav",
+      "source_url": "https://suno.com/song/de39cd92-d524-4698-ba42-9af66a9c1963",
+      "creator": "Klaus / realdexnorthern via Suno Sounds; Game Studio audio editing",
+      "license": "Suno permitted paid-tier downloads; terms effective 2026-09-03",
+      "proof_path": "assets/audio-reverie/audio-report.json",
+      "modifications": "Suno six-piece release; immediate attack from decoded 0.437-0.717s over its own 1.30-2.43s body, body offset 18ms; removes lead-in and shortens the separate bloom to one 1.15-second release; source-region editing, resampling, EQ, layering and authored levels; 48 kHz PCM16",
+      "approval_status": "generated-permitted-download"
+    }
+  ],
+  "next": "Root imports these two final WAVs only, verifies the bounded engine audition, and gives Klaus the preview to assess. Preserve the other21 cue WAVs and existing event behavior."
+}
