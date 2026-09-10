@@ -147,34 +147,45 @@ void ADBGameMode::BuildRecoveryCourtyard()
   Instance("SM_Rubble",C+CoverA[Variant]+FVector(250,-60,0),FRotator(0,32,0),FVector(1.2));
   // The root-embraced bell is one coherent textured silhouette, not a trunk,
   // separate suspended bell and several floating canopy pieces. Different
-  // diagonal quarters keep the three courts identifiable while leaving the
+  // quarters keep the three courts identifiable while leaving the
   // unchanged enemy pads, practice area and axial approaches exposed.
-  const FVector TreeOffsets[]={FVector(750+Variant*60,1000+Variant*70,0),
-   FVector(900+Variant*60,1130-Variant*45,0),FVector(-1020-Variant*40,1230-Variant*45,0)};
+  // The measured ground roots are 677 x 684 cm. Cardinal facing avoids
+  // expanding that obstacle across the NE caster pad or the cover lanes.
+  const FVector TreeOffsets[]={FVector(760+Variant*10,1100+Variant*30,0),
+   FVector(740+Variant*15,1140+Variant*20,0),FVector(-1260-Variant*10,1190+Variant*25,0)};
   const FVector Tree=C+TreeOffsets[RoomIndex];
-  const float TreeYaw=(C-Tree).Rotation().Yaw-90.f;
-  const float TreeScale=RoomIndex==2?1.08f:RoomIndex==1?.98f:1.f;
-  if(!Trellis(TEXT("SM_Trellis_BellTree"),Tree,FRotator(0,TreeYaw,0),FVector(TreeScale))){
+  const FVector TreeFront=GetRoomEntryPoint(RoomIndex)-Tree;
+  const float TreeYaw=FMath::Abs(TreeFront.X)>FMath::Abs(TreeFront.Y)
+   ?(TreeFront.X>0?-90.f:90.f):(TreeFront.Y>0?0.f:180.f);
+  if(!Trellis(TEXT("SM_Trellis_BellTree"),Tree,FRotator(0,TreeYaw,0),FVector::OneVector)){
    Instance("SM_BellTree",Tree,FRotator(0,TreeYaw+180,0),FVector(1.05f));
    Instance("SM_Bell",Tree+FRotator(0,TreeYaw+180,0).RotateVector(FVector(-20,-130,344)),FRotator(0,TreeYaw+180,0),FVector(1.5f));
   }
 
-  // Grounded optional cloisters replace the floating upper arches. The first
-  // court has a close right-hand frame visible from ordinary startup; it sits
-  // south of the approach, so traversing its generated opening is optional.
-  if(RoomIndex==0){
-   Cloister(C+FVector(-1060,-1220,0),54.f,1.f);
-   Cloister(C+FVector(-1040+Variant*45,1550,0),180.f,1.f);
-  }else if(RoomIndex==1){
-   Cloister(C+FVector(-1540,930+Variant*30,0),-90.f,1.f);
-   Cloister(C+FVector(-1540,1460,0),-90.f,.92f);
-  }else{
-   Cloister(C+FVector(1090+Variant*35,-1550,0),0.f,1.08f);
+  // Grounded carved bays frame the visible perimeter; original walls back
+  // them, so the narrow generated openings never become required passages.
+  // Even the wider bay ends beyond 737 cm from the central door axis.
+  for(int32 Side=0;Side<4;++Side){
+   const FVector Out=FRotator(0,Side*90.f,0).Vector(),T(-Out.Y,Out.X,0);
+   for(int32 Bay=0;Bay<2;++Bay){
+    const float BayScale=Bay==0?1.15f:1.25f;
+    const FVector Gallery=C+Out*1680.f+T*(Bay==0?-1050.f:1050.f);
+    // Measured cloister is 500.29 x 146.06 cm; reserve a further metre
+    // around the full tree root envelope instead of packing bays into it.
+    const float HalfX=(FMath::Abs(Out.X)*73.03f+FMath::Abs(T.X)*250.145f)*BayScale;
+    const float HalfY=(FMath::Abs(Out.Y)*73.03f+FMath::Abs(T.Y)*250.145f)*BayScale;
+    const FVector FromTree=Gallery-Tree;
+    if(FMath::Abs(FromTree.X)<HalfX+450.f&&FMath::Abs(FromTree.Y)<HalfY+450.f)continue;
+    Cloister(Gallery,Side*90.f+90.f,BayScale);
+   }
   }
+  // A close right-hand frame enters ordinary startup view while keeping a
+  // capsule-width approach to the ward and all four axial routes clear.
+  if(RoomIndex==0)Cloister(C+FVector(-950,-1080,0),63.f,1.20f);
   for(int32 Corner=0;Corner<4;++Corner){
-   // The wider paired cloister occupies this planted corner; leave its
-   // opening and approach visible instead of filling them with a rock mass.
-   if(RoomIndex==1&&Corner==1)continue;
+   // Keep the split court's open planted edge; the final court's broad tree
+   // now owns its NW corner, so it needs no second rock mass in the roots.
+   if(RoomIndex>0&&Corner==1)continue;
    const FRotator Around(0,Corner*90.f,0);
    FVector Growth=C+Around.RotateVector(FVector(1420,1390,0));
    if(RoomIndex==2&&Corner==3)Growth=C+FVector(1500,-1200,0);
@@ -222,6 +233,7 @@ void ADBGameMode::BuildRecoveryCourtyard()
  Sun->GetLightComponent()->SetMobility(EComponentMobility::Movable);
  Sun->GetLightComponent()->SetIntensity(5.2f);Sun->GetLightComponent()->SetLightColor(FLinearColor(1,.90,.73));
  Sun->GetLightComponent()->SetIndirectLightingIntensity(1.15f);
+ Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->SetForwardShadingPriority(1);
  Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->bAtmosphereSunLight=true;
  Cast<UDirectionalLightComponent>(Sun->GetLightComponent())->LightSourceAngle=1.8f;Generated.Add(Sun);
  Generated.Add(GetWorld()->SpawnActor<ASkyAtmosphere>());
@@ -232,6 +244,7 @@ void ADBGameMode::BuildRecoveryCourtyard()
  auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-48,138,0));
  Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);
  Fill->GetLightComponent()->SetIntensity(.60f);Fill->GetLightComponent()->SetLightColor(FLinearColor(.62,.76,1));
+ Cast<UDirectionalLightComponent>(Fill->GetLightComponent())->SetForwardShadingPriority(0);
  Fill->GetLightComponent()->SetCastShadows(false);Generated.Add(Fill);
  auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.009f);Fog->GetComponent()->SetFogHeightFalloff(.24f);
  Fog->GetComponent()->SetStartDistance(900.f);Fog->GetComponent()->SetFogMaxOpacity(.42f);
