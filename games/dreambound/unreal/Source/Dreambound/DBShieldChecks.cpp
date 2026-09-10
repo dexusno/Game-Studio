@@ -676,6 +676,7 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
 
             bool ClearPads = true, PadFloors = true, TerraceFloors = true;
             int32 PadCount = 0; FString PadFailures;
+            int32 TreadCount = 0, GoodTreads = 0; FString StairFailures;
             FCollisionQueryParams P(SCENE_QUERY_STAT(DBReveriePads),false,Player);
             for (int32 I = 0; I < Mode->Rooms.Num(); ++I) {
                 const FVector C = Mode->Rooms[I].Center;
@@ -697,13 +698,22 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
                 if (I>0) for (int32 Tread=0; Tread<8; ++Tread) {
                     const FVector Point=C+FVector(-337.5f-Tread*75.f,-1200,330);
                     FHitResult Floor;
-                    TerraceFloors &= GetWorld()->LineTraceSingleByChannel(Floor,Point,Point-FVector(0,0,400),ECC_Visibility,P)
-                        && FMath::IsNearlyEqual(Floor.ImpactPoint.Z,20.f*(Tread+1),2.f) && Floor.ImpactNormal.Z>.65f;
+                    const float Expected=20.f*(Tread+1);
+                    const bool Hit=GetWorld()->LineTraceSingleByChannel(Floor,Point,Point-FVector(0,0,400),ECC_Visibility,P);
+                    const bool Good=Hit&&FMath::IsNearlyEqual(Floor.ImpactPoint.Z,Expected,2.f)&&Floor.ImpactNormal.Z>.65f;
+                    TerraceFloors &= Good; ++TreadCount; GoodTreads+=Good?1:0;
+                    if(!Good){
+                        const auto* Component=Cast<UStaticMeshComponent>(Floor.GetComponent());
+                        StairFailures+=FString::Printf(TEXT("room%d tread%d at%s expected%.1f hit%d mesh%s actual%s normal%s; "),I,Tread,
+                            *Point.ToCompactString(),Expected,Hit,Component&&Component->GetStaticMesh()?*Component->GetStaticMesh()->GetName():*GetNameSafe(Floor.GetActor()),
+                            *Floor.ImpactPoint.ToCompactString(),*Floor.ImpactNormal.ToCompactString());
+                    }
                 }
             }
             Check(ClearPads && PadFloors,TEXT("spawn_combat_and_ward_approaches_clear"),
                 FString::Printf(TEXT("%d capsule-overlap and physical floor probes at retained entry, encounter, practice and ward approach positions. %s"),PadCount,*PadFailures));
-            Check(TerraceFloors,TEXT("terrace_stairs_have_physical_treads"),TEXT("Sixteen vertical floor queries on the two side staircases find successive20cm rises. This does not establish a native-input traversal."));
+            Check(TerraceFloors,TEXT("terrace_stairs_have_physical_treads"),FString::Printf(
+                TEXT("%d/%d physical tread probes find successive20cm rises. No native-input traversal claim. %s"),GoodTreads,TreadCount,*StairFailures));
         }
         if (IsTrellisArtCheck()) { Finish(false); return; }
         Go(EStep::FirstEncounter); break;

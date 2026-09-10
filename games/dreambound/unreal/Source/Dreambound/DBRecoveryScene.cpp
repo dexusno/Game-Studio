@@ -367,7 +367,10 @@ void ADBGameMode::BuildRecoveryCourtyard()
     Place(TEXT("SM_RV_TileB"),Terrace+FVector(X*200,Y*200,140),FRotator(0,(X+Y)*90.f,0));
    Place(TEXT("SM_RV_Wall"),Terrace+FVector(300,0,0),FRotator(0,90,0),FVector(1.5,1,.2666667f));
    Place(TEXT("SM_RV_Wall"),Terrace+FVector(0,300,0),FRotator::ZeroRotator,FVector(1.5,1,.2666667f));
-   Place(TEXT("SM_RV_Steps"),C+FVector(-600,-1200,0),FRotator(0,90,0));
+   // The imported FBX rises along local negativeY, opposite the Blender
+   // positiveY authoring note. This puts20cm at the court and160cm at the
+   // terrace, verified by actual runtime collision tread traces.
+   Place(TEXT("SM_RV_Steps"),C+FVector(-600,-1200,0),FRotator(0,-90,0));
    Place(TEXT("SM_RV_CrystalCluster"),Terrace+FVector(-150,-130,160),FRotator(0,35+Variant*50.f,0),FVector(.85),false);
    Place(TEXT("SM_RV_Fern"),Terrace+FVector(-175,80,160),FRotator(0,75,0),FVector(.80),false);
   }
