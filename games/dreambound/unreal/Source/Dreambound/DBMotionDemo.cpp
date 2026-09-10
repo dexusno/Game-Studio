@@ -51,7 +51,9 @@ void ADBGameMode::TickMotionDemo(float Dt)
  }
  auto* PC=Cast<APlayerController>(Player->GetController());if(!PC)return;
  FVector Aim(-500,-500,160);
- if(DemoTime>30.f)Aim=FVector(500,400,420);
+ // Keep the walking/sprinting study level and facing along its route. A fixed
+ // world-space look-at point pitches the view into the sky when passed.
+ if(DemoTime>30.f)Aim=Player->GetPawnViewLocation()+FVector(1000,300,0);
  PC->SetControlRotation(FMath::RInterpTo(PC->GetControlRotation(),(Aim-Player->GetPawnViewLocation()).Rotation(),Dt,4.f));
  // This controlled fixture makes each state visible. Upgrades and incoming
  // damage here are scripted, independently of the earned-progression checks.
@@ -77,14 +79,15 @@ void ADBGameMode::TickMotionDemo(float Dt)
  else if(DemoAction==15&&DemoTime>25){Player->ReceiveAttack(16,Player->GetPawnViewLocation()+Player->GetAimDirection()*500,false,nullptr,12001);DemoAction=16;}
  else if(DemoAction==16&&DemoTime>28.5f){Player->ReleaseGuard();DemoAction=17;}
  else if(DemoAction==17&&DemoTime>30){Player->SetActorLocation(FVector(-1250,-850,110));DemoAction=18;}
- // The final approach contrasts walking, held sprint and a grounded stop.
+ // The final approach contrasts walking, held sprint, a jump and landing.
  // Scripted movement uses the ordinary CharacterMovement input path.
  if(DemoTime>30.f&&DemoTime<33.8f){
   if(DemoTime>31.2f&&DemoAction==18){Player->PressSprint();DemoAction=19;}
   const FVector Forward=PC->GetControlRotation().Vector().GetSafeNormal2D();
   Player->AddMovementInput(Forward,1.f);
  }
- if(DemoTime>=33.8f&&DemoAction==19){Player->ReleaseSprint();DemoAction=20;}
+ if(DemoTime>=33.8f&&DemoAction==19){Player->ReleaseSprint();Player->Jump();DemoAction=20;}
+ if(DemoTime>=34.05f&&DemoAction==20){Player->StopJumping();DemoAction=21;}
  static double NextFrameAt=0;
  if(DemoTime>=NextFrameAt&&!FScreenshotRequest::IsScreenshotRequested()){
   NextFrameAt=DemoTime+.10;

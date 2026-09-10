@@ -1360,12 +1360,16 @@ void ADBEnemy::UpdateOrganicPose()
         const int32 Index = Skeleton.FindBoneIndex(FName(Name));
         if (!OrganicReferencePose.IsValidIndex(Index)) return;
         const int32 Parent = Skeleton.GetParentIndex(Index);
-        const FQuat ParentBasis = OrganicReferenceComponentPose.IsValidIndex(Parent)
-            ? OrganicReferenceComponentPose[Parent].GetRotation() : FQuat::Identity;
+        const FTransform ParentFrame = OrganicReferenceComponentPose.IsValidIndex(Parent)
+            ? OrganicReferenceComponentPose[Parent] : FTransform::Identity;
+        const FQuat ParentBasis = ParentFrame.GetRotation();
         const FQuat MeshDelta = ActorToMesh * Rotation.Quaternion() * MeshToActor;
         FTransform& Bone = OrganicMesh->BoneSpaceTransforms[Index];
         Bone.SetRotation((ParentBasis.Inverse() * MeshDelta * ParentBasis * Bone.GetRotation()).GetNormalized());
-        Bone.AddToTranslation(ParentBasis.UnrotateVector(ActorToMesh.RotateVector(Offset)));
+        // Motion offsets are centimetres in mesh space. The imported FBX root
+        // can carry the metres-to-centimetres scale: inverse rotation alone
+        // multiplied a sub-centimetre breath into a visible rise/sink.
+        Bone.AddToTranslation(ParentFrame.InverseTransformVector(ActorToMesh.RotateVector(Offset)));
     };
     // The original pivots now drive a continuous skinned body. Their combat
     // phase/timing remains authoritative; no animation changes damage windows.
