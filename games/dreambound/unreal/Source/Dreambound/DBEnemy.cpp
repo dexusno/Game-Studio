@@ -1307,40 +1307,83 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     const FVector PlanningVelocity = bStopping ? FVector::ZeroVector : FVector(MeasuredVelocity.X, MeasuredVelocity.Y, 0.f);
     const float PlanningSpeed = PlanningVelocity.Size2D();
     if (bStopping) OrganicStepsSinceStop = 0;
+    auto PredictedYaw = [&](float Time)
+    {
+        return OrganicFacingYaw + (bStopping ? 0.f : OrganicTurnRate * Time);
+    };
+    auto PredictedTurn = [&](float Time)
+    {
+        return FQuat(FVector::UpVector, FMath::DegreesToRadians(PredictedYaw(Time) - OrganicFacingYaw));
+    };
+    auto PredictPoint = [&](FVector Point, float Time)
+    {
+        return Frame.GetLocation() + PlanningVelocity * Time
+            + PredictedTurn(Time).RotateVector(Point - Frame.GetLocation());
+    };
     auto LandingFor = [&](int32 Side, float RemainingTime, float LeadTime)
     {
-        FVector Landing = Nominal[Side] + PlanningVelocity * (RemainingTime + LeadTime);
-        const FVector FutureCenter = Frame.GetLocation() + PlanningVelocity * RemainingTime;
-        FVector Radial = Landing - FutureCenter;
+        FVector Landing = PredictPoint(Nominal[Side], RemainingTime) + PlanningVelocity * LeadTime;
+        const FVector FutureHip = PredictPoint(Frame.TransformPosition(
+            OrganicReferenceComponentPose[HipIndices[Side]].GetLocation()), RemainingTime);
+        FVector Radial = Landing - FutureHip;
         Radial.Z = 0.f;
-        Radial = Radial.GetClampedToMaxSize(Lengths[Side] * .70f);
-        Landing.X = FutureCenter.X + Radial.X;
-        Landing.Y = FutureCenter.Y + Radial.Y;
+        // Bound the landing around its future hip, at the established working
+        // stance height. Actor-centred bounds let an accelerating, turning
+        // foot land too wide and demand another deep crouch on flat paving.
+        Radial = Radial.GetClampedToMaxSize(Lengths[Side] * .52f);
+        Landing.X = FutureHip.X + Radial.X;
+        Landing.Y = FutureHip.Y + Radial.Y;
         return Landing;
+    };
+    auto SwingRate = [&](const FOrganicFoot& Foot)
+    {
+        return Foot.bSettling || bStopping ? 1.f / FMath::Max(.01f, Foot.Duration)
+            : .4f / FMath::Max(.01f, Foot.Duration) + PlanningSpeed * .6f / FMath::Max(1.f, Foot.ExpectedTravel);
+    };
+    auto StepUrgency = [&](int32 Side, FVector CandidateNominal, float CandidateYaw, bool bOtherSwinging, float OtherProgress)
+    {
+        const FOrganicFoot& Foot = OrganicFeet[Side];
+        const float Gap = FVector::Dist2D(CandidateNominal, Foot.Anchor);
+        const float Transfer = OrganicStepsSinceStop < 2 ? .45f : bCaster ? .94f : 1.f;
+        if (bOtherSwinging && Gap < Lengths[Side] * .55f && (PlanningSpeed < 120.f || OtherProgress < Transfer)) return 0.f;
+        const float Threshold = OrganicStepsSinceStop == 0 ? 4.f * Scale
+            : FMath::Max(8.f * Scale, Lengths[Side] * (bCaster ? .22f : .26f));
+        const float Turn = FMath::Abs(FMath::FindDeltaAngleDegrees(Foot.FacingYaw, CandidateYaw));
+        const FVector MotionDirection = PlanningVelocity.GetSafeNormal2D();
+        const FVector MotionSide = FVector::CrossProduct(FVector::UpVector, MotionDirection);
+        const FVector Offset = CandidateNominal - Foot.Anchor;
+        const float Trailing = FVector::DotProduct(Offset, MotionDirection);
+        const float Sideways = FMath::Abs(FVector::DotProduct(Offset, MotionSide));
+        const float Placement = bStopping ? Gap / (8.f * Scale)
+            : FMath::Max(Trailing / Threshold, Sideways / (Lengths[Side] * .33f));
+        return FMath::Max(Placement, Turn / (bCaster ? 23.f : 29.f));
     };
     OrganicStepCooldown = FMath::Max(0.f, OrganicStepCooldown - DeltaSeconds);
     for (int32 Side = 0; Side < 2; ++Side)
     {
         FOrganicFoot& Foot = OrganicFeet[Side];
         if (!Foot.bSwinging) continue;
-        const FVector ExpectedLanding = LandingFor(Side, Foot.Duration * (1.f - Foot.Progress), bStopping ? 0.f : Foot.LandingLeadTime);
+        const float RemainingTime = (1.f - Foot.Progress) / FMath::Max(.01f, SwingRate(Foot));
+        const FVector ExpectedLanding = LandingFor(Side, RemainingTime, bStopping ? 0.f : Foot.LandingLeadTime);
         const bool bSettleNow = bStopping && !Foot.bSettling;
         const bool bCourseChanged = !bStopping && Foot.Progress < .90f
             && FVector::Dist2D(ExpectedLanding, Foot.SwingEnd) > Lengths[Side] * .22f;
         if (bSettleNow || bCourseChanged)
         {
-            // Replan only the foot already in flight. The current position and
-            // velocity are the new Hermite start, so a stop or reversal cannot
-            // leave it travelling toward an unreachable, obsolete landing.
-            Foot.Duration = FMath::Clamp(Foot.Duration * (1.f - Foot.Progress), .10f, bCaster ? .17f : .20f);
+            // Preserve the current landing deadline and velocity. Restarting
+            // a minimum .10 s swing with a new lift arc repeatedly delayed
+            // support and lifted an already-raised foot again during turns.
+            Foot.Duration = FMath::Max(DeltaSeconds, bStopping
+                ? FMath::Min(RemainingTime, bCaster ? .17f : .20f) : RemainingTime);
             Foot.SwingStart = Foot.Position;
             Foot.SwingStartVelocity = Foot.Velocity.GetClampedToMaxSize(650.f * Scale);
             Foot.StartRotation = Foot.Rotation;
-            Foot.LandingLeadTime = bStopping ? 0.f : Foot.Duration * .45f;
+            if (bStopping) Foot.LandingLeadTime = 0.f;
+            Foot.LiftHeight = 0.f;
             TraceOrganicFoot(LandingFor(Side, Foot.Duration, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
             Foot.LandingRotation = FQuat::FindBetweenNormals(FVector::UpVector, Foot.LandingNormal)
-                * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Side]].GetRotation();
-            Foot.FacingYaw = OrganicFacingYaw;
+                * PredictedTurn(Foot.Duration) * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Side]].GetRotation();
+            Foot.FacingYaw = PredictedYaw(Foot.Duration);
             Foot.Progress = 0.f;
             Foot.ExpectedTravel = FMath::Max(1.f, PlanningVelocity.Size2D() * Foot.Duration);
             Foot.bSettling = bStopping;
@@ -1356,12 +1399,13 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
         const float P = Foot.Progress;
         Foot.Position += Foot.SwingStartVelocity * Foot.Duration * (P * P * P - 2.f * P * P + P);
         const float LiftShape = FMath::Square(FMath::Sin(P * PI));
-        const float Lift = LiftShape * (Foot.bSettling ? 2.f : Foot.LiftHeight) * Scale;
+        const float Lift = LiftShape * Foot.LiftHeight * Scale;
         Foot.Position.Z += Lift;
         Foot.Velocity = DeltaSeconds > SMALL_NUMBER ? (Foot.Position - PreviousPosition) / DeltaSeconds : FVector::ZeroVector;
         Foot.Rotation = FQuat::Slerp(Foot.StartRotation, Foot.LandingRotation, Blend).GetNormalized();
         const FVector SwingRight = FRotator(0.f, OrganicFacingYaw, 0.f).RotateVector(FVector::RightVector);
-        Foot.Rotation = (FQuat(SwingRight, FMath::DegreesToRadians(-LiftShape * (bCaster ? 9.f : 13.f))) * Foot.Rotation).GetNormalized();
+        const float ToeLift = Foot.LiftHeight > 0.f ? LiftShape : 0.f;
+        Foot.Rotation = (FQuat(SwingRight, FMath::DegreesToRadians(-ToeLift * (bCaster ? 9.f : 13.f))) * Foot.Rotation).GetNormalized();
         if (Foot.Progress >= 1.f)
         {
             Foot.bSwinging = false;
@@ -1383,25 +1427,7 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             FOrganicFoot& Foot = OrganicFeet[Side];
             const FOrganicFoot& Other = OrganicFeet[1 - Side];
             if (Foot.bSwinging) continue;
-            // Mature strides carry weight until the opposite foot has nearly
-            // landed. The old 62% overlap made the heavy body take six short
-            // steps a second, with neither leg showing a clear support phase.
-            const float Gap = FVector::Dist2D(Nominal[Side], Foot.Anchor);
-            const float Transfer = OrganicStepsSinceStop < 2 ? .45f : bCaster ? .94f : 1.f;
-            if (Other.bSwinging && Gap < Lengths[Side] * .55f && (PlanningSpeed < 120.f || Other.Progress < Transfer)) continue;
-            const float Threshold = OrganicStepsSinceStop == 0 ? 4.f * Scale
-                : FMath::Max(8.f * Scale, Lengths[Side] * (bCaster ? .22f : .26f));
-            const float Turn = FMath::Abs(FMath::FindDeltaAngleDegrees(Foot.FacingYaw, OrganicFacingYaw));
-            const FVector MotionDirection = PlanningVelocity.GetSafeNormal2D();
-            const FVector MotionSide = FVector::CrossProduct(FVector::UpVector, MotionDirection);
-            const FVector Offset = Nominal[Side] - Foot.Anchor;
-            const float Trailing = FVector::DotProduct(Offset, MotionDirection);
-            const float Sideways = FMath::Abs(FVector::DotProduct(Offset, MotionSide));
-            // A leading contact is doing useful support work. Do not lift it
-            // merely because its distance from bind stance exceeds a threshold.
-            const float Placement = bStopping ? Gap / (8.f * Scale)
-                : FMath::Max(Trailing / Threshold, Sideways / (Lengths[Side] * .33f));
-            const float Urgency = FMath::Max(Placement, Turn / (bCaster ? 23.f : 29.f));
+            const float Urgency = StepUrgency(Side, Nominal[Side], OrganicFacingYaw, Other.bSwinging, Other.Progress);
             if (Urgency > Worst) { Pick = Side; Worst = Urgency; }
         }
         if (Pick != INDEX_NONE)
@@ -1419,7 +1445,7 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             if (!bStopping && !bFirstStep && DeltaSeconds > SMALL_NUMBER)
                 Foot.Duration = FMath::CeilToFloat((Foot.Duration - .0001f) / DeltaSeconds) * DeltaSeconds;
             Foot.LandingLeadTime = bStopping || bFirstStep ? 0.f : Foot.Duration * .50f;
-            Foot.LiftHeight = bFirstStep ? (bCaster ? 5.f : 6.f)
+            Foot.LiftHeight = bStopping ? 2.f : bFirstStep ? (bCaster ? 5.f : 6.f)
                 : bSecondStep ? (bCaster ? 7.f : 9.f) : (bCaster ? 9.f : 12.f);
             TraceOrganicFoot(LandingFor(Pick, Foot.Duration, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
             Foot.SwingStart = Foot.Position;
@@ -1427,8 +1453,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             Foot.bSettling = bStopping;
             Foot.StartRotation = Foot.Rotation;
             Foot.LandingRotation = FQuat::FindBetweenNormals(FVector::UpVector, Foot.LandingNormal)
-                * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Pick]].GetRotation();
-            Foot.FacingYaw = OrganicFacingYaw;
+                * PredictedTurn(Foot.Duration) * Frame.GetRotation() * OrganicReferenceComponentPose[FootIndices[Pick]].GetRotation();
+            Foot.FacingYaw = PredictedYaw(Foot.Duration);
             Foot.Progress = Foot.Travel = 0.f;
             Foot.ExpectedTravel = FMath::Max(1.f, PlanningSpeed * Foot.Duration);
             Foot.bSwinging = true;
@@ -1445,18 +1471,13 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     OrganicSupportOffset = FMath::VInterpTo(OrganicSupportOffset, Support, DeltaSeconds, bCaster ? 11.f : 7.f);
     float RequiredDrop = (bCaster ? 8.f : FMath::Lerp(3.f, 5.f, GaitBlend)) * Scale;
     float ForecastDrop = RequiredDrop;
-    auto SwingRate = [&](const FOrganicFoot& Foot)
-    {
-        return Foot.bSettling || bStopping ? 1.f / FMath::Max(.01f, Foot.Duration)
-            : .4f / FMath::Max(.01f, Foot.Duration) + PlanningSpeed * .6f / FMath::Max(1.f, Foot.ExpectedTravel);
-    };
     auto FutureFootPosition = [&](const FOrganicFoot& Foot, float LookAhead)
     {
         if (!Foot.bSwinging) return Foot.Position;
         const float P = FMath::Min(1.f, Foot.Progress + SwingRate(Foot) * LookAhead);
         FVector Position = FMath::Lerp(Foot.SwingStart, Foot.SwingEnd, FMath::SmoothStep(0.f, 1.f, P));
         Position += Foot.SwingStartVelocity * Foot.Duration * (P * P * P - 2.f * P * P + P);
-        Position.Z += FMath::Square(FMath::Sin(P * PI)) * (Foot.bSettling ? 2.f : Foot.LiftHeight) * Scale;
+        Position.Z += FMath::Square(FMath::Sin(P * PI)) * Foot.LiftHeight * Scale;
         return Position;
     };
     for (int32 Side = 0; Side < 2; ++Side)
@@ -1475,11 +1496,26 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             float LookAhead = Sample * .035f;
             const FOrganicFoot& Foot = OrganicFeet[Side];
             const FOrganicFoot& Other = OrganicFeet[1 - Side];
-            // Do not extrapolate a stationary support far beyond the opposite
-            // landing, when the scheduler can release it into the next stride.
-            if (!bStopping && !Foot.bSwinging && Other.bSwinging)
-                LookAhead = FMath::Min(LookAhead, (1.f - Other.Progress) / FMath::Max(.01f, SwingRate(Other)));
-            const FVector FutureHip = Hip + PlanningVelocity * LookAhead;
+            if (!Foot.bSwinging)
+            {
+                // Predict only the stance the scheduler will actually keep.
+                // A long fixed-anchor extrapolation after an early support
+                // release caused large false crouches late in the orbit path.
+                const float Tick = FMath::Max(.001f, DeltaSeconds);
+                for (float Probe = Tick; Probe <= LookAhead + .0001f; Probe += Tick)
+                {
+                    if (OrganicStepCooldown > Probe) continue;
+                    const float OtherProgress = Other.bSwinging ? FMath::Min(1.f, Other.Progress + SwingRate(Other) * Probe) : 1.f;
+                    if (StepUrgency(Side, PredictPoint(Nominal[Side], Probe), PredictedYaw(Probe),
+                        Other.bSwinging && OtherProgress < 1.f, OtherProgress) > 1.f)
+                    {
+                        LookAhead = Probe;
+                        break;
+                    }
+                }
+            }
+            const FVector FutureHip = PredictPoint(Frame.TransformPosition(
+                OrganicReferenceComponentPose[HipIndices[Side]].GetLocation()), LookAhead) + OrganicSupportOffset;
             ForecastDrop = FMath::Max(ForecastDrop, NeededDrop(FutureHip, FutureFootPosition(Foot, LookAhead)));
         }
     }
