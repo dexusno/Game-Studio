@@ -43,9 +43,9 @@ void ADBProjectile::BeginPlay()
 
 void ADBProjectile::PrepareVisuals()
 {
-    Streak->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam")));
+    Streak->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube")));
     if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr,
-        TEXT("/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal")))
+        TEXT("/Game/Art/PreferredCombat/Meshes/SM_Crystal.SM_Crystal")))
     {
         Visual->SetStaticMesh(Crystal);
         const FVector Size = Crystal->GetBounds().BoxExtent * 2.f;
@@ -56,7 +56,7 @@ void ADBProjectile::PrepareVisuals()
         Visual->SetRelativeLocation(VisualCenterOffset);
     }
     UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr,
-        TEXT("/Game/Art/Reverie/Materials/M_RV_CombatGlow.M_RV_CombatGlow"));
+        TEXT("/Game/Art/PreferredCombat/Materials/M_CombatGlow.M_CombatGlow"));
     if (Material)
     {
         GlowMaterial = UMaterialInstanceDynamic::Create(Material, this);

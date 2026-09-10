@@ -97,6 +97,10 @@ void ADBGameMode::BeginPlay() {
     CurrentRoomId=0;const FVector Position=Rooms[0].Center+FVector(380,400,110);
     Player->SetActorLocation(Position);
     Player->GetController()->SetControlRotation((Rooms[0].Center+FVector(1130,1240,330)-Position-FVector(0,0,50)).Rotation());
+   }else if(DetailView==TEXT("Stairs")){
+    CurrentRoomId=1;const FVector Position=Rooms[1].Center+FVector(150,-1600,120);
+    Player->SetActorLocation(Position);
+    Player->GetController()->SetControlRotation((Rooms[1].Center+FVector(-850,-1200,75)-Position-FVector(0,0,50)).Rotation());
    }else if(!FParse::Param(FCommandLine::Get(),TEXT("DBFirstView"))){
    CurrentRoomId=1;Player->SetActorLocation(Rooms[1].Center+FVector(-980,-650,110));
    Player->GetController()->SetControlRotation(FRotator(-3,38,0));
@@ -354,7 +358,7 @@ void ADBGameMode::Tick(float Dt) {
  if(bCapture){
   if(PulseTime>8&&!bCapturedFrame){
    bCapturedFrame=true;FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
-   FScreenshotRequest::RequestScreenshot(DetailView==TEXT("Fountain")?TEXT("Reverie_Fountain.png"):TEXT("Dreambound_FirstView.png"),true,false);
+   FScreenshotRequest::RequestScreenshot(DetailView==TEXT("Fountain")?TEXT("Reverie_Fountain.png"):DetailView==TEXT("Stairs")?TEXT("Reverie_Stairs.png"):TEXT("Dreambound_FirstView.png"),true,false);
   }
   if(PulseTime>12)FGenericPlatformMisc::RequestExit(false);
  }

@@ -82,6 +82,13 @@ void ADBGameMode::BuildRecoveryCourtyard()
   }
   Batch->AddInstance(FTransform(Rotation,Location,Scale),true);return true;
  };
+ // A buried dressed-stone base joins an authored asset to the sloping soil.
+ // Wall's solid top is exactly600cm; Place extends its bottom another112cm
+ // without moving this requested bearing surface or any playable top above it.
+ auto StoneBedding=[&Place](FVector Surface,FVector2D Footprint){
+  Place(TEXT("SM_RV_Wall"),Surface-FVector(0,0,32),FRotator::ZeroRotator,
+   FVector(Footprint.X/400.f,Footprint.Y/94.f,32.f/600.f),true,TEXT("M_RV_StoneDark"));
+ };
  // Altars and gates remain individual actors: progression hides/opens them.
  auto MovingMesh=[this,&Asset,&Material](const TCHAR* Name,FVector Location,FRotator Rotation,
   FVector Scale,const TCHAR* Override=nullptr)->AStaticMeshActor*{
@@ -156,6 +163,21 @@ void ADBGameMode::BuildRecoveryCourtyard()
     const FVector P=D*1760.f+T*Across*200.f;
     Place(TEXT("SM_RV_TileB"),C+P+FVector(0,0,-20),FRotator(0,D.Rotation().Yaw,0));PavingCenters.Add(P);
    }
+  }
+  // The20cm paving cap used to stop above the soil, most visibly where the
+  // shoulder falls away at bridge approaches. Support exposed slab edges;
+  // interior slabs retain their existing top and do not need extra scenery.
+  for(const FVector& P:PavingCenters){
+   bool Exposed=false;
+   for(const FVector& Offset:{FVector(101,75,0),FVector(101,-75,0),FVector(-101,75,0),FVector(-101,-75,0),
+     FVector(75,101,0),FVector(-75,101,0),FVector(75,-101,0),FVector(-75,-101,0)}){
+    const FVector Probe=P+Offset;bool Covered=false;
+    for(const FVector& Neighbor:PavingCenters)
+     if(FMath::Abs(Probe.X-Neighbor.X)<=100.5f&&FMath::Abs(Probe.Y-Neighbor.Y)<=100.5f){Covered=true;break;}
+    if(!Covered){Exposed=true;break;}
+   }
+   // Slightly inset below the cap, with2cm overlap into its solid bedding.
+   if(Exposed)StoneBedding(C+P+FVector(0,0,-18),FVector2D(194,186));
   }
   // Small unequal drifts soften exposed paving edges. Their candidates come
   // from actual slab boundaries, not a uniform lawn scatter, and retain a
@@ -324,6 +346,10 @@ void ADBGameMode::BuildRecoveryCourtyard()
   // Raised spring -> rill -> receiving basin is one coherent water feature.
   // It stays beyond the combat pads and every possible processional axis.
   const FVector Basin=C+FVector(1130,1240,0);
+  // Reuse the hollow radial masonry as an embedded foundation: the lower
+  // rim's physical top meetsZ0, while its coping overlaps the upper rim.
+  // The water volume remains open and its original35cm surface is unchanged.
+  Place(TEXT("SM_RV_Basin"),Basin+FVector(0,0,-114),FRotator(0,Variant*30.f,0),FVector(1.06,1.06,1.5));
   Place(TEXT("SM_RV_Basin"),Basin,FRotator(0,Variant*30.f,0));
   Place(TEXT("SM_RV_WaterDisc"),Basin+FVector(0,0,35),FRotator::ZeroRotator,FVector(4.85,4.85,1),false,TEXT("M_RV_Water"));
   const FRotator FountainFacing(0,135.f+Variant*12.f,0);
@@ -349,6 +375,7 @@ void ADBGameMode::BuildRecoveryCourtyard()
    WaterAudio->SetWorldLocation(Basin+FVector(0,0,120));WaterAudio->SetSound(WaterSound);WaterAudio->SetVolumeMultiplier(.55f);
    WaterAudio->RegisterComponent();WaterAudio->Play();
   }
+  StoneBedding(C+FVector(810,1240,12),FVector2D(604,174));
   Place(TEXT("SM_RV_Rill"),C+FVector(810,1240,50),FRotator::ZeroRotator);
   Place(TEXT("SM_RV_WaterPlane"),C+FVector(810,1240,35),FRotator::ZeroRotator,FVector(6,1.14,1),false,TEXT("M_RV_Water"));
   Place(TEXT("SM_RV_SculptedBank"),C+FVector(460,1240,-25),FRotator(0,20,0),FVector(.43));
@@ -365,8 +392,18 @@ void ADBGameMode::BuildRecoveryCourtyard()
    Ground(Terrace+FVector(0,0,80),FVector(300,300,80),0);
    for(int32 X=-1;X<=1;++X)for(int32 Y=-1;Y<=1;++Y)
     Place(TEXT("SM_RV_TileB"),Terrace+FVector(X*200,Y*200,140),FRotator(0,(X+Y)*90.f,0));
-   Place(TEXT("SM_RV_Wall"),Terrace+FVector(300,0,0),FRotator(0,90,0),FVector(1.5,1,.2666667f));
-   Place(TEXT("SM_RV_Wall"),Terrace+FVector(0,300,0),FRotator::ZeroRotator,FVector(1.5,1,.2666667f));
+   // Close every exposed side below the landing cap. These retain160cm
+   // tops and embedded footings rather than leaving the rear tiles cantilevered.
+   for(int32 Sign:{-1,1}){
+    Place(TEXT("SM_RV_Wall"),Terrace+FVector(Sign*300.f,0,0),FRotator(0,90,0),FVector(1.5,1,.2666667f));
+    Place(TEXT("SM_RV_Wall"),Terrace+FVector(0,Sign*300.f,0),FRotator::ZeroRotator,FVector(1.5,1,.2666667f));
+   }
+   // The stair asset begins atZ0; soil here is22cm lower and descends along
+   // the outer side. A solid buried base supports its complete run, with
+   // a125cm paved apron before the first riser and20cm physical side margins.
+   StoneBedding(C+FVector(-605,-1200,0),FVector2D(610,480));
+   StoneBedding(C+FVector(-237.5,-1200,-18),FVector2D(125,450));
+   Place(TEXT("SM_RV_TileB"),C+FVector(-237.5,-1200,-20),FRotator::ZeroRotator,FVector(.625,2.4,1));
    // The imported FBX rises along local negativeY, opposite the Blender
    // positiveY authoring note. This puts20cm at the court and160cm at the
    // terrace, verified by actual runtime collision tread traces.
@@ -374,7 +411,9 @@ void ADBGameMode::BuildRecoveryCourtyard()
    Place(TEXT("SM_RV_CrystalCluster"),Terrace+FVector(-150,-130,160),FRotator(0,35+Variant*50.f,0),FVector(.85),false);
    Place(TEXT("SM_RV_Fern"),Terrace+FVector(-175,80,160),FRotator(0,75,0),FVector(.80),false);
   }
-  Place(TEXT("SM_RV_ArrivalPlinth"),C+WardOffset-FVector(0,0,76),FRotator(0,20+Variant*30.f,0));
+  // Seat the stepped plinth into the imperfect flagstone surface while
+  // retaining its70cm physical top and the ward's existing interaction height.
+  Place(TEXT("SM_RV_ArrivalPlinth"),C+WardOffset-FVector(0,0,80),FRotator(0,20+Variant*30.f,0),FVector(1,1,74.f/70.f));
   R.Altar=MovingMesh(TEXT("SM_RV_WardCrystal"),C+WardOffset,FRotator::ZeroRotator,FVector(1.1));
   auto* WardLight=GetWorld()->SpawnActor<APointLight>(C+WardOffset+FVector(0,0,75),FRotator::ZeroRotator);
   WardLight->GetLightComponent()->SetMobility(EComponentMobility::Movable);

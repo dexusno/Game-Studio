@@ -4,6 +4,7 @@ import runpy
 import unreal
 scripts=Path(__file__).resolve().parent
 runpy.run_path(str(scripts/"import_reverie.py"),run_name="__main__")
+runpy.run_path(str(scripts/"import_preferred_combat.py"),run_name="__main__")
 editor=unreal.get_editor_subsystem(unreal.LevelEditorSubsystem)
 asset="/Game/Maps/Reverie"
 if unreal.EditorAssetLibrary.does_asset_exist(asset):
