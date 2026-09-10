@@ -1,0 +1,359 @@
+[
+  {
+    "image": "bind-front.png",
+    "mesh_axis_joint_degrees": {},
+    "preview_only_ground_translation_metres": 0.0018228982808068395,
+    "edge_stretch_percentile_99": 1.000004529953003,
+    "edge_stretch_percentile_99_9": 1.0000180006027222,
+    "edges_over_2x": 0,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "deep-stance.png",
+    "mesh_axis_joint_degrees": {
+      "thigh_l": [
+        "X",
+        -37
+      ],
+      "shin_l": [
+        "X",
+        78
+      ],
+      "foot_l": [
+        "X",
+        -41
+      ],
+      "thigh_r": [
+        "X",
+        -37
+      ],
+      "shin_r": [
+        "X",
+        78
+      ],
+      "foot_r": [
+        "X",
+        -41
+      ],
+      "spine": [
+        "X",
+        14
+      ],
+      "forearm_l": [
+        "X",
+        -25
+      ],
+      "forearm_r": [
+        "X",
+        -25
+      ],
+      "hand_l": [
+        "Y",
+        40
+      ],
+      "hand_r": [
+        "Y",
+        -40
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.2852870225906372,
+    "edge_stretch_percentile_99": 1.5134481191635132,
+    "edge_stretch_percentile_99_9": 1.9215847253799438,
+    "edges_over_2x": 261,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "deep-stance-side.png",
+    "mesh_axis_joint_degrees": {
+      "thigh_l": [
+        "X",
+        -37
+      ],
+      "shin_l": [
+        "X",
+        78
+      ],
+      "foot_l": [
+        "X",
+        -41
+      ],
+      "thigh_r": [
+        "X",
+        -37
+      ],
+      "shin_r": [
+        "X",
+        78
+      ],
+      "foot_r": [
+        "X",
+        -41
+      ],
+      "spine": [
+        "X",
+        14
+      ],
+      "forearm_l": [
+        "X",
+        -25
+      ],
+      "forearm_r": [
+        "X",
+        -25
+      ],
+      "hand_l": [
+        "Y",
+        40
+      ],
+      "hand_r": [
+        "Y",
+        -40
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.2852870225906372,
+    "edge_stretch_percentile_99": 1.5134481191635132,
+    "edge_stretch_percentile_99_9": 1.9215847253799438,
+    "edges_over_2x": 261,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "step.png",
+    "mesh_axis_joint_degrees": {
+      "thigh_l": [
+        "X",
+        -28
+      ],
+      "shin_l": [
+        "X",
+        52
+      ],
+      "foot_l": [
+        "X",
+        -24
+      ],
+      "thigh_r": [
+        "X",
+        12
+      ],
+      "shin_r": [
+        "X",
+        8
+      ],
+      "foot_r": [
+        "X",
+        -20
+      ],
+      "upperarm_l": [
+        "X",
+        16
+      ],
+      "upperarm_r": [
+        "X",
+        -18
+      ],
+      "forearm_l": [
+        "X",
+        -20
+      ],
+      "hand_l": [
+        "Y",
+        28
+      ],
+      "hand_r": [
+        "Y",
+        -25
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.03680485114455223,
+    "edge_stretch_percentile_99": 1.3780468702316284,
+    "edge_stretch_percentile_99_9": 1.6940616369247437,
+    "edges_over_2x": 42,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "cast.png",
+    "mesh_axis_joint_degrees": {
+      "spine": [
+        "Z",
+        -18
+      ],
+      "upperarm_r": [
+        "X",
+        -50
+      ],
+      "forearm_r": [
+        "X",
+        -50
+      ],
+      "hand_r": [
+        "Y",
+        -40
+      ],
+      "upperarm_l": [
+        "X",
+        -35
+      ],
+      "forearm_l": [
+        "X",
+        -65
+      ],
+      "hand_l": [
+        "Y",
+        40
+      ],
+      "head": [
+        "Z",
+        12
+      ],
+      "thigh_l": [
+        "X",
+        -15
+      ],
+      "shin_l": [
+        "X",
+        30
+      ],
+      "foot_l": [
+        "X",
+        -15
+      ],
+      "thigh_r": [
+        "X",
+        -15
+      ],
+      "shin_r": [
+        "X",
+        30
+      ],
+      "foot_r": [
+        "X",
+        -15
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.07290849834680557,
+    "edge_stretch_percentile_99": 2.0484843254089355,
+    "edge_stretch_percentile_99_9": 3.1721134185791016,
+    "edges_over_2x": 5208,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "wrist-flex-detail.png",
+    "mesh_axis_joint_degrees": {
+      "spine": [
+        "Z",
+        -18
+      ],
+      "upperarm_r": [
+        "X",
+        -50
+      ],
+      "forearm_r": [
+        "X",
+        -50
+      ],
+      "hand_r": [
+        "Y",
+        -40
+      ],
+      "upperarm_l": [
+        "X",
+        -35
+      ],
+      "forearm_l": [
+        "X",
+        -65
+      ],
+      "hand_l": [
+        "Y",
+        40
+      ],
+      "head": [
+        "Z",
+        12
+      ],
+      "thigh_l": [
+        "X",
+        -15
+      ],
+      "shin_l": [
+        "X",
+        30
+      ],
+      "foot_l": [
+        "X",
+        -15
+      ],
+      "thigh_r": [
+        "X",
+        -15
+      ],
+      "shin_r": [
+        "X",
+        30
+      ],
+      "foot_r": [
+        "X",
+        -15
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.07290849834680557,
+    "edge_stretch_percentile_99": 2.0484843254089355,
+    "edge_stretch_percentile_99_9": 3.1721134185791016,
+    "edges_over_2x": 5208,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  },
+  {
+    "image": "knee-ankle-detail.png",
+    "mesh_axis_joint_degrees": {
+      "thigh_l": [
+        "X",
+        -37
+      ],
+      "shin_l": [
+        "X",
+        78
+      ],
+      "foot_l": [
+        "X",
+        -41
+      ],
+      "thigh_r": [
+        "X",
+        -37
+      ],
+      "shin_r": [
+        "X",
+        78
+      ],
+      "foot_r": [
+        "X",
+        -41
+      ],
+      "spine": [
+        "X",
+        14
+      ],
+      "forearm_l": [
+        "X",
+        -25
+      ],
+      "forearm_r": [
+        "X",
+        -25
+      ],
+      "hand_l": [
+        "Y",
+        40
+      ],
+      "hand_r": [
+        "Y",
+        -40
+      ]
+    },
+    "preview_only_ground_translation_metres": -0.2852870225906372,
+    "edge_stretch_percentile_99": 1.5134481191635132,
+    "edge_stretch_percentile_99_9": 1.9215847253799438,
+    "edges_over_2x": 261,
+    "scope": "Static linear-blend pose. Ground translation seats support mesh only; no runtime IK or animation proven."
+  }
+]

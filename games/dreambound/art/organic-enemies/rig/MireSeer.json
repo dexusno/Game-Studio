@@ -1,6 +1,7 @@
 {
   "asset": "MireSeer",
   "source_folder": "mire-seer",
+  "output_folder": "finished-motion",
   "height_metres": 2.2,
   "source_front": "Blender -Y after optional yaw correction",
   "runtime_mesh_yaw": -90,
@@ -13,17 +14,24 @@
     "shoulder_l": [0.24, 0.015, 1.56],
     "elbow_l": [0.405, -0.015, 1.23],
     "hand_l": [0.575, -0.03, 0.92],
+    "palm_l": [0.605, -0.045, 0.80],
     "hip_l": [0.155, 0.025, 1.035],
     "knee_l": [0.22, -0.075, 0.56],
-    "ankle_l": [0.245, 0.005, 0.10]
+    "ankle_l": [0.245, 0.005, 0.10],
+    "toe_l": [0.335, -0.18, 0.04]
   },
   "bone_radii": {
     "pelvis": 0.19, "spine": 0.20, "head": 0.34,
     "upperarm_l": 0.10, "forearm_l": 0.085,
     "upperarm_r": 0.10, "forearm_r": 0.085,
     "thigh_l": 0.12, "shin_l": 0.10,
-    "thigh_r": 0.12, "shin_r": 0.10
+    "thigh_r": 0.12, "shin_r": 0.10,
+    "hand_l": 0.105, "hand_r": 0.105,
+    "foot_l": 0.15, "foot_r": 0.15
   },
+  "wrist_transition_z": 1.025,
+  "ankle_transition_z": 0.17,
+  "joint_blend_metres": {"hip": 0.115, "shoulder": 0.10, "knee": 0.13, "ankle": 0.07, "elbow": 0.075, "wrist": 0.065, "crotch_half_width": 0.075},
   "throat_emission": {"center": [0.0, -0.16, 1.91], "radius": [0.095, 0.13, 0.21]},
-  "notes": "Initial landmarks follow the original amphibian reference; verify actual front/side/pose previews before accepting. Pleated gill crown and sac move with the neck/head, with no robot equipment. Thin webbed fingers remain rigid within each forearm group."
+  "notes": "Sixteen bones; the original twelve names and rest landmarks are unchanged. Blender metres, front -Y, left +X, up Z. New hand children extend from the existing wrist landmarks toward the measured webbed-finger mass; foot children extend from the existing ankle landmarks toward the forward toe mass. Pleated gill crown and sac retain neck/head motion. Whole hands can cup/recoil and feet can counter shin pitch, but the splayed fingers and individual toes have no separate joints. Preserve the v1 topology, material and exact atlas bytes."
 }

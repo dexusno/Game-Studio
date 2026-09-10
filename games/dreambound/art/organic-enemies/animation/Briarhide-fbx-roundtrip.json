@@ -1,0 +1,73 @@
+{
+  "asset": "Briarhide",
+  "fbx_sha256": "ae89c05cdb007c544cfd59fb272e194b77ac72421a244c20c3ef139c817d513c",
+  "bone_count": 16,
+  "bone_names": [
+    "foot_l",
+    "foot_r",
+    "forearm_l",
+    "forearm_r",
+    "hand_l",
+    "hand_r",
+    "head",
+    "pelvis",
+    "root",
+    "shin_l",
+    "shin_r",
+    "spine",
+    "thigh_l",
+    "thigh_r",
+    "upperarm_l",
+    "upperarm_r"
+  ],
+  "triangles": 189559,
+  "max_influences": 4,
+  "weight_sum_range": [
+    0.9999999552965164,
+    1.0000000474974513
+  ],
+  "blender_reimport_armature_scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "blender_reimport_mesh_scale": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "blender_reimport_root_rest_matrix": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -0.9999999403953552,
+      0.0
+    ],
+    [
+      0.0,
+      0.9999999403953552,
+      1.1920928955078125e-07,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "blender_reimport_dimensions_metres": [
+    2.014063596725464,
+    1.0787104368209839,
+    2.2024810314178467
+  ],
+  "scope": "Blender CPU FBX reimport passed. Unreal axis/100x parent handling and runtime motion remain integration checks.",
+  "original_v1_fbx_reimport_triangles": 189559,
+  "prepared_blend_triangles": 189560
+}

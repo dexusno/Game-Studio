@@ -1,0 +1,798 @@
+{
+  "asset": "MireSeer",
+  "source_sha256": "53e775f931b55f17affe99f928632a09021c9c27eb10d3edae7c9391e6640862",
+  "source": "<windowsOutputRoot>/organic-enemies/mire-seer/source-1536/textured.glb",
+  "fbx": "SK_OE_MireSeer.fbx",
+  "fbx_sha256": "8bbb547e6a045df93870cc06f69e2602f29e66c219d92c083284ad79acf52c72",
+  "source_triangles": 982759,
+  "runtime_triangles": 170000,
+  "dimensions_metres": [
+    1.350663423538208,
+    0.6667898893356323,
+    2.201219081878662
+  ],
+  "height_metres": 2.2,
+  "runtime_mesh_yaw": -90,
+  "rig_spec_sha256": "a4369c6c059a2754e17b1ec581c5547a2ac547731a9e3ad77396be7c21e3ff72",
+  "weights": {
+    "vertices": 338651,
+    "max_influences": 4,
+    "method": "Capsule proximity with anatomy-specific hip, knee, ankle, shoulder, elbow and wrist transition gates; four normalized influences; eye material vertices rigid to head",
+    "rigid_eye_vertices": 0,
+    "fallback_vertices": 0,
+    "surface_region_vertices": {
+      "-1": 178944,
+      "0": 91697,
+      "1": 21438,
+      "2": 20462,
+      "3": 13412,
+      "4": 12698
+    },
+    "vertices_per_bone": {
+      "pelvis": 196688,
+      "spine": 191056,
+      "head": 167153,
+      "upperarm_l": 35799,
+      "forearm_l": 4590,
+      "thigh_l": 36406,
+      "shin_l": 9332,
+      "upperarm_r": 34180,
+      "forearm_r": 3972,
+      "thigh_r": 35849,
+      "shin_r": 8837,
+      "hand_l": 2810,
+      "foot_l": 3919,
+      "hand_r": 2383,
+      "foot_r": 3166
+    },
+    "throat_mask_vertices": 3709
+  },
+  "bones": [
+    {
+      "name": "root",
+      "parent": null,
+      "head": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "tail": [
+        0.0,
+        0.0,
+        0.18000000715255737
+      ],
+      "matrix_local": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "pelvis",
+      "parent": "root",
+      "head": [
+        0.0,
+        0.019999999552965164,
+        1.034999966621399
+      ],
+      "tail": [
+        0.0,
+        0.014999999664723873,
+        1.4600000381469727
+      ],
+      "matrix_local": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.011763890273869038,
+          -0.9999307990074158,
+          0.019999999552965164
+        ],
+        [
+          0.0,
+          0.999930739402771,
+          -0.011763890273869038,
+          1.034999966621399
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "spine",
+      "parent": "pelvis",
+      "head": [
+        0.0,
+        0.014999999664723873,
+        1.4600000381469727
+      ],
+      "tail": [
+        0.0,
+        -0.02500000037252903,
+        1.7699999809265137
+      ],
+      "matrix_local": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.1279713660478592,
+          -0.9917778372764587,
+          0.015000000596046448
+        ],
+        [
+          0.0,
+          0.991777777671814,
+          -0.127971351146698,
+          1.459999918937683
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "head",
+      "parent": "spine",
+      "head": [
+        0.0,
+        -0.02500000037252903,
+        1.7699999809265137
+      ],
+      "tail": [
+        0.0,
+        -0.07000000029802322,
+        2.109999895095825
+      ],
+      "matrix_local": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.13120874762535095,
+          -0.991354763507843,
+          -0.02500000223517418
+        ],
+        [
+          0.0,
+          0.9913547039031982,
+          -0.13120871782302856,
+          1.7699998617172241
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "upperarm_l",
+      "parent": "spine",
+      "head": [
+        0.23999999463558197,
+        0.014999999664723873,
+        1.559999942779541
+      ],
+      "tail": [
+        0.4050000011920929,
+        -0.014999999664723873,
+        1.2300000190734863
+      ],
+      "matrix_local": [
+        [
+          0.783790111541748,
+          0.44574233889579773,
+          0.4324176609516144,
+          0.23999999463558197
+        ],
+        [
+          -0.4457429349422455,
+          -0.08104405552148819,
+          0.8914847373962402,
+          0.01499999687075615
+        ],
+        [
+          0.4324164390563965,
+          -0.8914845585823059,
+          0.13516448438167572,
+          1.5599998235702515
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "forearm_l",
+      "parent": "upperarm_l",
+      "head": [
+        0.4050000011920929,
+        -0.014999999664723873,
+        1.2300000190734863
+      ],
+      "tail": [
+        0.574999988079071,
+        -0.029999999329447746,
+        0.9200000166893005
+      ],
+      "matrix_local": [
+        [
+          0.7589987516403198,
+          0.4804002344608307,
+          0.43947088718414307,
+          0.40499991178512573
+        ],
+        [
+          -0.48040080070495605,
+          -0.042388275265693665,
+          0.876024067401886,
+          -0.014999989420175552
+        ],
+        [
+          0.43946969509124756,
+          -0.8760239481925964,
+          0.1986115276813507,
+          1.2300000190734863
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "hand_l",
+      "parent": "forearm_l",
+      "head": [
+        0.574999988079071,
+        -0.029999999329447746,
+        0.9200000166893005
+      ],
+      "tail": [
+        0.6050000190734863,
+        -0.04500000178813934,
+        0.800000011920929
+      ],
+      "matrix_local": [
+        [
+          0.934093713760376,
+          0.24077177047729492,
+          0.2636207342147827,
+          0.5749999284744263
+        ],
+        [
+          -0.2407722920179367,
+          -0.12038576602935791,
+          0.9630865454673767,
+          -0.029999997466802597
+        ],
+        [
+          0.2636191248893738,
+          -0.9630861282348633,
+          -0.05448068678379059,
+          0.9200000166893005
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "upperarm_r",
+      "parent": "spine",
+      "head": [
+        -0.23999999463558197,
+        0.014999999664723873,
+        1.559999942779541
+      ],
+      "tail": [
+        -0.4050000011920929,
+        -0.014999999664723873,
+        1.2300000190734863
+      ],
+      "matrix_local": [
+        [
+          0.783790111541748,
+          -0.44574233889579773,
+          -0.4324176609516144,
+          -0.23999999463558197
+        ],
+        [
+          0.4457429349422455,
+          -0.08104405552148819,
+          0.8914847373962402,
+          0.01499999687075615
+        ],
+        [
+          -0.4324164390563965,
+          -0.8914845585823059,
+          0.13516448438167572,
+          1.5599998235702515
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "forearm_r",
+      "parent": "upperarm_r",
+      "head": [
+        -0.4050000011920929,
+        -0.014999999664723873,
+        1.2300000190734863
+      ],
+      "tail": [
+        -0.574999988079071,
+        -0.029999999329447746,
+        0.9200000166893005
+      ],
+      "matrix_local": [
+        [
+          0.7589987516403198,
+          -0.4804002344608307,
+          -0.43947088718414307,
+          -0.40499991178512573
+        ],
+        [
+          0.48040080070495605,
+          -0.042388275265693665,
+          0.876024067401886,
+          -0.014999989420175552
+        ],
+        [
+          -0.43946969509124756,
+          -0.8760239481925964,
+          0.1986115276813507,
+          1.2300000190734863
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "hand_r",
+      "parent": "forearm_r",
+      "head": [
+        -0.574999988079071,
+        -0.029999999329447746,
+        0.9200000166893005
+      ],
+      "tail": [
+        -0.6050000190734863,
+        -0.04500000178813934,
+        0.800000011920929
+      ],
+      "matrix_local": [
+        [
+          0.934093713760376,
+          -0.24077177047729492,
+          -0.2636207342147827,
+          -0.5749999284744263
+        ],
+        [
+          0.2407722920179367,
+          -0.12038576602935791,
+          0.9630865454673767,
+          -0.029999997466802597
+        ],
+        [
+          -0.2636191248893738,
+          -0.9630861282348633,
+          -0.05448068678379059,
+          0.9200000166893005
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "thigh_l",
+      "parent": "pelvis",
+      "head": [
+        0.1550000011920929,
+        0.02500000037252903,
+        1.034999966621399
+      ],
+      "tail": [
+        0.2199999988079071,
+        -0.07500000298023224,
+        0.5600000023841858
+      ],
+      "matrix_local": [
+        [
+          0.9778637886047363,
+          0.1327221691608429,
+          0.16175436973571777,
+          0.1550000011920929
+        ],
+        [
+          -0.13272500038146973,
+          -0.20418795943260193,
+          0.9698904156684875,
+          0.02500000223517418
+        ],
+        [
+          0.1617545783519745,
+          -0.969892680644989,
+          -0.1820533573627472,
+          1.0349998474121094
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "shin_l",
+      "parent": "thigh_l",
+      "head": [
+        0.2199999988079071,
+        -0.07500000298023224,
+        0.5600000023841858
+      ],
+      "tail": [
+        0.24500000476837158,
+        0.004999999888241291,
+        0.10000000149011612
+      ],
+      "matrix_local": [
+        [
+          0.997557520866394,
+          0.0534675307571888,
+          0.044916242361068726,
+          0.2199999988079071
+        ],
+        [
+          -0.053470537066459656,
+          0.17109613120555878,
+          0.9838003516197205,
+          -0.07500000298023224
+        ],
+        [
+          0.044916294515132904,
+          -0.9838023781776428,
+          0.17353743314743042,
+          0.5599998831748962
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "foot_l",
+      "parent": "shin_l",
+      "head": [
+        0.24500000476837158,
+        0.004999999888241291,
+        0.10000000149011612
+      ],
+      "tail": [
+        0.33500000834465027,
+        -0.18000000715255737,
+        0.03999999910593033
+      ],
+      "matrix_local": [
+        [
+          -0.2899569272994995,
+          0.4199694097042084,
+          0.8599696755409241,
+          0.24500000476837158
+        ],
+        [
+          -0.41996830701828003,
+          -0.8632704019546509,
+          0.27997642755508423,
+          0.005000025033950806
+        ],
+        [
+          0.8599709272384644,
+          -0.2799796462059021,
+          0.42668616771698,
+          0.09999990463256836
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "thigh_r",
+      "parent": "pelvis",
+      "head": [
+        -0.1550000011920929,
+        0.02500000037252903,
+        1.034999966621399
+      ],
+      "tail": [
+        -0.2199999988079071,
+        -0.07500000298023224,
+        0.5600000023841858
+      ],
+      "matrix_local": [
+        [
+          0.9778637886047363,
+          -0.1327221691608429,
+          -0.16175436973571777,
+          -0.1550000011920929
+        ],
+        [
+          0.13272500038146973,
+          -0.20418795943260193,
+          0.9698904156684875,
+          0.02500000223517418
+        ],
+        [
+          -0.1617545783519745,
+          -0.969892680644989,
+          -0.1820533573627472,
+          1.0349998474121094
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "shin_r",
+      "parent": "thigh_r",
+      "head": [
+        -0.2199999988079071,
+        -0.07500000298023224,
+        0.5600000023841858
+      ],
+      "tail": [
+        -0.24500000476837158,
+        0.004999999888241291,
+        0.10000000149011612
+      ],
+      "matrix_local": [
+        [
+          0.997557520866394,
+          -0.0534675307571888,
+          -0.044916242361068726,
+          -0.2199999988079071
+        ],
+        [
+          0.053470537066459656,
+          0.17109613120555878,
+          0.9838003516197205,
+          -0.07500000298023224
+        ],
+        [
+          -0.044916294515132904,
+          -0.9838023781776428,
+          0.17353743314743042,
+          0.5599998831748962
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "name": "foot_r",
+      "parent": "shin_r",
+      "head": [
+        -0.24500000476837158,
+        0.004999999888241291,
+        0.10000000149011612
+      ],
+      "tail": [
+        -0.33500000834465027,
+        -0.18000000715255737,
+        0.03999999910593033
+      ],
+      "matrix_local": [
+        [
+          -0.2899569272994995,
+          -0.4199694097042084,
+          -0.8599696755409241,
+          -0.24500000476837158
+        ],
+        [
+          0.41996830701828003,
+          -0.8632704019546509,
+          0.27997642755508423,
+          0.005000025033950806
+        ],
+        [
+          -0.8599709272384644,
+          -0.2799796462059021,
+          0.42668616771698,
+          0.09999990463256836
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "unit_contract": {
+    "coordinates": "Blender metres; front -Y, left +X, up +Z",
+    "bone_axis": "Local +Y runs from head to tail; full rest matrices supplied",
+    "scene_scale_length": 1.0,
+    "fbx_axis_forward": "-Y",
+    "fbx_axis_up": "Z",
+    "fbx_apply_unit_scale": true,
+    "fbx_scale_options": "FBX_SCALE_UNITS",
+    "runtime_requirement": "Query imported component/bone transforms. Prior Unreal import retained a 100x parent transform. Convert points with full TransformPosition/InverseTransformPosition, never rotation alone; avoid double cm conversion."
+  },
+  "preservation": {
+    "prepared_source": "<windowsOutputRoot>/organic-enemies/mire-seer/finished/SK_OE_MireSeer.blend",
+    "prepared_source_sha256": "4890a2c16e63df8460e85d24aca6484829726c66f98dcacb28fea98c7d56295b",
+    "mesh_and_uv_color_signature_sha256": "c60d2dd2816bc5a2de21d0474cdf08b8a914df86e1a2284ade5c03f22bcf2fef",
+    "original_twelve_rest_matrix_max_error": {
+      "root": 0.0,
+      "pelvis": 0.0,
+      "spine": 0.0,
+      "head": 0.0,
+      "upperarm_l": 0.0,
+      "forearm_l": 0.0,
+      "upperarm_r": 0.0,
+      "forearm_r": 0.0,
+      "thigh_l": 0.0,
+      "shin_l": 0.0,
+      "thigh_r": 0.0,
+      "shin_r": 0.0
+    },
+    "unchanged": [
+      "mesh positions and topology",
+      "UVs",
+      "material slots",
+      "vertex colors",
+      "embedded atlas bytes",
+      "eye geometry/materials",
+      "pigment floor"
+    ]
+  },
+  "textures": [
+    {
+      "file": "base_color.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+      "processing": "Unchanged embedded PNG bytes"
+    },
+    {
+      "file": "metallic_roughness.png",
+      "size": [
+        4096,
+        4096
+      ],
+      "sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+      "processing": "Unchanged embedded PNG bytes"
+    }
+  ],
+  "preview_renders": [
+    "bind-front.png",
+    "deep-stance.png",
+    "deep-stance-side.png",
+    "step.png",
+    "cast.png",
+    "wrist-flex-detail.png",
+    "knee-ankle-detail.png"
+  ],
+  "eye_placements": [],
+  "material_slots": [
+    "M_OE_MireSeer"
+  ],
+  "near_black_pigment_floor": null,
+  "limits": "Linear blend skinning with whole hand and foot articulation; no individual fingers/toes, corrective shapes, facial rig, cloth or ragdoll. Static CPU stress poses do not establish runtime foot placement, animation quality or game feel. Unreal motion inspection required.",
+  "preparation_script_sha256": "a33d4143a391bdda2b9d0382cf3d6b965c766d7988998a656517e3e9a1bd15e1",
+  "cpu_pose_review": {
+    "date": "2026-09-10",
+    "reviewed_images": [
+      "bind-front.png",
+      "deep-stance.png",
+      "deep-stance-side.png",
+      "step.png",
+      "cast.png",
+      "wrist-flex-detail.png",
+      "knee-ankle-detail.png"
+    ],
+    "pose_limits_reviewed_degrees": {
+      "knee_bend": 78,
+      "wrist_flex": 40,
+      "elbow_flex": 65,
+      "shoulder_forward_reach": 50
+    },
+    "observations": [
+      "Final deep stance and step keep the leg surface connected; toes retain their authored shape with foot counterrotation.",
+      "Final wrist detail and casting views show no long stretched finger/web spikes. The earlier cross-limb finger weights were removed with surface-region assignment.",
+      "Original detailed surface and bind appearance retained. Source positions, topology, UVs and colors match v1 exactly; both atlas PNG hashes are unchanged.",
+      "All original twelve bone names, parents and rest matrices remain unchanged; new feet/hands are child bones at the original landmarks."
+    ],
+    "remaining_visible_limits": [
+      "Deep 78-degree stance compresses the inside knee surface and produces a visible fold. No corrective shapes are present.",
+      "Large arm reach can compress or overlap attached leafy shoulder/forearm detail; the generated surface is not a clean authored animation cage.",
+      "Fingers and toes move as whole hand/foot groups. Individual curling, facial motion, twist bones, cloth and ragdoll are absent."
+    ],
+    "integration_required": "Actual Unreal walk/turn/cast/collapse review, full-transform point conversion, foot planting and scale. CPU images seat the static support mesh for review; they do not prove runtime IK or motion quality.",
+    "fbx_format_roundtrip": "fbx-roundtrip.json"
+  },
+  "public_copy_note": "Private machine paths use the windowsOutputRoot key from ignored config.local.json; original reports remain with their private assets. Measurements and hashes are unchanged."
+}

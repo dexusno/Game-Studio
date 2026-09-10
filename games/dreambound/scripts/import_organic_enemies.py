@@ -202,7 +202,7 @@ def main():
     try:
         for asset in assets:
             spec = json.loads((ROOT / "art/organic-enemies/rig" / (asset + ".json")).read_text(encoding="utf-8"))
-            folder = output_root / "organic-enemies" / spec.get("source_folder", asset.lower()) / "finished"
+            folder = output_root / "organic-enemies" / spec.get("source_folder", asset.lower()) / spec.get("output_folder", "finished")
             import_creature(asset, folder)
     finally:
         unreal.SystemLibrary.execute_console_command(None, flag + " " + str(previous))

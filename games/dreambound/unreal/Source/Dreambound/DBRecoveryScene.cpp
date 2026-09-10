@@ -534,9 +534,9 @@ void ADBGameMode::BuildRecoveryCourtyard()
  auto* Sky=GetWorld()->SpawnActor<ASkyLight>();Sky->GetLightComponent()->SetMobility(EComponentMobility::Movable);
  Sky->GetLightComponent()->SetRealTimeCaptureEnabled(true);Sky->GetLightComponent()->SetIntensity(1.1f);
  Sky->GetLightComponent()->SetLightColor(FLinearColor(.62,.83,.86));Sky->GetLightComponent()->RecaptureSky();Generated.Add(Sky);
- auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-52,142,0));
- Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);Fill->GetLightComponent()->SetIntensity(.65f);
- Fill->GetLightComponent()->SetLightColor(FLinearColor(.53,.75,.83));
+ auto* Fill=GetWorld()->SpawnActor<ADirectionalLight>(FVector(0,0,2500),FRotator(-25,142,0));
+ Fill->GetLightComponent()->SetMobility(EComponentMobility::Movable);Fill->GetLightComponent()->SetIntensity(1.5f);
+ Fill->GetLightComponent()->SetLightColor(FLinearColor(.78f,.86f,1.f));
  Cast<UDirectionalLightComponent>(Fill->GetLightComponent())->SetForwardShadingPriority(0);
  Fill->GetLightComponent()->SetCastShadows(false);Generated.Add(Fill);
  auto* Fog=GetWorld()->SpawnActor<AExponentialHeightFog>();Fog->GetComponent()->SetFogDensity(.016f);

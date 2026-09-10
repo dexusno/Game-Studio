@@ -16,6 +16,37 @@ class USoundBase;
 UENUM(BlueprintType)
 enum class EDBEnemyPhase : uint8 { Dormant, Approach, Telegraph, Attack, Recovery, Staggered, Dead };
 
+/** Read-only animation capture data. Targets/ankles are world-space centimetres. */
+struct FDBEnemyAnimationDebug
+{
+    float speed_cm_s = 0.f;
+    float visible_yaw = 0.f;
+    float movement_blend = 0.f;
+    FVector left_target_world = FVector::ZeroVector;
+    FVector right_target_world = FVector::ZeroVector;
+    FVector left_foot_world = FVector::ZeroVector;
+    FVector right_foot_world = FVector::ZeroVector;
+    FVector left_ground_normal = FVector::UpVector;
+    FVector right_ground_normal = FVector::UpVector;
+    FVector right_hand_world = FVector::ZeroVector;
+    FVector left_hand_world = FVector::ZeroVector;
+    FVector left_hand_target_world = FVector::ZeroVector;
+    FVector right_hand_target_world = FVector::ZeroVector;
+    FVector right_shoulder_world = FVector::ZeroVector;
+    FVector facing_forward = FVector::ForwardVector;
+    FVector pelvis_world = FVector::ZeroVector;
+    FVector head_world = FVector::ZeroVector;
+    bool left_planted = false;
+    bool right_planted = false;
+    float left_reach_error_cm = 0.f;
+    float right_reach_error_cm = 0.f;
+    float left_hand_reach_error_cm = 0.f;
+    float right_hand_reach_error_cm = 0.f;
+    float parent_unit_scale = 1.f;
+    float attack_elapsed = 0.f;
+    FString attack_name;
+};
+
 /** A room-bound physical opponent. Movement never requires a baked navigation mesh. */
 UCLASS()
 class DREAMBOUND_API ADBEnemy : public ACharacter
@@ -31,6 +62,7 @@ public:
     void ApplyCombatHit(const FDBHit& Hit);
     /** True consumes this stance. The caller destroys only its own outbound piece. */
     bool TryInterceptShieldPiece(FVector IncomingDirection);
+    FDBEnemyAnimationDebug GetAnimationDebugState() const;
 
     UPROPERTY(BlueprintReadOnly, Category="Combat") EDBEnemyKind Kind = EDBEnemyKind::Melee;
     UPROPERTY(BlueprintReadOnly, Category="Combat") int32 RoomId = 0;
@@ -92,6 +124,66 @@ private:
     TArray<FTransform> DeathStartPose;
     TArray<FTransform> OrganicReferencePose;
     TArray<FTransform> OrganicReferenceComponentPose;
+    TArray<FTransform> OrganicDeathStartPose;
+    TArray<FTransform> OrganicPhaseStartPose;
+    TArray<FTransform> OrganicPhaseStartBonePose;
+    struct FOrganicFoot
+    {
+        FVector Anchor = FVector::ZeroVector;
+        FVector Position = FVector::ZeroVector;
+        FVector SwingStart = FVector::ZeroVector;
+        FVector SwingEnd = FVector::ZeroVector;
+        FVector SwingStartVelocity = FVector::ZeroVector;
+        FVector Velocity = FVector::ZeroVector;
+        FVector Normal = FVector::UpVector;
+        FVector LandingNormal = FVector::UpVector;
+        FQuat Rotation = FQuat::Identity;
+        FQuat StartRotation = FQuat::Identity;
+        FQuat LandingRotation = FQuat::Identity;
+        float Progress = 1.f;
+        float Duration = 0.22f;
+        float ExpectedTravel = 1.f;
+        float Travel = 0.f;
+        float AnkleHeight = 10.f;
+        float FacingYaw = 0.f;
+        float LandingLeadTime = 0.f;
+        float LiftHeight = 12.f;
+        bool bSwinging = false;
+        bool bSettling = false;
+    };
+    FOrganicFoot OrganicFeet[2];
+    FVector OrganicLastLocation = FVector::ZeroVector;
+    FVector OrganicVelocity = FVector::ZeroVector;
+    FVector OrganicPelvisOffset = FVector::ZeroVector;
+    FVector OrganicSupportOffset = FVector::ZeroVector;
+    FVector DeathFootTargets[2];
+    FQuat DeathFootRotations[2];
+    FVector OrganicSlamHandTargets[2];
+    FVector OrganicSlamRequestedHands[2];
+    FVector OrganicSlamStartPoles[2];
+    FTransform OrganicSlamStartHands[2];
+    FQuat OrganicSlamUpperRotations[2];
+    FQuat OrganicSlamLowerRotations[2];
+    FQuat OrganicSlamHandRotations[2];
+    float OrganicFacingYaw = 0.f;
+    float OrganicSpeed = 0.f;
+    float OrganicArmDrive = 0.f;
+    float OrganicHipYaw = 0.f;
+    float OrganicHipRoll = 0.f;
+    float OrganicSupportDrop = 0.f;
+    float OrganicTurnRate = 0.f;
+    float OrganicPhaseBlendTime = 0.f;
+    float OrganicStepCooldown = 0.f;
+    float OrganicPoseDelta = 0.f;
+    int32 OrganicStepsSinceStop = 0;
+    float LeftElbowPitch = -20.f;
+    float RightElbowPitch = -20.f;
+    float LeftWristPitch = 0.f;
+    float RightWristPitch = 0.f;
+    EDBEnemyPhase OrganicPreviousPhase = EDBEnemyPhase::Dormant;
+    bool bOrganicFeetInitialized = false;
+    bool bOrganicGrounded = false;
+    bool bOrganicSlamTargetsInitialized = false;
     EAttack Attack = EAttack::None;
     FVector ArenaCenter = FVector::ZeroVector;
     FVector2D ArenaHalfSize = FVector2D(1180.f, 1050.f);
@@ -156,6 +248,9 @@ private:
     void BuildVisuals();
     void UpdateVisuals(float DeltaSeconds);
     void UpdateOrganicPose();
+    void UpdateOrganicLocomotion(float DeltaSeconds);
+    void ResetOrganicLocomotion();
+    bool TraceOrganicFoot(FVector Candidate, float AnkleHeight, FVector& Position, FVector& Normal) const;
     void UpdateDeath(float DeltaSeconds);
     void ApplyHitReaction(const FDBHit& Hit);
     void ChooseRepositionTarget();

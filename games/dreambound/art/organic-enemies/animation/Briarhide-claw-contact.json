@@ -1,0 +1,171 @@
+{
+  "source_fbx": ".\\.local\\ai3d\\outputs\\organic-enemies\\briarhide\\finished-motion\\SK_OE_Briarhide.fbx",
+  "fbx_sha256": "ae89c05cdb007c544cfd59fb272e194b77ac72421a244c20c3ef139c817d513c",
+  "coordinate_space": "Blender mesh local metres; original imported FBX vertices and deform-cluster weights; no mesh mutation",
+  "pose": "Ground hand orientation delta: minus 28 degrees about actor right; raw Blender -Y is actor front, raw +X is actor left",
+  "minimum_weight": 0.95,
+  "hands": {
+    "l": {
+      "vertex_index": 371712,
+      "hand_weight": 1.0,
+      "rest_relative_offset_blender_cm": [
+        5.00077080726623,
+        17.53778439760208,
+        -23.731303572654728
+      ],
+      "rest_relative_offset_actor_cm": [
+        -17.53778439760208,
+        -5.00077080726623,
+        -23.731303572654728
+      ],
+      "clearance_rest_cm": 29.186988413824206,
+      "clearance_boss_cm": 45.969506751773125
+    },
+    "r": {
+      "vertex_index": 35784,
+      "hand_weight": 1.0,
+      "rest_relative_offset_blender_cm": [
+        -4.491371631622309,
+        16.867215007543564,
+        -23.99273252487183
+      ],
+      "rest_relative_offset_actor_cm": [
+        -16.867215007543564,
+        4.491371631622309,
+        -23.99273252487183
+      ],
+      "clearance_rest_cm": 29.103003218380774,
+      "clearance_boss_cm": 45.83723006894972
+    }
+  },
+  "v6_frame_462": {
+    "actual_wrist_z_cm": 49.8618,
+    "old_requested_wrist_z_cm": 31.5,
+    "actual_r_shoulder_z_cm": 182.2586,
+    "arm_reach_world_cm": 147.58077088743212,
+    "old_requested_shoulder_to_target_world_cm": 168.04821159864036,
+    "interpretation": "Old requested wrist was unreachable and too low for the measured claw tip if reached. New contact target must subtract the rotated solid skin-vertex offset from traced ground, and actual solved wrist must meet it.",
+    "old_target_reach_excess_cm": 20.46744071120824
+  },
+  "v7_recorded_wrist_validation": {
+    "frames_csv": ".\\.local\\creature-motion-boss-v7\\Saved\\EnemyMotionStudy\\Boss-Front\\Frames.csv",
+    "csv_sha256": "2266f03a392050adc9910706af184326201035f36c4cc945f50323c7897d92d4",
+    "active_slam_frames": 109,
+    "max_left_reported_wrist_error_cm": 0.0,
+    "max_right_reported_wrist_error_cm": 0.0,
+    "contact_left_wrist_z_cm": 45.9695,
+    "contact_right_wrist_z_cm": 45.8372,
+    "limitation": "Proves requested and solved wrist targets agree at recorded precision; does not independently prove rendered lowest claw skin point touches ground. Low side visual review is still required."
+  },
+  "v8_final_validation": {
+    "recorded_utc": "2026-09-10T23:08:53.857012+00:00",
+    "source_cpp_sha256": "39e757329c9088ca729f005571f0abc0a5eff546305d4b3cbe9cccf8b77e52cc",
+    "source_h_sha256": "827b34e11cea3ed3659cf04ed430e8069c776717e366ee509671e0f9d1bd275c",
+    "captures": {
+      "Front": {
+        "directory": ".\\.local\\creature-motion-boss-v8\\Saved\\EnemyMotionStudy\\Boss-Front",
+        "frames_csv_sha256": "b63f0d4607c5e1dae6f8007563a5dbe28262e9468737c954b5c9580ee745b222",
+        "capture_json_sha256": "a96371e350dbe93f6054f4a567e73352baf644f7cbc1217ed12eae0a848e5c08",
+        "invocation_json_sha256": "9890da2c06672ce302484dea7596e248ce087ae681cb1416d5bb6b4bdaddd84d",
+        "game_dll_sha256": "6BCF0BB6C7F77792E3C13E3D5E0D41A4BDB51F840AC1CD110D330C655F5000EF",
+        "complete": true,
+        "aborted": false,
+        "frames": 600,
+        "simulation_seconds": 20.000038146972656,
+        "missed_readbacks": 0,
+        "active_slam_frames": 109,
+        "strike_start_frames": [
+          457,
+          561
+        ],
+        "left_max_reported_wrist_error_cm": 0.0,
+        "left_max_recomputed_csv_wrist_error_cm": 0.00010000000000331966,
+        "left_held_wrist_z_cm": {
+          "min": 45.9695,
+          "max": 45.9695,
+          "frames": 26
+        },
+        "left_predicted_lowest_skin_z_on_ground0_cm": {
+          "min": -6.751773128144123e-06,
+          "max": -6.751773128144123e-06,
+          "inference": "Subtracts the exact fully weighted reference skin offset in the locked hand rotation. Cross-checked visually in LowSide, not an independent runtime mesh-vertex measurement."
+        },
+        "right_max_reported_wrist_error_cm": 0.0,
+        "right_max_recomputed_csv_wrist_error_cm": 0.00014142135622190703,
+        "right_held_wrist_z_cm": {
+          "min": 45.8372,
+          "max": 45.8372,
+          "frames": 26
+        },
+        "right_predicted_lowest_skin_z_on_ground0_cm": {
+          "min": -3.0068949719463944e-05,
+          "max": -3.0068949719463944e-05,
+          "inference": "Subtracts the exact fully weighted reference skin offset in the locked hand rotation. Cross-checked visually in LowSide, not an independent runtime mesh-vertex measurement."
+        }
+      },
+      "LowSide": {
+        "directory": ".\\.local\\creature-motion-boss-low-v8\\Saved\\EnemyMotionStudy\\Boss-LowSide",
+        "frames_csv_sha256": "ce6a485a6827071616310b878e20fef3325f51ffc2743bbd062eb241fa17d730",
+        "capture_json_sha256": "28d4bd59842bab16ab330674d2136ccc246565929cdab22f0f87b95dfbde294e",
+        "invocation_json_sha256": "b98a124bab1bedf2df0a5be0ed75f03123e981223421d65d7cb7c318204dd589",
+        "game_dll_sha256": "6BCF0BB6C7F77792E3C13E3D5E0D41A4BDB51F840AC1CD110D330C655F5000EF",
+        "complete": true,
+        "aborted": false,
+        "frames": 600,
+        "simulation_seconds": 20.000038146972656,
+        "missed_readbacks": 0,
+        "active_slam_frames": 109,
+        "strike_start_frames": [
+          457,
+          561
+        ],
+        "left_max_reported_wrist_error_cm": 0.0,
+        "left_max_recomputed_csv_wrist_error_cm": 0.00010000000000331966,
+        "left_held_wrist_z_cm": {
+          "min": 45.9695,
+          "max": 45.9695,
+          "frames": 26
+        },
+        "left_predicted_lowest_skin_z_on_ground0_cm": {
+          "min": -6.751773128144123e-06,
+          "max": -6.751773128144123e-06,
+          "inference": "Subtracts the exact fully weighted reference skin offset in the locked hand rotation. Cross-checked visually in LowSide, not an independent runtime mesh-vertex measurement."
+        },
+        "right_max_reported_wrist_error_cm": 0.0,
+        "right_max_recomputed_csv_wrist_error_cm": 0.00014142135622190703,
+        "right_held_wrist_z_cm": {
+          "min": 45.8372,
+          "max": 45.8372,
+          "frames": 26
+        },
+        "right_predicted_lowest_skin_z_on_ground0_cm": {
+          "min": -3.0068949719463944e-05,
+          "max": -3.0068949719463944e-05,
+          "inference": "Subtracts the exact fully weighted reference skin offset in the locked hand rotation. Cross-checked visually in LowSide, not an independent runtime mesh-vertex measurement."
+        }
+      }
+    },
+    "measurement_scope": "Actual non-practice Boss AI, scripted invulnerable player, isolated fixed30Hz Editor game capture. Bone coordinates and targets are world centimetres. CSV rounded to4 decimal places; skin-tip clearance comes from the FBX reference geometry and final hand orientation, not a live GPU-skinned-vertex query. No performance, ordinary gameplay input, sound audition or Shipping claim.",
+    "visual_review": {
+      "worker_observed_front_frames": [
+        459,
+        460,
+        461,
+        462
+      ],
+      "worker_observed_low_side_frames": [
+        462,
+        474,
+        475,
+        480
+      ],
+      "result": "Front stroke retains a coherent overhead-to-front descent. In LowSide the near claw tip meets the paving in the impact/hold pose and lifts continuously by480; no broad floating hand or broad paving penetration is visible in those frames. The farther hand is partly occluded. Root separately confirms that Front470\u2013474 no longer show the large recovery elbow roll. Independent QA late-recovery review remains pending at report write.",
+      "limits": [
+        "Only fixed30Hz Boss fixture on flat paving assessed for Slam contact.",
+        "Individual digits have no articulated joints; the lowest rigid claw point contacts, not every fingertip or the full palm.",
+        "No claim of contact on all procedural slopes, teleports or arbitrary terrain."
+      ]
+    }
+  },
+  "public_copy_note": "Machine-specific roots normalized; original private analysis and captured data retained. No measurements changed."
+}

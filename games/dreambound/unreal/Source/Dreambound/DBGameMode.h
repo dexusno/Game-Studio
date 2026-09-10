@@ -118,7 +118,7 @@ private:
  int32 SaveRevision=0,RewardRoom=0;
  float PulseTime=0,CheckTimer=0;
  bool bEnding=false,bVerify=false,bCapture=false,bHadFocus=true,bInitialEntry=false,bCapturedFrame=false;
- bool bMotionCapture=false,bDemoRecording=false,bDemoStopped=false,bChecksRunning=false;
+ bool bMotionCapture=false,bEnemyMotionCapture=false,bDemoRecording=false,bDemoStopped=false,bChecksRunning=false;
  float VictoryDelay=0.f;
  double DemoStartedAt=0;
  double DemoAudioStartedAt=0;

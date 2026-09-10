@@ -1,6 +1,7 @@
 #include "DBGameMode.h"
 #include "DBCharacter.h"
 #include "DBEnemy.h"
+#include "DBEnemyMotionStudy.h"
 #include "DBProjectile.h"
 #include "DBHUD.h"
 #include "DBRuntimeChecks.h"
@@ -76,7 +77,9 @@ void ADBGameMode::BeginPlay() {
  if(bVerify&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_Auto");
  bCapture=FParse::Param(FCommandLine::Get(),TEXT("DBCapture"));
  bMotionCapture=FParse::Param(FCommandLine::Get(),TEXT("DBMotionCapture"));
- bCapture=bCapture||bMotionCapture;
+ bEnemyMotionCapture=FParse::Param(FCommandLine::Get(),TEXT("DBEnemyMotionStudy"));
+ if(bEnemyMotionCapture&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_EnemyMotion");
+ bCapture=bCapture||bMotionCapture||bEnemyMotionCapture;
  Player=Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this,0));
  LoadProgress();
  if(FAudioDeviceHandle Audio=GetWorld()->GetAudioDevice())Audio->SetTransientPrimaryVolume(SoundVolume);
@@ -91,7 +94,8 @@ void ADBGameMode::BeginPlay() {
  bTitle=true; bPaused=true; SetMenuInput(true);
  if(bCapture||bVerify) {
   bTitle=false;bPaused=false;SetMenuInput(false); StartNewRun(true);
-  if(bCapture&&Player&&!bMotionCapture) {
+  if(bEnemyMotionCapture)GetWorld()->SpawnActor<ADBEnemyMotionStudy>();
+  if(bCapture&&Player&&!bMotionCapture&&!bEnemyMotionCapture) {
    FString DetailView;FParse::Value(FCommandLine::Get(),TEXT("DBDetailView="),DetailView);
    if(DetailView==TEXT("Creatures")){
     CurrentRoomId=0;const FVector Center=Rooms[0].Center;
@@ -369,6 +373,7 @@ void ADBGameMode::Tick(float Dt) {
  if(bDefeated)VictoryDelay=0;
  if(VictoryDelay>0){VictoryDelay=FMath::Max(0.f,VictoryDelay-Dt);if(VictoryDelay==0){bWon=true;SaveProgress(false);SetMenuInput(true);}}
  if(bVerify&&PulseTime>3){bVerify=false;RunVerification();return;}
+ if(bEnemyMotionCapture)return;
  if(bMotionCapture){TickMotionDemo(Dt);return;}
  if(bCapture){
   if(PulseTime>8&&!bCapturedFrame){
