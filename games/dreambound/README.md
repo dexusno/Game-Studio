@@ -2,9 +2,9 @@
 
 First-person Unreal 5.8.2 prototype. Internal identifier `dreambound`; final title undecided.
 
-The current playable correction is 0.2.0-study1: a physical shield used for close strikes, guard, throw and spatial recall, with three courtyard encounters and two earned attachment choices. Klaus rejected the prior beta2; it remains a separate baseline. The correction has packaged technical evidence, but owner fun and art acceptance remain unproven. Read [STATUS.md](STATUS.md).
+The current playable build is **0.4.0-reverie**: three connected procedural sanctuaries, a six-piece folding shield, three encounters and two earned upgrade choices. The graphics package replaces the environment, shield/arms, enemies and effects with new Blender assets and three new textured TRELLIS landmarks. It also adds 23 replacement sound cues and persistent sound controls. Owner assessment of the art and combat feel remains pending. Read [STATUS.md](STATUS.md).
 
-Current player build: `BuildOutput/ShieldStudy/Windows/Dreambound.exe`. [Controls](PLAY.md), [scripted actual-engine capture](evidence/shield-study-scripted.mp4). The rejected baseline stays under `BuildOutput/Shipping`. Generated Unreal Content and packages are ignored and reproduced with the included scripts.
+Start `BuildOutput/Reverie/Windows/Dreambound.exe`, or run `scripts/Start-Demo.ps1`. [Controls](PLAY.md), [actual packaged view](evidence/reverie-courtyard.png), [build evidence](evidence/reverie-build.json). Historical packages remain in their original directories. Generated Unreal Content and packages are ignored and reproduced with the included scripts.
 
 - [Brief and player experience](BRIEF.md)
 - [Current state and resume instructions](STATUS.md)

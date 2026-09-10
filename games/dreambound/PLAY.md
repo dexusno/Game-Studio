@@ -1,9 +1,9 @@
-# Folding shield combat playtest
+# Reverie graphics and folding-shield playtest
 
 The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
 
 
-Open `BuildOutput/TrellisArt/Windows/Dreambound.exe` for the TRELLIS environment playtest (0.3.2-art1). The earlier combat build remains in `BuildOutput/CombatFeel` and the whole-disc study in `BuildOutput/ShieldStudy`.
+Open `BuildOutput/Reverie/Windows/Dreambound.exe` for the current **0.4.0-reverie** demo, or run `scripts/Start-Demo.ps1`. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 
@@ -36,6 +36,6 @@ Q recalls every surviving piece through space toward you. Reposition to make the
 
 Acquiring a core activates it. R also cycles through kinetic; the lower-left HUD identifies what is active. Tab retains instructions at the current rank. Safe practice provides two targets for elemental effects and a caster when Mirror/Anchor needs incoming bolts. Practice restores health and cannot award encounter kills. Leave through the passage when ready.
 
-Learned patterns survive defeat. Select one as your starting attachment on later expeditions. Same-seed retry repeats the generated route; a new seed changes route and cover. The `DreamboundSegments` save profile is separate from previous prototypes. A resumed fight restarts from its entry checkpoint; a resumed claimed ward restores its reward practice. Losing focus pauses. Mouse sensitivity is adjustable in pause.
+Learned patterns survive defeat. Select one as your starting attachment on later expeditions. Same-seed retry repeats the generated route; a new seed changes route and cover. The existing `DreamboundSegments` save profile is retained. A resumed fight restarts from its entry checkpoint; a resumed claimed ward restores its reward practice. Losing focus pauses. Mouse sensitivity and sound volume are adjustable in pause; sound starts at 85%, with plus/minus and mute/enable buttons. Settings persist with the profile.
 
-This remains a three-court playtest in one biome. The new root-embraced bell trees, carved cloisters, mossy rock groups and waymarkers use textured TRELLIS meshes with Nanite. Look at their scale and materials while moving, and whether enemies, ward stones and passages stay readable. The floor/wall surfaces and hero/enemy art still need further work toward anchor B; this is not the full game's content or duration.
+This remains a three-court playtest in one biome. All visible game art has been replaced: carved paving and walls, functional arches and bridges, planted soil beds, crown trees, layered banks, fountains and water channels, a painted morning sky, crystals, cyborg guardians and the folding weapon. The layout chooses connected routes first and arranges gardens and architecture around them. Look at whether passages and threats remain readable while moving. The new sounds use layered CC0 recordings; Suno generation is still awaiting an accessible signed-in session. This build does not establish the full game's content, duration or final visual quality.

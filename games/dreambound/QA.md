@@ -1,4 +1,12 @@
-# Current folding shield/combat-feel QA
+# Current Reverie graphics/audio QA
+
+Windows Shipping **0.4.0-reverie**, source `10e9738586944c561a79b73792d04a9c61d2c878`, passed the final focused packaged check: **2 groups / 11 observations / 0 failures**. Coverage includes seeded routes, functional arches, bridge and gate capsule lanes, continuous floors, protected gameplay pads, actual new asset instances and 16 physical stair probes. A reversed stair placement found in the first candidate was fixed before this package. [Exact build identity](evidence/reverie-build.json), [results](evidence/reverie-art-checks.json), [independent review](evidence/reverie-qa-notes.md).
+
+Root and independent QA inspected the new environment in actual Unreal views; the final [ordinary-spawn capture](evidence/reverie-courtyard.png) comes from this Shipping executable. Corrected stone striping and wall/soil contact are visible; upper fountain detail remains dark. Native startup and Enter into the first court worked on an isolated profile. Further movement/guard/pause/sound-settings checks stopped after the input tool detected user activity; the demo remains open. No ordinary complete run, subjective sound-quality verdict, new performance benchmark or owner acceptance is claimed. Suno sign-in remains unavailable; current replacement WAVs use disclosed CC0 recordings.
+
+The following sections preserve earlier builds' evidence. Their checks and conclusions are historical, not verification of Reverie.
+
+# Historical folding shield/combat-feel QA
 
 0.3.1-combat1 final Shipping binary independently passed **19 scenario groups /67 assertions /0 failures** in exactly one packaged suite execution. [Report](evidence/combat-feel-checks.json), [build identity and attempt record](evidence/combat-feel-build.json). QA observed a37.54cm folded socket span,49.64cm expanded span and return to folded; five-piece fixture damage168.5 versus full-six468.9; a single80-damage neighboring burst with a covered neighbor untouched; target hits from275cm, a stronger third strike, actual50cm open step and collision-limited wall step. Route coverage includes34 floor probes and sampled solid rocks in all three courts.
 
@@ -18,7 +26,7 @@ Rendered inspection found and fixed excess shield cropping, weak text contrast, 
 
 No ordinary full playthrough, all-seed navigation proof, challenge/pacing assessment, exhaustive testing of every upgrade rank/combination, sound-quality verdict or positive fun claim. The current environment remains far below B and enemy geometry remains the prior kit. Klaus's assessment is the next evidence of enjoyment. Prior prototype results follow as history.
 
-# Current physical shield study QA
+# Historical physical shield study QA
 
 0.2.0-study1 supersedes the rejected pulse-gun beta as the active experiment. Final packaged runtime results:14 scenarios passed,0 failed. Four runs were executed as integration, capture and menu corrections landed; no scenario failed. [Exact package](evidence/shield-study-build.json), [staged result](evidence/shield-study-checks.json), [fixture scope](qa/physical-shield-checks.md).
 

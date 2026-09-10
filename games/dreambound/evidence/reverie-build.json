@@ -1,0 +1,1299 @@
+{
+  "version": "0.4.0-reverie",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "10e9738586944c561a79b73792d04a9c61d2c878",
+  "recorded_on_utc": "2026-09-10T18:10:29.263612+00:00",
+  "package_path": "BuildOutput/Reverie/Windows",
+  "scope": "Complete visible game graphics and sound-palette replacement, connected procedural sanctuaries, retained folding-shield mechanics and saves, persistent master sound controls.",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2",
+      "modified_utc": "2026-09-10T18:01:46.460456+00:00"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166287360,
+      "sha256": "5C5DCD3B0D0A27E384AE8C9E4FAFB8BD974B780984A5FE7383F4B07B20741F07",
+      "modified_utc": "2026-09-10T18:01:23.692219+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11367996,
+      "sha256": "7A281C252051F49C491C4803EC126261D46F5694F52CDB5CF957894E12C11BC4",
+      "modified_utc": "2026-09-10T18:01:47.642097+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 389549824,
+      "sha256": "9A9116EAA3383324BEBCAFEBA1E78B9B02211361980D84E9B78817CEC7941C53",
+      "modified_utc": "2026-09-10T18:01:49.502781+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 274668,
+      "sha256": "39F231D0FF5B4089FA10DE09865673CD16FED065F440870365E6E7017AD48A0B",
+      "modified_utc": "2026-09-10T18:01:49.504781+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211600,
+      "sha256": "49B72DECF7F09AA8F307ED7802AADE0DC1E6CDDE944772189AD5A9E9A4A6E438",
+      "modified_utc": "2026-09-10T18:01:49.502781+00:00"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "CC931FD5A1828F0CB4D61D1CC8F99BA213F0889371E56DD9183F232D7A4DE3F8",
+      "modified_utc": "2026-09-10T18:01:49.504781+00:00"
+    }
+  ],
+  "build": {
+    "complete": true,
+    "exit_code": 0,
+    "build_cook_run_seconds": 42.53,
+    "final_log": ".local/reverie-package-final.log",
+    "candidate_history": "First Shipping candidate built successfully at ceab53fdc1f6e92e7c7bb6f91ff997381aa47a2a but failed stair orientation. Corrected source10e9738 was repackaged and passed the final focused check."
+  },
+  "content": {
+    "blender_meshes": 43,
+    "sculpted_meshes": 3,
+    "total_meshes": 46,
+    "materials": 30,
+    "textures": 10,
+    "sound_waves": 23,
+    "manifest_entries_total": 173,
+    "entry_map": {
+      "map": "/Game/Maps/Reverie",
+      "preplaced_graphics": [],
+      "complete": true
+    },
+    "runtime_namespaces": [
+      "/Game/Art/Reverie",
+      "/Game/Audio/Reverie"
+    ],
+    "historical_game_art_cooked": false,
+    "retired_new_kit_instances": "Initial Blender Tree/RockBank/Cliff are preserved as new source kit assets but not spawned; new TRELLIS landforms replace them.",
+    "imported_blender_meshes": [
+      {
+        "name": "SM_RV_Tile",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Tile.SM_RV_Tile",
+        "dimensions_cm": [
+          200.0,
+          200.0,
+          20.799999237060547
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          10.399999618530273
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_Mortar",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_TileB",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_TileB.SM_RV_TileB",
+        "dimensions_cm": [
+          200.0,
+          200.0,
+          20.799999237060547
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          10.399999618530273
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_Mortar",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_Wall",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Wall.SM_RV_Wall",
+        "dimensions_cm": [
+          399.96588134765625,
+          98.45804214477539,
+          600.0
+        ],
+        "bounds_origin_cm": [
+          -0.0064544677734375,
+          -1.2685070037841797,
+          300.0
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark",
+          "M_RV_Mortar",
+          "M_RV_Bronze",
+          "M_RV_Patina"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_Coping",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Coping.SM_RV_Coping",
+        "dimensions_cm": [
+          419.20001220703125,
+          132.0,
+          43.79999923706055
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          21.899999618530273
+        ],
+        "materials": [
+          "M_RV_StoneLight",
+          "M_RV_Moss",
+          "M_RV_Bronze",
+          "M_RV_Patina"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Buttress",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Buttress.SM_RV_Buttress",
+        "dimensions_cm": [
+          181.41942596435547,
+          180.15650177001953,
+          723.4908447265625
+        ],
+        "bounds_origin_cm": [
+          0.11525344848632812,
+          0.08740615844726562,
+          361.74542236328125
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark",
+          "M_RV_Moss",
+          "M_RV_Bronze",
+          "M_RV_Patina"
+        ],
+        "collision_hulls": 3
+      },
+      {
+        "name": "SM_RV_Arch",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Arch.SM_RV_Arch",
+        "dimensions_cm": [
+          737.0214233398438,
+          160.67507934570312,
+          799.1027221679688
+        ],
+        "bounds_origin_cm": [
+          0.003448486328125,
+          -0.0428314208984375,
+          399.5513610839844
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_Moss",
+          "M_RV_StoneDark",
+          "M_RV_Bronze",
+          "M_RV_Patina"
+        ],
+        "collision_hulls": 26
+      },
+      {
+        "name": "SM_RV_RockBank",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_RockBank.SM_RV_RockBank",
+        "dimensions_cm": [
+          664.5550231933594,
+          383.22314453125,
+          404.7951965332031
+        ],
+        "bounds_origin_cm": [
+          6.0699920654296875,
+          10.000595092773438,
+          202.39759826660156
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneDark",
+          "M_RV_Moss",
+          "M_RV_Bark"
+        ],
+        "collision_hulls": 3
+      },
+      {
+        "name": "SM_RV_Cliff",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Cliff.SM_RV_Cliff",
+        "dimensions_cm": [
+          958.9767150878906,
+          590.0106201171875,
+          1254.6451416015625
+        ],
+        "bounds_origin_cm": [
+          11.346786499023438,
+          20.844390869140625,
+          627.3225708007812
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Tree",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Tree.SM_RV_Tree",
+        "dimensions_cm": [
+          1302.95947265625,
+          1443.39501953125,
+          1199.5114135742188
+        ],
+        "bounds_origin_cm": [
+          -55.071533203125,
+          16.864501953125,
+          577.5945129394531
+        ],
+        "materials": [
+          "M_RV_Bark",
+          "M_RV_BarkLight",
+          "M_RV_Leaf",
+          "M_RV_LeafLight",
+          "M_RV_LeafGold"
+        ],
+        "collision_hulls": 5
+      },
+      {
+        "name": "SM_RV_Bough",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Bough.SM_RV_Bough",
+        "dimensions_cm": [
+          1211.349853515625,
+          1062.1347045898438,
+          503.1808786392212
+        ],
+        "bounds_origin_cm": [
+          -22.7105712890625,
+          -3.744293212890625,
+          238.42784070968628
+        ],
+        "materials": [
+          "M_RV_Bark",
+          "M_RV_BarkLight",
+          "M_RV_Leaf",
+          "M_RV_LeafLight",
+          "M_RV_LeafGold"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Fern",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Fern.SM_RV_Fern",
+        "dimensions_cm": [
+          186.5811309814453,
+          192.47481536865234,
+          73.21010875701904
+        ],
+        "bounds_origin_cm": [
+          4.609886169433594,
+          -6.711902618408203,
+          37.8790078163147
+        ],
+        "materials": [
+          "M_RV_BarkLight",
+          "M_RV_Leaf",
+          "M_RV_LeafLight"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Grass",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Grass.SM_RV_Grass",
+        "dimensions_cm": [
+          244.4475860595703,
+          179.82440948486328,
+          71.98823469877243
+        ],
+        "bounds_origin_cm": [
+          -3.4556198120117188,
+          -4.200344085693359,
+          36.8880161345005
+        ],
+        "materials": [
+          "M_RV_Leaf",
+          "M_RV_LeafLight",
+          "M_RV_LeafGold"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Ivy",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Ivy.SM_RV_Ivy",
+        "dimensions_cm": [
+          239.7397918701172,
+          29.833328247070312,
+          308.13923954963684
+        ],
+        "bounds_origin_cm": [
+          -7.939765930175781,
+          -6.737356185913086,
+          -151.80428159236908
+        ],
+        "materials": [
+          "M_RV_Bark",
+          "M_RV_Leaf",
+          "M_RV_LeafLight"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Flowers",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Flowers.SM_RV_Flowers",
+        "dimensions_cm": [
+          199.07361602783203,
+          130.6907196044922,
+          83.34916642308235
+        ],
+        "bounds_origin_cm": [
+          -1.3208503723144531,
+          -5.883613586425781,
+          41.336654886603355
+        ],
+        "materials": [
+          "M_RV_BarkLight",
+          "M_RV_Leaf",
+          "M_RV_LeafGold"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_CrystalCluster",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_CrystalCluster.SM_RV_CrystalCluster",
+        "dimensions_cm": [
+          189.13734436035156,
+          149.99152374267578,
+          177.0
+        ],
+        "bounds_origin_cm": [
+          -1.1866226196289062,
+          3.782909393310547,
+          88.5
+        ],
+        "materials": [
+          "M_RV_Moss",
+          "M_RV_Crystal",
+          "M_RV_CrystalBase"
+        ],
+        "collision_hulls": 3
+      },
+      {
+        "name": "SM_RV_Basin",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Basin.SM_RV_Basin",
+        "dimensions_cm": [
+          599.37158203125,
+          599.37158203125,
+          98.80000305175781
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          34.400001525878906
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 20
+      },
+      {
+        "name": "SM_RV_Rill",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Rill.SM_RV_Rill",
+        "dimensions_cm": [
+          599.5277709960938,
+          181.07508087158203,
+          52.48643684387207
+        ],
+        "bounds_origin_cm": [
+          -0.053497314453125,
+          -0.039058685302734375,
+          -13.756781578063965
+        ],
+        "materials": [
+          "M_RV_StoneLight",
+          "M_RV_StoneDark"
+        ],
+        "collision_hulls": 3
+      },
+      {
+        "name": "SM_RV_Bridge",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Bridge.SM_RV_Bridge",
+        "dimensions_cm": [
+          700.0,
+          700.8879699707031,
+          172.61037063598633
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          -0.0697784423828125,
+          -53.694814682006836
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark"
+        ],
+        "collision_hulls": 5
+      },
+      {
+        "name": "SM_RV_ArrivalPlinth",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_ArrivalPlinth.SM_RV_ArrivalPlinth",
+        "dimensions_cm": [
+          219.3935546875,
+          219.3935546875,
+          72.12112426757812
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          36.06056213378906
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_StoneDark",
+          "M_RV_Bronze"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_Steps",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Steps.SM_RV_Steps",
+        "dimensions_cm": [
+          439.9399871826172,
+          600.8529663085938,
+          160.10684204101562
+        ],
+        "bounds_origin_cm": [
+          0.06012725830078125,
+          0.012237548828125,
+          80.05342102050781
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight"
+        ],
+        "collision_hulls": 8
+      },
+      {
+        "name": "SM_RV_Rubble",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Rubble.SM_RV_Rubble",
+        "dimensions_cm": [
+          288.7379455566406,
+          184.3187484741211,
+          96.86170196533203
+        ],
+        "bounds_origin_cm": [
+          2.7241668701171875,
+          -3.8956336975097656,
+          48.430850982666016
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_TerrainPatch",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_TerrainPatch.SM_RV_TerrainPatch",
+        "dimensions_cm": [
+          4445.282470703125,
+          4443.469482421875,
+          268.84112548828125
+        ],
+        "bounds_origin_cm": [
+          19.4583740234375,
+          -11.7618408203125,
+          -134.42056274414062
+        ],
+        "materials": [
+          "M_RV_StoneDark",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_RuinCrown",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_RuinCrown.SM_RV_RuinCrown",
+        "dimensions_cm": [
+          499.65997314453125,
+          144.0,
+          482.3305358886719
+        ],
+        "bounds_origin_cm": [
+          -0.0879364013671875,
+          -4.0,
+          241.66526794433594
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight",
+          "M_RV_Moss"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_WallEnd",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_WallEnd.SM_RV_WallEnd",
+        "dimensions_cm": [
+          200.96075439453125,
+          150.77406311035156,
+          648.51513671875
+        ],
+        "bounds_origin_cm": [
+          0.028228759765625,
+          0.065093994140625,
+          324.257568359375
+        ],
+        "materials": [
+          "M_RV_Stone",
+          "M_RV_StoneLight"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_ShieldSegment",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_ShieldSegment.SM_RV_ShieldSegment",
+        "dimensions_cm": [
+          10.249998092651367,
+          29.1492280960083,
+          30.288402557373047
+        ],
+        "bounds_origin_cm": [
+          1.6250009536743164,
+          -0.006983280181884766,
+          26.144201278686523
+        ],
+        "materials": [
+          "M_RV_Bronze",
+          "M_RV_Ceramic",
+          "M_RV_Enamel",
+          "M_RV_DarkMetal"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_ShieldSegmentGlow",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_ShieldSegmentGlow.SM_RV_ShieldSegmentGlow",
+        "dimensions_cm": [
+          3.984415054321289,
+          2.5774879455566406,
+          18.101600646972656
+        ],
+        "bounds_origin_cm": [
+          4.795688152313232,
+          0.0,
+          29.038097381591797
+        ],
+        "materials": [
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_ShieldHub",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_ShieldHub.SM_RV_ShieldHub",
+        "dimensions_cm": [
+          9.999998092651367,
+          26.880762100219727,
+          30.281435012817383
+        ],
+        "bounds_origin_cm": [
+          0.5000009536743164,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Bronze",
+          "M_RV_DarkMetal",
+          "M_RV_Enamel"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Core",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Core.SM_RV_Core",
+        "dimensions_cm": [
+          6.0,
+          12.33345079421997,
+          12.648079872131348
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          -0.31859707832336426,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Forearm",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Forearm.SM_RV_Forearm",
+        "dimensions_cm": [
+          60.10019588470459,
+          21.100000381469727,
+          25.0
+        ],
+        "bounds_origin_cm": [
+          -21.94989824295044,
+          0.0,
+          -0.5
+        ],
+        "materials": [
+          "M_RV_DarkMetal",
+          "M_RV_Ceramic",
+          "M_RV_Bronze"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Sleeve",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Sleeve.SM_RV_Sleeve",
+        "dimensions_cm": [
+          20.0,
+          22.0,
+          100.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Cloth",
+          "M_RV_DarkMetal"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_GuardianBody",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_GuardianBody.SM_RV_GuardianBody",
+        "dimensions_cm": [
+          48.15031623840332,
+          59.0,
+          78.0
+        ],
+        "bounds_origin_cm": [
+          3.07515811920166,
+          0.0,
+          31.0
+        ],
+        "materials": [
+          "M_RV_DarkMetal",
+          "M_RV_Bronze",
+          "M_RV_Ceramic"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_GuardianHead",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_GuardianHead.SM_RV_GuardianHead",
+        "dimensions_cm": [
+          31.532336235046387,
+          28.96085834503174,
+          48.80641174316406
+        ],
+        "bounds_origin_cm": [
+          1.2850804328918457,
+          4.76837158203125e-07,
+          24.40320587158203
+        ],
+        "materials": [
+          "M_RV_Ceramic",
+          "M_RV_Bronze",
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_GuardianArm",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_GuardianArm.SM_RV_GuardianArm",
+        "dimensions_cm": [
+          29.999998092651367,
+          31.999995231628418,
+          104.66886138916016
+        ],
+        "bounds_origin_cm": [
+          -9.5367431640625e-07,
+          -2.384185791015625e-06,
+          -34.83443069458008
+        ],
+        "materials": [
+          "M_RV_DarkMetal",
+          "M_RV_Ceramic",
+          "M_RV_Bronze"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_GuardianLeg",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_GuardianLeg.SM_RV_GuardianLeg",
+        "dimensions_cm": [
+          48.999996185302734,
+          34.30768966674805,
+          104.0
+        ],
+        "bounds_origin_cm": [
+          7.499998092651367,
+          0.0,
+          -45.0
+        ],
+        "materials": [
+          "M_RV_DarkMetal",
+          "M_RV_Ceramic",
+          "M_RV_Bronze"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Crystal",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Crystal.SM_RV_Crystal",
+        "dimensions_cm": [
+          24.70562171936035,
+          25.338247299194336,
+          52.0
+        ],
+        "bounds_origin_cm": [
+          0.6402158737182617,
+          0.0,
+          26.0
+        ],
+        "materials": [
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_WardCrystal",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_WardCrystal.SM_RV_WardCrystal",
+        "dimensions_cm": [
+          61.981895446777344,
+          54.06368637084961,
+          77.28211951255798
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          38.35894024372101
+        ],
+        "materials": [
+          "M_RV_Core",
+          "M_RV_Bronze"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Beam",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Beam.SM_RV_Beam",
+        "dimensions_cm": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Spark",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Spark.SM_RV_Spark",
+        "dimensions_cm": [
+          100.0,
+          100.0,
+          100.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Core"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Gate",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Gate.SM_RV_Gate",
+        "dimensions_cm": [
+          17.101784706115723,
+          455.5424041748047,
+          500.63185289502144
+        ],
+        "bounds_origin_cm": [
+          0.4421725273132324,
+          0.00032806396484375,
+          249.97142706811428
+        ],
+        "materials": [
+          "M_RV_Bronze",
+          "M_RV_Core"
+        ],
+        "collision_hulls": 1
+      },
+      {
+        "name": "SM_RV_WaterPlane",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_WaterPlane.SM_RV_WaterPlane",
+        "dimensions_cm": [
+          100.0,
+          100.0,
+          0.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Water"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_WaterDisc",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_WaterDisc.SM_RV_WaterDisc",
+        "dimensions_cm": [
+          100.0,
+          100.0,
+          0.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Water"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_Waterfall",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_Waterfall.SM_RV_Waterfall",
+        "dimensions_cm": [
+          100.0,
+          18.000000000000004,
+          100.0
+        ],
+        "bounds_origin_cm": [
+          0.0,
+          -8.999999999999998,
+          50.0
+        ],
+        "materials": [
+          "M_RV_Waterfall"
+        ],
+        "collision_hulls": 0
+      },
+      {
+        "name": "SM_RV_SkyDome",
+        "path": "/Game/Art/Reverie/Meshes/SM_RV_SkyDome.SM_RV_SkyDome",
+        "dimensions_cm": [
+          99.99996566772461,
+          99.99998474121094,
+          100.0
+        ],
+        "bounds_origin_cm": [
+          9.5367431640625e-06,
+          -7.62939453125e-06,
+          0.0
+        ],
+        "materials": [
+          "M_RV_Sky"
+        ],
+        "collision_hulls": 0
+      }
+    ],
+    "sculpted_landmarks": {
+      "FountainHero": {
+        "mesh": "/Game/Art/Reverie/Meshes/SM_RV_FountainHero.SM_RV_FountainHero",
+        "material": "/Game/Art/Reverie/Materials/M_RV_FountainHero.M_RV_FountainHero",
+        "triangles": 961305,
+        "collision_hulls": 3,
+        "uv_channels": 2,
+        "nanite_enabled": true,
+        "dimensions_cm": [
+          413.9784240722656,
+          433.9048614501953,
+          650.0
+        ],
+        "textures": [
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_FountainHero_Base.T_RV_FountainHero_Base",
+            "width": 4096,
+            "height": 4096,
+            "srgb": true
+          },
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_FountainHero_MR.T_RV_FountainHero_MR",
+            "width": 4096,
+            "height": 4096,
+            "srgb": false
+          }
+        ]
+      },
+      "SculptedBank": {
+        "mesh": "/Game/Art/Reverie/Meshes/SM_RV_SculptedBank.SM_RV_SculptedBank",
+        "material": "/Game/Art/Reverie/Materials/M_RV_SculptedBank.M_RV_SculptedBank",
+        "triangles": 985900,
+        "collision_hulls": 3,
+        "uv_channels": 2,
+        "nanite_enabled": true,
+        "dimensions_cm": [
+          540.0,
+          521.6178894042969,
+          324.4823913574219
+        ],
+        "textures": [
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_SculptedBank_Base.T_RV_SculptedBank_Base",
+            "width": 4096,
+            "height": 4096,
+            "srgb": true
+          },
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_SculptedBank_MR.T_RV_SculptedBank_MR",
+            "width": 4096,
+            "height": 4096,
+            "srgb": false
+          }
+        ]
+      },
+      "CrownTree": {
+        "mesh": "/Game/Art/Reverie/Meshes/SM_RV_CrownTree.SM_RV_CrownTree",
+        "material": "/Game/Art/Reverie/Materials/M_RV_CrownTree.M_RV_CrownTree",
+        "triangles": 954410,
+        "collision_hulls": 3,
+        "uv_channels": 2,
+        "nanite_enabled": true,
+        "dimensions_cm": [
+          1048.3389282226562,
+          1045.3302612304688,
+          1100.0
+        ],
+        "textures": [
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_CrownTree_Base.T_RV_CrownTree_Base",
+            "width": 4096,
+            "height": 4096,
+            "srgb": true
+          },
+          {
+            "path": "/Game/Art/Reverie/Textures/T_RV_CrownTree_MR.T_RV_CrownTree_MR",
+            "width": 4096,
+            "height": 4096,
+            "srgb": false
+          }
+        ]
+      }
+    }
+  },
+  "import": {
+    "complete": true,
+    "warnings": 0,
+    "method": "Full Unreal Editor with NullRHI, followed by a materials/audio-only update",
+    "mesh_report": {
+      "path": "unreal/Saved/Reverie/import.json",
+      "bytes": 28801,
+      "sha256": "FC6B9B455EA773EB367C9D01FA91073D65D8C598791476EED96D5E6ED91E5FB9",
+      "modified_utc": "2026-09-10T17:31:41.794793+00:00"
+    },
+    "latest_surface_report": {
+      "path": "unreal/Saved/Reverie/surfaces-import.json",
+      "bytes": 6153,
+      "sha256": "6108A6FB75B469338BF2367AB618B6BB82ACC660A9F0853BB490498006A8FEF0",
+      "modified_utc": "2026-09-10T17:40:33.831450+00:00"
+    }
+  },
+  "generation": {
+    "tool": "Microsoft TRELLIS.2-4B, Blender finishing",
+    "source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+    "model_revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "texture_size": 4096,
+    "FountainHero": {
+      "seed": 73,
+      "actual_resolution": 1536,
+      "prepared_triangles": 961335
+    },
+    "SculptedBank": {
+      "seed": 271828,
+      "actual_resolution": 1536,
+      "prepared_triangles": 985958
+    },
+    "CrownTree": {
+      "seed": 314159,
+      "actual_resolution": 1024,
+      "prepared_triangles": 954479,
+      "fallback_note": "One1536 attempt failed during sparse decoding with RuntimeError: CUDA driver error: device not ready. An out-of-memory cause is not established. Failed metadata/latents retained; one separate1024 fallback completed. No second1536 pass or quality-equivalence claim."
+    },
+    "new_reference_sources": "art/reverie/references",
+    "private_prepared_sources": "<windowsOutputRoot>/reverie-v1/{fountain,root-bank,crown-tree}/finished",
+    "atlas_note": "Original 4K PBR pixels retained. CrownTree GLB embedded PNG payload includes two trailing zero bytes absent from standalone PNG; this is not a matching file-hash claim.",
+    "purchase_or_paid_model_api": false
+  },
+  "audio": {
+    "revision": "reverie-foley-v2",
+    "source": "Layered CC0 recorded foley; not Suno generations",
+    "suno": "Existing subscription authorized; available IAB/Chrome sessions require sign-in. Async login question unanswered. No purchase or generation in Suno.",
+    "cues": 23,
+    "channels": 1,
+    "sample_rate": 48000,
+    "pcm_bits": 16,
+    "highest_estimated_source_true_peak_dbtp": -4.494472624968932,
+    "source_full_scale_samples": 0,
+    "dry_overlap_fixtures": 4,
+    "highest_dry_fixture_true_peak_dbtp": -1.4409891107423611,
+    "dry_fixture_note": "Fixed dry mono sums with source gains, without attenuation; not an exhaustive engine mix. Six catches retain all tails beyond the intended two-voice cap.",
+    "source_report": "assets/audio-reverie/audio-report.json",
+    "actual_imported_settings": {
+      "S_Attack": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_BossTell": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 90,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_Catch": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_ChargeLoop": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": true,
+        "attenuation": null
+      },
+      "S_ChargeReady": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 90,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_ChargeTick": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Clear": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 25,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Dash": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Encounter": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 25,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_EnemyDefeat": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_EnemyFire": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_EnemyHit": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_EnemyTell": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_Equip": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 25,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_FullRelease": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 90,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Guard": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 100,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_HeavyImpact": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 90,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_Hurt": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 100,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Impact": {
+        "voice_cap": 2,
+        "limit_to_owner": false,
+        "priority": 70,
+        "looping": false,
+        "attenuation": "/Game/Audio/Reverie/A_RV_Threats.A_RV_Threats"
+      },
+      "S_MeleeSwing": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Parry": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 100,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_Recall": {
+        "voice_cap": 1,
+        "limit_to_owner": false,
+        "priority": 40,
+        "looping": false,
+        "attenuation": null
+      },
+      "S_WaterLoop": {
+        "voice_cap": 3,
+        "limit_to_owner": false,
+        "priority": 10,
+        "looping": true,
+        "attenuation": null
+      }
+    },
+    "subjective_listening_tested": false
+  },
+  "verification": {
+    "report": {
+      "path": "evidence/reverie-art-checks.json",
+      "bytes": 3429,
+      "sha256": "4B1B950BFC6BEC9802C52C77D3A6B79DEDBF7E67679B91A1FC8A6F01ECD2CC11",
+      "modified_utc": "2026-09-10T18:05:21.742845+00:00"
+    },
+    "final_package_executions": 1,
+    "scenario_groups": 2,
+    "observations": 11,
+    "failed": 0,
+    "complete": true,
+    "aborted": false,
+    "scope": "Seeded route/garden reproduction and variation, three capsule lanes through each gateway/bridge, continuous floors, physical closed gates and enclosing walls, actual new asset instances, functional arch placement, retained spawn/combat/ward pads and side stair floor profiles. Gates are excluded only from passage queries. Isolated QA profile backed up/restored; no combat fixture, visual judgment or ordinary play.",
+    "seed": 833283,
+    "combat_suite_retested": false,
+    "ordinary_complete_playthrough": false,
+    "performance_benchmarked": false
+  },
+  "capture": {
+    "path": "evidence/reverie-courtyard.png",
+    "bytes": 2682119,
+    "sha256": "D88B95D7D52B9760FD6F48C84C2E57126E6E6E1AEDB025AA5521BBCBB9DE9E6D",
+    "modified_utc": "2026-09-10T18:05:53.554075+00:00",
+    "build": "Final packaged Shipping executable10e9738",
+    "seed": 833283,
+    "mode": "-DBCapture -DBFirstView -RenderOffscreen -ResX=1600 -ResY=1000 -ForceRes",
+    "save_slot": "DreamboundQA_ReverieFinalView",
+    "note": "Actual normal arrival camera with starting equipment. No posed enemy or granted upgrades; scripted capture, not native play."
+  },
+  "native_review": {
+    "status": "bounded review completed; further input stopped after detected user activity",
+    "report": "evidence/reverie-qa-notes.md",
+    "isolated_profile": "DreamboundQA_ReverieInput",
+    "exact_shipping_exe_sha256": "5C5DCD3B0D0A27E384AE8C9E4FAFB8BD974B780984A5FE7383F4B07B20741F07",
+    "startup_verified": true,
+    "native_menu_entry_verified": true,
+    "ordinary_first_court_seed": 552389,
+    "movement": "One W tap only; traversal unverified",
+    "guard_pause_volume_persistence_exit": "Not verified: Sky twice detected user input after a window-state refresh. Further injection stopped.",
+    "audio_quality_heard": false,
+    "left_open": true
+  },
+  "limits": [
+    "Owner art/fun/sound acceptance remains pending; no exact anchor-B match claim.",
+    "Upper fountain carving remains dark; static water alignment was reviewed in Editor.",
+    "One biome with bounded seeded room/route variants; not exhaustive procedural validation.",
+    "No subjective audio-quality, ordinary full-run or new performance result."
+  ],
+  "local_input_config": {
+    "path": "unreal/Config/DefaultInput.ini",
+    "bytes": 11196,
+    "sha256": "8475ED722AE31C2D9F66D241203BE379433A59F9346C18B2211251CB9093CA67",
+    "modified_utc": "2026-09-09T21:12:58.791171+00:00",
+    "note": "Preexisting owner modifications preserved and included in the local package; excluded from our commits."
+  }
+}
