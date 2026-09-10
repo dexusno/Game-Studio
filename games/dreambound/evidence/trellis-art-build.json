@@ -1,0 +1,162 @@
+{
+  "version": "0.3.2-art1",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "source_commit": "5af7bad",
+  "recorded_on_utc": "2026-09-10T00:12:13.0383011Z",
+  "package_path": "BuildOutput/TrellisArt/Windows",
+  "scope": "TRELLIS environment assets, carved perimeter arcades, floor material-slot restoration and lighting in the existing three procedural courts",
+  "files": [
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166253568,
+      "sha256": "B940CEC843C56BBAF4A23AE9532F40D896FA54E4B512344D64E282115F693254"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11226557,
+      "sha256": "EF9440E9533A88CA906B2787AE51E3CB1F94B062D8B63AC6B79646EFE2810FBC"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 427585488,
+      "sha256": "BE5C86E085DB042465B9C0C7044C52356F6E03CD526CA5202A07EF6471D23FCB"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 290493,
+      "sha256": "64082C4015579E221434BFA5986A3CC8FB6EC5ED99D1A43A40FAEDB9192CB5DE"
+    }
+  ],
+  "build": {
+    "completed": true,
+    "package_attempts": 1,
+    "build_cook_run_seconds": 76.11,
+    "log": "Local AI3D directory/bellroot-package.log"
+  },
+  "imported_assets": [
+    {
+      "name": "Cloister",
+      "mesh": "/Game/Art/Trellis/Meshes/SM_Trellis_Cloister.SM_Trellis_Cloister",
+      "material": "/Game/Art/Trellis/Materials/M_Trellis_Cloister.M_Trellis_Cloister",
+      "dimensions_cm": [
+        500.2878723144531,
+        146.0637435913086,
+        500.0
+      ],
+      "uv_channels": 2,
+      "nanite_enabled": true,
+      "convex_hulls": 13,
+      "nanite_triangles": 956882
+    },
+    {
+      "name": "RootRock",
+      "mesh": "/Game/Art/Trellis/Meshes/SM_Trellis_RootRock.SM_Trellis_RootRock",
+      "material": "/Game/Art/Trellis/Materials/M_Trellis_RootRock.M_Trellis_RootRock",
+      "dimensions_cm": [
+        280.00001525878906,
+        344.0605926513672,
+        161.4225311279297
+      ],
+      "uv_channels": 2,
+      "nanite_enabled": true,
+      "convex_hulls": 3,
+      "nanite_triangles": 949398
+    },
+    {
+      "name": "Waymarker",
+      "mesh": "/Game/Art/Trellis/Meshes/SM_Trellis_Waymarker.SM_Trellis_Waymarker",
+      "material": "/Game/Art/Trellis/Materials/M_Trellis_Waymarker.M_Trellis_Waymarker",
+      "dimensions_cm": [
+        136.62378692626953,
+        108.32403945922852,
+        240.00001525878906
+      ],
+      "uv_channels": 2,
+      "nanite_enabled": true,
+      "convex_hulls": 4,
+      "nanite_triangles": 1070025
+    },
+    {
+      "name": "BellTree",
+      "mesh": "/Game/Art/Trellis/Meshes/SM_Trellis_BellTree.SM_Trellis_BellTree",
+      "material": "/Game/Art/Trellis/Materials/M_Trellis_BellTree.M_Trellis_BellTree",
+      "dimensions_cm": [
+        697.7977600097656,
+        683.3692626953125,
+        700.0
+      ],
+      "uv_channels": 2,
+      "nanite_enabled": true,
+      "convex_hulls": 3,
+      "nanite_triangles": 969372
+    }
+  ],
+  "import": {
+    "batches": 2,
+    "complete": true,
+    "warnings": 0,
+    "method": "Full editor with NullRHI; stone batch overlapped tree export, then tree batch"
+  },
+  "generation": {
+    "tool": "Microsoft TRELLIS.2-4B",
+    "source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+    "model_revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "seed": 42,
+    "texture_size": 4096,
+    "cloister": {
+      "resolution": 1536,
+      "triangles_prepared": 956920,
+      "source": "bellroot-kit-v1/cloister/source"
+    },
+    "root_rock": {
+      "resolution": 1536,
+      "triangles_prepared": 949436,
+      "source": "bellroot-kit-v1/root-rock/source-resumed4"
+    },
+    "bell_tree": {
+      "resolution": 1024,
+      "triangles_prepared": 969414,
+      "raw_triangles": 59692220,
+      "source": "bellroot-kit-v1/bell-tree/source-1024-resumed",
+      "note": "Explicit lower-resolution generation after six1536 decode failures; original1536 latents retained.1024 texture decoding needed geometry CPU offload. No quality-equivalence claim."
+    },
+    "waymarker": {
+      "source": "trellis-waymarker-v1-1536/repaired-art-v2",
+      "note": "Reuse of previously owner-liked repaired asset; no new generation"
+    },
+    "purchase_or_paid_model_api": false
+  },
+  "verification": {
+    "report": "evidence/trellis-art-checks.json",
+    "executions": 1,
+    "scenario_groups": 2,
+    "assertions": 8,
+    "failed": 0,
+    "complete": true,
+    "combat_retested": false,
+    "ordinary_playthrough": false,
+    "performance_measured": false
+  },
+  "capture": {
+    "path": "evidence/trellis-art-courtyard.png",
+    "build": "Packaged Shipping executable",
+    "seed": 833283,
+    "executions": 1,
+    "editor_preview_executions": 2,
+    "note": "Existing DBCapture staged room1 camera with sample Frost/Mirror and a posed enemy; not earned progression"
+  },
+  "native_review": {
+    "menu_entry_verified": true,
+    "visible_seed": 379569,
+    "preview_slot": "DreamboundQA_TrellisPreview",
+    "left_open": true,
+    "note": "Entered through the normal menu. Brief movement key call did not establish a walk-through."
+  },
+  "visual_limits": "Detailed new props and arcades are visible, but floor, broad wall surfaces, hero/enemy art and overall scene richness remain below anchor B. Owner review pending.",
+  "local_input_config": {
+    "path": "unreal/Config/DefaultInput.ini",
+    "sha256": "8475ED722AE31C2D9F66D241203BE379433A59F9346C18B2211251CB9093CA67",
+    "note": "Saved-project owner modifications preserved; not part of the source commit"
+  }
+}

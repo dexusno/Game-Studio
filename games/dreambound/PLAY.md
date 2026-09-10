@@ -3,7 +3,7 @@
 The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
 
 
-Open `BuildOutput/CombatFeel/Windows/Dreambound.exe`. This is the folding six-piece combat experiment (0.3.1-combat1). The older whole-disc study remains in `BuildOutput/ShieldStudy`.
+Open `BuildOutput/TrellisArt/Windows/Dreambound.exe` for the TRELLIS environment playtest (0.3.2-art1). The earlier combat build remains in `BuildOutput/CombatFeel` and the whole-disc study in `BuildOutput/ShieldStudy`.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 
@@ -38,4 +38,4 @@ Acquiring a core activates it. R also cycles through kinetic; the lower-left HUD
 
 Learned patterns survive defeat. Select one as your starting attachment on later expeditions. Same-seed retry repeats the generated route; a new seed changes route and cover. The `DreamboundSegments` save profile is separate from previous prototypes. A resumed fight restarts from its entry checkpoint; a resumed claimed ward restores its reward practice. Losing focus pauses. Mouse sensitivity is adjustable in pause.
 
-This remains a mechanics playtest with one biome and a small modular kit. The environment has not reached art anchor B, and this is not the full game's content or duration. For this playtest, try the folded strikes, repeated melee taps, a partial throw and a fully charged release. Judge whether each action feels distinct and forceful while keeping enemies visible.
+This remains a three-court playtest in one biome. The new root-embraced bell trees, carved cloisters, mossy rock groups and waymarkers use textured TRELLIS meshes with Nanite. Look at their scale and materials while moving, and whether enemies, ward stones and passages stay readable. The floor/wall surfaces and hero/enemy art still need further work toward anchor B; this is not the full game's content or duration.
