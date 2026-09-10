@@ -1346,7 +1346,13 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     {
         const FOrganicFoot& Foot = OrganicFeet[Side];
         const float Gap = FVector::Dist2D(CandidateNominal, Foot.Anchor);
-        const float Transfer = OrganicStepsSinceStop < 2 ? .45f : bCaster ? .94f : 1.f;
+        // Scheduling step two is still the startup catch-up, not a completed
+        // steady stride. Transfer the first short plant during that catch-up;
+        // retaining it for a full swing forced a sudden deep support drop as
+        // the creature accelerated and turned. The shared forecast uses this
+        // same release gate, while mature weight-bearing cadence is unchanged.
+        const float Transfer = OrganicStepsSinceStop == 2 ? .30f
+            : OrganicStepsSinceStop < 2 ? .45f : bCaster ? .94f : 1.f;
         if (bOtherSwinging && Gap < Lengths[Side] * .55f && (PlanningSpeed < 120.f || OtherProgress < Transfer)) return 0.f;
         const float Threshold = OrganicStepsSinceStop == 0 ? 4.f * Scale
             : FMath::Max(8.f * Scale, Lengths[Side] * (bCaster ? .22f : .26f));
