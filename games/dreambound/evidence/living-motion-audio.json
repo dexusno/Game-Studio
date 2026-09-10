@@ -1,0 +1,113 @@
+{
+  "version": "0.5.0-living1",
+  "scope": "36-second scripted actual Shipping engine capture; staged invulnerable practice targets. No native-input, complete-run, performance or subjective listening claim.",
+  "run": {
+    "exit_code": 0,
+    "arguments": [
+      "-DBMotionCapture",
+      "-DBSaveSlot=DreamboundQA_LivingAudition",
+      "-DBSeed=552389",
+      "-UserDir=D:/Game-Studio/.local/living1-audition-grounded",
+      "-RenderOffscreen",
+      "-windowed",
+      "-ResX=1280",
+      "-ResY=800",
+      "-ForceRes",
+      "-unattended"
+    ],
+    "executable_sha256": "FE8D1DB61568A541B7CBEA6A7813686838C54EC25B4FF00D6092DA94F9FE36B6",
+    "source_revision": "877be8e120fa89bdbd345f73f245b0cf031214de",
+    "elapsed_seconds": 46.217054
+  },
+  "captured_frames": 302,
+  "resolution": [
+    1280,
+    800
+  ],
+  "video_note": "Screenshots sampled at approximately 0.1s intervals, timed to the actual audio clock; encoded to 30fps by repeating frames. Audio mix is unchanged apart from AAC encoding.",
+  "audio": {
+    "seconds": 35.925333333333334,
+    "sample_rate": 48000,
+    "channels": 2,
+    "sample_peak_dbfs": -15.552428581278665,
+    "rms_dbfs": -39.636547901863636,
+    "full_scale_samples": 0,
+    "sha256": "29acb0d3cd8543fc40731c24aef4cbb7f323f700ed3dca7a9982f05446dee595"
+  },
+  "charge_loop_transitions": [
+    {
+      "seconds": 0.000308,
+      "charge_loop_playing": false
+    },
+    {
+      "seconds": 5.255352,
+      "charge_loop_playing": true
+    },
+    {
+      "seconds": 6.317519,
+      "charge_loop_playing": false
+    },
+    {
+      "seconds": 10.288082,
+      "charge_loop_playing": true
+    },
+    {
+      "seconds": 12.686101,
+      "charge_loop_playing": false
+    }
+  ],
+  "movement": {
+    "maximum_dash_speed_cm_s": 1850.0,
+    "maximum_sprint_speed_cm_s": 885.0,
+    "minimum_stamina": 48.059,
+    "jump_z_range_after_33_8s": [
+      94.15,
+      179.686
+    ]
+  },
+  "video": {
+    "path": "living-world-scripted.mp4",
+    "bytes": 9875493,
+    "sha256": "e1c2fa35b473e83b5d1a277618002528f661d0ba9bfd889f70ad424863a3152c"
+  },
+  "inspection_frames": [
+    {
+      "time": 2.28666,
+      "file": "Frame_00022.png"
+    },
+    {
+      "time": 10.9774,
+      "file": "Frame_00094.png"
+    },
+    {
+      "time": 17.986292,
+      "file": "Frame_00153.png"
+    },
+    {
+      "time": 22.090889,
+      "file": "Frame_00186.png"
+    },
+    {
+      "time": 32.363094,
+      "file": "Frame_00272.png"
+    },
+    {
+      "time": 35.286575,
+      "file": "Frame_00295.png"
+    }
+  ],
+  "visual_review": {
+    "reviewers": "Root and independent QA",
+    "observed": "At 2.28666s and 10.9774s the visible practice-target feet contact paving; the earlier large breathing rise/sink is absent. No claim covers all intervening frames or ordinary attack/gait contacts.",
+    "frames": [
+      {
+        "path": "living-practice-breath-a.png",
+        "sha256": "0ae759a23820f2757dc669f9d8bcd1ea27cd4584a689ba793e67cdfabad3593c"
+      },
+      {
+        "path": "living-practice-breath-b.png",
+        "sha256": "bfc519cc05d853dbb55ed8099953d2ed7c75057fb562ddd4fcf5ff0daa2db04a"
+      }
+    ]
+  }
+}

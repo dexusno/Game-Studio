@@ -1,0 +1,114 @@
+{
+  "version": "0.5.0-living1",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "877be8e120fa89bdbd345f73f245b0cf031214de",
+  "recorded_on_utc": "2026-09-10T20:54:54.971500+00:00",
+  "package_path": "BuildOutput/LivingWorld/Windows",
+  "scope": "Two original skinned biological enemy forms; twelve habitat prop families and ambient insects; grounded sprint stamina and separate evasive dash; movement foley and two owner-supplied Suno edits; preferred player cyborg/weapon retained.",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166327296,
+      "sha256": "FE8D1DB61568A541B7CBEA6A7813686838C54EC25B4FF00D6092DA94F9FE36B6"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11374144,
+      "sha256": "88F0C428252C40A88374D9C6AD79A59572FC94938D03451F951D5F7252E0C5EA"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 483057088,
+      "sha256": "575C4170EEEDBB92571EE3E68FFE3B4267D3B98378E8202D0F4D3F4A0BFC1CFB"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 320033,
+      "sha256": "E4E3C54C9A6D9039F899FE3F4048191D0CBE93D0A311506EF631CD8109148502"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211648,
+      "sha256": "43BB682CFD4BAA896C43C7461FD47F0F2F22714AF135393BF38B42BC68C870D8"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "40E0E2EE01F3D66CB537657A6E68C70AC068E4945BC8C5A2760E50621CB3AED0"
+    }
+  ],
+  "build": {
+    "exit_code": 0,
+    "version": "0.5.0-living1",
+    "source_revision": "877be8e120fa89bdbd345f73f245b0cf031214de",
+    "cook": "Reused unchanged content cooked by ecab7e21654d55ac30afa50a2556b6acb418aab8; C++-only pose scale and capture correction",
+    "output": "BuildOutput/LivingWorld",
+    "elapsed_seconds": 46.1269307
+  },
+  "prior_full_cook": {
+    "elapsed_seconds": 71.2690535,
+    "version": "0.5.0-living1",
+    "output": "BuildOutput/LivingWorld",
+    "exit_code": 0,
+    "source_revision": "ecab7e21654d55ac30afa50a2556b6acb418aab8"
+  },
+  "integration": {
+    "editor_compilation_seconds": 9.2,
+    "organic_import": "art/organic-enemies/import-report.json",
+    "habitat_import": "art/living-world/import-report.json",
+    "suno_audio_import": "evidence/suno1-audio-import.json",
+    "movement_audio_import": "evidence/living-movement-audio-import.json",
+    "organic_import_note": "Complete with validated bone links/units/material slots; two deprecated MaterialEditingLibrary API warnings. No import exception; editor exit0."
+  },
+  "input_config": {
+    "before_requested_mapping_change_sha256": "8475ED722AE31C2D9F66D241203BE379433A59F9346C18B2211251CB9093CA67",
+    "packaged_working_file_sha256": "46A15FAB3B5E618CF348BF4FAB527DB19CA2194054FB42E5BBEE8E704F5B0C60",
+    "changes": "Only Dash LeftShift -> LeftAlt and Sprint LeftShift added to the owner working file. Unrelated existing owner settings retained; only requested mappings committed."
+  },
+  "movement_verification": {
+    "complete": true,
+    "aborted": false,
+    "passed_groups": 4,
+    "failed_groups": 0,
+    "passed_observations": 14,
+    "run": {
+      "executable_sha256": "FC70194B45B79DDC0E96F99DF7DF5B920CDE89675DADD674B300F38158A6FFA5",
+      "exit_code": 0,
+      "source_revision": "ecab7e21654d55ac30afa50a2556b6acb418aab8",
+      "arguments": [
+        "-NullRHI",
+        "-DBVerify",
+        "-DBMovementCheck",
+        "-DBSaveSlot=DreamboundQA_LivingMovement",
+        "-DBSeed=552389",
+        "-UserDir=D:/Game-Studio/.local/living1-movement-final",
+        "-unattended",
+        "-nosound"
+      ]
+    },
+    "result": "evidence/living-movement-checks.json",
+    "revision_limit": "Executed on ecab7e2. The final877be8e changes only DBEnemy pose translation and scripted capture camera/jump; DBCharacter, DBHUD, input mappings and movement harness are identical. This is not a claim of a second execution."
+  },
+  "visual_audio_verification": {
+    "final_scripted_capture": "evidence/living-motion-audio.json",
+    "video": "evidence/living-world-scripted.mp4",
+    "posed_source_commit": "29743b142c8666ddd365ba5154fedbcd606dd372",
+    "posed_creatures": "evidence/living-creatures.png",
+    "posed_habitat": "evidence/living-habitat.png",
+    "note": "Posed stills precede the animation-scale fix. Final executable was inspected across two active breathing phases; large rise/sink is corrected. The raw final mix contains zero full-scale samples and charge stops after release."
+  },
+  "limits": [
+    "No ordinary complete playthrough or native-key/focus test in this increment.",
+    "No new performance/minimum-hardware benchmark; screenshot sampling is not FPS evidence.",
+    "Approximate procedural creature animation, one LOD each, no foot IK/facial rig/ragdoll; dark surfaces still hide detail.",
+    "Two habitats within one existing biome; insect motion is ambient dressing.",
+    "No subjective sound/feel approval or external release clearance."
+  ]
+}

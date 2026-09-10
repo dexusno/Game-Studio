@@ -1,0 +1,116 @@
+{
+	"suite": "grounded-movement-v1",
+	"scope": "Ordinary world ticks and real CharacterMovement displacement/collision on a staged level runway and solid wall. Public sprint/dash APIs and AddMovementInput exercise stamina exhaustion/recovery, blocked movement, dash travel, cooldown/held edge, pause and run reset. Isolated QA journals backed up/restored. No legacy combat/route cases, native input, visual or feel evidence.",
+	"combat_tested": false,
+	"ordinary_play_tested": false,
+	"engine": "5.8.2-56702186+++UE5+Release-5.8",
+	"executable": "Dreambound-Win64-Shipping",
+	"platform": "Windows",
+	"save_slot": "DreamboundQA_LivingMovement",
+	"seed": 552389,
+	"null_rhi": true,
+	"complete": true,
+	"aborted": false,
+	"last_step": 21,
+	"elapsed_wall_seconds": 3.9264493994414806,
+	"elapsed_tick_seconds": 15.533271789550781,
+	"passed": 2,
+	"failed": 2,
+	"checks": [
+		{
+			"id": "isolated_setup",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "isolated_slot",
+					"passed": true,
+					"detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+				},
+				{
+					"id": "recovery_world",
+					"passed": true,
+					"detail": "Actual world, possessed character, camera and three connected rooms."
+				},
+				{
+					"id": "journal_backup",
+					"passed": true,
+					"detail": "Prior QA bytes backed up; empty isolated profile established."
+				},
+				{
+					"id": "qa_journals_restored",
+					"passed": true,
+					"detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+				}
+			]
+		},
+		{
+			"id": "grounded_locomotion",
+			"status": "failed",
+			"observations": [
+				{
+					"id": "stationary_sprint_and_real_walk",
+					"passed": true,
+					"detail": "Stationary Shift retained full stamina=1; physical walking after acceleration 590.0 cm/s over 0.550s."
+				},
+				{
+					"id": "sprint_exhausts_after_physical_run",
+					"passed": false,
+					"detail": "Full-bar run 5.000s, displacement/path 4414.2 cm, peak 442.5 cm/s, stamina 0.007; expected roughly five seconds at 885 cm/s after acceleration."
+				},
+				{
+					"id": "delayed_recovery_does_not_restart_held_sprint",
+					"passed": true,
+					"detail": "First observed recovery 0.809s; stamina 25.00 at 1.800s, speed 590.0 cm/s while original Shift remains held. Expected 0.8s delay then 25/s."
+				},
+				{
+					"id": "fresh_sprint_requires_recovered_threshold",
+					"passed": false,
+					"detail": "Fresh press above 20 produced physical sprint=0; second fresh press at 15.99 stamina stayed walking at 590.0 cm/s."
+				},
+				{
+					"id": "sprint_into_solid_wall_does_not_drain",
+					"passed": true,
+					"detail": "After physical contact, held movement/Shift for 1.000s: displacement 0.000 cm, stamina 91.76 -> 100.00."
+				}
+			]
+		},
+		{
+			"id": "grounded_evasion",
+			"status": "failed",
+			"observations": [
+				{
+					"id": "dash_moves_four_metres_without_hop",
+					"passed": false,
+					"detail": "Actual dash 0.240s, path 444.19 cm, peak 925.0 cm/s, maximum vertical offset 0.000 cm, stamina 100.00 -> 100.00. Sampling includes the tick that reports source completion."
+				},
+				{
+					"id": "dash_cooldown_and_release_edge",
+					"passed": true,
+					"detail": "Early fresh press rejected=1; held repeat stayed still after cooldown=1; release/new press starts=1."
+				},
+				{
+					"id": "dash_stops_at_physical_wall",
+					"passed": true,
+					"detail": "Path 292.90 cm; capsule X 292.900, wall contact limit 293.000; vertical offset 0.000 cm, final speed 0.000 cm/s."
+				}
+			]
+		},
+		{
+			"id": "movement_menu_and_reset",
+			"status": "passed",
+			"observations": [
+				{
+					"id": "pause_suspends_dash_and_resume_has_no_stale_input",
+					"passed": true,
+					"detail": "Active dash canceled/frozen with stamina and cooldown retained=1; resume drift 0.000 cm over 0.350s."
+				},
+				{
+					"id": "run_reset_clears_burst_resources_and_held_latches",
+					"passed": true,
+					"detail": "Reset during measured dash; clean resources/stillness=1, drift 0.000 cm; fresh dash accepted without stale held latch=1."
+				}
+			]
+		}
+	],
+	"not_run": "Combat/immunity, slopes/stairs/ledges, native keyboard/focus, ordinary play, graphics, audio, feel and performance."
+}

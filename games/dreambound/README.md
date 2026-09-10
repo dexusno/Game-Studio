@@ -2,16 +2,13 @@
 
 First-person Unreal 5.8.2 prototype. Internal identifier `dreambound`; final title undecided.
 
-The current playable build is **0.4.1-reverie2**: three connected procedural sanctuaries, a six-piece folding shield, three encounters and two earned upgrade choices. This update restores the owner's preferred previous cyborg and weapon appearance inside the new Blender/TRELLIS environment. Buried foundations, stair aprons and complete terrace retaining walls correct exposed ground gaps. The 23 replacement CC0 sound cues and persistent sound controls remain; Suno sources have been generated but are awaiting official file delivery. Read [STATUS.md](STATUS.md).
+The current demo is **0.5.0-living1**. It adds two detailed organic enemy forms, twelve reusable habitat prop families, small animated insects and richer spring/ruin planting. The preferred cyborg arms and folding shield remain. Shift now sprints with stamina; Left Alt performs a forceful evasive dash. Grounded camera/weapon motion, footsteps and landing sounds support the movement. Two edited owner-supplied Suno cues power charge and full release.
 
-Start `BuildOutput/ReverieUpdate/Windows/Dreambound.exe`, or run `scripts/Start-Demo.ps1`. [Controls](PLAY.md), [build evidence](evidence/reverie-update-build.json). Historical packages remain in their original directories. Generated Unreal Content and packages are ignored and reproduced with the included scripts.
+Start `BuildOutput/LivingWorld/Windows/Dreambound.exe`, or run `scripts/Start-Demo.ps1`. Keep the whole Windows folder together. [Controls](PLAY.md), [current evidence and limits](STATUS.md), [build identity](evidence/living-world-build.json). The three connected courts and earned upgrades remain a bounded playtest in one biome. Previous packages remain available in their original directories.
 
-- [Brief and player experience](BRIEF.md)
-- [Current state and resume instructions](STATUS.md)
-- [Decision history](DECISIONS.md)
-- [Build and run instructions](BUILD.md)
-- [Quality and playtest record](QA.md)
-- [Release preparation](RELEASE.md)
-- [Asset licensing register](assets/manifest.csv)
+- [Brief](BRIEF.md) and [shield design](SHIELD-DESIGN.md)
+- [Build and run](BUILD.md)
+- [Decisions](DECISIONS.md) and [implementation](IMPLEMENTATION.md)
+- [Asset provenance](assets/manifest.csv)
 
-Implementation lives in `unreal/Source/`. Art sources and reproducible imports live in `art/` and `scripts/`. The previous Sixfold Recoil browser prototype remains parked.
+Sources and small original assets are tracked; Unreal Content, packages and large generated creature/environment sources stay private and require the existing source bundle or regeneration. The earlier browser prototype remains parked.

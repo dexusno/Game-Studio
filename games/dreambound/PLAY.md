@@ -1,9 +1,9 @@
-# Reverie graphics and folding-shield playtest
+# Living world and grounded movement playtest
 
 The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
 
 
-Open `BuildOutput/ReverieUpdate/Windows/Dreambound.exe` for the current **0.4.1-reverie2** demo, or run `scripts/Start-Demo.ps1`. This restores the previous cyborg/weapon art and fixes structure-to-ground gaps in the new environment. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
+Open `BuildOutput/LivingWorld/Windows/Dreambound.exe` for the current **0.5.0-living1** demo, or run `scripts/Start-Demo.ps1`. It adds organic enemies, habitat details, sprint stamina, a separate evasive dash and movement sounds while preserving the preferred cyborg arms and weapon. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 
@@ -16,10 +16,14 @@ Approach the glowing ward stone and press **E**. Clear the first court, return t
 | Cancel a selection and guard | RMB during LMB hold |
 | Recall surviving deployed pieces | Q |
 | Heavy bash / installed Ram rush | F |
-| Dash / jump | Shift / Space |
+| Sprint | Hold Left Shift |
+| Evasive dash | Left Alt |
+| Jump | Space |
 | Ward stone / reward choice | E / 1, 2, 3 or click |
 | Cycle owned elemental cores and kinetic | R |
 | Read current ability instructions / pause | Tab / Escape |
+
+Hold **Shift** to sprint. The stamina bar lasts about five seconds of actual running and recovers after a short rest; pressing into a wall does not drain it. After exhaustion, release Shift and wait for at least 20% before pressing again. **Left Alt** makes a short, forceful dash in your movement direction (forward when stationary), covering about 4.4 metres on clear level ground. It has a separate 1.45-second cooldown and no stamina cost. Ground-speed-driven weapon/body motion, alternating footfalls and landing feedback communicate movement weight.
 
 Six pieces are the starting tuning. Selection begins after 0.22 seconds and lights another every 0.316 seconds. Charging lowers your guard; after the throw's brief recovery, the pieces you kept can protect you. Each ordinary frontal block spends one piece. Its own three-second rebuilding timer starts immediately, independently of other losses. The HUD shows each piece as held, lit, away, returning or rebuilding. You can still move and strike with the core at zero pieces.
 
@@ -38,4 +42,4 @@ Acquiring a core activates it. R also cycles through kinetic; the lower-left HUD
 
 Learned patterns survive defeat. Select one as your starting attachment on later expeditions. Same-seed retry repeats the generated route; a new seed changes route and cover. The existing `DreamboundSegments` save profile is retained. A resumed fight restarts from its entry checkpoint; a resumed claimed ward restores its reward practice. Losing focus pauses. Mouse sensitivity and sound volume are adjustable in pause; sound starts at 85%, with plus/minus and mute/enable buttons. Settings persist with the profile.
 
-This remains a three-court playtest in one biome. All visible game art has been replaced: carved paving and walls, functional arches and bridges, planted soil beds, crown trees, layered banks, fountains and water channels, a painted morning sky, crystals, cyborg guardians and the folding weapon. The layout chooses connected routes first and arranges gardens and architecture around them. Look at whether passages and threats remain readable while moving. The new sounds use layered CC0 recordings; Suno generation is still awaiting an accessible signed-in session. This build does not establish the full game's content, duration or final visual quality.
+This remains a three-court playtest in one biome. Two new biological enemy forms replace the robotic enemies. Damp spring margins and dry ruin gardens now use reeds, lilies, ferns, flowers, fungi, broken wood, scrub, roots, urns, fallen masonry and small animated insects. These are habitat variations inside the current biome; insects are ambient dressing. The connected routes, grounded stairs, walls, trees, fountains and water remain. Two edited owner-supplied Suno sounds now provide the charge motor and full shield release; 24 other cues use retained CC0 foley, including new footsteps and landing. This build does not establish the full game's content, duration or final visual quality.
