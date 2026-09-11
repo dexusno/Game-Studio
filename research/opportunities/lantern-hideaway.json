@@ -13,10 +13,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T20:19:30+00:00",
+      "captured_at": "2026-09-11T21:18:57+00:00",
       "record_sha256": "934da64c13761143a59e914582d00a801f79c390bc43eb66edfddc2097e909b8",
       "files": {
-        "research/runs/2026-09-11-small-game-income/README.md": "84a2b8c0e55190fbc5d02c30ab50d796f97aeb8579abfb14b6d4fb08815ee79c",
+        "research/runs/2026-09-11-small-game-income/README.md": "bbbffdc88b69421db3e7a0264ece4c1f8a5a65e7ac9e698af64a8d9f8c2105f7",
         "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10",
         "research/runs/2026-09-11-small-game-income/phone-app-comparison.md": "fd403cd5f166cfc56c52a02fad93088332c5fbfe68d0bcc66c78edd4ab4cd30f"
       }

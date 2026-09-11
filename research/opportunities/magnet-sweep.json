@@ -1,34 +1,38 @@
 {
   "schema_version": 1,
-  "status": "shortlisted",
+  "status": "selected",
   "trend_stage": "unverified",
   "confidence": "low",
   "research_run": "research/runs/2026-09-11-small-game-income/README.md",
   "updated_on": "2026-09-11",
   "context": {
-    "entrypoint": "research/runs/2026-09-11-small-game-income/README.md",
+    "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
-      "research/runs/2026-09-11-small-game-income/REPORT.md",
-      "research/runs/2026-09-11-small-game-income/phone-app-comparison.md"
+      "games/magnet-sweep/BRIEF.md",
+      "games/magnet-sweep/PRODUCTION-PLAN.md",
+      "games/magnet-sweep/DECISIONS.md",
+      "games/magnet-sweep/design/CRITIQUE.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T20:19:30+00:00",
-      "record_sha256": "10537ad11928e755ba45d55518e060ea5405c2187a1a39da9ad34411149ce037",
+      "captured_at": "2026-09-11T21:18:56+00:00",
+      "record_sha256": "afae45e3b37405d1de41741ff683b2f31fad59d84681851c94cd5ae2ebb7e364",
       "files": {
-        "research/runs/2026-09-11-small-game-income/README.md": "84a2b8c0e55190fbc5d02c30ab50d796f97aeb8579abfb14b6d4fb08815ee79c",
-        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10",
-        "research/runs/2026-09-11-small-game-income/phone-app-comparison.md": "fd403cd5f166cfc56c52a02fad93088332c5fbfe68d0bcc66c78edd4ab4cd30f"
+        "games/magnet-sweep/STATUS.md": "5ac72a85fb8f1260eb82a02cef48cf2fb8296c944630e8e1af4a5ab21b47a0e4",
+        "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
+        "games/magnet-sweep/DECISIONS.md": "a7314857fde4571be2df085b97613fbe906f8c615a2426dbdbd7cedd1352f97a",
+        "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c"
       }
     }
   },
   "commercial_hypothesis": "Offline premium Windows. Target at least NOK 20,000 cash profit per game, before owner wage/personal tax. Only consider several games after actual results prove worthwhile. Price, production budget and sales unvalidated; no spending authorized.",
-  "evidence_limits": "Desk research. No playable prototype, paid demand for this exact hook, measured production speed, or owner acceptance. Working label, not cleared final title.",
+  "evidence_limits": "Three designers directly debated and revised gameplay after an independent gameplay critique. A professional dependency-led production plan is complete, with no development-time constraint. No engine project, human playtest, paid demand or owner play acceptance exists. Working title is not cleared for release.",
   "id": "magnet-sweep",
-  "title": "Magnet Sweep — research label",
-  "hook": "Sweep a magnet through a tray of scrap, separate two material types with a simple polarity change, and turn a small haul into a dramatic clearing sweep.",
-  "audience": "Players buying short, satisfying active incrementals with visible growth and a finite ending.",
-  "core_loop": "Sweep and collect; release into a furnace; buy a visibly different upgrade; clear the next bounded tray stage; finish a small visible restoration.",
+  "title": "Magnet Sweep (working title)",
+  "hook": "Sweep up a satisfying haul, aim a broad tug that breaks linked scrap loose, and forge a magnet with lasting new abilities.",
+  "audience": "Players seeking satisfying active collection, visible tool growth and forgiving expressive play. Exact demand and replay appeal are unvalidated.",
+  "core_loop": "Collect desirable scrap; aim and release a previewed pull; create a readable linked burst; dump at the furnace toward a visible goal; retain the improved rig; explore fresh arrangements.",
   "scores": {
     "demand": 3,
     "distinctiveness": 2,
@@ -51,18 +55,16 @@
     }
   ],
   "risks": [
-    "Polarity could become busywork; its originality and fun are untested.",
-    "Realistic magnetism, piles and chains would break the small scope.",
-    "Pacing, art, saves, discovery and first-release setup may exceed five to eight intensive days.",
-    "Recent idle supply is crowded; one successful genre member does not predict our sales."
+    "Context-sensitive tug controls may feel fiddly instead of satisfying.",
+    "Linked bursts may be unclear or leave the same obvious pull in every arrangement.",
+    "Forge goals may become chores or erase the feeling of earned power if inflated.",
+    "Fresh arrangements may not earn voluntary replay once unlock novelty ends.",
+    "Positive per-pull feedback must avoid making ordinary collecting feel like a scoring mistake."
   ],
-  "next_test": "If selected, cap first experiment at one intensive day: one tray, two materials, two visibly distinct upgrades, real ten-minute play and a fifteen-second gameplay clip. Seek understandable collection and voluntary continuation; no new content to rescue a weak action. No implementation authorized yet.",
-  "decision_reason": "First recommended experiment in the per-game income comparison, not a selected game. Fixed-view collection/progression differs from the held Scrap Swing transport loop.",
+  "next_test": "Implement an isolated Windows project and the representative sweep/tug/linked-burst/forge/improvement loop from the completed plan. Test understandable satisfying control and voluntary replay on different arrangements with the full rig; no development-time ceiling.",
+  "decision_reason": "Klaus selected the magnet experiment on 2026-09-11 and requested three designers to debate directly, a professional planner, and an independent critic. This assignment is design/planning; executable feasibility, fun and paid value remain untested.",
   "scope_hypothesis": {
-    "core_days": "3–5",
-    "complete_candidate_days": "5–8",
-    "owner_hours": "4–6",
-    "price_usd": "2.99–4.99",
-    "note": "Unproven estimates, store lead time separate. Counts are ceilings: three material types, ten upgrades, three stages."
+    "price_usd": "2.99-4.99 (historical research hypothesis; reassess for actual game)",
+    "note": "Owner explicitly removes development timelines from consideration. Simple coherent gameplay, reward and replay are the governing design goals; design is being revised through gameplay critique and direct designer dialogue."
   }
 }

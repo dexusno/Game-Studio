@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "slug": "magnet-sweep",
+  "title": "Magnet Sweep",
+  "engine": "unreal",
+  "platforms": [
+    "windows"
+  ],
+  "stage": "concept",
+  "created_on": "2026-09-11",
+  "source_opportunity": "magnet-sweep",
+  "budget": {
+    "target_days": 0,
+    "human_hours": 0,
+    "cash_usd": 0
+  },
+  "budget_note": "Owner explicitly removes development timeline as a consideration. Time fields are intentionally unset (schema uses 0), not zero-hour estimates or deadlines. Prior 5-8 day and owner-hour caps are superseded. Preserve a simple, engaging, rewarding, replayable game. Cash 0 records no new spending authorization. Current work is design and planning only.",
+  "context": {
+    "entrypoint": "games/magnet-sweep/STATUS.md",
+    "read_first": [
+      "games/magnet-sweep/BRIEF.md",
+      "games/magnet-sweep/PRODUCTION-PLAN.md",
+      "games/magnet-sweep/DECISIONS.md",
+      "games/magnet-sweep/design/CRITIQUE.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-11T21:18:56+00:00",
+      "record_sha256": "440a211a9d36b1ca1a46c705042ec974762fcd397be816634ce5d2d112ee07fb",
+      "files": {
+        "games/magnet-sweep/STATUS.md": "5ac72a85fb8f1260eb82a02cef48cf2fb8296c944630e8e1af4a5ab21b47a0e4",
+        "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
+        "games/magnet-sweep/DECISIONS.md": "a7314857fde4571be2df085b97613fbe906f8c615a2426dbdbd7cedd1352f97a",
+        "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c"
+      }
+    }
+  }
+}
