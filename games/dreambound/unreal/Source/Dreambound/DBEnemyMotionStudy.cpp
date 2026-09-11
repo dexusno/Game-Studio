@@ -315,13 +315,16 @@ void ADBEnemyMotionStudy::UpdateCombatPressure(float DeltaSeconds)
     if (Time >= 6.f && Time < 18.f)
     {
         const FVector Away = (Player->GetActorLocation() - Creature->GetActorLocation()).GetSafeNormal2D();
-        FVector Goal = Creature->GetActorLocation() + Away * (Time < 12.f ? 180.f : 650.f);
+        FVector Goal = Creature->GetActorLocation() + Away * (Time < 12.f ? 180.f : 950.f);
         Goal.Z = Player->GetActorLocation().Z;
         Player->SetActorLocation(FMath::VInterpConstantTo(Player->GetActorLocation(),Goal,DeltaSeconds,Time < 12.f ? 440.f : 340.f),true);
     }
     // Select exactly one real piece. A committed caster is never forced back to movement.
     if (Time >= 12.f && Time < 19.f && PressureThrowTime < 0.f && PressureChargeTime < 0.f
-        && Creature->Phase == EDBEnemyPhase::Approach && Creature->GetVelocity().SizeSquared2D() > FMath::Square(30.f)
+        && Creature->Phase == EDBEnemyPhase::Approach
+        && FVector::DotProduct(Creature->GetActorForwardVector(),
+            (Player->GetActorLocation()-Creature->GetActorLocation()).GetSafeNormal2D()) > .65f
+        && FVector::DistSquared2D(Player->GetActorLocation(),Creature->GetActorLocation()) > FMath::Square(850.f)
         && Player->AttackRecovery <= 0.f && Player->GetAttachedPieceCount() > 0)
     {
         Player->PressFire(); PressureChargeTime = Time;

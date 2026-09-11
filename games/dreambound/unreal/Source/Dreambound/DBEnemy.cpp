@@ -610,20 +610,24 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
     else StuckTime = 0.f;
     if (StuckTime > 0.8f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
     const bool bCasterTravel = Kind == EDBEnemyKind::Caster;
+    const bool bCasterEvasion = bCasterTravel && bRepositioning && CasterIntent == ECasterIntent::Evade;
     const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || (bRepositioning && !bCasterTravel)
         || (Kind == EDBEnemyKind::Hunter && Phase == EDBEnemyPhase::Recovery))
         && FVector::DistSquared2D(Start, Target->GetActorLocation()) < FMath::Square(1200.f)
         ? Target->GetActorLocation() - Start : Chosen;
     const FRotator Face(0.f, Facing.Rotation().Yaw, 0.f);
     SetActorRotation(bCasterTravel
-        ? FMath::RInterpConstantTo(GetActorRotation(), Face, DeltaSeconds, 165.f)
+        ? FMath::RInterpConstantTo(GetActorRotation(), Face, DeltaSeconds, bCasterEvasion ? 300.f : 165.f)
         : FMath::RInterpTo(GetActorRotation(), Face, DeltaSeconds, 7.f));
     // Let the carried body turn into a route before taking full forward steps.
     // Facing the player throughout every relocation produced a constant crab walk.
     const float TravelYaw = bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw;
-    const float TravelAlignment = bCasterTravel
+    float TravelAlignment = bCasterTravel
         ? FMath::Clamp((FVector::DotProduct(FRotator(0.f,TravelYaw,0.f).Vector(),Chosen)-.5f)/.4f,0.f,1.f)
         : 1.f;
+    // A single emergency step starts while turning; ordinary travel still
+    // waits for forward alignment. Collision and planted-foot solving remain.
+    if (bCasterEvasion) TravelAlignment = FMath::Max(.55f,TravelAlignment);
     GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * TravelAlignment * (1.f - ChillStacks * 0.16f);
     if (TravelAlignment > .01f) AddMovementInput(Chosen, 1.f, true);
     else ConsumeMovementInputVector();
@@ -774,7 +778,8 @@ void ADBEnemy::UpdateCasterCombat(float DeltaSeconds)
         EvadeCooldown = 4.5f;
         ChooseCasterPosition(ECasterIntent::Evade);
     }
-    else if (bTargetVisible && WithdrawCooldown <= 0.f
+    else if (!(bRepositioning && CasterIntent == ECasterIntent::Evade)
+        && bTargetVisible && WithdrawCooldown <= 0.f
         && (Distance < 480.f || (bNeedsReposition && RecentDamageTime > 0.f && Distance < 1050.f)))
     {
         WithdrawCooldown = 6.5f;
@@ -1125,7 +1130,7 @@ void ADBEnemy::BeginRecovery(float Duration)
     // longer spends every recovery walking around an arbitrary ring.
     Cooldown = Kind == EDBEnemyKind::Caster ? Duration + 1.5f : .35f;
     MeleeSetupTime = 0.f;
-    if (Kind == EDBEnemyKind::Caster) { bNeedsReposition = false; bRepositioning = false; }
+    if (Kind == EDBEnemyKind::Caster) bRepositioning = false;
 }
 
 void ADBEnemy::Stagger(float Duration)
