@@ -596,14 +596,24 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
     if (GetVelocity().SizeSquared2D() < FMath::Square(25.f)) StuckTime += DeltaSeconds;
     else StuckTime = 0.f;
     if (StuckTime > 0.8f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
-    GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * (1.f - ChillStacks * 0.16f);
-    AddMovementInput(Chosen, 1.f, true);
-    const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || bRepositioning
+    const bool bCasterTravel = Kind == EDBEnemyKind::Caster;
+    const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || (bRepositioning && !bCasterTravel)
         || (Kind == EDBEnemyKind::Hunter && Phase == EDBEnemyPhase::Recovery))
         && FVector::DistSquared2D(Start, Target->GetActorLocation()) < FMath::Square(1200.f)
         ? Target->GetActorLocation() - Start : Chosen;
     const FRotator Face(0.f, Facing.Rotation().Yaw, 0.f);
-    SetActorRotation(FMath::RInterpTo(GetActorRotation(), Face, DeltaSeconds, 7.f));
+    SetActorRotation(bCasterTravel
+        ? FMath::RInterpConstantTo(GetActorRotation(), Face, DeltaSeconds, 165.f)
+        : FMath::RInterpTo(GetActorRotation(), Face, DeltaSeconds, 7.f));
+    // Let the carried body turn into a route before taking full forward steps.
+    // Facing the player throughout every relocation produced a constant crab walk.
+    const float TravelYaw = bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw;
+    const float TravelAlignment = bCasterTravel
+        ? FMath::Clamp((FVector::DotProduct(FRotator(0.f,TravelYaw,0.f).Vector(),Chosen)-.5f)/.4f,0.f,1.f)
+        : 1.f;
+    GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * TravelAlignment * (1.f - ChillStacks * 0.16f);
+    if (TravelAlignment > .01f) AddMovementInput(Chosen, 1.f, true);
+    else ConsumeMovementInputVector();
 }
 
 void ADBEnemy::ChooseRepositionTarget()
@@ -615,7 +625,7 @@ void ADBEnemy::ChooseRepositionTarget()
     FVector Best = KeepInsideArena(GetActorLocation() + FVector::CrossProduct(Radial, FVector::UpVector) * 380.f * AvoidanceSide);
     FCollisionQueryParams Params(SCENE_QUERY_STAT(DBCasterPosition), false, this);
     Params.AddIgnoredActor(Target.Get());
-    for (float Angle : { 38.f, -38.f, 66.f, -66.f, 96.f, -96.f })
+    for (float Angle : { 0.f, 28.f, -28.f, 50.f, -50.f, 75.f, -75.f })
     {
         FVector Candidate = KeepInsideArena(PlayerPosition + Radial.RotateAngleAxis(Angle * AvoidanceSide, FVector::UpVector) * 850.f);
         Candidate.Z = GetActorLocation().Z;
@@ -646,24 +656,26 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     const bool bSight = HasSightTo(Target->GetActorLocation(), Target.Get());
     if (Kind == EDBEnemyKind::Caster)
     {
+        if (Distance < 440.f) bNeedsReposition = true;
         if (bNeedsReposition)
         {
             if (!bRepositioning) ChooseRepositionTarget();
             RepositionTime += DeltaSeconds;
-            if (FVector::DistSquared2D(GetActorLocation(), RepositionTarget) > FMath::Square(85.f) && RepositionTime < 2.4f)
+            if (FVector::DistSquared2D(GetActorLocation(), RepositionTarget) > FMath::Square(85.f) && RepositionTime < 3.2f)
             { MoveToward(RepositionTarget, DeltaSeconds); return; }
             bNeedsReposition = bRepositioning = false;
         }
-        if (Cooldown <= 0.f && Distance >= 380.f && Distance < 1250.f && bSight)
+        if (Distance > 1120.f || !bSight)
+        { MoveToward(Target->GetActorLocation(), DeltaSeconds); return; }
+        // A good firing position is worth holding. Face the threat and let the
+        // feet settle instead of orbiting mechanically through every cooldown.
+        ConsumeMovementInputVector();
+        const FRotator FacePlayer(0.f,ToPlayer.Rotation().Yaw,0.f);
+        SetActorRotation(FMath::RInterpConstantTo(GetActorRotation(),FacePlayer,DeltaSeconds,150.f));
+        const float FacingError = FMath::Abs(FMath::FindDeltaAngleDegrees(
+            bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw,FacePlayer.Yaw));
+        if (Cooldown <= 0.f && Distance >= 440.f && FacingError < 25.f && GetVelocity().SizeSquared2D() < FMath::Square(45.f))
         { BeginTell(EAttack::Bolt, 1.35f); return; }
-        if (Distance < 500.f)
-        {
-            bNeedsReposition = true;
-            ChooseRepositionTarget();
-            MoveToward(RepositionTarget, DeltaSeconds);
-        }
-        else if (Distance > 1000.f || !bSight) MoveToward(Target->GetActorLocation(), DeltaSeconds);
-        else MoveDirection(FVector::CrossProduct(ToPlayer.GetSafeNormal2D(), FVector::UpVector) * AvoidanceSide, DeltaSeconds, 0.55f);
     }
     else if (Kind == EDBEnemyKind::Hunter)
     {
@@ -947,9 +959,11 @@ void ADBEnemy::BeginRecovery(float Duration)
     TellTime = 0.f;
     GetCharacterMovement()->MaxAcceleration = 2200.f;
     GetCharacterMovement()->StopMovementImmediately();
-    Cooldown = 0.35f;
+    // Keep a breathing/assessment beat between volleys now that the caster no
+    // longer spends every recovery walking around an arbitrary ring.
+    Cooldown = Kind == EDBEnemyKind::Caster ? Duration + 1.5f : .35f;
     MeleeSetupTime = 0.f;
-    if (Kind == EDBEnemyKind::Caster) { bNeedsReposition = true; bRepositioning = false; }
+    if (Kind == EDBEnemyKind::Caster) { bNeedsReposition = false; bRepositioning = false; }
 }
 
 void ADBEnemy::Stagger(float Duration)
