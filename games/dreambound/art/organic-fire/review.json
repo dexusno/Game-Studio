@@ -239,6 +239,276 @@
     "observation": "Actual packaged caster uses the new fire visuals; master-submix audio recorded. Source clip fits the one-second release, with mono attenuation and 3ms fades. No naturalness/listening claim from the agent.",
     "wrapper_note": "The outer PowerShell wrapper wrongly treated unset LASTEXITCODE as a failure after the capture script completed. Capture script verified process completion, complete=true and Mix.wav; the existing capture was used without rerunning.",
     "default_launcher": "scripts/Start-Demo.ps1",
-    "integrated_owner_feedback": "pending; earlier Stable-only question superseded by owner-supplied fireball.wav"
+    "integrated_owner_feedback": "Looks much better; constant sidestepping rejected. Latest owner requires deliberate combat to hurt the player while trying to survive."
+  },
+  "caster_combat_package": {
+    "version": "0.5.4-fire3",
+    "source_commit": "c83a9054a892b6418c90cbd550b3f000fbff8ee3",
+    "configuration": "Windows Shipping, private noncommercial playtest",
+    "executable": {
+      "path": "games/dreambound/BuildOutput/OrganicFireCombat/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "sha256": "bd40af817371a6697983499176c7fd3fe40bdbb1e28717d3a0236d5801648908"
+    },
+    "build_seconds": 49.3,
+    "build_log": {
+      "path": ".local/organic-fire-review/package-fire3-combat-delivery.log",
+      "sha256": "c741e7afcd1d76f3481076dc25008e01d172c21cd297f59da0c39df02fab0130"
+    },
+    "capture": {
+      "path": ".local/organic-fire-review/fire3-combat-delivery/Saved/EnemyMotionStudy/Caster-Side/Capture.json",
+      "sha256": "f605a69b2cb355d441831374d11229898cec39ab84a1845f9411ddc4b7b7f555"
+    },
+    "invocation": {
+      "path": ".local/organic-fire-review/fire3-combat-delivery/Invocation.json",
+      "sha256": "cf6d213f77e72c654f5bb5104037c0618346a4e1de71f3baa6f0c0a33cb86861"
+    },
+    "frames": 657,
+    "simulation_seconds": 28.0064640045166,
+    "scope": "Ordinary non-practice caster AI; protected scripted player holds real guard 1-6s, pursues 6-12s, opens 950cm spacing 12-18s, attempts one real piece throw during Approach 17.6-19s with the normal pawn-camera aim update. Caster receives one synthetic 18-damage contact at 20s, followed by time to reengage. Movement is swept; no enemy phase/collision override or enemy invulnerability. Read event fields for achieved coverage. Not ordinary player input or a difficulty/performance benchmark.",
+    "missed_readbacks": 0,
+    "actual_player_actions": {
+      "pressure_guard_seconds": 5.007344722747803,
+      "pressure_throw_seconds": 17.842870712280273,
+      "pressure_thrown_pieces": 1,
+      "pressure_hit_frame": 470,
+      "pressure_hit_health_before": 185,
+      "pressure_hit_health_after": 167
+    },
+    "decision_transitions": [
+      {
+        "frame": "0",
+        "simulation_seconds": "0.000000",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "1100.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "12",
+        "simulation_seconds": "0.500003",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "1100.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "64",
+        "simulation_seconds": "2.723990",
+        "phase": "Recovery",
+        "combat_intent": "Recover",
+        "player_distance_cm": "1100.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "93",
+        "simulation_seconds": "3.957331",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "1100.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "94",
+        "simulation_seconds": "4.007332",
+        "phase": "Approach",
+        "combat_intent": "FlankShield",
+        "player_distance_cm": "1099.6496",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "146",
+        "simulation_seconds": "6.224030",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "799.5137",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "160",
+        "simulation_seconds": "6.817368",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "538.2712",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "213",
+        "simulation_seconds": "9.086305",
+        "phase": "Recovery",
+        "combat_intent": "Recover",
+        "player_distance_cm": "180.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "242",
+        "simulation_seconds": "10.319773",
+        "phase": "Approach",
+        "combat_intent": "CreateSpace",
+        "player_distance_cm": "180.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "302",
+        "simulation_seconds": "12.891959",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "781.4466",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "330",
+        "simulation_seconds": "14.075280",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "950.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "382",
+        "simulation_seconds": "16.292894",
+        "phase": "Recovery",
+        "combat_intent": "Recover",
+        "player_distance_cm": "950.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "411",
+        "simulation_seconds": "17.526209",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "950.0000",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "422",
+        "simulation_seconds": "18.009535",
+        "phase": "Approach",
+        "combat_intent": "LeaveFireLine",
+        "player_distance_cm": "950.0000",
+        "health": "185.000",
+        "incoming_threat": "0.2700"
+      },
+      {
+        "frame": "431",
+        "simulation_seconds": "18.391268",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "972.6004",
+        "health": "185.000",
+        "incoming_threat": "0.0292"
+      },
+      {
+        "frame": "446",
+        "simulation_seconds": "19.031458",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "972.9374",
+        "health": "185.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "470",
+        "simulation_seconds": "20.048109",
+        "phase": "Staggered",
+        "combat_intent": "Recover",
+        "player_distance_cm": "988.9711",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "487",
+        "simulation_seconds": "20.781431",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "1037.2950",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "540",
+        "simulation_seconds": "23.039246",
+        "phase": "Recovery",
+        "combat_intent": "Recover",
+        "player_distance_cm": "1037.2950",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "569",
+        "simulation_seconds": "24.273182",
+        "phase": "Approach",
+        "combat_intent": "HoldShot",
+        "player_distance_cm": "1037.2950",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "604",
+        "simulation_seconds": "25.773159",
+        "phase": "Telegraph",
+        "combat_intent": "CommittedCast",
+        "player_distance_cm": "1037.2950",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      },
+      {
+        "frame": "656",
+        "simulation_seconds": "27.989798",
+        "phase": "Recovery",
+        "combat_intent": "Recover",
+        "player_distance_cm": "1037.2950",
+        "health": "167.000",
+        "incoming_threat": "0.0000"
+      }
+    ],
+    "video": {
+      "path": ".local/organic-fire-review/caster-combat-delivery.mp4",
+      "sha256": "0bff8a2bb7c6b30a0e2a13faefadc271cc12458a6e636462026d635e361bc101"
+    },
+    "assembly_report": {
+      "path": ".local/organic-fire-review/caster-combat-delivery.json",
+      "sha256": "fb7e36947d8b757297924612783c4a7a28c2ed3e7d2d6237384a1d3acde0e94e"
+    },
+    "retained_rejected_findings": [
+      "Initial compile caught a member/parameter name shadow, fixed before any capture.",
+      "Code review found withdrawal overwriting active evasion and natural recovery discarding damage memory; both fixed.",
+      "Initial side study did not update the inactive player aim camera, so its shield missed. Corrected fixture preserves normal production aim.",
+      "Already-spaced damage caused a redundant turn away/back. It now requests a bounded lateral escape.",
+      "First correctly aimed throw was detected too late: only1.8cm of movement before real shield damage. Faster observation and initial physical movement followed; the next run still chose a diagonal closer to the incoming shield. Final choice prioritizes perpendicular clearance."
+    ],
+    "limits": [
+      "Scripted protected player; not a complete ordinary playthrough or difficulty/minimum-hardware benchmark.",
+      "One throw does not establish dodge reliability against all ranges, directions, terrain, volleys or frame rates.",
+      "Low-health spacing and obscured-target reacquisition are implemented but not covered by this exchange.",
+      "No change to the retained creature meshes, fire performance, owner sound, cyborg, weapon or input settings."
+    ],
+    "root_native_frames_inspected": [
+      420,
+      422,
+      424,
+      426,
+      428,
+      430,
+      432,
+      451
+    ],
+    "independent_review": {
+      "reviewer": "organic_enemies",
+      "sampled_frames": "420-435,446,470,487,520",
+      "verdict": "One successful physical evasion: shield visibly passes clear428-432, health185 preserved, continuous steps and settling with no obvious teleport or ground-slide discontinuity. Returns to cast446. Scripted hit470 reduces185 to167 with normal stagger; charging/throwing resume487/520. Purposeful, catchable combat; not universal dodge reliability."
+    }
   }
 }
