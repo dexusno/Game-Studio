@@ -2,6 +2,8 @@
 
 Research complete, 2026-09-11. No replacement game selected or implementation started.
 
+Follow-up question, 2026-09-11: Klaus asks how profit chances compare with phone apps based on rising trends or interesting topics. [Phone-app comparison](phone-app-comparison.md) conditionally favors a narrow utility with demonstrable paying demand over a small game; a topic/novelty app has no such advantage. There is no matched dataset supporting numerical success probabilities. Offline games remain attractive for limited ongoing operations. No app niche or game is selected. The next decision can compare concrete utility problems against the game before any prototype is authorized.
+
 Klaus parks the FPS experiment because its workload does not fit his full-time job and other projects. The governing target is **NOK 20,000 profit per game**, followed by **several games only if actual results prove profitable**. It is not a portfolio-wide or monthly income target. Preserve the parked game and source; old complex-FPS preferences do not constrain this comparison.
 
 The recommendation is to test one **finite active incremental** with a satisfying visible action, very few systems, a small upgrade set and an ending. [Full report](REPORT.md) compares six routes, commercial disclosures, current competition, per-game economics, tools, release timing and the conditional catalogue strategy. Three working candidates are shortlisted, not selected: [Magnet Sweep](../../opportunities/magnet-sweep.json), [Lantern Hideaway](../../opportunities/lantern-hideaway.json) and [Night Inspection](../../opportunities/night-inspection.json). Older candidates remain preserved; these are proposals, not a production slate.

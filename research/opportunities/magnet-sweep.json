@@ -8,15 +8,17 @@
   "context": {
     "entrypoint": "research/runs/2026-09-11-small-game-income/README.md",
     "read_first": [
-      "research/runs/2026-09-11-small-game-income/REPORT.md"
+      "research/runs/2026-09-11-small-game-income/REPORT.md",
+      "research/runs/2026-09-11-small-game-income/phone-app-comparison.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T19:53:12+00:00",
-      "record_sha256": "4e20aa10432c8e11d621be553f3543e23cf16c5142f107c24d693087b14d92d3",
+      "captured_at": "2026-09-11T20:19:30+00:00",
+      "record_sha256": "10537ad11928e755ba45d55518e060ea5405c2187a1a39da9ad34411149ce037",
       "files": {
-        "research/runs/2026-09-11-small-game-income/README.md": "54b00d1714a7b844777af31e8419c89aaf8b4f802083565295ef503a82f70340",
-        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10"
+        "research/runs/2026-09-11-small-game-income/README.md": "84a2b8c0e55190fbc5d02c30ab50d796f97aeb8579abfb14b6d4fb08815ee79c",
+        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10",
+        "research/runs/2026-09-11-small-game-income/phone-app-comparison.md": "fd403cd5f166cfc56c52a02fad93088332c5fbfe68d0bcc66c78edd4ab4cd30f"
       }
     }
   },
