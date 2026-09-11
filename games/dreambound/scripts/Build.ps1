@@ -1,6 +1,6 @@
 param([ValidateSet('Editor','Content','Audio','Package','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$PackageConfiguration='Shipping',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreaturePerformance',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy2',
  [ValidatePattern('^S_[A-Za-z0-9_]+$')][string[]]$AudioCues=@())
 $ErrorActionPreference='Stop'
 $betaGameRoot=Split-Path -Parent $PSScriptRoot

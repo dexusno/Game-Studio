@@ -1,6 +1,6 @@
 param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreaturePerformance',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy2',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
  [switch]$LegacyCreatureRig
 )

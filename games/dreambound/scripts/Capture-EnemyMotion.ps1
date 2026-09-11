@@ -1,6 +1,6 @@
 param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy2',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
  [ValidateSet('Side','LowSide','Front','Player','Detail')][string]$View='Side',
  [ValidateSet('Default','Performance','Anatomy','Legacy')][string]$Rig='Default',

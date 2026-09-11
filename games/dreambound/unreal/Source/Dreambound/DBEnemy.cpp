@@ -464,12 +464,22 @@ void ADBEnemy::Tick(float DeltaSeconds)
     case EDBEnemyPhase::Attack: UpdateAttack(Dt); break;
     case EDBEnemyPhase::Recovery:
     case EDBEnemyPhase::Staggered:
+    {
         PhaseTime -= Dt;
         // A struck body keeps its collision-resolved impulse during the first recovery beat.
         ConsumeMovementInputVector();
-        if (KnockbackTime <= 0.f) GetCharacterMovement()->StopMovementImmediately();
+        const bool bHunterNeedsSpace = Phase == EDBEnemyPhase::Recovery && Kind == EDBEnemyKind::Hunter
+            && Attack == EAttack::Lunge && KnockbackTime <= 0.f
+            && RecoveryDuration - PhaseTime > .18f
+            && FVector::DistSquared2D(GetActorLocation(), Target->GetActorLocation()) < FMath::Square(205.f);
+        // Absorb the landing first, then take real supporting steps out of the
+        // player's camera. CharacterMovement and the foot solver own this
+        // retreat; neither the player nor the rendered mesh is teleported.
+        if (bHunterNeedsSpace) MoveDirection(GetActorLocation() - Target->GetActorLocation(), Dt, .6f);
+        else if (KnockbackTime <= 0.f) GetCharacterMovement()->StopMovementImmediately();
         if (PhaseTime <= 0.f) { Phase = EDBEnemyPhase::Approach; bVulnerable = false; Telegraph.Empty(); }
         break;
+    }
     default: break;
     }
     // UE5.8 MovementComponent registers bTickBeforeOwner=true: translation has
@@ -532,7 +542,8 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
     if (StuckTime > 0.8f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
     GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * (1.f - ChillStacks * 0.16f);
     AddMovementInput(Chosen, 1.f, true);
-    const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || bRepositioning)
+    const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || bRepositioning
+        || (Kind == EDBEnemyKind::Hunter && Phase == EDBEnemyPhase::Recovery))
         && FVector::DistSquared2D(Start, Target->GetActorLocation()) < FMath::Square(1200.f)
         ? Target->GetActorLocation() - Start : Chosen;
     const FRotator Face(0.f, Facing.Rotation().Yaw, 0.f);
@@ -823,6 +834,14 @@ void ADBEnemy::UpdateAttack(float DeltaSeconds)
         }
         if (!bHitAttempted && TryMeleeHit(150.f, 0.15f, AttackDamage)) bHitAttempted = true;
         if (Phase != EDBEnemyPhase::Attack || bDead) return;
+        // Contact completes the forward commitment. Continuing to drive after
+        // the hit forced the tiny collision capsules together and left the
+        // creature's crown inside the player's view throughout recovery.
+        if (bHitAttempted)
+        {
+            ConsumeMovementInputVector();
+            GetCharacterMovement()->StopMovementImmediately();
+        }
         if (AttackElapsed >= 0.43f || (AttackElapsed > 0.15f && GetVelocity().Size2D() < 30.f)) BeginRecovery(1.05f);
     }
     else if (Attack == EAttack::Swing)
