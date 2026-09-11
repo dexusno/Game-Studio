@@ -19,7 +19,11 @@
   "pupil_radius": 0.0045,
   "gaze_offset": -0.004,
   "socket_color": [0.016, 0.012, 0.009],
-  "eye_color": [0.010, 0.014, 0.010],
-  "iris_color": [0.048, 0.061, 0.042],
-  "intent": "Remove the protruding generated eye and painted reflection, seating a reduced drab iris beneath real orbital hood/lid tissue. Preserve the amphibian frill, throat and accepted articulated mouth."
+  "eye_color": [0.080, 0.012, 0.002],
+  "iris_color": [0.28, 0.032, 0.003],
+  "eye_emissive_color": [1.0, 0.085, 0.006],
+  "eye_emissive_strength": 0.20,
+  "iris_emissive_strength": 8.0,
+  "eye_material_revision": "owner-luminous-v1",
+  "intent": "Owner-requested ember-orange luminous irises inside the existing recessed orbital hoods; dark pupils and restrained reflections. Preserve the amphibian frill, throat, mouth, skin mask and geometry."
 }

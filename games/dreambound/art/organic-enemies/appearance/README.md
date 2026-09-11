@@ -1,14 +1,25 @@
 # Recessed creature faces — dread-v1
 
-Both facial candidates are frozen with the `status-mask-v2` color correction for Unreal reimport. The CPU review supports the intended facial change: eyes sit inside the cranium beneath actual socket and lid geometry, with restrained iris exposure. It does not establish their appearance under the game's lighting or owner acceptance.
+Both facial candidates are frozen with the owner-requested `owner-luminous-v1` eye materials and the preserved `status-mask-v2` color correction. Briarhide has green luminous irises; MireSeer has ember-orange luminous irises. The recessed sockets and heavy lids remain intact. Root imported only the existing eye materials and confirmed the colors in actual Editor views: green-eyes-editor-v1 Melee-Detail frames20/40/65 and fire-eyes-editor-v1 Caster-Detail frames15/40/60, under `.local/organic-fire-review`. The caster also reads orange in the side combat view. The eye can be occluded by its brow when facing down or away; no owner acceptance is claimed.
 
 The editable specifications are [Briarhide.json](Briarhide.json) and [MireSeer.json](MireSeer.json). [appearance-contract.json](appearance-contract.json) records exact source/export/map/preview hashes, measured placements, material definitions and preservation results. [manifest-rows.csv](manifest-rows.csv) supplies proposed rows for the integration owner; the main manifest was not edited.
 
 ## What changed
 
-Briarhide's separate projecting amber iris/pupil discs were removed. Surface measurements located the cranial orbit below and behind those old cosmetic anchors. The replacement eye is recessed 0.9 cm from that measured surface and enclosed by a broad upper brow and lower lid. Its small muted iris sits beneath the brow instead of reading as an orange ornament on the forehead.
+Briarhide's separate projecting amber iris/pupil discs were removed. Surface measurements located the cranial orbit below and behind those old cosmetic anchors. The replacement eye is recessed 0.9 cm from that measured surface and enclosed by a broad upper brow and lower lid. The owner found the initial muted iris too hard to see and explicitly requested a green glow. Only the eye materials changed for that correction.
 
-MireSeer's original eye bulbs included large white highlights painted into the skin atlas. Those local surfaces were removed, while the atlas itself remained byte-identical. The replacement eyes sit 2.1 cm behind the measured original surface, under fitted fleshy orbital hoods. The opening exposes a small drab grey-green iris. Eye highlights now come from the material and illumination rather than a painted white stripe.
+MireSeer's original eye bulbs included large white highlights painted into the skin atlas. Those local surfaces were removed, while the atlas itself remained byte-identical. The replacement eyes sit 2.1 cm behind the measured original surface, under fitted fleshy orbital hoods. The owner explicitly requested fiery eyes, so the previous drab iris now emits ember orange. Pupils remain dark and specular response is reduced; no painted white reflection was added.
+
+## Current luminous eye materials
+
+| Species | Linear emission hue | Iris strength | Surrounding eye strength |
+| --- | --- | ---: | ---: |
+| Briarhide | `(0.035, 1.0, 0.10)` | 6.0 | 0.15 |
+| MireSeer | `(1.0, 0.085, 0.006)` | 8.0 | 0.20 |
+
+Eye and iris roughness is 0.38, specular 0.10. The non-emissive pupil has roughness 0.44, specular 0.08. Only slots `M_OE_DreadEye`, `M_OE_DreadIris` and `M_OE_DreadPupil` changed. Dark sockets, skin, body, mouth, geometry, rig and all repaired vertex colors are unchanged. The first exported FBX color stream was checked again to preserve the localized body status mask.
+
+New native CPU material previews: [Briarhide green eye](../../../../../.local/ai3d/outputs/organic-enemies/briarhide/finished-dread/luminous-oblique.png) and [MireSeer ember eye](../../../../../.local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/luminous-oblique.png). Both show a small colored iris beneath the retained hood with a dark pupil. Older pose and perspective images below document the unchanged geometry and the previous non-emissive treatment; they do not depict the current glow. Unreal exposure and bloom still need the actual integrated view.
 
 The new surrounding skin receives sampled original pigment through the linear `DreadFaceColor` vertex-color layer, only on DreadSkin corners. Original body corners retain their original `OrganicTell` RGBA status mask, including affine interpolation on newly clipped body edges. This avoids both disconnected-atlas UV streaks and contamination of the body's status-emission mask. The local cut clips intersecting source triangles at the socket boundary; it does not leave large original polygons crossing the opening. Original body and accepted mouth materials remain unchanged.
 
@@ -40,8 +51,8 @@ Earlier Briar candidates were rejected for UV streaks, source triangles crossing
 
 | Creature | FBX SHA-256 | Triangles | Bones | Retained original vertices |
 | --- | --- | ---: | ---: | ---: |
-| Briarhide | `6257183d0b07c7bfbc190bbcd09121f7faa9e16b148ab4f12022c286fcafc8e2` | 202,036 | 38 | 243,249 |
-| MireSeer | `cff792dc1cf21a5d909bde0375de605dc07abb302d718594d5ed20260f6b2456` | 183,783 | 43 | 220,414 |
+| Briarhide | `cfe9b44bf884af6f98c66dd0bb7dd5b86e3d30427cced5cc5422eec372f61881` | 202,036 | 38 | 243,249 |
+| MireSeer | `8494a35668b597e08c028665b9c099222b4bcdd3019b35ab9d6a2089a6b811a0` | 183,783 | 43 | 220,414 |
 
 Files are `.local/ai3d/outputs/organic-enemies/{briarhide,mire-seer}/finished-dread/SK_OE_{Briarhide,MireSeer}.{fbx,blend}` from the studio root. Each folder also contains `prep-report.json`, the original two 4K maps, `appearance-spec.json`, `preparation-source.py` and the matched previews. Prior `finished-anatomy` and `finished-performance` sources are intact. The color-defective facial exports and producing scripts are archived in Briarhide `iterations/20260911T133727Z` and MireSeer `iterations/20260911T133818Z`.
 
@@ -51,7 +62,9 @@ All accepted bone names, parents, rest matrices and anatomy channel definitions 
 
 Use `output_folder=finished-dread`, `appearance_revision=dread-v1` and the fresh `SK_OE_Briarhide_Dread` / `SK_OE_MireSeer_Dread` assets. Scale, axes and runtime Jaw/Grip/Crest interfaces are unchanged. Both exports have nine material slots: original body; Oral, Tooth and Tongue; DreadSkin, DreadSocket, DreadEye, DreadIris and DreadPupil. The old `eye_placements` list is empty and old EyeIris/EyePupil slots are absent. New measured surfaces are in `appearance_eye_placements`.
 
-Import the FBX's first linear corner-color set with replacement enabled. `M_OE_DreadSkin` requires `VertexColor RGB` as its base color; its default white is not the intended visible color. The body continues reading the same stream's R channel as the original status mask, not skin color. Skin roughness is 0.68 and specular 0.25. The other four new materials use the exact per-species definitions in the contract/prep, with eye roughness 0.24–0.26 and specular 0.25. All new materials are opaque and non-emissive. Namespace material instances by species, preserve body atlas wiring and verify persisted slot bindings in a fresh engine process. Parent owns imports and runtime integration.
+For the current eye-only integration, run `import_organic_enemies.py` in the full Editor with `-OrganicEnemyEyesOnly`. The importer now connects optional `emissive_color` multiplied by `emissive_strength` to Emissive Color and validates the existing mesh's material bindings before updating the three eye definitions per species. Geometry and bindings are identical, so no skeletal mesh reimport is needed. Matching new FBXs are supplied for later clean imports. Require `Saved/OrganicEnemies/import.json` to report complete with `eye_material_only: true`.
+
+When performing a full import, retain the first linear corner-color set with replacement enabled. `M_OE_DreadSkin` requires `VertexColor RGB`; the body continues reading the same stream's R channel as its original status mask. Skin roughness stays 0.68 and specular 0.25. All face materials remain opaque; only Eye and Iris emit. Namespace materials by species, preserve body atlas wiring and verify persisted slot bindings in a fresh engine process.
 
 The useful next check is the same dormant Melee close view to confirm normal body shading, then the ordinary combat distance including an open jaw and Mire's charged frill pose. Inspect eye shading, socket attachment and retained claw/foot contacts during actual motion. No additional body pose or combat-suite changes are part of this facial pass.
 
@@ -67,6 +80,8 @@ Actual preparation ran sequentially with installed Blender 5.2.1 LTS, four CPU t
 The actual background launches used `Start-Process -WindowStyle Hidden` with redirected output. Original preparation logs are `briarhide/face-preparation-04.log` and `mire-seer/face-preparation-01.log`, with matching `.err` files. The script reads the private output root from `config.local.json` and imports the existing anatomy/texture helpers; their handoff hashes are recorded in the contract. Re-running archives the current candidate first and exports a new candidate; compare its resulting hashes and views before substituting it for the frozen files.
 
 The color-only repair used the same hidden CPU launch for each asset with `--refresh-color-stream` replacing `--views ...`. Both exited 0; logs are each asset's `finished-dread/color-fix-01.log` and `.err`. That mode derives corrected color correspondence from the authoritative source, checks it against the frozen candidate, and transfers only color attributes onto the existing mesh before export. It verifies the actual first FBX color layer and retains the prior renders with an explicit reuse note. The normal full preparation path also contains the corrected status-mask handling.
+
+The current eye-material update used `--refresh-eye-materials` in the same sequential hidden CPU commands. Both exited 0; logs are each asset's `finished-dread/luminous-eyes-01.log` and `.err`. That mode edits the three eye materials on the frozen Blender scene, exports the same geometry/color streams, and renders one oblique material preview. Exact previous export hashes and archive locations are recorded in `eye_material_update` inside the prep and portable contract. The appearance specifications record the owner-requested hues and strengths, and the normal preparation path produces the same material definitions.
 
 There are no new gaze controls or animated eyelids. The eyes are fixed to the accepted head rig and the outer skin blends into sampled surrounding weights. Original dense, sometimes faceted body surfaces and mouth geometry remain. This pass adds local eye/lid topology rather than optimizing whole-creature LODs. The small visible eye can occupy few pixels at combat distance, and Unreal's illumination may alter its wet highlight. Those limits need the actual integrated view, not another static-pose claim of fear or animation quality.
 

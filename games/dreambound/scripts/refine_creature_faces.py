@@ -38,11 +38,16 @@ def material_defs(spec):
         {"name": "M_OE_DreadSocket", "base_color": spec["socket_color"] + [1],
          "roughness": .52, "specular": .22, "metallic": 0, "two_sided": False},
         {"name": "M_OE_DreadEye", "base_color": spec["eye_color"] + [1],
-         "roughness": .26, "specular": .25, "metallic": 0, "two_sided": False},
+         "roughness": .38, "specular": .10, "metallic": 0, "two_sided": False,
+         "emissive_color": spec.get("eye_emissive_color", [0, 0, 0]),
+         "emissive_strength": spec.get("eye_emissive_strength", 0)},
         {"name": "M_OE_DreadIris", "base_color": spec["iris_color"] + [1],
-         "roughness": .26, "specular": .25, "metallic": 0, "two_sided": False},
+         "roughness": .38, "specular": .10, "metallic": 0, "two_sided": False,
+         "emissive_color": spec.get("eye_emissive_color", [0, 0, 0]),
+         "emissive_strength": spec.get("iris_emissive_strength", 0)},
         {"name": "M_OE_DreadPupil", "base_color": [.0015, .0018, .0012, 1],
-         "roughness": .24, "specular": .25, "metallic": 0, "two_sided": False},
+         "roughness": .44, "specular": .08, "metallic": 0, "two_sided": False,
+         "emissive_color": [0, 0, 0], "emissive_strength": 0},
     ]
 
 
@@ -152,7 +157,9 @@ class FaceMesh:
         mat.use_nodes = True
         p = mat.node_tree.nodes.get("Principled BSDF")
         for name, value in [("Base Color", row["base_color"]), ("Roughness", row["roughness"]),
-                            ("Specular IOR Level", row["specular"]), ("Metallic", 0)]:
+                            ("Specular IOR Level", row["specular"]), ("Metallic", 0),
+                            ("Emission Color", row.get("emissive_color", [0, 0, 0]) + [1]),
+                            ("Emission Strength", row.get("emissive_strength", 0))]:
             p.inputs[name].default_value = value
         mat.diffuse_color = row["base_color"]
         if row.get("vertex_color"):
@@ -758,6 +765,71 @@ def refresh_color_stream(obj, arm, asset, source, output, spec, spec_path):
           "blend_sha256": report["blend_sha256"], "correction": report["color_stream_correction"]}), flush=True)
 
 
+def refresh_eye_materials(asset, output, spec, spec_path):
+    """Apply owner-requested iris glow to the frozen model without remeshing."""
+    report_path = output / "prep-report.json"
+    report = json.loads(report_path.read_text())
+    fbx, blend = output / report["fbx"], output / ("SK_OE_" + asset + ".blend")
+    if sha(fbx) != report["fbx_sha256"] or sha(blend) != report["blend_sha256"]:
+        raise RuntimeError("Eye update requires the recorded frozen candidate")
+    bpy.ops.wm.open_mainfile(filepath=str(blend))
+    obj = bpy.data.objects["SK_OE_" + asset]
+    arm = obj.find_armature()
+    before = non_color_fingerprint(obj, arm)
+    colors = [color_values(a) for a in obj.data.color_attributes]
+    color_digest = hashlib.sha256(b"".join(a.tobytes() for a in colors)).hexdigest()
+    archived = archive_candidate(output)
+    eye_names = {"M_OE_DreadEye", "M_OE_DreadIris", "M_OE_DreadPupil"}
+    definitions = {row["name"]: row for row in material_defs(spec) if row["name"] in eye_names}
+    for name, row in definitions.items():
+        mat = obj.data.materials[name]
+        shader = next(n for n in mat.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        for key, value in [("Base Color", row["base_color"]), ("Roughness", row["roughness"]),
+                           ("Specular IOR Level", row["specular"]),
+                           ("Emission Color", row["emissive_color"] + [1]),
+                           ("Emission Strength", row["emissive_strength"])]:
+            shader.inputs[key].default_value = value
+        mat.diffuse_color = row["base_color"]
+    if non_color_fingerprint(obj, arm) != before:
+        raise RuntimeError("Eye material update changed frozen geometry or skin")
+    if any(not np.array_equal(old, color_values(a)) for old, a in zip(colors, obj.data.color_attributes)):
+        raise RuntimeError("Eye material update changed the repaired status/color streams")
+    bpy.ops.object.select_all(action="DESELECT")
+    obj.select_set(True)
+    arm.select_set(True)
+    bpy.context.view_layer.objects.active = arm
+    bpy.context.preferences.filepaths.save_version = 0
+    bpy.ops.export_scene.fbx(filepath=str(fbx), use_selection=True, object_types={"MESH", "ARMATURE"},
+        axis_forward="-Y", axis_up="Z", apply_unit_scale=True, apply_scale_options="FBX_SCALE_UNITS",
+        bake_anim=False, use_mesh_modifiers=True, mesh_smooth_type="FACE", add_leaf_bones=False,
+        use_armature_deform_only=True, path_mode="STRIP", colors_type="LINEAR")
+    body_loops = [i for p in obj.data.polygons if p.material_index == 0 for i in p.loop_indices]
+    exported = exported_first_colors(fbx, colors[0], body_loops)
+    bpy.ops.wm.save_as_mainfile(filepath=str(blend))
+    report["eye_material_update"] = {
+        "revision": spec["eye_material_revision"],
+        "request": "Owner explicitly requested fiery eyes for MireSeer and glowing green eyes for Briarhide",
+        "previous_fbx_sha256": report["fbx_sha256"], "previous_blend_sha256": report["blend_sha256"],
+        "archived_candidate": str(archived), "changed_slots": sorted(eye_names),
+        "geometry_uvs_normals_weights_rests_exact": True,
+        "non_color_mesh_rig_fingerprint": before, "all_color_streams_sha256": color_digest,
+        "fbx_first_color_validation": exported,
+        "engine_procedure": "Update the three existing per-species eye materials from extra_materials; multiply linear emissive_color by emissive_strength into Emissive Color. Existing mesh/skeleton can remain loaded because geometry/slots/color streams are unchanged.",
+        "acceptance": "Source material candidate; actual Unreal visibility and owner acceptance pending",
+    }
+    report["extra_materials"] = [definitions.get(row["name"], row) for row in report["extra_materials"]]
+    report["appearance_preservation"]["changes"]["materials"] = material_defs(spec)
+    report.update({"fbx_sha256": sha(fbx), "blend_sha256": sha(blend),
+                   "preparation_script_sha256": sha(__file__), "appearance_spec_sha256": sha(spec_path)})
+    report["eye_material_previews"] = render_faces(obj, arm, asset, output,
+        report["anatomy_rig"]["channel_bones"], "luminous", ["oblique"])
+    report_path.write_text(json.dumps(report, indent=2) + "\n")
+    shutil.copy2(__file__, output / "preparation-source.py")
+    shutil.copy2(spec_path, output / "appearance-spec.json")
+    print("DREAD_EYES_UPDATED " + json.dumps({"asset": asset, "fbx_sha256": report["fbx_sha256"],
+          "blend_sha256": report["blend_sha256"], "materials": list(definitions.values())}), flush=True)
+
+
 def open_source(asset, folder):
     path = folder / ("SK_OE_" + asset + ".blend")
     bpy.ops.wm.open_mainfile(filepath=str(path))
@@ -813,6 +885,7 @@ def main():
     parser.add_argument("--asset", choices=("Briarhide", "MireSeer"), required=True)
     parser.add_argument("--inspect-only", action="store_true")
     parser.add_argument("--refresh-color-stream", action="store_true")
+    parser.add_argument("--refresh-eye-materials", action="store_true")
     parser.add_argument("--views", default="front,oblique,side,jaw-open,game")
     args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
     config = json.loads((STUDIO / "config.local.json").read_text(encoding="utf-8"))
@@ -826,7 +899,9 @@ def main():
     else:
         spec_path = ROOT / "art/organic-enemies/appearance" / (args.asset + ".json")
         spec = json.loads(spec_path.read_text())
-        if args.refresh_color_stream:
+        if args.refresh_eye_materials:
+            refresh_eye_materials(args.asset, output, spec, spec_path)
+        elif args.refresh_color_stream:
             refresh_color_stream(obj, arm, args.asset, private / "finished-anatomy", output, spec, spec_path)
         else:
             prepare_candidate(obj, arm, args.asset, private / "finished-anatomy", output, spec, spec_path, args.views.split(","))

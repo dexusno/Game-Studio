@@ -1,10 +1,10 @@
 {
   "revision": "dread-v1",
   "review_date": "2026-09-11",
-  "state": "Frozen color-corrected facial candidates; the first Unreal integration exposed an incorrect white status mask, now repaired in source/export; corrected Unreal review pending",
+  "state": "Owner-requested green Briarhide and ember-orange MireSeer eye materials integrated and visually verified in actual Editor views; recessed geometry and repaired status-mask stream unchanged; owner acceptance pending",
   "source_script": {
     "path": "games/dreambound/scripts/refine_creature_faces.py",
-    "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+    "sha256": "a9fb8b7bdeb8d83b94a9d6f349b64c2b685a6f23e5c69819d8577ed06dffe368"
   },
   "read_only_helpers_at_handoff": [
     {
@@ -51,14 +51,15 @@
       "fbx_colors_type": "LINEAR",
       "required": "Import/replace the first FBX color set DreadFaceColor. Body corners retain original OrganicTell RGBA status mask; clipped body boundaries interpolate that mask. Only M_OE_DreadSkin corners carry sampled skin pigment. Original body continues using R as its status-emission mask."
     },
-    "extra_materials": "Use exact per-species extra_materials below. All five new face materials are opaque, non-emissive and one-sided. Namespace per creature to avoid shared material edits.",
+    "extra_materials": "Use exact per-species extra_materials below. Only DreadEye and DreadIris emit; DreadPupil stays dark. Multiply linear emissive_color by emissive_strength into Emissive Color. Existing sockets/skin/body/mouth definitions and nine slot bindings remain unchanged.",
     "retired_materials": [
       "M_OE_EyeIris",
       "M_OE_EyePupil"
     ],
     "eye_placements": [],
     "eye_metadata": "Use appearance_eye_placements for the new measured surfaces. The legacy eye_placements array is deliberately empty.",
-    "runtime_channels": "No additional bones or channels. Jaw, Grip and Crest retain their accepted ranges and reference axes."
+    "runtime_channels": "No additional bones or channels. Jaw, Grip and Crest retain their accepted ranges and reference axes.",
+    "material_only_update": "For each species, call the existing anatomy_material(asset, definition) only for M_OE_DreadEye, M_OE_DreadIris and M_OE_DreadPupil after adding optional emission-field support. Recompile/save those existing per-species materials. No skeletal mesh import is necessary to display the update; new matching FBX/Blender exports are supplied for future clean imports."
   },
   "validation": {
     "cpu_preparation_exit_code": {
@@ -67,8 +68,9 @@
     },
     "focused_hash_and_contract_check": "Passed: final FBX/Blender/source/spec/map/preview hashes; immutable baseline FBX/Blender hashes; exact copied bone and anatomy channel contracts; four influences maximum; empty retired eye placements; Python AST parse",
     "retained_skin_comparison": "For neutral, full jaw, full grip and full crest poses, all retained source vertices match the baseline with observed maximum difference 0.0 cm. New clipped socket-boundary/lid/eye vertices are excluded from this exact comparison.",
-    "visual_scope": "Existing native CPU previews describe the unchanged face geometry/pigment. They predate the status-mask correction and did not expose the runtime body-mask dependency. Root actual Unreal Melee Detail frame 60 exposed that integration defect. No new pose render or corrected Unreal acceptance is claimed by this source pass.",
-    "color_stream_correction": "Both CPU corrections exited 0. Parsed actual FBX LayerElementColor 0 and verified every indexed RGBA against authored corners. Original body R ranges preserved; zero body corners at R=1. Reviewed geometry, normals, UVs, weights, rests and visible DreadSkin pigment remain exact."
+    "visual_scope": "Original CPU pose/whole-creature previews predate the luminous material change and establish unchanged geometry only. New luminous-oblique.png is the sole new material preview for each species. No new full pose suite or Unreal process was run for this eye-only update.",
+    "color_stream_correction": "Both CPU corrections exited 0. Parsed actual FBX LayerElementColor 0 and verified every indexed RGBA against authored corners. Original body R ranges preserved; zero body corners at R=1. Reviewed geometry, normals, UVs, weights, rests and visible DreadSkin pigment remain exact.",
+    "eye_material_update": "Both CPU material updates exited 0. Before/after geometry/UV/normal/weight/rest fingerprints match and every color-stream value remains exact. Parsed first FBX color set still matches authored corner RGBA. Reviewed one new native oblique CPU preview per species: clearly visible green/ember-orange iris below the unchanged hood with dark pupil."
   },
   "limitations": [
     "Static eyelids and fixed gaze attached to the accepted head rig; no blinking, eye-tracking or new facial-expression channels.",
@@ -85,23 +87,23 @@
       "files": [
         {
           "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/SK_OE_Briarhide.fbx",
-          "sha256": "6257183d0b07c7bfbc190bbcd09121f7faa9e16b148ab4f12022c286fcafc8e2"
+          "sha256": "cfe9b44bf884af6f98c66dd0bb7dd5b86e3d30427cced5cc5422eec372f61881"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/SK_OE_Briarhide.blend",
-          "sha256": "f41df84e0feadc843f7ce1e618669624f85c06bee05627c1609f6f4b24d71261"
+          "sha256": "68b748af040390a8b92e21d7e7501a84740a7dbf030bcee5cafcf78127a54694"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/prep-report.json",
-          "sha256": "73c6bd74d41737a4fb2664f6a7e1b9ebdd54cdcbeefc1991b84885e393a5fe52"
+          "sha256": "4880451a509bfd3c8252db2733bcc7cf1be5b28571454adca08015f86c2a4137"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/appearance-spec.json",
-          "sha256": "152ac5e0f0d69ff5d53b1b4040ff5d2f1fe706f7c71f696ac4be9c7acc9363e4"
+          "sha256": "01554883ffd2985b13650950539985012ce2375f06ddf10672048e110a776a6f"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/preparation-source.py",
-          "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+          "sha256": "a9fb8b7bdeb8d83b94a9d6f349b64c2b685a6f23e5c69819d8577ed06dffe368"
         }
       ],
       "baseline_files": [
@@ -116,7 +118,7 @@
       ],
       "spec": {
         "path": "games/dreambound/art/organic-enemies/appearance/Briarhide.json",
-        "sha256": "152ac5e0f0d69ff5d53b1b4040ff5d2f1fe706f7c71f696ac4be9c7acc9363e4",
+        "sha256": "01554883ffd2985b13650950539985012ce2375f06ddf10672048e110a776a6f",
         "parameters": {
           "asset": "Briarhide",
           "revision": "dread-v1",
@@ -151,16 +153,24 @@
             0.006
           ],
           "eye_color": [
-            0.012,
-            0.011,
-            0.007
+            0.006,
+            0.035,
+            0.012
           ],
           "iris_color": [
-            0.052,
-            0.038,
-            0.016
+            0.025,
+            0.18,
+            0.045
           ],
-          "intent": "Replace projecting amber discs with a smaller, recessed wet eye beneath an anatomically broad brow and lower lid. Original body and mouth appearance retained."
+          "eye_emissive_color": [
+            0.035,
+            1.0,
+            0.1
+          ],
+          "eye_emissive_strength": 0.15,
+          "iris_emissive_strength": 6.0,
+          "eye_material_revision": "owner-luminous-v1",
+          "intent": "Owner-requested green luminous irises inside the existing recessed sockets and heavy lids; dark pupils and restrained reflections. Original body, mouth, skin mask and geometry retained."
         }
       },
       "bones": 38,
@@ -245,28 +255,40 @@
         {
           "name": "M_OE_DreadEye",
           "base_color": [
+            0.006,
+            0.035,
             0.012,
-            0.011,
-            0.007,
             1
           ],
-          "roughness": 0.26,
-          "specular": 0.25,
+          "roughness": 0.38,
+          "specular": 0.1,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            0.035,
+            1.0,
+            0.1
+          ],
+          "emissive_strength": 0.15
         },
         {
           "name": "M_OE_DreadIris",
           "base_color": [
-            0.052,
-            0.038,
-            0.016,
+            0.025,
+            0.18,
+            0.045,
             1
           ],
-          "roughness": 0.26,
-          "specular": 0.25,
+          "roughness": 0.38,
+          "specular": 0.1,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            0.035,
+            1.0,
+            0.1
+          ],
+          "emissive_strength": 6.0
         },
         {
           "name": "M_OE_DreadPupil",
@@ -276,10 +298,16 @@
             0.0012,
             1
           ],
-          "roughness": 0.24,
-          "specular": 0.25,
+          "roughness": 0.44,
+          "specular": 0.08,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "emissive_strength": 0
         }
       ],
       "textures": [
@@ -465,28 +493,40 @@
             {
               "name": "M_OE_DreadEye",
               "base_color": [
+                0.006,
+                0.035,
                 0.012,
-                0.011,
-                0.007,
                 1
               ],
-              "roughness": 0.26,
-              "specular": 0.25,
+              "roughness": 0.38,
+              "specular": 0.1,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                0.035,
+                1.0,
+                0.1
+              ],
+              "emissive_strength": 0.15
             },
             {
               "name": "M_OE_DreadIris",
               "base_color": [
-                0.052,
-                0.038,
-                0.016,
+                0.025,
+                0.18,
+                0.045,
                 1
               ],
-              "roughness": 0.26,
-              "specular": 0.25,
+              "roughness": 0.38,
+              "specular": 0.1,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                0.035,
+                1.0,
+                0.1
+              ],
+              "emissive_strength": 6.0
             },
             {
               "name": "M_OE_DreadPupil",
@@ -496,10 +536,16 @@
                 0.0012,
                 1
               ],
-              "roughness": 0.24,
-              "specular": 0.25,
+              "roughness": 0.44,
+              "specular": 0.08,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                0,
+                0,
+                0
+              ],
+              "emissive_strength": 0
             }
           ],
           "new_face_vertices": 10104
@@ -682,7 +728,7 @@
         "side"
       ],
       "cpu_log": ".local/ai3d/outputs/organic-enemies/briarhide/face-preparation-04.log",
-      "cpu_review_decision": "Existing face-geometry/pigment clearance retained; body status-color integration defect corrected and awaiting Unreal reimport/review",
+      "cpu_review_decision": "Luminous iris color visible beneath unchanged lids in the new native oblique CPU preview; ready for root material-only Unreal update and actual camera review",
       "color_stream_correction": {
         "revision": "status-mask-v2",
         "previous_fbx_sha256": "e55642c2297454b3fc4369294a663f2493dfbe5160f92c42fe452363974c9e02",
@@ -930,7 +976,68 @@
           }
         }
       },
-      "color_correction_log": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/color-fix-01.log"
+      "color_correction_log": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/color-fix-01.log",
+      "eye_material_update": {
+        "revision": "owner-luminous-v1",
+        "request": "Owner explicitly requested fiery eyes for MireSeer and glowing green eyes for Briarhide",
+        "previous_fbx_sha256": "6257183d0b07c7bfbc190bbcd09121f7faa9e16b148ab4f12022c286fcafc8e2",
+        "previous_blend_sha256": "f41df84e0feadc843f7ce1e618669624f85c06bee05627c1609f6f4b24d71261",
+        "archived_candidate": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/iterations/20260911T162024Z",
+        "changed_slots": [
+          "M_OE_DreadEye",
+          "M_OE_DreadIris",
+          "M_OE_DreadPupil"
+        ],
+        "geometry_uvs_normals_weights_rests_exact": true,
+        "non_color_mesh_rig_fingerprint": "5405daf12af6ced8c61e490ce89660a19dda4ad076f48ae77e95455ca338031c",
+        "all_color_streams_sha256": "349c51015d778fc268f1709e2e0fd491979b35d7f69146fd9e1bd038247d338b",
+        "fbx_first_color_validation": {
+          "fbx_version": 7400,
+          "first_layer": "DreadFaceColor",
+          "mapping": "ByPolygonVertex",
+          "reference": "IndexToDirect",
+          "all_corner_rgba_exact": true,
+          "body_corners": 566788,
+          "body_min_rgba": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_max_rgba": [
+            0.5308301448822021,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_r_equal_one": 0,
+          "body_r_nonzero_corners": 1153
+        },
+        "engine_procedure": "Update the three existing per-species eye materials from extra_materials; multiply linear emissive_color by emissive_strength into Emissive Color. Existing mesh/skeleton can remain loaded because geometry/slots/color streams are unchanged.",
+        "acceptance": "Source material candidate; actual Unreal visibility and owner acceptance pending"
+      },
+      "eye_material_previews": [
+        {
+          "view": "oblique",
+          "file": "luminous-oblique.png",
+          "sha256": "295f9daeadb39bba342f766dd3f801ddc028f561d74a9829068cac9f2a0df63f",
+          "projection": "ORTHO",
+          "target": [
+            0,
+            -0.28,
+            1.69
+          ],
+          "offset": [
+            2,
+            -3,
+            0.05
+          ],
+          "jaw": 0,
+          "grip": 0,
+          "crest": 0
+        }
+      ],
+      "eye_material_log": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/luminous-eyes-01.log"
     },
     {
       "asset": "MireSeer",
@@ -939,23 +1046,23 @@
       "files": [
         {
           "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/SK_OE_MireSeer.fbx",
-          "sha256": "cff792dc1cf21a5d909bde0375de605dc07abb302d718594d5ed20260f6b2456"
+          "sha256": "8494a35668b597e08c028665b9c099222b4bcdd3019b35ab9d6a2089a6b811a0"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/SK_OE_MireSeer.blend",
-          "sha256": "c9222b8fd039f82dffb55a66862e73c07575ff1f79d982057495de0a7dfccaac"
+          "sha256": "1671d369b1e1d89375a69c037254e900bd454358a1d7a7f2ab66e1e81ed03192"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/prep-report.json",
-          "sha256": "9171845d84b5e7e64c6a83255b6b8872e40b048dae9a0c8436d3eca72b323cd4"
+          "sha256": "368635294693f7137a9d21bf662cb69849998e8a6bb4506d6ff52b3c89a2cdf1"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/appearance-spec.json",
-          "sha256": "8c1afcbe3dab9ffc3da429ddc899f541a7eed73aa4368ead58413f9fb4d63dd7"
+          "sha256": "ce0ca82fcf09d4aee065360a9996faf875022948fe64213cbd5a681478c94fd4"
         },
         {
           "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/preparation-source.py",
-          "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+          "sha256": "a9fb8b7bdeb8d83b94a9d6f349b64c2b685a6f23e5c69819d8577ed06dffe368"
         }
       ],
       "baseline_files": [
@@ -970,7 +1077,7 @@
       ],
       "spec": {
         "path": "games/dreambound/art/organic-enemies/appearance/MireSeer.json",
-        "sha256": "8c1afcbe3dab9ffc3da429ddc899f541a7eed73aa4368ead58413f9fb4d63dd7",
+        "sha256": "ce0ca82fcf09d4aee065360a9996faf875022948fe64213cbd5a681478c94fd4",
         "parameters": {
           "asset": "MireSeer",
           "revision": "dread-v1",
@@ -1005,16 +1112,24 @@
             0.009
           ],
           "eye_color": [
-            0.01,
-            0.014,
-            0.01
+            0.08,
+            0.012,
+            0.002
           ],
           "iris_color": [
-            0.048,
-            0.061,
-            0.042
+            0.28,
+            0.032,
+            0.003
           ],
-          "intent": "Remove the protruding generated eye and painted reflection, seating a reduced drab iris beneath real orbital hood/lid tissue. Preserve the amphibian frill, throat and accepted articulated mouth."
+          "eye_emissive_color": [
+            1.0,
+            0.085,
+            0.006
+          ],
+          "eye_emissive_strength": 0.2,
+          "iris_emissive_strength": 8.0,
+          "eye_material_revision": "owner-luminous-v1",
+          "intent": "Owner-requested ember-orange luminous irises inside the existing recessed orbital hoods; dark pupils and restrained reflections. Preserve the amphibian frill, throat, mouth, skin mask and geometry."
         }
       },
       "bones": 43,
@@ -1099,28 +1214,40 @@
         {
           "name": "M_OE_DreadEye",
           "base_color": [
-            0.01,
-            0.014,
-            0.01,
+            0.08,
+            0.012,
+            0.002,
             1
           ],
-          "roughness": 0.26,
-          "specular": 0.25,
+          "roughness": 0.38,
+          "specular": 0.1,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            1.0,
+            0.085,
+            0.006
+          ],
+          "emissive_strength": 0.2
         },
         {
           "name": "M_OE_DreadIris",
           "base_color": [
-            0.048,
-            0.061,
-            0.042,
+            0.28,
+            0.032,
+            0.003,
             1
           ],
-          "roughness": 0.26,
-          "specular": 0.25,
+          "roughness": 0.38,
+          "specular": 0.1,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            1.0,
+            0.085,
+            0.006
+          ],
+          "emissive_strength": 8.0
         },
         {
           "name": "M_OE_DreadPupil",
@@ -1130,10 +1257,16 @@
             0.0012,
             1
           ],
-          "roughness": 0.24,
-          "specular": 0.25,
+          "roughness": 0.44,
+          "specular": 0.08,
           "metallic": 0,
-          "two_sided": false
+          "two_sided": false,
+          "emissive_color": [
+            0,
+            0,
+            0
+          ],
+          "emissive_strength": 0
         }
       ],
       "textures": [
@@ -1319,28 +1452,40 @@
             {
               "name": "M_OE_DreadEye",
               "base_color": [
-                0.01,
-                0.014,
-                0.01,
+                0.08,
+                0.012,
+                0.002,
                 1
               ],
-              "roughness": 0.26,
-              "specular": 0.25,
+              "roughness": 0.38,
+              "specular": 0.1,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                1.0,
+                0.085,
+                0.006
+              ],
+              "emissive_strength": 0.2
             },
             {
               "name": "M_OE_DreadIris",
               "base_color": [
-                0.048,
-                0.061,
-                0.042,
+                0.28,
+                0.032,
+                0.003,
                 1
               ],
-              "roughness": 0.26,
-              "specular": 0.25,
+              "roughness": 0.38,
+              "specular": 0.1,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                1.0,
+                0.085,
+                0.006
+              ],
+              "emissive_strength": 8.0
             },
             {
               "name": "M_OE_DreadPupil",
@@ -1350,10 +1495,16 @@
                 0.0012,
                 1
               ],
-              "roughness": 0.24,
-              "specular": 0.25,
+              "roughness": 0.44,
+              "specular": 0.08,
               "metallic": 0,
-              "two_sided": false
+              "two_sided": false,
+              "emissive_color": [
+                0,
+                0,
+                0
+              ],
+              "emissive_strength": 0
             }
           ],
           "new_face_vertices": 11425
@@ -1614,7 +1765,7 @@
         "side"
       ],
       "cpu_log": ".local/ai3d/outputs/organic-enemies/mire-seer/face-preparation-01.log",
-      "cpu_review_decision": "Existing face-geometry/pigment clearance retained; body status-color integration defect corrected and awaiting Unreal reimport/review",
+      "cpu_review_decision": "Luminous iris color visible beneath unchanged lids in the new native oblique CPU preview; ready for root material-only Unreal update and actual camera review",
       "color_stream_correction": {
         "revision": "status-mask-v2",
         "previous_fbx_sha256": "c6f89168837e3844c98aff156d5c7bec3d9ec01e15ab41f2d3f9cafa020e04c1",
@@ -1862,7 +2013,68 @@
           }
         }
       },
-      "color_correction_log": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/color-fix-01.log"
+      "color_correction_log": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/color-fix-01.log",
+      "eye_material_update": {
+        "revision": "owner-luminous-v1",
+        "request": "Owner explicitly requested fiery eyes for MireSeer and glowing green eyes for Briarhide",
+        "previous_fbx_sha256": "cff792dc1cf21a5d909bde0375de605dc07abb302d718594d5ed20260f6b2456",
+        "previous_blend_sha256": "c9222b8fd039f82dffb55a66862e73c07575ff1f79d982057495de0a7dfccaac",
+        "archived_candidate": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/iterations/20260911T162117Z",
+        "changed_slots": [
+          "M_OE_DreadEye",
+          "M_OE_DreadIris",
+          "M_OE_DreadPupil"
+        ],
+        "geometry_uvs_normals_weights_rests_exact": true,
+        "non_color_mesh_rig_fingerprint": "5051f26f9f159293d76671b1ef4e2b23a06df49aabca8124d876dc50cc066c2e",
+        "all_color_streams_sha256": "d762dc37fc46bcd804bc551c7f6cddec0ce82ed3585b087b2903e25b41194278",
+        "fbx_first_color_validation": {
+          "fbx_version": 7400,
+          "first_layer": "DreadFaceColor",
+          "mapping": "ByPolygonVertex",
+          "reference": "IndexToDirect",
+          "all_corner_rgba_exact": true,
+          "body_corners": 511249,
+          "body_min_rgba": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_max_rgba": [
+            0.6860013604164124,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_r_equal_one": 0,
+          "body_r_nonzero_corners": 10247
+        },
+        "engine_procedure": "Update the three existing per-species eye materials from extra_materials; multiply linear emissive_color by emissive_strength into Emissive Color. Existing mesh/skeleton can remain loaded because geometry/slots/color streams are unchanged.",
+        "acceptance": "Source material candidate; actual Unreal visibility and owner acceptance pending"
+      },
+      "eye_material_previews": [
+        {
+          "view": "oblique",
+          "file": "luminous-oblique.png",
+          "sha256": "2b4d234f83145bdfb94f1698ca19f83d581ba20c514aed626e1d00a336b1a573",
+          "projection": "ORTHO",
+          "target": [
+            0,
+            -0.28,
+            1.98
+          ],
+          "offset": [
+            2,
+            -3,
+            0.05
+          ],
+          "jaw": 0,
+          "grip": 0,
+          "crest": 0
+        }
+      ],
+      "eye_material_log": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/luminous-eyes-01.log"
     }
   ],
   "color_stream_revision": "status-mask-v2",
@@ -1870,5 +2082,30 @@
     "path": ".local/organic-fire-review/dread-v2-melee-detail/Saved/EnemyMotionStudy/Melee-Detail/Frame_00060.png",
     "sha256": "1e1334c2d4fb76fec6bc9a80bd433eca9d1b10073873bb180d11915b4aa9d112",
     "finding": "Incorrect first FBX body color RGBA=(1,1,1,1) drove status emission across dormant Briarhide. Preserved original mask values now replace those white defaults."
+  },
+  "eye_material_revision": "owner-luminous-v1",
+  "engine_eye_review": {
+    "material_only": true,
+    "complete": true,
+    "root": ".local/organic-fire-review",
+    "views": [
+      {
+        "study": "green-eyes-editor-v1/Saved/EnemyMotionStudy/Melee-Detail",
+        "frames": [
+          20,
+          40,
+          65
+        ]
+      },
+      {
+        "study": "fire-eyes-editor-v1/Saved/EnemyMotionStudy/Caster-Detail",
+        "frames": [
+          15,
+          40,
+          60
+        ]
+      }
+    ],
+    "observation": "Green and ember-orange irises visible under existing lids. Brow occlusion remains when looking down or away. Body shading and cast fire remain intact."
   }
 }

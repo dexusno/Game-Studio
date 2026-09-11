@@ -19,7 +19,11 @@
   "pupil_radius": 0.0042,
   "gaze_offset": -0.003,
   "socket_color": [0.019, 0.010, 0.006],
-  "eye_color": [0.012, 0.011, 0.007],
-  "iris_color": [0.052, 0.038, 0.016],
-  "intent": "Replace projecting amber discs with a smaller, recessed wet eye beneath an anatomically broad brow and lower lid. Original body and mouth appearance retained."
+  "eye_color": [0.006, 0.035, 0.012],
+  "iris_color": [0.025, 0.18, 0.045],
+  "eye_emissive_color": [0.035, 1.0, 0.10],
+  "eye_emissive_strength": 0.15,
+  "iris_emissive_strength": 6.0,
+  "eye_material_revision": "owner-luminous-v1",
+  "intent": "Owner-requested green luminous irises inside the existing recessed sockets and heavy lids; dark pupils and restrained reflections. Original body, mouth, skin mask and geometry retained."
 }

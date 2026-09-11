@@ -243,7 +243,18 @@ namespace DBEnemyPerformance
     {
         FPose Base = Ready(Role); Carry(Base, Role);
         const bool Caster = Role == ERole::Caster, Hunter = Role == ERole::Hunter, Boss = Role == ERole::Boss;
-        if (Caster) Base=CasterCarriage(true);
+        if (Caster)
+        {
+            Base=CasterCarriage(true);
+            // Travel releases the gathered casting arm and the permanent squat.
+            // Weight is accepted over each support instead of held at one height.
+            Base.Offset=FVector(7.f,0.f,-2.f);
+            R(Base,Hips,-16.f,-2.f); R(Base,Lumbar,-8.f,1.f);
+            R(Base,Spine,-6.f,1.f); R(Base,Chest,1.f,2.f);
+            R(Base,Neck,14.f,-2.f); R(Base,Head,8.f,-1.f);
+            Base.HandTarget[0]=FVector(14.f,-13.f,-58.f);
+            Base.HandTarget[1]=FVector(20.f,14.f,-54.f);
+        }
         else if (!Hunter)
         {
             Base.Offset=FVector(Boss?7.f:9.f,-1.f,-3.f);
@@ -263,13 +274,14 @@ namespace DBEnemyPerformance
             const float Twist = Lead * (Passing ? .25f : Catch ? -.65f : 1.f);
             if (Caster)
             {
-                P.Offset += FVector(Load ? 2.f : Passing ? -1.f : 0.f, Twist * 1.5f, Load ? -2.f : -.5f);
-                P.Joint[Hips] += FRotator(Load ? -2.f : Passing ? 1.f : -.5f, -Twist * 6.f, Twist * 2.5f);
-                P.Joint[Lumbar] += FRotator(Load ? -1.f : 1.f, Twist * 4.f, -Twist);
-                P.Joint[Spine] += FRotator(Load ? -2.f : Passing ? 1.f : 0.f, Twist * 4.f, -Twist * 1.5f);
-                P.Joint[Chest] += FRotator(Load ? -2.f : Passing ? 2.f : 1.f, Twist * 7.f, -Twist * 3.f);
-                P.Joint[Neck] += FRotator(Load ? 2.f : Passing ? -1.f : 0.f, -Twist * 3.f, Twist);
-                P.Joint[Head] += FRotator(Passing ? -1.f : 0.f, -Twist, -Twist * .5f);
+                P.Offset += FVector(Load ? 3.f : Passing ? -1.f : Catch ? 1.f : 0.f,
+                    Twist * 2.5f, Load ? -4.5f : Passing ? 1.5f : Catch ? -1.5f : 0.f);
+                P.Joint[Hips] += FRotator(Load ? -4.f : Passing ? 2.f : -1.f, -Twist * 9.f, Twist * 4.f);
+                P.Joint[Lumbar] += FRotator(Load ? -3.f : Passing ? 2.f : 0.f, Twist * 5.f, -Twist * 1.5f);
+                P.Joint[Spine] += FRotator(Load ? -2.f : Passing ? 1.f : 0.f, Twist * 5.f, -Twist * 2.f);
+                P.Joint[Chest] += FRotator(Load ? -3.f : Passing ? 3.f : 1.f, Twist * 9.f, -Twist * 4.f);
+                P.Joint[Neck] += FRotator(Load ? 5.f : Passing ? -2.f : 0.f, -Twist * 3.f, Twist);
+                P.Joint[Head] += FRotator(Passing ? -2.f : 1.f, -Twist, -Twist * .5f);
             }
             else if (Hunter)
             {
@@ -301,10 +313,10 @@ namespace DBEnemyPerformance
                 const float Sign = S == 0 ? -1.f : 1.f;
                 const float ArmLead = Lead * -Sign * (Catch ? -.70f : Load ? .85f : 1.f);
                 const bool Forward = ArmLead > 0.f;
-                const float Front = Caster ? 27.f : Hunter ? 46.f : Boss ? 31.f : 38.f;
-                const float Rear = Caster ? -8.f : Hunter ? -10.f : Boss ? -22.f : -26.f;
+                const float Front = Caster ? 40.f : Hunter ? 46.f : Boss ? 31.f : 38.f;
+                const float Rear = Caster ? -20.f : Hunter ? -10.f : Boss ? -22.f : -26.f;
                 P.HandTarget[S] = Passing
-                    ? FVector(Caster ? 7.f : Hunter ? 16.f : (S == 0 ? -1.f : 5.f), Sign * 7.f, Caster ? -65.f : -77.f)
+                    ? FVector(Caster ? 8.f : Hunter ? 16.f : (S == 0 ? -1.f : 5.f), Sign * (Caster ? 15.f : 7.f), Caster ? -68.f : -77.f)
                     : FVector(FMath::Lerp(Base.HandTarget[S].X, Forward ? Front : Rear, FMath::Abs(ArmLead)),
                         Sign * (Forward ? 4.f : 11.f), Caster ? (Forward ? -47.f : -58.f) : (Forward ? -57.f : -66.f));
                 // The shoulder arrives before the loosely carried claw. The
@@ -315,16 +327,12 @@ namespace DBEnemyPerformance
                     -Sign * ArmLead * 6.f, Sign * (Load ? 3.f : 1.f));
                 if (Caster)
                 {
-                    // The seer keeps its right forelimb gathered near the
-                    // throat, while the left catches balance on the outside.
-                    // This also survives retreat and the long lateral turn.
-                    if (S==1)
-                    {
-                        P.HandTarget[S]=FVector(Passing?26.f:Forward?35.f:29.f,
-                            Passing?12.f:Forward?9.f:17.f,Passing?-46.f:Forward?-37.f:-42.f);
-                        P.Joint[HandR].Pitch=-12.f+(Passing?4.f:Forward?-3.f:1.f);
-                    }
-                    else P.HandTarget[S].Y-=3.f;
+                    // Both forelimbs counter the supporting leg. The right
+                    // reaches a little farther; neither is parked at the throat.
+                    P.HandTarget[S].X += S==1 ? 3.f : -2.f;
+                    P.HandTarget[S].Y = Sign * (Passing ? 15.f : Forward ? 12.f : 19.f);
+                    P.HandTarget[S].Z = Passing ? -68.f : Forward ? -48.f : -66.f;
+                    P.Joint[S==0?HandL:HandR].Pitch += Passing ? 6.f : Forward ? -5.f : 2.f;
                 }
                 else if (!Hunter)
                 {
@@ -378,6 +386,15 @@ namespace DBEnemyPerformance
         P.Joint[Neck].Pitch += Load * 2.f;
         P.Joint[Neck].Yaw += Turn * 4.f;
         P.Joint[Head].Yaw += Turn * 2.f;
+        if (Caster)
+        {
+            const float Pivot=FMath::Abs(Turn)*(1.f-FMath::Clamp(static_cast<float>(Velocity.Size2D()),0.f,1.f));
+            P.Offset.Z -= Pivot*2.5f;
+            P.Joint[Hips] += FRotator(-Pivot*3.f,Turn*5.f,Turn*2.f);
+            P.Joint[Chest] += FRotator(-Pivot*2.f,Turn*7.f,-Turn*3.f);
+            P.HandTarget[0].Y -= Pivot*7.f;
+            P.HandTarget[1].Y += Pivot*7.f;
+        }
         return P;
     }
     inline FPose Staggered(ERole Role, float Time, float Duration, FVector Direction)

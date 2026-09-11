@@ -618,13 +618,13 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
         ? Target->GetActorLocation() - Start : Chosen;
     const FRotator Face(0.f, Facing.Rotation().Yaw, 0.f);
     SetActorRotation(bCasterTravel
-        ? FMath::RInterpConstantTo(GetActorRotation(), Face, DeltaSeconds, bCasterEvasion ? 300.f : 165.f)
+        ? FMath::RInterpConstantTo(GetActorRotation(), Face, DeltaSeconds, bCasterEvasion ? 340.f : 285.f)
         : FMath::RInterpTo(GetActorRotation(), Face, DeltaSeconds, 7.f));
     // Let the carried body turn into a route before taking full forward steps.
     // Facing the player throughout every relocation produced a constant crab walk.
     const float TravelYaw = bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw;
     float TravelAlignment = bCasterTravel
-        ? FMath::Clamp((FVector::DotProduct(FRotator(0.f,TravelYaw,0.f).Vector(),Chosen)-.5f)/.4f,0.f,1.f)
+        ? FMath::Clamp((FVector::DotProduct(FRotator(0.f,TravelYaw,0.f).Vector(),Chosen)-.10f)/.80f,0.f,1.f)
         : 1.f;
     // A single emergency step starts while turning; ordinary travel still
     // waits for forward alignment. Collision and planted-foot solving remain.
@@ -1654,7 +1654,7 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     OrganicSpeed = OrganicVelocity.Size2D();
     OrganicLastLocation = Location;
     const float PreviousYaw = OrganicFacingYaw;
-    const float TurnSpeed = Phase == EDBEnemyPhase::Attack ? 720.f : Phase == EDBEnemyPhase::Telegraph ? 390.f : bCaster ? 225.f : 165.f;
+    const float TurnSpeed = Phase == EDBEnemyPhase::Attack ? 720.f : Phase == EDBEnemyPhase::Telegraph ? 390.f : bCaster ? 310.f : 165.f;
     // The head can acquire a new target bearing before the carried body turns.
     // A bounded angular response also keeps the trunk moving briefly after a
     // steering change, so it catches over the actual support steps.
@@ -1662,7 +1662,7 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     const FVector HeadingTarget(OrganicFacingYaw + FMath::FindDeltaAngleDegrees(OrganicFacingYaw,
         GetActorRotation().Yaw), 0.f, 0.f);
     const float HeadingResponse = Phase == EDBEnemyPhase::Attack ? 45.f : Phase == EDBEnemyPhase::Telegraph ? 25.f
-        : bCaster ? 12.f : Kind == EDBEnemyKind::Hunter ? 11.f : Kind == EDBEnemyKind::Boss ? 7.f : 8.f;
+        : bCaster ? 17.f : Kind == EDBEnemyKind::Hunter ? 11.f : Kind == EDBEnemyKind::Boss ? 7.f : 8.f;
     AdvanceOrganicResponse(Heading, HeadingVelocity, HeadingTarget, HeadingResponse, DeltaSeconds);
     OrganicFacingYaw = FMath::UnwindDegrees(OrganicFacingYaw + FMath::Clamp(
         static_cast<float>(Heading.X) - OrganicFacingYaw, -TurnSpeed * DeltaSeconds, TurnSpeed * DeltaSeconds));
@@ -1753,8 +1753,11 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
         OrganicArmDrive = 0.f;
         return;
     }
-    const float Moving = bOrganicGrounded ? FMath::Clamp(OrganicSpeed / FMath::Max(BaseSpeed, 1.f), 0.f, 1.f) : 0.f;
-    GaitBlend = FMath::FInterpTo(GaitBlend, Moving, DeltaSeconds, Moving > GaitBlend ? 6.f : 10.f);
+    const float TravelBlend = FMath::Clamp(OrganicSpeed / FMath::Max(BaseSpeed, 1.f), 0.f, 1.f);
+    const float TurnBlend = bCaster && Phase==EDBEnemyPhase::Approach
+        ? FMath::SmoothStep(25.f,160.f,FMath::Abs(OrganicTurnRate))*.65f : 0.f;
+    const float Moving = bOrganicGrounded ? FMath::Max(TravelBlend,TurnBlend) : 0.f;
+    GaitBlend = FMath::FInterpTo(GaitBlend, Moving, DeltaSeconds, Moving > GaitBlend ? (bCaster ? 12.f : 6.f) : 10.f);
     if (bOrganicLanding)
     {
         if (!bStartingLanding) OrganicLandingTime += DeltaSeconds;
@@ -1902,7 +1905,7 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             + FVector(0.f, 0.f, Foot.LiftVelocity);
         Foot.Rotation = FQuat::Slerp(Foot.StartRotation, Foot.LandingRotation, Blend).GetNormalized();
         const FVector SwingRight = FRotator(0.f, OrganicFacingYaw, 0.f).RotateVector(FVector::RightVector);
-        Foot.ToeRotation = FQuat(SwingRight, FMath::DegreesToRadians(-LiftShape * (bCaster ? 9.f : 13.f)));
+        Foot.ToeRotation = FQuat(SwingRight, FMath::DegreesToRadians(-LiftShape * (bCaster ? 16.f : 13.f)));
         Foot.Rotation = (Foot.ToeRotation * Foot.Rotation).GetNormalized();
         if (Foot.Progress >= 1.f)
         {
@@ -1945,8 +1948,8 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
             if (!bStopping && !bFirstStep && DeltaSeconds > SMALL_NUMBER)
                 Foot.Duration = FMath::CeilToFloat((Foot.Duration - .0001f) / DeltaSeconds) * DeltaSeconds;
             Foot.LandingLeadTime = bStopping || bFirstStep ? 0.f : Foot.Duration * .50f;
-            Foot.LiftHeight = bStopping ? 2.f : bFirstStep ? (bCaster ? 5.f : 6.f)
-                : bSecondStep ? (bCaster ? 7.f : 9.f) : (bCaster ? 9.f : 12.f);
+            Foot.LiftHeight = bStopping ? 2.f : bFirstStep ? (bCaster ? 7.f : 6.f)
+                : bSecondStep ? (bCaster ? 10.f : 9.f) : (bCaster ? 13.f : 12.f);
             TraceOrganicFoot(LandingFor(Pick, Foot.Duration, Foot.LandingLeadTime), Foot.AnkleHeight, Foot.SwingEnd, Foot.LandingNormal);
             Foot.SwingStart = Foot.Position;
             Foot.SwingStartVelocity = FVector::ZeroVector;
@@ -2654,6 +2657,8 @@ void ADBEnemy::UpdateOrganicPose()
             OrganicGazeVelocity = FVector::ZeroVector;
             bOrganicGazeInitialized = true;
         }
+        const float RouteAttention = Kind==EDBEnemyKind::Caster && Phase==EDBEnemyPhase::Approach
+            ? FMath::SmoothStep(.15f,.8f,GaitBlend)*.72f : 0.f;
         FVector GazeTarget(OrganicGaze.X + FMath::FindDeltaAngleDegrees(static_cast<float>(OrganicGaze.X),
             OrganicFacingYaw), 0.f, 0.f);
         if (bWatchingTarget)
@@ -2663,8 +2668,10 @@ void ADBEnemy::UpdateOrganicPose()
                 ? OrganicMesh->GetComponentTransform().TransformPosition(OrganicReferenceComponentPose[HeadIndex].GetLocation())
                 : GetActorLocation();
             const FVector ToTarget = Target->GetPawnViewLocation() - HeadOrigin;
-            GazeTarget.X = OrganicGaze.X + FMath::FindDeltaAngleDegrees(static_cast<float>(OrganicGaze.X), ToTarget.Rotation().Yaw);
-            GazeTarget.Y = FMath::Clamp(static_cast<float>(ToTarget.Rotation().Pitch), -22.f, 20.f);
+            const float WatchedYaw = OrganicFacingYaw + FMath::FindDeltaAngleDegrees(OrganicFacingYaw,
+                ToTarget.Rotation().Yaw)*(1.f-RouteAttention);
+            GazeTarget.X = OrganicGaze.X + FMath::FindDeltaAngleDegrees(static_cast<float>(OrganicGaze.X),WatchedYaw);
+            GazeTarget.Y = FMath::Clamp(static_cast<float>(ToTarget.Rotation().Pitch), -22.f, 20.f)*(1.f-RouteAttention);
         }
         AdvanceOrganicResponse(OrganicGaze, OrganicGazeVelocity, GazeTarget,
             Kind == EDBEnemyKind::Hunter ? 27.f : Kind == EDBEnemyKind::Caster ? 24.f : 22.f, OrganicPoseDelta);
@@ -2673,7 +2680,7 @@ void ADBEnemy::UpdateOrganicPose()
         const float InheritedYaw = Performance.Joint[Hips].Yaw + Performance.Joint[Lumbar].Yaw
             + Performance.Joint[Spine].Yaw + Performance.Joint[Chest].Yaw
             + Performance.Joint[Neck].Yaw + Performance.Joint[Head].Yaw;
-        const float GazeYaw = FMath::Clamp(TargetBearing - InheritedYaw * .90f
+        const float GazeYaw = FMath::Clamp(TargetBearing - InheritedYaw * FMath::Lerp(.90f,.55f,RouteAttention)
             * static_cast<float>(OrganicAttentionWeights.Z), -64.f, 64.f);
         // Preserve target attention while the shoulders sway and turn beneath
         // it. Smoothing an angle in the moving torso frame made both arrive

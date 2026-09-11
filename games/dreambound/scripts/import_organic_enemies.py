@@ -3,6 +3,7 @@
 Run in the full Unreal editor using -ExecutePythonScript. Optional
 -OrganicEnemyAssets=Briarhide,MireSeer selects prepared families. Sources live
 under config.local.json's windowsOutputRoot/organic-enemies/<source_folder>/finished.
+-OrganicEnemyEyesOnly updates the three existing Dread eye materials per family.
 Missing source, rig bones or texture files are errors, never robot substitution.
 """
 import hashlib
@@ -160,6 +161,15 @@ def anatomy_material(asset, definition):
     property_link(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
     property_link(specular, "", unreal.MaterialProperty.MP_SPECULAR)
     mat.set_editor_property("two_sided", bool(definition.get("two_sided", False)))
+    if definition.get("emissive_strength", 0) > 0:
+        emission = node(mat, unreal.MaterialExpressionConstant3Vector, -650, 420,
+                        constant=unreal.LinearColor(*definition["emissive_color"][:3], 1))
+        strength = node(mat, unreal.MaterialExpressionConstant, -650, 570,
+                        r=definition["emissive_strength"])
+        glow = node(mat, unreal.MaterialExpressionMultiply, -350, 420)
+        link(emission, "", glow, "A")
+        link(strength, "", glow, "B")
+        property_link(glow, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     EDIT.recompile_material(mat)
     LIB.save_loaded_asset(mat)
     REPORT["materials"].append(mat.get_path_name())
@@ -264,6 +274,8 @@ def main():
     output_root = Path(settings["tools"]["ai3d"]["windowsOutputRoot"])
     match = re.search(r"(?:^|\s)-OrganicEnemyAssets=([A-Za-z0-9_,]+)(?:\s|$)", unreal.SystemLibrary.get_command_line())
     assets = match.group(1).split(",") if match else ["Briarhide", "MireSeer"]
+    eyes_only = "-OrganicEnemyEyesOnly" in unreal.SystemLibrary.get_command_line()
+    REPORT["eye_material_only"] = eyes_only
     for suffix in ("/Meshes", "/Materials", "/Textures"):
         LIB.make_directory(DEST + suffix)
     flag = "Interchange.FeatureFlags.Import.FBX"
@@ -276,7 +288,27 @@ def main():
             appearance = json.loads(appearance_path.read_text(encoding="utf-8")) if appearance_path.is_file() else {}
             output_folder = "finished-dread" if appearance.get("revision") == "dread-v1" else spec.get("output_folder", "finished")
             folder = output_root / "organic-enemies" / spec.get("source_folder", asset.lower()) / output_folder
-            import_creature(asset, folder)
+            if eyes_only:
+                prep = json.loads((folder / "prep-report.json").read_text(encoding="utf-8"))
+                mesh = LIB.load_asset(DEST + "/Meshes/SK_OE_" + asset + "_Dread")
+                if not isinstance(mesh, unreal.SkeletalMesh):
+                    raise RuntimeError("Eye-only update requires the existing Dread mesh: " + asset)
+                bindings = {str(s.get_editor_property("material_slot_name")):
+                            s.get_editor_property("material_interface").get_path_name()
+                            for s in mesh.get_editor_property("materials")}
+                eyes = [row for row in prep["extra_materials"] if row["name"] in
+                        ("M_OE_DreadEye", "M_OE_DreadIris", "M_OE_DreadPupil")]
+                if len(eyes) != 3:
+                    raise RuntimeError("Expected three authored eye materials: " + asset)
+                for row in eyes:
+                    expected = DEST + "/Materials/" + row["name"] + "_" + asset
+                    if bindings.get(row["name"]) != expected + "." + row["name"] + "_" + asset:
+                        raise RuntimeError("Unexpected eye material binding: " + asset + ": " + row["name"])
+                    anatomy_material(asset, row)
+                REPORT["assets"].append({"asset": mesh.get_path_name(), "eye_material_only": True,
+                                        "eye_materials": eyes})
+            else:
+                import_creature(asset, folder)
     finally:
         unreal.SystemLibrary.execute_console_command(None, flag + " " + str(previous))
     LIB.save_directory(DEST, only_if_is_dirty=True, recursive=True)
