@@ -6,7 +6,7 @@
   "platforms": [
     "windows"
   ],
-  "stage": "concept",
+  "stage": "prototype",
   "created_on": "2026-09-11",
   "source_opportunity": "magnet-sweep",
   "budget": {
@@ -14,25 +14,31 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner explicitly removes development timeline as a consideration. Time fields are intentionally unset (schema uses 0), not zero-hour estimates or deadlines. Prior 5-8 day and owner-hour caps are superseded. Preserve a simple, engaging, rewarding, replayable game. Cash 0 records no new spending authorization. Current work is design and planning only.",
+  "budget_note": "Owner authorizes development and stopping at the playable concept demo. Development timeline remains intentionally unconstrained; zero time fields are unset, not zero-hour estimates. No additional purchases are authorized or needed.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
       "games/magnet-sweep/BRIEF.md",
       "games/magnet-sweep/PRODUCTION-PLAN.md",
       "games/magnet-sweep/DECISIONS.md",
-      "games/magnet-sweep/design/CRITIQUE.md"
+      "games/magnet-sweep/design/CRITIQUE.md",
+      "games/magnet-sweep/BUILD.md",
+      "games/magnet-sweep/QA.md",
+      "games/magnet-sweep/design/ART-DIRECTION.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T21:20:21+00:00",
-      "record_sha256": "440a211a9d36b1ca1a46c705042ec974762fcd397be816634ce5d2d112ee07fb",
+      "captured_at": "2026-09-11T23:21:06+00:00",
+      "record_sha256": "1507ca284b237944d793ffd623dbf8a64b3a828149317256c7d5b8261520ba9b",
       "files": {
-        "games/magnet-sweep/STATUS.md": "d7eda7bc9cb1b9b3fa65b828bab3e9c38d476ec4b5ec91cbff5e95f421206348",
+        "games/magnet-sweep/STATUS.md": "0355e9758b6f03747979283e4c5418e231605edfd2dc6dda6c59f280e21c3842",
         "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
         "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
-        "games/magnet-sweep/DECISIONS.md": "a7314857fde4571be2df085b97613fbe906f8c615a2426dbdbd7cedd1352f97a",
-        "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c"
+        "games/magnet-sweep/DECISIONS.md": "9f82d56a6c5d2981fed4fbca0778b05d096d34480a693ffb0b1e721857021de6",
+        "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c",
+        "games/magnet-sweep/BUILD.md": "34329c555655e2c8ac93fab77b806ab19a452f3f62361b33d448869a8ba1a096",
+        "games/magnet-sweep/QA.md": "a94d5818ba8943c5ae21f0f8df77648aa08363078acc6a88671296fe289c89cb",
+        "games/magnet-sweep/design/ART-DIRECTION.md": "762b1d0c1d7910ace475e94002dd67ed4b9501ab225d1891194776779a138be8"
       }
     }
   }

@@ -1,0 +1,2 @@
+asset_id,path,source_url,creator,license,proof_path,modifications,approval_status
+salvage_toy_visual_target,assets/concepts/salvage-toy-visual-target.png,generated: OpenAI built-in image tool,Game Studio / Codex,Applicable OpenAI tool generation terms; concept reference only,assets/concepts/PROVENANCE.md,Original prompt then generated corridor correction; copied PNG unchanged,reference-only

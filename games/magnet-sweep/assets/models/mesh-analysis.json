@@ -1,0 +1,141 @@
+{
+  "blender_version": "5.2.1 LTS",
+  "authoring_units": "centimeters",
+  "scene_unit_scale": 0.009999999776482582,
+  "export": "FBX_SCALE_UNITS; -Y forward; Z up; one neutral material; no textures",
+  "assets": [
+    {
+      "asset": "SM_Washer",
+      "file": "SM_Washer.fbx",
+      "dimensions_cm": [
+        28.0,
+        28.0,
+        4.0
+      ],
+      "vertices": 512,
+      "triangles": 1024,
+      "material_slots": 1,
+      "sha256": "0caf41c58b3ffc896bb9a6832e40f32c5444c76d0f0dbea39251d3895a388c1d",
+      "fbx_round_trip_cm": [
+        28.0,
+        28.0,
+        4.0
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_Bolt",
+      "file": "SM_Bolt.fbx",
+      "dimensions_cm": [
+        30.0,
+        15.225,
+        13.51
+      ],
+      "vertices": 848,
+      "triangles": 1684,
+      "material_slots": 1,
+      "sha256": "253a3d50242d2d238a09793cfbd97ed8f168fbd8d990a049e3191a9300e17e68",
+      "fbx_round_trip_cm": [
+        30.0,
+        15.225,
+        13.51
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_Plate",
+      "file": "SM_Plate.fbx",
+      "dimensions_cm": [
+        24.0,
+        17.0,
+        4.0
+      ],
+      "vertices": 96,
+      "triangles": 188,
+      "material_slots": 1,
+      "sha256": "87be349c2231fadd2e10e02adea03ba5dcadc08814357960ec870bbc95cdd163",
+      "fbx_round_trip_cm": [
+        24.0,
+        17.0,
+        4.0
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_Tangle",
+      "file": "SM_Tangle.fbx",
+      "dimensions_cm": [
+        65.0,
+        49.0,
+        20.0
+      ],
+      "vertices": 768,
+      "triangles": 1424,
+      "material_slots": 1,
+      "sha256": "4af21d1c81b50d07b429b02755317e0ad07f2d964f64138fa9c0490df3665e68",
+      "fbx_round_trip_cm": [
+        65.0,
+        49.0,
+        20.0
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_Ring",
+      "file": "SM_Ring.fbx",
+      "dimensions_cm": [
+        42.0,
+        42.0,
+        6.0
+      ],
+      "vertices": 256,
+      "triangles": 512,
+      "material_slots": 1,
+      "sha256": "7dc6c48cb3d4aa449c0435da523146a30067cf49ea02ad269666aad25762ebbc",
+      "fbx_round_trip_cm": [
+        42.0,
+        42.0,
+        6.0
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_MagnetBody",
+      "file": "SM_MagnetBody.fbx",
+      "dimensions_cm": [
+        80.0,
+        70.0,
+        18.0
+      ],
+      "vertices": 368,
+      "triangles": 732,
+      "material_slots": 1,
+      "sha256": "cb2a121fbd948ffd26fdc09c27186ecc50a2b574d429e742d07b33b35c787e51",
+      "fbx_round_trip_cm": [
+        80.0,
+        70.0,
+        18.0
+      ],
+      "fbx_round_trip": "passed"
+    },
+    {
+      "asset": "SM_Tray",
+      "file": "SM_Tray.fbx",
+      "dimensions_cm": [
+        1000.0,
+        620.0,
+        20.0
+      ],
+      "vertices": 96,
+      "triangles": 188,
+      "material_slots": 1,
+      "sha256": "688efbf4691c778b0155150563d2f69e5e1f392afe4fcf97646b743529c6774a",
+      "fbx_round_trip_cm": [
+        1000.0,
+        620.0,
+        20.0
+      ],
+      "fbx_round_trip": "passed"
+    }
+  ]
+}
