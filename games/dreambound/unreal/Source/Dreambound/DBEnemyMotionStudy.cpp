@@ -43,11 +43,13 @@ void ADBEnemyMotionStudy::BeginPlay()
     FParse::Value(FCommandLine::Get(), TEXT("DBCreatureStudySeconds="), Duration);
     Duration = FMath::Clamp(Duration,4.f,32.f);
     bFootMarkers = FParse::Param(FCommandLine::Get(), TEXT("DBFootMarkers"));
+    bPassiveIdle = FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyIdle"));
     EDBEnemyKind Kind = KindName == TEXT("Caster") ? EDBEnemyKind::Caster
         : KindName == TEXT("Hunter") ? EDBEnemyKind::Hunter
         : KindName == TEXT("Boss") ? EDBEnemyKind::Boss : EDBEnemyKind::Melee;
     KindName = StaticEnum<EDBEnemyKind>()->GetNameStringByValue(static_cast<int64>(Kind));
-    if (ViewName != TEXT("Front") && ViewName != TEXT("Player") && ViewName != TEXT("LowSide")) ViewName = TEXT("Side");
+    if (ViewName != TEXT("Front") && ViewName != TEXT("Player") && ViewName != TEXT("LowSide")
+        && ViewName != TEXT("Detail")) ViewName = TEXT("Side");
     Output = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("EnemyMotionStudy") / (KindName + TEXT("-") + ViewName));
     IFileManager::Get().MakeDirectory(*Output, true);
     if (!Mode || !Mode->Player || Mode->Rooms.IsEmpty())
@@ -70,7 +72,7 @@ void ADBEnemyMotionStudy::BeginPlay()
     Player->GetCharacterMovement()->StopMovementImmediately();
     Creature = GetWorld()->SpawnActor<ADBEnemy>(Center + (bBossStudy ? FVector(-950.f,-750.f,110.f) : FVector(-500.f,-600.f,110.f)), FRotator::ZeroRotator, Spawn);
     if (!Creature) { FailureReason = TEXT("Enemy spawn failed"); Finish(true); return; }
-    Creature->Configure(Kind, INDEX_NONE, 1.f);
+    Creature->Configure(Kind, bPassiveIdle ? Mode->CurrentRoomId + 10000 : INDEX_NONE, 1.f);
     Creature->SetArenaBounds(Center, FVector2D(1420.f,1420.f));
     Creature->SetActorTickEnabled(false);
     Camera = GetWorld()->SpawnActor<ACameraActor>();
@@ -86,7 +88,7 @@ void ADBEnemyMotionStudy::BeginPlay()
     FApp::SetFixedDeltaTime(1.0 / 30.0);
     FApp::SetUseFixedTimeStep(true);
     if (GEngine) GEngine->SetMaxFPS(30.f);
-    Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm,left_claw_contact_x,left_claw_contact_y,left_claw_contact_z,right_claw_contact_x,right_claw_contact_y,right_claw_contact_z\n");
+    Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm,left_claw_contact_x,left_claw_contact_y,left_claw_contact_z,right_claw_contact_x,right_claw_contact_y,right_claw_contact_z,pounce_blocked,blocked_pounce_elapsed\n");
     UpdateCamera(0.f);
 }
 
@@ -99,8 +101,12 @@ void ADBEnemyMotionStudy::UpdateCamera(float DeltaSeconds)
             Controller->SetControlRotation((Creature->GetActorLocation() + FVector(0,0,35) - Player->GetPawnViewLocation()).Rotation());
         return;
     }
-    const FVector Subject = Creature->GetActorLocation() + FVector(0,0,5);
-    const FVector Offset = ViewName == TEXT("Front") ? FVector(730,-250,210)
+    const bool bDetail = ViewName == TEXT("Detail");
+    const bool bBossFront = KindName == TEXT("Boss") && ViewName == TEXT("Front");
+    const FVector Subject = Creature->GetActorLocation() + FVector(0,0,bDetail ? 65 : bBossFront ? 45 : 5);
+    const FVector Offset = bDetail
+        ? FRotator(0.f, Creature->GetAnimationDebugState().visible_yaw, 0.f).RotateVector(FVector(340,-250,70))
+        : ViewName == TEXT("Front") ? FVector(730,-250,210)
         : ViewName == TEXT("LowSide") ? FVector(-120,-760,-15) : FVector(-120,-760,230);
     const FVector Desired = Subject + Offset * (KindName == TEXT("Boss") ? 1.12f : 1.f);
     FVector CameraPosition = Desired;
@@ -112,7 +118,8 @@ void ADBEnemyMotionStudy::UpdateCamera(float DeltaSeconds)
     if (bCameraObstructionAdjusted)
         CameraPosition = Obstruction.Location + (Subject-Desired).GetSafeNormal() * 24.f;
     CameraDistance = FVector::Distance(Subject,CameraPosition);
-    const float BaseFov = KindName == TEXT("Boss") ? 52.f : 44.f;
+    // Include the complete overhead claw arc, without altering the player camera.
+    const float BaseFov = bBossFront ? 58.f : KindName == TEXT("Boss") ? 52.f : 44.f;
     const float FramingFov = FMath::RadiansToDegrees(2.f * FMath::Atan(FMath::Tan(FMath::DegreesToRadians(BaseFov * .5f))
         * FVector::Distance(Subject,Desired) / FMath::Max(80.f,CameraDistance)));
     Camera->GetCameraComponent()->FieldOfView = FMath::Clamp(FramingFov,BaseFov,88.f);
@@ -145,6 +152,15 @@ void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
     PlayerHealthBeforeRestore = Player->Health;
     Player->Health = Player->MaxHealth;
     Player->bDead = false;
+    if (bPassiveIdle)
+    {
+        // Exercise a real dormant creature outside the active room. Its normal
+        // tick must retain breathing and incidental motion without starting AI.
+        RecordFrame(DeltaSeconds);
+        Time += DeltaSeconds;
+        if (Time >= Duration) Finish(false);
+        return;
+    }
     // Only the player's destination is choreographed. The non-practice enemy
     // uses its normal approach, steering, tell, damage, recovery and death code.
     FVector Goal(800,-600,0);
@@ -238,7 +254,7 @@ void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
     Samples += FString::Printf(TEXT(",%.4f,%.4f"),State.left_hand_reach_error_cm,State.right_hand_reach_error_cm);
     for (const FVector& Contact : {State.left_claw_contact_world,State.right_claw_contact_world})
         Samples += FString::Printf(TEXT(",%.4f,%.4f,%.4f"),Contact.X,Contact.Y,Contact.Z);
-    Samples += TEXT("\n");
+    Samples += FString::Printf(TEXT(",%d,%.5f\n"),State.pounce_blocked ? 1 : 0,State.blocked_pounce_elapsed);
     FScreenshotRequest::RequestScreenshot(Output/FString::Printf(TEXT("Frame_%05d.png"),Frame++),false,false);
 }
 
@@ -253,7 +269,11 @@ void ADBEnemyMotionStudy::Finish(bool bAborted)
     Report->SetStringField(TEXT("failure_reason"),FailureReason);
     Report->SetStringField(TEXT("scope"),TEXT("Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark."));
     Report->SetStringField(TEXT("creature"),KindName); Report->SetStringField(TEXT("view"),ViewName);
-    Report->SetStringField(TEXT("target_path"),KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
+    Report->SetStringField(TEXT("rig"),FParse::Param(FCommandLine::Get(),TEXT("DBLegacyCreatureRig"))
+        ? TEXT("legacy") : FParse::Param(FCommandLine::Get(),TEXT("DBAnatomyCreatureRig"))
+        || !FParse::Param(FCommandLine::Get(),TEXT("DBPerformanceCreatureRig")) ? TEXT("anatomy") : TEXT("performance"));
+    Report->SetStringField(TEXT("target_path"),bPassiveIdle ? TEXT("passive-idle")
+        : KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
     Report->SetNumberField(TEXT("scripted_player_close_relocation_frame"),BossCloseTargetFrame);
     Report->SetBoolField(TEXT("foot_target_markers"),bFootMarkers);
     Report->SetBoolField(TEXT("claw_skin_contact_markers"),bFootMarkers);

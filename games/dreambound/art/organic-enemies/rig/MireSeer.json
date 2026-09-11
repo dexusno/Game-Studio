@@ -1,8 +1,22 @@
 {
   "asset": "MireSeer",
   "source_folder": "mire-seer",
-  "output_folder": "finished-performance",
-  "rig_version": "performance-v1",
+  "output_folder": "finished-anatomy",
+  "rig_version": "anatomy-v1",
+  "anatomy_rig": {
+    "baseline_folder": "finished-performance",
+    "material_overrides": {"M_OE_Oral": {"roughness": 0.68, "specular": 0.12}},
+    "mouth": {"front_y": -0.33, "front_z": 1.920, "back_y": -0.10, "slope": 0.115, "half_width": 0.15, "chin_min_z": 1.84, "open_degrees": 14},
+    "digit_blend_radius": 0.037,
+    "digits": [
+      {"name": "digit_01", "root": [0.568, -0.068, 0.997], "joint": [0.548, -0.105, 0.903], "tip": [0.541, -0.119, 0.815], "rotation_degrees": [-28, 0, 0], "tip_rotation_degrees": [-18, 0, 0]},
+      {"name": "digit_02", "root": [0.596, -0.025, 0.982], "joint": [0.636, -0.026, 0.914], "tip": [0.659, -0.026, 0.859], "rotation_degrees": [-25, 0, 0], "tip_rotation_degrees": [-18, 0, 0]},
+      {"name": "digit_03", "root": [0.579, 0.069, 0.997], "joint": [0.606, 0.108, 0.951], "tip": [0.619, 0.109, 0.902], "rotation_degrees": [-18, -8, 0], "tip_rotation_degrees": [-14, 0, 0]},
+      {"name": "thumb", "root": [0.505, -0.060, 1.045], "joint": [0.462, -0.080, 0.977], "tip": [0.426, -0.083, 0.921], "rotation_degrees": [-12, -24, 0], "tip_rotation_degrees": [0, -15, 0]}
+    ],
+    "frill": {"root": [0.12, 0.008, 1.925], "joint": [0.28, 0.036, 1.962], "tip": [0.48, 0.04, 1.91], "rotation_degrees": [0, -8, 14], "tip_rotation_degrees": [0, 5, -8]},
+    "notes": "Oblique source inspection confirms three long webbed fingers plus an opposing thumb; all four existing digits receive proximal/distal skin. Two membrane stages permit head-relative tension and tip overlap while preserving the central head and eyes. Jaw opens an actual lined seam; upper sac attachment blends with the mandible and the existing throat remains independently driven."
+  },
   "height_metres": 2.2,
   "source_front": "Blender -Y after optional yaw correction",
   "runtime_mesh_yaw": -90,
@@ -77,5 +91,5 @@
       "scope": "Proposed mesh-axis pose range, not a certified independent-axis envelope. Review combined authored poses; retain limb limits from the motion rig."
     }
   },
-  "notes": "Twenty-two deform bones: the twenty-one-bone common performance chain plus a useful throat sac control under head. Preserve all sixteen existing global rest matrices and limb endpoints. New spine_lower/chest/neck/clavicle parents require a fresh Unreal skeleton. Blender metres, front -Y, left +X, up Z, bone local +Y along head-to-tail. Four normalized influences maximum. Preserved webbed fingers and individual toes remain fixed within whole-hand/foot articulation; no jaw, corrective shapes or secondary frill physics. Preserve the reviewed topology, material and exact atlas bytes."
+  "performance_baseline_notes": "Twenty-two deform bones: the twenty-one-bone common performance chain plus a useful throat sac control under head. Preserve all sixteen existing global rest matrices and limb endpoints. New spine_lower/chest/neck/clavicle parents require a fresh Unreal skeleton. Blender metres, front -Y, left +X, up Z, bone local +Y along head-to-tail. Four normalized influences maximum. Preserved webbed fingers and individual toes remain fixed within whole-hand/foot articulation; no jaw, corrective shapes or secondary frill physics. Preserve the reviewed topology, material and exact atlas bytes."
 }

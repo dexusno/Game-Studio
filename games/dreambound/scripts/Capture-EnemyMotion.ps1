@@ -1,16 +1,20 @@
 param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreaturePerformance',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
- [ValidateSet('Side','LowSide','Front','Player')][string]$View='Side',
+ [ValidateSet('Side','LowSide','Front','Player','Detail')][string]$View='Side',
+ [ValidateSet('Default','Performance','Anatomy','Legacy')][string]$Rig='Default',
+ [ValidateSet('Lit','BaseColor','Roughness','Specular')][string]$Surface='Lit',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
  [ValidateRange(640,2560)][int]$Width=1280,
  [ValidateRange(480,1600)][int]$Height=800,
  [ValidateRange(4,32)][int]$Seconds=32,
- [switch]$FootMarkers
+ [switch]$FootMarkers,
+ [switch]$Idle
 )
 $ErrorActionPreference='Stop'
 if($FootMarkers -and $Build -ne 'Editor'){throw 'Foot markers require an Editor capture.'}
+if($Surface -ne 'Lit' -and $Build -ne 'Editor'){throw 'Surface diagnostics require an Editor capture.'}
 $motionGameRoot=Split-Path -Parent $PSScriptRoot
 $motionRepoRoot=[IO.Path]::GetFullPath((Join-Path $motionGameRoot '../..'))
 $motionCaptureRoot=[IO.Path]::GetFullPath($CaptureDirectory)
@@ -33,8 +37,13 @@ $motionArguments+=@('-DBEnemyMotionStudy',('-DBCreature='+$Creature),('-DBCreatu
  '-DBSaveSlot=DreamboundQA_EnemyMotion',('-UserDir="'+$motionCaptureRoot+'/"'),('-abslog="'+$motionCaptureRoot+'/engine.log"'),
  '-windowed',('-ResX='+$Width),('-ResY='+$Height),'-ForceRes','-RenderOffscreen','-NoSound','-NoVSync','-unattended','-nop4','-nosplash')
 if($FootMarkers){$motionArguments+='-DBFootMarkers'}
+if($Idle){$motionArguments+='-DBCreatureStudyIdle'}
+if($Rig -eq 'Anatomy'){$motionArguments+='-DBAnatomyCreatureRig'}
+if($Rig -eq 'Performance'){$motionArguments+='-DBPerformanceCreatureRig'}
+if($Rig -eq 'Legacy'){$motionArguments+='-DBLegacyCreatureRig'}
+if($Surface -ne 'Lit'){$motionArguments+=('-ExecCmds="viewmode VisualizeBuffer,r.BufferVisualizationTarget '+$Surface+'"')}
 $motionProcess=Start-Process -FilePath $motionExecutable -ArgumentList $motionArguments -WorkingDirectory (Split-Path -Parent $motionExecutable) -WindowStyle Hidden -PassThru
-$motionIdentity=@{build=$Build;creature=$Creature;view=$View;pid=$motionProcess.Id;executable=$motionExecutable;
+$motionIdentity=@{build=$Build;creature=$Creature;view=$View;rig=$Rig;surface=$Surface;passive_idle=[bool]$Idle;pid=$motionProcess.Id;executable=$motionExecutable;
  executable_sha256=(Get-FileHash -LiteralPath $motionExecutable -Algorithm SHA256).Hash;
  captured_utc=(Get-Date).ToUniversalTime().ToString('o');arguments=$motionArguments}
 if($Build -eq 'Editor'){
@@ -49,4 +58,7 @@ $motionResultPath=Join-Path $motionCaptureRoot ('Saved/EnemyMotionStudy/'+$Creat
 if(-not(Test-Path -LiteralPath $motionResultPath)){throw 'The process did not produce a capture report. Inspect its engine.log.'}
 $motionResult=Get-Content -LiteralPath $motionResultPath -Raw | ConvertFrom-Json
 if(-not $motionResult.complete -or $motionResult.aborted){throw 'The motion study was incomplete.'}
+if($Surface -ne 'Lit' -and (Select-String -LiteralPath (Join-Path $motionCaptureRoot 'engine.log') -Pattern 'view mode not recognized|Debug viewmodes not allowed' -Quiet)){
+ throw 'The requested material diagnostic view was rejected; these frames are not a valid surface pass.'
+}
 Write-Output ('Complete: '+$motionResult.frames+' actual frames in '+$motionResult.simulation_seconds+' simulation seconds. '+$motionResultPath)

@@ -38,6 +38,7 @@ private:
     bool bDeathTriggered = false;
     bool bCameraObstructionAdjusted = false;
     bool bFootMarkers = false;
+    bool bPassiveIdle = false;
     void UpdateCamera(float DeltaSeconds);
     void RecordFrame(float DeltaSeconds);
     void Finish(bool bAborted);

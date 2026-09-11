@@ -1,0 +1,1132 @@
+{
+  "version": "anatomy-v1",
+  "date": "2026-09-11",
+  "scope": "Frozen editable Blender and skeletal FBX anatomy candidates; actual authored Unreal motion review is required. Static poses do not establish Monster Fantasy parity.",
+  "preparation_script": "games/dreambound/scripts/refine_organic_anatomy.py",
+  "current_preparation_script_sha256": "cd1fa43b64a220cbd3f76c17f34ba944b772b0a7d1cdeacba5fa3b028f713400",
+  "preserved_preparation_dependency": "games/dreambound/scripts/prepare_organic_enemy.py (texture_files read-only)",
+  "animation_exported": false,
+  "channels": {
+    "Jaw": "Scalar 0..1; zero preserves the closed 1mm seam; one reaches the listed jaw rotation.",
+    "Grip": "Independent left/right values 0..1; proximal and distal rotations use the same side value. Zero preserves every original claw contact coordinate.",
+    "Crest": "Mire only, 0..1; paired frill bases and tips. Authored runtime tip lag is separate from this static channel test."
+  },
+  "rotation_application": {
+    "coordinates": "Blender metres: left +X, back +Y, up +Z; front -Y.",
+    "meaning": "Signed mesh-axis degrees, never an assumed local-bone Euler convention. Multiply each listed rotation vector by its channel value and compose X then Y then Z.",
+    "blender_pose_basis": "For each bone: inverse(global_rest_rotation) * mesh_delta_rotation * global_rest_rotation.",
+    "runtime_actor_axes": {
+      "Blender +X": "actor -Y, positive rotation maps to negative Pitch",
+      "Blender +Y": "actor -X, positive rotation maps to negative Roll",
+      "Blender +Z": "actor +Z, positive rotation maps to negative Yaw"
+    },
+    "scale": "Use full imported component/reference transforms for positions. Earlier Unreal imports have a 100x parent transform; rotation-only inverse conversion is invalid.",
+    "rest_matrices": "Complete reference matrices and parent links are in the two anatomy-*-prep.json files."
+  },
+  "material_integration": "Source slots remain M_OE_Oral, M_OE_Tooth and M_OE_Tongue; root namespaces the imported authored materials per species. Preserve original body PBR and eye slots.",
+  "assets": {
+    "Briarhide": {
+      "private_output": ".local/ai3d/outputs/organic-enemies/briarhide/finished-anatomy",
+      "fbx": "SK_OE_Briarhide.fbx",
+      "fbx_sha256": "ea4cd13bbb5d13683be8cf71a57b8c9f67b2a58459bd104aad903a2d14514806",
+      "blend_sha256": "58699dbbe83a8a2604a6649dc9cdc12501ae809d08f26fa1592b8e0665244a63",
+      "private_prep_report_sha256": "c381bc2ef155cbb3f5a773d49ff8ede207e7c9688df758f1c7b4ff875bb07d85",
+      "portable_prep_report": "anatomy-Briarhide-prep.json",
+      "rig_spec": "games/dreambound/art/organic-enemies/rig/Briarhide.json",
+      "rig_spec_sha256": "2b227354f97055bcbdf52565e7ffdd0e809c767dc46ab25dd45e5a5d7461f833",
+      "producing_script_sha256": "cd1fa43b64a220cbd3f76c17f34ba944b772b0a7d1cdeacba5fa3b028f713400",
+      "producing_script_note": "Matches current preparation script. Final oral response revision preserves exact geometry/UV/color, weights, normals and bone rests; previous producing source retained with the private iteration archive.",
+      "baseline_fbx_sha256": "8c41b59a5164c2624e37dd5cda663eb3f072001c683dd81ec728b74da7fafece",
+      "runtime_asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Anatomy",
+      "fresh_skeleton_required": true,
+      "baseline_bones_preserved": 21,
+      "bone_count": 38,
+      "runtime_triangles": 190536,
+      "max_influences": 4,
+      "channel_bones": [
+        {
+          "bone": "jaw",
+          "parent": "head",
+          "head": [
+            0,
+            -0.28,
+            1.6481
+          ],
+          "tail": [
+            0,
+            -0.515,
+            1.572
+          ],
+          "channel": "Jaw",
+          "rotation_degrees": [
+            18,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_l",
+          "parent": "hand_l",
+          "head": [
+            0.925,
+            -0.096,
+            0.6
+          ],
+          "tail": [
+            0.94,
+            -0.08,
+            0.485
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            23,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_tip_l",
+          "parent": "digit_01_l",
+          "head": [
+            0.94,
+            -0.08,
+            0.485
+          ],
+          "tail": [
+            0.803,
+            -0.06,
+            0.4
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            18,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_l",
+          "parent": "hand_l",
+          "head": [
+            0.938,
+            0.017,
+            0.61
+          ],
+          "tail": [
+            0.958,
+            0.02,
+            0.473
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            25,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_tip_l",
+          "parent": "digit_02_l",
+          "head": [
+            0.958,
+            0.02,
+            0.473
+          ],
+          "tail": [
+            0.813,
+            0.055,
+            0.389
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            19,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_l",
+          "parent": "hand_l",
+          "head": [
+            0.91,
+            0.113,
+            0.61
+          ],
+          "tail": [
+            0.928,
+            0.113,
+            0.489
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            21,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_tip_l",
+          "parent": "digit_03_l",
+          "head": [
+            0.928,
+            0.113,
+            0.489
+          ],
+          "tail": [
+            0.827,
+            0.117,
+            0.422
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            16,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_l",
+          "parent": "hand_l",
+          "head": [
+            0.795,
+            -0.066,
+            0.63
+          ],
+          "tail": [
+            0.727,
+            -0.071,
+            0.565
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            -20,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_tip_l",
+          "parent": "thumb_l",
+          "head": [
+            0.727,
+            -0.071,
+            0.565
+          ],
+          "tail": [
+            0.705,
+            -0.075,
+            0.471
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            -15,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_r",
+          "parent": "hand_r",
+          "head": [
+            -0.925,
+            -0.096,
+            0.6
+          ],
+          "tail": [
+            -0.94,
+            -0.08,
+            0.485
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -23,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_tip_r",
+          "parent": "digit_01_r",
+          "head": [
+            -0.94,
+            -0.08,
+            0.485
+          ],
+          "tail": [
+            -0.803,
+            -0.06,
+            0.4
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -18,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_r",
+          "parent": "hand_r",
+          "head": [
+            -0.938,
+            0.017,
+            0.61
+          ],
+          "tail": [
+            -0.958,
+            0.02,
+            0.473
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -25,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_tip_r",
+          "parent": "digit_02_r",
+          "head": [
+            -0.958,
+            0.02,
+            0.473
+          ],
+          "tail": [
+            -0.813,
+            0.055,
+            0.389
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -19,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_r",
+          "parent": "hand_r",
+          "head": [
+            -0.91,
+            0.113,
+            0.61
+          ],
+          "tail": [
+            -0.928,
+            0.113,
+            0.489
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -21,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_tip_r",
+          "parent": "digit_03_r",
+          "head": [
+            -0.928,
+            0.113,
+            0.489
+          ],
+          "tail": [
+            -0.827,
+            0.117,
+            0.422
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -16,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_r",
+          "parent": "hand_r",
+          "head": [
+            -0.795,
+            -0.066,
+            0.63
+          ],
+          "tail": [
+            -0.727,
+            -0.071,
+            0.565
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            20,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_tip_r",
+          "parent": "thumb_r",
+          "head": [
+            -0.727,
+            -0.071,
+            0.565
+          ],
+          "tail": [
+            -0.705,
+            -0.075,
+            0.471
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            15,
+            0
+          ]
+        }
+      ],
+      "channel_displacement_checks": {
+        "Neutral": {
+          "max_vertex_displacement_cm": 2.3842585494815777e-05,
+          "vertices_moving_over_1mm": 0
+        },
+        "Jaw": {
+          "max_vertex_displacement_cm": 7.693163278764489,
+          "vertices_moving_over_1mm": 655
+        },
+        "Grip": {
+          "max_vertex_displacement_cm": 15.401923207199902,
+          "vertices_moving_over_1mm": 2963
+        }
+      },
+      "grip_zero_contact_region": {
+        "vertices": 4979,
+        "positions_sha256": "7eb9f9d87107951d8c0531d4ec7339c20e9f2fdc1a609c69ad3b662692b802e0"
+      },
+      "material_slots": [
+        "M_OE_Briarhide",
+        "M_OE_EyeIris",
+        "M_OE_EyePupil",
+        "M_OE_Oral",
+        "M_OE_Tooth",
+        "M_OE_Tongue"
+      ],
+      "extra_materials": [
+        {
+          "name": "M_OE_Oral",
+          "base_color": [
+            0.02,
+            0.006,
+            0.005,
+            1
+          ],
+          "roughness": 0.68,
+          "metallic": 0,
+          "two_sided": true,
+          "specular": 0.12
+        },
+        {
+          "name": "M_OE_Tooth",
+          "base_color": [
+            0.54,
+            0.43,
+            0.27,
+            1
+          ],
+          "roughness": 0.3,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_Tongue",
+          "base_color": [
+            0.07,
+            0.018,
+            0.012,
+            1
+          ],
+          "roughness": 0.46,
+          "metallic": 0,
+          "two_sided": false
+        }
+      ],
+      "textures": [
+        {
+          "file": "base_color.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "df01f0b75e590f4e117840e37923eeced9e0eba3173c38fda84339ac06ae8bbd",
+          "processing": "Unchanged embedded PNG bytes"
+        },
+        {
+          "file": "metallic_roughness.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "e466660f92d30152314d2b9c3f0ee7233f838f225765b402a4fc41bf07a8481d",
+          "processing": "Unchanged embedded PNG bytes"
+        }
+      ],
+      "unit_contract": {
+        "coordinates": "Blender metres; front -Y, left +X, up +Z",
+        "bone_axis": "Local +Y runs from head to tail; full rest matrices supplied",
+        "scene_scale_length": 1.0,
+        "fbx_axis_forward": "-Y",
+        "fbx_axis_up": "Z",
+        "fbx_apply_unit_scale": true,
+        "fbx_scale_options": "FBX_SCALE_UNITS",
+        "runtime_requirement": "Query imported component/bone transforms. Prior Unreal import retained a 100x parent transform. Convert points with full TransformPosition/InverseTransformPosition, never rotation alone; avoid double cm conversion."
+      },
+      "preview_evidence": [
+        {
+          "file": "jaw-open-front.png",
+          "sha256": "dbe928cf299639a2824c57d441bbc002f0b6b4e3df36f4cdd720719ef862bbcd"
+        },
+        {
+          "file": "jaw-open-side.png",
+          "sha256": "cff521f4880f1bac3e80bac96e43c3e11b931ff41c6cb2fb43b49ac427287275"
+        }
+      ],
+      "command": "Configured Blender --background --threads 4 --python-exit-code 1 --python games/dreambound/scripts/refine_organic_anatomy.py -- --asset Briarhide --views jaw-open-front,jaw-open-side",
+      "command_result": "Observed Blender process exit code 0; all requested views completed.",
+      "limits": "Candidate anatomy, not animation parity. Original generated triangular skin and four-influence linear blend skinning; one hinge per jaw, two segments per existing digit, no lip/eyelid rig; modeled tongue follows the jaw. CPU channel poses require actual authored motion review in Unreal.",
+      "material_revision_report": "anatomy-Briarhide-material-revision.json",
+      "previous_anatomy_fbx_sha256": "4a0adfced934a07bc157efac37047344976f9499a16ec854f61d29c9b4d8ccd0",
+      "material_change": {
+        "M_OE_Oral": {
+          "roughness": {
+            "before": 0.48,
+            "after": 0.68
+          },
+          "specular": {
+            "before": 0.5,
+            "after": 0.12
+          }
+        },
+        "scope": "Other material inputs, original geometry, indexed UV/color data, skin weights, normals and all reference matrices are exact matches."
+      }
+    },
+    "MireSeer": {
+      "private_output": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-anatomy",
+      "fbx": "SK_OE_MireSeer.fbx",
+      "fbx_sha256": "6f7c7d18b151f72e714c0b4064cafac91cea3eeeb1a7a23030aeee56546ba811",
+      "blend_sha256": "99fdc0ba11c1a43ef6d65863a4f85b5b0584fe9601979c9c5f8c7ce490927c44",
+      "private_prep_report_sha256": "3b9b67fc44b346b92af8aa4f303b86a4a48e5e7782eb31a400d7867dc82bc28b",
+      "portable_prep_report": "anatomy-MireSeer-prep.json",
+      "rig_spec": "games/dreambound/art/organic-enemies/rig/MireSeer.json",
+      "rig_spec_sha256": "458c1c2b7558ac674552fef1727d537c01a7ba355b1ce66c8efa12b7b250c87d",
+      "producing_script_sha256": "cd1fa43b64a220cbd3f76c17f34ba944b772b0a7d1cdeacba5fa3b028f713400",
+      "producing_script_note": "Matches current preparation script.",
+      "baseline_fbx_sha256": "1d30caa1ed02595e2c8834b04eacbdc190ab82080a2ad14ca4aca87c37212e22",
+      "runtime_asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Anatomy",
+      "fresh_skeleton_required": true,
+      "baseline_bones_preserved": 22,
+      "bone_count": 43,
+      "runtime_triangles": 170448,
+      "max_influences": 4,
+      "channel_bones": [
+        {
+          "bone": "jaw",
+          "parent": "head",
+          "head": [
+            0,
+            -0.1,
+            1.94645
+          ],
+          "tail": [
+            0,
+            -0.305,
+            1.905
+          ],
+          "channel": "Jaw",
+          "rotation_degrees": [
+            14,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_l",
+          "parent": "hand_l",
+          "head": [
+            0.568,
+            -0.068,
+            0.997
+          ],
+          "tail": [
+            0.548,
+            -0.105,
+            0.903
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -28,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_tip_l",
+          "parent": "digit_01_l",
+          "head": [
+            0.548,
+            -0.105,
+            0.903
+          ],
+          "tail": [
+            0.541,
+            -0.119,
+            0.815
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_l",
+          "parent": "hand_l",
+          "head": [
+            0.596,
+            -0.025,
+            0.982
+          ],
+          "tail": [
+            0.636,
+            -0.026,
+            0.914
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -25,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_tip_l",
+          "parent": "digit_02_l",
+          "head": [
+            0.636,
+            -0.026,
+            0.914
+          ],
+          "tail": [
+            0.659,
+            -0.026,
+            0.859
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_l",
+          "parent": "hand_l",
+          "head": [
+            0.579,
+            0.069,
+            0.997
+          ],
+          "tail": [
+            0.606,
+            0.108,
+            0.951
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -18,
+            -8,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_tip_l",
+          "parent": "digit_03_l",
+          "head": [
+            0.606,
+            0.108,
+            0.951
+          ],
+          "tail": [
+            0.619,
+            0.109,
+            0.902
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -14,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_l",
+          "parent": "hand_l",
+          "head": [
+            0.505,
+            -0.06,
+            1.045
+          ],
+          "tail": [
+            0.462,
+            -0.08,
+            0.977
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            -12,
+            -24,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_tip_l",
+          "parent": "thumb_l",
+          "head": [
+            0.462,
+            -0.08,
+            0.977
+          ],
+          "tail": [
+            0.426,
+            -0.083,
+            0.921
+          ],
+          "channel": "Grip",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            -15,
+            0
+          ]
+        },
+        {
+          "bone": "frill_l",
+          "parent": "head",
+          "head": [
+            0.12,
+            0.008,
+            1.925
+          ],
+          "tail": [
+            0.28,
+            0.036,
+            1.962
+          ],
+          "channel": "Crest",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            -8,
+            14
+          ]
+        },
+        {
+          "bone": "frill_tip_l",
+          "parent": "frill_l",
+          "head": [
+            0.28,
+            0.036,
+            1.962
+          ],
+          "tail": [
+            0.48,
+            0.04,
+            1.91
+          ],
+          "channel": "Crest",
+          "side": "l",
+          "rotation_degrees": [
+            0,
+            5,
+            -8
+          ]
+        },
+        {
+          "bone": "digit_01_r",
+          "parent": "hand_r",
+          "head": [
+            -0.568,
+            -0.068,
+            0.997
+          ],
+          "tail": [
+            -0.548,
+            -0.105,
+            0.903
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -28,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_01_tip_r",
+          "parent": "digit_01_r",
+          "head": [
+            -0.548,
+            -0.105,
+            0.903
+          ],
+          "tail": [
+            -0.541,
+            -0.119,
+            0.815
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_r",
+          "parent": "hand_r",
+          "head": [
+            -0.596,
+            -0.025,
+            0.982
+          ],
+          "tail": [
+            -0.636,
+            -0.026,
+            0.914
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -25,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_02_tip_r",
+          "parent": "digit_02_r",
+          "head": [
+            -0.636,
+            -0.026,
+            0.914
+          ],
+          "tail": [
+            -0.659,
+            -0.026,
+            0.859
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_r",
+          "parent": "hand_r",
+          "head": [
+            -0.579,
+            0.069,
+            0.997
+          ],
+          "tail": [
+            -0.606,
+            0.108,
+            0.951
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -18,
+            8,
+            0
+          ]
+        },
+        {
+          "bone": "digit_03_tip_r",
+          "parent": "digit_03_r",
+          "head": [
+            -0.606,
+            0.108,
+            0.951
+          ],
+          "tail": [
+            -0.619,
+            0.109,
+            0.902
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -14,
+            0,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_r",
+          "parent": "hand_r",
+          "head": [
+            -0.505,
+            -0.06,
+            1.045
+          ],
+          "tail": [
+            -0.462,
+            -0.08,
+            0.977
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            -12,
+            24,
+            0
+          ]
+        },
+        {
+          "bone": "thumb_tip_r",
+          "parent": "thumb_r",
+          "head": [
+            -0.462,
+            -0.08,
+            0.977
+          ],
+          "tail": [
+            -0.426,
+            -0.083,
+            0.921
+          ],
+          "channel": "Grip",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            15,
+            0
+          ]
+        },
+        {
+          "bone": "frill_r",
+          "parent": "head",
+          "head": [
+            -0.12,
+            0.008,
+            1.925
+          ],
+          "tail": [
+            -0.28,
+            0.036,
+            1.962
+          ],
+          "channel": "Crest",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            8,
+            -14
+          ]
+        },
+        {
+          "bone": "frill_tip_r",
+          "parent": "frill_r",
+          "head": [
+            -0.28,
+            0.036,
+            1.962
+          ],
+          "tail": [
+            -0.48,
+            0.04,
+            1.91
+          ],
+          "channel": "Crest",
+          "side": "r",
+          "rotation_degrees": [
+            0,
+            -5,
+            8
+          ]
+        }
+      ],
+      "channel_displacement_checks": {
+        "Neutral": {
+          "max_vertex_displacement_cm": 2.503040958916101e-05,
+          "vertices_moving_over_1mm": 0
+        },
+        "Jaw": {
+          "max_vertex_displacement_cm": 5.692533250704966,
+          "vertices_moving_over_1mm": 2386
+        },
+        "Grip": {
+          "max_vertex_displacement_cm": 12.722065479976338,
+          "vertices_moving_over_1mm": 3657
+        },
+        "Crest": {
+          "max_vertex_displacement_cm": 6.62275594353782,
+          "vertices_moving_over_1mm": 66482
+        }
+      },
+      "grip_zero_contact_region": {
+        "vertices": 4149,
+        "positions_sha256": "74931225058f3bfa9ff36ed764679aa961b293f10448de5b7e5862baf125319c"
+      },
+      "material_slots": [
+        "M_OE_MireSeer",
+        "M_OE_Oral",
+        "M_OE_Tooth",
+        "M_OE_Tongue"
+      ],
+      "extra_materials": [
+        {
+          "name": "M_OE_Oral",
+          "base_color": [
+            0.02,
+            0.006,
+            0.005,
+            1
+          ],
+          "roughness": 0.68,
+          "metallic": 0,
+          "two_sided": true,
+          "specular": 0.12
+        },
+        {
+          "name": "M_OE_Tooth",
+          "base_color": [
+            0.54,
+            0.43,
+            0.27,
+            1
+          ],
+          "roughness": 0.3,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_Tongue",
+          "base_color": [
+            0.07,
+            0.018,
+            0.012,
+            1
+          ],
+          "roughness": 0.46,
+          "metallic": 0,
+          "two_sided": false
+        }
+      ],
+      "textures": [
+        {
+          "file": "base_color.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+          "processing": "Unchanged embedded PNG bytes"
+        },
+        {
+          "file": "metallic_roughness.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+          "processing": "Unchanged embedded PNG bytes"
+        }
+      ],
+      "unit_contract": {
+        "coordinates": "Blender metres; front -Y, left +X, up +Z",
+        "bone_axis": "Local +Y runs from head to tail; full rest matrices supplied",
+        "scene_scale_length": 1.0,
+        "fbx_axis_forward": "-Y",
+        "fbx_axis_up": "Z",
+        "fbx_apply_unit_scale": true,
+        "fbx_scale_options": "FBX_SCALE_UNITS",
+        "runtime_requirement": "Query imported component/bone transforms. Prior Unreal import retained a 100x parent transform. Convert points with full TransformPosition/InverseTransformPosition, never rotation alone; avoid double cm conversion."
+      },
+      "preview_evidence": [
+        {
+          "file": "jaw-closed-front.png",
+          "sha256": "3d0e4394d4e0431589c1792c062899939a6888351ace3429cbbee94fac27936d"
+        },
+        {
+          "file": "jaw-half-front.png",
+          "sha256": "bf230495c9a5c127590ea5fc3a729fdf3e24ab85208341445a03ac8c81857900"
+        },
+        {
+          "file": "jaw-open-front.png",
+          "sha256": "19fcac2980caaea4b69fbdc728d609f617e90b8ee95cbfcbd07b0cf5f175b17a"
+        },
+        {
+          "file": "jaw-open-side.png",
+          "sha256": "082d2e22ca273fcb39a717d468c5611b31f319b99964325b9121403d98f93702"
+        },
+        {
+          "file": "grip-half.png",
+          "sha256": "4f133a3d2eb9ce342698275abf861596666aabd1c8824f815467b2c45f967f30"
+        },
+        {
+          "file": "grip-full.png",
+          "sha256": "e38fed9fd9751d90fb1690e54e4a4b3d206a5e3606f5048c52da87edc6be72e4"
+        },
+        {
+          "file": "grip-full-right.png",
+          "sha256": "166fd085ff41f9dfea186e46574b0eedad63f136fcb24ae4158a70da7e0e17d9"
+        },
+        {
+          "file": "crest-rest.png",
+          "sha256": "a63b44a284a4fb65f0c3c2624d99dae706449c689095990d8e7b2ce96fb3a483"
+        },
+        {
+          "file": "crest-full.png",
+          "sha256": "ca8cee347a1f8b134b36b25d165dde506e6e10cde5c75e1d1cfe4efddbf9c700"
+        },
+        {
+          "file": "flexed-cup.png",
+          "sha256": "c1c2bf9acf694a8775dd7b39cd54021c2638da19840977412cf3b12bfdf95ab8"
+        }
+      ],
+      "command": "Configured Blender --background --threads 4 --python-exit-code 1 --python games/dreambound/scripts/refine_organic_anatomy.py -- --asset MireSeer --views jaw-closed-front,jaw-half-front,jaw-open-front,jaw-open-side,grip-half,grip-full,grip-full-right,crest-rest,crest-full,flexed-cup",
+      "command_result": "Observed Blender process exit code 0; all requested views completed.",
+      "limits": "Candidate anatomy, not animation parity. Original generated triangular skin and four-influence linear blend skinning; one hinge per jaw, two segments per existing digit, no lip/eyelid rig; modeled tongue follows the jaw. CPU channel poses require actual authored motion review in Unreal."
+    }
+  }
+}

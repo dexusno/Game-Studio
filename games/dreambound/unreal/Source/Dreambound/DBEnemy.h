@@ -46,6 +46,8 @@ struct FDBEnemyAnimationDebug
     float right_hand_reach_error_cm = 0.f;
     float parent_unit_scale = 1.f;
     float attack_elapsed = 0.f;
+    bool pounce_blocked = false;
+    float blocked_pounce_elapsed = 0.f;
     FString attack_name;
 };
 
@@ -160,6 +162,18 @@ private:
     FOrganicFoot OrganicFeet[2];
     FVector OrganicLastLocation = FVector::ZeroVector;
     FVector OrganicVelocity = FVector::ZeroVector;
+    FVector OrganicMotionLean = FVector::ZeroVector;
+    FVector OrganicMotionLeanVelocity = FVector::ZeroVector;
+    FVector OrganicGaze = FVector::ZeroVector;
+    FVector OrganicGazeVelocity = FVector::ZeroVector;
+    float OrganicFacingVelocity = 0.f;
+    bool bOrganicGazeInitialized = false;
+    FVector OrganicAttentionWeights = FVector(1.f, 1.f, 0.f);
+    FVector OrganicAttentionVelocity = FVector::ZeroVector;
+    FVector OrganicCastOrigin = FVector::ZeroVector;
+    bool bOrganicCastReleased = false;
+    FVector OrganicCrestMotion = FVector::ZeroVector;
+    FVector OrganicCrestVelocity = FVector::ZeroVector;
     FVector OrganicPelvisOffset = FVector::ZeroVector;
     FVector OrganicSupportOffset = FVector::ZeroVector;
     FVector OrganicLandingPelvisStart = FVector::ZeroVector;
@@ -190,6 +204,10 @@ private:
     float OrganicStepCooldown = 0.f;
     float OrganicPoseDelta = 0.f;
     float OrganicPerformanceCycle = 0.f;
+    float OrganicIdlePhase = 0.f;
+    bool bOrganicPounceBlocked = false;
+    float OrganicBlockedPounceTime = 0.f;
+    FVector OrganicPounceStart = FVector::ZeroVector;
     float OrganicPerformancePlantTime[2] = { 1.f, 1.f };
     bool bOrganicPerformanceFootSwinging[2] = { false, false };
     int32 OrganicPerformanceStepSide = INDEX_NONE;

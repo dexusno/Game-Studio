@@ -1,0 +1,196 @@
+{
+  "scope": "Material-response-only revision after the actual Unreal lit A/B succeeded.",
+  "previous_fbx_sha256": "4a0adfced934a07bc157efac37047344976f9499a16ec854f61d29c9b4d8ccd0",
+  "current_fbx_sha256": "ea4cd13bbb5d13683be8cf71a57b8c9f67b2a58459bd104aad903a2d14514806",
+  "previous_blend_sha256": "c8593ac4e4d25cab8362b07c1e9e059cb3c7251de6632e8cb9edeea7d62d38d9",
+  "current_blend_sha256": "58699dbbe83a8a2604a6649dc9cdc12501ae809d08f26fa1592b8e0665244a63",
+  "checks": {
+    "mesh_uv_color_sha256": true,
+    "weights_sha256": true,
+    "corner_normals_sha256": true,
+    "bone_rest_sha256": true,
+    "other_materials_unchanged": true,
+    "oral_values_match_trial": true
+  },
+  "before": {
+    "mesh_uv_color_sha256": "490accf73be1f7de9a9b622568c8cb39d600aae74ddce65c0f7bf91fa4b34d79",
+    "weights_sha256": "cd6af1db8c7b2f6e4aaceea904cf2c9f07b8779d1295ad16f083e438f1d4059d",
+    "corner_normals_sha256": "bd68845bbb65fcaf2399464c45625e77287c8dfb7d642d60d6ff19514d96fefb",
+    "bone_rest_sha256": "403165cad6c47f479eb2c0722f7b3e48153214e1a305c221c651c384bd71b1e4",
+    "vertices": 386834,
+    "polygons": 189153,
+    "bones": 38,
+    "materials": {
+      "M_OE_Briarhide": {
+        "Base Color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "Roughness": 0.5,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      },
+      "M_OE_EyeIris": {
+        "Base Color": [
+          0.23999999463558197,
+          0.09200000017881393,
+          0.012000000104308128,
+          1.0
+        ],
+        "Roughness": 0.20000000298023224,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.699999988079071
+      },
+      "M_OE_EyePupil": {
+        "Base Color": [
+          0.003000000026077032,
+          0.004999999888241291,
+          0.0020000000949949026,
+          1.0
+        ],
+        "Roughness": 0.11999999731779099,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.699999988079071
+      },
+      "M_OE_Oral": {
+        "Base Color": [
+          0.019999999552965164,
+          0.006000000052154064,
+          0.004999999888241291,
+          1.0
+        ],
+        "Roughness": 0.47999998927116394,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      },
+      "M_OE_Tooth": {
+        "Base Color": [
+          0.5400000214576721,
+          0.4300000071525574,
+          0.27000001072883606,
+          1.0
+        ],
+        "Roughness": 0.30000001192092896,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      },
+      "M_OE_Tongue": {
+        "Base Color": [
+          0.07000000029802322,
+          0.017999999225139618,
+          0.012000000104308128,
+          1.0
+        ],
+        "Roughness": 0.46000000834465027,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      }
+    }
+  },
+  "after": {
+    "mesh_uv_color_sha256": "490accf73be1f7de9a9b622568c8cb39d600aae74ddce65c0f7bf91fa4b34d79",
+    "weights_sha256": "cd6af1db8c7b2f6e4aaceea904cf2c9f07b8779d1295ad16f083e438f1d4059d",
+    "corner_normals_sha256": "bd68845bbb65fcaf2399464c45625e77287c8dfb7d642d60d6ff19514d96fefb",
+    "bone_rest_sha256": "403165cad6c47f479eb2c0722f7b3e48153214e1a305c221c651c384bd71b1e4",
+    "vertices": 386834,
+    "polygons": 189153,
+    "bones": 38,
+    "materials": {
+      "M_OE_Briarhide": {
+        "Base Color": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929,
+          1.0
+        ],
+        "Roughness": 0.5,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      },
+      "M_OE_EyeIris": {
+        "Base Color": [
+          0.23999999463558197,
+          0.09200000017881393,
+          0.012000000104308128,
+          1.0
+        ],
+        "Roughness": 0.20000000298023224,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.699999988079071
+      },
+      "M_OE_EyePupil": {
+        "Base Color": [
+          0.003000000026077032,
+          0.004999999888241291,
+          0.0020000000949949026,
+          1.0
+        ],
+        "Roughness": 0.11999999731779099,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.699999988079071
+      },
+      "M_OE_Oral": {
+        "Base Color": [
+          0.019999999552965164,
+          0.006000000052154064,
+          0.004999999888241291,
+          1.0
+        ],
+        "Roughness": 0.6800000071525574,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.11999999731779099
+      },
+      "M_OE_Tooth": {
+        "Base Color": [
+          0.5400000214576721,
+          0.4300000071525574,
+          0.27000001072883606,
+          1.0
+        ],
+        "Roughness": 0.30000001192092896,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      },
+      "M_OE_Tongue": {
+        "Base Color": [
+          0.07000000029802322,
+          0.017999999225139618,
+          0.012000000104308128,
+          1.0
+        ],
+        "Roughness": 0.46000000834465027,
+        "Metallic": 0.0,
+        "Specular IOR Level": 0.5
+      }
+    }
+  },
+  "engine_trial_definition": ".local/anatomy-oral-trial.json",
+  "engine_trial_capture": ".local/anatomy-v3-melee-oral-trial/Saved/EnemyMotionStudy/Melee-Detail",
+  "engine_trial_reviewed_frames": [
+    140,
+    154,
+    158,
+    160
+  ],
+  "engine_trial_definition_sha256": "622cab3859533a3b44c7c19a7253dcf037ef5460e18a7f05b93d0e25b8073a8a",
+  "engine_trial_frames": [
+    {
+      "frame": 140,
+      "sha256": "05d6de584625df0033433beef743c1e9db6afc128aaf7694b05d74c9ba097973"
+    },
+    {
+      "frame": 154,
+      "sha256": "d98fa16c66380f6ce3f4909561e72dcd9df802318672c95a7377fc1211ce1d0b"
+    },
+    {
+      "frame": 158,
+      "sha256": "c6425ae9f913b5d4540034e19a53046356fa8f1e7e0a7206104a641b96d540f7"
+    },
+    {
+      "frame": 160,
+      "sha256": "f6ddfbe8bdf88fefeda6db3e89335554e4feb1d0a2645dcf742898941cd756a5"
+    }
+  ]
+}

@@ -40,6 +40,22 @@ namespace
     };
     uint32 EnemyAttackSequence = 0;
 
+    // Exact critically damped response for a target held over this tick.
+    // Arrival remains continuous across frame rates and a hitch cannot turn
+    // a small carried-body reaction into an unstable Euler spring.
+    void AdvanceOrganicResponse(FVector& Value, FVector& Velocity, const FVector& Target,
+        float Frequency, float DeltaSeconds)
+    {
+        if (DeltaSeconds <= 0.f) return;
+        const float Time = FMath::Min(DeltaSeconds, .25f);
+        const float Omega = FMath::Max(.01f, Frequency);
+        const FVector Error = Value - Target;
+        const FVector Carry = Velocity + Error * Omega;
+        const float Decay = FMath::Exp(-Omega * Time);
+        Value = Target + (Error + Carry * Time) * Decay;
+        Velocity = (Velocity - Carry * (Omega * Time)) * Decay;
+    }
+
     void AddElementShard(UInstancedStaticMeshComponent* Component, FVector At, FRotator Rotation, FVector Size)
     {
         if (!Component->GetStaticMesh()) return;
@@ -197,6 +213,7 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     const uint32 PlacementKey = static_cast<uint32>(FMath::RoundToInt(HomePosition.X)) * 73856093u
         ^ static_cast<uint32>(FMath::RoundToInt(HomePosition.Y)) * 19349663u
         ^ static_cast<uint32>(RoomId) * 83492791u;
+    OrganicIdlePhase = static_cast<float>((PlacementKey >> 6u) & 1023u) * (17.f / 1024.f);
     AvoidanceSide = PlacementKey & 1u ? 1.f : -1.f;
     Cooldown = 0.35f + ((PlacementKey >> 3u) & 3u) * 0.16f;
     const float Size = Kind == EDBEnemyKind::Boss ? 1.75f : Kind == EDBEnemyKind::Hunter ? 0.95f : 1.f;
@@ -251,10 +268,14 @@ void ADBEnemy::BuildVisuals()
     const bool bHunter = Kind == EDBEnemyKind::Hunter;
     const bool bCaster = Kind == EDBEnemyKind::Caster;
     const bool bLegacyRig = FParse::Param(FCommandLine::Get(), TEXT("DBLegacyCreatureRig"));
+    const bool bAnatomyRig = !bLegacyRig && (FParse::Param(FCommandLine::Get(), TEXT("DBAnatomyCreatureRig"))
+        || !FParse::Param(FCommandLine::Get(), TEXT("DBPerformanceCreatureRig")));
     const TCHAR* CreaturePath = bCaster
         ? (bLegacyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer.SK_OE_MireSeer")
+            : bAnatomyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Anatomy.SK_OE_MireSeer_Anatomy")
             : TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Performance.SK_OE_MireSeer_Performance"))
         : (bLegacyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide.SK_OE_Briarhide")
+            : bAnatomyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Anatomy.SK_OE_Briarhide_Anatomy")
             : TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Performance.SK_OE_Briarhide_Performance"));
     USkeletalMesh* Creature = LoadObject<USkeletalMesh>(nullptr, CreaturePath);
     OrganicMesh->SetSkinnedAssetAndUpdate(Creature);
@@ -280,6 +301,8 @@ void ADBEnemy::BuildVisuals()
             || !OrganicBoneIndices.Contains(TEXT("neck")) || !OrganicBoneIndices.Contains(TEXT("clavicle_l"))
             || !OrganicBoneIndices.Contains(TEXT("clavicle_r"))))
             UE_LOG(LogTemp, Error, TEXT("The selected performance mesh is missing its authored torso/shoulder hierarchy."));
+        if (bAnatomyRig && !OrganicBoneIndices.Contains(TEXT("jaw")))
+            UE_LOG(LogTemp, Error, TEXT("The selected anatomy mesh is missing its articulated jaw."));
         if (UMaterialInterface* Skin = OrganicMesh->GetMaterial(0))
         {
             CoreMaterial = UMaterialInstanceDynamic::Create(Skin, this);
@@ -362,7 +385,11 @@ FVector ADBEnemy::KeepInsideArena(FVector Point) const
 
 FVector ADBEnemy::ShotOrigin() const
 {
-    if (bVisualsBuilt && Kind == EDBEnemyKind::Caster && ChargePart) return ChargePart->GetComponentLocation();
+    // Preserve the original gameplay origin under the legacy body controller.
+    // The visible orb can stay with the release gesture while that controller
+    // applies its post-shot kick, without moving the next projectile or LOS ray.
+    if (bVisualsBuilt && Kind == EDBEnemyKind::Caster && BodyPivot)
+        return BodyPivot->GetComponentTransform().TransformPosition(FVector(78.f, 0.f, 37.f));
     return GetActorLocation() + FVector(0.f, 0.f, Kind == EDBEnemyKind::Boss ? 48.f : 26.f)
         + GetActorForwardVector() * (GetCapsuleComponent()->GetScaledCapsuleRadius() + 18.f);
 }
@@ -390,6 +417,12 @@ void ADBEnemy::Tick(float DeltaSeconds)
     {
         GetCharacterMovement()->StopMovementImmediately();
         ConsumeMovementInputVector();
+        // Creatures waiting in another court remain alive and breathing.
+        // Menus and pause still freeze the world, including cosmetic motion.
+        const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode());
+        const bool bWorldRunning = !Mode || (!Mode->bPaused && !Mode->bChoosingReward && !Mode->bShowingBuild
+            && !Mode->bTitle && !Mode->bWon && !Mode->bDefeated);
+        if (bWorldRunning && Phase == EDBEnemyPhase::Dormant) UpdateVisuals(Dt);
         WarningMarks->ClearInstances();
         ClearElementVisuals();
         ChargePart->SetVisibility(false);
@@ -400,6 +433,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
     {
         GetCharacterMovement()->StopMovementImmediately();
         Phase = EDBEnemyPhase::Dormant;
+        UpdateVisuals(Dt);
         WarningMarks->ClearInstances();
         ClearElementVisuals();
         ChargePart->SetVisibility(false);
@@ -621,6 +655,7 @@ bool ADBEnemy::TryInterceptShieldPiece(FVector IncomingDirection)
 
 void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
 {
+    bOrganicCastReleased = false;
     Attack = InAttack;
     Phase = EDBEnemyPhase::Telegraph;
     TellTime = TellDuration = Duration;
@@ -695,6 +730,9 @@ void ADBEnemy::BeginAttack()
     }
     if (Attack == EAttack::Lunge)
     {
+        bOrganicPounceBlocked = false;
+        OrganicBlockedPounceTime = 0.f;
+        OrganicPounceStart = GetActorLocation();
         LockedDirection.Z = 0.f;
         LockedDirection.Normalize();
         GetCharacterMovement()->MaxWalkSpeed = 1050.f * (1.f - ChillStacks * 0.12f);
@@ -706,12 +744,18 @@ void ADBEnemy::FireBolt(FVector Direction, float Damage, FLinearColor Color)
 {
     if (!Target.IsValid() || Target->bDead) return;
     AttackKick = 1.f;
-    if (EnemyFireSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyFireSound, ShotOrigin(), 0.78f,
+    const FVector Origin = ShotOrigin();
+    if (Kind == EDBEnemyKind::Caster)
+    {
+        OrganicCastOrigin = Origin;
+        bOrganicCastReleased = true;
+    }
+    if (EnemyFireSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyFireSound, Origin, 0.78f,
         Kind == EDBEnemyKind::Boss ? 0.82f : 1.f);
     FActorSpawnParameters Params;
     Params.Owner = this;
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-    if (ADBProjectile* Bolt = GetWorld()->SpawnActor<ADBProjectile>(ShotOrigin(), Direction.Rotation(), Params))
+    if (ADBProjectile* Bolt = GetWorld()->SpawnActor<ADBProjectile>(Origin, Direction.Rotation(), Params))
         Bolt->Initialize(Direction, Kind == EDBEnemyKind::Boss ? 900.f : 690.f, Damage, false, this, Color);
 }
 
@@ -764,6 +808,19 @@ void ADBEnemy::UpdateAttack(float DeltaSeconds)
         const FVector Next = GetActorLocation() + LockedDirection * 100.f;
         if (FVector::DistSquared2D(Next, KeepInsideArena(Next)) < 1.f)
             AddMovementInput(LockedDirection, 1.f, true);
+        // Two movement updates have had a chance to advance the pounce. If
+        // solid contact or the arena boundary held it here, brace against that
+        // stop instead of displaying a complete flight over a stationary body.
+        // Damage, commitment duration and recovery remain gameplay-owned.
+        if (!bOrganicPounceBlocked && AttackElapsed >= .06f && AttackElapsed <= .18f
+            && FVector::DistSquared2D(GetActorLocation(),OrganicPounceStart) < FMath::Square(6.f)
+            && GetVelocity().SizeSquared2D() < FMath::Square(30.f))
+        {
+            bOrganicPounceBlocked = true;
+            OrganicBlockedPounceTime = 0.f;
+            OrganicPhaseStartBonePose = OrganicMesh->BoneSpaceTransforms;
+            OrganicPhaseBlendTime = 0.f;
+        }
         if (!bHitAttempted && TryMeleeHit(150.f, 0.15f, AttackDamage)) bHitAttempted = true;
         if (Phase != EDBEnemyPhase::Attack || bDead) return;
         if (AttackElapsed >= 0.43f || (AttackElapsed > 0.15f && GetVelocity().Size2D() < 30.f)) BeginRecovery(1.05f);
@@ -1028,11 +1085,11 @@ void ADBEnemy::Die()
         RightArmPivot.Get(), LeftLegPivot.Get(), RightLegPivot.Get() }) DeathStartPose.Add(Joint->GetRelativeTransform());
     OrganicDeathStartPose = OrganicMesh->BoneSpaceTransforms;
     OrganicDeathPelvisStart = OrganicMesh->GetBoneLocationByName(TEXT("pelvis"), EBoneSpaces::WorldSpace);
-    DeathLocalDirection = GetActorRotation().UnrotateVector(LastHitDirection);
+    const FRotator DeathFacing(0.f, OrganicFacingYaw, 0.f);
+    DeathLocalDirection = DeathFacing.UnrotateVector(LastHitDirection);
     if (DeathLocalDirection.IsNearlyZero()) DeathLocalDirection = -FVector::ForwardVector;
     const float FallSide = DeathLocalDirection.Y >= 0.f ? 1.f : -1.f;
     const float FallBack = DeathLocalDirection.X >= 0.f ? -1.f : 1.f;
-    const FRotator DeathFacing(0.f, OrganicFacingYaw, 0.f);
     const FVector ContactCandidate = OrganicDeathPelvisStart + DeathFacing.RotateVector(
         FVector(-FallBack * 29.f, FallSide * 20.f, 0.f)) * VisualScale;
     FVector PelvisGroundNormal;
@@ -1046,8 +1103,13 @@ void ADBEnemy::Die()
         Foot.Position = OrganicMesh->GetBoneLocationByName(FootName, EBoneSpaces::WorldSpace);
         Foot.Rotation = OrganicMesh->GetBoneRotationByName(FootName, EBoneSpaces::WorldSpace).Quaternion();
         FVector GroundNormal;
-        TraceOrganicFoot(Foot.Position, Foot.AnkleHeight, DeathFootTargets[Side], GroundNormal);
-        DeathFootRotations[Side] = FQuat::FindBetweenNormals(Foot.Normal, GroundNormal) * Foot.Rotation;
+        const float Sign = Side == 0 ? -1.f : 1.f;
+        const bool bFailedSupport = Sign == FallSide;
+        const FVector FootDrag = bFailedSupport
+            ? DeathFacing.RotateVector(FVector(-12.f,-Sign * 8.f,0.f)) * VisualScale : FVector::ZeroVector;
+        TraceOrganicFoot(Foot.Position + FootDrag, Foot.AnkleHeight, DeathFootTargets[Side], GroundNormal);
+        DeathFootRotations[Side] = FQuat(GroundNormal, FMath::DegreesToRadians(bFailedSupport ? Sign * 17.f : 0.f))
+            * FQuat::FindBetweenNormals(Foot.Normal, GroundNormal) * Foot.Rotation;
         Foot.bSwinging = false;
     }
     bOrganicFeetInitialized = bOrganicGrounded = false;
@@ -1068,6 +1130,7 @@ void ADBEnemy::Die()
 
 void ADBEnemy::UpdateDeath(float DeltaSeconds)
 {
+    OrganicPoseDelta = DeltaSeconds;
     DeathTime += DeltaSeconds;
     const float Kneel = FMath::SmoothStep(0.f, 0.26f, DeathTime);
     const float Fall = FMath::SmoothStep(0.18f, 0.70f, DeathTime);
@@ -1102,7 +1165,7 @@ void ADBEnemy::UpdateDeath(float DeltaSeconds)
     WarningMarks->ClearInstances();
     EffectMarks->ClearInstances();
     if (CoreMaterial) CoreMaterial->SetVectorParameterValue(TEXT("Color"), DangerColor * FMath::Max(0.015f, 1.f - DeathTime * 1.5f));
-    if (!bDeathLanded && DeathTime >= 0.53f)
+    if (!bDeathLanded && DeathTime >= 0.59f)
     {
         bDeathLanded = true;
         if (BodyImpactSound) UGameplayStatics::PlaySoundAtLocation(this, BodyImpactSound, FeetLocation(), 0.58f, 0.62f);
@@ -1232,9 +1295,20 @@ void ADBEnemy::ResetOrganicLocomotion()
     OrganicLandingPelvisStart = FVector::ZeroVector;
     OrganicLastLocation = GetActorLocation();
     OrganicVelocity = OrganicPelvisOffset = OrganicSupportOffset = FVector::ZeroVector;
+    OrganicMotionLean = OrganicMotionLeanVelocity = FVector::ZeroVector;
+    OrganicGaze = OrganicGazeVelocity = FVector::ZeroVector;
+    OrganicFacingVelocity = 0.f;
+    bOrganicGazeInitialized = false;
+    OrganicAttentionWeights = FVector(1.f, 1.f, 0.f);
+    OrganicAttentionVelocity = FVector::ZeroVector;
+    bOrganicCastReleased = false;
+    OrganicCrestMotion = OrganicCrestVelocity = FVector::ZeroVector;
     OrganicFacingYaw = GetActorRotation().Yaw;
     OrganicSpeed = OrganicArmDrive = OrganicHipYaw = OrganicHipRoll = OrganicSupportDrop = OrganicTurnRate = OrganicStepCooldown = OrganicPerformanceCycle = 0.f;
     OrganicPerformanceStepSide = INDEX_NONE;
+    bOrganicPounceBlocked = false;
+    OrganicBlockedPounceTime = 0.f;
+    OrganicPounceStart = GetActorLocation();
     for (int32 Side = 0; Side < 2; ++Side)
     {
         OrganicPerformancePlantTime[Side] = 1.f;
@@ -1285,17 +1359,43 @@ void ADBEnemy::UpdateOrganicLocomotion(float DeltaSeconds)
     const bool bTeleport = Travel.Size2D() > 200.f || FMath::Abs(Travel.Z) > 120.f;
     if (bTeleport) ResetOrganicLocomotion();
     const float Distance = bTeleport ? 0.f : Travel.Size2D();
-    const bool bLunging = Phase == EDBEnemyPhase::Attack && Attack == EAttack::Lunge;
+    const bool bLunging = Phase == EDBEnemyPhase::Attack && Attack == EAttack::Lunge && !bOrganicPounceBlocked;
     const bool bStartingLanding = bOrganicLungeNeedsLanding && !bLunging
         && GetCharacterMovement()->IsMovingOnGround();
     const FVector MeasuredVelocity = DeltaSeconds > SMALL_NUMBER && !bTeleport ? Travel / DeltaSeconds : FVector::ZeroVector;
+    const FVector PreviousVelocity = OrganicVelocity;
     OrganicVelocity = FMath::VInterpTo(OrganicVelocity, FVector(MeasuredVelocity.X, MeasuredVelocity.Y, 0.f), DeltaSeconds, 14.f);
     OrganicSpeed = OrganicVelocity.Size2D();
     OrganicLastLocation = Location;
     const float PreviousYaw = OrganicFacingYaw;
     const float TurnSpeed = Phase == EDBEnemyPhase::Attack ? 720.f : Phase == EDBEnemyPhase::Telegraph ? 390.f : bCaster ? 225.f : 165.f;
-    OrganicFacingYaw = FMath::FixedTurn(OrganicFacingYaw, GetActorRotation().Yaw, TurnSpeed * DeltaSeconds);
+    // The head can acquire a new target bearing before the carried body turns.
+    // A bounded angular response also keeps the trunk moving briefly after a
+    // steering change, so it catches over the actual support steps.
+    FVector Heading(OrganicFacingYaw, 0.f, 0.f), HeadingVelocity(OrganicFacingVelocity, 0.f, 0.f);
+    const FVector HeadingTarget(OrganicFacingYaw + FMath::FindDeltaAngleDegrees(OrganicFacingYaw,
+        GetActorRotation().Yaw), 0.f, 0.f);
+    const float HeadingResponse = Phase == EDBEnemyPhase::Attack ? 45.f : Phase == EDBEnemyPhase::Telegraph ? 25.f
+        : bCaster ? 12.f : Kind == EDBEnemyKind::Hunter ? 11.f : Kind == EDBEnemyKind::Boss ? 7.f : 8.f;
+    AdvanceOrganicResponse(Heading, HeadingVelocity, HeadingTarget, HeadingResponse, DeltaSeconds);
+    OrganicFacingYaw = FMath::UnwindDegrees(OrganicFacingYaw + FMath::Clamp(
+        static_cast<float>(Heading.X) - OrganicFacingYaw, -TurnSpeed * DeltaSeconds, TurnSpeed * DeltaSeconds));
+    OrganicFacingVelocity = FMath::Clamp(static_cast<float>(HeadingVelocity.X), -TurnSpeed, TurnSpeed);
     OrganicTurnRate = DeltaSeconds > SMALL_NUMBER ? FMath::FindDeltaAngleDegrees(PreviousYaw, OrganicFacingYaw) / DeltaSeconds : 0.f;
+    const FRotator MotionFacing(0.f, OrganicFacingYaw, 0.f);
+    const FVector Acceleration = DeltaSeconds > SMALL_NUMBER && !bTeleport
+        ? MotionFacing.UnrotateVector((OrganicVelocity - PreviousVelocity) / DeltaSeconds) : FVector::ZeroVector;
+    const float SpeedFraction = FMath::Clamp(OrganicSpeed / FMath::Max(1.f, BaseSpeed), 0.f, 1.f);
+    const float TurnFraction = FMath::Clamp(OrganicTurnRate / 165.f, -1.f, 1.f);
+    const float HeadingError = FMath::Clamp(FMath::FindDeltaAngleDegrees(OrganicFacingYaw,
+        GetActorRotation().Yaw), -35.f, 35.f);
+    const FVector LeanTarget(
+        -FMath::Clamp(static_cast<float>(Acceleration.X / 1500.f), -1.f, 1.f) * 10.f,
+        HeadingError * .20f,
+        -FMath::Clamp(static_cast<float>(Acceleration.Y / 1500.f), -1.f, 1.f) * 6.f
+            - TurnFraction * SpeedFraction * 5.f);
+    AdvanceOrganicResponse(OrganicMotionLean, OrganicMotionLeanVelocity, LeanTarget,
+        bCaster ? 13.f : Kind == EDBEnemyKind::Boss ? 8.f : 10.f, DeltaSeconds);
     // Only the skin turns with visual inertia. The capsule, warning direction,
     // and ChargePart/ShotOrigin retain their existing actor-space semantics.
     OrganicMesh->SetRelativeRotation(FRotator(0.f,
@@ -1665,6 +1765,8 @@ FDBEnemyAnimationDebug ADBEnemy::GetAnimationDebugState() const
     Result.visible_yaw = OrganicFacingYaw;
     Result.movement_blend = GaitBlend;
     Result.attack_elapsed = AttackElapsed;
+    Result.pounce_blocked = bOrganicPounceBlocked;
+    Result.blocked_pounce_elapsed = OrganicBlockedPounceTime;
     switch (Attack)
     {
     case EAttack::Swing: Result.attack_name = TEXT("Swing"); break;
@@ -1721,6 +1823,16 @@ FDBEnemyAnimationDebug ADBEnemy::GetAnimationDebugState() const
 void ADBEnemy::UpdateVisuals(float DeltaSeconds)
 {
     OrganicPoseDelta = DeltaSeconds;
+    if (bOrganicPounceBlocked)
+    {
+        if (Attack == EAttack::Lunge && (Phase == EDBEnemyPhase::Attack || Phase == EDBEnemyPhase::Recovery))
+            OrganicBlockedPounceTime += DeltaSeconds;
+        else
+        {
+            bOrganicPounceBlocked = false;
+            OrganicBlockedPounceTime = 0.f;
+        }
+    }
     UpdateOrganicLocomotion(DeltaSeconds);
     VisualTime += DeltaSeconds;
     HitFlash = FMath::Max(0.f, HitFlash - DeltaSeconds);
@@ -2013,6 +2125,8 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     const bool bCharging = (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
         && (Phase == EDBEnemyPhase::Telegraph || (Phase == EDBEnemyPhase::Attack && ShotsRemaining > 0));
     ChargePart->SetVisibility(bCharging);
+    if (Kind == EDBEnemyKind::Caster)
+        ChargePart->SetWorldLocation(bOrganicCastReleased ? OrganicCastOrigin : ShotOrigin());
     if (bCharging)
     {
         if (Kind == EDBEnemyKind::Boss) ChargePart->SetWorldLocation(ShotOrigin());
@@ -2076,7 +2190,7 @@ void ADBEnemy::UpdateOrganicPose()
         return FMath::SmoothStep(0.f, .045f, Age) * FMath::Exp(-Age * 9.f);
     };
     FPose Performance = Travel(PerformanceRole, GaitBlend, OrganicPerformanceCycle, OrganicPelvisOffset.Y,
-        FMath::Clamp(OrganicTurnRate / 165.f, -1.f, 1.f), MotionVelocity, FVector2D(PlantLoad(0), PlantLoad(1)), VisualTime);
+        FMath::Clamp(OrganicTurnRate / 165.f, -1.f, 1.f), MotionVelocity, FVector2D(PlantLoad(0), PlantLoad(1)), VisualTime + OrganicIdlePhase);
     const bool bActionPerformance = !bDead && (Phase == EDBEnemyPhase::Telegraph
         || Phase == EDBEnemyPhase::Attack || Phase == EDBEnemyPhase::Recovery);
     if (bActionPerformance)
@@ -2088,7 +2202,7 @@ void ADBEnemy::UpdateOrganicPose()
         switch (Attack)
         {
         case EAttack::Swing: Performance = Melee(ActionTime); break;
-        case EAttack::Lunge: Performance = Hunter(ActionTime); break;
+        case EAttack::Lunge: Performance = bOrganicPounceBlocked ? BlockedPounce(OrganicBlockedPounceTime) : Hunter(ActionTime); break;
         case EAttack::Bolt: Performance = Cast(ActionTime, false); break;
         case EAttack::Salvo: Performance = Cast(ActionTime, true); break;
         case EAttack::Intercept: Performance = Cast(ActionTime, true, true); break;
@@ -2097,13 +2211,66 @@ void ADBEnemy::UpdateOrganicPose()
         default: break;
         }
     }
-    if (!bDead && Target.IsValid())
+    if (!bDead)
     {
-        const FVector ToTarget = Target->GetActorLocation() - OrganicMesh->GetComponentLocation();
-        const float LookYaw = FMath::Clamp(FMath::FindDeltaAngleDegrees(OrganicFacingYaw, ToTarget.Rotation().Yaw), -32.f, 32.f);
-        const float Attention = Phase == EDBEnemyPhase::Approach || Phase == EDBEnemyPhase::Dormant ? 1.f : .30f;
-        Performance.Joint[Neck].Yaw += LookYaw * Attention * .65f;
-        Performance.Joint[Head].Yaw += LookYaw * Attention * .35f;
+        const float CarriageTarget = Phase == EDBEnemyPhase::Approach || Phase == EDBEnemyPhase::Dormant ? 1.f
+            : Phase == EDBEnemyPhase::Recovery ? .25f : .08f;
+        const float AttentionTarget = Phase == EDBEnemyPhase::Approach || Phase == EDBEnemyPhase::Dormant ? 1.f
+            : Phase == EDBEnemyPhase::Telegraph ? .45f : Phase == EDBEnemyPhase::Recovery ? .55f : .12f;
+        const bool bWatchingTarget = Target.IsValid() && !Target->bDead && IsRoomActive()
+            && FVector::DistSquared2D(GetActorLocation(), Target->GetActorLocation()) < FMath::Square(1800.f);
+        // An action-to-recovery handoff must not switch a large held gaze
+        // correction on in one frame. Regain attention and carried response
+        // continuously while the authored action itself keeps its clock.
+        AdvanceOrganicResponse(OrganicAttentionWeights, OrganicAttentionVelocity,
+            FVector(CarriageTarget, AttentionTarget, bWatchingTarget ? 1.f : 0.f), 18.f, OrganicPoseDelta);
+        const float Carriage = FMath::Clamp(static_cast<float>(OrganicAttentionWeights.X), 0.f, 1.f);
+        const float Attention = FMath::Clamp(static_cast<float>(OrganicAttentionWeights.Y), 0.f, 1.f);
+        // Acceleration loads the body before a travelling stance settles;
+        // braking leaves the shoulders catching up. The actual movement,
+        // rather than an independent idle clock, drives these small reactions.
+        Performance.Joint[Hips] += FRotator(OrganicMotionLean.X * .25f, 0.f, OrganicMotionLean.Z * .20f) * Carriage;
+        Performance.Joint[Lumbar] += FRotator(OrganicMotionLean.X * .25f, OrganicMotionLean.Y * .35f,
+            OrganicMotionLean.Z * .25f) * Carriage;
+        Performance.Joint[Chest] += FRotator(OrganicMotionLean.X * .50f, OrganicMotionLean.Y * .65f,
+            OrganicMotionLean.Z * .55f) * Carriage;
+        Performance.Joint[Neck].Pitch -= OrganicMotionLean.X * Carriage * .30f;
+        Performance.Joint[Head].Roll -= OrganicMotionLean.Z * Carriage * .25f;
+
+        if (!bOrganicGazeInitialized)
+        {
+            OrganicGaze = FVector(OrganicFacingYaw, 0.f, 0.f);
+            OrganicGazeVelocity = FVector::ZeroVector;
+            bOrganicGazeInitialized = true;
+        }
+        FVector GazeTarget(OrganicGaze.X + FMath::FindDeltaAngleDegrees(static_cast<float>(OrganicGaze.X),
+            OrganicFacingYaw), 0.f, 0.f);
+        if (bWatchingTarget)
+        {
+            const int32 HeadIndex = Skeleton.FindBoneIndex(TEXT("head"));
+            const FVector HeadOrigin = OrganicReferenceComponentPose.IsValidIndex(HeadIndex)
+                ? OrganicMesh->GetComponentTransform().TransformPosition(OrganicReferenceComponentPose[HeadIndex].GetLocation())
+                : GetActorLocation();
+            const FVector ToTarget = Target->GetPawnViewLocation() - HeadOrigin;
+            GazeTarget.X = OrganicGaze.X + FMath::FindDeltaAngleDegrees(static_cast<float>(OrganicGaze.X), ToTarget.Rotation().Yaw);
+            GazeTarget.Y = FMath::Clamp(static_cast<float>(ToTarget.Rotation().Pitch), -22.f, 20.f);
+        }
+        AdvanceOrganicResponse(OrganicGaze, OrganicGazeVelocity, GazeTarget,
+            Kind == EDBEnemyKind::Hunter ? 27.f : Kind == EDBEnemyKind::Caster ? 24.f : 22.f, OrganicPoseDelta);
+        const float TargetBearing = FMath::Clamp(FMath::FindDeltaAngleDegrees(OrganicFacingYaw,
+            static_cast<float>(OrganicGaze.X)), -58.f, 58.f);
+        const float InheritedYaw = Performance.Joint[Hips].Yaw + Performance.Joint[Lumbar].Yaw
+            + Performance.Joint[Spine].Yaw + Performance.Joint[Chest].Yaw
+            + Performance.Joint[Neck].Yaw + Performance.Joint[Head].Yaw;
+        const float GazeYaw = FMath::Clamp(TargetBearing - InheritedYaw * .90f
+            * static_cast<float>(OrganicAttentionWeights.Z), -64.f, 64.f);
+        // Preserve target attention while the shoulders sway and turn beneath
+        // it. Smoothing an angle in the moving torso frame made both arrive
+        // together and allowed the stride's chest twist to carry the face off.
+        Performance.Joint[Neck] += FRotator(OrganicGaze.Y * .60f, GazeYaw * .68f,
+            -TargetBearing * .035f) * Attention;
+        Performance.Joint[Head] += FRotator(OrganicGaze.Y * .40f, GazeYaw * .32f,
+            -TargetBearing * .025f) * Attention;
     }
     if (!bDead && Phase == EDBEnemyPhase::Staggered)
     {
@@ -2129,7 +2296,7 @@ void ADBEnemy::UpdateOrganicPose()
         Performance.Joint[ForearmL].Pitch -= BodyHit * 11.f;
         Performance.Joint[ForearmR].Pitch -= BodyHit * 15.f;
     }
-    auto Pose = [&](const TCHAR* Name, FRotator Rotation, FVector Offset = FVector::ZeroVector)
+    auto PoseRotation = [&](const TCHAR* Name, const FQuat& Rotation, const FVector& Offset)
     {
         const int32* Cached = OrganicBoneIndices.Find(FName(Name));
         const int32 Index = Cached ? *Cached : INDEX_NONE;
@@ -2138,13 +2305,28 @@ void ADBEnemy::UpdateOrganicPose()
         const FTransform ParentFrame = OrganicReferenceComponentPose.IsValidIndex(Parent)
             ? OrganicReferenceComponentPose[Parent] : FTransform::Identity;
         const FQuat ParentBasis = ParentFrame.GetRotation();
-        const FQuat MeshDelta = ActorToMesh * Rotation.Quaternion() * MeshToActor;
+        const FQuat MeshDelta = ActorToMesh * Rotation * MeshToActor;
         FTransform& Bone = OrganicMesh->BoneSpaceTransforms[Index];
         Bone.SetRotation((ParentBasis.Inverse() * MeshDelta * ParentBasis * Bone.GetRotation()).GetNormalized());
         // Motion offsets are centimetres in mesh space. The imported FBX root
         // can carry the metres-to-centimetres scale: inverse rotation alone
         // multiplied a sub-centimetre breath into a visible rise/sink.
         Bone.AddToTranslation(ParentFrame.InverseTransformVector(ActorToMesh.RotateVector(Offset)));
+    };
+    auto Pose = [&](const TCHAR* Name, FRotator Rotation, FVector Offset = FVector::ZeroVector)
+    {
+        PoseRotation(Name, Rotation.Quaternion(), Offset);
+    };
+    auto Anatomy = [&](const TCHAR* Name, const FVector& BlenderDegrees, float Channel)
+    {
+        const FVector Angles = BlenderDegrees * FMath::Clamp(Channel, 0.f, 1.f);
+        // The source contract uses mesh-axis X, then Y, then Z rotations.
+        // Map axial handedness explicitly; a bone's arbitrary local roll is
+        // never treated as the jaw/digit hinge. Keep this order for the frill.
+        const FQuat X = FRotator(-Angles.X, 0.f, 0.f).Quaternion();
+        const FQuat Y = FRotator(0.f, 0.f, -Angles.Y).Quaternion();
+        const FQuat Z = FRotator(0.f, -Angles.Z, 0.f).Quaternion();
+        PoseRotation(Name, (Z * Y * X).GetNormalized(), FVector::ZeroVector);
     };
     // The old scene pivots remain the authoritative effect/ShotOrigin
     // controller. Skin performance is independent so a larger visual coil
@@ -2161,11 +2343,16 @@ void ADBEnemy::UpdateOrganicPose()
             // Start at the actual struck hip. It first loses lateral support,
             // then falls into a traced contact instead of lowering fifty
             // centimetres into a symmetric squat before the torso tips.
-            const float Yield = FMath::SmoothStep(0.f, .18f, DeathTime);
+            const float Yield = FMath::SmoothStep(0.f, .16f, DeathTime);
             const FVector Across = OrganicDeathPelvisContact - OrganicDeathPelvisStart;
             FVector PelvisWorld = OrganicDeathPelvisStart
-                + FVector(Across.X, Across.Y, 0.f) * (Yield * .24f + Fall * .76f);
-            PelvisWorld.Z = FMath::Lerp(OrganicDeathPelvisStart.Z, OrganicDeathPelvisContact.Z, Fall);
+                + FVector(Across.X, Across.Y, 0.f) * (Yield * .12f + Fall * .88f);
+            const float FailedSide = DeathLocalDirection.Y >= 0.f ? 1.f : -1.f;
+            PelvisWorld += FRotator(0.f,OrganicFacingYaw,0.f).RotateVector(FVector(0.f,FailedSide * 6.f,0.f))
+                * VisualScale * Yield * (1.f - Fall);
+            // First lose height over one buckling knee. The remaining support
+            // briefly catches the weight before the trunk falls beyond it.
+            PelvisWorld.Z = FMath::Lerp(OrganicDeathPelvisStart.Z, OrganicDeathPelvisContact.Z, .24f * Yield + .76f * Fall);
             const FVector LocalPelvis = GroundFrame.InverseTransformPosition(PelvisWorld);
             PelvisOffset = MeshToActor.RotateVector(LocalPelvis - OrganicReferenceComponentPose[PelvisIndex].GetLocation());
         }
@@ -2187,16 +2374,54 @@ void ADBEnemy::UpdateOrganicPose()
     Pose(TEXT("forearm_r"), Performance.Joint[ForearmR]);
     Pose(TEXT("hand_l"), Performance.Joint[HandL]);
     Pose(TEXT("hand_r"), Performance.Joint[HandR]);
+    if (OrganicBoneIndices.Contains(TEXT("jaw")))
+    {
+        const bool bMire = Kind == EDBEnemyKind::Caster;
+        Anatomy(TEXT("jaw"), FVector(bMire ? 14.f : 18.f, 0.f, 0.f), Performance.Jaw);
+        static const TCHAR* DigitNames[2][4] = {
+            { TEXT("digit_01_l"), TEXT("digit_02_l"), TEXT("digit_03_l"), TEXT("thumb_l") },
+            { TEXT("digit_01_r"), TEXT("digit_02_r"), TEXT("digit_03_r"), TEXT("thumb_r") }
+        };
+        static const TCHAR* TipNames[2][4] = {
+            { TEXT("digit_01_tip_l"), TEXT("digit_02_tip_l"), TEXT("digit_03_tip_l"), TEXT("thumb_tip_l") },
+            { TEXT("digit_01_tip_r"), TEXT("digit_02_tip_r"), TEXT("digit_03_tip_r"), TEXT("thumb_tip_r") }
+        };
+        const FVector MireDigits[4] = { FVector(-28,0,0), FVector(-25,0,0), FVector(-18,-8,0), FVector(-12,-24,0) };
+        const FVector MireTips[4] = { FVector(-18,0,0), FVector(-18,0,0), FVector(-14,0,0), FVector(0,-15,0) };
+        const float BriarDigits[4] = { 23.f,25.f,21.f,-20.f };
+        const float BriarTips[4] = { 18.f,19.f,16.f,-15.f };
+        for (int32 Side = 0; Side < 2; ++Side)
+        {
+            const float Mirror = Side == 0 ? 1.f : -1.f;
+            for (int32 Digit = 0; Digit < 4; ++Digit)
+            {
+                const FVector Proximal = bMire ? MireDigits[Digit] * FVector(1.f,Mirror,Mirror)
+                    : FVector(0.f,BriarDigits[Digit] * Mirror,0.f);
+                const FVector Distal = bMire ? MireTips[Digit] * FVector(1.f,Mirror,Mirror)
+                    : FVector(0.f,BriarTips[Digit] * Mirror,0.f);
+                Anatomy(DigitNames[Side][Digit], Proximal, Performance.Grip[Side]);
+                Anatomy(TipNames[Side][Digit], Distal, Performance.Grip[Side]);
+            }
+        }
+        if (bMire)
+        {
+            const float TurnLoad = FMath::Clamp(OrganicTurnRate * .0005f, -.09f, .09f);
+            const FVector CrestTarget(FMath::Clamp(Performance.Crest + TurnLoad, 0.f, 1.f),
+                FMath::Clamp(Performance.Crest - TurnLoad, 0.f, 1.f), 0.f);
+            AdvanceOrganicResponse(OrganicCrestMotion, OrganicCrestVelocity, CrestTarget, 17.f, OrganicPoseDelta);
+            Anatomy(TEXT("frill_l"), FVector(0,-8,14), Performance.Crest);
+            Anatomy(TEXT("frill_r"), FVector(0,8,-14), Performance.Crest);
+            // Membrane tips catch up with tension in the base, and load a
+            // little differently across a turn. The bony crown stays rigid.
+            Anatomy(TEXT("frill_tip_l"), FVector(0,5,-8), OrganicCrestMotion.X);
+            Anatomy(TEXT("frill_tip_r"), FVector(0,-5,8), OrganicCrestMotion.Y);
+        }
+    }
     if (const int32* Throat = OrganicBoneIndices.Find(TEXT("throat")))
         OrganicMesh->BoneSpaceTransforms[*Throat].SetScale3D(OrganicReferencePose[*Throat].GetScale3D()
             * FVector(1.f + Performance.Throat * .08f, 1.f + Performance.Throat * .015f, 1.f + Performance.Throat * .08f));
-    const float Collapse = bDead ? FMath::SmoothStep(0.f, 0.7f, DeathTime) : 0.f;
     if (bDead)
     {
-        Pose(TEXT("thigh_l"), LeftLegPivot->GetRelativeRotation());
-        Pose(TEXT("thigh_r"), RightLegPivot->GetRelativeRotation());
-        Pose(TEXT("shin_l"), FRotator(-Collapse * 48.f, 0.f, 0.f));
-        Pose(TEXT("shin_r"), FRotator(-Collapse * 53.f, 0.f, 0.f));
         // Preserve the complete struck pose, including wrists and lifted feet,
         // through the first part of the collapse rather than resetting to bind.
         if (OrganicDeathStartPose.Num() == OrganicReferencePose.Num())
@@ -2228,7 +2453,8 @@ void ADBEnemy::UpdateOrganicPose()
         // Enter from the actual solved performance, including every new torso
         // and shoulder joint. Authored action phases share a continuous clock;
         // blending those phases again would erase the fast contact stroke.
-        const float Duration = Phase == EDBEnemyPhase::Staggered ? .09f
+        const float Duration = bOrganicPounceBlocked && (Phase == EDBEnemyPhase::Attack || Phase == EDBEnemyPhase::Recovery) ? .10f
+            : Phase == EDBEnemyPhase::Staggered ? .09f
             : Phase == EDBEnemyPhase::Telegraph ? .14f : Phase == EDBEnemyPhase::Approach ? .20f : 0.f;
         if (Duration > 0.f && OrganicPhaseBlendTime < Duration)
         {
@@ -2242,7 +2468,7 @@ void ADBEnemy::UpdateOrganicPose()
         }
     }
 
-    TArray<FTransform, TInlineAllocator<24>> Components;
+    TArray<FTransform, TInlineAllocator<48>> Components;
     Components.SetNum(OrganicReferencePose.Num());
     auto RebuildComponents = [&]()
     {
@@ -2321,7 +2547,9 @@ void ADBEnemy::UpdateOrganicPose()
         float ExtraDrop = 0.f;
         for (int32 Side = 0; Side < 2; ++Side)
         {
-            const float Landing = FMath::SmoothStep(0.f, .22f, DeathTime);
+            const bool bFailedSupport = (DeathLocalDirection.Y >= 0.f ? 1 : 0) == Side;
+            const float Landing = bFailedSupport ? FMath::SmoothStep(.04f, .29f, DeathTime)
+                : FMath::SmoothStep(.24f, .55f, DeathTime);
             Targets[Side] = bDead ? FMath::Lerp(OrganicFeet[Side].Position, DeathFootTargets[Side], Landing) : OrganicFeet[Side].Position;
             Rotations[Side] = bDead ? FQuat::Slerp(OrganicFeet[Side].Rotation, DeathFootRotations[Side], Landing) : OrganicFeet[Side].Rotation;
             const int32 Upper = Skeleton.FindBoneIndex(UpperNames[Side]);
@@ -2346,8 +2574,13 @@ void ADBEnemy::UpdateOrganicPose()
             SetComponentBone(Pelvis, Supported);
         }
         for (int32 Side = 0; Side < 2; ++Side)
+        {
+            const float Sign = Side == 0 ? -1.f : 1.f;
+            const bool bFailedSupport = bDead && (DeathLocalDirection.Y >= 0.f ? 1 : 0) == Side;
+            const float KneeGive = bFailedSupport ? FMath::SmoothStep(0.f, .16f, DeathTime) : 0.f;
             SolveLimb(UpperNames[Side], LowerNames[Side], FootNames[Side], Targets[Side], Rotations[Side],
-                Forward + Right * (Side == 0 ? -.14f : .14f), 1.f, true);
+                Forward + Right * Sign * (.14f + KneeGive * .85f), 1.f, true);
+        }
     }
     else if (Phase == EDBEnemyPhase::Attack && Attack == EAttack::Lunge)
     {
@@ -2538,8 +2771,8 @@ void ADBEnemy::UpdateOrganicPose()
             const int32 Hand = Skeleton.FindBoneIndex(HandNames[Side]);
             if (!Components.IsValidIndex(Hand)) continue;
             const bool bCatchSide = (DeathLocalDirection.Y >= 0.f ? 1 : 0) == Side;
-            const float ReachStart = bCatchSide ? .24f : .50f;
-            const float ContactTime = bCatchSide ? .46f : .78f;
+            const float ReachStart = bCatchSide ? .25f : .57f;
+            const float ContactTime = bCatchSide ? .51f : .93f;
             const float Contact = FMath::SmoothStep(ReachStart, ContactTime, DeathTime);
             if (DeathTime < ReachStart) continue;
             if (!bOrganicDeathHandContact[Side])

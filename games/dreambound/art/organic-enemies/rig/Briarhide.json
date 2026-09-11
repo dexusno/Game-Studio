@@ -1,7 +1,20 @@
 {
   "asset": "Briarhide",
-  "output_folder": "finished-performance",
-  "rig_version": "performance-v1",
+  "output_folder": "finished-anatomy",
+  "rig_version": "anatomy-v1",
+  "anatomy_rig": {
+    "baseline_folder": "finished-performance",
+    "material_overrides": {"M_OE_Oral": {"roughness": 0.68, "specular": 0.12}},
+    "mouth": {"front_y": -0.54, "front_z": 1.587, "back_y": -0.28, "slope": 0.235, "half_width": 0.155, "chin_min_z": 1.49, "open_degrees": 18},
+    "digit_blend_radius": 0.046,
+    "digits": [
+      {"name": "digit_01", "root": [0.925, -0.096, 0.600], "joint": [0.940, -0.080, 0.485], "tip": [0.803, -0.060, 0.400], "rotation_degrees": [0, 23, 0], "tip_rotation_degrees": [0, 18, 0]},
+      {"name": "digit_02", "root": [0.938, 0.017, 0.610], "joint": [0.958, 0.020, 0.473], "tip": [0.813, 0.055, 0.389], "rotation_degrees": [0, 25, 0], "tip_rotation_degrees": [0, 19, 0]},
+      {"name": "digit_03", "root": [0.910, 0.113, 0.610], "joint": [0.928, 0.113, 0.489], "tip": [0.827, 0.117, 0.422], "rotation_degrees": [0, 21, 0], "tip_rotation_degrees": [0, 16, 0]},
+      {"name": "thumb", "root": [0.795, -0.066, 0.630], "joint": [0.727, -0.071, 0.565], "tip": [0.705, -0.075, 0.471], "rotation_degrees": [0, -20, 0], "tip_rotation_degrees": [0, -15, 0]}
+    ],
+    "notes": "Measured source has three hooked fingers and an opposing thumb per hand. Local digit controls preserve rest geometry and use mirrored mesh-Y closure. Actual seam cut, oral lining and small teeth provide a visible jaw opening; rigid antlers stay on head. Candidate angle limits require deformation review."
+  },
   "height_metres": 2.2,
   "source_front": "Blender -Y after optional yaw correction",
   "runtime_mesh_yaw": -90,
@@ -69,5 +82,5 @@
       "scope": "Proposed mesh-axis pose range, not a certified independent-axis envelope. Review combined authored poses; retain limb limits from the motion rig."
     }
   },
-  "notes": "Twenty-one deform bones. Add spine_lower, chest, neck and clavicle_l/r, with real torso and shoulder weights; preserve every existing sixteen-bone global rest matrix and all limb endpoints. Reparent spine under spine_lower, head under neck, and upper arms under clavicles: a fresh Unreal skeleton is mandatory. Blender metres: front -Y, left +X, up Z; local bone +Y points head-to-tail. Four normalized influences maximum. Whole hand/foot articulation only: no individual fingers, toe roll, jaw or facial rig. Preserve the reviewed geometry, moist amber eyes, pigment floor and exact atlas bytes."
+  "performance_baseline_notes": "Twenty-one deform bones. Add spine_lower, chest, neck and clavicle_l/r, with real torso and shoulder weights; preserve every existing sixteen-bone global rest matrix and all limb endpoints. Reparent spine under spine_lower, head under neck, and upper arms under clavicles: a fresh Unreal skeleton is mandatory. Blender metres: front -Y, left +X, up Z; local bone +Y points head-to-tail. Four normalized influences maximum. Whole hand/foot articulation only: no individual fingers, toe roll, jaw or facial rig. Preserve the reviewed geometry, moist amber eyes, pigment floor and exact atlas bytes."
 }

@@ -2,6 +2,8 @@
 
 Owner goal, September 11, 2026: “make our animations on par with premium indie games like windrose, monster fantasy and the like.” The technical correction is delivered, but root's fresh online reassessment below finds that the broader reference quality goal is not reached. The previous completion decision was premature. Earlier criterion passes are retained as scoped improvement and reproduction evidence.
 
+Klaus subsequently reactivated the explicit goal, “make our monster animation on par with the Monster Fantasy game.” The complete quality target remains active. The new anatomy/performance candidates are undergoing actual-frame review and correction; see [current evidence and next action](../../../STATUS.md). Added joints, successful imports and improved individual gestures are not a parity verdict.
+
 ## Reference observations
 
 Inspected September 11, 2026. These are short official promotional excerpts, with different anatomy and cameras. Observations come from ordered decoded frames; continuous playback and the complete reference games were not assessed. Reference footage is private review material, not a game asset, and is not redistributed here.

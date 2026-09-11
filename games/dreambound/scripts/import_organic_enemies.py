@@ -122,6 +122,35 @@ def eye_material(label):
     return mat
 
 
+def anatomy_material(asset, definition):
+    name = definition["name"]
+    if name not in ("M_OE_Oral", "M_OE_Tooth", "M_OE_Tongue"):
+        raise RuntimeError("Unexpected authored anatomy material: " + name)
+    material_name = name + "_" + asset
+    path = DEST + "/Materials/" + material_name
+    mat = LIB.load_asset(path) if LIB.does_asset_exist(path) else TOOLS.create_asset(
+        material_name, DEST + "/Materials", unreal.Material, unreal.MaterialFactoryNew())
+    EDIT.delete_all_material_expressions(mat)
+    EDIT.set_material_usage(mat, unreal.MaterialUsage.MATUSAGE_SKELETAL_MESH)
+    defaults = {"M_OE_Oral": [.020, .006, .005], "M_OE_Tooth": [.58, .48, .31],
+                "M_OE_Tongue": [.070, .018, .012]}
+    rgb = definition.get("base_color", defaults[name])
+    pigment = node(mat, unreal.MaterialExpressionConstant3Vector, -350, -100,
+                   constant=unreal.LinearColor(*rgb[:3], 1))
+    rough = node(mat, unreal.MaterialExpressionConstant, -350, 120,
+                 r=definition.get("roughness", .38 if name == "M_OE_Oral" else .42))
+    specular = node(mat, unreal.MaterialExpressionConstant, -350, 240,
+                    r=definition.get("specular", .5))
+    property_link(pigment, "", unreal.MaterialProperty.MP_BASE_COLOR)
+    property_link(rough, "", unreal.MaterialProperty.MP_ROUGHNESS)
+    property_link(specular, "", unreal.MaterialProperty.MP_SPECULAR)
+    mat.set_editor_property("two_sided", bool(definition.get("two_sided", False)))
+    EDIT.recompile_material(mat)
+    LIB.save_loaded_asset(mat)
+    REPORT["materials"].append(mat.get_path_name())
+    return mat
+
+
 def import_creature(asset, folder):
     report_path = folder / "prep-report.json"
     prep = json.loads(report_path.read_text(encoding="utf-8"))
@@ -134,6 +163,8 @@ def import_creature(asset, folder):
     materials = {"M_OE_" + asset: mat}
     if prep.get("eye_placements"):
         materials.update({"M_OE_Eye" + label: eye_material(label) for label in ("Iris", "Pupil")})
+    for definition in prep.get("extra_materials", []):
+        materials[definition["name"]] = anatomy_material(asset, definition)
     options = unreal.FbxImportUI()
     options.set_editor_property("automated_import_should_detect_type", False)
     options.set_editor_property("mesh_type_to_import", unreal.FBXImportType.FBXIT_SKELETAL_MESH)
@@ -158,7 +189,8 @@ def import_creature(asset, folder):
     # Reparented torso/shoulder chains need a distinct skeleton. Keep the
     # sixteen-bone mesh available for explicit baseline comparison.
     performance_rig = any(bone["name"] == "spine_lower" for bone in prep["bones"])
-    task.destination_name = "SK_OE_" + asset + ("_Performance" if performance_rig else "")
+    anatomy_rig = bool(prep.get("anatomy_rig"))
+    task.destination_name = "SK_OE_" + asset + ("_Anatomy" if anatomy_rig else "_Performance" if performance_rig else "")
     task.automated = task.replace_existing = task.save = True
     task.options = options
     TOOLS.import_asset_tasks([task])
@@ -168,12 +200,24 @@ def import_creature(asset, folder):
     slots = mesh.get_editor_property("materials")
     if len(slots) != len(materials):
         raise RuntimeError("Unexpected PBR/eye material slot count on " + asset)
+    if str(slots[0].get_editor_property("material_slot_name")) != "M_OE_" + asset:
+        raise RuntimeError("The runtime skin/tint material must remain slot zero: " + asset)
     for index, slot in enumerate(slots):
         name = str(slot.get_editor_property("material_slot_name"))
         if name not in materials:
             raise RuntimeError("Unexpected material slot " + name + " on " + asset)
         slot.set_editor_property("material_interface", materials[name])
+        # Python receives a value copy of each SkeletalMaterial struct. Write
+        # it back into the array before assigning the mesh's material slots.
+        slots[index] = slot
     mesh.set_editor_property("materials", slots)
+    assigned_slots = []
+    for slot in mesh.get_editor_property("materials"):
+        name = str(slot.get_editor_property("material_slot_name"))
+        assigned = slot.get_editor_property("material_interface")
+        if not assigned or assigned.get_path_name() != materials[name].get_path_name():
+            raise RuntimeError("Material interface was not retained on " + asset + ": " + name)
+        assigned_slots.append({"slot": name, "material": assigned.get_path_name()})
     bounds = mesh.get_imported_bounds()
     size = bounds.box_extent * 2
     expected = prep["height_metres"] * 100
@@ -183,13 +227,19 @@ def import_creature(asset, folder):
     for bone in prep["bones"]:
         if bone["parent"] and str(subsystem.get_bone_parent(mesh, bone["name"])) != bone["parent"]:
             raise RuntimeError("Missing or incorrectly parented rig bone: " + bone["name"])
-    LIB.save_loaded_asset(mesh)
+    # Imported tasks save before the material bindings above. A copied array
+    # update does not reliably dirty the package, so persist it explicitly.
+    if not LIB.save_loaded_asset(mesh, only_if_is_dirty=False):
+        raise RuntimeError("Could not save the bound skeletal mesh: " + asset)
     REPORT["assets"].append({"asset": mesh.get_path_name(), "source_fbx_sha256": prep["fbx_sha256"],
                              "source_glb_sha256": prep["source_sha256"], "dimensions_cm": [size.x, size.y, size.z],
+                             "source_prep_sha256": hashlib.sha256(report_path.read_bytes()).hexdigest(),
                              "runtime_triangles_from_blender": prep["runtime_triangles"],
+                             "bone_count": len(prep["bones"]),
                              "validated_bone_parent_links": len(prep["bones"]) - 1,
-                             "rig_variant": "performance" if performance_rig else "motion",
+                             "rig_variant": "anatomy" if anatomy_rig else "performance" if performance_rig else "motion",
                              "lod_count": subsystem.get_lod_count(mesh), "materials": len(slots),
+                             "assigned_materials": assigned_slots,
                              "runtime_mesh_yaw": prep["runtime_mesh_yaw"]})
 
 
