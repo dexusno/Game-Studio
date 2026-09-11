@@ -268,7 +268,7 @@ private:
     FVector LastSeenPlayer = FVector::ZeroVector;
     FVector SeenPlayerVelocity = FVector::ZeroVector;
     FVector SeenPlayerAim = FVector::ForwardVector;
-    FVector IncomingDirection = FVector::ZeroVector;
+    FVector IncomingShieldDirection = FVector::ZeroVector;
     float SenseTime = 0.f;
     float CasterClock = 0.f;
     float DecisionTime = 0.f;

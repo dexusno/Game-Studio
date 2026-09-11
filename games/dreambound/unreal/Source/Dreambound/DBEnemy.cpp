@@ -681,7 +681,7 @@ void ADBEnemy::UpdateCasterSenses(float DeltaSeconds)
                     && (ToBody - Velocity * Arrival).SizeSquared() < FMath::Square(130.f))
                 {
                     EarliestThreat = Arrival;
-                    IncomingDirection = Velocity.GetSafeNormal2D();
+                    IncomingShieldDirection = Velocity.GetSafeNormal2D();
                 }
             }
         }
@@ -702,7 +702,7 @@ bool ADBEnemy::ChooseCasterPosition(ECasterIntent Intent)
     const FVector Start = GetActorLocation();
     const FVector Away = (Start - LastSeenPlayer).GetSafeNormal2D();
     const FVector Side = FVector::CrossProduct(
-        Intent == ECasterIntent::Evade ? IncomingDirection : Away, FVector::UpVector) * AvoidanceSide;
+        Intent == ECasterIntent::Evade ? IncomingShieldDirection : Away, FVector::UpVector) * AvoidanceSide;
     const FVector Basis = Intent == ECasterIntent::Withdraw ? Away : Intent == ECasterIntent::Hunt ? -Away : Side;
     const float CurrentRange = FVector::Dist2D(Start, LastSeenPlayer);
     const float CurrentGuardAngle = FVector::DotProduct(Away, SeenPlayerAim);
