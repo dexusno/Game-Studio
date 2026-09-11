@@ -25,10 +25,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T21:18:56+00:00",
+      "captured_at": "2026-09-11T21:20:21+00:00",
       "record_sha256": "440a211a9d36b1ca1a46c705042ec974762fcd397be816634ce5d2d112ee07fb",
       "files": {
-        "games/magnet-sweep/STATUS.md": "5ac72a85fb8f1260eb82a02cef48cf2fb8296c944630e8e1af4a5ab21b47a0e4",
+        "games/magnet-sweep/STATUS.md": "d7eda7bc9cb1b9b3fa65b828bab3e9c38d476ec4b5ec91cbff5e95f421206348",
         "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
         "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
         "games/magnet-sweep/DECISIONS.md": "a7314857fde4571be2df085b97613fbe906f8c615a2426dbdbd7cedd1352f97a",

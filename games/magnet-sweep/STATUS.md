@@ -46,3 +46,5 @@ The next concrete action is an implementation assignment for an isolated Windows
 ## Verification boundary
 
 Only planning artifacts were checked. Unreal was not launched for this game, no package was built and no human fun/replay test occurred. The separate studio doctor issue remains the private tool-configuration schema mismatch recorded in BUILD.md; no private configuration was changed. Any receiving task must use the committed revision or saved main checkout containing these records and preserve unrelated owner edits.
+
+Design integration is committed on saved main at `794a445`. The new-task handoff helper was attempted after that commit but refuses while the unrelated Dreambound input/audio changes remain in the checkout. Those owner changes were preserved. No new task was created; a receiving task can use saved main containing this commit, without requiring the unrelated files to be staged or removed.
