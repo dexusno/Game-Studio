@@ -8,6 +8,7 @@
 #include "CanvasItem.h"
 #include "Kismet/GameplayStatics.h"
 #include "EngineUtils.h"
+#include "Misc/ConfigCacheIni.h"
 
 void ADBHUD::Panel(float X,float Y,float W,float H,FLinearColor C){DrawRect(C,X*UIScale,Y*UIScale,W*UIScale,H*UIScale);}
 void ADBHUD::Frame(float X,float Y,float W,float H,bool Accent){
@@ -160,7 +161,12 @@ void ADBHUD::DrawHUD(){
    const FVector2D V[4]={Center+D*23.f,Center+D*47.f+Side*12.f,Center+D*74.f,Center+D*47.f-Side*12.f};
    for(int32 J=0;J<4;++J)DrawLine(V[J].X*UIScale,V[J].Y*UIScale,V[(J+1)%4].X*UIScale,V[(J+1)%4].Y*UIScale,Gold,1.6f*UIScale);
   }
-  Label(G->bRecoverySlice?TEXT("SANCTUARY / REVERIE 0.4.0"):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
+  static const FString BuildVersion=[](){
+   FString Value;
+   if(GConfig)GConfig->GetString(TEXT("/Script/EngineSettings.GeneralProjectSettings"),TEXT("ProjectVersion"),Value,GGameIni);
+   return Value.IsEmpty()?FString(TEXT("PROTOTYPE")):Value;
+  }();
+  Label(G->bRecoverySlice?FString::Printf(TEXT("SANCTUARY / %s"),*BuildVersion):TEXT("CYBORG / PLAYABLE BETA"),115,100,20,Gold);
   Label(TEXT("BETWEEN"),108,153,79,Ivory);Label(TEXT("WORLDS"),108,230,79,Ivory);
   Label(G->bRecoverySlice?TEXT("Your defense becomes your attack."):TEXT("The places you dream about are real."),115,343,29,Ivory);
   Label(G->bRecoverySlice?TEXT("Fold to strike. Unfold to defend. Commit to power."):TEXT("Build a weapon worth carrying between them."),115,392,23,Mint);
