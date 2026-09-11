@@ -1,7 +1,7 @@
 {
   "date": "2026-09-11",
-  "status": "visual_candidate_reviewed_private_audio_audition_pending_listening",
-  "shipping_package_created": false,
+  "status": "packaged_owner_fireball_candidate_pending_integrated_listening",
+  "shipping_package_created": true,
   "owner_acceptance": false,
   "performance_header_sha256": "f3556204088841bd3b91500e127aaec55b272ffa10b7d3c803d4186068f924eb",
   "fire_shader_sha256": "2085b8dcb2cefc5362bc811048996ce67d8dc2b2b8271d8b9cb50e1d1e1f3646",
@@ -104,9 +104,8 @@
     "audio-v1-impact and audio-v2-impact-track: framing insufficient or obscured by foreground wall; not clear impact evidence"
   ],
   "remaining": [
-    "Listening decision on the existing synchronized sound audition, then necessary quality changes.",
-    "Death/encounter-change/retry audio cleanup remains unverified by a new runtime study; extra harness stopped at owner steering.",
-    "Deliver combined playable result with proportional verification; no new package yet."
+    "Owner evaluation of the integrated appearance and fire sound in the delivered candidate; make any required quality changes.",
+    "Ordinary-play audio lifecycle behavior was not covered by this short capture; extra test harness was stopped at owner steering."
   ],
   "visual_candidate_editor_dll_sha256": "738a2470b31a72405805ed2901d387dacfffad53e2b3455e27df02e70e1ef56f",
   "private_audio_audition": {
@@ -197,5 +196,49 @@
       }
     },
     "terms_review": "assets/audio-organic-fire/candidate-stable-audio3/README.md#license-evidence-and-scope"
+  },
+  "commercial_release": false,
+  "owner_fireball_package": {
+    "version": "0.5.4-fire1",
+    "source_commit": "82aed44298b1525a176969b66e266c68b1c08cfc",
+    "configuration": "Windows Shipping, private noncommercial playtest",
+    "executable": {
+      "path": "games/dreambound/BuildOutput/OrganicFireCandidate/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "sha256": "1645735bac22939531210e03b0d20ec7dd4df2225f99db5abf408cbe9cd8d9b2"
+    },
+    "build_seconds": 54.97,
+    "build_log": {
+      "path": ".local/organic-fire-review/package-owner-fireball.log",
+      "sha256": "f480f6c25915ce428bfb7f2e3ae161aaf2f980550f43c45499a6e075b33bd73c"
+    },
+    "source_report": "assets/audio-organic-fire/owner-fireball-report.json",
+    "audio_import": {
+      "path": "games/dreambound/unreal/Saved/OrganicFire/import.json",
+      "sha256": "8f6cc4eef12a0c41075975f6ca3012d0cc62d387719fcb6221c172ceed692fc3"
+    },
+    "capture": {
+      "path": ".local/organic-fire-review/owner-fireball-package-v1/Saved/EnemyMotionStudy/Caster-Player/Capture.json",
+      "sha256": "8674a054bf60ae7b3f0e4fb76989fab2ce6b9aa30056c6eb225bcb6dba98f1ef"
+    },
+    "capture_complete": true,
+    "frames": 188,
+    "simulation_seconds": 8.008049964904785,
+    "native_frames_inspected": [
+      44,
+      60
+    ],
+    "video": {
+      "path": ".local/organic-fire-review/owner-fireball-in-game.mp4",
+      "sha256": "e02029f73b7d939fe5eaf45708e576a8a46e7b0bf1a1414bbf1ef224ee4d2c27"
+    },
+    "assembly_report": {
+      "path": ".local/organic-fire-review/owner-fireball-in-game.json",
+      "sha256": "8ca2b7800777525295c7c4fed73b41806db47ad607d71d528721104a37dc6f74"
+    },
+    "audio_seconds": 8.021333333333333,
+    "observation": "Actual packaged caster uses the new fire visuals; master-submix audio recorded. Source clip fits the one-second release, with mono attenuation and 3ms fades. No naturalness/listening claim from the agent.",
+    "wrapper_note": "The outer PowerShell wrapper wrongly treated unset LASTEXITCODE as a failure after the capture script completed. Capture script verified process completion, complete=true and Mix.wav; the existing capture was used without rerunning.",
+    "default_launcher": "scripts/Start-Demo.ps1",
+    "integrated_owner_feedback": "pending; earlier Stable-only question superseded by owner-supplied fireball.wav"
   }
 }
