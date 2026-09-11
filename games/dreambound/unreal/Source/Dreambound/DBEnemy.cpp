@@ -611,6 +611,7 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
     if (StuckTime > 0.8f) { AvoidanceSide *= -1.f; StuckTime = 0.f; }
     const bool bCasterTravel = Kind == EDBEnemyKind::Caster;
     const bool bCasterEvasion = bCasterTravel && bRepositioning && CasterIntent == ECasterIntent::Evade;
+    if (bCasterTravel) GetCharacterMovement()->MaxAcceleration = bCasterEvasion ? 8000.f : 2200.f;
     const FVector Facing = Target.IsValid() && (Kind == EDBEnemyKind::Melee || (bRepositioning && !bCasterTravel)
         || (Kind == EDBEnemyKind::Hunter && Phase == EDBEnemyPhase::Recovery))
         && FVector::DistSquared2D(Start, Target->GetActorLocation()) < FMath::Square(1200.f)
@@ -627,7 +628,7 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
         : 1.f;
     // A single emergency step starts while turning; ordinary travel still
     // waits for forward alignment. Collision and planted-foot solving remain.
-    if (bCasterEvasion) TravelAlignment = FMath::Max(.55f,TravelAlignment);
+    if (bCasterEvasion) TravelAlignment = FMath::Max(.85f,TravelAlignment);
     GetCharacterMovement()->MaxWalkSpeed = BaseSpeed * SpeedMultiplier * TravelAlignment * (1.f - ChillStacks * 0.16f);
     if (TravelAlignment > .01f) AddMovementInput(Chosen, 1.f, true);
     else ConsumeMovementInputVector();
@@ -647,7 +648,7 @@ void ADBEnemy::UpdateCasterSenses(float DeltaSeconds)
     ThreatReactionTime = FMath::Max(0.f, ThreatReactionTime - DeltaSeconds);
     GuardPressureTime = bTargetVisible && bTargetGuarding ? FMath::Min(3.f, GuardPressureTime + DeltaSeconds) : 0.f;
     if (SenseTime > 0.f) return;
-    SenseTime = .12f;
+    SenseTime = .06f;
     const FVector PlayerPosition = Target->GetActorLocation();
     bTargetVisible = HasSightTo(PlayerPosition, Target.Get());
     // Entry gives one last-known position. Thereafter walls break tracking;
@@ -696,7 +697,7 @@ void ADBEnemy::UpdateCasterSenses(float DeltaSeconds)
     ObservedShields = MoveTemp(VisibleShields);
     if (EarliestThreat < 1.f)
     {
-        if (IncomingThreatTime <= 0.f) ThreatReactionTime = .20f;
+        if (IncomingThreatTime <= 0.f) ThreatReactionTime = .12f;
         IncomingThreatTime = .27f;
     }
 }
@@ -806,7 +807,7 @@ void ADBEnemy::UpdateCasterCombat(float DeltaSeconds)
             && Distance > (Health < MaxHealth*.45f ? 970.f : 760.f);
         if (!bReached && !bEnoughSpace && RepositionTime < CasterMoveDuration)
         {
-            MoveToward(RepositionTarget,DeltaSeconds,CasterIntent == ECasterIntent::Evade ? 1.4f
+            MoveToward(RepositionTarget,DeltaSeconds,CasterIntent == ECasterIntent::Evade ? 2.f
                 : CasterIntent == ECasterIntent::Withdraw ? 1.15f : 1.f);
             return;
         }
