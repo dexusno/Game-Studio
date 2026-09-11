@@ -143,7 +143,12 @@ void ADBHUD::DrawHUD(){
     if(Mark.Z>0&&MX>120&&MX<1730&&MY>225&&MY<H-190){Label(Reward?TEXT("RECOVER"):Room.bOptional?TEXT("OPTIONAL / MIRROR TRIAL"):TEXT("PASSAGE"),MX-50,MY,18,Mint);}
    }
   }
-  if(P&&P->MessageTime>0&&!G->bChoosingReward){Frame(590,H*.60f-12,752,P->LastCombatMessage.Len()>90?90:54);WrappedLabel(P->LastCombatMessage,610,H*0.60f,710,21,Gold);}
+  if(P&&P->MessageTime>0&&!G->bChoosingReward){
+   const float MessageHeight=P->LastCombatMessage.Len()>90?90.f:54.f;
+   const float MessageY=H-88.f-MessageHeight;
+   Frame(530,MessageY,820,MessageHeight);
+   WrappedLabel(P->LastCombatMessage,550,MessageY+12.f,780,19,Gold);
+  }
  }
  if(G->bTitle){
   Panel(0,0,920,H,FLinearColor(.011f,.024f,.018f,.94f));

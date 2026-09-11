@@ -75,6 +75,39 @@ namespace
         Mesh->SetFirstPersonPrimitiveType(EFirstPersonPrimitiveType::FirstPerson);
         Mesh->bReceivesDecals = false;
     }
+
+    struct FWeaponPoseKey
+    {
+        float Phase;
+        FVector Position;
+        FRotator Rotation;
+        FVector Travel = FVector::ZeroVector;
+        FVector Turn = FVector::ZeroVector;
+    };
+
+    void SampleWeaponStroke(const FWeaponPoseKey* Keys, int32 Count, float Phase,
+        FVector& Position, FRotator& Rotation)
+    {
+        int32 Next = 1;
+        while (Next < Count - 1 && Phase > Keys[Next].Phase) ++Next;
+        const FWeaponPoseKey& A = Keys[Next - 1];
+        const FWeaponPoseKey& B = Keys[Next];
+        const float Span = FMath::Max(.001f, B.Phase - A.Phase);
+        const float T = FMath::Clamp((Phase - A.Phase) / Span, 0.f, 1.f);
+        const float T2 = T * T, T3 = T2 * T;
+        // A carried tangent at contact gives the stroke follow-through. The
+        // loaded and settled poses deliberately have zero velocity.
+        const auto Hermite = [=](const FVector& P0, const FVector& V0,
+            const FVector& P1, const FVector& V1)
+        {
+            return P0 * (2.f * T3 - 3.f * T2 + 1.f) + V0 * Span * (T3 - 2.f * T2 + T)
+                + P1 * (-2.f * T3 + 3.f * T2) + V1 * Span * (T3 - T2);
+        };
+        Position = Hermite(A.Position, A.Travel, B.Position, B.Travel);
+        const FVector Angles = Hermite(FVector(A.Rotation.Pitch, A.Rotation.Yaw, A.Rotation.Roll), A.Turn,
+            FVector(B.Rotation.Pitch, B.Rotation.Yaw, B.Rotation.Roll), B.Turn);
+        Rotation = FRotator(Angles.X, Angles.Y, Angles.Z);
+    }
 }
 
 ADBCharacter::ADBCharacter()
@@ -602,6 +635,8 @@ void ADBCharacter::SuspendCombatInput()
     FootstepSequence = 0;
     LocomotionAudioHold = .2f;
     MovementLean = PreviousMotionVelocity = FVector::ZeroVector;
+    EvasionPoseAge = 1.f;
+    AirbornePoseBlend = 0.f;
     PreviousMotionLocation = GetActorLocation();
     GetCharacterMovement()->GroundFriction = WalkFriction;
     GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
@@ -1169,6 +1204,8 @@ void ADBCharacter::TriggerFullVolleyImpact(uint32 VolleyId, FVector Location, AD
 void ADBCharacter::StartRimStrike(bool bHeavy)
 {
     if (!CanAct() || AttackRecovery > 0.f) return;
+    StrikeStartLocation = WeaponBaseLocation;
+    StrikeStartRotation = WeaponBaseRotation;
     ClearPieceSelection();
     bShieldReady = false;
     bWantsFire = false;
@@ -1467,6 +1504,8 @@ void ADBCharacter::Dash()
     Burst->FinishVelocityParams.ClampVelocity = bGuarding ? 320.f : WalkSpeed;
     DashRootMotionId = Movement->ApplyRootMotionSource(Burst);
     if (DashRootMotionId == 0) return;
+    EvasionPoseAge = 0.f;
+    EvasionPoseDirection = Direction;
     DashCooldown = 1.45f;
     EvasionInvulnerabilityTime = .13f;
     bSprinting = false;
@@ -1755,6 +1794,8 @@ void ADBCharacter::OnRunReset()
     MeleeChainWindow = MeleeStepRemaining = 0.f;
     bMeleeFinisher = bExpansionTarget = false;
     CameraKick = CameraSideKick = ReleasePose = 0.f;
+    EvasionPoseAge = 1.f;
+    AirbornePoseBlend = 0.f;
     ImpactSoundCooldown = HeavySoundCooldown = 0.f;
     NextBlockPiece = 0;
     CatchSoundCooldown = 0.f;
@@ -1878,18 +1919,26 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
     const float SpeedFraction = FMath::Clamp(GroundedSpeed / SprintSpeed, 0.f, 1.f);
     GaitAmount = bGrounded && !IsDashing()
         ? FMath::FInterpTo(GaitAmount, SpeedFraction, DeltaSeconds, 14.f) : 0.f;
-    // Phase follows distance travelled: stationary and airborne poses have
-    // no autonomous walking loop. Head travel stays below1cm even sprinting.
-    if (GroundedSpeed > 8.f) BobPhase += DeltaSeconds * GroundedSpeed * (2.f * PI / 550.f);
-    const float Bob = FMath::Sin(BobPhase * 2.f) * 1.3f * GaitAmount;
-    const float GaitSway = FMath::Sin(BobPhase) * .65f * GaitAmount;
     SprintBlend = FMath::FInterpTo(SprintBlend, bSprinting ? 1.f : 0.f, DeltaSeconds, 8.f);
+    // The hand travels more than the eye: a visible carried mass with a
+    // restrained camera. Both gait and footsteps use200/260cm step lengths.
+    const float StepLength = FMath::Lerp(200.f, 260.f, SprintBlend);
+    if (GroundedSpeed > 8.f) BobPhase += DeltaSeconds * GroundedSpeed * PI / StepLength;
+    const float Bob = (FMath::Cos(BobPhase * 2.f) * .75f - .25f) * GaitAmount;
+    const float GaitSway = FMath::Sin(BobPhase) * GaitAmount;
+    EvasionPoseAge = FMath::Min(1.f, EvasionPoseAge + DeltaSeconds);
+    const float EvasionLoad = FMath::SmoothStep(0.f, .065f, EvasionPoseAge)
+        * (1.f - FMath::SmoothStep(.24f, .46f, EvasionPoseAge));
+    const FVector LocalEvasion = FRotator(0.f, GetControlRotation().Yaw, 0.f).Quaternion()
+        .UnrotateVector(EvasionPoseDirection);
+    AirbornePoseBlend = FMath::FInterpTo(AirbornePoseBlend, bGrounded ? 0.f : 1.f, DeltaSeconds, 9.f);
+    const float Rising = FMath::Clamp(GetVelocity().Z / 565.f, -1.f, 1.f);
     LandingImpact = FMath::FInterpTo(LandingImpact, 0.f, DeltaSeconds, 11.f);
     const float Brace = FMath::SmoothStep(0.f, 1.f, GuardBlend);
     FVector Pose = FMath::Lerp(FVector(120,-43,-42), FVector(106,-47,-18), Brace);
     FRotator Rotation = FMath::Lerp(FRotator(0,-8,-3), FRotator(0,-7,-8), Brace);
 
-    if (bWantsFire)
+    if (bWantsFire && (!bStrikePoseActive || AttackRecovery <= 0.f))
     {
         const float Anticipation = GetChargeProgress();
         Pose += FVector(-11,-4,3) * Anticipation;
@@ -1898,45 +1947,74 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
     else if (bStrikePoseActive && AttackRecovery > 0.f)
     {
         const float Phase = 1.f - FMath::Clamp(AttackRecovery / StrikeTotal, 0.f, 1.f);
-        const float ContactAt = bHeavyStrike ? .33f : bMeleeFinisher ? .39f : .37f;
-        const float WindupEnd = ContactAt * .52f;
+        const float ContactAt = (bHeavyStrike ? .27f : bMeleeFinisher ? .24f : .17f) / StrikeTotal;
+        const float WindupEnd = ContactAt * .62f;
+        const float FollowAt = ContactAt + (bHeavyStrike ? .20f : .18f);
         FVector Windup = MeleeSide > 0.f ? FVector(76,-65,-32) : FVector(88,6,-36);
         FVector Contact = MeleeSide > 0.f ? FVector(126,22,-22) : FVector(121,-63,-20);
         FRotator WindupRotation(-14, MeleeSide > 0.f ? -45.f : 35.f, -MeleeSide * 28.f);
         FRotator ContactRotation(9, MeleeSide * 48.f, MeleeSide * 53.f);
+        FVector Follow = MeleeSide > 0.f ? FVector(107, 38, -34) : FVector(100, -75, -32);
+        FRotator FollowRotation(2, MeleeSide * 60.f, MeleeSide * 65.f);
         if (bHeavyStrike || bMeleeFinisher)
         {
             Windup = FVector(73,-56,bMeleeFinisher ? -54.f : -35.f);
             Contact = FVector(138,-15,bMeleeFinisher ? -7.f : -14.f);
             WindupRotation = FRotator(-22,-26,-32);
             ContactRotation = FRotator(bMeleeFinisher ? 18.f : 3.f,7.f, bMeleeFinisher ? 35.f : 8.f);
+            Follow = bMeleeFinisher ? FVector(127, 12, -29) : FVector(129, -3, -35);
+            FollowRotation = FRotator(bMeleeFinisher ? 5.f : -10.f, 15.f, bMeleeFinisher ? 47.f : 18.f);
         }
-        if (Phase < WindupEnd)
-        {
-            const float Alpha = FMath::SmoothStep(0.f, 1.f, Phase / WindupEnd);
-            Pose = FMath::Lerp(Pose, Windup, Alpha);
-            Rotation = FMath::Lerp(Rotation, WindupRotation, Alpha);
-        }
-        else if (Phase < ContactAt)
-        {
-            const float Alpha = FMath::SmoothStep(0.f, 1.f, (Phase - WindupEnd) / (ContactAt - WindupEnd));
-            Pose = FMath::Lerp(Windup, Contact, Alpha);
-            Rotation = FMath::Lerp(WindupRotation, ContactRotation, Alpha);
-        }
-        else
-        {
-            const float Alpha = FMath::SmoothStep(0.f, 1.f, (Phase - ContactAt) / (1.f - ContactAt));
-            Pose = FMath::Lerp(Contact, Pose, Alpha);
-            Rotation = FMath::Lerp(ContactRotation, Rotation, Alpha);
-        }
+        const float ContactSpan = FMath::Max(.01f, FollowAt - WindupEnd);
+        const FVector ContactTravel = (Follow - Windup) * (1.15f / ContactSpan);
+        const FRotator ContactTurn = (FollowRotation - WindupRotation) * (1.15f / ContactSpan);
+        const FWeaponPoseKey Keys[] = {
+            {0.f, StrikeStartLocation, StrikeStartRotation},
+            {WindupEnd, Windup, WindupRotation},
+            {ContactAt, Contact, ContactRotation, ContactTravel,
+                FVector(ContactTurn.Pitch, ContactTurn.Yaw, ContactTurn.Roll)},
+            {FollowAt, Follow, FollowRotation},
+            {.86f, Pose + FVector(-3.f, -MeleeSide * 2.f, -2.f), Rotation + FRotator(-2.f, -MeleeSide * 3.f, 0.f)},
+            {1.f, Pose, Rotation}
+        };
+        SampleWeaponStroke(Keys, UE_ARRAY_COUNT(Keys), Phase, Pose, Rotation);
     }
+    WeaponBaseLocation = Pose;
+    WeaponBaseRotation = Rotation;
+    const float StrokePhase = bStrikePoseActive && AttackRecovery > 0.f
+        ? 1.f - FMath::Clamp(AttackRecovery / StrikeTotal, 0.f, 1.f) : 1.f;
+    const float StrokeWeight = 1.f - .85f * FMath::SmoothStep(0.f, .16f, StrokePhase)
+        * (1.f - FMath::SmoothStep(.58f, 1.f, StrokePhase));
     Pose += FVector(-Recoil * 6.f - CatchPose * 12.f - ReleasePose * 8.f,
-        -LookSwayX + GaitSway + CatchPose * 5.f, Bob + LookSwayY - EquipPose * 5.f + ReleasePose * 5.f);
+        -LookSwayX + GaitSway * 1.6f * StrokeWeight + CatchPose * 5.f,
+        Bob * (2.5f + SprintBlend) * StrokeWeight + LookSwayY - EquipPose * 5.f + ReleasePose * 5.f);
     const float LocomotionWeight = 1.f - Brace * .75f;
-    Pose += FVector(-MovementLean.X * 3.f - SprintBlend * 3.f, -MovementLean.Y * 2.f,
-        -LandingImpact * 4.f - SprintBlend * 1.5f) * LocomotionWeight;
+    Pose += FVector(-MovementLean.X * 3.f - SprintBlend * 9.f, -MovementLean.Y * 2.f - SprintBlend * 3.f,
+        -LandingImpact * 4.f - SprintBlend * 5.f) * LocomotionWeight * StrokeWeight;
+    // Evasion draws the assembly across the chest, then catches its momentum
+    // after the feet stop. It has its own silhouette rather than the run carry.
+    const FVector EvasionBrace(-24.f - FMath::Max(0.f, -LocalEvasion.X) * 5.f,
+        14.f + LocalEvasion.Y * 7.f, 13.f - LocalEvasion.X * 4.f);
+    const FRotator EvasionTurn(-12.f - LocalEvasion.X * 6.f,
+        12.f + LocalEvasion.Y * 10.f, 8.f + LocalEvasion.Y * 26.f);
+    const FWeaponPoseKey EvasionKeys[] = {
+        {0.f, FVector::ZeroVector, FRotator::ZeroRotator},
+        {.065f, EvasionBrace, EvasionTurn},
+        {.205f, EvasionBrace, EvasionTurn},
+        {.30f, FVector(-10.f, -LocalEvasion.Y * 9.f, -6.f),
+            FRotator(7.f, -LocalEvasion.Y * 6.f, -LocalEvasion.Y * 14.f)},
+        {.43f, FVector(-3.f, LocalEvasion.Y * 2.f, 2.f),
+            FRotator(-2.f, LocalEvasion.Y * 2.f, LocalEvasion.Y * 3.f)},
+        {.56f, FVector::ZeroVector, FRotator::ZeroRotator}
+    };
+    FVector EvasionPosition; FRotator EvasionRotation;
+    SampleWeaponStroke(EvasionKeys, UE_ARRAY_COUNT(EvasionKeys), EvasionPoseAge, EvasionPosition, EvasionRotation);
+    Pose += EvasionPosition * LocomotionWeight;
+    Pose += FVector(-5.f, -2.f, Rising * 3.f) * AirbornePoseBlend * LocomotionWeight * StrokeWeight;
     Rotation += FRotator(Recoil * 4.f - EquipPose * 7.f - (MovementLean.X + SprintBlend) * LocomotionWeight,
-        CatchPose * 8.f - ReleasePose * 9.f, GaitSway * .4f - MovementLean.Y * .6f * LocomotionWeight);
+        CatchPose * 8.f - ReleasePose * 9.f,
+        GaitSway * 1.5f * StrokeWeight - MovementLean.Y * .6f * LocomotionWeight - SprintBlend * 9.f * StrokeWeight);
+    Rotation += EvasionRotation * LocomotionWeight;
     WeaponRoot->SetRelativeLocation(Pose);
     WeaponRoot->SetRelativeRotation(Rotation);
 
@@ -1969,10 +2047,11 @@ void ADBCharacter::UpdateWeapon(float DeltaSeconds)
         AttachmentParts[Index]->SetHiddenInGame(!HasUpgrade(Ids[Index]));
     // Short contact/release impulses recover to zero; aim input never receives artificial drift.
     ViewCamera->ClearAdditiveOffset();
-    ViewCamera->AddAdditiveOffset(FTransform(FRotator(-CameraKick,CameraSideKick,CameraSideKick * .3f),
+    ViewCamera->AddAdditiveOffset(FTransform(FRotator(-CameraKick - EvasionLoad * .25f, CameraSideKick,
+        CameraSideKick * .3f - LocalEvasion.Y * EvasionLoad * 1.1f),
         FVector(-CameraKick * 2.f - MovementLean.X * .4f,
             GaitSway * .4f - MovementLean.Y * .25f,
-            Bob * .65f - LandingImpact * 2.2f)), 0.f);
+            Bob * .65f - LandingImpact * 2.2f - EvasionLoad * 2.5f)), 0.f);
     const float DesiredFOV = IsDashing() || DashTime > 0.f ? 99.f
         : 94.f + SprintBlend * 2.f - (bWantsFire ? GetChargeProgress() * 3.f : 0.f);
     ViewCamera->SetFieldOfView(FMath::FInterpTo(ViewCamera->FieldOfView, DesiredFOV, DeltaSeconds, 9.f));

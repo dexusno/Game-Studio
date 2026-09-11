@@ -119,12 +119,14 @@ private:
  float PulseTime=0,CheckTimer=0;
  bool bEnding=false,bVerify=false,bCapture=false,bHadFocus=true,bInitialEntry=false,bCapturedFrame=false;
  bool bMotionCapture=false,bEnemyMotionCapture=false,bDemoRecording=false,bDemoStopped=false,bChecksRunning=false;
+ bool bMotionFrameStudy=false;
  float VictoryDelay=0.f;
  double DemoStartedAt=0;
  double DemoAudioStartedAt=0;
  FString DemoFrameTimes;
  float DemoTime=0.f;
- int32 DemoFrame=0,DemoAction=0;
+ int32 DemoFrame=0,DemoAction=0,DemoMissedFrames=0;
+ float DemoNextFrameAt=0.f;
  FString SlotBase="DreamboundSegments";
  FRandomStream Random;
  AActor* Mesh(const FString& Name,FVector Location,FRotator Rotation=FRotator::ZeroRotator,FVector Scale=FVector::OneVector,bool bCollision=true,const FString& Material="");

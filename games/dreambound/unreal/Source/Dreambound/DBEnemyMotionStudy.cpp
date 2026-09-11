@@ -62,6 +62,9 @@ void ADBEnemyMotionStudy::BeginPlay()
     Mode->ClearRewardPractice();
     Mode->PracticeReward = TEXT("AnimationStudy");
     Mode->bSliceAwaitingStart = false;
+    // The isolated study skips normal game-mode timers. Do not retain the
+    // one-time arrival banner forever over the raised attack silhouette.
+    Mode->EventRemaining = 0.f;
     const bool bBossStudy = Kind == EDBEnemyKind::Boss;
     Player->SetActorLocation(Center + (bBossStudy ? FVector(1050.f,900.f,110.f) : FVector(600.f,-600.f,110.f)));
     Player->GetCharacterMovement()->StopMovementImmediately();
@@ -83,7 +86,7 @@ void ADBEnemyMotionStudy::BeginPlay()
     FApp::SetFixedDeltaTime(1.0 / 30.0);
     FApp::SetUseFixedTimeStep(true);
     if (GEngine) GEngine->SetMaxFPS(30.f);
-    Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm\n");
+    Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm,left_claw_contact_x,left_claw_contact_y,left_claw_contact_z,right_claw_contact_x,right_claw_contact_y,right_claw_contact_z\n");
     UpdateCamera(0.f);
 }
 
@@ -203,6 +206,14 @@ void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
             DrawDebugSphere(GetWorld(),Target,3.5f,8,FColor::Green,false,0.f,1,1.5f);
             DrawDebugLine(GetWorld(),Target-FVector(0,0,8),Target+FVector(0,0,8),FColor::White,false,0.f,1,1.5f);
         }
+        // These points follow measured source skin vertices through the hand
+        // bones. They expose skin contact separately from ankle/wrist targets.
+        for (const FVector& Contact : {State.left_claw_contact_world,State.right_claw_contact_world})
+        {
+            if (Contact.IsNearlyZero()) continue;
+            DrawDebugSphere(GetWorld(),Contact,3.f,8,FColor::Magenta,false,0.f,1,1.5f);
+            DrawDebugLine(GetWorld(),Contact-FVector(0,0,8),Contact+FVector(0,0,8),FColor::Magenta,false,0.f,1,1.5f);
+        }
     }
     const FVector At = Creature->GetActorLocation();
     const FString Phase = StaticEnum<EDBEnemyPhase>()->GetNameStringByValue(static_cast<int64>(Creature->Phase));
@@ -224,7 +235,10 @@ void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
     Samples += FString::Printf(TEXT(",%.4f"),FVector::Dist2D(At,Player->GetActorLocation()));
     for (const FVector& Target : {State.left_hand_target_world,State.right_hand_target_world})
         Samples += FString::Printf(TEXT(",%.4f,%.4f,%.4f"),Target.X,Target.Y,Target.Z);
-    Samples += FString::Printf(TEXT(",%.4f,%.4f\n"),State.left_hand_reach_error_cm,State.right_hand_reach_error_cm);
+    Samples += FString::Printf(TEXT(",%.4f,%.4f"),State.left_hand_reach_error_cm,State.right_hand_reach_error_cm);
+    for (const FVector& Contact : {State.left_claw_contact_world,State.right_claw_contact_world})
+        Samples += FString::Printf(TEXT(",%.4f,%.4f,%.4f"),Contact.X,Contact.Y,Contact.Z);
+    Samples += TEXT("\n");
     FScreenshotRequest::RequestScreenshot(Output/FString::Printf(TEXT("Frame_%05d.png"),Frame++),false,false);
 }
 
@@ -242,6 +256,7 @@ void ADBEnemyMotionStudy::Finish(bool bAborted)
     Report->SetStringField(TEXT("target_path"),KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
     Report->SetNumberField(TEXT("scripted_player_close_relocation_frame"),BossCloseTargetFrame);
     Report->SetBoolField(TEXT("foot_target_markers"),bFootMarkers);
+    Report->SetBoolField(TEXT("claw_skin_contact_markers"),bFootMarkers);
     Report->SetStringField(TEXT("observer_tick_stage"),TEXT("PostPhysics, before camera-manager update"));
     Report->SetNumberField(TEXT("simulation_seconds"),Time); Report->SetNumberField(TEXT("frames"),Frame);
     Report->SetNumberField(TEXT("requested_seconds"),Duration);

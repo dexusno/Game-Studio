@@ -1,7 +1,8 @@
 {
   "asset": "MireSeer",
   "source_folder": "mire-seer",
-  "output_folder": "finished-motion",
+  "output_folder": "finished-performance",
+  "rig_version": "performance-v1",
   "height_metres": 2.2,
   "source_front": "Blender -Y after optional yaw correction",
   "runtime_mesh_yaw": -90,
@@ -11,6 +12,12 @@
     "chest": [0.0, 0.015, 1.46],
     "neck": [0.0, -0.025, 1.77],
     "head_top": [0.0, -0.07, 2.11],
+    "spine_lower": [0.0, 0.02, 1.22],
+    "upper_chest": [0.0, 0.015, 1.55],
+    "neck_base": [0.0, 0.0, 1.66],
+    "clavicle_l": [0.055, 0.015, 1.56],
+    "throat_root": [0.0, -0.195, 1.905],
+    "throat_tip": [0.0, -0.175, 1.665],
     "shoulder_l": [0.24, 0.015, 1.56],
     "elbow_l": [0.405, -0.015, 1.23],
     "hand_l": [0.575, -0.03, 0.92],
@@ -33,5 +40,42 @@
   "ankle_transition_z": 0.17,
   "joint_blend_metres": {"hip": 0.115, "shoulder": 0.10, "knee": 0.13, "ankle": 0.07, "elbow": 0.075, "wrist": 0.065, "crotch_half_width": 0.075},
   "throat_emission": {"center": [0.0, -0.16, 1.91], "radius": [0.095, 0.13, 0.21]},
-  "notes": "Sixteen bones; the original twelve names and rest landmarks are unchanged. Blender metres, front -Y, left +X, up Z. New hand children extend from the existing wrist landmarks toward the measured webbed-finger mass; foot children extend from the existing ankle landmarks toward the forward toe mass. Pleated gill crown and sac retain neck/head motion. Whole hands can cup/recoil and feet can counter shin pitch, but the splayed fingers and individual toes have no separate joints. Preserve the v1 topology, material and exact atlas bytes."
+  "performance_rig": {
+    "upperarm_ownership": {
+      "inner_x": 0.20, "reference_z": 1.30, "inner_x_slope": 0.30, "side_half_width": 0.055,
+      "upper_z": 1.48, "upper_half_width": 0.06, "lower_z": 1.18, "lower_half_width": 0.05
+    },
+    "neck_weights": {
+      "lateral_center": 0.12, "lateral_half_width": 0.07,
+      "head_fan_transition": {"z": 1.72, "half_width": 0.06}
+    },
+    "torso_transitions": [
+      {"to": "spine_lower", "z": 1.14, "half_width": 0.09},
+      {"to": "spine", "z": 1.37, "half_width": 0.09},
+      {"to": "chest", "z": 1.51, "half_width": 0.07},
+      {"to": "neck", "z": 1.65, "half_width": 0.065},
+      {"to": "head", "z": 1.80, "half_width": 0.07}
+    ],
+    "clavicle_weights": {
+      "outward_center": 0.11, "outward_half_width": 0.075,
+      "vertical_radius": 0.17, "depth_radius": 0.25,
+      "upper_limit": 1.69, "upper_half_width": 0.055,
+      "body_share": 0.85, "cuff_center": 0.065, "cuff_half_width": 0.09, "cuff_share": 0.65
+    },
+    "throat": {
+      "center": [0.0, -0.21, 1.78], "radius": [0.102, 0.07, 0.165], "max_weight": 0.95,
+      "local_scale_review": [1.10, 1.02, 1.10],
+      "notes": "Anterior gular sac only, blended into neck/head attachment. Local +Y points down the sac; local X/Z provide radial expansion. No independent jaw or frill animation."
+    },
+    "review_angle_targets_degrees": {
+      "pelvis": {"pitch": 12, "yaw": 15, "roll": 8},
+      "spine_lower": {"pitch": 12, "yaw": 15, "roll": 8},
+      "spine": {"pitch": 15, "yaw": 18, "roll": 8},
+      "chest": {"pitch": 15, "yaw": 18, "roll": 10},
+      "neck": {"pitch": 15, "yaw": 18, "roll": 10},
+      "clavicle_l_r": {"yaw": 15, "roll": 8},
+      "scope": "Proposed mesh-axis pose range, not a certified independent-axis envelope. Review combined authored poses; retain limb limits from the motion rig."
+    }
+  },
+  "notes": "Twenty-two deform bones: the twenty-one-bone common performance chain plus a useful throat sac control under head. Preserve all sixteen existing global rest matrices and limb endpoints. New spine_lower/chest/neck/clavicle parents require a fresh Unreal skeleton. Blender metres, front -Y, left +X, up Z, bone local +Y along head-to-tail. Four normalized influences maximum. Preserved webbed fingers and individual toes remain fixed within whole-hand/foot articulation; no jaw, corrective shapes or secondary frill physics. Preserve the reviewed topology, material and exact atlas bytes."
 }

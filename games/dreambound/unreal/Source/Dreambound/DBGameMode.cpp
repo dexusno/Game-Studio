@@ -77,6 +77,10 @@ void ADBGameMode::BeginPlay() {
  if(bVerify&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_Auto");
  bCapture=FParse::Param(FCommandLine::Get(),TEXT("DBCapture"));
  bMotionCapture=FParse::Param(FCommandLine::Get(),TEXT("DBMotionCapture"));
+ bMotionFrameStudy=FParse::Param(FCommandLine::Get(),TEXT("DBMotionFrameStudy"));
+ if(bMotionFrameStudy)SetTickGroup(TG_PostPhysics);
+ bMotionCapture=bMotionCapture||bMotionFrameStudy;
+ if(bMotionFrameStudy&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_PlayerMotion");
  bEnemyMotionCapture=FParse::Param(FCommandLine::Get(),TEXT("DBEnemyMotionStudy"));
  if(bEnemyMotionCapture&&!SlotBase.StartsWith(TEXT("DreamboundQA"))&&!SlotBase.StartsWith(TEXT("DBQA_")))SlotBase=TEXT("DreamboundQA_EnemyMotion");
  bCapture=bCapture||bMotionCapture||bEnemyMotionCapture;

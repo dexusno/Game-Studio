@@ -1,0 +1,66 @@
+{
+  "complete": true,
+  "scope": "/Game/Art/OrganicEnemies",
+  "assets": [
+    {
+      "asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Performance.SK_OE_Briarhide_Performance",
+      "source_fbx_sha256": "8c41b59a5164c2624e37dd5cda663eb3f072001c683dd81ec728b74da7fafece",
+      "source_glb_sha256": "f64379b43b30cc08b8e7cc75b812310f5db9e2b333cc62babc548e26033423bc",
+      "dimensions_cm": [
+        201.40640258789062,
+        107.87104034423828,
+        220.24811433255672
+      ],
+      "runtime_triangles_from_blender": 189560,
+      "validated_bone_parent_links": 20,
+      "rig_variant": "performance",
+      "lod_count": 1,
+      "materials": 3,
+      "runtime_mesh_yaw": -90
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Performance.SK_OE_MireSeer_Performance",
+      "source_fbx_sha256": "1d30caa1ed02595e2c8834b04eacbdc190ab82080a2ad14ca4aca87c37212e22",
+      "source_glb_sha256": "53e775f931b55f17affe99f928632a09021c9c27eb10d3edae7c9391e6640862",
+      "dimensions_cm": [
+        135.0663299560547,
+        66.67898941040039,
+        220.12190448120236
+      ],
+      "runtime_triangles_from_blender": 170000,
+      "validated_bone_parent_links": 21,
+      "rig_variant": "performance",
+      "lod_count": 1,
+      "materials": 1,
+      "runtime_mesh_yaw": -90
+    }
+  ],
+  "textures": [
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_Briarhide_Base.T_OE_Briarhide_Base",
+      "source_sha256": "df01f0b75e590f4e117840e37923eeced9e0eba3173c38fda84339ac06ae8bbd",
+      "srgb": true
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_Briarhide_MR.T_OE_Briarhide_MR",
+      "source_sha256": "e466660f92d30152314d2b9c3f0ee7233f838f225765b402a4fc41bf07a8481d",
+      "srgb": false
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_MireSeer_Base.T_OE_MireSeer_Base",
+      "source_sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+      "srgb": true
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_MireSeer_MR.T_OE_MireSeer_MR",
+      "source_sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+      "srgb": false
+    }
+  ],
+  "materials": [
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Briarhide.M_OE_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_EyeIris.M_OE_EyeIris",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_EyePupil.M_OE_EyePupil",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_MireSeer.M_OE_MireSeer"
+  ]
+}

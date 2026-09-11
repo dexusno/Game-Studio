@@ -1,5 +1,6 @@
 param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureMotion',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
  [ValidateSet('Side','LowSide','Front','Player')][string]$View='Side',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
@@ -24,7 +25,7 @@ if($Build -eq 'Editor'){
  $motionArguments+=('"'+(Join-Path $motionGameRoot 'unreal/Dreambound.uproject')+'"')
  $motionArguments+='-game'
 }else{
- $motionExecutable=Join-Path $motionGameRoot 'BuildOutput/CreatureMotion/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe'
+ $motionExecutable=Join-Path $motionGameRoot ('BuildOutput/'+$OutputName+'/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe')
 }
 if(-not(Test-Path -LiteralPath $motionExecutable -PathType Leaf)){throw 'The selected build is missing.'}
 $motionArguments+=@('-DBEnemyMotionStudy',('-DBCreature='+$Creature),('-DBCreatureView='+$View),'-DBSeed=552389',

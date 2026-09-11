@@ -155,7 +155,10 @@ def import_creature(asset, folder):
     task = unreal.AssetImportTask()
     task.filename = str(source)
     task.destination_path = DEST + "/Meshes"
-    task.destination_name = "SK_OE_" + asset
+    # Reparented torso/shoulder chains need a distinct skeleton. Keep the
+    # sixteen-bone mesh available for explicit baseline comparison.
+    performance_rig = any(bone["name"] == "spine_lower" for bone in prep["bones"])
+    task.destination_name = "SK_OE_" + asset + ("_Performance" if performance_rig else "")
     task.automated = task.replace_existing = task.save = True
     task.options = options
     TOOLS.import_asset_tasks([task])
@@ -185,6 +188,7 @@ def import_creature(asset, folder):
                              "source_glb_sha256": prep["source_sha256"], "dimensions_cm": [size.x, size.y, size.z],
                              "runtime_triangles_from_blender": prep["runtime_triangles"],
                              "validated_bone_parent_links": len(prep["bones"]) - 1,
+                             "rig_variant": "performance" if performance_rig else "motion",
                              "lod_count": subsystem.get_lod_count(mesh), "materials": len(slots),
                              "runtime_mesh_yaw": prep["runtime_mesh_yaw"]})
 

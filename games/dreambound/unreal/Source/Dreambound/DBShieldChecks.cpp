@@ -858,7 +858,10 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
                 const auto* Batch = Pair.Value;
                 if (!Batch || !Batch->GetStaticMesh() || Batch->GetInstanceCount() == 0) continue;
                 const UStaticMesh* Model = Batch->GetStaticMesh();
-                NewOnly &= Model->GetPathName().StartsWith(TEXT("/Game/Art/Reverie/"));
+                // The approved habitat increment adds the LivingWorld kit to
+                // Reverie. Both replace the retired environment assets.
+                NewOnly &= Model->GetPathName().StartsWith(TEXT("/Game/Art/Reverie/"))
+                    || Model->GetPathName().StartsWith(TEXT("/Game/Art/LivingWorld/"));
                 NewOnly &= Model->GetFName()!=FName(TEXT("SM_RV_RockBank"))&&Model->GetFName()!=FName(TEXT("SM_RV_Cliff"))
                     &&Model->GetFName()!=FName(TEXT("SM_RV_Tree"));
                 Families.FindOrAdd(Model->GetFName()) += Batch->GetInstanceCount();
@@ -890,7 +893,7 @@ void ADBShieldCheckRunner::Tick(float DeltaSeconds)
             }
             Check(NewOnly && Missing.IsEmpty() && Families.FindRef(FName(TEXT("SM_RV_CrownTree")))==Mode->Rooms.Num()*2,
                 TEXT("new_environment_assets_actually_instanced"),
-                FString::Printf(TEXT("%d loaded/instanced mesh families; two CrownTrees per room; no legacy paths or retired Blender tree/rock/cliff instances; new individual ward/gate actors. Missing: %s"), Families.Num(), *Missing));
+                FString::Printf(TEXT("%d loaded/instanced Reverie/LivingWorld mesh families; two CrownTrees per room; no legacy paths or retired Blender tree/rock/cliff instances; new individual ward/gate actors. Missing: %s"), Families.Num(), *Missing));
             for (int32 I=1; I<Mode->Rooms.Num(); ++I) {
                 const FVector A=Mode->Rooms[I-1].Center, B=Mode->Rooms[I].Center, D=(B-A).GetSafeNormal2D();
                 for (const FVector& Expected : {A+D*1800.f, B-D*1800.f}) {

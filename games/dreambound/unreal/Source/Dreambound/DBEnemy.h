@@ -32,6 +32,8 @@ struct FDBEnemyAnimationDebug
     FVector left_hand_world = FVector::ZeroVector;
     FVector left_hand_target_world = FVector::ZeroVector;
     FVector right_hand_target_world = FVector::ZeroVector;
+    FVector left_claw_contact_world = FVector::ZeroVector;
+    FVector right_claw_contact_world = FVector::ZeroVector;
     FVector right_shoulder_world = FVector::ZeroVector;
     FVector facing_forward = FVector::ForwardVector;
     FVector pelvis_world = FVector::ZeroVector;
@@ -124,6 +126,7 @@ private:
     TArray<FTransform> DeathStartPose;
     TArray<FTransform> OrganicReferencePose;
     TArray<FTransform> OrganicReferenceComponentPose;
+    TMap<FName, int32> OrganicBoneIndices;
     TArray<FTransform> OrganicDeathStartPose;
     TArray<FTransform> OrganicPhaseStartPose;
     TArray<FTransform> OrganicPhaseStartBonePose;
@@ -159,8 +162,16 @@ private:
     FVector OrganicVelocity = FVector::ZeroVector;
     FVector OrganicPelvisOffset = FVector::ZeroVector;
     FVector OrganicSupportOffset = FVector::ZeroVector;
+    FVector OrganicLandingPelvisStart = FVector::ZeroVector;
+    float OrganicLandingTime = 0.f;
+    bool bOrganicLungeNeedsLanding = false;
+    bool bOrganicLanding = false;
     FVector DeathFootTargets[2];
     FQuat DeathFootRotations[2];
+    FVector OrganicDeathPelvisStart = FVector::ZeroVector;
+    FVector OrganicDeathPelvisContact = FVector::ZeroVector;
+    FVector OrganicDeathHandContacts[2];
+    bool bOrganicDeathHandContact[2] = { false, false };
     FVector OrganicSlamHandTargets[2];
     FVector OrganicSlamRequestedHands[2];
     FVector OrganicSlamStartPoles[2];
@@ -178,6 +189,10 @@ private:
     float OrganicPhaseBlendTime = 0.f;
     float OrganicStepCooldown = 0.f;
     float OrganicPoseDelta = 0.f;
+    float OrganicPerformanceCycle = 0.f;
+    float OrganicPerformancePlantTime[2] = { 1.f, 1.f };
+    bool bOrganicPerformanceFootSwinging[2] = { false, false };
+    int32 OrganicPerformanceStepSide = INDEX_NONE;
     int32 OrganicStepsSinceStop = 0;
     float LeftElbowPitch = -20.f;
     float RightElbowPitch = -20.f;

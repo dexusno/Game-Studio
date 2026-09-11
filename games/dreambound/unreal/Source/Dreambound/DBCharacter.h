@@ -234,6 +234,10 @@ private:
     float ChargeHeld = 0.f;
     float StrikeDelay = 0.f;
     float StrikeTotal = .5f;
+    FVector StrikeStartLocation = FVector(120.f, -43.f, -42.f);
+    FRotator StrikeStartRotation = FRotator(0.f, -8.f, -3.f);
+    FVector WeaponBaseLocation = FVector(120.f, -43.f, -42.f);
+    FRotator WeaponBaseRotation = FRotator(0.f, -8.f, -3.f);
     float CatchPose = 0.f;
     float GuardRaiseCooldown = 0.f;
     float SinceFired = 10.f;
@@ -241,6 +245,9 @@ private:
     float SinceDamaged = 10.f;
     float DashTime = 0.f;
     uint16 DashRootMotionId = 0;
+    float EvasionPoseAge = 1.f;
+    FVector EvasionPoseDirection = FVector::ForwardVector;
+    float AirbornePoseBlend = 0.f;
     float EvasionInvulnerabilityTime = 0.f;
     float StaminaRecoveryDelay = 0.f;
     float GroundedSpeed = 0.f;
