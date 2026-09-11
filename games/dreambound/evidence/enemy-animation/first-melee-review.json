@@ -1,0 +1,355 @@
+{
+  "capture": {
+    "complete": true,
+    "aborted": false,
+    "failure_reason": "",
+    "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+    "creature": "Melee",
+    "view": "Side",
+    "simulation_seconds": 32.03318786621094,
+    "frames": 961,
+    "missed_readbacks": 0,
+    "wall_seconds": 62.31026630103588,
+    "phase_samples": {
+      "Approach": 418,
+      "Telegraph": 157,
+      "Attack": 85,
+      "Recovery": 131,
+      "Staggered": 50,
+      "Dead": 120
+    }
+  },
+  "source_frames_csv_sha256": "f84e448436fd8d59e8a7380359b9785f679a300c72b2e60ed2f98ddb141dc02f",
+  "actual_pngs": 961,
+  "actual_dimensions": [
+    888,
+    500
+  ],
+  "csv_samples": 961,
+  "missing_or_misnumbered_frames": [],
+  "consecutive_30hz_simulation": true,
+  "sample_interval_seconds": {
+    "samples": 960,
+    "median": 0.033332999999999835,
+    "p95": 0.033333999999999975,
+    "max": 0.03333400000000175
+  },
+  "scope": "Measured bone/target positions and coverage, not a visual quality grade or hardware FPS benchmark.",
+  "phase_samples": {
+    "Approach": 418,
+    "Telegraph": 157,
+    "Attack": 85,
+    "Recovery": 131,
+    "Staggered": 50,
+    "Dead": 120
+  },
+  "near_black_frames": [],
+  "camera_obstruction_adjusted_samples": 0,
+  "phase_transitions": [
+    {
+      "time": 4.333331,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 130
+    },
+    {
+      "time": 5.23333,
+      "from": "Telegraph",
+      "to": "Attack",
+      "frame": 157
+    },
+    {
+      "time": 5.799996,
+      "from": "Attack",
+      "to": "Recovery",
+      "frame": 174
+    },
+    {
+      "time": 6.999995,
+      "from": "Recovery",
+      "to": "Approach",
+      "frame": 210
+    },
+    {
+      "time": 7.333328,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 220
+    },
+    {
+      "time": 8.23333,
+      "from": "Telegraph",
+      "to": "Attack",
+      "frame": 247
+    },
+    {
+      "time": 8.800004,
+      "from": "Attack",
+      "to": "Recovery",
+      "frame": 264
+    },
+    {
+      "time": 10.00002,
+      "from": "Recovery",
+      "to": "Approach",
+      "frame": 300
+    },
+    {
+      "time": 18.266731,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 548
+    },
+    {
+      "time": 19.166718,
+      "from": "Telegraph",
+      "to": "Attack",
+      "frame": 575
+    },
+    {
+      "time": 19.733376,
+      "from": "Attack",
+      "to": "Recovery",
+      "frame": 592
+    },
+    {
+      "time": 20.000038,
+      "from": "Recovery",
+      "to": "Staggered",
+      "frame": 600
+    },
+    {
+      "time": 20.933357,
+      "from": "Staggered",
+      "to": "Approach",
+      "frame": 628
+    },
+    {
+      "time": 21.266685,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 638
+    },
+    {
+      "time": 22.000008,
+      "from": "Telegraph",
+      "to": "Staggered",
+      "frame": 660
+    },
+    {
+      "time": 22.73333,
+      "from": "Staggered",
+      "to": "Approach",
+      "frame": 682
+    },
+    {
+      "time": 23.066658,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 692
+    },
+    {
+      "time": 23.966644,
+      "from": "Telegraph",
+      "to": "Attack",
+      "frame": 719
+    },
+    {
+      "time": 24.533302,
+      "from": "Attack",
+      "to": "Recovery",
+      "frame": 736
+    },
+    {
+      "time": 25.733284,
+      "from": "Recovery",
+      "to": "Approach",
+      "frame": 772
+    },
+    {
+      "time": 26.066612,
+      "from": "Approach",
+      "to": "Telegraph",
+      "frame": 782
+    },
+    {
+      "time": 26.966599,
+      "from": "Telegraph",
+      "to": "Attack",
+      "frame": 809
+    },
+    {
+      "time": 27.533257,
+      "from": "Attack",
+      "to": "Recovery",
+      "frame": 826
+    },
+    {
+      "time": 28.033249,
+      "from": "Recovery",
+      "to": "Dead",
+      "frame": 841
+    }
+  ],
+  "left_contact": {
+    "planted_reach_error_cm": {
+      "samples": 444,
+      "median": 0.0,
+      "p95": 0.6018,
+      "max": 8.1296
+    },
+    "planted_frame_drift_cm": {
+      "samples": 385,
+      "median": 9.999999999976694e-05,
+      "p95": 0.2014213990617551,
+      "max": 8.129606013823768
+    },
+    "anchor_changes_while_marked_planted": [],
+    "largest_drift_frames": [
+      {
+        "time": 10.033354,
+        "cm": 8.129606013823768,
+        "phase": "Approach",
+        "frame": 301
+      },
+      {
+        "time": 18.333397,
+        "cm": 4.006156826685607,
+        "phase": "Telegraph",
+        "frame": 550
+      },
+      {
+        "time": 18.300064,
+        "cm": 3.001363991587844,
+        "phase": "Telegraph",
+        "frame": 549
+      },
+      {
+        "time": 10.066688,
+        "cm": 1.44789507907164,
+        "phase": "Approach",
+        "frame": 302
+      },
+      {
+        "time": 18.36673,
+        "cm": 1.3447105896808942,
+        "phase": "Telegraph",
+        "frame": 551
+      }
+    ]
+  },
+  "right_contact": {
+    "planted_reach_error_cm": {
+      "samples": 454,
+      "median": 0.0,
+      "p95": 1.1188,
+      "max": 8.1279
+    },
+    "planted_frame_drift_cm": {
+      "samples": 398,
+      "median": 9.999999999976694e-05,
+      "p95": 0.3088572971454384,
+      "max": 8.127885541762932
+    },
+    "anchor_changes_while_marked_planted": [],
+    "largest_drift_frames": [
+      {
+        "time": 10.033354,
+        "cm": 8.127885541762932,
+        "phase": "Approach",
+        "frame": 301
+      },
+      {
+        "time": 4.399997,
+        "cm": 4.095747045411865,
+        "phase": "Telegraph",
+        "frame": 132
+      },
+      {
+        "time": 10.066688,
+        "cm": 2.352860150965198,
+        "phase": "Approach",
+        "frame": 302
+      },
+      {
+        "time": 10.100021,
+        "cm": 2.069145528956324,
+        "phase": "Approach",
+        "frame": 303
+      },
+      {
+        "time": 10.133355,
+        "cm": 1.708210273941717,
+        "phase": "Approach",
+        "frame": 304
+      },
+      {
+        "time": 4.433331,
+        "cm": 1.385957881755423,
+        "phase": "Telegraph",
+        "frame": 133
+      },
+      {
+        "time": 10.166689,
+        "cm": 1.2959173584762145,
+        "phase": "Approach",
+        "frame": 305
+      },
+      {
+        "time": 22.766663,
+        "cm": 1.0196876776738588,
+        "phase": "Approach",
+        "frame": 683
+      }
+    ]
+  },
+  "speed_cm_s": {
+    "samples": 841,
+    "median": 151.127,
+    "p95": 280.0,
+    "max": 290.345
+  },
+  "moving_samples_over_40_cm_s": 473,
+  "stationary_samples_under_5_cm_s": 318,
+  "player_damaged_samples": [
+    {
+      "time": 5.43333,
+      "phase": "Attack",
+      "health": 77.0
+    },
+    {
+      "time": 19.366714,
+      "phase": "Attack",
+      "health": 77.0
+    },
+    {
+      "time": 24.133308,
+      "phase": "Attack",
+      "health": 77.0
+    },
+    {
+      "time": 27.133263,
+      "phase": "Attack",
+      "health": 77.0
+    }
+  ],
+  "creature_health_events": [
+    {
+      "time": 20.000038,
+      "health": 203.8,
+      "frame": 600
+    },
+    {
+      "time": 22.000008,
+      "health": 191.8,
+      "frame": 660
+    },
+    {
+      "time": 28.033249,
+      "health": 0.0,
+      "frame": 841
+    }
+  ],
+  "projectile_count_increases": [],
+  "complete_consecutive_capture": true
+}

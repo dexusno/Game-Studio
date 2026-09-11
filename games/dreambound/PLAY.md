@@ -1,9 +1,9 @@
-# Living world and grounded movement playtest
+# Creature movement playtest
 
 The weapon rests folded along your arm. **Hold RMB** to unfold the surviving pieces into a shield; release RMB to fold it again. **Tap LMB repeatedly** for close strikes, with a stronger third strike when chained. **Hold LMB for 1.8 seconds** to light all six pieces and reach full power, then release. Releasing earlier throws only the lit pieces and keeps the rest available to block. Full power requires all six pieces, and committing them leaves you without armor until recall or reconstruction. **Q** recalls survivors; **F** performs a heavy strike (or Ram when earned).
 
 
-Open `BuildOutput/LivingWorld/Windows/Dreambound.exe` for the current **0.5.0-living1** demo, or run `scripts/Start-Demo.ps1`. It adds organic enemies, habitat details, sprint stamina, a separate evasive dash and movement sounds while preserving the preferred cyborg arms and weapon. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
+Open `BuildOutput/CreatureMotion/Windows/Dreambound.exe` for the current **0.5.1-motion1** demo, or run `scripts/Start-Demo.ps1`. It adds planted creature steps, smoother starts and turns, forward claw strikes, caster gestures, pounce landing, a grounded guardian slam and continuous hit/death transitions. The preferred cyborg arms, weapon, habitat dressing, sprint, dash and sound palette remain. [Watch the 35-second motion review](evidence/enemy-animation-review.mp4); it is a silent scripted study of the actual packaged enemy AI. Keep the whole Windows directory together. Earlier packages remain historical builds in their own directories.
 
 Approach the glowing ward stone and press **E**. Clear the first court, return to its stone and choose an attachment. Try it on the safe practice targets, then follow the open passage to the next court and press E at its stone. The second court earns an elemental core; the third contains the heavy sentinel and a caster. Routes and cover arrangements vary with the seed.
 

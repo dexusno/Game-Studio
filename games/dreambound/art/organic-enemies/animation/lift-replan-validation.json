@@ -1,0 +1,48 @@
+{
+  "candidate": "v10",
+  "source_commit": "2b70cb7ba7d4f6c5510fb6fb0237a5948fa1a387",
+  "created_utc": "2026-09-10T23:42:48.065092+00:00",
+  "source_sha256": {
+    "games/dreambound/unreal/Source/Dreambound/DBEnemy.cpp": "16AE701D109F8E9496FA68E6EDDAB4A026021FEFFDD46C4D9170606C8C125A2C",
+    "games/dreambound/unreal/Source/Dreambound/DBEnemy.h": "C1DD3130E70D7829693191338AF17205F0613452132641004CAAA0C6E15951BE"
+  },
+  "scope": "CPU algebra check of clearance phase and instantaneous position/velocity continuity when the remaining base path is refitted. This does not execute or validate the Unreal runtime.",
+  "conditions": {
+    "seed": 9010,
+    "fixed_hz": 30,
+    "original_step_duration_ticks_inclusive": [
+      4,
+      14
+    ],
+    "trials_per_duration": 200,
+    "per_tick_replan_probability": 0.7,
+    "lift_height_cm": 10.8,
+    "constant_phase_speed": true,
+    "velocity_clamp_inactive": true,
+    "random_replans_exclude_final_tick": true
+  },
+  "procedure": [
+    "For each original duration and trial, advance the current local step phase by dt/local_duration.",
+    "Before each randomly selected intermediate tick, preserve global_phase = phase_start + (1-phase_start)*local_phase and remaining_duration=(1-local_phase)*local_duration, then set local_phase=0 and phase_start=global_phase.",
+    "Compare sin(pi*global_phase)^2*10.8 clearance against the unretargeted original i/ticks phase at every sample, including landing.",
+    "At each replan, subtract the current lift displacement and analytic vertical lift velocity from a synthetic outgoing position/velocity; add the preserved phase displacement and derivative back and compare the instantaneous boundary.",
+    "Assert all final phases reach 1 and maximum errors remain below 1e-10."
+  ],
+  "result": {
+    "pass": true,
+    "schedules": 2200,
+    "replans": 12257,
+    "max_clearance_error_cm": 9.592326932761353e-15,
+    "max_replan_position_jump_cm": 0.0,
+    "max_replan_velocity_jump_cm_s": 5.684341886080802e-14
+  },
+  "not_tested": [
+    "Engine compilation, launch, skinning, or rendering",
+    "Actual foot lift, landing, skating, or visual pelvis continuity",
+    "Horizontal target reach and collision/terrain tracing",
+    "Speed-changing or stopping phase-rate derivatives and active velocity clamps",
+    "Toe orientation continuity",
+    "Full AI path or combat regression"
+  ],
+  "required_game_validation": "Full 32s Shipping Melee and Caster recordings, including Melee 300-480 and former drag 442-449; inspect actual images and world trajectories together."
+}

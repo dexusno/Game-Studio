@@ -1,0 +1,234 @@
+{
+  "version": "0.5.1-motion1",
+  "engine": "Unreal 5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "a0c7642a98002a40f6cc8369bc36085ac8a1f16d",
+  "recorded_on_utc": "2026-09-11T00:01:02.314021+00:00",
+  "package_path": "BuildOutput/CreatureMotion/Windows",
+  "scope": "Sixteen-bone organic creature rigs, planted locomotion and weight transfer, forward attacks and continuous hit/recovery/death poses; opposing fill lighting. Preferred player art, controls, world layout and audio assets preserved.",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166405120,
+      "sha256": "8F551105BDB9585B34025B4C15A280205EBB0EA04EFC2452F7E90CD3300A823E"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11374144,
+      "sha256": "86D6640D3D01A2CE87FE862E228172535D886712A671B4F1F4AE479A5B9E9C93"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 483005888,
+      "sha256": "153B2B749BEEF8926698011BFF9593BEBC6514BE83C0603B1EE4DF81285872CC"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 320033,
+      "sha256": "FFE61F0A3D581DDAF67F6AC521EF54CAF75EECB85CABDD2064D99241FA084D68"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211776,
+      "sha256": "8D27EAB64AB91BCA3F1B3C403BC46A2978F86F169DAFB394ABC3D32498F07B31"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "9C5450B1FD2F2AEEB7B1D3E2A68B028EF40D0DC07C1BB19633C59C5EDB32E707"
+    }
+  ],
+  "build": {
+    "exit_code": 0,
+    "cook": "Reused unchanged sixteen-bone content from the full cook at57e0d159e8cd4fbce3af3afb9c0cec9d77979de9; subsequent change is C++ locomotion only",
+    "build_cook_run_seconds": 48.25,
+    "log_sha256": "FEA0F471CD305318A1E06A2CB30013983FE77DC685873C86F7EFF27689DAA3FB"
+  },
+  "owner_configuration": {
+    "path": "unreal/Config/DefaultInput.ini",
+    "sha256": "46A15FAB3B5E618CF348BF4FAB527DB19CA2194054FB42E5BBEE8E704F5B0C60",
+    "note": "Existing owner working copy retained byte-for-byte; not included in this source commit. Package uses these local settings."
+  },
+  "verification_status": "Integrated local correction. Independent final v11 review cleared the named Melee restart/drag, bounded Caster restart/player cues, Melee player strike and Boss recovery windows with no new concrete blocker. Overall high-end fidelity and ordinary-play acceptance remain unestablished.",
+  "prior_full_cook": {
+    "exit_code": 0,
+    "cook": "Full cook of current imported sixteen-bone content; no skipcook",
+    "build_cook_run_seconds": 80.92,
+    "log_sha256": "015B78CF5DA18E86982AB77F387231650A73BF9699E14415716A04C68B4DA606",
+    "source_commit": "57e0d159e8cd4fbce3af3afb9c0cec9d77979de9"
+  },
+  "unchanged_package_files_from_full_cook": [
+    "Dreambound.exe",
+    "Dreambound/Content/Paks/Dreambound-Windows.pak",
+    "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+    "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+    "Dreambound/Content/Paks/global.ucas",
+    "Dreambound/Content/Paks/global.utoc"
+  ],
+  "verification": {
+    "method": "Normal non-practice enemy AI against a choreographed protected target; isolated QA user directory/save slot and seed552389, fixed30Hz screenshots, silent offscreen render. Player views use the game camera but scripted movement. Boss player target is explicitly relocated at14s to provoke normal Slam selection.",
+    "runs": [
+      {
+        "creature_view": "Melee-Side",
+        "frames": 961,
+        "simulation_seconds": 32.03318786621094,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-melee-side-review.json",
+        "frames_csv_sha256": "AA904E8A87E58A16207FDE6AE6CE54A547DBE62A118BA56EAF4507A4B4BAED48",
+        "invocation_sha256": "8268656EF588426862548414A86FAB6052A06350F5DF01B16C2E6159C2D7CDDB"
+      },
+      {
+        "creature_view": "Caster-Side",
+        "frames": 961,
+        "simulation_seconds": 32.03318786621094,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-caster-side-review.json",
+        "frames_csv_sha256": "79D05628A50C423DBDA0AA4FB99C8CC4832C579554222FA0A38B130A7C478688",
+        "invocation_sha256": "6B36F14FD4F9BE235D918F7AFF1FDEC06B7EE0BEC630C8034FA67CCDEA5A72E3"
+      },
+      {
+        "creature_view": "Melee-Player",
+        "frames": 241,
+        "simulation_seconds": 8.033327102661133,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-melee-player-review.json",
+        "frames_csv_sha256": "64DEEA4398CB1B4A2322113F24954DB0CE83050493962EE7916B5AF4B46E74FD",
+        "invocation_sha256": "17336F697FB9FAECD78D4115016BD6167A3960545249A345B518D92A95761476"
+      },
+      {
+        "creature_view": "Caster-Player",
+        "frames": 241,
+        "simulation_seconds": 8.033327102661133,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-caster-player-review.json",
+        "frames_csv_sha256": "09FFFA64D1F113C7967094BC6BF1E2AC12E326A565EA0DC3C9F14E33E498BC5A",
+        "invocation_sha256": "5E1184B8DF94E4F0ECC4FDB318E2ADC6632D2DDB6FCACA57CD94BD987EED09D0"
+      },
+      {
+        "creature_view": "Hunter-Side",
+        "frames": 181,
+        "simulation_seconds": 6.033329010009766,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-hunter-side-review.json",
+        "frames_csv_sha256": "1945F69DFF69D898F676A319C395AE6AA964F57F12C2EB70EDFBE715A1AE412D",
+        "invocation_sha256": "156E1C90ABA058089DE29679425A0DD26A1205C5234D0DB17A3544ACE3F9475C"
+      },
+      {
+        "creature_view": "Boss-Front",
+        "frames": 961,
+        "simulation_seconds": 32.03318786621094,
+        "complete": true,
+        "missed_readbacks": 0,
+        "review": "evidence/enemy-animation/v11-boss-front-review.json",
+        "frames_csv_sha256": "6954121A633B38EA5112EFCFAC83E9CC00473489FA4B04AC036F6B7B2016886C",
+        "invocation_sha256": "72A38E92D5E05563C87E99D140F5DE760145E5DDFC5AD68C72B4AA90957F6FF4"
+      }
+    ],
+    "total_actual_frames": 3546,
+    "total_missed_readbacks": 0,
+    "independent_review": "evidence/enemy-animation-qa.md",
+    "review_video": "evidence/enemy-animation-review.mp4",
+    "selection_record": "evidence/enemy-animation/selection.json",
+    "video_delivery": {
+      "actual_encoded_frames": 1039,
+      "fps": 30,
+      "dimensions": [
+        1280,
+        888
+      ],
+      "seconds": 34.63333333333333,
+      "labels": "44-pixel borders above/below the original1280x800 game image; game/HUD pixels are not cropped",
+      "decode_samples": [
+        0,
+        400,
+        650,
+        1038
+      ],
+      "display": "Codex file-preview request queued; file available at the recorded path"
+    }
+  },
+  "rig_evidence": [
+    "art/organic-enemies/animation/import.json",
+    "art/organic-enemies/animation/Briarhide-prep-report.json",
+    "art/organic-enemies/animation/MireSeer-prep-report.json",
+    "art/organic-enemies/animation/Briarhide-claw-contact.json"
+  ],
+  "root_visual_coverage": {
+    "Melee-Side": [
+      "304-309",
+      "428-430",
+      "825-827",
+      "601",
+      "607",
+      "846",
+      "864",
+      "915"
+    ],
+    "Caster-Side": [
+      "735-738",
+      "780-782"
+    ],
+    "Melee-Player": [
+      "130",
+      "157",
+      "163",
+      "174"
+    ],
+    "Caster-Player": [
+      "35",
+      "51",
+      "59",
+      "70"
+    ],
+    "Hunter-Side": [
+      "74",
+      "80",
+      "85-87",
+      "90"
+    ],
+    "Boss-Front": [
+      "458",
+      "462",
+      "470-471",
+      "480",
+      "600",
+      "608",
+      "842",
+      "864",
+      "915"
+    ],
+    "note": "This list records final-build root image inspection, not continuous video playback. Earlier rejected/corrected branch inspection is retained in the independent report."
+  },
+  "root_gait_measurements": {
+    "melee_restart_pelvis_z_cm_305_to_309": [
+      73.2296,
+      70.441,
+      69.3303,
+      68.5339,
+      68.6296
+    ],
+    "melee_largest_moving_approach_relative_pelvis_drop_cm": 3.3815,
+    "melee_largest_drop_frame": 826,
+    "long_flat_swing_screen": "No Approach interval of5+ unplanted frames with >15cm XY travel and <2cm ankle Z range found in either fullMelee/Caster trace. This only screens the named dragging pattern.",
+    "contact_scope": "Reported planted reach error is0 at four-decimal capture precision across the six studies; largest reconstructed consecutive planted drift is0.000142cm. This measures ankle targets, not every skin vertex."
+  },
+  "limits": [
+    "No owner playtest or overall high-end/AAA fidelity acceptance.",
+    "Silent scripted motion studies do not validate ordinary native controls, audio, fairness, saves or performance; these were not repeated for the animation-only change.",
+    "Fixed30Hz capture is not hardware frame-rate evidence and does not cover variable-frame-rate or all terrain/attack directions.",
+    "Sixteen-bone procedural rigs have no individual finger/toe articulation, facial rig, ragdoll or additional runtime LOD. Deep bends compress inner knees and extreme reaches can overlap leafy surfaces.",
+    "Dark/overlapping limbs and perspective limit tiny contact/deformation judgment; Boss Front corpse nose approaches the lower frame edge.",
+    "The isolated player-view study leaves its introductory tutorial banner/zero-threat HUD active. The banner and folded weapon obscure portions of the closest raised/descending claw; ordinary ward-combat overlap was not established."
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "candidate": {
+    "change": "Transfer gate is .30 only while OrganicStepsSinceStop==2; initial .45 and mature .94/1 remain unchanged. Same helper serves real scheduling and stance forecast.",
+    "frame306_pelvis_delta_cm": -2.787137769411899,
+    "frame307_pelvis_delta_cm": -1.1099109356757708,
+    "frame308_pelvis_delta_cm": -0.7955879592983308,
+    "first_support_release_frame": 308
+  },
+  "created_utc": "2026-09-10T23:58:14.506006+00:00",
+  "source_sha256": {
+    "DBEnemy.cpp": "1AD418E81312F224D31E31A1FAC548C27A7B025C2E0F462A75229C3F08BCC83D",
+    "DBEnemy.h": "C1DD3130E70D7829693191338AF17205F0613452132641004CAAA0C6E15951BE"
+  },
+  "captured_baseline": "v10 Shipping source 2b70cb7ba7d4f6c5510fb6fb0237a5948fa1a387",
+  "input_csv": ".local/creature-motion-v10-melee-side/Saved/EnemyMotionStudy/Melee-Side/Frames.csv",
+  "input_csv_sha256": "843168B3A975637DCF1F7BD057F6825EC61DF77F57340B3AE5733C7D024AD673",
+  "diagnostic_script": ".local/creature-motion-v11-startup-diagnosis.py",
+  "scope": "CPU replay of the recorded flat-paving actor translations, visible yaw, movement blend and known Briarhide anatomy for frames300-314. Candidate changes only the step-two support transfer gate. This is a counterfactual diagnosis, not actual candidate engine/visual verification.",
+  "baseline_match": {
+    "frames": [
+      302,
+      314
+    ],
+    "max_foot_target_difference_cm": 0.0007318410758696898,
+    "frame306_replayed_pelvis_delta_cm": -6.869197122362493,
+    "frame306_actual_pelvis_delta_cm": -6.870699999999999,
+    "frame306_current_required_support_drop_cm": 3.42576,
+    "frame306_forecast_support_drop_cm": 21.043208454316577
+  },
+  "limitations": [
+    "Uses rounded recorded inputs and authored reference anatomy, not live engine bone transforms.",
+    "Flat paving only; fixed30Hz; no simulated terrain/collision.",
+    "No animation phase blend or rendered mesh; scalar pelvis is rest height minus support drop.",
+    "Original 300-314 window baseline is validated; longer standalone script outputs are exploratory and can diverge on threshold choices.",
+    "Candidate must pass full32s Shipping Melee/Caster and actual motion review."
+  ],
+  "candidate_name": "v11",
+  "diagnostic_script_sha256": "08377C9D25827B39C6A34A93457BBDD506C5D8D480090172A689339AB05A9B96",
+  "reproduction_command": "python .local/creature-motion-v11-startup-diagnosis.py",
+  "source_commit": "a0c7642a98002a40f6cc8369bc36085ac8a1f16d"
+}

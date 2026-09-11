@@ -1,0 +1,114 @@
+{
+  "scope": "Silent scripted animation study. One actual Shipping frame per fixed30Hz tick. Normal enemy AI against a protected choreographed target; not native player input or a performance benchmark.",
+  "source_commit": "a0c7642a98002a40f6cc8369bc36085ac8a1f16d",
+  "shipping_executable_sha256": "8F551105BDB9585B34025B4C15A280205EBB0EA04EFC2452F7E90CD3300A823E",
+  "frame_rate": 30,
+  "segments": [
+    {
+      "label": "Briarhide | approach, planted steps, claw strike",
+      "private_capture": ".local/creature-motion-v11-melee-side",
+      "first_frame": 0,
+      "last_frame_inclusive": 210,
+      "frames": 211,
+      "first_simulation_seconds": 0.0,
+      "last_simulation_seconds": 6.999995,
+      "trace_sha256": "AA904E8A87E58A16207FDE6AE6CE54A547DBE62A118BA56EAF4507A4B4BAED48",
+      "invocation_sha256": "8268656EF588426862548414A86FAB6052A06350F5DF01B16C2E6159C2D7CDDB"
+    },
+    {
+      "label": "Briarhide | restart and change of direction",
+      "private_capture": ".local/creature-motion-v11-melee-side",
+      "first_frame": 296,
+      "last_frame_inclusive": 465,
+      "frames": 170,
+      "first_simulation_seconds": 9.866685,
+      "last_simulation_seconds": 15.500093,
+      "trace_sha256": "AA904E8A87E58A16207FDE6AE6CE54A547DBE62A118BA56EAF4507A4B4BAED48",
+      "invocation_sha256": "8268656EF588426862548414A86FAB6052A06350F5DF01B16C2E6159C2D7CDDB"
+    },
+    {
+      "label": "Briarhide | player camera",
+      "private_capture": ".local/creature-motion-v11-melee-player",
+      "first_frame": 120,
+      "last_frame_inclusive": 218,
+      "frames": 99,
+      "first_simulation_seconds": 3.999998,
+      "last_simulation_seconds": 7.266661,
+      "trace_sha256": "64DEEA4398CB1B4A2322113F24954DB0CE83050493962EE7916B5AF4B46E74FD",
+      "invocation_sha256": "17336F697FB9FAECD78D4115016BD6167A3960545249A345B518D92A95761476"
+    },
+    {
+      "label": "MireSeer | gather, release, resume movement",
+      "private_capture": ".local/creature-motion-v11-caster-side",
+      "first_frame": 0,
+      "last_frame_inclusive": 164,
+      "frames": 165,
+      "first_simulation_seconds": 0.0,
+      "last_simulation_seconds": 5.466663,
+      "trace_sha256": "79D05628A50C423DBDA0AA4FB99C8CC4832C579554222FA0A38B130A7C478688",
+      "invocation_sha256": "6B36F14FD4F9BE235D918F7AFF1FDEC06B7EE0BEC630C8034FA67CCDEA5A72E3"
+    },
+    {
+      "label": "MireSeer | player camera",
+      "private_capture": ".local/creature-motion-v11-caster-player",
+      "first_frame": 45,
+      "last_frame_inclusive": 90,
+      "frames": 46,
+      "first_simulation_seconds": 1.5,
+      "last_simulation_seconds": 2.999999,
+      "trace_sha256": "09FFFA64D1F113C7967094BC6BF1E2AC12E326A565EA0DC3C9F14E33E498BC5A",
+      "invocation_sha256": "5E1184B8DF94E4F0ECC4FDB318E2ADC6632D2DDB6FCACA57CD94BD987EED09D0"
+    },
+    {
+      "label": "Hunter | prepare, pounce, absorb landing",
+      "private_capture": ".local/creature-motion-v11-hunter-side",
+      "first_frame": 42,
+      "last_frame_inclusive": 132,
+      "frames": 91,
+      "first_simulation_seconds": 1.4,
+      "last_simulation_seconds": 4.399997,
+      "trace_sha256": "1945F69DFF69D898F676A319C395AE6AA964F57F12C2EB70EDFBE715A1AE412D",
+      "invocation_sha256": "156E1C90ABA058089DE29679425A0DD26A1205C5234D0DB17A3544ACE3F9475C"
+    },
+    {
+      "label": "Guardian | windup, ground contact, recovery",
+      "private_capture": ".local/creature-motion-v11-boss-front",
+      "first_frame": 420,
+      "last_frame_inclusive": 530,
+      "frames": 111,
+      "first_simulation_seconds": 14.000073,
+      "last_simulation_seconds": 17.66674,
+      "trace_sha256": "6954121A633B38EA5112EFCFAC83E9CC00473489FA4B04AC036F6B7B2016886C",
+      "invocation_sha256": "72A38E92D5E05563C87E99D140F5DE760145E5DDFC5AD68C72B4AA90957F6FF4"
+    },
+    {
+      "label": "Briarhide | hit reaction",
+      "private_capture": ".local/creature-motion-v11-melee-side",
+      "first_frame": 599,
+      "last_frame_inclusive": 635,
+      "frames": 37,
+      "first_simulation_seconds": 19.966705,
+      "last_simulation_seconds": 21.166687,
+      "trace_sha256": "AA904E8A87E58A16207FDE6AE6CE54A547DBE62A118BA56EAF4507A4B4BAED48",
+      "invocation_sha256": "8268656EF588426862548414A86FAB6052A06350F5DF01B16C2E6159C2D7CDDB"
+    },
+    {
+      "label": "Briarhide | collapse and settle",
+      "private_capture": ".local/creature-motion-v11-melee-side",
+      "first_frame": 839,
+      "last_frame_inclusive": 947,
+      "frames": 109,
+      "first_simulation_seconds": 27.966583,
+      "last_simulation_seconds": 31.566528,
+      "trace_sha256": "AA904E8A87E58A16207FDE6AE6CE54A547DBE62A118BA56EAF4507A4B4BAED48",
+      "invocation_sha256": "8268656EF588426862548414A86FAB6052A06350F5DF01B16C2E6159C2D7CDDB"
+    }
+  ],
+  "video": {
+    "path": "evidence/enemy-animation-review.mp4",
+    "frames": 1039,
+    "sha256": "880DD50081731ECDA44B5A9A96CCD311CBD2A6F07CEBE8F6132A55203CF3AC22",
+    "bytes": 15560433,
+    "seconds": 34.63333333333333
+  }
+}
