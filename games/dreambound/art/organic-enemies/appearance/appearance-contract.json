@@ -1,7 +1,7 @@
 {
   "revision": "dread-v1",
   "review_date": "2026-09-11",
-  "state": "Owner-requested green Briarhide and ember-orange MireSeer eye materials integrated and visually verified in actual Editor views; recessed geometry and repaired status-mask stream unchanged; owner acceptance pending",
+  "state": "Owner-requested green Briarhide and ember-orange MireSeer eye materials integrated and visually verified in actual Editor and Shipping views; recessed geometry and repaired status-mask stream unchanged; owner acceptance pending",
   "source_script": {
     "path": "games/dreambound/scripts/refine_creature_faces.py",
     "sha256": "a9fb8b7bdeb8d83b94a9d6f349b64c2b685a6f23e5c69819d8577ed06dffe368"
@@ -2106,6 +2106,20 @@
         ]
       }
     ],
-    "observation": "Green and ember-orange irises visible under existing lids. Brow occlusion remains when looking down or away. Body shading and cast fire remain intact."
+    "observation": "Green and ember-orange irises visible under existing lids. Brow occlusion remains when looking down or away. Body shading and cast fire remain intact.",
+    "shipping": {
+      "version": "0.5.4-fire4",
+      "caster_study": ".local/organic-fire-review/fire4-agility-delivery/Saved/EnemyMotionStudy/Caster-Side",
+      "caster_frames": [
+        60,
+        270,
+        427
+      ],
+      "briar_study": ".local/organic-fire-review/fire4-green-eyes-delivery/Saved/EnemyMotionStudy/Melee-Detail",
+      "briar_frames": [
+        20,
+        40
+      ]
+    }
   }
 }

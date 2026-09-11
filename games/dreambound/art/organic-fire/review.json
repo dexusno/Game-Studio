@@ -1,6 +1,6 @@
 {
   "date": "2026-09-11",
-  "status": "packaged_owner_fireball_candidate_pending_integrated_listening",
+  "status": "packaged_fire4_locomotion_and_luminous_eyes; owner play feedback pending",
   "shipping_package_created": true,
   "owner_acceptance": false,
   "performance_header_sha256": "f3556204088841bd3b91500e127aaec55b272ffa10b7d3c803d4186068f924eb",
@@ -104,8 +104,8 @@
     "audio-v1-impact and audio-v2-impact-track: framing insufficient or obscured by foreground wall; not clear impact evidence"
   ],
   "remaining": [
-    "Owner evaluation of the integrated appearance and fire sound in the delivered candidate; make any required quality changes.",
-    "Ordinary-play audio lifecycle behavior was not covered by this short capture; extra test harness was stopped at owner steering."
+    "Owner ordinary-play feedback on the caster gait, responsiveness and both eye colors.",
+    "The torso remains somewhat restrained; this correction does not establish high-end animation parity or broad difficulty/performance acceptance."
   ],
   "visual_candidate_editor_dll_sha256": "738a2470b31a72405805ed2901d387dacfffad53e2b3455e27df02e70e1ef56f",
   "private_audio_audition": {
@@ -510,5 +510,114 @@
       "sampled_frames": "420-435,446,470,487,520",
       "verdict": "One successful physical evasion: shield visibly passes clear428-432, health185 preserved, continuous steps and settling with no obvious teleport or ground-slide discontinuity. Returns to cast446. Scripted hit470 reduces185 to167 with normal stagger; charging/throwing resume487/520. Purposeful, catchable combat; not universal dodge reliability."
     }
+  },
+  "current_package": "caster_agility_and_eyes_package",
+  "caster_agility_and_eyes_package": {
+    "version": "0.5.4-fire4",
+    "source_commit": "8652d4c7e69d47b45398cf0c76bd86c017fe0619",
+    "configuration": "Windows Shipping, private noncommercial playtest",
+    "executable": {
+      "path": "games/dreambound/BuildOutput/OrganicFireAgility/Windows/Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "sha256": "cada744a38b14172ce7a3aa72cd22930ec64b5f43ae20caf1ba6550d25b3ed41"
+    },
+    "build_seconds": 52.77,
+    "build_log": {
+      "path": ".local/organic-fire-review/package-fire4-agility.log",
+      "sha256": "651f917cd5ba0b672b1e7bd90680b7500222d2be8d7a27987209e2835982831e"
+    },
+    "changes": [
+      "Caster releases the tucked casting arm during travel; both arms alternate with hip and rib loading.",
+      "Quicker bounded turns, route attention during travel, pivot loading, higher foot clearance and toe flex.",
+      "Green Briarhide and ember-orange MireSeer emission through the existing recessed eye materials; rigs and body status masks preserved."
+    ],
+    "eye_import": {
+      "path": "games/dreambound/unreal/Saved/OrganicEnemies/import.json",
+      "sha256": "6fd242be938b09b14b207735a1f620f2875238884e311e02a74f22d382b4ff2f"
+    },
+    "material_only": true,
+    "caster_shipping": {
+      "capture": {
+        "path": ".local/organic-fire-review/fire4-agility-delivery/Saved/EnemyMotionStudy/Caster-Side/Capture.json",
+        "sha256": "7edca93a9eb65a28f3fe699f3e9a1450a2d610a95ce9bb5028d58a7ec87ee5bd"
+      },
+      "frames_csv": {
+        "path": ".local/organic-fire-review/fire4-agility-delivery/Saved/EnemyMotionStudy/Caster-Side/Frames.csv",
+        "sha256": "2d73cd7ed9604b960d800419c84f0d3467e1c1a6e009418fb0a6121d9fc554a8"
+      },
+      "frames": 657,
+      "simulation_seconds": 28.00247573852539,
+      "missed_readbacks": 0,
+      "native_frames_inspected": [
+        60,
+        108,
+        124,
+        270,
+        427
+      ]
+    },
+    "green_eyes_shipping": {
+      "capture": {
+        "path": ".local/organic-fire-review/fire4-green-eyes-delivery/Saved/EnemyMotionStudy/Melee-Detail/Capture.json",
+        "sha256": "146f246eb8073a7e2727b13401c860d5bcb9729eab832b078ec70fd4791de6b4"
+      },
+      "frames_csv": {
+        "path": ".local/organic-fire-review/fire4-green-eyes-delivery/Saved/EnemyMotionStudy/Melee-Detail/Frames.csv",
+        "sha256": "cd20657b105ac0aa8790fa54946dcb270ed4bad21ce655ad674044f01df619c9"
+      },
+      "frames": 94,
+      "simulation_seconds": 4.014880180358887,
+      "missed_readbacks": 0,
+      "native_frames_inspected": [
+        20,
+        40
+      ]
+    },
+    "caster_invocation": {
+      "path": ".local/organic-fire-review/fire4-agility-delivery/Invocation.json",
+      "sha256": "953f64934d5d77bcf385c7e95573fa66174eb90df35aea17f4e952f7eaa9c5c9"
+    },
+    "green_eyes_invocation": {
+      "path": ".local/organic-fire-review/fire4-green-eyes-delivery/Invocation.json",
+      "sha256": "abf0f9b81577fa89d5729725a20619420f7e4ad89bccbef9b52f221089fd951d"
+    },
+    "video": {
+      "path": ".local/organic-fire-review/caster-agility-delivery.mp4",
+      "sha256": "5acfeefd9c9556709e0716954b3fb1939b732e0efec03112166abd83a69d5d0a"
+    },
+    "assembly_report": {
+      "path": ".local/organic-fire-review/caster-agility-delivery.json",
+      "sha256": "1f9c54faa44c7a89c00be73d56ebe7649b719153658afdaa98b73b0f22d90d05"
+    },
+    "shipping_observations": "Orange eye and retained hand-thrown fire visible. Alternating arm/leg poses and foot lift retained in package. Green eye visible under brow in the packaged close view. Combat trace records flanking93, withdrawal238, physical evasion422-430 with health185 retained, resumed cast445, scripted18-damage hit469 and another cast487.",
+    "independent_editor_review": {
+      "study": ".local/organic-fire-review/gait-eyes-editor-v1/Saved/EnemyMotionStudy/Caster-Side",
+      "consecutive_frame_ranges": [
+        [
+          92,
+          103
+        ],
+        [
+          116,
+          127
+        ],
+        [
+          237,
+          248
+        ],
+        [
+          261,
+          272
+        ],
+        [
+          288,
+          295
+        ]
+      ],
+      "verdict": "Accept bounded travel improvement: freer alternating arms, connected hip/shoulder loading, continuous withdrawal turn and coherent braking. No concrete new bounce, twist or grounding defect. Upper torso remains somewhat restrained."
+    },
+    "scope": "Actual AI with a protected scripted player on the existing study route; not ordinary human input, a universal dodge test or a performance benchmark. Selected native Shipping frames checked against the independently reviewed Editor candidate. Eye visibility naturally reduces when the brow occludes it.",
+    "unchanged_owner_input_sha256": "46a15fab3b5e618cf348bf4fab527db19ca2194054fb42e5bbee8e704f5b0c60",
+    "unchanged_owner_fireball_sha256": "a81514161371db128a8f8d19d26bc2d281abc3a8f8747f97ce9000e55d810662",
+    "default_launcher": "scripts/Start-Demo.ps1"
   }
 }

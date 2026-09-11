@@ -2,7 +2,7 @@ param([switch]$CheckOnly)
 $ErrorActionPreference='Stop'
 $fireGameRoot=Split-Path -Parent $PSScriptRoot
 $fireRepoRoot=[IO.Path]::GetFullPath((Join-Path $fireGameRoot '../..'))
-$firePackage=Join-Path $fireGameRoot 'BuildOutput/OrganicFireCombat/Windows/Dreambound.exe'
+$firePackage=Join-Path $fireGameRoot 'BuildOutput/OrganicFireAgility/Windows/Dreambound.exe'
 $fireUserRoot=Join-Path $fireRepoRoot '.local/organic-fire-review/playable-preview'
 if(Test-Path -LiteralPath $firePackage -PathType Leaf){
  $firePackageArguments=@('-DBSaveSlot=DreamboundOrganicFirePreview',('-UserDir="'+$fireUserRoot+'/"'),'-windowed','-ResX=1600','-ResY=1000')
