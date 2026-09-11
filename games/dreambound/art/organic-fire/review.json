@@ -1,0 +1,111 @@
+{
+  "date": "2026-09-11",
+  "status": "visual_candidate_reviewed_audio_unresolved",
+  "shipping_package_created": false,
+  "owner_acceptance": false,
+  "editor_dll_sha256": "738a2470b31a72405805ed2901d387dacfffad53e2b3455e27df02e70e1ef56f",
+  "performance_header_sha256": "f3556204088841bd3b91500e127aaec55b272ffa10b7d3c803d4186068f924eb",
+  "fire_shader_sha256": "2085b8dcb2cefc5362bc811048996ce67d8dc2b2b8271d8b9cb50e1d1e1f3646",
+  "studies": [
+    {
+      "private_directory": ".local/organic-fire-review/dread-v3-melee-detail/Saved/EnemyMotionStudy/Melee-Detail",
+      "capture_report_sha256": "fda7db1a451ded39e1f3b0f28b8a9f1fde7217393e177a3fae0da46f52a1ba10",
+      "frames_csv_sha256": "3ca12107d3b2603e950fb41cb6c13f50ed994900457baaec3db33e3bf0037774",
+      "frames": 121,
+      "seconds": 4.033330917358398,
+      "native_frames_visually_inspected": [
+        60
+      ],
+      "rig": "dread",
+      "view": "Detail",
+      "silent": true,
+      "fixed_hz": 30
+    },
+    {
+      "private_directory": ".local/organic-fire-review/dread-v3-caster-detail/Saved/EnemyMotionStudy/Caster-Detail",
+      "capture_report_sha256": "2be78d246ee716b8352fc0148b129067a967e0cb6657445fa1ea779217bc64e8",
+      "frames_csv_sha256": "1c6caae69655b6c449aa2c398c6c3cb8bca093455803359c0c9cc8e5d84367f4",
+      "frames": 121,
+      "seconds": 4.033330917358398,
+      "native_frames_visually_inspected": [
+        10,
+        28,
+        52,
+        57,
+        72
+      ],
+      "rig": "dread",
+      "view": "Detail",
+      "silent": true,
+      "fixed_hz": 30
+    },
+    {
+      "private_directory": ".local/organic-fire-review/dread-v3-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+      "capture_report_sha256": "433a5ead6b60c4413003ed9232599db20ebf4585bf86c1854f0418a60aebbd3d",
+      "frames_csv_sha256": "38b178103db4e946a4d04568221ca961b5bb1a38fca49abab43730cc2bd30979",
+      "frames": 241,
+      "seconds": 8.033327102661133,
+      "native_frames_visually_inspected": [
+        87,
+        105,
+        115
+      ],
+      "rig": "dread",
+      "view": "Player",
+      "silent": true,
+      "fixed_hz": 30
+    }
+  ],
+  "gameplay_check": {
+    "report_sha256": "c4888615f1e9b83c507daed22196aee423641fa84cdd23106b73c83bcf11ca8b",
+    "complete": true,
+    "passed_groups": 19,
+    "failed_groups": 0,
+    "observations": 70,
+    "null_rhi": true,
+    "sound": false
+  },
+  "review_video": {
+    "private_path": ".local/organic-fire-review/organic-fire-visual-review.mp4",
+    "sha256": "c227886246f4edb6b6615da7bbbda4b619c00f2720dfb6952c9c5b602f5ad76e",
+    "duration_seconds": 16,
+    "encoded_frames": 480,
+    "audio": false,
+    "clips": [
+      {
+        "study": 0,
+        "first_frame": 0,
+        "frames": 120
+      },
+      {
+        "study": 1,
+        "first_frame": 0,
+        "frames": 120
+      },
+      {
+        "study": 2,
+        "first_frame": 0,
+        "frames": 240
+      }
+    ],
+    "decode_check": "ffmpeg full decode exited 0; no errors",
+    "visual_review_scope": "Selected native frames listed above; not a claim to have inspected every encoded frame."
+  },
+  "observations": [
+    "Whole-body orange emission defect resolved in corrected engine views.",
+    "Recessed eyes and brows replace prominent discs/painted highlights. Fine eye detail is hidden by lighting at combat distance.",
+    "Chest/throat heat, hand gathering, committed release and separate irregular traveling fire volumes visible.",
+    "Player impact is partly obscured by the first-person weapon and camera framing; the complete impact shape is not visually established by these studies."
+  ],
+  "rejected": [
+    "fire-v1-side: smooth glowing bulb",
+    "dread-v1-melee-detail: invalid capture after failed import",
+    "dread-v2 captures: white vertex mask caused whole-body orange glow"
+  ],
+  "remaining": [
+    "Actual listening decision for stronger sound source; no rejected/free-plan audio imported.",
+    "Integrate and hear synchronized charge/release/flight/impact in a playable private preview.",
+    "Verify audible cancellation on pause, death, inactive encounter and retry, plus a clear impact view.",
+    "Package combined result and obtain owner play feedback."
+  ]
+}

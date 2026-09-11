@@ -1,11 +1,14 @@
 #include "DBEnemy.h"
 #include "DBEnemyPerformance.h"
+#include "DBOrganicFire.h"
 
 #include "DBCharacter.h"
 #include "DBCombatEffect.h"
 #include "DBGameMode.h"
 #include "DBProjectile.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/AudioComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "Components/PoseableMeshComponent.h"
 #include "Components/SceneComponent.h"
@@ -136,6 +139,29 @@ ADBEnemy::ADBEnemy()
     ChargePart = Part(TEXT("ChargedVolley"), BodyPivot);
     ChargePart->SetCastShadow(false);
     ChargePart->SetVisibility(false);
+    OrganicFireCharge = Part(TEXT("OrganicFireCharge"), GetCapsuleComponent());
+    OrganicFireCharge->SetCastShadow(false);
+    OrganicFireCharge->SetVisibility(false);
+    OrganicFireLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("InternalFurnaceLight"));
+    OrganicFireLight->SetupAttachment(GetCapsuleComponent());
+    OrganicFireLight->SetIntensity(0.f);
+    OrganicFireLight->SetAttenuationRadius(210.f);
+    OrganicFireLight->SetCastShadows(true);
+    OrganicFireLight->SetLightColor(FLinearColor(1.f,.22f,.025f));
+    OrganicFurnaceAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("OrganicFurnaceAudio"));
+    OrganicFurnaceAudio->SetupAttachment(GetCapsuleComponent());
+    OrganicFurnaceAudio->bAutoActivate = false;
+    OrganicIgnitionAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("OrganicIgnitionAudio"));
+    OrganicIgnitionAudio->SetupAttachment(GetCapsuleComponent());
+    OrganicIgnitionAudio->bAutoActivate = false;
+    for (int32 Side=0; Side<2; ++Side)
+    {
+        UAudioComponent* Release=CreateDefaultSubobject<UAudioComponent>(
+            *FString::Printf(TEXT("OrganicReleaseAudio%d"),Side));
+        Release->SetupAttachment(GetCapsuleComponent());
+        Release->bAutoActivate=false;
+        OrganicReleaseAudio.Add(Release);
+    }
     WarningMarks = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("AttackWarning"));
     WarningMarks->SetupAttachment(GetCapsuleComponent());
     WarningMarks->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -270,11 +296,16 @@ void ADBEnemy::BuildVisuals()
     const bool bLegacyRig = FParse::Param(FCommandLine::Get(), TEXT("DBLegacyCreatureRig"));
     const bool bAnatomyRig = !bLegacyRig && (FParse::Param(FCommandLine::Get(), TEXT("DBAnatomyCreatureRig"))
         || !FParse::Param(FCommandLine::Get(), TEXT("DBPerformanceCreatureRig")));
+    const bool bDreadRig = !bLegacyRig && (FParse::Param(FCommandLine::Get(), TEXT("DBDreadCreatureRig"))
+        || (!FParse::Param(FCommandLine::Get(), TEXT("DBAnatomyCreatureRig"))
+            && !FParse::Param(FCommandLine::Get(), TEXT("DBPerformanceCreatureRig"))));
     const TCHAR* CreaturePath = bCaster
         ? (bLegacyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer.SK_OE_MireSeer")
+            : bDreadRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Dread.SK_OE_MireSeer_Dread")
             : bAnatomyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Anatomy.SK_OE_MireSeer_Anatomy")
             : TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Performance.SK_OE_MireSeer_Performance"))
         : (bLegacyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide.SK_OE_Briarhide")
+            : bDreadRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Dread.SK_OE_Briarhide_Dread")
             : bAnatomyRig ? TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Anatomy.SK_OE_Briarhide_Anatomy")
             : TEXT("/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Performance.SK_OE_Briarhide_Performance"));
     USkeletalMesh* Creature = LoadObject<USkeletalMesh>(nullptr, CreaturePath);
@@ -305,11 +336,19 @@ void ADBEnemy::BuildVisuals()
             UE_LOG(LogTemp, Error, TEXT("The selected anatomy mesh is missing its articulated jaw."));
         if (UMaterialInterface* Skin = OrganicMesh->GetMaterial(0))
         {
+            const FLinearColor CreatureTint = bHunter ? FLinearColor(0.87f, 0.91f, 0.8f)
+                : Kind == EDBEnemyKind::Boss ? FLinearColor(0.91f, 0.84f, 0.71f) : FLinearColor::White;
             CoreMaterial = UMaterialInstanceDynamic::Create(Skin, this);
-            CoreMaterial->SetVectorParameterValue(TEXT("CreatureTint"), bHunter
-                ? FLinearColor(0.87f, 0.91f, 0.8f) : Kind == EDBEnemyKind::Boss
-                ? FLinearColor(0.91f, 0.84f, 0.71f) : FLinearColor::White);
+            CoreMaterial->SetVectorParameterValue(TEXT("CreatureTint"), CreatureTint);
             OrganicMesh->SetMaterial(0, CoreMaterial);
+            for (int32 Slot=1; Slot<OrganicMesh->GetNumMaterials(); ++Slot)
+                if (UMaterialInterface* Face=OrganicMesh->GetMaterial(Slot))
+                    if (Face->GetName().Contains(TEXT("M_OE_DreadSkin")))
+                    {
+                        UMaterialInstanceDynamic* FaceSkin=UMaterialInstanceDynamic::Create(Face,this);
+                        FaceSkin->SetVectorParameterValue(TEXT("CreatureTint"),CreatureTint);
+                        OrganicMesh->SetMaterial(Slot,FaceSkin);
+                    }
         }
     }
     else UE_LOG(LogTemp, Error, TEXT("Organic enemy mesh is missing: %s. Complete the performance import before packaging."), CreaturePath);
@@ -348,6 +387,7 @@ void ADBEnemy::BuildVisuals()
     if (UMaterialInterface* Material = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Art/PreferredCombat/Materials/M_Storm.M_Storm")))
         EffectMarks->SetMaterial(0, Material);
     UpdateOrganicPose();
+    if (bCaster) PrepareOrganicFire();
 }
 
 bool ADBEnemy::IsRoomActive() const
@@ -406,6 +446,12 @@ void ADBEnemy::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     const float Dt = FMath::Min(DeltaSeconds, 0.1f);
+    const ADBGameMode* FireMode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode());
+    const bool bFirePaused = FireMode && (FireMode->bPaused || FireMode->bShowingBuild);
+    OrganicFurnaceAudio->SetPaused(bFirePaused);
+    OrganicIgnitionAudio->SetPaused(bFirePaused);
+    for (UAudioComponent* Audio : OrganicReleaseAudio) Audio->SetPaused(bFirePaused);
+    if (bFirePaused) return;
     if (bDead)
     {
         if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode()))
@@ -415,6 +461,16 @@ void ADBEnemy::Tick(float DeltaSeconds)
     }
     if (!IsRoomActive())
     {
+        StopOrganicFire(true);
+        if (Kind == EDBEnemyKind::Caster && Attack == EAttack::Bolt
+            && (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack))
+        {
+            // A deactivated encounter cannot later resume half of a silent cast.
+            Attack=EAttack::None; Phase=EDBEnemyPhase::Dormant;
+            ShotsRemaining=0; TellTime=TellDuration=AttackElapsed=PhaseTime=0.f;
+            bAimLocked=bOrganicCastReleased=false;
+            Cooldown=FMath::Max(Cooldown,.8f);
+        }
         GetCharacterMovement()->StopMovementImmediately();
         ConsumeMovementInputVector();
         // Creatures waiting in another court remain alive and breathing.
@@ -599,7 +655,7 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
             bNeedsReposition = bRepositioning = false;
         }
         if (Cooldown <= 0.f && Distance >= 380.f && Distance < 1250.f && bSight)
-        { BeginTell(EAttack::Bolt, 1.18f); return; }
+        { BeginTell(EAttack::Bolt, 1.35f); return; }
         if (Distance < 500.f)
         {
             bNeedsReposition = true;
@@ -682,7 +738,7 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
     switch (Attack)
     {
     case EAttack::Swing: Telegraph = TEXT("HEAVY SWING - PARRY / STEP BACK"); TellRadius = 190.f; break;
-    case EAttack::Bolt: Telegraph = TEXT("CHARGING VOLLEY - MOVE / RETURN SHIELD"); break;
+    case EAttack::Bolt: Telegraph = TEXT("FIRE GATHERING - DODGE / RAISE SHIELD"); break;
     case EAttack::Lunge: Telegraph = TEXT("LUNGE - SIDESTEP / DEFLECT"); break;
     case EAttack::Salvo: Telegraph = TEXT("AIMED SALVO - LEAVE THE LANES"); break;
     case EAttack::Intercept:
@@ -704,8 +760,15 @@ void ADBEnemy::BeginTell(EAttack InAttack, float Duration)
             Mode->NotifyEvent(Telegraph, Attack == EAttack::Intercept ? InterceptColor
                 : Attack == EAttack::Slam || Attack == EAttack::Ground ? GroundColor : DangerColor);
     }
-    else if (EnemyTellSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyTellSound, GetActorLocation(),
-        Kind == EDBEnemyKind::Caster ? 0.8f : 0.65f, Kind == EDBEnemyKind::Caster ? 1.08f : 0.82f);
+    else if (Kind == EDBEnemyKind::Caster)
+    {
+        OrganicIgnitionAudio->SetVolumeMultiplier(.70f);
+        OrganicIgnitionAudio->Play();
+        OrganicFurnaceAudio->SetVolumeMultiplier(.08f);
+        OrganicFurnaceAudio->Play();
+        bOrganicFireActive = true;
+    }
+    else if (EnemyTellSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyTellSound, GetActorLocation(), .65f, .82f);
 }
 
 void ADBEnemy::UpdateTell(float DeltaSeconds)
@@ -729,7 +792,7 @@ void ADBEnemy::BeginAttack()
     Phase = EDBEnemyPhase::Attack;
     bAimLocked = true;
     AttackElapsed = 0.f;
-    NextShotTime = 0.f;
+    NextShotTime = Attack == EAttack::Bolt ? .03f : 0.f;
     ShotsRemaining = Attack == EAttack::Salvo ? 3 : Attack == EAttack::Bolt ? 2 : 1;
     bHitAttempted = false;
     EnemyAttackSequence = (EnemyAttackSequence + 1u) & 0x7fffffffu;
@@ -758,8 +821,12 @@ void ADBEnemy::FireBolt(FVector Direction, float Damage, FLinearColor Color)
     const FVector Origin = ShotOrigin();
     if (Kind == EDBEnemyKind::Caster)
     {
-        OrganicCastOrigin = Origin;
+        if (!bOrganicCastReleased) OrganicCastOrigin = Origin;
         bOrganicCastReleased = true;
+        // Commit after the current tick's authored pose is solved. Fire leaves
+        // the hand actually shown at the release, without a detached emitter.
+        PendingOrganicBolts.Add({Direction,Color,Damage,ShotsRemaining == 2 ? 1 : 0});
+        return;
     }
     if (EnemyFireSound) UGameplayStatics::PlaySoundAtLocation(this, EnemyFireSound, Origin, 0.78f,
         Kind == EDBEnemyKind::Boss ? 0.82f : 1.f);
@@ -808,10 +875,10 @@ void ADBEnemy::UpdateAttack(float DeltaSeconds)
             const float Spread = Attack == EAttack::Salvo ? (2 - ShotsRemaining) * 7.f : (ShotsRemaining == 2 ? -3.f : 3.f);
             FireBolt(LockedDirection.RotateAngleAxis(Spread, FVector::UpVector), AttackDamage, DangerColor);
             ShotsRemaining--;
-            NextShotTime += Attack == EAttack::Salvo ? 0.2f : 0.27f;
+            NextShotTime += Attack == EAttack::Salvo ? 0.2f : 0.44f;
         }
-        if (AttackElapsed >= (Attack == EAttack::Salvo ? 0.65f : 0.64f))
-            BeginRecovery(Kind == EDBEnemyKind::Boss ? 1.7f : 1.15f);
+        if (AttackElapsed >= (Attack == EAttack::Salvo ? 0.65f : 0.87f))
+            BeginRecovery(Kind == EDBEnemyKind::Boss ? 1.7f : 1.22f);
     }
     else if (Attack == EAttack::Lunge)
     {
@@ -1092,6 +1159,7 @@ void ADBEnemy::DealHealthDamage(float Damage)
 
 void ADBEnemy::Die()
 {
+    StopOrganicFire(false);
     if (bDead) return;
     bDead = true;
     bShieldInterceptionReady = false;
@@ -2143,7 +2211,7 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
     RightWristPitch = FMath::FInterpTo(RightWristPitch, WristRight, DeltaSeconds, JointSpeed);
     const bool bCharging = (Attack == EAttack::Bolt || Attack == EAttack::Salvo)
         && (Phase == EDBEnemyPhase::Telegraph || (Phase == EDBEnemyPhase::Attack && ShotsRemaining > 0));
-    ChargePart->SetVisibility(bCharging);
+    ChargePart->SetVisibility(bCharging && Kind != EDBEnemyKind::Caster);
     if (Kind == EDBEnemyKind::Caster)
         ChargePart->SetWorldLocation(bOrganicCastReleased ? OrganicCastOrigin : ShotOrigin());
     if (bCharging)
@@ -2166,8 +2234,118 @@ void ADBEnemy::UpdateVisuals(float DeltaSeconds)
         CoreMaterial->SetScalarParameterValue(TEXT("EmissiveStrength"), bVulnerable ? 3.5f : 1.7f);
     }
     UpdateOrganicPose();
+    UpdateOrganicFire(DeltaSeconds);
     UpdateWarningGeometry();
     UpdateElementVisuals(DeltaSeconds);
+}
+
+void ADBEnemy::PrepareOrganicFire()
+{
+    StopOrganicFire(true);
+    OrganicFireMaterial = DBOrganicFire::Prepare(OrganicFireCharge,this);
+    OrganicFurnaceAudio->SetSound(LoadObject<USoundBase>(nullptr,
+        TEXT("/Game/Audio/OrganicFire/S_CasterFurnaceLoop.S_CasterFurnaceLoop")));
+    OrganicIgnitionAudio->SetSound(LoadObject<USoundBase>(nullptr,
+        TEXT("/Game/Audio/OrganicFire/S_CasterIgnite.S_CasterIgnite")));
+    OrganicFireReleases.Reset();
+    for (const TCHAR* Name : { TEXT("S_CasterReleaseA"),TEXT("S_CasterReleaseB"),TEXT("S_CasterReleaseC") })
+    {
+        const FString Path=FString::Printf(TEXT("/Game/Audio/OrganicFire/%s.%s"),Name,Name);
+        OrganicFireReleases.Add(LoadObject<USoundBase>(nullptr,*Path));
+    }
+}
+
+void ADBEnemy::StopOrganicFire(bool bImmediate)
+{
+    PendingOrganicBolts.Reset();
+    bOrganicFireActive=false;
+    OrganicFireHeat=0.f;
+    OrganicFireCharge->SetVisibility(false);
+    OrganicFireLight->SetIntensity(0.f);
+    if (CoreMaterial) CoreMaterial->SetScalarParameterValue(TEXT("InternalHeat"),0.f);
+    for (UAudioComponent* Audio : {OrganicFurnaceAudio.Get(),OrganicIgnitionAudio.Get()})
+        if (bImmediate) Audio->Stop();
+        else if (Audio->IsPlaying()) Audio->FadeOut(.06f,0.f);
+    for (UAudioComponent* Audio : OrganicReleaseAudio)
+        if (bImmediate) Audio->Stop();
+        else if (Audio->IsPlaying()) Audio->FadeOut(.06f,0.f);
+}
+
+FVector ADBEnemy::OrganicFireHand(int32 Side) const
+{
+    const FTransform Hand=OrganicMesh->GetBoneTransformByName(Side == 0 ? TEXT("hand_l") : TEXT("hand_r"),EBoneSpaces::WorldSpace);
+    return Hand.GetLocation()+GetActorForwardVector()*(11.f*VisualScale)+FVector::UpVector*(4.f*VisualScale);
+}
+
+void ADBEnemy::UpdateOrganicFire(float DeltaSeconds)
+{
+    if (Kind != EDBEnemyKind::Caster || !OrganicMesh->GetSkinnedAsset()) return;
+    const bool bTell=Phase == EDBEnemyPhase::Telegraph && Attack == EAttack::Bolt;
+    const bool bAttack=Phase == EDBEnemyPhase::Attack && Attack == EAttack::Bolt;
+    const bool bActive=!bDead && (bTell || (bAttack && ShotsRemaining>0));
+    const float Action=bTell ? -TellTime : AttackElapsed;
+    const FVector Forward=GetActorForwardVector(), Right=GetActorRightVector();
+    const FTransform Chest=OrganicMesh->GetBoneTransformByName(TEXT("chest"),EBoneSpaces::WorldSpace);
+    const FTransform Throat=OrganicMesh->GetBoneTransformByName(TEXT("throat"),EBoneSpaces::WorldSpace);
+    const FVector Body=FMath::Lerp(Chest.GetLocation(),Throat.GetLocation(),.34f)+Forward*(10.f*VisualScale);
+    float TargetHeat=0.f;
+    if (bTell) TargetHeat=FMath::Lerp(.12f,1.f,FMath::SmoothStep(-1.35f,-.20f,Action));
+    else if (bActive) TargetHeat=.45f+.55f*FMath::SmoothStep(.13f,.40f,Action);
+    OrganicFireHeat=FMath::FInterpTo(OrganicFireHeat,TargetHeat,DeltaSeconds,bActive ? 14.f : 9.f);
+    if (CoreMaterial)
+    {
+        CoreMaterial->SetVectorParameterValue(TEXT("HeatCenter"),DBOrganicFire::V(Body));
+        CoreMaterial->SetVectorParameterValue(TEXT("HeatForward"),DBOrganicFire::V(Forward/VisualScale));
+        CoreMaterial->SetVectorParameterValue(TEXT("HeatRight"),DBOrganicFire::V(Right/VisualScale));
+        CoreMaterial->SetVectorParameterValue(TEXT("HeatUp"),DBOrganicFire::V(FVector::UpVector/VisualScale));
+        CoreMaterial->SetScalarParameterValue(TEXT("InternalHeat"),OrganicFireHeat);
+        CoreMaterial->SetScalarParameterValue(TEXT("FireTime"),VisualTime);
+    }
+    OrganicFurnaceAudio->SetWorldLocation(Body);
+    OrganicIgnitionAudio->SetWorldLocation(Body);
+    if (bActive) OrganicFurnaceAudio->SetVolumeMultiplier(.68f*FMath::Lerp(.12f,1.f,OrganicFireHeat));
+
+    // The new visible flame follows the solved hand. ChargePart stays hidden
+    // and stationary as the independent IK reference, avoiding pose feedback.
+    const bool bFirst=bTell || (bAttack && ShotsRemaining==2);
+    const bool bSecond=bAttack && ShotsRemaining==1 && Action>=.17f;
+    const float Draw=bFirst ? FMath::SmoothStep(-.94f,-.65f,Action)
+        : FMath::SmoothStep(.17f,.32f,Action);
+    const FVector Hand=OrganicFireHand(bFirst ? 1 : 0);
+    const FVector Charge=FMath::Lerp(Body,Hand,Draw);
+    const float Strength=(bFirst || bSecond) ? FMath::SmoothStep(0.f,.35f,Draw) : 0.f;
+    const float Size=FMath::Lerp(16.f,32.f,FMath::Sqrt(FMath::Max(0.f,Draw)))*VisualScale;
+    DBOrganicFire::Draw(OrganicFireCharge,OrganicFireMaterial,Charge,GetActorRotation(),
+        FVector(Size),VisualTime,Strength,0.f,static_cast<float>(GetUniqueID()%71));
+    OrganicFireLight->SetWorldLocation(FMath::Lerp(Body+Forward*(14.f*VisualScale),Charge,Strength*.65f));
+    OrganicFireLight->SetIntensity((180.f*OrganicFireHeat+380.f*Strength)*(1.f+.09f*FMath::Sin(VisualTime*19.f)));
+
+    for (const FPendingOrganicBolt& Pending : PendingOrganicBolts)
+    {
+        if (!Target.IsValid() || Target->bDead || bDead) continue;
+        const FVector Origin=OrganicFireHand(Pending.HandSide);
+        FActorSpawnParameters Params;
+        Params.Owner=this;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+        if (ADBProjectile* Bolt=GetWorld()->SpawnActor<ADBProjectile>(Origin,Pending.Direction.Rotation(),Params))
+            Bolt->Initialize(Pending.Direction,690.f,Pending.Damage,false,this,Pending.Color);
+        const int32 Variant=(static_cast<int32>(ActiveAttackId&0x7fffffff)+Pending.HandSide)%3;
+        if (OrganicFireReleases.IsValidIndex(Variant) && OrganicFireReleases[Variant])
+        {
+            UAudioComponent* Release=OrganicReleaseAudio[Pending.HandSide];
+            Release->SetWorldLocation(Origin);
+            Release->SetSound(OrganicFireReleases[Variant]);
+            Release->SetVolumeMultiplier(.82f);
+            Release->Play();
+        }
+        OrganicFireCharge->SetVisibility(false);
+    }
+    PendingOrganicBolts.Reset();
+    if (!bActive && bOrganicFireActive)
+    {
+        OrganicFurnaceAudio->FadeOut(bAttack ? .035f : .06f,0.f);
+        if (!bAttack) OrganicIgnitionAudio->FadeOut(.06f,0.f);
+        bOrganicFireActive=false;
+    }
 }
 
 void ADBEnemy::UpdateOrganicPose()

@@ -1,0 +1,66 @@
+{
+  "item": "internal_ignition",
+  "created_utc": "2026-09-11T13:09:34.264845+00:00",
+  "status": "complete",
+  "space": "stabilityai/stable-audio-3",
+  "space_url": "https://huggingface.co/spaces/stabilityai/stable-audio-3",
+  "host": "https://stabilityai-stable-audio-3.hf.space",
+  "space_revision": "a6d4a3300fb7d96b2f28ac409d868cba65eb6093",
+  "space_hardware": {
+    "current": "zero-a10g",
+    "requested": "zero-a10g"
+  },
+  "model": "stabilityai/stable-audio-3-small-sfx",
+  "model_metadata_revision": "ae12755283df9d62ca39a9b050a39a0b607b8c20",
+  "model_license_tag": "other",
+  "actual_loaded_model_revision": "Not reported by demo; model metadata revision is not proof of loaded weight identity.",
+  "endpoint": "/gradio_api/call/v2/infer",
+  "endpoint_visibility": "public",
+  "settings": {
+    "variant_key": "small-sfx",
+    "steps": 8,
+    "cfg_scale": 1.0,
+    "sampler_type": "pingpong",
+    "seed": 46711,
+    "duration": 3,
+    "prompt": "A flame ignites inside a confined cavity: a low muffled puff of air and rough turbulent burning with tiny irregular crackles. Close dry sound effect. No music, voice, synthesizer, beeps or metallic ringing."
+  },
+  "anonymous": true,
+  "credentials_used": false,
+  "paid_service": false,
+  "local_processing": "none",
+  "acceptance": "unaccepted private audition",
+  "commercial_rights": "not cleared for release",
+  "listened": false,
+  "submission_http_status": 200,
+  "submission_response": {
+    "event_id": "b90823759b144b43b0a2c73ac029c2e6"
+  },
+  "event_id": "b90823759b144b43b0a2c73ac029c2e6",
+  "events": [
+    {
+      "type": "complete",
+      "data": [
+        {
+          "path": "/tmp/gradio/81d00d73dc6c7c091f5c9d4fd012fa0ce76068b30a8e383b410934874444e072/sa3.wav",
+          "url": "https://stabilityai-stable-audio-3.hf.space/gradio_api/file=/tmp/gradio/81d00d73dc6c7c091f5c9d4fd012fa0ce76068b30a8e383b410934874444e072/sa3.wav",
+          "size": null,
+          "orig_name": "sa3.wav",
+          "mime_type": null,
+          "is_stream": false,
+          "meta": {
+            "_type": "gradio.FileData"
+          }
+        }
+      ],
+      "observed_utc": "2026-09-11T13:09:37.074455+00:00"
+    }
+  ],
+  "stream_http_status": 200,
+  "updated_utc": "2026-09-11T13:09:37.074455+00:00",
+  "output_file": "internal_ignition-raw.wav",
+  "output_url": "https://stabilityai-stable-audio-3.hf.space/gradio_api/file=/tmp/gradio/81d00d73dc6c7c091f5c9d4fd012fa0ce76068b30a8e383b410934874444e072/sa3.wav",
+  "output_bytes": 529244,
+  "output_sha256": "6df0ea37575b4a6c5e7ed4fbb8809ba5268dc9c2fe5ba7baa491c9ee7d0f0b9e",
+  "wall_seconds": 3.312000000005355
+}

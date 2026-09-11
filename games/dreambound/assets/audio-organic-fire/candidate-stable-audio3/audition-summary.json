@@ -1,0 +1,73 @@
+{
+  "checked": "2026-09-11",
+  "status": "unaccepted_private_audition",
+  "model": "stabilityai/stable-audio-3-small-sfx",
+  "space_url": "https://huggingface.co/spaces/stabilityai/stable-audio-3",
+  "space_revision": "a6d4a3300fb7d96b2f28ac409d868cba65eb6093",
+  "anonymous_requests": 3,
+  "successful_generations": 3,
+  "request_limit": 3,
+  "no_further_generations": true,
+  "credentials_used": false,
+  "money_spent": 0,
+  "suno_used": false,
+  "gated_model_files_downloaded": false,
+  "agent_listened": false,
+  "owner_listened": false,
+  "commercial_release_cleared": false,
+  "local_audio_processing": "none; original server output retained byte-identical",
+  "model_license_file_observation": {
+    "requested_url": "https://huggingface.co/stabilityai/stable-audio-3-small-sfx/resolve/main/LICENSE.md",
+    "status": 200,
+    "resolved_url": "https://huggingface.co/stabilityai/stable-audio-3-small-sfx/resolve/main/LICENSE.md",
+    "response_sha256": "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d",
+    "gated_conditions_accepted": false
+  },
+  "files": [
+    {
+      "file": "erupting_flare-raw.wav",
+      "sha256": "7bc201fb244fb35a9fc33cfd89860f0537d4cb2bd1702e525df42f5b89ff156c",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "44100",
+        "channels": 2,
+        "bits_per_sample": 16
+      },
+      "seconds": 2.0,
+      "sample_peak_dbfs": -0.00026507636037961915,
+      "rms_dbfs": -17.710025445312954,
+      "full_scale_samples": 1,
+      "decode_errors": 0
+    },
+    {
+      "file": "fireball_whoosh-raw.wav",
+      "sha256": "dd24195b91fbf5093fb05c5399b6dd954400992056aa261d704381edebc9b738",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "44100",
+        "channels": 2,
+        "bits_per_sample": 16
+      },
+      "seconds": 2.0,
+      "sample_peak_dbfs": -0.00026507636037961915,
+      "rms_dbfs": -21.87841015063025,
+      "full_scale_samples": 1,
+      "decode_errors": 0
+    },
+    {
+      "file": "internal_ignition-raw.wav",
+      "sha256": "6df0ea37575b4a6c5e7ed4fbb8809ba5268dc9c2fe5ba7baa491c9ee7d0f0b9e",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "44100",
+        "channels": 2,
+        "bits_per_sample": 16
+      },
+      "seconds": 3.0,
+      "sample_peak_dbfs": -0.00026507636037961915,
+      "rms_dbfs": -22.384009884894006,
+      "full_scale_samples": 1,
+      "decode_errors": 0
+    }
+  ]
+}

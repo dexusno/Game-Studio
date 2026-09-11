@@ -3,7 +3,7 @@ param(
  [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy2',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
  [ValidateSet('Side','LowSide','Front','Player','Detail')][string]$View='Side',
- [ValidateSet('Default','Performance','Anatomy','Legacy')][string]$Rig='Default',
+ [ValidateSet('Default','Performance','Anatomy','Dread','Legacy')][string]$Rig='Default',
  [ValidateSet('Lit','BaseColor','Roughness','Specular')][string]$Surface='Lit',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
  [ValidateRange(640,2560)][int]$Width=1280,
@@ -39,6 +39,7 @@ $motionArguments+=@('-DBEnemyMotionStudy',('-DBCreature='+$Creature),('-DBCreatu
 if($FootMarkers){$motionArguments+='-DBFootMarkers'}
 if($Idle){$motionArguments+='-DBCreatureStudyIdle'}
 if($Rig -eq 'Anatomy'){$motionArguments+='-DBAnatomyCreatureRig'}
+if($Rig -eq 'Dread'){$motionArguments+='-DBDreadCreatureRig'}
 if($Rig -eq 'Performance'){$motionArguments+='-DBPerformanceCreatureRig'}
 if($Rig -eq 'Legacy'){$motionArguments+='-DBLegacyCreatureRig'}
 if($Surface -ne 'Lit'){$motionArguments+=('-ExecCmds="viewmode VisualizeBuffer,r.BufferVisualizationTarget '+$Surface+'"')}

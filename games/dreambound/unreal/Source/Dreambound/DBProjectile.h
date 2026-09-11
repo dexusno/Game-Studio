@@ -7,6 +7,9 @@
 class USphereComponent;
 class UStaticMeshComponent;
 class UMaterialInstanceDynamic;
+class UAudioComponent;
+class UPointLightComponent;
+class USoundBase;
 
 /** Hostile spell with swept world collision, visible travel and a bounded active lifetime. */
 UCLASS()
@@ -28,6 +31,11 @@ private:
     UPROPERTY() TObjectPtr<UStaticMeshComponent> Visual;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> Streak;
     UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> GlowMaterial;
+    UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> FireMaterial;
+    UPROPERTY() TObjectPtr<UPointLightComponent> FireLight;
+    UPROPERTY() TObjectPtr<UAudioComponent> FlightAudio;
+    UPROPERTY() TObjectPtr<UAudioComponent> ImpactAudio;
+    UPROPERTY() TArray<TObjectPtr<USoundBase>> FireImpacts;
     TWeakObjectPtr<AActor> SourceEnemy;
     FVector Velocity = FVector::ZeroVector;
     FVector VisualCenterOffset = FVector::ZeroVector;
@@ -40,7 +48,9 @@ private:
     bool bPiercesGuard = false;
     bool bInitialized = false;
     bool bImpacted = false;
+    bool bOrganicFire = false;
 
     void PrepareVisuals();
+    void UpdateFireVisuals();
     void Impact(FVector Location);
 };

@@ -12,6 +12,8 @@ class UPoseableMeshComponent;
 class USceneComponent;
 class UStaticMeshComponent;
 class USoundBase;
+class UAudioComponent;
+class UPointLightComponent;
 
 UENUM(BlueprintType)
 enum class EDBEnemyPhase : uint8 { Dormant, Approach, Telegraph, Attack, Recovery, Staggered, Dead };
@@ -110,6 +112,13 @@ private:
     UPROPERTY() TObjectPtr<UStaticMeshComponent> RightLegPart;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> CorePart;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> ChargePart;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> OrganicFireCharge;
+    UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> OrganicFireMaterial;
+    UPROPERTY() TObjectPtr<UPointLightComponent> OrganicFireLight;
+    UPROPERTY() TObjectPtr<UAudioComponent> OrganicFurnaceAudio;
+    UPROPERTY() TObjectPtr<UAudioComponent> OrganicIgnitionAudio;
+    UPROPERTY() TArray<TObjectPtr<USoundBase>> OrganicFireReleases;
+    UPROPERTY() TArray<TObjectPtr<UAudioComponent>> OrganicReleaseAudio;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> WarningMarks;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> EffectMarks;
     UPROPERTY() TObjectPtr<UInstancedStaticMeshComponent> FrostMarks;
@@ -172,6 +181,20 @@ private:
     FVector OrganicAttentionVelocity = FVector::ZeroVector;
     FVector OrganicCastOrigin = FVector::ZeroVector;
     bool bOrganicCastReleased = false;
+    bool bOrganicFireActive = false;
+    float OrganicFireHeat = 0.f;
+    struct FPendingOrganicBolt
+    {
+        FVector Direction;
+        FLinearColor Color;
+        float Damage;
+        int32 HandSide;
+    };
+    TArray<FPendingOrganicBolt> PendingOrganicBolts;
+    void PrepareOrganicFire();
+    void UpdateOrganicFire(float DeltaSeconds);
+    void StopOrganicFire(bool bImmediate);
+    FVector OrganicFireHand(int32 Side) const;
     FVector OrganicCrestMotion = FVector::ZeroVector;
     FVector OrganicCrestVelocity = FVector::ZeroVector;
     FVector OrganicPelvisOffset = FVector::ZeroVector;

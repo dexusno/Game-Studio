@@ -744,144 +744,182 @@ namespace DBEnemyPerformance
                 {1.93f,Breathe,.6f},{2.20f,Settle,.4f},{2.35f,Base,0.f}};
             return SamplePerformance(Keys,UE_ARRAY_COUNT(Keys),Time,.018f,.026f,.050f);
         }
-        // Seer-only revision after the actual v1 body review. The prior
-        // positive chest extension cancelled the loaded hips: frames26-44
-        // kept nearly one silhouette while the hands offered the orb. Carry
-        // the crouched pressure through both releases, instead of standing
-        // upright between two brief folds. Boss/Guard clips above are frozen.
+        // MireSeer furnace: inhale into the torso, draw heat into the right
+        // hand, then throw from alternating sides. Wrist contact stays on
+        // the shared projectile clock; hips lead and the head follows ribs.
+        // This branch does not change the guardian's salvo or interception.
         Base=CasterCarriage(false);
-        Notice=Base; Notice.Offset=FVector(3.f,-3.f,-7.f);
-        R(Notice,Hips,-14.f,-8.f,-3.f); R(Notice,Lumbar,-6.f,3.f,1.f);
-        R(Notice,Spine,-5.f,2.f,1.f); R(Notice,Chest,-1.f,8.f,2.f);
-        R(Notice,Neck,12.f,-7.f); R(Notice,Head,7.f,-4.f);
-        Notice.HandTarget[0]=FVector(-40.f,-15.f,-25.f); Notice.HandTarget[1]=FVector(-53.f,29.f,5.f);
-        Notice.HandWeight[0]=.35f; Notice.HandWeight[1]=.60f;
-        Notice.Jaw=.18f; Notice.Throat=.32f; Notice.Crest=.46f;
-        Notice.Grip[0]=.16f; Notice.Grip[1]=.43f;
-        Gather=Notice; Gather.Offset=FVector(-10.f,-5.f,-14.f);
-        R(Gather,Hips,-17.f,-14.f,-4.f); R(Gather,Lumbar,-7.f,4.f,2.f);
-        // Open toward the supporting hand before the drawing shoulder takes
-        // the load. The pelvis keeps its established low support trajectory.
-        R(Gather,Spine,-5.f,3.f,-2.f); R(Gather,Chest,5.f,-3.f,-5.f);
-        R(Gather,Neck,16.f,4.f,1.f); R(Gather,Head,8.f,4.f);
-        R(Gather,ClavicleL,-4.f,8.f,-5.f); R(Gather,ClavicleR,3.f,5.f,3.f);
-        Gather.HandTarget[0]=FVector(-23.f,-18.f,-14.f); Gather.HandTarget[1]=FVector(-36.f,40.f,22.f);
+        Notice=Base; Notice.Offset=FVector(0.f,-2.f,-8.f);
+        R(Notice,Hips,-15.f,-6.f,-2.f); R(Notice,Lumbar,-5.f,3.f,1.f);
+        R(Notice,Spine,-2.f,3.f,1.f); R(Notice,Chest,6.f,6.f,2.f);
+        R(Notice,Neck,4.f,-7.f); R(Notice,Head,0.f,-3.f);
+        R(Notice,ClavicleL,3.f,-5.f,-4.f); R(Notice,ClavicleR,4.f,7.f,4.f);
+        Notice.HandTarget[0]=FVector(-55.f,-18.f,-20.f); Notice.HandTarget[1]=FVector(-57.f,22.f,-11.f);
+        Notice.HandWeight[0]=.55f; Notice.HandWeight[1]=.65f;
+        Notice.Jaw=.55f; Notice.Throat=.45f; Notice.Crest=.54f;
+        Notice.Grip[0]=.18f; Notice.Grip[1]=.31f;
+        // The sternum opens first; both hands acknowledge the heat source
+        // before the right hand draws it away from the body.
+        Gather=Notice; Gather.Offset=FVector(-8.f,2.f,-11.f);
+        R(Gather,Hips,-16.f,-7.f,-3.f); R(Gather,Lumbar,-5.f,4.f,1.f);
+        R(Gather,Spine,0.f,7.f,1.f); R(Gather,Chest,14.f,10.f,3.f);
+        R(Gather,Neck,-4.f,-14.f); R(Gather,Head,-2.f,-5.f);
+        R(Gather,ClavicleL,4.f,-6.f,-5.f); R(Gather,ClavicleR,5.f,8.f,5.f);
+        Gather.HandTarget[0]=FVector(-58.f,-16.f,-9.f); Gather.HandTarget[1]=FVector(-55.f,19.f,-2.f);
         Gather.HandWeight[0]=Gather.HandWeight[1]=1.f;
-        R(Gather,HandL,-13.f,-6.f,-3.f); R(Gather,HandR,-19.f,12.f,7.f);
-        Gather.Jaw=.12f; Gather.Throat=.78f; Gather.Crest=.78f;
-        Gather.Grip[0]=.27f; Gather.Grip[1]=.63f;
-        FPose Draw=Gather;
-        Draw.Offset=FVector(-13.f,-6.f,-18.f);
-        R(Draw,Hips,-21.f,-15.f,-5.f); R(Draw,Lumbar,-8.f,3.f,2.f);
-        // Lift/retract the drawing shoulder against the forward counterarm.
-        // The ribs turn and open over the crouch; the face stays on its target.
-        R(Draw,Spine,-2.f,11.f,-3.f); R(Draw,Chest,12.f,17.f,-7.f);
-        R(Draw,Neck,9.f,-12.f,5.f); R(Draw,Head,5.f,-4.f);
-        R(Draw,ClavicleL,-4.f,10.f,-5.f); R(Draw,ClavicleR,7.f,14.f,-5.f);
-        Draw.HandTarget[0]=FVector(-15.f,-19.f,-8.f); Draw.HandTarget[1]=FVector(-22.f,36.f,36.f);
-        Draw.Jaw=.07f; Draw.Throat=.96f; Draw.Crest=.91f;
-        Draw.Grip[0]=.42f; Draw.Grip[1]=.69f;
-        Set=Draw; Set.Offset=FVector(-8.f,-4.f,-16.f);
-        R(Set,Hips,-19.f,-12.f,-3.f); R(Set,Lumbar,-7.f,3.f,1.f);
-        // Compression begins in the ribs while the drawing shoulder is still
-        // back. Its forward drive follows, so this is one loaded action.
-        R(Set,Spine,-8.f,9.f,0.f); R(Set,Chest,-4.f,14.f,-3.f);
-        R(Set,Neck,14.f,-11.f,2.f); R(Set,Head,8.f,-3.f);
-        R(Set,ClavicleL,-2.f,5.f,1.f); R(Set,ClavicleR,3.f,10.f,-6.f);
-        Set.HandTarget[0]=FVector(-20.f,-19.f,-4.f); Set.HandTarget[1]=FVector(-11.f,22.f,13.f);
-        Set.Throat=1.f; Set.Crest=.96f;
-        FPose Press=Set; Press.Offset=FVector(-1.f,-3.f,-15.f);
-        R(Press,Hips,-18.f,-6.f,-2.f); R(Press,Lumbar,-8.f,0.f,1.f);
-        R(Press,Spine,-9.f,5.f,0.f); R(Press,Chest,-7.f,4.f,1.f);
-        R(Press,Neck,16.f,-2.f); R(Press,Head,9.f,-1.f);
-        R(Press,ClavicleL,-1.f,-5.f,2.f); R(Press,ClavicleR,-4.f,-5.f,-5.f);
-        Press.HandTarget[1]=FVector(-5.f,16.f,5.f); Press.Jaw=.29f;
-        Press.Grip[1]=.33f; Press.Throat=.66f;
-        Release=Press; Release.Offset=FVector(11.f,2.f,-15.f);
-        R(Release,Hips,-18.f,8.f,3.f); R(Release,Lumbar,-8.f,-3.f,-1.f);
-        R(Release,Spine,-9.f,-5.f,-1.f); R(Release,Chest,-14.f,-10.f,-4.f);
-        R(Release,Neck,16.f,11.f); R(Release,Head,11.f,7.f);
-        R(Release,ClavicleR,-5.f,-12.f,-5.f); R(Release,ClavicleL,2.f,-3.f,-2.f);
-        Release.HandTarget[0]=FVector(-18.f,-17.f,-5.f); Release.HandTarget[1]=FVector(-3.f,13.f,-4.f);
-        R(Release,HandR,3.f,-9.f,-5.f);
-        Release.Jaw=.78f; Release.Throat=.12f; Release.Crest=1.f;
-        Release.Grip[0]=.37f; Release.Grip[1]=.02f;
-        FPose Through=Release; Through.Offset=FVector(10.f,4.f,-17.f);
-        Through.HandTarget[1]=FVector(1.f,15.f,-7.f);
-        Through.HandTarget[0]=FVector(-22.f,-22.f,2.f);
-        R(Through,Chest,-13.f,-12.f,-4.f); R(Through,Neck,14.f,12.f);
-        Through.Jaw=.53f; Through.Grip[0]=.46f;
-        Reload=Gather; Reload.Offset=FVector(1.f,6.f,-19.f);
-        R(Reload,Hips,-21.f,12.f,4.f); R(Reload,Lumbar,-9.f,-4.f,-2.f);
-        R(Reload,Spine,-6.f,-5.f,-1.f); R(Reload,Chest,-4.f,-9.f,-4.f);
-        R(Reload,Neck,15.f,10.f); R(Reload,Head,7.f,6.f);
-        R(Reload,ClavicleL,5.f,-11.f,-6.f); R(Reload,ClavicleR,1.f,4.f,3.f);
-        Reload.HandTarget[0]=FVector(-17.f,-24.f,13.f); Reload.HandTarget[1]=FVector(-30.f,18.f,-9.f);
-        R(Reload,HandL,-18.f,-10.f,-6.f); R(Reload,HandR,-5.f,5.f,3.f);
-        Reload.Jaw=.17f; Reload.Throat=.73f; Reload.Crest=.75f;
-        Reload.Grip[0]=.66f; Reload.Grip[1]=.18f;
-        Second=Release; Second.Offset=FVector(10.f,-6.f,-17.f);
-        R(Second,Hips,-21.f,-9.f,-4.f); R(Second,Lumbar,-9.f,3.f,2.f);
-        R(Second,Spine,-10.f,5.f,1.f); R(Second,Chest,-12.f,11.f,5.f);
-        R(Second,Neck,20.f,-12.f); R(Second,Head,12.f,-7.f);
-        R(Second,ClavicleL,-5.f,12.f,5.f); R(Second,ClavicleR,1.f,3.f,2.f);
-        Second.HandTarget[0]=FVector(-4.f,-13.f,-4.f); Second.HandTarget[1]=FVector(-19.f,17.f,-6.f);
-        R(Second,HandL,4.f,9.f,5.f); R(Second,HandR,-6.f,4.f,2.f);
-        Second.Jaw=.89f; Second.Throat=.05f; Second.Crest=1.f;
-        Second.Grip[0]=.02f; Second.Grip[1]=.26f;
-        FPose Spill=Second; Spill.Offset=FVector(11.f,-5.f,-19.f);
-        Spill.HandTarget[0]=FVector(0.f,-16.f,-11.f); Spill.HandTarget[1]=FVector(-28.f,22.f,-17.f);
-        R(Spill,Chest,-14.f,9.f,4.f); R(Spill,Neck,17.f,-9.f);
-        Spill.Jaw=.64f; Spill.Grip[1]=.17f;
-        Exhaust=Base; Exhaust.Offset=FVector(7.f,-4.f,-19.f);
-        R(Exhaust,Hips,-22.f,-7.f,-3.f); R(Exhaust,Lumbar,-10.f,3.f,1.f);
-        R(Exhaust,Spine,-8.f,3.f,1.f); R(Exhaust,Chest,-9.f,5.f,2.f);
-        R(Exhaust,Neck,14.f,-7.f); R(Exhaust,Head,8.f,-4.f);
+        R(Gather,HandL,-12.f,-5.f,-3.f); R(Gather,HandR,-16.f,8.f,5.f);
+        Gather.Jaw=.40f; Gather.Throat=1.f; Gather.Crest=.88f;
+        Gather.Grip[0]=.26f; Gather.Grip[1]=.50f;
+        FPose DrawFire=Gather;
+        DrawFire.Offset=FVector(-10.f,-1.f,-14.f);
+        R(DrawFire,Hips,-18.f,-13.f,-4.f); R(DrawFire,Lumbar,-6.f,4.f,2.f);
+        R(DrawFire,Spine,0.f,10.f,1.f); R(DrawFire,Chest,8.f,15.f,4.f);
+        R(DrawFire,Neck,6.f,-15.f); R(DrawFire,Head,3.f,-5.f);
+        R(DrawFire,ClavicleL,-2.f,5.f,-3.f); R(DrawFire,ClavicleR,6.f,12.f,-4.f);
+        DrawFire.HandTarget[0]=FVector(-49.f,-20.f,-22.f); DrawFire.HandTarget[1]=FVector(-62.f,46.f,8.f);
+        R(DrawFire,HandR,-18.f,14.f,7.f);
+        DrawFire.Jaw=.15f; DrawFire.Throat=.86f; DrawFire.Crest=.95f;
+        DrawFire.Grip[0]=.30f; DrawFire.Grip[1]=.76f;
+        FPose WindRight=DrawFire;
+        WindRight.Offset=FVector(-13.f,-5.f,-17.f);
+        R(WindRight,Hips,-21.f,-17.f,-5.f); R(WindRight,Lumbar,-7.f,4.f,2.f);
+        R(WindRight,Spine,-1.f,11.f,1.f); R(WindRight,Chest,7.f,18.f,5.f);
+        R(WindRight,Neck,9.f,-15.f,-2.f); R(WindRight,Head,4.f,-4.f);
+        R(WindRight,ClavicleL,-3.f,7.f,-3.f); R(WindRight,ClavicleR,7.f,14.f,-6.f);
+        WindRight.HandTarget[0]=FVector(-43.f,-23.f,-29.f); WindRight.HandTarget[1]=FVector(-93.f,58.f,16.f);
+        R(WindRight,HandR,-19.f,18.f,8.f);
+        WindRight.Jaw=.08f; WindRight.Throat=.68f; WindRight.Crest=1.f;
+        WindRight.Grip[0]=.34f; WindRight.Grip[1]=.85f;
+        // The hand finishes cocking while the ribs compress toward release.
+        // The counterarm stays below the face rather than sharing the orb.
+        Set=WindRight; Set.Offset=FVector(-12.f,-5.f,-18.f);
+        R(Set,Hips,-21.f,-12.f,-4.f); R(Set,Lumbar,-8.f,4.f,2.f);
+        R(Set,Spine,-2.f,11.f,1.f); R(Set,Chest,2.f,17.f,4.f);
+        R(Set,Neck,13.f,-16.f,-2.f); R(Set,Head,6.f,-4.f);
+        Set.HandTarget[0]=FVector(-42.f,-24.f,-30.f); Set.HandTarget[1]=FVector(-86.f,62.f,27.f);
+        Set.Throat=.58f; Set.Grip[1]=.90f;
+        FPose DriveRight=Set; DriveRight.Offset=FVector(2.f,-3.f,-17.f);
+        R(DriveRight,Hips,-21.f,4.f,1.f); R(DriveRight,Lumbar,-9.f,-1.f);
+        R(DriveRight,Spine,-6.f,5.f); R(DriveRight,Chest,-6.f,6.f,1.f);
+        R(DriveRight,Neck,16.f,-6.f); R(DriveRight,Head,7.f,-2.f);
+        R(DriveRight,ClavicleR,0.f,1.f,-5.f); R(DriveRight,ClavicleL,1.f,-4.f,-2.f);
+        DriveRight.HandTarget[0]=FVector(-52.f,-27.f,-29.f); DriveRight.HandTarget[1]=FVector(-39.f,48.f,22.f);
+        R(DriveRight,HandR,-8.f,6.f,2.f);
+        DriveRight.Jaw=.35f; DriveRight.Throat=.33f; DriveRight.Grip[1]=.62f;
+        Release=DriveRight; Release.Offset=FVector(14.f,5.f,-19.f);
+        R(Release,Hips,-22.f,10.f,3.f); R(Release,Lumbar,-10.f,-4.f,-1.f);
+        R(Release,Spine,-10.f,-7.f,-1.f); R(Release,Chest,-17.f,-16.f,-5.f);
+        R(Release,Neck,20.f,14.f,1.f); R(Release,Head,10.f,5.f);
+        R(Release,ClavicleR,-6.f,-14.f,-6.f); R(Release,ClavicleL,3.f,-4.f,-2.f);
+        Release.HandTarget[0]=FVector(-67.f,-27.f,-26.f); Release.HandTarget[1]=FVector(27.f,13.f,-4.f);
+        R(Release,HandR,14.f,-18.f,-8.f);
+        Release.Jaw=.88f; Release.Throat=.08f; Release.Crest=1.f;
+        Release.Grip[0]=.48f; Release.Grip[1]=0.f;
+        FPose FollowRight=Release; FollowRight.Offset=FVector(15.f,7.f,-20.f);
+        R(FollowRight,Hips,-23.f,15.f,4.f); R(FollowRight,Lumbar,-10.f,-6.f,-2.f);
+        R(FollowRight,Spine,-11.f,-8.f,-2.f); R(FollowRight,Chest,-18.f,-19.f,-6.f);
+        R(FollowRight,Neck,18.f,17.f,2.f); R(FollowRight,Head,9.f,5.f);
+        FollowRight.HandTarget[0]=FVector(-53.f,-20.f,-16.f); FollowRight.HandTarget[1]=FVector(20.f,-4.f,-20.f);
+        R(FollowRight,HandR,24.f,-20.f,-9.f);
+        FollowRight.Jaw=.60f; FollowRight.Throat=.12f; FollowRight.Grip[0]=.57f;
+        // Recoil reloads the other side: the returning right arm hangs low
+        // while the left extracts a second charge and winds outside the head.
+        Reload=DrawFire; Reload.Offset=FVector(0.f,7.f,-19.f);
+        R(Reload,Hips,-21.f,17.f,4.f); R(Reload,Lumbar,-8.f,-5.f,-2.f);
+        R(Reload,Spine,-3.f,-9.f,-2.f); R(Reload,Chest,5.f,-14.f,-6.f);
+        R(Reload,Neck,11.f,12.f,2.f); R(Reload,Head,6.f,5.f);
+        R(Reload,ClavicleL,6.f,-12.f,5.f); R(Reload,ClavicleR,-2.f,3.f,3.f);
+        Reload.HandTarget[0]=FVector(-62.f,-42.f,4.f); Reload.HandTarget[1]=FVector(-35.f,5.f,-40.f);
+        R(Reload,HandL,-17.f,-14.f,-7.f); R(Reload,HandR,8.f,-5.f,-2.f);
+        Reload.Jaw=.26f; Reload.Throat=.74f; Reload.Crest=.86f;
+        Reload.Grip[0]=.74f; Reload.Grip[1]=.10f;
+        FPose WindLeft=Reload; WindLeft.Offset=FVector(-9.f,8.f,-19.f);
+        R(WindLeft,Hips,-21.f,16.f,4.f); R(WindLeft,Lumbar,-8.f,-5.f,-2.f);
+        R(WindLeft,Spine,0.f,-10.f,-2.f); R(WindLeft,Chest,8.f,-19.f,-5.f);
+        R(WindLeft,Neck,10.f,17.f,2.f); R(WindLeft,Head,5.f,4.f);
+        R(WindLeft,ClavicleL,7.f,-14.f,6.f); R(WindLeft,ClavicleR,-2.f,5.f,3.f);
+        WindLeft.HandTarget[0]=FVector(-90.f,-58.f,20.f); WindLeft.HandTarget[1]=FVector(-60.f,25.f,-35.f);
+        R(WindLeft,HandL,-19.f,-18.f,-8.f);
+        WindLeft.Jaw=.10f; WindLeft.Throat=.88f; WindLeft.Crest=.97f; WindLeft.Grip[0]=.88f;
+        FPose DriveLeft=WindLeft; DriveLeft.Offset=FVector(4.f,2.f,-20.f);
+        R(DriveLeft,Hips,-22.f,-2.f,-1.f); R(DriveLeft,Lumbar,-9.f,2.f,1.f);
+        R(DriveLeft,Spine,-6.f,-5.f,-1.f); R(DriveLeft,Chest,-7.f,-7.f,-1.f);
+        R(DriveLeft,Neck,17.f,7.f); R(DriveLeft,Head,8.f,2.f);
+        R(DriveLeft,ClavicleL,0.f,-1.f,5.f); R(DriveLeft,ClavicleR,2.f,4.f,2.f);
+        DriveLeft.HandTarget[0]=FVector(-42.f,-47.f,15.f); DriveLeft.HandTarget[1]=FVector(-65.f,25.f,-31.f);
+        R(DriveLeft,HandL,-7.f,-6.f,-2.f);
+        DriveLeft.Jaw=.39f; DriveLeft.Throat=.37f; DriveLeft.Grip[0]=.58f;
+        Second=DriveLeft; Second.Offset=FVector(15.f,-6.f,-21.f);
+        R(Second,Hips,-23.f,-10.f,-4.f); R(Second,Lumbar,-10.f,3.f,2.f);
+        R(Second,Spine,-11.f,7.f,1.f); R(Second,Chest,-17.f,17.f,5.f);
+        R(Second,Neck,21.f,-15.f,-1.f); R(Second,Head,12.f,-6.f);
+        R(Second,ClavicleL,-6.f,14.f,6.f); R(Second,ClavicleR,3.f,4.f,2.f);
+        Second.HandTarget[0]=FVector(27.f,-13.f,-4.f); Second.HandTarget[1]=FVector(-69.f,29.f,-31.f);
+        R(Second,HandL,14.f,18.f,8.f);
+        Second.Jaw=.95f; Second.Throat=.025f; Second.Crest=1.f;
+        Second.Grip[0]=0.f; Second.Grip[1]=.18f;
+        FPose FollowLeft=Second; FollowLeft.Offset=FVector(17.f,-8.f,-21.f);
+        R(FollowLeft,Hips,-23.f,-16.f,-5.f); R(FollowLeft,Lumbar,-10.f,6.f,2.f);
+        R(FollowLeft,Spine,-12.f,11.f,2.f); R(FollowLeft,Chest,-19.f,19.f,6.f);
+        R(FollowLeft,Neck,19.f,-17.f,-2.f); R(FollowLeft,Head,11.f,-6.f);
+        FollowLeft.HandTarget[0]=FVector(20.f,6.f,-23.f); FollowLeft.HandTarget[1]=FVector(-57.f,32.f,-38.f);
+        R(FollowLeft,HandL,24.f,20.f,9.f);
+        FollowLeft.Jaw=.65f; FollowLeft.Throat=.035f; FollowLeft.Crest=.70f;
+        Exhaust=Base; Exhaust.Offset=FVector(9.f,-5.f,-20.f);
+        R(Exhaust,Hips,-23.f,-8.f,-4.f); R(Exhaust,Lumbar,-10.f,3.f,1.f);
+        R(Exhaust,Spine,-11.f,4.f,1.f); R(Exhaust,Chest,-14.f,6.f,2.f);
+        R(Exhaust,Neck,17.f,-7.f); R(Exhaust,Head,8.f,-2.f);
         R(Exhaust,ClavicleL,-3.f,4.f,-2.f); R(Exhaust,ClavicleR,2.f,-5.f,4.f);
-        Exhaust.HandTarget[0]=FVector(-27.f,-33.f,-43.f); Exhaust.HandTarget[1]=FVector(-45.f,17.f,-20.f);
+        Arms(Exhaust,FRotator(32.f,-7.f,-17.f),FRotator(41.f,12.f,16.f),14.f,33.f,8.f,-10.f);
+        Exhaust.HandTarget[0]=FVector(-25.f,-31.f,-44.f); Exhaust.HandTarget[1]=FVector(-54.f,19.f,-21.f);
         Exhaust.HandWeight[0]=Exhaust.HandWeight[1]=1.f;
-        Exhaust.Jaw=.41f; Exhaust.Throat=.035f; Exhaust.Crest=.41f;
+        Exhaust.Jaw=.45f; Exhaust.Throat=.025f; Exhaust.Crest=.42f;
         Exhaust.Grip[0]=.05f; Exhaust.Grip[1]=.20f;
-        Spent=Exhaust; Spent.Offset=FVector(-1.f,-2.f,-17.f);
-        R(Spent,Hips,-19.f,-4.f,-2.f); R(Spent,Lumbar,-9.f,2.f,1.f);
-        R(Spent,Spine,-10.f,3.f,1.f); R(Spent,Chest,-13.f,4.f,2.f);
-        R(Spent,Neck,12.f,-4.f); R(Spent,Head,6.f,-2.f);
-        Spent.HandTarget[0]=FVector(-49.f,-23.f,-45.f); Spent.HandTarget[1]=FVector(-39.f,24.f,-25.f);
-        Spent.HandWeight[0]=.75f; Spent.HandWeight[1]=.90f;
-        Spent.Jaw=.25f; Spent.Crest=.15f; Spent.Grip[1]=.24f;
-        Regain=Spent; Regain.Offset=FVector(-4.f,4.f,-11.f);
-        R(Regain,Hips,-15.f,4.f,3.f); R(Regain,Lumbar,-7.f,-2.f,-1.f);
-        R(Regain,Spine,-7.f,-3.f,-1.f); R(Regain,Chest,-8.f,-5.f,-3.f);
-        R(Regain,Neck,10.f,5.f); R(Regain,Head,6.f,3.f);
-        Regain.HandTarget[0]=FVector(-51.f,-17.f,-48.f); Regain.HandTarget[1]=FVector(-30.f,24.f,-35.f);
+        // No new pose at Attack->Recovery: the throw loses height first,
+        // then a quiet asymmetric breath regains the same carried stance.
+        Spent=Exhaust; Spent.Offset=FVector(2.f,-5.f,-21.f);
+        R(Spent,Hips,-23.f,-7.f,-3.f); R(Spent,Lumbar,-10.f,3.f,1.f);
+        R(Spent,Spine,-9.f,4.f,1.f); R(Spent,Chest,-12.f,8.f,2.f);
+        R(Spent,Neck,15.f,-8.f); R(Spent,Head,7.f,-3.f);
+        Spent.HandTarget[0]=FVector(-50.f,-23.f,-46.f); Spent.HandTarget[1]=FVector(-42.f,23.f,-29.f);
+        Spent.HandWeight[0]=.85f; Spent.HandWeight[1]=1.f;
+        Spent.Jaw=.28f; Spent.Throat=.06f; Spent.Crest=.18f; Spent.Grip[1]=.24f;
+        FPose Respire=Spent; Respire.Offset=FVector(-1.f,3.f,-16.f);
+        R(Respire,Hips,-18.f,4.f,3.f); R(Respire,Lumbar,-8.f,-2.f,-1.f);
+        R(Respire,Spine,-8.f,-3.f,-1.f); R(Respire,Chest,-5.f,-5.f,-3.f);
+        R(Respire,Neck,12.f,5.f); R(Respire,Head,7.f,3.f);
+        Respire.HandTarget[0]=FVector(-53.f,-18.f,-51.f); Respire.HandTarget[1]=FVector(-34.f,26.f,-34.f);
+        Respire.HandWeight[0]=.70f; Respire.HandWeight[1]=.90f;
+        Respire.Jaw=.17f; Respire.Throat=.28f; Respire.Crest=.28f;
+        Respire.Grip[0]=.13f; Respire.Grip[1]=.38f;
+        Regain=Respire; Regain.Offset=FVector(-3.f,2.f,-11.f);
+        R(Regain,Hips,-15.f,3.f,2.f); R(Regain,Lumbar,-7.f,-2.f,-1.f);
+        R(Regain,Spine,-6.f,-2.f,-1.f); R(Regain,Chest,-5.f,-3.f,-2.f);
+        R(Regain,Neck,10.f,4.f); R(Regain,Head,6.f,2.f);
+        Regain.HandTarget[0]=FVector(-50.f,-16.f,-50.f); Regain.HandTarget[1]=FVector(-39.f,22.f,-43.f);
         Regain.HandWeight[0]=.40f; Regain.HandWeight[1]=.65f;
-        Regain.Jaw=.12f; Regain.Throat=.23f; Regain.Crest=.27f;
-        Regain.Grip[0]=.14f; Regain.Grip[1]=.37f;
-        Breathe=Base; Breathe.Offset=FVector(-1.f,2.f,-6.f);
-        R(Breathe,Hips,-12.f,1.f,1.f); R(Breathe,Lumbar,-5.f,-1.f);
-        R(Breathe,Spine,-5.f,-2.f); R(Breathe,Chest,1.f,-3.f,-1.f);
-        R(Breathe,Neck,7.f,3.f); R(Breathe,Head,7.f,1.f);
+        Regain.Jaw=.10f; Regain.Throat=.24f; Regain.Crest=.24f;
+        Regain.Grip[0]=.15f; Regain.Grip[1]=.33f;
+        Breathe=Base; Breathe.Offset=FVector(3.f,-1.f,-7.f);
+        R(Breathe,Hips,-13.f,-2.f,-1.f); R(Breathe,Lumbar,-5.f,1.f);
+        R(Breathe,Spine,-5.f,1.f); R(Breathe,Chest,0.f,4.f,-1.f);
+        R(Breathe,Neck,9.f,-2.f); R(Breathe,Head,7.f,-1.f);
         Breathe.HandTarget[0]=FVector(-51.f,-15.f,-50.f); Breathe.HandTarget[1]=FVector(-42.f,15.f,-45.f);
         Breathe.HandWeight[0]=.08f; Breathe.HandWeight[1]=.25f;
-        Breathe.Jaw=.07f; Breathe.Throat=.32f; Breathe.Crest=.24f;
-        Settle=Base; Settle.Offset+=FVector(1.f,0.f,-1.f);
-        Settle.Joint[Chest].Pitch-=2.f; Settle.Joint[Neck].Pitch+=1.f;
+        Breathe.Jaw=.08f; Breathe.Throat=.17f; Breathe.Crest=.22f;
+        Settle=Base; Settle.Offset+=FVector(.5f,0.f,-.7f);
+        Settle.Joint[Chest].Pitch-=1.f; Settle.Joint[Neck].Pitch+=.5f;
         Settle.HandTarget[0]=Breathe.HandTarget[0]; Settle.HandTarget[1]=Breathe.HandTarget[1];
         Settle.HandWeight[0]=.015f; Settle.HandWeight[1]=.07f;
-        Settle.Jaw=.11f; Settle.Throat=.12f; Settle.Crest=.18f;
-        const FKey Keys[]={{-1.18f,Base,0.f},{-.99f,Notice,.6f},{-.72f,Gather,.7f},
-            {-.45f,Draw,.65f},{-.15f,Set,.7f},{-.035f,Press,.9f},{.035f,Release,1.f},
-            {.09f,Through,.85f},{.19f,Reload,.6f},{.26f,Reload,.65f},{.31f,Second,1.f},
-            {.39f,Spill,.8f},{.59f,Exhaust,.65f},{.84f,Spent,.6f},
-            {1.16f,Regain,.7f},{1.48f,Breathe,.6f},{1.68f,Settle,.4f},{1.79f,Base,0.f}};
-        FPose P=SamplePerformance(Keys,UE_ARRAY_COUNT(Keys),Time,.018f,.028f,.050f);
-        // The waiting hand passes outside the cheek between bolts, rather
-        // than covering the frill (Detail53-58 / 213-218). Preserve both
-        // release poses and their neighboring motion; only route the reload.
-        const float ClearCheek=FMath::SmoothStep(.05f,.14f,Time)
-            * (1.f-FMath::SmoothStep(.225f,.295f,Time));
-        P.HandTarget[0]+=FVector(8.f,-14.f,-10.f)*ClearCheek;
-        return P;
+        Settle.Jaw=.10f; Settle.Throat=.11f; Settle.Crest=.18f;
+        const FKey Keys[]={{-1.35f,Base,0.f},{-1.12f,Notice,.65f},{-.89f,Gather,.6f},
+            {-.66f,DrawFire,.7f},{-.43f,WindRight,.65f},{-.18f,Set,.7f},
+            {-.07f,DriveRight,1.f},{.03f,Release,1.f},{.10f,FollowRight,.85f},
+            {.22f,Reload,.65f},{.34f,WindLeft,.65f},{.405f,DriveLeft,1.f},
+            {.47f,Second,1.f},{.58f,FollowLeft,.85f},{.72f,Exhaust,.7f},
+            {.87f,Spent,.6f},{1.12f,Respire,.65f},{1.45f,Regain,.7f},
+            {1.78f,Breathe,.6f},{1.98f,Settle,.4f},{2.09f,Base,0.f}};
+        return SamplePerformance(Keys,UE_ARRAY_COUNT(Keys),Time,.020f,.026f,.046f);
     }
     inline FPose Ground(float Time, bool Slam)
     {

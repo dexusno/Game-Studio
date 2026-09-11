@@ -1,0 +1,1874 @@
+{
+  "revision": "dread-v1",
+  "review_date": "2026-09-11",
+  "state": "Frozen color-corrected facial candidates; the first Unreal integration exposed an incorrect white status mask, now repaired in source/export; corrected Unreal review pending",
+  "source_script": {
+    "path": "games/dreambound/scripts/refine_creature_faces.py",
+    "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+  },
+  "read_only_helpers_at_handoff": [
+    {
+      "path": "games/dreambound/scripts/refine_organic_anatomy.py",
+      "sha256": "cd1fa43b64a220cbd3f76c17f34ba944b772b0a7d1cdeacba5fa3b028f713400"
+    },
+    {
+      "path": "games/dreambound/scripts/prepare_organic_enemy.py",
+      "sha256": "1874a25f1396850a0df6626fa1f5e07760fdc7ea90ea56d0856c5a0d5672763a"
+    }
+  ],
+  "authoring": {
+    "tool": "Blender 5.2.1 LTS",
+    "render_device": "Cycles CPU",
+    "threads": 4,
+    "close_preview_samples": 24,
+    "close_preview_resolution": [
+      700,
+      700
+    ],
+    "perspective_preview_resolution": [
+      1280,
+      800
+    ],
+    "perspective_camera_offset_metres": [
+      0.7,
+      -4.5,
+      0.25
+    ],
+    "view_transform": "AgX",
+    "lighting": "Matched neutral studio scene for baseline and candidate; not Unreal courtyard lighting",
+    "perspective_camera_angle_degrees": 70
+  },
+  "import_contract": {
+    "output_folder": "finished-dread",
+    "appearance_revision": "dread-v1",
+    "mesh_suffix": "_Dread",
+    "unit_convention": "Existing anatomy contract: Blender metres, front -Y, up +Z; FBX unit conversion unchanged; intended creature height 220 cm",
+    "skeleton": "38 Briarhide / 43 MireSeer bones; names, hierarchy, rest matrices and anatomy channel rows equal to the finished-anatomy baseline",
+    "vertex_colors": {
+      "name": "DreadFaceColor",
+      "domain": "CORNER",
+      "blender_type": "FLOAT_COLOR",
+      "fbx_colors_type": "LINEAR",
+      "required": "Import/replace the first FBX color set DreadFaceColor. Body corners retain original OrganicTell RGBA status mask; clipped body boundaries interpolate that mask. Only M_OE_DreadSkin corners carry sampled skin pigment. Original body continues using R as its status-emission mask."
+    },
+    "extra_materials": "Use exact per-species extra_materials below. All five new face materials are opaque, non-emissive and one-sided. Namespace per creature to avoid shared material edits.",
+    "retired_materials": [
+      "M_OE_EyeIris",
+      "M_OE_EyePupil"
+    ],
+    "eye_placements": [],
+    "eye_metadata": "Use appearance_eye_placements for the new measured surfaces. The legacy eye_placements array is deliberately empty.",
+    "runtime_channels": "No additional bones or channels. Jaw, Grip and Crest retain their accepted ranges and reference axes."
+  },
+  "validation": {
+    "cpu_preparation_exit_code": {
+      "Briarhide": 0,
+      "MireSeer": 0
+    },
+    "focused_hash_and_contract_check": "Passed: final FBX/Blender/source/spec/map/preview hashes; immutable baseline FBX/Blender hashes; exact copied bone and anatomy channel contracts; four influences maximum; empty retired eye placements; Python AST parse",
+    "retained_skin_comparison": "For neutral, full jaw, full grip and full crest poses, all retained source vertices match the baseline with observed maximum difference 0.0 cm. New clipped socket-boundary/lid/eye vertices are excluded from this exact comparison.",
+    "visual_scope": "Existing native CPU previews describe the unchanged face geometry/pigment. They predate the status-mask correction and did not expose the runtime body-mask dependency. Root actual Unreal Melee Detail frame 60 exposed that integration defect. No new pose render or corrected Unreal acceptance is claimed by this source pass.",
+    "color_stream_correction": "Both CPU corrections exited 0. Parsed actual FBX LayerElementColor 0 and verified every indexed RGBA against authored corners. Original body R ranges preserved; zero body corners at R=1. Reviewed geometry, normals, UVs, weights, rests and visible DreadSkin pigment remain exact."
+  },
+  "limitations": [
+    "Static eyelids and fixed gaze attached to the accepted head rig; no blinking, eye-tracking or new facial-expression channels.",
+    "Existing dense/faceted body and accepted mouth geometry are preserved. This is localized facial surgery, not whole-creature retopology or LOD optimization.",
+    "MireSeer baseline already has a visible dark side-mouth opening at neutral; it remains in the candidate. Full jaw shape and lining are unchanged.",
+    "Small iris exposure can become only a few pixels at combat distance. Threat/readability under actual camera exposure, fire glow and courtyard lighting requires the integration review.",
+    "Blender and Unreal may produce different wet-eye highlights. A material-only correction may be needed after the actual engine comparison; the current source is frozen."
+  ],
+  "assets": [
+    {
+      "asset": "Briarhide",
+      "candidate_folder": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread",
+      "engine_mesh": "/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Dread",
+      "files": [
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/SK_OE_Briarhide.fbx",
+          "sha256": "6257183d0b07c7bfbc190bbcd09121f7faa9e16b148ab4f12022c286fcafc8e2"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/SK_OE_Briarhide.blend",
+          "sha256": "f41df84e0feadc843f7ce1e618669624f85c06bee05627c1609f6f4b24d71261"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/prep-report.json",
+          "sha256": "73c6bd74d41737a4fb2664f6a7e1b9ebdd54cdcbeefc1991b84885e393a5fe52"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/appearance-spec.json",
+          "sha256": "152ac5e0f0d69ff5d53b1b4040ff5d2f1fe706f7c71f696ac4be9c7acc9363e4"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/preparation-source.py",
+          "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+        }
+      ],
+      "baseline_files": [
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-anatomy/SK_OE_Briarhide.fbx",
+          "sha256": "ea4cd13bbb5d13683be8cf71a57b8c9f67b2a58459bd104aad903a2d14514806"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-anatomy/SK_OE_Briarhide.blend",
+          "sha256": "58699dbbe83a8a2604a6649dc9cdc12501ae809d08f26fa1592b8e0665244a63"
+        }
+      ],
+      "spec": {
+        "path": "games/dreambound/art/organic-enemies/appearance/Briarhide.json",
+        "sha256": "152ac5e0f0d69ff5d53b1b4040ff5d2f1fe706f7c71f696ac4be9c7acc9363e4",
+        "parameters": {
+          "asset": "Briarhide",
+          "revision": "dread-v1",
+          "source_fbx_sha256": "ea4cd13bbb5d13683be8cf71a57b8c9f67b2a58459bd104aad903a2d14514806",
+          "anchor": [
+            0.097,
+            -0.411,
+            1.726
+          ],
+          "normal": [
+            0.72,
+            -0.693974,
+            0.0
+          ],
+          "cut_width": 0.025,
+          "cut_height": 0.019,
+          "outer_width": 0.04,
+          "outer_height": 0.03,
+          "opening_width": 0.016,
+          "opening_height": 0.007,
+          "upper_opening_fraction": 0.5,
+          "corner_tilt": 0.0015,
+          "globe_radius": 0.027,
+          "recess": 0.009,
+          "brow_depth": 0.01,
+          "iris_radius": 0.007,
+          "pupil_radius": 0.0042,
+          "gaze_offset": -0.003,
+          "socket_color": [
+            0.019,
+            0.01,
+            0.006
+          ],
+          "eye_color": [
+            0.012,
+            0.011,
+            0.007
+          ],
+          "iris_color": [
+            0.052,
+            0.038,
+            0.016
+          ],
+          "intent": "Replace projecting amber discs with a smaller, recessed wet eye beneath an anatomically broad brow and lower lid. Original body and mouth appearance retained."
+        }
+      },
+      "bones": 38,
+      "vertices": 253353,
+      "runtime_triangles": 202036,
+      "material_slots": [
+        "M_OE_Briarhide",
+        "M_OE_Oral",
+        "M_OE_Tooth",
+        "M_OE_Tongue",
+        "M_OE_DreadSkin",
+        "M_OE_DreadSocket",
+        "M_OE_DreadEye",
+        "M_OE_DreadIris",
+        "M_OE_DreadPupil"
+      ],
+      "extra_materials": [
+        {
+          "name": "M_OE_Oral",
+          "base_color": [
+            0.02,
+            0.006,
+            0.005,
+            1
+          ],
+          "roughness": 0.68,
+          "metallic": 0,
+          "two_sided": true,
+          "specular": 0.12
+        },
+        {
+          "name": "M_OE_Tooth",
+          "base_color": [
+            0.54,
+            0.43,
+            0.27,
+            1
+          ],
+          "roughness": 0.3,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_Tongue",
+          "base_color": [
+            0.07,
+            0.018,
+            0.012,
+            1
+          ],
+          "roughness": 0.46,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadSkin",
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "vertex_color": true,
+          "roughness": 0.68,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadSocket",
+          "base_color": [
+            0.019,
+            0.01,
+            0.006,
+            1
+          ],
+          "roughness": 0.52,
+          "specular": 0.22,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadEye",
+          "base_color": [
+            0.012,
+            0.011,
+            0.007,
+            1
+          ],
+          "roughness": 0.26,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadIris",
+          "base_color": [
+            0.052,
+            0.038,
+            0.016,
+            1
+          ],
+          "roughness": 0.26,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadPupil",
+          "base_color": [
+            0.0015,
+            0.0018,
+            0.0012,
+            1
+          ],
+          "roughness": 0.24,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        }
+      ],
+      "textures": [
+        {
+          "file": "base_color.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "df01f0b75e590f4e117840e37923eeced9e0eba3173c38fda84339ac06ae8bbd",
+          "processing": "Unchanged embedded PNG bytes"
+        },
+        {
+          "file": "metallic_roughness.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "e466660f92d30152314d2b9c3f0ee7233f838f225765b402a4fc41bf07a8481d",
+          "processing": "Unchanged embedded PNG bytes"
+        }
+      ],
+      "measured_eye_placements": [
+        {
+          "side": -1,
+          "surface_center": [
+            -0.0975043922662735,
+            -0.4114861488342285,
+            1.7259999513626099
+          ],
+          "normal": [
+            -0.7200000286102295,
+            -0.6939740180969238,
+            0.0
+          ],
+          "u": [
+            -0.6939740180969238,
+            0.7200000286102295,
+            -0.0
+          ],
+          "v": [
+            -0.0,
+            0.0,
+            1.0
+          ],
+          "added_vertices": 3072,
+          "peak_recess_cm": 0.8999999999999999
+        },
+        {
+          "side": 1,
+          "surface_center": [
+            0.09405548870563507,
+            -0.40816187858581543,
+            1.7259999513626099
+          ],
+          "normal": [
+            0.7200000286102295,
+            -0.6939740180969238,
+            0.0
+          ],
+          "u": [
+            0.6939740180969238,
+            0.7200000286102295,
+            -0.0
+          ],
+          "v": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "added_vertices": 3072,
+          "peak_recess_cm": 0.8999999999999999
+        }
+      ],
+      "preservation": {
+        "baseline_fbx_sha256": "ea4cd13bbb5d13683be8cf71a57b8c9f67b2a58459bd104aad903a2d14514806",
+        "baseline_blend_sha256": "58699dbbe83a8a2604a6649dc9cdc12501ae809d08f26fa1592b8e0665244a63",
+        "all_bone_rests_and_parents_exact": true,
+        "retained_pose_comparisons": {
+          "neutral": {
+            "retained_vertices_compared": 243249,
+            "max_difference_cm": 0.0
+          },
+          "jaw_open": {
+            "retained_vertices_compared": 243249,
+            "max_difference_cm": 0.0
+          },
+          "grip_full": {
+            "retained_vertices_compared": 243249,
+            "max_difference_cm": 0.0
+          },
+          "crest_full": {
+            "retained_vertices_compared": 243249,
+            "max_difference_cm": 0.0
+          }
+        },
+        "changes": {
+          "removed_faces": 1277,
+          "removed_triangles": 2077,
+          "retained_original_vertices": 243249,
+          "retained_positions_and_weights_exact": true,
+          "boundary_fragments": 1221,
+          "eyes": [
+            {
+              "side": -1,
+              "surface_center": [
+                -0.0975043922662735,
+                -0.4114861488342285,
+                1.7259999513626099
+              ],
+              "normal": [
+                -0.7200000286102295,
+                -0.6939740180969238,
+                0.0
+              ],
+              "u": [
+                -0.6939740180969238,
+                0.7200000286102295,
+                -0.0
+              ],
+              "v": [
+                -0.0,
+                0.0,
+                1.0
+              ],
+              "added_vertices": 3072,
+              "peak_recess_cm": 0.8999999999999999
+            },
+            {
+              "side": 1,
+              "surface_center": [
+                0.09405548870563507,
+                -0.40816187858581543,
+                1.7259999513626099
+              ],
+              "normal": [
+                0.7200000286102295,
+                -0.6939740180969238,
+                0.0
+              ],
+              "u": [
+                0.6939740180969238,
+                0.7200000286102295,
+                -0.0
+              ],
+              "v": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "added_vertices": 3072,
+              "peak_recess_cm": 0.8999999999999999
+            }
+          ],
+          "materials": [
+            {
+              "name": "M_OE_DreadSkin",
+              "base_color": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "vertex_color": true,
+              "roughness": 0.68,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadSocket",
+              "base_color": [
+                0.019,
+                0.01,
+                0.006,
+                1
+              ],
+              "roughness": 0.52,
+              "specular": 0.22,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadEye",
+              "base_color": [
+                0.012,
+                0.011,
+                0.007,
+                1
+              ],
+              "roughness": 0.26,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadIris",
+              "base_color": [
+                0.052,
+                0.038,
+                0.016,
+                1
+              ],
+              "roughness": 0.26,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadPupil",
+              "base_color": [
+                0.0015,
+                0.0018,
+                0.0012,
+                1
+              ],
+              "roughness": 0.24,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            }
+          ],
+          "new_face_vertices": 10104
+        },
+        "original_maps_byte_identical": true,
+        "intentional_removal": "Protruding cosmetic Briar irises/pupils and local original eye surfaces, including Mire's painted highlight",
+        "unchanged": [
+          "retained original vertex positions and skin weights",
+          "body/jaw/digit rig names, rests and hierarchy",
+          "retained source face UVs and corner normals",
+          "original body, oral, tooth and tongue materials"
+        ]
+      },
+      "previews": {
+        "baseline": [
+          {
+            "view": "front",
+            "file": "baseline-front.png",
+            "sha256": "d011d70ae121e2f0afbd4270f6b97d2ea2e135cc7f4630aa162bbe9fdf6aedc3",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              0.12,
+              -3,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "side",
+            "file": "baseline-side.png",
+            "sha256": "49edbfea323944ad46a33943e62e7fc84b991338f73706336247bcae8abb0430",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              3,
+              -0.5,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "jaw-open",
+            "file": "baseline-jaw-open.png",
+            "sha256": "8a5cc48d2a63c855924099dd39d5bc19b295cfc8a80e2d86df3b0b01c0db4ee5",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              1.2,
+              -3,
+              0.04
+            ],
+            "jaw": 1,
+            "grip": 0.25,
+            "crest": 0
+          },
+          {
+            "view": "game",
+            "file": "baseline-game.png",
+            "sha256": "62a11d54dba4e163bfd4d3c34f41a7bad9dfaf44a533e534b514e980876d54b7",
+            "projection": "PERSP",
+            "target": [
+              0,
+              -0.02,
+              1.1
+            ],
+            "offset": [
+              0.7,
+              -4.5,
+              0.25
+            ],
+            "jaw": 0.45,
+            "grip": 0.25,
+            "crest": 0.3
+          }
+        ],
+        "candidate": [
+          {
+            "view": "front",
+            "file": "candidate-front.png",
+            "sha256": "d10611c7dbf3ef1a5904d5c2edaafd75381bc09772e13664e2959b5c79921d93",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              0.12,
+              -3,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "side",
+            "file": "candidate-side.png",
+            "sha256": "b57a415554b6c5eeb4144082d9f8bb9de8107856a45082f60f823d06022d201f",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              3,
+              -0.5,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "jaw-open",
+            "file": "candidate-jaw-open.png",
+            "sha256": "75eb47d448df5204c1eeaf7f19d3d048d999af974cdd41364bcb953fb5302d38",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.69
+            ],
+            "offset": [
+              1.2,
+              -3,
+              0.04
+            ],
+            "jaw": 1,
+            "grip": 0.25,
+            "crest": 0
+          },
+          {
+            "view": "game",
+            "file": "candidate-game.png",
+            "sha256": "2a7c2a1c476c0dd241f70e87447abfd9f03cec7941a6f997e71d9f93b9571612",
+            "projection": "PERSP",
+            "target": [
+              0,
+              -0.02,
+              1.1
+            ],
+            "offset": [
+              0.7,
+              -4.5,
+              0.25
+            ],
+            "jaw": 0.45,
+            "grip": 0.25,
+            "crest": 0.3
+          }
+        ]
+      },
+      "reviewed_candidate_views": [
+        "front",
+        "side",
+        "jaw-open",
+        "game"
+      ],
+      "reviewed_baseline_views": [
+        "front",
+        "side"
+      ],
+      "cpu_log": ".local/ai3d/outputs/organic-enemies/briarhide/face-preparation-04.log",
+      "cpu_review_decision": "Existing face-geometry/pigment clearance retained; body status-color integration defect corrected and awaiting Unreal reimport/review",
+      "color_stream_correction": {
+        "revision": "status-mask-v2",
+        "previous_fbx_sha256": "e55642c2297454b3fc4369294a663f2493dfbe5160f92c42fe452363974c9e02",
+        "previous_blend_sha256": "76ade209da7705865accc59625f21d658f3e749b7d2c1fa3ef3a36620123386c",
+        "archived_candidate": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/iterations/20260911T133727Z",
+        "authoritative_source_color": "OrganicTell",
+        "new_first_color_domain": "CORNER",
+        "non_color_mesh_rig_fingerprint_before": "5405daf12af6ced8c61e490ce89660a19dda4ad076f48ae77e95455ca338031c",
+        "non_color_mesh_rig_fingerprint_after": "5405daf12af6ced8c61e490ce89660a19dda4ad076f48ae77e95455ca338031c",
+        "reviewed_geometry_uvs_normals_weights_rests_exact": true,
+        "reviewed_dread_skin_pigment_exact": true,
+        "body_mask_method": "Retained source RGBA copied exactly; cut triangle fragments use affine interpolation of the original OrganicTell RGBA; skin-atlas pigment only on DreadSkin corners",
+        "fbx_first_color_validation": {
+          "fbx_version": 7400,
+          "first_layer": "DreadFaceColor",
+          "mapping": "ByPolygonVertex",
+          "reference": "IndexToDirect",
+          "all_corner_rgba_exact": true,
+          "body_corners": 566788,
+          "body_min_rgba": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_max_rgba": [
+            0.5308301448822021,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_r_equal_one": 0,
+          "body_r_nonzero_corners": 1153
+        },
+        "preview_reuse": "Existing CPU previews predate this status-mask-only correction; exact reviewed geometry and DreadSkin pigment preserved. No new render or in-game acceptance claimed."
+      },
+      "pre_correction_color_inspection": {
+        "path": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/color-stream-inspection.json",
+        "sha256": "2e25ef02f743dd48cee4e4facfe84e73c895bd59f8993b3a7bcb1bb586d3475e",
+        "data": {
+          "asset": "Briarhide",
+          "folders": {
+            "finished-anatomy": {
+              "blend_color_sets": [
+                {
+                  "name": "OrganicTell",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 386834,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 1021,
+                    "r_one": 529
+                  },
+                  "body": {
+                    "count": 242916,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      0.5308301448822021,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "r_nonzero": 420,
+                    "r_one": 0
+                  }
+                }
+              ],
+              "active_color_index": 0,
+              "render_color_index": 0,
+              "fbx_color_sets": [
+                {
+                  "index": 0,
+                  "name": "OrganicTell",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 464,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      0.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 462,
+                    "r_one": 1
+                  }
+                }
+              ]
+            },
+            "finished-dread": {
+              "blend_color_sets": [
+                {
+                  "name": "DreadFaceColor",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 253353,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 253303,
+                    "r_one": 250857
+                  },
+                  "body": {
+                    "count": 246687,
+                    "min_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 246687,
+                    "r_one": 246687
+                  }
+                },
+                {
+                  "name": "OrganicTell",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 253353,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 11046,
+                    "r_one": 10626
+                  },
+                  "body": {
+                    "count": 246687,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 4380,
+                    "r_one": 3960
+                  }
+                }
+              ],
+              "active_color_index": 0,
+              "render_color_index": 0,
+              "fbx_color_sets": [
+                {
+                  "index": 0,
+                  "name": "DreadFaceColor",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 2448,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 2447,
+                    "r_one": 1
+                  }
+                },
+                {
+                  "index": 1,
+                  "name": "OrganicTell",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 399,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 398,
+                    "r_one": 1
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "color_correction_log": ".local/ai3d/outputs/organic-enemies/briarhide/finished-dread/color-fix-01.log"
+    },
+    {
+      "asset": "MireSeer",
+      "candidate_folder": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread",
+      "engine_mesh": "/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Dread",
+      "files": [
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/SK_OE_MireSeer.fbx",
+          "sha256": "cff792dc1cf21a5d909bde0375de605dc07abb302d718594d5ed20260f6b2456"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/SK_OE_MireSeer.blend",
+          "sha256": "c9222b8fd039f82dffb55a66862e73c07575ff1f79d982057495de0a7dfccaac"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/prep-report.json",
+          "sha256": "9171845d84b5e7e64c6a83255b6b8872e40b048dae9a0c8436d3eca72b323cd4"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/appearance-spec.json",
+          "sha256": "8c1afcbe3dab9ffc3da429ddc899f541a7eed73aa4368ead58413f9fb4d63dd7"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/preparation-source.py",
+          "sha256": "dcfb79fb2a175547e3b2059eacb7fe920851311c353146487ba10d0f5fe21d6d"
+        }
+      ],
+      "baseline_files": [
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-anatomy/SK_OE_MireSeer.fbx",
+          "sha256": "6f7c7d18b151f72e714c0b4064cafac91cea3eeeb1a7a23030aeee56546ba811"
+        },
+        {
+          "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-anatomy/SK_OE_MireSeer.blend",
+          "sha256": "99fdc0ba11c1a43ef6d65863a4f85b5b0584fe9601979c9c5f8c7ce490927c44"
+        }
+      ],
+      "spec": {
+        "path": "games/dreambound/art/organic-enemies/appearance/MireSeer.json",
+        "sha256": "8c1afcbe3dab9ffc3da429ddc899f541a7eed73aa4368ead58413f9fb4d63dd7",
+        "parameters": {
+          "asset": "MireSeer",
+          "revision": "dread-v1",
+          "source_fbx_sha256": "6f7c7d18b151f72e714c0b4064cafac91cea3eeeb1a7a23030aeee56546ba811",
+          "anchor": [
+            0.1,
+            -0.202,
+            2.01
+          ],
+          "normal": [
+            0.8,
+            -0.6,
+            0.0
+          ],
+          "cut_width": 0.038,
+          "cut_height": 0.028,
+          "outer_width": 0.05,
+          "outer_height": 0.037,
+          "opening_width": 0.018,
+          "opening_height": 0.0075,
+          "upper_opening_fraction": 0.65,
+          "corner_tilt": 0.001,
+          "globe_radius": 0.03,
+          "recess": 0.021,
+          "brow_depth": 0.011,
+          "iris_radius": 0.008,
+          "pupil_radius": 0.0045,
+          "gaze_offset": -0.004,
+          "socket_color": [
+            0.016,
+            0.012,
+            0.009
+          ],
+          "eye_color": [
+            0.01,
+            0.014,
+            0.01
+          ],
+          "iris_color": [
+            0.048,
+            0.061,
+            0.042
+          ],
+          "intent": "Remove the protruding generated eye and painted reflection, seating a reduced drab iris beneath real orbital hood/lid tissue. Preserve the amphibian frill, throat and accepted articulated mouth."
+        }
+      },
+      "bones": 43,
+      "vertices": 231839,
+      "runtime_triangles": 183783,
+      "material_slots": [
+        "M_OE_MireSeer",
+        "M_OE_Oral",
+        "M_OE_Tooth",
+        "M_OE_Tongue",
+        "M_OE_DreadSkin",
+        "M_OE_DreadSocket",
+        "M_OE_DreadEye",
+        "M_OE_DreadIris",
+        "M_OE_DreadPupil"
+      ],
+      "extra_materials": [
+        {
+          "name": "M_OE_Oral",
+          "base_color": [
+            0.02,
+            0.006,
+            0.005,
+            1
+          ],
+          "roughness": 0.68,
+          "metallic": 0,
+          "two_sided": true,
+          "specular": 0.12
+        },
+        {
+          "name": "M_OE_Tooth",
+          "base_color": [
+            0.54,
+            0.43,
+            0.27,
+            1
+          ],
+          "roughness": 0.3,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_Tongue",
+          "base_color": [
+            0.07,
+            0.018,
+            0.012,
+            1
+          ],
+          "roughness": 0.46,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadSkin",
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "vertex_color": true,
+          "roughness": 0.68,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadSocket",
+          "base_color": [
+            0.016,
+            0.012,
+            0.009,
+            1
+          ],
+          "roughness": 0.52,
+          "specular": 0.22,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadEye",
+          "base_color": [
+            0.01,
+            0.014,
+            0.01,
+            1
+          ],
+          "roughness": 0.26,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadIris",
+          "base_color": [
+            0.048,
+            0.061,
+            0.042,
+            1
+          ],
+          "roughness": 0.26,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        },
+        {
+          "name": "M_OE_DreadPupil",
+          "base_color": [
+            0.0015,
+            0.0018,
+            0.0012,
+            1
+          ],
+          "roughness": 0.24,
+          "specular": 0.25,
+          "metallic": 0,
+          "two_sided": false
+        }
+      ],
+      "textures": [
+        {
+          "file": "base_color.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+          "processing": "Unchanged embedded PNG bytes"
+        },
+        {
+          "file": "metallic_roughness.png",
+          "size": [
+            4096,
+            4096
+          ],
+          "sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+          "processing": "Unchanged embedded PNG bytes"
+        }
+      ],
+      "measured_eye_placements": [
+        {
+          "side": -1,
+          "surface_center": [
+            -0.10866913199424744,
+            -0.20850184559822083,
+            2.009999990463257
+          ],
+          "normal": [
+            -0.800000011920929,
+            -0.6000000238418579,
+            0.0
+          ],
+          "u": [
+            -0.6000000238418579,
+            0.800000011920929,
+            -0.0
+          ],
+          "v": [
+            -0.0,
+            0.0,
+            1.0
+          ],
+          "added_vertices": 3072,
+          "peak_recess_cm": 2.1
+        },
+        {
+          "side": 1,
+          "surface_center": [
+            0.10922718048095703,
+            -0.20892038941383362,
+            2.009999990463257
+          ],
+          "normal": [
+            0.800000011920929,
+            -0.6000000238418579,
+            0.0
+          ],
+          "u": [
+            0.6000000238418579,
+            0.800000011920929,
+            -0.0
+          ],
+          "v": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "added_vertices": 3072,
+          "peak_recess_cm": 2.1
+        }
+      ],
+      "preservation": {
+        "baseline_fbx_sha256": "6f7c7d18b151f72e714c0b4064cafac91cea3eeeb1a7a23030aeee56546ba811",
+        "baseline_blend_sha256": "99fdc0ba11c1a43ef6d65863a4f85b5b0584fe9601979c9c5f8c7ce490927c44",
+        "all_bone_rests_and_parents_exact": true,
+        "retained_pose_comparisons": {
+          "neutral": {
+            "retained_vertices_compared": 220414,
+            "max_difference_cm": 0.0
+          },
+          "jaw_open": {
+            "retained_vertices_compared": 220414,
+            "max_difference_cm": 0.0
+          },
+          "grip_full": {
+            "retained_vertices_compared": 220414,
+            "max_difference_cm": 0.0
+          },
+          "crest_full": {
+            "retained_vertices_compared": 220414,
+            "max_difference_cm": 0.0
+          }
+        },
+        "changes": {
+          "removed_faces": 1075,
+          "removed_triangles": 1075,
+          "retained_original_vertices": 220414,
+          "retained_positions_and_weights_exact": true,
+          "boundary_fragments": 1720,
+          "eyes": [
+            {
+              "side": -1,
+              "surface_center": [
+                -0.10866913199424744,
+                -0.20850184559822083,
+                2.009999990463257
+              ],
+              "normal": [
+                -0.800000011920929,
+                -0.6000000238418579,
+                0.0
+              ],
+              "u": [
+                -0.6000000238418579,
+                0.800000011920929,
+                -0.0
+              ],
+              "v": [
+                -0.0,
+                0.0,
+                1.0
+              ],
+              "added_vertices": 3072,
+              "peak_recess_cm": 2.1
+            },
+            {
+              "side": 1,
+              "surface_center": [
+                0.10922718048095703,
+                -0.20892038941383362,
+                2.009999990463257
+              ],
+              "normal": [
+                0.800000011920929,
+                -0.6000000238418579,
+                0.0
+              ],
+              "u": [
+                0.6000000238418579,
+                0.800000011920929,
+                -0.0
+              ],
+              "v": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "added_vertices": 3072,
+              "peak_recess_cm": 2.1
+            }
+          ],
+          "materials": [
+            {
+              "name": "M_OE_DreadSkin",
+              "base_color": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "vertex_color": true,
+              "roughness": 0.68,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadSocket",
+              "base_color": [
+                0.016,
+                0.012,
+                0.009,
+                1
+              ],
+              "roughness": 0.52,
+              "specular": 0.22,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadEye",
+              "base_color": [
+                0.01,
+                0.014,
+                0.01,
+                1
+              ],
+              "roughness": 0.26,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadIris",
+              "base_color": [
+                0.048,
+                0.061,
+                0.042,
+                1
+              ],
+              "roughness": 0.26,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            },
+            {
+              "name": "M_OE_DreadPupil",
+              "base_color": [
+                0.0015,
+                0.0018,
+                0.0012,
+                1
+              ],
+              "roughness": 0.24,
+              "specular": 0.25,
+              "metallic": 0,
+              "two_sided": false
+            }
+          ],
+          "new_face_vertices": 11425
+        },
+        "original_maps_byte_identical": true,
+        "intentional_removal": "Protruding cosmetic Briar irises/pupils and local original eye surfaces, including Mire's painted highlight",
+        "unchanged": [
+          "retained original vertex positions and skin weights",
+          "body/jaw/digit rig names, rests and hierarchy",
+          "retained source face UVs and corner normals",
+          "original body, oral, tooth and tongue materials"
+        ]
+      },
+      "previews": {
+        "baseline": [
+          {
+            "view": "front",
+            "file": "baseline-front.png",
+            "sha256": "0b96cb67d9706c7f16d792e897fd7457c337197f53ebf078ac577c208fe5c913",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              0.12,
+              -3,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "oblique",
+            "file": "baseline-oblique.png",
+            "sha256": "cc0e5d701e8ab00bb1df1545f5dfb7c255063f36c3d4501d6842e0b7fb813b93",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              2,
+              -3,
+              0.05
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "side",
+            "file": "baseline-side.png",
+            "sha256": "0a989c8cd702e5accaf432e4e7d2d1f1a289ea00f940164a76cb0d097415e99c",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              3,
+              -0.5,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "jaw-open",
+            "file": "baseline-jaw-open.png",
+            "sha256": "3b7dd4a4626cc711d98c7f8f14396b5f1b1938fd2c24a71640aa630fb6559fe7",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              1.2,
+              -3,
+              0.04
+            ],
+            "jaw": 1,
+            "grip": 0.25,
+            "crest": 0
+          },
+          {
+            "view": "crest-loaded",
+            "file": "baseline-crest-loaded.png",
+            "sha256": "a5cdb6c9c09f7f8492193f1d26bbb2691c9c5dfa5afe534cd2fb38a34b31d12b",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.03,
+              1.83
+            ],
+            "offset": [
+              0.3,
+              -3,
+              0.1
+            ],
+            "jaw": 0.7,
+            "grip": 0.35,
+            "crest": 1
+          },
+          {
+            "view": "game",
+            "file": "baseline-game.png",
+            "sha256": "91d84680bf08d4017d8a36e805d1478dfb76b4fb1bd65e120443f10d55f944c8",
+            "projection": "PERSP",
+            "target": [
+              0,
+              -0.02,
+              1.1
+            ],
+            "offset": [
+              0.7,
+              -4.5,
+              0.25
+            ],
+            "jaw": 0.45,
+            "grip": 0.25,
+            "crest": 0.3
+          }
+        ],
+        "candidate": [
+          {
+            "view": "front",
+            "file": "candidate-front.png",
+            "sha256": "0efb5c88719d6c9bc4f3c4dd11e995bdb6c410168487d1cf989f74c550be1e19",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              0.12,
+              -3,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "oblique",
+            "file": "candidate-oblique.png",
+            "sha256": "09c7960e455b8b11b0b0e16a16ef463008799753c69f29aa45918104249659e1",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              2,
+              -3,
+              0.05
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "side",
+            "file": "candidate-side.png",
+            "sha256": "a550d51e3a819d2b2cf3075e9f5b1cc756c59d2b7e716cbcfd559328c9ce75a3",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              3,
+              -0.5,
+              0.07
+            ],
+            "jaw": 0,
+            "grip": 0,
+            "crest": 0
+          },
+          {
+            "view": "jaw-open",
+            "file": "candidate-jaw-open.png",
+            "sha256": "8698ae8ef38b30957ee06ffeaf93fb9b82541e95169c3113bf94a2eda08e03cd",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.28,
+              1.98
+            ],
+            "offset": [
+              1.2,
+              -3,
+              0.04
+            ],
+            "jaw": 1,
+            "grip": 0.25,
+            "crest": 0
+          },
+          {
+            "view": "crest-loaded",
+            "file": "candidate-crest-loaded.png",
+            "sha256": "c2c647aa8eab7282f98d42ecb95522db231a88e1a1da9f199da3abeab5b602d1",
+            "projection": "ORTHO",
+            "target": [
+              0,
+              -0.03,
+              1.83
+            ],
+            "offset": [
+              0.3,
+              -3,
+              0.1
+            ],
+            "jaw": 0.7,
+            "grip": 0.35,
+            "crest": 1
+          },
+          {
+            "view": "game",
+            "file": "candidate-game.png",
+            "sha256": "119eb2f7117a22e6eb00bea1fec76af10ef53529734b1ec36307620598456f6f",
+            "projection": "PERSP",
+            "target": [
+              0,
+              -0.02,
+              1.1
+            ],
+            "offset": [
+              0.7,
+              -4.5,
+              0.25
+            ],
+            "jaw": 0.45,
+            "grip": 0.25,
+            "crest": 0.3
+          }
+        ]
+      },
+      "reviewed_candidate_views": [
+        "front",
+        "oblique",
+        "side",
+        "jaw-open",
+        "crest-loaded",
+        "game"
+      ],
+      "reviewed_baseline_views": [
+        "front",
+        "side"
+      ],
+      "cpu_log": ".local/ai3d/outputs/organic-enemies/mire-seer/face-preparation-01.log",
+      "cpu_review_decision": "Existing face-geometry/pigment clearance retained; body status-color integration defect corrected and awaiting Unreal reimport/review",
+      "color_stream_correction": {
+        "revision": "status-mask-v2",
+        "previous_fbx_sha256": "c6f89168837e3844c98aff156d5c7bec3d9ec01e15ab41f2d3f9cafa020e04c1",
+        "previous_blend_sha256": "082a5b9170b593487ef669086efcd3fb2b36cd7c43a2b9bb990a342dc4a86b2c",
+        "archived_candidate": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/iterations/20260911T133818Z",
+        "authoritative_source_color": "OrganicTell",
+        "new_first_color_domain": "CORNER",
+        "non_color_mesh_rig_fingerprint_before": "5051f26f9f159293d76671b1ef4e2b23a06df49aabca8124d876dc50cc066c2e",
+        "non_color_mesh_rig_fingerprint_after": "5051f26f9f159293d76671b1ef4e2b23a06df49aabca8124d876dc50cc066c2e",
+        "reviewed_geometry_uvs_normals_weights_rests_exact": true,
+        "reviewed_dread_skin_pigment_exact": true,
+        "body_mask_method": "Retained source RGBA copied exactly; cut triangle fragments use affine interpolation of the original OrganicTell RGBA; skin-atlas pigment only on DreadSkin corners",
+        "fbx_first_color_validation": {
+          "fbx_version": 7400,
+          "first_layer": "DreadFaceColor",
+          "mapping": "ByPolygonVertex",
+          "reference": "IndexToDirect",
+          "all_corner_rgba_exact": true,
+          "body_corners": 511249,
+          "body_min_rgba": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_max_rgba": [
+            0.6860013604164124,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "body_r_equal_one": 0,
+          "body_r_nonzero_corners": 10247
+        },
+        "preview_reuse": "Existing CPU previews predate this status-mask-only correction; exact reviewed geometry and DreadSkin pigment preserved. No new render or in-game acceptance claimed."
+      },
+      "pre_correction_color_inspection": {
+        "path": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/color-stream-inspection.json",
+        "sha256": "92aac53c85fedd9b53538703b22967a14892a6e27b20ed4189cdea2755da362a",
+        "data": {
+          "asset": "MireSeer",
+          "folders": {
+            "finished-anatomy": {
+              "blend_color_sets": [
+                {
+                  "name": "OrganicTell",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 338882,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 4831,
+                    "r_one": 551
+                  },
+                  "body": {
+                    "count": 220750,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      0.6860013604164124,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "r_nonzero": 3447,
+                    "r_one": 0
+                  }
+                }
+              ],
+              "active_color_index": 0,
+              "render_color_index": 0,
+              "fbx_color_sets": [
+                {
+                  "index": 0,
+                  "name": "OrganicTell",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 4008,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 4007,
+                    "r_one": 1
+                  }
+                }
+              ]
+            },
+            "finished-dread": {
+              "blend_color_sets": [
+                {
+                  "name": "DreadFaceColor",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 231839,
+                    "min_rgba": [
+                      0.03725309297442436,
+                      0.022339727729558945,
+                      0.010212641209363937,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 231839,
+                    "r_one": 229343
+                  },
+                  "body": {
+                    "count": 225154,
+                    "min_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 225154,
+                    "r_one": 225154
+                  }
+                },
+                {
+                  "name": "OrganicTell",
+                  "domain": "POINT",
+                  "data_type": "FLOAT_COLOR",
+                  "all": {
+                    "count": 231839,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 15247,
+                    "r_one": 11966
+                  },
+                  "body": {
+                    "count": 225154,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 8562,
+                    "r_one": 5281
+                  }
+                }
+              ],
+              "active_color_index": 0,
+              "render_color_index": 0,
+              "fbx_color_sets": [
+                {
+                  "index": 0,
+                  "name": "DreadFaceColor",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 2497,
+                    "min_rgba": [
+                      0.03725309297442436,
+                      0.022339727729558945,
+                      0.010212641209363937,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 2497,
+                    "r_one": 1
+                  }
+                },
+                {
+                  "index": 1,
+                  "name": "OrganicTell",
+                  "mapping": "ByPolygonVertex",
+                  "reference": "IndexToDirect",
+                  "values": {
+                    "count": 3102,
+                    "min_rgba": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "max_rgba": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "r_nonzero": 3101,
+                    "r_one": 1
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "color_correction_log": ".local/ai3d/outputs/organic-enemies/mire-seer/finished-dread/color-fix-01.log"
+    }
+  ],
+  "color_stream_revision": "status-mask-v2",
+  "integration_failure_evidence": {
+    "path": ".local/organic-fire-review/dread-v2-melee-detail/Saved/EnemyMotionStudy/Melee-Detail/Frame_00060.png",
+    "sha256": "1e1334c2d4fb76fec6bc9a80bd433eca9d1b10073873bb180d11915b4aa9d112",
+    "finding": "Incorrect first FBX body color RGBA=(1,1,1,1) drove status emission across dormant Briarhide. Preserved original mask values now replace those white defaults."
+  }
+}

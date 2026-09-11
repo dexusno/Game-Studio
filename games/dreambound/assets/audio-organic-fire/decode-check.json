@@ -1,0 +1,116 @@
+{
+  "checked": "2026-09-11",
+  "decoder": "ffmpeg",
+  "files": [
+    {
+      "file": "organic-fire-preview.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 12.2,
+      "sha256": "e5b268c190eb10fe9bb22c477d5b7914b78073fbec207b85d7d0566c46639129",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterFlightLoop.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.1,
+      "sha256": "52da881ef2d48a8deb220d9942135b75783bd1186d132f45c74d8fafb0a29222",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterFurnaceLoop.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.6,
+      "sha256": "a9b5af863fe1114cb6c9a1edd252564ec18d0d0ea7d4ca182f32b8cda7b9ae53",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterIgnite.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 0.64,
+      "sha256": "417fbb24b90ef1f67be4cc948f9a94dd9bd09916412a8f660dddd2eef7fbb61d",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterImpactA.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.16,
+      "sha256": "6ee8ce09fbcdfaf40a44ec556fa7818d48e778e0a2fbbfd9ebc45882b6b812a1",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterImpactB.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.24,
+      "sha256": "f839b42517d536a9df6702e447745eb9cbafd2669660c6bdb3377896c6f067d0",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterReleaseA.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.12,
+      "sha256": "d577e7bbf38f46428724bdc4b4af24fe557a17e5c86a92ff52ab387d80348ca6",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterReleaseB.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.08,
+      "sha256": "4689d43ca3515e3cbf5373570ce2265ed529451e64a91d0ca2fc97f7e38d5c8b",
+      "decode_errors": 0
+    },
+    {
+      "file": "S_CasterReleaseC.wav",
+      "stream": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16
+      },
+      "seconds": 1.2,
+      "sha256": "cfd48d5ca6d5122b38bfdbd8054147109f06c3df0f024d29119ecd303ffabdcb",
+      "decode_errors": 0
+    }
+  ],
+  "in_game_playback": false,
+  "listened": false
+}

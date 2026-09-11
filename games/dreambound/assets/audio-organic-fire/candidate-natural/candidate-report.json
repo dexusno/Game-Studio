@@ -1,0 +1,137 @@
+{
+  "status": "unaccepted comparison control",
+  "owner_verdict_on_baseline": "Still sounds artificial",
+  "baseline_preview_sha256": "e5b268c190eb10fe9bb22c477d5b7914b78073fbec207b85d7d0566c46639129",
+  "baseline_wavs_preserved": {
+    "S_CasterIgnite.wav": "417fbb24b90ef1f67be4cc948f9a94dd9bd09916412a8f660dddd2eef7fbb61d",
+    "S_CasterFurnaceLoop.wav": "a9b5af863fe1114cb6c9a1edd252564ec18d0d0ea7d4ca182f32b8cda7b9ae53",
+    "S_CasterReleaseA.wav": "d577e7bbf38f46428724bdc4b4af24fe557a17e5c86a92ff52ab387d80348ca6",
+    "S_CasterReleaseB.wav": "4689d43ca3515e3cbf5373570ce2265ed529451e64a91d0ca2fc97f7e38d5c8b",
+    "S_CasterReleaseC.wav": "cfd48d5ca6d5122b38bfdbd8054147109f06c3df0f024d29119ecd303ffabdcb",
+    "S_CasterFlightLoop.wav": "52da881ef2d48a8deb220d9942135b75783bd1186d132f45c74d8fafb0a29222",
+    "S_CasterImpactA.wav": "6ee8ce09fbcdfaf40a44ec556fa7818d48e778e0a2fbbfd9ebc45882b6b812a1",
+    "S_CasterImpactB.wav": "f839b42517d536a9df6702e447745eb9cbafd2669660c6bdb3377896c6f067d0",
+    "organic-fire-preview.wav": "e5b268c190eb10fe9bb22c477d5b7914b78073fbec207b85d7d0566c46639129"
+  },
+  "candidate_file": "natural-source-control.wav",
+  "sha256": "1fb01f07817d30649e5c8b482883f38c4b3e920565db2f16fb04726e9a826665",
+  "seconds": 4.8,
+  "format": "mono PCM16 48 kHz",
+  "events": [
+    {
+      "source": "fire_staff_24",
+      "region_seconds": [
+        0.3,
+        2.155
+      ],
+      "time_seconds": 0.25,
+      "gain": 0.6,
+      "fade_in_seconds": 0.07,
+      "fade_out_seconds": 0.035,
+      "label": "quiet burn throughout gather and second-shot preparation"
+    },
+    {
+      "source": "fire_staff_17",
+      "region_seconds": [
+        0,
+        2.2
+      ],
+      "time_seconds": 1.63,
+      "gain": 0.52,
+      "fade_in_seconds": 0.0025,
+      "fade_out_seconds": 0.02,
+      "label": "first supplied fire event, complete retained transient/tail"
+    },
+    {
+      "source": "fire_staff_19",
+      "region_seconds": [
+        0,
+        2.15
+      ],
+      "time_seconds": 2.07,
+      "gain": 0.52,
+      "fade_in_seconds": 0.0025,
+      "fade_out_seconds": 0.02,
+      "label": "second supplied fire event, complete retained transient/tail"
+    }
+  ],
+  "global_constant_gain": 0.8652848082399826,
+  "source_records": {
+    "fire_staff_24": {
+      "file": "sources/fire-staff-24.flac",
+      "sha256": "861e9b34354bbd03390a39db88f0e73b79e43b7a8523331fa06c2102c23bff69",
+      "source_url": "https://opengameart.org/content/fire-staff-sound-effects",
+      "download_url": "https://opengameart.org/sites/default/files/legit_audio_fire_staff_-_free_0.zip",
+      "creator": "LEGIT Audio",
+      "license": "CC0 1.0",
+      "license_proof": "rights/cc0-source-evidence.md",
+      "checked": "2026-09-11",
+      "source_title": "Fire Staff Sound Effects",
+      "archive_sha256": "8c0668fdde03de52b9b201e672244992ae739438937d4bef6908d1618a86b020",
+      "original_archive_member": "LEGIT Audio_FIRE STAFF - FREE/Wavs/LEGIT_FIR_Fire_Staff 24-Audio.wav",
+      "original_member_sha256": "407e9c0a9dcdb0621991ad4ca20130635e37e4ad1c61656195f07a3ff65cb9f6",
+      "original_region_seconds": [
+        0.4,
+        8.4
+      ],
+      "retained_modifications": "Exact named WAV region decoded, downmixed to mono, resampled 96 kHz to 48 kHz and retained as PCM24 lossless FLAC. No EQ, envelope or gain changes in retained source.",
+      "rights_page_sha256": "bd98ef40b990338d5080875ef79a53e48f283c880ca7109d632af57129e82e1d"
+    },
+    "fire_staff_17": {
+      "file": "sources/fire-staff-17.flac",
+      "sha256": "92f263df68a4be1407a404a4741bd7fdf82da84d3b994202a110a5c4ab2f5f7a",
+      "source_url": "https://opengameart.org/content/fire-staff-sound-effects",
+      "download_url": "https://opengameart.org/sites/default/files/legit_audio_fire_staff_-_free_0.zip",
+      "creator": "LEGIT Audio",
+      "license": "CC0 1.0",
+      "license_proof": "rights/cc0-source-evidence.md",
+      "checked": "2026-09-11",
+      "source_title": "Fire Staff Sound Effects",
+      "archive_sha256": "8c0668fdde03de52b9b201e672244992ae739438937d4bef6908d1618a86b020",
+      "original_archive_member": "LEGIT Audio_FIRE STAFF - FREE/Wavs/LEGIT_FIR_Fire_Staff 17-Audio.wav",
+      "original_member_sha256": "54b55dc438ca44cb6cb8c3c4246505bfc3450c5541e72772682cc13f396087ef",
+      "original_region_seconds": [
+        0,
+        2.2
+      ],
+      "retained_modifications": "Exact named WAV region decoded, downmixed to mono, resampled 96 kHz to 48 kHz and retained as PCM24 lossless FLAC. No EQ, envelope or gain changes in retained source.",
+      "rights_page_sha256": "bd98ef40b990338d5080875ef79a53e48f283c880ca7109d632af57129e82e1d"
+    },
+    "fire_staff_19": {
+      "file": "sources/fire-staff-19.flac",
+      "sha256": "e37a1fd7244e0186339427e20163251758c021660e65652b445b3e9afc50d6f6",
+      "source_url": "https://opengameart.org/content/fire-staff-sound-effects",
+      "download_url": "https://opengameart.org/sites/default/files/legit_audio_fire_staff_-_free_0.zip",
+      "creator": "LEGIT Audio",
+      "license": "CC0 1.0",
+      "license_proof": "rights/cc0-source-evidence.md",
+      "checked": "2026-09-11",
+      "source_title": "Fire Staff Sound Effects",
+      "archive_sha256": "8c0668fdde03de52b9b201e672244992ae739438937d4bef6908d1618a86b020",
+      "original_archive_member": "LEGIT Audio_FIRE STAFF - FREE/Wavs/LEGIT_FIR_Fire_Staff 19-Audio.wav",
+      "original_member_sha256": "2904f65ac6c3af0273ad237bb1ed1cb6928a43c124c8cd1d485d36e3d19ab37c",
+      "original_region_seconds": [
+        0,
+        2.15
+      ],
+      "retained_modifications": "Exact named WAV region decoded, downmixed to mono, resampled 96 kHz to 48 kHz and retained as PCM24 lossless FLAC. No EQ, envelope or gain changes in retained source.",
+      "rights_page_sha256": "bd98ef40b990338d5080875ef79a53e48f283c880ca7109d632af57129e82e1d"
+    }
+  },
+  "processing_removed": [
+    "already slowed ghost breath",
+    "human tired breath",
+    "all creative pitch/speed changes",
+    "all high/low-pass EQ",
+    "RMS body matching",
+    "soft-knee level shaper",
+    "loop repetition",
+    "release breath/ignition overlays",
+    "overlaid flight/impact events"
+  ],
+  "sample_peak_dbfs": -5.1180767174539135,
+  "full_scale_samples": 0,
+  "silence_after_seconds": 4.22,
+  "listened": false,
+  "limitation": "Audio input is unavailable. Source identities, signal construction and decode are verified; perceived naturalness is unverified. This intentionally sparse control does not provide the full runtime palette or prove the organic monster-fire goal."
+}

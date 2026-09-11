@@ -1,0 +1,2 @@
+# Preserve the captured upstream license hash on Windows checkouts.
+model-license-evidence.txt text eol=lf

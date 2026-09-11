@@ -6,6 +6,7 @@ under config.local.json's windowsOutputRoot/organic-enemies/<source_folder>/fini
 Missing source, rig bones or texture files are errors, never robot substitution.
 """
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -95,6 +96,11 @@ def material(asset, base, packed, pigment_floor=None):
     link(status, "RGB", glow, "A")
     link(power, "", glow, "B")
     property_link(glow, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
+    if asset == "MireSeer":
+        definition = importlib.util.spec_from_file_location("organic_fire_materials", Path(__file__).with_name("import_organic_fire.py"))
+        fire = importlib.util.module_from_spec(definition)
+        definition.loader.exec_module(fire)
+        fire.add_furnace_to_skin(mat, glow)
     EDIT.recompile_material(mat)
     LIB.save_loaded_asset(mat)
     REPORT["materials"].append(mat.get_path_name())
@@ -124,7 +130,8 @@ def eye_material(label):
 
 def anatomy_material(asset, definition):
     name = definition["name"]
-    if name not in ("M_OE_Oral", "M_OE_Tooth", "M_OE_Tongue"):
+    if name not in ("M_OE_Oral", "M_OE_Tooth", "M_OE_Tongue", "M_OE_DreadSkin",
+                    "M_OE_DreadSocket", "M_OE_DreadEye", "M_OE_DreadIris", "M_OE_DreadPupil"):
         raise RuntimeError("Unexpected authored anatomy material: " + name)
     material_name = name + "_" + asset
     path = DEST + "/Materials/" + material_name
@@ -134,9 +141,17 @@ def anatomy_material(asset, definition):
     EDIT.set_material_usage(mat, unreal.MaterialUsage.MATUSAGE_SKELETAL_MESH)
     defaults = {"M_OE_Oral": [.020, .006, .005], "M_OE_Tooth": [.58, .48, .31],
                 "M_OE_Tongue": [.070, .018, .012]}
-    rgb = definition.get("base_color", defaults[name])
-    pigment = node(mat, unreal.MaterialExpressionConstant3Vector, -350, -100,
-                   constant=unreal.LinearColor(*rgb[:3], 1))
+    rgb = definition.get("base_color", defaults.get(name, [.02, .01, .008]))
+    if definition.get("vertex_color"):
+        vertex = node(mat, unreal.MaterialExpressionVertexColor, -650, -100)
+        tint = node(mat, unreal.MaterialExpressionVectorParameter, -650, -260,
+                    parameter_name="CreatureTint", default_value=unreal.LinearColor(1, 1, 1, 1))
+        pigment = node(mat, unreal.MaterialExpressionMultiply, -350, -100)
+        link(vertex, "", pigment, "A")
+        link(tint, "RGB", pigment, "B")
+    else:
+        pigment = node(mat, unreal.MaterialExpressionConstant3Vector, -350, -100,
+                       constant=unreal.LinearColor(*rgb[:3], 1))
     rough = node(mat, unreal.MaterialExpressionConstant, -350, 120,
                  r=definition.get("roughness", .38 if name == "M_OE_Oral" else .42))
     specular = node(mat, unreal.MaterialExpressionConstant, -350, 240,
@@ -190,7 +205,8 @@ def import_creature(asset, folder):
     # sixteen-bone mesh available for explicit baseline comparison.
     performance_rig = any(bone["name"] == "spine_lower" for bone in prep["bones"])
     anatomy_rig = bool(prep.get("anatomy_rig"))
-    task.destination_name = "SK_OE_" + asset + ("_Anatomy" if anatomy_rig else "_Performance" if performance_rig else "")
+    dread = prep.get("appearance_revision") == "dread-v1"
+    task.destination_name = "SK_OE_" + asset + ("_Dread" if dread else "_Anatomy" if anatomy_rig else "_Performance" if performance_rig else "")
     task.automated = task.replace_existing = task.save = True
     task.options = options
     TOOLS.import_asset_tasks([task])
@@ -237,7 +253,7 @@ def import_creature(asset, folder):
                              "runtime_triangles_from_blender": prep["runtime_triangles"],
                              "bone_count": len(prep["bones"]),
                              "validated_bone_parent_links": len(prep["bones"]) - 1,
-                             "rig_variant": "anatomy" if anatomy_rig else "performance" if performance_rig else "motion",
+                             "rig_variant": "dread" if dread else "anatomy" if anatomy_rig else "performance" if performance_rig else "motion",
                              "lod_count": subsystem.get_lod_count(mesh), "materials": len(slots),
                              "assigned_materials": assigned_slots,
                              "runtime_mesh_yaw": prep["runtime_mesh_yaw"]})
@@ -256,7 +272,10 @@ def main():
     try:
         for asset in assets:
             spec = json.loads((ROOT / "art/organic-enemies/rig" / (asset + ".json")).read_text(encoding="utf-8"))
-            folder = output_root / "organic-enemies" / spec.get("source_folder", asset.lower()) / spec.get("output_folder", "finished")
+            appearance_path = ROOT / "art/organic-enemies/appearance" / (asset + ".json")
+            appearance = json.loads(appearance_path.read_text(encoding="utf-8")) if appearance_path.is_file() else {}
+            output_folder = "finished-dread" if appearance.get("revision") == "dread-v1" else spec.get("output_folder", "finished")
+            folder = output_root / "organic-enemies" / spec.get("source_folder", asset.lower()) / output_folder
             import_creature(asset, folder)
     finally:
         unreal.SystemLibrary.execute_console_command(None, flag + " " + str(previous))

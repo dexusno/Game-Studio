@@ -1,0 +1,1676 @@
+{
+  "named_endpoints": {
+    "/_variant_change_simple": {
+      "parameters": [
+        {
+          "label": "Model",
+          "parameter_name": "variant_key",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "medium",
+              "small-music",
+              "small-sfx"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['medium', 'small-music', 'small-sfx']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "medium"
+        }
+      ],
+      "returns": [
+        {
+          "label": "Duration (s) \u00b7 model max 380s",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 380"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 1 and 380"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "Prompt",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "",
+      "code_snippets": {
+        "python": "from gradio_client import Client\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\tvariant_key=\"medium\",\n\tapi_name=\"/_variant_change_simple\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/_variant_change_simple\", {\n\t\tvariant_key: \"medium\",\n});\n\nconsole.log(result.data);",
+        "bash": "curl -X POST http://localhost:7860/gradio_api/call/v2/_variant_change_simple -s -H \"Content-Type: application/json\" \\\n  -d '{\"variant_key\": \"medium\"}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/_variant_change_simple/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /_variant_change_simple '{\n  \"variant_key\": \"medium\"\n}'\n"
+      }
+    },
+    "/infer": {
+      "parameters": [
+        {
+          "label": "Model",
+          "parameter_name": "variant_key",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "medium",
+              "small-music",
+              "small-sfx"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['medium', 'small-music', 'small-sfx']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "medium"
+        },
+        {
+          "label": "Prompt",
+          "parameter_name": "prompt",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox",
+          "example_input": "Hello!!"
+        },
+        {
+          "label": "Duration (s) \u00b7 model max 380s",
+          "parameter_name": "duration",
+          "parameter_has_default": true,
+          "parameter_default": 60,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 380"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 1
+        },
+        {
+          "label": "Steps",
+          "parameter_name": "steps",
+          "parameter_has_default": true,
+          "parameter_default": 8,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 50"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 1
+        },
+        {
+          "label": "CFG scale",
+          "parameter_name": "cfg_scale",
+          "parameter_has_default": true,
+          "parameter_default": 1.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.5 and 8.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.5
+        },
+        {
+          "label": "Sampler",
+          "parameter_name": "sampler_type",
+          "parameter_has_default": true,
+          "parameter_default": "pingpong",
+          "type": {
+            "type": "string",
+            "enum": [
+              "pingpong",
+              "euler",
+              "rk4",
+              "dpmpp"
+            ]
+          },
+          "python_type": {
+            "type": "Literal['pingpong', 'euler', 'rk4', 'dpmpp']",
+            "description": ""
+          },
+          "component": "Dropdown",
+          "example_input": "pingpong"
+        },
+        {
+          "label": "Seed (0 = random)",
+          "parameter_name": "seed",
+          "parameter_has_default": true,
+          "parameter_default": 0,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        }
+      ],
+      "returns": [
+        {
+          "label": "Output",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "Audio"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "Slim handler used by the Simple tab and the Examples cache.",
+      "code_snippets": {
+        "python": "from gradio_client import Client\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\tvariant_key=\"medium\",\n\tprompt=\"Hello!!\",\n\tduration=60,\n\tsteps=8,\n\tcfg_scale=1.0,\n\tsampler_type=\"pingpong\",\n\tseed=0,\n\tapi_name=\"/infer\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/infer\", {\n\t\tvariant_key: \"medium\",\n\t\tprompt: \"Hello!!\",\n\t\tduration: 60,\n\t\tsteps: 8,\n\t\tcfg_scale: 1.0,\n\t\tsampler_type: \"pingpong\",\n\t\tseed: 0,\n});\n\nconsole.log(result.data);",
+        "bash": "curl -X POST http://localhost:7860/gradio_api/call/v2/infer -s -H \"Content-Type: application/json\" \\\n  -d '{\"variant_key\": \"medium\", \"prompt\": \"Hello!!\", \"duration\": 60, \"steps\": 8, \"cfg_scale\": 1.0, \"sampler_type\": \"pingpong\", \"seed\": 0}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/infer/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /infer '{\n  \"variant_key\": \"medium\",\n  \"prompt\": \"Hello!!\",\n  \"duration\": 60,\n  \"steps\": 8,\n  \"cfg_scale\": 1.0,\n  \"sampler_type\": \"pingpong\",\n  \"seed\": 3\n}'\n"
+      }
+    },
+    "/lambda": {
+      "parameters": [
+        {
+          "label": "Output audio",
+          "parameter_name": "a",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "label": "Init audio",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "Audio"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "",
+      "code_snippets": {
+        "python": "from gradio_client import Client, handle_file\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\ta=handle_file('https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav'),\n\tapi_name=\"/lambda\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst response_0 = await fetch(\"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\");\nconst exampleAudio = await response_0.blob();\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/lambda\", {\n\t\ta: exampleAudio,\n});\n\nconsole.log(result.data);",
+        "bash": "FILE_PATH=$(curl -s -X POST http://localhost:7860/gradio_api/upload -F 'files=@/path/to/your/file' | tr -d '[]\" ')\n\ncurl -X POST http://localhost:7860/gradio_api/call/v2/lambda -s -H \"Content-Type: application/json\" \\\n  -d '{\"a\": {\"path\": \"'$FILE_PATH'\", \"meta\": {\"_type\": \"gradio.FileData\"}}}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/lambda/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /lambda '{\n  \"a\": {\n    \"path\": \"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\",\n    \"meta\": {\n      \"_type\": \"gradio.FileData\"\n    }\n  }\n}'\n"
+      }
+    },
+    "/lambda_1": {
+      "parameters": [
+        {
+          "label": "Output audio",
+          "parameter_name": "a",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "label": "Inpaint audio",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "Audio"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "",
+      "code_snippets": {
+        "python": "from gradio_client import Client, handle_file\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\ta=handle_file('https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav'),\n\tapi_name=\"/lambda_1\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst response_0 = await fetch(\"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\");\nconst exampleAudio = await response_0.blob();\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/lambda_1\", {\n\t\ta: exampleAudio,\n});\n\nconsole.log(result.data);",
+        "bash": "FILE_PATH=$(curl -s -X POST http://localhost:7860/gradio_api/upload -F 'files=@/path/to/your/file' | tr -d '[]\" ')\n\ncurl -X POST http://localhost:7860/gradio_api/call/v2/lambda_1 -s -H \"Content-Type: application/json\" \\\n  -d '{\"a\": {\"path\": \"'$FILE_PATH'\", \"meta\": {\"_type\": \"gradio.FileData\"}}}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/lambda_1/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /lambda_1 '{\n  \"a\": {\n    \"path\": \"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\",\n    \"meta\": {\n      \"_type\": \"gradio.FileData\"\n    }\n  }\n}'\n"
+      }
+    },
+    "/_update_mask_max": {
+      "parameters": [
+        {
+          "label": "Seconds total \u00b7 model max 380s",
+          "parameter_name": "seconds_total",
+          "parameter_has_default": true,
+          "parameter_default": 60,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 380"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 1
+        }
+      ],
+      "returns": [
+        {
+          "label": "Mask start (sec)",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "Mask end (sec)",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "component": "Slider"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "",
+      "code_snippets": {
+        "python": "from gradio_client import Client\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\tseconds_total=60,\n\tapi_name=\"/_update_mask_max\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/_update_mask_max\", {\n\t\tseconds_total: 60,\n});\n\nconsole.log(result.data);",
+        "bash": "curl -X POST http://localhost:7860/gradio_api/call/v2/_update_mask_max -s -H \"Content-Type: application/json\" \\\n  -d '{\"seconds_total\": 60}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/_update_mask_max/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /_update_mask_max '{\n  \"seconds_total\": 60\n}'\n"
+      }
+    },
+    "/_variant_change_advanced": {
+      "parameters": [
+        {
+          "label": "Model",
+          "parameter_name": "variant_key",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "medium",
+              "small-music",
+              "small-sfx"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['medium', 'small-music', 'small-sfx']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "medium"
+        }
+      ],
+      "returns": [
+        {
+          "label": "Seconds total \u00b7 model max 380s",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 380"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 1 and 380"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "value_25",
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox"
+        },
+        {
+          "label": "Mask start (sec)",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "component": "Slider"
+        },
+        {
+          "label": "Mask end (sec)",
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "component": "Slider"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "",
+      "code_snippets": {
+        "python": "from gradio_client import Client\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\tvariant_key=\"medium\",\n\tapi_name=\"/_variant_change_advanced\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/_variant_change_advanced\", {\n\t\tvariant_key: \"medium\",\n});\n\nconsole.log(result.data);",
+        "bash": "curl -X POST http://localhost:7860/gradio_api/call/v2/_variant_change_advanced -s -H \"Content-Type: application/json\" \\\n  -d '{\"variant_key\": \"medium\"}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/_variant_change_advanced/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /_variant_change_advanced '{\n  \"variant_key\": \"medium\"\n}'\n"
+      }
+    },
+    "/infer_advanced": {
+      "parameters": [
+        {
+          "label": "Model",
+          "parameter_name": "variant_key",
+          "parameter_has_default": true,
+          "parameter_default": "medium",
+          "type": {
+            "enum": [
+              "medium",
+              "small-music",
+              "small-sfx"
+            ],
+            "title": "Radio",
+            "type": "string"
+          },
+          "python_type": {
+            "type": "Literal['medium', 'small-music', 'small-sfx']",
+            "description": ""
+          },
+          "component": "Radio",
+          "example_input": "medium"
+        },
+        {
+          "label": "parameter_25",
+          "parameter_name": "prompt",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox",
+          "example_input": "Hello!!"
+        },
+        {
+          "label": "parameter_26",
+          "parameter_name": "negative_prompt",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "type": "string"
+          },
+          "python_type": {
+            "type": "str",
+            "description": ""
+          },
+          "component": "Textbox",
+          "example_input": "Hello!!"
+        },
+        {
+          "label": "Seconds total \u00b7 model max 380s",
+          "parameter_name": "duration",
+          "parameter_has_default": true,
+          "parameter_default": 60,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 380"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 1
+        },
+        {
+          "label": "Steps",
+          "parameter_name": "steps",
+          "parameter_has_default": true,
+          "parameter_default": 8,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 1 and 500"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 1
+        },
+        {
+          "label": "CFG scale",
+          "parameter_name": "cfg_scale",
+          "parameter_has_default": true,
+          "parameter_default": 1.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 25.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "Sampler type",
+          "parameter_name": "sampler_type",
+          "parameter_has_default": true,
+          "parameter_default": "pingpong",
+          "type": {
+            "type": "string",
+            "enum": [
+              "pingpong",
+              "euler",
+              "rk4",
+              "dpmpp"
+            ]
+          },
+          "python_type": {
+            "type": "Literal['pingpong', 'euler', 'rk4', 'dpmpp']",
+            "description": ""
+          },
+          "component": "Dropdown",
+          "example_input": "pingpong"
+        },
+        {
+          "label": "Seed (set to -1 for random seed)",
+          "parameter_name": "seed",
+          "parameter_has_default": true,
+          "parameter_default": -1,
+          "type": {
+            "type": "integer"
+          },
+          "python_type": {
+            "type": "int",
+            "description": ""
+          },
+          "component": "Number",
+          "example_input": 3
+        },
+        {
+          "label": "Sigma max",
+          "parameter_name": "sigma_max",
+          "parameter_has_default": true,
+          "parameter_default": 1.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 1.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "APG scale",
+          "parameter_name": "apg_scale",
+          "parameter_has_default": true,
+          "parameter_default": 1.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 1.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "Duration padding (sec)",
+          "parameter_name": "duration_padding_sec",
+          "parameter_has_default": true,
+          "parameter_default": 6.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 30.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "Cut to seconds total",
+          "parameter_name": "cut_to_seconds_total",
+          "parameter_has_default": true,
+          "parameter_default": true,
+          "type": {
+            "type": "boolean"
+          },
+          "python_type": {
+            "type": "bool",
+            "description": ""
+          },
+          "component": "Checkbox",
+          "example_input": true
+        },
+        {
+          "label": "Init audio",
+          "parameter_name": "init_audio",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        },
+        {
+          "label": "Init noise level",
+          "parameter_name": "init_noise_level",
+          "parameter_has_default": true,
+          "parameter_default": 0.9,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.01 and 1.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.01
+        },
+        {
+          "label": "Inpaint audio",
+          "parameter_name": "inpaint_audio",
+          "parameter_has_default": false,
+          "parameter_default": null,
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "component": "Audio",
+          "example_input": {
+            "path": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav",
+            "meta": {
+              "_type": "gradio.FileData"
+            },
+            "orig_name": "audio_sample.wav",
+            "url": "https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav"
+          }
+        },
+        {
+          "label": "Mask start (sec)",
+          "parameter_name": "mask_start_sec",
+          "parameter_has_default": true,
+          "parameter_default": 0.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "Mask end (sec)",
+          "parameter_name": "mask_end_sec",
+          "parameter_has_default": true,
+          "parameter_default": 0.0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0.0 and 380.0"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0.0
+        },
+        {
+          "label": "Spec preview every N steps (0 = off)",
+          "parameter_name": "preview_every",
+          "parameter_has_default": true,
+          "parameter_default": 0,
+          "type": {
+            "type": "number",
+            "description": "numeric value between 0 and 100"
+          },
+          "python_type": {
+            "type": "float",
+            "description": ""
+          },
+          "component": "Slider",
+          "example_input": 0
+        }
+      ],
+      "returns": [
+        {
+          "label": "Output audio",
+          "type": {
+            "$defs": {
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              }
+            },
+            "properties": {
+              "path": {
+                "title": "Path",
+                "type": "string"
+              },
+              "url": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Url"
+              },
+              "size": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Size"
+              },
+              "orig_name": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Orig Name"
+              },
+              "mime_type": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Mime Type"
+              },
+              "is_stream": {
+                "default": false,
+                "title": "Is Stream",
+                "type": "boolean"
+              },
+              "meta": {
+                "$ref": "#/$defs/FileDataMeta"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "title": "FileData",
+            "type": "object",
+            "additional_description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed)."
+          },
+          "python_type": {
+            "type": "filepath",
+            "description": ""
+          },
+          "component": "Audio"
+        },
+        {
+          "label": "Output spectrogram",
+          "type": {
+            "$defs": {
+              "FileData": {
+                "description": "The FileData class is a subclass of the GradioModel class that represents a file object within a Gradio interface. It is used to store file data and metadata when a file is uploaded.\n\nAttributes:\n    path: The server file path where the file is stored.\n    url: The normalized server URL pointing to the file.\n    size: The size of the file in bytes.\n    orig_name: The original filename before upload.\n    mime_type: The MIME type of the file.\n    is_stream: Indicates whether the file is a stream.\n    meta: Additional metadata used internally (should not be changed).",
+                "properties": {
+                  "path": {
+                    "title": "Path",
+                    "type": "string"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "$ref": "#/$defs/FileDataMeta"
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "title": "FileData",
+                "type": "object"
+              },
+              "FileDataMeta": {
+                "properties": {
+                  "_type": {
+                    "const": "gradio.FileData",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "_type"
+                ],
+                "title": "FileDataMeta",
+                "type": "object"
+              },
+              "GalleryImage": {
+                "properties": {
+                  "image": {
+                    "$ref": "#/$defs/ImageData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "image"
+                ],
+                "title": "GalleryImage",
+                "type": "object"
+              },
+              "GalleryVideo": {
+                "properties": {
+                  "video": {
+                    "$ref": "#/$defs/FileData"
+                  },
+                  "caption": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "title": "Caption"
+                  }
+                },
+                "required": [
+                  "video"
+                ],
+                "title": "GalleryVideo",
+                "type": "object"
+              },
+              "ImageData": {
+                "description": "A local filepath or publicly available URL.",
+                "properties": {
+                  "path": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Path to a local file",
+                    "title": "Path"
+                  },
+                  "url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Publicly available url or base64 encoded image",
+                    "title": "Url"
+                  },
+                  "size": {
+                    "anyOf": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Size of image in bytes",
+                    "title": "Size"
+                  },
+                  "orig_name": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Original filename",
+                    "title": "Orig Name"
+                  },
+                  "mime_type": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "mime type of image",
+                    "title": "Mime Type"
+                  },
+                  "is_stream": {
+                    "default": false,
+                    "description": "Can always be set to False",
+                    "title": "Is Stream",
+                    "type": "boolean"
+                  },
+                  "meta": {
+                    "additionalProperties": true,
+                    "default": {
+                      "_type": "gradio.FileData"
+                    },
+                    "title": "Meta",
+                    "type": "object"
+                  }
+                },
+                "title": "ImageData",
+                "type": "object"
+              }
+            },
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/GalleryImage"
+                },
+                {
+                  "$ref": "#/$defs/GalleryVideo"
+                }
+              ]
+            },
+            "title": "GalleryData",
+            "type": "array",
+            "additional_description": null
+          },
+          "python_type": {
+            "type": "list[dict(image: filepath, caption: str | None) | dict(video: filepath, caption: str | None)]",
+            "description": ""
+          },
+          "component": "Gallery"
+        }
+      ],
+      "api_visibility": "public",
+      "description": "Full-featured handler used by the Advanced tab.",
+      "code_snippets": {
+        "python": "from gradio_client import Client, handle_file\n\nclient = Client(\"stabilityai/stable-audio-3\")\nresult = client.predict(\n\tvariant_key=\"medium\",\n\tprompt=\"Hello!!\",\n\tnegative_prompt=\"Hello!!\",\n\tduration=60,\n\tsteps=8,\n\tcfg_scale=1.0,\n\tsampler_type=\"pingpong\",\n\tseed=-1,\n\tsigma_max=1.0,\n\tapg_scale=1.0,\n\tduration_padding_sec=6.0,\n\tcut_to_seconds_total=True,\n\tinit_audio=handle_file('https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav'),\n\tinit_noise_level=0.9,\n\tinpaint_audio=handle_file('https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav'),\n\tmask_start_sec=0.0,\n\tmask_end_sec=0.0,\n\tpreview_every=0,\n\tapi_name=\"/infer_advanced\",\n)\nprint(result)",
+        "javascript": "import { Client } from \"@gradio/client\";\n\nconst response_0 = await fetch(\"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\");\nconst exampleAudio = await response_0.blob();\nconst response_1 = await fetch(\"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\");\nconst exampleAudio = await response_1.blob();\n\nconst client = await Client.connect(\"stabilityai/stable-audio-3\");\nconst result = await client.predict(\"/infer_advanced\", {\n\t\tvariant_key: \"medium\",\n\t\tprompt: \"Hello!!\",\n\t\tnegative_prompt: \"Hello!!\",\n\t\tduration: 60,\n\t\tsteps: 8,\n\t\tcfg_scale: 1.0,\n\t\tsampler_type: \"pingpong\",\n\t\tseed: -1,\n\t\tsigma_max: 1.0,\n\t\tapg_scale: 1.0,\n\t\tduration_padding_sec: 6.0,\n\t\tcut_to_seconds_total: true,\n\t\tinit_audio: exampleAudio,\n\t\tinit_noise_level: 0.9,\n\t\tinpaint_audio: exampleAudio,\n\t\tmask_start_sec: 0.0,\n\t\tmask_end_sec: 0.0,\n\t\tpreview_every: 0,\n});\n\nconsole.log(result.data);",
+        "bash": "FILE_PATH=$(curl -s -X POST http://localhost:7860/gradio_api/upload -F 'files=@/path/to/your/file' | tr -d '[]\" ')\n\ncurl -X POST http://localhost:7860/gradio_api/call/v2/infer_advanced -s -H \"Content-Type: application/json\" \\\n  -d '{\"variant_key\": \"medium\", \"prompt\": \"Hello!!\", \"negative_prompt\": \"Hello!!\", \"duration\": 60, \"steps\": 8, \"cfg_scale\": 1.0, \"sampler_type\": \"pingpong\", \"seed\": -1, \"sigma_max\": 1.0, \"apg_scale\": 1.0, \"duration_padding_sec\": 6.0, \"cut_to_seconds_total\": true, \"init_audio\": {\"path\": \"'$FILE_PATH'\", \"meta\": {\"_type\": \"gradio.FileData\"}}, \"init_noise_level\": 0.9, \"inpaint_audio\": {\"path\": \"'$FILE_PATH'\", \"meta\": {\"_type\": \"gradio.FileData\"}}, \"mask_start_sec\": 0.0, \"mask_end_sec\": 0.0, \"preview_every\": 0}' \\\n  | awk -F'\"' '{ print $4}' \\\n  | read EVENT_ID; curl -N http://localhost:7860/gradio_api/call/infer_advanced/$EVENT_ID",
+        "cli": "{command} predict stabilityai/stable-audio-3 /infer_advanced '{\n  \"variant_key\": \"medium\",\n  \"prompt\": \"Hello!!\",\n  \"negative_prompt\": \"Hello!!\",\n  \"duration\": 60,\n  \"steps\": 8,\n  \"cfg_scale\": 1.0,\n  \"sampler_type\": \"pingpong\",\n  \"seed\": -1,\n  \"sigma_max\": 1.0,\n  \"apg_scale\": 1.0,\n  \"duration_padding_sec\": 6.0,\n  \"cut_to_seconds_total\": true,\n  \"init_audio\": {\n    \"path\": \"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\",\n    \"meta\": {\n      \"_type\": \"gradio.FileData\"\n    }\n  },\n  \"init_noise_level\": 0.9,\n  \"inpaint_audio\": {\n    \"path\": \"https://github.com/gradio-app/gradio/raw/main/test/test_files/audio_sample.wav\",\n    \"meta\": {\n      \"_type\": \"gradio.FileData\"\n    }\n  },\n  \"mask_start_sec\": 0.0,\n  \"mask_end_sec\": 0.0,\n  \"preview_every\": 0\n}'\n"
+      }
+    }
+  },
+  "unnamed_endpoints": {}
+}

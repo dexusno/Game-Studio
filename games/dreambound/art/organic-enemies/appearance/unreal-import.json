@@ -1,0 +1,160 @@
+{
+  "complete": true,
+  "scope": "/Game/Art/OrganicEnemies",
+  "assets": [
+    {
+      "asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_Briarhide_Dread.SK_OE_Briarhide_Dread",
+      "source_fbx_sha256": "6257183d0b07c7bfbc190bbcd09121f7faa9e16b148ab4f12022c286fcafc8e2",
+      "source_glb_sha256": "f64379b43b30cc08b8e7cc75b812310f5db9e2b333cc62babc548e26033423bc",
+      "dimensions_cm": [
+        201.40640258789062,
+        107.87104034423828,
+        220.24811433255672
+      ],
+      "source_prep_sha256": "73c6bd74d41737a4fb2664f6a7e1b9ebdd54cdcbeefc1991b84885e393a5fe52",
+      "runtime_triangles_from_blender": 202036,
+      "bone_count": 38,
+      "validated_bone_parent_links": 37,
+      "rig_variant": "dread",
+      "lod_count": 1,
+      "materials": 9,
+      "assigned_materials": [
+        {
+          "slot": "M_OE_Briarhide",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Briarhide.M_OE_Briarhide"
+        },
+        {
+          "slot": "M_OE_Oral",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Oral_Briarhide.M_OE_Oral_Briarhide"
+        },
+        {
+          "slot": "M_OE_Tooth",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Tooth_Briarhide.M_OE_Tooth_Briarhide"
+        },
+        {
+          "slot": "M_OE_Tongue",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Tongue_Briarhide.M_OE_Tongue_Briarhide"
+        },
+        {
+          "slot": "M_OE_DreadSkin",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSkin_Briarhide.M_OE_DreadSkin_Briarhide"
+        },
+        {
+          "slot": "M_OE_DreadSocket",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSocket_Briarhide.M_OE_DreadSocket_Briarhide"
+        },
+        {
+          "slot": "M_OE_DreadEye",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadEye_Briarhide.M_OE_DreadEye_Briarhide"
+        },
+        {
+          "slot": "M_OE_DreadIris",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadIris_Briarhide.M_OE_DreadIris_Briarhide"
+        },
+        {
+          "slot": "M_OE_DreadPupil",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadPupil_Briarhide.M_OE_DreadPupil_Briarhide"
+        }
+      ],
+      "runtime_mesh_yaw": -90
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Meshes/SK_OE_MireSeer_Dread.SK_OE_MireSeer_Dread",
+      "source_fbx_sha256": "cff792dc1cf21a5d909bde0375de605dc07abb302d718594d5ed20260f6b2456",
+      "source_glb_sha256": "53e775f931b55f17affe99f928632a09021c9c27eb10d3edae7c9391e6640862",
+      "dimensions_cm": [
+        135.0663299560547,
+        66.67898941040039,
+        220.12190448120236
+      ],
+      "source_prep_sha256": "9171845d84b5e7e64c6a83255b6b8872e40b048dae9a0c8436d3eca72b323cd4",
+      "runtime_triangles_from_blender": 183783,
+      "bone_count": 43,
+      "validated_bone_parent_links": 42,
+      "rig_variant": "dread",
+      "lod_count": 1,
+      "materials": 9,
+      "assigned_materials": [
+        {
+          "slot": "M_OE_MireSeer",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_MireSeer.M_OE_MireSeer"
+        },
+        {
+          "slot": "M_OE_Oral",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Oral_MireSeer.M_OE_Oral_MireSeer"
+        },
+        {
+          "slot": "M_OE_Tooth",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Tooth_MireSeer.M_OE_Tooth_MireSeer"
+        },
+        {
+          "slot": "M_OE_Tongue",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_Tongue_MireSeer.M_OE_Tongue_MireSeer"
+        },
+        {
+          "slot": "M_OE_DreadSkin",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSkin_MireSeer.M_OE_DreadSkin_MireSeer"
+        },
+        {
+          "slot": "M_OE_DreadSocket",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSocket_MireSeer.M_OE_DreadSocket_MireSeer"
+        },
+        {
+          "slot": "M_OE_DreadEye",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadEye_MireSeer.M_OE_DreadEye_MireSeer"
+        },
+        {
+          "slot": "M_OE_DreadIris",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadIris_MireSeer.M_OE_DreadIris_MireSeer"
+        },
+        {
+          "slot": "M_OE_DreadPupil",
+          "material": "/Game/Art/OrganicEnemies/Materials/M_OE_DreadPupil_MireSeer.M_OE_DreadPupil_MireSeer"
+        }
+      ],
+      "runtime_mesh_yaw": -90
+    }
+  ],
+  "textures": [
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_Briarhide_Base.T_OE_Briarhide_Base",
+      "source_sha256": "df01f0b75e590f4e117840e37923eeced9e0eba3173c38fda84339ac06ae8bbd",
+      "srgb": true
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_Briarhide_MR.T_OE_Briarhide_MR",
+      "source_sha256": "e466660f92d30152314d2b9c3f0ee7233f838f225765b402a4fc41bf07a8481d",
+      "srgb": false
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_MireSeer_Base.T_OE_MireSeer_Base",
+      "source_sha256": "6ff77903db4e25f0357a7a45e896cd5338139c771c0f3ef95af76a27d7fa3530",
+      "srgb": true
+    },
+    {
+      "asset": "/Game/Art/OrganicEnemies/Textures/T_OE_MireSeer_MR.T_OE_MireSeer_MR",
+      "source_sha256": "93d9d6404ac3d66f7eeabc53f72b3bcda5f8e5d9c7978f2876340f21adc8079a",
+      "srgb": false
+    }
+  ],
+  "materials": [
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Briarhide.M_OE_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Oral_Briarhide.M_OE_Oral_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Tooth_Briarhide.M_OE_Tooth_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Tongue_Briarhide.M_OE_Tongue_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSkin_Briarhide.M_OE_DreadSkin_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSocket_Briarhide.M_OE_DreadSocket_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadEye_Briarhide.M_OE_DreadEye_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadIris_Briarhide.M_OE_DreadIris_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadPupil_Briarhide.M_OE_DreadPupil_Briarhide",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_MireSeer.M_OE_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Oral_MireSeer.M_OE_Oral_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Tooth_MireSeer.M_OE_Tooth_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_Tongue_MireSeer.M_OE_Tongue_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSkin_MireSeer.M_OE_DreadSkin_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadSocket_MireSeer.M_OE_DreadSocket_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadEye_MireSeer.M_OE_DreadEye_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadIris_MireSeer.M_OE_DreadIris_MireSeer",
+    "/Game/Art/OrganicEnemies/Materials/M_OE_DreadPupil_MireSeer.M_OE_DreadPupil_MireSeer"
+  ]
+}

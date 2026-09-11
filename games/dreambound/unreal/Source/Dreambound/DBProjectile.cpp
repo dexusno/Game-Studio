@@ -3,7 +3,10 @@
 #include "DBCharacter.h"
 #include "DBEnemy.h"
 #include "DBGameMode.h"
+#include "DBOrganicFire.h"
 #include "DBThrownShield.h"
+#include "Components/AudioComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/StaticMesh.h"
@@ -11,6 +14,7 @@
 #include "EngineUtils.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
+#include "Sound/SoundBase.h"
 #include "UObject/ConstructorHelpers.h"
 
 ADBProjectile::ADBProjectile()
@@ -33,16 +37,40 @@ ADBProjectile::ADBProjectile()
     Visual->SetRelativeScale3D(FVector(0.28f, 0.22f, 0.22f));
     Streak->SetRelativeLocation(FVector(-33.f, 0.f, 0.f));
     Streak->SetRelativeScale3D(FVector(0.72f, 0.055f, 0.055f));
+    FireLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("FireLight"));
+    FireLight->SetupAttachment(Collision);
+    FireLight->SetCastShadows(false);
+    FireLight->SetIntensity(0.f);
+    FireLight->SetAttenuationRadius(220.f);
+    FireLight->SetLightColor(FLinearColor(1.f, 0.2f, 0.022f));
+    FlightAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("FlightAudio"));
+    FlightAudio->SetupAttachment(Collision);
+    FlightAudio->bAutoActivate = false;
+    ImpactAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("ImpactAudio"));
+    ImpactAudio->SetupAttachment(Collision);
+    ImpactAudio->bAutoActivate = false;
 }
 
 void ADBProjectile::BeginPlay()
 {
     Super::BeginPlay();
-    PrepareVisuals();
 }
 
 void ADBProjectile::PrepareVisuals()
 {
+    if (bOrganicFire)
+    {
+        FireMaterial = DBOrganicFire::Prepare(Visual, this);
+        Streak->SetVisibility(false);
+        FlightAudio->SetSound(LoadObject<USoundBase>(nullptr,
+            TEXT("/Game/Audio/OrganicFire/S_CasterFlightLoop.S_CasterFlightLoop")));
+        for (const TCHAR* Name : {TEXT("S_CasterImpactA"), TEXT("S_CasterImpactB")})
+        {
+            const FString Path = FString::Printf(TEXT("/Game/Audio/OrganicFire/%s.%s"), Name, Name);
+            if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *Path)) FireImpacts.Add(Sound);
+        }
+        return;
+    }
     Streak->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cube.Cube")));
     if (UStaticMesh* Crystal = LoadObject<UStaticMesh>(nullptr,
         TEXT("/Game/Art/PreferredCombat/Meshes/SM_Crystal.SM_Crystal")))
@@ -83,10 +111,18 @@ void ADBProjectile::Initialize(FVector Direction, float Speed, float Damage, boo
     Streak->SetVisibility(true);
     Visual->SetRelativeScale3D(BaseVisualScale);
     const ADBEnemy* Enemy = Cast<ADBEnemy>(OwnerEnemy);
+    bOrganicFire = Enemy && Enemy->Kind == EDBEnemyKind::Caster;
     if (Enemy && Enemy->RoomId >= 0) SpawnRoomId = Enemy->RoomId;
     else if (const ADBGameMode* Mode = Cast<ADBGameMode>(GetWorld()->GetAuthGameMode())) SpawnRoomId = Mode->CurrentRoomId;
     SetActorRotation(Velocity.Rotation());
+    PrepareVisuals();
     bInitialized = true;
+    if (bOrganicFire)
+    {
+        UpdateFireVisuals();
+        FlightAudio->SetVolumeMultiplier(0.52f);
+        FlightAudio->Play();
+    }
     if (GlowMaterial)
     {
         GlowMaterial->SetVectorParameterValue(TEXT("Color"), Color);
@@ -101,9 +137,43 @@ void ADBProjectile::Impact(FVector Location)
     Velocity = FVector::ZeroVector;
     SetActorLocation(Location, false);
     Streak->SetVisibility(false);
+    if (bOrganicFire)
+    {
+        LifeRemaining = 0.62f;
+        FlightAudio->FadeOut(0.045f, 0.f);
+        if (!FireImpacts.IsEmpty())
+        {
+            ImpactAudio->SetSound(FireImpacts[GetUniqueID() % FireImpacts.Num()]);
+            ImpactAudio->SetVolumeMultiplier(0.8f);
+            ImpactAudio->Play();
+        }
+        UpdateFireVisuals();
+        return;
+    }
     LifeRemaining = 0.13f;
     // The stopped flash remains visible briefly; it cannot deal another contact.
     if (GlowMaterial) GlowMaterial->SetVectorParameterValue(TEXT("Color"), FLinearColor(1.f, 0.76f, 0.4f) * 2.f);
+}
+
+void ADBProjectile::UpdateFireVisuals()
+{
+    const float Seed = static_cast<float>(GetUniqueID() % 971) * 0.71f;
+    if (bImpacted)
+    {
+        const float Age = 1.f - FMath::Clamp(LifeRemaining / 0.62f, 0.f, 1.f);
+        const float Size = FMath::Lerp(31.f, 73.f, FMath::Sqrt(Age));
+        const float Glow = 1.f - FMath::SmoothStep(0.06f, 0.58f, Age);
+        DBOrganicFire::Draw(Visual, FireMaterial, GetActorLocation(), GetActorRotation(),
+            FVector(Size, Size * 0.82f, Size * 0.95f), VisualTime, 1.f - Age, 2.f, Seed, Glow);
+        FireLight->SetIntensity(720.f * Glow * (1.f - Age));
+    }
+    else
+    {
+        // The luminous head follows the swept collision center; its eroded tail trails behind.
+        DBOrganicFire::Draw(Visual, FireMaterial, GetActorLocation() - GetActorForwardVector() * 38.f,
+            GetActorRotation(), FVector(75.f, 34.f, 34.f), VisualTime, 1.f, 1.f, Seed);
+        FireLight->SetIntensity(420.f * (1.f + 0.1f * FMath::Sin(VisualTime * 27.f + Seed)));
+    }
 }
 
 void ADBProjectile::Tick(float DeltaSeconds)
@@ -116,12 +186,17 @@ void ADBProjectile::Tick(float DeltaSeconds)
         if (Mode->bChoosingReward || Mode->bTitle || Mode->bWon || Mode->bDefeated
             || (SpawnRoomId != INDEX_NONE && Mode->CurrentRoomId != SpawnRoomId))
         { Destroy(); return; }
-        if (Mode->bPaused || Mode->bShowingBuild) return;
+        const bool bPaused = Mode->bPaused || Mode->bShowingBuild;
+        FlightAudio->SetPaused(bPaused);
+        ImpactAudio->SetPaused(bPaused);
+        if (bPaused) return;
     }
     LifeRemaining -= DeltaSeconds;
     if (LifeRemaining <= 0.f) { Destroy(); return; }
+    VisualTime += DeltaSeconds;
     if (bImpacted)
     {
+        if (bOrganicFire) { UpdateFireVisuals(); return; }
         const float Fade = FMath::Clamp(LifeRemaining / 0.13f, 0.f, 1.f);
         const float Expansion = 1.f + (1.f - Fade) * 2.f;
         Visual->SetRelativeScale3D(BaseVisualScale * Expansion);
@@ -129,10 +204,12 @@ void ADBProjectile::Tick(float DeltaSeconds)
         if (GlowMaterial) GlowMaterial->SetVectorParameterValue(TEXT("Color"), BoltColor * (Fade * 2.5f));
         return;
     }
-    VisualTime += DeltaSeconds;
-    Visual->AddLocalRotation(FRotator(0.f, 0.f, DeltaSeconds * 210.f));
-    Visual->SetRelativeLocation(Visual->GetRelativeRotation().RotateVector(VisualCenterOffset));
-    Streak->SetRelativeScale3D(FVector(0.66f + FMath::Sin(VisualTime * 25.f) * 0.08f, 0.055f, 0.055f));
+    if (!bOrganicFire)
+    {
+        Visual->AddLocalRotation(FRotator(0.f, 0.f, DeltaSeconds * 210.f));
+        Visual->SetRelativeLocation(Visual->GetRelativeRotation().RotateVector(VisualCenterOffset));
+        Streak->SetRelativeScale3D(FVector(0.66f + FMath::Sin(VisualTime * 25.f) * 0.08f, 0.055f, 0.055f));
+    }
 
     const FVector Start = GetActorLocation();
     const FVector End = Start + Velocity * DeltaSeconds;
@@ -180,4 +257,5 @@ void ADBProjectile::Tick(float DeltaSeconds)
         return;
     }
     SetActorLocation(End, false);
+    if (bOrganicFire) UpdateFireVisuals();
 }

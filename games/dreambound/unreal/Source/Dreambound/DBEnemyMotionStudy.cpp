@@ -271,7 +271,8 @@ void ADBEnemyMotionStudy::Finish(bool bAborted)
     Report->SetStringField(TEXT("creature"),KindName); Report->SetStringField(TEXT("view"),ViewName);
     Report->SetStringField(TEXT("rig"),FParse::Param(FCommandLine::Get(),TEXT("DBLegacyCreatureRig"))
         ? TEXT("legacy") : FParse::Param(FCommandLine::Get(),TEXT("DBAnatomyCreatureRig"))
-        || !FParse::Param(FCommandLine::Get(),TEXT("DBPerformanceCreatureRig")) ? TEXT("anatomy") : TEXT("performance"));
+        ? TEXT("anatomy") : FParse::Param(FCommandLine::Get(),TEXT("DBPerformanceCreatureRig"))
+        ? TEXT("performance") : TEXT("dread"));
     Report->SetStringField(TEXT("target_path"),bPassiveIdle ? TEXT("passive-idle")
         : KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
     Report->SetNumberField(TEXT("scripted_player_close_relocation_frame"),BossCloseTargetFrame);
