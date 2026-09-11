@@ -784,7 +784,19 @@ void ADBEnemy::UpdateCasterCombat(float DeltaSeconds)
     {
         WithdrawCooldown = 6.5f;
         bNeedsReposition = false;
-        ChooseCasterPosition(ECasterIntent::Withdraw);
+        const bool bAlreadySpaced = Distance > (Health < MaxHealth*.45f ? 970.f : 760.f);
+        if (bAlreadySpaced)
+        {
+            // Already at useful range: leave the line that just hit us instead
+            // of turning away, noticing enough distance and turning straight back.
+            if (EvadeCooldown <= 0.f)
+            {
+                IncomingShieldDirection = LastHitDirection;
+                EvadeCooldown = 4.5f;
+                ChooseCasterPosition(ECasterIntent::Evade);
+            }
+        }
+        else ChooseCasterPosition(ECasterIntent::Withdraw);
     }
     if (bRepositioning)
     {
@@ -2046,7 +2058,7 @@ FDBEnemyAnimationDebug ADBEnemy::GetAnimationDebugState() const
         case ECasterIntent::Hunt: Result.combat_intent = TEXT("FindShot"); break;
         case ECasterIntent::Flank: Result.combat_intent = TEXT("FlankShield"); break;
         case ECasterIntent::Withdraw: Result.combat_intent = TEXT("CreateSpace"); break;
-        case ECasterIntent::Evade: Result.combat_intent = TEXT("EvadeThrow"); break;
+        case ECasterIntent::Evade: Result.combat_intent = TEXT("LeaveFireLine"); break;
         default: Result.combat_intent = TEXT("HoldShot"); break;
         }
         if (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack) Result.combat_intent = TEXT("CommittedCast");

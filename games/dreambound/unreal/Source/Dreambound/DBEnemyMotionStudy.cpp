@@ -308,7 +308,11 @@ void ADBEnemyMotionStudy::UpdateCombatPressure(float DeltaSeconds)
 {
     if (Creature->bDead) return;
     if (AController* Controller = Player->GetController())
-        Controller->SetControlRotation((Creature->GetActorLocation() + FVector(0,0,15) - Player->GetPawnViewLocation()).Rotation());
+        Controller->SetControlRotation((Creature->GetActorLocation() + FVector(0,0,15) - Player->ViewCamera->GetComponentLocation()).Rotation());
+    // The side-study camera is the view target. Refresh the pawn camera just
+    // as normal first-person play does, since real shield aim reads it.
+    FMinimalViewInfo PlayerView;
+    Player->ViewCamera->GetCameraView(DeltaSeconds,PlayerView);
     if (Time >= 1.f && !bPressureGuardStarted) { Player->PressGuard(); bPressureGuardStarted = true; }
     if (Time >= 6.f && !bPressureGuardReleased) { Player->ReleaseGuard(); bPressureGuardReleased = true; }
     if (Time >= 1.f && Time < 6.f && Player->bGuarding) PressureGuardSeconds += DeltaSeconds;
@@ -320,7 +324,7 @@ void ADBEnemyMotionStudy::UpdateCombatPressure(float DeltaSeconds)
         Player->SetActorLocation(FMath::VInterpConstantTo(Player->GetActorLocation(),Goal,DeltaSeconds,Time < 12.f ? 440.f : 340.f),true);
     }
     // Select exactly one real piece. A committed caster is never forced back to movement.
-    if (Time >= 12.f && Time < 19.f && PressureThrowTime < 0.f && PressureChargeTime < 0.f
+    if (Time >= 17.6f && Time < 19.f && PressureThrowTime < 0.f && PressureChargeTime < 0.f
         && Creature->Phase == EDBEnemyPhase::Approach
         && FVector::DotProduct(Creature->GetActorForwardVector(),
             (Player->GetActorLocation()-Creature->GetActorLocation()).GetSafeNormal2D()) > .65f
@@ -455,8 +459,8 @@ void ADBEnemyMotionStudy::Finish(bool bAborted)
         : KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
     if (bCombatPressure)
     {
-        Report->SetStringField(TEXT("target_path"),TEXT("combat-pressure-v1"));
-        Report->SetStringField(TEXT("scope"),TEXT("Ordinary non-practice caster AI; protected scripted player holds real guard 1-6s, pursues 6-12s, opens spacing 12-18s, attempts one real piece throw during Approach 12-19s. Caster receives one synthetic 18-damage contact at 20s, followed by time to reengage. Movement is swept; no enemy phase/collision override or enemy invulnerability. Read event fields for achieved coverage. Not ordinary player input or a difficulty/performance benchmark."));
+        Report->SetStringField(TEXT("target_path"),TEXT("combat-pressure-v2"));
+        Report->SetStringField(TEXT("scope"),TEXT("Ordinary non-practice caster AI; protected scripted player holds real guard 1-6s, pursues 6-12s, opens 950cm spacing 12-18s, attempts one real piece throw during Approach 17.6-19s with the normal pawn-camera aim update. Caster receives one synthetic 18-damage contact at 20s, followed by time to reengage. Movement is swept; no enemy phase/collision override or enemy invulnerability. Read event fields for achieved coverage. Not ordinary player input or a difficulty/performance benchmark."));
         Report->SetNumberField(TEXT("pressure_guard_seconds"),PressureGuardSeconds);
         Report->SetNumberField(TEXT("pressure_throw_seconds"),PressureThrowTime);
         Report->SetNumberField(TEXT("pressure_thrown_pieces"),PressureThrownPieces);
