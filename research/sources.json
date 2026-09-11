@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_on": "2026-09-06",
+  "updated_on": "2026-09-11",
   "notes": "Public discovery and validation entry points, not a category allowlist or promise of paid access. All trend subjects are eligible. Access refreshed for inspected sources in the 2026-09-06 next-game run; untested sources stay explicitly untested.",
   "sources": [
     {
@@ -182,6 +182,22 @@
       "purpose": "Verify CC0 terms for material, lighting and model inputs, separately from website images and branding.",
       "access": "Official page inspected on 2026-09-07. No assets downloaded or integrated.",
       "last_verified_on": "2026-09-07"
+    },
+    {
+      "id": "gamediscover-primary-interviews",
+      "name": "GameDiscoverCo developer and publisher interviews",
+      "url": "https://newsletter.gamediscover.co/",
+      "purpose": "Find attributed sales disclosures, production duration, distribution context and accounting definitions; distinguish actual disclosures from modeled estimates.",
+      "access": "Public Gnorp and SUMMERHOUSE interviews inspected in 2026-09-11 small-game-income run.",
+      "last_verified_on": "2026-09-11"
+    },
+    {
+      "id": "steam-annual-genre-study",
+      "name": "How To Market A Game annual genre review",
+      "url": "https://howtomarketagame.com/2026/01/27/what-the-hell-happened-in-2025/",
+      "purpose": "Contextualize genre supply and review-threshold outcomes; not a revenue probability or review-to-sales model.",
+      "access": "Public 2025 study read 2026-09-11; sample date 2026-01-04.",
+      "last_verified_on": "2026-09-11"
     }
   ]
 }

@@ -1,0 +1,103 @@
+{
+  "date": "2026-09-11",
+  "currency": "NOK",
+  "target_cash_profit_per_game": 20000,
+  "direct_cost_allowance": 2000,
+  "store_share": 0.3,
+  "steam_fee_recovery_credited": 0,
+  "definition": "Scenario only. Direct cost allowance includes fee reserve and incremental project costs; excludes personal tax and owner wage. Existing subscriptions/hardware treated as sunk. Extra withholding and bank/FX charges not modeled. No sales forecast or live FX conversion.",
+  "scenarios": {
+    "downside": {
+      "realization": 0.65,
+      "refund_rate": 0.15,
+      "effective_included_tax": 0.25
+    },
+    "base": {
+      "realization": 0.8,
+      "refund_rate": 0.08,
+      "effective_included_tax": 0.2
+    },
+    "favorable": {
+      "realization": 0.9,
+      "refund_rate": 0.05,
+      "effective_included_tax": 0.15
+    }
+  },
+  "results": [
+    {
+      "reference_price_nok": 29,
+      "downside": {
+        "contribution_per_attempted_purchase_nok": 8.9726,
+        "required_attempted_purchases": 2452
+      },
+      "base": {
+        "contribution_per_attempted_purchase_nok": 12.450667,
+        "required_attempted_purchases": 1767
+      },
+      "favorable": {
+        "contribution_per_attempted_purchase_nok": 15.092609,
+        "required_attempted_purchases": 1458
+      }
+    },
+    {
+      "reference_price_nok": 39,
+      "downside": {
+        "contribution_per_attempted_purchase_nok": 12.0666,
+        "required_attempted_purchases": 1824
+      },
+      "base": {
+        "contribution_per_attempted_purchase_nok": 16.744,
+        "required_attempted_purchases": 1314
+      },
+      "favorable": {
+        "contribution_per_attempted_purchase_nok": 20.296957,
+        "required_attempted_purchases": 1084
+      }
+    },
+    {
+      "reference_price_nok": 49,
+      "downside": {
+        "contribution_per_attempted_purchase_nok": 15.1606,
+        "required_attempted_purchases": 1452
+      },
+      "base": {
+        "contribution_per_attempted_purchase_nok": 21.037333,
+        "required_attempted_purchases": 1046
+      },
+      "favorable": {
+        "contribution_per_attempted_purchase_nok": 25.501304,
+        "required_attempted_purchases": 863
+      }
+    },
+    {
+      "reference_price_nok": 69,
+      "downside": {
+        "contribution_per_attempted_purchase_nok": 21.3486,
+        "required_attempted_purchases": 1031
+      },
+      "base": {
+        "contribution_per_attempted_purchase_nok": 29.624,
+        "required_attempted_purchases": 743
+      },
+      "favorable": {
+        "contribution_per_attempted_purchase_nok": 35.91,
+        "required_attempted_purchases": 613
+      }
+    },
+    {
+      "reference_price_nok": 89,
+      "downside": {
+        "contribution_per_attempted_purchase_nok": 27.5366,
+        "required_attempted_purchases": 799
+      },
+      "base": {
+        "contribution_per_attempted_purchase_nok": 38.210667,
+        "required_attempted_purchases": 576
+      },
+      "favorable": {
+        "contribution_per_attempted_purchase_nok": 46.318696,
+        "required_attempted_purchases": 475
+      }
+    }
+  ]
+}

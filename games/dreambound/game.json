@@ -6,7 +6,7 @@
   "platforms": [
     "windows"
   ],
-  "stage": "prototype",
+  "stage": "parked",
   "created_on": "2026-09-08",
   "source_opportunity": "reactor-raider",
   "budget": {
@@ -25,10 +25,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T16:35:17+00:00",
-      "record_sha256": "e144d257342ae24a029512ae7e1d0cd29faf00756c22862edf595f37c31c5aee",
+      "captured_at": "2026-09-11T19:53:12+00:00",
+      "record_sha256": "3635ebfbc31b88b7e5b0866306f1f5ccebae14acaa0e7c27372b00725a5af723",
       "files": {
-        "games/dreambound/STATUS.md": "2d6efec040114156c73f7fe69def005f582bcb7547ac22e55ef427c2c641cb20",
+        "games/dreambound/STATUS.md": "9d32093e05d7572587a9e01945cdd824731d67018695fc5320c021e0fd6403ab",
         "games/dreambound/BRIEF.md": "d2bf1d088ff54574991e51f68b6434f7bc78e905740816b0242947e44394c70a",
         "games/dreambound/SHIELD-DESIGN.md": "891acd15aea07116ddba0bb101381bc2779628d5b0aa1fab49851cdfa532abf1",
         "games/dreambound/IMPLEMENTATION.md": "de2111b8773edbbaf9f3d2cafbbfe37b40e50115f218533d491f86a9dcbee1e6",

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "shortlisted",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "research_run": "research/runs/2026-09-11-small-game-income/README.md",
+  "updated_on": "2026-09-11",
+  "context": {
+    "entrypoint": "research/runs/2026-09-11-small-game-income/README.md",
+    "read_first": [
+      "research/runs/2026-09-11-small-game-income/REPORT.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-11T19:53:12+00:00",
+      "record_sha256": "4e20aa10432c8e11d621be553f3543e23cf16c5142f107c24d693087b14d92d3",
+      "files": {
+        "research/runs/2026-09-11-small-game-income/README.md": "54b00d1714a7b844777af31e8419c89aaf8b4f802083565295ef503a82f70340",
+        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10"
+      }
+    }
+  },
+  "commercial_hypothesis": "Offline premium Windows. Target at least NOK 20,000 cash profit per game, before owner wage/personal tax. Only consider several games after actual results prove worthwhile. Price, production budget and sales unvalidated; no spending authorized.",
+  "evidence_limits": "Desk research. No playable prototype, paid demand for this exact hook, measured production speed, or owner acceptance. Working label, not cleared final title.",
+  "id": "magnet-sweep",
+  "title": "Magnet Sweep — research label",
+  "hook": "Sweep a magnet through a tray of scrap, separate two material types with a simple polarity change, and turn a small haul into a dramatic clearing sweep.",
+  "audience": "Players buying short, satisfying active incrementals with visible growth and a finite ending.",
+  "core_loop": "Sweep and collect; release into a furnace; buy a visibly different upgrade; clear the next bounded tray stage; finish a small visible restoration.",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 3
+  },
+  "evidence": [
+    {
+      "url": "https://steamcommunity.com/app/3769130/allnews/",
+      "accessed_on": "2026-09-11",
+      "kind": "reported",
+      "claim": "2025-08-16 Keep on Mining announcement reports over 100,000 copies and deliberate short-game scope. No development duration or net profit disclosed; not evidence for this specific magnet mechanic."
+    },
+    {
+      "url": "https://store.steampowered.com/app/3107330/",
+      "accessed_on": "2026-09-11",
+      "kind": "observed",
+      "claim": "Nodebuster US list USD 2.99 in timestamped run snapshot; reviews are not sales. Adjacent active incremental positioning."
+    }
+  ],
+  "risks": [
+    "Polarity could become busywork; its originality and fun are untested.",
+    "Realistic magnetism, piles and chains would break the small scope.",
+    "Pacing, art, saves, discovery and first-release setup may exceed five to eight intensive days.",
+    "Recent idle supply is crowded; one successful genre member does not predict our sales."
+  ],
+  "next_test": "If selected, cap first experiment at one intensive day: one tray, two materials, two visibly distinct upgrades, real ten-minute play and a fifteen-second gameplay clip. Seek understandable collection and voluntary continuation; no new content to rescue a weak action. No implementation authorized yet.",
+  "decision_reason": "First recommended experiment in the per-game income comparison, not a selected game. Fixed-view collection/progression differs from the held Scrap Swing transport loop.",
+  "scope_hypothesis": {
+    "core_days": "3–5",
+    "complete_candidate_days": "5–8",
+    "owner_hours": "4–6",
+    "price_usd": "2.99–4.99",
+    "note": "Unproven estimates, store lead time separate. Counts are ceilings: three material types, ten upgrades, three stages."
+  }
+}

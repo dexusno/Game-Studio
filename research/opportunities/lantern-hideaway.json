@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "shortlisted",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "research_run": "research/runs/2026-09-11-small-game-income/README.md",
+  "updated_on": "2026-09-11",
+  "context": {
+    "entrypoint": "research/runs/2026-09-11-small-game-income/README.md",
+    "read_first": [
+      "research/runs/2026-09-11-small-game-income/REPORT.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-11T19:53:12+00:00",
+      "record_sha256": "d983dde5d7dfcba3f195fee824e5edc1e5796053605d37cdeee5ff56b1c1747c",
+      "files": {
+        "research/runs/2026-09-11-small-game-income/README.md": "54b00d1714a7b844777af31e8419c89aaf8b4f802083565295ef503a82f70340",
+        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10"
+      }
+    }
+  },
+  "commercial_hypothesis": "Offline premium Windows. Target at least NOK 20,000 cash profit per game, before owner wage/personal tax. Only consider several games after actual results prove worthwhile. Price, production budget and sales unvalidated; no spending authorized.",
+  "evidence_limits": "Desk research. No playable prototype, paid demand for this exact hook, measured production speed, or owner acceptance. Working label, not cleared final title.",
+  "id": "lantern-hideaway",
+  "title": "Lantern Hideaway — research label",
+  "hook": "Find tiny moths in one dusk conservatory illustration; each discovery lights part of the scene until the whole shelter glows.",
+  "audience": "Players of inexpensive hidden-object and relaxing observation games.",
+  "core_loop": "Inspect and zoom; identify a recognizable target; click to collect and illuminate; use a hint when stuck; complete one scene.",
+  "scores": {
+    "demand": 2,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 3,
+    "distribution": 2
+  },
+  "evidence": [
+    {
+      "url": "https://steamcommunity.com/app/2313250/allnews/",
+      "accessed_on": "2026-09-11",
+      "kind": "reported",
+      "claim": "Travellin Cats February 2026 announcement says its games are main income; amount undisclosed. Paris is free and catalogue/DLC advantages do not establish per-title sales."
+    },
+    {
+      "url": "https://store.steampowered.com/app/1740240/",
+      "accessed_on": "2026-09-11",
+      "kind": "observed",
+      "claim": "100 hidden cups weak response and negative review sample identify ambiguous target recognition as a failure mode. Reviews do not establish financial failure."
+    }
+  ],
+  "risks": [
+    "A dense attractive illustration can take longer than the code.",
+    "Low prices require more copies and existing series have catalogue advantages.",
+    "No sales or fun evidence for this exact theme."
+  ],
+  "next_test": "If preferred, first make one final-looking section with fifteen targets, zoom, hint and light-up reward within six to ten production hours. Proceed only if recognition and artwork are strong enough; do not assume a finished hundred-target scene will be automatic.",
+  "decision_reason": "Conditional lowest-code alternative. Not selected; art productivity must be proved before claiming a three-to-five-day full product.",
+  "scope_hypothesis": {
+    "complete_candidate_days": "3–5 conditional on art test",
+    "owner_hours": "3–5",
+    "price_usd": "1.99–2.99"
+  }
+}

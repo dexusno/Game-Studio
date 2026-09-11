@@ -1,5 +1,10 @@
-# Cyborg between worlds — enemy presence and organic fire
-Updated 2026-09-11. Prototype. Owner Klaus. Internal identifier dreambound; final title undecided.
+# Cyborg between worlds — parked experiment
+Updated 2026-09-11. Parked. Owner Klaus. Internal identifier dreambound; final title undecided.
+
+## Governing owner decision — 2026-09-11
+Klaus enjoyed testing whether an attractive, functional FPS could be made, but has decided the time and workload are too high alongside a full-time job and other projects. Park further FPS production and preserve all source, assets, local packages and historical evidence. This supersedes the ordinary-play follow-ups and active implementation wording retained below. The latest delivered package remains 0.5.4-fire4; parking makes no new quality or playtest claim.
+
+The new assignment is comparative research into games that can be completed within a few days and plausibly earn at least NOK 20,000 in lifetime cash profit with low ongoing owner attention. Its ongoing record is research/runs/2026-09-11-small-game-income/README.md. No replacement game is selected. Next action for this game: none unless Klaus explicitly resumes it. Preserve unrelated input settings and original audio files.
 
 ## Current delivery — 0.5.4-fire4
 Klaus rejected stiff, awkward caster walking and eyes that had become invisible. He explicitly requested fiery eyes on the fire creature and glowing green eyes on the other. Windows Shipping **0.5.4-fire4**, source `8652d4c7e69d47b45398cf0c76bd86c017fe0619`, is now at `BuildOutput/OrganicFireAgility/Windows/Dreambound.exe`; both current launchers select it.

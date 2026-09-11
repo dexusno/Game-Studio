@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "reactor-raider",
   "title": "Cyborg between worlds — working concept",
-  "status": "selected",
+  "status": "held",
   "hook": "A first-person cyborg discovers its dreams reveal real worlds, reshapes one modular weapon/shield with their technology and magic, and chooses which abilities to carry into the next destination.",
   "audience": "Players seeking skilled aimed combat, transformative equipment, build discovery, exploration, meaningful achievements and varied expeditions.",
   "core_loop": "Explore a procedurally varied world, fight using freely chosen attacks and defense, earn ability-changing attachments, choose or discover synergies, defeat a guardian, preserve learned patterns and campaign milestones, and select active powers for a crossing.",
@@ -43,7 +43,7 @@
     "Procedural combinations, reaction chains, story persistence and interrupted reward/transition saves require actual testing."
   ],
   "next_test": "Assess the0.3.1 folding shield, full-charge payoff and useful melee. Establish a guided creation pipeline across distinct procedural biomes: first proposed Rodin/Blender asset trial must be inspected as actual Unreal geometry. A ruins kit is not the selected solution. Resume games/dreambound/STATUS.md.",
-  "decision_reason": "Klaus authorized the beta and rejected 0.1.0-beta2 after playing on 2026-09-08: generic gun-like combat, weak power/feedback and graphics far below anchor B. The project remains selected; the delivered approach is rejected. Antagonists and reasons for fighting require later story work, as requested.",
+  "decision_reason": "Klaus parks the FPS/cyborg-worlds experiment on 2026-09-11: workload and time do not fit his full-time job and other projects. Preserve the existing game and design; research few-day commercial games with a NOK 20,000+ lifetime cash-profit target. No replacement selected.",
   "research_run": "research/runs/2026-09-07-depth-reset/README.md",
   "engine_direction": "Unreal 5.8.2; first person, chosen by the owner",
   "scope_note": "Substantially greater ambition; no literal 10x multiplier, feature quota or hard development/owner-time cap. Several distinct worlds are the campaign direction; counts, transfer allowance and final length remain in refinement.",
@@ -74,7 +74,7 @@
     "current_design": "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md"
   },
   "identifier_note": "The reactor-raider id is preserved from the initial comparison; the working concept has evolved through explicit owner steering.",
-  "updated_on": "2026-09-08",
+  "updated_on": "2026-09-11",
   "art_workflow": {
     "decision_on": "2026-09-08",
     "authority": "Owner delegated workflow choice and reported Blender installed and Fusion 360 available",
@@ -95,11 +95,11 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-09T19:23:39+00:00",
-      "record_sha256": "6da29d380f8db7fb9398e65c22ee56cc9e62b9fea7966ccf13c5a65b38cb8983",
+      "captured_at": "2026-09-11T19:53:12+00:00",
+      "record_sha256": "2dbe1e472fc4b43eea9cc5a7b7626a778e24498a7a0e2757a3b4c9cca1b6b6cd",
       "files": {
-        "games/dreambound/STATUS.md": "99c641b4fe0c1ed34055f96aca71dc39b1ccf184f5aca366e3dd6931dc345195",
-        "studio/CHARTER.md": "9fa9488ab2cfc3a805fd8776dfdcc789f2afad25486a7c3f817a14f6b415aa0c",
+        "games/dreambound/STATUS.md": "9d32093e05d7572587a9e01945cdd824731d67018695fc5320c021e0fd6403ab",
+        "studio/CHARTER.md": "4dae3a688765e9a3c81f3343428e5511579954df39f5e579beb886aa3f278186",
         "research/runs/2026-09-07-depth-reset/cyborg-worlds-design.md": "cde9bab8f24d90be0443c2c696f231137e0fbd6fd5cb2fc40665ca8f39861e35",
         "research/runs/2026-09-07-depth-reset/weapon-shield-design.md": "20ddaad16ecc7565412d1e18a517b42d5ead3e1d82abfc3728256476af5e6d46",
         "research/runs/2026-09-07-depth-reset/attachment-catalogue.md": "3de36ae8ae888fdda29c88b56f209631ef13245de8d6cd3771f2f1347d4a2d75",
@@ -141,5 +141,11 @@
       "reason": "Owner rejected beta2 and clarified physical shield offense/recall with real attack-defense commitment. Preserve the broader selected game while replacing the failed combat/art approach. Antagonist and conflict development is explicitly deferred."
     }
   ],
-  "selected_game": "dreambound"
+  "selected_game": "dreambound",
+  "decisions": [
+    {
+      "date": "2026-09-11",
+      "decision": "Klaus parks the FPS/cyborg-worlds experiment on 2026-09-11: workload and time do not fit his full-time job and other projects. Preserve the existing game and design; research few-day commercial games with a NOK 20,000+ lifetime cash-profit target. No replacement selected."
+    }
+  ]
 }

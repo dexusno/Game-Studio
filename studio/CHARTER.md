@@ -14,6 +14,14 @@ For commercial scenarios show units, expected realized price, refunds, taxes col
 
 ## Quality
 
+### Current portfolio direction — 2026-09-11
+
+Klaus explicitly clarified the target during research: **NOK 20,000 profit per game**, with several games only if actual results prove the model profitable. It is not a portfolio-wide NOK 20,000 target. Test one release first and make later catalogue investment conditional on its economics and owner workload.
+
+Klaus enjoyed the FPS experiment but has decided its workload is too large for a non-coder working alone alongside a full-time job and other projects. Park the cyborg/worlds experiment and preserve its source, assets and evidence. The current assignment is research into small commercial games achievable within a few days, with low owner attention and ongoing support. Lifetime cash profit of NOK 20,000 or more per game is worthwhile; favor the intersection of demonstrated paid demand and feasible production. Avoid huge lore, intricate systems and hundreds of options. Existing Unreal, Blender, TRELLIS, Suno and ElevenLabs are available resources, not a requirement to use every tool. Additional tools may be considered, without an implied purchase authorization.
+
+This supersedes the previous complex-FPS direction as a portfolio requirement. The earlier quality and design choices below remain historical decisions for that parked experiment; they do not prohibit simpler mechanics, 2D, other engines or other viewpoints in this research. Attractive presentation and enjoyable, complete play still matter. No replacement game has been selected or authorized for implementation by this research request.
+
 The current owner direction, clarified in the 2026-09-07 Sixfold Recoil playtest, is substantially more ambitious games with challenge, learnable skill, tactical choices, interacting abilities/builds, exploration and meaningful progression. The comparison to "ten times the complexity" was explicitly illustrative, not a multiplier, feature quota, budget or deadline. Minimal one-attack arcade loops do not meet this portfolio target.
 
 Prioritize responsive play, skill and meaningful decisions, readable feedback, rewarding progression, and coherent visual/audio presentation. Internal technical probes may be rough. An owner-facing gameplay slice must represent the proposed game's decision space and first progression/reward loop; removing those systems can invalidate the playtest. Include enough interacting options to test the intended experience before expanding the full campaign.

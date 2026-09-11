@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "shortlisted",
+  "trend_stage": "unverified",
+  "confidence": "low",
+  "research_run": "research/runs/2026-09-11-small-game-income/README.md",
+  "updated_on": "2026-09-11",
+  "context": {
+    "entrypoint": "research/runs/2026-09-11-small-game-income/README.md",
+    "read_first": [
+      "research/runs/2026-09-11-small-game-income/REPORT.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-11T19:53:12+00:00",
+      "record_sha256": "e313f97327acb152e4570e5a96c0948356dfbdb6cef21e4d11d7d1efd67ab7f0",
+      "files": {
+        "research/runs/2026-09-11-small-game-income/README.md": "54b00d1714a7b844777af31e8419c89aaf8b4f802083565295ef503a82f70340",
+        "research/runs/2026-09-11-small-game-income/REPORT.md": "c5632ed43c3a71b1bf2e900cb531515481570dfc109032ce581ccffe4faeeb10"
+      }
+    }
+  },
+  "commercial_hypothesis": "Offline premium Windows. Target at least NOK 20,000 cash profit per game, before owner wage/personal tax. Only consider several games after actual results prove worthwhile. Price, production budget and sales unvalidated; no spending authorized.",
+  "evidence_limits": "Desk research. No playable prototype, paid demand for this exact hook, measured production speed, or owner acceptance. Working label, not cleared final title.",
+  "id": "night-inspection",
+  "title": "Night Inspection — research label",
+  "hook": "Inspect a familiar room against its reference state, detect the impossible change and decide whether to clear it for the next occupant.",
+  "audience": "Players of short atmospheric anomaly and inspection horror.",
+  "core_loop": "Learn the reference room; inspect one finite event; choose clear or reject; advance through a short shift; reach one ending.",
+  "scores": {
+    "demand": 3,
+    "distinctiveness": 2,
+    "fun_potential": 2,
+    "scope_fit": 2,
+    "distribution": 3
+  },
+  "evidence": [
+    {
+      "url": "https://bsky.app/profile/internationalcat.bsky.social/post/3ldln5yjfyk2n",
+      "accessed_on": "2026-09-11",
+      "kind": "reported",
+      "claim": "The Cabin Factory developer reports over 50,000 copies in five days on 2024-12-18. Development duration and platform split not established."
+    },
+    {
+      "url": "https://store.steampowered.com/app/2893680/",
+      "accessed_on": "2026-09-11",
+      "kind": "observed",
+      "claim": "Telephone Call has weak filtered Steam review response in the run snapshot, without a revenue claim."
+    }
+  ],
+  "risks": [
+    "Close established competition; distinguishing hook unvalidated.",
+    "Custom monsters, chase AI, mirrors or branching lore destroy the few-day envelope.",
+    "Short duration and ambiguous event rules can frustrate buyers and create refunds."
+  ],
+  "next_test": "If preferred, make one room with three test events and unambiguous inspect/clear decisions. Judge readability and tension in actual play before authoring up to twelve finite events.",
+  "decision_reason": "Retained 3D alternative, ranked behind active incremental and conditional hidden-object for workload. Not a resumption of the parked FPS or a selected game.",
+  "scope_hypothesis": {
+    "complete_candidate_days": "5–8 with suitable existing room assets",
+    "owner_hours": "4–6",
+    "price_usd": "2.99–3.99"
+  }
+}
