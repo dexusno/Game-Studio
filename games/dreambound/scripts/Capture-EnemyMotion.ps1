@@ -2,7 +2,7 @@ param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
  [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureAnatomy2',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
- [ValidateSet('Side','LowSide','Front','Player','Detail')][string]$View='Side',
+ [ValidateSet('Side','LowSide','Front','Player','Detail','Impact')][string]$View='Side',
  [ValidateSet('Default','Performance','Anatomy','Dread','Legacy')][string]$Rig='Default',
  [ValidateSet('Lit','BaseColor','Roughness','Specular')][string]$Surface='Lit',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
@@ -10,11 +10,16 @@ param(
  [ValidateRange(480,1600)][int]$Height=800,
  [ValidateRange(4,32)][int]$Seconds=32,
  [switch]$FootMarkers,
- [switch]$Idle
+ [switch]$Idle,
+ [switch]$WithAudio,
+ [switch]$PreviewAudio,
+ [switch]$PauseStudy
 )
 $ErrorActionPreference='Stop'
 if($FootMarkers -and $Build -ne 'Editor'){throw 'Foot markers require an Editor capture.'}
 if($Surface -ne 'Lit' -and $Build -ne 'Editor'){throw 'Surface diagnostics require an Editor capture.'}
+if($PreviewAudio -and ($Build -ne 'Editor' -or -not $WithAudio)){throw 'Private audio requires an Editor capture with WithAudio.'}
+if($PauseStudy -and -not $WithAudio){throw 'PauseStudy requires a real-time WithAudio capture.'}
 $motionGameRoot=Split-Path -Parent $PSScriptRoot
 $motionRepoRoot=[IO.Path]::GetFullPath((Join-Path $motionGameRoot '../..'))
 $motionCaptureRoot=[IO.Path]::GetFullPath($CaptureDirectory)
@@ -35,7 +40,10 @@ if(-not(Test-Path -LiteralPath $motionExecutable -PathType Leaf)){throw 'The sel
 $motionArguments+=@('-DBEnemyMotionStudy',('-DBCreature='+$Creature),('-DBCreatureView='+$View),'-DBSeed=552389',
  ('-DBCreatureStudySeconds='+$Seconds),
  '-DBSaveSlot=DreamboundQA_EnemyMotion',('-UserDir="'+$motionCaptureRoot+'/"'),('-abslog="'+$motionCaptureRoot+'/engine.log"'),
- '-windowed',('-ResX='+$Width),('-ResY='+$Height),'-ForceRes','-RenderOffscreen','-NoSound','-NoVSync','-unattended','-nop4','-nosplash')
+ '-windowed',('-ResX='+$Width),('-ResY='+$Height),'-ForceRes','-RenderOffscreen','-NoVSync','-unattended','-nop4','-nosplash')
+if($WithAudio){$motionArguments+='-DBCreatureStudyAudio'}else{$motionArguments+='-NoSound'}
+if($PreviewAudio){$motionArguments+='-DBOrganicFireAudioPreview'}
+if($PauseStudy){$motionArguments+='-DBCreatureStudyPause'}
 if($FootMarkers){$motionArguments+='-DBFootMarkers'}
 if($Idle){$motionArguments+='-DBCreatureStudyIdle'}
 if($Rig -eq 'Anatomy'){$motionArguments+='-DBAnatomyCreatureRig'}
@@ -44,7 +52,7 @@ if($Rig -eq 'Performance'){$motionArguments+='-DBPerformanceCreatureRig'}
 if($Rig -eq 'Legacy'){$motionArguments+='-DBLegacyCreatureRig'}
 if($Surface -ne 'Lit'){$motionArguments+=('-ExecCmds="viewmode VisualizeBuffer,r.BufferVisualizationTarget '+$Surface+'"')}
 $motionProcess=Start-Process -FilePath $motionExecutable -ArgumentList $motionArguments -WorkingDirectory (Split-Path -Parent $motionExecutable) -WindowStyle Hidden -PassThru
-$motionIdentity=@{build=$Build;creature=$Creature;view=$View;rig=$Rig;surface=$Surface;passive_idle=[bool]$Idle;pid=$motionProcess.Id;executable=$motionExecutable;
+$motionIdentity=@{build=$Build;creature=$Creature;view=$View;rig=$Rig;surface=$Surface;passive_idle=[bool]$Idle;audio=[bool]$WithAudio;private_audio_audition=[bool]$PreviewAudio;pause_study=[bool]$PauseStudy;pid=$motionProcess.Id;executable=$motionExecutable;
  executable_sha256=(Get-FileHash -LiteralPath $motionExecutable -Algorithm SHA256).Hash;
  captured_utc=(Get-Date).ToUniversalTime().ToString('o');arguments=$motionArguments}
 if($Build -eq 'Editor'){
@@ -59,6 +67,10 @@ $motionResultPath=Join-Path $motionCaptureRoot ('Saved/EnemyMotionStudy/'+$Creat
 if(-not(Test-Path -LiteralPath $motionResultPath)){throw 'The process did not produce a capture report. Inspect its engine.log.'}
 $motionResult=Get-Content -LiteralPath $motionResultPath -Raw | ConvertFrom-Json
 if(-not $motionResult.complete -or $motionResult.aborted){throw 'The motion study was incomplete.'}
+if($WithAudio){
+ $motionMix=Join-Path (Split-Path -Parent $motionResultPath) 'Mix.wav'
+ if(-not(Test-Path -LiteralPath $motionMix) -or (Get-Item -LiteralPath $motionMix).Length -lt 128){throw 'The real-time study did not export its audio mix.'}
+}
 if($Surface -ne 'Lit' -and (Select-String -LiteralPath (Join-Path $motionCaptureRoot 'engine.log') -Pattern 'view mode not recognized|Debug viewmodes not allowed' -Quiet)){
  throw 'The requested material diagnostic view was rejected; these frames are not a valid surface pass.'
 }

@@ -1,9 +1,8 @@
 {
   "date": "2026-09-11",
-  "status": "visual_candidate_reviewed_audio_unresolved",
+  "status": "visual_candidate_reviewed_private_audio_audition_pending_listening",
   "shipping_package_created": false,
   "owner_acceptance": false,
-  "editor_dll_sha256": "738a2470b31a72405805ed2901d387dacfffad53e2b3455e27df02e70e1ef56f",
   "performance_header_sha256": "f3556204088841bd3b91500e127aaec55b272ffa10b7d3c803d4186068f924eb",
   "fire_shader_sha256": "2085b8dcb2cefc5362bc811048996ce67d8dc2b2b8271d8b9cb50e1d1e1f3646",
   "studies": [
@@ -100,12 +99,103 @@
   "rejected": [
     "fire-v1-side: smooth glowing bulb",
     "dread-v1-melee-detail: invalid capture after failed import",
-    "dread-v2 captures: white vertex mask caused whole-body orange glow"
+    "dread-v2 captures: white vertex mask caused whole-body orange glow",
+    "audio-v1-player-pause: PNG screenshot cadence and larger sound offset superseded by JPEG/PCM inline v3",
+    "audio-v1-impact and audio-v2-impact-track: framing insufficient or obscured by foreground wall; not clear impact evidence"
   ],
   "remaining": [
-    "Actual listening decision for stronger sound source; no rejected/free-plan audio imported.",
-    "Integrate and hear synchronized charge/release/flight/impact in a playable private preview.",
-    "Verify audible cancellation on pause, death, inactive encounter and retry, plus a clear impact view.",
-    "Package combined result and obtain owner play feedback."
-  ]
+    "Listening decision on the existing synchronized sound audition, then necessary quality changes.",
+    "Death/encounter-change/retry audio cleanup remains unverified by a new runtime study; extra harness stopped at owner steering.",
+    "Deliver combined playable result with proportional verification; no new package yet."
+  ],
+  "visual_candidate_editor_dll_sha256": "738a2470b31a72405805ed2901d387dacfffad53e2b3455e27df02e70e1ef56f",
+  "private_audio_audition": {
+    "editor_dll_sha256": "6b648437a61a3ae9d9db448cd618f4f0c90d79cf678f60a216a02136cee6b20c",
+    "import_namespace": "/Game/DeveloperAuditions/OrganicFire",
+    "cooking_excluded": true,
+    "compression": "PCM",
+    "loading_behavior": "ForceInline",
+    "source_report": "assets/audio-organic-fire/candidate-stable-audio3/runtime-audition-report.json",
+    "source_count": 3,
+    "cue_count": 8,
+    "unique_renderings": 5,
+    "mix_audit": {
+      "private_path": ".local/organic-fire-review/audio-v3-inline-player/Saved/EnemyMotionStudy/Caster-Player/mix-audit.json",
+      "sha256": "521d0286d217621057c9968751d2e93288143bc63bd0103f8eeaa97621b70346"
+    },
+    "video": {
+      "private_path": ".local/organic-fire-review/organic-fire-audio-preview-v3.mp4",
+      "sha256": "63a5c84f0b73fb78ede4f67cac7479f0f69cb95ad6d275604d45a3a0862c7082"
+    },
+    "assembly_report": {
+      "private_path": ".local/organic-fire-review/organic-fire-audio-preview-v3.json",
+      "sha256": "05776dbcc9a63c4a6956d72b8d675f0e446f937fe23626c4763cf429bfcde5d2"
+    },
+    "master_mix": {
+      "path": ".local/organic-fire-review/audio-v3-inline-player/Saved/EnemyMotionStudy/Caster-Player/Mix.wav",
+      "sha256": "55e9a745ba0ed277fc9aed49b51e564b4cfeab2aea2eb117eb6a32d904549992",
+      "bytes": 2080812
+    },
+    "duration_seconds": 10.837333333333333,
+    "frames": 248,
+    "native_frames_visually_inspected": [
+      54,
+      73
+    ],
+    "fixed_frame_rate": false,
+    "sound_to_projectile_observation_offsets_seconds": [
+      0.06400000000000006,
+      0.021333666666666584,
+      -3.333333342681044e-07,
+      0.02133366666666703
+    ],
+    "controlled_pair_offset_reduction_seconds": [
+      0.1,
+      0.1
+    ],
+    "timing_scope": "Two comparable v2/v3 releases with identical waveforms and nearly identical JPEG capture cadence. PCM/ForceInline together removed 100ms of measured offset. Residual recorder-origin, mixer-clock and command-queue contributions remain unresolved; no sample-accurate synchronization or general latency claim.",
+    "pause": {
+      "start_seconds": 1.344,
+      "end_seconds": 2.176,
+      "frames": 39936,
+      "peak_dbfs": null,
+      "rms_dbfs": null,
+      "nonzero_channel_samples": 0,
+      "digital_silence": true
+    },
+    "peak_dbfs": -17.227393993062947,
+    "clipping_samples": 0,
+    "video_audio_processing": "No filters, gain changes, time stretching or retiming; original Mix.wav retained, AAC 256kbps delivery encoding.",
+    "owner_listening": "pending; the in-game video supersedes the isolated-clip question",
+    "agent_listened": false,
+    "naturalness_verified": false,
+    "release_clearance": "Commercial output distribution supported by published terms; perceptual acceptance remains pending.",
+    "playable_launcher": "scripts/Start-OrganicFirePreview.ps1",
+    "launcher_prerequisites_verified": true,
+    "ordinary_play_unverified": true,
+    "lifecycle_followup": "Not run; extra harness stopped after owner flagged excessive time spent on checks and documentation.",
+    "impact_review": {
+      "capture": {
+        "private_path": ".local/organic-fire-review/audio-v3-impact-track/Saved/EnemyMotionStudy/Caster-Impact/Capture.json",
+        "sha256": "5cbc4cb53357af504286d1a9aec0914b87335850b526884319ea986ea77f89d5"
+      },
+      "frames": 158,
+      "simulation_seconds": 7.016487121582031,
+      "tracked_projectile_impacted": true,
+      "native_frames_visually_inspected": [
+        78,
+        85
+      ],
+      "observation": "Actual projectile contact against paving/ledge produces a flare that decays into orange/brown soot. This is a world-contact view, not complete player-hit coverage.",
+      "video": {
+        "private_path": ".local/organic-fire-review/organic-fire-impact-preview-v3.mp4",
+        "sha256": "801cb637daacdf25775dead493fcc007f38c16d72fadb561d49b2af16e9e86d5"
+      },
+      "assembly_report": {
+        "private_path": ".local/organic-fire-review/organic-fire-impact-preview-v3.json",
+        "sha256": "f8c2502e25ae71d30a3df499e93d483a68395cbbbbce68d8820046b1d57c37f3"
+      }
+    },
+    "terms_review": "assets/audio-organic-fire/candidate-stable-audio3/README.md#license-evidence-and-scope"
+  }
 }

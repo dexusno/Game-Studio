@@ -63,10 +63,10 @@ void ADBProjectile::PrepareVisuals()
         FireMaterial = DBOrganicFire::Prepare(Visual, this);
         Streak->SetVisibility(false);
         FlightAudio->SetSound(LoadObject<USoundBase>(nullptr,
-            TEXT("/Game/Audio/OrganicFire/S_CasterFlightLoop.S_CasterFlightLoop")));
+            *DBOrganicFire::SoundPath(TEXT("S_CasterFlightLoop"))));
         for (const TCHAR* Name : {TEXT("S_CasterImpactA"), TEXT("S_CasterImpactB")})
         {
-            const FString Path = FString::Printf(TEXT("/Game/Audio/OrganicFire/%s.%s"), Name, Name);
+            const FString Path = DBOrganicFire::SoundPath(Name);
             if (USoundBase* Sound = LoadObject<USoundBase>(nullptr, *Path)) FireImpacts.Add(Sound);
         }
         return;

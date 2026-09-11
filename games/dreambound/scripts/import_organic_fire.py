@@ -77,28 +77,51 @@ def add_furnace_to_skin(mat,existing_glow):
     link(existing_glow,'',combined,'A');link(heat,'',combined,'B')
     output(combined,'',unreal.MaterialProperty.MP_EMISSIVE_COLOR)
 
-def import_audio():
+def import_audio(audition=False,candidate=False,owner_audio=False):
     folder=ROOT/'assets/audio-organic-fire'; metadata=folder/'audio-report.json'
+    destination=AUDIO
+    if audition or candidate:
+        folder=ROOT.parents[1]/'.local/organic-fire-review'/('audio-owner-fireball-v1' if owner_audio else 'audio-preview-v1')
+        metadata=folder/'audition-report.json'
+        if audition:destination='/Game/DeveloperAuditions/OrganicFire'
     if not metadata.is_file():
+        if audition or candidate:raise RuntimeError('Prepared sound candidate report is missing.')
         REPORT['audio_pending']='Audio author has not delivered audio-report.json yet.'
         return
     info=json.loads(metadata.read_text(encoding='utf-8-sig'))
+    audition_files={}
+    if audition or candidate:
+        if not info.get('complete') or info.get('acceptance')!='private-unaccepted-audition':
+            raise RuntimeError('The private audition has not completed its file preparation.')
+        audition_files={entry['name']:entry for entry in info['files']}
+        expected={'S_CasterIgnite','S_CasterFurnaceLoop','S_CasterReleaseA','S_CasterReleaseB','S_CasterReleaseC','S_CasterFlightLoop','S_CasterImpactA','S_CasterImpactB'}
+        if set(audition_files)!=expected:raise RuntimeError('Incomplete private audition palette.')
+        for name,entry in audition_files.items():
+            source=folder/(name+'.wav')
+            if entry['path']!=source.name or hashlib.sha256(source.read_bytes()).hexdigest()!=entry['sha256']:
+                raise RuntimeError('Private audition source mismatch: '+name)
+        REPORT['audio_acceptance']='Unaccepted listening candidate for a private playable build.' if candidate else 'Private listening evaluation only; excluded from packaged builds.'
     if 'rejected' in str(info.get('acceptance','')).lower():
         REPORT['audio_pending']='The authored draft was rejected by the owner; it is not imported.'
         return
-    LIB.make_directory(AUDIO)
-    attenuation_path=AUDIO+'/A_OrganicFire'
-    attenuation=LIB.load_asset(attenuation_path) if LIB.does_asset_exist(attenuation_path) else TOOLS.create_asset('A_OrganicFire',AUDIO,unreal.SoundAttenuation,unreal.SoundAttenuationFactory())
+    LIB.make_directory(destination)
+    attenuation_path=destination+'/A_OrganicFire'
+    attenuation=LIB.load_asset(attenuation_path) if LIB.does_asset_exist(attenuation_path) else TOOLS.create_asset('A_OrganicFire',destination,unreal.SoundAttenuation,unreal.SoundAttenuationFactory())
     settings=attenuation.get_editor_property('attenuation')
     settings.set_editor_property('spatialize',True);settings.set_editor_property('attenuate',True)
     settings.set_editor_property('attenuation_shape_extents',unreal.Vector(260,0,0));settings.set_editor_property('falloff_distance',2100)
     attenuation.set_editor_property('attenuation',settings);LIB.save_loaded_asset(attenuation,only_if_is_dirty=False)
     for source in sorted(folder.glob('S_*.wav')):
-        task=unreal.AssetImportTask();task.filename=str(source);task.destination_path=AUDIO;task.destination_name=source.stem
+        task=unreal.AssetImportTask();task.filename=str(source);task.destination_path=destination;task.destination_name=source.stem
         task.automated=task.replace_existing=task.save=True;TOOLS.import_asset_tasks([task])
-        sound=LIB.load_asset(AUDIO+'/'+source.stem)
+        sound=LIB.load_asset(destination+'/'+source.stem)
         if not isinstance(sound,unreal.SoundWave):raise RuntimeError('Organic sound import failed: '+source.stem)
+        # These compact transient cues should be available immediately at the
+        # physical release, without a streaming/decompression startup request.
+        sound.set_sound_asset_compression_type(unreal.SoundAssetCompressionType.PCM)
+        sound.set_editor_property('loading_behavior',unreal.SoundWaveLoadingBehavior.FORCE_INLINE)
         looping=source.stem in ('S_CasterFurnaceLoop','S_CasterFlightLoop')
+        if audition or candidate:looping=bool(audition_files[source.stem]['looping'])
         sound.set_editor_property('looping',looping)
         sound.set_editor_property('attenuation_settings',attenuation)
         concurrency=unreal.SoundConcurrencySettings();concurrency.set_editor_property('max_count',4 if looping else 6)
@@ -107,11 +130,18 @@ def import_audio():
         sound.set_editor_property('override_concurrency',True);sound.set_editor_property('concurrency_overrides',concurrency)
         sound.set_editor_property('priority',72.0 if 'Release' in source.stem else 65.0)
         LIB.save_loaded_asset(sound,only_if_is_dirty=False)
-        REPORT['audio'].append({'name':source.stem,'looping':looping,'sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'duration':float(sound.get_editor_property('duration'))})
+        REPORT['audio'].append({'name':source.stem,'path':sound.get_path_name(),'looping':looping,'compression':'PCM','loading_behavior':'ForceInline','sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'duration':float(sound.get_editor_property('duration'))})
     REPORT['audio_report_sha256']=hashlib.sha256(metadata.read_bytes()).hexdigest()
 
 def main():
-    import_material();import_audio();REPORT['complete']=True
+    flags=unreal.SystemLibrary.get_command_line().split()
+    audition='-OrganicFireAudioPreview' in flags
+    candidate='-OrganicFireAudioCandidate' in flags
+    owner_audio='-OrganicFireOwnerAudio' in flags
+    if audition and candidate:raise RuntimeError('Choose the Editor audition or packaged candidate destination, not both.')
+    if owner_audio and not (audition or candidate):raise RuntimeError('Owner audio requires an explicit preview or candidate import.')
+    if not (audition or candidate):import_material()
+    import_audio(audition,candidate,owner_audio);REPORT['complete']=True
     unreal.log('ORGANIC_FIRE_READY '+json.dumps(REPORT))
 
 if __name__=='__main__':

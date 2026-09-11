@@ -2244,13 +2244,13 @@ void ADBEnemy::PrepareOrganicFire()
     StopOrganicFire(true);
     OrganicFireMaterial = DBOrganicFire::Prepare(OrganicFireCharge,this);
     OrganicFurnaceAudio->SetSound(LoadObject<USoundBase>(nullptr,
-        TEXT("/Game/Audio/OrganicFire/S_CasterFurnaceLoop.S_CasterFurnaceLoop")));
+        *DBOrganicFire::SoundPath(TEXT("S_CasterFurnaceLoop"))));
     OrganicIgnitionAudio->SetSound(LoadObject<USoundBase>(nullptr,
-        TEXT("/Game/Audio/OrganicFire/S_CasterIgnite.S_CasterIgnite")));
+        *DBOrganicFire::SoundPath(TEXT("S_CasterIgnite"))));
     OrganicFireReleases.Reset();
     for (const TCHAR* Name : { TEXT("S_CasterReleaseA"),TEXT("S_CasterReleaseB"),TEXT("S_CasterReleaseC") })
     {
-        const FString Path=FString::Printf(TEXT("/Game/Audio/OrganicFire/%s.%s"),Name,Name);
+        const FString Path=DBOrganicFire::SoundPath(Name);
         OrganicFireReleases.Add(LoadObject<USoundBase>(nullptr,*Path));
     }
 }

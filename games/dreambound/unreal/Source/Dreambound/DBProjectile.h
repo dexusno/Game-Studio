@@ -20,6 +20,7 @@ class DREAMBOUND_API ADBProjectile : public AActor
 public:
     ADBProjectile();
     virtual void Tick(float DeltaSeconds) override;
+    bool HasImpacted() const { return bImpacted; }
     void Initialize(FVector Direction, float Speed, float Damage, bool bUnblockable,
         AActor* OwnerEnemy, FLinearColor Color);
 

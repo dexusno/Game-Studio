@@ -1,0 +1,233 @@
+{
+  "complete": true,
+  "acceptance": "private-unaccepted-audition",
+  "source": "Klaus supplied ElevenLabs fireball.wav on 2026-09-11",
+  "owner_prompt": "the sound of a fireball shot from a monster in a AAA game",
+  "source_sha256": "a81514161371db128a8f8d19d26bc2d281abc3a8f8747f97ce9000e55d810662",
+  "source_count": 4,
+  "files": [
+    {
+      "name": "S_CasterIgnite",
+      "path": "S_CasterIgnite.wav",
+      "sha256": "c3780cec6945e29993c7516d040d0eaab9b50046dd0157c2a4d15c21e29423aa",
+      "looping": false,
+      "duration_seconds": 0.62,
+      "alias_of": null,
+      "runtime_gain": 0.7,
+      "voice_cap": 3,
+      "owner_cap": 1,
+      "priority": 78,
+      "source_key": "internal_ignition",
+      "source_region_seconds": [
+        0.34,
+        0.96
+      ],
+      "constant_gain_db": -9.0,
+      "endpoint_fades_seconds": [
+        0.006,
+        0.055
+      ],
+      "loop_crossfade_seconds": 0,
+      "measurements": {
+        "sample_rate": 48000,
+        "pcm_bits": 16,
+        "channels": 1,
+        "peak_dbfs": -9.022085555950937,
+        "true_peak_4x_dbfs": -8.99677861417587,
+        "rms_dbfs": -26.21665998507767,
+        "dc_offset": 0.0002734625211326025,
+        "full_scale_samples": 0,
+        "first_sample": 0.0,
+        "last_sample": 0.0
+      },
+      "ffmpeg_decode_errors": 0
+    },
+    {
+      "name": "S_CasterFurnaceLoop",
+      "path": "S_CasterFurnaceLoop.wav",
+      "sha256": "d632e0113c81b3e106117c4586eeb53ebb7d7585086c4dfa37145b25ec7639a1",
+      "looping": true,
+      "duration_seconds": 0.64,
+      "alias_of": null,
+      "runtime_gain": 0.68,
+      "voice_cap": 3,
+      "owner_cap": 1,
+      "priority": 80,
+      "source_key": "internal_ignition",
+      "source_region_seconds": [
+        1.2,
+        1.96
+      ],
+      "constant_gain_db": -3.0,
+      "endpoint_fades_seconds": null,
+      "loop_crossfade_seconds": 0.12,
+      "measurements": {
+        "sample_rate": 48000,
+        "pcm_bits": 16,
+        "channels": 1,
+        "peak_dbfs": -10.133589700439309,
+        "true_peak_4x_dbfs": -9.915225275634562,
+        "rms_dbfs": -25.021505479608127,
+        "dc_offset": 0.0005698621273040772,
+        "full_scale_samples": 0,
+        "first_sample": -0.06719970703125,
+        "last_sample": -0.06109619140625,
+        "loop_boundary_jump": 0.006103515625,
+        "loop_boundary_jump_dbfs": -44.28839878591474,
+        "interior_difference_p99": 0.06201171875,
+        "minimum_20ms_rms_dbfs": -39.559386733421576
+      },
+      "ffmpeg_decode_errors": 0
+    },
+    {
+      "name": "S_CasterReleaseA",
+      "path": "S_CasterReleaseA.wav",
+      "sha256": "695eb7b360bd4ada4545c2c0d78f4edf2c24cb2724183d873a949f81f5a406d5",
+      "looping": false,
+      "duration_seconds": 1.0,
+      "source": "assets/audio/fireball.wav",
+      "source_sha256": "a81514161371db128a8f8d19d26bc2d281abc3a8f8747f97ce9000e55d810662",
+      "alias_of": null
+    },
+    {
+      "name": "S_CasterReleaseB",
+      "path": "S_CasterReleaseB.wav",
+      "sha256": "695eb7b360bd4ada4545c2c0d78f4edf2c24cb2724183d873a949f81f5a406d5",
+      "looping": false,
+      "duration_seconds": 1.0,
+      "source": "assets/audio/fireball.wav",
+      "source_sha256": "a81514161371db128a8f8d19d26bc2d281abc3a8f8747f97ce9000e55d810662",
+      "alias_of": "S_CasterReleaseA"
+    },
+    {
+      "name": "S_CasterReleaseC",
+      "path": "S_CasterReleaseC.wav",
+      "sha256": "695eb7b360bd4ada4545c2c0d78f4edf2c24cb2724183d873a949f81f5a406d5",
+      "looping": false,
+      "duration_seconds": 1.0,
+      "source": "assets/audio/fireball.wav",
+      "source_sha256": "a81514161371db128a8f8d19d26bc2d281abc3a8f8747f97ce9000e55d810662",
+      "alias_of": "S_CasterReleaseA"
+    },
+    {
+      "name": "S_CasterFlightLoop",
+      "path": "S_CasterFlightLoop.wav",
+      "sha256": "718d727f8d5eec066b5429de4d1592c06bc4ffa4b5d359a50206dac80f5d3ec5",
+      "looping": false,
+      "duration_seconds": 1.5,
+      "alias_of": null,
+      "runtime_gain": 0.52,
+      "voice_cap": 4,
+      "owner_cap": 1,
+      "priority": 45,
+      "source_key": "fireball_whoosh",
+      "source_region_seconds": [
+        0.05,
+        1.55
+      ],
+      "constant_gain_db": -10.0,
+      "endpoint_fades_seconds": [
+        0.008,
+        0.05
+      ],
+      "loop_crossfade_seconds": 0,
+      "measurements": {
+        "sample_rate": 48000,
+        "pcm_bits": 16,
+        "channels": 1,
+        "peak_dbfs": -10.944010817036013,
+        "true_peak_4x_dbfs": -10.938483442004943,
+        "rms_dbfs": -31.305565120477553,
+        "dc_offset": 6.004757351345486e-06,
+        "full_scale_samples": 0,
+        "first_sample": 0.0,
+        "last_sample": 0.0
+      },
+      "ffmpeg_decode_errors": 0
+    },
+    {
+      "name": "S_CasterImpactA",
+      "path": "S_CasterImpactA.wav",
+      "sha256": "69d0e970dfb0df3359a7b3f5eca8e9ea98422ee241d3f56e5fa837ce79b2e03b",
+      "looping": false,
+      "duration_seconds": 0.62,
+      "alias_of": null,
+      "runtime_gain": 0.8,
+      "voice_cap": 4,
+      "owner_cap": 1,
+      "priority": 85,
+      "source_key": "erupting_flare",
+      "source_region_seconds": [
+        0.055,
+        0.675
+      ],
+      "constant_gain_db": -12.0,
+      "endpoint_fades_seconds": [
+        0.003,
+        0.09
+      ],
+      "loop_crossfade_seconds": 0,
+      "measurements": {
+        "sample_rate": 48000,
+        "pcm_bits": 16,
+        "channels": 1,
+        "peak_dbfs": -12.01156234839335,
+        "true_peak_4x_dbfs": -11.957145628127282,
+        "rms_dbfs": -24.947938240213997,
+        "dc_offset": -0.0008534082802393103,
+        "full_scale_samples": 0,
+        "first_sample": 0.0,
+        "last_sample": 0.0
+      },
+      "ffmpeg_decode_errors": 0
+    },
+    {
+      "name": "S_CasterImpactB",
+      "path": "S_CasterImpactB.wav",
+      "sha256": "69d0e970dfb0df3359a7b3f5eca8e9ea98422ee241d3f56e5fa837ce79b2e03b",
+      "looping": false,
+      "duration_seconds": 0.62,
+      "alias_of": "S_CasterImpactA",
+      "runtime_gain": 0.8,
+      "voice_cap": 4,
+      "owner_cap": 1,
+      "priority": 85,
+      "source_key": "erupting_flare",
+      "source_region_seconds": [
+        0.055,
+        0.675
+      ],
+      "constant_gain_db": -12.0,
+      "endpoint_fades_seconds": [
+        0.003,
+        0.09
+      ],
+      "loop_crossfade_seconds": 0,
+      "measurements": {
+        "sample_rate": 48000,
+        "pcm_bits": 16,
+        "channels": 1,
+        "peak_dbfs": -12.01156234839335,
+        "true_peak_4x_dbfs": -11.957145628127282,
+        "rms_dbfs": -24.947938240213997,
+        "dc_offset": -0.0008534082802393103,
+        "full_scale_samples": 0,
+        "first_sample": 0.0,
+        "last_sample": 0.0
+      },
+      "ffmpeg_decode_errors": 0
+    }
+  ],
+  "source_license": "Owner-reported ElevenLabs Free plan; private noncommercial playtest only.",
+  "processing": {
+    "duration_seconds": 1.0,
+    "trim_seconds": 0,
+    "stereo_to_mono": "0.5 left + 0.5 right",
+    "constant_gain_db": -4.814740791294997,
+    "endpoint_fade_seconds": 0.003,
+    "pitch_changed": false
+  },
+  "note": "Release A/B/C use the same owner clip. Five remaining cues preserve the preceding Stable Audio3 candidate byte-for-byte. No generated variations or new AI requests.",
+  "agent_listened": false,
+  "owner_accepted_integrated_mix": false
+}

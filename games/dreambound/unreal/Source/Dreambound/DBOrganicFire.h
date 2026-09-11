@@ -5,11 +5,23 @@
 #include "Engine/StaticMesh.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
 
 /** Shared original volume rendering for the drawn charge and its actual projectile. */
 namespace DBOrganicFire
 {
     inline FLinearColor V(const FVector& P) { return FLinearColor(P.X,P.Y,P.Z,0.f); }
+
+    inline FString SoundPath(const TCHAR* Name)
+    {
+        const TCHAR* Directory = TEXT("/Game/Audio/OrganicFire");
+#if WITH_EDITOR
+        if (FParse::Param(FCommandLine::Get(),TEXT("DBOrganicFireAudioPreview")))
+            Directory = TEXT("/Game/DeveloperAuditions/OrganicFire");
+#endif
+        return FString::Printf(TEXT("%s/%s.%s"),Directory,Name,Name);
+    }
 
     inline UMaterialInstanceDynamic* Prepare(UStaticMeshComponent* Component, UObject* Owner)
     {

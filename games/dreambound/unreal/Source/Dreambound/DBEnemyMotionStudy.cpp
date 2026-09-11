@@ -3,11 +3,14 @@
 #include "DBCharacter.h"
 #include "DBEnemy.h"
 #include "DBProjectile.h"
+#include "AudioDevice.h"
+#include "AudioMixerBlueprintLibrary.h"
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
 #include "Dom/JsonObject.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/Engine.h"
+#include "Engine/GameViewportClient.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -15,6 +18,8 @@
 #include "GameFramework/PlayerController.h"
 #include "HAL/FileManager.h"
 #include "HAL/PlatformTime.h"
+#include "HAL/IConsoleManager.h"
+#include "ImageUtils.h"
 #include "Misc/App.h"
 #include "Misc/CommandLine.h"
 #include "Misc/FileHelper.h"
@@ -44,12 +49,14 @@ void ADBEnemyMotionStudy::BeginPlay()
     Duration = FMath::Clamp(Duration,4.f,32.f);
     bFootMarkers = FParse::Param(FCommandLine::Get(), TEXT("DBFootMarkers"));
     bPassiveIdle = FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyIdle"));
+    bAudioCapture = FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyAudio"));
+    bPauseStudy = bAudioCapture && FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyPause"));
     EDBEnemyKind Kind = KindName == TEXT("Caster") ? EDBEnemyKind::Caster
         : KindName == TEXT("Hunter") ? EDBEnemyKind::Hunter
         : KindName == TEXT("Boss") ? EDBEnemyKind::Boss : EDBEnemyKind::Melee;
     KindName = StaticEnum<EDBEnemyKind>()->GetNameStringByValue(static_cast<int64>(Kind));
     if (ViewName != TEXT("Front") && ViewName != TEXT("Player") && ViewName != TEXT("LowSide")
-        && ViewName != TEXT("Detail")) ViewName = TEXT("Side");
+        && ViewName != TEXT("Detail") && ViewName != TEXT("Impact")) ViewName = TEXT("Side");
     Output = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("EnemyMotionStudy") / (KindName + TEXT("-") + ViewName));
     IFileManager::Get().MakeDirectory(*Output, true);
     if (!Mode || !Mode->Player || Mode->Rooms.IsEmpty())
@@ -86,9 +93,22 @@ void ADBEnemyMotionStudy::BeginPlay()
     // Every sampled frame is one actual rendered simulation step. Encoding does
     // not invent missing contact frames, and this mode is never a FPS benchmark.
     FApp::SetFixedDeltaTime(1.0 / 30.0);
-    FApp::SetUseFixedTimeStep(true);
-    if (GEngine) GEngine->SetMaxFPS(30.f);
+    FApp::SetUseFixedTimeStep(!bAudioCapture);
+    if (GEngine)
+    {
+        if (bAudioCapture) GEngine->bUseFixedFrameRate = false;
+        GEngine->SetMaxFPS(bAudioCapture ? 60.f : 30.f);
+    }
+    if (bAudioCapture)
+    {
+        FApp::SetUnfocusedVolumeMultiplier(1.f);
+        ScreenshotHandle=UGameViewportClient::OnScreenshotCaptured().AddUObject(this,&ADBEnemyMotionStudy::SaveAudioFrame);
+        if (auto* RenderSilence=IConsoleManager::Get().FindConsoleVariable(TEXT("au.NeverDisableSubmixes")))
+            RenderSilence->Set(1,ECVF_SetByCode);
+    }
     Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm,left_claw_contact_x,left_claw_contact_y,left_claw_contact_z,right_claw_contact_x,right_claw_contact_y,right_claw_contact_z,pounce_blocked,blocked_pounce_elapsed\n");
+    Samples.RemoveFromEnd(TEXT("\n"));
+    Samples += TEXT(",audio_seconds,paused\n");
     UpdateCamera(0.f);
 }
 
@@ -99,6 +119,29 @@ void ADBEnemyMotionStudy::UpdateCamera(float DeltaSeconds)
     {
         if (AController* Controller = Player->GetController())
             Controller->SetControlRotation((Creature->GetActorLocation() + FVector(0,0,35) - Player->GetPawnViewLocation()).Rotation());
+        return;
+    }
+    if (ViewName == TEXT("Impact"))
+    {
+        if (!bProjectileObserved)
+            for (TActorIterator<ADBProjectile> It(GetWorld()); It; ++It)
+            {
+                ObservedProjectile=*It;
+                bProjectileObserved=true;
+                break;
+            }
+        if (ObservedProjectile.IsValid())
+        {
+            LastProjectilePosition=ObservedProjectile->GetActorLocation();
+            bImpactObserved |= ObservedProjectile->HasImpacted();
+        }
+        const FVector Subject = bProjectileObserved ? LastProjectilePosition
+            : Creature->GetActorLocation()+FVector(70,0,20);
+        // Stay on the courtyard side of the far wall as the projectile hits it.
+        Camera->SetActorLocation(Subject + FVector(-300,-350,180));
+        Camera->SetActorRotation((Subject-Camera->GetActorLocation()).Rotation());
+        Camera->GetCameraComponent()->FieldOfView = 60.f;
+        CameraDistance = FVector::Distance(Subject,Camera->GetActorLocation());
         return;
     }
     const bool bDetail = ViewName == TEXT("Detail");
@@ -130,10 +173,29 @@ void ADBEnemyMotionStudy::UpdateCamera(float DeltaSeconds)
 void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (bFinished) { FGenericPlatformMisc::RequestExit(false); return; }
+    if (bFinished)
+    {
+        // WAV export is asynchronous; leave its worker time to finish writing.
+        if (!bAudioCapture || FPlatformTime::Seconds()-FinishedAt > 2.f)
+        {
+            if (ScreenshotHandle.IsValid()) UGameViewportClient::OnScreenshotCaptured().Remove(ScreenshotHandle);
+            FGenericPlatformMisc::RequestExit(false);
+        }
+        return;
+    }
     if (!IsValid(Creature) || !IsValid(Player) || !IsValid(Mode))
     {
         FailureReason = TEXT("A required study actor became invalid"); Finish(true); return;
+    }
+    if (bStudyPaused)
+    {
+        RecordFrame(0.f);
+        if (FPlatformTime::Seconds()-PauseStartedAt >= .8)
+        {
+            Mode->TogglePause();
+            bStudyPaused = false;
+        }
+        return;
     }
     if (Mode->bDefeated || Mode->bPaused || Mode->bTitle || Mode->bChoosingReward || Mode->bShowingBuild)
     {
@@ -145,10 +207,28 @@ void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
         Warmup += DeltaSeconds;
         if (Warmup < 3.f) return;
         bStarted = true; StartedAt = FPlatformTime::Seconds();
+        if (bAudioCapture)
+        {
+            auto Device=GetWorld()->GetAudioDevice();
+            if (!Device.IsValid())
+            {
+                FailureReason=TEXT("Audio capture requires a live audio device"); Finish(true); return;
+            }
+            AudioStartedAt=Device->GetAudioClock();
+            UAudioMixerBlueprintLibrary::StartRecordingOutput(this,Duration+3.f);
+        }
         Creature->SetActorTickEnabled(true);
         return; // Frame zero follows a complete enemy AI, movement and pose tick.
     }
     if (FPlatformTime::Seconds() - StartedAt > 180.f) { FailureReason = TEXT("Capture exceeded its wall-time limit"); Finish(true); return; }
+    if (bPauseStudy && !bPauseTriggered && Creature->Phase==EDBEnemyPhase::Telegraph && Creature->TellTime<.75f)
+    {
+        bPauseTriggered=bStudyPaused=true;
+        PauseStartedAt=FPlatformTime::Seconds();
+        Mode->TogglePause();
+        RecordFrame(0.f);
+        return;
+    }
     PlayerHealthBeforeRestore = Player->Health;
     Player->Health = Player->MaxHealth;
     Player->bDead = false;
@@ -213,6 +293,13 @@ void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
 
 void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
 {
+    double AudioTime=-1;
+    if (bAudioCapture)
+    {
+        if (auto Device=GetWorld()->GetAudioDevice()) AudioTime=Device->GetAudioClock()-AudioStartedAt;
+        // Sample against advancing mixer time; video assembly retains actual gaps.
+        if (AudioTime < 0 || AudioTime-LastAudioFrameAt < 1.0/30.0) return;
+    }
     if (FScreenshotRequest::IsScreenshotRequested()) { ++MissedReadbacks; return; }
     const FDBEnemyAnimationDebug State = Creature->GetAnimationDebugState();
     if (bFootMarkers)
@@ -254,20 +341,44 @@ void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
     Samples += FString::Printf(TEXT(",%.4f,%.4f"),State.left_hand_reach_error_cm,State.right_hand_reach_error_cm);
     for (const FVector& Contact : {State.left_claw_contact_world,State.right_claw_contact_world})
         Samples += FString::Printf(TEXT(",%.4f,%.4f,%.4f"),Contact.X,Contact.Y,Contact.Z);
-    Samples += FString::Printf(TEXT(",%d,%.5f\n"),State.pounce_blocked ? 1 : 0,State.blocked_pounce_elapsed);
-    FScreenshotRequest::RequestScreenshot(Output/FString::Printf(TEXT("Frame_%05d.png"),Frame++),false,false);
+    Samples += FString::Printf(TEXT(",%d,%.5f,%.6f,%d\n"),State.pounce_blocked ? 1 : 0,State.blocked_pounce_elapsed,AudioTime,Mode->bPaused?1:0);
+    if (bAudioCapture) LastAudioFrameAt=AudioTime;
+    const FString FramePath=Output/FString::Printf(TEXT("Frame_%05d.%s"),Frame++,bAudioCapture ? TEXT("jpg") : TEXT("png"));
+    PendingAudioFrame=FramePath;
+    FScreenshotRequest::RequestScreenshot(FramePath,false,false);
+}
+
+void ADBEnemyMotionStudy::SaveAudioFrame(int32 Width, int32 Height, const TArray<FColor>& Pixels)
+{
+    if (!FImageUtils::SaveImageByExtension(*PendingAudioFrame,FImageView(Pixels.GetData(),Width,Height),92))
+    {
+        FailureReason=TEXT("Could not save the real-time screenshot");
+        Finish(true);
+    }
 }
 
 void ADBEnemyMotionStudy::Finish(bool bAborted)
 {
     if (bFinished) return;
     bFinished = true;
+    FinishedAt=FPlatformTime::Seconds();
+    if (bAudioCapture && bStarted && AudioStartedAt>0)
+        UAudioMixerBlueprintLibrary::StopRecordingOutput(this,EAudioRecordingExportType::WavFile,TEXT("Mix"),Output);
     FFileHelper::SaveStringToFile(Samples,*(Output/TEXT("Frames.csv")));
     TSharedRef<FJsonObject> Report = MakeShared<FJsonObject>();
     Report->SetBoolField(TEXT("complete"),!bAborted);
     Report->SetBoolField(TEXT("aborted"),bAborted);
     Report->SetStringField(TEXT("failure_reason"),FailureReason);
-    Report->SetStringField(TEXT("scope"),TEXT("Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark."));
+    Report->SetStringField(TEXT("scope"),bAudioCapture
+        ? TEXT("Actual non-practice enemy AI, animation and master-submix audio; choreographed invulnerable player target, real-time engine updates and screenshots timestamped against audio clock. Not ordinary input, owner listening acceptance or a performance benchmark.")
+        : TEXT("Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark."));
+    Report->SetBoolField(TEXT("audio_recorded"),bAudioCapture);
+    Report->SetBoolField(TEXT("fixed_30_hz"),!bAudioCapture);
+    Report->SetStringField(TEXT("image_format"),bAudioCapture ? TEXT("jpeg-quality-92") : TEXT("png"));
+    Report->SetBoolField(TEXT("scripted_pause_triggered"),bPauseTriggered);
+    Report->SetBoolField(TEXT("tracked_projectile_impacted"),bImpactObserved);
+    Report->SetNumberField(TEXT("audio_started_at"),AudioStartedAt);
+    Report->SetStringField(TEXT("audio_timing_limit"),TEXT("Mixer-clock timestamps; start-recording command and image readback can differ by a render/audio block. No claim of sample-accurate synchronization."));
     Report->SetStringField(TEXT("creature"),KindName); Report->SetStringField(TEXT("view"),ViewName);
     Report->SetStringField(TEXT("rig"),FParse::Param(FCommandLine::Get(),TEXT("DBLegacyCreatureRig"))
         ? TEXT("legacy") : FParse::Param(FCommandLine::Get(),TEXT("DBAnatomyCreatureRig"))
