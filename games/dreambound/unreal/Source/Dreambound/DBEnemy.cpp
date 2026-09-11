@@ -697,7 +697,7 @@ void ADBEnemy::UpdateCasterSenses(float DeltaSeconds)
     ObservedShields = MoveTemp(VisibleShields);
     if (EarliestThreat < 1.f)
     {
-        if (IncomingThreatTime <= 0.f) ThreatReactionTime = .12f;
+        if (IncomingThreatTime <= 0.f) ThreatReactionTime = .06f;
         IncomingThreatTime = .27f;
     }
 }
@@ -742,7 +742,10 @@ bool ADBEnemy::ChooseCasterPosition(ECasterIntent Intent)
         {
             const float Clearance = FMath::Abs(FVector::DotProduct(Candidate-Start,Side));
             if (Clearance < 150.f || Range < 240.f) continue;
-            Score += FMath::Abs(Clearance-250.f) + FMath::Abs(Range-800.f)*.12f;
+            // First clear the incoming line. Closing distance while dodging
+            // shortens the very reaction window this movement is trying to buy.
+            Score += FMath::Abs(Clearance-250.f)
+                + FMath::Abs(FVector::DotProduct(Candidate-Start,IncomingShieldDirection))*1.5f;
         }
         else if (Intent == ECasterIntent::Withdraw)
         {
