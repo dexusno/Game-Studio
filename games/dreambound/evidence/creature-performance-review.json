@@ -1,0 +1,134 @@
+{
+  "scope": "Labelled actual consecutive 30 Hz game frames. Silent, scripted protected-target studies; not ordinary play or a hardware benchmark.",
+  "clips": [
+    {
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "start": 0,
+      "end": 120,
+      "label": "0.5.2  |  Melee / grounded approach",
+      "frames": 121,
+      "seconds": 4.033333333333333,
+      "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+    },
+    {
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "start": 300,
+      "end": 345,
+      "label": "0.5.2  |  Melee / changing direction",
+      "frames": 46,
+      "seconds": 1.5333333333333334,
+      "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+    },
+    {
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "start": 124,
+      "end": 220,
+      "label": "0.5.2  |  Melee / coil, strike and regain",
+      "frames": 97,
+      "seconds": 3.2333333333333334,
+      "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+    },
+    {
+      "source": ".local/performance-final-melee-player/Saved/EnemyMotionStudy/Melee-Player",
+      "start": 124,
+      "end": 215,
+      "label": "0.5.2  |  Melee / actual player view",
+      "frames": 92,
+      "seconds": 3.066666666666667,
+      "csv_sha256": "3385ea3f24c0c7684c86e7842ee2ba1f92c4ad516156f4d167e108bdb0919224"
+    },
+    {
+      "source": ".local/performance-final-caster-side/Saved/EnemyMotionStudy/Caster-Side",
+      "start": 12,
+      "end": 120,
+      "label": "0.5.2  |  Caster / gather, release and exhaustion",
+      "frames": 109,
+      "seconds": 3.6333333333333333,
+      "csv_sha256": "6e010f4cd3f59642239f3719565626dcaaf2653ff0674af002f88cf52150286f"
+    },
+    {
+      "source": ".local/performance-final-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+      "start": 14,
+      "end": 110,
+      "label": "0.5.2  |  Caster / actual ranged player view",
+      "frames": 97,
+      "seconds": 3.2333333333333334,
+      "csv_sha256": "085463bcb9dd91029c12af2cd58994c75b1418eeb63345648cdb1556b80da680"
+    },
+    {
+      "source": ".local/performance-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+      "start": 45,
+      "end": 125,
+      "label": "0.5.2  |  Hunter / launch, reach and landing",
+      "frames": 81,
+      "seconds": 2.7,
+      "csv_sha256": "82e77e44ea71212a1eb236c4ad2d4ac8675d4443fe3a84bf2ed306056566b198"
+    },
+    {
+      "source": ".local/performance-final-boss-low/Saved/EnemyMotionStudy/Boss-LowSide",
+      "start": 420,
+      "end": 526,
+      "label": "0.5.2  |  Guardian / load, impact and rise",
+      "frames": 107,
+      "seconds": 3.566666666666667,
+      "csv_sha256": "8b37ad658b1e17568aa79a4e9068d93bb30a85c8112c26fca9c124aec91aac0a"
+    },
+    {
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "start": 595,
+      "end": 635,
+      "label": "0.5.2  |  Melee / hit response",
+      "frames": 41,
+      "seconds": 1.3666666666666667,
+      "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+    },
+    {
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "start": 837,
+      "end": 890,
+      "label": "0.5.2  |  Melee / loss of support and settling",
+      "frames": 54,
+      "seconds": 1.8,
+      "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+    },
+    {
+      "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+      "start": 505,
+      "end": 589,
+      "label": "0.5.2  |  Player / continuous three-strike chain",
+      "frames": 85,
+      "seconds": 2.8333333333333335,
+      "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+    },
+    {
+      "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+      "start": 595,
+      "end": 632,
+      "label": "0.5.2  |  Player / heavy stroke",
+      "frames": 38,
+      "seconds": 1.2666666666666666,
+      "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+    },
+    {
+      "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+      "start": 655,
+      "end": 688,
+      "label": "0.5.2  |  Player / evasive brace and catch",
+      "frames": 34,
+      "seconds": 1.1333333333333333,
+      "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+    },
+    {
+      "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+      "start": 920,
+      "end": 1026,
+      "label": "0.5.2  |  Player / grounded running, jump and landing",
+      "frames": 107,
+      "seconds": 3.566666666666667,
+      "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+    }
+  ],
+  "frames": 1109,
+  "seconds": 36.96666666666667,
+  "video_sha256": "1d8f1aba16ade3879ee966582b4945e82f2069091876f4b35872de1cea176a97"
+}

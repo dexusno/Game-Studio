@@ -1,6 +1,6 @@
 # Animation performance target
 
-Owner goal, September 11, 2026: “make our animations on par with premium indie games like windrose, monster fantasy and the like.” The goal remains active. Passing the earlier v11 contact checks did not establish that quality.
+Owner goal, September 11, 2026: “make our animations on par with premium indie games like windrose, monster fantasy and the like.” The authored performance increment is delivered with the explicit criteria decisions below and final packaged reproduction. Passing the earlier v11 contact checks alone did not establish that quality.
 
 ## Reference observations
 
@@ -25,8 +25,31 @@ The reviewed page assets were `3041230/extras/b65482d2ffe4b51a515cc922dbe42542.w
 
 ## Implementation and review
 
-The candidate adds lower-spine, chest, neck and clavicle articulation to the existing creature rigs. MireSeer's throat sac receives its own weighted bone. Existing global rest transforms, creature geometry, UVs and original maps are preserved. New skeletal assets use the `_Performance` suffix so the earlier skeletons remain available. Bone count alone is not a quality criterion.
+The delivered performance adds lower-spine, chest, neck and clavicle articulation to the existing creature rigs. MireSeer's throat sac receives its own weighted bone. Existing global rest transforms, creature geometry, UVs and original maps are preserved. New skeletal assets use the `_Performance` suffix so the earlier skeletons remain available. Bone count alone is not a quality criterion.
 
 Authored pose curves control the larger performance; contact solving adapts it to actual movement and terrain. Keep damage, phase timing, collision and player control authoritative. Review complete approach/turn/attack/hit/collapse sequences from side and player cameras, beginning with Melee, before accepting the approach for the remaining creatures. A good still pose cannot pass a broken transition; numerical contact checks cannot pass an unconvincing performance.
 
 The existing v11 build/reel remains the comparison baseline. Candidate builds, rejected findings and the final inspected coverage belong in the game's existing STATUS and QA records. Neither this target nor successful compilation establishes reference parity, owner acceptance or enjoyable play.
+
+## Reviewed performance decisions — September 11
+
+Independent art and QA reviewers assessed actual v2/v3 rendered sequences against the visible craft criteria above. These are explicit criteria decisions from ordered native frames and their capture timing. They do not imply a complete playthrough of either reference game, continuous video perception, owner approval, or equivalent asset/production scope.
+
+| Performance | Decision | Evidence |
+|---|---|---|
+| Melee approach/turn | Met | v2 Side 300–322: lowered moving stance, alternating support and stepped change of heading. |
+| Melee coil/strike/recovery | Met | Side 134–170 and184–208: asymmetric coil, faster bodily commitment, slower withdrawal and progressive rise. Player 150, every 157–174 and179: claw passes beside/below the muzzle; foreground shield occlusion leaves direction readable. |
+| Melee hit/collapse | Met | Side 603–615 and847–860: directional upset, balance catch, loss of support and overlapping settling. Independent QA also checked217 frames including restarts and curved travel. |
+| Caster gather/releases/recovery | Met | v3 Side 14/34/49/51/59 and65–104: preparation changes the body silhouette, two impulses align with projectile departures, lowered exhaustion progressively regains readiness. Player 0/14/25/40, every 49–65,76/96/105 confirms readability at actual range. This clears the earlier late-recovery neutral-wait finding in the assessed sequence. |
+| Caster hit/collapse | Met | v3 Side 600–622,663–674,841–859 and settling samples through950: interruption, support catch, backward/side collapse and settled endpoint. Grass occludes some fine ground contact. |
+| Hunter pounce | Met | v3 Side every 73–96 and143–165: compression, forward extension with separated reaching claws, then continuous foot arrival and knee/body absorption. |
+| Guardian Slam | Met | v3 LowSide 424–450, every 457–491 and561–585, recovery through500: leg/back load, committed descent, visible near-claw floor contact and effortful rising with lagging hands. The far hand is partly occluded; diagnostic markers are supplementary evidence. |
+| First-person stroke/evasion | Met | v2 player heavy 604–621, finisher 563–584 and dash 661–677: carry-through, readable return, distinct chest brace/catch and restrained camera. Separate QA inspected141 player frames and the recorded jump/landing. |
+
+Melee/player v2 Editor DLL: `055E394175238145710120741E2B9D449DB640791AA7EA16EE103ED20D23A150`. Creature v3 Editor DLL: `4B0CAD235E2EB82CF39FE2A79243259F1BF0BF95D4E1F6524BAA99811DC60F18`. Caster Player uses `F3B1FFE254BFE05BE1415D4F34654F53C281EB223548F05627E089B56E9C1319`, differing only by the corrected environment-test whitelist. Private capture names begin `performance-v2-` / `performance-v3-`; exact reviewed frames and rejected iterations are retained in the [QA report](../../../evidence/enemy-animation-qa.md). Final packaged validation is recorded separately with the delivered executable identity.
+
+## Final Shipping reproduction
+
+Windows Shipping 0.5.2-performance1, source `e9b3f8a6cd79d70e4e7b4aadbda1bc11dda7f97e`, executable SHA-256 `3FF6C616806724CA238283F7DF8D8F55E4E16A86CB73276859FA7E62CBA9FD1A`, reproduces the accepted performances without a new required correction. Seven studies contain 4,627 actual frames with zero missed captures. Independent QA rechecked 192 selected frames across five creature studies. The art reviewer additionally checked the final Caster Player release/recovery at frames 49/51/59/65/76/96 and 25 native first-person samples across chain/finisher, heavy, dash, sprint, jump and landing. Recorded first-person samples over 510–588, 600–630, 658–679 and 930–1030 also match the accepted Editor transforms, with a largest attack-window weapon-pitch difference of 0.0001 degrees.
+
+The [37-second final-build review](../../../evidence/creature-performance-review.mp4) contains selected consecutive actual frames. [Build identity and limits](../../../evidence/creature-performance-build.json) distinguish staged capture, brief native UI checks and reviewer attribution. These final checks preserve the ordered-frame scope above; they do not add continuous-playback, audio or complete ordinary-input acceptance.

@@ -1,0 +1,591 @@
+{
+  "version": "0.5.2-performance1",
+  "engine": "5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "e9b3f8a6cd79d70e4e7b4aadbda1bc11dda7f97e",
+  "authored_performance_commit": "781ba338b64bf287f78ec2c3a89e2cb6e4fc0345",
+  "recorded_on_utc": "2026-09-11T09:07:27.686935+00:00",
+  "package_path": "BuildOutput/CreaturePerformance/Windows",
+  "scope": "Expanded21/22-bone organic rigs, authored whole-body motion with world contact solving, first-person carried strikes and evasive brace/catch. Criteria reviewed against official reference excerpts; this is an internal playable build.",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166457856,
+      "sha256": "3FF6C616806724CA238283F7DF8D8F55E4E16A86CB73276859FA7E62CBA9FD1A"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11374144,
+      "sha256": "26DCD387207F2CAF8E6C01EF8447BF16A5435E6DA83F7CB9BDDCB857384860AA"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 493870672,
+      "sha256": "AB47F41E6EE7ABE152170B4581C6D094A507CE736B439C58E2CD06E9C16E5967"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 324513,
+      "sha256": "113EA5B59660A5523FF790F449605544BD35C9EBAE15F7F993118FC43CD5A1FF"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211776,
+      "sha256": "8D27EAB64AB91BCA3F1B3C403BC46A2978F86F169DAFB394ABC3D32498F07B31"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "9C5450B1FD2F2AEEB7B1D3E2A68B028EF40D0DC07C1BB19633C59C5EDB32E707"
+    }
+  ],
+  "build": {
+    "exit_code": 0,
+    "full_cook": true,
+    "initial_performance_build_cook_run_seconds": 54.87,
+    "final_build_cook_run_seconds": 41.31,
+    "final_log_sha256": "AEDFF811CACA7F29127F64A2CC1DE30DCE7AE7D8D2B2B866818AC26A8A52C676"
+  },
+  "owner_configuration": {
+    "DefaultInput.ini_sha256": "46A15FAB3B5E618CF348BF4FAB527DB19CA2194054FB42E5BBEE8E704F5B0C60",
+    "status": "Owner-modified file retained in the package, excluded from commits; original Suno MP3s also retained untracked."
+  },
+  "studies": [
+    {
+      "name": "melee-side",
+      "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "frames": 961,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "F0674F1E05A1D87A0FFBE296DCDB6167419F61671B26A94328A3B6F321E14023",
+      "invocation_sha256": "E90A026E285FCFCC8F08D5D9FAF4CAA2B7AE84307D290DA51FBFE945887CF39B",
+      "recorded_utc": "2026-09-11T08:53:32.6418398Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Melee",
+        "view": "Side",
+        "target_path": "travel-turn-hit-death-v1",
+        "scripted_player_close_relocation_frame": -1,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 32.03318786621094,
+        "frames": 961,
+        "requested_seconds": 32,
+        "missed_readbacks": 0,
+        "wall_seconds": 104.5609209984541,
+        "phase_samples": {
+          "Approach": 553,
+          "Telegraph": 107,
+          "Attack": 51,
+          "Recovery": 80,
+          "Staggered": 50,
+          "Dead": 120
+        }
+      }
+    },
+    {
+      "name": "caster-side",
+      "source": ".local/performance-final-caster-side/Saved/EnemyMotionStudy/Caster-Side",
+      "frames": 961,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "6E010F4CD3F59642239F3719565626DCAAF2653FF0674AF002F88CF52150286F",
+      "invocation_sha256": "1C5F48FB71C820A83AE2ECBA2A2E3F89765F9A3A410E9A6817F7FF6DA6D98B22",
+      "recorded_utc": "2026-09-11T08:55:20.7174885Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Caster",
+        "view": "Side",
+        "target_path": "travel-turn-hit-death-v1",
+        "scripted_player_close_relocation_frame": -1,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 32.03318786621094,
+        "frames": 961,
+        "requested_seconds": 32,
+        "missed_readbacks": 0,
+        "wall_seconds": 104.21022060140967,
+        "phase_samples": {
+          "Approach": 462,
+          "Telegraph": 170,
+          "Attack": 60,
+          "Recovery": 105,
+          "Staggered": 44,
+          "Dead": 120
+        }
+      }
+    },
+    {
+      "name": "hunter-side",
+      "source": ".local/performance-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+      "frames": 181,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "82E77E44EA71212A1EB236C4AD2D4AC8675D4443FE3A84BF2ED306056566B198",
+      "invocation_sha256": "CD91F109DC2928D495DE6530182D07E37DDC238AE2C8E2C57E11035AE666CDB0",
+      "recorded_utc": "2026-09-11T08:57:08.5059935Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Hunter",
+        "view": "Side",
+        "target_path": "travel-turn-hit-death-v1",
+        "scripted_player_close_relocation_frame": -1,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 6.033329010009766,
+        "frames": 181,
+        "requested_seconds": 6,
+        "missed_readbacks": 0,
+        "wall_seconds": 19.688856299966574,
+        "phase_samples": {
+          "Approach": 50,
+          "Telegraph": 48,
+          "Attack": 24,
+          "Recovery": 59
+        }
+      }
+    },
+    {
+      "name": "boss-low",
+      "source": ".local/performance-final-boss-low/Saved/EnemyMotionStudy/Boss-LowSide",
+      "frames": 961,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "8B37AD658B1E17568AA79A4E9068D93BB30A85C8112C26FCA9C124AEC91AAC0A",
+      "invocation_sha256": "CD5FF180022FD132CC351488A97050906CB191DA12C604DDB20BD7A332189C06",
+      "recorded_utc": "2026-09-11T08:57:31.2756494Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Boss",
+        "view": "LowSide",
+        "target_path": "boss-approach-ranged-close-v3",
+        "scripted_player_close_relocation_frame": 420,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 32.03318786621094,
+        "frames": 961,
+        "requested_seconds": 32,
+        "missed_readbacks": 0,
+        "wall_seconds": 103.33621310070157,
+        "phase_samples": {
+          "Approach": 83,
+          "Telegraph": 266,
+          "Attack": 104,
+          "Recovery": 357,
+          "Staggered": 31,
+          "Dead": 120
+        }
+      }
+    },
+    {
+      "name": "melee-player",
+      "source": ".local/performance-final-melee-player/Saved/EnemyMotionStudy/Melee-Player",
+      "frames": 241,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "3385EA3F24C0C7684C86E7842EE2BA1F92C4AD516156F4D167E108BDB0919224",
+      "invocation_sha256": "198DA75925EE96A4103D3F37CAF27477530554C3D866187F5DE221327D6D4E65",
+      "recorded_utc": "2026-09-11T08:59:18.0528209Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Melee",
+        "view": "Player",
+        "target_path": "travel-turn-hit-death-v1",
+        "scripted_player_close_relocation_frame": -1,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 8.033327102661133,
+        "frames": 241,
+        "requested_seconds": 8,
+        "missed_readbacks": 0,
+        "wall_seconds": 27.436394602060318,
+        "phase_samples": {
+          "Approach": 140,
+          "Telegraph": 48,
+          "Attack": 17,
+          "Recovery": 36
+        }
+      }
+    },
+    {
+      "name": "caster-player",
+      "source": ".local/performance-final-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+      "frames": 241,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "085463BCB9DD91029C12AF2CD58994C75B1418EEB63345648CDB1556B80DA680",
+      "invocation_sha256": "19C0432508E68A94CF32376591743913F110C688792099BAAE1811325A6BA134",
+      "recorded_utc": "2026-09-11T08:59:48.8747531Z",
+      "capture": {
+        "complete": true,
+        "aborted": false,
+        "failure_reason": "",
+        "scope": "Actual non-practice enemy AI and animation; choreographed invulnerable player target; isolated fixed30Hz simulation with one screenshot requested per rendered tick. Not ordinary input, subjective owner acceptance or a performance benchmark.",
+        "creature": "Caster",
+        "view": "Player",
+        "target_path": "travel-turn-hit-death-v1",
+        "scripted_player_close_relocation_frame": -1,
+        "foot_target_markers": false,
+        "claw_skin_contact_markers": false,
+        "observer_tick_stage": "PostPhysics, before camera-manager update",
+        "simulation_seconds": 8.033327102661133,
+        "frames": 241,
+        "requested_seconds": 8,
+        "missed_readbacks": 0,
+        "wall_seconds": 27.1093942001462,
+        "phase_samples": {
+          "Approach": 83,
+          "Telegraph": 72,
+          "Attack": 40,
+          "Recovery": 46
+        }
+      }
+    },
+    {
+      "name": "player",
+      "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+      "frames": 1081,
+      "dt_seconds": 0.03333333333333333,
+      "frames_csv_sha256": "5FBE7449B9890A6DA2B94953D3937DB67D4FCC61C4E1A554ACF791DCE84E068C",
+      "invocation_sha256": "50CC17ED2D0258F9851CD7E28A92D599FBE3986F094EB80263D11CCD41B3BCC4",
+      "recorded_utc": "2026-09-11T09:00:19.6563807Z",
+      "capture": {
+        "frames": 1081,
+        "missed_readbacks": 0,
+        "fixed_30_hz": true,
+        "note": "Scripted engine capture. No ordinary-input, complete-run or fun claim.\nsamples=1081 seconds=36.033 wall_seconds=124.037 fixed_30_hz=1 missed_frames=0 audio_recorded=0 screenshot_capture=1\nThis fixture is not a performance measurement."
+      }
+    }
+  ],
+  "total_actual_frames": 4627,
+  "total_missed_readbacks": 0,
+  "engine_checks": [
+    {
+      "suite": "grounded-movement-v1",
+      "build": "Editor",
+      "game_dll_sha256": "4B0CAD235E2EB82CF39FE2A79243259F1BF0BF95D4E1F6524BAA99811DC60F18",
+      "groups_passed": 4,
+      "groups_failed": 0,
+      "observations": 14,
+      "source": ".local/performance-v3-movement-checks/Saved/QA/movement-checks.json",
+      "report_sha256": "D5F89E8483D6A846A1B296BBA9AA5CF743006E67DFB7E5D8A39F1E6DFEC05B50",
+      "scope": "Ordinary world ticks and real CharacterMovement displacement/collision on a staged level runway and solid wall. Public sprint/dash APIs and AddMovementInput exercise stamina exhaustion/recovery, blocked movement, dash travel, cooldown/held edge, pause and run reset. Isolated QA journals backed up/restored. No legacy combat/route cases, native input, visual or feel evidence."
+    },
+    {
+      "suite": "folding-shield-combat-route-v2",
+      "build": "Editor",
+      "game_dll_sha256": "F3B1FFE254BFE05BE1415D4F34654F53C281EB223548F05627E089B56E9C1319",
+      "groups_passed": 19,
+      "groups_failed": 0,
+      "observations": 70,
+      "source": ".local/performance-v3-combat-checks-fixed/Saved/QA/combat-feel-checks.json",
+      "report_sha256": "2C167403C6921164DAC098CA961261A547BDEF10660C667BFAF2AA7BE3F7E70C",
+      "scope": "Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence."
+    }
+  ],
+  "native_ui_checks": {
+    "scope": "Native Windows UI observation and brief key/click actions on an isolated QA profile; not a complete ordinary playthrough, continuous motion grade, sustained held-input test or hardware benchmark.",
+    "source_commit": "781ba338b64bf287f78ec2c3a89e2cb6e4fc0345",
+    "executable_sha256": "F55F1E38561A1CA3287667196F0B2FE2EE804FA381B495912377058082984D04",
+    "profile": "DreamboundQA_PerformanceNative",
+    "observed_normal_run_seed": 657139,
+    "observed": [
+      "Shipping title and courtyard render",
+      "Native menu click enters courtyard",
+      "Alt and W sequence advances into ward interaction range",
+      "E begins a normal one-enemy encounter with current organic model",
+      "Defeat screen appears after the unguarded encounter",
+      "Practice-this-seed restart preserves seed657139 and restores100health",
+      "Escape opens pause menu with controls",
+      "Save checkpoint / exit closes the process"
+    ],
+    "not_established": [
+      "Sustained walking/sprint and native jump: tap-only tool does not establish held-input behavior",
+      "Heavy hit outcome: attempted F after enemy combat had already ended in defeat",
+      "Mouse look preservation during continuous combat",
+      "Continuous normal-speed quality and complete ward progression"
+    ],
+    "found_and_corrected": "Title still displayed REVERIE0.4.0; next source e9b3f8a reads the configured ProjectVersion.",
+    "launch_note": "Initial hidden process44364 had no targetable window and was closed; interactive retry41436 was observed and exited through UI.",
+    "final_title_verification": {
+      "source_commit": "e9b3f8a6cd79d70e4e7b4aadbda1bc11dda7f97e",
+      "executable_sha256": "3FF6C616806724CA238283F7DF8D8F55E4E16A86CB73276859FA7E62CBA9FD1A",
+      "observed_label": "SANCTUARY / 0.5.2-performance1",
+      "resume_option_visible": true,
+      "exited_through_title_ui": true
+    }
+  },
+  "rig_evidence": [
+    "art/organic-enemies/animation/premium-rig-contract.json",
+    "art/organic-enemies/animation/premium-import.json"
+  ],
+  "visual_decisions": "art/organic-enemies/animation/PERFORMANCE.md",
+  "independent_qa": "evidence/enemy-animation-qa.md",
+  "review": {
+    "scope": "Labelled actual consecutive 30 Hz game frames. Silent, scripted protected-target studies; not ordinary play or a hardware benchmark.",
+    "clips": [
+      {
+        "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 0,
+        "end": 120,
+        "label": "0.5.2  |  Melee / grounded approach",
+        "frames": 121,
+        "seconds": 4.033333333333333,
+        "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+      },
+      {
+        "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 300,
+        "end": 345,
+        "label": "0.5.2  |  Melee / changing direction",
+        "frames": 46,
+        "seconds": 1.5333333333333334,
+        "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+      },
+      {
+        "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 124,
+        "end": 220,
+        "label": "0.5.2  |  Melee / coil, strike and regain",
+        "frames": 97,
+        "seconds": 3.2333333333333334,
+        "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+      },
+      {
+        "source": ".local/performance-final-melee-player/Saved/EnemyMotionStudy/Melee-Player",
+        "start": 124,
+        "end": 215,
+        "label": "0.5.2  |  Melee / actual player view",
+        "frames": 92,
+        "seconds": 3.066666666666667,
+        "csv_sha256": "3385ea3f24c0c7684c86e7842ee2ba1f92c4ad516156f4d167e108bdb0919224"
+      },
+      {
+        "source": ".local/performance-final-caster-side/Saved/EnemyMotionStudy/Caster-Side",
+        "start": 12,
+        "end": 120,
+        "label": "0.5.2  |  Caster / gather, release and exhaustion",
+        "frames": 109,
+        "seconds": 3.6333333333333333,
+        "csv_sha256": "6e010f4cd3f59642239f3719565626dcaaf2653ff0674af002f88cf52150286f"
+      },
+      {
+        "source": ".local/performance-final-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+        "start": 14,
+        "end": 110,
+        "label": "0.5.2  |  Caster / actual ranged player view",
+        "frames": 97,
+        "seconds": 3.2333333333333334,
+        "csv_sha256": "085463bcb9dd91029c12af2cd58994c75b1418eeb63345648cdb1556b80da680"
+      },
+      {
+        "source": ".local/performance-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+        "start": 45,
+        "end": 125,
+        "label": "0.5.2  |  Hunter / launch, reach and landing",
+        "frames": 81,
+        "seconds": 2.7,
+        "csv_sha256": "82e77e44ea71212a1eb236c4ad2d4ac8675d4443fe3a84bf2ed306056566b198"
+      },
+      {
+        "source": ".local/performance-final-boss-low/Saved/EnemyMotionStudy/Boss-LowSide",
+        "start": 420,
+        "end": 526,
+        "label": "0.5.2  |  Guardian / load, impact and rise",
+        "frames": 107,
+        "seconds": 3.566666666666667,
+        "csv_sha256": "8b37ad658b1e17568aa79a4e9068d93bb30a85c8112c26fca9c124aec91aac0a"
+      },
+      {
+        "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 595,
+        "end": 635,
+        "label": "0.5.2  |  Melee / hit response",
+        "frames": 41,
+        "seconds": 1.3666666666666667,
+        "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+      },
+      {
+        "source": ".local/performance-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 837,
+        "end": 890,
+        "label": "0.5.2  |  Melee / loss of support and settling",
+        "frames": 54,
+        "seconds": 1.8,
+        "csv_sha256": "f0674f1e05a1d87a0ffbe296dcdb6167419f61671b26a94328a3b6f321e14023"
+      },
+      {
+        "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+        "start": 505,
+        "end": 589,
+        "label": "0.5.2  |  Player / continuous three-strike chain",
+        "frames": 85,
+        "seconds": 2.8333333333333335,
+        "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+      },
+      {
+        "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+        "start": 595,
+        "end": 632,
+        "label": "0.5.2  |  Player / heavy stroke",
+        "frames": 38,
+        "seconds": 1.2666666666666666,
+        "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+      },
+      {
+        "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+        "start": 655,
+        "end": 688,
+        "label": "0.5.2  |  Player / evasive brace and catch",
+        "frames": 34,
+        "seconds": 1.1333333333333333,
+        "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+      },
+      {
+        "source": ".local/performance-final-player/Saved/PlayerMotionStudy",
+        "start": 920,
+        "end": 1026,
+        "label": "0.5.2  |  Player / grounded running, jump and landing",
+        "frames": 107,
+        "seconds": 3.566666666666667,
+        "csv_sha256": "5fbe7449b9890a6da2b94953d3937db67d4fcc61c4e1a554acf791dce84e068c"
+      }
+    ],
+    "frames": 1109,
+    "seconds": 36.96666666666667,
+    "video_sha256": "1d8f1aba16ade3879ee966582b4945e82f2069091876f4b35872de1cea176a97",
+    "encoded_file_check": {
+      "decoded_frames": 1109,
+      "duration_seconds": 36.966667,
+      "width": 1280,
+      "height": 840,
+      "frame_rate": "30/1",
+      "root_visually_inspected_clip_midpoints": [
+        60,
+        144,
+        215,
+        310,
+        410,
+        513,
+        602,
+        696,
+        770,
+        818,
+        887,
+        949,
+        985,
+        1055
+      ],
+      "result": "All fourteen clips render and captions are readable; midpoint sampling supplements the dense source-frame reviews."
+    }
+  },
+  "limits": [
+    "Visual judgments use ordered rendered frames and timing; no continuous-playback perception or owner playtest approval is claimed.",
+    "Fixed30Hz studies use protected choreographed targets; native UI/encounter observations are brief and separately identified.",
+    "No sustained native walking/sprint/jump assessment, variable-frame-rate benchmark, full ordinary playthrough or new sound acceptance.",
+    "One runtime LOD; no independent fingers/toes or facial rig/ragdoll. Deep joint compression and occluded far-side surfaces remain.",
+    "Original generated asset dependency/redistribution terms remain those recorded in the manifest; no external release was performed."
+  ],
+  "independent_qa_sha256": "5437D912DEDC276451015E368E14F366C527AD93AAA3D3204FA515A48F4B64EE",
+  "final_visual_reproduction": {
+    "decision": "Accepted criteria reproduced; no new required correction",
+    "qa_reviewer": {
+      "name": "reverie_qa",
+      "inspected_selections": 192,
+      "studies": [
+        "Melee Side",
+        "Caster Side",
+        "Hunter Side",
+        "Boss LowSide",
+        "Melee Player"
+      ]
+    },
+    "art_reviewer": {
+      "name": "structured_scene",
+      "caster_player_frames": [
+        49,
+        51,
+        59,
+        65,
+        76,
+        96
+      ],
+      "player_frames": [
+        510,
+        520,
+        529,
+        534,
+        544,
+        550,
+        558,
+        567,
+        571,
+        584,
+        604,
+        609,
+        613,
+        621,
+        661,
+        665,
+        671,
+        938,
+        969,
+        990,
+        997,
+        1005,
+        1010,
+        1014,
+        1030
+      ],
+      "recorded_sample_comparison_ranges": [
+        [
+          510,
+          588
+        ],
+        [
+          600,
+          630
+        ],
+        [
+          658,
+          679
+        ],
+        [
+          930,
+          1030
+        ]
+      ],
+      "largest_attack_weapon_pitch_difference_degrees": 0.0001
+    },
+    "scope": "Ordered rendered-frame review and recorded-transform comparison; no continuous playback, audio or ordinary-input acceptance."
+  },
+  "record_checks": {
+    "studio_validate": {
+      "result": "one unrelated error",
+      "error": "games/scrapstorm/QA.md: broken relative link build/Sixfold-Recoil-Beta.html",
+      "dreambound_errors_reported": 0
+    },
+    "changed_powershell_scripts_parse": "pass",
+    "reviewed_diff_whitespace": "pass"
+  }
+}

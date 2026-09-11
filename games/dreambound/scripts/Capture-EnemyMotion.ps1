@@ -1,6 +1,6 @@
 param(
  [ValidateSet('Editor','Shipping')][string]$Build='Editor',
- [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreatureMotion',
+ [ValidatePattern('^[A-Za-z0-9_-]+$')][string]$OutputName='CreaturePerformance',
  [ValidateSet('Melee','Caster','Hunter','Boss')][string]$Creature='Melee',
  [ValidateSet('Side','LowSide','Front','Player')][string]$View='Side',
  [Parameter(Mandatory=$true)][string]$CaptureDirectory,
