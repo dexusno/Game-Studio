@@ -1,0 +1,1096 @@
+{
+  "version": "0.5.3-anatomy2",
+  "engine": "5.8.2",
+  "configuration": "Shipping",
+  "platform": "Windows",
+  "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+  "recorded_utc": "2026-09-11T12:20:45.343821+00:00",
+  "package_path": "BuildOutput/CreatureAnatomy2/Windows",
+  "scope": "Four re-authored creature performances and articulated anatomy. Final Hunter contact stops forward drive; supported target-facing recovery steps restore readable separation. Internal playable increment.",
+  "default_rig": "Anatomy",
+  "performance_header_sha256": "57B4EA67DBB50EA0FBB9198E213918D820F7B67EE802EC30ABEF61936AE8E442",
+  "files": [
+    {
+      "path": "Dreambound.exe",
+      "bytes": 171520,
+      "sha256": "EC3458827493BE466091F77B2549E3F802EEB34351F97C4C9F7D14B1920568C2"
+    },
+    {
+      "path": "Dreambound/Binaries/Win64/Dreambound-Win64-Shipping.exe",
+      "bytes": 166513664,
+      "sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.pak",
+      "bytes": 11374144,
+      "sha256": "38075AFE017EF1CDCE5B003218FB800D7C5EC24FD66B4318A30809EF3E3EA278"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.ucas",
+      "bytes": 504899584,
+      "sha256": "2BB4154214BF42956D8EB8A410709CCAB0CAC394C253170B457A54684514A2A7"
+    },
+    {
+      "path": "Dreambound/Content/Paks/Dreambound-Windows.utoc",
+      "bytes": 330102,
+      "sha256": "5F6EF380CD75275DAC3966371BCD632DAB3F69F37C8A3B03C742F8D00176484F"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.ucas",
+      "bytes": 3211776,
+      "sha256": "8D27EAB64AB91BCA3F1B3C403BC46A2978F86F169DAFB394ABC3D32498F07B31"
+    },
+    {
+      "path": "Dreambound/Content/Paks/global.utoc",
+      "bytes": 794,
+      "sha256": "9C5450B1FD2F2AEEB7B1D3E2A68B028EF40D0DC07C1BB19633C59C5EDB32E707"
+    }
+  ],
+  "build": {
+    "complete": true,
+    "full_build_cook_package": true,
+    "seconds": 49.27,
+    "log_sha256": "D29EF0B21D874CB73E5DEB4B0FFB48E3028FB23AD54760A8E4D588679B59EDDC"
+  },
+  "predecessor": {
+    "version": "0.5.3-anatomy1",
+    "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+    "shipping_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+    "status": "Rejected for MF-C05: sustained Hunter camera overlap after contact. Other reviewed creature actions retained unchanged.",
+    "private_delivery_record": ".local/anatomy1-rejected-delivery/creature-anatomy-build.json"
+  },
+  "anatomy_contract": "art/organic-enemies/animation/anatomy-contract.json",
+  "anatomy_import": "art/organic-enemies/animation/anatomy-import.json",
+  "owner_input_sha256": "46A15FAB3B5E618CF348BF4FAB527DB19CA2194054FB42E5BBEE8E704F5B0C60",
+  "studies": [
+    {
+      "name": "boss-front",
+      "private_source": ".local/anatomy-final-boss-front/Saved/EnemyMotionStudy/Boss-Front",
+      "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+      "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+      "current_package": false,
+      "attribution": "Unchanged animation on preceding Shipping package; Hunter-only runtime correction does not alter this creature.",
+      "invocation_sha256": "DB37E6B6CC22DF5FE2A9557CA2CBBC24DE237D7ABAF6008E5723875F09D2011F",
+      "trace_sha256": "5C72CA11EBBB84DDEA131CC879D5C3BBD265418FCB27398A30B317CDA19C92F8",
+      "captured_utc": "2026-09-11T11:40:25.6527074Z",
+      "frames": 961,
+      "simulation_seconds": 32.03318786621094,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 83,
+        "Telegraph": 266,
+        "Attack": 104,
+        "Recovery": 357,
+        "Staggered": 31,
+        "Dead": 120
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "melee-side",
+      "private_source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+      "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+      "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+      "current_package": false,
+      "attribution": "Unchanged animation on preceding Shipping package; Hunter-only runtime correction does not alter this creature.",
+      "invocation_sha256": "6D9CDBA0381AF3F659D08711AE985F15DA6A5C140F20A4CF6B8BD3D1F8AFBD71",
+      "trace_sha256": "033D5EBE925D5F8DE8831526D5EB3AB8AC0294D882180A309EA4A8A11B698F31",
+      "captured_utc": "2026-09-11T11:42:25.7563398Z",
+      "frames": 961,
+      "simulation_seconds": 32.03318786621094,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 553,
+        "Telegraph": 107,
+        "Attack": 51,
+        "Recovery": 80,
+        "Staggered": 50,
+        "Dead": 120
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "caster-side",
+      "private_source": ".local/anatomy-final-caster-side/Saved/EnemyMotionStudy/Caster-Side",
+      "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+      "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+      "current_package": false,
+      "attribution": "Unchanged animation on preceding Shipping package; Hunter-only runtime correction does not alter this creature.",
+      "invocation_sha256": "DC87B5FFA5E61FF0FEBE4336BF0B5C8D99E9B447DC4A44DA11B9AC10DFA03ED5",
+      "trace_sha256": "DB35D2932FC0BF3D14C9C4676E81D152DA1F6A71016D2FD82B08D6624674A56F",
+      "captured_utc": "2026-09-11T11:46:56.1293228Z",
+      "frames": 241,
+      "simulation_seconds": 8.033327102661133,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 83,
+        "Telegraph": 72,
+        "Attack": 40,
+        "Recovery": 46
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "hunter-side",
+      "private_source": ".local/anatomy2-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+      "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+      "executable_sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39",
+      "current_package": true,
+      "attribution": "Current Shipping correction.",
+      "invocation_sha256": "C27471DB091AF3D0FA3A32CFC0EAD17723FD7B78F4DC064F3880EDCAFFFC59CF",
+      "trace_sha256": "244EF5A1C3FB4FB3F9E9EE712BB4FD8760CE1934BF64023C424565B47B8A98A9",
+      "captured_utc": "2026-09-11T12:16:29.6322153Z",
+      "frames": 360,
+      "simulation_seconds": 12.000046730041504,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 89,
+        "Telegraph": 104,
+        "Attack": 39,
+        "Recovery": 128
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "melee-player",
+      "private_source": ".local/anatomy-final-melee-player/Saved/EnemyMotionStudy/Melee-Player",
+      "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+      "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+      "current_package": false,
+      "attribution": "Unchanged animation on preceding Shipping package; Hunter-only runtime correction does not alter this creature.",
+      "invocation_sha256": "45D3DFF9E061BC305334056447E107196DB8A4617C5D5F453F8A9BE73F53DFEF",
+      "trace_sha256": "13EA9C798DC733F8EF03FA3E85FDD914C15160F1A9E225D2E9F7FD823EABCE57",
+      "captured_utc": "2026-09-11T11:44:26.5942068Z",
+      "frames": 241,
+      "simulation_seconds": 8.033327102661133,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 140,
+        "Telegraph": 48,
+        "Attack": 17,
+        "Recovery": 36
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "caster-player",
+      "private_source": ".local/anatomy-final-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+      "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+      "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+      "current_package": false,
+      "attribution": "Unchanged animation on preceding Shipping package; Hunter-only runtime correction does not alter this creature.",
+      "invocation_sha256": "79785345B47D9E57E0027EEDDAEB2D1C0B2BF039514DBD89E117776041CE8377",
+      "trace_sha256": "880D5947BA94CFE65414ED92061CBAA28CA5D1C180D122F3903C8D0B173076B3",
+      "captured_utc": "2026-09-11T11:45:00.4030349Z",
+      "frames": 241,
+      "simulation_seconds": 8.033327102661133,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 83,
+        "Telegraph": 72,
+        "Attack": 40,
+        "Recovery": 46
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    },
+    {
+      "name": "hunter-player",
+      "private_source": ".local/anatomy2-final-hunter-player/Saved/EnemyMotionStudy/Hunter-Player",
+      "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+      "executable_sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39",
+      "current_package": true,
+      "attribution": "Current Shipping correction.",
+      "invocation_sha256": "D2E9281DA482550333C30AF52CBBA36F339F2D45A6ED1A20EEA40B31040B9DE4",
+      "trace_sha256": "C9915552A332962E43E0C20E224F4939D60E810009CD679C495F63DB03DE9BC3",
+      "captured_utc": "2026-09-11T12:14:25.4614772Z",
+      "frames": 360,
+      "simulation_seconds": 12.000046730041504,
+      "missed_readbacks": 0,
+      "phase_samples": {
+        "Approach": 89,
+        "Telegraph": 104,
+        "Attack": 39,
+        "Recovery": 128
+      },
+      "rig": "anatomy",
+      "explicit_rig_override": false
+    }
+  ],
+  "actual_frames": 3365,
+  "current_package_frames": 720,
+  "engine_checks": [
+    {
+      "name": "combat/route/save",
+      "editor_dll_sha256": "27FD82C4DB459A01B14C72E11080B852B037D7B2357EE478395B432664274C70",
+      "private_report": ".local/anatomy-v8-combat-checks/Saved/QA/combat-feel-checks.json",
+      "report_sha256": "CAEBBA36999CAC1012441947C0A25A5D65EA832AAD1BA9D536249BA3F0F87AAA",
+      "result": {
+        "suite": "folding-shield-combat-route-v2",
+        "scope": "Staged ordinary world ticks, real piece sweeps/input APIs, AI-created counter stance then frozen, artificial positions/lethal hits and explicit ActivateRoom staging. No OS input, normal journey or fun evidence.",
+        "engine": "5.8.2-56702186+++UE5+Release-5.8",
+        "executable": "UnrealEditor",
+        "platform": "Windows",
+        "save_slot": "DreamboundQA_AnatomySpacing",
+        "seed": 552389,
+        "null_rhi": true,
+        "complete": true,
+        "aborted": false,
+        "last_step": 38,
+        "elapsed_wall_seconds": 16.021793000400066,
+        "passed": 19,
+        "failed": 0,
+        "checks": [
+          {
+            "id": "isolated_setup",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "isolated_slot",
+                "passed": true,
+                "detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+              },
+              {
+                "id": "recovery_world",
+                "passed": true,
+                "detail": "Actual world, possessed character, camera and three connected rooms."
+              },
+              {
+                "id": "journal_backup",
+                "passed": true,
+                "detail": "Prior QA bytes backed up; empty isolated profile established."
+              },
+              {
+                "id": "collision_fixture",
+                "passed": true,
+                "detail": "Stationary real enemy and separate QA floor, 100 m above courtyard."
+              },
+              {
+                "id": "qa_journals_restored",
+                "passed": true,
+                "detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+              }
+            ]
+          },
+          {
+            "id": "allocation_and_retained_guard",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "hold_selects_three",
+                "passed": true,
+                "detail": "Ordinary hold observed 0.8725s; third-piece threshold from charge tuning."
+              },
+              {
+                "id": "release_launches_selected_three",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "launch_ownership",
+                "passed": true,
+                "detail": "held=3 selected=0 deployed=3 rebuilding=0 unique flight actors=3"
+              },
+              {
+                "id": "remainder_blocks_without_health_loss",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "attack_identity",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "same_attack_id_spends_once",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "different_attack_id_spends_another",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "pause_freezes_flight_and_rebuild",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "pause_preserves_position_and_timer",
+                "passed": true,
+                "detail": "Ordinary pause menu; runner advances while character/flight remain frozen."
+              }
+            ]
+          },
+          {
+            "id": "independent_reconstruction",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "staggered_losses_have_separate_timers",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "older_piece_rebuilds_without_waiting_for_newer",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "later_piece_finishes_own_timer",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "concurrent_throws_and_unselected_catch",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "first_partial_throw",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "catch_during_hold_docks_unselected",
+                "passed": true,
+                "detail": "One physical return docks during a second hold; original three lit pieces remain selected."
+              },
+              {
+                "id": "second_throw_launches_only_lit_pieces",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "destroyed_piece_and_survivor_recall",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "only_survivors_return_no_duplicate_replacement",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "recall_ownership",
+                "passed": true,
+                "detail": "held=5 selected=0 deployed=0 rebuilding=1 unique flight actors=0"
+              }
+            ]
+          },
+          {
+            "id": "zero_piece_core_offense",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "six_distinct_blocks_spend_six_pieces",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "core_tap_hits_without_guard_pieces",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "elite_directional_interception",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "actual_ai_enters_signalled_counter",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "rear_and_flank_do_not_consume_counter",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "physical_salvo_loses_exactly_one_other_pieces_hit",
+                "passed": true,
+                "detail": "Real outbound collision; active stance frozen after normal telegraph to isolate interception semantics."
+              }
+            ]
+          },
+          {
+            "id": "frost_launch_and_return_shatter",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "ordinary_enemy_hit_chills_without_destroying_piece",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "physical_return_consumes_chill_and_adds_shatter_damage",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "folding_shield_pose",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "idle_is_collapsed",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "guard_separates_physical_piece_sockets",
+                "passed": true,
+                "detail": "folded span 37.54cm, expanded 49.64cm"
+              },
+              {
+                "id": "release_refolds",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "full_charge_payoff",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "five_pieces_are_not_full_power",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "partial_volley_hits_and_keeps_armor",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "full_power_requires_long_hold",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "one_full_volley_commits_all_armor",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "release_stops_charge_component",
+                "passed": true,
+                "detail": "Lifecycle state only; NullRHI/nosound does not assess sound."
+              },
+              {
+                "id": "full_release_more_than_piece_count_bonus",
+                "passed": true,
+                "detail": "five-piece damage 168.5, full six 468.9; minimum 1.5x damage per piece"
+              },
+              {
+                "id": "one_shared_blast_hits_neighbor_once",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "blast_respects_cover",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "reachable_melee_chain",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "tap_reaches_enemy_275cm_away",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "unobstructed_melee_actually_steps_forward",
+                "passed": true,
+                "detail": "forward displacement 50.0cm"
+              },
+              {
+                "id": "second_tap_connects",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "third_tap_has_stronger_payoff",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "melee_and_forward_step_respect_wall",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "finite_lethal_storm_chain",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "lethal_root_arcs_to_two_without_recursive_chain",
+                "passed": true,
+                "detail": "Four physically visible, pre-marked enemies; lethal root and two lethal secondary hits; fourth untouched; isolated RoomId=-1."
+              }
+            ]
+          },
+          {
+            "id": "seeded_connected_route",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "same_seed_reproduces_route_and_gardens",
+                "passed": true,
+                "detail": "reverie-route:0,1/garden0:2/garden1:2/garden2:0"
+              },
+              {
+                "id": "alternate_seed_changes_layout",
+                "passed": true,
+                "detail": "Up to three nearby seeds sampled; not exhaustive procedural validation."
+              },
+              {
+                "id": "connected_collision_and_floor",
+                "passed": true,
+                "detail": "Three linked rooms; three capsule lanes per gateway/bridge, 102 floor probes, center/+-270cm gate sweeps blocked while closed and clear after opening, enclosing walls on every unconnected cardinal side. Gate collision restored after the isolated open fixture."
+              },
+              {
+                "id": "new_environment_assets_actually_instanced",
+                "passed": true,
+                "detail": "38 loaded/instanced Reverie/LivingWorld mesh families; two CrownTrees per room; no legacy paths or retired Blender tree/rock/cliff instances; new individual ward/gate actors. Missing: "
+              },
+              {
+                "id": "every_arch_serves_connected_route",
+                "passed": true,
+                "detail": "Exactly four gateway instances, each on a selected room edge with its open local-Y traversal axis aligned to one of two bridges."
+              },
+              {
+                "id": "spawn_combat_and_ward_approaches_clear",
+                "passed": true,
+                "detail": "30 capsule-overlap and physical floor probes at retained entry, encounter, practice and ward approach positions. "
+              },
+              {
+                "id": "terrace_stairs_have_physical_treads",
+                "passed": true,
+                "detail": "16/16 physical tread probes find successive20cm rises. No native-input traversal claim. "
+              }
+            ]
+          },
+          {
+            "id": "earned_rewards_and_safe_practice",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "encounter_0_starts_once",
+                "passed": true,
+                "detail": "ActivateRoom staging, actual ward interaction spawned 1 threats; repeated E leaves 1."
+              },
+              {
+                "id": "encounter_0_clear",
+                "passed": true,
+                "detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+              },
+              {
+                "id": "earned_Mirror_stays_in_room",
+                "passed": true,
+                "detail": "Clear, ward, actual choice/claim: one installation, retained pattern, same room, practice instruction and next gate opened."
+              },
+              {
+                "id": "Mirror_practice_is_safe",
+                "passed": true,
+                "detail": "2 actual practice targets survive lethal contact; RoomId=-1; no kill/clear progression."
+              },
+              {
+                "id": "encounter_1_starts_once",
+                "passed": true,
+                "detail": "ActivateRoom staging, actual ward interaction spawned 3 threats; repeated E leaves 3."
+              },
+              {
+                "id": "encounter_1_clear",
+                "passed": true,
+                "detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+              },
+              {
+                "id": "earned_Frost_stays_in_room",
+                "passed": true,
+                "detail": "Clear, ward, actual choice/claim: one installation, retained pattern, same room, practice instruction and next gate opened."
+              },
+              {
+                "id": "Frost_practice_is_safe",
+                "passed": true,
+                "detail": "2 actual practice targets survive lethal contact; RoomId=-1; no kill/clear progression."
+              }
+            ]
+          },
+          {
+            "id": "checkpoint_resume",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "save_with_piece_deployed",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "resume_restores_earned_build_at_connected_room_entry",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "crc_checkpoint_fallback",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "corrupt_latest_loads_previous_earned_checkpoint",
+                "passed": true,
+                "detail": ""
+              }
+            ]
+          },
+          {
+            "id": "completion_death_and_reset",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "encounter_2_starts_once",
+                "passed": true,
+                "detail": "ActivateRoom staging, actual ward interaction spawned 2 threats; repeated E leaves 2."
+              },
+              {
+                "id": "encounter_2_clear",
+                "passed": true,
+                "detail": "Actual spawned enemies; staged lethal combat hits; duplicate death notification rejected."
+              },
+              {
+                "id": "final_clear_allows_return_before_results",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "victory_is_inactive_saved_attempt",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "same_seed_retry_retains_patterns_resets_pieces",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "death_saves_inactive_attempt",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "death_retry_restores_usable_six_piece_shield",
+                "passed": true,
+                "detail": ""
+              },
+              {
+                "id": "reset_ownership",
+                "passed": true,
+                "detail": "held=6 selected=0 deployed=0 rebuilding=0 unique flight actors=0"
+              }
+            ]
+          }
+        ],
+        "not_run": "Ordinary inputs, graphics/audio/feel, performance and an unstaged full journey."
+      }
+    },
+    {
+      "name": "movement",
+      "editor_dll_sha256": "BB9B942B097036A9EAF9E4E62750EA478FDB4ED4F5292EDEBBED1354E074E370",
+      "private_report": ".local/anatomy-v6-movement-checks/Saved/QA/movement-checks.json",
+      "report_sha256": "BE96AA3EC3A2CAD52281015955D4BC25E3F53FD51AF3302195B5FD512438C048",
+      "result": {
+        "suite": "grounded-movement-v1",
+        "scope": "Ordinary world ticks and real CharacterMovement displacement/collision on a staged level runway and solid wall. Public sprint/dash APIs and AddMovementInput exercise stamina exhaustion/recovery, blocked movement, dash travel, cooldown/held edge, pause and run reset. Isolated QA journals backed up/restored. No legacy combat/route cases, native input, visual or feel evidence.",
+        "combat_tested": false,
+        "ordinary_play_tested": false,
+        "engine": "5.8.2-56702186+++UE5+Release-5.8",
+        "executable": "UnrealEditor",
+        "platform": "Windows",
+        "save_slot": "DreamboundQA_AnatomyMovement",
+        "seed": 552389,
+        "null_rhi": true,
+        "complete": true,
+        "aborted": false,
+        "last_step": 21,
+        "elapsed_wall_seconds": 9.57354000210762,
+        "elapsed_tick_seconds": 15.531864166259766,
+        "observed_ticks": 31006,
+        "minimum_tick_seconds": 0.0005000000237487257,
+        "maximum_tick_seconds": 0.023385901004076004,
+        "passed": 4,
+        "failed": 0,
+        "checks": [
+          {
+            "id": "isolated_setup",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "isolated_slot",
+                "passed": true,
+                "detail": "Requires -DBVerify and an explicit matching QA save-slot prefix."
+              },
+              {
+                "id": "recovery_world",
+                "passed": true,
+                "detail": "Actual world, possessed character, camera and three connected rooms."
+              },
+              {
+                "id": "journal_backup",
+                "passed": true,
+                "detail": "Prior QA bytes backed up; empty isolated profile established."
+              },
+              {
+                "id": "qa_journals_restored",
+                "passed": true,
+                "detail": "Previous QA bytes restored exactly; newly created slots removed; end-play saving suppressed."
+              }
+            ]
+          },
+          {
+            "id": "grounded_locomotion",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "stationary_sprint_and_real_walk",
+                "passed": true,
+                "detail": "Stationary Shift retained full stamina=1; physical walking after acceleration 590.0 cm/s over 0.551s."
+              },
+              {
+                "id": "sprint_exhausts_after_physical_run",
+                "passed": true,
+                "detail": "Full-bar run 5.000s, displacement/path 4414.7 cm, peak 885.0 cm/s, stamina 0.000; expected roughly five seconds at 885 cm/s after acceleration."
+              },
+              {
+                "id": "delayed_recovery_does_not_restart_held_sprint",
+                "passed": true,
+                "detail": "First observed recovery 0.808s; stamina 25.01 at 1.800s, speed 590.0 cm/s while original Shift remains held. Expected 0.8s delay then 25/s."
+              },
+              {
+                "id": "fresh_sprint_requires_recovered_threshold",
+                "passed": true,
+                "detail": "Fresh press above 20 produced physical sprint=1; second fresh press at 16.00 stamina stayed walking at 590.0 cm/s."
+              },
+              {
+                "id": "sprint_into_solid_wall_does_not_drain",
+                "passed": true,
+                "detail": "After physical contact, held movement/Shift for 1.000s: displacement 0.000 cm, stamina 91.76 -> 100.00."
+              }
+            ]
+          },
+          {
+            "id": "grounded_evasion",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "dash_moves_four_metres_without_hop",
+                "passed": true,
+                "detail": "Actual dash 0.240s, path 444.19 cm, peak 2114.6 cm/s, maximum vertical offset 0.000 cm, stamina 100.00 -> 100.00. Sampling includes the tick that reports source completion."
+              },
+              {
+                "id": "dash_cooldown_and_release_edge",
+                "passed": true,
+                "detail": "Early fresh press rejected=1; held repeat stayed still after cooldown=1; release/new press starts=1."
+              },
+              {
+                "id": "dash_stops_at_physical_wall",
+                "passed": true,
+                "detail": "Path 292.90 cm; capsule X 292.900, wall contact limit 293.000; vertical offset 0.000 cm, final speed 0.000 cm/s."
+              }
+            ]
+          },
+          {
+            "id": "movement_menu_and_reset",
+            "status": "passed",
+            "observations": [
+              {
+                "id": "pause_suspends_dash_and_resume_has_no_stale_input",
+                "passed": true,
+                "detail": "Active dash canceled/frozen with stamina and cooldown retained=1; resume drift 0.000 cm over 0.350s."
+              },
+              {
+                "id": "run_reset_clears_burst_resources_and_held_latches",
+                "passed": true,
+                "detail": "Reset during measured dash; clean resources/stillness=1, drift 0.000 cm; fresh dash accepted without stale held latch=1."
+              }
+            ]
+          }
+        ],
+        "not_run": "Combat/immunity, slopes/stairs/ledges, native keyboard/focus, ordinary play, graphics, audio, feel and performance."
+      }
+    }
+  ],
+  "independent_animation_review": "evidence/enemy-animation-qa.md",
+  "independent_anatomy_review": "art/organic-enemies/animation/anatomy-review.md",
+  "limits": [
+    "Animation judgment uses ordered actual rendered frames with timing and fresh official reference footage. No claim to have perceived continuous playback or played the reference games.",
+    "Fixed30Hz protected-target studies are not ordinary play or a hardware benchmark.",
+    "One runtime LOD; no independent eyelid/lip performance or ragdoll. Fine caster jaw/digit movement is not readable at10\u201311m in1280x800 player framing.",
+    "New Shipping studies recheck the changed Hunter. The other five Shipping studies use the preceding binary with unchanged creature animation; complete later Caster/Hunter reactions and deaths were reviewed on the identified Editor builds.",
+    "Native UI check belongs to the preceding Anatomy1 package and is not attributed to the final executable.",
+    "No new audio verdict, complete ordinary playthrough, all-terrain/all-direction assessment or minimum-hardware performance claim."
+  ],
+  "review_video": {
+    "scope": "Labelled actual consecutive30Hz frames from identified Shipping packages. Corrected Hunter uses0.5.3-anatomy2; unchanged other creature actions use0.5.3-anatomy1, explicitly attributed per clip. Silent protected-target studies; not ordinary play or a hardware benchmark.",
+    "clips": [
+      {
+        "source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 0,
+        "end": 114,
+        "label": "0.5.3 | Briarhide - carried pursuit",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 115,
+        "seconds": 3.8333333333333335,
+        "csv_sha256": "033d5ebe925d5f8de8831526d5eb3ab8ac0294d882180a309ea4a8a11b698f31"
+      },
+      {
+        "source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 126,
+        "end": 214,
+        "label": "Briarhide - load, strike and regain balance",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 89,
+        "seconds": 2.966666666666667,
+        "csv_sha256": "033d5ebe925d5f8de8831526d5eb3ab8ac0294d882180a309ea4a8a11b698f31"
+      },
+      {
+        "source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 411,
+        "end": 468,
+        "label": "Briarhide - attention leads the turn",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 58,
+        "seconds": 1.9333333333333333,
+        "csv_sha256": "033d5ebe925d5f8de8831526d5eb3ab8ac0294d882180a309ea4a8a11b698f31"
+      },
+      {
+        "source": ".local/anatomy-final-melee-player/Saved/EnemyMotionStudy/Melee-Player",
+        "start": 131,
+        "end": 210,
+        "label": "Briarhide - the player view",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 80,
+        "seconds": 2.6666666666666665,
+        "csv_sha256": "13ea9c798dc733f8ef03fa3e85fdd914c15160f1a9e225d2e9f7fd823eabce57"
+      },
+      {
+        "source": ".local/anatomy-final-caster-side/Saved/EnemyMotionStudy/Caster-Side",
+        "start": 10,
+        "end": 109,
+        "label": "MireSeer - gather, two releases, spent return",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 100,
+        "seconds": 3.3333333333333335,
+        "csv_sha256": "db35d2932fc0bf3d14c9c4676e81d152da1f6a71016d2fd82b08d6624674a56f"
+      },
+      {
+        "source": ".local/anatomy-final-caster-player/Saved/EnemyMotionStudy/Caster-Player",
+        "start": 44,
+        "end": 79,
+        "label": "MireSeer - casting at combat range",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 36,
+        "seconds": 1.2,
+        "csv_sha256": "880d5947ba94cfe65414ed92061cbaa28ca5d1c180d122f3903c8d0b173076b3"
+      },
+      {
+        "source": ".local/anatomy2-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+        "start": 46,
+        "end": 119,
+        "label": "Hunter - forward reach and absorbed landing",
+        "executable_sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39",
+        "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+        "package_version": "0.5.3-anatomy2",
+        "attribution": "Corrected Hunter in current Shipping package.",
+        "frames": 74,
+        "seconds": 2.466666666666667,
+        "csv_sha256": "244ef5a1c3fb4fb3f9e9ee712bb4fd8760ce1934bf64023c424565b47b8a98a9"
+      },
+      {
+        "source": ".local/anatomy2-final-hunter-player/Saved/EnemyMotionStudy/Hunter-Player",
+        "start": 135,
+        "end": 206,
+        "label": "Hunter - close contact, separation and next attack",
+        "executable_sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39",
+        "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+        "package_version": "0.5.3-anatomy2",
+        "attribution": "Corrected Hunter in current Shipping package.",
+        "frames": 72,
+        "seconds": 2.4,
+        "csv_sha256": "c9915552a332962e43e0c20e224f4939d60e810009cd679c495f63db03de9bc3"
+      },
+      {
+        "source": ".local/anatomy2-final-hunter-side/Saved/EnemyMotionStudy/Hunter-Side",
+        "start": 143,
+        "end": 246,
+        "label": "Hunter - landing, supporting backsteps and repeat",
+        "executable_sha256": "6F9ABDB137645398ED4D445D72FBD6A721B3913104721A402667C1F9A295EA39",
+        "source_commit": "1957fd1fdbe88a236f97ef20de07091014e201c5",
+        "package_version": "0.5.3-anatomy2",
+        "attribution": "Corrected Hunter in current Shipping package.",
+        "frames": 104,
+        "seconds": 3.466666666666667,
+        "csv_sha256": "244ef5a1c3fb4fb3f9e9ee712bb4fd8760ce1934bf64023c424565b47b8a98a9"
+      },
+      {
+        "source": ".local/anatomy-final-boss-front/Saved/EnemyMotionStudy/Boss-Front",
+        "start": 424,
+        "end": 528,
+        "label": "Guardian - overhead load, floor strike and recovery",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 105,
+        "seconds": 3.5,
+        "csv_sha256": "5c72ca11ebbb84ddea131cc879d5c3bbd265418fcb27398a30b317cda19c92f8"
+      },
+      {
+        "source": ".local/anatomy-final-boss-front/Saved/EnemyMotionStudy/Boss-Front",
+        "start": 600,
+        "end": 634,
+        "label": "Guardian - interrupted action and support catch",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 35,
+        "seconds": 1.1666666666666667,
+        "csv_sha256": "5c72ca11ebbb84ddea131cc879d5c3bbd265418fcb27398a30b317cda19c92f8"
+      },
+      {
+        "source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 597,
+        "end": 639,
+        "label": "Briarhide - hit reaction and renewed pursuit",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 43,
+        "seconds": 1.4333333333333333,
+        "csv_sha256": "033d5ebe925d5f8de8831526d5eb3ab8ac0294d882180a309ea4a8a11b698f31"
+      },
+      {
+        "source": ".local/anatomy-final-melee-side/Saved/EnemyMotionStudy/Melee-Side",
+        "start": 839,
+        "end": 935,
+        "label": "Briarhide - failed support, collapse and settle",
+        "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+        "source_commit": "3e92d8bf6267d839bfa15ecdf10debe2e52ba887",
+        "package_version": "0.5.3-anatomy1",
+        "attribution": "Unchanged creature performance in preceding Shipping package; subsequent runtime difference is restricted to Hunter contact/recovery movement.",
+        "frames": 97,
+        "seconds": 3.2333333333333334,
+        "csv_sha256": "033d5ebe925d5f8de8831526d5eb3ab8ac0294d882180a309ea4a8a11b698f31"
+      }
+    ],
+    "frames": 1008,
+    "seconds": 33.6,
+    "video_sha256": "45406f89c346a7ec71fce39c2710b284993c2ffb09952b546f6275b5afedbfd0",
+    "encoded_video_check": {
+      "decoded_frames": 1008,
+      "frames_per_second": 30.0,
+      "dimensions": [
+        1280,
+        840
+      ],
+      "clip_midpoint_frames": [
+        57,
+        159,
+        232,
+        301,
+        391,
+        459,
+        514,
+        587,
+        675,
+        780,
+        850,
+        889,
+        959
+      ],
+      "clip_midpoints_visually_inspected": true,
+      "inspection_note": "Root inspected all13 decoded clip midpoints; captions are legible above the game image and each expected scene is present. Motion decisions use the separately recorded ordered source-frame reviews."
+    }
+  },
+  "predecessor_native_review": {
+    "executable_sha256": "453D78EDEEB25786FD4A89764704723259DB777C23B9ECF1862268463B928383",
+    "invocation": ".local/anatomy-native-visible/Invocation.json",
+    "observed_utc": "2026-09-11T11:55:15.096843+00:00",
+    "method": "Windows Computer Use via @oai/sky; selected exact returned executable window. Native screenshots and input, separate QA profile.",
+    "save_slot": "DreamboundQA_AnatomyNative",
+    "requested_seed": 552389,
+    "displayed_new_expedition_seed": 867635,
+    "observations": [
+      "Native title displayed0.5.3-anatomy1 and Enter the courtyard.",
+      "Clicking Enter loaded the normal courtyard with full HUD and preferred player weapon. New expedition selected displayed seed867635.",
+      "E outside ward range did not start the encounter. Native LeftAlt dash moved the player into range and displayed evading/Begin the encounter.",
+      "Native E then activated one normal creature; the approaching organic enemy and its health bar were visible.",
+      "After the unattended interval, the normal defeat screen appeared. Individual live attack/hit frames were not observed during that interval.",
+      "Native Exit closed the test window."
+    ],
+    "limits": [
+      "Brief startup, interaction and encounter observations only. No complete ordinary playthrough, sustained held-input test, live action-quality or audio-quality verdict."
+    ],
+    "initial_hidden_attempt": "The first test process ran without a targetable visible window; it was terminated and relaunched visibly with a separate isolated UserDir. Its frames were not treated as native evidence."
+  },
+  "animation_assessment": {
+    "verdict": "Root and independent QA accept the four revised monster performances against the inspected official Monster Fantasy actions. No remaining material animation authoring correction identified in the reviewed complete performances.",
+    "qa_report_sha256": "0119F3A9F6FEB2FC35867FCA6B12D15D86DAD3D3904145447444DF98959F3F14",
+    "anatomy_review_sha256": "2DCEC67F89231D1BCCA7C415139CA6703AD72C886E8AC615F8BE5D15D7BD421E",
+    "reference": "https://store.steampowered.com/app/4713940/Monster_Fantasy/",
+    "comparison": "art/organic-enemies/animation/PERFORMANCE.md#anatomy-performance--current-comparative-decision",
+    "scope": "Ordered rendered-frame and timing judgment, with player camera checks and proportionate Shipping reproduction; no claim of owner acceptance, perceived continuous playback or complete ordinary play."
+  },
+  "delivery_checks": {
+    "local_markdown_links_checked": 84,
+    "missing_local_link_targets": [],
+    "owner_input_preserved": true,
+    "powershell_scripts_parsed": [
+      "Build.ps1",
+      "Start-Demo.ps1",
+      "Capture-EnemyMotion.ps1",
+      "Capture-PlayerMotion.ps1"
+    ],
+    "changed_tracked_files_whitespace_check": "passed"
+  }
+}
