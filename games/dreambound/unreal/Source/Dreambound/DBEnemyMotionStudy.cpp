@@ -51,6 +51,7 @@ void ADBEnemyMotionStudy::BeginPlay()
     bPassiveIdle = FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyIdle"));
     bAudioCapture = FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyAudio"));
     bPauseStudy = bAudioCapture && FParse::Param(FCommandLine::Get(), TEXT("DBCreatureStudyPause"));
+    bCombatPressure = FParse::Param(FCommandLine::Get(), TEXT("CombatPressure"));
     EDBEnemyKind Kind = KindName == TEXT("Caster") ? EDBEnemyKind::Caster
         : KindName == TEXT("Hunter") ? EDBEnemyKind::Hunter
         : KindName == TEXT("Boss") ? EDBEnemyKind::Boss : EDBEnemyKind::Melee;
@@ -59,6 +60,10 @@ void ADBEnemyMotionStudy::BeginPlay()
         && ViewName != TEXT("Detail") && ViewName != TEXT("Impact")) ViewName = TEXT("Side");
     Output = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir() / TEXT("EnemyMotionStudy") / (KindName + TEXT("-") + ViewName));
     IFileManager::Get().MakeDirectory(*Output, true);
+    if (bCombatPressure && (Kind != EDBEnemyKind::Caster || bPassiveIdle || bPauseStudy || Duration < 24.f))
+    {
+        FailureReason = TEXT("CombatPressure requires a Caster study of at least 24 seconds, without idle/pause"); Finish(true); return;
+    }
     if (!Mode || !Mode->Player || Mode->Rooms.IsEmpty())
     {
         FailureReason = TEXT("Study setup is missing the game mode, player or room"); Finish(true); return;
@@ -109,6 +114,7 @@ void ADBEnemyMotionStudy::BeginPlay()
     Samples = TEXT("frame,simulation_seconds,wall_seconds,dt,kind,phase,tell_remaining,tell_duration,aim_locked,vulnerable,health,speed_cm_s,visible_yaw,movement_blend,x,y,z,left_planted,right_planted,left_target_x,left_target_y,left_target_z,right_target_x,right_target_y,right_target_z,left_foot_x,left_foot_y,left_foot_z,right_foot_x,right_foot_y,right_foot_z,left_error_cm,right_error_cm,parent_unit_scale,projectiles,player_health,attack,attack_elapsed,camera_distance,camera_adjusted,right_hand_x,right_hand_y,right_hand_z,left_hand_x,left_hand_y,left_hand_z,right_shoulder_x,right_shoulder_y,right_shoulder_z,facing_x,facing_y,facing_z,pelvis_x,pelvis_y,pelvis_z,head_x,head_y,head_z,player_x,player_y,player_z,player_distance_cm,left_hand_target_x,left_hand_target_y,left_hand_target_z,right_hand_target_x,right_hand_target_y,right_hand_target_z,left_hand_error_cm,right_hand_error_cm,left_claw_contact_x,left_claw_contact_y,left_claw_contact_z,right_claw_contact_x,right_claw_contact_y,right_claw_contact_z,pounce_blocked,blocked_pounce_elapsed\n");
     Samples.RemoveFromEnd(TEXT("\n"));
     Samples += TEXT(",audio_seconds,paused\n");
+    if (bCombatPressure) { Samples.RemoveFromEnd(TEXT("\n")); Samples += TEXT(",combat_intent,target_visible,incoming_threat\n"); }
     UpdateCamera(0.f);
 }
 
@@ -232,6 +238,13 @@ void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
     PlayerHealthBeforeRestore = Player->Health;
     Player->Health = Player->MaxHealth;
     Player->bDead = false;
+    if (bCombatPressure)
+    {
+        UpdateCombatPressure(DeltaSeconds);
+        RecordFrame(DeltaSeconds); Time += DeltaSeconds;
+        if (Time >= Duration) Finish(false);
+        return;
+    }
     if (bPassiveIdle)
     {
         // Exercise a real dormant creature outside the active room. Its normal
@@ -291,6 +304,52 @@ void ADBEnemyMotionStudy::Tick(float DeltaSeconds)
     if (Time >= Duration) Finish(false);
 }
 
+void ADBEnemyMotionStudy::UpdateCombatPressure(float DeltaSeconds)
+{
+    if (Creature->bDead) return;
+    if (AController* Controller = Player->GetController())
+        Controller->SetControlRotation((Creature->GetActorLocation() + FVector(0,0,15) - Player->GetPawnViewLocation()).Rotation());
+    if (Time >= 1.f && !bPressureGuardStarted) { Player->PressGuard(); bPressureGuardStarted = true; }
+    if (Time >= 6.f && !bPressureGuardReleased) { Player->ReleaseGuard(); bPressureGuardReleased = true; }
+    if (Time >= 1.f && Time < 6.f && Player->bGuarding) PressureGuardSeconds += DeltaSeconds;
+    if (Time >= 6.f && Time < 18.f)
+    {
+        const FVector Away = (Player->GetActorLocation() - Creature->GetActorLocation()).GetSafeNormal2D();
+        FVector Goal = Creature->GetActorLocation() + Away * (Time < 12.f ? 180.f : 650.f);
+        Goal.Z = Player->GetActorLocation().Z;
+        Player->SetActorLocation(FMath::VInterpConstantTo(Player->GetActorLocation(),Goal,DeltaSeconds,Time < 12.f ? 440.f : 340.f),true);
+    }
+    // Select exactly one real piece. A committed caster is never forced back to movement.
+    if (Time >= 12.f && Time < 19.f && PressureThrowTime < 0.f && PressureChargeTime < 0.f
+        && Creature->Phase == EDBEnemyPhase::Approach && Creature->GetVelocity().SizeSquared2D() > FMath::Square(30.f)
+        && Player->AttackRecovery <= 0.f && Player->GetAttachedPieceCount() > 0)
+    {
+        Player->PressFire(); PressureChargeTime = Time;
+    }
+    if (PressureChargeTime >= 0.f)
+    {
+        if (Creature->Phase != EDBEnemyPhase::Approach || Player->GetSelectedPieceCount() > 1 || Time >= 19.f)
+        {
+            Player->PressGuard(); Player->ReleaseGuard(); PressureChargeTime = -1.f;
+        }
+        else if (Player->GetSelectedPieceCount() == 1 && Time-PressureChargeTime >= ADBCharacter::GetSelectionHoldTime(1))
+        {
+            Player->ReleaseFire(); PressureChargeTime = -1.f;
+            for (int32 Index = 0; Index < Player->GetShieldPieceCount(); ++Index)
+                if (Player->GetPieceState(Index) == EDBShieldPieceState::Outbound && Player->GetPieceFlight(Index)) ++PressureThrownPieces;
+            if (PressureThrownPieces > 0) PressureThrowTime = Time;
+        }
+    }
+    if (Time >= 20.f && !bFrontHit)
+    {
+        // Labeled synthetic contact isolates wounded behavior; the earlier throw uses real collision.
+        FDBHit Hit; Hit.Damage = 18.f; Hit.bImpact = true; Hit.InstigatorActor = Player;
+        Hit.Source = Player->GetActorLocation(); Hit.Direction = (Creature->GetActorLocation()-Hit.Source).GetSafeNormal();
+        PressureHitBefore = Creature->Health; Creature->ApplyCombatHit(Hit); PressureHitAfter = Creature->Health;
+        PressureHitFrame = Frame; bFrontHit = true;
+    }
+}
+
 void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
 {
     double AudioTime=-1;
@@ -342,6 +401,11 @@ void ADBEnemyMotionStudy::RecordFrame(float DeltaSeconds)
     for (const FVector& Contact : {State.left_claw_contact_world,State.right_claw_contact_world})
         Samples += FString::Printf(TEXT(",%.4f,%.4f,%.4f"),Contact.X,Contact.Y,Contact.Z);
     Samples += FString::Printf(TEXT(",%d,%.5f,%.6f,%d\n"),State.pounce_blocked ? 1 : 0,State.blocked_pounce_elapsed,AudioTime,Mode->bPaused?1:0);
+    if (bCombatPressure)
+    {
+        Samples.RemoveFromEnd(TEXT("\n"));
+        Samples += FString::Printf(TEXT(",%s,%d,%.4f\n"),*State.combat_intent,State.target_visible?1:0,State.incoming_threat);
+    }
     if (bAudioCapture) LastAudioFrameAt=AudioTime;
     const FString FramePath=Output/FString::Printf(TEXT("Frame_%05d.%s"),Frame++,bAudioCapture ? TEXT("jpg") : TEXT("png"));
     PendingAudioFrame=FramePath;
@@ -386,6 +450,17 @@ void ADBEnemyMotionStudy::Finish(bool bAborted)
         ? TEXT("performance") : TEXT("dread"));
     Report->SetStringField(TEXT("target_path"),bPassiveIdle ? TEXT("passive-idle")
         : KindName == TEXT("Boss") ? TEXT("boss-approach-ranged-close-v3") : TEXT("travel-turn-hit-death-v1"));
+    if (bCombatPressure)
+    {
+        Report->SetStringField(TEXT("target_path"),TEXT("combat-pressure-v1"));
+        Report->SetStringField(TEXT("scope"),TEXT("Ordinary non-practice caster AI; protected scripted player holds real guard 1-6s, pursues 6-12s, opens spacing 12-18s, attempts one real piece throw during Approach 12-19s. Caster receives one synthetic 18-damage contact at 20s, followed by time to reengage. Movement is swept; no enemy phase/collision override or enemy invulnerability. Read event fields for achieved coverage. Not ordinary player input or a difficulty/performance benchmark."));
+        Report->SetNumberField(TEXT("pressure_guard_seconds"),PressureGuardSeconds);
+        Report->SetNumberField(TEXT("pressure_throw_seconds"),PressureThrowTime);
+        Report->SetNumberField(TEXT("pressure_thrown_pieces"),PressureThrownPieces);
+        Report->SetNumberField(TEXT("pressure_hit_frame"),PressureHitFrame);
+        Report->SetNumberField(TEXT("pressure_hit_health_before"),PressureHitBefore);
+        Report->SetNumberField(TEXT("pressure_hit_health_after"),PressureHitAfter);
+    }
     Report->SetNumberField(TEXT("scripted_player_close_relocation_frame"),BossCloseTargetFrame);
     Report->SetBoolField(TEXT("foot_target_markers"),bFootMarkers);
     Report->SetBoolField(TEXT("claw_skin_contact_markers"),bFootMarkers);

@@ -51,6 +51,9 @@ struct FDBEnemyAnimationDebug
     bool pounce_blocked = false;
     float blocked_pounce_elapsed = 0.f;
     FString attack_name;
+    FString combat_intent;
+    bool target_visible = false;
+    float incoming_threat = 0.f;
 };
 
 /** A room-bound physical opponent. Movement never requires a baked navigation mesh. */
@@ -95,6 +98,7 @@ protected:
 
 private:
     enum class EAttack : uint8 { None, Swing, Bolt, Lunge, Salvo, Slam, Ground, Intercept };
+    enum class ECasterIntent : uint8 { Hunt, Hold, Flank, Withdraw, Evade };
 
     UPROPERTY() TObjectPtr<USceneComponent> VisualRoot;
     UPROPERTY() TObjectPtr<UPoseableMeshComponent> OrganicMesh;
@@ -253,6 +257,32 @@ private:
     FVector ReactionLocalDirection = -FVector::ForwardVector;
     FVector DeathLocalDirection = -FVector::ForwardVector;
     FVector SteeringDirection = FVector::ZeroVector;
+    ECasterIntent CasterIntent = ECasterIntent::Hunt;
+    struct FObservedShield
+    {
+        TWeakObjectPtr<AActor> Actor;
+        FVector Position = FVector::ZeroVector;
+        float Time = 0.f;
+    };
+    TArray<FObservedShield> ObservedShields;
+    FVector LastSeenPlayer = FVector::ZeroVector;
+    FVector SeenPlayerVelocity = FVector::ZeroVector;
+    FVector SeenPlayerAim = FVector::ForwardVector;
+    FVector IncomingDirection = FVector::ZeroVector;
+    float SenseTime = 0.f;
+    float CasterClock = 0.f;
+    float DecisionTime = 0.f;
+    float IncomingThreatTime = 0.f;
+    float ThreatReactionTime = 0.f;
+    float EvadeCooldown = 0.f;
+    float WithdrawCooldown = 0.f;
+    float FlankCooldown = 0.f;
+    float GuardPressureTime = 0.f;
+    float RecentDamageTime = 0.f;
+    float CasterMoveDuration = 0.f;
+    bool bTargetVisible = false;
+    bool bTargetGuarding = false;
+    bool bHasTargetMemory = false;
     float DifficultyScale = 1.f;
     float BaseSpeed = 245.f;
     float AttackDamage = 18.f;
@@ -312,7 +342,9 @@ private:
     bool TraceOrganicFoot(FVector Candidate, float AnkleHeight, FVector& Position, FVector& Normal) const;
     void UpdateDeath(float DeltaSeconds);
     void ApplyHitReaction(const FDBHit& Hit);
-    void ChooseRepositionTarget();
+    bool ChooseCasterPosition(ECasterIntent Intent);
+    void UpdateCasterSenses(float DeltaSeconds);
+    void UpdateCasterCombat(float DeltaSeconds);
     void UpdateWarningGeometry();
     void UpdateStatusEffects(float DeltaSeconds);
     void UpdateElementVisuals(float DeltaSeconds);

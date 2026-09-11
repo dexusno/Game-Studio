@@ -13,13 +13,15 @@ param(
  [switch]$Idle,
  [switch]$WithAudio,
  [switch]$PreviewAudio,
- [switch]$PauseStudy
+ [switch]$PauseStudy,
+ [switch]$CombatPressure
 )
 $ErrorActionPreference='Stop'
 if($FootMarkers -and $Build -ne 'Editor'){throw 'Foot markers require an Editor capture.'}
 if($Surface -ne 'Lit' -and $Build -ne 'Editor'){throw 'Surface diagnostics require an Editor capture.'}
 if($PreviewAudio -and ($Build -ne 'Editor' -or -not $WithAudio)){throw 'Private audio requires an Editor capture with WithAudio.'}
 if($PauseStudy -and -not $WithAudio){throw 'PauseStudy requires a real-time WithAudio capture.'}
+if($CombatPressure -and ($Creature -ne 'Caster' -or $Seconds -lt 24 -or $Idle -or $PauseStudy)){throw 'CombatPressure requires Caster, at least 24 seconds, and no Idle/PauseStudy.'}
 $motionGameRoot=Split-Path -Parent $PSScriptRoot
 $motionRepoRoot=[IO.Path]::GetFullPath((Join-Path $motionGameRoot '../..'))
 $motionCaptureRoot=[IO.Path]::GetFullPath($CaptureDirectory)
@@ -44,6 +46,7 @@ $motionArguments+=@('-DBEnemyMotionStudy',('-DBCreature='+$Creature),('-DBCreatu
 if($WithAudio){$motionArguments+='-DBCreatureStudyAudio'}else{$motionArguments+='-NoSound'}
 if($PreviewAudio){$motionArguments+='-DBOrganicFireAudioPreview'}
 if($PauseStudy){$motionArguments+='-DBCreatureStudyPause'}
+if($CombatPressure){$motionArguments+='-CombatPressure'}
 if($FootMarkers){$motionArguments+='-DBFootMarkers'}
 if($Idle){$motionArguments+='-DBCreatureStudyIdle'}
 if($Rig -eq 'Anatomy'){$motionArguments+='-DBAnatomyCreatureRig'}
@@ -55,6 +58,7 @@ $motionProcess=Start-Process -FilePath $motionExecutable -ArgumentList $motionAr
 $motionIdentity=@{build=$Build;creature=$Creature;view=$View;rig=$Rig;surface=$Surface;passive_idle=[bool]$Idle;audio=[bool]$WithAudio;private_audio_audition=[bool]$PreviewAudio;pause_study=[bool]$PauseStudy;pid=$motionProcess.Id;executable=$motionExecutable;
  executable_sha256=(Get-FileHash -LiteralPath $motionExecutable -Algorithm SHA256).Hash;
  captured_utc=(Get-Date).ToUniversalTime().ToString('o');arguments=$motionArguments}
+if($CombatPressure){$motionIdentity.combat_pressure=$true}
 if($Build -eq 'Editor'){
  $motionDll=Join-Path $motionGameRoot 'unreal/Binaries/Win64/UnrealEditor-Dreambound.dll'
  $motionIdentity.game_dll_sha256=(Get-FileHash -LiteralPath $motionDll -Algorithm SHA256).Hash

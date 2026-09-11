@@ -6,6 +6,7 @@
 #include "DBCombatEffect.h"
 #include "DBGameMode.h"
 #include "DBProjectile.h"
+#include "DBThrownShield.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/AudioComponent.h"
 #include "Components/PointLightComponent.h"
@@ -211,6 +212,11 @@ void ADBEnemy::Configure(EDBEnemyKind InKind, int32 InRoomId, float Difficulty)
     bDeathNotified = false;
     bDeathLanded = false;
     bNeedsReposition = bRepositioning = false;
+    CasterIntent = ECasterIntent::Hunt;
+    ObservedShields.Reset();
+    SenseTime = CasterClock = DecisionTime = IncomingThreatTime = ThreatReactionTime = 0.f;
+    EvadeCooldown = WithdrawCooldown = FlankCooldown = GuardPressureTime = RecentDamageTime = 0.f;
+    bTargetVisible = bTargetGuarding = bHasTargetMemory = false;
     bHitAttempted = false;
     bChillStaggered = false;
     bAimLocked = false;
@@ -461,6 +467,9 @@ void ADBEnemy::Tick(float DeltaSeconds)
     }
     if (!IsRoomActive())
     {
+        ObservedShields.Reset();
+        IncomingThreatTime = GuardPressureTime = 0.f;
+        bRepositioning = bTargetVisible = bHasTargetMemory = false;
         StopOrganicFire(true);
         if (Kind == EDBEnemyKind::Caster && Attack == EAttack::Bolt
             && (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack))
@@ -487,6 +496,9 @@ void ADBEnemy::Tick(float DeltaSeconds)
     if (!Target.IsValid()) Target = Cast<ADBCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
     if (!Target.IsValid() || Target->bDead || FVector::DistSquared2D(GetActorLocation(), Target->GetActorLocation()) > FMath::Square(3600.f))
     {
+        ObservedShields.Reset();
+        IncomingThreatTime = GuardPressureTime = 0.f;
+        bRepositioning = bTargetVisible = bHasTargetMemory = false;
         GetCharacterMovement()->StopMovementImmediately();
         Phase = EDBEnemyPhase::Dormant;
         UpdateVisuals(Dt);
@@ -513,6 +525,7 @@ void ADBEnemy::Tick(float DeltaSeconds)
         UpdateVisuals(Dt);
         return;
     }
+    if (Kind == EDBEnemyKind::Caster) UpdateCasterSenses(Dt);
     switch (Phase)
     {
     case EDBEnemyPhase::Approach: UpdateApproach(Dt); break;
@@ -616,36 +629,194 @@ void ADBEnemy::MoveDirection(FVector Direction, float DeltaSeconds, float SpeedM
     else ConsumeMovementInputVector();
 }
 
-void ADBEnemy::ChooseRepositionTarget()
+void ADBEnemy::UpdateCasterSenses(float DeltaSeconds)
 {
     if (!Target.IsValid()) return;
+    CasterClock += DeltaSeconds;
+    SenseTime -= DeltaSeconds;
+    DecisionTime = FMath::Max(0.f, DecisionTime - DeltaSeconds);
+    EvadeCooldown = FMath::Max(0.f, EvadeCooldown - DeltaSeconds);
+    WithdrawCooldown = FMath::Max(0.f, WithdrawCooldown - DeltaSeconds);
+    FlankCooldown = FMath::Max(0.f, FlankCooldown - DeltaSeconds);
+    RecentDamageTime = FMath::Max(0.f, RecentDamageTime - DeltaSeconds);
+    IncomingThreatTime = FMath::Max(0.f, IncomingThreatTime - DeltaSeconds);
+    ThreatReactionTime = FMath::Max(0.f, ThreatReactionTime - DeltaSeconds);
+    GuardPressureTime = bTargetVisible && bTargetGuarding ? FMath::Min(3.f, GuardPressureTime + DeltaSeconds) : 0.f;
+    if (SenseTime > 0.f) return;
+    SenseTime = .12f;
     const FVector PlayerPosition = Target->GetActorLocation();
-    const FVector Radial = (GetActorLocation() - PlayerPosition).GetSafeNormal2D();
+    bTargetVisible = HasSightTo(PlayerPosition, Target.Get());
+    // Entry gives one last-known position. Thereafter walls break tracking;
+    // only another sighting updates the memory.
+    if (!bHasTargetMemory || bTargetVisible) LastSeenPlayer = PlayerPosition;
+    bHasTargetMemory = true;
+    bTargetGuarding = bTargetVisible && Target->bGuarding;
+    SeenPlayerVelocity = bTargetVisible ? Target->GetVelocity().GetClampedToMaxSize(650.f) : FVector::ZeroVector;
+    if (bTargetVisible) SeenPlayerAim = Target->GetAimDirection().GetSafeNormal2D();
+
+    TArray<FObservedShield> VisibleShields;
+    float EarliestThreat = 1.f;
+    for (int32 Index = 0; Index < Target->GetShieldPieceCount(); ++Index)
+    {
+        ADBThrownShield* Piece = Target->GetPieceFlight(Index);
+        if (!IsValid(Piece) || Target->GetPieceState(Index) != EDBShieldPieceState::Outbound) continue;
+        const FVector Position = Piece->GetActorLocation();
+        const FVector ToPiece = Position - GetActorLocation();
+        if (ToPiece.SizeSquared() > FMath::Square(1600.f)
+            || FVector::DotProduct(ToPiece.GetSafeNormal2D(), GetActorForwardVector()) < -.15f
+            || !HasSightTo(Position, Piece)) continue;
+        const FObservedShield* Previous = ObservedShields.FindByPredicate(
+            [Piece](const FObservedShield& Sample) { return Sample.Actor.Get() == Piece; });
+        if (Previous && CasterClock > Previous->Time)
+        {
+            // Manually moved shields have no AActor velocity. Observe their
+            // actual visible travel; never dodge the player's button press.
+            const FVector Velocity = (Position - Previous->Position) / (CasterClock - Previous->Time);
+            const float SpeedSquared = Velocity.SizeSquared();
+            if (SpeedSquared > FMath::Square(200.f))
+            {
+                const FVector ToBody = GetActorLocation() - Position;
+                const float Arrival = FVector::DotProduct(ToBody, Velocity) / SpeedSquared;
+                if (Arrival > .08f && Arrival < .9f && Arrival < EarliestThreat
+                    && (ToBody - Velocity * Arrival).SizeSquared() < FMath::Square(130.f))
+                {
+                    EarliestThreat = Arrival;
+                    IncomingDirection = Velocity.GetSafeNormal2D();
+                }
+            }
+        }
+        FObservedShield Sample;
+        Sample.Actor = Piece; Sample.Position = Position; Sample.Time = CasterClock;
+        VisibleShields.Add(Sample);
+    }
+    ObservedShields = MoveTemp(VisibleShields);
+    if (EarliestThreat < 1.f)
+    {
+        if (IncomingThreatTime <= 0.f) ThreatReactionTime = .20f;
+        IncomingThreatTime = .27f;
+    }
+}
+
+bool ADBEnemy::ChooseCasterPosition(ECasterIntent Intent)
+{
+    const FVector Start = GetActorLocation();
+    const FVector Away = (Start - LastSeenPlayer).GetSafeNormal2D();
+    const FVector Side = FVector::CrossProduct(
+        Intent == ECasterIntent::Evade ? IncomingDirection : Away, FVector::UpVector) * AvoidanceSide;
+    const FVector Basis = Intent == ECasterIntent::Withdraw ? Away : Intent == ECasterIntent::Hunt ? -Away : Side;
+    const float CurrentRange = FVector::Dist2D(Start, LastSeenPlayer);
+    const float CurrentGuardAngle = FVector::DotProduct(Away, SeenPlayerAim);
+    const bool bWounded = Health < MaxHealth * .45f;
     float BestScore = TNumericLimits<float>::Max();
-    FVector Best = KeepInsideArena(GetActorLocation() + FVector::CrossProduct(Radial, FVector::UpVector) * 380.f * AvoidanceSide);
+    FVector Best = Start;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(DBCasterPosition), false, this);
     Params.AddIgnoredActor(Target.Get());
-    for (float Angle : { 0.f, 28.f, -28.f, 50.f, -50.f, 75.f, -75.f })
+    const float Radius = GetCapsuleComponent()->GetScaledCapsuleRadius();
+    const float Half = GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
+    for (float Length : { Intent == ECasterIntent::Evade ? 220.f : 380.f,
+        Intent == ECasterIntent::Evade ? 340.f : 650.f })
+    for (float Angle : { 0.f, 35.f, -35.f, 70.f, -70.f, 110.f, -110.f, 180.f })
     {
-        FVector Candidate = KeepInsideArena(PlayerPosition + Radial.RotateAngleAxis(Angle * AvoidanceSide, FVector::UpVector) * 850.f);
-        Candidate.Z = GetActorLocation().Z;
-        const float Travel = FVector::Dist2D(Candidate, GetActorLocation());
-        if (Travel < 180.f) continue;
-        if (GetWorld()->OverlapBlockingTestByChannel(Candidate, FQuat::Identity, ECC_Visibility,
-            FCollisionShape::MakeCapsule(GetCapsuleComponent()->GetScaledCapsuleRadius(),
-                GetCapsuleComponent()->GetScaledCapsuleHalfHeight() - 12.f), Params)) continue;
-        FHitResult CoverHit, RouteHit;
-        const bool bCovered = GetWorld()->LineTraceSingleByChannel(CoverHit, Candidate + FVector(0.f,0.f,28.f),
-            PlayerPosition, ECC_Visibility, Params);
-        const bool bBlockedRoute = GetWorld()->SweepSingleByChannel(RouteHit, GetActorLocation() + FVector(0.f,0.f,8.f),
+        FVector Candidate = KeepInsideArena(Start + Basis.RotateAngleAxis(Angle, FVector::UpVector) * Length);
+        const float Travel = FVector::Dist2D(Candidate, Start);
+        if (Travel < 150.f) continue;
+        FHitResult FloorHit, RouteHit, CoverHit;
+        if (!GetWorld()->LineTraceSingleByChannel(FloorHit, Candidate + FVector(0.f,0.f,80.f),
+            Candidate - FVector(0.f,0.f,Half + 85.f), ECC_WorldStatic, Params)
+            || FloorHit.ImpactNormal.Z < .7f || FMath::Abs(FloorHit.ImpactPoint.Z - (Start.Z-Half)) > 75.f) continue;
+        Candidate.Z = FloorHit.ImpactPoint.Z + Half + 2.f;
+        if (GetWorld()->SweepSingleByChannel(RouteHit, Start + FVector(0.f,0.f,8.f),
             Candidate + FVector(0.f,0.f,8.f), FQuat::Identity, ECC_Visibility,
-            FCollisionShape::MakeSphere(GetCapsuleComponent()->GetScaledCapsuleRadius()), Params);
-        const float Score = FMath::Abs(Travel - 420.f) + (bCovered ? 550.f : 0.f) + (bBlockedRoute ? 300.f : 0.f);
+            FCollisionShape::MakeCapsule(Radius*.9f,Half-14.f), Params)) continue;
+        const bool bCovered = GetWorld()->LineTraceSingleByChannel(CoverHit, Candidate + FVector(0.f,0.f,28.f),
+            LastSeenPlayer, ECC_Visibility, Params);
+        const float Range = FVector::Dist2D(Candidate, LastSeenPlayer);
+        const float GuardAngle = FVector::DotProduct((Candidate-LastSeenPlayer).GetSafeNormal2D(), SeenPlayerAim);
+        float Score = Travel * .15f;
+        if (Intent == ECasterIntent::Evade)
+        {
+            const float Clearance = FMath::Abs(FVector::DotProduct(Candidate-Start,Side));
+            if (Clearance < 150.f || Range < 240.f) continue;
+            Score += FMath::Abs(Clearance-250.f) + FMath::Abs(Range-800.f)*.12f;
+        }
+        else if (Intent == ECasterIntent::Withdraw)
+        {
+            if (Range < CurrentRange+110.f) continue;
+            Score += FMath::Abs(Range-(bWounded ? 1050.f : 800.f))*.7f + (bCovered ? 90.f : 0.f);
+        }
+        else if (Intent == ECasterIntent::Flank)
+        {
+            if (Range < 400.f || GuardAngle > CurrentGuardAngle-.12f || bCovered) continue;
+            Score += FMath::Abs(Range-780.f)*.4f + FMath::Max(0.f,GuardAngle)*650.f;
+        }
+        else Score += FMath::Abs(Range-(bTargetVisible ? 850.f : 250.f)) + (bCovered ? 500.f : 0.f);
         if (Score < BestScore) { BestScore = Score; Best = Candidate; }
     }
+    DecisionTime = .3f;
+    if (BestScore == TNumericLimits<float>::Max()) return false;
     RepositionTarget = Best;
     RepositionTime = 0.f;
+    CasterMoveDuration = Intent == ECasterIntent::Evade ? 1.55f : 3.1f;
+    CasterIntent = Intent;
+    SteeringTime = 0.f;
     bRepositioning = true;
+    return true;
+}
+
+void ADBEnemy::UpdateCasterCombat(float DeltaSeconds)
+{
+    const FVector ToPlayer = LastSeenPlayer - GetActorLocation();
+    const float Distance = ToPlayer.Size2D();
+    // Only Approach makes these decisions. Gathering, throwing and recovering
+    // remain commitments that cannot be cancelled to dodge a late attack.
+    if (IncomingThreatTime > 0.f && ThreatReactionTime <= 0.f && EvadeCooldown <= 0.f)
+    {
+        EvadeCooldown = 4.5f;
+        ChooseCasterPosition(ECasterIntent::Evade);
+    }
+    else if (bTargetVisible && WithdrawCooldown <= 0.f
+        && (Distance < 480.f || (bNeedsReposition && RecentDamageTime > 0.f && Distance < 1050.f)))
+    {
+        WithdrawCooldown = 6.5f;
+        bNeedsReposition = false;
+        ChooseCasterPosition(ECasterIntent::Withdraw);
+    }
+    if (bRepositioning)
+    {
+        RepositionTime += DeltaSeconds;
+        const bool bReached = FVector::DistSquared2D(GetActorLocation(),RepositionTarget) < FMath::Square(65.f);
+        const bool bEnoughSpace = CasterIntent == ECasterIntent::Withdraw && RepositionTime > .8f
+            && Distance > (Health < MaxHealth*.45f ? 970.f : 760.f);
+        if (!bReached && !bEnoughSpace && RepositionTime < CasterMoveDuration)
+        {
+            MoveToward(RepositionTarget,DeltaSeconds,CasterIntent == ECasterIntent::Evade ? 1.4f
+                : CasterIntent == ECasterIntent::Withdraw ? 1.15f : 1.f);
+            return;
+        }
+        bRepositioning = false;
+        DecisionTime = .35f;
+    }
+    if (!bTargetVisible || Distance > 1120.f)
+    {
+        CasterIntent = ECasterIntent::Hunt;
+        if (DecisionTime <= 0.f && ChooseCasterPosition(ECasterIntent::Hunt)) return;
+        if (Distance > 180.f) { MoveToward(LastSeenPlayer,DeltaSeconds); return; }
+    }
+    else if (GuardPressureTime > 1.f && FlankCooldown <= 0.f && DecisionTime <= 0.f)
+    {
+        // One better angle, then fight from it even if the guard tracks us.
+        // Holding a shield must not turn the encounter into endless circling.
+        FlankCooldown = 6.f;
+        if (ChooseCasterPosition(ECasterIntent::Flank)) return;
+    }
+    CasterIntent = ECasterIntent::Hold;
+    ConsumeMovementInputVector();
+    const FRotator FacePlayer(0.f,ToPlayer.Rotation().Yaw,0.f);
+    SetActorRotation(FMath::RInterpConstantTo(GetActorRotation(),FacePlayer,DeltaSeconds,150.f));
+    const float FacingError = FMath::Abs(FMath::FindDeltaAngleDegrees(
+        bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw,FacePlayer.Yaw));
+    if (bTargetVisible && Cooldown <= 0.f && Distance < 1180.f && FacingError < 25.f
+        && GetVelocity().SizeSquared2D() < FMath::Square(45.f)) BeginTell(EAttack::Bolt,1.35f);
 }
 
 void ADBEnemy::UpdateApproach(float DeltaSeconds)
@@ -656,26 +827,7 @@ void ADBEnemy::UpdateApproach(float DeltaSeconds)
     const bool bSight = HasSightTo(Target->GetActorLocation(), Target.Get());
     if (Kind == EDBEnemyKind::Caster)
     {
-        if (Distance < 440.f) bNeedsReposition = true;
-        if (bNeedsReposition)
-        {
-            if (!bRepositioning) ChooseRepositionTarget();
-            RepositionTime += DeltaSeconds;
-            if (FVector::DistSquared2D(GetActorLocation(), RepositionTarget) > FMath::Square(85.f) && RepositionTime < 3.2f)
-            { MoveToward(RepositionTarget, DeltaSeconds); return; }
-            bNeedsReposition = bRepositioning = false;
-        }
-        if (Distance > 1120.f || !bSight)
-        { MoveToward(Target->GetActorLocation(), DeltaSeconds); return; }
-        // A good firing position is worth holding. Face the threat and let the
-        // feet settle instead of orbiting mechanically through every cooldown.
-        ConsumeMovementInputVector();
-        const FRotator FacePlayer(0.f,ToPlayer.Rotation().Yaw,0.f);
-        SetActorRotation(FMath::RInterpConstantTo(GetActorRotation(),FacePlayer,DeltaSeconds,150.f));
-        const float FacingError = FMath::Abs(FMath::FindDeltaAngleDegrees(
-            bOrganicFeetInitialized ? OrganicFacingYaw : GetActorRotation().Yaw,FacePlayer.Yaw));
-        if (Cooldown <= 0.f && Distance >= 440.f && FacingError < 25.f && GetVelocity().SizeSquared2D() < FMath::Square(45.f))
-        { BeginTell(EAttack::Bolt, 1.35f); return; }
+        UpdateCasterCombat(DeltaSeconds);
     }
     else if (Kind == EDBEnemyKind::Hunter)
     {
@@ -789,8 +941,18 @@ void ADBEnemy::UpdateTell(float DeltaSeconds)
     GetCharacterMovement()->StopMovementImmediately();
     if (!bAimLocked)
     {
-        LockedDirection = (Target->GetActorLocation() - ShotOrigin()).GetSafeNormal();
-        TellTarget = Target->GetActorLocation();
+        FVector Aim = Target->GetActorLocation();
+        if (Kind == EDBEnemyKind::Caster)
+        {
+            // Read visible travel before the existing halfway aim lock. Late
+            // dodges still defeat the committed throw; cover breaks tracking.
+            Aim = LastSeenPlayer;
+            const float FlightTime = FMath::Clamp(FVector::Distance(Aim,ShotOrigin())/690.f,.15f,.8f);
+            const FVector Lead = SeenPlayerVelocity.GetClampedToMaxSize(360.f)*FlightTime;
+            if (bTargetVisible && HasSightTo(Aim+Lead,Target.Get())) Aim += Lead;
+        }
+        LockedDirection = (Aim - ShotOrigin()).GetSafeNormal();
+        TellTarget = Aim;
         if (TellTime <= (Attack == EAttack::Swing ? 0.37f : TellDuration * 0.5f)) bAimLocked = true;
     }
     if (Attack != EAttack::Ground && Attack != EAttack::Slam)
@@ -1156,6 +1318,8 @@ void ADBEnemy::ChainToNearby(float Damage, int32 MaxTargets, float Radius, AActo
 void ADBEnemy::DealHealthDamage(float Damage)
 {
     if (bDead || Damage <= 0.f) return;
+    RecentDamageTime = 4.f;
+    bNeedsReposition = true;
     Health = FMath::Max(0.f, Health - Damage);
     if (Health <= 0.f)
     {
@@ -1868,6 +2032,21 @@ FDBEnemyAnimationDebug ADBEnemy::GetAnimationDebugState() const
     Result.attack_elapsed = AttackElapsed;
     Result.pounce_blocked = bOrganicPounceBlocked;
     Result.blocked_pounce_elapsed = OrganicBlockedPounceTime;
+    Result.target_visible = bTargetVisible;
+    Result.incoming_threat = IncomingThreatTime;
+    if (Kind == EDBEnemyKind::Caster)
+    {
+        switch (CasterIntent)
+        {
+        case ECasterIntent::Hunt: Result.combat_intent = TEXT("FindShot"); break;
+        case ECasterIntent::Flank: Result.combat_intent = TEXT("FlankShield"); break;
+        case ECasterIntent::Withdraw: Result.combat_intent = TEXT("CreateSpace"); break;
+        case ECasterIntent::Evade: Result.combat_intent = TEXT("EvadeThrow"); break;
+        default: Result.combat_intent = TEXT("HoldShot"); break;
+        }
+        if (Phase == EDBEnemyPhase::Telegraph || Phase == EDBEnemyPhase::Attack) Result.combat_intent = TEXT("CommittedCast");
+        if (Phase == EDBEnemyPhase::Recovery || Phase == EDBEnemyPhase::Staggered) Result.combat_intent = TEXT("Recover");
+    }
     switch (Attack)
     {
     case EAttack::Swing: Result.attack_name = TEXT("Swing"); break;

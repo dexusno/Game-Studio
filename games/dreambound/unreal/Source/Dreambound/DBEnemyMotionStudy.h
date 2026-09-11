@@ -48,6 +48,11 @@ private:
     bool bFootMarkers = false;
     bool bPassiveIdle = false;
     bool bAudioCapture = false, bPauseStudy = false, bPauseTriggered = false, bStudyPaused = false;
+    bool bCombatPressure = false, bPressureGuardStarted = false, bPressureGuardReleased = false;
+    float PressureGuardSeconds = 0.f, PressureChargeTime = -1.f, PressureThrowTime = -1.f;
+    float PressureHitBefore = 0.f, PressureHitAfter = 0.f;
+    int32 PressureThrownPieces = 0, PressureHitFrame = INDEX_NONE;
+    void UpdateCombatPressure(float DeltaSeconds);
     void UpdateCamera(float DeltaSeconds);
     void RecordFrame(float DeltaSeconds);
     void SaveAudioFrame(int32 Width, int32 Height, const TArray<FColor>& Pixels);
