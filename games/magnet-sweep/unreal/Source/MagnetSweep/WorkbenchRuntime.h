@@ -111,6 +111,7 @@ struct FWorkbenchImpl {
  bool bPendingNext=false;
  bool bPendingDeposit=false;
  bool bMouseWasDown=false;
+ bool bHaulDrag=false;
  int32 HoverRing=INDEX_NONE;
  int32 AimedRing=INDEX_NONE;
  int32 DisplayUpgrade=0;
@@ -144,6 +145,7 @@ struct FWorkbenchImpl {
  void Paint(UCanvas* C);
  void PaintTutorial(UCanvas* C);
  bool TutorialIntro() const;
+ bool CanCaptureForPlayer(int32 Id) const;
  void TutorialChanged(bool Changed);
  void UpdateTutorial();
  void EnterTutorialPractice();

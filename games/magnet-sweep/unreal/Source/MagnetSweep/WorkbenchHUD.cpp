@@ -117,24 +117,25 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  const int32 RankEnd=FSalvageModel::XPForLevel(Rank+1);
  const float RankFraction=RankEnd>RankStart?float(Model.GetXP()-RankStart)/(RankEnd-RankStart):1.f;
  const bool Complete=Model.IsDeliveryCompleted(),Failed=Model.IsJobFailed();
+ const bool GuideBuy=Tutorial.bEnabled&&Tutorial.Step==ETutorialStep::Upgrade;
 
  PaintEffects(C);
 
  // Goal, opportunity budget and permanent progress stay visible together.
  PanelBox(28,22,1544,118,Edge);Rect(C,28,22,4,118,Copper);
  DrawText(C,TEXT("MAGNET SWEEP"),50,42,1.07f,Paper,true);
- DrawText(C,TEXT("SALVAGE  /  SMELT  /  UPGRADE"),52,91,.71f,Quiet);
+ DrawText(C,FString::Printf(TEXT("YOUR RIG  /  %d OF 9 UPGRADES"),Model.GetUpgradeLevel()),52,91,.71f,Quiet);
  Rect(C,319,43,1,75,Edge);
  FitText(FString::Printf(TEXT("ORDER %02d  /  %s"),Model.GetLayoutIndex()+1,*Job.Name.ToUpper()),342,39,417,.76f,Quiet);
- const int32 Target=Complete?Job.GoldGoal:Job.Quota;
- const FString GoalText=Failed?TEXT("Order missed"):(Model.IsGoldAwarded()?TEXT("Gold order complete"):
-  FString::Printf(TEXT("%d / %d cr %s"),Model.GetBanked(),Target,Complete?TEXT("for gold"):TEXT("banked")));
+ const int32 Target=Complete&&!GuideBuy?Job.GoldGoal:Job.Quota;
+ const FString GoalText=GuideBuy?TEXT("Order paid — upgrade ready"):(Failed?TEXT("Order missed"):(Model.IsGoldAwarded()?TEXT("Gold order complete"):
+  FString::Printf(TEXT("%d / %d cr %s"),Model.GetBanked(),Target,Complete?TEXT("for gold"):TEXT("banked"))));
  DrawText(C,GoalText,342,61,1.13f,Failed?Danger:(Complete?Mint:Paper));
  constexpr float GoalWidth=417;
  Meter(342,98,GoalWidth,float(Model.GetBanked()+Model.GetCargo())/FMath::Max(1,Target),FLinearColor(.22f,.40f,.35f,1),9);
  Rect(C,342,98,GoalWidth*FMath::Clamp(float(Model.GetBanked())/FMath::Max(1,Target),0.f,1.f),9,Model.IsGoldAwarded()?Gold:Mint);
  if(Model.GetCargo()>0&&!Unsafe)DrawText(C,FString::Printf(TEXT("Next pour +%d cr"),Model.GetCargo()),342,115,.65f,Mint);
- else DrawText(C,Complete?FString::Printf(TEXT("Gold bonus +%d cr"),Job.GoldBonus):FString::Printf(TEXT("Order bonus +%d cr"),Job.CompletionBonus),342,115,.65f,Quiet);
+ else DrawText(C,GuideBuy?TEXT("Open Workshop to fit your first improvement"):(Complete?FString::Printf(TEXT("Gold bonus +%d cr"),Job.GoldBonus):FString::Printf(TEXT("Order bonus +%d cr"),Job.CompletionBonus)),342,115,.65f,Quiet);
  DrawText(C,TEXT("FURNACE FUEL"),799,39,.72f,Quiet);
  for(int32 I=0;I<FSalvageModel::HeatsPerJob;++I)
  {
@@ -145,13 +146,14 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  }
  DrawText(C,FString::Printf(TEXT("%d fuel charges"),Model.GetHeatsRemaining()),799,110,.69f,Model.GetHeatsRemaining()==1?Copper:Paper);
  Rect(C,962,43,1,75,Edge);
- DrawText(C,TEXT("WALLET"),986,39,.72f,Quiet);
+ if(PourTimer>0)Rect(C,973,34,174,94,FLinearColor(.36f,.22f,.04f,.35f+.15f*FMath::Sin(Time*10)));
+ DrawText(C,TEXT("BANKED CREDITS"),986,39,.72f,Quiet);
  DrawText(C,FString::Printf(TEXT("%d cr"),Model.GetWallet()),986,64,1.05f,Gold,true);
  DrawText(C,FString::Printf(TEXT("RANK %d"),Rank),1164,39,.76f,Mint);
  DrawText(C,FString::Printf(TEXT("%d XP"),Model.GetXP()),1164,65,.95f,Paper);
  Meter(1164,100,190,RankFraction,Mint,5);
  DrawText(C,RankEnd>RankStart?FString::Printf(TEXT("%d to next rank"),FMath::Max(0,RankEnd-Model.GetXP())):TEXT("Veteran rig"),1164,113,.64f,Quiet);
- AddButton(20,TEXT("Workshop"),1400,41,148,38,Ready&&!TutorialIntro()&&!Tutorial.bRiskHeld);
+ AddButton(20,TEXT("Workshop"),1400,41,148,38,Ready&&!TutorialIntro()&&!Tutorial.bRiskHeld,GuideBuy);
  AddButton(3,TEXT("Pause"),1400,91,148,29);
 
  if(!Modal)
@@ -159,7 +161,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
   DrawText(C,TEXT("IRON  2kg / 4cr"),47,157,.69f,Quiet);
   DrawText(C,TEXT("COPPER  3kg / 12cr"),224,157,.69f,Copper);
   DrawText(C,TEXT("ALLOY  4kg / 24cr"),437,157,.69f,Paper);
-  DrawText(C,TEXT("RED CELLS = UNSTABLE"),643,157,.69f,Danger);
+  DrawText(C,Tutorial.IsTrainingGuardActive()?TEXT("RED CELLS BLOCKED IN TRAINING"):TEXT("RED CELLS = DANGER"),643,157,.69f,Tutorial.IsTrainingGuardActive()?Mint:Danger);
   const FVector2D Screen=Project(World(Magnet,105));
   const float ChipWidth=Unsafe?284.f:214.f,ChipHeight=Unsafe?85.f:62.f;
   const float MX=FMath::Clamp(float((Screen.X-UX)/UIScale)+42.f,46.f,1546.f-ChipWidth);
@@ -186,22 +188,29 @@ void FWorkbenchImpl::Paint(UCanvas* C)
    const TArray<int32> Group=Model.GetCaptureGroup(Nearest->Id);
    int32 Mass=0,Value=0;bool Cell=false;
    for(int32 Id:Group)if(const FSalvagePiece* P=Model.FindPiece(Id)){Mass+=P->Mass;Value+=P->Amount;Cell|=P->Material==EMaterial::HotCell;}
-   const bool Fits=Model.CanCaptureGroup(Nearest->Id),WouldOverload=Model.GetCargoMass()+Mass>Model.GetCapacity()||Cell;
-   const FLinearColor Color=WouldOverload?Danger:(Nearest->Material==EMaterial::Core?Gold:Copper);
+   const bool Fits=CanCaptureForPlayer(Nearest->Id),WouldOverload=Model.GetCargoMass()+Mass>Model.GetCapacity()||Cell;
+   const FLinearColor Color=WouldOverload?(Tutorial.IsTrainingGuardActive()?Gold:Danger):(Nearest->Material==EMaterial::Core?Gold:Copper);
    const float HX=FMath::Clamp(float((Pointer.X-UX)/UIScale)+25.f,42.f,1255.f);
    const float HY=FMath::Clamp(float((Pointer.Y-UY)/UIScale)+26.f,199.f,669.f);
    Rect(C,HX,HY,300,99,Panel);Rect(C,HX,HY,3,99,Color);
    FitText(Group.Num()>1?FString::Printf(TEXT("LINKED BUNDLE  /  %d pieces"),Group.Num()):Model.PieceName(Nearest->Id),HX+13,HY+9,276,.89f,Paper);
    DrawText(C,FString::Printf(TEXT("%d kg   /   %d cr"),Mass,Value),HX+13,HY+37,1.02f,Color);
-   FitText(!Fits?TEXT("Too heavy for this rig"):(Cell?TEXT("Discharge costs 1 fuel. RMB drops haul."):
+   FitText(!Fits?(Tutorial.IsTrainingGuardActive()?(Cell?TEXT("Training guard: red cell stays on tray"):TEXT("Training guard: smelt your current load")):TEXT("Too heavy for this rig")):(Cell?TEXT("Discharge costs 1 fuel. RMB drops haul."):
     FString::Printf(TEXT("Incoming %d / %d kg%s"),Model.GetCargoMass()+Mass,Model.GetCapacity(),WouldOverload?TEXT(" - unstable"):TEXT(""))),HX+13,HY+69,275,.77f,Color);
   }
-  const FVector2D Label=Project(World(FVector2D(650,178),30));
-  const float FX=FMath::Clamp(float((Label.X-UX)/UIScale)-94.f,40.f,1338.f);
-  const float FY=FMath::Clamp(float((Label.Y-UY)/UIScale),190.f,701.f);
-  Rect(C,FX,FY,222,58,Panel);
-  DrawText(C,TEXT("FURNACE"),FX+12,FY+8,.79f,Copper);
-  FitText(Unsafe?TEXT("Unstable - drop haul first"):(Model.GetCargo()>0?FString::Printf(TEXT("Click: +%d cr / 1 fuel"),Model.GetCargo()):TEXT("Bring a stable load here")),FX+12,FY+32,200,.77f,Unsafe?Danger:Paper);
+  FString SmeltReason;const bool CanSmelt=Model.CanSmelt(SmeltReason);
+  FString Status=TEXT("Uses 1 fuel. Pays your banked credits.");
+  if(PourTimer>0)Status=TEXT("Paying credits — pouring metal...");
+  else if(Model.IsJobEnded()||Failed)Status=TEXT("Order ended. Open Workshop for another.");
+  else if(Model.GetCargoMass()==0)Status=TEXT("Collect any metal first. Mixing is fine.");
+  else if(Model.HasHotCell())Status=TEXT("Red cell onboard. RMB drops the haul.");
+  else if(Unsafe)Status=TEXT("Over capacity. RMB drops the haul.");
+  Rect(C,1262,548,286,178,Panel);
+  DrawText(C,TEXT("FURNACE: ALL METALS ACCEPTED"),1276,561,.72f,Copper);
+  FitText(Status,1276,585,258,.73f,Unsafe?Danger:Paper);
+  AddButton(40,CanSmelt?FString::Printf(TEXT("SMELT HAUL  +%d cr"),Model.GetCargo()):TEXT("SMELT HAUL"),1274,614,262,46,Ready&&CanSmelt&&!Tutorial.bRiskHeld,true);
+  DrawText(C,TEXT("Click furnace or press E to smelt."),1276,673,.70f,Quiet);
+  DrawText(C,TEXT("RMB puts everything back on the tray."),1276,698,.66f,Quiet);
  }
 
  if(NoticeTimer>0&&!NoticeTitle.IsEmpty()&&!Modal&&!Unsafe)
@@ -221,13 +230,14 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  }
  else if(PourTimer>0||ForgeTimer>0){Hint=TEXT("Smelting your haul");Detail=TEXT("Metal becomes credits, rank progress and recovered loot.");}
  else if(Failed){Hint=TEXT("Order missed. Your banked earnings are safe.");Detail=TEXT("Try a richer load or improve your rig before the next contract.");}
+ else if(GuideBuy){Hint=TEXT("Your first upgrade is funded — open Workshop");Detail=TEXT("Fit a permanent 150-credit improvement. Optional gold targets can wait until your rig is better.");}
  else if(Complete){Hint=Model.IsGoldAwarded()?TEXT("Gold secured. Finish this order when ready."):TEXT("Order secured. Bank more for gold, or finish safely.");Detail=TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision  |  RMB drops whole haul");}
- else if(bFurnaceHover&&Model.GetCargo()>0){Hint=FString::Printf(TEXT("Pour %d cr into this order"),Model.GetCargo());Detail=TEXT("One pour uses one fuel charge. Compare the value of this load before banking.");}
- else {Hint=FieldOn?(bPrecision?TEXT("Precision field - separate the valuable pieces"):TEXT("Field active - watch the weight of your haul")):TEXT("Choose your haul. Four fuel charges for this order.");Detail=TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision  |  RMB drops whole haul");}
+ else if(Model.GetCargo()>0){Hint=FString::Printf(TEXT("%d cr carried — click SMELT HAUL to get paid"),Model.GetCargo());Detail=TEXT("Any metal mix is accepted. Release LMB keeps your load. RMB returns the entire haul to the tray.");}
+ else {Hint=TEXT("Collect metal > smelt for credits > build your better magnet");Detail=Tutorial.IsTrainingGuardActive()?FString::Printf(TEXT("TRAINING GUARD: %d kg maximum; red cells stay on the tray until your first upgrade."),Model.GetCapacity()):TEXT("LMB / Space attracts; release keeps cargo. E / furnace smelts. RMB drops everything back on the tray.");}
  FitText(Hint,49,801,1080,1.06f,Unsafe?Danger:Paper);
  FitText(Detail,49,839,1080,.79f,Unsafe?FLinearColor(1,.66f,.54f,1):Quiet);
- AddButton(20,TEXT("Workshop"),1372,809,172,43,Ready&&!Tutorial.bRiskHeld);
- if(Complete&&!Model.IsJobEnded())AddButton(1,TEXT("Finish order"),1180,809,176,43,Ready&&Model.GetCargoMass()==0,true);
+ AddButton(20,TEXT("Workshop"),1372,809,172,43,Ready&&!Tutorial.bRiskHeld,GuideBuy);
+ if(Complete&&!Model.IsJobEnded()&&!GuideBuy)AddButton(1,TEXT("Finish order"),1180,809,176,43,Ready&&Model.GetCargoMass()==0,true);
  else if(Model.IsJobEnded()||Failed)AddButton(30,TEXT("Choose next order"),1180,809,176,43,Ready,true);
  else DrawText(C,FString::Printf(TEXT("%dkg RIG"),Model.GetCapacity()),1209,824,.88f,Quiet);
 
@@ -337,7 +347,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
   AddButton(bTutorialPractice?461:460,bTutorialPractice?TEXT("Return to saved career"):TEXT("Practice tutorial (separate save)"),498,622,604,42);
   FitText(TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision"),499,693,603,.75f,Quiet);
   FitText(TEXT("RMB drops the whole haul recoverably and switches the field off."),499,719,603,.74f,Quiet);
-  DrawText(C,TEXT("ESC resume  /  F11 fullscreen  /  M mute"),499,747,.71f,Quiet);
+  DrawText(C,TEXT("E smelt  /  ESC resume  /  F11 fullscreen  /  M mute"),499,747,.71f,Quiet);
   DrawText(C,TEXT("Music and effects buttons cycle their volume."),499,773,.68f,Quiet);
  }
  PaintTutorial(C);

@@ -1,44 +1,46 @@
 # Magnet Sweep — build and run
 
-UE 5.8.2 Windows gameplay rebuild, version 0.3.0. Source is isolated in `unreal/`. Machine-local tool locations come from ignored `config.local.json`; no engine installation is copied into this repository. The old 0.1 concept demo and its owner save remain separately under BuildOutput/ConceptDemo.
+Unreal Engine 5.8.2, Windows Development, version 0.4.0. The previous tutorial passed a scripted agent path but failed the owner's novice playtest; this clarity increment repairs that reported behavior. It remains a prototype for owner judgment.
 
-## Play the tutorial
+## Play and preserve progress
 
-[Play Magnet Sweep.cmd](Play%20Magnet%20Sweep.cmd) opens `BuildOutput/Tutorial/Windows/MagnetSweep.exe`. Keep the adjacent Engine and MagnetSweep folders. A fresh career begins with **Start learning**; actions advance the lessons, and earned credits, XP and upgrades remain in that run. Skip guidance at any time. The first dangerous pickup explicitly pauses its fuse until the player drops the haul; later warnings have normal consequences.
+[Play Magnet Sweep.cmd](Play%20Magnet%20Sweep.cmd) targets the corrected `BuildOutput/Clarity/Windows/MagnetSweep.exe`. The entire adjacent Windows folder is required. The earlier 0.3 package/save remain in BuildOutput/Tutorial, the 0.2 rebuild remains in BuildOutput/Rework and the rejected 0.1 demo remains in BuildOutput/ConceptDemo. [Continue Previous Demo.cmd](Continue%20Previous%20Demo.cmd) still opens the 0.2 Rework package.
 
-Pause offers **Practice tutorial**, with its own saved run and **Return to saved career**. Re-entering practice resumes it; only the confirmed **Restart practice** resets that practice. Skipping or completing the guide does not erase its earnings. Saves without tutorial metadata continue normally.
+The first objective is 150 credits for an actual magnet improvement. The side panel tracks that goal and then the rig's 9 installed improvements; orders and 6 rare cores are the longer goals. This version does not add construction of a larger building or machine. It makes the existing salvage-and-upgrade purpose explicit.
 
-The earlier package and its player career are preserved separately. [Continue Previous Demo.cmd](Continue%20Previous%20Demo.cmd) opens the previous Rework package. Its save has not been migrated into the new tutorial archive. The original 0.1 demo also remains under BuildOutput/ConceptDemo. Native tutorial results belong in [QA-TUTORIAL.md](QA-TUTORIAL.md); historical rebuild evidence remains in [QA-REWORK.md](QA-REWORK.md).
+## Controls and rules
+
+- Hold left mouse or toggle Space to attract metal. Release on the tray keeps cargo.
+- Click **SMELT HAUL**, click the furnace, press E, or release a tray-origin drag over the furnace/button to bank a stable haul. Any metal mix counts. Guidance never refuses a valid deposit because an unrelated lesson is incomplete.
+- Right mouse drops the entire haul recoverably onto the tray; this is not a furnace deposit.
+- Shift or Q narrows the field. Connected pieces have one combined pickup weight/value, shown in the tooltip.
+- Each smelt uses 1 of 4 fuel charges. Pickup numbers mean carried value; melting pays credits and XP. The first order's 120 salvage target adds 80 bonus credits, enough for a 150-credit upgrade.
+- The labelled tutorial guard blocks red-cell capture and loads above safe capacity until the first actual upgrade purchase. The first guided sweep pauses around 36 carried credits or at capacity, but smaller deposits remain allowed.
+- Purchase explicitly switches off the guard. The first unpractised dangerous pickup pauses for a real rescue; subsequent excess weight or red cells run the normal fuse. Expiry spends 1 fuel and destroys the most valuable unbanked piece, if any; banked progress stays safe.
+- Tab opens Workshop; Escape pauses; R requests retry confirmation; M mutes; F11 changes display mode; F9 saves an actual screenshot. Pause includes separate music/effects controls, saved practice, return-to-career and Save & quit.
 
 ## Reproduce
 
-From the repository root in PowerShell:
+Machine paths come from ignored config.local.json. No engine is copied into source control.
 
 ```powershell
 pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
-pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Content
 pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
-pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName Tutorial
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName Clarity
 ```
 
-Content regenerates the material, imports seven original meshes and 28 WAVs (nine historical cues and 19 new cues), sets four rework sound loops to play while silent, and saves the Concept map. The original rework sound sources reproduce with `python games/magnet-sweep/scripts/GenerateReworkAudio.py`. Packaging cooks the engine ambient cubemap referenced by the scene, targets Win64 Development and archives by default to ignored `BuildOutput/Tutorial/Windows/`. The entire Windows folder is required to run. `-ArchiveName` chooses another simple directory name. The All stage does not include Tests; run that stage explicitly. Tests requires a fresh exported report and rejects failures or unrun tests even if Unreal exits with code zero.
+For a clean content setup, also run `-Stage Content`. That imports existing original meshes/audio and saves the Concept map. This increment adds no external assets or new audio. `-ArchiveName` defaults to Clarity and accepts another simple directory name. All does not include Tests; run Tests explicitly. Tests validates a fresh report and fails on failed/unrun cases even when Unreal exits zero.
 
-This machine uses Visual Studio 14.44 and Windows SDK 10.0.22621. During the first package, Unreal's cooker-owned Zen cache process exited before staging could connect to port8558. Keeping the installed Zen server running through staging allowed the subsequent package to finish. This was a local packaging-cache dependency, not a game runtime dependency; the game runs offline without Zen.
+The runtime career is `MagnetSweep/Saved/Rework/player.json` with a valid previous backup; optional tutorial metadata keeps compatible numeric lesson IDs. Old Release/Bundle saves reconcile toward smelting, and actual banked value recognizes an interrupted payout. Pause's practice run uses `Saved/Tutorial/player.json` separately. Skipping/completing practice does not erase its earnings; an explicit confirmed restart replaces only practice. Retry keeps banked career progress.
 
-## Controls and consequences
+`-DemoProfile=qa_name -DemoQA` selects an isolated QA profile; `-DemoFresh` resets only that chosen profile. Never use the owner's career for destructive QA. The original 0.3 owner save was backed up before this increment under ignored BuildOutput/OwnerBackups/before-clarity-v04. The original and its backup were also copied without overwriting an existing destination into the Clarity normal-career save location. The normal launcher continues that copied career; it has not been launched or verified natively in Clarity yet.
 
-Hold left mouse or toggle Space to attract; release retains cargo. Hold Shift or toggle Q for a narrow precision field. Connected links form one moving load. Right mouse **drops the entire haul recoverably** and switches the field off. Click the furnace to smelt a stable load; each smelt spends one of four fuel charges.
+The live qa_clarity session must now be preserved as possible owner progress: physical Escape stopped computer control during QA. Do not reset it or replace the foreground. The separately prepared qa_clarity_legacy copy has not been launched. A later native check requires a safe foreground handoff.
 
-Outside the explicitly paused first tutorial warning, unsafe cargo starts a persistent fuse. Expiry spends one fuel charge and destroys the named most valuable unbanked salvage piece; hot cells are removed and the rest spills recoverably. Previously banked cash, XP, upgrades and collection remain safe. Exhausting fuel below quota fails the contract. Dropping the haul in time costs no fuel or salvage but requires rebuilding the load.
+## Verification
 
-Tab opens the workshop. Escape pauses/closes overlays; R opens retry confirmation; M toggles master sound; separate music/effects controls live in pause. F11 switches window mode and restores the prior window size. F9 writes an actual game screenshot under Saved/Screenshots. The pause menu offers save and quit.
+Editor compilation and 17 engine automation cases pass in report 2026.09.12-19.41.26 with zero failures/warnings/unrun tests. Eight Tutorial cases include real immediate iron/mixed payouts from early/legacy states, training guard capacity/cells/atomic groups, actual earned purchase, natural release over furnace or button 40 versus other UI, no duplicate payout, legacy saves and transactional metadata. Nine Rework cases retain the existing economy/risk/save coverage.
 
-## Saves and verification
+Build/cook/stage/archive succeeded in 40.01 seconds. Child EXE SHA256: 49c9e253f2446c761d6b38f4ad75b558ba6efdcb81d5f8bc47acfc1bc3e036de. Exact artifact identities and compact tests are in [clarity-verification.json](evidence/clarity-verification.json). Independent reported-behavior checks and their limits belong in [QA-CLARITY.md](QA-CLARITY.md); historical evidence remains in QA-TUTORIAL.md and QA-REWORK.md.
 
-The version2 career lives under runtime `MagnetSweep/Saved/Rework/player.json`, with a previous valid backup. It preserves actual piece positions/ownership, current fuel and fuse, banked quota and bonus flags, credits, XP, purchased mods, collection and audio settings. Unsafe cargo loads paused. Optional tutorial metadata records the lesson, first-danger rehearsal and purchased-mod event. Separate practice lives at runtime `MagnetSweep/Saved/Tutorial/player.json`; switching back loads the saved career rather than merging practice earnings. `-DemoProfile=qa_name -DemoQA` selects a separate QA profile plus diagnostic telemetry; `-DemoFresh` starts that selected profile fresh. Owner saves must not be used for destructive QA.
-
-Editor compilation and the fresh 2026.09.12-18.50.46 headless report passed: **15 tests, zero failures, warnings or unrun cases**. Nine cover the existing salvage/reward/risk/save rules; six cover lesson order, off-path play, early danger, retries, actual runtime rescue/Skip callbacks, legacy saves and strict transactional tutorial metadata validation. The runtime callback tests use a null controller and do not prove rendered Tick behavior. The final changes after that report are confined to tutorial drawing: pouring copy, fuller risk explanation and removal of a misleading quota pickup marker; final editor/package compilation and the focused T2 native pass verify that presentation.
-
-Build/cook/stage/archive completed in 37.32 seconds. Tutorial child EXE SHA256: `1090787dd46eafc7aa14a1b84e4d41e04696825bbf6d2f40e4b6ff57aca0dcf5`. Complete EXE/PAK/IoStore identities and compact test results are in [tutorial-verification.json](evidence/tutorial-verification.json). Previous R2 identities remain in [rework-verification.json](evidence/rework-verification.json).
-
-Native observations are recorded separately in QA-TUTORIAL.md. Numerical audio analysis and active audio components do not certify the audible mix; perceptual listening remains unverified. Formal performance and other hardware/platforms remain untested. This is a local playable prototype for owner judgment, not a release candidate or evidence of commercial appeal.
+Native play confirmed immediate off-route iron payout, a safe 24 kg training cap and immediate whole-haul drop without spending fuel or banked money. Physical owner Escape stopped the pass before the mixed-haul, spare-capacity cell, first purchase, continuous drag-release and copied-save checks. Automated callbacks cover logic for these paths but do not establish rendered input or visual comprehension. A successful prescribed route did not predict the owner's experience. Human enjoyment, long-term purpose/replay, perceptual listening and broader hardware/performance coverage remain unverified.

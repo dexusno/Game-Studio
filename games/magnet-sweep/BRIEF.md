@@ -16,26 +16,28 @@ Development timeline is not a consideration. The objective is a coherent, simple
 
 The desired player effect is anticipation followed by a physical and economic payoff. An upgrade menu cannot compensate for weak attraction, indistinct impacts or an uninteresting batch decision.
 
-## Guided demo
+## Guided demo: payout and purpose first
 
-Fresh careers open a playable tutorial instead of dropping the player straight onto an unexplained tray. A persistent side card gives one action and a world marker points to a real target. The player learns attraction, field release retaining cargo, linked-group mass/value, first smelt and finite fuel, emergency recovery, precision pickup, quota reward and a purchased upgrade. Normal starter play can bank 44 credits from two iron pieces plus one copper bundle, then 76 from the rare core plus another bundle: 120 salvage plus the 80-credit bonus affords a 150-credit mod. Prompts show the actual haul value; this example is not a forced script.
+The owner rejected the first guided demo after actual play. It requested iron but secretly blocked smelting behind release/bundle lessons, exposed overload before a understood reward and failed to communicate why to collect anything. That feedback supersedes the earlier agent-led successful path. The corrected first objective is **earn 150 credits and fit a permanent improvement to this magnet**. Longer goals use the existing rig's nine improvements, six orders/gold targets and six banked collectible cores; no larger building, lore or new crafting economy is implied.
 
-The **first unsafe pickup** pauses its fuse before any loss and stops attraction. Its card explicitly teaches that red cells or excess weight cause instability, field-off does not cancel danger, expiry spends a fuel charge and the named valuable piece, and RMB drops ALL cargo recoverably. RMB remains usable during this dedicated teaching hold. The hold can interrupt an earlier lesson; after a successful drop, later warnings follow normal real-time rules. Guidance can be skipped; skipping a held warning explicitly says “Drop haul & skip guidance” and performs that rescue first.
+**Any ordinary metal mix counts.** Iron, copper, alloy and cores all have smelt value. Composition itself never fails an order. Red cells are hazards, not another requested material. A real **SMELT HAUL +N cr** button remains beside the furnace and reports the real refusal reason if empty/unsafe/ended. Clicking the furnace, pressing E, or releasing a tray-origin drag over the furnace/button reaches the same rule-valid deposit. Guidance never blocks a safe nonempty deposit because a lesson is incomplete. Pickup feedback means carried value; only the furnace pays banked credits and XP.
 
-Tutorial progress is saved with the actual run, including an interrupted teaching hold. Advancing requires actual capture, field release, smelt, precision pickup and purchase events. Lost optional cores fall back to other useful precision targets; exhausted or failed trays expose a clear retry. Retry preserves banked earnings and learned controls. Ending guidance keeps the run and its rewards.
+A labelled **training guard** prevents capturing red cells or exceeding current safe capacity until the first actual upgrade purchase. First useful capture exposes smelting without stopping attraction immediately. The first sweep gently stops at 36 carried value or safe capacity and points to the furnace; this is assistance, never a minimum-payout requirement. Earlier iron-only or mixed deposits must pay normally. Release keeps cargo; right-click returns the entire haul recoverably to the tray and never masquerades as a furnace deposit.
 
-Existing saves without tutorial metadata resume normally. Pause offers a separate saved practice tutorial and a distinct return-to-career action. Practice never overwrites the saved career. The tutorial package is archived separately from the older Rework package currently used by the owner; their local runtime saves remain separate.
+The sequence is collect → smelt → fund the first upgrade (120 order value plus 80 bonus readily affords it) → purchase and use the improved rig → risk rescue → precision. Links are explained by actual group mass/value tooltips rather than a mandatory collection gate. The main HUD prioritizes the first upgrade after quota instead of competing with optional gold. A purchase explicitly announces the end of training guard. The first unpractised unsafe pickup pauses its fuse before loss, and RMB remains usable for the actual rescue. Later warnings run under normal consequences. Skipping explicitly removes guidance/guard; skipping a held warning drops the real haul first.
+
+Lesson state and actual progress are saved. Existing numeric lesson IDs remain compatible; obsolete Release/Bundle paths reconcile toward a payable haul rather than trap the owner. Actual already-banked value reconciles interrupted pours. Retry retains money, XP, installed upgrades and collection. Pause retains separate saved practice and Return to career. The owner's original 0.3 tutorial save is backed up and preserved; corrected 0.4 verification uses disposable profiles and a copy of that exact stuck state.
 
 ## Input and physical response
 
 | Input | Implemented action |
 | --- | --- |
 | Move mouse | Move the magnet toward the pointer with responsive bounded motion |
-| Hold left mouse over the tray | Energize the attraction field; release retains cargo |
+| Hold left mouse over the tray | Attract metal; release on the tray retains cargo; release over the furnace/smelt button banks a safe haul |
 | Space | Toggle the attraction field as an alternative to holding |
 | Hold Shift / toggle Q | Narrow the field for precise approaches |
 | Right mouse | Drop the entire haul recoverably and switch the field off |
-| Click furnace | Smelt stable cargo deliberately; a held sweep does not automatically dump |
+| Click SMELT HAUL / furnace, or press E | Smelt any safe mixed cargo, independent of lesson order |
 | Tab | Open or close the workshop |
 | Escape / R | Pause or close an overlay / request confirmed retry |
 | M / F11 | Toggle audio mute / toggle fullscreen |

@@ -1,0 +1,171 @@
+{
+  "version": "0.4.0",
+  "candidate": "Clarity C1",
+  "date": "2026-09-12",
+  "engine": "Unreal Engine 5.8.2",
+  "configuration": "Win64 Development / PCD3D_SM5",
+  "package": "BuildOutput/Clarity/Windows",
+  "build_cook_run_seconds": 40.01,
+  "artifacts": [
+    {
+      "path": "MagnetSweep.exe",
+      "bytes": 171520,
+      "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+    },
+    {
+      "path": "MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+      "bytes": 332115456,
+      "sha256": "49c9e253f2446c761d6b38f4ad75b558ba6efdcb81d5f8bc47acfc1bc3e036de"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+      "bytes": 10652987,
+      "sha256": "c045d1e4e165d5eeffb3be8f64d7c182922b672bbcae4b80c9607a8f944ba5d0"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+      "bytes": 137779056,
+      "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+      "bytes": 138215,
+      "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+    }
+  ],
+  "automation": {
+    "created": "2026.09.12-19.41.26",
+    "succeeded": 17,
+    "failed": 0,
+    "warnings": 0,
+    "not_run": 0,
+    "tests": [
+      {
+        "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.ActualActionSequence",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ]
+  },
+  "native_evidence": "QA-CLARITY.md",
+  "native_status": "Partial independent regression: immediate iron payout, safe 24 kg training cap and immediate whole-haul drop observed. Physical owner Escape stopped native control; preserve live qa_clarity as possible owner progress.",
+  "limits": [
+    "Owner rejected the preceding tutorial despite its scripted native pass; these checks do not establish novice comprehension or enjoyment.",
+    "Repeated tiny accepted smelts still consume limited fuel; balance is not established by deposit correctness.",
+    "Audio is unchanged; perceptual listening remains unverified.",
+    "Original owner save and backup copied intact into the normal Clarity career; that profile was not launched this turn.",
+    "The running qa_clarity session may now contain owner play and must not be reset or controlled without a new safe foreground handoff."
+  ],
+  "native_verified": [
+    "Welcome and smelt offer readable at 1600x900",
+    "One iron paid 4 credits and 4 XP immediately and spent one fuel without a lesson prerequisite",
+    "Careless iron collection stopped safely at 24 kg",
+    "Full haul stayed safe over red cells; spare-capacity exclusion not independently verified",
+    "Immediate RMB drop frame cleared carried value without spending banked credits or fuel; settled recovery not verified"
+  ],
+  "native_pending": [
+    "Spare-capacity red-cell exclusion",
+    "Mixed-haul payout",
+    "Continuous drag release after training auto-stop",
+    "Settled drop recoverability",
+    "Actual purchase and guard-off warning",
+    "Prepared legacy-copy payout and native resume"
+  ]
+}

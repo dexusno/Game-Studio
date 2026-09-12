@@ -90,12 +90,23 @@ void FWorkbenchImpl::UpdatePointer(FVector2D EventPosition)
 int32 FWorkbenchImpl::HitButton() const{for(const auto& B:Buttons)if(B.Enabled&&B.Rect.IsInside(Pointer))return B.Id;return INDEX_NONE;}
 void FWorkbenchImpl::HandlePress()
 {
+ bHaulDrag=false;
  const int32 UI=HitButton();if(UI!=INDEX_NONE){Action=EMagnetAction::UI;Button(UI);return;}
  if(bPaused||bWorkshop||bReceipt||TutorialIntro()||PourTimer>0||ForgeTimer>0)return;
  if(bFurnaceHover){Action=EMagnetAction::Dump;Deposit();return;}
- if(bInTray&&!Tutorial.bRiskHeld&&!Model.IsJobEnded()&&!Model.IsJobFailed()){Action=EMagnetAction::Sweep;Play(TEXT("magnet_on"),.65f);LastEvent=TEXT("field_on");}
+ if(bInTray&&!Tutorial.bRiskHeld&&!Model.IsJobEnded()&&!Model.IsJobFailed()){bHaulDrag=true;Action=EMagnetAction::Sweep;Play(TEXT("magnet_on"),.65f);LastEvent=TEXT("field_on");}
 }
-void FWorkbenchImpl::HandleRelease(){const bool WasSweeping=Action==EMagnetAction::Sweep;if(Action==EMagnetAction::Sweep&&!bFieldLatched)Play(TEXT("magnet_off"),.4f);Action=bFieldLatched?EMagnetAction::Sweep:EMagnetAction::None;AimedRing=INDEX_NONE;Preview={};LastEvent=bFieldLatched?TEXT("field_latched"):TEXT("field_off");if(!bFieldLatched&&WasSweeping)TutorialChanged(Tutorial.ObserveFieldOff());SaveTimer=.3f;}
+void FWorkbenchImpl::HandleRelease()
+{
+ const bool DropOnFurnace=bHaulDrag&&(bFurnaceHover||HitButton()==40); bHaulDrag=false;
+ const bool WasSweeping=Action==EMagnetAction::Sweep;
+ if(WasSweeping&&!bFieldLatched)Play(TEXT("magnet_off"),.4f);
+ Action=bFieldLatched?EMagnetAction::Sweep:EMagnetAction::None;AimedRing=INDEX_NONE;Preview={};
+ LastEvent=bFieldLatched?TEXT("field_latched"):TEXT("field_off");
+ if(!bFieldLatched&&WasSweeping)TutorialChanged(Tutorial.ObserveFieldOff());
+ if(DropOnFurnace&&Model.GetCargoMass()>0)Deposit();
+ SaveTimer=.3f;
+}
 void FWorkbenchImpl::SweepPath() {} // No instantaneous swept-point capture.
 void FWorkbenchImpl::UpdateAttraction(float Delta)
 {
@@ -107,12 +118,12 @@ void FWorkbenchImpl::UpdateAttraction(float Delta)
   FVector2D Center=FVector2D::ZeroVector;int32 Mass=0;
   for(int32 Id:Group){Visited.Add(Id);const auto* Q=Model.FindPiece(Id);Center+=Q->Position*Q->Mass;Mass+=Q->Mass;}Center/=FMath::Max(1,Mass);
   const FVector2D Toward=Magnet-Center;const float Distance=Toward.Size();auto* First=Visuals.Find(Group[0]);if(!First)continue;
-  const bool CanTake=Model.CanCaptureGroup(P.Id);const bool Pulling=Active&&Distance<FieldRadius&&First->CaptureDelay<=0;FVector2D Velocity=First->Velocity;
+  const bool CanTake=CanCaptureForPlayer(P.Id);const bool GuardBlocked=Tutorial.IsTrainingGuardActive()&&!CanTake;const bool Pulling=Active&&Distance<FieldRadius&&First->CaptureDelay<=0&&!GuardBlocked;FVector2D Velocity=First->Velocity;
   if(Pulling){const float Falloff=1.f-FMath::Clamp(Distance/FieldRadius,0.f,1.f);const float Acceleration=(2000+9000*Falloff)*Model.GetForceScale()/FMath::Sqrt(float(Mass));Velocity+=Toward.GetSafeNormal()*Acceleration*Delta*(bPrecision?.8f:1.f);Velocity*=FMath::Exp(-Delta*3.f);if(!CanTake&&Distance<48)Velocity-=Toward.GetSafeNormal()*4000*Delta;}
   else Velocity*=FMath::Exp(-Delta*9.f);
   if(Velocity.Size()>650)Velocity=Velocity.GetSafeNormal()*650;FVector2D Shift=Velocity*Delta;
   for(int32 Id:Group){const auto* Q=Model.FindPiece(Id);const auto Clamped=FSalvageModel::ClampToTray(Q->Position+Shift);Shift=Clamped-Q->Position;}
-  for(int32 Id:Group){const auto* Q=Model.FindPiece(Id);Model.MoveAvailablePiece(Id,Q->Position+Shift);if(auto* V=Visuals.Find(Id)){V->Velocity=Velocity;V->Attracted=Pulling?(CanTake?1.f:-1.f):0.f;V->CaptureDelay=FMath::Max(0.f,V->CaptureDelay-Delta);}}
+  for(int32 Id:Group){const auto* Q=Model.FindPiece(Id);Model.MoveAvailablePiece(Id,Q->Position+Shift);if(auto* V=Visuals.Find(Id)){V->Velocity=Velocity;V->Attracted=GuardBlocked&&Active&&Distance<FieldRadius?-.35f:(Pulling?(CanTake?1.f:-1.f):0.f);V->CaptureDelay=FMath::Max(0.f,V->CaptureDelay-Delta);}}
   if(Pulling&&CanTake&&Distance<28){const auto PreviousStep=Tutorial.Step;OnRecovery(Model.CapturePieces(Group),Group.Num()>1,Group.Num());if(Tutorial.bRiskHeld||Tutorial.Step!=PreviousStep||Action!=EMagnetAction::Sweep)return;}
  }
 }
@@ -123,10 +134,14 @@ void FWorkbenchImpl::OnRecovery(const FRecoveryResult& R,bool Bundle,int32 Count
  if(Rare){Play(TEXT("rare_find"),.8f);Toast(TEXT("Rare core secured — still at risk"),TEXT("Smelt it to keep the collectible and its payout."),3);}
  else if(Bundle||R.Mass>=8)Play(TEXT("pickup_heavy"),.8f,.96f);
  else if(PickupCooldown<=0){Play(FName(*FString::Printf(TEXT("pickup_metal%d"),1+Sweeps%3)),.7f,.94f+(Sweeps%4)*.03f);PickupCooldown=.055f;}
- Popups.Add({World(Magnet,125),FString::Printf(TEXT("+%d cr   %d kg"),R.Amount,R.Mass),Rare?FLinearColor(1,.78,.28):FLinearColor(.7,.96,.9),1.15f});
+ Popups.Add({World(Magnet,125),FString::Printf(TEXT("%d cr in haul   %d kg"),R.Amount,R.Mass),Rare?FLinearColor(1,.78,.28):FLinearColor(.7,.96,.9),1.15f});
  const bool LessonChanged=Tutorial.ObserveCapture(Bundle,bPrecision,R.Amount>0,Model.GetCargoMass());
  const bool TeachingHold=Tutorial.HoldFirstRisk(Model.IsCargoUnsafe());
  TutorialChanged(LessonChanged||TeachingHold);
+ if(Tutorial.IsTrainingGuardActive()&&(Model.GetCargoMass()>=Model.GetCapacity()||(Model.GetBanked()==0&&Model.GetCargo()>=36))){
+  bFieldLatched=false;Action=EMagnetAction::None;
+  Toast(TEXT("Practice load ready"),TEXT("Click SMELT HAUL by the furnace to turn this mixed load into credits."),5);
+ }
  Sweeps++;if(Bundle)Pulls++;LastBurst=R.Amount;LastEvent=TEXT("physical_capture");SaveTimer=.3f;
 }
 void FWorkbenchImpl::SpillVisuals(const TArray<int32>& Released,const TArray<int32>& Destroyed,bool Failure)
@@ -143,9 +158,10 @@ void FWorkbenchImpl::Vent()
 }
 void FWorkbenchImpl::Deposit(bool Next)
 {
- if(TutorialIntro()||Tutorial.bRiskHeld)return;
- if(Tutorial.bEnabled&&(Tutorial.Step==ETutorialStep::Attract||Tutorial.Step==ETutorialStep::Release||Tutorial.Step==ETutorialStep::Bundle)){Toast(TEXT("Build your first useful load"),TEXT("Follow the highlighted lesson, or skip guidance to smelt freely."),3);return;}
+ if(bPaused||bWorkshop||bReceipt||TutorialIntro()||PourTimer>0||ForgeTimer>0)return;
+ if(Tutorial.bRiskHeld){Toast(TEXT("Unsafe haul — drop it back onto the tray"),TEXT("RMB drops everything recoverably. Then collect a smaller safe load and click SMELT HAUL."),5);return;}
  FString Reason;if(!Model.CanSmelt(Reason)){Toast(TEXT("Cannot smelt this load"),Reason,3);Play(TEXT("ui_click"),.35f,.7f);return;}
+ bFieldLatched=false;Action=EMagnetAction::None;
  if(RecoveryTimer>0){bPendingDeposit=true;bPendingNext=Next;return;}if(PourTimer>0||ForgeTimer>0)return;
  bPendingDeposit=false;LastBank=Model.BankCargo();if(LastBank.Amount<=0)return;
  bFieldLatched=false;Action=EMagnetAction::None;Deposits++;PourTimer=2.6f;FurnacePulse=1;Play(TEXT("smelt"),.7f);bPendingNext=Next;
@@ -166,12 +182,18 @@ void FWorkbenchImpl::BeginJob(int32 Job)
 }
 void FWorkbenchImpl::Pause(bool Value)
 {
- bPaused=Value;bFieldLatched=false;Action=EMagnetAction::None;AimedRing=INDEX_NONE;Preview={};bConfirmRetry=bConfirmNew=false;LastEvent=Value?TEXT("paused"):TEXT("resumed");for(auto& A:PlayingSounds)if(A.IsValid())A->SetPaused(Value);Save();
+ bPaused=Value;bFieldLatched=false;bHaulDrag=false;Action=EMagnetAction::None;AimedRing=INDEX_NONE;Preview={};bConfirmRetry=bConfirmNew=false;LastEvent=Value?TEXT("paused"):TEXT("resumed");for(auto& A:PlayingSounds)if(A.IsValid())A->SetPaused(Value);Save();
 }
 void FWorkbenchImpl::Button(int32 Id)
 {
  Play(TEXT("ui_click"),.65f);
- if(Id>=100&&Id<103){if(Model.PurchaseUpgrade(static_cast<EUpgrade>(Id-100))){TutorialChanged(Tutorial.ObservePurchase(Id-100));DisplayUpgrade=Model.GetUpgradeLevel();ForgeTimer=.85f;Impact=.6f;Play(TEXT("upgrade"),.9f);Toast(TEXT("Upgrade fitted"),TEXT("Your magnet has changed. Try it on the next haul."),3);Save();}return;}
+ if(Id>=100&&Id<103){
+  const bool GuardWasOn=Tutorial.IsTrainingGuardActive();
+  if(Model.PurchaseUpgrade(static_cast<EUpgrade>(Id-100))){
+   TutorialChanged(Tutorial.ObservePurchase(Id-100));DisplayUpgrade=Model.GetUpgradeLevel();ForgeTimer=.85f;Impact=.6f;Play(TEXT("upgrade"),.9f);
+   Toast(GuardWasOn?TEXT("Upgrade fitted — training guard off"):TEXT("Upgrade fitted"),GuardWasOn?(Tutorial.bRiskLearned?TEXT("Red cells and overloads now run a real fuse. RMB returns the whole haul to the tray."):TEXT("Your first dangerous pickup will pause for rescue practice. Try your improved magnet.")):TEXT("Your permanent rig improvement is ready for the next haul."),7);Save();
+  }return;
+ }
  if(Id>=200&&Id<206){BeginJob(Id-200);return;}
  switch(Id){
  case 1:NextDelivery();break;
@@ -188,6 +210,7 @@ void FWorkbenchImpl::Button(int32 Id)
  case 20:if(Tutorial.bRiskHeld){Toast(TEXT("Practise Drop haul first"),TEXT("Right-click on the tray. This first warning is waiting safely."),3);break;}Pause(false);bWorkshop=true;Action=EMagnetAction::None;break;
  case 21:bWorkshop=false;break;
  case 30:bReceipt=false;bWorkshop=true;break;
+ case 40:Deposit();break;
  case 31:Model.AbandonJob();bReceipt=false;bWorkshop=true;Pause(false);Save();break;
  case 450:bPaused=bWorkshop=bReceipt=false;TutorialChanged(Tutorial.Begin());break;
  case 451:if(Tutorial.bRiskHeld){const bool WasPaused=bPaused,WasWorkshop=bWorkshop,WasReceipt=bReceipt;bPaused=bWorkshop=bReceipt=false;Vent();bPaused=WasPaused;bWorkshop=WasWorkshop;bReceipt=WasReceipt;}TutorialChanged(Tutorial.Skip());break;
@@ -204,6 +227,7 @@ void FWorkbenchImpl::Tick(float Delta)
  if(Focused){
   if(PC->WasInputKeyJustPressed(EKeys::Escape)){if(bWorkshop)bWorkshop=false;else if(bReceipt)bReceipt=false;else Pause(!bPaused);}
   if(PC->WasInputKeyJustPressed(EKeys::M))Button(4);
+  if(PC->WasInputKeyJustPressed(EKeys::E))Deposit();
   if(PC->WasInputKeyJustPressed(EKeys::Q)&&!bPaused&&!bWorkshop&&!bReceipt&&!TutorialIntro())bPrecisionLatched=!bPrecisionLatched;
   if(PC->WasInputKeyJustPressed(EKeys::SpaceBar)&&!bPaused&&!bWorkshop&&!bReceipt&&!TutorialIntro()&&!Tutorial.bRiskHeld&&PourTimer<=0&&ForgeTimer<=0&&!Model.IsJobEnded()&&!Model.IsJobFailed()){bFieldLatched=!bFieldLatched;Action=bFieldLatched?EMagnetAction::Sweep:EMagnetAction::None;Play(bFieldLatched?TEXT("magnet_on"):TEXT("magnet_off"),.5f);if(!bFieldLatched)TutorialChanged(Tutorial.ObserveFieldOff());}
   if(PC->WasInputKeyJustPressed(EKeys::Tab)&&!bPaused&&!TutorialIntro()&&!Tutorial.bRiskHeld&&PourTimer<=0){bWorkshop=!bWorkshop;bFieldLatched=false;Action=EMagnetAction::None;}

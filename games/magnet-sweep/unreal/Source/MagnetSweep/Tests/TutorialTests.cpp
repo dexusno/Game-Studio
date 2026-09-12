@@ -9,13 +9,25 @@
 using namespace MagnetSweep;
 namespace
 {
-void ReachBundle(FTutorialProgress& T)
-{
-    T.Start(); T.Begin(); T.ObserveCapture(false,false,true,4); T.ObserveFieldOff();
-}
 void ReachRisk(FTutorialProgress& T)
 {
-    ReachBundle(T); T.ObserveCapture(true,false,true,9); T.ObserveSmelt(false);
+    T.Start(); T.Begin(); T.ObserveCapture(false,false,true,2);
+    T.ObserveSmelt(true); T.ObservePurchase(1); T.ObserveCapture(false,false,true,2);
+}
+bool EarnCoil(FWorkbenchImpl& Runtime)
+{
+    Runtime.Tutorial.Start(); Runtime.Tutorial.Begin();
+    for(int32 Start : {0,12})
+    {
+        TArray<int32> Iron; for(int32 Id=Start;Id<Start+12;++Id)Iron.Add(Id);
+        Runtime.Model.CapturePieces(Iron); Runtime.Model.BankCargo();
+        Runtime.Tutorial.ObserveSmelt(Runtime.Model.IsDeliveryCompleted());
+    }
+    Runtime.Model.CapturePieces({24}); Runtime.Model.BankCargo();
+    Runtime.Tutorial.ObserveSmelt(Runtime.Model.IsDeliveryCompleted());
+    if(!Runtime.Model.PurchaseUpgrade(EUpgrade::Coil))return false;
+    Runtime.Tutorial.ObservePurchase(int32(EUpgrade::Coil));
+    return true;
 }
 }
 
@@ -24,42 +36,39 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialActionTest,"MagnetSweep.Tutorial.Actua
 bool FTutorialActionTest::RunTest(const FString& Parameters)
 {
     FTutorialProgress T; FString Reason;
-    TestTrue(TEXT("Default not-yet-started tutorial is valid"),T.Validate(Reason));
+    TestTrue(TEXT("Default tutorial is valid and does not change normal capture"),T.Validate(Reason) && !T.IsTrainingGuardActive());
     TestFalse(TEXT("Disabled tutorial ignores capture"),T.ObserveCapture(true,true,true,12));
-    TestTrue(TEXT("Start enables Welcome"),T.Start() && T.bEnabled && T.Step==ETutorialStep::Welcome);
-    TestTrue(TEXT("Begin opens actual attraction lesson"),T.Begin() && T.Step==ETutorialStep::Attract);
-    TestFalse(TEXT("One2kg piece does not meet the first haul threshold"),T.ObserveCapture(false,false,true,2));
-    TestTrue(TEXT("Capture advances only to release even when linked and precise"),
-        T.ObserveCapture(true,true,true,9) && T.Step==ETutorialStep::Release);
-    TestFalse(TEXT("Another capture cannot stand in for a player release"),T.ObserveCapture(true,true,true,12));
-    TestTrue(TEXT("Actual field release opens bundle lesson"),T.ObserveFieldOff() && T.Step==ETutorialStep::Bundle);
-    TestFalse(TEXT("Repeated release does not cascade"),T.ObserveFieldOff());
-    TestFalse(TEXT("Ordinary loose pickup cannot pass bundle lesson"),T.ObserveCapture(false,false,true,14));
-    TestTrue(TEXT("Actual connected capture opens first smelt lesson"),
-        T.ObserveCapture(true,false,true,23) && T.Step==ETutorialStep::FirstSmelt);
-    TestTrue(TEXT("Even a quota-reaching smelt first teaches risk"),T.ObserveSmelt(true) && T.Step==ETutorialStep::Risk);
-    TestFalse(TEXT("A safe load cannot trigger a first-risk hold"),T.HoldFirstRisk(false));
-    TestTrue(TEXT("Actual unsafe cargo requests one teaching hold"),T.HoldFirstRisk(true) && T.bRiskHeld);
-    TestFalse(TEXT("Repeated unsafe frames do not repeat the hold event"),T.HoldFirstRisk(true));
-    TestFalse(TEXT("An unsuccessful drop is not a learned rescue"),T.ObserveDrop(false));
-    TestTrue(TEXT("Hold remains until real rescue"),T.bRiskHeld && !T.bRiskLearned);
-    TestTrue(TEXT("Real drop teaches rescue and opens precision"),
+    T.Start(); T.Begin();
+    TestTrue(TEXT("Novice capture protection begins before any earned purchase"),T.IsTrainingGuardActive());
+    TestFalse(TEXT("A valueless hot cell cannot stand in for useful salvage"),T.ObserveCapture(false,false,false,4));
+    TestTrue(TEXT("One useful piece goes straight to freely available smelting"),
+        T.ObserveCapture(false,false,true,2) && T.Step==ETutorialStep::FirstSmelt);
+    TestFalse(TEXT("Field release is no longer an ordered prerequisite"),T.ObserveFieldOff());
+    TestTrue(TEXT("Even a small real first payout advances to earning the upgrade"),
+        T.ObserveSmelt(false) && T.Step==ETutorialStep::Quota);
+    TestTrue(TEXT("First payout does not claim danger learning or remove novice protection"),
+        !T.bRiskLearned && T.IsTrainingGuardActive() && T.Validate(Reason));
+    TestTrue(TEXT("An actual quota payout opens the shop before risk practice"),
+        T.ObserveSmelt(true) && T.Step==ETutorialStep::Upgrade && !T.bRiskLearned && T.Validate(Reason));
+    TestFalse(TEXT("Invalid purchase identity cannot end novice protection"),T.ObservePurchase(3));
+    TestTrue(TEXT("Real purchase alone ends the training guard and opens use"),
+        T.ObservePurchase(1) && T.Step==ETutorialStep::TryUpgrade && !T.IsTrainingGuardActive() && T.Validate(Reason));
+    TestFalse(TEXT("Empty or hazardous capture cannot demonstrate useful upgrade use"),T.ObserveCapture(false,false,false,4));
+    TestTrue(TEXT("Useful upgraded capture introduces later risk practice"),
+        T.ObserveCapture(false,false,true,4) && T.Step==ETutorialStep::Risk);
+    TestFalse(TEXT("A safe load cannot create a first-warning hold"),T.HoldFirstRisk(false));
+    TestTrue(TEXT("The actual first unsafe haul receives a rescue hold"),T.HoldFirstRisk(true));
+    TestFalse(TEXT("A repeated warning does not restart the hold"),T.HoldFirstRisk(true));
+    TestFalse(TEXT("An unsuccessful drop does not teach rescue"),T.ObserveDrop(false));
+    TestTrue(TEXT("Real rescue leads to precision after the earned upgrade"),
         T.ObserveDrop(true) && T.bRiskLearned && !T.bRiskHeld && T.Step==ETutorialStep::Precision);
-    TestFalse(TEXT("A hot-cell-only precise capture does not teach useful precision"),T.ObserveCapture(false,true,false,4));
-    TestFalse(TEXT("Broad-field useful capture does not pass precision"),T.ObserveCapture(false,false,true,8));
-    TestTrue(TEXT("Actual useful precision capture opens the quota lesson"),
-        T.ObserveCapture(false,true,true,12) && T.Step==ETutorialStep::Quota);
-    TestFalse(TEXT("Below-quota smelt cannot open upgrades"),T.ObserveSmelt(false));
-    TestTrue(TEXT("Met quota opens real upgrade purchase"),T.ObserveSmelt(true) && T.Step==ETutorialStep::Upgrade);
-    TestFalse(TEXT("Unknown upgrade identity is not a purchase"),T.ObservePurchase(3));
-    TestTrue(TEXT("Actual coil purchase opens upgrade use"),
-        T.ObservePurchase(1) && T.bPurchasedMod && T.PurchasedMod==1 && T.Step==ETutorialStep::TryUpgrade);
-    TestFalse(TEXT("Unsuccessful empty capture cannot complete practice"),T.ObserveCapture(false,false,true,0));
-    TestFalse(TEXT("Capturing only a hazard cannot complete upgrade practice"),T.ObserveCapture(false,false,false,4));
-    TestTrue(TEXT("Using the upgraded rig on useful salvage completes guidance"),
-        T.ObserveCapture(false,false,true,8) && T.Step==ETutorialStep::Complete && !T.bEnabled);
-    TestTrue(TEXT("Completed tutorial persists its learned events"),T.bRiskLearned && T.bPurchasedMod && T.Validate(Reason));
-    TestFalse(TEXT("Post-completion events cannot restart lessons"),T.ObserveSmelt(true));
+    TestFalse(TEXT("Dropping again cannot trap or erase the precision lesson"),T.ObserveDrop(true));
+    TestFalse(TEXT("Hot-cell precision cannot finish useful practice"),T.ObserveCapture(false,true,false,4));
+    TestFalse(TEXT("Broad capture cannot stand in for precision"),T.ObserveCapture(false,false,true,8));
+    TestTrue(TEXT("Actual useful precision completes the later rehearsal"),
+        T.ObserveCapture(false,true,true,12) && T.Step==ETutorialStep::Complete && !T.bEnabled);
+    TestTrue(TEXT("Completion retains actual rescue and purchase evidence"),T.bRiskLearned && T.bPurchasedMod && T.Validate(Reason));
+    TestFalse(TEXT("Completion does not reinstate the training guard"),T.IsTrainingGuardActive());
     return true;
 }
 
@@ -67,31 +76,29 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialEarlyRiskTest,"MagnetSweep.Tutorial.Ea
     EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FTutorialEarlyRiskTest::RunTest(const FString& Parameters)
 {
-    FTutorialProgress T; T.Start(); T.Begin();
-    T.ObserveCapture(false,false,false,4);
-    TestTrue(TEXT("An early hazardous capture still reaches release lesson"),T.Step==ETutorialStep::Release);
-    T.HoldFirstRisk(true);
-    TestTrue(TEXT("First danger holds even before the dedicated risk lesson"),T.bRiskHeld);
-    TestTrue(TEXT("Rescue while learning release returns to attraction with an empty haul"),
-        T.ObserveDrop(true) && T.Step==ETutorialStep::Attract && T.bRiskLearned && !T.bRiskHeld);
-    T.ObserveCapture(false,false,true,4); T.ObserveFieldOff(); T.ObserveCapture(true,false,true,13);
-    TestTrue(TEXT("Later first smelt honors already-observed rescue without repeating it"),
-        T.ObserveSmelt(false) && T.Step==ETutorialStep::Precision);
-    TestFalse(TEXT("Later dangers are real gameplay, not another teaching hold"),T.HoldFirstRisk(true));
-
-    FTutorialProgress Earlier; ReachBundle(Earlier); Earlier.HoldFirstRisk(true);
-    TestTrue(TEXT("Rescue during bundle lesson records learning without skipping the bundle action"),
-        Earlier.ObserveDrop(true) && Earlier.Step==ETutorialStep::Bundle && Earlier.bRiskLearned);
+    // Old saved tutorials can already hold unsafe cargo before the new training
+    // guard. Honor their actual rescue without forcing danger again before rewards.
+    FTutorialProgress Legacy; Legacy.Start(); Legacy.Step=ETutorialStep::Release;
+    Legacy.HoldFirstRisk(true);
+    TestFalse(TEXT("Reconciliation cannot dismiss a restored first warning"),Legacy.Reconcile(false,true,true));
+    TestTrue(TEXT("Dropping a legacy held haul returns to unrestricted collection"),
+        Legacy.ObserveDrop(true) && Legacy.Step==ETutorialStep::Attract && Legacy.bRiskLearned && !Legacy.bRiskHeld);
+    TestTrue(TEXT("Real payment after the old warning still opens earning guidance"),
+        Legacy.ObserveSmelt(false) && Legacy.Step==ETutorialStep::Quota);
+    Legacy.ObservePurchase(2);
+    TestTrue(TEXT("Already-learned rescue is preserved when the real upgraded rig is used"),
+        Legacy.ObserveCapture(false,false,true,2) && Legacy.Step==ETutorialStep::Precision);
+    TestFalse(TEXT("Previously learned danger does not receive another false first hold"),Legacy.HoldFirstRisk(true));
+    TestTrue(TEXT("Actual precision can finish the preserved lesson"),Legacy.ObserveCapture(false,true,true,2));
 
     FTutorialProgress Retry; ReachRisk(Retry); Retry.HoldFirstRisk(true);
-    TestTrue(TEXT("A genuinely reset safe board clears its stale teaching hold"),Retry.HoldFirstRisk(false));
-    TestTrue(TEXT("Retry does not claim a rescue or reset the pending lesson"),
-        !Retry.bRiskLearned && !Retry.bRiskHeld && Retry.Step==ETutorialStep::Risk);
-    TestFalse(TEXT("Restocking itself does not pass risk"),Retry.Reconcile(false,true,true));
-    TestTrue(TEXT("A new unsafe haul can still receive the missing first hold"),Retry.HoldFirstRisk(true));
-    TestTrue(TEXT("An actual subsequent rescue finishes the pending lesson"),
-        Retry.ObserveDrop(true) && Retry.Step==ETutorialStep::Precision);
-    FString Reason; TestTrue(TEXT("Retry/rescue state remains persistable"),Retry.Validate(Reason));
+    TestTrue(TEXT("Restocking a safe board clears only its stale hold"),Retry.HoldFirstRisk(false));
+    TestTrue(TEXT("Retry cannot invent rescue or undo the purchased rig"),
+        !Retry.bRiskLearned && Retry.bPurchasedMod && Retry.Step==ETutorialStep::Risk && !Retry.IsTrainingGuardActive());
+    TestFalse(TEXT("New material itself does not pass the risk action"),Retry.Reconcile(false,true,true));
+    TestTrue(TEXT("The missing first rescue can still receive a real warning hold"),Retry.HoldFirstRisk(true));
+    TestTrue(TEXT("Actual drop advances the retained risk lesson"),Retry.ObserveDrop(true) && Retry.Step==ETutorialStep::Precision);
+    FString Reason; TestTrue(TEXT("Retry result remains saveable"),Retry.Validate(Reason));
     return true;
 }
 
@@ -99,31 +106,44 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialReconcileTest,"MagnetSweep.Tutorial.Of
     EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FTutorialReconcileTest::RunTest(const FString& Parameters)
 {
-    FTutorialProgress T; ReachBundle(T);
-    TestTrue(TEXT("Off-path early purchase is recorded without skipping the current lesson"),
-        T.ObservePurchase(2) && T.Step==ETutorialStep::Bundle && T.PurchasedMod==2);
-    TestFalse(TEXT("Available bundles require an actual linked capture"),T.Reconcile(true,true,true));
-    TestTrue(TEXT("No remaining bundle avoids an impossible bundle gate"),
-        T.Reconcile(true,false,false) && T.Step==ETutorialStep::FirstSmelt);
-    TestTrue(TEXT("Met quota is evidence of an earlier smelt, but does not skip risk"),
-        T.Reconcile(true,false,false) && T.Step==ETutorialStep::Risk);
-    T.HoldFirstRisk(true);
-    TestFalse(TEXT("Board reconciliation cannot dismiss a held danger"),T.Reconcile(true,false,false));
-    T.ObserveDrop(true);
-    TestFalse(TEXT("Exhausted board cannot invent a precision event"),T.Reconcile(true,false,false));
-    TestTrue(TEXT("Pending precision explicitly requests useful fresh material"),
-        T.Step==ETutorialStep::Precision && T.NeedsFreshTray(false));
-    TestFalse(TEXT("Available useful material requires no restock"),T.NeedsFreshTray(true));
-    TestFalse(TEXT("Retry/restock retains the pending precision lesson"),T.Reconcile(false,true,true));
+    const ETutorialStep Early[]={ETutorialStep::Welcome,ETutorialStep::Attract,ETutorialStep::Release,
+        ETutorialStep::Bundle,ETutorialStep::FirstSmelt};
+    for(auto Step:Early)
+    {
+        FTutorialProgress T; T.Start(); T.Step=Step;
+        TestTrue(TEXT("Every early lesson accepts a real below-quota payout without prerequisites"),
+            T.ObserveSmelt(false) && T.Step==ETutorialStep::Quota);
+        TestFalse(TEXT("Recognizing payout never fabricates danger learning"),T.bRiskLearned);
+        TestTrue(TEXT("An actual purchase funded across retries bypasses unnecessary current quota"),
+            T.ObservePurchase(0) && T.Step==ETutorialStep::TryUpgrade && !T.IsTrainingGuardActive());
+    }
+    for(auto Step:{ETutorialStep::Release,ETutorialStep::Bundle})
+    {
+        FTutorialProgress T; T.Start(); T.Step=Step;
+        TestTrue(TEXT("Legacy release/bundle gates are removed even when links remain"),
+            T.Reconcile(false,true,true) && T.Step==ETutorialStep::FirstSmelt);
+        TestTrue(TEXT("Dropping the whole practice load gives a fresh collection instruction"),
+            T.ObserveDrop(true) && T.Step==ETutorialStep::Attract);
+        TestTrue(TEXT("Existing actual cargo makes a resumed collection save freely smeltable"),
+            T.Reconcile(false,true,true,4) && T.Step==ETutorialStep::FirstSmelt);
+    }
+    for(auto Step:{ETutorialStep::Risk,ETutorialStep::Precision})
+    {
+        FTutorialProgress T; T.Start(); T.Step=Step; T.bRiskLearned=Step==ETutorialStep::Precision;
+        TestTrue(TEXT("Old pre-upgrade danger lessons resume earning first"),
+            T.Reconcile(false,true,true) && T.Step==ETutorialStep::Quota);
+        TestTrue(TEXT("Earned quota is sufficient to open purchase guidance"),
+            T.Reconcile(true,true,true) && T.Step==ETutorialStep::Upgrade);
+    }
+    FTutorialProgress T; ReachRisk(T); T.HoldFirstRisk(true); T.ObserveDrop(true);
+    TestFalse(TEXT("Exhausted tray cannot invent a precision event"),T.Reconcile(true,false,false));
+    TestTrue(TEXT("Unfinished precision requests fresh useful material"),T.NeedsFreshTray(false));
+    TestFalse(TEXT("Existing useful material needs no restock"),T.NeedsFreshTray(true));
     T.ObserveCapture(false,true,true,4);
-    TestTrue(TEXT("Actual precision followed by existing quota uses the prior real purchase"),
-        T.Reconcile(true,true,true) && T.Step==ETutorialStep::TryUpgrade);
-    TestFalse(TEXT("Empty board does not count as using the upgrade"),T.Reconcile(true,false,false));
-    TestTrue(TEXT("Upgrade practice can request a new tray without buying the mod twice"),
-        T.NeedsFreshTray(false) && T.bPurchasedMod && T.PurchasedMod==2);
-    T.Reconcile(false,true,true);
-    TestTrue(TEXT("Actual useful capture completes the retained upgrade lesson"),T.ObserveCapture(false,false,true,4));
-    TestFalse(TEXT("Completed guidance never requests a forced replay"),T.NeedsFreshTray(false));
+    TestFalse(TEXT("Completed guidance cannot demand forced replay"),T.NeedsFreshTray(false));
+    FTutorialProgress Paid; Paid.Start(); Paid.ObserveSmelt(false);
+    TestFalse(TEXT("Dropping after payment keeps the earning objective"),Paid.ObserveDrop(true));
+    TestTrue(TEXT("No second release/bundle gate after dropping or retrying"),Paid.Step==ETutorialStep::Quota);
     return true;
 }
 
@@ -132,33 +152,123 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialValidationTest,"MagnetSweep.Tutorial.T
 bool FTutorialValidationTest::RunTest(const FString& Parameters)
 {
     FTutorialProgress T; ReachRisk(T); T.HoldFirstRisk(true);
-    TestFalse(TEXT("Skip cannot silently remove protection while dangerous cargo is held"),T.Skip());
-    TestTrue(TEXT("Rejected skip preserves the held lesson"),T.bEnabled && T.bRiskHeld);
+    TestFalse(TEXT("Skip cannot silently abandon protected dangerous cargo"),T.Skip());
     T.ObserveDrop(true);
-    TestTrue(TEXT("Skip disables safely after actual drop"),T.Skip() && !T.bEnabled && T.Step==ETutorialStep::Skipped);
-    TestFalse(TEXT("Finish does not falsely relabel a skipped tutorial completed"),T.Finish());
-    TestTrue(TEXT("Skipped terminal identity is preserved"),T.Step==ETutorialStep::Skipped);
-    TestFalse(TEXT("Skipped state ignores new purchase events"),T.ObservePurchase(0));
-    TestTrue(TEXT("Only explicit Start resets terminal and learned state"),
-        T.Start() && T.Step==ETutorialStep::Welcome && !T.bRiskLearned && !T.bPurchasedMod);
-    TestTrue(TEXT("Explicit finish produces a disabled completed record"),T.Finish() && T.Step==ETutorialStep::Complete && !T.bEnabled);
-    TestFalse(TEXT("Skip does not overwrite a completed record"),T.Skip());
+    TestTrue(TEXT("Skip disables safely after the actual drop"),T.Skip() && T.Step==ETutorialStep::Skipped && !T.bEnabled);
+    TestFalse(TEXT("Finish preserves a skipped terminal record"),T.Finish());
+    TestFalse(TEXT("Disabled guidance ignores later purchases"),T.ObservePurchase(0));
+    T.Start();
+    TestTrue(TEXT("Explicit Start alone resets teaching progress"),!T.bRiskLearned && !T.bPurchasedMod && T.IsTrainingGuardActive());
+    TestTrue(TEXT("Explicit finish retains its original terminal API"),T.Finish() && T.Step==ETutorialStep::Complete);
+    TestFalse(TEXT("Skipping never overwrites completed metadata"),T.Skip());
     FString Reason;
-    TestTrue(TEXT("Terminal record validates"),T.Validate(Reason));
-    const auto Valid = [&Reason](int32 Step,bool Enabled,bool Learned,bool Held,bool Purchased,int32 Mod) {
+    const auto Valid=[&Reason](int32 Step,bool Enabled,bool Learned,bool Held,bool Purchased,int32 Mod){
         return FTutorialProgress::ValidateFields(Step,Enabled,Learned,Held,Purchased,Mod,Reason);
     };
-    TestFalse(TEXT("Negative serialized step is rejected before enum conversion"),Valid(-1,true,false,false,false,-1));
-    TestFalse(TEXT("Unknown serialized step is rejected"),Valid(99,true,false,false,false,-1));
-    TestFalse(TEXT("Enabled completed state is rejected"),Valid(int32(ETutorialStep::Complete),true,true,false,true,0));
-    TestFalse(TEXT("Disabled mid-lesson state is rejected"),Valid(int32(ETutorialStep::Risk),false,false,false,false,-1));
-    TestFalse(TEXT("A learned risk cannot retain a teaching hold"),Valid(int32(ETutorialStep::Risk),true,true,true,false,-1));
-    TestFalse(TEXT("Later lesson cannot forge an unobserved rescue"),Valid(int32(ETutorialStep::Precision),true,false,false,false,-1));
-    TestFalse(TEXT("Practice requires a recorded purchase"),Valid(int32(ETutorialStep::TryUpgrade),true,true,false,false,-1));
-    TestFalse(TEXT("Unknown purchased mod is rejected"),Valid(int32(ETutorialStep::Upgrade),true,true,false,true,3));
-    TestFalse(TEXT("Absent purchase cannot carry a mod identity"),Valid(int32(ETutorialStep::Quota),true,true,false,false,1));
-    TestTrue(TEXT("A valid saved hold restores enough state for safe resume"),Valid(int32(ETutorialStep::Release),true,false,true,false,-1));
-    TestTrue(TEXT("A valid off-path purchased mod can persist before risk"),Valid(int32(ETutorialStep::Bundle),true,false,false,true,2));
+    const ETutorialStep SavedIds[]={ETutorialStep::Welcome,ETutorialStep::Attract,ETutorialStep::Release,
+        ETutorialStep::Bundle,ETutorialStep::FirstSmelt,ETutorialStep::Risk,ETutorialStep::Precision,
+        ETutorialStep::Quota,ETutorialStep::Upgrade,ETutorialStep::TryUpgrade,ETutorialStep::Complete,ETutorialStep::Skipped};
+    for(int32 Id=0;Id<12;++Id)TestEqual(TEXT("Existing serialized enum IDs stay unchanged"),int32(SavedIds[Id]),Id);
+    TestFalse(TEXT("Negative saved step is rejected before enum conversion"),Valid(-1,true,false,false,false,-1));
+    TestFalse(TEXT("Unknown saved step is rejected"),Valid(99,true,false,false,false,-1));
+    TestFalse(TEXT("Enabled completed state is rejected"),Valid(10,true,true,false,true,0));
+    TestFalse(TEXT("Disabled mid-lesson state is rejected"),Valid(5,false,false,false,false,-1));
+    TestFalse(TEXT("Learned and held danger is contradictory"),Valid(5,true,true,true,false,-1));
+    TestFalse(TEXT("Precision cannot forge an unobserved rescue"),Valid(6,true,false,false,true,0));
+    TestFalse(TEXT("Upgrade use requires actual purchase evidence"),Valid(9,true,false,false,false,-1));
+    TestFalse(TEXT("Unknown purchased mod is rejected"),Valid(8,true,false,false,true,3));
+    TestFalse(TEXT("Absent purchase cannot carry a mod identity"),Valid(7,true,false,false,false,1));
+    TestTrue(TEXT("Quota guidance now correctly precedes rescue"),Valid(7,true,false,false,false,-1));
+    TestTrue(TEXT("Purchase guidance now correctly precedes rescue"),Valid(8,true,false,false,false,-1));
+    TestTrue(TEXT("Using a paid mod now correctly precedes rescue"),Valid(9,true,false,false,true,2));
+    TestTrue(TEXT("Old held Release save remains loadable"),Valid(2,true,false,true,false,-1));
+    TestTrue(TEXT("Old pre-purchase Precision save remains loadable for reconciliation"),Valid(6,true,true,false,false,-1));
+    return true;
+}
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialEarningTest,"MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FTutorialEarningTest::RunTest(const FString& Parameters)
+{
+    for(auto Step:{ETutorialStep::Attract,ETutorialStep::Release,ETutorialStep::Bundle,ETutorialStep::FirstSmelt})
+    for(bool Mixed:{false,true})
+    {
+        FWorkbenchImpl R(nullptr); R.bMuted=true; R.Tutorial.Start(); R.Tutorial.Step=Step;
+        R.Model.CapturePieces(Mixed?TArray<int32>{0,24}:TArray<int32>{0});
+        const int32 Expected=Mixed?40:4;
+        TestEqual(TEXT("Fixture contains actual iron or iron plus linked copper"),R.Model.GetCargo(),Expected);
+        R.Deposit(false);
+        TestEqual(TEXT("Real Deposit pays every safe material mix from every early lesson"),R.Model.GetBanked(),Expected);
+        TestEqual(TEXT("The actual first payout reaches the wallet with no tutorial award"),R.Model.GetWallet(),Expected);
+        TestEqual(TEXT("The actual first payout reaches XP with no fabricated lesson reward"),R.Model.GetXP(),Expected);
+        TestEqual(TEXT("Even a tiny accepted pour spends exactly one advertised charge"),R.Model.GetHeatsRemaining(),3);
+        // Simulate reopening a saved committed pour: the real ledger is authoritative,
+        // even if the original animation's settled callback was never delivered.
+        FWorkbenchImpl Reloaded(nullptr); Reloaded.bMuted=true;
+        TestTrue(TEXT("Every early committed payout remains saveable"),Reloaded.DecodeSave(R.EncodeSave()));
+        Reloaded.UpdateTutorial();
+        TestTrue(TEXT("Saved real payout resumes earning guidance without another pickup"),Reloaded.Tutorial.Step==ETutorialStep::Quota);
+        TestTrue(TEXT("Early banking retains training protection until an actual purchase"),Reloaded.Tutorial.IsTrainingGuardActive());
+    }
+    FWorkbenchImpl Guard(nullptr); Guard.bMuted=true; Guard.Tutorial.Start(); Guard.Tutorial.Begin();
+    TestFalse(TEXT("Visible training guard blocks actual hot-cell attachment"),Guard.CanCaptureForPlayer(35));
+    TestTrue(TEXT("The novice can take a legal connected copper bundle"),Guard.CanCaptureForPlayer(24));
+    Guard.Action=EMagnetAction::Sweep; Guard.bFieldLatched=true;
+    Guard.OnRecovery(Guard.Model.CapturePieces({0}),false,1);
+    TestTrue(TEXT("The first useful piece exposes smelting without interrupting a larger sweep"),
+        Guard.Tutorial.Step==ETutorialStep::FirstSmelt && Guard.Action==EMagnetAction::Sweep && Guard.bFieldLatched);
+    TArray<int32> MoreIron; for(int32 Id=1;Id<8;++Id)MoreIron.Add(Id);
+    Guard.OnRecovery(Guard.Model.CapturePieces(MoreIron),false,MoreIron.Num());
+    TestEqual(TEXT("Guard boundary fixture holds sixteen kg"),Guard.Model.GetCargoMass(),16);
+    TestTrue(TEXT("The normal model would allow the additional nine-kg bundle"),Guard.Model.CanCaptureGroup(24));
+    TestFalse(TEXT("The novice guard rejects the whole linked bundle above safe capacity"),Guard.CanCaptureForPlayer(24));
+    TestTrue(TEXT("Rejected guarded bundle stays fully available"),
+        Guard.Model.FindPiece(24)->State==EPieceState::Available && Guard.Model.FindPiece(25)->State==EPieceState::Available
+        && Guard.Model.FindPiece(26)->State==EPieceState::Available);
+    Guard.OnRecovery(Guard.Model.CapturePieces({8,9,10,11}),false,4);
+    TestEqual(TEXT("A novice haul can reach the actual safe capacity"),Guard.Model.GetCargoMass(),24);
+    TestFalse(TEXT("Safe capacity blocks more novice iron instead of overloading"),Guard.CanCaptureForPlayer(12));
+    TestTrue(TEXT("Full safe practice haul visibly stops the field with no danger"),
+        Guard.Action==EMagnetAction::None && !Guard.bFieldLatched && !Guard.Model.IsCargoUnsafe());
+    TestEqual(TEXT("Protected collection consumed no fuel"),Guard.Model.GetHeatsRemaining(),4);
+    FWorkbenchImpl Purchased(nullptr); Purchased.bMuted=true;
+    TestTrue(TEXT("Unlock fixture actually earns and buys its first rig mod"),EarnCoil(Purchased));
+    TestFalse(TEXT("Real purchase ends training protection"),Purchased.Tutorial.IsTrainingGuardActive());
+    TestTrue(TEXT("Ordinary hot-cell risk is available after the actual purchase"),Purchased.CanCaptureForPlayer(35));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialDragReleaseTest,"MagnetSweep.Tutorial.NaturalDragReleasePayout",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FTutorialDragReleaseTest::RunTest(const FString& Parameters)
+{
+    // Tray, world furnace, enabled SMELT HAUL button, unrelated enabled UI.
+    for(int32 Target=0;Target<4;++Target)
+    {
+        FWorkbenchImpl R(nullptr); R.bMuted=true;
+        R.Tutorial.Start(); R.Tutorial.Step=ETutorialStep::Bundle;
+        R.Model.CapturePieces({0,24}); // A real safe 40-credit mixed haul.
+        R.bHaulDrag=true; R.bFurnaceHover=Target==1;
+        if(Target>=2)
+        {
+            FDemoButton Button;
+            Button.Id=Target==2?40:41; Button.Enabled=true;
+            Button.Rect=FBox2D(FVector2D(100,100),FVector2D(200,140));
+            R.Buttons.Add(Button); R.Pointer=FVector2D(150,120);
+            TestEqual(TEXT("UI release uses an actual enabled button hit"),R.HitButton(),Button.Id);
+        }
+        const bool ShouldBank=Target==1 || Target==2;
+        R.Action=EMagnetAction::None; // The training guard already stopped attraction.
+        R.HandleRelease();
+        TestFalse(TEXT("Actual release consumes the original tray-drag intent"),R.bHaulDrag);
+        TestEqual(TEXT("World furnace or SMELT HAUL release pays; tray or unrelated UI retains cargo"),
+            R.Model.GetBanked(),ShouldBank?40:0);
+        TestEqual(TEXT("Release away from either smelt target retains every cargo piece"),R.Model.GetCargo(),ShouldBank?0:40);
+        TestEqual(TEXT("Only an accepted smelt release awards real wallet income"),R.Model.GetWallet(),ShouldBank?40:0);
+        TestEqual(TEXT("Only an accepted smelt release spends a charge"),R.Model.GetHeatsRemaining(),ShouldBank?3:4);
+        const int32 Banked=R.Model.GetBanked();
+        R.HandleRelease();
+        TestEqual(TEXT("Repeating release without another tray drag cannot credit twice"),R.Model.GetBanked(),Banked);
+    }
     return true;
 }
 
@@ -169,10 +279,10 @@ bool FTutorialRuntimeTest::RunTest(const FString& Parameters)
     // Real runtime callbacks, with no world/scene/audio required. Tick itself needs a
     // player controller and is intentionally not represented as a rendered/native test.
     FWorkbenchImpl Runtime(nullptr); Runtime.bMuted=true;
-    TArray<int32> Iron; for(int32 Id=0;Id<12;++Id)Iron.Add(Id);
-    Runtime.Model.CapturePieces(Iron); Runtime.Model.BankCargo();
+    TestTrue(TEXT("Runtime fixture earns and purchases its real first coil"),EarnCoil(Runtime));
+    Runtime.OnRecovery(Runtime.Model.CapturePieces({30}),false,1);
+    TestTrue(TEXT("Actual upgraded recovery reaches the later risk rehearsal"),Runtime.Tutorial.Step==ETutorialStep::Risk);
     const int32 Banked=Runtime.Model.GetBanked(), Wallet=Runtime.Model.GetWallet(), XP=Runtime.Model.GetXP();
-    Runtime.Tutorial.Start(); Runtime.Tutorial.Begin();
     Runtime.Action=EMagnetAction::Sweep; Runtime.bFieldLatched=true;
     Runtime.OnRecovery(Runtime.Model.CapturePieces({35}),false,1);
     TestTrue(TEXT("Actual hot-cell recovery establishes the first safety hold before risk advancement"),
@@ -180,23 +290,26 @@ bool FTutorialRuntimeTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("Held danger stops the actual runtime field and its toggle"),
         Runtime.Action==EMagnetAction::None && !Runtime.bFieldLatched);
     TestEqual(TEXT("OnRecovery has not spent the protected first fuse"),Runtime.Model.GetFuseElapsed(),0.f);
-    TestEqual(TEXT("First warning has not burned an extra fuel charge"),Runtime.Model.GetHeatsRemaining(),3);
+    TestEqual(TEXT("First warning has not burned an extra fuel charge"),Runtime.Model.GetHeatsRemaining(),1);
     Runtime.UpdateTutorial();
     TestTrue(TEXT("Runtime reconciliation preserves the first warning hold"),Runtime.Tutorial.bRiskHeld);
     Runtime.Vent();
     TestEqual(TEXT("Actual runtime drop empties the model haul"),Runtime.Model.GetCargoMass(),0);
     TestTrue(TEXT("Actual runtime drop clears the hold and records the rescue"),
         !Runtime.Tutorial.bRiskHeld && Runtime.Tutorial.bRiskLearned);
-    TestTrue(TEXT("Dropping during release returns to attraction practice"),Runtime.Tutorial.Step==ETutorialStep::Attract);
+    TestTrue(TEXT("Dropping after actual upgrade use leads to later precision practice"),Runtime.Tutorial.Step==ETutorialStep::Precision);
     TestTrue(TEXT("Actual spill callback generated feedback particles"),!Runtime.Particles.IsEmpty());
     TestEqual(TEXT("Guided rescue preserves previously banked material"),Runtime.Model.GetBanked(),Banked);
     TestEqual(TEXT("Guided rescue preserves previously earned money"),Runtime.Model.GetWallet(),Wallet);
     TestEqual(TEXT("Guided rescue preserves previously earned XP"),Runtime.Model.GetXP(),XP);
-    TestEqual(TEXT("Guided rescue preserves fuel"),Runtime.Model.GetHeatsRemaining(),3);
+    TestEqual(TEXT("Guided rescue preserves fuel"),Runtime.Model.GetHeatsRemaining(),1);
+    TestEqual(TEXT("Guided rescue preserves the actually purchased upgrade"),Runtime.Model.GetUpgradeTier(EUpgrade::Coil),1);
 
     FWorkbenchImpl SkipRuntime(nullptr); SkipRuntime.bMuted=true;
-    SkipRuntime.Tutorial.Start(); SkipRuntime.Tutorial.Begin();
-    SkipRuntime.OnRecovery(SkipRuntime.Model.CapturePieces({35}),false,1);
+    // A legacy save may contain an already-held dangerous load before the new
+    // training guard. Its Skip action must still perform an honest safe rescue.
+    SkipRuntime.Tutorial.Start(); SkipRuntime.Tutorial.Step=ETutorialStep::Release;
+    SkipRuntime.Model.CapturePieces({35}); SkipRuntime.Tutorial.HoldFirstRisk(true);
     TestTrue(TEXT("Skip fixture begins with an actual held dangerous haul"),SkipRuntime.Tutorial.bRiskHeld);
     SkipRuntime.bPaused=true;
     SkipRuntime.Button(451);
@@ -219,8 +332,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FTutorialJsonTest,"MagnetSweep.Tutorial.Metadat
 bool FTutorialJsonTest::RunTest(const FString& Parameters)
 {
     FWorkbenchImpl Writer(nullptr); Writer.bMuted=true; Writer.SfxVolume=.65f; Writer.MusicVolume=.2f;
-    Writer.Tutorial.Start(); Writer.Tutorial.Begin();
-    Writer.OnRecovery(Writer.Model.CapturePieces({35}),false,1);
+    Writer.Tutorial.Start(); Writer.Tutorial.Step=ETutorialStep::Release;
+    Writer.Model.CapturePieces({35}); Writer.Tutorial.HoldFirstRisk(true);
     const FString Encoded=Writer.EncodeSave();
     FWorkbenchImpl Loaded(nullptr);
     TestTrue(TEXT("Actual career JSON accepts tutorial metadata"),Loaded.DecodeSave(Encoded));

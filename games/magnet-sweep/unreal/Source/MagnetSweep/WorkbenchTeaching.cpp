@@ -17,8 +17,8 @@ bool FWorkbenchImpl::TutorialIntro() const
 void FWorkbenchImpl::TutorialChanged(bool Changed)
 {
  if(!Changed)return;
- // Release is a real player action: keep the field running until they release it.
- if(Tutorial.Step!=ETutorialStep::Release || Tutorial.bRiskHeld){bFieldLatched=false;Action=EMagnetAction::None;}
+ // First useful capture exposes smelting without cutting the sweep down to one cheap piece.
+ if(Tutorial.Step!=ETutorialStep::FirstSmelt || Tutorial.bRiskHeld){bFieldLatched=false;Action=EMagnetAction::None;}
  if(Tutorial.Step==ETutorialStep::Complete){Toast(TEXT("Tutorial complete — your rig is ready"),TEXT("Keep your earnings and upgrades. Chase gold, missing cores and the next contract."),7);Play(TEXT("contract_success"),.7f);}
  LastEvent=TEXT("tutorial_progress");Save();
 }
@@ -29,15 +29,28 @@ void FWorkbenchImpl::UpdateTutorial()
  bool Bundle=false;
  for(const auto& P:Model.GetPieces())if(P.State==EPieceState::Available&&Model.GetCaptureGroup(P.Id).Num()>1){Bundle=true;break;}
  bool Changed=Tutorial.HoldFirstRisk(Model.IsCargoUnsafe());
- if(PourTimer<=0&&Tutorial.Step==ETutorialStep::FirstSmelt&&Model.GetBanked()>0)Changed|=Tutorial.ObserveSmelt(Model.IsDeliveryCompleted());
- if(PourTimer<=0&&ForgeTimer<=0)Changed|=Tutorial.Reconcile(Model.IsDeliveryCompleted(),Bundle,Model.GetAvailableAmount()>0||Model.GetCargo()>0);
+ if(PourTimer<=0&&Model.GetBanked()>0)Changed|=Tutorial.ObserveSmelt(Model.IsDeliveryCompleted());
+ if(PourTimer<=0&&ForgeTimer<=0)Changed|=Tutorial.Reconcile(Model.IsDeliveryCompleted(),Bundle,Model.GetAvailableAmount()>0||Model.GetCargo()>0,Model.GetCargo());
  TutorialChanged(Changed);
+}
+
+bool FWorkbenchImpl::CanCaptureForPlayer(int32 Id) const
+{
+ if(!Model.CanCaptureGroup(Id))return false;
+ if(!Tutorial.IsTrainingGuardActive())return true;
+ int32 IncomingMass=Model.GetCargoMass();
+ for(int32 PieceId:Model.GetCaptureGroup(Id)){
+  const auto* Piece=Model.FindPiece(PieceId);
+  if(!Piece||Piece->Material==EMaterial::HotCell)return false;
+  IncomingMass+=Piece->Mass;
+ }
+ return IncomingMass<=Model.GetCapacity();
 }
 
 void FWorkbenchImpl::ResetTutorialScene()
 {
  bPaused=bWorkshop=bReceipt=bConfirmRetry=bConfirmNew=false;
- bFieldLatched=bPrecisionLatched=bPrecision=false;
+ bFieldLatched=bPrecisionLatched=bPrecision=bHaulDrag=false;
  bPendingDeposit=bPendingNext=bFailureShown=false;
  RecoveryTimer=PourTimer=ForgeTimer=NoticeTimer=0;LastBank={};
  Action=EMagnetAction::None;Magnet=MagnetTarget={0,-240};MagnetVelocity=FVector2D::ZeroVector;
@@ -85,85 +98,108 @@ void FWorkbenchImpl::PaintTutorial(UCanvas* C)
   const auto Measure=FSlateApplication::Get().GetRenderer()->GetFontMeasureService();
   TArray<FString> Words;Text.ParseIntoArray(Words,TEXT(" "),true);FString Row;
   for(const auto& Word:Words){const FString Next=Row.IsEmpty()?Word:Row+TEXT(" ")+Word;
-   if(!Row.IsEmpty()&&Measure->Measure(Next,Font).X>W*UIScale){DrawText(C,Row,X,Y,Scale,Color);Y+=24;Row=Word;}else Row=Next;
+   if(!Row.IsEmpty()&&Measure->Measure(Next,Font).X>W*UIScale){DrawText(C,Row,X,Y,Scale,Color);Y+=23;Row=Word;}else Row=Next;
   }
-  if(!Row.IsEmpty()){DrawText(C,Row,X,Y,Scale,Color);Y+=24;}return Y;
+  if(!Row.IsEmpty()){DrawText(C,Row,X,Y,Scale,Color);Y+=23;}return Y;
  };
- if(!Tutorial.bEnabled){
-  if(bTutorialPractice&&!bWorkshop&&!bReceipt){Rect(C,44,197,273,83,Dark);DrawText(C,TEXT("PRACTICE RUN"),58,207,.85f,Gold);Button(461,TEXT("Return to saved career"),57,239,246,32);}
-  return;
- }
  if(TutorialIntro()){
   Buttons.Reset();Rect(C,0,0,1600,900,FLinearColor(.004,.014,.020,.84));
-  Rect(C,365,218,870,460,Dark);Rect(C,365,218,870,3,Mint);
-  DrawText(C,TEXT("LEARN THE WORKBENCH"),403,255,1.28f,Paper,true);
-  float Y=Wrap(TEXT("Pull a valuable haul. Smelt it for credits. Build a better magnet."),405,313,785,1.04f,Paper);
-  Y=Wrap(TEXT("We will guide your first order one action at a time. Your first dangerous pickup pauses so you can practise dropping the haul safely."),405,Y+20,785,.94f,Quiet);
-  Wrap(bTutorialPractice?TEXT("This practice run has its own save. Return to your saved career at any time from Pause."):TEXT("Credits, XP and upgrades you earn here stay yours when the guidance ends."),405,Y+20,785,.94f,Mint);
-  Button(450,TEXT("Start learning"),405,579,368,52,true);Button(451,TEXT("Play without guidance"),798,579,395,52);
-  if(bTutorialPractice)Button(461,TEXT("Return to saved career"),405,639,788,30);
+  Rect(C,330,173,940,554,Dark);Rect(C,330,173,940,3,Mint);
+  DrawText(C,TEXT("BUILD YOUR FIRST MAGNET UPGRADE"),367,209,1.10f,Paper,true);
+  float Y=Wrap(TEXT("Earn 150 credits, then fit a stronger coil, a larger basket or a safer stabilizer."),370,268,860,1.01f,Gold);
+  Y=Wrap(TEXT("Hold left mouse near metal to attract it. Release keeps your haul. Click SMELT HAUL by the furnace to turn it into credits."),370,Y+17,860,.96f,Paper);
+  Y=Wrap(TEXT("Iron, copper and alloy can be mixed freely. Every metal counts toward the order. Right-click drops the whole haul back onto the table; it does not smelt it."),370,Y+17,860,.94f,Paper);
+  Y=Wrap(TEXT("Training guard: your magnet cannot overfill or pick up red cells until your first upgrade. Then we will practise risk with a paused first warning."),370,Y+17,860,.89f,Mint);
+  Wrap(bTutorialPractice?TEXT("Separate practice save. Your main career stays safe."):TEXT("Keep your earnings. Finish orders, install all 9 rig improvements and recover 6 rare cores."),370,Y+14,860,.82f,Quiet);
+  Button(450,TEXT("Start: collect and smelt"),370,626,421,51,true);Button(451,TEXT("Play without assistance"),812,626,417,51);
+  if(bTutorialPractice)Button(461,TEXT("Return to saved career"),370,686,859,29);
   return;
  }
- FString Title,Body,Task;int32 Target=INDEX_NONE;bool Furnace=false;
+ const int32 Mods=Model.GetUpgradeLevel();
+ auto DrawRigGoal=[&](){
+  constexpr float X=43,W=275;
+  Rect(C,X,199,W,530,Dark);Rect(C,X,199,W,3,Mint);
+  DrawText(C,Mods==0?TEXT("FIRST BUILD: BETTER MAGNET"):TEXT("BUILD YOUR SALVAGE RIG"),X+16,213,.71f,Gold);
+  if(Mods==0){
+   DrawText(C,FString::Printf(TEXT("%d / 150 credits saved"),Model.GetWallet()),X+16,237,.91f,Paper);
+   Rect(C,X+16,266,W-32,6,FLinearColor(.06,.12,.12));Rect(C,X+16,266,(W-32)*FMath::Clamp(Model.GetWallet()/150.f,0.f,1.f),6,Gold);
+  }else{
+   DrawText(C,FString::Printf(TEXT("%d / 9 improvements fitted"),Mods),X+16,237,.91f,Paper);
+   for(int32 I=0;I<9;++I)Rect(C,X+16+I*27,266,22,6,I<Mods?Mint:FLinearColor(.06,.12,.12));
+  }
+  DrawText(C,Tutorial.IsTrainingGuardActive()?TEXT("TRAINING GUARD ON"):TEXT("SMELT  >  EARN  >  UPGRADE"),X+16,282,.67f,Tutorial.IsTrainingGuardActive()?Mint:Quiet);
+ };
+ if(!Tutorial.bEnabled){
+  if(!bWorkshop&&!bReceipt){
+   DrawRigGoal();float Y=Wrap(TEXT("Smelt mixed metal to earn credits. Buy permanent improvements in Workshop."),59,325,243,.93f,Paper);
+   int32 Cleared=0;for(int32 I=0;I<6;++I)Cleared+=Model.IsJobCleared(I)?1:0;
+   Y=Wrap(FString::Printf(TEXT("Orders completed: %d / 6. Rare cores recovered: %d / 6."),Cleared,Model.GetCollectedCores().Num()),59,Y+22,243,.88f,Mint);
+   Wrap(TEXT("Choose valuable loads and chase gold targets with the rig you are building."),59,Y+20,243,.85f,Quiet);
+   Button(20,TEXT("Workshop: improve rig"),58,621,245,40,true);
+   if(bTutorialPractice)Button(461,TEXT("Return to saved career"),58,683,245,32);
+  }
+  return;
+ }
+ FString Title,Body,Task;int32 Target=INDEX_NONE;bool Furnace=Model.GetCargo()>0&&!Model.IsCargoUnsafe();
  const bool NeedsTray=Tutorial.NeedsFreshTray(Model.GetAvailableAmount()>0||Model.GetCargo()>0);
  const bool Failed=Model.IsJobFailed();
- const bool EndedAction=Model.IsJobEnded()&&Tutorial.Step!=ETutorialStep::Upgrade&&Tutorial.Step!=ETutorialStep::Complete;
+ const bool EndedAction=Model.IsJobEnded()&&Tutorial.Step!=ETutorialStep::Upgrade;
  if(Tutorial.bRiskHeld){
-  Title=TEXT("FIRST WARNING: PAUSED");Task=TEXT("Right-click to drop the whole haul.");
-  Body=FString::Printf(TEXT("Red cells or excess weight start a %g-second fuse, even with attraction off. Expiry spends 1 fuel and destroys your most valuable unbanked piece, if any. Banked rewards stay safe. This first warning waits for you. Drop haul returns salvage to the tray."),Model.GetFuseDuration());
+  Title=TEXT("DANGER: PAUSED FOR YOU");Task=TEXT("Right-click to return the entire haul to the table.");
+  Body=TEXT("This is a rescue, not a deposit. A normal expired warning costs 1 fuel and your most valuable unbanked piece. Your banked credits and rig stay safe. This first warning waits.");
  }else if(Failed){
-  Title=TEXT("TRY A RICHER LOAD");Task=TEXT("Retry this order to continue learning.");
-  Body=TEXT("Four fuel charges ran out before the quota. Each smelt and each failed warning uses one charge. Banked credits, XP and upgrades stay yours. Copper and alloy pack more value into a load.");
+  Title=TEXT("YOUR CREDITS ARE SAFE");Task=FString::Printf(TEXT("Retry the order. Keep your %d credits."),Model.GetWallet());
+  Body=TEXT("The four pours ran out. Copper and alloy give more credits per load. You keep your earned money and upgrades when you retry.");
  }else switch(Tutorial.Step){
-  case ETutorialStep::Attract:Title=TEXT("1. ATTRACT SALVAGE");Task=TEXT("Collect at least 4 kg of iron.");Body=TEXT("Move beside the highlighted iron. Hold left mouse or press Space to switch the field on. Watch the pieces move into the magnet. Your order needs 120 credits of salvage.");break;
-  case ETutorialStep::Release:Title=TEXT("2. KEEP YOUR HAUL");Task=(Action==EMagnetAction::Sweep||bFieldLatched)?TEXT("Release left mouse, or press Space off."):TEXT("Switch the field on, then off again.");Body=TEXT("Turning attraction off keeps your cargo attached. You can carry it safely while choosing your next pickup. Right-click is different: it drops the entire haul.");break;
-  case ETutorialStep::Bundle:Title=TEXT("3. LINKED BUNDLES");Task=TEXT("Attract the linked copper rings.");Body=FString::Printf(TEXT("Connected pieces move together and count as one pickup: these three rings weigh 9 kg and pay 36 credits. Your safe load is %d kg. Check the incoming weight before pulling."),Model.GetCapacity());break;
-  case ETutorialStep::FirstSmelt:Title=TEXT("4. YOUR FIRST PAYOUT");Task=Model.GetCargo()>0?TEXT("Click the furnace to smelt this haul."):TEXT("Gather valuable salvage for a useful load.");Body=FString::Printf(TEXT("Your haul is worth %d credits. One smelt spends one of four fuel charges, no matter how small the load. The metal pays spendable credits and XP. Reach 120 salvage value for an 80-credit bonus."),Model.GetCargo());Furnace=Model.GetCargo()>0;break;
-  case ETutorialStep::Risk:Title=TEXT("5. PRACTISE A RESCUE");Task=TEXT("Pick up a highlighted red cell.");Body=TEXT("Red cells make even a light haul unstable. Try the red-cell pocket with a small haul. Your FIRST warning pauses before any loss. We will practise Drop haul; later warnings run in real time.");break;
-  case ETutorialStep::Precision:Title=TEXT("6. PICK WITH PRECISION");Task=TEXT("Use Q or hold Shift and collect salvage.");Body=TEXT("A narrow field helps separate valuable salvage from red cells. Try the glowing core if it is still here: smelting it pays 40 credits and adds it to your collection. Rare cores are optional.");break;
-  case ETutorialStep::Quota:Title=TEXT("7. COMPLETE YOUR ORDER");Task=FString::Printf(TEXT("Bank %d more credits of salvage."),FMath::Max(0,Model.GetGoal()-Model.GetBanked()));Body=TEXT("Choose useful loads of copper and alloy. Smelted value fills the order; the bonus adds extra credits and XP. Finish after the quota or use spare fuel to chase gold. The next danger warning has a real fuse.");Furnace=Model.GetCargo()>0&&Model.GetBanked()+Model.GetCargo()>=Model.GetGoal();break;
-  case ETutorialStep::Upgrade:Title=TEXT("8. BUILD A BETTER RIG");Task=TEXT("Open Workshop and buy one upgrade.");Body=TEXT("Spend 150 credits on capacity, a stronger coil or more rescue time. XP unlocks ranks and further contracts; spending credits does not remove XP. You can fit a mod once your cargo is empty.");break;
-  case ETutorialStep::TryUpgrade:Title=TEXT("9. FEEL THE UPGRADE");Task=TEXT("Try your upgraded magnet on another haul.");Body=FString::Printf(TEXT("Your rig now holds %d kg, reaches %g units and gives %g seconds to rescue an unsafe load. If this order is finished, choose another in Workshop. Your purchased improvement stays with you."),Model.GetCapacity(),Model.GetFieldRadius(),Model.GetFuseDuration());break;
-  case ETutorialStep::Complete:Title=TEXT("YOU KNOW THE WORKBENCH");Task=TEXT("Ready for your next contract.");Body=TEXT("Choose a valuable load, watch its weight, drop danger in time and smelt for lasting rewards. Pursue gold marks, missing cores and new rig upgrades. Your progress stays with this run.");break;
+  case ETutorialStep::Attract:
+   Title=TEXT("COLLECT A MIXED LOAD");Task=TEXT("Hold left mouse beside metal, then release.");
+   Body=TEXT("Iron, copper and alloy all count. Mixing them never fails the order. Try the copper rings for a useful load. Click SMELT HAUL when ready; RMB only drops it.");break;
+  case ETutorialStep::Release:case ETutorialStep::Bundle:case ETutorialStep::FirstSmelt:
+   Title=TEXT("TURN METAL INTO CREDITS");Task=Model.GetCargo()>0?FString::Printf(TEXT("Click SMELT HAUL by the furnace: +%d credits."),Model.GetCargo()):TEXT("Collect any metal, then click SMELT HAUL.");
+   Body=TEXT("You can also click the glowing furnace or press E. Release left mouse to keep your load. Right-click does NOT deposit. Each pour uses 1 fuel, so useful mixed loads pay better.");break;
+  case ETutorialStep::Quota:
+   Title=TEXT("FUND YOUR FIRST UPGRADE");Task=FString::Printf(TEXT("Smelt %d more credits of any metal."),FMath::Max(0,Model.GetGoal()-Model.GetBanked()));
+   Body=TEXT("Reach 120 order value for an extra 80 credits: enough for a 150-credit rig upgrade. Copper and alloy pay more than iron. Mix them freely. Only smelting pays your wallet.");break;
+  case ETutorialStep::Upgrade:
+   Title=TEXT("BUILD THE IMPROVEMENT");Task=Model.GetCargo()>0?TEXT("Smelt your carried metal, then open Workshop."):TEXT("Open Workshop and buy a 150-credit improvement.");
+   Body=TEXT("A larger basket carries more per pour; a stronger coil pulls farther; a stabilizer gives more rescue time. These are permanent changes to this magnet.");break;
+  case ETutorialStep::TryUpgrade:
+   Title=TEXT("USE YOUR BETTER MAGNET");Task=TEXT("Return to the tray and collect another useful load.");
+   Body=Tutorial.bRiskLearned?TEXT("Your upgrade stays yours. Training guard is now OFF: avoid red cells and overfilling, or drop the haul before the warning expires."):TEXT("Your upgrade stays yours. Training guard is now OFF. Your first dangerous pickup will pause so we can practise rescuing it.");break;
+  case ETutorialStep::Risk:
+   Title=TEXT("NOW PRACTISE A RESCUE");Task=Model.GetCargo()>0?TEXT("Smelt this safe haul, then try the marked red cell."):TEXT("Pick up the marked red cell with an empty magnet.");
+   Body=TEXT("Your first upgrade is built. Now learn the risk: red cells or too much weight start a fuse. This first warning pauses before any loss. Later warnings run in real time.");break;
+  case ETutorialStep::Precision:
+   Title=TEXT("LEAVE DANGER BEHIND");Task=TEXT("Press Q or hold Shift, then collect useful metal.");
+   Body=TEXT("Precision narrows the field so you can leave red cells behind. Try the glowing core: smelt it for 40 credits and a permanent collectible. Mixing ordinary metals is always fine.");break;
   default:break;
  }
- if(NeedsTray&&!Failed&&Tutorial.Step!=ETutorialStep::Upgrade){Task=TEXT("Restock this tray or choose the next order.");Body+=TEXT(" There is no useful salvage left for this lesson. Retry keeps your banked earnings and learned controls.");}
- if(EndedAction&&!Failed){Title=TEXT("CONTINUE ON A FRESH TRAY");Task=TEXT("Choose another order in Workshop, or retry.");Body=TEXT("This order is finished, so its remaining pieces cannot be picked up. Your lesson continues on the next tray. Credits, upgrades and learned controls stay yours.");}
- if(PourTimer>0){Title=TEXT("SMELTING YOUR HAUL");Task=FString::Printf(TEXT("+%d credits and %d XP banked."),LastBank.CashAwarded,LastBank.XPAwarded);Body=TEXT("The furnace uses one fuel charge for the whole load. Watch the metal become an ingot; your next lesson starts when the pour finishes.");Furnace=false;}
+ if(NeedsTray&&!Failed&&Tutorial.Step!=ETutorialStep::Upgrade){Task=TEXT("Restock this tray or choose the next order.");Body=TEXT("This lesson needs useful metal. Retry keeps your banked credits, installed upgrades and learned controls.");}
+ if(EndedAction&&!Failed){Title=TEXT("CONTINUE ON A FRESH TRAY");Task=TEXT("Choose another order in Workshop, or retry.");Body=TEXT("Your banked earnings and improved rig stay yours. The lesson continues on the next tray.");}
+ if(PourTimer>0){Title=TEXT("CREDITS PAID TO WALLET");Task=FString::Printf(TEXT("+%d credits and %d XP earned."),LastBank.CashAwarded,LastBank.XPAwarded);Body=Mods==0?FString::Printf(TEXT("%d / 150 credits toward your first rig improvement. One fuel charge paid for the whole mixed load."),Model.GetWallet()):TEXT("The whole mixed haul paid your wallet. Use those credits to keep improving your rig.");Furnace=false;}
  if(bWorkshop){
-  Rect(C,146,800,1308,80,Dark);DrawText(C,Title,160,810,.88f,Mint);
-  Wrap(Task,160,841,900,.81f,Paper);
-  Button(451,Tutorial.bRiskHeld?TEXT("Drop haul & skip guidance"):TEXT("Skip guidance"),1115,820,317,37);
-  return;
+  Rect(C,146,800,1308,80,Dark);DrawText(C,Title,160,810,.88f,Mint);Wrap(Task,160,841,900,.81f,Paper);
+  Button(451,Tutorial.bRiskHeld?TEXT("Drop haul & skip guide"):TEXT("Skip guide & guard"),1115,820,317,37);return;
  }
- constexpr float X=43,W=275;
- Rect(C,X,199,W,530,Dark);Rect(C,X,199,W,3,Tutorial.bRiskHeld?Gold:Mint);
- DrawText(C,bTutorialPractice?TEXT("GUIDED PRACTICE"):TEXT("GUIDED FIRST ORDER"),X+16,215,.71f,Quiet);
- float Y=Wrap(Title,X+16,248,W-32,.98f,Tutorial.bRiskHeld?Gold:Mint);
- Y=Wrap(Task,X+16,Y+14,W-32,.94f,Paper);
- Wrap(Body,X+16,Y+22,W-32,.83f,Quiet);
- if(Tutorial.Step==ETutorialStep::Complete&&!Tutorial.bRiskHeld)Button(452,TEXT("Continue playing"),X+15,631,W-30,40,true);
- else if(PourTimer<=0&&(Failed||NeedsTray||EndedAction))Button(2,TEXT("Retry guided order"),X+15,631,W-30,40,true);
- Button(451,Tutorial.bRiskHeld?TEXT("Drop haul & skip guidance"):TEXT("Skip guidance"),X+15,683,W-30,32);
-
- // One marker points to an actual available target; no pretend magnetic captures.
+ DrawRigGoal();float Y=Wrap(Title,59,311,243,.98f,Tutorial.bRiskHeld?Gold:Mint);
+ Y=Wrap(Task,59,Y+12,243,.94f,Paper);Wrap(Body,59,Y+16,243,.83f,Quiet);
+ if(PourTimer<=0&&(Failed||NeedsTray||EndedAction))Button(2,TEXT("Retry order; keep credits"),58,631,245,40,true);
+ Button(451,Tutorial.bRiskHeld?TEXT("Drop haul & skip guide"):TEXT("Skip guide & guard"),58,683,245,32);
  if(!Tutorial.bRiskHeld&&!Failed&&!EndedAction&&!bReceipt&&PourTimer<=0){
   for(const auto& P:Model.GetPieces()){
    if(P.State!=EPieceState::Available)continue;
    bool Match=false;
-   if(Tutorial.Step==ETutorialStep::Attract)Match=P.Material==EMaterial::Iron;
-   if(Tutorial.Step==ETutorialStep::Bundle)Match=Model.GetCaptureGroup(P.Id).Num()>1;
-   if(Tutorial.Step==ETutorialStep::Risk)Match=P.Material==EMaterial::HotCell;
-   if(Tutorial.Step==ETutorialStep::Precision)Match=P.Material!=EMaterial::HotCell;
-   // The quota lesson asks the player to choose value per load; do not steer it toward the first cheap piece.
-   if(Tutorial.Step==ETutorialStep::TryUpgrade||Tutorial.Step==ETutorialStep::FirstSmelt)Match=P.Amount>0&&Model.CanCaptureGroup(P.Id);
-   if(Match&&(Target==INDEX_NONE||(Tutorial.Step==ETutorialStep::Precision&&P.Material==EMaterial::Core))){Target=P.Id;if(Tutorial.Step!=ETutorialStep::Precision||P.Material==EMaterial::Core)break;}
+   if(Tutorial.Step==ETutorialStep::Attract)Match=P.Amount>0&&CanCaptureForPlayer(P.Id);
+   if(Tutorial.Step==ETutorialStep::Risk&&!Furnace)Match=P.Material==EMaterial::HotCell;
+   if(Tutorial.Step==ETutorialStep::Precision)Match=P.Material!=EMaterial::HotCell&&CanCaptureForPlayer(P.Id);
+   if(Tutorial.Step==ETutorialStep::TryUpgrade||(Tutorial.Step==ETutorialStep::FirstSmelt&&!Furnace))Match=P.Amount>0&&CanCaptureForPlayer(P.Id);
+   if(Match){
+    const bool Preferred=(Tutorial.Step==ETutorialStep::Attract&&P.Material==EMaterial::Copper&&Model.GetCaptureGroup(P.Id).Num()>1)||(Tutorial.Step==ETutorialStep::Precision&&P.Material==EMaterial::Core);
+    if(Target==INDEX_NONE||Preferred)Target=P.Id;
+    if(Preferred)break;
+   }
   }
   if(Furnace)WorldCircle(C,{650,0},112,Gold,3,96);
-  else if(Target!=INDEX_NONE){
-   const auto* P=Model.FindPiece(Target);const FVector2D S=Project(World(P->Position,24));
-   WorldCircle(C,P->Position,34+3*FMath::Sin(Time*4),Gold,3,23);
-   Line(C,{UX+318*UIScale,UY+280*UIScale},S,Gold*.72f,1.4f);
-  }
+  else if(Target!=INDEX_NONE){const auto* P=Model.FindPiece(Target);const FVector2D S=Project(World(P->Position,24));WorldCircle(C,P->Position,34+3*FMath::Sin(Time*4),Gold,3,23);Line(C,{UX+318*UIScale,UY+327*UIScale},S,Gold*.72f,1.4f);}
  }
 }
