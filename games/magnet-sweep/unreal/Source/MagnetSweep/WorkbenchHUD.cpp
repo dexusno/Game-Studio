@@ -151,7 +151,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  DrawText(C,FString::Printf(TEXT("%d XP"),Model.GetXP()),1164,65,.95f,Paper);
  Meter(1164,100,190,RankFraction,Mint,5);
  DrawText(C,RankEnd>RankStart?FString::Printf(TEXT("%d to next rank"),FMath::Max(0,RankEnd-Model.GetXP())):TEXT("Veteran rig"),1164,113,.64f,Quiet);
- AddButton(20,TEXT("Workshop"),1400,41,148,38,Ready);
+ AddButton(20,TEXT("Workshop"),1400,41,148,38,Ready&&!TutorialIntro()&&!Tutorial.bRiskHeld);
  AddButton(3,TEXT("Pause"),1400,91,148,29);
 
  if(!Modal)
@@ -168,7 +168,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
   {
    Rect(C,MX,MY,ChipWidth,ChipHeight,Panel);Rect(C,MX,MY,3,ChipHeight,Unsafe?Danger:Mint);
    DrawText(C,FString::Printf(TEXT("%d / %d kg"),Model.GetCargoMass(),Model.GetCapacity()),MX+13,MY+8,1.f,Unsafe?Danger:Paper);
-   DrawText(C,Unsafe?FString::Printf(TEXT("%.1fs - lose 1 fuel"),Model.GetFuseRemaining()):FString::Printf(TEXT("Haul worth %d cr"),Model.GetCargo()),MX+13,MY+35,.79f,Unsafe?Danger:Mint);
+   DrawText(C,Unsafe?(Tutorial.bRiskHeld?TEXT("Training: fuse paused"):FString::Printf(TEXT("%.1fs - lose 1 fuel"),Model.GetFuseRemaining())):FString::Printf(TEXT("Haul worth %d cr"),Model.GetCargo()),MX+13,MY+35,.79f,Unsafe?Danger:Mint);
    if(Unsafe)
    {
     const FSalvagePiece* Risk=Model.GetAtRiskPiece();
@@ -216,7 +216,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  if(Unsafe)
  {
   const FSalvagePiece* Risk=Model.GetAtRiskPiece();
-  Hint=FString::Printf(TEXT("UNSTABLE  %.1fs  -  RMB: Drop haul"),Model.GetFuseRemaining());
+  Hint=Tutorial.bRiskHeld?TEXT("FIRST WARNING PAUSED  -  RMB: Drop haul"):FString::Printf(TEXT("UNSTABLE  %.1fs  -  RMB: Drop haul"),Model.GetFuseRemaining());
   Detail=Risk?FString::Printf(TEXT("Expiry: lose 1 fuel + %s (%d cr). Drop releases the whole haul; all dropped pieces stay recoverable."),*Model.PieceName(Risk->Id),Risk->Amount):TEXT("Expiry: lose 1 fuel. Drop releases the whole haul recoverably and switches the field off.");
  }
  else if(PourTimer>0||ForgeTimer>0){Hint=TEXT("Smelting your haul");Detail=TEXT("Metal becomes credits, rank progress and recovered loot.");}
@@ -226,7 +226,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  else {Hint=FieldOn?(bPrecision?TEXT("Precision field - separate the valuable pieces"):TEXT("Field active - watch the weight of your haul")):TEXT("Choose your haul. Four fuel charges for this order.");Detail=TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision  |  RMB drops whole haul");}
  FitText(Hint,49,801,1080,1.06f,Unsafe?Danger:Paper);
  FitText(Detail,49,839,1080,.79f,Unsafe?FLinearColor(1,.66f,.54f,1):Quiet);
- AddButton(20,TEXT("Workshop"),1372,809,172,43,Ready);
+ AddButton(20,TEXT("Workshop"),1372,809,172,43,Ready&&!Tutorial.bRiskHeld);
  if(Complete&&!Model.IsJobEnded())AddButton(1,TEXT("Finish order"),1180,809,176,43,Ready&&Model.GetCargoMass()==0,true);
  else if(Model.IsJobEnded()||Failed)AddButton(30,TEXT("Choose next order"),1180,809,176,43,Ready,true);
  else DrawText(C,FString::Printf(TEXT("%dkg RIG"),Model.GetCapacity()),1209,824,.88f,Quiet);
@@ -234,8 +234,8 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  if(bConfirmRetry||bConfirmNew)
  {
   Veil();PanelBox(452,227,696,434,Copper);
-  DrawText(C,bConfirmNew?TEXT("Start a new career?"):TEXT("Retry this contract?"),490,263,1.36f,Paper,true);
-  FitText(bConfirmNew?TEXT("This replaces your current save, wallet, rig and collection."):TEXT("The current tray and unbanked cargo will be replaced."),491,340,618,.93f,Paper);
+  DrawText(C,bConfirmNew?(bTutorialPractice?TEXT("Restart this practice run?"):TEXT("Start a new career?")):TEXT("Retry this contract?"),490,263,1.36f,Paper,true);
+  FitText(bConfirmNew?(bTutorialPractice?TEXT("This replaces only practice progress. Your saved career stays safe."):TEXT("This replaces your current save, wallet, rig and collection.")):TEXT("The current tray and unbanked cargo will be replaced."),491,340,618,.93f,Paper);
   FitText(bConfirmNew?TEXT("This cannot be undone."):TEXT("Banked credits, XP, upgrades and collected cores stay yours."),491,379,618,.90f,bConfirmNew?Danger:Mint);
   AddButton(bConfirmNew?9:8,bConfirmNew?TEXT("Start over"):TEXT("Retry contract"),490,484,280,54,true,true);
   AddButton(7,TEXT("Cancel"),794,484,280,54);
@@ -294,7 +294,7 @@ void FWorkbenchImpl::Paint(UCanvas* C)
    DrawText(C,Owned?TEXT("RECOVERED"):TEXT("Find and smelt"),X+51,747,.65f,Owned?Mint:Quiet);
   }
   if(NoticeTimer>0&&!NoticeTitle.IsEmpty())FitText(NoticeTitle+TEXT("  ")+NoticeBody,150,814,1300,.85f,Mint);
-  return;
+  PaintTutorial(C);return;
  }
 
  if(bReceipt)
@@ -318,25 +318,27 @@ void FWorkbenchImpl::Paint(UCanvas* C)
   FitText(Loot,427,543,745,.87f,LastBank.NewCoreIds.IsEmpty()?Quiet:Gold);
   AddButton(30,TEXT("Workshop & next order"),427,616,463,53,true,true);
   AddButton(2,TEXT("Retry this order"),912,616,262,53,true);
-  return;
+  PaintTutorial(C);return;
  }
 
  if(bPaused)
  {
-  Veil();PanelBox(458,157,684,585,Mint);
+  Veil();PanelBox(458,130,684,684,Mint);
   DrawText(C,TEXT("PAUSED"),498,196,1.35f,Paper,true);
   DrawText(C,TEXT("Your cargo, fuel and progress are saved."),499,247,.92f,Quiet);
   AddButton(3,TEXT("Resume"),498,305,604,49,true,true);
-  AddButton(20,TEXT("Workshop"),498,370,291,43,Ready);
+  AddButton(20,TEXT("Workshop"),498,370,291,43,Ready&&!Tutorial.bRiskHeld);
   AddButton(2,TEXT("Retry contract"),811,370,291,43,Ready);
   AddButton(10,FString::Printf(TEXT("Music  %d%%"),FMath::RoundToInt(MusicVolume*100)),498,434,291,43);
   AddButton(11,FString::Printf(TEXT("Effects  %d%%"),FMath::RoundToInt(SfxVolume*100)),811,434,291,43);
   AddButton(4,bMuted?TEXT("Master sound: OFF"):TEXT("Master sound: ON"),498,498,604,39);
-  AddButton(5,TEXT("New career"),498,561,291,43);
+  AddButton(5,bTutorialPractice?TEXT("Restart practice"):TEXT("New career"),498,561,291,43);
   AddButton(6,TEXT("Save & quit"),811,561,291,43);
-  FitText(TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision"),499,637,603,.75f,Quiet);
-  FitText(TEXT("RMB drops the whole haul recoverably and switches the field off."),499,663,603,.74f,Quiet);
-  DrawText(C,TEXT("ESC resume  /  F11 fullscreen  /  M mute"),499,691,.71f,Quiet);
-  DrawText(C,TEXT("Music and effects buttons cycle their volume."),499,717,.68f,Quiet);
+  AddButton(bTutorialPractice?461:460,bTutorialPractice?TEXT("Return to saved career"):TEXT("Practice tutorial (separate save)"),498,622,604,42);
+  FitText(TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision"),499,693,603,.75f,Quiet);
+  FitText(TEXT("RMB drops the whole haul recoverably and switches the field off."),499,719,603,.74f,Quiet);
+  DrawText(C,TEXT("ESC resume  /  F11 fullscreen  /  M mute"),499,747,.71f,Quiet);
+  DrawText(C,TEXT("Music and effects buttons cycle their volume."),499,773,.68f,Quiet);
  }
+ PaintTutorial(C);
 }

@@ -4,9 +4,15 @@ Updated 2026-09-12. The owner rejected the first playable demo and authorized im
 
 **Development timeline is not a consideration.** Complete and assess the intended experience through dependency-led increments. Do not replace gameplay judgment with deadlines, asset counts, successful compilation or additional feature lists. Root integrates shared records and the package; bounded specialists preserve one another's assigned files.
 
+## Current increment: playable tutorial
+
+Owner request, 2026-09-12: explain the game through the demo itself. Implement a saved, skippable guided opening, an explicit protected first-danger rehearsal, actual-action progression, contextual world markers, sensible off-path recovery and separate practice/return save routing. Root owns runtime, presentation, persistence and integration; the model engineer owns pure lesson state and focused tests; designers/critic review gameplay usability.
+
+Acceptance: play attraction → release retaining cargo → linked load → smelt → first-danger rescue → precision pickup → quota → purchase/use; interrupt/reload a held warning; skip safely; preserve a real saved career while entering and returning from practice. Verify the actual text/markers at normal gameplay scale and package beside the preserved previous build. No voiceover, extra currencies, lore or new contracts are part of this request.
+
 ## Current implementation and acceptance
 
-The integration owner reports nine final Rework engine automation cases passed and editor/Windows packaging completed. That establishes implemented behavior and a buildable candidate. R1 native play verified quota, loot, purchase, next contract, saves and display/focus behavior; R2 verified clean entry and mixed-haul corner drop before external user input ended controlled testing. Short-fuse rescue/refusal and final-charge UI checks remain explicit gaps. Presentation assessment and human fun/replay evidence remain distinct work; the latest exact artifact and coverage belong in [BUILD.md](BUILD.md) and [QA-REWORK.md](QA-REWORK.md).
+The tutorial editor/Windows package and 15 engine automation cases pass, including the nine prior Rework cases. Independent T1 native play completed the actual guided payout/rescue/precision/quota/purchase/use sequence and preserved the career across separate practice/return. T2 verified the final presentation corrections, actual relaunch and preserved practice/career; exact evidence belongs in [QA-TUTORIAL.md](QA-TUTORIAL.md). R1 native play verified quota, loot, purchase, next contract, saves and display/focus behavior; R2 verified clean entry and mixed-haul corner drop before external user input ended controlled testing. Short-fuse rescue/refusal and final-charge UI checks remain explicit gaps. Presentation assessment and human fun/replay evidence remain distinct work; the latest exact artifact and coverage belong in [BUILD.md](BUILD.md) and [QA-REWORK.md](QA-REWORK.md).
 
 | Work package | Current implementation | Acceptance needed in the actual package |
 | --- | --- | --- |

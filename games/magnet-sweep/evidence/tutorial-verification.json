@@ -1,0 +1,144 @@
+{
+  "version": "0.3.0",
+  "candidate": "Tutorial T2",
+  "date": "2026-09-12",
+  "engine": "Unreal Engine 5.8.2",
+  "configuration": "Win64 Development / PCD3D_SM5",
+  "package": "BuildOutput/Tutorial/Windows",
+  "build_cook_run_seconds": 37.32,
+  "artifacts": [
+    {
+      "path": "MagnetSweep.exe",
+      "bytes": 171520,
+      "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+    },
+    {
+      "path": "MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+      "bytes": 332094464,
+      "sha256": "1090787dd46eafc7aa14a1b84e4d41e04696825bbf6d2f40e4b6ff57aca0dcf5"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+      "bytes": 10652987,
+      "sha256": "7d4686c0aeabe938d0c24abf62d226dc8aff3f35fdfd3c76729064dc5e1ce4a6"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+      "bytes": 137779056,
+      "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+      "bytes": 138215,
+      "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+    }
+  ],
+  "automation": {
+    "created": "2026.09.12-18.50.46",
+    "succeeded": 15,
+    "failed": 0,
+    "warnings": 0,
+    "not_run": 0,
+    "tests": [
+      {
+        "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.ActualActionSequence",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ],
+    "scope_note": "15 passing tests cover gameplay/tutorial state and persistence before final PaintTutorial-only copy/marker corrections. Final editor and package compile those corrections; T2 native pass checks presentation."
+  },
+  "native_evidence": "QA-TUTORIAL.md",
+  "native_status": "T1 completed actual attraction/release/bundle/smelt/held-danger rescue/precision/quota/purchase/use flow and practice return. T2 verified actual completed-career relaunch, resumed skipped practice, explicit practice restart/return, corrected smelt/warning copy and absence of generic quota pickup marker. QA game saved and closed.",
+  "limits": [
+    "Automated action callbacks and save validation do not establish visual comprehension or enjoyment.",
+    "Audio was not changed by this increment; perceptual listening remains unverified.",
+    "Previous Rework package and player career remain separate and were not migrated.",
+    "Native unfinished/held-warning process restart, mixed-haul protected rescue, held-warning Skip, failed tutorial and other resolutions remain untested; see QA-TUTORIAL.md."
+  ]
+}

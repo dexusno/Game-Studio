@@ -22,6 +22,7 @@ struct FSaveSettings
     bool Receipt = false;
     float Sfx = .8f;
     float Music = .3f;
+    FTutorialProgress Tutorial;
 };
 
 TArray<TSharedPtr<FJsonValue>> IntArray(const TArray<int32>& Values)
@@ -85,7 +86,8 @@ TSharedRef<FJsonObject> SnapshotJson(const FSalvageSnapshot& S)
 }
 bool Integral(const FJsonObject& Json, const TCHAR* Key, double Min, double Max, double& Result)
 {
-    return Json.TryGetNumberField(Key, Result) && FMath::IsFinite(Result)
+    const auto Value=Json.TryGetField(Key);
+    return Value.IsValid() && Value->Type==EJson::Number && Value->TryGetNumber(Result) && FMath::IsFinite(Result)
         && Result >= Min && Result <= Max && FMath::FloorToDouble(Result) == Result;
 }
 bool IntField(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, int32& Result)
@@ -94,10 +96,16 @@ bool IntField(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, i
     if (!Integral(Json, Key, Min, Max, Number)) return false;
     Result = static_cast<int32>(Number); return true;
 }
+bool BoolField(const FJsonObject& Json, const TCHAR* Key, bool& Result)
+{
+    const auto Value=Json.TryGetField(Key);
+    return Value.IsValid() && Value->Type==EJson::Boolean && Value->TryGetBool(Result);
+}
 bool FloatField(const FJsonObject& Json, const TCHAR* Key, float Min, float Max, float& Result)
 {
     double Number = 0;
-    if (!Json.TryGetNumberField(Key, Number) || !FMath::IsFinite(Number) || Number < Min || Number > Max) return false;
+    const auto Value=Json.TryGetField(Key);
+    if (!Value.IsValid() || Value->Type!=EJson::Number || !Value->TryGetNumber(Number) || !FMath::IsFinite(Number) || Number < Min || Number > Max) return false;
     Result = static_cast<float>(Number); return true;
 }
 bool ReadInts(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, int32 MaxCount, TArray<int32>& Out)
@@ -108,7 +116,7 @@ bool ReadInts(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, i
     for (const auto& Value : *Values)
     {
         double Number = 0;
-        if (!Value.IsValid() || !Value->TryGetNumber(Number) || !FMath::IsFinite(Number)
+        if (!Value.IsValid() || Value->Type!=EJson::Number || !Value->TryGetNumber(Number) || !FMath::IsFinite(Number)
             || Number < Min || Number > Max || FMath::FloorToDouble(Number) != Number) return false;
         Out.Add(static_cast<int32>(Number));
     }
@@ -121,7 +129,7 @@ bool ReadBools(const FJsonObject& Json, const TCHAR* Key, int32 Count, TArray<bo
     Out.Reset();
     for (const auto& Value : *Values)
     {
-        bool Parsed = false; if (!Value.IsValid() || !Value->TryGetBool(Parsed)) return false; Out.Add(Parsed);
+        bool Parsed = false; if (!Value.IsValid() || Value->Type!=EJson::Boolean || !Value->TryGetBool(Parsed)) return false; Out.Add(Parsed);
     }
     return true;
 }
@@ -132,11 +140,27 @@ bool ParseSave(const FString& Text, FSalvageSnapshot& S, FSaveSettings& Settings
     if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text), Root) || !Root.IsValid()) return false;
     int32 Version = 0;
     if (!IntField(*Root, TEXT("save_version"), 2, 2, Version)
-        || !Root->TryGetBoolField(TEXT("muted"), Settings.Muted)
-        || !Root->TryGetBoolField(TEXT("workshop"), Settings.Workshop)
-        || !Root->TryGetBoolField(TEXT("receipt"), Settings.Receipt)
+        || !BoolField(*Root, TEXT("muted"), Settings.Muted)
+        || !BoolField(*Root, TEXT("workshop"), Settings.Workshop)
+        || !BoolField(*Root, TEXT("receipt"), Settings.Receipt)
         || !FloatField(*Root, TEXT("sfx_volume"), 0, 1, Settings.Sfx)
         || !FloatField(*Root, TEXT("music_volume"), 0, 1, Settings.Music)) return false;
+    // Older careers have no tutorial object and remain playable without a forced restart.
+    if (Root->HasField(TEXT("tutorial")))
+    {
+        const TSharedPtr<FJsonObject>* T = nullptr;
+        int32 Step = 0, Mod = -1; FString TutorialError;
+        if (!Root->TryGetObjectField(TEXT("tutorial"), T) || !T || !T->IsValid()
+            || !IntField(**T, TEXT("step"), 0, static_cast<int32>(ETutorialStep::Skipped), Step)
+            || !BoolField(**T, TEXT("enabled"), Settings.Tutorial.bEnabled)
+            || !BoolField(**T, TEXT("risk_learned"), Settings.Tutorial.bRiskLearned)
+            || !BoolField(**T, TEXT("risk_held"), Settings.Tutorial.bRiskHeld)
+            || !BoolField(**T, TEXT("purchased_mod"), Settings.Tutorial.bPurchasedMod)
+            || !IntField(**T, TEXT("mod"), -1, 2, Mod)
+            || !FTutorialProgress::ValidateFields(Step, Settings.Tutorial.bEnabled, Settings.Tutorial.bRiskLearned,
+                Settings.Tutorial.bRiskHeld, Settings.Tutorial.bPurchasedMod, Mod, TutorialError)) return false;
+        Settings.Tutorial.Step=static_cast<ETutorialStep>(Step); Settings.Tutorial.PurchasedMod=Mod;
+    }
     const TSharedPtr<FJsonObject>* Object = nullptr;
     if (!Root->TryGetObjectField(TEXT("snapshot"), Object) || !Object || !Object->IsValid()) return false;
     const FJsonObject& Json = **Object;
@@ -162,9 +186,9 @@ bool ParseSave(const FString& Text, FSalvageSnapshot& S, FSaveSettings& Settings
         || !IntField(Json, TEXT("heats_used"), 0, 4, S.HeatsUsed)
         || !IntField(Json, TEXT("capture_serial"), 0, 100000000, S.CaptureSerial)
         || !FloatField(Json, TEXT("fuse_elapsed"), 0, 6, S.FuseElapsed)
-        || !Json.TryGetBoolField(TEXT("delivery_completed"), S.bDeliveryCompleted)
-        || !Json.TryGetBoolField(TEXT("gold_awarded"), S.bGoldAwarded)
-        || !Json.TryGetBoolField(TEXT("job_ended"), S.bJobEnded)) return false;
+        || !BoolField(Json, TEXT("delivery_completed"), S.bDeliveryCompleted)
+        || !BoolField(Json, TEXT("gold_awarded"), S.bGoldAwarded)
+        || !BoolField(Json, TEXT("job_ended"), S.bJobEnded)) return false;
     S.Epoch = static_cast<uint32>(Epoch);
     const TArray<TSharedPtr<FJsonValue>>* Pieces = nullptr;
     if (!Json.TryGetArrayField(TEXT("pieces"), Pieces) || !Pieces || Pieces->IsEmpty() || Pieces->Num() > 256) return false;
@@ -248,6 +272,14 @@ FString FWorkbenchImpl::EncodeSave() const
     Json->SetNumberField(TEXT("sfx_volume"), SfxVolume);
     Json->SetNumberField(TEXT("music_volume"), MusicVolume);
     Json->SetBoolField(TEXT("muted"), bMuted);
+    const auto Teaching=MakeShared<FJsonObject>();
+    Teaching->SetNumberField(TEXT("step"),static_cast<int32>(Tutorial.Step));
+    Teaching->SetBoolField(TEXT("enabled"),Tutorial.bEnabled);
+    Teaching->SetBoolField(TEXT("risk_learned"),Tutorial.bRiskLearned);
+    Teaching->SetBoolField(TEXT("risk_held"),Tutorial.bRiskHeld);
+    Teaching->SetBoolField(TEXT("purchased_mod"),Tutorial.bPurchasedMod);
+    Teaching->SetNumberField(TEXT("mod"),Tutorial.PurchasedMod);
+    Json->SetObjectField(TEXT("tutorial"),Teaching);
     Json->SetObjectField(TEXT("snapshot"), SnapshotJson(Model.GetSnapshot()));
     FString Result;
     FJsonSerializer::Serialize(Json, TJsonWriterFactory<>::Create(&Result));
@@ -260,6 +292,7 @@ bool FWorkbenchImpl::DecodeSave(const FString& Text)
     FSaveSettings Settings;
     FString Error;
     if (!ParseSave(Text, Snapshot, Settings) || !Model.RestoreSnapshot(Snapshot, Error)) return false;
+    Tutorial = Settings.Tutorial;
     bMuted = Settings.Muted;
     bWorkshop = Settings.Workshop;
     bReceipt = Settings.Receipt;
@@ -282,7 +315,7 @@ bool FWorkbenchImpl::Save()
 {
     if (SavePath.IsEmpty()) return false;
     FString Error;
-    if (!Model.CheckInvariants(Error))
+    if (!Model.CheckInvariants(Error) || !Tutorial.Validate(Error))
     {
         UE_LOG(LogTemp, Error, TEXT("MAGNET_SAVE_REFUSED: %s"), *Error);
         return false;
@@ -354,6 +387,10 @@ void FWorkbenchImpl::WriteTelemetry()
     if (!bQA || SavePath.IsEmpty()) return;
     const auto Json = MakeShared<FJsonObject>();
     Json->SetNumberField(TEXT("telemetry_version"), 2);
+    Json->SetNumberField(TEXT("tutorial_step"),static_cast<int32>(Tutorial.Step));
+    Json->SetBoolField(TEXT("tutorial_enabled"),Tutorial.bEnabled);
+    Json->SetBoolField(TEXT("tutorial_risk_hold"),Tutorial.bRiskHeld);
+    Json->SetBoolField(TEXT("tutorial_practice"),bTutorialPractice);
     Json->SetNumberField(TEXT("capacity"), Model.GetCapacity());
     Json->SetNumberField(TEXT("fuse_remaining"), Model.GetFuseRemaining());
     Json->SetBoolField(TEXT("unsafe"), Model.IsCargoUnsafe());

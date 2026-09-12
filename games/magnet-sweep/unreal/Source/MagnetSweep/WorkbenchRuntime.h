@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "SalvageModel.h"
+#include "WorkbenchTutorial.h"
 class AMagnetWorkbench;
 class APlayerController;
 class UStaticMesh;
@@ -67,6 +68,9 @@ struct FWorkbenchImpl {
  UStaticMeshComponent* FurnaceFill=nullptr;
  UPointLightComponent* FurnaceLight=nullptr;
  MagnetSweep::FSalvageModel Model;
+ MagnetSweep::FTutorialProgress Tutorial;
+ bool bTutorialPractice=false;
+ FString CareerSavePath;
  MagnetSweep::FPullSelection Preview;
  EMagnetAction Action=EMagnetAction::None;
  FVector2D Pointer=FVector2D::ZeroVector;
@@ -138,6 +142,13 @@ struct FWorkbenchImpl {
  void SweepPath();
  void Tick(float Delta);
  void Paint(UCanvas* C);
+ void PaintTutorial(UCanvas* C);
+ bool TutorialIntro() const;
+ void TutorialChanged(bool Changed);
+ void UpdateTutorial();
+ void EnterTutorialPractice();
+ void ReturnFromTutorial();
+ void ResetTutorialScene();
  void SetupScene();
  void BuildPieces();
  void UpdateVisuals(float Delta);

@@ -1,6 +1,6 @@
 param([ValidateSet('Editor','Content','Package','Tests','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$Configuration='Development',
- [string]$ArchiveName='Rework')
+ [string]$ArchiveName='Tutorial')
 $ErrorActionPreference='Stop'
 $magnetRoot=Split-Path -Parent $PSScriptRoot
 $magnetRepo=[IO.Path]::GetFullPath((Join-Path $magnetRoot '../..'))
@@ -25,9 +25,14 @@ if($Stage -in @('Content','All')) {
  if(!$magnetContent.complete -or @($magnetContent.imports).Count -ne ($magnetExpectedMeshes+$magnetExpectedAudio)){throw 'Content generation did not verify every source mesh and sound'}
 }
 if($Stage -eq 'Tests') {
+ $magnetTestReport=Join-Path $magnetRoot 'unreal/Saved/Automation/index.json'
+ if(Test-Path -LiteralPath $magnetTestReport){Remove-Item -LiteralPath $magnetTestReport}
  $magnetCmd=Join-Path (Split-Path $magnetEditor -Parent) 'UnrealEditor-Cmd.exe'
  & $magnetCmd $magnetProject -unattended -nop4 -NullRHI '-ExecCmds=Automation RunTests MagnetSweep' '-TestExit=Automation Test Queue Empty' "-ReportExportPath=$magnetRoot/unreal/Saved/Automation"
  if($LASTEXITCODE -ne 0){throw 'Magnet Sweep automation tests failed'}
+ if(!(Test-Path -LiteralPath $magnetTestReport)){throw 'Automation did not export a fresh report'}
+ $magnetResults=Get-Content -LiteralPath $magnetTestReport -Raw | ConvertFrom-Json
+ if($magnetResults.failed -gt 0 -or $magnetResults.notRun -gt 0 -or $magnetResults.succeeded -lt 1){throw 'Magnet Sweep automation report contains failed, skipped or missing tests'}
 }
 if($Stage -in @('Package','All')) {
  if($ArchiveName -notmatch '^[a-zA-Z0-9_-]+$'){throw 'ArchiveName must be a simple directory name'}

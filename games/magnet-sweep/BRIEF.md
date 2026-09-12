@@ -16,6 +16,16 @@ Development timeline is not a consideration. The objective is a coherent, simple
 
 The desired player effect is anticipation followed by a physical and economic payoff. An upgrade menu cannot compensate for weak attraction, indistinct impacts or an uninteresting batch decision.
 
+## Guided demo
+
+Fresh careers open a playable tutorial instead of dropping the player straight onto an unexplained tray. A persistent side card gives one action and a world marker points to a real target. The player learns attraction, field release retaining cargo, linked-group mass/value, first smelt and finite fuel, emergency recovery, precision pickup, quota reward and a purchased upgrade. Normal starter play can bank 44 credits from two iron pieces plus one copper bundle, then 76 from the rare core plus another bundle: 120 salvage plus the 80-credit bonus affords a 150-credit mod. Prompts show the actual haul value; this example is not a forced script.
+
+The **first unsafe pickup** pauses its fuse before any loss and stops attraction. Its card explicitly teaches that red cells or excess weight cause instability, field-off does not cancel danger, expiry spends a fuel charge and the named valuable piece, and RMB drops ALL cargo recoverably. RMB remains usable during this dedicated teaching hold. The hold can interrupt an earlier lesson; after a successful drop, later warnings follow normal real-time rules. Guidance can be skipped; skipping a held warning explicitly says “Drop haul & skip guidance” and performs that rescue first.
+
+Tutorial progress is saved with the actual run, including an interrupted teaching hold. Advancing requires actual capture, field release, smelt, precision pickup and purchase events. Lost optional cores fall back to other useful precision targets; exhausted or failed trays expose a clear retry. Retry preserves banked earnings and learned controls. Ending guidance keeps the run and its rewards.
+
+Existing saves without tutorial metadata resume normally. Pause offers a separate saved practice tutorial and a distinct return-to-career action. Practice never overwrites the saved career. The tutorial package is archived separately from the older Rework package currently used by the owner; their local runtime saves remain separate.
+
 ## Input and physical response
 
 | Input | Implemented action |
