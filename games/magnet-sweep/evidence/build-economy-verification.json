@@ -1,0 +1,1863 @@
+{
+  "kind": "design-economy-evidence",
+  "source": "games\\magnet-sweep\\design\\build-economy.json",
+  "source_sha256": "d08f783c0c7681b13cfa2d260b349b8dd06f331197c16dea0b931f22fbf2c988",
+  "modules_checked": 30,
+  "routes_checked": 6,
+  "routes": [
+    {
+      "id": "A",
+      "cash_remaining": 1,
+      "spent": 57,
+      "resale_refunds": 2,
+      "build": [
+        "anchor_winch",
+        "counterweight_hook",
+        "crack_follower",
+        "extraction_coil",
+        "intact_recovery"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "extraction_coil"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "extraction_coil"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 7,
+          "fitted": [
+            "extraction_coil"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 7,
+          "cash_after": 7,
+          "fitted": [
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 7,
+          "cash_after": 17,
+          "fitted": [
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "reward",
+          "cash_before": 17,
+          "cash_after": 19,
+          "fitted": [
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "offers",
+          "cash_before": 19,
+          "cash_after": 19,
+          "fitted": [
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "buy",
+          "cash_before": 19,
+          "cash_after": 10,
+          "fitted": [
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "fit",
+          "cash_before": 10,
+          "cash_after": 10,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 10,
+          "cash_after": 22,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "reward",
+          "cash_before": 22,
+          "cash_after": 24,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "offers",
+          "cash_before": 24,
+          "cash_after": 24,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "buy",
+          "cash_before": 24,
+          "cash_after": 0,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "fit",
+          "cash_before": 0,
+          "cash_after": 0,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "reward",
+          "cash_before": 0,
+          "cash_after": 14,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "reward",
+          "cash_before": 14,
+          "cash_after": 16,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "reward",
+          "cash_before": 16,
+          "cash_after": 18,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "offers",
+          "cash_before": 18,
+          "cash_after": 18,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "sell",
+          "cash_before": 18,
+          "cash_after": 20,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 20,
+          "action": "buy",
+          "cash_before": 20,
+          "cash_after": 10,
+          "fitted": [
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 21,
+          "action": "fit",
+          "cash_before": 10,
+          "cash_after": 10,
+          "fitted": [
+            "anchor_winch",
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 22,
+          "action": "buy",
+          "cash_before": 10,
+          "cash_after": 5,
+          "fitted": [
+            "anchor_winch",
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 23,
+          "action": "fit",
+          "cash_before": 5,
+          "cash_after": 5,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 24,
+          "action": "precharge",
+          "cash_before": 5,
+          "cash_after": 1,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "crack_follower",
+            "extraction_coil",
+            "intact_recovery"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "anchor_winch",
+            "insulated_jaw"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "crack_follower"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "intact_recovery"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "cold_seam"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "cash_remaining": 16,
+      "spent": 38,
+      "resale_refunds": 0,
+      "build": [
+        "arc_driver",
+        "ground_clip",
+        "impact_fuse",
+        "rail_impeller",
+        "rebound_plate",
+        "slug_press"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 7,
+          "fitted": [
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 7,
+          "cash_after": 7,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 7,
+          "cash_after": 17,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "reward",
+          "cash_before": 17,
+          "cash_after": 19,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "offers",
+          "cash_before": 19,
+          "cash_after": 19,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "buy",
+          "cash_before": 19,
+          "cash_after": 10,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "fit",
+          "cash_before": 10,
+          "cash_after": 10,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 10,
+          "cash_after": 22,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "reward",
+          "cash_before": 22,
+          "cash_after": 24,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "offers",
+          "cash_before": 24,
+          "cash_after": 24,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "buy",
+          "cash_before": 24,
+          "cash_after": 14,
+          "fitted": [
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "fit",
+          "cash_before": 14,
+          "cash_after": 14,
+          "fitted": [
+            "arc_driver",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "buy",
+          "cash_before": 14,
+          "cash_after": 9,
+          "fitted": [
+            "arc_driver",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "fit",
+          "cash_before": 9,
+          "cash_after": 9,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "reward",
+          "cash_before": 9,
+          "cash_after": 23,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "reward",
+          "cash_before": 23,
+          "cash_after": 25,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "offers",
+          "cash_before": 25,
+          "cash_after": 25,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 20,
+          "action": "buy",
+          "cash_before": 25,
+          "cash_after": 20,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 21,
+          "action": "fit",
+          "cash_before": 20,
+          "cash_after": 20,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "rebound_plate",
+            "slug_press"
+          ]
+        },
+        {
+          "step": 22,
+          "action": "precharge",
+          "cash_before": 20,
+          "cash_after": 16,
+          "fitted": [
+            "arc_driver",
+            "ground_clip",
+            "impact_fuse",
+            "rail_impeller",
+            "rebound_plate",
+            "slug_press"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "impact_fuse"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "slug_press"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "arc_driver",
+            "extraction_coil",
+            "salvage_cyclone"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "anchor_winch",
+            "rebound_plate",
+            "salvage_cyclone",
+            "vector_emitter"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "cash_remaining": 2,
+      "spent": 63,
+      "resale_refunds": 9,
+      "build": [
+        "arc_driver",
+        "extraction_coil",
+        "ground_clip",
+        "insulated_jaw",
+        "intact_recovery"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "arc_driver"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "arc_driver"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 7,
+          "fitted": [
+            "arc_driver"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 7,
+          "cash_after": 7,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 7,
+          "cash_after": 17,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "reward",
+          "cash_before": 17,
+          "cash_after": 19,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "offers",
+          "cash_before": 19,
+          "cash_after": 19,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "buy",
+          "cash_before": 19,
+          "cash_after": 9,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "fit",
+          "cash_before": 9,
+          "cash_after": 9,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 9,
+          "cash_after": 21,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "reward",
+          "cash_before": 21,
+          "cash_after": 23,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "offers",
+          "cash_before": 23,
+          "cash_after": 23,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "buy",
+          "cash_before": 23,
+          "cash_after": 14,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "fit",
+          "cash_before": 14,
+          "cash_after": 14,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "conductive_tether",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "reward",
+          "cash_before": 14,
+          "cash_after": 28,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "conductive_tether",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "reward",
+          "cash_before": 28,
+          "cash_after": 30,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "conductive_tether",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "reward",
+          "cash_before": 30,
+          "cash_after": 32,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "conductive_tether",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "offers",
+          "cash_before": 32,
+          "cash_after": 32,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "conductive_tether",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "sell",
+          "cash_before": 32,
+          "cash_after": 36,
+          "fitted": [
+            "anchor_winch",
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 20,
+          "action": "sell",
+          "cash_before": 36,
+          "cash_after": 41,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 21,
+          "action": "buy",
+          "cash_before": 41,
+          "cash_after": 31,
+          "fitted": [
+            "arc_driver",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 22,
+          "action": "fit",
+          "cash_before": 31,
+          "cash_after": 31,
+          "fitted": [
+            "arc_driver",
+            "extraction_coil",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 23,
+          "action": "buy",
+          "cash_before": 31,
+          "cash_after": 7,
+          "fitted": [
+            "arc_driver",
+            "extraction_coil",
+            "ground_clip"
+          ]
+        },
+        {
+          "step": 24,
+          "action": "fit",
+          "cash_before": 7,
+          "cash_after": 7,
+          "fitted": [
+            "arc_driver",
+            "extraction_coil",
+            "ground_clip",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 25,
+          "action": "buy",
+          "cash_before": 7,
+          "cash_after": 2,
+          "fitted": [
+            "arc_driver",
+            "extraction_coil",
+            "ground_clip",
+            "intact_recovery"
+          ]
+        },
+        {
+          "step": 26,
+          "action": "fit",
+          "cash_before": 2,
+          "cash_after": 2,
+          "fitted": [
+            "arc_driver",
+            "extraction_coil",
+            "ground_clip",
+            "insulated_jaw",
+            "intact_recovery"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "anchor_winch",
+            "extraction_coil",
+            "ground_clip"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "anchor_winch",
+            "extraction_coil",
+            "induction_bridge"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "conductive_tether",
+            "counterweight_hook",
+            "extraction_coil"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "extraction_coil",
+            "induction_bridge"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "cash_remaining": 0,
+      "spent": 52,
+      "resale_refunds": 0,
+      "build": [
+        "anchor_winch",
+        "counterweight_hook",
+        "extraction_coil",
+        "twin_anchor",
+        "walking_gantry"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "anchor_winch"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "anchor_winch"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 7,
+          "fitted": [
+            "anchor_winch"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 7,
+          "cash_after": 7,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 7,
+          "cash_after": 17,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "offers",
+          "cash_before": 17,
+          "cash_after": 17,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "buy",
+          "cash_before": 17,
+          "cash_after": 8,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "fit",
+          "cash_before": 8,
+          "cash_after": 8,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "reward",
+          "cash_before": 8,
+          "cash_after": 20,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 20,
+          "cash_after": 22,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "offers",
+          "cash_before": 22,
+          "cash_after": 22,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "precharge",
+          "cash_before": 22,
+          "cash_after": 18,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "reward",
+          "cash_before": 18,
+          "cash_after": 32,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "reward",
+          "cash_before": 32,
+          "cash_after": 34,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "offers",
+          "cash_before": 34,
+          "cash_after": 34,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "buy",
+          "cash_before": 34,
+          "cash_after": 10,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "fit",
+          "cash_before": 10,
+          "cash_after": 10,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor",
+            "walking_gantry"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "buy",
+          "cash_before": 10,
+          "cash_after": 0,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "twin_anchor",
+            "walking_gantry"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "fit",
+          "cash_before": 0,
+          "cash_after": 0,
+          "fitted": [
+            "anchor_winch",
+            "counterweight_hook",
+            "extraction_coil",
+            "twin_anchor",
+            "walking_gantry"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "arc_driver",
+            "counterweight_hook",
+            "extraction_coil"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "arc_driver",
+            "extraction_coil",
+            "twin_anchor"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "arc_driver",
+            "extraction_coil",
+            "ratchet_pawl"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "arc_driver",
+            "extraction_coil",
+            "walking_gantry"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    },
+    {
+      "id": "E",
+      "cash_remaining": 3,
+      "spent": 60,
+      "resale_refunds": 7,
+      "build": [
+        "cold_seam",
+        "eddy_brake",
+        "extraction_coil",
+        "reaction_frame",
+        "vector_emitter"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 6,
+          "fitted": [
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 6,
+          "cash_after": 6,
+          "fitted": [
+            "eddy_brake",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 6,
+          "cash_after": 16,
+          "fitted": [
+            "eddy_brake",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "reward",
+          "cash_before": 16,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "offers",
+          "cash_before": 18,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "buy",
+          "cash_before": 18,
+          "cash_after": 4,
+          "fitted": [
+            "eddy_brake",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "fit",
+          "cash_before": 4,
+          "cash_after": 4,
+          "fitted": [
+            "eddy_brake",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 4,
+          "cash_after": 16,
+          "fitted": [
+            "eddy_brake",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "reward",
+          "cash_before": 16,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "offers",
+          "cash_before": 18,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "buy",
+          "cash_before": 18,
+          "cash_after": 8,
+          "fitted": [
+            "eddy_brake",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "fit",
+          "cash_before": 8,
+          "cash_after": 8,
+          "fitted": [
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "buy",
+          "cash_before": 8,
+          "cash_after": 2,
+          "fitted": [
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "fit",
+          "cash_before": 2,
+          "cash_after": 2,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "reward",
+          "cash_before": 2,
+          "cash_after": 16,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "reward",
+          "cash_before": 16,
+          "cash_after": 18,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "reward",
+          "cash_before": 18,
+          "cash_after": 20,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 20,
+          "action": "offers",
+          "cash_before": 20,
+          "cash_after": 20,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "shear_gate",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 21,
+          "action": "sell",
+          "cash_before": 20,
+          "cash_after": 27,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 22,
+          "action": "buy",
+          "cash_before": 27,
+          "cash_after": 3,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "vector_emitter"
+          ]
+        },
+        {
+          "step": 23,
+          "action": "fit",
+          "cash_before": 3,
+          "cash_after": 3,
+          "fitted": [
+            "cold_seam",
+            "eddy_brake",
+            "extraction_coil",
+            "reaction_frame",
+            "vector_emitter"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "arc_driver",
+            "eddy_brake",
+            "extraction_coil",
+            "rail_impeller"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "anchor_winch",
+            "extraction_coil",
+            "heat_sink_mould",
+            "shear_gate"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "extraction_coil",
+            "heat_sink_mould"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "anchor_winch",
+            "arc_driver",
+            "heat_sink_mould"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    },
+    {
+      "id": "F",
+      "cash_remaining": 2,
+      "spent": 58,
+      "resale_refunds": 4,
+      "build": [
+        "eddy_brake",
+        "field_loom",
+        "rail_impeller",
+        "rebound_plate",
+        "relay_projector"
+      ],
+      "trace": [
+        {
+          "step": 1,
+          "action": "starter",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 2,
+          "action": "offers",
+          "cash_before": 12,
+          "cash_after": 12,
+          "fitted": [
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "buy",
+          "cash_before": 12,
+          "cash_after": 6,
+          "fitted": [
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 4,
+          "action": "fit",
+          "cash_before": 6,
+          "cash_after": 6,
+          "fitted": [
+            "eddy_brake",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 5,
+          "action": "reward",
+          "cash_before": 6,
+          "cash_after": 16,
+          "fitted": [
+            "eddy_brake",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 6,
+          "action": "reward",
+          "cash_before": 16,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 7,
+          "action": "offers",
+          "cash_before": 18,
+          "cash_after": 18,
+          "fitted": [
+            "eddy_brake",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 8,
+          "action": "buy",
+          "cash_before": 18,
+          "cash_after": 9,
+          "fitted": [
+            "eddy_brake",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 9,
+          "action": "fit",
+          "cash_before": 9,
+          "cash_after": 9,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 10,
+          "action": "reward",
+          "cash_before": 9,
+          "cash_after": 21,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 11,
+          "action": "reward",
+          "cash_before": 21,
+          "cash_after": 23,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 12,
+          "action": "offers",
+          "cash_before": 23,
+          "cash_after": 23,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 13,
+          "action": "buy",
+          "cash_before": 23,
+          "cash_after": 13,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 14,
+          "action": "fit",
+          "cash_before": 13,
+          "cash_after": 13,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 15,
+          "action": "buy",
+          "cash_before": 13,
+          "cash_after": 8,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 16,
+          "action": "fit",
+          "cash_before": 8,
+          "cash_after": 8,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 17,
+          "action": "reward",
+          "cash_before": 8,
+          "cash_after": 22,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 18,
+          "action": "reward",
+          "cash_before": 22,
+          "cash_after": 24,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 19,
+          "action": "reward",
+          "cash_before": 24,
+          "cash_after": 26,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 20,
+          "action": "offers",
+          "cash_before": 26,
+          "cash_after": 26,
+          "fitted": [
+            "eddy_brake",
+            "flow_splitter",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 21,
+          "action": "sell",
+          "cash_before": 26,
+          "cash_after": 30,
+          "fitted": [
+            "eddy_brake",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 22,
+          "action": "buy",
+          "cash_before": 30,
+          "cash_after": 6,
+          "fitted": [
+            "eddy_brake",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 23,
+          "action": "fit",
+          "cash_before": 6,
+          "cash_after": 6,
+          "fitted": [
+            "eddy_brake",
+            "field_loom",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        },
+        {
+          "step": 24,
+          "action": "precharge",
+          "cash_before": 6,
+          "cash_after": 2,
+          "fitted": [
+            "eddy_brake",
+            "field_loom",
+            "rail_impeller",
+            "rebound_plate",
+            "relay_projector"
+          ]
+        }
+      ],
+      "logical_offer_candidates": [
+        {
+          "depot": 0,
+          "candidates": [
+            "arc_driver",
+            "eddy_brake",
+            "rail_impeller",
+            "vector_emitter"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 1,
+          "candidates": [
+            "anchor_winch",
+            "flow_splitter",
+            "heat_sink_mould",
+            "rail_impeller"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 2,
+          "candidates": [
+            "heat_sink_mould",
+            "rail_impeller"
+          ],
+          "physical_opportunity_verified": false
+        },
+        {
+          "depot": 3,
+          "candidates": [
+            "arc_driver",
+            "field_loom",
+            "heat_sink_mould",
+            "punch_through_collar"
+          ],
+          "physical_opportunity_verified": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Checks authored offer/budget/equipment sequences only; not random offer fairness.",
+    "Does not implement physical salvage, module effects, challenge balance or fun.",
+    "Different identifiers and affordable builds do not prove distinct strategies.",
+    "Capability-compatible offers still need distinct physical opportunities in the next site."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "design-verifier-negative-evidence",
+  "cases": [
+    {
+      "case": "duplicate_reward",
+      "rejected": true,
+      "reason": "Site or refining reward paid twice"
+    },
+    {
+      "case": "double_precharge",
+      "rejected": true,
+      "reason": "Precharge is once per departure"
+    },
+    {
+      "case": "forced_pivot_stock",
+      "rejected": true,
+      "reason": "C depot 3: stock lacks two affordable capability-compatible choices: ['extraction_coil'], wallet 32"
+    },
+    {
+      "case": "unaffordable_purchase",
+      "rejected": true,
+      "reason": "Cannot afford intact_recovery: 12 < 24"
+    },
+    {
+      "case": "missing_active_on_departure",
+      "rejected": true,
+      "reason": "Inactive fitted module insulated_jaw: missing capability"
+    },
+    {
+      "case": "owned_passive_stock",
+      "rejected": true,
+      "reason": "Stock repeats an owned unique passive"
+    }
+  ],
+  "limits": "Invalid design input rejection only; not game runtime or gameplay evidence."
+}

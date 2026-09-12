@@ -1,0 +1,2121 @@
+{
+  "schema_version": 1,
+  "kind": "proposed-build-economy",
+  "reviewed_on": "2026-09-13",
+  "status": "authored design routes; no physical gameplay or fun validation",
+  "sources": [
+    {
+      "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+      "role": "Authoritative economy, twenty-four current offer lists and rejected original B stock"
+    },
+    {
+      "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+      "section": "Concrete starting catalogue",
+      "role": "Thirty provisional module identities, prices, slot sizes and eligibility"
+    }
+  ],
+  "rules": {
+    "starting_cash": 12,
+    "free_starter_choices": [
+      "extraction_coil",
+      "rail_impeller",
+      "arc_driver",
+      "anchor_winch",
+      "vector_emitter",
+      "relay_projector"
+    ],
+    "starter_count": 1,
+    "starter_purchase_basis": 0,
+    "rewards": {
+      "site_1_clear": 10,
+      "site_1_refine_120": 2,
+      "site_1_refine_240": 2,
+      "site_2_clear": 12,
+      "site_2_refine_180": 2,
+      "site_2_refine_360": 2,
+      "site_3_clear": 14,
+      "site_3_refine_240": 2,
+      "site_3_refine_480": 2
+    },
+    "refining_milestones": [
+      {
+        "site": 1,
+        "output": 120,
+        "reward": "site_1_refine_120",
+        "once_per_site": true
+      },
+      {
+        "site": 1,
+        "output": 240,
+        "reward": "site_1_refine_240",
+        "once_per_site": true
+      },
+      {
+        "site": 2,
+        "output": 180,
+        "reward": "site_2_refine_180",
+        "once_per_site": true
+      },
+      {
+        "site": 2,
+        "output": 360,
+        "reward": "site_2_refine_360",
+        "once_per_site": true
+      },
+      {
+        "site": 3,
+        "output": 240,
+        "reward": "site_3_refine_240",
+        "once_per_site": true
+      },
+      {
+        "site": 3,
+        "output": 480,
+        "reward": "site_3_refine_480",
+        "once_per_site": true
+      }
+    ],
+    "slots": {
+      "active": 2,
+      "passive": 4
+    },
+    "price_tiers": {
+      "support": [
+        4,
+        6
+      ],
+      "specialist": [
+        8,
+        12
+      ],
+      "advanced": [
+        14,
+        18
+      ],
+      "keystone": [
+        22,
+        26
+      ]
+    },
+    "module_offers_per_depot": 4,
+    "depots": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "rerolls_enabled": false,
+    "reroll_costs": [],
+    "precharge": {
+      "cost": 4,
+      "max_per_depot": 1,
+      "normal_next_site_battery": 100,
+      "charged_next_site_battery": 120,
+      "stacks": false
+    },
+    "resale": {
+      "numerator": 1,
+      "denominator": 2,
+      "rounding": "floor",
+      "basis": "actual price paid",
+      "free_item_refund": 0
+    },
+    "maximum_pre_finale_income": 60,
+    "minimum_pre_finale_income": 48,
+    "reward_policy": "Site and refining rewards pay once per saved source ID; retry restores resources and rewards together.",
+    "ownership_policy": "Proposed run installs/cash with persistent blueprints and archived rigs; pending owner/root selection; legacy career unchanged.",
+    "initial_free_starter_choices": [
+      "extraction_coil",
+      "rail_impeller",
+      "arc_driver",
+      "anchor_winch"
+    ],
+    "unlockable_free_starter_choices": [
+      "vector_emitter",
+      "relay_projector"
+    ],
+    "starter_unlock_policy": "A-D use initially available starters. E-F assume the Vector/Relay blueprint has already been unlocked; unlock criteria are pending and are not an entry fee or permanent-power requirement for victory.",
+    "offer_guarantee": {
+      "module_count": 4,
+      "independently_actionable_affordable_choices_at_entry": 2,
+      "precharge_counts_toward_guarantee": false,
+      "needs": [
+        "installed capability or independently functional refit",
+        "actual next-site opportunity",
+        "credible benefit within slot limits"
+      ],
+      "limits": "The arithmetic verifier does not establish capability or opportunity eligibility."
+    }
+  },
+  "modules": [
+    {
+      "id": "extraction_coil",
+      "name": "Extraction Coil",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Extraction Coil"
+      },
+      "provides": [
+        "Sever"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "rail_impeller",
+      "name": "Rail Impeller",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Rail Impeller"
+      },
+      "provides": [
+        "Launch"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "arc_driver",
+      "name": "Arc Driver",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Arc Driver"
+      },
+      "provides": [
+        "Arc"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "anchor_winch",
+      "name": "Anchor Winch",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Anchor Winch"
+      },
+      "provides": [
+        "PhysicalTether"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "vector_emitter",
+      "name": "Vector Emitter",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Vector Emitter"
+      },
+      "provides": [
+        "Vector"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "relay_projector",
+      "name": "Relay Projector",
+      "kind": "active",
+      "price": 10,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Relay Projector"
+      },
+      "provides": [
+        "FieldTransfer"
+      ],
+      "requires_all": [],
+      "requires_any": []
+    },
+    {
+      "id": "insulated_jaw",
+      "name": "Insulated Jaw",
+      "kind": "passive",
+      "price": 5,
+      "tier": "support",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Insulated Jaw"
+      },
+      "provides": [],
+      "requires_all": [
+        "Sever"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "crack_follower",
+      "name": "Crack Follower",
+      "kind": "passive",
+      "price": 9,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Crack Follower"
+      },
+      "provides": [],
+      "requires_all": [
+        "Sever"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "impact_fuse",
+      "name": "Impact Fuse",
+      "kind": "passive",
+      "price": 5,
+      "tier": "support",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Impact Fuse"
+      },
+      "provides": [],
+      "requires_all": [
+        "Launch"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "slug_press",
+      "name": "Slug Press",
+      "kind": "passive",
+      "price": 9,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Slug Press"
+      },
+      "provides": [],
+      "requires_all": [
+        "Launch"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "ground_clip",
+      "name": "Ground Clip",
+      "kind": "passive",
+      "price": 5,
+      "tier": "support",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Ground Clip"
+      },
+      "provides": [],
+      "requires_all": [
+        "Arc"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "conductive_tether",
+      "name": "Conductive Tether",
+      "kind": "passive",
+      "price": 9,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Conductive Tether"
+      },
+      "provides": [],
+      "requires_all": [
+        "PhysicalTether",
+        "Arc"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "counterweight_hook",
+      "name": "Counterweight Hook",
+      "kind": "passive",
+      "price": 5,
+      "tier": "support",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Counterweight Hook"
+      },
+      "provides": [],
+      "requires_all": [
+        "PhysicalTether"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "twin_anchor",
+      "name": "Twin Anchor",
+      "kind": "passive",
+      "price": 9,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Twin Anchor"
+      },
+      "provides": [],
+      "requires_all": [
+        "PhysicalTether"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "rebound_plate",
+      "name": "Rebound Plate",
+      "kind": "passive",
+      "price": 5,
+      "tier": "support",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Rebound Plate"
+      },
+      "provides": [],
+      "requires_all": [
+        "Launch"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "flow_splitter",
+      "name": "Flow Splitter",
+      "kind": "passive",
+      "price": 9,
+      "tier": "specialist",
+      "slots": 1,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Flow Splitter"
+      },
+      "provides": [],
+      "requires_all": [
+        "FieldTransfer"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "intact_recovery",
+      "name": "Intact Recovery",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Intact Recovery"
+      },
+      "provides": [],
+      "requires_all": [
+        "Sever"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "salvage_cyclone",
+      "name": "Salvage Cyclone",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Salvage Cyclone"
+      },
+      "provides": [],
+      "requires_all": [
+        "Launch"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "closed_circuit",
+      "name": "Closed Circuit",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Closed Circuit"
+      },
+      "provides": [],
+      "requires_all": [
+        "Arc"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "walking_gantry",
+      "name": "Walking Gantry",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Concrete starting catalogue",
+        "module_name": "Walking Gantry"
+      },
+      "provides": [],
+      "requires_all": [
+        "PhysicalTether"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "cold_seam",
+      "name": "Cold Seam",
+      "kind": "passive",
+      "price": 6,
+      "tier": "support",
+      "slots": 1,
+      "eligibility_notes": [
+        "Sever",
+        "BrittleEligible neighbor"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Cold Seam"
+      },
+      "provides": [],
+      "requires_all": [
+        "Sever"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "ratchet_pawl",
+      "name": "Ratchet Pawl",
+      "kind": "passive",
+      "price": 6,
+      "tier": "support",
+      "slots": 1,
+      "eligibility_notes": [
+        "PhysicalTether",
+        "fixed anchor"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Ratchet Pawl"
+      },
+      "provides": [],
+      "requires_all": [
+        "PhysicalTether"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "eddy_brake",
+      "name": "Eddy Brake",
+      "kind": "passive",
+      "price": 6,
+      "tier": "support",
+      "slots": 1,
+      "eligibility_notes": [
+        "Vector OR FieldTransfer",
+        "moving conductive body"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Eddy Brake"
+      },
+      "provides": [],
+      "requires_all": [],
+      "requires_any": [
+        "Vector",
+        "FieldTransfer"
+      ]
+    },
+    {
+      "id": "shear_gate",
+      "name": "Shear Gate",
+      "kind": "passive",
+      "price": 14,
+      "tier": "advanced",
+      "slots": 1,
+      "eligibility_notes": [
+        "Vector",
+        "exposed Brittle or designated shear seam"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Shear Gate"
+      },
+      "provides": [],
+      "requires_all": [
+        "Vector"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "induction_bridge",
+      "name": "Induction Bridge",
+      "kind": "passive",
+      "price": 16,
+      "tier": "advanced",
+      "slots": 1,
+      "eligibility_notes": [
+        "Arc",
+        "conductive endpoints separated by a clear gap of at most80"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Induction Bridge"
+      },
+      "provides": [],
+      "requires_all": [
+        "Arc"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "heat_sink_mould",
+      "name": "Heat-Sink Mould",
+      "kind": "passive",
+      "price": 16,
+      "tier": "advanced",
+      "slots": 1,
+      "eligibility_notes": [
+        "Vector OR FieldTransfer",
+        "hot source and finite sacrificial iron at rest"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Heat-Sink Mould"
+      },
+      "provides": [],
+      "requires_all": [],
+      "requires_any": [
+        "Vector",
+        "FieldTransfer"
+      ]
+    },
+    {
+      "id": "escapement_relay",
+      "name": "Escapement Relay",
+      "kind": "passive",
+      "price": 16,
+      "tier": "advanced",
+      "slots": 1,
+      "eligibility_notes": [
+        "Arc",
+        "sensor and receiver",
+        "moving mechanism"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Escapement Relay"
+      },
+      "provides": [],
+      "requires_all": [
+        "Arc"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "punch_through_collar",
+      "name": "Punch-Through Collar",
+      "kind": "passive",
+      "price": 14,
+      "tier": "advanced",
+      "slots": 1,
+      "eligibility_notes": [
+        "Launch",
+        "brittle brace"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Punch-Through Collar"
+      },
+      "provides": [],
+      "requires_all": [
+        "Launch"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "reaction_frame",
+      "name": "Reaction Frame",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "eligibility_notes": [
+        "Vector",
+        "authored or winch-created support"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Reaction Frame"
+      },
+      "provides": [],
+      "requires_all": [
+        "Vector"
+      ],
+      "requires_any": []
+    },
+    {
+      "id": "field_loom",
+      "name": "Field Loom",
+      "kind": "passive",
+      "price": 24,
+      "tier": "keystone",
+      "slots": 2,
+      "eligibility_notes": [
+        "FieldTransfer",
+        "Launch for projectile use",
+        "clear guide corridor"
+      ],
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
+        "section": "Additional operation modules and offer eligibility",
+        "module_name": "Field Loom"
+      },
+      "provides": [],
+      "requires_all": [
+        "FieldTransfer"
+      ],
+      "requires_any": [],
+      "conditional_requires": {
+        "projectile_use": [
+          "Launch"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "A",
+      "name": "Preserve machinery, then tow it intact",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "A"
+      },
+      "refining_bonuses": [
+        2,
+        2,
+        4
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "extraction_coil",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "insulated_jaw",
+            "anchor_winch",
+            "impact_fuse",
+            "ground_clip"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "A",
+            "visit": "outfit",
+            "table_row": "A / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "insulated_jaw",
+          "cash_after": 7
+        },
+        {
+          "type": "fit",
+          "module": "insulated_jaw",
+          "cash_after": 7
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 17
+        },
+        {
+          "type": "reward",
+          "id": "site_1_refine_120",
+          "cash_after": 19
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "crack_follower",
+            "anchor_winch",
+            "arc_driver",
+            "slug_press"
+          ],
+          "cash_after": 19,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "A",
+            "visit": "depot 1",
+            "table_row": "A / depot 1"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "crack_follower",
+          "cash_after": 10
+        },
+        {
+          "type": "fit",
+          "module": "crack_follower",
+          "cash_after": 10
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 22
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 24
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "intact_recovery",
+            "anchor_winch",
+            "arc_driver",
+            "impact_fuse"
+          ],
+          "cash_after": 24,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "A",
+            "visit": "depot 2",
+            "table_row": "A / depot 2"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "intact_recovery",
+          "cash_after": 0
+        },
+        {
+          "type": "fit",
+          "module": "intact_recovery",
+          "cash_after": 0
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 14
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 16
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_480",
+          "cash_after": 18
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "anchor_winch",
+            "counterweight_hook",
+            "cold_seam",
+            "arc_driver"
+          ],
+          "cash_after": 18,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "A",
+            "visit": "depot 3",
+            "table_row": "A / depot 3",
+            "revision_note": "Cold Seam6 replaces the unused Insulated Jaw5 offer because the route already owns Jaw at shop entry. Chosen purchases and final cash are unchanged."
+          }
+        },
+        {
+          "type": "sell",
+          "module": "insulated_jaw",
+          "cash_after": 20
+        },
+        {
+          "type": "buy",
+          "module": "anchor_winch",
+          "cash_after": 10
+        },
+        {
+          "type": "fit",
+          "module": "anchor_winch",
+          "cash_after": 10
+        },
+        {
+          "type": "buy",
+          "module": "counterweight_hook",
+          "cash_after": 5
+        },
+        {
+          "type": "fit",
+          "module": "counterweight_hook",
+          "cash_after": 5
+        },
+        {
+          "type": "precharge",
+          "depot": 3,
+          "cost": 4,
+          "cash_after": 1
+        }
+      ],
+      "expected_build": [
+        "extraction_coil",
+        "anchor_winch",
+        "crack_follower",
+        "intact_recovery",
+        "counterweight_hook"
+      ],
+      "expected_cash_remaining": 1,
+      "limits": [
+        "Trades thermal isolation for intact transport; physical preservation and tow route remain unimplemented."
+      ],
+      "starter_access": "initially_available"
+    },
+    {
+      "id": "B",
+      "name": "Demolition/conduction hybrid without a keystone",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "B"
+      },
+      "refining_bonuses": [
+        2,
+        2,
+        2
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "rail_impeller",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "impact_fuse",
+            "arc_driver",
+            "anchor_winch",
+            "insulated_jaw"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "B",
+            "visit": "outfit",
+            "table_row": "B / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "impact_fuse",
+          "cash_after": 7
+        },
+        {
+          "type": "fit",
+          "module": "impact_fuse",
+          "cash_after": 7
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 17
+        },
+        {
+          "type": "reward",
+          "id": "site_1_refine_120",
+          "cash_after": 19
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "slug_press",
+            "arc_driver",
+            "anchor_winch",
+            "ground_clip"
+          ],
+          "cash_after": 19,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "B",
+            "visit": "depot 1",
+            "table_row": "B / depot 1"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "slug_press",
+          "cash_after": 10
+        },
+        {
+          "type": "fit",
+          "module": "slug_press",
+          "cash_after": 10
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 22
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 24
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "salvage_cyclone",
+            "arc_driver",
+            "ground_clip",
+            "extraction_coil"
+          ],
+          "cash_after": 24,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "B",
+            "visit": "depot 2",
+            "table_row": "B / depot 2"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "arc_driver",
+          "cash_after": 14
+        },
+        {
+          "type": "fit",
+          "module": "arc_driver",
+          "cash_after": 14
+        },
+        {
+          "type": "buy",
+          "module": "ground_clip",
+          "cash_after": 9
+        },
+        {
+          "type": "fit",
+          "module": "ground_clip",
+          "cash_after": 9
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 23
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 25
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "rebound_plate",
+            "vector_emitter",
+            "anchor_winch",
+            "salvage_cyclone"
+          ],
+          "cash_after": 25,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "B",
+            "visit": "depot 3",
+            "table_row": "B / depot 3"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "rebound_plate",
+          "cash_after": 20
+        },
+        {
+          "type": "fit",
+          "module": "rebound_plate",
+          "cash_after": 20
+        },
+        {
+          "type": "precharge",
+          "depot": 3,
+          "cost": 4,
+          "cash_after": 16
+        }
+      ],
+      "expected_build": [
+        "rail_impeller",
+        "arc_driver",
+        "impact_fuse",
+        "slug_press",
+        "ground_clip",
+        "rebound_plate"
+      ],
+      "expected_cash_remaining": 16,
+      "limits": [
+        "The corner-shot opportunity must exist on the final site; 16unused credits are not a requirement to spend more.",
+        "Fuse/Rebound combination requires the launched body to survive the initial collision. Reflection uses only remaining impulse, followed by the one delayed burst.",
+        "Current stock offers a cheap corner-shot support, independently functional Vector/Winch pivots and a costly two-slot Cyclone; actual usefulness still needs gameplay evidence.",
+        "Keeping the hybrid is a budgeted choice, not demonstrated final-site victory."
+      ],
+      "starter_access": "initially_available"
+    },
+    {
+      "id": "C",
+      "name": "Pivot from electrical transport to insulated extraction",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "C"
+      },
+      "refining_bonuses": [
+        2,
+        2,
+        4
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "arc_driver",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "ground_clip",
+            "anchor_winch",
+            "extraction_coil",
+            "impact_fuse"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "C",
+            "visit": "outfit",
+            "table_row": "C / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "ground_clip",
+          "cash_after": 7
+        },
+        {
+          "type": "fit",
+          "module": "ground_clip",
+          "cash_after": 7
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 17
+        },
+        {
+          "type": "reward",
+          "id": "site_1_refine_120",
+          "cash_after": 19
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "anchor_winch",
+            "closed_circuit",
+            "extraction_coil",
+            "induction_bridge"
+          ],
+          "cash_after": 19,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "C",
+            "visit": "depot 1",
+            "table_row": "C / depot 1"
+          },
+          "integration_note": "Stricter current-tool support audit: replace an unused offer so the player can deepen the installed tool instead of being forced to pivot. Actual level opportunity remains required."
+        },
+        {
+          "type": "buy",
+          "module": "anchor_winch",
+          "cash_after": 9
+        },
+        {
+          "type": "fit",
+          "module": "anchor_winch",
+          "cash_after": 9
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 21
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 23
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "conductive_tether",
+            "extraction_coil",
+            "intact_recovery",
+            "counterweight_hook"
+          ],
+          "cash_after": 23,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "C",
+            "visit": "depot 2",
+            "table_row": "C / depot 2"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "conductive_tether",
+          "cash_after": 14
+        },
+        {
+          "type": "fit",
+          "module": "conductive_tether",
+          "cash_after": 14
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 28
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 30
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_480",
+          "cash_after": 32
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "intact_recovery",
+            "extraction_coil",
+            "insulated_jaw",
+            "induction_bridge"
+          ],
+          "cash_after": 32,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "C",
+            "visit": "depot 3",
+            "table_row": "C / depot 3",
+            "revision_note": "Induction Bridge16 replaces the unused Crack Follower9 offer, adding an independently useful option for the installed Arc Driver. Chosen pivot purchases and final cash are unchanged."
+          }
+        },
+        {
+          "type": "sell",
+          "module": "conductive_tether",
+          "cash_after": 36
+        },
+        {
+          "type": "sell",
+          "module": "anchor_winch",
+          "cash_after": 41
+        },
+        {
+          "type": "buy",
+          "module": "extraction_coil",
+          "cash_after": 31
+        },
+        {
+          "type": "fit",
+          "module": "extraction_coil",
+          "cash_after": 31
+        },
+        {
+          "type": "buy",
+          "module": "intact_recovery",
+          "cash_after": 7
+        },
+        {
+          "type": "fit",
+          "module": "intact_recovery",
+          "cash_after": 7
+        },
+        {
+          "type": "buy",
+          "module": "insulated_jaw",
+          "cash_after": 2
+        },
+        {
+          "type": "fit",
+          "module": "insulated_jaw",
+          "cash_after": 2
+        }
+      ],
+      "expected_build": [
+        "arc_driver",
+        "extraction_coil",
+        "ground_clip",
+        "intact_recovery",
+        "insulated_jaw"
+      ],
+      "expected_cash_remaining": 2,
+      "limits": [
+        "Winch and Conductive Tether cost19 and resell for9; the pivot loses10 credits.",
+        "Arc termination and preserved extraction require a real shared final-site operation."
+      ],
+      "starter_access": "initially_available"
+    },
+    {
+      "id": "D",
+      "name": "Save for a walking retrieval rig",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "D"
+      },
+      "refining_bonuses": [
+        0,
+        2,
+        2
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "anchor_winch",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "counterweight_hook",
+            "extraction_coil",
+            "arc_driver",
+            "ground_clip"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "D",
+            "visit": "outfit",
+            "table_row": "D / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "counterweight_hook",
+          "cash_after": 7
+        },
+        {
+          "type": "fit",
+          "module": "counterweight_hook",
+          "cash_after": 7
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 17
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "twin_anchor",
+            "extraction_coil",
+            "arc_driver",
+            "ground_clip"
+          ],
+          "cash_after": 17,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "D",
+            "visit": "depot 1",
+            "table_row": "D / depot 1"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "twin_anchor",
+          "cash_after": 8
+        },
+        {
+          "type": "fit",
+          "module": "twin_anchor",
+          "cash_after": 8
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 20
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 22
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "walking_gantry",
+            "extraction_coil",
+            "arc_driver",
+            "ratchet_pawl"
+          ],
+          "cash_after": 22,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "D",
+            "visit": "depot 2",
+            "table_row": "D / depot 2"
+          },
+          "integration_note": "Independent final critique: Ratchet Pawl supplies an affordable support for the installed Winch; its physical site opportunity remains a requirement."
+        },
+        {
+          "type": "precharge",
+          "depot": 2,
+          "cost": 4,
+          "cash_after": 18
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 32
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 34
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "walking_gantry",
+            "extraction_coil",
+            "arc_driver",
+            "ground_clip"
+          ],
+          "cash_after": 34,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "D",
+            "visit": "depot 3",
+            "table_row": "D / depot 3"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "walking_gantry",
+          "cash_after": 10
+        },
+        {
+          "type": "fit",
+          "module": "walking_gantry",
+          "cash_after": 10
+        },
+        {
+          "type": "buy",
+          "module": "extraction_coil",
+          "cash_after": 0
+        },
+        {
+          "type": "fit",
+          "module": "extraction_coil",
+          "cash_after": 0
+        }
+      ],
+      "expected_build": [
+        "anchor_winch",
+        "extraction_coil",
+        "counterweight_hook",
+        "twin_anchor",
+        "walking_gantry"
+      ],
+      "expected_cash_remaining": 0,
+      "limits": [
+        "Site3 must be completable with early winch supports and precharge before Walking Gantry can be bought."
+      ],
+      "starter_access": "initially_available"
+    },
+    {
+      "id": "E",
+      "name": "Vector control, then reaction-assisted extraction",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "E"
+      },
+      "starter_access": "unlocked_blueprint_scenario",
+      "refining_bonuses": [
+        2,
+        2,
+        4
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "vector_emitter",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "eddy_brake",
+            "extraction_coil",
+            "rail_impeller",
+            "arc_driver"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "E",
+            "visit": "outfit",
+            "table_row": "E / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "eddy_brake",
+          "cash_after": 6
+        },
+        {
+          "type": "fit",
+          "module": "eddy_brake",
+          "cash_after": 6
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 16
+        },
+        {
+          "type": "reward",
+          "id": "site_1_refine_120",
+          "cash_after": 18
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "shear_gate",
+            "extraction_coil",
+            "heat_sink_mould",
+            "anchor_winch"
+          ],
+          "cash_after": 18,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "E",
+            "visit": "depot 1",
+            "table_row": "E / depot 1"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "shear_gate",
+          "cash_after": 4
+        },
+        {
+          "type": "fit",
+          "module": "shear_gate",
+          "cash_after": 4
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 16
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 18
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "extraction_coil",
+            "cold_seam",
+            "heat_sink_mould",
+            "reaction_frame"
+          ],
+          "cash_after": 18,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "E",
+            "visit": "depot 2",
+            "table_row": "E / depot 2"
+          },
+          "integration_note": "Stricter current-tool support audit: replace an unused offer so the player can deepen the installed tool instead of being forced to pivot. Actual level opportunity remains required."
+        },
+        {
+          "type": "buy",
+          "module": "extraction_coil",
+          "cash_after": 8
+        },
+        {
+          "type": "fit",
+          "module": "extraction_coil",
+          "cash_after": 8
+        },
+        {
+          "type": "buy",
+          "module": "cold_seam",
+          "cash_after": 2
+        },
+        {
+          "type": "fit",
+          "module": "cold_seam",
+          "cash_after": 2
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 16
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 18
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_480",
+          "cash_after": 20
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "reaction_frame",
+            "heat_sink_mould",
+            "anchor_winch",
+            "arc_driver"
+          ],
+          "cash_after": 20,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "E",
+            "visit": "depot 3",
+            "table_row": "E / depot 3"
+          }
+        },
+        {
+          "type": "sell",
+          "module": "shear_gate",
+          "cash_after": 27
+        },
+        {
+          "type": "buy",
+          "module": "reaction_frame",
+          "cash_after": 3
+        },
+        {
+          "type": "fit",
+          "module": "reaction_frame",
+          "cash_after": 3
+        }
+      ],
+      "expected_build": [
+        "vector_emitter",
+        "extraction_coil",
+        "eddy_brake",
+        "cold_seam",
+        "reaction_frame"
+      ],
+      "expected_cash_remaining": 3,
+      "limits": [
+        "Shear Gate costs14 and resells for7: the final reaction frame costs an earlier directional-cutting specialty.",
+        "Cold Seam requires real eligible material; Reaction Frame requires a real support and a second constrained body.",
+        "The affordability path does not establish available supports, safe brittle setup or a playable final extraction."
+      ]
+    },
+    {
+      "id": "F",
+      "name": "Relay routing, then guided physical projectiles",
+      "source": {
+        "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+        "sequence": "F"
+      },
+      "starter_access": "unlocked_blueprint_scenario",
+      "refining_bonuses": [
+        2,
+        2,
+        4
+      ],
+      "actions": [
+        {
+          "type": "starter",
+          "module": "relay_projector",
+          "cash_after": 12
+        },
+        {
+          "type": "offers",
+          "depot": 0,
+          "modules": [
+            "eddy_brake",
+            "rail_impeller",
+            "arc_driver",
+            "vector_emitter"
+          ],
+          "cash_after": 12,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "F",
+            "visit": "outfit",
+            "table_row": "F / outfit"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "eddy_brake",
+          "cash_after": 6
+        },
+        {
+          "type": "fit",
+          "module": "eddy_brake",
+          "cash_after": 6
+        },
+        {
+          "type": "reward",
+          "id": "site_1_clear",
+          "cash_after": 16
+        },
+        {
+          "type": "reward",
+          "id": "site_1_refine_120",
+          "cash_after": 18
+        },
+        {
+          "type": "offers",
+          "depot": 1,
+          "modules": [
+            "flow_splitter",
+            "rail_impeller",
+            "heat_sink_mould",
+            "anchor_winch"
+          ],
+          "cash_after": 18,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "F",
+            "visit": "depot 1",
+            "table_row": "F / depot 1"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "flow_splitter",
+          "cash_after": 9
+        },
+        {
+          "type": "fit",
+          "module": "flow_splitter",
+          "cash_after": 9
+        },
+        {
+          "type": "reward",
+          "id": "site_2_clear",
+          "cash_after": 21
+        },
+        {
+          "type": "reward",
+          "id": "site_2_refine_180",
+          "cash_after": 23
+        },
+        {
+          "type": "offers",
+          "depot": 2,
+          "modules": [
+            "rail_impeller",
+            "rebound_plate",
+            "field_loom",
+            "heat_sink_mould"
+          ],
+          "cash_after": 23,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "F",
+            "visit": "depot 2",
+            "table_row": "F / depot 2"
+          }
+        },
+        {
+          "type": "buy",
+          "module": "rail_impeller",
+          "cash_after": 13
+        },
+        {
+          "type": "fit",
+          "module": "rail_impeller",
+          "cash_after": 13
+        },
+        {
+          "type": "buy",
+          "module": "rebound_plate",
+          "cash_after": 8
+        },
+        {
+          "type": "fit",
+          "module": "rebound_plate",
+          "cash_after": 8
+        },
+        {
+          "type": "reward",
+          "id": "site_3_clear",
+          "cash_after": 22
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_240",
+          "cash_after": 24
+        },
+        {
+          "type": "reward",
+          "id": "site_3_refine_480",
+          "cash_after": 26
+        },
+        {
+          "type": "offers",
+          "depot": 3,
+          "modules": [
+            "field_loom",
+            "heat_sink_mould",
+            "punch_through_collar",
+            "arc_driver"
+          ],
+          "cash_after": 26,
+          "source": {
+            "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+            "section": "Exact stock and budget contract for later executable checks",
+            "sequence": "F",
+            "visit": "depot 3",
+            "table_row": "F / depot 3"
+          }
+        },
+        {
+          "type": "sell",
+          "module": "flow_splitter",
+          "cash_after": 30
+        },
+        {
+          "type": "buy",
+          "module": "field_loom",
+          "cash_after": 6
+        },
+        {
+          "type": "fit",
+          "module": "field_loom",
+          "cash_after": 6
+        },
+        {
+          "type": "precharge",
+          "depot": 3,
+          "cost": 4,
+          "cash_after": 2
+        }
+      ],
+      "expected_build": [
+        "relay_projector",
+        "rail_impeller",
+        "eddy_brake",
+        "rebound_plate",
+        "field_loom"
+      ],
+      "expected_cash_remaining": 2,
+      "limits": [
+        "Flow Splitter costs9 and resells for4: the guide keystone sacrifices simultaneous split routing and5credits.",
+        "Field Loom requires a clear physical corridor; it cannot teleport through blockers or multiply impulse.",
+        "No claim of projectile solvability or safety follows from the equipment and budget sequence."
+      ]
+    }
+  ],
+  "limits": [
+    "Checks affordability, offer provenance, refunds and equipment counts only; no claim that sites or threshold rewards are physically reachable.",
+    "Does not prove random-stock fairness, compatible opportunity generation or meaningful choice quality.",
+    "Exact refinement output and site-clear conditions require implemented levels and gameplay evidence.",
+    "Six authored family paths do not by themselves establish six viable final-core strategies.",
+    "Rarity is distinct from price tier and has no probability model in this file.",
+    "Module capability dependencies are documented in the mechanics proposal; this budget schema does not simulate them.",
+    "Rejected original B is preserved separately and must not be counted as a current accepted route."
+  ],
+  "rejected_stock_evidence": [
+    {
+      "id": "B_original_sparse_stock",
+      "status": "rejected useful-choice quality; valid historical budget evidence",
+      "reason": "At25 cash, the old last shop offered mostly unsupported pivots or the24-credit keystone. Buying only precharge left21; affordability did not demonstrate a worthwhile choice.",
+      "route_snapshot": {
+        "id": "B_original_sparse_stock",
+        "name": "Demolition/conduction hybrid without a keystone",
+        "source": {
+          "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+          "section": "Rejected stock evidence — original B"
+        },
+        "refining_bonuses": [
+          2,
+          2,
+          2
+        ],
+        "actions": [
+          {
+            "type": "starter",
+            "module": "rail_impeller",
+            "cash_after": 12
+          },
+          {
+            "type": "offers",
+            "depot": 0,
+            "modules": [
+              "impact_fuse",
+              "arc_driver",
+              "anchor_winch",
+              "insulated_jaw"
+            ],
+            "cash_after": 12,
+            "source": {
+              "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+              "section": "Exact stock and budget contract for later executable checks",
+              "sequence": "B",
+              "visit": "outfit",
+              "table_row": "B / outfit"
+            }
+          },
+          {
+            "type": "buy",
+            "module": "impact_fuse",
+            "cash_after": 7
+          },
+          {
+            "type": "fit",
+            "module": "impact_fuse",
+            "cash_after": 7
+          },
+          {
+            "type": "reward",
+            "id": "site_1_clear",
+            "cash_after": 17
+          },
+          {
+            "type": "reward",
+            "id": "site_1_refine_120",
+            "cash_after": 19
+          },
+          {
+            "type": "offers",
+            "depot": 1,
+            "modules": [
+              "slug_press",
+              "arc_driver",
+              "anchor_winch",
+              "ground_clip"
+            ],
+            "cash_after": 19,
+            "source": {
+              "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+              "section": "Exact stock and budget contract for later executable checks",
+              "sequence": "B",
+              "visit": "depot 1",
+              "table_row": "B / depot 1"
+            }
+          },
+          {
+            "type": "buy",
+            "module": "slug_press",
+            "cash_after": 10
+          },
+          {
+            "type": "fit",
+            "module": "slug_press",
+            "cash_after": 10
+          },
+          {
+            "type": "reward",
+            "id": "site_2_clear",
+            "cash_after": 22
+          },
+          {
+            "type": "reward",
+            "id": "site_2_refine_180",
+            "cash_after": 24
+          },
+          {
+            "type": "offers",
+            "depot": 2,
+            "modules": [
+              "salvage_cyclone",
+              "arc_driver",
+              "ground_clip",
+              "extraction_coil"
+            ],
+            "cash_after": 24,
+            "source": {
+              "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+              "section": "Exact stock and budget contract for later executable checks",
+              "sequence": "B",
+              "visit": "depot 2",
+              "table_row": "B / depot 2"
+            }
+          },
+          {
+            "type": "buy",
+            "module": "arc_driver",
+            "cash_after": 14
+          },
+          {
+            "type": "fit",
+            "module": "arc_driver",
+            "cash_after": 14
+          },
+          {
+            "type": "buy",
+            "module": "ground_clip",
+            "cash_after": 9
+          },
+          {
+            "type": "fit",
+            "module": "ground_clip",
+            "cash_after": 9
+          },
+          {
+            "type": "reward",
+            "id": "site_3_clear",
+            "cash_after": 23
+          },
+          {
+            "type": "reward",
+            "id": "site_3_refine_240",
+            "cash_after": 25
+          },
+          {
+            "type": "offers",
+            "depot": 3,
+            "modules": [
+              "salvage_cyclone",
+              "anchor_winch",
+              "conductive_tether",
+              "insulated_jaw"
+            ],
+            "cash_after": 25,
+            "source": {
+              "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
+              "section": "Rejected stock evidence — original B",
+              "visit": "depot3"
+            }
+          },
+          {
+            "type": "precharge",
+            "depot": 3,
+            "cost": 4,
+            "cash_after": 21
+          }
+        ],
+        "expected_build": [
+          "rail_impeller",
+          "arc_driver",
+          "impact_fuse",
+          "slug_press",
+          "ground_clip"
+        ],
+        "expected_cash_remaining": 21,
+        "limits": [
+          "One passive socket remains empty and 21 credits remain unused; useful late stock is a known design weakness.",
+          "Conductive Tether is offered as a possible pivot but is not claimed to work without a tether-producing tool.",
+          "Keeping the hybrid is a budgeted choice, not demonstrated final-site victory."
+        ]
+      }
+    }
+  ]
+}

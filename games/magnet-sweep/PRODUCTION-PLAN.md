@@ -1,5 +1,7 @@
 # Magnet Sweep — rebuild production plan
 
+> 2026-09-13 scope note: this document records the implemented career and prior increments. The active broad build-system recommendation and ordered next experiment are in [design/BUILD-SYSTEM.md](design/BUILD-SYSTEM.md). Its proposed expedition rules are not yet implemented and do not rewrite old saves. The nine permanent purchases and four-pour structure below are historical implementation context, not the requested final upgrade system.
+
 Updated 2026-09-12. The owner rejected the first playable demo and authorized implementation of meaningful goals, challenge, risk, satisfying attraction/melting, improved graphics and sound, music, upgrades, leveling and loot. [BRIEF.md](BRIEF.md) is the current contract. The prior unlimited, risk-free brief and plan at Git revision `8af011f` are historical rejected alternatives.
 
 **Development timeline is not a consideration.** Complete and assess the intended experience through dependency-led increments. Do not replace gameplay judgment with deadlines, asset counts, successful compilation or additional feature lists. Root integrates shared records and the package; bounded specialists preserve one another's assigned files.
