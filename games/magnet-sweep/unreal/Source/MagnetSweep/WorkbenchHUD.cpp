@@ -178,11 +178,9 @@ void FWorkbenchImpl::Paint(UCanvas* C)
    }
    Meter(MX+13,MY+ChipHeight-4,ChipWidth-26,Unsafe?Model.GetFuseRemaining()/Model.GetFuseDuration():float(Model.GetCargoMass())/Model.GetCapacity(),Unsafe?Danger:Mint,3);
   }
-  const FSalvagePiece* Nearest=nullptr;double Closest=48.0*48.0;
-  if(bInTray&&!FieldOn)
-   for(const FSalvagePiece& P:Model.GetPieces())
-    if(P.State==EPieceState::Available&&(P.Position-RawWorld).SizeSquared()<Closest)
-    {Nearest=&P;Closest=(P.Position-RawWorld).SizeSquared();}
+  if(Model.GetUpgradeTier(EUpgrade::Coil)>0)
+   FitText(FString::Printf(TEXT("F: EXTRACT  %d / %d  |  Smelt to recharge"),Model.GetBreakawayUsesRemaining(),Model.GetUpgradeTier(EUpgrade::Coil)),1065,158,485,.83f,Mint);
+  const FSalvagePiece* Nearest=bInTray&&(!FieldOn||Model.GetUpgradeTier(EUpgrade::Coil)>0)?Model.FindPiece(FindBreakawayTarget()):nullptr;
   if(Nearest)
   {
    const TArray<int32> Group=Model.GetCaptureGroup(Nearest->Id);
@@ -191,12 +189,22 @@ void FWorkbenchImpl::Paint(UCanvas* C)
    const bool Fits=CanCaptureForPlayer(Nearest->Id),WouldOverload=Model.GetCargoMass()+Mass>Model.GetCapacity()||Cell;
    const FLinearColor Color=WouldOverload?(Tutorial.IsTrainingGuardActive()?Gold:Danger):(Nearest->Material==EMaterial::Core?Gold:Copper);
    const float HX=FMath::Clamp(float((Pointer.X-UX)/UIScale)+25.f,42.f,1255.f);
-   const float HY=FMath::Clamp(float((Pointer.Y-UY)/UIScale)+26.f,199.f,669.f);
-   Rect(C,HX,HY,300,99,Panel);Rect(C,HX,HY,3,99,Color);
+   const float HY=FMath::Clamp(float((Pointer.Y-UY)/UIScale)+26.f,199.f,Group.Num()>1?603.f:669.f);
+   const float TipHeight=Group.Num()>1?157.f:99.f;
+   Rect(C,HX,HY,300,TipHeight,Panel);Rect(C,HX,HY,3,TipHeight,Color);
    FitText(Group.Num()>1?FString::Printf(TEXT("LINKED BUNDLE  /  %d pieces"),Group.Num()):Model.PieceName(Nearest->Id),HX+13,HY+9,276,.89f,Paper);
    DrawText(C,FString::Printf(TEXT("%d kg   /   %d cr"),Mass,Value),HX+13,HY+37,1.02f,Color);
    FitText(!Fits?(Tutorial.IsTrainingGuardActive()?(Cell?TEXT("Training guard: red cell stays on tray"):TEXT("Training guard: smelt your current load")):TEXT("Too heavy for this rig")):(Cell?TEXT("Discharge costs 1 fuel. RMB drops haul."):
-    FString::Printf(TEXT("Incoming %d / %d kg%s"),Model.GetCargoMass()+Mass,Model.GetCapacity(),WouldOverload?TEXT(" - unstable"):TEXT(""))),HX+13,HY+69,275,.77f,Color);
+    FString::Printf(TEXT("%s %d / %d kg%s"),Group.Num()>1?TEXT("Normal pull:"):TEXT("Incoming"),Model.GetCargoMass()+Mass,Model.GetCapacity(),WouldOverload?TEXT(" - unstable"):TEXT(""))),HX+13,HY+69,275,.77f,Color);
+   if(Group.Num()>1){
+    FString CutReason;bool CanCut=Model.CanBreakaway(Nearest->Id,CutReason);
+    if(CanCut&&(Nearest->Position-Magnet).Size()>Model.GetFieldRadius()){CanCut=false;CutReason=TEXT("Move magnet closer before pressing F");}
+    if(CanCut&&(RecoveryTimer>0||!Ready)){CanCut=false;CutReason=TEXT("Wait for the current pull or smelt to finish");}
+    WorldCircle(C,Nearest->Position,29,CanCut?Mint:Gold,2.5f,24);
+    FitText(FString::Printf(TEXT("F: %s only / %d kg / %d cr"),*Model.PieceName(Nearest->Id),Nearest->Mass,Nearest->Amount),HX+13,HY+101,275,.78f,Mint);
+    const bool HotTarget=Nearest->Material==EMaterial::HotCell;
+    FitText(CanCut?FString::Printf(TEXT("%s %d / %d kg. Costs 1 extraction."),HotTarget?TEXT("HOT CELL:"):TEXT("Safe:"),Model.GetCargoMass()+Nearest->Mass,Model.GetCapacity()):CutReason,HX+13,HY+129,275,.74f,CanCut?(HotTarget?Danger:Mint):Quiet);
+   }
   }
   FString SmeltReason;const bool CanSmelt=Model.CanSmelt(SmeltReason);
   FString Status=TEXT("Uses 1 fuel. Pays your banked credits.");
@@ -259,8 +267,8 @@ void FWorkbenchImpl::Paint(UCanvas* C)
   DrawText(C,TEXT("Earn better pulls. Choose what your rig does next."),151,132,.95f,Quiet);
   DrawText(C,FString::Printf(TEXT("%d cr  /  RANK %d"),Model.GetWallet(),Rank),1104,92,1.05f,Gold);
   AddButton(21,TEXT("Back to tray"),1264,133,186,38);
-  const TCHAR* Names[]={TEXT("DEEP BASKET"),TEXT("POWER COIL"),TEXT("STABILIZER")};
-  const TCHAR* Roles[]={TEXT("Bigger valuable batches"),TEXT("Stronger, wider attraction"),TEXT("More time to rescue a risky haul")};
+  const TCHAR* Names[]={TEXT("DEEP BASKET"),TEXT("EXTRACTION COIL"),TEXT("STABILIZER")};
+  const TCHAR* Roles[]={TEXT("Bigger valuable batches"),TEXT("Take one linked piece; leave the weight"),TEXT("More time to rescue a risky haul")};
   const EUpgrade Types[]={EUpgrade::Capacity,EUpgrade::Coil,EUpgrade::Stabilizer};
   for(int32 I=0;I<3;++I)
   {
@@ -272,10 +280,10 @@ void FWorkbenchImpl::Paint(UCanvas* C)
    DrawText(C,FString::Printf(TEXT("TIER %d / 3"),Tier),X+132,285,.70f,Quiet);
    FString Effect;
    if(I==0)Effect=Tier<3?FString::Printf(TEXT("%d kg  >  %d kg capacity"),Model.GetCapacity(),Model.GetCapacity()+8):FString::Printf(TEXT("%d kg capacity"),Model.GetCapacity());
-   else if(I==1)Effect=Tier<3?FString::Printf(TEXT("%.0f  >  %.0f field radius"),Model.GetFieldRadius(),Model.GetFieldRadius()+35):FString::Printf(TEXT("%.0f field radius"),Model.GetFieldRadius());
+   else if(I==1)Effect=Tier<3?FString::Printf(TEXT("%d  >  %d extractions per smelt"),Tier,Tier+1):TEXT("3 extractions per smelt");
    else Effect=Tier<3?FString::Printf(TEXT("%.0fs  >  %.0fs warning fuse"),Model.GetFuseDuration(),Model.GetFuseDuration()+1):FString::Printf(TEXT("%.0fs warning fuse"),Model.GetFuseDuration());
    FitText(Effect,X+23,320,370,.99f,Paper);
-   DrawText(C,I==1?TEXT("+25% force per tier. Shift / Q for precision."):(I==0?TEXT("Carry more value in each furnace pour."):TEXT("Expiry costs 1 fuel and your best piece.")),X+23,351,.76f,Quiet);
+   FitText(I==1?TEXT("Aim at a linked piece. F pulls only that piece."):(I==0?TEXT("Carry more value in each furnace pour."):TEXT("Expiry costs 1 fuel and your best piece.")),X+23,351,370,.76f,Quiet);
    FString Reason;const bool CanBuy=Model.CanPurchaseUpgrade(Types[I],Reason);
    const FString BuyLabel=Tier>=3?TEXT("Fully upgraded"):(CanBuy?FString::Printf(TEXT("Upgrade  /  %d cr"),Model.GetUpgradePrice(Types[I])):Reason);
    AddButton(100+I,BuyLabel.IsEmpty()?TEXT("Unavailable"):BuyLabel,X+23,395,370,43,CanBuy,CanBuy);

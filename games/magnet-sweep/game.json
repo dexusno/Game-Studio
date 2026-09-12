@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner rejected the original demo and then the guided tutorial. Current corrective scope makes collection, smelting, earned rewards and rig goals clear while preserving career progress. Timeline is unconstrained; zero time fields mean unset. No purchases or release authorized.",
+  "budget_note": "Owner rejects radius-only coil as no meaningful new accomplishment. Current increment adds aimed selected-piece extraction, real finite uses and optional mixed assemblies while preserving existing progress and owner control. Timeline is unconstrained; zero time fields mean unset. No purchases or release authorized.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -22,6 +22,7 @@
       "games/magnet-sweep/PRODUCTION-PLAN.md",
       "games/magnet-sweep/DECISIONS.md",
       "games/magnet-sweep/design/REWORK-CRITIQUE.md",
+      "games/magnet-sweep/QA-EXTRACTION.md",
       "games/magnet-sweep/QA-CLARITY.md",
       "games/magnet-sweep/QA-TUTORIAL.md",
       "games/magnet-sweep/BUILD.md",
@@ -30,17 +31,18 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-12T19:59:01+00:00",
-      "record_sha256": "e5e390681adf5eccfe1970ba8f1571da64f18cccda9cba018ea8a88e4c09794a",
+      "captured_at": "2026-09-12T21:52:56+00:00",
+      "record_sha256": "8efbd66c25aee7c2f6e887b0cfe8758ac1f0f0e689be113ac124f53cb66d71d8",
       "files": {
-        "games/magnet-sweep/STATUS.md": "111292c519ee10e23ed7d4323170f52b4deef911f7dd659d7ce68625ef2c9a76",
-        "games/magnet-sweep/BRIEF.md": "a72ebdb50444d00e4ff26f71019dd486e02bddef337e9d5a8ea77a219a204f5e",
-        "games/magnet-sweep/PRODUCTION-PLAN.md": "e47fa348903ec66de730432cfc5bb731a6f4a976f662e1253736246c43a21fb2",
-        "games/magnet-sweep/DECISIONS.md": "400e502cadfb28ed7eaa14b2e86fa9d809d19e4e2c85660d9262cf41895ea635",
+        "games/magnet-sweep/STATUS.md": "38d62a297579d966c02317c4e74d19d4eb4afd1b4337f22271f7ced2e0e95683",
+        "games/magnet-sweep/BRIEF.md": "7e1910c71416f088761d6678555a5145f29c7e3d8cc73d7b04d66c41188f3e92",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "44ecb4f435fd997917e100b4fca1a16da8de72beff2e7d1dfcd44b4dd948cfc7",
+        "games/magnet-sweep/DECISIONS.md": "66f4e5f6c43b0bc915777a1da1668328a7d92827ff4996ce100fb73bde331805",
         "games/magnet-sweep/design/REWORK-CRITIQUE.md": "a676b6bfa2544d33447ddbdad96c9cdc6b45f41a580d957c3adabf9b9d2067b6",
+        "games/magnet-sweep/QA-EXTRACTION.md": "5a0633eddd3baa29447a43c45653ef3e468c32f77cf4692456dec8a1495691e4",
         "games/magnet-sweep/QA-CLARITY.md": "23eb956b32abd2c075feaddaaf405db9aa8693b7111decb82930efd0272dd682",
         "games/magnet-sweep/QA-TUTORIAL.md": "831a785fcdf328064a884f1b4337bc5d4a3bfa309f350b3a198c2221d319bc1e",
-        "games/magnet-sweep/BUILD.md": "ac953032cd215556ae45d921d9add03b939c984d7ea9c520e65b9196c7410e97",
+        "games/magnet-sweep/BUILD.md": "367ab3923c8bab226411f293b7dfe338b7140ea46398048bacd6a666885dea1c",
         "games/magnet-sweep/design/REWORK-PRESENTATION.md": "6db22e8aaff762b0fbf0798fc4c3010b1296f24456db329e59905e4e7996dae1",
         "games/magnet-sweep/QA-REWORK.md": "2b9da1b0de3fedb149e1f1a21f9c1f0b7045f8867faa81cc9988442a82f9cb00"
       }

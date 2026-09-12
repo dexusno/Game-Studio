@@ -181,6 +181,48 @@ bool FSalvageModel::MoveAvailablePiece(int32 Id, const FVector2D& Position)
         if (P.Id == Id && P.State == EPieceState::Available) { P.Position = Position; return true; }
     return false;
 }
+bool FSalvageModel::CanBreakaway(int32 Id, FString& Reason) const
+{
+    const auto Refuse = [&Reason](const TCHAR* Text) { Reason = Text; return false; };
+    if (State.bJobEnded || IsJobFailed() || State.HeatsUsed >= HeatsPerJob)
+        return Refuse(TEXT("Start an active contract with fuel before extracting."));
+    if (!HasBreakaway()) return Refuse(TEXT("Fit an Extraction Coil to extract a selected linked piece."));
+    if (GetBreakawayUsesRemaining() <= 0) return Refuse(TEXT("No extractions left. Smelt a useful haul to recharge."));
+    if (IsCargoUnsafe()) return Refuse(TEXT("Drop the unsafe haul before using the Extraction Coil."));
+    const auto* Piece = FindPiece(Id);
+    if (!Piece || Piece->State != EPieceState::Available)
+        return Refuse(TEXT("Aim at an available linked piece on the tray."));
+    bool Linked = false;
+    for (int32 OtherId : Piece->DirectLinks)
+    {
+        const auto* Other = FindPiece(OtherId);
+        Linked |= Other && Other->State == EPieceState::Available;
+    }
+    if (!Linked) return Refuse(TEXT("This piece is already loose. Attract it normally."));
+    if (State.CargoMass + Piece->Mass > GetCapacity())
+        return Refuse(TEXT("The selected piece will not fit safely. Smelt or drop the current haul."));
+    Reason.Reset(); return true;
+}
+FRecoveryResult FSalvageModel::BreakawayExtract(int32 Id)
+{
+    FRecoveryResult Result; FString Reason;
+    if (!CanBreakaway(Id, Reason)) return Result;
+    // The validated graph is mutated only after all refusals have been checked.
+    // Removing both sides also preserves a permanent separation after drop/reload.
+    for (auto& Piece : State.Pieces)
+    {
+        if (Piece.Id == Id) Piece.DirectLinks.Reset();
+        else Piece.DirectLinks.Remove(Id);
+        Piece.Kind = Piece.DirectLinks.IsEmpty() ? EPieceKind::Loose : EPieceKind::Tangle;
+        if (Piece.Id == Id)
+        {
+            Piece.State = EPieceState::Cargo; Piece.CaptureOrder = ++State.CaptureSerial;
+            Result.PieceIds.Add(Id); Result.Mass = Piece.Mass; Result.Amount = Piece.Amount;
+        }
+    }
+    ++State.BreakawayUses; RecountCargo(); IncrementEpoch();
+    return Result;
+}
 void FSalvageModel::RecountCargo()
 {
     State.Cargo = 0; State.CargoMass = 0;
@@ -327,7 +369,8 @@ FBankResult FSalvageModel::BankCargo()
             if (P.Material == EMaterial::Core && !State.CollectedCores.Contains(P.CoreId))
             { State.CollectedCores.Add(P.CoreId); Result.NewCoreIds.Add(P.CoreId); }
         }
-    State.CollectedCores.Sort(); State.Banked += Result.Amount; ++State.HeatsUsed; RecountCargo();
+    State.CollectedCores.Sort(); State.Banked += Result.Amount; ++State.HeatsUsed;
+    State.BreakawayUses = 0; RecountCargo();
     int32 Award = Result.Amount;
     if (!State.bDeliveryCompleted && State.Banked >= State.Goal)
     {
@@ -376,7 +419,7 @@ void FSalvageModel::BuildLayout(int32 Index, int32 Seed)
 {
     State.LayoutIndex = FMath::Clamp(Index, 0, LayoutCount - 1); State.Seed = Seed;
     State.Pieces.Reset(); State.Cargo = 0; State.CargoMass = 0; State.Banked = 0;
-    State.HeatsUsed = 0; State.CaptureSerial = 0; State.FuseElapsed = 0;
+    State.HeatsUsed = 0; State.CaptureSerial = 0; State.FuseElapsed = 0; State.BreakawayUses = 0;
     State.Goal = GetJob().Quota; State.bDeliveryCompleted = false; State.bGoldAwarded = false; State.bJobEnded = false;
     IncrementEpoch();
     FRandomStream Random(Seed);
@@ -427,6 +470,48 @@ void FSalvageModel::BuildLayout(int32 Index, int32 Seed)
         const FVector2D Center = I < 2 ? State.Pieces[CoreIndex].Position : FVector2D(-30 + (I-2)*105,130);
         State.Pieces[CoreIndex+1+I].Position = ClampToTray(Center + FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)) * (80 + I*7));
     }
+    // Optional mixed assemblies do not change any earlier piece ID, position or
+    // quota route. Each is independently worth 32cr at 8kg;
+    // breakaway can take its 24cr/4kg alloy while leaving both iron weights behind.
+    for (int32 Assembly = 0; Assembly < 3; ++Assembly)
+    {
+        const int32 First = State.Pieces.Num();
+        const FVector2D Preferred(-350 + Assembly * 350, 260);
+        FVector2D Center = FVector2D::ZeroVector, Axis(1,0);
+        double BestClearance = -1, BestScore = TNumericLimits<double>::Max();
+        // Small deterministic candidate search: prefer the authored upper sites
+        // when 42-unit center clearance is available; otherwise take the clearest
+        // candidate. All three parts remain at least 25 units inside the walls.
+        for (int32 Orientation = 0; Orientation < 2; ++Orientation)
+        for (int32 Y = -280; Y <= 280; Y += 20)
+        for (int32 X = -460; X <= 460; X += 20)
+        {
+            const FVector2D Candidate(X,Y), Direction = Orientation == 0 ? FVector2D(1,0) : FVector2D(0,1);
+            double Clearance = TNumericLimits<double>::Max(); bool Inside = true;
+            for (int32 Part = -1; Part <= 1; ++Part)
+            {
+                const FVector2D Position = Candidate + Direction * (46 * Part);
+                if (FMath::Abs(Position.X) > 475 || FMath::Abs(Position.Y) > 285) { Inside = false; break; }
+                for (const auto& Existing : State.Pieces)
+                    Clearance = FMath::Min(Clearance, (Position - Existing.Position).SizeSquared());
+            }
+            if (!Inside) continue;
+            const double Score = (Candidate - Preferred).SizeSquared() + Orientation;
+            const bool Clear = Clearance >= 42 * 42, BestClear = BestClearance >= 42 * 42;
+            if ((Clear && (!BestClear || Score < BestScore))
+                || (!Clear && !BestClear && Clearance > BestClearance))
+            { Center = Candidate; Axis = Direction; BestClearance = Clearance; BestScore = Score; }
+        }
+        for (int32 Part = 0; Part < 3; ++Part)
+        {
+            FSalvagePiece Piece; Piece.Id = State.Pieces.Num();
+            Piece.Material = Part == 0 ? EMaterial::Alloy : EMaterial::Iron;
+            Piece.Mass = MaterialMass(Piece.Material); Piece.Amount = MaterialValue(Piece.Material);
+            Piece.Position = Center + Axis * (Part == 1 ? -46 : Part == 2 ? 46 : 0);
+            State.Pieces.Add(Piece);
+        }
+        LinkPieces(State.Pieces, First, First + 1); LinkPieces(State.Pieces, First, First + 2);
+    }
 }
 
 // Integration compatibility: legacy corridor selection is deliberately inactive.
@@ -470,6 +555,8 @@ bool FSalvageModel::ValidateSnapshot(const FSalvageSnapshot& S, FString& Error)
     }
     if (S.UpgradeLevel != TierSum || (S.XP < CareerLimit && S.XP - S.Wallet != Spent))
         return Fail(TEXT("Purchased rig does not match the cash ledger."));
+    if (S.BreakawayUses < 0 || S.BreakawayUses > S.UpgradeTiers[static_cast<int32>(EUpgrade::Coil)])
+        return Fail(TEXT("Invalid spent breakaway pulse count."));
     if (LevelForXP(S.XP) < JobDefinition(S.LayoutIndex).RequiredLevel) return Fail(TEXT("Active contract is locked."));
     if (S.CompletedDeliveryCount < 0 || S.CompletedDeliveryCount > 1000000 || S.HeatsUsed < 0 || S.HeatsUsed > HeatsPerJob
         || S.CaptureSerial < 0 || S.CaptureSerial > 100000000 || S.Goal != JobDefinition(S.LayoutIndex).Quota)

@@ -156,6 +156,8 @@ struct FWorkbenchImpl {
  void UpdateVisuals(float Delta);
  void UpdateAttraction(float Delta);
  void Vent();
+ int32 FindBreakawayTarget() const;
+ void Breakaway();
  void UpdateAudio(float Delta);
  void AddBurst(FVector Position,FLinearColor Color,int32 Count,float Force=100);
  void SpillVisuals(const TArray<int32>& Released,const TArray<int32>& Destroyed,bool bFailure);
@@ -164,7 +166,7 @@ struct FWorkbenchImpl {
  void UpdatePointer(FVector2D EventPosition=FVector2D(-1,-1));
  void HandlePress();
  void HandleRelease();
- void OnRecovery(const MagnetSweep::FRecoveryResult& Result,bool bPull,int32 Tangled=0);
+ void OnRecovery(const MagnetSweep::FRecoveryResult& Result,bool bPull,int32 Tangled=0,bool UsedBreakaway=false);
  void Deposit(bool Next=false);
  void NextDelivery();
  void Button(int32 Id);

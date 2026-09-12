@@ -96,6 +96,7 @@ struct FSalvageSnapshot
     int32 Goal = 120;
     int32 HeatsUsed = 0;
     int32 CaptureSerial = 0;
+    int32 BreakawayUses = 0; // Used pulses this batch; old saves default to unused.
     float FuseElapsed = 0;
     bool bDeliveryCompleted = false;
     bool bGoldAwarded = false;
@@ -153,6 +154,7 @@ public:
     int32 GetMaxCaptureMass() const { return GetCapacity() * 3 / 2; }
     float GetFieldRadius() const { return 110.f + 35.f * GetUpgradeTier(EUpgrade::Coil); }
     float GetForceScale() const { return 1.f + .25f * GetUpgradeTier(EUpgrade::Coil); }
+    int32 GetBreakawayUsesRemaining() const { return FMath::Max(0, GetUpgradeTier(EUpgrade::Coil) - State.BreakawayUses); }
     float GetFuseDuration() const { return 3.f + GetUpgradeTier(EUpgrade::Stabilizer); }
     float GetFuseElapsed() const { return State.FuseElapsed; }
     float GetFuseRemaining() const { return FMath::Max(0.f, GetFuseDuration() - State.FuseElapsed); }
@@ -180,6 +182,10 @@ public:
     TArray<int32> GetCaptureGroup(int32 Id) const;
     bool CanCaptureGroup(int32 Id) const;
     FRecoveryResult CapturePieces(const TArray<int32>& Ids);
+    // Aimed paid-coil action: detach and capture only the selected linked piece.
+    // Refusals never change graph/cargo/pulses; extraction must fit SAFE capacity.
+    bool CanBreakaway(int32 Id, FString& Reason) const;
+    FRecoveryResult BreakawayExtract(int32 Id);
     bool MoveAvailablePiece(int32 Id, const FVector2D& Position);
     // Drop the entire unbanked haul, stable or unsafe. All pieces remain recoverable;
     // connected components retain their shape and cells are separated for precision pickup.

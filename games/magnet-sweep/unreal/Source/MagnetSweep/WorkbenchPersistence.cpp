@@ -59,6 +59,7 @@ TSharedRef<FJsonObject> SnapshotJson(const FSalvageSnapshot& S)
     Json->SetNumberField(TEXT("banked"), S.Banked);
     Json->SetNumberField(TEXT("goal"), S.Goal);
     Json->SetNumberField(TEXT("heats_used"), S.HeatsUsed);
+    Json->SetNumberField(TEXT("breakaway_uses"), S.BreakawayUses);
     Json->SetNumberField(TEXT("capture_serial"), S.CaptureSerial);
     Json->SetNumberField(TEXT("fuse_elapsed"), S.FuseElapsed);
     Json->SetBoolField(TEXT("delivery_completed"), S.bDeliveryCompleted);
@@ -189,6 +190,10 @@ bool ParseSave(const FString& Text, FSalvageSnapshot& S, FSaveSettings& Settings
         || !BoolField(Json, TEXT("delivery_completed"), S.bDeliveryCompleted)
         || !BoolField(Json, TEXT("gold_awarded"), S.bGoldAwarded)
         || !BoolField(Json, TEXT("job_ended"), S.bJobEnded)) return false;
+    // Older version-two careers have never spent an extraction. New saves persist it
+    // explicitly so reload, drop and practice switching cannot recharge the coil.
+    S.BreakawayUses = 0;
+    if (Json.HasField(TEXT("breakaway_uses")) && !IntField(Json, TEXT("breakaway_uses"), 0, 3, S.BreakawayUses)) return false;
     S.Epoch = static_cast<uint32>(Epoch);
     const TArray<TSharedPtr<FJsonValue>>* Pieces = nullptr;
     if (!Json.TryGetArrayField(TEXT("pieces"), Pieces) || !Pieces || Pieces->IsEmpty() || Pieces->Num() > 256) return false;

@@ -35,6 +35,7 @@ Lesson state and actual progress are saved. Existing numeric lesson IDs remain c
 | Move mouse | Move the magnet toward the pointer with responsive bounded motion |
 | Hold left mouse over the tray | Attract metal; release on the tray retains cargo; release over the furnace/smelt button banks a safe haul |
 | Space | Toggle the attraction field as an alternative to holding |
+| F over a linked piece, with Extraction Coil fitted | Break its links and pull only that chosen piece; stops broad attraction and uses one extraction |
 | Hold Shift / toggle Q | Narrow the field for precise approaches |
 | Right mouse | Drop the entire haul recoverably and switch the field off |
 | Click SMELT HAUL / furnace, or press E | Smelt any safe mixed cargo, independent of lesson order |
@@ -88,8 +89,14 @@ Each of three branches has three sequential purchases costing **150, 300 and 500
 | Branch | Starter → tier 1 → tier 2 → tier 3 | Player effect |
 | --- | --- | --- |
 | Capacity | 24 → 32 → 40 → 48 kg | Carry larger useful mixed loads safely |
-| Coil | Radius 110 → 145 → 180 → 215; force 1.0 → 1.25 → 1.5 → 1.75 | Stronger, wider attraction with precision control retained |
+| Extraction Coil | 0 → 1 → 2 → 3 extractions between successful smelts | Extract one selected linked piece while leaving unwanted weight; later tiers allow more selections in one furnace batch |
 | Stabilizer | Fuse 3 → 4 → 5 → 6 seconds | More time to rescue a valuable unstable haul |
+
+Klaus rejected radius alone because it did not expand what the player could accomplish. The coil now supplies a deliberate **F extraction**. Aim at an available linked piece within extraction reach: only that piece becomes cargo, its reciprocal links are removed, and the broad/latched field stops. The selected mass must fit safe capacity and current cargo must be stable. Deliberately selecting a linked hot cell retains its normal hazard; the coil does not automatically choose valuable material. A successful extraction visibly pulls the selected piece over 0.55 seconds. Immediate smelting waits for the pull; RMB cancels any queued pour as well as dropping cargo.
+
+The concrete benefit is a different safely bankable haul: at 20/24 kg, an alloy plus two iron pieces weighs 8 kg and cannot be smelted after an ordinary pull. Extracting the 4 kg alloy alone fills a safe 24 kg haul while leaving 4 kg of iron. Each tier grants one more extraction before spending another furnace charge. Only a successful smelt or new/retried order replenishes uses; drops, quenching, failed smelts, menus and save/load do not. Extraction itself grants no wallet money, XP or collected-core credit. The tutorial requires actual coil use and explains the weight left behind; it invites filling the remaining space before banking rather than requiring a tiny pour.
+
+Fresh layouts append three separate optional alloy-and-two-iron assemblies, preserving the original population, IDs and baseline quota routes. These let the player use up to three extractions on different valuable pieces without a shared cheap hub bypassing the counter. Existing loaded trays are not rebuilt or silently restocked. Previously purchased Coil tiers map directly to equivalent extraction limits and retain their radius/force extras (110/145/180/215 reach, 1.0/1.25/1.5/1.75 force). Those extras are not the new selling point. More extractions are uses of one capability, not three separate abilities. Selective-plucking dominance and the value of higher tiers still require player observation.
 
 A core becomes a permanent named collection entry only when smelted. Collect all six identities; repeated cores still pay salvage value without duplicating the collection. Cleared and gold contract records and best banked haul persist. Six contract families use deterministic seeded arrangements; new completed-contract runs change the seed, while retry reproduces the current seed. No seed-selection UI or endless content promise is implied.
 

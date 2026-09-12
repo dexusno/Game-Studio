@@ -35,7 +35,7 @@ bool FTutorialProgress::IsTrainingGuardActive() const
 {
     return bEnabled && !bPurchasedMod;
 }
-bool FTutorialProgress::ObserveCapture(bool bLinked, bool bPrecision, bool bUseful, int32 CargoMass)
+bool FTutorialProgress::ObserveCapture(bool bLinked, bool bPrecision, bool bUseful, int32 CargoMass, bool bUsedBreakaway)
 {
     if (!bEnabled || bRiskHeld || CargoMass <= 0) return false;
     (void)bLinked;
@@ -51,7 +51,7 @@ bool FTutorialProgress::ObserveCapture(bool bLinked, bool bPrecision, bool bUsef
         if (bPrecision && bUseful && bPurchasedMod) return Finish();
         break;
     case ETutorialStep::TryUpgrade:
-        if (bUseful && bPurchasedMod)
+        if (bUseful && bPurchasedMod && (PurchasedMod != 1 || bUsedBreakaway))
         {
             Step = bRiskLearned ? ETutorialStep::Precision : ETutorialStep::Risk;
             return true;

@@ -1,11 +1,14 @@
 #include "SalvageModel.h"
 #if WITH_DEV_AUTOMATION_TESTS
 #include "WorkbenchRuntime.h"
+#include "Dom/JsonObject.h"
 #include "HAL/FileManager.h"
 #include "Misc/AutomationTest.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Guid.h"
 #include "Misc/Paths.h"
+#include "Serialization/JsonReader.h"
+#include "Serialization/JsonSerializer.h"
 #include <limits>
 
 using namespace MagnetSweep;
@@ -27,11 +30,11 @@ bool CareerFixture(FSalvageModel& Model, int32 XP)
 }
 // A deterministic legal planner checks content feasibility, not gameplay quality.
 // It only captures complete non-hazard groups which fit a stable batch.
-FBankResult BankBestStableLoad(FSalvageModel& Model)
+FBankResult BankBestStableLoad(FSalvageModel& Model, int32 ExclusiveId = MAX_int32)
 {
     TArray<int32> Candidates;
     for (const auto& P : Model.GetPieces())
-        if (P.State == EPieceState::Available && P.Material != EMaterial::HotCell) Candidates.Add(P.Id);
+        if (P.Id < ExclusiveId && P.State == EPieceState::Available && P.Material != EMaterial::HotCell) Candidates.Add(P.Id);
     Candidates.Sort([&Model](int32 A, int32 B)
     {
         const auto* PA = Model.FindPiece(A); const auto* PB = Model.FindPiece(B);
@@ -402,6 +405,149 @@ bool FSalvageCareerTest::RunTest(const FString& Parameters)
     return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSalvageBreakawayTest, "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FSalvageBreakawayTest::RunTest(const FString& Parameters)
+{
+    FSalvageModel Model; CareerFixture(Model,5000); FString Error;
+    const int32 Assembly = 37;
+    TestFalse(TEXT("The original coil cannot selectively extract linked salvage"),Model.BreakawayExtract(Assembly).Succeeded());
+    TestTrue(TEXT("A real coil purchase unlocks extraction"),Model.PurchaseUpgrade(EUpgrade::Coil));
+    Model.CapturePieces(IdRange(0,10));
+    FSalvageModel Bulk; Bulk.RestoreSnapshot(Model.GetSnapshot(),Error);
+    TestEqual(TEXT("The new optional assembly is a real eight-kg linked load"),Bulk.CapturePieces({Assembly}).Mass,8);
+    TestTrue(TEXT("Ordinary collection of that assembly overloads the existing twenty-kg haul"),Bulk.IsCargoUnsafe());
+    const int32 Wallet=Model.GetWallet(), XP=Model.GetXP();
+    const auto Extracted=Model.BreakawayExtract(Assembly);
+    TestTrue(TEXT("Breakaway captures only the specifically selected alloy"),
+        Extracted.PieceIds.Num()==1 && Extracted.PieceIds[0]==Assembly && Extracted.Mass==4 && Extracted.Amount==24);
+    TestEqual(TEXT("Selected extraction completes a legal twenty-four-kg haul"),Model.GetCargoMass(),24);
+    TestFalse(TEXT("Mass-fitting useful extraction introduces no overload"),Model.IsCargoUnsafe());
+    TestEqual(TEXT("Extraction grants no money before melting"),Model.GetWallet(),Wallet);
+    TestEqual(TEXT("Extraction grants no XP before melting"),Model.GetXP(),XP);
+    TestEqual(TEXT("The selected use spends exactly one pulse"),Model.GetBreakawayUsesRemaining(),0);
+    TestTrue(TEXT("Both unwanted weights remain available and detached"),
+        Model.FindPiece(Assembly+1)->State==EPieceState::Available && Model.FindPiece(Assembly+2)->State==EPieceState::Available
+        && Model.FindPiece(Assembly+1)->DirectLinks.IsEmpty() && Model.FindPiece(Assembly+2)->DirectLinks.IsEmpty());
+    TestTrue(TEXT("Selected item and both weights update their link presentation"),
+        Model.FindPiece(Assembly)->Kind==EPieceKind::Loose && Model.FindPiece(Assembly+1)->Kind==EPieceKind::Loose
+        && Model.FindPiece(Assembly+2)->Kind==EPieceKind::Loose);
+    TestTrue(TEXT("Atomic extraction preserves model invariants"),Model.CheckInvariants(Error));
+
+    const auto RejectUnchanged=[&](FSalvageModel& M,int32 Id,const TCHAR* Label)
+    {
+        const auto Before=M.GetSnapshot();
+        TestFalse(Label,M.BreakawayExtract(Id).Succeeded());
+        const auto After=M.GetSnapshot();
+        TestEqual(TEXT("Rejected extraction preserves epoch"),After.Epoch,Before.Epoch);
+        TestEqual(TEXT("Rejected extraction preserves cargo mass"),After.CargoMass,Before.CargoMass);
+        TestEqual(TEXT("Rejected extraction preserves pulses"),After.BreakawayUses,Before.BreakawayUses);
+        TestEqual(TEXT("Rejected extraction preserves capture serial"),After.CaptureSerial,Before.CaptureSerial);
+        TestEqual(TEXT("Rejected extraction preserves wallet"),After.Wallet,Before.Wallet);
+        for(int32 I=0;I<Before.Pieces.Num();++I)
+            TestTrue(TEXT("Rejected extraction preserves every ownership and symmetric link"),
+                After.Pieces[I].State==Before.Pieces[I].State && After.Pieces[I].DirectLinks==Before.Pieces[I].DirectLinks);
+    };
+    RejectUnchanged(Model,Assembly+3,TEXT("An exhausted coil cannot cut another assembly"));
+    FSalvageModel Refused; CareerFixture(Refused,5000); Refused.PurchaseUpgrade(EUpgrade::Coil);
+    RejectUnchanged(Refused,-1,TEXT("Invalid target is refused without mutation"));
+    RejectUnchanged(Refused,0,TEXT("Loose salvage cannot waste a breakaway pulse"));
+    Refused.CapturePieces(IdRange(0,11));
+    RejectUnchanged(Refused,Assembly,TEXT("A twenty-two-kg haul cannot accept a four-kg selected piece"));
+    Refused.CapturePieces({11,12});
+    RejectUnchanged(Refused,Assembly,TEXT("An already unsafe haul cannot use extraction as free rescue"));
+    Refused.VentCargo(); Refused.AbandonJob();
+    RejectUnchanged(Refused,Assembly,TEXT("An ended job cannot extract salvage"));
+
+    FSalvageModel Ballast; CareerFixture(Ballast,5000); Ballast.PurchaseUpgrade(EUpgrade::Coil);
+    const auto Cheap=Ballast.BreakawayExtract(Assembly+1);
+    TestTrue(TEXT("Explicit ballast selection takes the chosen iron rather than auto-sorting value"),Cheap.Mass==2 && Cheap.Amount==4);
+    TestTrue(TEXT("Removing one ballast link preserves the remaining alloy-to-iron link symmetrically"),
+        Ballast.FindPiece(Assembly)->DirectLinks==TArray<int32>{Assembly+2}
+        && Ballast.FindPiece(Assembly+2)->DirectLinks==TArray<int32>{Assembly});
+    TestTrue(TEXT("Ballast choice keeps a valid partial assembly"),Ballast.CheckInvariants(Error));
+
+    FSalvageModel Hazard; CareerFixture(Hazard,5000); Hazard.PurchaseUpgrade(EUpgrade::Coil);
+    auto HazardState=Hazard.GetSnapshot();
+    HazardState.Pieces[35].DirectLinks.Add(Assembly+1); HazardState.Pieces[35].Kind=EPieceKind::Tangle;
+    HazardState.Pieces[Assembly+1].DirectLinks.Add(35);
+    TestTrue(TEXT("A deliberate linked-cell fixture is a valid symmetric assembly"),Hazard.RestoreSnapshot(HazardState,Error));
+    const auto Cell=Hazard.BreakawayExtract(35);
+    TestTrue(TEXT("A deliberately selected linked hot cell carries its actual hazard and spends its pulse"),
+        Cell.Succeeded() && Cell.Amount==0 && Hazard.HasHotCell() && Hazard.IsCargoUnsafe() && Hazard.GetBreakawayUsesRemaining()==0);
+    TestEqual(TEXT("Selecting a cell creates no money"),Hazard.GetWallet(),HazardState.Wallet);
+    TestEqual(TEXT("Selecting a cell creates no XP"),Hazard.GetXP(),HazardState.XP);
+    TestTrue(TEXT("The selected hot cell retains ordinary fuse consequences"),Hazard.AdvanceRisk(3.1f).bTripped);
+    TestEqual(TEXT("Cell quench does not refill the spent pulse"),Hazard.GetBreakawayUsesRemaining(),0);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSalvageBreakawayBudgetTest, "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FSalvageBreakawayBudgetTest::RunTest(const FString& Parameters)
+{
+    FString Error;
+    for(int32 Tier=1;Tier<=3;++Tier)
+    {
+        FSalvageModel Model; CareerFixture(Model,5000);
+        for(int32 I=0;I<Tier;++I)TestTrue(TEXT("Each real paid coil tier purchases normally"),Model.PurchaseUpgrade(EUpgrade::Coil));
+        for(int32 I=0;I<Tier;++I)
+        {
+            TestTrue(TEXT("Each paid tier permits another independent valuable selection in this batch"),Model.BreakawayExtract(37+I*3).Succeeded());
+            TestEqual(TEXT("Exactly one additional four-kg alloy is carried per selection"),Model.GetCargoMass(),(I+1)*4);
+        }
+        TestEqual(TEXT("Each tier supports its advertised alloy value before melting"),Model.GetCargo(),Tier*24);
+        TestFalse(TEXT("No tier can exceed its paid pulses by choosing an ordinary remaining link"),Model.BreakawayExtract(24).Succeeded());
+        Model.VentCargo();
+        TestEqual(TEXT("Dropping cargo never refills coil pulses"),Model.GetBreakawayUsesRemaining(),0);
+        FSalvageModel Reloaded;
+        TestTrue(TEXT("Spent pulses and cut links restore in the existing snapshot version"),Reloaded.RestoreSnapshot(Model.GetSnapshot(),Error));
+        TestEqual(TEXT("Reloading cannot refill the coil"),Reloaded.GetBreakawayUsesRemaining(),0);
+        TestTrue(TEXT("Dropped selected alloy stays permanently detached after reload"),Reloaded.FindPiece(37)->DirectLinks.IsEmpty());
+        FWorkbenchImpl JsonWriter(nullptr),JsonReader(nullptr);
+        JsonWriter.Model.RestoreSnapshot(Reloaded.GetSnapshot(),Error);
+        TestTrue(TEXT("Actual career JSON preserves the spent extraction budget"),JsonReader.DecodeSave(JsonWriter.EncodeSave()));
+        TestEqual(TEXT("Actual JSON reload cannot refill spent extractions"),JsonReader.Model.GetBreakawayUsesRemaining(),0);
+        TestTrue(TEXT("Actual JSON reload preserves the severed graph"),JsonReader.Model.FindPiece(37)->DirectLinks.IsEmpty());
+        TestEqual(TEXT("Empty smelt is not a recharge exploit"),Reloaded.BankCargo().Amount,0);
+        TestEqual(TEXT("Rejected empty smelt leaves spent pulses unchanged"),Reloaded.GetBreakawayUsesRemaining(),0);
+        Reloaded.CapturePieces({37}); const auto Payout=Reloaded.BankCargo();
+        TestEqual(TEXT("Actual recovered alloy must pay normally before it recharges"),Payout.Amount,24);
+        TestEqual(TEXT("A successful paid smelt restores exactly the installed tier budget"),Reloaded.GetBreakawayUsesRemaining(),Tier);
+        Reloaded.BreakawayExtract(24); Reloaded.CapturePieces({35});
+        TestEqual(TEXT("Unsafe smelt cannot refill a partly used coil"),Reloaded.BankCargo().Amount,0);
+        Reloaded.TriggerOverload();
+        TestEqual(TEXT("Overload quench never refills a partly used coil"),Reloaded.GetBreakawayUsesRemaining(),Tier-1);
+        const int32 Wallet=Reloaded.GetWallet(); Reloaded.RetryJob();
+        TestEqual(TEXT("A new attempt restores the advertised pulse budget"),Reloaded.GetBreakawayUsesRemaining(),Tier);
+        TestEqual(TEXT("New-attempt recharge does not alter banked income"),Reloaded.GetWallet(),Wallet);
+        TestTrue(TEXT("Every tier and reset preserves ledger invariants"),Reloaded.CheckInvariants(Error));
+    }
+    FSalvageModel Old; CareerFixture(Old,5000); Old.PurchaseUpgrade(EUpgrade::Coil);
+    auto OldSnapshot=Old.GetSnapshot(); OldSnapshot.Pieces.SetNum(37); // Actual old layout, no added assemblies.
+    TestTrue(TEXT("Old career populations stay valid without mandatory new content"),Old.RestoreSnapshot(OldSnapshot,Error));
+    TestEqual(TEXT("Loading an old attempt does not append or rebuild its tray"),Old.GetPieces().Num(),37);
+    TestEqual(TEXT("Old purchased coil retains its radius benefit"),Old.GetFieldRadius(),145.f);
+    FWorkbenchImpl OldWriter(nullptr),OldReader(nullptr); OldWriter.Model.RestoreSnapshot(OldSnapshot,Error);
+    TSharedPtr<FJsonObject> OldJson;
+    TestTrue(TEXT("Old-format fixture starts from valid career JSON"),FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(OldWriter.EncodeSave()),OldJson));
+    if(OldJson.IsValid())
+    {
+        OldJson->GetObjectField(TEXT("snapshot"))->RemoveField(TEXT("breakaway_uses"));
+        FString LegacyText; FJsonSerializer::Serialize(OldJson.ToSharedRef(),TJsonWriterFactory<>::Create(&LegacyText));
+        TestTrue(TEXT("A real old JSON save without extraction metadata remains loadable"),OldReader.DecodeSave(LegacyText));
+        TestEqual(TEXT("Old JSON defaults to the retained coil's unused extraction budget"),OldReader.Model.GetBreakawayUsesRemaining(),1);
+        TestEqual(TEXT("Old JSON restore does not add or replace saved pieces"),OldReader.Model.GetPieces().Num(),37);
+    }
+    TestTrue(TEXT("Old copper links can immediately use the newly meaningful capability"),Old.BreakawayExtract(24).Succeeded());
+    auto Invalid=Old.GetSnapshot(); Invalid.BreakawayUses=-1;
+    TestFalse(TEXT("Negative spent pulse metadata is rejected transactionally"),Old.RestoreSnapshot(Invalid,Error));
+    Invalid=Old.GetSnapshot(); Invalid.BreakawayUses=2;
+    TestFalse(TEXT("Spent count above the owned tier is rejected"),Old.RestoreSnapshot(Invalid,Error));
+    TestEqual(TEXT("Rejected pulse metadata leaves the live spent budget intact"),Old.GetBreakawayUsesRemaining(),0);
+    return true;
+}
+
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSalvageContentTest, "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
     EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FSalvageContentTest::RunTest(const FString& Parameters)
@@ -411,11 +557,32 @@ bool FSalvageContentTest::RunTest(const FString& Parameters)
         FSalvageModel A,B; CareerFixture(A,5000); CareerFixture(B,5000);
         TestTrue(TEXT("All authored jobs unlock at master level"), A.StartJob(Job,41));
         B.StartJob(Job,41); const auto S=A.GetSnapshot();
+        const auto& Definition=A.GetJob();
+        const int32 OriginalCount=Definition.IronCount+Definition.CopperCount+Definition.AlloyCount+1+Definition.CellCount;
+        TestEqual(TEXT("Three optional assemblies append nine items without replacing the ordinary routes"),A.GetPieces().Num(),OriginalCount+9);
+        double MinimumNewClearance=TNumericLimits<double>::Max();
         TestEqual(TEXT("Same job seed reproduces population"), A.GetPieces().Num(),B.GetPieces().Num());
         for (int32 I=0; I<A.GetPieces().Num(); ++I)
         {
             TestTrue(TEXT("Same seed reproduces positions"), A.GetPieces()[I].Position.Equals(B.GetPieces()[I].Position,.00001));
             TestTrue(TEXT("Every piece is inside tray"), FSalvageModel::IsInsideTray(A.GetPieces()[I].Position));
+            if(I>=OriginalCount)
+            {
+                const auto& Added=A.GetPieces()[I];
+                TestTrue(TEXT("Optional extraction scrap stays at least twenty-five units inside walls"),
+                    FMath::Abs(Added.Position.X)<=475 && FMath::Abs(Added.Position.Y)<=285);
+                for(const auto& Other:A.GetPieces()) if(Other.Id!=Added.Id)
+                    MinimumNewClearance=FMath::Min(MinimumNewClearance,(Added.Position-Other.Position).Size());
+            }
+        }
+        TestTrue(TEXT("Optional assembly centers have at least forty-two units of clearance from all other pieces"),MinimumNewClearance>=41.999);
+        AddInfo(FString::Printf(TEXT("Job %d optional assembly minimum center clearance: %.2f units"),Job+1,MinimumNewClearance));
+        for(int32 Assembly=0;Assembly<3;++Assembly)
+        {
+            const int32 Alloy=OriginalCount+Assembly*3;
+            TestTrue(TEXT("Each optional selection is its own alloy and two iron weights"),
+                A.FindPiece(Alloy)->Material==EMaterial::Alloy && A.FindPiece(Alloy+1)->Material==EMaterial::Iron
+                && A.FindPiece(Alloy+2)->Material==EMaterial::Iron && A.GetCaptureGroup(Alloy).Num()==3);
         }
         A.RetryJob(true); bool bChanged=false;
         for (int32 I=0; I<A.GetPieces().Num(); ++I) bChanged |= !A.GetPieces()[I].Position.Equals(S.Pieces[I].Position,.001);
@@ -423,8 +590,8 @@ bool FSalvageContentTest::RunTest(const FString& Parameters)
         // Teaching contracts use24kg. Advanced contracts use40kg, affordable from the
         // first three minimum clears (900credits), rather than a950credit full basket.
         if (Job>=3) for (int32 Tier=0; Tier<2; ++Tier) A.PurchaseUpgrade(EUpgrade::Capacity);
-        for (int32 Heat=0; Heat<4 && !A.IsDeliveryCompleted(); ++Heat) BankBestStableLoad(A);
-        TestTrue(FString::Printf(TEXT("Job%d has a legal stable-load base completion"), Job+1), A.IsDeliveryCompleted());
+        for (int32 Heat=0; Heat<4 && !A.IsDeliveryCompleted(); ++Heat) BankBestStableLoad(A,OriginalCount);
+        TestTrue(FString::Printf(TEXT("Job%d retains a legal completion using only its original salvage, without extraction or added assemblies"), Job+1), A.IsDeliveryCompleted());
         FString Error; TestTrue(TEXT("Job completion preserves all ledger invariants"),A.CheckInvariants(Error));
     }
     // Explicit mathematical dead-end state is terminal, never an apparently live soft-lock.

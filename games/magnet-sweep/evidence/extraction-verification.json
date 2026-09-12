@@ -1,0 +1,148 @@
+{
+  "version": "0.5.0",
+  "candidate": "Extraction E1",
+  "date": "2026-09-12",
+  "engine": "Unreal Engine 5.8.2",
+  "configuration": "Win64 Development / PCD3D_SM5",
+  "package": "BuildOutput/Extraction/Windows",
+  "build_cook_run_seconds": 39.47,
+  "artifacts": [
+    {
+      "path": "MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+      "bytes": 332166144,
+      "sha256": "771df590f395bd1a4dc76bf79142f334133a70d6f161d37c027d425ccc7ab8dd"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/global.ucas",
+      "bytes": 3207392,
+      "sha256": "267eeaa2d73f11a0bab0ecaf9fadd376d4a84d980535213e4c23b04682fbd542"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/global.utoc",
+      "bytes": 782,
+      "sha256": "df381a3bf10f7f0cb553af0afb5538c29e5dd50dceebda6976672b33c892cbf1"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+      "bytes": 10652987,
+      "sha256": "10b7967134c9f7b47eb6cead774d7ba908a6e4363a462688261fe3733a588b57"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+      "bytes": 137779056,
+      "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+      "bytes": 138215,
+      "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+    },
+    {
+      "path": "MagnetSweep.exe",
+      "bytes": 171520,
+      "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+    }
+  ],
+  "automation": {
+    "created": "2026.09.12-21.46.20",
+    "succeeded": 21,
+    "failed": 0,
+    "warnings": 0,
+    "not_run": 0,
+    "tests": [
+      {
+        "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.ActualActionSequence",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+        "state": "Success"
+      },
+      {
+        "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+        "state": "Success"
+      }
+    ]
+  },
+  "native_evidence": "QA-EXTRACTION.md",
+  "native_status": "Not run: prior physical owner Escape stopped native control. Current Clarity session and all owner saves remain untouched. No Extraction game has been launched.",
+  "limits": [
+    "Tests use actual model/runtime callbacks and JSON but do not prove physical F input, target readability, animation feel or enjoyment.",
+    "Final package includes the follow-up tooltip waiting hint; automated cases exercise gameplay logic, not rendered HUD.",
+    "The preview launcher selects its own persistent extraction_preview career; no current owner save was migrated or reset.",
+    "Existing numeric coil tiers and legacy save schema load compatibly in tests; original saved trays remain as saved until a new/retried order.",
+    "All six quotas remain feasible with original pieces alone in model tests; added assemblies and higher-tier balance require play."
+  ]
+}

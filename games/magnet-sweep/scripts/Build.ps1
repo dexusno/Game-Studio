@@ -1,6 +1,6 @@
 param([ValidateSet('Editor','Content','Package','Tests','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$Configuration='Development',
- [string]$ArchiveName='Clarity')
+ [string]$ArchiveName='Extraction')
 $ErrorActionPreference='Stop'
 $magnetRoot=Split-Path -Parent $PSScriptRoot
 $magnetRepo=[IO.Path]::GetFullPath((Join-Path $magnetRoot '../..'))

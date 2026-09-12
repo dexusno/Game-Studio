@@ -1,14 +1,18 @@
 # Magnet Sweep — build and run
 
-Unreal Engine 5.8.2, Windows Development, version 0.4.0. The previous tutorial passed a scripted agent path but failed the owner's novice playtest; this clarity increment repairs that reported behavior. It remains a prototype for owner judgment.
+Unreal Engine 5.8.2, Windows Development, version 0.5.0 / Extraction E1. Klaus rejected the radius-only coil; this increment gives it a selected-piece extraction capability. It remains a prototype for owner judgment.
 
 ## Play and preserve progress
+
+[Play Extraction Preview.cmd](Play%20Extraction%20Preview.cmd) opens the new `BuildOutput/Extraction/Windows/MagnetSweep.exe` with its own persistent `extraction_preview` career. It does not overwrite or migrate the current Clarity career. No Extraction game has been launched during this increment. Finish using the current game before starting a different package.
 
 [Play Magnet Sweep.cmd](Play%20Magnet%20Sweep.cmd) targets the corrected `BuildOutput/Clarity/Windows/MagnetSweep.exe`. The entire adjacent Windows folder is required. The earlier 0.3 package/save remain in BuildOutput/Tutorial, the 0.2 rebuild remains in BuildOutput/Rework and the rejected 0.1 demo remains in BuildOutput/ConceptDemo. [Continue Previous Demo.cmd](Continue%20Previous%20Demo.cmd) still opens the 0.2 Rework package.
 
 The first objective is 150 credits for an actual magnet improvement. The side panel tracks that goal and then the rig's 9 installed improvements; orders and 6 rare cores are the longer goals. This version does not add construction of a larger building or machine. It makes the existing salvage-and-upgrade purpose explicit.
 
 ## Controls and rules
+
+- After fitting an **Extraction Coil**, aim at a linked piece and press **F** to pull only that piece. Other weight remains on the tray and broad attraction stops until a new player action. Tiers allow 1/2/3 extractions between successful smelts; dropping, quenching and reloading do not recharge them. The tooltip compares the normal whole-bundle load with the selected F load.
 
 - Hold left mouse or toggle Space to attract metal. Release on the tray keeps cargo.
 - Click **SMELT HAUL**, click the furnace, press E, or release a tray-origin drag over the furnace/button to bank a stable haul. Any metal mix counts. Guidance never refuses a valid deposit because an unrelated lesson is incomplete.
@@ -26,10 +30,10 @@ Machine paths come from ignored config.local.json. No engine is copied into sour
 ```powershell
 pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
 pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
-pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName Clarity
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName Extraction
 ```
 
-For a clean content setup, also run `-Stage Content`. That imports existing original meshes/audio and saves the Concept map. This increment adds no external assets or new audio. `-ArchiveName` defaults to Clarity and accepts another simple directory name. All does not include Tests; run Tests explicitly. Tests validates a fresh report and fails on failed/unrun cases even when Unreal exits zero.
+For a clean content setup, also run `-Stage Content`. That imports existing original meshes/audio and saves the Concept map. This increment adds no external assets or new audio. `-ArchiveName` defaults to Extraction and accepts another simple directory name. All does not include Tests; run Tests explicitly. Tests validates a fresh report and fails on failed/unrun cases even when Unreal exits zero.
 
 The runtime career is `MagnetSweep/Saved/Rework/player.json` with a valid previous backup; optional tutorial metadata keeps compatible numeric lesson IDs. Old Release/Bundle saves reconcile toward smelting, and actual banked value recognizes an interrupted payout. Pause's practice run uses `Saved/Tutorial/player.json` separately. Skipping/completing practice does not erase its earnings; an explicit confirmed restart replaces only practice. Retry keeps banked career progress.
 
@@ -38,6 +42,12 @@ The runtime career is `MagnetSweep/Saved/Rework/player.json` with a valid previo
 The live qa_clarity session must now be preserved as possible owner progress: physical Escape stopped computer control during QA. Do not reset it or replace the foreground. The separately prepared qa_clarity_legacy copy has not been launched. A later native check requires a safe foreground handoff.
 
 ## Verification
+
+Extraction E1 editor compilation and 21 automation cases pass in fresh report 2026.09.12-21.46.20, with zero failures/warnings/unrun tests. Eleven Rework and ten Tutorial cases cover selected extraction versus unsafe bulk capture, all three use limits, real callback field cancellation, F→E→RMB cancellation, delayed/once-only payout, real coil teaching, saved severed links/spent uses, legacy loading and ordinary quota feasibility. Optional assembly center clearances were 42.46 units or greater in the tested six default layouts, with at least 25 units of wall inset. This is model geometry evidence, not visual inspection.
+
+Build/cook/stage/archive succeeded in 39.47 seconds. Child EXE SHA256: 771df590f395bd1a4dc76bf79142f334133a70d6f161d37c027d425ccc7ab8dd. Artifact identities and exact cases: [extraction-verification.json](evidence/extraction-verification.json). Independent static review and untested native routes: [QA-EXTRACTION.md](QA-EXTRACTION.md). Physical F input, tooltip/target readability, pull animation, owner-save continuation and enjoyment remain unverified; prior owner Escape keeps native control stopped.
+
+The following Clarity results are historical, from the preceding 0.4 package:
 
 Editor compilation and 17 engine automation cases pass in report 2026.09.12-19.41.26 with zero failures/warnings/unrun tests. Eight Tutorial cases include real immediate iron/mixed payouts from early/legacy states, training guard capacity/cells/atomic groups, actual earned purchase, natural release over furnace or button 40 versus other UI, no duplicate payout, legacy saves and transactional metadata. Nine Rework cases retain the existing economy/risk/save coverage.
 

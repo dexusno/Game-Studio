@@ -27,7 +27,7 @@ struct FTutorialProgress
     // Runtime visibly limits capture to safe capacity and excludes hot cells until
     // an actual purchase. This helper never changes the model's normal rules.
     bool IsTrainingGuardActive() const;
-    bool ObserveCapture(bool bLinked, bool bPrecision, bool bUseful, int32 CargoMass);
+    bool ObserveCapture(bool bLinked, bool bPrecision, bool bUseful, int32 CargoMass, bool bUsedBreakaway = false);
     // Legacy release recovery only. Field release and bundles are contextual tips.
     bool ObserveFieldOff();
     // Call only for a settled real payout. Any early step accepts every material mix.

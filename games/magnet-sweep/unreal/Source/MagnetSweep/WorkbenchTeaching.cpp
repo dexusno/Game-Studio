@@ -106,7 +106,7 @@ void FWorkbenchImpl::PaintTutorial(UCanvas* C)
   Buttons.Reset();Rect(C,0,0,1600,900,FLinearColor(.004,.014,.020,.84));
   Rect(C,330,173,940,554,Dark);Rect(C,330,173,940,3,Mint);
   DrawText(C,TEXT("BUILD YOUR FIRST MAGNET UPGRADE"),367,209,1.10f,Paper,true);
-  float Y=Wrap(TEXT("Earn 150 credits, then fit a stronger coil, a larger basket or a safer stabilizer."),370,268,860,1.01f,Gold);
+  float Y=Wrap(TEXT("Earn 150 credits, then fit an extraction coil, a larger basket or a safer stabilizer."),370,268,860,1.01f,Gold);
   Y=Wrap(TEXT("Hold left mouse near metal to attract it. Release keeps your haul. Click SMELT HAUL by the furnace to turn it into credits."),370,Y+17,860,.96f,Paper);
   Y=Wrap(TEXT("Iron, copper and alloy can be mixed freely. Every metal counts toward the order. Right-click drops the whole haul back onto the table; it does not smelt it."),370,Y+17,860,.94f,Paper);
   Y=Wrap(TEXT("Training guard: your magnet cannot overfill or pick up red cells until your first upgrade. Then we will practise risk with a paused first warning."),370,Y+17,860,.89f,Mint);
@@ -141,6 +141,10 @@ void FWorkbenchImpl::PaintTutorial(UCanvas* C)
   return;
  }
  FString Title,Body,Task;int32 Target=INDEX_NONE;bool Furnace=Model.GetCargo()>0&&!Model.IsCargoUnsafe();
+ bool LinkedLeft=false,ExtractionReady=false;
+ for(const auto& P:Model.GetPieces())if(P.State==EPieceState::Available&&P.Amount>0&&Model.GetCaptureGroup(P.Id).Num()>1){
+  LinkedLeft=true;FString Reason;ExtractionReady|=Model.CanBreakaway(P.Id,Reason);
+ }
  const bool NeedsTray=Tutorial.NeedsFreshTray(Model.GetAvailableAmount()>0||Model.GetCargo()>0);
  const bool Failed=Model.IsJobFailed();
  const bool EndedAction=Model.IsJobEnded()&&Tutorial.Step!=ETutorialStep::Upgrade;
@@ -162,12 +166,23 @@ void FWorkbenchImpl::PaintTutorial(UCanvas* C)
    Body=TEXT("Reach 120 order value for an extra 80 credits: enough for a 150-credit rig upgrade. Copper and alloy pay more than iron. Mix them freely. Only smelting pays your wallet.");break;
   case ETutorialStep::Upgrade:
    Title=TEXT("BUILD THE IMPROVEMENT");Task=Model.GetCargo()>0?TEXT("Smelt your carried metal, then open Workshop."):TEXT("Open Workshop and buy a 150-credit improvement.");
-   Body=TEXT("A larger basket carries more per pour; a stronger coil pulls farther; a stabilizer gives more rescue time. These are permanent changes to this magnet.");break;
+   Body=TEXT("A larger basket carries more per pour. An extraction coil takes one valuable piece out of a linked bundle, leaving the other weight behind. A stabilizer gives more rescue time.");break;
   case ETutorialStep::TryUpgrade:
    Title=TEXT("USE YOUR BETTER MAGNET");Task=TEXT("Return to the tray and collect another useful load.");
-   Body=Tutorial.bRiskLearned?TEXT("Your upgrade stays yours. Training guard is now OFF: avoid red cells and overfilling, or drop the haul before the warning expires."):TEXT("Your upgrade stays yours. Training guard is now OFF. Your first dangerous pickup will pause so we can practise rescuing it.");break;
+   Body=Tutorial.bRiskLearned?TEXT("Your upgrade stays yours. Training guard is now OFF: avoid red cells and overfilling, or drop the haul before the warning expires."):TEXT("Your upgrade stays yours. Training guard is now OFF. Your first dangerous pickup will pause so we can practise rescuing it.");
+   if(Tutorial.PurchasedMod==1){
+    Title=TEXT("EXTRACT ONLY THE GOOD PIECE");
+    Task=TEXT("Point at a linked piece, then press F.");
+    Body=TEXT("The coil takes only that piece; the other weight stays. Each smelt recharges extractions. Training guard is OFF. ");
+    Body+=Tutorial.bRiskLearned?TEXT("Red cells and overloads now run a real fuse."):TEXT("Your first dangerous pickup pauses for rescue practice.");
+    if(!LinkedLeft){
+     Task=Model.IsDeliveryCompleted()?(Model.GetCargo()>0?TEXT("Smelt your haul, then finish this order."):TEXT("Finish this order and choose the next.")):TEXT("Smelt loose metal to finish this order.");
+     Body=TEXT("No linked pieces remain here. Your extraction lesson continues on the next tray. Keep earning normally; the furnace stays available.");
+    }else if(!ExtractionReady){Task=TEXT("Smelt a useful haul before extracting.");Body=TEXT("Extraction needs room for the selected piece and a charged coil. A successful smelt empties your load and recharges extractions. RMB returns cargo but does not recharge.");}
+    else Furnace=false;
+   }break;
   case ETutorialStep::Risk:
-   Title=TEXT("NOW PRACTISE A RESCUE");Task=Model.GetCargo()>0?TEXT("Smelt this safe haul, then try the marked red cell."):TEXT("Pick up the marked red cell with an empty magnet.");
+   Title=TEXT("PREPARE FOR RESCUE PRACTICE");Task=Model.GetCargo()>0?TEXT("Add valuable metal, then smelt before rescue practice."):TEXT("Pick up the marked red cell with an empty magnet.");
    Body=TEXT("Your first upgrade is built. Now learn the risk: red cells or too much weight start a fuse. This first warning pauses before any loss. Later warnings run in real time.");break;
   case ETutorialStep::Precision:
    Title=TEXT("LEAVE DANGER BEHIND");Task=TEXT("Press Q or hold Shift, then collect useful metal.");
@@ -192,9 +207,10 @@ void FWorkbenchImpl::PaintTutorial(UCanvas* C)
    if(Tutorial.Step==ETutorialStep::Attract)Match=P.Amount>0&&CanCaptureForPlayer(P.Id);
    if(Tutorial.Step==ETutorialStep::Risk&&!Furnace)Match=P.Material==EMaterial::HotCell;
    if(Tutorial.Step==ETutorialStep::Precision)Match=P.Material!=EMaterial::HotCell&&CanCaptureForPlayer(P.Id);
-   if(Tutorial.Step==ETutorialStep::TryUpgrade||(Tutorial.Step==ETutorialStep::FirstSmelt&&!Furnace))Match=P.Amount>0&&CanCaptureForPlayer(P.Id);
+   if(Tutorial.Step==ETutorialStep::TryUpgrade){FString Reason;Match=P.Amount>0&&(Tutorial.PurchasedMod==1?Model.CanBreakaway(P.Id,Reason):CanCaptureForPlayer(P.Id));}
+   if(Tutorial.Step==ETutorialStep::FirstSmelt&&!Furnace)Match=P.Amount>0&&CanCaptureForPlayer(P.Id);
    if(Match){
-    const bool Preferred=(Tutorial.Step==ETutorialStep::Attract&&P.Material==EMaterial::Copper&&Model.GetCaptureGroup(P.Id).Num()>1)||(Tutorial.Step==ETutorialStep::Precision&&P.Material==EMaterial::Core);
+    const bool Preferred=(Tutorial.Step==ETutorialStep::Attract&&P.Material==EMaterial::Copper&&Model.GetCaptureGroup(P.Id).Num()>1)||(Tutorial.Step==ETutorialStep::Precision&&P.Material==EMaterial::Core)||(Tutorial.Step==ETutorialStep::TryUpgrade&&Tutorial.PurchasedMod==1&&P.Material==EMaterial::Alloy);
     if(Target==INDEX_NONE||Preferred)Target=P.Id;
     if(Preferred)break;
    }
