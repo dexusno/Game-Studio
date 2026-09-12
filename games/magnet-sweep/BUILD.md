@@ -1,5 +1,33 @@
 # Magnet Sweep — build and run
 
+## Expedition Lab 0.6.0
+
+The new `-Expedition` mode runs a separate four-site salvage expedition with a fresh rig, earned depot choices and a physical final core. [Play Expedition Lab.cmd](Play%20Expedition%20Lab.cmd) targets `BuildOutput/Expedition/Windows/MagnetSweep.exe` with its own `-ExpeditionProfile=expedition_preview`. Build/cook/stage/archive succeeded; all 52 engine cases pass (31 Expedition plus 21 legacy) in report 2026.09.12-23.45.53. The package has not been launched natively. Exact artifact hashes and test history are in [expedition-verification.json](evidence/expedition-verification.json); native and effect-coverage limits are in QA-EXPEDITION.md.
+
+The mode is selected before any old career loading occurs. World schema 2 is isolated from every old career. Its composite rig/world/checkpoint lives in `Saved/Expedition/<profile>.json`; `DemoProfile` and `DemoFresh` are ignored. The launcher does not reset a run. A damaged current save can restore its valid backup; if neither validates, the originals remain until an explicit new run. No owner files have been used to test this path.
+
+- LMB buys one ordinary capture batch for 6 battery. Shift narrows its field; Space toggles capture. Release turns the field off and retains secured cargo. The planning menu contains the deliberate/continuous comparison.
+- Q/F: hold to aim while the magnet stays put, release the same key to use its fitted tool. Invalid actions cost nothing. Preview shows cost, load and risk. Uncommitted marks are cancelled by drop, pause, banking or another tool; paid physical movement survives aiming and pause.
+- Rail preparation lets you select a single held body to launch (C cycles), or explicitly check at least two iron bodies to weld. Welding costs 4 and does not fire; the next separate launch costs 8. Other held material is preserved.
+- Fitted supports expose relevant operation buttons beneath Q/F: ground an endpoint, arm a sensor/receiver, transfer heat into a chosen iron sink, switch a saved anchor, or lay a guide. Multi-stage selections explain the next target; only the final valid operation commits its displayed cost.
+- RMB drops the whole haul onto the worksite. To sell scrap, carry it to the furnace, wait for it to settle and press E. Metal types can be mixed. The protected mission core is delivered at the separate receiver with E.
+- Follow the recovery panel: slide the collar into its stop, place ballast in the catch, and place an iron brace in the arm stopper. Recovering the first three cores pays 10/12/14 credits. Refining can earn two additional 2-credit milestones per site. The fourth core completes the expedition and archives the rig. On the second site, the supported machine and live assembly hold most of the upgrade value; two tested capability routes reach 362/366 output, while ordinary haulable pools total 168.
+- Safe mass is 24 kg, hard limit 36 kg. An unsafe/hot haul starts a three-second fuse. Timely drop preserves the haul; expiry spills it recoverably and spends 12 battery. Actual hazard contact can damage struck scrap. Secured core delivery remains possible at zero battery.
+- Escape pauses all physical clocks. Retry restores the complete site entry, including cash, spent battery, world, rig and refining awards. M toggles sound. Save & quit retains the expedition.
+
+Build this package separately:
+
+```powershell
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName Expedition
+```
+
+The current possible owner Clarity session remains protected. No native control resumes without a safe foreground handoff. The older launchers and packages below remain available.
+
+## Historical Extraction E1
+
+
 Unreal Engine 5.8.2, Windows Development, version 0.5.0 / Extraction E1. Klaus rejected the radius-only coil; this increment gives it a selected-piece extraction capability. It remains a prototype for owner judgment.
 
 ## Play and preserve progress

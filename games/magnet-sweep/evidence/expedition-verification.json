@@ -1,0 +1,867 @@
+{
+  "version": "0.6.0",
+  "mode": "Expedition Lab",
+  "status": "Packaged; engine automation passed; native acceptance pending",
+  "base_revision": "db860a446e7e7cf1faabd1b053585fea4b2de45b",
+  "tests": [
+    {
+      "report_created_on": "2026.09.12-23.36.18",
+      "succeeded": 50,
+      "failed": 1,
+      "not_run": 0,
+      "warnings": 0,
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Fail",
+          "errors": [
+            "Expected 'Controlled physical shear fixture validates' to be true."
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "report_created_on": "2026.09.12-23.39.09",
+      "succeeded": 50,
+      "failed": 1,
+      "not_run": 0,
+      "warnings": 0,
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Fail",
+          "errors": [
+            "Expected 'Actual movement through the shear plane cuts the head seam' to be true.",
+            "Expected 'Seam support acts on the physically crossed adjacent material' to be true."
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "report_created_on": "2026.09.12-23.45.53",
+      "succeeded": 52,
+      "failed": 0,
+      "not_run": 0,
+      "warnings": 0,
+      "report_sha256": "c589f887f6634caf2ed453a0472d478965bb8df8fe276508e68a80de94cf9fd1",
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedSiteTwoBuildsReachBothRefiningRewards",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "errors": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "package": {
+    "configuration": "Win64 Development",
+    "engine": "5.8.2",
+    "build_cook_stage_archive": "Succeeded",
+    "build_cook_run_seconds": 42.59,
+    "launcher": "games/magnet-sweep/Play Expedition Lab.cmd",
+    "arguments": "-Expedition -ExpeditionProfile=expedition_preview",
+    "files": [
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep.exe",
+        "bytes": 171520,
+        "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+        "bytes": 332593664,
+        "sha256": "6485ed0efb9c512ba8b33044b87bc330b515d98d5a410cabd7320f7c8b69aa6f"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Content/Paks/global.ucas",
+        "bytes": 3207392,
+        "sha256": "267eeaa2d73f11a0bab0ecaf9fadd376d4a84d980535213e4c23b04682fbd542"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Content/Paks/global.utoc",
+        "bytes": 782,
+        "sha256": "df381a3bf10f7f0cb553af0afb5538c29e5dd50dceebda6976672b33c892cbf1"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+        "bytes": 10652987,
+        "sha256": "957de0e92e1eb41564ec9155dde49165d82fb1c4d65cb4785bca2b491e76b6af"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+        "bytes": 137779056,
+        "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/Expedition/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+        "bytes": 138215,
+        "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+      }
+    ],
+    "compiler_warnings": [
+      "Existing WorkbenchEffects potentially uninitialized Last",
+      "Existing WorkbenchScene deprecated public CompositeFont access"
+    ]
+  },
+  "native_playtest": "Not run. Protected possible owner Clarity session remains untouched.",
+  "limits": [
+    "31 expedition engine cases do not establish native input, visual/audio quality, performance or enjoyment.",
+    "Four sites share machinery geometry; site index1 now redistributes rewards across two tested capability routes.",
+    "Individual support and combination coverage limits are listed in QA-EXPEDITION.md; 30 implementations are not 30 fully accepted gameplay upgrades.",
+    "Run-reset preference remains a working recommendation; old careers are separate and untouched."
+  ]
+}

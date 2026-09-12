@@ -19,6 +19,7 @@ public:
  virtual void DrawHUD() override;
 };
 struct FWorkbenchImpl;
+struct FExpeditionRuntime;
 UCLASS()
 class AMagnetWorkbench : public AActor {
  GENERATED_BODY()
@@ -31,6 +32,7 @@ public:
  void Paint(UCanvas* Target);
 private:
  FWorkbenchImpl* Demo = nullptr;
+ FExpeditionRuntime* Expedition = nullptr;
  UPROPERTY() TArray<TObjectPtr<UObject>> Resources;
  friend struct FWorkbenchImpl;
 };
