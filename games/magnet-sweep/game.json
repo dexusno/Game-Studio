@@ -14,31 +14,31 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner authorizes development and stopping at the playable concept demo. Development timeline remains intentionally unconstrained; zero time fields are unset, not zero-hour estimates. No additional purchases are authorized or needed.",
+  "budget_note": "Owner rejected the first concept demo and authorizes the full gameplay and presentation rebuild recorded in STATUS.md and DECISIONS.md. Timeline is unconstrained; zero time fields mean unset. No purchases or external release are authorized.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
       "games/magnet-sweep/BRIEF.md",
       "games/magnet-sweep/PRODUCTION-PLAN.md",
       "games/magnet-sweep/DECISIONS.md",
-      "games/magnet-sweep/design/CRITIQUE.md",
+      "games/magnet-sweep/design/REWORK-CRITIQUE.md",
       "games/magnet-sweep/BUILD.md",
-      "games/magnet-sweep/QA.md",
-      "games/magnet-sweep/design/ART-DIRECTION.md"
+      "games/magnet-sweep/design/REWORK-PRESENTATION.md",
+      "games/magnet-sweep/QA-REWORK.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T23:21:06+00:00",
-      "record_sha256": "1507ca284b237944d793ffd623dbf8a64b3a828149317256c7d5b8261520ba9b",
+      "captured_at": "2026-09-12T10:30:29+00:00",
+      "record_sha256": "3a0519bc04fed3b6bc104801b70206f26706d5fc8c7063e91a0734ba873917b2",
       "files": {
-        "games/magnet-sweep/STATUS.md": "0355e9758b6f03747979283e4c5418e231605edfd2dc6dda6c59f280e21c3842",
-        "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
-        "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
-        "games/magnet-sweep/DECISIONS.md": "9f82d56a6c5d2981fed4fbca0778b05d096d34480a693ffb0b1e721857021de6",
-        "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c",
-        "games/magnet-sweep/BUILD.md": "34329c555655e2c8ac93fab77b806ab19a452f3f62361b33d448869a8ba1a096",
-        "games/magnet-sweep/QA.md": "a94d5818ba8943c5ae21f0f8df77648aa08363078acc6a88671296fe289c89cb",
-        "games/magnet-sweep/design/ART-DIRECTION.md": "762b1d0c1d7910ace475e94002dd67ed4b9501ab225d1891194776779a138be8"
+        "games/magnet-sweep/STATUS.md": "b1120a33f3ea5f91419fbd48ca14f5d88727cde94fb715d6e34fe2fbdea65bbe",
+        "games/magnet-sweep/BRIEF.md": "9a27b630d1ee3d2145cb2b36eebe790acb33ef5c49e10a33429f7e186135f3d8",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "f6661799bdb3532364e66c546004be32b54362a23e0bcaf1cedd614f7e508e4a",
+        "games/magnet-sweep/DECISIONS.md": "10963b8401b2a1aa1361cb6cac7c65389760969975b70a57851a056582cc0a03",
+        "games/magnet-sweep/design/REWORK-CRITIQUE.md": "a676b6bfa2544d33447ddbdad96c9cdc6b45f41a580d957c3adabf9b9d2067b6",
+        "games/magnet-sweep/BUILD.md": "32bbc9bde21b697f9bc101677e13482e3db8887aa56361478c798bb91dc90925",
+        "games/magnet-sweep/design/REWORK-PRESENTATION.md": "6db22e8aaff762b0fbf0798fc4c3010b1296f24456db329e59905e4e7996dae1",
+        "games/magnet-sweep/QA-REWORK.md": "2b9da1b0de3fedb149e1f1a21f9c1f0b7045f8867faa81cc9988442a82f9cb00"
       }
     }
   }

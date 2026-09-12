@@ -2,7 +2,7 @@
 
 Follow the root studio instructions and the agreed ownership in the active task. Read [STATUS.md](STATUS.md), [BRIEF.md](BRIEF.md), [DECISIONS.md](DECISIONS.md), and [BUILD.md](BUILD.md) before changing this game. Update status with evidence and a useful next step before handing off.
 
-- This is a planning scaffold. Engine metadata (`unreal`) does not mean that an engine project exists or builds.
+- A Windows Unreal concept demo exists. Its functional verification did not establish fun; Klaus rejected the first demo after playing. The active 2026-09-12 rebuild explicitly supersedes the old no-capacity/no-risk rules. Use the current STATUS and integrated brief for the new assignment.
 - Preserve the agreed scope. Record new scope, budget and engine choices in DECISIONS.md.
 - Assign one owner to each file or tightly bounded area; do not run concurrent writers on the same files.
 - Validate player-facing changes in the actual game when available. Distinguish static inspection, mocked tests, engine builds and human playtesting.

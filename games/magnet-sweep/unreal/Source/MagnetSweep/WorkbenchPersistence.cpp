@@ -15,105 +15,181 @@ namespace
 {
 constexpr int32 MaxSaveCharacters = 2 * 1024 * 1024;
 
-TSharedRef<FJsonObject> SnapshotJson(const FSalvageSnapshot& Snapshot)
+struct FSaveSettings
+{
+    bool Muted = false;
+    bool Workshop = false;
+    bool Receipt = false;
+    float Sfx = .8f;
+    float Music = .3f;
+};
+
+TArray<TSharedPtr<FJsonValue>> IntArray(const TArray<int32>& Values)
+{
+    TArray<TSharedPtr<FJsonValue>> Result;
+    for (int32 Value : Values) Result.Add(MakeShared<FJsonValueNumber>(Value));
+    return Result;
+}
+TArray<TSharedPtr<FJsonValue>> BoolArray(const TArray<bool>& Values)
+{
+    TArray<TSharedPtr<FJsonValue>> Result;
+    for (bool Value : Values) Result.Add(MakeShared<FJsonValueBoolean>(Value));
+    return Result;
+}
+TSharedRef<FJsonObject> SnapshotJson(const FSalvageSnapshot& S)
 {
     const auto Json = MakeShared<FJsonObject>();
-    Json->SetNumberField(TEXT("version"), Snapshot.Version);
-    Json->SetNumberField(TEXT("layout_index"), Snapshot.LayoutIndex);
-    Json->SetNumberField(TEXT("epoch"), Snapshot.Epoch);
-    Json->SetNumberField(TEXT("upgrade_level"), Snapshot.UpgradeLevel);
-    Json->SetNumberField(TEXT("completed_delivery_count"), Snapshot.CompletedDeliveryCount);
-    Json->SetNumberField(TEXT("cargo"), Snapshot.Cargo);
-    Json->SetNumberField(TEXT("banked"), Snapshot.Banked);
-    Json->SetNumberField(TEXT("goal"), Snapshot.Goal);
-    Json->SetBoolField(TEXT("delivery_completed"), Snapshot.bDeliveryCompleted);
+    Json->SetNumberField(TEXT("version"), S.Version);
+    Json->SetNumberField(TEXT("layout_index"), S.LayoutIndex);
+    Json->SetNumberField(TEXT("seed"), S.Seed);
+    Json->SetNumberField(TEXT("epoch"), S.Epoch);
+    Json->SetNumberField(TEXT("upgrade_level"), S.UpgradeLevel);
+    Json->SetNumberField(TEXT("completed_delivery_count"), S.CompletedDeliveryCount);
+    Json->SetArrayField(TEXT("upgrade_tiers"), IntArray(S.UpgradeTiers));
+    Json->SetNumberField(TEXT("wallet"), S.Wallet);
+    Json->SetNumberField(TEXT("xp"), S.XP);
+    Json->SetArrayField(TEXT("collected_cores"), IntArray(S.CollectedCores));
+    Json->SetArrayField(TEXT("best_banked"), IntArray(S.BestBanked));
+    Json->SetArrayField(TEXT("best_heats"), IntArray(S.BestHeats));
+    Json->SetArrayField(TEXT("cleared_jobs"), BoolArray(S.ClearedJobs));
+    Json->SetArrayField(TEXT("gold_jobs"), BoolArray(S.GoldJobs));
+    Json->SetNumberField(TEXT("cargo"), S.Cargo);
+    Json->SetNumberField(TEXT("cargo_mass"), S.CargoMass);
+    Json->SetNumberField(TEXT("banked"), S.Banked);
+    Json->SetNumberField(TEXT("goal"), S.Goal);
+    Json->SetNumberField(TEXT("heats_used"), S.HeatsUsed);
+    Json->SetNumberField(TEXT("capture_serial"), S.CaptureSerial);
+    Json->SetNumberField(TEXT("fuse_elapsed"), S.FuseElapsed);
+    Json->SetBoolField(TEXT("delivery_completed"), S.bDeliveryCompleted);
+    Json->SetBoolField(TEXT("gold_awarded"), S.bGoldAwarded);
+    Json->SetBoolField(TEXT("job_ended"), S.bJobEnded);
     TArray<TSharedPtr<FJsonValue>> Pieces;
-    for (const FSalvagePiece& Piece : Snapshot.Pieces)
+    for (const FSalvagePiece& P : S.Pieces)
     {
         const auto Item = MakeShared<FJsonObject>();
-        Item->SetNumberField(TEXT("id"), Piece.Id);
-        Item->SetNumberField(TEXT("kind"), static_cast<uint8>(Piece.Kind));
-        Item->SetNumberField(TEXT("state"), static_cast<uint8>(Piece.State));
-        Item->SetNumberField(TEXT("x"), Piece.Position.X);
-        Item->SetNumberField(TEXT("y"), Piece.Position.Y);
-        Item->SetNumberField(TEXT("amount"), Piece.Amount);
-        TArray<TSharedPtr<FJsonValue>> Links;
-        for (int32 Id : Piece.DirectLinks) Links.Add(MakeShared<FJsonValueNumber>(Id));
-        Item->SetArrayField(TEXT("links"), Links);
+        Item->SetNumberField(TEXT("id"), P.Id);
+        Item->SetNumberField(TEXT("kind"), static_cast<uint8>(P.Kind));
+        Item->SetNumberField(TEXT("material"), static_cast<uint8>(P.Material));
+        Item->SetNumberField(TEXT("state"), static_cast<uint8>(P.State));
+        Item->SetNumberField(TEXT("x"), P.Position.X);
+        Item->SetNumberField(TEXT("y"), P.Position.Y);
+        Item->SetNumberField(TEXT("mass"), P.Mass);
+        Item->SetNumberField(TEXT("amount"), P.Amount);
+        Item->SetNumberField(TEXT("core_id"), P.CoreId);
+        Item->SetNumberField(TEXT("capture_order"), P.CaptureOrder);
+        Item->SetArrayField(TEXT("links"), IntArray(P.DirectLinks));
         Pieces.Add(MakeShared<FJsonValueObject>(Item));
     }
     Json->SetArrayField(TEXT("pieces"), Pieces);
     return Json;
 }
-
 bool Integral(const FJsonObject& Json, const TCHAR* Key, double Min, double Max, double& Result)
 {
     return Json.TryGetNumberField(Key, Result) && FMath::IsFinite(Result)
         && Result >= Min && Result <= Max && FMath::FloorToDouble(Result) == Result;
 }
-
 bool IntField(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, int32& Result)
 {
     double Number = 0;
     if (!Integral(Json, Key, Min, Max, Number)) return false;
-    Result = static_cast<int32>(Number);
+    Result = static_cast<int32>(Number); return true;
+}
+bool FloatField(const FJsonObject& Json, const TCHAR* Key, float Min, float Max, float& Result)
+{
+    double Number = 0;
+    if (!Json.TryGetNumberField(Key, Number) || !FMath::IsFinite(Number) || Number < Min || Number > Max) return false;
+    Result = static_cast<float>(Number); return true;
+}
+bool ReadInts(const FJsonObject& Json, const TCHAR* Key, int32 Min, int32 Max, int32 MaxCount, TArray<int32>& Out)
+{
+    const TArray<TSharedPtr<FJsonValue>>* Values = nullptr;
+    if (!Json.TryGetArrayField(Key, Values) || !Values || Values->Num() > MaxCount) return false;
+    Out.Reset();
+    for (const auto& Value : *Values)
+    {
+        double Number = 0;
+        if (!Value.IsValid() || !Value->TryGetNumber(Number) || !FMath::IsFinite(Number)
+            || Number < Min || Number > Max || FMath::FloorToDouble(Number) != Number) return false;
+        Out.Add(static_cast<int32>(Number));
+    }
     return true;
 }
-
-bool ParseSave(const FString& Text, FSalvageSnapshot& Snapshot, bool& bMuted)
+bool ReadBools(const FJsonObject& Json, const TCHAR* Key, int32 Count, TArray<bool>& Out)
+{
+    const TArray<TSharedPtr<FJsonValue>>* Values = nullptr;
+    if (!Json.TryGetArrayField(Key, Values) || !Values || Values->Num() != Count) return false;
+    Out.Reset();
+    for (const auto& Value : *Values)
+    {
+        bool Parsed = false; if (!Value.IsValid() || !Value->TryGetBool(Parsed)) return false; Out.Add(Parsed);
+    }
+    return true;
+}
+bool ParseSave(const FString& Text, FSalvageSnapshot& S, FSaveSettings& Settings)
 {
     if (Text.Len() > MaxSaveCharacters) return false;
     TSharedPtr<FJsonObject> Root;
     if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Text), Root) || !Root.IsValid()) return false;
     int32 Version = 0;
-    if (!IntField(*Root, TEXT("save_version"), 1, 1, Version)
-        || !Root->TryGetBoolField(TEXT("muted"), bMuted)) return false;
+    if (!IntField(*Root, TEXT("save_version"), 2, 2, Version)
+        || !Root->TryGetBoolField(TEXT("muted"), Settings.Muted)
+        || !Root->TryGetBoolField(TEXT("workshop"), Settings.Workshop)
+        || !Root->TryGetBoolField(TEXT("receipt"), Settings.Receipt)
+        || !FloatField(*Root, TEXT("sfx_volume"), 0, 1, Settings.Sfx)
+        || !FloatField(*Root, TEXT("music_volume"), 0, 1, Settings.Music)) return false;
     const TSharedPtr<FJsonObject>* Object = nullptr;
     if (!Root->TryGetObjectField(TEXT("snapshot"), Object) || !Object || !Object->IsValid()) return false;
     const FJsonObject& Json = **Object;
     double Epoch = 0;
-    if (!IntField(Json, TEXT("version"), 1, 1, Snapshot.Version)
-        || !IntField(Json, TEXT("layout_index"), 0, 1, Snapshot.LayoutIndex)
+    if (!IntField(Json, TEXT("version"), 2, 2, S.Version)
+        || !IntField(Json, TEXT("layout_index"), 0, 5, S.LayoutIndex)
+        || !IntField(Json, TEXT("seed"), 1, MAX_int32, S.Seed)
         || !Integral(Json, TEXT("epoch"), 1, MAX_uint32, Epoch)
-        || !IntField(Json, TEXT("upgrade_level"), 0, 2, Snapshot.UpgradeLevel)
-        || !IntField(Json, TEXT("completed_delivery_count"), 0, 1000000, Snapshot.CompletedDeliveryCount)
-        || !IntField(Json, TEXT("cargo"), 0, 256000, Snapshot.Cargo)
-        || !IntField(Json, TEXT("banked"), 0, 256000, Snapshot.Banked)
-        || !IntField(Json, TEXT("goal"), 1, 256000, Snapshot.Goal)
-        || !Json.TryGetBoolField(TEXT("delivery_completed"), Snapshot.bDeliveryCompleted)) return false;
-    Snapshot.Epoch = static_cast<uint32>(Epoch);
+        || !IntField(Json, TEXT("upgrade_level"), 0, 9, S.UpgradeLevel)
+        || !IntField(Json, TEXT("completed_delivery_count"), 0, 1000000, S.CompletedDeliveryCount)
+        || !ReadInts(Json, TEXT("upgrade_tiers"), 0, 3, 3, S.UpgradeTiers)
+        || !IntField(Json, TEXT("wallet"), 0, 100000000, S.Wallet)
+        || !IntField(Json, TEXT("xp"), 0, 100000000, S.XP)
+        || !ReadInts(Json, TEXT("collected_cores"), 0, 5, 6, S.CollectedCores)
+        || !ReadInts(Json, TEXT("best_banked"), 0, 100000, 6, S.BestBanked)
+        || !ReadInts(Json, TEXT("best_heats"), 0, 4, 6, S.BestHeats)
+        || !ReadBools(Json, TEXT("cleared_jobs"), 6, S.ClearedJobs)
+        || !ReadBools(Json, TEXT("gold_jobs"), 6, S.GoldJobs)
+        || !IntField(Json, TEXT("cargo"), 0, 256000, S.Cargo)
+        || !IntField(Json, TEXT("cargo_mass"), 0, 1024, S.CargoMass)
+        || !IntField(Json, TEXT("banked"), 0, 256000, S.Banked)
+        || !IntField(Json, TEXT("goal"), 1, 256000, S.Goal)
+        || !IntField(Json, TEXT("heats_used"), 0, 4, S.HeatsUsed)
+        || !IntField(Json, TEXT("capture_serial"), 0, 100000000, S.CaptureSerial)
+        || !FloatField(Json, TEXT("fuse_elapsed"), 0, 6, S.FuseElapsed)
+        || !Json.TryGetBoolField(TEXT("delivery_completed"), S.bDeliveryCompleted)
+        || !Json.TryGetBoolField(TEXT("gold_awarded"), S.bGoldAwarded)
+        || !Json.TryGetBoolField(TEXT("job_ended"), S.bJobEnded)) return false;
+    S.Epoch = static_cast<uint32>(Epoch);
     const TArray<TSharedPtr<FJsonValue>>* Pieces = nullptr;
-    if (!Json.TryGetArrayField(TEXT("pieces"), Pieces) || !Pieces || Pieces->IsEmpty() || Pieces->Num() > 256)
-        return false;
-    Snapshot.Pieces.Reset();
-    for (const TSharedPtr<FJsonValue>& Value : *Pieces)
+    if (!Json.TryGetArrayField(TEXT("pieces"), Pieces) || !Pieces || Pieces->IsEmpty() || Pieces->Num() > 256) return false;
+    S.Pieces.Reset();
+    for (const auto& Value : *Pieces)
     {
         if (!Value.IsValid() || Value->Type != EJson::Object) return false;
-        const auto Item = Value->AsObject();
-        if (!Item.IsValid()) return false;
-        FSalvagePiece Piece;
-        int32 Kind = 0, Ownership = 0;
-        if (!IntField(*Item, TEXT("id"), 0, MAX_int32, Piece.Id)
+        const auto Item = Value->AsObject(); if (!Item.IsValid()) return false;
+        FSalvagePiece P; int32 Kind = 0, Material = 0, Ownership = 0;
+        if (!IntField(*Item, TEXT("id"), 0, MAX_int32, P.Id)
             || !IntField(*Item, TEXT("kind"), 0, 1, Kind)
-            || !IntField(*Item, TEXT("state"), 0, 2, Ownership)
-            || !IntField(*Item, TEXT("amount"), 1, 1000, Piece.Amount)
-            || !Item->TryGetNumberField(TEXT("x"), Piece.Position.X)
-            || !Item->TryGetNumberField(TEXT("y"), Piece.Position.Y)) return false;
-        Piece.Kind = static_cast<EPieceKind>(Kind);
-        Piece.State = static_cast<EPieceState>(Ownership);
-        const TArray<TSharedPtr<FJsonValue>>* Links = nullptr;
-        if (!Item->TryGetArrayField(TEXT("links"), Links) || !Links || Links->Num() > 255) return false;
-        for (const TSharedPtr<FJsonValue>& Link : *Links)
-        {
-            double Number = 0;
-            if (!Link.IsValid() || !Link->TryGetNumber(Number) || !FMath::IsFinite(Number)
-                || Number < 0 || Number > MAX_int32 || FMath::FloorToDouble(Number) != Number) return false;
-            Piece.DirectLinks.Add(static_cast<int32>(Number));
-        }
-        Snapshot.Pieces.Add(MoveTemp(Piece));
+            || !IntField(*Item, TEXT("material"), 0, 4, Material)
+            || !IntField(*Item, TEXT("state"), 0, 3, Ownership)
+            || !IntField(*Item, TEXT("mass"), 1, 1000, P.Mass)
+            || !IntField(*Item, TEXT("amount"), 0, 1000, P.Amount)
+            || !IntField(*Item, TEXT("core_id"), -1, 5, P.CoreId)
+            || !IntField(*Item, TEXT("capture_order"), 0, 100000000, P.CaptureOrder)
+            || !Item->TryGetNumberField(TEXT("x"), P.Position.X)
+            || !Item->TryGetNumberField(TEXT("y"), P.Position.Y)
+            || !ReadInts(*Item, TEXT("links"), 0, MAX_int32, 255, P.DirectLinks)) return false;
+        P.Kind = static_cast<EPieceKind>(Kind); P.Material = static_cast<EMaterial>(Material); P.State = static_cast<EPieceState>(Ownership);
+        S.Pieces.Add(MoveTemp(P));
     }
     FString Error;
-    return FSalvageModel::ValidateSnapshot(Snapshot, Error);
+    return FSalvageModel::ValidateSnapshot(S, Error);
 }
 
 bool ReadSaveFile(const FString& Path, FString& Text)
@@ -166,7 +242,11 @@ const TCHAR* ActionName(EMagnetAction Action)
 FString FWorkbenchImpl::EncodeSave() const
 {
     const auto Json = MakeShared<FJsonObject>();
-    Json->SetNumberField(TEXT("save_version"), 1);
+    Json->SetNumberField(TEXT("save_version"), 2);
+    Json->SetBoolField(TEXT("workshop"), bWorkshop);
+    Json->SetBoolField(TEXT("receipt"), bReceipt);
+    Json->SetNumberField(TEXT("sfx_volume"), SfxVolume);
+    Json->SetNumberField(TEXT("music_volume"), MusicVolume);
     Json->SetBoolField(TEXT("muted"), bMuted);
     Json->SetObjectField(TEXT("snapshot"), SnapshotJson(Model.GetSnapshot()));
     FString Result;
@@ -177,10 +257,15 @@ FString FWorkbenchImpl::EncodeSave() const
 bool FWorkbenchImpl::DecodeSave(const FString& Text)
 {
     FSalvageSnapshot Snapshot;
-    bool bSavedMuted = false;
+    FSaveSettings Settings;
     FString Error;
-    if (!ParseSave(Text, Snapshot, bSavedMuted) || !Model.RestoreSnapshot(Snapshot, Error)) return false;
-    bMuted = bSavedMuted;
+    if (!ParseSave(Text, Snapshot, Settings) || !Model.RestoreSnapshot(Snapshot, Error)) return false;
+    bMuted = Settings.Muted;
+    bWorkshop = Settings.Workshop;
+    bReceipt = Settings.Receipt;
+    SfxVolume = Settings.Sfx;
+    MusicVolume = Settings.Music;
+    LastBank = {};
     // Visual transfers are cosmetic; restored material ownership is already canonical.
     Preview = {};
     Action = EMagnetAction::None;
@@ -212,15 +297,15 @@ bool FWorkbenchImpl::Save()
         return false;
     FString Written;
     FSalvageSnapshot Verified;
-    bool bWrittenMuted = false;
-    if (!ReadSaveFile(Temporary, Written) || !ParseSave(Written, Verified, bWrittenMuted)) return false;
+    FSaveSettings WrittenSettings;
+    if (!ReadSaveFile(Temporary, Written) || !ParseSave(Written, Verified, WrittenSettings)) return false;
 
     FString Previous;
     if (ReadSaveFile(SavePath, Previous))
     {
         FSalvageSnapshot PreviousSnapshot;
-        bool bPreviousMuted = false;
-        if (ParseSave(Previous, PreviousSnapshot, bPreviousMuted))
+        FSaveSettings PreviousSettings;
+        if (ParseSave(Previous, PreviousSnapshot, PreviousSettings))
         {
             if (!StageAndReplace(Previous, Backup + TEXT(".tmp"), Backup)) return false;
         }
@@ -268,7 +353,15 @@ void FWorkbenchImpl::WriteTelemetry()
 {
     if (!bQA || SavePath.IsEmpty()) return;
     const auto Json = MakeShared<FJsonObject>();
-    Json->SetNumberField(TEXT("telemetry_version"), 1);
+    Json->SetNumberField(TEXT("telemetry_version"), 2);
+    Json->SetNumberField(TEXT("capacity"), Model.GetCapacity());
+    Json->SetNumberField(TEXT("fuse_remaining"), Model.GetFuseRemaining());
+    Json->SetBoolField(TEXT("unsafe"), Model.IsCargoUnsafe());
+    Json->SetBoolField(TEXT("workshop"), bWorkshop);
+    Json->SetBoolField(TEXT("receipt"), bReceipt);
+    Json->SetBoolField(TEXT("precision"), bPrecision);
+    Json->SetNumberField(TEXT("operator_level"), Model.GetPlayerLevel());
+    Json->SetNumberField(TEXT("job_earnings"), Model.GetJobEarnings());
     Json->SetStringField(TEXT("utc"), FDateTime::UtcNow().ToIso8601());
     Json->SetStringField(TEXT("profile"), Profile);
     Json->SetStringField(TEXT("event"), LastEvent);

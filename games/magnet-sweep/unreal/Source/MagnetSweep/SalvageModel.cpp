@@ -1,350 +1,554 @@
 #include "SalvageModel.h"
+#include "Math/RandomStream.h"
 
 namespace MagnetSweep
 {
 namespace
 {
-bool IsFinitePoint(const FVector2D& Point)
+constexpr int32 CareerLimit = 100000000;
+const FJobDefinition Jobs[] = {
+    {TEXT("First Pour"), 120, 180, 80, 40, 1, 24, 8, 2, 2},
+    {TEXT("Copper Knot"), 180, 260, 120, 60, 2, 24, 12, 6, 3},
+    {TEXT("Live Wire"), 240, 360, 160, 80, 3, 24, 16, 10, 4},
+    {TEXT("Heavy Freight"), 300, 440, 200, 100, 4, 28, 18, 14, 5},
+    {TEXT("Split Seam"), 380, 540, 240, 120, 4, 28, 20, 18, 6},
+    {TEXT("Furnace Crown"), 460, 660, 280, 140, 4, 30, 22, 22, 6}
+};
+bool FinitePoint(const FVector2D& P) { return FMath::IsFinite(P.X) && FMath::IsFinite(P.Y); }
+int32 MaterialMass(EMaterial M) { return M == EMaterial::Iron ? 2 : M == EMaterial::Copper ? 3 : 4; }
+int32 MaterialValue(EMaterial M)
 {
-    return FMath::IsFinite(Point.X) && FMath::IsFinite(Point.Y);
+    switch (M) { case EMaterial::Iron: return 4; case EMaterial::Copper: return 12;
+    case EMaterial::Alloy: return 24; case EMaterial::Core: return 40; default: return 0; }
 }
-
-void AddPiece(TArray<FSalvagePiece>& Pieces, int32 Id, EPieceKind Kind, double X,
-    double Y, int32 Amount)
+void LinkPieces(TArray<FSalvagePiece>& Pieces, int32 A, int32 B)
 {
-    FSalvagePiece Piece;
-    Piece.Id = Id;
-    Piece.Kind = Kind;
-    Piece.Position = FVector2D(X, Y);
-    Piece.Amount = Amount;
-    Pieces.Add(MoveTemp(Piece));
-}
-
-void Link(TArray<FSalvagePiece>& Pieces, int32 A, int32 B)
-{
-    for (FSalvagePiece& Piece : Pieces)
-    {
-        if (Piece.Id == A) Piece.DirectLinks.Add(B);
-        if (Piece.Id == B) Piece.DirectLinks.Add(A);
-    }
+    Pieces[A].DirectLinks.AddUnique(B); Pieces[B].DirectLinks.AddUnique(A);
+    Pieces[A].Kind = EPieceKind::Tangle; Pieces[B].Kind = EPieceKind::Tangle;
 }
 }
 
-FSalvageModel::FSalvageModel()
+FSalvageModel::FSalvageModel() { BuildLayout(0, State.Seed); }
+const FJobDefinition& FSalvageModel::JobDefinition(int32 Index) { return Jobs[FMath::Clamp(Index, 0, LayoutCount - 1)]; }
+void FSalvageModel::IncrementEpoch() { if (++State.Epoch == 0) State.Epoch = 1; }
+int32 FSalvageModel::LevelForXP(int32 XP) { return XP >= 700 ? 4 : XP >= 350 ? 3 : XP >= 120 ? 2 : 1; }
+int32 FSalvageModel::XPForLevel(int32 Level) { return Level >= 4 ? 700 : Level == 3 ? 350 : Level == 2 ? 120 : 0; }
+int32 FSalvageModel::GetPlayerLevel() const { return LevelForXP(State.XP); }
+int32 FSalvageModel::GetUpgradeTier(EUpgrade Upgrade) const
 {
-    BuildLayout(0);
+    const int32 Index = static_cast<int32>(Upgrade);
+    return State.UpgradeTiers.IsValidIndex(Index) ? State.UpgradeTiers[Index] : 0;
 }
-
-void FSalvageModel::IncrementEpoch()
+int32 FSalvageModel::GetUpgradePrice(EUpgrade Upgrade) const
 {
-    ++State.Epoch;
-    if (State.Epoch == 0) State.Epoch = 1;
+    const int32 Tier = GetUpgradeTier(Upgrade);
+    return Tier == 0 ? 150 : Tier == 1 ? 300 : Tier == 2 ? 500 : 0;
 }
-
-bool FSalvageModel::IsInsideTray(const FVector2D& Position)
+bool FSalvageModel::CanPurchaseUpgrade(EUpgrade Upgrade, FString& Reason) const
 {
-    return IsFinitePoint(Position) && Position.X >= TrayMinX && Position.X <= TrayMaxX
-        && Position.Y >= TrayMinY && Position.Y <= TrayMaxY;
+    const int32 Index = static_cast<int32>(Upgrade);
+    if (!State.UpgradeTiers.IsValidIndex(Index)) { Reason = TEXT("Unknown mod."); return false; }
+    const int32 Tier = GetUpgradeTier(Upgrade);
+    if (Tier >= 3) { Reason = TEXT("Fully upgraded."); return false; }
+    if (GetPlayerLevel() < Tier + 2) { Reason = FString::Printf(TEXT("Requires operator level %d."), Tier + 2); return false; }
+    if (State.CargoMass > 0) { Reason = TEXT("Smelt or leave the current haul before fitting a mod."); return false; }
+    if (State.Wallet < GetUpgradePrice(Upgrade)) { Reason = TEXT("Earn more credits from salvage contracts."); return false; }
+    Reason.Reset(); return true;
 }
-
-FVector2D FSalvageModel::ClampToTray(const FVector2D& Position)
+bool FSalvageModel::PurchaseUpgrade(EUpgrade Upgrade)
 {
-    if (!IsFinitePoint(Position)) return FVector2D::ZeroVector;
-    return FVector2D(FMath::Clamp(Position.X, double(TrayMinX), double(TrayMaxX)),
-        FMath::Clamp(Position.Y, double(TrayMinY), double(TrayMaxY)));
+    FString Reason; if (!CanPurchaseUpgrade(Upgrade, Reason)) return false;
+    State.Wallet -= GetUpgradePrice(Upgrade);
+    ++State.UpgradeTiers[static_cast<int32>(Upgrade)]; ++State.UpgradeLevel;
+    IncrementEpoch(); return true;
 }
-
-bool FSalvageModel::IsInsideCapsule(const FVector2D& Point, const FVector2D& Start,
-    const FVector2D& End, float Radius)
+FString FSalvageModel::MaterialName(EMaterial Material)
 {
-    if (!IsFinitePoint(Point) || !IsFinitePoint(Start) || !IsFinitePoint(End)
-        || !FMath::IsFinite(Radius) || Radius < 0.0f) return false;
-    const FVector2D Segment = End - Start;
-    const double LengthSquared = Segment.SizeSquared();
-    const double T = LengthSquared > UE_DOUBLE_SMALL_NUMBER
-        ? FMath::Clamp(FVector2D::DotProduct(Point - Start, Segment) / LengthSquared, 0.0, 1.0)
-        : 0.0;
-    return (Point - (Start + Segment * T)).SizeSquared() <= double(Radius) * Radius + 0.0001;
+    switch (Material) { case EMaterial::Iron: return TEXT("Iron scrap"); case EMaterial::Copper: return TEXT("Copper salvage");
+    case EMaterial::Alloy: return TEXT("Alloy salvage"); case EMaterial::Core: return TEXT("Rare core"); default: return TEXT("Hot cell"); }
 }
-
+FString FSalvageModel::CoreName(int32 Id)
+{
+    static const TCHAR* Names[] = {TEXT("Amber Dynamo"), TEXT("Copper Heart"), TEXT("Blue Capacitor"),
+        TEXT("Freight Gyroscope"), TEXT("Twin Spark"), TEXT("Furnace Crown")};
+    return Id >= 0 && Id < LayoutCount ? Names[Id] : TEXT("Unknown core");
+}
+FString FSalvageModel::PieceName(int32 Id) const
+{
+    const FSalvagePiece* Piece = FindPiece(Id);
+    return Piece ? Piece->Material == EMaterial::Core ? CoreName(Piece->CoreId) : MaterialName(Piece->Material) : TEXT("No salvage");
+}
+bool FSalvageModel::IsInsideTray(const FVector2D& P)
+{
+    return FinitePoint(P) && P.X >= TrayMinX && P.X <= TrayMaxX && P.Y >= TrayMinY && P.Y <= TrayMaxY;
+}
+FVector2D FSalvageModel::ClampToTray(const FVector2D& P)
+{
+    return FinitePoint(P) ? FVector2D(FMath::Clamp(P.X, double(TrayMinX), double(TrayMaxX)),
+        FMath::Clamp(P.Y, double(TrayMinY), double(TrayMaxY))) : FVector2D::ZeroVector;
+}
+bool FSalvageModel::IsInsideCapsule(const FVector2D& P, const FVector2D& A, const FVector2D& B, float Radius)
+{
+    if (!FinitePoint(P) || !FinitePoint(A) || !FinitePoint(B) || !FMath::IsFinite(Radius) || Radius < 0) return false;
+    const FVector2D D = B-A; const double Length = D.SizeSquared();
+    const double T = Length > UE_DOUBLE_SMALL_NUMBER ? FMath::Clamp(FVector2D::DotProduct(P-A,D) / Length, 0., 1.) : 0.;
+    return (P-(A+D*T)).SizeSquared() <= double(Radius)*Radius + .0001;
+}
 const FSalvagePiece* FSalvageModel::FindPiece(int32 Id) const
 {
     return State.Pieces.FindByPredicate([Id](const FSalvagePiece& Piece) { return Piece.Id == Id; });
 }
-
-int32 FSalvageModel::FindAvailableRing(const FVector2D& Position) const
-{
-    if (!IsInsideTray(Position)) return INDEX_NONE;
-    int32 Id = INDEX_NONE;
-    double Nearest = double(RingHitRadius) * RingHitRadius;
-    for (const FSalvagePiece& Piece : State.Pieces)
-    {
-        if (Piece.Kind != EPieceKind::Tangle || Piece.State != EPieceState::Available) continue;
-        const double Distance = (Piece.Position - Position).SizeSquared();
-        if (Distance <= Nearest && (Distance < Nearest || Id == INDEX_NONE || Piece.Id < Id))
-        {
-            Id = Piece.Id;
-            Nearest = Distance;
-        }
-    }
-    return Id;
-}
-
 int32 FSalvageModel::GetAvailableAmount() const
 {
-    int32 Result = 0;
-    for (const FSalvagePiece& Piece : State.Pieces)
-        if (Piece.State == EPieceState::Available) Result += Piece.Amount;
-    return Result;
+    int32 Total = 0; for (const auto& P : State.Pieces) if (P.State == EPieceState::Available) Total += P.Amount; return Total;
 }
-
 int32 FSalvageModel::GetTotalAmount() const
 {
-    return GetAvailableAmount() + State.Cargo + State.Banked;
+    int32 Total = 0; for (const auto& P : State.Pieces) Total += P.Amount; return Total;
 }
-
-FString FSalvageModel::GetLayoutName() const
+bool FSalvageModel::HasHotCell() const
 {
-    return State.LayoutIndex == 0 ? TEXT("Linked Fan") : TEXT("Offset Fork");
+    return State.Pieces.ContainsByPredicate([](const FSalvagePiece& P) { return P.State == EPieceState::Cargo && P.Material == EMaterial::HotCell; });
 }
-
-FRecoveryResult FSalvageModel::Recover(const TArray<int32>& PieceIds)
+const FSalvagePiece* FSalvageModel::GetAtRiskPiece() const
+{
+    const FSalvagePiece* Best = nullptr;
+    for (const FSalvagePiece& P : State.Pieces)
+        if (P.State == EPieceState::Cargo && P.Material != EMaterial::HotCell
+            && (!Best || P.Amount > Best->Amount || (P.Amount == Best->Amount && P.Id < Best->Id))) Best = &P;
+    return Best;
+}
+bool FSalvageModel::IsJobFailed() const
+{
+    return !State.bDeliveryCompleted && (State.bJobEnded || State.HeatsUsed >= HeatsPerJob
+        || State.Banked + State.Cargo + GetAvailableAmount() < State.Goal);
+}
+void FSalvageModel::UpdateFailure() { if (IsJobFailed()) State.bJobEnded = true; }
+bool FSalvageModel::IsJobUnlocked(int32 Index) const
+{
+    return Index >= 0 && Index < LayoutCount && GetPlayerLevel() >= JobDefinition(Index).RequiredLevel;
+}
+bool FSalvageModel::IsJobCleared(int32 Index) const { return State.ClearedJobs.IsValidIndex(Index) && State.ClearedJobs[Index]; }
+bool FSalvageModel::IsJobGold(int32 Index) const { return State.GoldJobs.IsValidIndex(Index) && State.GoldJobs[Index]; }
+TArray<int32> FSalvageModel::GetCaptureGroup(int32 Id) const
+{
+    TArray<int32> Group;
+    const FSalvagePiece* Start = FindPiece(Id);
+    if (!Start || Start->State != EPieceState::Available) return Group;
+    Group.Add(Id);
+    for (int32 Cursor = 0; Cursor < Group.Num(); ++Cursor)
+    {
+        const FSalvagePiece* Piece = FindPiece(Group[Cursor]);
+        for (int32 Link : Piece->DirectLinks)
+        {
+            const FSalvagePiece* Other = FindPiece(Link);
+            if (Other && Other->State == EPieceState::Available) Group.AddUnique(Link);
+        }
+    }
+    Group.Sort(); return Group;
+}
+bool FSalvageModel::CanCaptureGroup(int32 Id) const
+{
+    if (State.bJobEnded || IsJobFailed() || State.HeatsUsed >= HeatsPerJob) return false;
+    const TArray<int32> Group = GetCaptureGroup(Id);
+    if (Group.IsEmpty()) return false;
+    int32 Mass = State.CargoMass;
+    for (int32 PieceId : Group) Mass += FindPiece(PieceId)->Mass;
+    return Mass <= GetMaxCaptureMass();
+}
+FRecoveryResult FSalvageModel::CapturePieces(const TArray<int32>& Ids)
 {
     FRecoveryResult Result;
-    // Private callers provide a complete selection; identity and Available state remain authoritative.
-    for (FSalvagePiece& Piece : State.Pieces)
-    {
-        if (Piece.State == EPieceState::Available && PieceIds.Contains(Piece.Id))
+    if (State.bJobEnded || IsJobFailed() || State.HeatsUsed >= HeatsPerJob) return Result;
+    TArray<int32> Expanded;
+    for (int32 Id : Ids) for (int32 Linked : GetCaptureGroup(Id)) Expanded.AddUnique(Linked);
+    Expanded.Sort();
+    int32 Mass = 0; for (int32 Id : Expanded) Mass += FindPiece(Id)->Mass;
+    if (Mass + State.CargoMass > GetMaxCaptureMass()) { Result.bCapacityRefused = true; return Result; }
+    for (FSalvagePiece& P : State.Pieces)
+        if (Expanded.Contains(P.Id))
         {
-            Piece.State = EPieceState::Cargo;
-            Result.PieceIds.Add(Piece.Id);
-            Result.Amount += Piece.Amount;
+            P.State = EPieceState::Cargo; P.CaptureOrder = ++State.CaptureSerial;
+            Result.PieceIds.Add(P.Id); Result.Amount += P.Amount; Result.Mass += P.Mass;
         }
-    }
-    if (Result.Amount > 0)
-    {
-        Result.PieceIds.Sort();
-        State.Cargo += Result.Amount;
-        IncrementEpoch();
-    }
+    if (Result.Succeeded()) { RecountCargo(); IncrementEpoch(); }
     return Result;
 }
-
-FRecoveryResult FSalvageModel::SweepAt(const FVector2D& Position)
+bool FSalvageModel::MoveAvailablePiece(int32 Id, const FVector2D& Position)
 {
-    if (!IsInsideTray(Position)) return FRecoveryResult();
-    TArray<int32> Ids;
-    for (const FSalvagePiece& Piece : State.Pieces)
-    {
-        if (Piece.Kind == EPieceKind::Loose && Piece.State == EPieceState::Available
-            && (Piece.Position - Position).SizeSquared() <= double(SweepRadius) * SweepRadius)
-            Ids.Add(Piece.Id);
-    }
-    return Recover(Ids);
+    if (!IsInsideTray(Position)) return false;
+    for (FSalvagePiece& P : State.Pieces)
+        if (P.Id == Id && P.State == EPieceState::Available) { P.Position = Position; return true; }
+    return false;
 }
-
-FPullSelection FSalvageModel::PreviewPull(int32 RingId, const FVector2D& DesiredEndpoint) const
+void FSalvageModel::RecountCargo()
 {
-    FPullSelection Result;
-    const FSalvagePiece* Ring = FindPiece(RingId);
-    if (!Ring || Ring->Kind != EPieceKind::Tangle || Ring->State != EPieceState::Available
-        || !IsFinitePoint(DesiredEndpoint)) return Result;
-    Result.RingId = RingId;
-    Result.Epoch = State.Epoch;
-    const FVector2D Clamped = ClampToTray(DesiredEndpoint);
-    const FVector2D Delta = Clamped - Ring->Position;
-    const double Length = Delta.Size();
-    Result.Endpoint = Ring->Position + Delta * (Length > GetReach() ? GetReach() / Length : 1.0);
-    for (const FSalvagePiece& Piece : State.Pieces)
-    {
-        if (Piece.State != EPieceState::Available) continue;
-        const bool bEligible = Piece.Id == RingId || Piece.Kind == EPieceKind::Loose
-            || (HasBreakaway() && Ring->DirectLinks.Contains(Piece.Id));
-        if (bEligible && (Piece.Id == RingId
-            || IsInsideCapsule(Piece.Position, Ring->Position, Result.Endpoint, PullRadius)))
-        {
-            Result.PieceIds.Add(Piece.Id);
-            Result.Amount += Piece.Amount;
-        }
-    }
-    Result.PieceIds.Sort();
+    State.Cargo = 0; State.CargoMass = 0;
+    for (const FSalvagePiece& P : State.Pieces)
+        if (P.State == EPieceState::Cargo) { State.Cargo += P.Amount; State.CargoMass += P.Mass; }
+    if (!IsCargoUnsafe()) State.FuseElapsed = 0;
+}
+FSpillResult FSalvageModel::VentCargo(const FVector2D& Origin)
+{
+    FSpillResult Result;
+    if (State.bJobEnded || State.CargoMass == 0 || !FinitePoint(Origin)) return Result;
+    PlaceDroppedCargo(Origin, Result.ReleasedPieceIds);
+    RecountCargo(); IncrementEpoch();
     return Result;
 }
-
-FRecoveryResult FSalvageModel::CommitPull(const FPullSelection& Preview)
+void FSalvageModel::PlaceDroppedCargo(const FVector2D& Origin, TArray<int32>& OutIds)
 {
-    if (!Preview.IsValid() || Preview.Epoch != State.Epoch) return FRecoveryResult();
-    const FPullSelection Current = PreviewPull(Preview.RingId, Preview.Endpoint);
-    if (Current.PieceIds != Preview.PieceIds || Current.Amount != Preview.Amount
-        || !Current.Endpoint.Equals(Preview.Endpoint, 0.001)) return FRecoveryResult();
-    return Recover(Current.PieceIds);
+    struct FDropGroup { TArray<int32> Ids; };
+    struct FPlaced { FVector2D Position; bool Hot; };
+    TArray<FDropGroup> Groups;
+    TSet<int32> Dropped;
+    for (const auto& P : State.Pieces)
+    {
+        if (P.State != EPieceState::Cargo || Dropped.Contains(P.Id)) continue;
+        FDropGroup Group; Group.Ids.Add(P.Id); Dropped.Add(P.Id);
+        for (int32 I = 0; I < Group.Ids.Num(); ++I)
+            for (int32 Linked : FindPiece(Group.Ids[I])->DirectLinks)
+            {
+                const auto* Other = FindPiece(Linked);
+                if (Other && Other->State == EPieceState::Cargo && !Dropped.Contains(Linked))
+                { Group.Ids.Add(Linked); Dropped.Add(Linked); }
+            }
+        Group.Ids.Sort(); Groups.Add(MoveTemp(Group));
+    }
+    Groups.Sort([](const FDropGroup& A, const FDropGroup& B) {
+        return A.Ids.Num() == B.Ids.Num() ? A.Ids[0] < B.Ids[0] : A.Ids.Num() > B.Ids.Num();
+    });
+    TArray<FPlaced> Placed;
+    const FVector2D Center = ClampToTray(Origin);
+    for (const FDropGroup& Group : Groups)
+    {
+        FVector2D Mean = FVector2D::ZeroVector;
+        for (int32 Id : Group.Ids) Mean += FindPiece(Id)->Position;
+        Mean /= Group.Ids.Num();
+        TArray<FVector2D> Offsets;
+        double Extent = 0;
+        for (int32 Id : Group.Ids) { const auto Offset = FindPiece(Id)->Position-Mean; Offsets.Add(Offset); Extent = FMath::Max(Extent, Offset.Size()); }
+        // Keep normal authored bundle geometry. Compact a previously scattered bundle
+        // uniformly so its links remain readable and it can be placed near a tray edge.
+        if (Extent > 90) for (auto& Offset : Offsets) Offset *= 90. / Extent;
+        FVector2D Low = FVector2D::ZeroVector, High = FVector2D::ZeroVector;
+        for (const auto& Offset : Offsets)
+        { Low.X=FMath::Min(Low.X,Offset.X); Low.Y=FMath::Min(Low.Y,Offset.Y); High.X=FMath::Max(High.X,Offset.X); High.Y=FMath::Max(High.Y,Offset.Y); }
+        FVector2D Best = Center;
+        double BestPenalty = TNumericLimits<double>::Max();
+        // A fixed fine grid is deterministic and bounded. Prefer nearby empty space;
+        // never clamp pieces independently, which would collapse a bundle at a corner.
+        for (double Y=TrayMinY+24; Y<=TrayMaxY-24; Y+=28)
+            for (double X=TrayMinX+24; X<=TrayMaxX-24; X+=28)
+            {
+                const FVector2D Candidate(FMath::Clamp(X,TrayMinX+24.-Low.X,TrayMaxX-24.-High.X),
+                    FMath::Clamp(Y,TrayMinY+24.-Low.Y,TrayMaxY-24.-High.Y));
+                bool Blocked = false; double Penalty = (Candidate-Center).SizeSquared();
+                for (int32 I=0; I<Group.Ids.Num() && !Blocked; ++I)
+                {
+                    const bool Hot = FindPiece(Group.Ids[I])->Material == EMaterial::HotCell;
+                    const auto Point = Candidate+Offsets[I];
+                    for (const auto& Other : Placed)
+                    {
+                        const double Gap = Hot || Other.Hot ? 118. : 60.;
+                        if ((Point-Other.Position).SizeSquared() < Gap*Gap) { Blocked=true; break; }
+                    }
+                    // Existing unmoved scrap is a soft obstacle in dense trays; the
+                    // released pieces themselves always keep the hard separation above.
+                    for (const auto& Other : State.Pieces)
+                        if (Other.State == EPieceState::Available && !Dropped.Contains(Other.Id))
+                        {
+                            const double Gap = Hot || Other.Material == EMaterial::HotCell ? 118. : 60.;
+                            const double Distance = (Point-Other.Position).Size();
+                            if (Distance < Gap) Penalty += 1000000. + FMath::Square(Gap-Distance)*100.;
+                        }
+                }
+                if (!Blocked && Penalty < BestPenalty) { BestPenalty=Penalty; Best=Candidate; }
+            }
+        for (int32 I=0; I<Group.Ids.Num(); ++I)
+            for (auto& P : State.Pieces) if (P.Id == Group.Ids[I])
+            {
+                P.Position=ClampToTray(Best+Offsets[I]); P.State=EPieceState::Available; P.CaptureOrder=0;
+                OutIds.Add(P.Id); Placed.Add({P.Position,P.Material==EMaterial::HotCell}); break;
+            }
+    }
+    OutIds.Sort();
 }
-
+FSpillResult FSalvageModel::TriggerOverload(const FVector2D& Origin)
+{
+    FSpillResult Result;
+    if (State.bJobEnded || State.HeatsUsed >= HeatsPerJob || !IsCargoUnsafe() || !FinitePoint(Origin)) return Result;
+    const FSalvagePiece* AtRisk = GetAtRiskPiece();
+    const int32 LostId = AtRisk ? AtRisk->Id : INDEX_NONE;
+    Result.bTripped = true;
+    for (FSalvagePiece& P : State.Pieces)
+        if (P.State == EPieceState::Cargo)
+        {
+            if (P.Id == LostId || P.Material == EMaterial::HotCell)
+            {
+                P.State = EPieceState::Lost; Result.DestroyedPieceIds.Add(P.Id); Result.LostValue += P.Amount;
+            }
+        }
+    PlaceDroppedCargo(Origin, Result.ReleasedPieceIds);
+    // An emergency quench spends the same finite fuel used by a smelt. Even a lone
+    // zero-value hot cell costs a charge, so deliberately tripping is not free disposal.
+    State.HeatsUsed = FMath::Min(HeatsPerJob, State.HeatsUsed + 1);
+    if (State.HeatsUsed == HeatsPerJob) State.bJobEnded = true;
+    RecountCargo(); State.FuseElapsed = 0; UpdateFailure(); IncrementEpoch(); return Result;
+}
+FSpillResult FSalvageModel::AdvanceRisk(float Delta, const FVector2D& Origin)
+{
+    if (!FMath::IsFinite(Delta) || Delta <= 0 || !FinitePoint(Origin) || State.bJobEnded) return {};
+    if (!IsCargoUnsafe()) { State.FuseElapsed = 0; return {}; }
+    State.FuseElapsed = FMath::Min(GetFuseDuration(), State.FuseElapsed + Delta);
+    if (State.FuseElapsed >= GetFuseDuration()) return TriggerOverload(Origin);
+    return {};
+}
+bool FSalvageModel::CanSmelt(FString& Reason) const
+{
+    if (State.bJobEnded || IsJobFailed()) { Reason = TEXT("Contract ended. Choose a new attempt in the workshop."); return false; }
+    if (State.HeatsUsed >= HeatsPerJob) { Reason = TEXT("No furnace heats left."); return false; }
+    if (State.CargoMass == 0) { Reason = TEXT("Collect a useful haul first."); return false; }
+    if (HasHotCell()) { Reason = TEXT("Hot cell in cargo. Right-click to drop the haul before smelting."); return false; }
+    if (State.CargoMass > GetCapacity()) { Reason = TEXT("Overloaded. Right-click to drop the haul before smelting."); return false; }
+    Reason.Reset(); return true;
+}
 FBankResult FSalvageModel::BankCargo()
 {
     FBankResult Result;
-    Result.PreviousUpgradeLevel = State.UpgradeLevel;
-    Result.NewUpgradeLevel = State.UpgradeLevel;
-    if (State.Cargo == 0) return Result;
-    Result.Amount = State.Cargo;
-    for (FSalvagePiece& Piece : State.Pieces)
-    {
-        if (Piece.State == EPieceState::Cargo)
+    Result.PreviousPlayerLevel = Result.NewPlayerLevel = GetPlayerLevel();
+    Result.PreviousUpgradeLevel = Result.NewUpgradeLevel = GetUpgradeLevel();
+    FString Reason; if (!CanSmelt(Reason)) return Result;
+    Result.Amount = State.Cargo; Result.Mass = State.CargoMass;
+    for (FSalvagePiece& P : State.Pieces)
+        if (P.State == EPieceState::Cargo)
         {
-            Piece.State = EPieceState::Banked;
-            Result.PieceIds.Add(Piece.Id);
+            P.State = EPieceState::Banked; Result.PieceIds.Add(P.Id);
+            if (P.Material == EMaterial::Core && !State.CollectedCores.Contains(P.CoreId))
+            { State.CollectedCores.Add(P.CoreId); Result.NewCoreIds.Add(P.CoreId); }
         }
-    }
-    State.Banked += State.Cargo;
-    State.Cargo = 0;
+    State.CollectedCores.Sort(); State.Banked += Result.Amount; ++State.HeatsUsed; RecountCargo();
+    int32 Award = Result.Amount;
     if (!State.bDeliveryCompleted && State.Banked >= State.Goal)
     {
-        State.bDeliveryCompleted = true;
-        Result.bCompletedNow = true;
-        State.CompletedDeliveryCount = FMath::Min(State.CompletedDeliveryCount + 1, 1000000);
-        State.UpgradeLevel = FMath::Min(State.CompletedDeliveryCount, 2);
-        Result.NewUpgradeLevel = State.UpgradeLevel;
+        State.bDeliveryCompleted = true; Result.bCompletedNow = true;
+        ++State.CompletedDeliveryCount; State.ClearedJobs[State.LayoutIndex] = true;
+        Award += GetJob().CompletionBonus;
+        const int32 Best = State.BestHeats[State.LayoutIndex];
+        State.BestHeats[State.LayoutIndex] = Best == 0 ? State.HeatsUsed : FMath::Min(Best, State.HeatsUsed);
     }
-    IncrementEpoch();
-    return Result;
+    if (!State.bGoldAwarded && State.Banked >= GetGoldGoal())
+    {
+        State.bGoldAwarded = true; Result.bGoldNow = true;
+        State.GoldJobs[State.LayoutIndex] = true; Award += GetJob().GoldBonus;
+    }
+    State.BestBanked[State.LayoutIndex] = FMath::Max(State.BestBanked[State.LayoutIndex], State.Banked);
+    Result.CashAwarded = FMath::Min(Award, CareerLimit - State.Wallet);
+    Result.XPAwarded = FMath::Min(Award, CareerLimit - State.XP);
+    State.Wallet += Result.CashAwarded; State.XP += Result.XPAwarded;
+    Result.NewPlayerLevel = GetPlayerLevel();
+    if (State.HeatsUsed >= HeatsPerJob) State.bJobEnded = true;
+    UpdateFailure(); IncrementEpoch(); return Result;
 }
-
-void FSalvageModel::ResetLayout()
+bool FSalvageModel::StartJob(int32 Index, int32 Seed)
 {
-    BuildLayout(State.LayoutIndex);
+    if (!IsJobUnlocked(Index) || Seed <= 0) return false;
+    const bool bUntouched = State.HeatsUsed == 0 && State.CaptureSerial == 0;
+    if (!State.bJobEnded && !bUntouched) return false;
+    BuildLayout(Index, Seed); return true;
+}
+void FSalvageModel::RetryJob(bool bNewSeed)
+{
+    const int32 Seed = bNewSeed ? State.Seed == MAX_int32 ? 1 : State.Seed + 1 : State.Seed;
+    BuildLayout(State.LayoutIndex, Seed);
+}
+bool FSalvageModel::FinishJob()
+{
+    if (!State.bDeliveryCompleted || State.CargoMass > 0) return false;
+    State.bJobEnded = true; IncrementEpoch(); return true;
+}
+void FSalvageModel::AbandonJob()
+{
+    for (FSalvagePiece& P : State.Pieces) if (P.State == EPieceState::Cargo) P.State = EPieceState::Lost;
+    RecountCargo(); State.bJobEnded = true; IncrementEpoch();
+}
+void FSalvageModel::BuildLayout(int32 Index, int32 Seed)
+{
+    State.LayoutIndex = FMath::Clamp(Index, 0, LayoutCount - 1); State.Seed = Seed;
+    State.Pieces.Reset(); State.Cargo = 0; State.CargoMass = 0; State.Banked = 0;
+    State.HeatsUsed = 0; State.CaptureSerial = 0; State.FuseElapsed = 0;
+    State.Goal = GetJob().Quota; State.bDeliveryCompleted = false; State.bGoldAwarded = false; State.bJobEnded = false;
+    IncrementEpoch();
+    FRandomStream Random(Seed);
+    const FJobDefinition& Job = GetJob();
+    // A safe iron crescent remains in every job. Rich clusters rotate/mirror across a clear grid.
+    // Seeds change cluster approach angles and membership; no opaque required item can block quota.
+    TArray<FVector2D> Slots;
+    for (int32 Row = 0; Row < 8; ++Row)
+        for (int32 Col = 0; Col < 11; ++Col) Slots.Add(FVector2D(-445 + Col * 88, -258 + Row * 73));
+    for (int32 I = Slots.Num()-1; I > 0; --I) Slots.Swap(I, Random.RandRange(0, I));
+    int32 Slot = 0;
+    const auto Add = [&](EMaterial Material, int32 Count)
+    {
+        for (int32 I = 0; I < Count; ++I)
+        {
+            FSalvagePiece P; P.Id = State.Pieces.Num(); P.Material = Material;
+            P.Mass = MaterialMass(Material); P.Amount = MaterialValue(Material);
+            P.CoreId = Material == EMaterial::Core ? State.LayoutIndex : INDEX_NONE;
+            const FVector2D Jitter(Random.FRandRange(-9,9), Random.FRandRange(-8,8));
+            P.Position = ClampToTray(Slots[Slot++] + Jitter);
+            State.Pieces.Add(P);
+        }
+    };
+    Add(EMaterial::Iron, Job.IronCount); Add(EMaterial::Copper, Job.CopperCount);
+    Add(EMaterial::Alloy, Job.AlloyCount); Add(EMaterial::Core, 1); Add(EMaterial::HotCell, Job.CellCount);
+    // Broad iron opening is separated from dangerous clusters. Position it deliberately.
+    for (int32 I = 0; I < 12; ++I)
+        State.Pieces[I].Position = FVector2D(-428 + (I % 6) * 69, -255 + (I / 6) * 52);
+    // Two readable small copper/alloy bundles. Atomic group mass remains <=24kg in all jobs.
+    const int32 RichStart = Job.IronCount;
+    const int32 BundleCount = 2 + State.LayoutIndex / 2;
+    for (int32 B = 0; B < BundleCount; ++B)
+    {
+        const int32 First = RichStart + B * 3;
+        if (First + 2 >= RichStart + Job.CopperCount) break;
+        const double A = Random.FRandRange(-.8f,.8f) + (State.LayoutIndex % 2 ? 1.15 : .15);
+        const FVector2D Center(-260 + B * 172, 35 + ((B + State.LayoutIndex) % 2) * 135);
+        for (int32 K = 0; K < 3; ++K)
+            State.Pieces[First + K].Position = ClampToTray(Center + FVector2D(FMath::Cos(A),FMath::Sin(A)) * ((K-1) * 46.));
+        LinkPieces(State.Pieces, First, First+1); LinkPieces(State.Pieces, First+1, First+2);
+    }
+    // Core and cells are visually inspectable adjacent opportunities, not mandatory linked contamination.
+    const int32 CoreIndex = Job.IronCount + Job.CopperCount + Job.AlloyCount;
+    State.Pieces[CoreIndex].Position = FVector2D(335, -70 + 35 * (State.LayoutIndex % 3));
+    for (int32 I = 0; I < Job.CellCount; ++I)
+    {
+        const double Angle = I * 2.39996 + Random.FRandRange(-.35f,.35f);
+        const FVector2D Center = I < 2 ? State.Pieces[CoreIndex].Position : FVector2D(-30 + (I-2)*105,130);
+        State.Pieces[CoreIndex+1+I].Position = ClampToTray(Center + FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)) * (80 + I*7));
+    }
 }
 
+// Integration compatibility: legacy corridor selection is deliberately inactive.
+int32 FSalvageModel::FindAvailableRing(const FVector2D& Position) const { return INDEX_NONE; }
+FRecoveryResult FSalvageModel::SweepAt(const FVector2D& Position)
+{
+    if (!IsInsideTray(Position)) return {};
+    TArray<int32> Nearby;
+    for (const FSalvagePiece& P : State.Pieces)
+        if (P.State == EPieceState::Available && (P.Position-Position).SizeSquared() <= SweepRadius*SweepRadius) Nearby.Add(P.Id);
+    return CapturePieces(Nearby);
+}
+FPullSelection FSalvageModel::PreviewPull(int32 RingId, const FVector2D& DesiredEndpoint) const { return {}; }
+FRecoveryResult FSalvageModel::CommitPull(const FPullSelection& Preview) { return {}; }
 bool FSalvageModel::AdvanceLayout()
 {
-    if (!State.bDeliveryCompleted || State.Cargo != 0) return false;
-    BuildLayout((State.LayoutIndex + 1) % LayoutCount);
-    return true;
+    if (!State.bDeliveryCompleted || State.CargoMass > 0) return false;
+    FinishJob();
+    for (int32 Offset = 1; Offset <= LayoutCount; ++Offset)
+    {
+        const int32 Next = (State.LayoutIndex + Offset) % LayoutCount;
+        if (IsJobUnlocked(Next)) return StartJob(Next, State.Seed == MAX_int32 ? 1 : State.Seed + 1);
+    }
+    return false;
 }
 
-void FSalvageModel::BuildLayout(int32 LayoutIndex)
+bool FSalvageModel::ValidateSnapshot(const FSalvageSnapshot& S, FString& Error)
 {
-    State.LayoutIndex = LayoutIndex;
-    State.Pieces.Reset();
-    State.Cargo = 0;
-    State.Banked = 0;
-    State.Goal = LayoutIndex == 0 ? 100 : 140;
-    State.bDeliveryCompleted = false;
-    IncrementEpoch();
-
-    if (LayoutIndex == 0)
+    const auto Fail = [&Error](const TCHAR* Text) { Error = Text; return false; };
+    if (S.Version != SnapshotVersion) return Fail(TEXT("Unsupported salvage career save version."));
+    if (S.LayoutIndex < 0 || S.LayoutIndex >= LayoutCount || S.Seed <= 0 || S.Epoch == 0) return Fail(TEXT("Invalid contract identity."));
+    if (S.Wallet < 0 || S.Wallet > CareerLimit || S.XP < 0 || S.XP > CareerLimit || S.Wallet > S.XP)
+        return Fail(TEXT("Invalid career cash or experience ledger."));
+    if (S.UpgradeTiers.Num() != 3 || S.BestBanked.Num() != LayoutCount || S.BestHeats.Num() != LayoutCount
+        || S.ClearedJobs.Num() != LayoutCount || S.GoldJobs.Num() != LayoutCount) return Fail(TEXT("Invalid career record sizes."));
+    int32 TierSum = 0, Spent = 0;
+    for (int32 Tier : S.UpgradeTiers)
     {
-        // The southern crescent and isolated tangle offer a generous unlinked opening.
-        const FVector2D Opening[] = {
-            {-430,-210},{-388,-242},{-340,-256},{-290,-247},{-245,-220},
-            {-417,-165},{-373,-184},{-326,-198},{-279,-185},{-232,-155}
-        };
-        int32 Id = 0;
-        for (const FVector2D& P : Opening) AddPiece(State.Pieces, Id++, EPieceKind::Loose, P.X, P.Y, 8);
-        AddPiece(State.Pieces, 100, EPieceKind::Tangle, -355, -85, 40);
-        // Horizontal fan: starting at the hub can reach all three directly linked leaves.
-        AddPiece(State.Pieces, 101, EPieceKind::Tangle, -210, 90, 44);
-        AddPiece(State.Pieces, 102, EPieceKind::Tangle, 30, 25, 36);
-        AddPiece(State.Pieces, 103, EPieceKind::Tangle, 60, 95, 36);
-        AddPiece(State.Pieces, 104, EPieceKind::Tangle, 20, 170, 36);
-        Link(State.Pieces, 101, 102);
-        Link(State.Pieces, 101, 103);
-        Link(State.Pieces, 101, 104);
-        const FVector2D Seam[] = {
-            {-155,55},{-102,90},{-54,120},{112,55},{168,112},{225,82},
-            {290,65},{343,105},{408,80},{445,136},{312,220},{380,-145},
-            {430,-215},{210,-225},{125,-165},{-30,-170}
-        };
-        Id = 10;
-        for (const FVector2D& P : Seam) AddPiece(State.Pieces, Id++, EPieceKind::Loose, P.X, P.Y, 8);
+        if (Tier < 0 || Tier > 3 || Tier > LevelForXP(S.XP)-1) return Fail(TEXT("Unowned or locked rig tier."));
+        TierSum += Tier; if (Tier >= 1) Spent += 150; if (Tier >= 2) Spent += 300; if (Tier >= 3) Spent += 500;
     }
-    else
+    if (S.UpgradeLevel != TierSum || (S.XP < CareerLimit && S.XP - S.Wallet != Spent))
+        return Fail(TEXT("Purchased rig does not match the cash ledger."));
+    if (LevelForXP(S.XP) < JobDefinition(S.LayoutIndex).RequiredLevel) return Fail(TEXT("Active contract is locked."));
+    if (S.CompletedDeliveryCount < 0 || S.CompletedDeliveryCount > 1000000 || S.HeatsUsed < 0 || S.HeatsUsed > HeatsPerJob
+        || S.CaptureSerial < 0 || S.CaptureSerial > 100000000 || S.Goal != JobDefinition(S.LayoutIndex).Quota)
+        return Fail(TEXT("Invalid attempt counters or goal."));
+    int32 Clears = 0;
+    for (int32 I = 0; I < LayoutCount; ++I)
     {
-        // Fork: hub directions disagree; the lower leaf offers a rich diagonal loose seam.
-        AddPiece(State.Pieces, 100, EPieceKind::Tangle, -80, 30, 44);
-        AddPiece(State.Pieces, 101, EPieceKind::Tangle, -280, 205, 36);
-        AddPiece(State.Pieces, 102, EPieceKind::Tangle, 155, 210, 36);
-        AddPiece(State.Pieces, 103, EPieceKind::Tangle, -260, -170, 40);
-        AddPiece(State.Pieces, 104, EPieceKind::Tangle, 330, -180, 36);
-        Link(State.Pieces, 100, 101);
-        Link(State.Pieces, 100, 102);
-        Link(State.Pieces, 100, 103);
-        Link(State.Pieces, 102, 104);
-        const FVector2D Loose[] = {
-            {-405,-210},{-360,-190},{-205,-145},{-165,-110},{-110,-72},
-            {-55,-38},{0,0},{50,35},{105,70},{165,105},{220,140},
-            {280,180},{345,215},{405,245},{-370,190},{-320,250},
-            {-165,230},{-120,180},{-10,230},{270,-220},{380,-120},
-            {425,-195},{180,-120},{40,-205},{-70,-230},{-410,10}
-        };
-        int32 Id = 0;
-        for (const FVector2D& P : Loose) AddPiece(State.Pieces, Id++, EPieceKind::Loose, P.X, P.Y, 8);
+        if (S.BestBanked[I] < 0 || S.BestBanked[I] > 100000 || S.BestHeats[I] < 0 || S.BestHeats[I] > HeatsPerJob
+            || (S.GoldJobs[I] && !S.ClearedJobs[I]) || (S.ClearedJobs[I] != (S.BestHeats[I] > 0))
+            || (S.ClearedJobs[I] && S.BestBanked[I] < JobDefinition(I).Quota)
+            || (S.GoldJobs[I] && S.BestBanked[I] < JobDefinition(I).GoldGoal)) return Fail(TEXT("Inconsistent completed contract records."));
+        if (S.ClearedJobs[I]) ++Clears;
     }
-}
-
-bool FSalvageModel::ValidateSnapshot(const FSalvageSnapshot& Snapshot, FString& OutError)
-{
-    const auto Fail = [&OutError](const TCHAR* Message) { OutError = Message; return false; };
-    if (Snapshot.Version != SnapshotVersion) return Fail(TEXT("Unsupported save version."));
-    if (Snapshot.LayoutIndex < 0 || Snapshot.LayoutIndex >= LayoutCount || Snapshot.Epoch == 0)
-        return Fail(TEXT("Invalid delivery identity."));
-    if (Snapshot.CompletedDeliveryCount < 0 || Snapshot.CompletedDeliveryCount > 1000000
-        || Snapshot.UpgradeLevel != FMath::Min(Snapshot.CompletedDeliveryCount, 2))
-        return Fail(TEXT("Invalid retained improvement state."));
-    if (Snapshot.Pieces.Num() == 0 || Snapshot.Pieces.Num() > 256)
-        return Fail(TEXT("Invalid material population."));
-    TSet<int32> Ids;
-    int32 Cargo = 0;
-    int32 Banked = 0;
-    int32 Total = 0;
-    for (const FSalvagePiece& Piece : Snapshot.Pieces)
+    if (S.CompletedDeliveryCount < Clears) return Fail(TEXT("Completed contract count is inconsistent."));
+    TSet<int32> CoreIds;
+    for (int32 Id : S.CollectedCores)
+    { if (Id < 0 || Id >= LayoutCount || CoreIds.Contains(Id)) return Fail(TEXT("Invalid rare collection.")); CoreIds.Add(Id); }
+    if (S.Pieces.IsEmpty() || S.Pieces.Num() > 256) return Fail(TEXT("Invalid salvage population."));
+    TSet<int32> Ids, CaptureOrders;
+    int32 Cargo = 0, Mass = 0, Banked = 0, Available = 0, SpentHeatWitnesses = 0; bool bHot = false;
+    for (const FSalvagePiece& P : S.Pieces)
     {
-        if (Piece.Id < 0 || Ids.Contains(Piece.Id)) return Fail(TEXT("Duplicate or invalid material identity."));
-        Ids.Add(Piece.Id);
-        if (!IsInsideTray(Piece.Position) || Piece.Amount < 1 || Piece.Amount > 1000)
-            return Fail(TEXT("Invalid material geometry or amount."));
-        if (Piece.Kind != EPieceKind::Loose && Piece.Kind != EPieceKind::Tangle)
-            return Fail(TEXT("Invalid material kind."));
-        if (Piece.State != EPieceState::Available && Piece.State != EPieceState::Cargo
-            && Piece.State != EPieceState::Banked) return Fail(TEXT("Invalid material ownership."));
-        if (Piece.Kind == EPieceKind::Loose && !Piece.DirectLinks.IsEmpty())
-            return Fail(TEXT("Loose material cannot own tangle links."));
-        if (Piece.State == EPieceState::Cargo) Cargo += Piece.Amount;
-        if (Piece.State == EPieceState::Banked) Banked += Piece.Amount;
-        Total += Piece.Amount;
-        TSet<int32> Links;
-        for (int32 LinkId : Piece.DirectLinks)
+        if (P.Id < 0 || Ids.Contains(P.Id)) return Fail(TEXT("Duplicate or invalid salvage identity.")); Ids.Add(P.Id);
+        if (!IsInsideTray(P.Position) || static_cast<int32>(P.Material) > static_cast<int32>(EMaterial::HotCell)
+            || static_cast<int32>(P.State) > static_cast<int32>(EPieceState::Lost)
+            || static_cast<int32>(P.Kind) > static_cast<int32>(EPieceKind::Tangle)
+            || P.Mass != MaterialMass(P.Material) || P.Amount != MaterialValue(P.Material)) return Fail(TEXT("Invalid salvage geometry, type, mass or value."));
+        if ((P.Material == EMaterial::Core && P.CoreId != S.LayoutIndex)
+            || (P.Material != EMaterial::Core && P.CoreId != INDEX_NONE)) return Fail(TEXT("Invalid core identity."));
+        if (P.CaptureOrder < 0 || P.CaptureOrder > S.CaptureSerial) return Fail(TEXT("Invalid capture order."));
+        if (P.State == EPieceState::Cargo)
         {
-            if (LinkId == Piece.Id || Links.Contains(LinkId)) return Fail(TEXT("Duplicate or self link."));
-            Links.Add(LinkId);
-            const FSalvagePiece* Neighbor = Snapshot.Pieces.FindByPredicate(
-                [LinkId](const FSalvagePiece& Other) { return Other.Id == LinkId; });
-            if (!Neighbor || Neighbor->Kind != EPieceKind::Tangle || !Neighbor->DirectLinks.Contains(Piece.Id))
-                return Fail(TEXT("Missing or asymmetric tangle link."));
+            if (P.CaptureOrder == 0 || CaptureOrders.Contains(P.CaptureOrder)) return Fail(TEXT("Duplicate cargo capture order."));
+            CaptureOrders.Add(P.CaptureOrder); Cargo += P.Amount; Mass += P.Mass; bHot |= P.Material == EMaterial::HotCell;
+        }
+        if (P.State == EPieceState::Banked)
+        {
+            if (P.Material == EMaterial::HotCell || (P.Material == EMaterial::Core && !CoreIds.Contains(P.CoreId)))
+                return Fail(TEXT("Unsafe or unrecorded banked item."));
+            Banked += P.Amount;
+            ++SpentHeatWitnesses;
+        }
+        // Every quench destroys at least one previously captured piece, including
+        // zero-value cells. Every smelt banks at least one piece. A spent charge
+        // therefore needs a distinct terminal piece as a ledger witness; discarded
+        // untouched fixture pieces cannot fabricate evidence of consumed fuel.
+        if (P.State == EPieceState::Lost && P.CaptureOrder > 0) ++SpentHeatWitnesses;
+        if (P.State == EPieceState::Available) Available += P.Amount;
+        if ((P.DirectLinks.IsEmpty() && P.Kind != EPieceKind::Loose) || (!P.DirectLinks.IsEmpty() && P.Kind != EPieceKind::Tangle))
+            return Fail(TEXT("Link presentation does not match group membership."));
+        TSet<int32> Links;
+        for (int32 Id : P.DirectLinks)
+        {
+            const FSalvagePiece* Other = S.Pieces.FindByPredicate([Id](const FSalvagePiece& Q) { return Q.Id == Id; });
+            if (Id == P.Id || Links.Contains(Id) || !Other || !Other->DirectLinks.Contains(P.Id)) return Fail(TEXT("Dangling or asymmetric salvage link."));
+            Links.Add(Id);
         }
     }
-    if (Snapshot.Goal <= 0 || Snapshot.Goal >= Total) return Fail(TEXT("Goal must leave optional material."));
-    if (Snapshot.Cargo != Cargo || Snapshot.Banked != Banked)
-        return Fail(TEXT("Material ownership does not match the saved ledger."));
-    if (Snapshot.bDeliveryCompleted != (Banked >= Snapshot.Goal)
-        || (Snapshot.bDeliveryCompleted && Snapshot.CompletedDeliveryCount == 0))
-        return Fail(TEXT("Inconsistent delivery completion."));
-    OutError.Reset();
-    return true;
+    if (S.Cargo != Cargo || S.CargoMass != Mass || S.Banked != Banked || Mass > (24 + 8*S.UpgradeTiers[0])*3/2)
+        return Fail(TEXT("Attempt material ledger does not match ownership."));
+    const bool bUnsafe = bHot || Mass > 24 + 8*S.UpgradeTiers[0];
+    if (!FMath::IsFinite(S.FuseElapsed) || S.FuseElapsed < 0 || S.FuseElapsed >= 3.f + S.UpgradeTiers[2]
+        || (!bUnsafe && S.FuseElapsed != 0)) return Fail(TEXT("Invalid saved instability fuse."));
+    if (S.bDeliveryCompleted != (Banked >= S.Goal) || S.bGoldAwarded != (Banked >= JobDefinition(S.LayoutIndex).GoldGoal)
+        || (S.bDeliveryCompleted && (!S.ClearedJobs[S.LayoutIndex] || S.CompletedDeliveryCount == 0))
+        || (S.bGoldAwarded && !S.GoldJobs[S.LayoutIndex])) return Fail(TEXT("Contract bonus state is inconsistent."));
+    if ((S.HeatsUsed == 0 && Banked != 0) || S.HeatsUsed > SpentHeatWitnesses
+        || (S.HeatsUsed == HeatsPerJob && !S.bJobEnded)
+        || (!S.bDeliveryCompleted && Banked + Cargo + Available < S.Goal && !S.bJobEnded))
+        return Fail(TEXT("Invalid furnace heat or failed-contract state."));
+    const int32 EarnedThisJob = Banked + (S.bDeliveryCompleted ? JobDefinition(S.LayoutIndex).CompletionBonus : 0)
+        + (S.bGoldAwarded ? JobDefinition(S.LayoutIndex).GoldBonus : 0);
+    if (S.XP < EarnedThisJob || S.BestBanked[S.LayoutIndex] < Banked) return Fail(TEXT("Career ledger is missing a committed smelt."));
+    Error.Reset(); return true;
 }
-
-bool FSalvageModel::CheckInvariants(FString& OutError) const
+bool FSalvageModel::CheckInvariants(FString& Error) const { return ValidateSnapshot(State, Error); }
+bool FSalvageModel::RestoreSnapshot(const FSalvageSnapshot& Snapshot, FString& Error)
 {
-    return ValidateSnapshot(State, OutError);
-}
-
-bool FSalvageModel::RestoreSnapshot(const FSalvageSnapshot& Snapshot, FString& OutError)
-{
-    if (!ValidateSnapshot(Snapshot, OutError)) return false;
-    const uint32 PreviousEpoch = State.Epoch;
-    State = Snapshot;
-    // A loaded copy must invalidate any live gesture, even if loading a snapshot of itself.
-    State.Epoch = FMath::Max(State.Epoch, PreviousEpoch);
-    IncrementEpoch();
-    return true;
+    if (!ValidateSnapshot(Snapshot, Error)) return false;
+    const uint32 Prior = State.Epoch; State = Snapshot; State.Epoch = FMath::Max(Prior, State.Epoch); IncrementEpoch(); return true;
 }
 }

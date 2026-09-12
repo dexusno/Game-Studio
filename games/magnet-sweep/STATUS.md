@@ -1,29 +1,30 @@
-# Magnet Sweep — playable concept demo ready
+# Magnet Sweep — gameplay rebuild ready for owner play
 
-Updated 2026-09-12. Stage: prototype. Development is complete **through the playable concept demo only**, as authorized. Development timeline was not a consideration. The next action is owner playtesting; full production and store work have not been started.
+Updated 2026-09-12. Stage: prototype. Version 0.2.0 / final R2 Windows Development package. The owner-authorized rebuild is implemented. Timeline is not a consideration. No publication or purchases were requested.
 
-## Open the demo
+## Governing direction and current game
 
-Use `Play Magnet Sweep.cmd` in this game, or `BuildOutput/ConceptDemo/Windows/MagnetSweep.exe`. The full Windows folder is required. The owner entry state is a fresh Linked Fan tray, starter magnet, no banked/carried metal and sound on. Current delivery and rig autosave. BUILD.md has controls and reproduction commands.
+Klaus rejected the original concept demo as “utterly boring”: no felt goal, progress, melting reward, challenge, risk or magnetic impact. That negative human playtest supersedes earlier agent design confidence and functional QA. The former unlimited/risk-free rules at revision `8af011f` are historical; that artifact and owner's save remain separately under BuildOutput/ConceptDemo. BRIEF.md governs this rebuild.
 
-Hold primary mouse to sweep loose metal. Press a copper ring, drag and release for an aimed tug. Click the furnace to pour the entire haul. Earn Breakaway and longer reach, compare the linked fan and offset fork, and retry with the improved rig. Remaining scrap is optional; no timer, capacity tax, shop or lore progression has been added.
+Four fuel charges, salvage quotas and optional gold targets give each haul a purpose. Safe load starts at 24 kg with a 36 kg hard attachment ceiling. Material value differs from weight; connected bundles move together under actual continuous attraction. Hot cells or excessive mass trigger a persistent three-second fuse. Expiry spends one fuel charge and destroys the forecast highest-value unbanked salvage piece; cells are removed and remaining scrap returns to the tray. Banked money, XP, mods and collection remain safe. Running out of fuel below quota fails the attempt.
 
-## Verified evidence
+RMB Drop haul releases ALL cargo recoverably and turns the field off, replacing automatic hazard/cheap-piece sorting. Distinct spilled groups stay separated, with extra room around cells; large hauls may spread farther across the tray to find clear space. Smelting pays credits and XP, completion/gold bonuses, four ranks, six contracts, three upgrade branches with three tiers and six permanent collectible cores. Same-seed retry preserves career progress; completed runs remix arrangements. Physical motion, material-specific objects, force/impact/furnace effects, 19 original cues and a 96-second original music loop are integrated. Music and effects have separate controls.
 
-- Unreal 5.8.2 Windows Development build compiled, cooked, packaged and launched. Seven original Blender meshes and nine original procedural sound effects imported; generators and provenance are recorded with assets.
-- Six model/persistence automation tests passed, including finite reach/capsule geometry, direct-only links, whole-haul ownership, progression/retry and actual corrupt-save backup recovery. The deliberate recovery produces one expected warning.
-- Independent native play covered sweep retention, fast ring tugs, fixed gesture context, linked bursts, whole-haul/surplus deposits, both upgrades and layouts, full-rig replay, pause/focus, retry, mute setting persistence and real save/quit/reopen. The same fork route recovered 148 before extended reach and 180 with the complete rig; directed QA replay is not evidence of voluntary replay.
-- Native defects were repaired and rechecked: fast ring-origin capture, collection on an outward stroke, visible recovered block and F11 restoration of the original 1600x900 window.
-- An art director generated a labeled concept target and reviewed actual game captures. Camera framing, tray contrast, furnace depth and text were corrected in the real build. Concept imagery is separate from native gameplay evidence.
+## Build and actual evidence
 
-Final child executable SHA-256: `332931cdb84a904cce3417811cb9768f656504cef48b0dd8397b578745e00dd5`.
-Final game PAK SHA-256: `317f5e82007a9569c41b30a7a857f250d73f4fa9090666f4e23b74a17758ffe8`.
-QA.md records exact builds, coverage and limits. Build outputs and raw captures are ignored; only curated game-only evidence belongs in source control.
+- Final editor compilation passed; nine Unreal automation tests passed with zero failures/warnings in report 2026.09.12-10.19.45. Coverage includes atomic groups/capacity, persistent fuse and exact loss, charge consumption/final-charge end, whole-haul corner/full-rig recovery, rewards/purchases/collection, transactional saves and actual JSON/backup recovery. Legal-load model routes meet advanced 300/380/460 quotas at an affordable 40 kg capacity. This establishes feasibility, not native difficulty or enjoyment.
+- Final Windows build/cook/stage/archive succeeded in 40.62 seconds. [Play Magnet Sweep.cmd](Play%20Magnet%20Sweep.cmd) targets BuildOutput/Rework/Windows/MagnetSweep.exe. Exact EXE/PAK/IoStore hashes and compact tests are in [evidence/rework-verification.json](evidence/rework-verification.json) and BUILD.md.
+- Independent R1 native play visibly attracted and captured moving salvage, smelted it into an ingot, reached 132 salvage value / 212 credits and rank 2, banked the first rare core, bought a 150-credit capacity mod and opened the next contract. Real save/quit/relaunch preserved cargo, career and audio settings. Retry, focus pause and F11 restoration worked. R1 also exposed free hot-cell destruction; final R2 source/model tests close it with the one-fuel cost.
+- Final R2 native play verified clean default entry, no missing ambient-cubemap warning, actual save/relaunch of a 7 kg mixed haul and whole-haul drop at the upper-right corner: both pieces recoverable, zero cargo, no loss and all four fuel charges retained. Root inspected the actual R2 render in [evidence/rework-board.png](evidence/rework-board.png). All 19 sound assets loaded; music and field audio components were observed active. Signal files pass reproducibility/peak/seam checks. No perceptual listening was possible.
 
-## Remaining uncertainty and next action
+## Current foreground and progress — preserve
 
-Klaus should play without being coached toward a positive answer, then describe which action feels best or weakest and whether another delivery is wanted after the full rig. Human enjoyment, sound/mix perception, voluntary replay, demand and profitability are not established by agent checks.
+During R2 testing, Sky detected user input and the tray state changed independently of the QA agent. ALL native automation stopped. The running game and current R2/player career may now contain owner play; **do not reset, quit or overwrite them without a coordinated handoff**. The original ConceptDemo save was never changed. Initial R2 began fresh after the earlier disposable R1 QA save was backed up, but fresh career is no longer guaranteed after external input. The current session was left under the user's control.
 
-Held-preview visual inspection and pause/focus loss during a held Aim were not exercised with atomic drag tooling. Formal frame-time/memory benchmarks, other hardware/platforms and accessibility/controller bindings remain untested. No core-play blocker was observed in covered flows. The shared studio validator has one pre-existing unrelated Scrapstorm link error, with no Magnet Sweep issue.
+The one temporary QA-only Input.ini console-key attempt was unsuccessful; no slomo command ran. Root subsequently checked Saved/Config/Windows and found the temporary Input.ini absent. Preserve GameUserSettings and all career data.
 
-Keep the next increment within an explicit owner follow-up. BRIEF.md governs current mechanics; PRODUCTION-PLAN.md is an ordered contract, not permission to expand beyond this demo. Preserve other games and owner edits. Source, assets, records and the reviewed handoff should travel together at the committed revision.
+## Limits and next concrete action
+
+The nine final logic tests pass, but the native interruption left short-fuse rescue, unsafe furnace refusal, exact 24/36 kg boundaries, four tiny pours and final-charge receipt insufficiently exercised in R2. The R2 corner test did not yet recover a hazardous mixed spill with precision. QA-REWORK.md distinguishes these gaps from earlier R1 evidence and never counts independently changed state as an agent test. Formal hardware/performance coverage, hold-specific LMB/Shift combinations, listening, human enjoyment and voluntary replay remain unverified. Hard shadows, dense-haul recovery and late-career interest remain gameplay/presentation questions, not certified polish.
+
+Next: Klaus plays the running rebuild and reports whether approaching a rich cluster, rescuing a load and melting/purchasing now feel worthwhile. Use that evidence for the smallest corrective increment. When foreground is explicitly available again, finish the listed R2 native failure/recovery checks; avoid adding content to conceal a weak interaction. Do not publish or infer commercial success. Shared studio validation reports only the existing unrelated Scrapstorm QA broken link. Preserve unrelated Dreambound owner changes.

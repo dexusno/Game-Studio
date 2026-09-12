@@ -1,0 +1,115 @@
+{
+  "version": "0.2.0",
+  "candidate": "R2",
+  "date": "2026-09-12",
+  "engine": "Unreal Engine 5.8.2",
+  "configuration": "Win64 Development / PCD3D_SM5",
+  "package": "BuildOutput/Rework/Windows",
+  "build_cook_run_seconds": 40.62,
+  "artifacts": [
+    {
+      "path": "MagnetSweep.exe",
+      "bytes": 171520,
+      "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+    },
+    {
+      "path": "MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+      "bytes": 332029952,
+      "sha256": "0848a376445ea7dad0ba6de1a4f0ed2254a9895cf68adceac8e450f9a183be80"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+      "bytes": 10652987,
+      "sha256": "e411209a92e5a3e8ac868c94a6e8f96a0e732ef5bf589c02b9b268177749f027"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+      "bytes": 137779056,
+      "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+    },
+    {
+      "path": "MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+      "bytes": 138215,
+      "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+    }
+  ],
+  "automation": {
+    "created": "2026.09.12-10.19.45",
+    "succeeded": 9,
+    "failed": 0,
+    "warnings": 0,
+    "not_run": 0,
+    "tests": [
+      {
+        "name": "CapacityAndAtomicGroups",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "CareerPurchasesFailureAndCollection",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "DeterministicJobsAndFeasibleLoads",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "FullHaulDropPlacementAndRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "JsonPersistenceAndBackupRecovery",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "OverloadConsumesExistingFuel",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "PersistentFuseVentAndForecastLoss",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "SmeltGoalsAndOneTimeBonuses",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "TransactionalSnapshotValidation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ]
+  },
+  "audio": {
+    "files": 19,
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "music_seconds": 96,
+    "perceptual_listening": false
+  },
+  "native_evidence": "QA-REWORK.md",
+  "limits": [
+    "Logic routes establish feasibility, not native difficulty or enjoyment.",
+    "Signal analysis and component playback do not certify audible mix quality.",
+    "Raw captures, packaged builds and local saves are ignored.",
+    "Final R2 timed hazardous rescue, unstable furnace refusal, exact native capacity boundaries and final-charge receipt not fully exercised.",
+    "No Development-console slow motion ran."
+  ],
+  "native_status": "R1 broad loop/purchase/persistence; R2 clean boot and safe mixed corner drop. Controlled R2 pass ended after external user input; current session/progress preserved."
+}

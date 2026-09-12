@@ -1,5 +1,7 @@
 # Magnet Sweep — independent QA and playtest record
 
+**Historical first-demo report.** Klaus subsequently played and rejected this build as boring. Functional readiness below did not establish enjoyable gameplay. The active rebuild is recorded in [QA-REWORK.md](QA-REWORK.md) and STATUS.md.
+
 Updated 2026-09-12. Independent reviewer: `magnet_demo_qa`; implementation owner: root. Only this report is reviewer-owned. Development timelines were not evaluated.
 
 ## Readiness

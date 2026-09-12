@@ -1,5 +1,6 @@
 param([ValidateSet('Editor','Content','Package','Tests','All')][string]$Stage='All',
- [ValidateSet('Development','Shipping')][string]$Configuration='Development')
+ [ValidateSet('Development','Shipping')][string]$Configuration='Development',
+ [string]$ArchiveName='Rework')
 $ErrorActionPreference='Stop'
 $magnetRoot=Split-Path -Parent $PSScriptRoot
 $magnetRepo=[IO.Path]::GetFullPath((Join-Path $magnetRoot '../..'))
@@ -19,7 +20,9 @@ if($Stage -in @('Content','All')) {
  if($magnetProcess.ExitCode -ne 0){throw 'Magnet Sweep content build failed'}
  if(!(Test-Path -LiteralPath $magnetContentReport)){throw 'Content generation did not produce its completion report'}
  $magnetContent=Get-Content -LiteralPath $magnetContentReport -Raw | ConvertFrom-Json
- if(!$magnetContent.complete -or @($magnetContent.imports).Count -ne 16){throw 'Content generation did not verify all seven meshes and nine sounds'}
+ $magnetExpectedMeshes=@(Get-ChildItem -LiteralPath (Join-Path $magnetRoot 'assets/models') -Filter '*.fbx').Count
+ $magnetExpectedAudio=@(Get-ChildItem -LiteralPath (Join-Path $magnetRoot 'assets/audio') -Filter '*.wav' -Recurse).Count
+ if(!$magnetContent.complete -or @($magnetContent.imports).Count -ne ($magnetExpectedMeshes+$magnetExpectedAudio)){throw 'Content generation did not verify every source mesh and sound'}
 }
 if($Stage -eq 'Tests') {
  $magnetCmd=Join-Path (Split-Path $magnetEditor -Parent) 'UnrealEditor-Cmd.exe'
@@ -27,6 +30,7 @@ if($Stage -eq 'Tests') {
  if($LASTEXITCODE -ne 0){throw 'Magnet Sweep automation tests failed'}
 }
 if($Stage -in @('Package','All')) {
- & (Join-Path $magnetEngine 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$magnetProject" -nop4 -platform=Win64 "-clientconfig=$Configuration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$magnetRoot/BuildOutput/ConceptDemo" -utf8output
+ if($ArchiveName -notmatch '^[a-zA-Z0-9_-]+$'){throw 'ArchiveName must be a simple directory name'}
+ & (Join-Path $magnetEngine 'Engine/Build/BatchFiles/RunUAT.bat') BuildCookRun "-project=$magnetProject" -nop4 -platform=Win64 "-clientconfig=$Configuration" -build -cook -stage -pak -iostore -nodebuginfo -archive "-archivedirectory=$magnetRoot/BuildOutput/$ArchiveName" -utf8output
  if($LASTEXITCODE -ne 0){throw 'Magnet Sweep packaging failed'}
 }

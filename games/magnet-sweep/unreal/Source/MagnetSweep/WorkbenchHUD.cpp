@@ -13,7 +13,7 @@ using namespace MagnetSweep;
 namespace
 {
 const FLinearColor Ink(.018f,.035f,.044f,1.f);
-const FLinearColor Panel(.024f,.053f,.061f,.96f);
+const FLinearColor Panel(.009f,.024f,.030f,.93f);
 const FLinearColor Edge(.12f,.25f,.27f,1.f);
 const FLinearColor Paper(.89f,.94f,.90f,1.f);
 const FLinearColor Quiet(.53f,.67f,.68f,1.f);
@@ -68,232 +68,275 @@ void FWorkbenchImpl::Paint(UCanvas* C)
  UIScale=FMath::Max(.01f,FMath::Min(Width/1600.f,Height/900.f));
  UX=(Width-1600.f*UIScale)*.5f; UY=(Height-900.f*UIScale)*.5f;
  Buttons.Reset();
-
+ const FLinearColor Danger(1.f,.24f,.18f,1),Gold(1.f,.80f,.32f,1);
+ auto Measure=[&](const FString& Text,float Scale,bool Large=false)->FVector2D
+ {
+  return FSlateApplication::Get().GetRenderer()->GetFontMeasureService()->Measure(Text,
+   FSlateFontInfo(RuntimeFont,FMath::Max(9.f,Scale*UIScale*(Large?24.f:16.f)),Large?TEXT("Bold"):TEXT("Regular")))/UIScale;
+ };
+ auto FitText=[&](const FString& Text,float X,float Y,float W,float Scale,FLinearColor Color,bool Large=false)
+ {
+  const float M=Measure(Text,Scale,Large).X;
+  DrawText(C,Text,X,Y,M>W?Scale*W/M:Scale,Color,Large);
+ };
+ auto PanelBox=[&](float X,float Y,float W,float H,FLinearColor Accent)
+ {
+  Rect(C,X+4,Y+6,W,H,FLinearColor(0,0,0,.22f));
+  Rect(C,X,Y,W,H,Panel);Rect(C,X,Y,W,2,Accent);
+ };
+ auto Meter=[&](float X,float Y,float W,float Fraction,FLinearColor Color,float H=7.f)
+ {
+  Rect(C,X,Y,W,H,Ink);Rect(C,X,Y,W*FMath::Clamp(Fraction,0.f,1.f),H,Color);
+ };
  auto AddButton=[&](int32 Id,const FString& Label,float X,float Y,float W,float H,bool Enabled=true,bool Primary=false)
  {
-  FDemoButton B;
-  B.Id=Id; B.Label=Label; B.Enabled=Enabled;
+  FDemoButton B;B.Id=Id;B.Label=Label;B.Enabled=Enabled;
   B.Rect=FBox2D(FVector2D(UX+X*UIScale,UY+Y*UIScale),FVector2D(UX+(X+W)*UIScale,UY+(Y+H)*UIScale));
   Buttons.Add(B);
-  const bool Hover=Enabled && B.Rect.IsInside(Pointer);
-  const FLinearColor Base=Primary?FLinearColor(.11f,.39f,.32f,1):FLinearColor(.055f,.12f,.14f,1);
-  Rect(C,X,Y,W,H,Enabled?(Hover?Base*1.35f:Base):FLinearColor(.04f,.075f,.084f,1));
-  Rect(C,X,Y,W,1,Primary?Mint:(Hover?Quiet:Edge));
-  const float TextScale=.94f;
-  float TextW=0,TextH=0;
-  const FVector2D Measured=FSlateApplication::Get().GetRenderer()->GetFontMeasureService()->Measure(Label,FCoreStyle::GetDefaultFontStyle(TEXT("Regular"),TextScale*UIScale*16.f));
-  TextW=Measured.X/UIScale;TextH=Measured.Y/UIScale;
-  DrawText(C,Label,X+FMath::Max(10.f,(W-TextW)*.5f),Y+(H-TextH)*.5f,TextScale,Enabled?Paper:Quiet*.55f);
+  const bool Hover=Enabled&&B.Rect.IsInside(Pointer);
+  const FLinearColor Base=Primary?FLinearColor(.10f,.34f,.27f,1):FLinearColor(.05f,.11f,.13f,1);
+  Rect(C,X,Y,W,H,Enabled?(Hover?FLinearColor(Base.R+.045f,Base.G+.065f,Base.B+.055f,1):Base):FLinearColor(.035f,.060f,.070f,1));
+  Rect(C,X,Y,W,1,Enabled?(Primary?Mint:(Hover?Paper:Edge)):Edge*.6f);
+  const float Scale=FMath::Min(.93f,(W-22.f)/FMath::Max(1.f,Measure(Label,1.f).X));
+  const FVector2D Size=Measure(Label,Scale);
+  DrawText(C,Label,X+(W-Size.X)*.5f,Y+(H-Size.Y)*.5f-1,Scale,Enabled?Paper:Quiet*.72f);
  };
-
- // Connections are a property of the board. A preview emphasizes only the links
- // from the chosen ring, so it cannot imply a recursive chain reaction.
- if(!bPaused)
- {
-  for(const FSalvagePiece& P:Model.GetPieces())
-  {
-   if(P.Kind!=EPieceKind::Tangle || P.State!=EPieceState::Available) continue;
-   for(int32 LinkId:P.DirectLinks)
-   {
-    const FSalvagePiece* Q=Model.FindPiece(LinkId);
-    if(!Q || Q->State!=EPieceState::Available || P.Id>=Q->Id) continue;
-    const FVector2D Direction=(Q->Position-P.Position).GetSafeNormal();
-    const bool InPreview=Action==EMagnetAction::Aim && Preview.IsValid() &&
-     ((P.Id==AimedRing && Preview.PieceIds.Contains(Q->Id)) || (Q->Id==AimedRing && Preview.PieceIds.Contains(P.Id)));
-    const FLinearColor LinkColor=InPreview?Mint:FLinearColor(.66f,.53f,.32f,.5f);
-    Line(C,Project(World(P.Position+Direction*29,45)),Project(World(Q->Position-Direction*29,45)),LinkColor,InPreview?3.f:1.4f);
-   }
-  }
-
-  if(Action==EMagnetAction::Aim && Preview.IsValid())
-  {
-   const FSalvagePiece* Ring=Model.FindPiece(AimedRing);
-   if(Ring)
-   {
-    const FVector2D Start=Ring->Position;
-    const FVector2D End=Preview.Endpoint;
-    const FVector2D Direction=(End-Start).GetSafeNormal();
-    const float Angle=Direction.IsNearlyZero()?0.f:FMath::Atan2(Direction.Y,Direction.X);
-    TArray<FVector2D> Boundary;
-    constexpr int32 ArcSteps=24;
-    for(int32 I=0;I<=ArcSteps;++I)
-    {
-     const float A=Angle+PI*.5f+PI*I/ArcSteps;
-     Boundary.Add(Project(World(Start+FVector2D(FMath::Cos(A),FMath::Sin(A))*FSalvageModel::PullRadius,14)));
-    }
-    for(int32 I=0;I<=ArcSteps;++I)
-    {
-     const float A=Angle-PI*.5f+PI*I/ArcSteps;
-     Boundary.Add(Project(World(End+FVector2D(FMath::Cos(A),FMath::Sin(A))*FSalvageModel::PullRadius,14)));
-    }
-    const FVector2D Center=Project(World((Start+End)*.5f,14));
-    for(int32 I=0;I<Boundary.Num();++I)
-    {
-     const FVector2D A=Boundary[I],B=Boundary[(I+1)%Boundary.Num()];
-     FCanvasTriangleItem Fill(Center,A,B,GWhiteTexture);
-     Fill.SetColor(FLinearColor(.18f,.85f,.61f,.075f));
-     Fill.BlendMode=SE_BLEND_Translucent;
-     C->DrawItem(Fill);
-     Line(C,A,B,FLinearColor(.35f,.94f,.72f,.8f),2.f);
-    }
-    Line(C,Project(World(Start,62)),Project(World(End,64)),Mint,2.f);
-    for(int32 Id:Preview.PieceIds)
-    {
-     const FSalvagePiece* P=Model.FindPiece(Id);
-     if(P && P->State==EPieceState::Available)
-      WorldCircle(C,P->Position,P->Kind==EPieceKind::Tangle?37.f:20.f,Mint,P->Kind==EPieceKind::Tangle?2.5f:1.2f,P->Kind==EPieceKind::Tangle?58.f:19.f);
-    }
-   }
-  }
-  else if(Action==EMagnetAction::Sweep)
-  {
-   WorldCircle(C,Magnet,FSalvageModel::SweepRadius,FLinearColor(.34f,.94f,.72f,.45f),1.4f,12);
-  }
-  else if(HoverRing!=INDEX_NONE)
-  {
-   if(const FSalvagePiece* P=Model.FindPiece(HoverRing))
-    WorldCircle(C,P->Position,40,Copper,2.5f,58);
-  }
-
-  if(bFurnaceHover && Model.GetCargo()>0)
-   WorldCircle(C,FVector2D(650,0),112,Copper,3.f,77);
-  const FVector2D FurnaceLabel=Project(World(FVector2D(650,180),30));
-  const float FX=(FurnaceLabel.X-UX)/UIScale-74.f;
-  const float FY=(FurnaceLabel.Y-UY)/UIScale;
-  Rect(C,FX-10,FY-5,172,50,Panel);
-  DrawText(C,TEXT("FURNACE"),FX,FY,.81f,Copper);
-  DrawText(C,Model.GetCargo()>0?TEXT("Click to pour your haul"):TEXT("Bring your haul here"),FX,FY+21,.72f,Paper);
- }
-
- // A narrow instrument strip keeps the entire workbench available to play.
- Rect(C,32,24,1536,124,Panel);
- Rect(C,32,24,5,124,Copper);
- DrawText(C,TEXT("MAGNET SWEEP"),56,42,1.15f,Paper,true);
- DrawText(C,TEXT("CONCEPT DEMO  /  TAKE YOUR TIME"),58,94,.77f,Quiet);
-
- const FString GoalLabel=DisplayUpgrade==0?TEXT("FORGE A BREAKAWAY COIL"):
-  DisplayUpgrade==1?TEXT("FORGE LONG REACH"):TEXT("RECOVER A METAL BLOCK");
- DrawText(C,GoalLabel,465,43,.8f,Model.IsDeliveryCompleted()?Mint:Quiet);
- const FString Progress=Model.IsDeliveryCompleted()?TEXT("Delivery complete"):
-  FString::Printf(TEXT("%d / %d metal banked"),Model.GetBanked(),Model.GetGoal());
- DrawText(C,Progress,465,68,1.04f,Paper);
- constexpr float BarWidth=475;
- const float BankedFraction=FMath::Clamp(float(Model.GetBanked())/Model.GetGoal(),0.f,1.f);
- const float WithCargoFraction=FMath::Clamp(float(Model.GetBanked()+Model.GetCargo())/Model.GetGoal(),0.f,1.f);
- Rect(C,465,108,BarWidth,8,Ink);
- Rect(C,465,108,BarWidth*WithCargoFraction,8,FLinearColor(.20f,.40f,.35f,1));
- Rect(C,465,108,BarWidth*BankedFraction,8,Model.IsDeliveryCompleted()?Mint:Copper);
- if(!Model.IsDeliveryCompleted() && Model.GetCargo()>0)
-  Rect(C,465+BarWidth*WithCargoFraction-1,105,2,14,Mint);
-
- DrawText(C,TEXT("YOUR HAUL"),977,43,.76f,Quiet);
- DrawText(C,FString::Printf(TEXT("%d"),Model.GetCargo()),977,67,1.2f,Model.GetCargo()>0?Mint:Paper,true);
- DrawText(C,TEXT("safe on the magnet"),977,108,.67f,Quiet);
- Rect(C,1160,46,1,70,Edge);
- DrawText(C,TEXT("YOUR RIG"),1185,43,.76f,Quiet);
- const FString Rig=DisplayUpgrade==0?TEXT("Starter magnet"):
-  DisplayUpgrade==1?TEXT("Breakaway coil"):TEXT("Complete rig");
- DrawText(C,Rig,1185,69,.98f,Paper);
- DrawText(C,DisplayUpgrade==0?TEXT("A stronger pull is ahead"):
-  DisplayUpgrade==1?TEXT("Linked rings can break free"):TEXT("Breakaway + extended reach"),1185,108,.67f,DisplayUpgrade>0?Mint:Quiet);
- AddButton(3,TEXT("Pause"),1454,45,90,40);
- AddButton(4,bMuted?TEXT("Sound off"):TEXT("Sound on"),1454,94,90,30);
- DrawText(C,Model.GetLayoutName().ToUpper(),48,163,.79f,Quiet);
-
- // Positive feedback concerns this action only; there is no score to protect.
- if(NoticeTimer>0 && !NoticeTitle.IsEmpty() && !bPaused)
- {
-  const float Fade=FMath::Min(1.f,NoticeTimer*2.f);
-  Rect(C,470,166,670,67,FLinearColor(.025f,.07f,.075f,.94f*Fade));
-  Rect(C,470,166,3,67,FLinearColor(.34f,.94f,.72f,Fade));
-  DrawText(C,NoticeTitle,490,175,1.f,FLinearColor(.89f,.94f,.90f,Fade));
-  DrawText(C,NoticeBody,490,205,.77f,FLinearColor(.60f,.76f,.73f,Fade));
- }
-
- Rect(C,32,782,1536,94,Panel);
- Rect(C,32,782,1536,1,Edge);
- FString HintTitle,HintBody;
- if(PourTimer>0 || ForgeTimer>0 || bPendingNext)
- {
-  HintTitle=ForgeTimer>0?TEXT("Making your magnet stronger"):TEXT("A whole haul, safely recovered");
-  HintBody=TEXT("Enjoy the pour. Your next delivery will be ready when it finishes.");
- }
- else if(Action==EMagnetAction::Aim && Preview.IsValid())
- {
-  int32 Tangles=0;
-  for(int32 Id:Preview.PieceIds) if(const FSalvagePiece* P=Model.FindPiece(Id))
-   if(P->Kind==EPieceKind::Tangle) ++Tangles;
-  HintTitle=FString::Printf(TEXT("Release to pull %d metal%s"),Preview.Amount,Tangles>1?*FString::Printf(TEXT(" from %d tangles"),Tangles):TEXT(""));
-  HintBody=Model.HasBreakaway()?TEXT("The lit pieces will come with you. Only directly linked rings can join this pull."):
-   TEXT("The lit pieces will come with you. The selected tangle always breaks free.");
- }
- else if(Action==EMagnetAction::Sweep)
- {
-  HintTitle=TEXT("Sweep through the loose scrap");
-  HintBody=TEXT("Release whenever you like. Everything collected stays on your magnet.");
- }
- else if(bFurnaceHover && Model.GetCargo()>0)
- {
-  HintTitle=FString::Printf(TEXT("Click to pour %d metal"),Model.GetCargo());
-  HintBody=TEXT("The entire haul counts. There is no need to aim precisely.");
- }
- else if(HoverRing!=INDEX_NONE)
- {
-  HintTitle=TEXT("Press this ring, drag, then release");
-  HintBody=Model.HasBreakaway()?TEXT("Aim through lit links and loose scrap for a bigger breakaway."):
-   TEXT("Choose a direction to gather loose scrap along your pull.");
- }
- else if(Model.IsDeliveryCompleted())
- {
-  HintTitle=TEXT("Delivery complete. Take another satisfying sweep?");
-  HintBody=TEXT("Keep collecting if you want, or bring your earned rig to the next arrangement.");
- }
- else if(Model.GetCargo()>0 && Model.GetCargo()+Model.GetBanked()>=Model.GetGoal())
- {
-  HintTitle=TEXT("That haul can finish the forge");
-  HintBody=TEXT("Click the furnace to pour it in, or keep collecting. Your cargo has no limit.");
- }
- else
- {
-  HintTitle=TEXT("Hold the mouse button and sweep to collect");
-  HintBody=TEXT("Drag from a ring for a pull. Click the furnace to pour. Releasing keeps your cargo.");
- }
- DrawText(C,HintTitle,57,800,1.04f,Paper);
- DrawText(C,HintBody,57,837,.8f,Quiet);
- const bool Ready=PourTimer<=0 && ForgeTimer<=0 && !bPendingNext;
- if(Model.IsDeliveryCompleted())
-  AddButton(1,Model.GetCargo()>0?TEXT("Pour & next delivery"):TEXT("Next delivery"),1220,802,270,49,Ready,true);
- else
-  AddButton(2,TEXT("Retry tray"),1350,802,140,49,Ready);
-
- if(bPaused || bConfirmRetry || bConfirmNew)
+ auto Veil=[&]()
  {
   Buttons.Reset();
-  FCanvasTileItem Veil(FVector2D::ZeroVector,FVector2D(Width,Height),FLinearColor(.006f,.015f,.022f,.85f));
-  Veil.BlendMode=SE_BLEND_Translucent;
-  C->DrawItem(Veil);
-  const bool Confirm=bConfirmRetry || bConfirmNew;
-  Rect(C,480,225,640,450,Panel);
-  Rect(C,480,225,640,3,Confirm?Copper:Mint);
-  DrawText(C,Confirm?(bConfirmNew?TEXT("Restart the demo?"):TEXT("Retry this tray?")):TEXT("Take a breather"),520,269,1.3f,Paper,true);
-  if(Confirm)
+  FCanvasTileItem Item(FVector2D::ZeroVector,FVector2D(Width,Height),FLinearColor(.003f,.012f,.018f,.91f));
+  Item.BlendMode=SE_BLEND_Translucent;C->DrawItem(Item);
+ };
+ const FJobDefinition& Job=Model.GetJob();
+ const bool Unsafe=Model.IsCargoUnsafe();
+ const bool FieldOn=bFieldLatched||Action==EMagnetAction::Sweep;
+ const bool Modal=bPaused||bWorkshop||bReceipt||bConfirmRetry||bConfirmNew;
+ const bool Ready=PourTimer<=0&&ForgeTimer<=0&&!bPendingDeposit&&!bPendingNext;
+ const int32 Rank=Model.GetPlayerLevel();
+ const int32 RankStart=FSalvageModel::XPForLevel(Rank);
+ const int32 RankEnd=FSalvageModel::XPForLevel(Rank+1);
+ const float RankFraction=RankEnd>RankStart?float(Model.GetXP()-RankStart)/(RankEnd-RankStart):1.f;
+ const bool Complete=Model.IsDeliveryCompleted(),Failed=Model.IsJobFailed();
+
+ PaintEffects(C);
+
+ // Goal, opportunity budget and permanent progress stay visible together.
+ PanelBox(28,22,1544,118,Edge);Rect(C,28,22,4,118,Copper);
+ DrawText(C,TEXT("MAGNET SWEEP"),50,42,1.07f,Paper,true);
+ DrawText(C,TEXT("SALVAGE  /  SMELT  /  UPGRADE"),52,91,.71f,Quiet);
+ Rect(C,319,43,1,75,Edge);
+ FitText(FString::Printf(TEXT("ORDER %02d  /  %s"),Model.GetLayoutIndex()+1,*Job.Name.ToUpper()),342,39,417,.76f,Quiet);
+ const int32 Target=Complete?Job.GoldGoal:Job.Quota;
+ const FString GoalText=Failed?TEXT("Order missed"):(Model.IsGoldAwarded()?TEXT("Gold order complete"):
+  FString::Printf(TEXT("%d / %d cr %s"),Model.GetBanked(),Target,Complete?TEXT("for gold"):TEXT("banked")));
+ DrawText(C,GoalText,342,61,1.13f,Failed?Danger:(Complete?Mint:Paper));
+ constexpr float GoalWidth=417;
+ Meter(342,98,GoalWidth,float(Model.GetBanked()+Model.GetCargo())/FMath::Max(1,Target),FLinearColor(.22f,.40f,.35f,1),9);
+ Rect(C,342,98,GoalWidth*FMath::Clamp(float(Model.GetBanked())/FMath::Max(1,Target),0.f,1.f),9,Model.IsGoldAwarded()?Gold:Mint);
+ if(Model.GetCargo()>0&&!Unsafe)DrawText(C,FString::Printf(TEXT("Next pour +%d cr"),Model.GetCargo()),342,115,.65f,Mint);
+ else DrawText(C,Complete?FString::Printf(TEXT("Gold bonus +%d cr"),Job.GoldBonus):FString::Printf(TEXT("Order bonus +%d cr"),Job.CompletionBonus),342,115,.65f,Quiet);
+ DrawText(C,TEXT("FURNACE FUEL"),799,39,.72f,Quiet);
+ for(int32 I=0;I<FSalvageModel::HeatsPerJob;++I)
+ {
+  const bool Full=I<Model.GetHeatsRemaining();
+  Rect(C,799+I*34.f,68,26,29,Full?FLinearColor(.58f,.25f,.07f,1):Ink);
+  Rect(C,803+I*34.f,72,18,17,Full?Copper:Edge*.7f);
+  Rect(C,807+I*34.f,66,10,3,Full?Gold:Edge);
+ }
+ DrawText(C,FString::Printf(TEXT("%d fuel charges"),Model.GetHeatsRemaining()),799,110,.69f,Model.GetHeatsRemaining()==1?Copper:Paper);
+ Rect(C,962,43,1,75,Edge);
+ DrawText(C,TEXT("WALLET"),986,39,.72f,Quiet);
+ DrawText(C,FString::Printf(TEXT("%d cr"),Model.GetWallet()),986,64,1.05f,Gold,true);
+ DrawText(C,FString::Printf(TEXT("RANK %d"),Rank),1164,39,.76f,Mint);
+ DrawText(C,FString::Printf(TEXT("%d XP"),Model.GetXP()),1164,65,.95f,Paper);
+ Meter(1164,100,190,RankFraction,Mint,5);
+ DrawText(C,RankEnd>RankStart?FString::Printf(TEXT("%d to next rank"),FMath::Max(0,RankEnd-Model.GetXP())):TEXT("Veteran rig"),1164,113,.64f,Quiet);
+ AddButton(20,TEXT("Workshop"),1400,41,148,38,Ready);
+ AddButton(3,TEXT("Pause"),1400,91,148,29);
+
+ if(!Modal)
+ {
+  DrawText(C,TEXT("IRON  2kg / 4cr"),47,157,.69f,Quiet);
+  DrawText(C,TEXT("COPPER  3kg / 12cr"),224,157,.69f,Copper);
+  DrawText(C,TEXT("ALLOY  4kg / 24cr"),437,157,.69f,Paper);
+  DrawText(C,TEXT("RED CELLS = UNSTABLE"),643,157,.69f,Danger);
+  const FVector2D Screen=Project(World(Magnet,105));
+  const float ChipWidth=Unsafe?284.f:214.f,ChipHeight=Unsafe?85.f:62.f;
+  const float MX=FMath::Clamp(float((Screen.X-UX)/UIScale)+42.f,46.f,1546.f-ChipWidth);
+  const float MY=FMath::Clamp(float((Screen.Y-UY)/UIScale)-25.f,238.f,694.f);
+  if(Model.GetCargoMass()>0||FieldOn)
   {
-   DrawText(C,bConfirmNew?TEXT("Start again with the starter magnet and a fresh tray."):
-    TEXT("Restock this tray and clear its current haul."),520,346,.96f,Paper);
-   DrawText(C,bConfirmNew?TEXT("This replaces your saved demo progress."):
-    TEXT("All earned rig improvements stay with you."),520,382,.9f,bConfirmNew?Copper:Mint);
-   AddButton(bConfirmNew?9:8,bConfirmNew?TEXT("Restart demo"):TEXT("Retry tray"),520,470,250,55,true,true);
-   AddButton(7,TEXT("Keep playing"),790,470,250,55);
+   Rect(C,MX,MY,ChipWidth,ChipHeight,Panel);Rect(C,MX,MY,3,ChipHeight,Unsafe?Danger:Mint);
+   DrawText(C,FString::Printf(TEXT("%d / %d kg"),Model.GetCargoMass(),Model.GetCapacity()),MX+13,MY+8,1.f,Unsafe?Danger:Paper);
+   DrawText(C,Unsafe?FString::Printf(TEXT("%.1fs - lose 1 fuel"),Model.GetFuseRemaining()):FString::Printf(TEXT("Haul worth %d cr"),Model.GetCargo()),MX+13,MY+35,.79f,Unsafe?Danger:Mint);
+   if(Unsafe)
+   {
+    const FSalvagePiece* Risk=Model.GetAtRiskPiece();
+    FitText(Risk?FString::Printf(TEXT("+ %s (%d cr)"),*Model.PieceName(Risk->Id),Risk->Amount):TEXT("RMB: Drop haul"),MX+13,MY+58,ChipWidth-26,.75f,Risk?Danger:Quiet);
+   }
+   Meter(MX+13,MY+ChipHeight-4,ChipWidth-26,Unsafe?Model.GetFuseRemaining()/Model.GetFuseDuration():float(Model.GetCargoMass())/Model.GetCapacity(),Unsafe?Danger:Mint,3);
   }
-  else
+  const FSalvagePiece* Nearest=nullptr;double Closest=48.0*48.0;
+  if(bInTray&&!FieldOn)
+   for(const FSalvagePiece& P:Model.GetPieces())
+    if(P.State==EPieceState::Available&&(P.Position-RawWorld).SizeSquared()<Closest)
+    {Nearest=&P;Closest=(P.Position-RawWorld).SizeSquared();}
+  if(Nearest)
   {
-   DrawText(C,TEXT("Your cargo and progress are kept."),520,336,.95f,Quiet);
-   AddButton(3,TEXT("Resume"),520,391,540,53,true,true);
-   AddButton(2,TEXT("Retry this tray"),520,460,260,48);
-   AddButton(5,TEXT("Restart demo"),800,460,260,48);
-   AddButton(4,bMuted?TEXT("Turn sound on"):TEXT("Turn sound off"),520,525,260,48);
-   AddButton(6,TEXT("Save & quit"),800,525,260,48);
-   DrawText(C,TEXT("ESC to return to the workbench"),520,617,.78f,Quiet);
+   const TArray<int32> Group=Model.GetCaptureGroup(Nearest->Id);
+   int32 Mass=0,Value=0;bool Cell=false;
+   for(int32 Id:Group)if(const FSalvagePiece* P=Model.FindPiece(Id)){Mass+=P->Mass;Value+=P->Amount;Cell|=P->Material==EMaterial::HotCell;}
+   const bool Fits=Model.CanCaptureGroup(Nearest->Id),WouldOverload=Model.GetCargoMass()+Mass>Model.GetCapacity()||Cell;
+   const FLinearColor Color=WouldOverload?Danger:(Nearest->Material==EMaterial::Core?Gold:Copper);
+   const float HX=FMath::Clamp(float((Pointer.X-UX)/UIScale)+25.f,42.f,1255.f);
+   const float HY=FMath::Clamp(float((Pointer.Y-UY)/UIScale)+26.f,199.f,669.f);
+   Rect(C,HX,HY,300,99,Panel);Rect(C,HX,HY,3,99,Color);
+   FitText(Group.Num()>1?FString::Printf(TEXT("LINKED BUNDLE  /  %d pieces"),Group.Num()):Model.PieceName(Nearest->Id),HX+13,HY+9,276,.89f,Paper);
+   DrawText(C,FString::Printf(TEXT("%d kg   /   %d cr"),Mass,Value),HX+13,HY+37,1.02f,Color);
+   FitText(!Fits?TEXT("Too heavy for this rig"):(Cell?TEXT("Discharge costs 1 fuel. RMB drops haul."):
+    FString::Printf(TEXT("Incoming %d / %d kg%s"),Model.GetCargoMass()+Mass,Model.GetCapacity(),WouldOverload?TEXT(" - unstable"):TEXT(""))),HX+13,HY+69,275,.77f,Color);
   }
+  const FVector2D Label=Project(World(FVector2D(650,178),30));
+  const float FX=FMath::Clamp(float((Label.X-UX)/UIScale)-94.f,40.f,1338.f);
+  const float FY=FMath::Clamp(float((Label.Y-UY)/UIScale),190.f,701.f);
+  Rect(C,FX,FY,222,58,Panel);
+  DrawText(C,TEXT("FURNACE"),FX+12,FY+8,.79f,Copper);
+  FitText(Unsafe?TEXT("Unstable - drop haul first"):(Model.GetCargo()>0?FString::Printf(TEXT("Click: +%d cr / 1 fuel"),Model.GetCargo()):TEXT("Bring a stable load here")),FX+12,FY+32,200,.77f,Unsafe?Danger:Paper);
+ }
+
+ if(NoticeTimer>0&&!NoticeTitle.IsEmpty()&&!Modal&&!Unsafe)
+ {
+  const float Fade=FMath::Min(1.f,NoticeTimer*2.f);
+  Rect(C,460,186,680,73,FLinearColor(.023f,.063f,.067f,.97f*Fade));Rect(C,460,186,3,73,FLinearColor(.34f,.94f,.72f,Fade));
+  FitText(NoticeTitle,480,197,642,1.03f,FLinearColor(.89f,.94f,.90f,Fade));
+  FitText(NoticeBody,480,230,642,.79f,FLinearColor(.66f,.78f,.74f,Fade));
+ }
+ PanelBox(28,786,1544,92,Unsafe?Danger:Edge);
+ FString Hint,Detail;
+ if(Unsafe)
+ {
+  const FSalvagePiece* Risk=Model.GetAtRiskPiece();
+  Hint=FString::Printf(TEXT("UNSTABLE  %.1fs  -  RMB: Drop haul"),Model.GetFuseRemaining());
+  Detail=Risk?FString::Printf(TEXT("Expiry: lose 1 fuel + %s (%d cr). Drop releases the whole haul; all dropped pieces stay recoverable."),*Model.PieceName(Risk->Id),Risk->Amount):TEXT("Expiry: lose 1 fuel. Drop releases the whole haul recoverably and switches the field off.");
+ }
+ else if(PourTimer>0||ForgeTimer>0){Hint=TEXT("Smelting your haul");Detail=TEXT("Metal becomes credits, rank progress and recovered loot.");}
+ else if(Failed){Hint=TEXT("Order missed. Your banked earnings are safe.");Detail=TEXT("Try a richer load or improve your rig before the next contract.");}
+ else if(Complete){Hint=Model.IsGoldAwarded()?TEXT("Gold secured. Finish this order when ready."):TEXT("Order secured. Bank more for gold, or finish safely.");Detail=TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision  |  RMB drops whole haul");}
+ else if(bFurnaceHover&&Model.GetCargo()>0){Hint=FString::Printf(TEXT("Pour %d cr into this order"),Model.GetCargo());Detail=TEXT("One pour uses one fuel charge. Compare the value of this load before banking.");}
+ else {Hint=FieldOn?(bPrecision?TEXT("Precision field - separate the valuable pieces"):TEXT("Field active - watch the weight of your haul")):TEXT("Choose your haul. Four fuel charges for this order.");Detail=TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision  |  RMB drops whole haul");}
+ FitText(Hint,49,801,1080,1.06f,Unsafe?Danger:Paper);
+ FitText(Detail,49,839,1080,.79f,Unsafe?FLinearColor(1,.66f,.54f,1):Quiet);
+ AddButton(20,TEXT("Workshop"),1372,809,172,43,Ready);
+ if(Complete&&!Model.IsJobEnded())AddButton(1,TEXT("Finish order"),1180,809,176,43,Ready&&Model.GetCargoMass()==0,true);
+ else if(Model.IsJobEnded()||Failed)AddButton(30,TEXT("Choose next order"),1180,809,176,43,Ready,true);
+ else DrawText(C,FString::Printf(TEXT("%dkg RIG"),Model.GetCapacity()),1209,824,.88f,Quiet);
+
+ if(bConfirmRetry||bConfirmNew)
+ {
+  Veil();PanelBox(452,227,696,434,Copper);
+  DrawText(C,bConfirmNew?TEXT("Start a new career?"):TEXT("Retry this contract?"),490,263,1.36f,Paper,true);
+  FitText(bConfirmNew?TEXT("This replaces your current save, wallet, rig and collection."):TEXT("The current tray and unbanked cargo will be replaced."),491,340,618,.93f,Paper);
+  FitText(bConfirmNew?TEXT("This cannot be undone."):TEXT("Banked credits, XP, upgrades and collected cores stay yours."),491,379,618,.90f,bConfirmNew?Danger:Mint);
+  AddButton(bConfirmNew?9:8,bConfirmNew?TEXT("Start over"):TEXT("Retry contract"),490,484,280,54,true,true);
+  AddButton(7,TEXT("Cancel"),794,484,280,54);
+  return;
+ }
+
+ if(bWorkshop)
+ {
+  Veil();
+  DrawText(C,TEXT("THE WORKSHOP"),150,86,1.55f,Paper,true);
+  DrawText(C,TEXT("Earn better pulls. Choose what your rig does next."),151,132,.95f,Quiet);
+  DrawText(C,FString::Printf(TEXT("%d cr  /  RANK %d"),Model.GetWallet(),Rank),1104,92,1.05f,Gold);
+  AddButton(21,TEXT("Back to tray"),1264,133,186,38);
+  const TCHAR* Names[]={TEXT("DEEP BASKET"),TEXT("POWER COIL"),TEXT("STABILIZER")};
+  const TCHAR* Roles[]={TEXT("Bigger valuable batches"),TEXT("Stronger, wider attraction"),TEXT("More time to rescue a risky haul")};
+  const EUpgrade Types[]={EUpgrade::Capacity,EUpgrade::Coil,EUpgrade::Stabilizer};
+  for(int32 I=0;I<3;++I)
+  {
+   const float X=150+I*441.f;const int32 Tier=Model.GetUpgradeTier(Types[I]);
+   PanelBox(X,197,416,263,I==0?Copper:(I==1?Mint:Gold));
+   DrawText(C,Names[I],X+22,219,1.06f,Paper,true);
+   DrawText(C,Roles[I],X+23,257,.81f,Quiet);
+   for(int32 J=0;J<3;++J)Rect(C,X+24+J*29,292,21,6,J<Tier?Mint:Edge);
+   DrawText(C,FString::Printf(TEXT("TIER %d / 3"),Tier),X+132,285,.70f,Quiet);
+   FString Effect;
+   if(I==0)Effect=Tier<3?FString::Printf(TEXT("%d kg  >  %d kg capacity"),Model.GetCapacity(),Model.GetCapacity()+8):FString::Printf(TEXT("%d kg capacity"),Model.GetCapacity());
+   else if(I==1)Effect=Tier<3?FString::Printf(TEXT("%.0f  >  %.0f field radius"),Model.GetFieldRadius(),Model.GetFieldRadius()+35):FString::Printf(TEXT("%.0f field radius"),Model.GetFieldRadius());
+   else Effect=Tier<3?FString::Printf(TEXT("%.0fs  >  %.0fs warning fuse"),Model.GetFuseDuration(),Model.GetFuseDuration()+1):FString::Printf(TEXT("%.0fs warning fuse"),Model.GetFuseDuration());
+   FitText(Effect,X+23,320,370,.99f,Paper);
+   DrawText(C,I==1?TEXT("+25% force per tier. Shift / Q for precision."):(I==0?TEXT("Carry more value in each furnace pour."):TEXT("Expiry costs 1 fuel and your best piece.")),X+23,351,.76f,Quiet);
+   FString Reason;const bool CanBuy=Model.CanPurchaseUpgrade(Types[I],Reason);
+   const FString BuyLabel=Tier>=3?TEXT("Fully upgraded"):(CanBuy?FString::Printf(TEXT("Upgrade  /  %d cr"),Model.GetUpgradePrice(Types[I])):Reason);
+   AddButton(100+I,BuyLabel.IsEmpty()?TEXT("Unavailable"):BuyLabel,X+23,395,370,43,CanBuy,CanBuy);
+  }
+  DrawText(C,TEXT("CONTRACTS"),150,483,.93f,Paper);
+  const bool CanLeave=Model.IsJobEnded()||Failed;
+  FitText(CanLeave?TEXT("Choose a contract. Each new delivery changes the salvage arrangement."):TEXT("Finish or retry the active order before starting a different contract."),352,484,1096,.78f,Quiet);
+  for(int32 I=0;I<FSalvageModel::LayoutCount;++I)
+  {
+   const float X=150+I*220.f;const FJobDefinition& D=FSalvageModel::JobDefinition(I);
+   const bool Unlocked=Model.IsJobUnlocked(I),Current=I==Model.GetLayoutIndex();
+   PanelBox(X,516,208,116,Model.IsJobGold(I)?Gold:(Current?Mint:Edge));
+   FitText(FString::Printf(TEXT("%02d  %s"),I+1,*D.Name),X+12,530,184,.81f,Unlocked?Paper:Quiet);
+   DrawText(C,FString::Printf(TEXT("%d cr target"),D.Quota),X+12,557,.75f,Quiet);
+   const FString Status=!Unlocked?FString::Printf(TEXT("Rank %d required"),D.RequiredLevel):(CanLeave?TEXT("Start order"):(Current?TEXT("Active order"):TEXT("Finish active order")));
+   AddButton(200+I,Status,X+12,590,184,30,Unlocked&&CanLeave,Unlocked&&CanLeave);
+  }
+  DrawText(C,TEXT("RECOVERED CORES"),150,662,.91f,Paper);
+  DrawText(C,FString::Printf(TEXT("%d / 6  -  Bank rare salvage to keep it"),Model.GetCollectedCores().Num()),382,664,.77f,Quiet);
+  for(int32 I=0;I<6;++I)
+  {
+   const float X=150+I*220.f;const bool Owned=Model.GetCollectedCores().Contains(I);
+   Rect(C,X,700,208,84,Panel);Rect(C,X+12,716,28,35,Owned?Gold:Edge*.6f);
+   Rect(C,X+19,725,14,17,Owned?FLinearColor(.98f,.98f,.72f,1):Ink);
+   FitText(Owned?FSalvageModel::CoreName(I):TEXT("Unknown core"),X+51,715,147,.75f,Owned?Paper:Quiet);
+   DrawText(C,Owned?TEXT("RECOVERED"):TEXT("Find and smelt"),X+51,747,.65f,Owned?Mint:Quiet);
+  }
+  if(NoticeTimer>0&&!NoticeTitle.IsEmpty())FitText(NoticeTitle+TEXT("  ")+NoticeBody,150,814,1300,.85f,Mint);
+  return;
+ }
+
+ if(bReceipt)
+ {
+  Veil();PanelBox(380,164,840,577,Failed?Danger:(Model.IsGoldAwarded()?Gold:Mint));
+  const FString Result=Failed?TEXT("ORDER MISSED"):(Model.IsGoldAwarded()?TEXT("GOLD RECOVERED"):TEXT("ORDER COMPLETE"));
+  DrawText(C,Result,426,201,.85f,Failed?Danger:(Model.IsGoldAwarded()?Gold:Mint));
+  DrawText(C,Job.Name,423,239,1.60f,Paper,true);
+  FitText(Failed?TEXT("The banked haul stays yours. Try a different extraction."):TEXT("Your salvage is banked. Put it to work on the next rig."),426,297,748,.90f,Quiet);
+  const int32 Bonus=(Complete?Job.CompletionBonus:0)+(Model.IsGoldAwarded()?Job.GoldBonus:0);
+  Rect(C,426,347,748,1,Edge);
+  DrawText(C,TEXT("SALVAGE BANKED"),427,370,.78f,Quiet);
+  DrawText(C,FString::Printf(TEXT("%d cr"),Model.GetBanked()),908,366,1.08f,Paper);
+  DrawText(C,TEXT("ORDER / GOLD BONUSES"),427,412,.78f,Quiet);
+  DrawText(C,FString::Printf(TEXT("+%d cr"),Bonus),908,407,1.08f,Gold);
+  DrawText(C,TEXT("TOTAL ORDER XP"),427,454,.78f,Quiet);
+  DrawText(C,FString::Printf(TEXT("+%d XP"),Model.GetJobEarnings()),908,449,1.08f,Mint);
+  DrawText(C,TEXT("FUEL CHARGES USED"),427,496,.78f,Quiet);
+  DrawText(C,FString::Printf(TEXT("%d / 4 charges"),Model.GetHeatsUsed()),908,491,1.02f,Paper);
+  const FString Loot=LastBank.NewCoreIds.IsEmpty()?FString::Printf(TEXT("Collection: %d of 6 rare cores recovered"),Model.GetCollectedCores().Num()):FString::Printf(TEXT("New core: %s"),*FSalvageModel::CoreName(LastBank.NewCoreIds[0]));
+  FitText(Loot,427,543,745,.87f,LastBank.NewCoreIds.IsEmpty()?Quiet:Gold);
+  AddButton(30,TEXT("Workshop & next order"),427,616,463,53,true,true);
+  AddButton(2,TEXT("Retry this order"),912,616,262,53,true);
+  return;
+ }
+
+ if(bPaused)
+ {
+  Veil();PanelBox(458,157,684,585,Mint);
+  DrawText(C,TEXT("PAUSED"),498,196,1.35f,Paper,true);
+  DrawText(C,TEXT("Your cargo, fuel and progress are saved."),499,247,.92f,Quiet);
+  AddButton(3,TEXT("Resume"),498,305,604,49,true,true);
+  AddButton(20,TEXT("Workshop"),498,370,291,43,Ready);
+  AddButton(2,TEXT("Retry contract"),811,370,291,43,Ready);
+  AddButton(10,FString::Printf(TEXT("Music  %d%%"),FMath::RoundToInt(MusicVolume*100)),498,434,291,43);
+  AddButton(11,FString::Printf(TEXT("Effects  %d%%"),FMath::RoundToInt(SfxVolume*100)),811,434,291,43);
+  AddButton(4,bMuted?TEXT("Master sound: OFF"):TEXT("Master sound: ON"),498,498,604,39);
+  AddButton(5,TEXT("New career"),498,561,291,43);
+  AddButton(6,TEXT("Save & quit"),811,561,291,43);
+  FitText(TEXT("LMB hold / Space toggle field  |  Shift hold / Q toggle precision"),499,637,603,.75f,Quiet);
+  FitText(TEXT("RMB drops the whole haul recoverably and switches the field off."),499,663,603,.74f,Quiet);
+  DrawText(C,TEXT("ESC resume  /  F11 fullscreen  /  M mute"),499,691,.71f,Quiet);
+  DrawText(C,TEXT("Music and effects buttons cycle their volume."),499,717,.68f,Quiet);
  }
 }

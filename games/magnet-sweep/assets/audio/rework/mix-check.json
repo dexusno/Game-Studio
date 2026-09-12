@@ -1,0 +1,56 @@
+{
+  "scenario": "12-second original-music, field, overlapping pickups, warning, overload, smelt, payout synthetic mix",
+  "not_in_engine": true,
+  "sample_peak_dbfs": -9.599,
+  "clipped_samples": 0,
+  "sfx_master": 0.9,
+  "music_gain": 0.4,
+  "magnet_loop_gain": 0.3,
+  "events": [
+    {
+      "cue": "magnet_on",
+      "time": 0.02,
+      "gain": 0.5
+    },
+    {
+      "cue": "pickup_metal1",
+      "time": 0.8,
+      "gain": 0.42
+    },
+    {
+      "cue": "pickup_metal2",
+      "time": 0.89,
+      "gain": 0.42
+    },
+    {
+      "cue": "pickup_heavy",
+      "time": 1.05,
+      "gain": 0.62
+    },
+    {
+      "cue": "pickup_metal3",
+      "time": 2.1,
+      "gain": 0.42
+    },
+    {
+      "cue": "warning_loop",
+      "time": 2.8,
+      "gain": 0.68
+    },
+    {
+      "cue": "overload",
+      "time": 4.28,
+      "gain": 0.8
+    },
+    {
+      "cue": "smelt",
+      "time": 7.1,
+      "gain": 0.7
+    },
+    {
+      "cue": "payout",
+      "time": 9.73,
+      "gain": 0.65
+    }
+  ]
+}
