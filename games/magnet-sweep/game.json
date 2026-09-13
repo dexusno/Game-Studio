@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary campaign through fortified cities with 10-20-fight waves, recipe crafting, shops and game-long system upgrades. 16B preparation and 16C action; existing renders are art experiments. Active work is mechanics/scenes Q&A; detailed tuning, recipe availability and campaign ending remain open. Timeline unconstrained; zero time fields mean unset.",
+  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary campaign through fortified cities with 10-20-fight waves, limited recipe memory with crafting cooldowns, shops and game-long system upgrades. 16B preparation and 16C action; existing renders are art experiments. Active work is mechanics/scenes Q&A; memory size, cooldown interactions, standalone removal, detailed tuning and campaign ending remain open. Timeline unconstrained; zero time fields mean unset.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -44,14 +44,14 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T19:33:56+00:00",
-      "record_sha256": "a089952e79cd6439dc653bd93d1374fa3fd393bd8ce6c9d5507b4541cbb04d21",
+      "captured_at": "2026-09-13T19:54:36+00:00",
+      "record_sha256": "bc56a64bc4114810364d84be2ebaf34ca6dbe3c87c4a1460c9b3a51e6a13e6a8",
       "files": {
-        "games/magnet-sweep/STATUS.md": "86ac7b3c5c71cb86db6d41834d1b91a7160723fc41d1fd0e270b871cf22aaf78",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "a846fefb3b93164a490513020313503797874bbbb0603365c6eb7d8f53721698",
-        "games/magnet-sweep/DECISIONS.md": "3bc6ca30e56a0479fdc810052e61f6cbfc8ea1907bfec03d4467a1122fa24c67",
-        "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "996a49ea4938fc44483ece27283d13885fded04af7f71579c89a0fc35ebe0c6d",
-        "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "d8f0dce436b236e924cb2efb4239d3096e52f15866da24121ef30008eff523e0",
+        "games/magnet-sweep/STATUS.md": "fcf45c36c28203d8e2f819d6e21232abcfc7c2214f4d5fa754037e85f63a8a39",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "d26936401e7eae09efa271f08826592e79fd8e2dd22b7fba4b6df6ce9843c65a",
+        "games/magnet-sweep/DECISIONS.md": "4beef5d0349f7b2f7340524b652996fea30bc466d3a644480ae86a8fde6313cb",
+        "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "554681726aa6e360e552f0748ce8ed5805e8d8f5a2a3e50e9c66288ab597dc39",
+        "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "48f29ed18b26ae79f24d35220e1842ac3417e75980a711adc75cef25b3565228",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
         "games/magnet-sweep/art-tests/camera-motion/README.md": "90a69eaf7492966fbcc920b03295018b7eb64574761c7b40b0e128369087db9d",
         "games/magnet-sweep/art-tests/camera-motion/build_scene.py": "27eeff8d0d5e63dec72dcdf44cb6706bfc34f663b87ac2634c8dc9a4a4df1bf3",
