@@ -1,0 +1,32 @@
+# Game interface reference library
+
+Select references for the current problem; do not read this as one mandated style. This is a starting library and research method, not exhaustive experience or a ranking of the best games. Access checked 2026-09-13. Sources below distinguish public summaries from inspected source material. The transfer questions are our design inferences, not quoted recommendations or proven results for another game.
+
+## Primary examples
+
+| Reference and inspected material | What the source establishes | Transfer question and limit |
+| --- | --- | --- |
+| [Hardspace: Shipbreaker — Cutting Apart the Diegetic Interface](https://www.gdcvault.com/play/1027158/Cutting-Apart-The-Diegetic-Interface), Vidhi Shah, Blackbird Interactive, GDC 2021. Public session abstract inspected; full talk not watched. | The developer describes redesigning interfaces to connect narrative and gameplay, considering multiple UI approaches to balance immersion and usability. | Can the interface express the player's occupation and equipment while keeping decisions readable? Don't force every important message onto an awkwardly placed physical object. Inspect the relevant shipped screen before recommending its particular layout. |
+| [Dead Space — Crafting Destruction](https://www.gdcvault.com/play/1017723/Crafting-Destruction-The-Evolution-of), Dino Ignacio, Visceral Games, GDC 2013. Public session abstract inspected; full talk not watched. | The lead designer describes the experiments and decisions behind the series' immersive, diegetic interface. | Could a small part of the interface live naturally in the world? Account for camera distance, occlusion and action tempo; an immersive treatment is not automatically readable or appropriate to a different camera. |
+| [Into the Breach — Design Postmortem slides](https://media.gdcvault.com/gdc2019/presentations/Into%20the%20Breach%20Postmortem%20Final.pdf), Subset Games, GDC 2019. PDF text inspected, particularly pages 27–37; slide imagery/full talk not evaluated. [Session](https://www.gdcvault.com/play/1026333/-Into-the-Breach-Design). | The slides connect telegraphed attacks, target/type iconography and UI constraints with simplifying the rules players need to understand. | Can the player anticipate the affected target and consequence before committing? Show available information honestly; don't pretend an uncertain physics result is deterministic, or import a turn-based preview into real-time play without adaptation. |
+| [Destiny — Tenacious Design and the Interface](https://www.gdcvault.com/play/1023107/Tenacious-Design-and-The-Interface), David Candland, Bungie, GDC 2016. Public abstract retrieved in search; direct page fetch failed, full talk not watched. [Developer slides](https://media.gdcvault.com/gdc2016/Presentations/Candland_David_Tenacious_Design_and.pdf) are a follow-up source, not inspected here. | The abstract frames the problem of serving new and experienced players and lists cursor interaction, timing, localization, visual direction and icon production among its topics. | How can a quick equipment choice expose useful depth on inspection? Verify the exact interaction first; don't copy a large game's navigation burden, delayed actions or inventory structure into a small game. |
+| [Xbox Accessibility Guideline 112 — UI navigation](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/112), Microsoft. Guideline text and descriptions of Sea of Thieves, Grounded and Minecraft Dungeons examples inspected; videos not played. | Documents consistent navigation, predictable focus, accessible entry to settings and support for different input methods, with named game examples. | Can a player reach, understand and leave the same decision with each supported input? A mouse-only mockup cannot demonstrate keyboard/controller behavior. Apply the relevant guidance rather than claim complete conformance. |
+
+## Broaden the comparison for the task
+
+Draw candidates from multiple genres and scales instead of recycling the same references. These are **research leads**, not inspected evidence or pre-approved designs:
+
+- Tactical clarity and consequences: Into the Breach, Slay the Spire, XCOM. Inspect targeting, intent, preview and post-action explanation.
+- Equipment depth and comparison: Hades, Destiny, Diablo. Inspect selection versus commitment, competing stats/abilities and the route back to play.
+- Physical, expressive interfaces: Hearthstone, Inscryption, Papers, Please. Inspect response to handling, readable affordances and how interface objects express the fiction.
+- Work, tools and world status: Hardspace: Shipbreaker, Dead Space, Dredge. Inspect task focus, proximity cues, pressure and persistent versus contextual information.
+- Calm guidance and progression: A Short Hike, Animal Crossing, Dorfromantik. Inspect first actions, optional explanation, progress visibility and understated feedback.
+- Dense systems without constant overload: Factorio, Satisfactory, FTL. Inspect overview/detail transitions, exceptions and the cost of finding information.
+
+For an actual comparison, capture only the evidence needed: game/version, platform/input, exact screen or sequence, source/date, player question, observed treatment, tradeoff and a testable adaptation. Search official footage, developer presentations or an available legal build first. Secondary capture galleries can locate examples, but verify provenance and inspect the image before claiming a pattern. If access is missing, mark the gap rather than fill it with confident recollection. Retain only lessons that changed a design decision in the assigned game's existing notes.
+
+## Readability and interaction criteria
+
+[Xbox Accessibility Guideline 101 — Text display](https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101) explains measuring rendered glyph body height and gives platform-dependent sizing guidance. Read the current text for the relevant target; do not treat an engine's font-size number as rendered pixel height or apply one universal size across PC, TV and mobile. The page text was inspected; this does not certify any studio build.
+
+Use the navigation guideline above for focus and input. When evaluating another accessibility dimension, follow its relevant primary guidance and document what was tested. Small text, undiscoverable tooltips, color-only warnings and unexpected focus changes are player problems even in a visually attractive screen.

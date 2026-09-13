@@ -1,6 +1,16 @@
 # Magnet Sweep — Expedition Visuals 0.7.0
 
-Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: a major graphics overhaul before more gameplay work. Timeline is not a consideration.
+Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: create the missing dedicated game UI/UX agent and skill, then STOP for the owner's next goals. Timeline is not a consideration.
+
+## Latest owner direction — specialist setup only
+
+The owner rejects the current UI as boring, cluttered with text, hard to understand and resembling a PowerPoint slide. Earlier agent visual acceptance is technical review, not owner acceptance. The owner also requires real risk of losing and a meaningful premise: who the player is, why the work matters, and why the end goal matters. Factory operator, construction and dystopian survivor were examples, not a selected story. No new failure/reset model or backstory has been chosen.
+
+Read-only source inspection confirms the current 0.7.0 implementation has finite battery and recoverable setbacks, unlimited site-entry retry without an additional penalty, and voluntary retreat ending the expedition. Zero battery does not automatically fail the run, and secured cargo/core can still be delivered. Do not describe these rules as an accepted meaningful loss condition.
+
+No dedicated UI/UX role was present among the nine studio roles. Added [ui-ux-designer](../../.codex/agents/ui-ux-designer.toml) and [game-ui-ux](../../.agents/skills/game-ui-ux/SKILL.md), with a selectively loaded primary-source reference library, game-specific visual craft, information hierarchy, contextual teaching, risk/reward clarity, input/accessibility behavior and actual-game verification. TEAM, production/director routing and the studio validator now include the specialist. The role inherits the active model and permissions; named-role hot reload is not assumed, and TEAM documents the runtime fallback.
+
+Skill frontmatter validation passes. An independent agent applied the role to a synthetic cluttered-HUD scenario and a setup-only/stop scenario: it identified actionable hierarchy and danger-guidance issues, distinguished missing design foundations from UI work, disclosed absent visual/play evidence and respected the stop boundary. This is an instruction behavior check, not a Magnet Sweep redesign or usability playtest. The existing studio tooling suite runs 50 cases: 48 pass, 2 are skipped. Studio validation reports only the pre-existing Scrapstorm QA link failure; the scoped diff check passes. No game source, art, build or save changed in this setup. STOP here; the owner will supply subsequent goals.
 
 ## Current result and acceptance
 
@@ -16,7 +26,7 @@ Editor compilation and all **82 existing engine cases pass** (zero failed/warnin
 
 Source/art/assets and reviewed evidence are integrated on main at **1a65f7c2d14d1873698e5e20bbea65f028cdb5f8**. The normal continuity handoff helper was attempted after commit and refused because unrelated Dreambound work remains dirty. Preserve that work; use this exact source revision when handing the visual preview to another task.
 
-The visual-overhaul increment is implemented, packaged and visually reviewed. The next useful owner step is to play this preview and judge the new appearance, readability and magnet presentation. Gameplay work remains on hold until that visual priority is addressed; the broad earlier gameplay goal is still incomplete. Do not expand mechanics or catalogue merely to continue an idle task.
+The visual-overhaul increment remains implemented and packaged, but its interface has now been rejected by the owner. The UI/UX specialist setup is complete. Await the owner's next goals; no gameplay, interface redesign or story development is authorized in this setup turn. The broad earlier gameplay goal remains incomplete. Preserve all existing packages, saves and visual assets.
 
 Observed corrections include late instruction overflow, a frame panel covering machinery, overlapping optional fitting labels, excessive trim and an occluded furnace. A checked material pass caught previously silent Unreal 5.8 pin-name mismatches. The intermediate cook after that failed import is explicitly excluded; only the later validated import/package/captures are accepted. Preserve the recorded visual scope and exact hashes when resuming.
 

@@ -9,7 +9,7 @@ Read [CHARTER](../../../studio/CHARTER.md), [WORKFLOW](../../../studio/WORKFLOW.
 
 Choose the smallest increment that improves the player experience or resolves a release risk. State observable acceptance criteria and the affected build target. Keep the owner's time and game budget visible; if the feature grows, cut lower-value scope or present a concrete tradeoff before expanding the product promise.
 
-Assign independent implementation to the `game-engineer`, focused mechanics or content work to the `game-designer`, visual assets to the `art-director`, and sound to the `audio-designer` only as needed. Give each exact file ownership and integration assumptions. Shared scene files, project settings, and manifests need a single writer or sequential handoff.
+Assign independent implementation to the `game-engineer`, focused mechanics or content work to the `game-designer`, visual assets to the `art-director`, interface/player-flow work to the `ui-ux-designer` using [game-ui-ux](../game-ui-ux/SKILL.md), and sound to the `audio-designer` only as needed. Give each exact file ownership and integration assumptions. Shared scene files, project settings, and manifests need a single writer or sequential handoff.
 
 Preserve a runnable main loop while integrating work. Match the game's established systems when useful; avoid adding infrastructure for hypothetical later games. Consult current primary documentation when engine or SDK behavior is uncertain. Read existing code and diagnostics before replacing subsystems.
 

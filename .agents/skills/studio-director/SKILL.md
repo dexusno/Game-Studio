@@ -16,6 +16,7 @@ Route only work that helps now:
 - Uncertain demand or positioning: `game-research`.
 - Selected concept with an untested core interaction: `game-prototype`.
 - Playable loop with a recorded production decision: `game-production`.
+- Game interface, HUD, onboarding or usability: `game-ui-ux` with the `ui-ux-designer`; keep gameplay rules and narrative choices with their design owner.
 - A build being prepared for distribution: `game-release`.
 - A shipped, parked, or completed experiment: `game-retrospective`.
 

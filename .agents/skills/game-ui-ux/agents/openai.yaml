@@ -1,0 +1,4 @@
+interface:
+  display_name: "Game UI/UX"
+  short_description: "Craft expressive game UI that players understand"
+  default_prompt: "Use $game-ui-ux to improve the assigned game's interface, player guidance and visual identity, checking real gameplay states within the requested scope."
