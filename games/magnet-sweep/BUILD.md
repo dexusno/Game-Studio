@@ -1,6 +1,25 @@
 # Magnet Sweep — build and run
 
-## Expedition Choices 0.6.3
+## Expedition Visuals 0.7.0
+
+The current preview is the owner-requested major visual overhaul. It integrates ImageGen/TRELLIS/Blender hero art, 13 original Blender kit meshes, PBR materials, animated furnace heat, Barlow typography and the rebuilt industrial interface. Gameplay rules, prices and save schema are preserved.
+
+[Play Expedition Visuals.cmd](Play%20Expedition%20Visuals.cmd) targets separate `BuildOutput/ExpeditionVisuals/Windows`, profile `expedition_visuals_preview`. The packaged child EXE is **332,956,160 bytes**, SHA-256 **9a57f4bf8ab3b891a3628919d063be317a44bf2205a06db6738e03d0d3575f03**. Build/cook/stage/archive passed in 29.90 seconds. Final regression report **2026.09.13-03.26.02** has 82 success/0failed/warning/unrun. Five packaged 1600×900 screenshots were inspected and the packaged fonts/licenses verified. Exact evidence and limitations: [visual-overhaul-verification.json](evidence/visual-overhaul-verification.json).
+
+```powershell
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Visuals
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName ExpeditionVisuals
+pwsh -NoProfile -File games/magnet-sweep/scripts/CaptureVisualAudit.ps1 -Extended -Executable games/magnet-sweep/BuildOutput/ExpeditionVisuals/Windows/MagnetSweep/Binaries/Win64/MagnetSweep.exe
+```
+
+Run each step only after the previous step succeeds. On a checkout without original runtime content, run the existing Content stage before Visuals (All also imports both in order). Visuals imports the checked-in original files; local TRELLIS inference is not required to rebuild the game. To regenerate the procedural kit, run Blender with `--background --factory-startup --python games/magnet-sweep/scripts/GenerateVisualKit.py` before Visuals. Keep tool installations and full raw TRELLIS output outside Git.
+
+The capture command launches only its own offscreen game process, uses a unique save-disabled profile, verifies PNG completion and exits. The first 3 screens use real fresh-run callbacks. Extended adds 2 clearly labelled unearned late-site rendering fixtures with unchanged starter gear; it is not an earned gameplay run. These checks do not establish native input, sound, sustained performance, other resolutions or enjoyment. Loaded Rail cargo was not captured. All earlier packages and owner profiles remain separate.
+
+## Preserved Expedition Choices 0.6.3
+
 
 The current build adds affordable same-shop tool/support combinations, concrete purchase/refit forecasts and actual new free-starter notifications. It preserves the existing four-card stock size, earned frame routes, exact saved inventories and prior packages. A conditional support requires its actual tool to be fitted before purchase; no gear is automatically removed. Native rendering, input, sound, performance and enjoyment remain unverified.
 

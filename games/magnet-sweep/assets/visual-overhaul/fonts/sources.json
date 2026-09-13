@@ -1,0 +1,31 @@
+{
+  "retrieved": "2026-09-13",
+  "creator": "The Barlow Project Authors",
+  "license": "SIL Open Font License 1.1",
+  "files": [
+    {
+      "file": "Barlow-Medium.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/Barlow-Medium.ttf",
+      "sha256": "f8906f762cb73dca441da034bc363b2d8e2e68bc10d5c05e58717646c20cc4b4",
+      "bytes": 103536
+    },
+    {
+      "file": "BarlowCondensed-SemiBold.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/BarlowCondensed-SemiBold.ttf",
+      "sha256": "7b619d14bc2327509a9ef32b0890f709626f7ecc9ff61191c2a4314c5499d2d9",
+      "bytes": 109428
+    },
+    {
+      "file": "OFL-Barlow.txt",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlow/OFL.txt",
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+      "bytes": 4377
+    },
+    {
+      "file": "OFL-BarlowCondensed.txt",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/OFL.txt",
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+      "bytes": 4377
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+asset_id,path,source_url,creator,license,proof_path,modifications,approval_status
+visual_barlow-medium,assets/visual-overhaul/fonts/Barlow-Medium.ttf,https://github.com/google/fonts/blob/main/ofl/barlow/Barlow-Medium.ttf,The Barlow Project Authors,SIL Open Font License 1.1,assets/visual-overhaul/fonts/OFL-Barlow.txt,Unmodified source font; embedded in runtime UFont family,licensed
+visual_barlowcondensed-semibold,assets/visual-overhaul/fonts/BarlowCondensed-SemiBold.ttf,https://github.com/google/fonts/blob/main/ofl/barlowcondensed/BarlowCondensed-SemiBold.ttf,The Barlow Project Authors,SIL Open Font License 1.1,assets/visual-overhaul/fonts/OFL-BarlowCondensed.txt,Unmodified source font; embedded in runtime UFont family,licensed

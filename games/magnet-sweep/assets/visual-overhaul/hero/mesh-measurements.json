@@ -1,0 +1,130 @@
+{
+  "source_sha256": "93cbec0dc6837904430e7c28f6340e68161f254c38655530a2588a2f1cc1a184",
+  "source_triangles": 985925,
+  "source_dimensions_blender": [
+    0.9196216464042664,
+    0.9966824054718018,
+    0.3183358311653137
+  ],
+  "rotation_degrees": [
+    0,
+    0,
+    0
+  ],
+  "unit": "centimeters",
+  "pivot": "XY center; bottom Z=0",
+  "texture_channels": "BaseColor sRGB; MR linear G=roughness B=metallic; Normal tangent OpenGL (+Y)",
+  "blender_version": "5.2.1 LTS",
+  "in_engine_verified": true,
+  "triangles": 159999,
+  "vertices": 265264,
+  "uv_layers": [
+    "UVMap"
+  ],
+  "normal_map": "Neutral tangent map; generated surface relief is retained as actual geometry; rejected ray bake is not used.",
+  "materials": [
+    {
+      "slot": 0,
+      "name": "M_HeroMagnet"
+    }
+  ],
+  "dimensions_cm": [
+    92.7506103515625,
+    100.23680114746094,
+    31.894683837890625
+  ],
+  "fbx_reimport": {
+    "meshes": 1,
+    "triangles": 159999,
+    "material_slots": [
+      [
+        "M_HeroMagnet"
+      ]
+    ],
+    "uv_layers": [
+      [
+        "UVMap"
+      ]
+    ]
+  },
+  "glb_reimport": {
+    "meshes": 1,
+    "triangles": 159999,
+    "material_slots": [
+      [
+        "M_HeroMagnet"
+      ]
+    ],
+    "embedded_images": [
+      {
+        "name": "T_HeroMagnet_BaseColor",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "T_HeroMagnet_MR",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "T_HeroMagnet_Normal",
+        "size": [
+          4,
+          4
+        ]
+      }
+    ]
+  },
+  "files": {
+    "hero-electromagnet-reference.png": {
+      "bytes": 1655235,
+      "sha256": "47e485e0c335b0e1f2beffe1746718ce5404711adecadb017e7eca594b769c6c"
+    },
+    "hero-rear.png": {
+      "bytes": 1975500,
+      "sha256": "a3accbc8072c8b90c0869828fa8b066e7dce50f017bd18833a0e1387405fe28f"
+    },
+    "hero-three-quarter.png": {
+      "bytes": 1949144,
+      "sha256": "e1dafa9501077431d043186a77c9eee509abc463b14387c8f9b294145a1b5ddb"
+    },
+    "hero-top.png": {
+      "bytes": 1978631,
+      "sha256": "c82522c61c4346b61d15326faebbfc497d985c47f0b6b9a7fc9541358935ed46"
+    },
+    "HeroMagnet.blend": {
+      "bytes": 10057386,
+      "sha256": "ac28a23abdd976514526030dd6f8a1cdecf646a8e7936b47fabe0f0b81dfc81a"
+    },
+    "rejected-source-uv-preview.png": {
+      "bytes": 1997745,
+      "sha256": "3e88b91a6bc3464eac29ba2af8b4775a6425ac5d1d2ab2eb11482f957754b095"
+    },
+    "SM_HeroMagnet.fbx": {
+      "bytes": 10078908,
+      "sha256": "9725b04ec80447bb6a095dceac642f17a45088bcffd6996ec31dc8474cc36a56"
+    },
+    "SM_HeroMagnet.glb": {
+      "bytes": 23145464,
+      "sha256": "95aaac0a1c955c4e77bc2a947f69dc4f5a835e442ddf54f297b0780269f77bab"
+    },
+    "T_HeroMagnet_BaseColor.png": {
+      "bytes": 8093331,
+      "sha256": "2264562510683337f3dd37d75e3ab9f80cae08db00b14e80a70b40efe4384c0e"
+    },
+    "T_HeroMagnet_MR.png": {
+      "bytes": 6836503,
+      "sha256": "73c686499b8965ae551058db1f752129ad0b3b39d2a748e1e498f66c8534825a"
+    },
+    "T_HeroMagnet_Normal.png": {
+      "bytes": 259,
+      "sha256": "76ed2a69b7337a47b8e8fd95a602566d2375bf6d49d237b520e22bc2f74a5480"
+    }
+  },
+  "verification_note": "Final conservative source-UV reduction selected after visual rejection of two bake approaches. Normal map is neutral, not a claimed detail bake.",
+  "in_engine_scope": "Actual packaged0.7.0 captures at1600x900 verify appearance and material binding; no sustained performance claim. See evidence/visual-overhaul-verification.json."
+}

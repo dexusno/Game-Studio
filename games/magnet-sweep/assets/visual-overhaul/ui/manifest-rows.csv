@@ -1,0 +1,2 @@
+asset_id,path,source_url,creator,license,proof_path,modifications,approval_status
+expedition_console_art,unreal/Source/MagnetSweep/ExpeditionUIVisuals.cpp,original: runtime console geometry and glyphs,Game Studio / Codex,Original project art; no third-party visual source; project distribution license unset,assets/visual-overhaul/ui/INTEGRATION.md,Original resolution-independent panel geometry and six tool-family glyphs,original-project

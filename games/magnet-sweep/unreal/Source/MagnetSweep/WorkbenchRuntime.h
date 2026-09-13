@@ -40,6 +40,7 @@ struct FWorkbenchImpl {
  APlayerController* PC=nullptr;
  UCameraComponent* Camera=nullptr;
  UFont* RuntimeFont=nullptr;
+ UFont* DisplayFont=nullptr;
  UMaterialInterface* Surface=nullptr;
  UMaterialInterface* Overlay=nullptr;
  TMap<FName,UStaticMesh*> Meshes;

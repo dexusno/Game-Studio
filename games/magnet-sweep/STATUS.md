@@ -1,10 +1,28 @@
-# Magnet Sweep - Expedition Choices 0.6.3
+# Magnet Sweep — Expedition Visuals 0.7.0
 
-Updated 2026-09-13, Europe/Oslo. Stage: prototype. **82 engine cases pass: 60 Expedition behavior cases, one shop diagnostic and 21 legacy cases; zero failed/warning/unrun cases**, report **2026.09.13-02.01.30**. Editor compilation and separate ExpeditionChoices build/cook/stage/archive passed (39.75 seconds). No native game launch, owner-save access, purchase or publication occurred. Timeline is not a consideration.
+Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: a major graphics overhaul before more gameplay work. Timeline is not a consideration.
 
-## Current goal and milestone
+## Current result and acceptance
 
-This continuation extends main **0a6b2db3a134aea0c25385765cf64fc9c3e3be68** and is **progress**. The owner wants interacting abilities, meaningful prices, combinations and different rewarding builds toward an ultimate tool. Radius-only convenience does not meet that requirement. **The full goal is incomplete and blocked on the pending native-playtest handoff.** This bounded increment is packaged; tests do not establish satisfying feel, worthwhile prices or voluntary replay.
+The presentation has been rebuilt around a tactile industrial workshop. Thirteen original Blender kit meshes (166,872 triangles combined) replace simple salvage and machinery: hollow gears/bearings, copper coils, finned components, a caged core, power frames, recessed workbench, fastened barriers/pads/arm and a rebuilt crucible. A genuinely generated ImageGen → local TRELLIS.2 → Blender hero magnet has 159,999 triangles, distinct enamel/copper/steel regions and 2K PBR maps. Two flawed bakes were rejected; final micro-detail remains geometry and its normal map is neutral. ImageGen also supplied the restrained machined surface texture.
+
+The industrial instrument interface uses licensed Barlow/Barlow Condensed, six tool-family glyphs, equipment cards and inspector, socket/cost hierarchy, segmented meters and clearer world label plates. Actual engine captures prompted fixes to header overlap, crowded bottom text, overly bright tray trim, overlapping annotations and an occluded furnace interior. Warm animated furnace heat and cooler machinery lighting are now integrated. These are presentation changes; gameplay rules, prices, physical collision/target shapes and save schema remain unchanged.
+
+Editor compilation and all **82 existing engine cases pass** (zero failed/warning/unrun), report **2026.09.13-03.26.02**. The final separate ExpeditionVisuals Windows Development package built/cooked/staged/archived successfully in **29.90 seconds**. Five actual packaged captures at 1600×900 were inspected: starter, selected outfitter and first worksite use actual fresh-run callbacks; balanced rack and final exchange are prominently labelled unearned rendering fixtures. Both fonts and OFL notices are verified in staged Content/Fonts. Independent interface review accepts the corrected late-site layout; art critique confirms a major uplift. This is not an objective claim of amazing graphics, enjoyment or sales.
+
+[Play Expedition Visuals.cmd](Play%20Expedition%20Visuals.cmd) launches the separate preview with profile `expedition_visuals_preview`. Child EXE: **332,956,160 bytes**, SHA-256 **9a57f4bf8ab3b891a3628919d063be317a44bf2205a06db6738e03d0d3575f03**. The prior Choices/Frames/Sites/Expedition child hashes are unchanged; old sessions and saves remain untouched. [Visual verification](evidence/visual-overhaul-verification.json) records source/artifact evidence and limitations. [Actual first-worksite capture](evidence/visuals/03-first-worksite.png) and [final-site fixture](evidence/visuals/05-counterweight-exchange-fixture.png) are curated screenshots from this package.
+
+## Next action / resume
+
+The visual-overhaul increment is implemented, packaged and visually reviewed. The next useful owner step is to play this preview and judge the new appearance, readability and magnet presentation. Gameplay work remains on hold until that visual priority is addressed; the broad earlier gameplay goal is still incomplete. Do not expand mechanics or catalogue merely to continue an idle task.
+
+Observed corrections include late instruction overflow, a frame panel covering machinery, overlapping optional fitting labels, excessive trim and an occluded furnace. A checked material pass caught previously silent Unreal 5.8 pin-name mismatches. The intermediate cook after that failed import is explicitly excluded; only the later validated import/package/captures are accepted. Preserve the recorded visual scope and exact hashes when resuming.
+
+The opt-in -VisualAudit harness uses Unreal rendering and actual starter/depot/depart callbacks, a unique profile and disabled/empty save destination. It does not load owner profiles. Offscreen captures do not prove native input, sound, sustained performance or fun. The owner explicitly authorizes tools/computer use and this new visual assignment supersedes the historical pending foreground handoff for isolated development verification. A callable native input REPL was unavailable in this session; no custom native-control substitute was created. No spending or publication occurred. TRELLIS runtime dependency commercial pipeline clearance remains a release task; no tool code or weights are bundled.
+
+## Preserved Expedition Choices 0.6.3 evidence
+
+This continuation extends main **0a6b2db3a134aea0c25385765cf64fc9c3e3be68** and is **progress**. The owner wants interacting abilities, meaningful prices, combinations and different rewarding builds toward an ultimate tool. Radius-only convenience does not meet that requirement. **The full gameplay goal remained incomplete at this milestone.** This bounded increment is packaged; tests do not establish satisfying feel, worthwhile prices or voluntary replay.
 
 Root integrated rig/runtime/presentation and shared records. Independent QA exercised actual transactions, physical controls and saved state; the shop engineer audited actual generated choices; the gameplay critic challenged prerequisite traps, sacrifices, text clarity and appeal. Fresh equipment/cash each run with permanent discoveries and last-winning-rig retention remains a working recommendation, not an owner-selected reset preference. Two active tools, four passive sockets and thirty catalogue identities remain the experiment.
 
@@ -34,13 +52,9 @@ The prior 0.6.2 child retains d5d2741ed194ab9fc7298400445624397238b5307994667506
 
 The increment is integrated through a scoped local commit on main. The normal continuity handoff requires a fully clean checkout; preserve unrelated Dreambound work and never stage/reset it just to satisfy that helper. The exact main revision is the receiving task's source boundary. Studio validation's existing unrelated Scrapstorm broken link remains outside this assignment.
 
-## Next action and limits
+### Historical handoff state
 
-The next acceptance step is **native comparison of the packaged build's controls, attraction, receiving feedback and purchase choices**, once the existing foreground handoff is resolved. Can the player name a different next-site recovery and what money/gear they give up before buying? Does the pair card create an interesting plan despite removing an independent active choice? Do optional frame recoveries feel worthwhile, and does the player voluntarily try another build? Compare the 14-credit transport specialist, 11-credit staged supports and 24-credit electrical option without presenting unmatched battery fixtures as an optimal balance proof.
-
-**Native control is still stopped.** The earlier Clarity playtest recorded the owner's Escape; the foreground-handoff question remains unanswered. Preserve the possible qa_clarity session and every old save. Do not launch/control a game, repeat the question or infer approval from elapsed time or automatic continuation. Shell builds and headless NullRHI checks are allowed. Native input, rendered saving, readability, sound, performance, enjoyable risk/reward, remaining high-price appeal and replay remain unverified. No release is authorized.
-
-The packaged 0.6.3 goal turn was **progress**, integrated at **6b327e6a02e4246478dfde6332946706a220a1ee**. Three subsequent continuations verified the unchanged Magnet source/package and recorded handoff; the latest checked revision was 1756b22f329d1f348d1262d7ae6c8db47a9181eb. No foreground-handoff answer or new safe action enabling native acceptance arrived, and there is no live build/test job to wait on. **Blocked audit: 3 consecutive continuations at this impasse; all are no progress, not verified waits.** The goal tool now records **blocked**, with the original full objective intact. Resume the native comparison once the existing handoff is answered. If the owner resumes the goal while the same blocker persists, begin a fresh consecutive-blocker audit. The next decisive work needs native playtesting rather than catalogue expansion or repetition of passing checks; do not manufacture feature scope to substitute for observed reward/feel/replay.
+The 0.6.3 goal was recorded blocked after three idle continuations awaiting a native playtest handoff. The owner has since reported playtesting and explicitly prioritized a major graphics overhaul. That old blocker does not govern the new visual assignment. The broad gameplay goal is still incomplete; resume gameplay evaluation only after the owner's graphics priority has been addressed. Preserve all older packages, sessions and saves.
 
 ## Research and design reference
 

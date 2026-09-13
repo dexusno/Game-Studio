@@ -1,4 +1,5 @@
 #include "ExpeditionRuntime.h"
+#include "VisualCaptureProbe.h"
 #include "ExpeditionRig.h"
 #include "ExpeditionWorld.h"
 #include "WorkbenchRuntime.h"
@@ -87,9 +88,10 @@ void FExpeditionRuntime::Start()
     for (int32 I=0; I<Profile.Len(); ++I)
         if (!FChar::IsAlnum(Profile[I]) && Profile[I] != TCHAR('_')) Profile[I]=TCHAR('_');
     Profile=Profile.Left(40); if(Profile.IsEmpty()) Profile=TEXT("expedition_preview");
-    SavePath=FPaths::Combine(FPaths::ProjectSavedDir(),TEXT("Expedition"),Profile+TEXT(".json"));
+    const bool bVisualAudit=InitializeVisualCaptureProbe(*this);
+    SavePath=bVisualAudit?FString():FPaths::Combine(FPaths::ProjectSavedDir(),TEXT("Expedition"),Profile+TEXT(".json"));
     // DemoProfile and DemoFresh belong to the old career and are deliberately ignored.
-    const bool bLoaded=Load();
+    const bool bLoaded=bVisualAudit?false:Load();
     if(Display)
     {
         Display->PC=PC; Display->Profile=TEXT("expedition_assets");Display->bMuted=bMuted;Display->bPaused=bPaused;
@@ -494,6 +496,7 @@ void FExpeditionRuntime::Tick(float Delta)
     if(FieldAudio.IsValid()) FieldAudio->SetVolumeMultiplier(!bMuted && !bPaused && (Input.bField || World->GetState().PullRemaining>0)?.3f:0.f);
     RefreshCargoSelection();UpdateVisuals(bPaused?0.f:D);
     SaveElapsed+=D; if(SaveElapsed>=2){SaveElapsed=0; Save();}
+    TickVisualCaptureProbe(*this,Delta);
 }
 
 TSharedPtr<FJsonObject> FExpeditionRuntime::MakeState(bool bIncludeCheckpoint) const

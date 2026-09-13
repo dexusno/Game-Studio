@@ -1,0 +1,339 @@
+{
+  "reportCreatedOn": "2026.09.13-03.26.02",
+  "succeeded": 82,
+  "succeededWithWarnings": 0,
+  "failed": 0,
+  "notRun": 0,
+  "totalDuration": 3.4631314277648926,
+  "scope": "82 existing regression cases on final compiled visual source; rendering checked separately in the packaged executable.",
+  "tests": [
+    {
+      "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.BalancedRackUsesRestingMassAndLatchesOnlyAfterCapture",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.CheapRemoteFrameSupportPreservesActualHeldFinalCore",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ConductiveCompanionPlanRetainsArcWithinTwoActualToolSockets",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedArcVectorReactionRunUnlocksStarterAndCompletesBothFrames",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedClosedCircuitCompletesBothLateFramesAndEntireRun",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedFullSocketPurchaseForecastDoesNotEjectOrSpendUntilChosen",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedGantryPurchaseRecoversOversizedFramesAcrossLateSites",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedGeneratedCompanionWaitsForItsToolAndKeepsExactStock",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.EarnedSiteTwoBuildsReachBothRefiningRewards",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.FinalRemoteToolsMoveRealReplacementWhileCoreStaysHeld",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.FrameAcceptsCheaperPhysicalSupportWithoutKeystoneGate",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.FrameElectricalRoutesShareOcclusionFiniteChargeAndRealHandoff",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.FrameReactionMovesActualTwelveAndTwentyKilogramSupportsToReceipt",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.GantryPriceChangePreservesHistoricalReceiptWithoutCashGrant",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.GeneratedShopChoicesAcross128Seeds",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ImpactFuseProducesOneDelayedPhysicalSecondaryImpulse",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.InductionBridgesOneActuallyPlacedAirGap",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.InputCancellation",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.LateSensorRelayRequiresAndReservesRealPortableCharge",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.LegacyLayoutSurvivesDepotDeparturePaidSaveAndRetry",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PackagedLateRevisionOneSurvivesNewFrameDefaultsAndRetry",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PreservedGeneratorPowersTwoIsolatedRecoveriesAndRealRewards",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.PunchThroughPreservesProjectileTravelBeyondFracturedBrace",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RackWinchAndRailEarnDistinctPhysicalRecoveries",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RatchetResistsRealDisturbanceWhileWinchWorksElsewhere",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ReboundRetainsActualReflectedMomentumOnce",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeGroundChangesOnlyItsPhysicalCircuitBranch",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeSplitRejectsOutOfReachSecondReceiver",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeTwinAnchorReturnsToActualPaidPlacement",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.SavedWorksiteRefreshesExactOpportunitiesWithoutReroll",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.StoredPhysicalTetherEnablesOtherwiseOpenCircuit",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.UnknownLayoutIdentityOrRevisionRefusesAtomically",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.ActualActionSequence",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+      "state": "Success"
+    },
+    {
+      "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+      "state": "Success"
+    }
+  ]
+}

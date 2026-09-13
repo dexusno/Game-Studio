@@ -1,4 +1,4 @@
-param([ValidateSet('Editor','Content','Package','Tests','All')][string]$Stage='All',
+param([ValidateSet('Editor','Content','Visuals','Package','Tests','All')][string]$Stage='All',
  [ValidateSet('Development','Shipping')][string]$Configuration='Development',
  [string]$ArchiveName='Extraction')
 $ErrorActionPreference='Stop'
@@ -23,6 +23,16 @@ if($Stage -in @('Content','All')) {
  $magnetExpectedMeshes=@(Get-ChildItem -LiteralPath (Join-Path $magnetRoot 'assets/models') -Filter '*.fbx').Count
  $magnetExpectedAudio=@(Get-ChildItem -LiteralPath (Join-Path $magnetRoot 'assets/audio') -Filter '*.wav' -Recurse).Count
  if(!$magnetContent.complete -or @($magnetContent.imports).Count -ne ($magnetExpectedMeshes+$magnetExpectedAudio)){throw 'Content generation did not verify every source mesh and sound'}
+}
+if($Stage -in @('Visuals','All')) {
+ $magnetVisualReport=Join-Path $magnetRoot 'unreal/Saved/VisualContent.json'
+ if(Test-Path -LiteralPath $magnetVisualReport){Remove-Item -LiteralPath $magnetVisualReport}
+ $magnetArgs=@(('"'+$magnetProject+'"'),('-ExecutePythonScript="'+$PSScriptRoot+'/CreateVisualContent.py"'),'-unattended','-nop4','-nosplash','-NullRHI')
+ $magnetProcess=Start-Process -FilePath $magnetEditor -ArgumentList $magnetArgs -WindowStyle Hidden -PassThru -Wait
+ if($magnetProcess.ExitCode -ne 0){throw 'Visual content import failed'}
+ if(!(Test-Path -LiteralPath $magnetVisualReport)){throw 'Visual import did not produce a completion report'}
+ $magnetVisual=Get-Content -LiteralPath $magnetVisualReport -Raw | ConvertFrom-Json
+ if(!$magnetVisual.complete -or !$magnetVisual.hero_ready -or @($magnetVisual.fonts).Count -ne 2){throw 'Visual import is missing hero materials or fonts'}
 }
 if($Stage -eq 'Tests') {
  $magnetTestReport=Join-Path $magnetRoot 'unreal/Saved/Automation/index.json'

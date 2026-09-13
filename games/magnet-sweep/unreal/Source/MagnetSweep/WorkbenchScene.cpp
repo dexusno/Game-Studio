@@ -15,6 +15,7 @@
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
 #include "Styling/CoreStyle.h"
+#include "Fonts/CompositeFont.h"
 #include "Engine/GameViewportClient.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Engine/World.h"
@@ -63,32 +64,50 @@ UStaticMeshComponent* FWorkbenchImpl::Shape(FName MeshName,FVector P,FVector Siz
  auto* S=NewObject<UStaticMeshComponent>(Owner);
  S->SetMobility(EComponentMobility::Movable);S->SetStaticMesh(Mesh(MeshName));
  if(Materials.Contains(Material)) S->SetMaterial(0,Materials[Material]);
+ for(int32 Slot=0;Slot<S->GetStaticMesh()->GetStaticMaterials().Num();++Slot)
+ {
+  const FName SlotName=S->GetStaticMesh()->GetStaticMaterials()[Slot].MaterialSlotName;
+  if(auto* Assigned=Materials.Find(SlotName))S->SetMaterial(Slot,*Assigned);
+ }
+ if(MeshName==TEXT("SM_HeroMagnet"))
+  if(auto* Hero=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MagnetSweep/Materials/M_HeroMagnet.M_HeroMagnet")))
+  {S->SetMaterial(0,Hero);Owner->Resources.AddUnique(Hero);}
  S->SetCollisionEnabled(ECollisionEnabled::NoCollision);S->SetGenerateOverlapEvents(false);
  Owner->AddInstanceComponent(S);S->RegisterComponent();Place(S,P,Size,R);
  if(Static) StaticShapes.Add(S);return S;
 }
 void FWorkbenchImpl::SetupScene() {
- RuntimeFont=NewObject<UFont>(Owner);RuntimeFont->FontCacheType=EFontCacheType::Runtime;RuntimeFont->CompositeFont=*FCoreStyle::GetDefaultFont();Owner->Resources.Add(RuntimeFont);
- Surface=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MagnetSweep/Materials/M_Surface.M_Surface"));
+ auto MakeFont=[&](const TCHAR* File)
+ {
+  auto* Font=NewObject<UFont>(Owner);Font->FontCacheType=EFontCacheType::Runtime;
+  const FString Path=FPaths::ProjectContentDir()/TEXT("Fonts")/File;
+  if(FPaths::FileExists(Path))Font->CompositeFont.DefaultTypeface.Fonts.Add(FTypefaceEntry(TEXT("Regular"),Path,EFontHinting::Default,EFontLoadingPolicy::LazyLoad));
+  else {Font->CompositeFont=*FCoreStyle::GetDefaultFont();UE_LOG(LogTemp,Warning,TEXT("Missing visual font %s"),File);}
+  Owner->Resources.Add(Font);return Font;
+ };
+ RuntimeFont=MakeFont(TEXT("Barlow-Medium.ttf"));DisplayFont=MakeFont(TEXT("BarlowCondensed-SemiBold.ttf"));
+ Surface=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MagnetSweep/Materials/M_VisualSurface.M_VisualSurface"));
+ if(!Surface)Surface=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MagnetSweep/Materials/M_Surface.M_Surface"));
  if(!Surface) Surface=LoadObject<UMaterialInterface>(nullptr,TEXT("/Engine/BasicShapes/BasicShapeMaterial.BasicShapeMaterial"));
  Owner->Resources.Add(Surface);
  Mat(TEXT("Background"),C(.0015,.003,.005),0,.85);
  Mat(TEXT("Base"),C(.004,.012,.017),.12,.7);
- Mat(TEXT("Tray"),C(.002,.006,.010),0,.87);
+ Mat(TEXT("Tray"),C(.030,.045,.049),.5,.51);
  Mat(TEXT("Grid"),C(.034,.067,.070),.15,.65);
  Mat(TEXT("Edge"),C(.13,.20,.21),.6,.3);
  Mat(TEXT("Dark"),C(.009,.016,.018),.2,.6);
- Mat(TEXT("Steel"),C(.37,.49,.53),.65,.20);
+ Mat(TEXT("Steel"),C(.33,.40,.43),.88,.23);
  Mat(TEXT("Alloy"),C(.18,.36,.58),.72,.18);
  Mat(TEXT("Hazard"),C(.48,.018,.009),.3,.28);
  Mat(TEXT("Warning"),C(1,.08,.005),.15,.3,2.2);
  Mat(TEXT("Core"),C(1,.48,.045),.68,.18,1.3);
  Mat(TEXT("Glow"),C(.04,.65,.50),.1,.28,1.8);
  Mat(TEXT("Copper"),C(.7,.255,.075),.65,.28);
- Mat(TEXT("Brass"),C(.85,.52,.15),.7,.24);
+ Mat(TEXT("Brass"),C(.56,.31,.085),.8,.28);
  Mat(TEXT("Ivory"),C(.78,.81,.69),.25,.4);
- Mat(TEXT("Magnet"),C(.055,.38,.37),.4,.28);
- Mat(TEXT("Hot"),C(.8,.09,.008),.15,.3,.8);
+ Mat(TEXT("Magnet"),C(.018,.11,.13),.54,.32);
+ Mat(TEXT("RimGlow"),C(.025,.25,.21),.1,.4,.45);
+ Mat(TEXT("Hot"),C(.95,.15,.012),.1,.35,3.2);
  Mat(TEXT("Selected"),C(.36,1,.79),.4,.2,.6);
  Mat(TEXT("Ring"),C(1,.58,.2),.6,.26,.2);
  Camera=NewObject<UCameraComponent>(Owner);Owner->AddInstanceComponent(Camera);Camera->RegisterComponent();
@@ -97,62 +116,54 @@ void FWorkbenchImpl::SetupScene() {
  Camera->OrthoNearClipPlane=1;Camera->OrthoFarClipPlane=10000;
  PC->SetViewTarget(Owner);
  auto* Key=Owner->GetWorld()->SpawnActor<ADirectionalLight>(FVector::ZeroVector,FRotator(-56,-40,0));
- Key->GetLightComponent()->SetIntensity(4.5);Key->GetLightComponent()->SetLightColor(C(1,.84,.67));Cast<UDirectionalLightComponent>(Key->GetLightComponent())->SetLightSourceAngle(5.f);
+ Key->GetLightComponent()->SetIntensity(5.4);Key->GetLightComponent()->SetLightColor(C(1,.84,.67));Cast<UDirectionalLightComponent>(Key->GetLightComponent())->SetLightSourceAngle(9.f);
+ Cast<UDirectionalLightComponent>(Key->GetLightComponent())->SetForwardShadingPriority(1);
  auto* Fill=Owner->GetWorld()->SpawnActor<ADirectionalLight>(FVector::ZeroVector,FRotator(-38,145,0));
- Fill->GetLightComponent()->SetIntensity(2.2);Fill->GetLightComponent()->SetLightColor(C(.5,.77,1));Fill->GetLightComponent()->SetCastShadows(false);
+ Fill->GetLightComponent()->SetIntensity(1.65);Fill->GetLightComponent()->SetLightColor(C(.5,.77,1));Fill->GetLightComponent()->SetCastShadows(false);
  auto* Sky=Owner->GetWorld()->SpawnActor<ASkyLight>();Sky->GetLightComponent()->SetIntensity(.35);Sky->GetLightComponent()->bLowerHemisphereIsBlack=false;Sky->GetLightComponent()->LowerHemisphereColor=C(.22,.3,.34);Sky->GetLightComponent()->RecaptureSky();
- if(auto* Ambient=LoadObject<UTextureCube>(nullptr,TEXT("/Engine/MapTemplates/Sky/DaylightAmbientCubemap.DaylightAmbientCubemap"))){Owner->Resources.Add(Ambient);Sky->GetLightComponent()->SourceType=SLS_SpecifiedCubemap;Sky->GetLightComponent()->SetCubemap(Ambient);Sky->GetLightComponent()->SetIntensity(.65f);}
+ if(auto* Ambient=LoadObject<UTextureCube>(nullptr,TEXT("/Engine/MapTemplates/Sky/DaylightAmbientCubemap.DaylightAmbientCubemap"))){Owner->Resources.Add(Ambient);Sky->GetLightComponent()->SourceType=SLS_SpecifiedCubemap;Sky->GetLightComponent()->SetCubemap(Ambient);Sky->GetLightComponent()->SetIntensity(1.0f);}
  auto* PP=Owner->GetWorld()->SpawnActor<APostProcessVolume>();PP->bUnbound=true;
  PP->Settings.bOverride_AutoExposureMethod=true;PP->Settings.AutoExposureMethod=AEM_Manual;
  PP->Settings.bOverride_AutoExposureBias=true;PP->Settings.AutoExposureBias=0;
  PP->Settings.bOverride_AutoExposureApplyPhysicalCameraExposure=true;PP->Settings.AutoExposureApplyPhysicalCameraExposure=false;
  PP->Settings.bOverride_BloomIntensity=true;PP->Settings.BloomIntensity=.48f;
  PP->Settings.bOverride_VignetteIntensity=true;PP->Settings.VignetteIntensity=.25f;
- PP->Settings.bOverride_AmbientOcclusionIntensity=true;PP->Settings.AmbientOcclusionIntensity=.4f;
- Shape(TEXT("Cube"),FVector(80,0,-95),FVector(2600,2000,65),TEXT("Background"));
- Shape(TEXT("Cube"),FVector(80,0,-40),FVector(1470,800,58),TEXT("Base"));
- Shape(TEXT("SM_Tray"),FVector(0,0,-6),FVector(1040,660,22),TEXT("Tray"));
- for(int I=-4;I<=4;I++) Shape(TEXT("Cube"),FVector(I*100,0,5.3),FVector(.7,615,.5),TEXT("Grid"));
- for(int I=-2;I<=2;I++) Shape(TEXT("Cube"),FVector(0,I*100,5.3),FVector(995,.7,.5),TEXT("Grid"));
+ PP->Settings.bOverride_AmbientOcclusionIntensity=true;PP->Settings.AmbientOcclusionIntensity=.8f;
+ // Detailed workshop kit is purely visual; every collision and target stays in the model.
+ Shape(TEXT("Cube"),FVector(80,0,-170),FVector(2600,2000,45),TEXT("Background"));
+ Shape(TEXT("Cube"),FVector(80,0,-56),FVector(1510,850,68),TEXT("Base"));
+ Shape(TEXT("SM_VDeck"),FVector(0,0,-21),FVector(1080,704,66),TEXT("Dark"));
  for(int Side:{-1,1}) {
-  Shape(TEXT("Cube"),FVector(Side*530,0,12),FVector(32,695,34),TEXT("Edge"));
-  Shape(TEXT("Cube"),FVector(0,Side*337,12),FVector(1030,25,34),TEXT("Edge"));
-  for(int Y:{-1,1}) Shape(TEXT("Cylinder"),FVector(Side*531,Y*324,33),FVector(15,15,7),TEXT("Brass"));
+  for(int Front:{-1,1}) {
+   Shape(TEXT("Cube"),FVector(Side*650,Front*310,-105),FVector(85,85,150),TEXT("Dark"));
+   Shape(TEXT("SM_VBearing"),FVector(Side*650,Front*310,-163),FVector(110,110,22),TEXT("Steel"));
+  }
+  Shape(TEXT("Cube"),FVector(Side*555,0,-7),FVector(14,735,30),TEXT("Copper"));
+  for(int I=0;I<9;I++)Shape(TEXT("Cube"),FVector(Side*594,-275+I*64,-6),FVector(44,23,13),TEXT("Dark"));
  }
- for(int I=0;I<7;I++) Shape(TEXT("Cube"),FVector(-420+I*125,-372,-7),FVector(68,10,2),I%2?TEXT("Dark"):TEXT("Copper"));
- // Replace an empty backing plane with a compact, lit salvage station.
- for(int Side:{-1,1}){
-  Shape(TEXT("Cube"),FVector(Side*565,0,-6),FVector(12,750,18),TEXT("Dark"));
-  for(int Y=-280;Y<=280;Y+=80)Shape(TEXT("Cylinder"),FVector(Side*532,Y,32),FVector(10,10,5),TEXT("Steel"));
-  Shape(TEXT("Cube"),FVector(0,Side*349,30),FVector(905,4,4),TEXT("Glow"));
+ // A service column and small working gauges give the tray a believable setting.
+ Shape(TEXT("Cube"),FVector(-671,0,9),FVector(128,480,42),TEXT("Magnet"));
+ for(int I=0;I<3;I++) {
+  Shape(TEXT("SM_VBearing"),FVector(-674,-155+I*142,45),FVector(84,84,15),TEXT("Brass"));
+  Shape(TEXT("Cylinder"),FVector(-674,-155+I*142,55),FVector(45,45,3),TEXT("Dark"));
+  Shape(TEXT("Cube"),FVector(-674,-155+I*142,58),FVector(28,3,2),TEXT("Ivory"),FRotator(0,25+I*32,0));
  }
- for(int I=0;I<19;I++)Shape(TEXT("Cube"),FVector(630+(I%4)*18,-300+(I/4)*18,12),FVector(10,10,6),TEXT("Edge"));
- for(int I=0;I<3;I++){
-  Shape(TEXT("Cube"),FVector(660,220+I*34,13),FVector(145,23,16),TEXT("Edge"));
-  Shape(TEXT("Cube"),FVector(635,220+I*34,24),FVector(70,12,4),TEXT("Copper"));
+ for(int I=0;I<16;I++) {
+  const float X=-480+I*62;
+  Shape(TEXT("Cube"),FVector(X,-369,0),FVector(33,12,5),I%2?TEXT("Dark"):TEXT("Brass"),FRotator(0,20,0));
  }
- Shape(TEXT("Cube"),FVector(660,0,8),FVector(215,280,66),TEXT("Dark"));
- Shape(TEXT("Cylinder"),FVector(650,0,30),FVector(208,208,38),TEXT("Copper"));
- Shape(TEXT("Cylinder"),FVector(650,0,55),FVector(174,174,8),TEXT("Dark"));
- for(int Z=62;Z<=95;Z+=8)Shape(TEXT("SM_Ring"),FVector(650,0,Z),FVector(203,203,12),Z==94?TEXT("Brass"):TEXT("Copper"));
- FurnaceFill=Shape(TEXT("Cylinder"),FVector(650,0,62),FVector(142,142,3),TEXT("Hot"));
- for(int Side:{-1,1}) for(int I=0;I<5;I++) Shape(TEXT("Cube"),FVector(650+(I-2)*34,Side*123,43),FVector(20,14,4),I%2?TEXT("Dark"):TEXT("Brass"));
- auto* Lamp=Owner->GetWorld()->SpawnActor<APointLight>(FVector(650,0,120),FRotator::ZeroRotator);
- FurnaceLight=Lamp->PointLightComponent;FurnaceLight->SetIntensity(1800);FurnaceLight->SetAttenuationRadius(480);FurnaceLight->SetLightColor(C(1,.3,.065));FurnaceLight->SetCastShadows(false);
- auto AddMagnet=[&](FName MeshName,FVector Offset,FVector Size,FName Material){
-  auto* S=Shape(MeshName,World(Magnet,80)+Offset,Size,Material,FRotator::ZeroRotator,false);
-  MagnetShapes.Add(S);MagnetOffsets.Add(Offset);MagnetSizes.Add(Size);return S;};
- AddMagnet(TEXT("SM_MagnetBody"),FVector(0,0,0),FVector(100,90,29),TEXT("Magnet"));
- AddMagnet(TEXT("SM_MagnetBody"),FVector(0,0,-8),FVector(108,98,13),TEXT("Dark"));
- AddMagnet(TEXT("Cube"),FVector(0,33,16),FVector(44,16,8),TEXT("Copper"));
- AddMagnet(TEXT("Cylinder"),FVector(0,33,22),FVector(12,12,5),TEXT("Glow"));
- for(int Side:{-1,1}) {
-  AddMagnet(TEXT("Cube"),FVector(Side*35,-37,0),FVector(27,20,30),TEXT("Ivory"));
-  auto* Insulator=AddMagnet(TEXT("Cube"),FVector(Side*41,-7,9),FVector(19,28,9),TEXT("Warning"));StabilizerParts.Add(Insulator);
-  AddMagnet(TEXT("Cube"),FVector(Side*27,-18,0),FVector(24,5,22),TEXT("Copper"));
-  for(int I=0;I<3;I++) {auto* Coil=AddMagnet(TEXT("SM_Ring"),FVector(Side*26,3+I*7,0),FVector(29,29,6),TEXT("Brass"));Coils.Add(Coil);}
-  auto* Arm=AddMagnet(TEXT("Cube"),FVector(Side*48,20,0),FVector(28,14,14),TEXT("Copper"));ReachParts.Add(Arm);
- }
+ Shape(TEXT("SM_VFurnace"),FVector(650,0,30),FVector(236,278,148),TEXT("Dark"));
+ FurnaceFill=Shape(TEXT("Cylinder"),FVector(650,0,61),FVector(142,142,3),TEXT("Hot"));
+ if(auto* Heat=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/MagnetSweep/Materials/M_FurnaceHeat.M_FurnaceHeat")))
+ {FurnaceFill->SetMaterial(0,Heat);Owner->Resources.AddUnique(Heat);}
+ for(int I=0;I<3;I++)Shape(TEXT("SM_VHeatSink"),FVector(657,210+I*42,6),FVector(135,32,24),TEXT("Copper"));
+ auto* Lamp=Owner->GetWorld()->SpawnActor<APointLight>(FVector(650,0,115),FRotator::ZeroRotator);
+ FurnaceLight=Lamp->PointLightComponent;FurnaceLight->SetIntensity(2300);FurnaceLight->SetAttenuationRadius(430);FurnaceLight->SetLightColor(C(1,.26,.045));FurnaceLight->SetCastShadows(false);
+ auto* Rim=Owner->GetWorld()->SpawnActor<APointLight>(FVector(-450,-420,210),FRotator::ZeroRotator);
+ Rim->PointLightComponent->SetIntensity(1400);Rim->PointLightComponent->SetAttenuationRadius(850);Rim->PointLightComponent->SetLightColor(C(.13,.58,.73));Rim->PointLightComponent->SetCastShadows(false);
+ const FVector HeroSize(136,147.4f,47);
+ auto* Hero=Shape(TEXT("SM_HeroMagnet"),World(Magnet,78),HeroSize,TEXT("Magnet"),FRotator::ZeroRotator,false);
+ MagnetShapes.Add(Hero);MagnetOffsets.Add(FVector::ZeroVector);MagnetSizes.Add(HeroSize);
  RecoveredBlock=Shape(TEXT("SM_Plate"),FVector(650,-216,25),FVector(118,70,30),TEXT("Copper"));RecoveredBlock->SetVisibility(false);
  const TArray<FName> CueNames={TEXT("magnet_loop"),TEXT("magnet_on"),TEXT("magnet_off"),TEXT("pickup_metal1"),TEXT("pickup_metal2"),TEXT("pickup_metal3"),TEXT("pickup_heavy"),TEXT("rare_find"),TEXT("vent"),TEXT("warning_loop"),TEXT("overload"),TEXT("smelt"),TEXT("payout"),TEXT("upgrade"),TEXT("contract_success"),TEXT("contract_fail"),TEXT("ui_click"),TEXT("workshop_music"),TEXT("furnace_loop")};
  for(FName Name:CueNames){USoundBase* S=LoadObject<USoundBase>(nullptr,*(TEXT("/Game/MagnetSweep/Audio/rework/")+Name.ToString()+TEXT(".")+Name.ToString()));if(S){Sounds.Add(Name,S);Owner->Resources.Add(S);}else UE_LOG(LogTemp,Error,TEXT("MISSING REWORK SOUND %s"),*Name.ToString());}

@@ -1,0 +1,204 @@
+{
+  "generator": "Blender 5.2.1 LTS",
+  "source": "scripts/GenerateVisualKit.py",
+  "units": "centimeters; runtime Place fits exact display envelope",
+  "meshes": [
+    {
+      "name": "SM_VGear",
+      "triangles": 10312,
+      "dimensions_cm": [
+        44.0,
+        43.9566764831543,
+        8.5
+      ],
+      "material_slots": [
+        "Steel",
+        "Brass",
+        "Dark"
+      ]
+    },
+    {
+      "name": "SM_VBearing",
+      "triangles": 9168,
+      "dimensions_cm": [
+        44.0,
+        44.0,
+        12.600000381469727
+      ],
+      "material_slots": [
+        "Steel",
+        "Dark",
+        "Brass"
+      ]
+    },
+    {
+      "name": "SM_VHeatSink",
+      "triangles": 3204,
+      "dimensions_cm": [
+        35.0,
+        34.0,
+        18.0
+      ],
+      "material_slots": [
+        "Steel",
+        "Dark",
+        "Alloy"
+      ]
+    },
+    {
+      "name": "SM_VCoil",
+      "triangles": 16600,
+      "dimensions_cm": [
+        41.0,
+        40.0,
+        16.59000015258789
+      ],
+      "material_slots": [
+        "Dark",
+        "Steel",
+        "Copper",
+        "Magnet"
+      ]
+    },
+    {
+      "name": "SM_VCore",
+      "triangles": 14820,
+      "dimensions_cm": [
+        42.0,
+        42.0,
+        41.5
+      ],
+      "material_slots": [
+        "Dark",
+        "Glow",
+        "Brass",
+        "Steel",
+        "Magnet"
+      ]
+    },
+    {
+      "name": "SM_VFrame",
+      "triangles": 36028,
+      "dimensions_cm": [
+        74.0,
+        65.0,
+        30.5
+      ],
+      "material_slots": [
+        "Dark",
+        "Steel",
+        "Magnet",
+        "Brass",
+        "Copper",
+        "Glow"
+      ]
+    },
+    {
+      "name": "SM_VDeck",
+      "triangles": 16596,
+      "dimensions_cm": [
+        1062.0,
+        684.0,
+        62.59000015258789
+      ],
+      "material_slots": [
+        "Dark",
+        "Tray",
+        "Magnet",
+        "Steel",
+        "RimGlow"
+      ]
+    },
+    {
+      "name": "SM_VFurnace",
+      "triangles": 36712,
+      "dimensions_cm": [
+        216.0,
+        250.0,
+        92.58999633789062
+      ],
+      "material_slots": [
+        "Dark",
+        "Copper",
+        "Brass",
+        "Hot",
+        "Steel"
+      ]
+    },
+    {
+      "name": "SM_VDock",
+      "triangles": 6360,
+      "dimensions_cm": [
+        110.0,
+        100.0,
+        32.5
+      ],
+      "material_slots": [
+        "Dark",
+        "Magnet",
+        "Brass",
+        "Glow",
+        "Steel"
+      ]
+    },
+    {
+      "name": "SM_VPress",
+      "triangles": 7128,
+      "dimensions_cm": [
+        100.0,
+        80.0,
+        40.0
+      ],
+      "material_slots": [
+        "Hazard",
+        "Dark",
+        "Steel",
+        "Brass"
+      ]
+    },
+    {
+      "name": "SM_VPad",
+      "triangles": 3956,
+      "dimensions_cm": [
+        100.0,
+        100.0,
+        18.59000015258789
+      ],
+      "material_slots": [
+        "Dark",
+        "Tray",
+        "Steel",
+        "Brass"
+      ]
+    },
+    {
+      "name": "SM_VBarrier",
+      "triangles": 2636,
+      "dimensions_cm": [
+        120.0,
+        35.0,
+        36.09000015258789
+      ],
+      "material_slots": [
+        "Dark",
+        "Steel",
+        "Magnet",
+        "Brass"
+      ]
+    },
+    {
+      "name": "SM_VArm",
+      "triangles": 3352,
+      "dimensions_cm": [
+        94.0,
+        18.0,
+        19.59000015258789
+      ],
+      "material_slots": [
+        "Brass",
+        "Dark",
+        "Steel"
+      ]
+    }
+  ]
+}
