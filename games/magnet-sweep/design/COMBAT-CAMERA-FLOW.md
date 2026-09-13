@@ -14,9 +14,11 @@ Develop the reference's dimensional, stylised machinery: substantial bevelled me
 
 ## Proposed player flow
 
+**Updated mechanic foundation from the design Q&A:** Choose Character establishes an individual weapon and starting core recipes. During preparation, one magnet use per turn gathers **source materials**, compatible with many recipes. The player assigns them to available recipes in the furnace, crafting ammo, defence and modifier parts for immediate or later use. **Unused raw resources and unused finished parts both carry into later turns.** After each fight, searching enemy rubble offers one of three recipes or a skip. See [the authoritative recipe/part rules](REDESIGN-PLAN.md#owner-defined-recipe-and-part-system). The concept's generic operator/cannon and three illustrated parts are not the final character roster or recipes; the board is concept art, not actual game screens.
+
 | Moment | What the player sees and does | Information that must remain clear |
 | --- | --- | --- |
-| Prepare — 2.5D side view | Read enemy intentions, move the chain-hung magnet, gather components and arrange them in the shot bar | Available versus already committed parts; remaining energy; intended targets; expected effects and cost before Fire |
+| Prepare — 2.5D side view | Read enemy intentions, use the magnet once to gather materials, assign resources to available furnace recipes, then arrange crafted/retained parts into shot and defence | Raw-resource reserves versus crafted-part reserves; recipe costs and crafting output; available versus committed parts; energy; targets; expected effects before Fire |
 | Fire — 3D perspective | The camera takes a view behind and beside the rig, preserving the selected target. Components seat and activate in sequence, then the cannon fires | The shot is already committed. Animation reveals the physical cause of the previewed result rather than introducing a new aiming challenge |
 | Impact — 3D perspective | See the projectile reach its target and each affected enemy react | Who was hit, which effects applied and what protection or health changed. A spread attack needs framing that shows every affected target |
 | Enemy turn — 3D action view | Watch enemy attacks and their effects on the rig and its protection | Which enemy is acting, what hit the rig and the remaining player health; use an angle that actually shows the rig being struck |
