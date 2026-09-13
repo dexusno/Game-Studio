@@ -4,6 +4,8 @@
 
 ## What Klaus chose
 
+In the continuation task on 13 September, Klaus supplied the same board and explicitly confirmed **16B / 2.5D side view** and **16C / 3D perspective** as the two mechanic layouts, using this graphics treatment throughout. Following his preceding request, these map to preparation/assembly and action respectively.
+
 Klaus likes **both the visual treatment and the perspective in 16C** of [the camera comparison](../assets/concepts/art-direction-2026-09-13/16-depth-camera.webp). He proposes preparing ammunition in a separate 2.5D side-view screen, then switching to 3D for the shot, impact and potentially the enemy turn. The preparation view shows enemies, available scrap and a component bar used to build the shot. Damage and targeting mechanics remain open.
 
 ## The visual foundation
@@ -38,4 +40,4 @@ Damage rules, single-target versus spread behaviour, effect order, defence timin
 
 Next art evidence: a short storyboard showing the same rig and enemies across these moments, followed by a reproducibility test using shared geometry and two camera views. Inspect magnet movement, stacked material clarity, loading-channel continuity, target visibility and return orientation. Generated stills alone do not prove the camera transition, animation quality or an easy production method.
 
-The [exact four-panel storyboard prompt](../assets/concepts/combat-camera-2026-09-13/PROMPT.md) is saved. Its initial ImageGen attempt was interrupted; the handle is now missing and no new image was recovered. The receiving task should generate from this prompt with panel 16C as the visual reference, then inspect and preserve the output. The requested hypothetical single-target hit and plate impact illustrate framing only; they do not settle damage or defence rules.
+The [four-panel storyboard](../assets/concepts/combat-camera-2026-09-13/storyboard.webp) was generated and inspected in the continuation task on 13 September. The [original prompt](../assets/concepts/combat-camera-2026-09-13/PROMPT.md), [targeted loading refinement](../assets/concepts/combat-camera-2026-09-13/REFINEMENT-PROMPT.md) and [provenance/observations](../assets/concepts/combat-camera-2026-09-13/PROVENANCE.md) preserve the result. Its Fire panel catches the joined components entering an open chamber; impact and the later enemy response show contact direction clearly. Generated stills have some housing/damage-state drift, which is why the shared-geometry motion test remains necessary. The hypothetical single-target and plate hits illustrate framing only; they do not settle damage, defence or turn timing.

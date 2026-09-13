@@ -4,13 +4,15 @@
 
 ## Current owner preference
 
+Klaus explicitly reconfirmed board 16 in the continuation task: **16B for preparation/assembly and 16C for action**, with the same graphics treatment. The [four-panel storyboard](../assets/concepts/combat-camera-2026-09-13/storyboard.webp) now refines those moments. [Inspection and provenance](../assets/concepts/combat-camera-2026-09-13/PROVENANCE.md) distinguish its visual strengths from unresolved asset continuity and rule details.
+
 Klaus likes both the graphics treatment and 3D perspective in **16C** for the actual shot. He proposes a separate **2.5D side-view preparation screen** showing enemies, available scrap and a component bar to build the shot. Fire then switches to 3D for discharge and impact; explore the enemy response in 3D as well. See [the camera-flow proposal](COMBAT-CAMERA-FLOW.md). This replaces the earlier request for a broad shortlist. It does not settle damage, targeting, whether Fire ends the turn, final fiction or the exact UI.
 
 ## How to review
 
 Open the [local browser preview](http://127.0.0.1:8874/assets/concepts/art-direction-2026-09-13/index.html) to switch boards, enlarge the original artwork and collect favourite codes. The [review page source](../assets/concepts/art-direction-2026-09-13/index.html) and its images are saved together. Its shortlist and notes stay in that browser when storage is available; copy the resulting text into our conversation to communicate a preference. Nothing in the page selects or approves an art direction automatically. The temporary preview can be restarted from the studio root with `python -m http.server 8874 --bind 127.0.0.1 --directory games/magnet-sweep`.
 
-Each board has one visual family and five coded variants, A–E. Choose individual variants, not necessarily an entire board. The useful response is three to five codes plus what appeals: material, shape, colour, atmosphere or overall clarity. Disliking all of them is also useful; name what is missing and the next exploration can change direction. Nothing has been selected automatically.
+Each archived board has one visual family and five coded variants, A–E. The earlier request for a shortlist is superseded by Klaus's 16B/16C selection. Use this archive for comparison only; continue refining the selected foundation.
 
 The comparison uses the same functional scene: hanging magnet, airborne scrap, a physical loading stack, forge-cannon, protective plate and two enemies. This makes the style differences easier to see. The wide E panel gives more environmental space, so judge object treatment rather than panel size. The board labels are descriptions of appearance; “8-bit” and “16-bit” do not certify historical palette/hardware restrictions. Generated frames occasionally invent decorative details or ambiguous connections; a selected direction must be refined into mechanically correct objects.
 
