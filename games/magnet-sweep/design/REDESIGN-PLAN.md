@@ -1,6 +1,8 @@
 # Magnet Sweep — proposed complete redesign plan
 
-Prepared for Klaus, 13 September 2026. **Sequence remains a draft for owner revision. Step 1 is authorized and five premise options have been prepared; none is selected. Later steps have not started.**
+Prepared for Klaus, 13 September 2026. **Sequence remains a draft for owner revision. Five premise options and a native Slay the Spire 2 combat study are delivered; no premise or detailed combat rules are selected. Art production and redesign implementation have not started.**
+
+Latest steering: Klaus proposes round-based combat in which the hanging magnet supplies a smart forge weapon, combining scrap into attacks or defence against enemies that fight back. The [play study and proposed combat direction](SCRAP-COMBAT-DIRECTION.md) recommends developing one complete mid-game round, intermediate stage goals, useful rewards and loss/reset rules together before visual production. This brings progression design forward from step 7; its later playable implementation still follows owner-set goals. The original nine-step sequence below remains a reference for review, not automatic authorization.
 
 The aim is a game whose purpose, objects, actions and consequences make sense while you play, with an expressive swinging magnet and a visual style you want to spend time in. This is a redesign of the whole experience. Existing features earn their place by serving the new design.
 
@@ -23,6 +25,8 @@ Establish the game's simple premise: the player's role, their situation, why usi
 **What you judge:** “Do I understand why I am doing this, and do I care about reaching the end?”
 
 ## 2. Decide how a level works, including how we actually lose
+
+For the proposed combat direction, use a complete encounter and one detailed round: enemy intentions, available scrap, powered loads, attack/shield choices, forge preview, material consumption and replenishment, then enemy response. Connect encounter rewards to a stage guardian and the eventual final mission. Settle the strategic role of the physical magnet before multiplying materials and status effects. The study's examples and three-stage outline are proposals, not selected rules.
 
 Describe one typical mid-game level from arrival to outcome. Give it a concrete objective, a reason to take an optional risk, an understandable success condition and a real failure condition. Decide what failure costs, what is retained, and what restarting a level or expedition means. The actual losing rules must survive the retry/save flow; unlimited undo must not quietly erase the agreed stakes.
 
