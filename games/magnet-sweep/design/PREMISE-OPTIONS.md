@@ -1,5 +1,7 @@
 # Five premises for the magnet game
 
+**Archived alternatives:** Klaus has since chosen a mercenary travelling between fortified cities to repel robot waves after an AI takeover. The [current redesign plan](REDESIGN-PLAN.md#chosen-world-and-city-campaign) owns that premise and progression. These five earlier options remain historical design material; choosing one is no longer a pending step.
+
 Redesign step 1, 13 September 2026. **Original proposals for Klaus to choose from or combine. The names are working labels. None is selected or implemented.**
 
 All five support the agreed side-view play, a magnet suspended from a crane or gantry, and stacked objects that can shift, tumble and swing. Ordinary scrap provides usable material or income; particular recoveries visibly advance the main project. A beam, motor housing or wheel should look like one. Where a recovered item is not magnetically responsive, its lifting attachment must be recognisable and consistent with the later interaction design.

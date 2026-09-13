@@ -10,11 +10,13 @@ Klaus likes **both the visual treatment and the perspective in 16C** of [the cam
 
 ## The visual foundation
 
+The later design Q&A selects a **mercenary defending fortified cities against robots after an AI takeover**, with several character-specific weapons. See [the chosen campaign](REDESIGN-PLAN.md#chosen-world-and-city-campaign). This supplies the current world foundation; the exact pictured operator, cannon and environment are still illustrative assets rather than approved character/city specifications.
+
 Develop the reference's dimensional, stylised machinery: substantial bevelled metal, restrained wear, warm furnace light, cooler background depth and recognisable gears, bolts and magnetic poles. Keep the tactile volume and dramatic camera of 16C while giving selectable scrap clear edges in the preparation view. Preserve visual continuity between views. The pictured operator, clothing and sunset scrapyard are working references, not a selected protagonist or final story. The rack of finished bullets in the reference is not the ammunition-building mechanic.
 
 ## Proposed player flow
 
-**Updated mechanic foundation from the design Q&A:** Choose Character establishes an individual weapon and starting core recipes. During preparation, one magnet use per turn gathers **source materials**, compatible with many recipes. The player assigns them to available recipes in the furnace, crafting ammo, defence and modifier parts for immediate or later use. **Unused raw resources and unused finished parts both carry into later turns.** After each fight, searching enemy rubble offers one of three recipes or a skip. See [the authoritative recipe/part rules](REDESIGN-PLAN.md#owner-defined-recipe-and-part-system). The concept's generic operator/cannon and three illustrated parts are not the final character roster or recipes; the board is concept art, not actual game screens.
+**Updated mechanic foundation from the design Q&A:** Choose Character establishes an individual weapon and starting core recipes. One magnet use per turn gathers source materials; the player allocates them to available furnace recipes to make ammo/defence/modifier parts. **Unused resources and parts remain between turns, then both clear at fight end.** Recipes and permanent upgrades carry through the game, with upgrades able to grant fresh starting or turn-timed supplies. Victories provide cores for sale and normally one of three recipe rewards or a skip; Officers also award a permanent upgrade. See [the authoritative recipe/part rules](REDESIGN-PLAN.md#owner-defined-recipe-and-part-system). The generic operator/cannon and three illustrated parts are not the final character roster or recipes; the board is concept art, not actual game screens.
 
 | Moment | What the player sees and does | Information that must remain clear |
 | --- | --- | --- |

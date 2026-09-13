@@ -1,10 +1,10 @@
 # Magnet Sweep — proposed complete redesign plan
 
-Prepared for Klaus, 13 September 2026. **Current assignment: mechanics and scenes Q&A.** Review the mechanics and player-facing scene sequence one topic at a time, recording Klaus's answers here. Five premise options, reference-game studies, the art atlas, storyboard and first motion study are delivered reference material. Fiction and detailed combat rules remain open; redesign gameplay implementation has not started. The four-panel storyboard is concept art and graphics direction, not actual game screens or a finished UI specification.
+Prepared for Klaus, 13 September 2026. **Current assignment: mechanics and scenes Q&A.** Review the mechanics and player-facing scene sequence one topic at a time, recording Klaus's answers here. The owner has now chosen a mercenary campaign through fortified cities under robot attack, with recipe crafting, branching encounter choices, shops and permanent weapon-system upgrades. Detailed combat tuning, character roster and campaign ending remain open; redesign gameplay implementation has not started. The old five premises are archived alternatives. The four-panel storyboard is concept art and graphics direction, not actual game screens or a finished UI specification.
 
 Current art direction: after reviewing [the visual atlas](ART-DIRECTION.md), Klaus prefers 16C's graphical treatment and proposes [preparation in 2.5D with firing/impact and enemy response in 3D](COMBAT-CAMERA-FLOW.md). Refine that foundation and test repeatable assets and camera continuity. Damage, targeting and whether Fire ends the turn remain open; the remaining implementation steps follow owner-set goals.
 
-Combat direction: choose a character with its own basic weapon and core recipes. Games contain fights, and fights contain turns. Once per turn, use the hanging magnet to gather source materials; assign those materials to available recipes in the furnace to craft the parts you choose. Build attacks and defence, or save unused raw resources and finished parts for later turns. After each fight, search the attackers' rubble and choose one of three recipe rewards or skip. The detailed owner-defined rules are recorded below; exact costs, yields, turn ending and persistence across fights/games remain to be specified.
+Combat direction: choose a mercenary with its own basic weapon and core recipes. Each city has a wave of 10–20 fights, with turns inside each fight. Use the magnet once per turn and assign gathered materials to furnace recipes. Both unused raw resources and crafted parts clear at fight end; recipes and permanent system upgrades persist through the game. Upgrades can grant fresh resources/ready parts at fight start or on specified turns. Victories supply cores and recipes; Officers also award a permanent upgrade. City-opening upgrades, encounter choices, shops, mysteries and stronger later cities develop the build. Exact costs, yields, recipe availability, turn ending and other detailed rules remain open.
 
 The aim is a game whose purpose, objects, actions and consequences make sense while you play, with an expressive swinging magnet and a visual style you want to spend time in. This is a redesign of the whole experience. Existing features earn their place by serving the new design.
 
@@ -14,22 +14,25 @@ Use the [completed strategy study](BUILD-STRATEGY-STUDY.md) for Slay the Spire 2
 
 ### Mechanics and scenes Q&A — opening screen first
 
-Known foundation: characters with individual weapons/abilities and core recipes; turn-based fights; one magnet gathering action per turn; player-assigned resource crafting in the furnace; physical ammunition/defence/modifier parts; unused raw-resource and part retention between turns; and one-of-three-or-skip recipe rewards after each fight. Preparation uses the 16B side view and combat presentation the 16C perspective. Exact costs, yields, effects, turn ending and persistence across fights/games remain open.
+Known foundation: individual mercenaries/weapons and core recipes; 10–20-fight city waves; one magnet haul per turn; player-assigned furnace crafting; resource/part retention between turns and clearing at fight end; game-long recipes/upgrades including fight-start and turn-timed supply grants; core/recipe rewards; Officers; between-fight shops; and mysteries. Preparation uses 16B and action uses 16C. Exact crafting/energy numbers, recipe availability, turn ending and new-game/profile persistence remain open.
 
 Klaus wants to begin at the opening screen and work forward through the player journey. Title Screen leads through Start New Game to Choose Character. He then defined the recipe/part combat and reward loop below. Ask one main question at a time and preserve these answers. The assistant's separate End Turn/multiple-shots recommendation has not been accepted or rejected.
 
-Scene inventory: the title-screen baseline is recorded below; other entries remain discussion topics rather than a final scene list.
+Scene/function inventory: the owner has selected the following flow and functions. Exact screen composition, transitions and which functions share a screen are still design work.
 
 | Player-facing scene or function | Current standing |
 | --- | --- |
 | Title screen | Owner-defined first version below; Start New Game leads to Choose Character |
 | Choose Character | Confirmed next scene; each character has its own weapon, strengths/abilities and starting core recipes; roster and layout open |
+| City arrival / mayor's offer | Before the city's wave, choose among three special weapon upgrades; an opening offer can include a legendary upgrade |
+| Encounter choice | Pick among three offered encounters; regular, Officer and mystery types are possible; how many of each appear is not fixed |
 | Preparation and assembly | Selected side view; gather source materials, assign them to available recipes in the furnace, build shot/defence or save raw resources/parts; no separate furnace scene has been specified |
 | Combat action | Selected perspective; firing, impacts and enemy response are moments within it, not automatically separate scenes |
-| Rubble / recipe reward | After each fight, choose one of three recipes or skip; standalone scene versus overlay and physical presentation remain open |
-| Other rig upgrades | Broader upgrade functions remain to define beyond the selected recipe reward system |
-| Progress between fights | Progression required; map, hub or direct advancement not selected |
-| Victory and defeat | Meaningful outcomes required; presentation and reset rules open |
+| Salvage / analysis rewards | Take robot energy cores and analyze dropped items for recipes; normally choose one of three recipes or skip; Officer rewards also include a permanent system upgrade |
+| Local shop | Accessible between fights; sell cores for credits and buy resources, recipes or permanent system upgrades; stock varies |
+| Mystery encounter | May resolve as combat, a special merchant or a tech-support encounter; these need their own interaction states |
+| City boss / city cleared | End-of-wave boss is the last enemy in the city; clearing the wave leads to a more advanced city and a fresh opening upgrade offer |
+| Victory and defeat | City victory is specified; final campaign victory, loss/reset and presentation remain open |
 
 ### Scene 1 — title screen, first version
 
@@ -48,7 +51,58 @@ Profiles scope their progression, resumable game and discovered-item collection.
 
 ### Scene 2 — Choose Character
 
-Confirmed by Klaus, 13 September 2026: the first scene after Start New Game is **Choose Character**. Offer different characters, each with its own weapon and individual strengths and abilities. A new game starts with the chosen character's basic gun and core recipes. Character count, identities, exact abilities, starting-recipe lists and character unlock/access rules are not selected yet. What happens after confirming the character (intro, map or first fight) also remains open.
+Confirmed by Klaus, 13 September 2026: the first scene after Start New Game is **Choose Character**. Offer different mercenaries, each with its own weapon and individual strengths and abilities. A new game starts with the chosen character's basic gun and core recipes. Character count, identities, exact abilities, starting-recipe lists and character unlock/access rules are not selected yet. The campaign begins in a fortified city, with an upgrade offer before its wave; whether an introductory sequence precedes that city interaction remains open.
+
+### Chosen world and city campaign
+
+**Owner-defined premise:** you are a mercenary travelling between fortified cities in a dystopian world. An AI judged humans a threat and used robots to take over the world. Scattered fortified cities survive robot attacks with help from mercenaries wielding special weapons. Many mercenaries work for a city and several attacks occur at the same time, explaining the player's choice of assignments. This background does not itself specify multiplayer, companions or simulated allied battles.
+
+**Campaign scale:** a game progresses through cities; a city is cleared by defeating its wave of **10–20 fights**; each fight contains many turns. More advanced cities have often-better shops, more advanced recipes and harder/more advanced enemies. Progression must balance the player's growing build against those threats. City count, named locations, actual enemy rosters, total-game ending and difficulty curves remain open. The 10–20 range is owner-selected, not an implementation-time budget.
+
+**Opening reward:** before each city's wave, the city/mayor offers a choice among **three special upgrades to the weapon**. These are the first rewards before the wave's fights and can sometimes include a legendary upgrade. System upgrades gained through the campaign are permanent for the current game, not merely this fight. Exact opening reward pools, probability, skip rules and equip/stack limits are not specified.
+
+**Upgrade supply effects, explicitly allowed by Klaus:** permanent upgrades may provide starting raw resources or ready-made parts at the beginning of each fight, or extra raw resources/ready parts on a specified turn during a fight. These are fresh grants from retained systems, not leftovers carried across the fight boundary. They supplement the default magnet/furnace supply route; no extra magnet activation is implied. Exact trigger turns, quantities, part eligibility, repeat/stack rules and initial grant order remain to define per upgrade. A turn-timed effect is not automatically an every-turn effect.
+
+**Before the next fight:** choose among **three offered encounters**. Possible types are regular, Officer and mystery; Klaus has not required that each set always contain exactly one of each. The city ends with an end-of-wave boss as its last enemy. The exact treatment of the final boss within the three-choice flow, and whether noncombat mystery encounters count toward the 10–20 fights, remain to clarify.
+
+| Encounter | Challenge and rewards |
+| --- | --- |
+| Regular | Troops grow stronger with progression but remain weaker than comparable Officers. Recipe drops can be common, uncommon and sometimes rare; **never legendary** |
+| Officer | Stronger enemy, often assisted by minions/troops. Victory gives a **permanent system-upgrade part in addition to a recipe reward**. Recipes are often uncommon/rare and sometimes legendary |
+| Mystery | Can become a regular fight, special merchant or tech-support encounter; outcome probabilities and advance information are open |
+| End-of-wave boss | Last enemy in the city. Can drop legendary rewards; the owner has not specified a guaranteed legendary, full reward table or boss selection UI |
+
+After clearing the city/wave, move to a more advanced city and repeat its opening offer and wave. The scene sequence is thus character choice → city arrival/offer → encounter choice → fight or mystery → rewards → between-fight services/next choice → city boss/clear → next city. This describes functions; it is not a locked map layout or a requirement to visit the shop after every fight.
+
+### Cores, credits and the between-fight shop
+
+Defeated robots provide **energy cores**. Stronger robots' cores have greater sale value. Collect cores after victory and **sell them to the shop for credits**; they are not automatically the same thing as spendable credits or the fight's expendable crafting pool. Prices and core types remain to balance.
+
+The local shop is accessible **between fights**, and its stock is slightly different each time. It sells raw resources for recipes, whole recipes at higher prices, and permanent system upgrades of various strengths. Legendary stock can sometimes appear. Offers are semi-random and balanced for the chosen character and current level/city; later cities often offer better goods alongside harder threats. Exact restock trigger, stock persistence during revisits, prices, sale restrictions and eligibility rules are not selected. Purchased resources must remain usable for the upcoming fight; the purchase/staging/reset order still needs definition rather than silently deleting those purchases.
+
+### Recipe strength, rarity and services
+
+Each recipe has a **name and strength**. The same functional recipe can exist at different strength levels and material costs. Owner's illustrative example: a strength-3 shield costs 1 iron + 2 copper; a strength-5 version might cost 2 iron + 2 copper. These are examples of improving efficiency, **not approved tuning**. Strength, rarity, material cost and the shop purchase price are distinct properties.
+
+Rarity tiers are **common → uncommon → rare → legendary**. Common recipes are the weakest and most expensive relative to delivered strength. Progressively rarer recipes should become better/stronger, offer more abilities and give a better cost-to-strength ratio. This does not mean a legendary must always cost fewer absolute materials or fewer shop credits. Exact cost curves, effect budgets, offer probabilities, duplicate handling and how two strength versions coexist remain open.
+
+Legendary sources named by Klaus are occasional Officer rewards, occasional shop stock, the mayor's opening wave reward and the end-of-wave boss. Regular troops cannot drop legendary recipes. Do not turn possible drops into guaranteed drops or silently remove Officer eligibility because other legendary sources were also listed.
+
+Mystery merchants can sell better items. Mystery tech-support characters can offer to **remove unwanted recipes, transform recipes, improve/enhance recipes or add special functions** such as doubled output or additional defence/attack capability. They can also offer permanent upgrades in exchange for **health, another upgrade, or one or more recipes**. Availability, prices, exact sacrifices and whether health means current or maximum health remain open. These are optional offers the player may accept, not automatic losses.
+
+QA dependency to resolve later: what makes recipe removal valuable under player-selected crafting? Recipe availability/draw rules, pool-dependent material supply, capacity or other costs have not been chosen. Do not silently introduce a card draw/discard system or a penalty for owning recipes just to make removal useful.
+
+### Persistence boundaries
+
+| Boundary | Confirmed behaviour |
+| --- | --- |
+| Next turn in the same fight | Unused raw resources stay in the resource pool; unused crafted parts also remain available |
+| End of fight | **Clear both unused raw crafting resources and unused crafted parts.** Neither stockpile carries into the next fight |
+| Start of the next fight / a specified turn | Retained upgrades can grant fresh starting resources/parts or extra supplies on specified turns; exact amounts and triggers are upgrade-specific and still to define |
+| Later fights and cities in this game | Acquired recipes and permanent weapon-system upgrades carry through the **whole game**. Cores/credits support between-fight trading; exact economy reset at a new game is not specified |
+| New game / active profile | Start with the chosen character's basic gun and core recipes as previously selected. Collection discovery, unlocks, loss consequences and other cross-game persistence still need definition |
+
+The phrase permanent upgrade refers to the current game/campaign; it is not yet a permanent statistical upgrade to all future games in the profile.
 
 ### Owner-defined recipe and part system
 
@@ -74,9 +128,9 @@ Owner's example: retain a good damage-multiplier part from the previous turn; ob
 
 Requested effect directions include ordinary damage enhancers, fire, explosive tips, shield demolition, shields, fight-duration buffs and enemy debuffs. Klaus expects many combinations and further iteration; the final catalogue, exact interaction rules and numbers are open. These examples do not imply that all parts are equally available to every character.
 
-**After each fight:** pick through the attackers' rubble, discover recipe rewards, and **choose one of three recipes or skip all three**. The choice should fit or redirect the current build. A selected recipe is added to the player's recipe collection and expands the recipes usable in the current game; it is not merely a one-use reward part. Each new game still starts with the chosen character's core recipes and basic gun. Detailed profile-Collection records, whether unchosen offers count as discoveries, and whether discovery changes future-game availability remain to clarify.
+**After each fight:** collect robot energy cores for sale and analyze dropped items for recipe rewards, normally **choosing one of three recipes or skipping all three**. The choice should fit or redirect the current build. A selected recipe joins the collection and remains usable in later fights/cities of the current game; Officers also give a permanent system upgrade. Encounter rarity rules and shops are specified above. Each new game still starts with the chosen character's core recipes and basic gun. Detailed profile-Collection records, whether unchosen offers count as discoveries, and whether discovery changes future-game availability remain open.
 
-**Still open:** ingredient/output counts and costs; recipe duplicate/upgrade rules and character-specific reward pools; energy and activation rules; shots per turn and whether Fire ends the turn; shield expiry and precise effects; inventory capacity; parts/materials carried between fights; profile discovery versus current-game recipe access; and the scene after character confirmation. No discard/reshuffle system, fixed starter-kit size or numerical balance is selected by the reference analogy.
+**Still open:** ingredient/output counts and costs; recipe strength/rarity tuning, duplicates and reward pools; energy/activation rules; shots per turn and whether Fire ends the turn; shield expiry/effects; inventory capacity; upgrade supply triggers/amounts; recipe availability and the value of removal; shop purchase staging/restock rules; mystery counting and final-boss choice; and profile progression/campaign ending. No discard/reshuffle system, fixed starter-kit size or numerical balance is selected by the reference analogy.
 
 **Full redesign; implementation not started.** Klaus reconfirmed that little of the old game's code may be usable. Design the new game on its own requirements, and assess old code for reuse only where it fits. Existing prototype code and its recorded stage describe the old design. Storyboards, the review page and standalone Blender camera tests are design/art tools; they are not a partially implemented redesign or a commitment to its code architecture.
 
@@ -103,9 +157,9 @@ You review and revise this plan as the direction evolves, and set a goal for the
 
 ## Proposals and decisions still open
 
-- **Persistence:** keeping both unused raw resources and unused finished parts between turns in one fight is confirmed. Each new game begins with the chosen character's basic gun and core recipes; chosen fight rewards expand that game's recipe access. Fresh material each fight remains an earlier proposal; cross-fight part/material carryover, storage limits, profile discovery and future-game unlock rules remain to settle.
+- **Persistence:** both raw resources and crafted parts remain between turns and clear at fight end. Recipes and permanent system upgrades persist across fights/cities, and upgrades may grant fresh fight-start or turn-timed supplies. New-game starter kit remains character-specific; profile discovery/unlocks, other reset rules and storage limits are open.
 - **Combat rules:** exact energy and haul costs, carrying limits and risky-pull consequences; the relationship between Fire and End Turn; number of actions/shots; targeting and multi-target distribution; armour duration; effect order; and damage values. Poison, piercing, shock, explosions and other effects are possibilities, not an approved full catalogue.
-- **World and progression:** character roster/identities, final fiction, specific mid-goals/bosses, route structure, rewards beyond the confirmed recipe choice, defeat/retry consequences and profile unlocks. The suggested village, harbour, survivor or factory premises are not selected canon.
+- **World and progression:** the mercenary/AI-robot takeover and fortified-city campaign are now chosen. Character/city identities, total cities, exact bosses, mystery counting, three-choice handling at the boss, final campaign victory, defeat/retry consequences and profile unlocks remain open. The five older premises are archived alternatives, not a pending prerequisite.
 - **Visual production:** refine the 16B/16C treatment into consistent objects, UI and motion. Exact character, materials, loading-bar capacity and camera transitions are not all approved simply because the reference is liked. The first shared-geometry motion test is delivered; matching the reference's finish in actual assets remains unproved.
 - **Product details:** exact controls, content scope, release configuration and pricing remain open. The commercial aim is a worthwhile solo project, with a stated target of at least NOK 20,000 profit per game and further games if profitability is demonstrated.
 
@@ -113,11 +167,11 @@ The old four-site recovery structure, safe unlimited hauling, equipment catalogu
 
 ## 1. Decide who we are and why the work matters
 
-Current deliverable: [five premise options](PREMISE-OPTIONS.md), awaiting Klaus's choice or revisions. Preparing the choices does not settle the premise.
+**Owner premise now selected:** a mercenary travels between fortified cities in an AI/robot-dominated dystopian world, helping defeat waves of robot attacks and developing a weapon/recipe build. See the chosen city campaign above. The [five earlier premise options](PREMISE-OPTIONS.md) are archived alternatives; do not ask Klaus to choose one before continuing.
 
-Establish the game's simple premise: the player's role, their situation, why using this magnet and weapon matters, and the larger result they want to achieve. Connect battles and stage victories to a visible end goal. Keep the backstory compact enough to communicate through the opening, environment and progress rather than a lore manual.
+Refine the chosen premise's character/city identities and final campaign objective. City defence provides the intermediate goal: clear a wave and travel to a more advanced city. Keep the backstory compact enough to communicate through the opening, environment and progress rather than a lore manual.
 
-**What you receive:** a few short premise options, each explaining who you are, what a typical job accomplishes and what changes when the game is completed. We develop your preferred direction.
+**What remains to define:** how the chosen world is introduced and what completing the whole campaign changes, beyond clearing individual cities.
 
 **What you judge:** “Do I understand why I am doing this, and do I care about reaching the end?”
 
@@ -217,4 +271,4 @@ Polish pacing, sound, music, controls and presentation as the game grows. Check 
 
 The game designer connects purpose, choices, stakes and progression. The UI/UX designer works from the start on comprehension, interaction flow and visual hierarchy. The art director creates and carries the selected visual language into usable assets. The engineer implements and verifies the physics and game behavior; the audio designer connects sound to action and tone. Gameplay critique challenges clarity, fairness, reward and replay appeal. The producer coordinates the current goal, and QA independently checks the resulting build. Use these roles only where the authorized goal benefits from them.
 
-**Next action: continue the player journey by asking which scene follows confirmation in Choose Character.** Furnace control is answered: the player assigns resources to available recipes, and both unused resources and crafted parts can carry into later turns. Preserve once-per-turn gathering and one-of-three-or-skip recipe rewards. Use the selected art as a reference rather than a finished screen specification; full gameplay implementation follows an owner-set goal. Store preparation, publication, marketing and purchases are outside this design discussion.
+**Next action: clarify what determines which recipes are available to craft on a turn.** This also determines the strategic benefit of tech-support recipe removal. Then cover mystery counting and the final boss's position in encounter choice. Fight-end reset is answered: clear both raw resources and unused crafted parts, while retained upgrades can create fresh fight-start or turn-timed supplies. Preserve the selected mercenary/city world, 10–20-fight waves, mayor/Officer upgrades, core/credit economy and crafting/rewards. Full gameplay implementation follows an owner-set goal; publication, marketing and purchases remain outside this design discussion.
