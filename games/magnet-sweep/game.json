@@ -44,10 +44,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T10:58:27+00:00",
+      "captured_at": "2026-09-13T11:02:26+00:00",
       "record_sha256": "a7576b770ed6077cc4f8cd69178d2695cb99c852dfd5467533bcd327ec15204e",
       "files": {
-        "games/magnet-sweep/STATUS.md": "ec97d77365f1d6974b500474dc54ccef853d80e4c9c24548aa5b42566edbd5ff",
+        "games/magnet-sweep/STATUS.md": "c6e073443bd0250cc773b980934d4b5bb6d4fb576102e170c19202743e717028",
         "games/magnet-sweep/design/VISUAL-OVERHAUL.md": "0e40f3c26ede21aa57b6a25f3f3ed3a3bd5b6766e9d3e44025e6c2c4812c3589",
         "games/magnet-sweep/evidence/visual-overhaul-verification.json": "4ac439fa5bfabfc62266a152f62863b7182bad5af7d2ded97b975571fceaec41",
         "games/magnet-sweep/evidence/visual-regression.json": "0ec88c12d436b393b2b669dd5f1335dd0d672ade1ee3a1d07b65937e6e2d0002",
@@ -58,7 +58,7 @@
         "games/magnet-sweep/evidence/expedition-sites-verification.json": "409e9772cbc33d61d92376597f3597d241d427d15e78c8174f7069173fee721a",
         "games/magnet-sweep/evidence/expedition-frames-verification.json": "98af4fd71e78624dd79927d7f6ec60b9e34fad112c46ca0b3a04aca6203fc653",
         "games/magnet-sweep/evidence/expedition-choices-verification.json": "1680e274520bb5d31907edd815f55c768de529bfbe3e83c9d96facbde7487d06",
-        "games/magnet-sweep/DECISIONS.md": "836cd3d94d2d5dd7a2d507336265541b891678ad92daa4bba94dcde2a89a743d",
+        "games/magnet-sweep/DECISIONS.md": "37ce7b9c44f938199fc689a3bd16432c3e30be2c6c3377764a183b6d9aa2be23",
         "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md": "3cce17d04e25e08f2ca9882ecdff7dd788e5504d7d349d40ef6033aa79c4f8e6",
         "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md": "c77998494876feae4e616546c6f4630f7ad640753d5898fb24304e687a03cbf0",
         "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md": "293e852f66d2af1af9fa225e2095d64b99385482fcf00b7741dec60c37cc46f3",
