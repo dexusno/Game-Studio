@@ -1,5 +1,9 @@
 # Magnet Sweep — complete redesign planning
 
+## Active assignment — mechanics and scenes Q&A
+
+Klaus requests a design Q&A about the game mechanics and the scenes the game will contain. Work through consequential choices with him and record answers in the existing redesign plan; do not resume art production or start coding merely to illustrate an answer. The four-panel storyboard is concept art/graphics direction, not actual game screens or a finished UI specification. Start with turn structure, then gathering/assembly, attack/defence, progression/rewards and the scene sequence. No new rule or scene list has yet been approved in this Q&A. The delivered art work below remains reference material.
+
 **Implementation boundary, reconfirmed by Klaus on 2026-09-13:** this is a full redesign and its gameplay code has not been implemented. The recorded `prototype` stage and existing game code belong to the old design. Little of that code may be suitable for reuse; assess individual pieces against the new design rather than assuming the old game is its foundation. The storyboard, review page and standalone Blender scripts are art experiments, not the redesigned game's implementation. Continue the current design/art work; implementation follows Klaus's later goals.
 
 ## Art direction — 16C preference and two-view combat flow

@@ -1,6 +1,6 @@
 # Magnet Sweep — proposed complete redesign plan
 
-Prepared for Klaus, 13 September 2026. **Current plan reconciled with the owner's choices.** The active work is art/UX refinement around the 16B/16C reference and the preparation/action camera split. Five premise options, reference-game studies and 75 art variants plus the camera comparison are delivered. Fiction and detailed combat rules remain open; redesign gameplay implementation has not started. The numbered areas below do not override the owner's current art assignment.
+Prepared for Klaus, 13 September 2026. **Current assignment: mechanics and scenes Q&A.** Review the mechanics and player-facing scene sequence one topic at a time, recording Klaus's answers here. Five premise options, reference-game studies, the art atlas, storyboard and first motion study are delivered reference material. Fiction and detailed combat rules remain open; redesign gameplay implementation has not started. The four-panel storyboard is concept art and graphics direction, not actual game screens or a finished UI specification.
 
 Current art direction: after reviewing [the visual atlas](ART-DIRECTION.md), Klaus prefers 16C's graphical treatment and proposes [preparation in 2.5D with firing/impact and enemy response in 3D](COMBAT-CAMERA-FLOW.md). Refine that foundation and test repeatable assets and camera continuity. Damage, targeting and whether Fire ends the turn remain open; the remaining implementation steps follow owner-set goals.
 
@@ -11,6 +11,25 @@ The aim is a game whose purpose, objects, actions and consequences make sense wh
 Further owner steering: assemble physical ammunition by stacking components, spend it when fired, and consider retaining unused pieces between turns but refreshing stock each fight. Single-target and multiple-target effects, poison, piercing and scrap-built armour should compete for resources and energy. Loading should visibly build anticipation as each component contributes before the shot. The [completed 595-entry strategy study](BUILD-STRATEGY-STUDY.md) translates reference-game synergies into this direction, including semi-random early rewards and run-long rig capabilities. Its detailed rules and example values are proposals for step 2, not approved implementation.
 
 ## How we will work
+
+### Mechanics and scenes Q&A — just started
+
+Known foundation: turn-based fights; a chain-hung magnet gathers stacked scrap; physical components build ammunition and are spent when fired; attack and defence compete for resources/energy; rewards support varied, increasingly capable builds. Preparation uses the 16B side view and combat presentation the 16C perspective. Exact costs, effects, turn structure and persistence remain open.
+
+Review turn structure first: what ends a player turn and when enemies respond. Then settle gathering/assembly, targeting and defence, rewards and progression, and loss/reset rules. Ask one main question at a time. Suggestions remain proposals until Klaus answers.
+
+Scene inventory for discussion, **not an approved scene list**:
+
+| Player-facing scene or function | Current standing |
+| --- | --- |
+| Start/continue | Ordinary entry-flow candidate; details not discussed |
+| Preparation and assembly | Selected side view; actual screen layout and rules open |
+| Combat action | Selected perspective; firing, impacts and enemy response are moments within it, not automatically separate scenes |
+| Rewards and rig upgrades | Required functions; whether they share a scene or use separate screens is open |
+| Progress between fights | Progression required; map, hub or direct advancement not selected |
+| Victory and defeat | Meaningful outcomes required; presentation and reset rules open |
+
+No new mechanic or additional scene has been selected by opening this review.
 
 **Full redesign; implementation not started.** Klaus reconfirmed that little of the old game's code may be usable. Design the new game on its own requirements, and assess old code for reuse only where it fits. Existing prototype code and its recorded stage describe the old design. Storyboards, the review page and standalone Blender camera tests are design/art tools; they are not a partially implemented redesign or a commitment to its code architecture.
 
@@ -151,4 +170,4 @@ Polish pacing, sound, music, controls and presentation as the game grows. Check 
 
 The game designer connects purpose, choices, stakes and progression. The UI/UX designer works from the start on comprehension, interaction flow and visual hierarchy. The art director creates and carries the selected visual language into usable assets. The engineer implements and verifies the physics and game behavior; the audio designer connects sound to action and tone. Gameplay critique challenges clarity, fairness, reward and replay appeal. The producer coordinates the current goal, and QA independently checks the resulting build. Use these roles only where the authorized goal benefits from them.
 
-**Next action: review the delivered storyboard and motion study, then refine the 16B/16C forge rig, loading channel and scrap toward the selected visual quality.** The premise, combat rules and progression specification remain future owner-led decisions; they do not block authorized visual refinement. Full gameplay implementation, store preparation, publication, marketing and purchases are outside the present art assignment.
+**Next action: conduct the mechanics and scenes Q&A, beginning with what ends a player turn.** Use the selected art as a reference while recording mechanics and scene decisions. Further art refinement remains available after this review; full gameplay implementation follows an owner-set goal. Store preparation, publication, marketing and purchases are outside this design discussion.

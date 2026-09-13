@@ -44,10 +44,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T18:04:20+00:00",
+      "captured_at": "2026-09-13T18:07:43+00:00",
       "record_sha256": "74e99af366d993ed836800a4d676f144774afbf39e95a8d23aaf45f8957cb1ad",
       "files": {
-        "games/magnet-sweep/STATUS.md": "203ba18dc72ae906f790af8e70eb059332dfbadd5e6dfb9bcee148527962d1d0",
+        "games/magnet-sweep/STATUS.md": "371f9a9259f627ab6ac51633e7557134e7dfbb07de45232eca554c4d59885cfd",
         "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "0f082b048aeb1ea6251969a2b6ee870214d926220e06e875ff9bb32fee3438a2",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
         "games/magnet-sweep/art-tests/camera-motion/README.md": "90a69eaf7492966fbcc920b03295018b7eb64574761c7b40b0e128369087db9d",
@@ -60,7 +60,7 @@
         "games/magnet-sweep/design/BALANCE-RESEARCH.md": "64618cc2781e0a9e9d211c93db191f27c706e208358ffbfd3440c36d88e30a9d",
         "games/magnet-sweep/design/SCRAP-COMBAT-DIRECTION.md": "c4c43ee34df45911114cec7b8a598054e5c65047cae45b03b7933c08e760a8bd",
         "games/magnet-sweep/design/PREMISE-OPTIONS.md": "c42702b7bda2a2901dac8222f0b07c4e0390a5d1269a77475009046b3245603a",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "99153ba0bcda133e9da655dd5143422c2b3dd615fb11feb24a93463f3fdd0e79",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "e6cee78b528ae90da54f2b674d0488d735f88181ce559b5c6f20fc2ef28e5e41",
         "games/magnet-sweep/design/BUILD-SYSTEM.md": "1fc1efeb769a64c27c870dfbf35875f171c7a907038a3b9acc2d065d899eb76b",
         "games/magnet-sweep/design/EXPEDITION-SITES.md": "3a722eb2bec81a887791b0fcc77726795fc1123e006f5d4d06e9b728f6670938",
         "games/magnet-sweep/DECISIONS.md": "3267d1b26358aadfe00ea83daa40a967a13c855f9734058efe6efafc8943adbf",
