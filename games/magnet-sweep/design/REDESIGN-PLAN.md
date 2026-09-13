@@ -6,6 +6,8 @@ Latest steering: Klaus proposes round-based combat in which the hanging magnet s
 
 The aim is a game whose purpose, objects, actions and consequences make sense while you play, with an expressive swinging magnet and a visual style you want to spend time in. This is a redesign of the whole experience. Existing features earn their place by serving the new design.
 
+Further owner steering: assemble physical ammunition by stacking components, spend it when fired, and consider retaining unused pieces between turns but refreshing stock each fight. Single-target and multiple-target effects, poison, piercing and scrap-built armour should compete for resources and energy. Loading should visibly build anticipation as each component contributes before the shot. The [completed 595-entry strategy study](BUILD-STRATEGY-STUDY.md) translates reference-game synergies into this direction, including semi-random early rewards and run-long rig capabilities. Its detailed rules and example values are proposals for step 2, not approved implementation.
+
 ## How we will work
 
 You review and revise this plan first. You then set a goal for the step you want to pursue. We complete that goal, give you something concrete to judge, and revise it until you are satisfied. We begin another step only when you set its goal. A step can be split into smaller goals if useful. No development timetable is imposed.
