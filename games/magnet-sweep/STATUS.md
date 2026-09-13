@@ -14,6 +14,8 @@ Editor compilation and all **82 existing engine cases pass** (zero failed/warnin
 
 ## Next action / resume
 
+Source/art/assets and reviewed evidence are integrated on main at **1a65f7c2d14d1873698e5e20bbea65f028cdb5f8**. The normal continuity handoff helper was attempted after commit and refused because unrelated Dreambound work remains dirty. Preserve that work; use this exact source revision when handing the visual preview to another task.
+
 The visual-overhaul increment is implemented, packaged and visually reviewed. The next useful owner step is to play this preview and judge the new appearance, readability and magnet presentation. Gameplay work remains on hold until that visual priority is addressed; the broad earlier gameplay goal is still incomplete. Do not expand mechanics or catalogue merely to continue an idle task.
 
 Observed corrections include late instruction overflow, a frame panel covering machinery, overlapping optional fitting labels, excessive trim and an occluded furnace. A checked material pass caught previously silent Unreal 5.8 pin-name mismatches. The intermediate cook after that failed import is explicitly excluded; only the later validated import/package/captures are accepted. Preserve the recorded visual scope and exact hashes when resuming.
