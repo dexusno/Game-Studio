@@ -4,6 +4,14 @@
 
 ## Current owner preference
 
+### Owner-supplied style anchor — 14 September 2026
+
+Klaus designates [art anchor.png](art%20anchor.png) as the game's **STYLE anchor**, explicitly **not gameplay images**. The bottom **16C / 3D Perspective** panel anchors how the attack perspective should look. Its stylised machinery, materials, lighting, depth and camera treatment inform production; it does not prescribe literal gameplay props, HUD values or their locations.
+
+For planning/loading, Klaus now places the magnet and scrap gathering **behind the player/gun**, away from the space between gun and enemies, and requires visible enemy-intent indicators to inform the current round's attack/defence. Every city must have a **unique backdrop and surroundings**, consistently rendered in this shared style. These owner requirements supersede the pictured gathering arrangement; the old boards and motion study remain concept/art experiments.
+
+**Preservation/provenance:** the owner-supplied PNG is preserved without modification at `design/art anchor.png`, 1536 x 1024 pixels, 2,736,842 bytes, SHA-256 `52615934a21dc3304202cbab793ee13af2c35e84d7c1c0bff7e622bd9b54387c`. Decoded RGB pixels match [the archived board 16](../assets/concepts/art-direction-2026-09-13/16-depth-camera.webp) exactly. Its [existing generation provenance](../assets/concepts/art-direction-2026-09-13/PROVENANCE.md) and board register therefore remain the source record: built-in ImageGen, generated 13 September 2026 under applicable platform terms; studio distribution licence unset. This is an owner-selected reference asset, not a verified runtime asset or finished game screen.
+
 Klaus explicitly reconfirmed board 16 in the continuation task: **16B for preparation/assembly and 16C for action**, with the same graphics treatment. The [four-panel storyboard](../assets/concepts/combat-camera-2026-09-13/storyboard.webp) now refines those moments. [Inspection and provenance](../assets/concepts/combat-camera-2026-09-13/PROVENANCE.md) distinguish its visual strengths from unresolved asset continuity and rule details.
 
 Klaus likes both the graphics treatment and 3D perspective in **16C** for the actual shot. He proposes a separate **2.5D side-view preparation screen** showing enemies, available scrap and a component bar to build the shot. Fire then switches to 3D for discharge and impact; explore the enemy response in 3D as well. See [the camera-flow proposal](COMBAT-CAMERA-FLOW.md). This replaces the earlier request for a broad shortlist. It does not settle damage, targeting, whether Fire ends the turn, final fiction or the exact UI.
