@@ -1,10 +1,10 @@
 # Magnet Sweep — proposed complete redesign plan
 
-Prepared for Klaus, 13 September 2026. **Sequence remains a draft for owner revision. Five premise options, reference-game studies and the first broad art exploration are delivered; no premise, final art direction or detailed combat rules are selected. Redesign gameplay implementation has not started.**
+Prepared for Klaus, 13 September 2026. **Current plan reconciled with the owner's choices.** The active work is art/UX refinement around the 16B/16C reference and the preparation/action camera split. Five premise options, reference-game studies and 75 art variants plus the camera comparison are delivered. Fiction and detailed combat rules remain open; redesign gameplay implementation has not started. The numbered areas below do not override the owner's current art assignment.
 
 Current art direction: after reviewing [the visual atlas](ART-DIRECTION.md), Klaus prefers 16C's graphical treatment and proposes [preparation in 2.5D with firing/impact and enemy response in 3D](COMBAT-CAMERA-FLOW.md). Refine that foundation and test repeatable assets and camera continuity. Damage, targeting and whether Fire ends the turn remain open; the remaining implementation steps follow owner-set goals.
 
-Latest steering: Klaus proposes round-based combat in which the hanging magnet supplies a smart forge weapon, combining scrap into attacks or defence against enemies that fight back. The [play study and proposed combat direction](SCRAP-COMBAT-DIRECTION.md) recommends developing one complete mid-game round, intermediate stage goals, useful rewards and loss/reset rules together before visual production. This brings progression design forward from step 7; its later playable implementation still follows owner-set goals. The original nine-step sequence below remains a reference for review, not automatic authorization.
+Combat direction: the hanging magnet supplies a smart forge weapon, combining scrap into attacks or defence against enemies that fight back in rounds. The [play study](SCRAP-COMBAT-DIRECTION.md) supports a later goal defining one complete mid-game round, intermediate stage goals, useful rewards and loss/reset rules together. Klaus subsequently brought art exploration forward; completing a premise or numerical combat specification is not a prerequisite for the currently authorized art work.
 
 The aim is a game whose purpose, objects, actions and consequences make sense while you play, with an expressive swinging magnet and a visual style you want to spend time in. This is a redesign of the whole experience. Existing features earn their place by serving the new design.
 
@@ -12,17 +12,42 @@ Further owner steering: assemble physical ammunition by stacking components, spe
 
 ## How we will work
 
-You review and revise this plan first. You then set a goal for the step you want to pursue. We complete that goal, give you something concrete to judge, and revise it until you are satisfied. We begin another step only when you set its goal. A step can be split into smaller goals if useful. No development timetable is imposed.
+You review and revise this plan as the direction evolves, and set a goal for the work you want to pursue. We complete that goal, give you something concrete to judge, and revise it until you are satisfied. We begin another implementation step only when you set its goal. A step can be split into smaller goals if useful. The current art goal is already authorized; no development timetable is imposed.
 
-Already directed by you: a **2.5D side view**, metal that can stack vertically, a magnet hanging from a chain or similar suspension and swinging as it moves, important physical behavior, and at least **five overall visual styles with five variants each** to choose from. Readable objects, visible cause and effect, plain instructions, useful progression and meaningful wins/losses apply to every step.
+## Current instructions and preferences
 
-Still to choose: who you are, what you are working toward, the world/tone, exact controls, level objectives, loss and retry consequences, progression/reset rules, visual style and content scope. A dystopian survivor, factory operator or construction project is not selected merely because it was mentioned earlier. Neither the current four-site structure nor its equipment catalogue is automatically retained.
+| Area | What carries forward |
+| --- | --- |
+| Game concept | Turn-based combat using the magnet to gather scrap and supply a weapon; enemies fight back. Slay the Spire informs strategy and progression; cards are not requested |
+| Preparation view | A separate 2.5D side-view screen showing enemies, available scrap and a component bar used to build the shot. The middle row, 16B, is the corresponding viewpoint example |
+| Action view and look | 16C is the owner's preferred graphical treatment and 3D perspective for the shot and impact. Explore enemy responses in 3D too. Keep the same visual identity across views |
+| Reference asset | The owner reattached and reconfirmed [board 16](../assets/concepts/art-direction-2026-09-13/16-depth-camera.webp) for graphics and viewpoints; its saved pixels match the attachment exactly. Its props and HUD are references, not a complete mechanic specification |
+| Physical magnet | Hang it from a chain or similar suspension, let it swing, and make the attraction, collisions, weight and vertically stacked scrap visible and satisfying |
+| Shot assembly | Build ammunition from physical components in a linear stack/loading bar; components add properties or combine functions. Firing spends its component material. The pictured rack of completed bullets does not replace this system |
+| Strategic choices | A shared energy/resource economy must create meaningful choices between offence, defence and preparation. Support focused and multiple-target attacks and scrap-built protection; exact rules remain to be designed |
+| Build variety | Semi-random early rewards influence the run's direction. Later rewards should make the player more capable through useful synergies, alternative approaches and opportunities to adapt |
+| Progress and stakes | Meaningful encounter rewards, intermediate objectives, clear stage completion, substantial obstacles and a final confrontation. Winning must matter, losing must be possible, and another run should offer different strategies |
+| Upgrade quality | Enable something useful or an exciting new tactic. Merely gathering the same permitted load faster was rejected as sufficient justification for an upgrade |
+| Clarity | Recognisable objects, visibly connected mechanisms, familiar words, clear goals and consequences, restrained UI and an interactive tutorial. The old jargon-filled, overcrowded board is not the target |
+| Feedback and audio | Component loading should build anticipation into discharge and readable effects. Strong magnetic/impact sounds and suitable soothing background music are requested; tracks and exact sound direction remain open |
+| Scope and review | Keep the game understandable and manageable for a solo owner; do not add huge lore or an excessive catalogue of systems. Development timelines are explicitly not the design constraint. Gameplay critique concerns fun, fairness and comprehension, not schedules |
+| Delivery process | Klaus sets implementation goals; complete and revise each until he is satisfied. A playable concept demo must be judged before full development. Functional tests alone do not establish fun |
+
+## Proposals and decisions still open
+
+- **Persistence:** Klaus proposes keeping unused components between turns within one fight and starting with fresh material each fight. Exact supply/refill, storage and reset rules remain to be settled. Keeping earned rig capabilities through a run is root's recommendation, not a confirmed rule.
+- **Combat rules:** exact energy and haul costs, carrying limits and risky-pull consequences; the relationship between Fire and End Turn; number of actions/shots; targeting and multi-target distribution; armour duration; effect order; and damage values. Poison, piercing, shock, explosions and other effects are possibilities, not an approved full catalogue.
+- **World and progression:** player identity, final fiction, specific mid-goals/bosses, route structure, rewards, defeat/retry consequences and what survives a new run. The suggested village, harbour, survivor or factory premises are not selected canon.
+- **Visual production:** refine 16C's preferred treatment into consistent objects, UI and motion. Exact character, materials, loading-bar capacity and camera transitions are not all approved simply because the reference is liked. Reusing shared 3D assets for both camera layouts is a production proposal requiring a test.
+- **Product details:** exact controls, content scope, release configuration and pricing remain open. The commercial aim is a worthwhile solo project, with a stated target of at least NOK 20,000 profit per game and further games if profitability is demonstrated.
+
+The old four-site recovery structure, safe unlimited hauling, equipment catalogue and earlier implementation hypotheses are historical material. They are not automatically retained in this combat redesign. [DECISIONS.md](../DECISIONS.md) preserves the chronology and superseded choices.
 
 ## 1. Decide who we are and why the work matters
 
 Current deliverable: [five premise options](PREMISE-OPTIONS.md), awaiting Klaus's choice or revisions. Preparing the choices does not settle the premise.
 
-Establish the game's simple premise: the player's role, their situation, why using this magnet helps, and the larger result they want to achieve. Connect ordinary recovery work to a visible end goal. Keep the backstory compact enough to communicate through the opening, environment and progress rather than a lore manual.
+Establish the game's simple premise: the player's role, their situation, why using this magnet and weapon matters, and the larger result they want to achieve. Connect battles and stage victories to a visible end goal. Keep the backstory compact enough to communicate through the opening, environment and progress rather than a lore manual.
 
 **What you receive:** a few short premise options, each explaining who you are, what a typical job accomplishes and what changes when the game is completed. We develop your preferred direction.
 
@@ -40,23 +65,17 @@ Explain how careful play differs from a risky move and how a player can recognis
 
 **What you judge:** “Would beating this feel earned? Could I lose, understand why, and want another attempt?”
 
-## 3. Choose the graphics through 25 comparable examples
+## 3. Refine the chosen visual foundation and two-view presentation
 
-Create **at least five distinctly different style families, each with five variants**. The following are proposed families and directions to explore; you may change them before setting this goal.
+**Breadth exploration delivered:** the original minimum of five families with five variants was expanded to **15 families with five variants each**, plus a three-panel camera comparison. All 16 boards are saved in [the atlas](ART-DIRECTION.md), with exact prompts, provenance and static observations. Do not repeat that exploration by default.
 
-| Overall style | Five variants within that style |
-| --- | --- |
-| Pixel art | Chunky retro; detailed modern pixels; restrained industrial palette; vivid arcade palette; atmospheric pixel noir |
-| Realistic 3D | Clean modern workshop; worn working scrapyard; heavy weathered industry; cold abandoned facility; warm restored machinery |
-| Cartoon | Bold cel shading; rounded playful forms; comic-book outlines; retro animation; flat graphic cutouts |
-| Hand-drawn / line art | Fine pen and ink; rough pencil; bold brush outlines; colored line drawing; watercolor with ink contours |
-| Stylized 3D | Miniature diorama; clay-like materials; carved wooden-toy treatment; sculpted painterly surfaces; simplified graphic materials |
+**Preferred foundation received:** use 16C's visual treatment, the 16B-style side view for preparation, and a 16C-style perspective for firing and impact. Explore the enemy response with an angle that clearly shows the rig being hit. The owner explicitly reconfirmed the existing board as the graphics/viewpoint reference.
 
-All 25 examples use the **same representative side-view composition**: hanging magnet, stacked recognisable scrap, one visibly connected mechanism and a clear collection destination, suited to the premise selected in step 1. Show comparable framing and gameplay-scale object sizes. Variants should change shape treatment, materials, outlines, shading or atmosphere meaningfully, rather than merely changing one tint. Keep the comparison about style; do not invent a different game or backstory for every picture.
+First complete the [prepare/fire/impact/enemy-response storyboard](COMBAT-CAMERA-FLOW.md). Then test a small set of consistent assets and motion from both camera views. Establish readable scrap, physical assembly, a recognisable target, coherent hit consequences and a return to preparation that preserves orientation. Do not decide damage or turn rules merely to fill a storyboard frame.
 
-**What you receive:** 25 labelled art anchors plus comparison sheets, with larger individual images available for inspection. First choose a family, then refine a variant. Record the selected palette, shapes, material treatment, lighting and interface direction. These are concept references; their achievable appearance must later be checked in the playable game.
+**What you receive next:** a focused storyboard and a small visual-production test, followed by practical rules for shapes, materials, lighting, interface hierarchy and camera use. The reference's attractive still frame is not evidence that its complete runtime appearance is already achievable.
 
-**What you judge:** “Which world would I enjoy looking at, and can I clearly recognise its objects and actions?”
+**What you judge:** “Does this preserve the look I chose, make both phases clear and make the shot satisfying to watch?”
 
 ## 4. Make the hanging magnet feel good in a small playable scene
 
@@ -70,15 +89,15 @@ Use just enough temporary UI to operate and judge this experiment. It is not yet
 
 **What you judge:** “Is moving, pulling, lifting and dropping enjoyable before we add a whole level around it?”
 
-## 5. Build one level whose machinery explains itself
+## 5. Build one combat encounter whose actions explain themselves
 
-Turn the level from step 2 into a coherent side-view space using the physical interaction from step 4. Give objects distinct, recognisable forms and a visible job. Any gate, counterweight, support, cable or moving obstacle must visibly connect to what it affects. Show the obstacle preventing progress, the action changing it and the resulting new opportunity.
+Turn the encounter from step 2 into the agreed preparation/action flow using the physical interaction from step 4. Give scrap, ammunition, protection, the magnet and enemies distinct recognisable forms and visible jobs. Show what the enemy is about to do, what the player can afford, how components change the assembled shot and what happens when it is fired.
 
-For example, a weight platform might descend and visibly pull a cable that raises a gate. That illustrates the required cause-and-effect clarity; it is not a selected level mechanic. Reject a pad that only changes an invisible completion flag without explaining what physically changed.
+The component bar must connect clearly to ammunition and the weapon. Protection must visibly receive attacks where it is mounted. Any added mechanism must visibly connect to what it affects; do not bring back arbitrary pads or hidden completion triggers from the rejected recovery board.
 
 Arrange the scene so stacking, height, reach and swinging matter to the decisions. Introduce only the mechanisms needed for this representative level. Give the current objective and immediate danger clear visual priority; the UI/UX specialist works with the level designer and artist here, rather than arriving after the layout is finished. Include the agreed winning and losing outcomes in the playable level.
 
-**What you receive:** one playable level with recognisable pieces, visible mechanical relationships, clear destinations and a real risk/reward decision.
+**What you receive:** one playable encounter with recognisable pieces, understandable attack/defence choices, clear camera transitions and a real risk/reward decision.
 
 **What you judge:** “Can I work out what is happening and why my action helps, without someone explaining the board to me?”
 
@@ -96,7 +115,7 @@ Carry the same language and visual identity through start, pause, inspection, su
 
 ## 7. Make rewards and upgrades change what we can accomplish
 
-Connect salvage and level rewards to the larger purpose from step 1. Show what the player earned, what it contributes toward and why a purchase matters. Develop a small set of contrasting upgrades that enable different actions or solutions and can be tried in the representative level. Show their effect on the rig or its behavior wherever possible.
+Connect encounter and stage rewards to the larger purpose from step 1. Show what the player earned, what it contributes toward and why an upgrade matters. Develop a small set of contrasting rewards that enable different actions and builds, influenced by semi-random early offers and later synergies. Try them in the representative encounter and show their effect on the rig or its behavior wherever possible.
 
 Do not use the rejected radius-only improvement as the model for meaningful progression. Establish the basic equipment, an intermediate setup and the intended end-state payoff before expanding the catalogue. Decide what lasts between attempts, how loss interacts with ownership and what makes another playthrough worthwhile. Avoid adding currencies, tiers or loot solely to fill a screen.
 
@@ -106,7 +125,7 @@ Do not use the rejected radius-only improvement as the model for meaningful prog
 
 ## 8. Review a complete concept demo before full development
 
-Combine the accepted pieces into a short, representative demo: an approachable start, a meaningful recovery challenge, an optional risk, actual success and failure, a reward choice and a chance to use the resulting upgrade. Include representative mid-game difficulty; do not make the whole demo an easy lesson with no stakes. Communicate the larger goal and how this recovery contributes to it.
+Combine the accepted pieces into a short, representative demo: an approachable start, meaningful combat, an optional risk, actual success and failure, a reward choice and a chance to use the resulting upgrade. Include representative mid-game difficulty; do not make the whole demo an easy lesson with no stakes. Communicate the larger goal and how winning the encounter contributes to it.
 
 Use the selected graphics, sounds and interface together. This demo is where we check whether the whole experience makes sense and feels rewarding. Fix issues across mechanics, art and guidance rather than assuming a confusing result only needs another tutorial paragraph. The exact demo length and number of scenes are set in its goal.
 
@@ -130,4 +149,4 @@ Polish pacing, sound, music, controls and presentation as the game grows. Check 
 
 The game designer connects purpose, choices, stakes and progression. The UI/UX designer works from the start on comprehension, interaction flow and visual hierarchy. The art director creates and carries the selected visual language into usable assets. The engineer implements and verifies the physics and game behavior; the audio designer connects sound to action and tone. Gameplay critique challenges clarity, fairness, reward and replay appeal. The producer coordinates the current goal, and QA independently checks the resulting build. Use these roles only where the authorized goal benefits from them.
 
-**Next action: choose or revise the five premise options for step 1.** The remaining sequence can still be revised. No art generation, mechanics implementation or new level production is authorized by the premise goal. Store preparation, publication, marketing and purchases remain outside the current scope.
+**Next action: continue the 16B/16C art and camera-flow work in the new task**, starting with the saved storyboard prompt and then the bounded visual-production test. The premise, combat rules and progression specification remain future owner-led decisions; they do not block this authorized visual work. Full gameplay implementation, store preparation, publication, marketing and purchases are outside the present art assignment.
