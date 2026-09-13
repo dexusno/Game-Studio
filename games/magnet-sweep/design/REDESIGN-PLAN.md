@@ -2,7 +2,7 @@
 
 Prepared for Klaus, 13 September 2026. **Sequence remains a draft for owner revision. Five premise options, reference-game studies and the first broad art exploration are delivered; no premise, final art direction or detailed combat rules are selected. Redesign gameplay implementation has not started.**
 
-Current art goal: [the visual atlas](ART-DIRECTION.md) delivers 15 families × five variants plus a separate 2D/2.5D/3D comparison. Klaus reviews the coded variants before a preferred identity is refined and tested for repeatable asset production. This supersedes the earlier waiting state for art exploration; the remaining steps still follow owner-set goals.
+Current art direction: after reviewing [the visual atlas](ART-DIRECTION.md), Klaus prefers 16C's graphical treatment and proposes [preparation in 2.5D with firing/impact and enemy response in 3D](COMBAT-CAMERA-FLOW.md). Refine that foundation and test repeatable assets and camera continuity. Damage, targeting and whether Fire ends the turn remain open; the remaining implementation steps follow owner-set goals.
 
 Latest steering: Klaus proposes round-based combat in which the hanging magnet supplies a smart forge weapon, combining scrap into attacks or defence against enemies that fight back. The [play study and proposed combat direction](SCRAP-COMBAT-DIRECTION.md) recommends developing one complete mid-game round, intermediate stage goals, useful rewards and loss/reset rules together before visual production. This brings progression design forward from step 7; its later playable implementation still follows owner-set goals. The original nine-step sequence below remains a reference for review, not automatic authorization.
 

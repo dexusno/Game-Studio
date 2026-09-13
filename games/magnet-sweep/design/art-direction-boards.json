@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "status": "breadth pass delivered; owner preference and reproducibility test pending",
+  "status": "owner prefers 16C visual treatment and 3D action view; two-view storyboard and reproducibility test pending",
   "tool": "built-in image_gen",
   "board_format": "one family, five labelled variants, consistent side-view combat scene",
   "boards": [
@@ -618,7 +618,12 @@
       "bytes": 1698394,
       "review": "static visual inspection in generated tool output",
       "observation": "All three depth/camera variants present, with flat contours, side-view volume and three-quarter perspective. The perspective view demonstrates occlusion. Generated ammunition appears as a rack of completed rounds, so this board is only a camera/depth comparison and must not become the assembly/mechanism specification.",
-      "owner_selection": null,
+      "owner_selection": {
+        "variant": "16C",
+        "date": "2026-09-13",
+        "status": "preferred foundation for refinement",
+        "scope": "visual treatment and perspective for firing/impact; 2.5D side-view gathering and component-bar assembly; explore enemy response in 3D"
+      },
       "pixel_preserving_conversion": true
     }
   ]

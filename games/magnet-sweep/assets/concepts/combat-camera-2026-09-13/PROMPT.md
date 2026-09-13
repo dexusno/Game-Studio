@@ -1,0 +1,23 @@
+# Camera-flow storyboard prompt
+
+Built-in ImageGen; reference: `../art-direction-2026-09-13/16-depth-camera.webp`, panel 16C. Generation date: 2026-09-13. Exact prompt follows.
+
+Use case: stylized-concept.
+Asset type: one polished four-panel game presentation storyboard, a landscape image with four equal wide panels in a clean 2 by 2 grid, very narrow gutters.
+Reference image: the supplied board is a STYLE AND SUBJECT REFERENCE. Use ONLY its bottom panel, labelled 16C / 3D PERSPECTIVE, as the visual foundation. Preserve its appealing dimensional stylised metal machinery, orange furnace glow, softly worn blue-grey steel and brass, warm late-day light, cooler distant scrapyard haze, character scale and recognisable robot shapes. Do not copy the three-row comparison-board layout. This is one coherent treatment through four moments of the same encounter.
+
+Primary request: Show the user's proposed game flow: preparation and component assembly in a readable 2.5D side view; cinematic 3D discharge and target impact; 3D enemy response. Keep the SAME operator, forge cannon, chain-hung horseshoe magnet, loose gear/nut/bolt pile, mounted protective plate and two distinct enemy robots in all frames where visible. Operator wears goggles, practical work clothes and a red scarf like the reference. The cannon/rig is on the left and enemies on the right; maintain that spatial relationship across cuts. Use the same setting and material treatment in all four panels. No new characters, no title-screen composition, no cards, no statistics dashboard.
+
+Top left label exactly "01 / PREPARE".
+A clean lateral 2.5D view of the encounter. Player rig at left, two visibly distinct enemies at right, a chain-hung magnet pulls recognisable pieces from a vertically stacked scrap pile in the open middle foreground. At the very bottom of this panel, a modest horizontal metal loading channel shows three big distinct physical components placed end-to-end: a steel projectile body, an orange payload capsule, and a pointed nose. They look like ingredients of ONE assembled shot, not three finished bullets. Show the physical forms, no arbitrary recipe writing or intricate slot labels. A small clear "FIRE" control sits at the right end of this channel. Only compact health strips and energy pips elsewhere; keep scenery and scrap dominant.
+
+Top right label exactly "02 / FIRE".
+Move to the 16C over-the-operator's-left-shoulder three-quarter perspective. The SAME cannon looms in the near left foreground, enemies visible downrange. Its open loading channel shows the three joined components sliding as one coherent assembly into the chamber; internal furnace glow and one decisive muzzle discharge, a clear projectile travelling toward the selected saw-armed robot. Convey weight, recoil and anticipation with restrained glow and airborne dust. No duplicate ammunition rack. Hide assembly-screen controls during the action.
+
+Bottom left label exactly "03 / IMPACT".
+A closer dramatic three-quarter view of the SAME saw-armed enemy taking the shot on its metal shoulder. Sparks, displaced armour fragment and visible recoil show contact, with enough clear space to recognise the hit. The second tall robot remains visible farther back and is visibly intact. This is a single-target illustrative shot, NOT a specification of damage mechanics. No giant text, damage numbers or screen-filling explosion. Keep all robots in exactly the same visual language as the reference.
+
+Bottom right label exactly "04 / ENEMY TURN".
+A wider three-quarter action angle now makes the rig's mounted protective plate visible at left and the surviving tall enemy at right. The enemy fires a visible small projectile that strikes the plate with a controlled spark burst, so the viewer can see WHO attacked and WHAT was hit. The operator braces beside the cannon. Retain spatial continuity, the cannon, hanging magnet and scrap pile. The labels signal a later enemy turn, not an assertion that every press of Fire automatically ends a turn.
+
+Art direction: premium stylised 3D game render with strong forms, substantial bevels, tactile convincing metal, coherent scale, warm/cool lighting contrast, atmospheric depth only behind gameplay subjects, no photoreal human pores, no flat comic outlines. Match the treatment of reference panel 16C, not the 16A sprite style. Every scene is easy to parse. Avoid dense small text, free-floating mysterious pads, cluttered HUD panels, arbitrary meters and technical jargon. Only the four short panel labels and the FIRE control need readable text. The board is a visual concept, not fake implemented gameplay.

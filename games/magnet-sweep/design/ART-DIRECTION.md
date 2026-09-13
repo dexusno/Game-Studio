@@ -1,6 +1,10 @@
 # Magnet Sweep — visual direction atlas
 
-13 September 2026. **First broad exploration; owner selection pending.** Generated concept boards compare possible identities. They are not screenshots of an implemented redesign. Characters, scenery, colour coding, health values and mechanisms are visual placeholders, not selected fiction or rules.
+13 September 2026. **Owner prefers 16C as the foundation; refinement and a repeatable production method remain to be proved.** Generated concept boards compare possible identities. They are not screenshots of an implemented redesign. Characters, scenery, colour coding, health values and mechanisms are visual placeholders, not selected fiction or rules.
+
+## Current owner preference
+
+Klaus likes both the graphics treatment and 3D perspective in **16C** for the actual shot. He proposes a separate **2.5D side-view preparation screen** showing enemies, available scrap and a component bar to build the shot. Fire then switches to 3D for discharge and impact; explore the enemy response in 3D as well. See [the camera-flow proposal](COMBAT-CAMERA-FLOW.md). This replaces the earlier request for a broad shortlist. It does not settle damage, targeting, whether Fire ends the turn, final fiction or the exact UI.
 
 ## How to review
 
@@ -18,7 +22,7 @@ The comparison uses the same functional scene: hanging magnet, airborne scrap, a
 | 2.5D side view | Action stays on a lateral plane; art can combine 3D objects and layered illustration | Visible chain swing, object volume and pile depth while retaining a readable side view | Do depth and shadows help rather than hide selectable pieces? |
 | 3D perspective | A spatial camera views a fully modelled encounter | Flexible camera and dimensional impact shots | Do occlusion, depth picking and camera movement add anything useful to this turn-based loop? |
 
-Root's provisional recommendation is a **2.5D side view**, with the visual treatment chosen independently. This is an inference from the game's physical interaction and readability needs, not an owner decision. Fully modelled objects can look painted, inked, faceted, ceramic or toy-like; choosing 3D assets does not require photorealism.
+The owner's preferred combination is now **2.5D for preparation and 3D for action**, using 16C's visual treatment throughout. Root recommends exploring shared 3D assets and two authored camera layouts to keep both views consistent. That implementation route still needs a real asset/motion test.
 
 ## Boards
 
@@ -42,7 +46,7 @@ Root's provisional recommendation is a **2.5D side view**, with the visual treat
 | [15 — Flat Graphic](../assets/concepts/art-direction-2026-09-13/15-flat-vector.webp) | A: Bold vector · B: Soft vector · C: Industrial pictogram · D: Silhouette theatre · E: Retro futurist graphic |
 | [16 — Depth And Camera](../assets/concepts/art-direction-2026-09-13/16-depth-camera.webp) | A: 2D sprites · B: 2.5D side view · C: 3D perspective |
 
-**Root shortlist for discussion:** 07B Clear-line comic, 08D Crafted miniature and 14D Painted 3D. These favour readable forms and plausible reusable asset routes while offering distinct moods. Owner preference is pending; none is selected.
+**Earlier root shortlist, retained for comparison:** 07B Clear-line comic, 08D Crafted miniature and 14D Painted 3D. The owner subsequently preferred 16C; these alternatives do not override that preference.
 
 ### 01 — Pixel Art
 
@@ -179,7 +183,7 @@ Our visual comparison is generated original subject matter, not a collage of oth
 
 ## What establishes the final choice
 
-1. Klaus identifies appealing variants or gives a specific new direction to explore. Keep that preference distinct from root's shortlist.
+1. **Preference received:** Klaus chose 16C as the visual foundation and proposed the preparation/action camera split. Keep this distinct from approval of a finished style guide or all pictured objects.
 2. Refine the preferred identity across a quiet scene, magnet pull, loading/fire sequence and enemy impact. Establish recognisable scrap/material shapes and a restrained real UI treatment.
 3. Make a small reproducibility test: the same magnet from several angles, several consistent scrap types, one enemy and a short motion/render sample using the proposed asset route. It can be a separate art test; it need not implement the game.
 4. Record the accepted shape language, palette, materials, line/texture rules, lighting, UI relationship and asset method. Only call the direction selected when the owner accepts it and the extension method has evidence.
