@@ -12,24 +12,39 @@ Further owner steering: assemble physical ammunition by stacking components, spe
 
 ## How we will work
 
-### Mechanics and scenes Q&A — just started
+### Mechanics and scenes Q&A — opening screen first
 
 Known foundation: turn-based fights; a chain-hung magnet gathers stacked scrap; physical components build ammunition and are spent when fired; attack and defence compete for resources/energy; rewards support varied, increasingly capable builds. Preparation uses the 16B side view and combat presentation the 16C perspective. Exact costs, effects, turn structure and persistence remain open.
 
-Review turn structure first: what ends a player turn and when enemies respond. Then settle gathering/assembly, targeting and defence, rewards and progression, and loss/reset rules. Ask one main question at a time. Suggestions remain proposals until Klaus answers.
+Klaus wants to begin at the opening screen and work forward through the player journey. The title-screen baseline below is his first answer and may be iterated later. Ask one main question at a time. Turn structure, gathering/assembly, targeting/defence, rewards/progression and loss/reset rules remain later topics. The assistant's separate End Turn recommendation has not been accepted or rejected.
 
-Scene inventory for discussion, **not an approved scene list**:
+Scene inventory: the title-screen baseline is recorded below; other entries remain discussion topics rather than a final scene list.
 
 | Player-facing scene or function | Current standing |
 | --- | --- |
-| Start/continue | Ordinary entry-flow candidate; details not discussed |
+| Title screen | Owner-defined first version below; profile, settings, collection and new-game flows still to detail |
 | Preparation and assembly | Selected side view; actual screen layout and rules open |
 | Combat action | Selected perspective; firing, impacts and enemy response are moments within it, not automatically separate scenes |
 | Rewards and rig upgrades | Required functions; whether they share a scene or use separate screens is open |
 | Progress between fights | Progression required; map, hub or direct advancement not selected |
 | Victory and defeat | Meaningful outcomes required; presentation and reset rules open |
 
-No new mechanic or additional scene has been selected by opening this review.
+### Scene 1 — title screen, first version
+
+Owner-defined baseline, 13 September 2026. This is a design decision, not an implemented screen, and Klaus explicitly leaves room for later iteration.
+
+| Menu entry | Intended function and availability |
+| --- | --- |
+| Start New Game | Begin a new game. The next screen and interaction with an existing game/progression are still to define |
+| Continue Game | Resume an existing game when the active profile has a game to continue |
+| Choose Profile | Select a save profile, allowing more than one independent progression lane |
+| Settings | Access graphical, sound and game settings; individual options are not yet specified |
+| Collection | View the currently discovered items in the active profile once a game has been played in that profile |
+| Quit to Desktop | Exit the game to the desktop |
+
+Profiles scope their progression, resumable game and discovered-item collection. Exact profile creation/management, number of profiles, save behaviour and settings scope remain open. The visual treatment of unavailable Continue Game/Collection entries (hidden, disabled or explanatory empty state) is not yet selected. The game's final title, title-screen composition and menu styling remain open; the concept storyboard does not specify them.
+
+Next Q&A topic: what the player sees immediately after choosing Start New Game. Do not fill that transition with an assumed story intro, character selection or gameplay screen.
 
 **Full redesign; implementation not started.** Klaus reconfirmed that little of the old game's code may be usable. Design the new game on its own requirements, and assess old code for reuse only where it fits. Existing prototype code and its recorded stage describe the old design. Storyboards, the review page and standalone Blender camera tests are design/art tools; they are not a partially implemented redesign or a commitment to its code architecture.
 
@@ -170,4 +185,4 @@ Polish pacing, sound, music, controls and presentation as the game grows. Check 
 
 The game designer connects purpose, choices, stakes and progression. The UI/UX designer works from the start on comprehension, interaction flow and visual hierarchy. The art director creates and carries the selected visual language into usable assets. The engineer implements and verifies the physics and game behavior; the audio designer connects sound to action and tone. Gameplay critique challenges clarity, fairness, reward and replay appeal. The producer coordinates the current goal, and QA independently checks the resulting build. Use these roles only where the authorized goal benefits from them.
 
-**Next action: conduct the mechanics and scenes Q&A, beginning with what ends a player turn.** Use the selected art as a reference while recording mechanics and scene decisions. Further art refinement remains available after this review; full gameplay implementation follows an owner-set goal. Store preparation, publication, marketing and purchases are outside this design discussion.
+**Next action: continue from the owner-defined title screen and ask what follows Start New Game.** Work forward through the player journey, recording mechanics and scene decisions. Use the selected art as a reference rather than a finished screen specification. Further art refinement remains available after this review; full gameplay implementation follows an owner-set goal. Store preparation, publication, marketing and purchases are outside this design discussion.
