@@ -41,10 +41,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T02:09:10+00:00",
+      "captured_at": "2026-09-13T02:10:03+00:00",
       "record_sha256": "cbd6020d0f3f3990bd191c07fea88f2b3c66ff6686edde173a6d5b59d867dd79",
       "files": {
-        "games/magnet-sweep/STATUS.md": "9286a09cb49dc90958cc33056d488da69adf4e0e39480b04954178cb34913505",
+        "games/magnet-sweep/STATUS.md": "6f76dc425d5c68e3f0a7d1bded353ab216db8ee2f60b14ee828b2f44f0d8e596",
         "games/magnet-sweep/design/BUILD-SYSTEM.md": "1fc1efeb769a64c27c870dfbf35875f171c7a907038a3b9acc2d065d899eb76b",
         "games/magnet-sweep/design/EXPEDITION-SITES.md": "3a722eb2bec81a887791b0fcc77726795fc1123e006f5d4d06e9b728f6670938",
         "games/magnet-sweep/QA-EXPEDITION.md": "2a4f9ec7a9c9a1ba38acb58ca1fee99f324b557afe04bfa53679b63851d19e96",
