@@ -46,6 +46,16 @@ Another illustration: increasing a three-energy budget to four is a 33% increase
 
 ## Resource availability and semi-random builds
 
+### Flexible scrap and choosing after seeing the threat
+
+Schreiber's [situational-balance lesson](https://gamebalanceconcepts.wordpress.com/2010/08/11/level-6-situational-balance/) includes an unusually close example: metal that can become either a weapon or armour. He explains that choosing between uses can be worth more than either fixed use, without being worth their combined benefits. He also distinguishes selecting an effect before knowing the situation from choosing it only when it will work. Rechecked these sections on 2026-09-13.
+
+Our application: a steel piece that can become ammunition or protection after enemy intentions are visible is more reliable than a piece restricted to one purpose. That does not mean we should penalise the starter metal until it feels weak. Keep it a dependable foundation, then give specialised components a clear advantage in their intended situation. Compare complete turns with the same starting stock, rather than assuming two pieces are equivalent because their printed numbers match.
+
+The timing of commitment is therefore a balance rule. Holding a canister until a group appears, then using a splitter, avoids spending that combination on an unsuitable lone target. Judge the combined effect in the favourable situation the player can deliberately create, including the real costs of obtaining, holding and firing its pieces. Do not discount a powerful combination merely because it would be poor when used carelessly.
+
+For a future experiment, compare identical encounters with (a) flexible steel, (b) separate attack and armour pieces, and (c) flexible steel plus one specialist. Observe whether a specialist creates an appealing decision, whether mixed stock forces unavoidable damage, and whether flexible steel makes every specialist redundant. These are alternative test conditions, not three new systems to implement.
+
 Separate randomness before the decision from randomness after commitment. Unexpected scrap or reward options can create an interesting problem that the player sees and solves. A hidden last-second failure on a carefully assembled shot can undermine that planning. The initial recommendation is predictable activation outcomes with variety in visible supplies, encounters and rewards.
 
 Test material access physically, not only by counting a level's inventory. A pile can contain enough armour material while every useful piece is buried beyond the player's affordable hauls. Record that distinction. An opening-stock rule, basic conversion option or alternative defence may prevent unavoidable starvation; choose the simplest solution that preserves retrieval decisions. Do not guarantee effortless survival or an exact desired combo every turn.
