@@ -1,0 +1,625 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "status": "breadth pass delivered; owner preference and reproducibility test pending",
+  "tool": "built-in image_gen",
+  "board_format": "one family, five labelled variants, consistent side-view combat scene",
+  "boards": [
+    {
+      "n": "01",
+      "slug": "pixel-art",
+      "title": "PIXEL ART",
+      "variants": [
+        [
+          "8-bit",
+          ""
+        ],
+        [
+          "16-bit",
+          ""
+        ],
+        [
+          "Neon pixels",
+          ""
+        ],
+        [
+          "Miniature",
+          ""
+        ],
+        [
+          "Nano pixels",
+          ""
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: a professional game art-direction comparison storyboard, ONE finished image. Create a large landscape art board titled exactly \"01 / PIXEL ART\". Arrange FIVE equally important wide gameplay scene panels in a clean layout: two columns in the first two rows, and one wide fifth panel across the bottom. Label each panel with its code and short title. This is a stylistic comparison board, not a UI dashboard. Artwork fills at least 90% of the page, very narrow dark gutters, no prose or stats tables.\nThe original game is turn-based scrap-magnet combat. In EVERY panel depict the SAME functional scene from an easily readable fixed SIDE VIEW: a squat operator's forge-cannon platform on the left, a recognisable heavy horseshoe industrial magnet hanging by a chain above a heap of stacked steel nuts, toothed gears and bolts; a few metal pieces being drawn visibly up toward its poles; an upright three-part physical ammunition assembly (steel body, small bright payload capsule, pointed cap) being loaded into the cannon; a mounted protective metal plate; two distinct hostile scrap robots on the right. Keep all subjects big enough to read, open separation between rig and enemies, depth only in backgrounds, no top-down or isometric board. Subtle compact health bars and a few energy pips are allowed, no card deck or card UI.\nAll five panels must be genuinely PIXEL ART with deliberately placed hard square pixels, no blurred pixels, not a 3D render with a pixel filter. Vary structure, resolution, texture, shape language and lighting, not just hue:\n01A / 8-BIT: severe chunky low-resolution sprites, 4-colour-per-object look, black contours, simple bold scenery.\n01B / 16-BIT: richly authored 1990s arcade pixel sprites, detailed industrial forms, stepped highlights, readable parallax layers.\n01C / NEON PIXELS: limited deep navy backdrop, vivid emissive pixel bands and sparks, futuristic silhouettes, sharp pixels preserved.\n01D / MINIATURE: tiny diorama-like pixel machinery with careful clustered detail, warm daylight, intimate handcrafted miniature scale, still side view.\n01E / NANO PIXELS: ultra-coarse micro-sprites and extremely economical large pixel clusters, dramatic negative space, only a handful of pixels describe each bolt or enemy. Intentionally more abstract than 01A but still recognisable.\nEach scene should feel like a polished original indie game worth buying, with a satisfying magnetic pull and clear potential for weapon impact. No franchise characters, logos, watermarks, realistic humans, dense text or beige PowerPoint layout. This board explores one family; do not introduce watercolour, clay, vector or photographic styles.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/01-pixel-art.webp",
+      "sha256": "574cba8730dfe5d63a5a3b869875fa21b542bb835ad711703a30bd04d8be9520",
+      "bytes": 1748430,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five coded variants present. The very coarse treatment loses individual part identity; 16-bit/miniature variants preserve more detail. Pixel labels describe an aesthetic, not hardware-accurate sprites.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "02",
+      "slug": "watercolour",
+      "title": "WATERCOLOUR",
+      "variants": [
+        [
+          "Transparent washes",
+          "Luminous traditional transparent watercolour on cold-pressed ivory paper, reserved paper highlights, broken edges and gentle daylight; crisp dark focal silhouettes."
+        ],
+        [
+          "Ink and wash",
+          "Fine expressive pen contours under loose puddles of watercolour, lively travel-sketch feeling, quiet cream background with generous breathing space."
+        ],
+        [
+          "Storm wash",
+          "Dramatic charcoal-blue storm clouds painted wet-on-wet, salt blooms, bleeding pigment, sharp warm metal highlights against cool washes."
+        ],
+        [
+          "Pastel storybook",
+          "Airy delicate pastel watercolour, simplified charming machine silhouettes, soft pink and mint atmosphere, tactile paper, no plastic shading."
+        ],
+        [
+          "Bold pigment",
+          "Rich saturated granulating watercolour with forceful dry-brush marks, contrasting indigo and burnt orange, bold graphic light and shadow, visibly physical paint."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"02 / WATERCOLOUR\". All panels belong to this ONE visual family.\nPanel 02A, label \"02A / TRANSPARENT WASHES\": Luminous traditional transparent watercolour on cold-pressed ivory paper, reserved paper highlights, broken edges and gentle daylight; crisp dark focal silhouettes.\nPanel 02B, label \"02B / INK AND WASH\": Fine expressive pen contours under loose puddles of watercolour, lively travel-sketch feeling, quiet cream background with generous breathing space.\nPanel 02C, label \"02C / STORM WASH\": Dramatic charcoal-blue storm clouds painted wet-on-wet, salt blooms, bleeding pigment, sharp warm metal highlights against cool washes.\nPanel 02D, label \"02D / PASTEL STORYBOOK\": Airy delicate pastel watercolour, simplified charming machine silhouettes, soft pink and mint atmosphere, tactile paper, no plastic shading.\nPanel 02E, label \"02E / BOLD PIGMENT\": Rich saturated granulating watercolour with forceful dry-brush marks, contrasting indigo and burnt orange, bold graphic light and shadow, visibly physical paint.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/02-watercolour.webp",
+      "sha256": "68b2d0b0d55b19d4f549bdcc5720785e5f909cbd3aa4f25b37b562182b6743ac",
+      "bytes": 2598202,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Wash handling and mood differ; ink-and-wash gives useful edge definition. Fine rust detail would need simplifying at smaller gameplay sizes.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "03",
+      "slug": "anime",
+      "title": "ANIME",
+      "variants": [
+        [
+          "Retro cel",
+          "1980s hand-painted mechanical anime, confident thick-to-thin ink outlines, two-tone cel shading, dusty gouache backgrounds, sturdy angular engineering."
+        ],
+        [
+          "Modern clean cel",
+          "Contemporary pristine cel-shaded anime with precise contours, luminous rim lights, large readable shapes and crisp controlled colour separation."
+        ],
+        [
+          "Soft painted anime",
+          "Tender painterly anime environment art, soft afternoon sun and lush natural scenery contrasting with clearly outlined functional machines."
+        ],
+        [
+          "Super deformed",
+          "Compact chibi proportions, oversized expressive machinery, playful squash-ready silhouettes and very economical high-contrast cel colours."
+        ],
+        [
+          "Graphic action anime",
+          "Sharp angular mecha design, extreme black shadow shapes, selective vivid accent colour and hand-drawn kinetic sparks; energetic yet readable."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"03 / ANIME\". All panels belong to this ONE visual family.\nPanel 03A, label \"03A / RETRO CEL\": 1980s hand-painted mechanical anime, confident thick-to-thin ink outlines, two-tone cel shading, dusty gouache backgrounds, sturdy angular engineering.\nPanel 03B, label \"03B / MODERN CLEAN CEL\": Contemporary pristine cel-shaded anime with precise contours, luminous rim lights, large readable shapes and crisp controlled colour separation.\nPanel 03C, label \"03C / SOFT PAINTED ANIME\": Tender painterly anime environment art, soft afternoon sun and lush natural scenery contrasting with clearly outlined functional machines.\nPanel 03D, label \"03D / SUPER DEFORMED\": Compact chibi proportions, oversized expressive machinery, playful squash-ready silhouettes and very economical high-contrast cel colours.\nPanel 03E, label \"03E / GRAPHIC ACTION ANIME\": Sharp angular mecha design, extreme black shadow shapes, selective vivid accent colour and hand-drawn kinetic sparks; energetic yet readable.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/03-anime.webp",
+      "sha256": "2eb3897d5c9a75c422e744a3e2fbd8b4cb746a34ecab17fff5519f27af1f80c5",
+      "bytes": 2308514,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Clear cel and super-deformed forms differ from painted backgrounds. Graphic action panel uses a canted composition, so compare its line/colour treatment rather than adopting that camera.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "04",
+      "slug": "storybook-animation",
+      "title": "STORYBOOK ANIMATION",
+      "variants": [
+        [
+          "Golden-age cel",
+          "1940s feature-animation storybook craft, rounded hand-inked machine characters, appealing silhouette and warmly painted backgrounds, original Disney-like appeal without any franchise character."
+        ],
+        [
+          "Adventure animation",
+          "1990s theatrical hand-drawn adventure, confident tapered outlines, sculpted cel shadows and richly painted industrial-fantasy scenery."
+        ],
+        [
+          "Gouache folk tale",
+          "Flat gouache picture-book animation, charming asymmetry, hand-painted visible brushwork, patterned foliage and simplified expressive machines."
+        ],
+        [
+          "Luminous fairytale",
+          "Polished modern feature-animation rendering, luminous materials, rounded expressive silhouettes, soft cinematic bounce light, warm magical atmosphere."
+        ],
+        [
+          "Graphic mid-century",
+          "Stylised 1950s animation design, skewed geometric machinery, flat colour areas, economical bold contours and abstract background shapes."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"04 / STORYBOOK ANIMATION\". All panels belong to this ONE visual family.\nPanel 04A, label \"04A / GOLDEN-AGE CEL\": 1940s feature-animation storybook craft, rounded hand-inked machine characters, appealing silhouette and warmly painted backgrounds, original Disney-like appeal without any franchise character.\nPanel 04B, label \"04B / ADVENTURE ANIMATION\": 1990s theatrical hand-drawn adventure, confident tapered outlines, sculpted cel shadows and richly painted industrial-fantasy scenery.\nPanel 04C, label \"04C / GOUACHE FOLK TALE\": Flat gouache picture-book animation, charming asymmetry, hand-painted visible brushwork, patterned foliage and simplified expressive machines.\nPanel 04D, label \"04D / LUMINOUS FAIRYTALE\": Polished modern feature-animation rendering, luminous materials, rounded expressive silhouettes, soft cinematic bounce light, warm magical atmosphere.\nPanel 04E, label \"04E / GRAPHIC MID-CENTURY\": Stylised 1950s animation design, skewed geometric machinery, flat colour areas, economical bold contours and abstract background shapes.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/04-storybook-animation.webp",
+      "sha256": "fd41f4dca7b66e40f5c7fcfdf0f579c7fe522411d723f7ec1d6ba20107c1a680",
+      "bytes": 2133192,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present, from classic inked animation to volumetric modern rendering. Character/world motifs are placeholders and need original identity development after selection.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "05",
+      "slug": "vintage-cartoon",
+      "title": "VINTAGE CARTOON",
+      "variants": [
+        [
+          "Ink and ivory",
+          "Early sound-era black-and-white rubber-hose cartoon, hand-inked springy mechanical limbs, paper grain and strong black silhouettes."
+        ],
+        [
+          "Two-colour cel",
+          "1940s limited two-colour cartoon palette, cream paper plus petrol blue and red accents, comic timing suggested by expressive posed machinery."
+        ],
+        [
+          "Technicolor",
+          "1940s saturated theatrical cartoon, lush painted backgrounds, clean inked foreground, highly expressive original robots and extravagant hand-drawn sparks."
+        ],
+        [
+          "Noir cartoon",
+          "Vintage cartoon with dramatic film-noir shadows, angled warm spotlights, restricted warm-grey palette, mysterious scrapyard, beautifully legible silhouettes."
+        ],
+        [
+          "Poster cartoon",
+          "Retro screenprinted cartoon, bold simplified shapes and offset ink texture, confident sepia orange teal palette, irreverent expressive machine shapes."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"05 / VINTAGE CARTOON\". All panels belong to this ONE visual family.\nPanel 05A, label \"05A / INK AND IVORY\": Early sound-era black-and-white rubber-hose cartoon, hand-inked springy mechanical limbs, paper grain and strong black silhouettes.\nPanel 05B, label \"05B / TWO-COLOUR CEL\": 1940s limited two-colour cartoon palette, cream paper plus petrol blue and red accents, comic timing suggested by expressive posed machinery.\nPanel 05C, label \"05C / TECHNICOLOR\": 1940s saturated theatrical cartoon, lush painted backgrounds, clean inked foreground, highly expressive original robots and extravagant hand-drawn sparks.\nPanel 05D, label \"05D / NOIR CARTOON\": Vintage cartoon with dramatic film-noir shadows, angled warm spotlights, restricted warm-grey palette, mysterious scrapyard, beautifully legible silhouettes.\nPanel 05E, label \"05E / POSTER CARTOON\": Retro screenprinted cartoon, bold simplified shapes and offset ink texture, confident sepia orange teal palette, irreverent expressive machine shapes.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/05-vintage-cartoon.webp",
+      "sha256": "182641bf52af0bbad47cdb80843477b9a5b97b497046fe7049a5c3edaf43966c",
+      "bytes": 2408372,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Black silhouettes and exaggerated poses communicate vintage appeal. Noir loses dark foreground detail; board includes decorative scenery text, not approved narrative/UI.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "06",
+      "slug": "modern-art",
+      "title": "MODERN ART",
+      "variants": [
+        [
+          "Bauhaus machinery",
+          "Constructivist/Bauhaus-inspired functional shapes: circles, bars, arcs and triangles, flat red blue yellow on warm white, each machine still recognisable."
+        ],
+        [
+          "Cut-paper colour",
+          "Matisse-like cut-paper shapes, exuberant organic colour fields, expressive asymmetry, original mechanical silhouettes made of cut coloured shapes."
+        ],
+        [
+          "Geometric surrealism",
+          "Elegant surreal geometric landscape, long shadows, impossible-looking distant architecture but understandable foreground physics, strong restrained palette."
+        ],
+        [
+          "Psychedelic print",
+          "Contemporary psychedelic art print, fluid swirling scenery and iridescent graphic colour, with bold quiet silhouettes around interactable objects."
+        ],
+        [
+          "Minimal colour field",
+          "Minimalist fine-art composition, few large flat colour fields, highly economical machinery, deliberate negative space, exceptionally clear interactive shapes."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"06 / MODERN ART\". All panels belong to this ONE visual family.\nPanel 06A, label \"06A / BAUHAUS MACHINERY\": Constructivist/Bauhaus-inspired functional shapes: circles, bars, arcs and triangles, flat red blue yellow on warm white, each machine still recognisable.\nPanel 06B, label \"06B / CUT-PAPER COLOUR\": Matisse-like cut-paper shapes, exuberant organic colour fields, expressive asymmetry, original mechanical silhouettes made of cut coloured shapes.\nPanel 06C, label \"06C / GEOMETRIC SURREALISM\": Elegant surreal geometric landscape, long shadows, impossible-looking distant architecture but understandable foreground physics, strong restrained palette.\nPanel 06D, label \"06D / PSYCHEDELIC PRINT\": Contemporary psychedelic art print, fluid swirling scenery and iridescent graphic colour, with bold quiet silhouettes around interactable objects.\nPanel 06E, label \"06E / MINIMAL COLOUR FIELD\": Minimalist fine-art composition, few large flat colour fields, highly economical machinery, deliberate negative space, exceptionally clear interactive shapes.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/06-modern-art.webp",
+      "sha256": "32d0ee865a6395a5930cadab18ec0b62d0e4a6873b98375b880d8945fe210bbf",
+      "bytes": 1845514,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Shape and background language differ substantially. Psychedelic background competes with play; minimal colour-field version separates machinery clearly.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "07",
+      "slug": "line-art",
+      "title": "LINE ART",
+      "variants": [
+        [
+          "Ink engraving",
+          "Black ink engraved industrial illustration on off-white, deliberate cross-hatching, differentiated line weights, extremely readable focal silhouettes."
+        ],
+        [
+          "Clear-line comic",
+          "Franco-Belgian clear-line illustration, even clean contours, flat confident colour, carefully legible machinery, no cross-hatching."
+        ],
+        [
+          "Pencil notebook",
+          "Expressive graphite and coloured-pencil sketch on warm paper, visible rough handmade strokes but confident finished shapes, not a technical diagram."
+        ],
+        [
+          "Coloured contour",
+          "Modern elegant colourful contour drawing on midnight blue, selective flat filled shapes, luminous drawn magnetic arcs and strong outline hierarchy."
+        ],
+        [
+          "Brush and ink",
+          "Bold calligraphic black brushwork, dry-brush textures and sparse vermilion accents, expressive loose backgrounds, crisp identifiable objects."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"07 / LINE ART\". All panels belong to this ONE visual family.\nPanel 07A, label \"07A / INK ENGRAVING\": Black ink engraved industrial illustration on off-white, deliberate cross-hatching, differentiated line weights, extremely readable focal silhouettes.\nPanel 07B, label \"07B / CLEAR-LINE COMIC\": Franco-Belgian clear-line illustration, even clean contours, flat confident colour, carefully legible machinery, no cross-hatching.\nPanel 07C, label \"07C / PENCIL NOTEBOOK\": Expressive graphite and coloured-pencil sketch on warm paper, visible rough handmade strokes but confident finished shapes, not a technical diagram.\nPanel 07D, label \"07D / COLOURED CONTOUR\": Modern elegant colourful contour drawing on midnight blue, selective flat filled shapes, luminous drawn magnetic arcs and strong outline hierarchy.\nPanel 07E, label \"07E / BRUSH AND INK\": Bold calligraphic black brushwork, dry-brush textures and sparse vermilion accents, expressive loose backgrounds, crisp identifiable objects.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/07-line-art.webp",
+      "sha256": "1848a5cd6e8ad5007b1d60e4436bce491b3b5ce4e185f9bef8a0a6d3b911b481",
+      "bytes": 2377198,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Clear-line variant offers clean part edges; engraving/pencil/brush textures can obscure the pile. An outline workflow needs motion testing.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "08",
+      "slug": "playful-3d",
+      "title": "PLAYFUL 3D",
+      "variants": [
+        [
+          "Toy diorama",
+          "Beautiful tactile miniature toy world, polished painted wooden and metal machinery, soft bright daylight, charming compact proportions; original Nintendo-like design appeal."
+        ],
+        [
+          "Round and bouncy",
+          "Bold soft rounded 3D machinery, cheerful candy colours, beautifully sculpted silhouettes with expressive robot poses and punchy readable highlights."
+        ],
+        [
+          "Adventure cel",
+          "Playful polished 3D with graphic cel shading, confident large shapes and adventurous warm green gold blue colours, hand-painted detail selectively."
+        ],
+        [
+          "Crafted miniature",
+          "Precision handmade model-kit world with painted chips, tiny screws and richly tactile surfaces, still large clear toy shapes with strong silhouette."
+        ],
+        [
+          "Stylised spectacle",
+          "Premium colourful 3D action-adventure lighting, dramatic saturated warm/cool contrast, sculpted rounded shapes and luminous clean VFX; restrained surface noise."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"08 / PLAYFUL 3D\". All panels belong to this ONE visual family.\nPanel 08A, label \"08A / TOY DIORAMA\": Beautiful tactile miniature toy world, polished painted wooden and metal machinery, soft bright daylight, charming compact proportions; original Nintendo-like design appeal.\nPanel 08B, label \"08B / ROUND AND BOUNCY\": Bold soft rounded 3D machinery, cheerful candy colours, beautifully sculpted silhouettes with expressive robot poses and punchy readable highlights.\nPanel 08C, label \"08C / ADVENTURE CEL\": Playful polished 3D with graphic cel shading, confident large shapes and adventurous warm green gold blue colours, hand-painted detail selectively.\nPanel 08D, label \"08D / CRAFTED MINIATURE\": Precision handmade model-kit world with painted chips, tiny screws and richly tactile surfaces, still large clear toy shapes with strong silhouette.\nPanel 08E, label \"08E / STYLISED SPECTACLE\": Premium colourful 3D action-adventure lighting, dramatic saturated warm/cool contrast, sculpted rounded shapes and luminous clean VFX; restrained surface noise.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/08-playful-3d.webp",
+      "sha256": "b3372f7cc1d1dd85a74f92235fd85187f75d148430cfb097ad24ac28a44c6e9e",
+      "bytes": 1976682,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Rounded toy, cel and crafted-material approaches differ. Miniature surface treatment conveys weight; focus blur should not touch interactable parts.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "09",
+      "slug": "realism",
+      "title": "REALISM",
+      "variants": [
+        [
+          "Working steel",
+          "Grounded photorealistic engineering, coherent mechanisms, raw steel, rubber, grease, believable weight and bright industrial workshop daylight."
+        ],
+        [
+          "Cinematic salvage",
+          "Photorealistic rugged salvage rig with carefully worn surfaces, dramatic film lighting, strong negative space and cinematic atmosphere."
+        ],
+        [
+          "Clean future",
+          "Elegant photorealistic precision machines, white ceramic and brushed metal, restrained accent lighting, premium contemporary industrial product design."
+        ],
+        [
+          "Retrofuture",
+          "Believable 1960s analog sci-fi industrial machinery, enamel curves, bakelite, copper, mechanical dials, warm filmic atmosphere."
+        ],
+        [
+          "Nature reclaimed",
+          "Physically plausible weathered machines among overgrown abandoned industrial structures, diffuse forest light, delicate rust and moss, clear foreground contrast."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"09 / REALISM\". All panels belong to this ONE visual family.\nPanel 09A, label \"09A / WORKING STEEL\": Grounded photorealistic engineering, coherent mechanisms, raw steel, rubber, grease, believable weight and bright industrial workshop daylight.\nPanel 09B, label \"09B / CINEMATIC SALVAGE\": Photorealistic rugged salvage rig with carefully worn surfaces, dramatic film lighting, strong negative space and cinematic atmosphere.\nPanel 09C, label \"09C / CLEAN FUTURE\": Elegant photorealistic precision machines, white ceramic and brushed metal, restrained accent lighting, premium contemporary industrial product design.\nPanel 09D, label \"09D / RETROFUTURE\": Believable 1960s analog sci-fi industrial machinery, enamel curves, bakelite, copper, mechanical dials, warm filmic atmosphere.\nPanel 09E, label \"09E / NATURE RECLAIMED\": Physically plausible weathered machines among overgrown abandoned industrial structures, diffuse forest light, delicate rust and moss, clear foreground contrast.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/09-realism.webp",
+      "sha256": "8390e455021c08c86f1899e6b22f40a9f0afadd9a248bc0e35e90de6fa13e0d3",
+      "bytes": 2319276,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Realistic material/lighting alternatives are visible. Dense rust/moss can make parts merge with the pile and raise asset-cleanup demands.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "10",
+      "slug": "low-poly",
+      "title": "LOW-POLY 3D",
+      "variants": [
+        [
+          "Faceted sculpture",
+          "Beautiful flat-shaded faceted polygon sculptures, deliberate large planar bevels, warm sculptural lighting, geometrically clear scrap and robots."
+        ],
+        [
+          "Retro console",
+          "1990s early-3D console aesthetic, very low polygon counts, nearest-neighbour textures and visibly chunky forms; composed intentionally, not broken."
+        ],
+        [
+          "Pastel geometry",
+          "Minimal untextured low-poly machines, soft pastel colours and clean ambient shadows, optimistic daylight with excellent silhouette."
+        ],
+        [
+          "Neon geometry",
+          "Dark angular low-poly sci-fi forms, vivid emissive edges and geometric projectile effects, spare deep-indigo backdrop."
+        ],
+        [
+          "Painted facets",
+          "Hand-painted low-poly assets, broad painted highlights and visible polygon planes, rich muted earthy colour and selective saturated accents."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"10 / LOW-POLY 3D\". All panels belong to this ONE visual family.\nPanel 10A, label \"10A / FACETED SCULPTURE\": Beautiful flat-shaded faceted polygon sculptures, deliberate large planar bevels, warm sculptural lighting, geometrically clear scrap and robots.\nPanel 10B, label \"10B / RETRO CONSOLE\": 1990s early-3D console aesthetic, very low polygon counts, nearest-neighbour textures and visibly chunky forms; composed intentionally, not broken.\nPanel 10C, label \"10C / PASTEL GEOMETRY\": Minimal untextured low-poly machines, soft pastel colours and clean ambient shadows, optimistic daylight with excellent silhouette.\nPanel 10D, label \"10D / NEON GEOMETRY\": Dark angular low-poly sci-fi forms, vivid emissive edges and geometric projectile effects, spare deep-indigo backdrop.\nPanel 10E, label \"10E / PAINTED FACETS\": Hand-painted low-poly assets, broad painted highlights and visible polygon planes, rich muted earthy colour and selective saturated accents.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/10-low-poly.webp",
+      "sha256": "661cc2a920170b44ebc18b7cae343859f3a184f6328639600e1574e43f8b0618",
+      "bytes": 1852340,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Large facets, retro texture, soft colour and emissive geometry vary. Retro-console panel has low-resolution smear and must be refined before serving as a production target.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "11",
+      "slug": "clay-stop-motion",
+      "title": "CLAY AND STOP MOTION",
+      "variants": [
+        [
+          "Plasticine",
+          "Hand-sculpted colourful plasticine machinery with fingerprints, chunky appealing forms, soft miniature studio lighting and handmade seams."
+        ],
+        [
+          "Ceramic",
+          "Glazed ceramic machine sculptures, delightful cream and cobalt glazes with small crackles, solid polished forms, strong ceramic weight."
+        ],
+        [
+          "Felt and wool",
+          "Tactile felt-and-wool miniature machinery, stitched silhouette edges, coherent gear and magnet shapes, charming handmade theatre world."
+        ],
+        [
+          "Found-object puppets",
+          "Stop-motion puppets constructed from bolts, tin cans and reclaimed metal, unique expressive shapes, visibly practical handmade miniature set."
+        ],
+        [
+          "Dark clay fable",
+          "Moody storybook clay sculpture, beautiful eccentric angular forms and carefully lit texture, desaturated earthy palette with a warm payload glow."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"11 / CLAY AND STOP MOTION\". All panels belong to this ONE visual family.\nPanel 11A, label \"11A / PLASTICINE\": Hand-sculpted colourful plasticine machinery with fingerprints, chunky appealing forms, soft miniature studio lighting and handmade seams.\nPanel 11B, label \"11B / CERAMIC\": Glazed ceramic machine sculptures, delightful cream and cobalt glazes with small crackles, solid polished forms, strong ceramic weight.\nPanel 11C, label \"11C / FELT AND WOOL\": Tactile felt-and-wool miniature machinery, stitched silhouette edges, coherent gear and magnet shapes, charming handmade theatre world.\nPanel 11D, label \"11D / FOUND-OBJECT PUPPETS\": Stop-motion puppets constructed from bolts, tin cans and reclaimed metal, unique expressive shapes, visibly practical handmade miniature set.\nPanel 11E, label \"11E / DARK CLAY FABLE\": Moody storybook clay sculpture, beautiful eccentric angular forms and carefully lit texture, desaturated earthy palette with a warm payload glow.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/11-clay-stop-motion.webp",
+      "sha256": "549b7857ae0d0a61e6d829f173190c23d82f13419d4d830b3b9c15b9bb1a7ad9",
+      "bytes": 1985316,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Plasticine, ceramic, textile and found-object surfaces differ strongly. Felt/ceramic must preserve the meaning of metal or establish a clear handmade-world convention.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "12",
+      "slug": "paper-craft",
+      "title": "PAPER CRAFT",
+      "variants": [
+        [
+          "Layered cutout",
+          "Layered coloured-paper silhouettes with fine cast shadows and cut edges, foreground machines clean and tangible, restrained jewel palette."
+        ],
+        [
+          "Folded origami",
+          "Clever folded-paper machines with visible creases, geometrically recognisable magnet and parts, crisp origami forms, simple backdrop."
+        ],
+        [
+          "Cardboard workshop",
+          "Corrugated cardboard miniature machines with craft-paint surfaces, tabs, folds and construction logic, charming toy engineering."
+        ],
+        [
+          "Pop-up theatre",
+          "Intricate illustrated pop-up-book scenery with layered paper stage depth and fold-out machinery, playful broad silhouettes, elegant presentation."
+        ],
+        [
+          "Printed collage",
+          "Editorial paper collage assembled from original abstract printed textures, newspaper-like pattern without legible words, bold torn edges and strong black accents."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"12 / PAPER CRAFT\". All panels belong to this ONE visual family.\nPanel 12A, label \"12A / LAYERED CUTOUT\": Layered coloured-paper silhouettes with fine cast shadows and cut edges, foreground machines clean and tangible, restrained jewel palette.\nPanel 12B, label \"12B / FOLDED ORIGAMI\": Clever folded-paper machines with visible creases, geometrically recognisable magnet and parts, crisp origami forms, simple backdrop.\nPanel 12C, label \"12C / CARDBOARD WORKSHOP\": Corrugated cardboard miniature machines with craft-paint surfaces, tabs, folds and construction logic, charming toy engineering.\nPanel 12D, label \"12D / POP-UP THEATRE\": Intricate illustrated pop-up-book scenery with layered paper stage depth and fold-out machinery, playful broad silhouettes, elegant presentation.\nPanel 12E, label \"12E / PRINTED COLLAGE\": Editorial paper collage assembled from original abstract printed textures, newspaper-like pattern without legible words, bold torn edges and strong black accents.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/12-paper-craft.webp",
+      "sha256": "c428f9e51ecb2ce58ee0a64afe182750a0956f47c6c3ecf98d28ed522b953270",
+      "bytes": 2260562,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Cutouts, folds, corrugation, theatre and collage are distinct. Origami makes small gears less recognisable; layered cutout keeps cleaner functional shapes.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "13",
+      "slug": "comic-print",
+      "title": "COMIC AND PRINT",
+      "variants": [
+        [
+          "Adventure comic",
+          "Bold inked adventure comic, weighty black silhouettes, flat controlled colour and selective bright mechanical highlights."
+        ],
+        [
+          "Halftone pop",
+          "Energetic pop-art print with visible Ben-Day dots, chunky clean contour and graphic action bursts, vivid limited palette."
+        ],
+        [
+          "Woodcut",
+          "High-contrast hand-carved woodcut, textured ink on cream, chunky carved machinery silhouettes, strong selective vermilion accents."
+        ],
+        [
+          "Risograph",
+          "Contemporary risograph illustration, grainy overlapping cobalt coral and yellow spot colours, charming asymmetric machine design."
+        ],
+        [
+          "Graphic noir",
+          "Elegant limited-colour graphic novel, rich blacks, spare whites and one bright electric accent, expressive ink lighting and clear shapes."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"13 / COMIC AND PRINT\". All panels belong to this ONE visual family.\nPanel 13A, label \"13A / ADVENTURE COMIC\": Bold inked adventure comic, weighty black silhouettes, flat controlled colour and selective bright mechanical highlights.\nPanel 13B, label \"13B / HALFTONE POP\": Energetic pop-art print with visible Ben-Day dots, chunky clean contour and graphic action bursts, vivid limited palette.\nPanel 13C, label \"13C / WOODCUT\": High-contrast hand-carved woodcut, textured ink on cream, chunky carved machinery silhouettes, strong selective vermilion accents.\nPanel 13D, label \"13D / RISOGRAPH\": Contemporary risograph illustration, grainy overlapping cobalt coral and yellow spot colours, charming asymmetric machine design.\nPanel 13E, label \"13E / GRAPHIC NOIR\": Elegant limited-colour graphic novel, rich blacks, spare whites and one bright electric accent, expressive ink lighting and clear shapes.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/13-comic-print.webp",
+      "sha256": "63937319ea700b257c68cac17bba0de9e263cf4543f26028a7966a6465f9913f",
+      "bytes": 2456400,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Print texture changes substantially. Halftone and woodcut backgrounds can compete with scrap edges; noir makes the bright magnet lead well.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "14",
+      "slug": "painterly",
+      "title": "PAINTERLY",
+      "variants": [
+        [
+          "Oil impasto",
+          "Sculptural thick oil-paint strokes, rich expressive brush texture, strong warm-cool contrasts, readable machinery shaped by deliberate paint planes."
+        ],
+        [
+          "Gouache adventure",
+          "Opaque gouache environment illustration, matte velvety paint, hand-shaped edges, charming substantial mechanical silhouettes."
+        ],
+        [
+          "Digital brushwork",
+          "Premium digital painted game art, broad confident brush marks, crisp focal detail with loose atmospheric background, beautiful material distinctions."
+        ],
+        [
+          "Painted 3D",
+          "Sculpted 3D machines carrying hand-painted textures, brushy colour planes and art-directed highlights, convincing volume with an illustrated finish."
+        ],
+        [
+          "Pastel chalk",
+          "Expressive chalk and dry pastel on dark textured paper, rich dusty colour and luminous strokes, clear bold objects against quiet softened scenery."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"14 / PAINTERLY\". All panels belong to this ONE visual family.\nPanel 14A, label \"14A / OIL IMPASTO\": Sculptural thick oil-paint strokes, rich expressive brush texture, strong warm-cool contrasts, readable machinery shaped by deliberate paint planes.\nPanel 14B, label \"14B / GOUACHE ADVENTURE\": Opaque gouache environment illustration, matte velvety paint, hand-shaped edges, charming substantial mechanical silhouettes.\nPanel 14C, label \"14C / DIGITAL BRUSHWORK\": Premium digital painted game art, broad confident brush marks, crisp focal detail with loose atmospheric background, beautiful material distinctions.\nPanel 14D, label \"14D / PAINTED 3D\": Sculpted 3D machines carrying hand-painted textures, brushy colour planes and art-directed highlights, convincing volume with an illustrated finish.\nPanel 14E, label \"14E / PASTEL CHALK\": Expressive chalk and dry pastel on dark textured paper, rich dusty colour and luminous strokes, clear bold objects against quiet softened scenery.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/14-painterly.webp",
+      "sha256": "04516b034ba357c95740e63d7537cd5f40eb9e5784a2483704d7c00c5e813ffe",
+      "bytes": 2563154,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Oil/chalk textures differ from gouache and painted volume. Painted 3D gives a promising path to repeatable shapes; strongly textured alternatives need edge hierarchy.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "15",
+      "slug": "flat-vector",
+      "title": "FLAT GRAPHIC",
+      "variants": [
+        [
+          "Bold vector",
+          "Highly polished vector-like flat illustration, strong geometric silhouettes, economical crisp contour, large deliberate colour blocks."
+        ],
+        [
+          "Soft vector",
+          "Friendly rounded vector-like forms, restrained gentle gradients, airy negative space, sophisticated warm palette and clean visual hierarchy."
+        ],
+        [
+          "Industrial pictogram",
+          "Distinctive functional visual language built from purposeful bold shapes, confident safety-colour accents, clear recognisable machinery without technical diagram labels."
+        ],
+        [
+          "Silhouette theatre",
+          "Layered silhouettes with luminous coloured atmosphere, striking theatrical lighting and strong foreground shape separation, selective interior detail."
+        ],
+        [
+          "Retro futurist graphic",
+          "Mid-century science-fiction book-cover graphic design translated into a game scene, broad curved machinery, beautiful muted colour blocks and sparse texture."
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: ONE finished professional art-direction comparison storyboard for an original turn-based scrap-magnet combat game. Large landscape board. Artwork occupies over 90% of the image, narrow neutral gutters. Layout: five distinct wide scene panels, two columns for the first two rows, fifth panel full width at the bottom. Exact board title and panel codes below. No prose, charts, franchise characters, logos, watermarks, card UI or dashboard.\nIn EVERY panel show a consistent original functional combat scene from a readable SIDE VIEW: operator's forge-cannon platform on left, recognisable heavy horseshoe industrial magnet visibly hanging by a chain over a vertically stacked pile of gears, nuts and bolts; some pieces lift toward its poles to show a satisfying attraction. Upright three-component physical ammunition assembly feeding the gun, mounted protective plate, and two visually distinct hostile scrap robots on right. Keep subjects large, recognisable, separated. Small restrained health bars and energy pips only, no text blocks. The SAME gameplay subjects across all five variants make comparison fair, but adapt forms, materials and environment art to each aesthetic rather than merely recolouring. Background must not overpower the magnet, parts or enemies. These are polished potential game frames, not icons or isolated assets.\n\nBoard title: \"15 / FLAT GRAPHIC\". All panels belong to this ONE visual family.\nPanel 15A, label \"15A / BOLD VECTOR\": Highly polished vector-like flat illustration, strong geometric silhouettes, economical crisp contour, large deliberate colour blocks.\nPanel 15B, label \"15B / SOFT VECTOR\": Friendly rounded vector-like forms, restrained gentle gradients, airy negative space, sophisticated warm palette and clean visual hierarchy.\nPanel 15C, label \"15C / INDUSTRIAL PICTOGRAM\": Distinctive functional visual language built from purposeful bold shapes, confident safety-colour accents, clear recognisable machinery without technical diagram labels.\nPanel 15D, label \"15D / SILHOUETTE THEATRE\": Layered silhouettes with luminous coloured atmosphere, striking theatrical lighting and strong foreground shape separation, selective interior detail.\nPanel 15E, label \"15E / RETRO FUTURIST GRAPHIC\": Mid-century science-fiction book-cover graphic design translated into a game scene, broad curved machinery, beautiful muted colour blocks and sparse texture.\nMake the five approaches meaningfully distinct in shape language, surface treatment, line, lighting or rendering technique. Beautiful finished artwork, strong game readability. Do not let every variant converge on the same generic polished digital illustration.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/15-flat-vector.webp",
+      "sha256": "e2c7be253f6c0f87b56b23b0d14a1645bf33bb85c246117e2904bb877f08e49d",
+      "bytes": 1839202,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All five present. Flat, soft, pictographic, silhouette and retrofuturist approaches differ. Flat treatments still include some volumetric shading; silhouette option hides part materials and needs inspection feedback.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    },
+    {
+      "n": "16",
+      "slug": "depth-camera",
+      "title": "DEPTH AND CAMERA",
+      "variants": [
+        [
+          "2D sprites",
+          "Flat illustrated side view"
+        ],
+        [
+          "2.5D side view",
+          "Volumetric assets in a lateral gameplay plane"
+        ],
+        [
+          "3D perspective",
+          "Spatial three-quarter camera"
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Create ONE finished landscape comparison board titled \"16 / DEPTH AND CAMERA\" with THREE equally sized wide horizontal gameplay frames stacked vertically. The comparison is only the rendering depth and camera, so use the SAME original forge-cannon, operator, horseshoe magnet hanging on a chain, upright component-loaded ammunition assembly, protective plate, pile of loose gears and bolts, two enemy scrap robots, same warm/cool palette and same understated environment in all three. Restrained health bars and energy pips, no card interface. The player must instantly understand what each object is. A clear close view, art fills the page with very narrow gutters, not a PowerPoint slide.\nFrame 16A label \"16A / 2D SPRITES\": completely flat illustrated side-view sprites with confident simple contours, lateral silhouettes, flat colour shading, all action in a single readable plane, illustrated background layers.\nFrame 16B label \"16B / 2.5D SIDE VIEW\": the same scene and layout seen side-on, with appealing sculpted 3D models, visible thickness and bevels, real contact shadows, foreground and background parallax. Gameplay is visibly on one lateral plane but objects have volume, suspended chain curves and swinging parts show weight. No overhead view.\nFrame 16C label \"16C / 3D PERSPECTIVE\": same models as B but a clearly different three-quarter perspective camera looking across the rig toward the scrap pile and enemies; visible depth and foreshortening, some natural occlusion demonstrates the depth tradeoff. Not first person and not top-down.\nNo additional visual styles, no franchise references, no slogans, no explanatory paragraphs, no charts. The presentation should make flat artwork, layered side-view depth and free spatial perspective visibly different without making A look deliberately worse. All are polished legitimate game options.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "asset_path": "assets/concepts/art-direction-2026-09-13/16-depth-camera.webp",
+      "sha256": "59f84be422c47cf3d8e1f7376ae84a6cfbe17daab4233f91dd7ee8ffde47c95d",
+      "bytes": 1698394,
+      "review": "static visual inspection in generated tool output",
+      "observation": "All three depth/camera variants present, with flat contours, side-view volume and three-quarter perspective. The perspective view demonstrates occlusion. Generated ammunition appears as a rack of completed rounds, so this board is only a camera/depth comparison and must not become the assembly/mechanism specification.",
+      "owner_selection": null,
+      "pixel_preserving_conversion": true
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magnet Sweep — Art Direction</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #161a1d; color: #f1eee7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button, select, textarea { font: inherit; }
+    button, select { color: inherit; background: #292e32; border: 1px solid #576068; border-radius: 6px; padding: 10px 14px; cursor: pointer; }
+    button:hover { border-color: #edc881; }
+    :focus-visible { outline: 3px solid #edc881; outline-offset: 4px; }
+    button:disabled { opacity: .4; cursor: default; }
+    button[aria-pressed="true"] { color: #201b14; background: #edc881; border-color: #edc881; }
+    header, main, footer { width: min(1568px, 100%); margin: auto; padding: 24px 28px; }
+    header { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+    .eyebrow { color: #edc881; font-size: 12px; letter-spacing: .17em; text-transform: uppercase; }
+    h1 { font-size: clamp(25px, 3.2vw, 40px); font-weight: 650; margin: 5px 0 6px; letter-spacing: -.04em; }
+    h2 { font-size: 19px; margin: 0; }
+    p { color: #bbc2c6; line-height: 1.5; margin: 6px 0; }
+    .count { white-space: nowrap; text-align: right; font-size: 14px; color: #bbc2c6; }
+    .toolbar, .choices, .shortlist-head { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .toolbar { margin-bottom: 16px; }
+    .field { display: flex; align-items: center; gap: 10px; flex: 1; }
+    select { min-width: 220px; flex: 1; }
+    .board-link { display: block; cursor: zoom-in; }
+    .board-link img { display: block; width: 100%; height: auto; background: #24292d; }
+    .board-note { font-size: 13px; margin: 12px 0 22px; max-width: 100ch; }
+    .choice-label { margin-bottom: 12px; color: #f1eee7; }
+    .choices button { text-align: left; display: flex; gap: 10px; align-items: baseline; }
+    .choices strong { font-variant-numeric: tabular-nums; }
+    .shortlist { border-top: 1px solid #41474b; margin-top: 28px; padding-top: 24px; }
+    .shortlist-head { justify-content: space-between; }
+    #selected-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; padding: 0; list-style: none; }
+    #selected-list button { padding: 6px 10px; font-size: 14px; }
+    .notes-label { display: block; margin: 16px 0 8px; }
+    textarea { width: 100%; min-height: 80px; resize: vertical; border: 1px solid #576068; border-radius: 6px; background: #202529; color: #f1eee7; padding: 12px; }
+    #copy-output { min-height: 110px; }
+    .hint { font-size: 13px; }
+    #copy-status { min-height: 22px; }
+    footer { font-size: 13px; color: #bbc2c6; }
+    footer a { color: #edc881; }
+    dialog { max-width: 98vw; max-height: 96vh; width: 1600px; padding: 12px; background: #161a1d; color: #f1eee7; border: 1px solid #576068; }
+    dialog::backdrop { background: #000c; }
+    .zoom-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .zoom-viewport { max-height: 80vh; overflow: auto; }
+    .zoom-viewport img { display: block; width: 1536px; max-width: none; }
+    .zoom-viewport.fit img { width: auto; max-width: 100%; max-height: 80vh; margin: auto; }
+    @media (max-width: 680px) {
+      header, main, footer { padding: 18px 14px; }
+      header { align-items: start; }
+      .count { display: none; }
+      .field { flex-basis: 100%; }
+      .toolbar > button { flex: 1; }
+      .choices { display: grid; grid-template-columns: 1fr; }
+      .shortlist-head { align-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><div class="eyebrow">Magnet Sweep · Visual exploration</div><h1>Find the game's character.</h1><p>Explore each family. Keep the variants you want to see developed.</p></div>
+    <div class="count">75 style examples<br>3 camera treatments</div>
+  </header>
+  <main>
+    <div class="toolbar">
+      <label class="field" for="board-select">Board <select id="board-select"></select></label>
+      <button id="previous" type="button">← Previous</button>
+      <button id="next" type="button">Next →</button>
+      <button id="enlarge" type="button">Enlarge artwork</button>
+    </div>
+    <a id="board-link" class="board-link" aria-label="Enlarge current comparison board" href="01-pixel-art.webp"><img id="board-image" src="01-pixel-art.webp" width="1536" height="1024" alt="Pixel art: five variants of the scrap-magnet combat scene"></a>
+    <p id="board-note" class="board-note"></p>
+    <p class="choice-label">Keep any variants that appeal to you:</p>
+    <div id="choices" class="choices" aria-label="Variants on this board"></div>
+    <section class="shortlist" aria-labelledby="shortlist-title">
+      <div class="shortlist-head"><h2 id="shortlist-title">Your shortlist <span id="selected-count">(0)</span></h2><button id="copy" type="button" disabled>Copy shortlist</button></div>
+      <p class="hint">Saved in this browser when available. Nothing is sent or approved automatically.</p>
+      <ul id="selected-list" aria-label="Selected variants"></ul>
+      <p id="empty-shortlist">No favourites yet. Three to five is a useful starting point.</p>
+      <label class="notes-label" for="notes">What appeals—or what is missing?</label>
+      <textarea id="notes" placeholder="Materials, shapes, colour, mood, clarity…"></textarea>
+      <p id="copy-status" class="hint" role="status"></p>
+      <details><summary>Text to paste into our conversation</summary><textarea id="copy-output" readonly aria-label="Shortlist and notes to copy"></textarea></details>
+    </section>
+  </main>
+  <footer>Concept artwork, not gameplay screenshots. Camera board 16 is a depth comparison; its ammunition rack is not the assembly design. <a href="../../../design/ART-DIRECTION.md">Full atlas and production notes</a></footer>
+  <dialog id="zoom" aria-label="Enlarged comparison board">
+    <div class="zoom-toolbar"><strong id="zoom-title"></strong><div><button id="zoom-fit" type="button" aria-pressed="false">Fit to window</button> <button id="zoom-close" type="button">Close</button></div></div>
+    <div id="zoom-viewport" class="zoom-viewport"><img id="zoom-image" alt=""></div>
+  </dialog>
+  <script>
+    const boards = [{"n": "01", "title": "Pixel Art", "variants": ["8-bit", "16-bit", "Neon pixels", "Miniature", "Nano pixels"], "image": "01-pixel-art.webp", "observation": "All five coded variants present. The very coarse treatment loses individual part identity; 16-bit/miniature variants preserve more detail. Pixel labels describe an aesthetic, not hardware-accurate sprites."}, {"n": "02", "title": "Watercolour", "variants": ["Transparent washes", "Ink and wash", "Storm wash", "Pastel storybook", "Bold pigment"], "image": "02-watercolour.webp", "observation": "All five present. Wash handling and mood differ; ink-and-wash gives useful edge definition. Fine rust detail would need simplifying at smaller gameplay sizes."}, {"n": "03", "title": "Anime", "variants": ["Retro cel", "Modern clean cel", "Soft painted anime", "Super deformed", "Graphic action anime"], "image": "03-anime.webp", "observation": "All five present. Clear cel and super-deformed forms differ from painted backgrounds. Graphic action panel uses a canted composition, so compare its line/colour treatment rather than adopting that camera."}, {"n": "04", "title": "Storybook Animation", "variants": ["Golden-age cel", "Adventure animation", "Gouache folk tale", "Luminous fairytale", "Graphic mid-century"], "image": "04-storybook-animation.webp", "observation": "All five present, from classic inked animation to volumetric modern rendering. Character/world motifs are placeholders and need original identity development after selection."}, {"n": "05", "title": "Vintage Cartoon", "variants": ["Ink and ivory", "Two-colour cel", "Technicolor", "Noir cartoon", "Poster cartoon"], "image": "05-vintage-cartoon.webp", "observation": "All five present. Black silhouettes and exaggerated poses communicate vintage appeal. Noir loses dark foreground detail; board includes decorative scenery text, not approved narrative/UI."}, {"n": "06", "title": "Modern Art", "variants": ["Bauhaus machinery", "Cut-paper colour", "Geometric surrealism", "Psychedelic print", "Minimal colour field"], "image": "06-modern-art.webp", "observation": "All five present. Shape and background language differ substantially. Psychedelic background competes with play; minimal colour-field version separates machinery clearly."}, {"n": "07", "title": "Line Art", "variants": ["Ink engraving", "Clear-line comic", "Pencil notebook", "Coloured contour", "Brush and ink"], "image": "07-line-art.webp", "observation": "All five present. Clear-line variant offers clean part edges; engraving/pencil/brush textures can obscure the pile. An outline workflow needs motion testing."}, {"n": "08", "title": "Playful 3D", "variants": ["Toy diorama", "Round and bouncy", "Adventure cel", "Crafted miniature", "Stylised spectacle"], "image": "08-playful-3d.webp", "observation": "All five present. Rounded toy, cel and crafted-material approaches differ. Miniature surface treatment conveys weight; focus blur should not touch interactable parts."}, {"n": "09", "title": "Realism", "variants": ["Working steel", "Cinematic salvage", "Clean future", "Retrofuture", "Nature reclaimed"], "image": "09-realism.webp", "observation": "All five present. Realistic material/lighting alternatives are visible. Dense rust/moss can make parts merge with the pile and raise asset-cleanup demands."}, {"n": "10", "title": "Low-Poly 3D", "variants": ["Faceted sculpture", "Retro console", "Pastel geometry", "Neon geometry", "Painted facets"], "image": "10-low-poly.webp", "observation": "All five present. Large facets, retro texture, soft colour and emissive geometry vary. Retro-console panel has low-resolution smear and must be refined before serving as a production target."}, {"n": "11", "title": "Clay And Stop Motion", "variants": ["Plasticine", "Ceramic", "Felt and wool", "Found-object puppets", "Dark clay fable"], "image": "11-clay-stop-motion.webp", "observation": "All five present. Plasticine, ceramic, textile and found-object surfaces differ strongly. Felt/ceramic must preserve the meaning of metal or establish a clear handmade-world convention."}, {"n": "12", "title": "Paper Craft", "variants": ["Layered cutout", "Folded origami", "Cardboard workshop", "Pop-up theatre", "Printed collage"], "image": "12-paper-craft.webp", "observation": "All five present. Cutouts, folds, corrugation, theatre and collage are distinct. Origami makes small gears less recognisable; layered cutout keeps cleaner functional shapes."}, {"n": "13", "title": "Comic And Print", "variants": ["Adventure comic", "Halftone pop", "Woodcut", "Risograph", "Graphic noir"], "image": "13-comic-print.webp", "observation": "All five present. Print texture changes substantially. Halftone and woodcut backgrounds can compete with scrap edges; noir makes the bright magnet lead well."}, {"n": "14", "title": "Painterly", "variants": ["Oil impasto", "Gouache adventure", "Digital brushwork", "Painted 3D", "Pastel chalk"], "image": "14-painterly.webp", "observation": "All five present. Oil/chalk textures differ from gouache and painted volume. Painted 3D gives a promising path to repeatable shapes; strongly textured alternatives need edge hierarchy."}, {"n": "15", "title": "Flat Graphic", "variants": ["Bold vector", "Soft vector", "Industrial pictogram", "Silhouette theatre", "Retro futurist graphic"], "image": "15-flat-vector.webp", "observation": "All five present. Flat, soft, pictographic, silhouette and retrofuturist approaches differ. Flat treatments still include some volumetric shading; silhouette option hides part materials and needs inspection feedback."}, {"n": "16", "title": "Depth And Camera", "variants": ["2D sprites", "2.5D side view", "3D perspective"], "image": "16-depth-camera.webp", "observation": "All three depth/camera variants present, with flat contours, side-view volume and three-quarter perspective. The perspective view demonstrates occlusion. Generated ammunition appears as a rack of completed rounds, so this board is only a camera/depth comparison and must not become the assembly/mechanism specification."}];
+    const byId = id => document.getElementById(id);
+    const storageKey = 'magnet-sweep-art-review-2026-09-13';
+    const names = new Map(boards.flatMap(b => b.variants.map((name, i) => [b.n + String.fromCharCode(65 + i), name])));
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch (_) {}
+    const selected = new Set(Array.isArray(saved.selected) ? saved.selected.filter(code => names.has(code)) : []);
+    let current = 0;
+    byId('notes').value = typeof saved.notes === 'string' ? saved.notes : '';
+    boards.forEach((board, i) => { const option = document.createElement('option'); option.value = i; option.textContent = board.n + ' / ' + board.title; byId('board-select').append(option); });
+    function save() { try { localStorage.setItem(storageKey, JSON.stringify({ selected: [...selected], notes: byId('notes').value })); } catch (_) {} }
+    function shortlistText() {
+      const lines = [...selected].sort().map(code => code + ' — ' + names.get(code));
+      const notes = byId('notes').value.trim();
+      return (lines.length ? 'Art directions I would like to explore:\n' + lines.join('\n') : 'Art direction feedback:') + (notes ? '\n\n' + notes : '');
+    }
+    function refreshShortlist() {
+      byId('selected-count').textContent = '(' + selected.size + ')';
+      byId('empty-shortlist').hidden = selected.size > 0;
+      byId('selected-list').replaceChildren();
+      [...selected].sort().forEach(code => {
+        const item = document.createElement('li'); const button = document.createElement('button'); button.type = 'button'; button.textContent = code + ' · ' + names.get(code) + ' ×'; button.setAttribute('aria-label', 'Remove ' + code + ' ' + names.get(code));
+        button.addEventListener('click', () => { selected.delete(code); save(); render(); }); item.append(button); byId('selected-list').append(item);
+      });
+      byId('copy-output').value = shortlistText();
+      byId('copy').disabled = !selected.size && !byId('notes').value.trim();
+    }
+    function render() {
+      const board = boards[current];
+      byId('board-select').value = current;
+      byId('board-image').src = board.image; byId('board-image').alt = board.title + ': ' + board.variants.join(', ');
+      byId('board-link').href = board.image; byId('board-note').textContent = board.observation;
+      byId('previous').disabled = current === 0; byId('next').disabled = current === boards.length - 1;
+      byId('choices').replaceChildren();
+      board.variants.forEach((name, i) => {
+        const code = board.n + String.fromCharCode(65 + i); const button = document.createElement('button'); button.type = 'button'; button.setAttribute('aria-pressed', String(selected.has(code)));
+        const label = document.createElement('strong'); label.textContent = code; const description = document.createElement('span'); description.textContent = name; button.append(label, description);
+        button.addEventListener('click', () => { selected.has(code) ? selected.delete(code) : selected.add(code); button.setAttribute('aria-pressed', String(selected.has(code))); save(); refreshShortlist(); byId('copy-status').textContent = ''; });
+        byId('choices').append(button);
+      });
+      refreshShortlist();
+    }
+    function openZoom() {
+      const board = boards[current]; byId('zoom-title').textContent = board.n + ' / ' + board.title; byId('zoom-image').src = board.image; byId('zoom-image').alt = byId('board-image').alt;
+      byId('zoom-viewport').classList.remove('fit'); byId('zoom-fit').setAttribute('aria-pressed', 'false'); byId('zoom').showModal(); byId('zoom-viewport').scrollTo(0, 0);
+    }
+    byId('board-select').addEventListener('change', event => { current = Number(event.target.value); render(); });
+    byId('previous').addEventListener('click', () => { current--; render(); });
+    byId('next').addEventListener('click', () => { current++; render(); });
+    byId('enlarge').addEventListener('click', openZoom);
+    byId('board-link').addEventListener('click', event => { event.preventDefault(); openZoom(); });
+    byId('zoom-close').addEventListener('click', () => byId('zoom').close());
+    byId('zoom-fit').addEventListener('click', () => { const fit = byId('zoom-viewport').classList.toggle('fit'); byId('zoom-fit').setAttribute('aria-pressed', String(fit)); });
+    byId('notes').addEventListener('input', () => { save(); refreshShortlist(); byId('copy-status').textContent = ''; });
+    byId('copy').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(shortlistText()); byId('copy-status').textContent = 'Copied. Paste this into our conversation when ready.'; }
+      catch (_) { byId('copy-output').parentElement.open = true; byId('copy-output').focus(); byId('copy-output').select(); byId('copy-status').textContent = 'Select and copy the text below.'; }
+    });
+    render();
+  </script>
+</body>
+</html>
