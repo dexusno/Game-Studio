@@ -14,13 +14,15 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner requests an extensible interacting upgrade system, meaningful price choices, very different builds and a clear rewarding goal. Separate Expedition Lab 0.6.0 is packaged; 52 engine tests pass against 30 implemented identities/six families. Native feel, individual support coverage, varied sites and replay remain unproven; full goal active. Timeline is unconstrained; zero time fields mean unset. No purchases or release authorized.",
+  "budget_note": "Owner requests interacting capabilities, competing prices/builds and a clear rewarding goal. Separate Expedition Sites 0.6.1 is packaged; 69 engine cases pass including real 480-output routes and final remote/electrical alternatives. Native feel, organic purchase paths, expensive-keystone endgame value and replay remain unproven; full goal active. Timeline is unconstrained; zero time fields mean unset. No purchases or release authorized.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
       "games/magnet-sweep/design/BUILD-SYSTEM.md",
+      "games/magnet-sweep/design/EXPEDITION-SITES.md",
       "games/magnet-sweep/QA-EXPEDITION.md",
       "games/magnet-sweep/evidence/expedition-verification.json",
+      "games/magnet-sweep/evidence/expedition-sites-verification.json",
       "games/magnet-sweep/DECISIONS.md",
       "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
       "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
@@ -37,14 +39,16 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-12T23:51:26+00:00",
-      "record_sha256": "72b83d39a6475f2b9307ca87ca070543423f5da54f6d898741f847e5b8d188cf",
+      "captured_at": "2026-09-13T00:45:21+00:00",
+      "record_sha256": "b9bee83e406883a705a846e4af08c3638718986568e3cb04014cc6aaf7336bba",
       "files": {
-        "games/magnet-sweep/STATUS.md": "87ccee28ecb5b9f5a9fca1ed022166981ce85f3f362e41cb50c998daa8515191",
+        "games/magnet-sweep/STATUS.md": "4cc0719d0aa92c019f1e7d544f9b2564a5d7b39e734e63858f5ce22415763c97",
         "games/magnet-sweep/design/BUILD-SYSTEM.md": "b3559a1b45ba9d8c2a9fcd8de5e7faa9970ae7547a40b6a7f8fa873006346150",
-        "games/magnet-sweep/QA-EXPEDITION.md": "0a697f7c23f8bcd03397b7ee826fcb1c3d41637cc71aa30a820ab4392b5c4d14",
+        "games/magnet-sweep/design/EXPEDITION-SITES.md": "35667a64d7c2ae1732376ab674e206b1db61ab83a0a79e9cbb76b74a9c4c82bf",
+        "games/magnet-sweep/QA-EXPEDITION.md": "42d5aa766e8c2feb72487a018ba7f9a3a4d4af39d200a9d1970f678fa6d569e3",
         "games/magnet-sweep/evidence/expedition-verification.json": "9a3d02f68314d6ac77ca4e6711061a9e45313280cd5228d29b563db6f852f7e4",
-        "games/magnet-sweep/DECISIONS.md": "2ef56336a2664533843de95f39a5f4dad4a933a43404cf0a0a7f2e54592a86f0",
+        "games/magnet-sweep/evidence/expedition-sites-verification.json": "409e9772cbc33d61d92376597f3597d241d427d15e78c8174f7069173fee721a",
+        "games/magnet-sweep/DECISIONS.md": "6eb4b446cfbe9b8c8ce60cdad911974cfecee6fb233e7ff225f62b8f8c6c5cc3",
         "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md": "939b405bfc68493670c567993b265e60de9e117f0d2eca4f24c3b8b104948faa",
         "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md": "b1484f4e6f414deda9aae4ae1153122f7fed7022b2bdb99274bddd4f07deabb3",
         "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md": "293e852f66d2af1af9fa225e2095d64b99385482fcf00b7741dec60c37cc46f3",
@@ -56,7 +60,7 @@
         "games/magnet-sweep/PRODUCTION-PLAN.md": "cfd91e32540e2aa33afa5fd60a8d4487765c55141a8c41e11c070d4f4a48dc5d",
         "games/magnet-sweep/QA-EXTRACTION.md": "5a0633eddd3baa29447a43c45653ef3e468c32f77cf4692456dec8a1495691e4",
         "games/magnet-sweep/QA-CLARITY.md": "23eb956b32abd2c075feaddaaf405db9aa8693b7111decb82930efd0272dd682",
-        "games/magnet-sweep/BUILD.md": "c39425a0884c91697c50bf97a8a3d9c38b1d31acb8e9d295b8601362c02f3e92"
+        "games/magnet-sweep/BUILD.md": "3cb95a40c9dc30dd32fed7efa389756a706b2338dd17677ad4c4a971787956f1"
       }
     }
   }

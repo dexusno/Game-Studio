@@ -40,6 +40,7 @@ struct FExpeditionBody
     float FuseDelay = -1.f;
     float RecoverDelay = 0.f;
     int32 RootAction = 0;
+    int32 PenetratedBody = INDEX_NONE; // One fractured body may be passed during this paid launch.
     TArray<int32> Links;
     TArray<int32> SourceIds;
 };
@@ -98,6 +99,41 @@ struct FExpeditionObstacle
     FName Role;
 };
 
+struct FExpeditionSiteMarker
+{
+    FName Id;
+    FString Label;
+    FVector2D Position = FVector2D::ZeroVector;
+    float Radius = 35.f;
+    bool bRequired = false;
+    int32 LinkedBodyId = INDEX_NONE; // Authored visible relationship: supported payload or released mechanism.
+};
+
+struct FExpeditionSiteObjective
+{
+    FName Id;
+    FString Label;
+    FString Hint;
+    bool bSatisfied = false;
+    bool bRequired = true;
+};
+
+// Immutable authored definition selected by the saved layout identity, not by a new-run default.
+struct FExpeditionSiteDefinition
+{
+    FName LayoutId;
+    int32 LayoutRevision = 1;
+    FString Name;
+    FString Summary;
+    TArray<FExpeditionSiteMarker> Markers;
+    TArray<FExpeditionObstacle> Obstacles;
+    bool bHasPress = true;
+    FVector2D PressCenter = FVector2D(217.5, 0);
+    FVector2D PressHalfSize = FVector2D(27.5, 130);
+    bool bHasArm = true;
+    FVector2D ArmPivot = FVector2D(390, 210);
+};
+
 enum class EExpeditionConstraintKind : uint8 { Counterweight, Reaction, Gantry };
 struct FExpeditionConstraint
 {
@@ -111,8 +147,10 @@ struct FExpeditionConstraint
 
 struct FExpeditionWorldState
 {
-    int32 Version = 2;
+    int32 Version = 3;
     int32 SiteIndex = 0;
+    FName LayoutId = TEXT("e1");
+    int32 LayoutRevision = 1;
     int32 Seed = 1;
     int32 Battery = 100;
     int32 Output = 0;
@@ -130,6 +168,8 @@ struct FExpeditionWorldState
     bool bCounterweightUsed = false;
     bool bDispatched = false;
     bool bEvacuated = false;
+    bool bCoreSecured = false; // Latched by an actual capture; staged cores remain released.
+    TArray<int32> PoweredTerminals;
     int32 TetherBody = INDEX_NONE;
     FVector2D TetherAnchor = FVector2D::ZeroVector;
     int32 SecondTetherBody = INDEX_NONE;
@@ -185,7 +225,9 @@ public:
     FVector2D GetArmTip() const;
 
     FExpeditionWorld();
-    void StartSite(int32 SiteIndex, int32 Seed, int32 InitialBattery = 100);
+    // Omitted identity chooses the current new-site layout; explicit identity recreates saved/depot content.
+    // Unknown identities refuse transactionally. Schema 2 always restores frozen e1 revision 1.
+    bool StartSite(int32 SiteIndex, int32 Seed, int32 InitialBattery = 100, FName LayoutId = NAME_None, int32 LayoutRevision = 0);
     void Tick(float Delta, const FVector2D& Magnet, const FExpeditionRig& Rig);
     FExpeditionPreview Preview(const FExpeditionCommand& Command, const FExpeditionRig& Rig) const;
     FExpeditionResult Execute(const FExpeditionCommand& Command, const FExpeditionRig& Rig);
@@ -199,6 +241,9 @@ public:
     const FExpeditionWorldState& GetState() const { return State; }
     const TArray<FExpeditionBody>& GetBodies() const { return State.Bodies; }
     const TArray<FExpeditionObstacle>& GetObstacles() const { return Obstacles; }
+    const FExpeditionSiteDefinition& GetSiteDefinition() const { return SiteDefinition; }
+    TArray<FExpeditionSiteObjective> GetObjectives() const;
+    const FExpeditionSiteMarker* FindMarker(FName Id) const;
     const FExpeditionBody* FindBody(int32 Id) const;
     int32 FindBodyAt(const FVector2D& Position, float ExtraRadius = 20.f, bool bIncludeCargo = false) const;
     TArray<int32> GetGroup(int32 Id) const;
@@ -206,7 +251,7 @@ public:
     int32 GetCargoValue() const;
     bool IsUnsafe() const;
     bool IsEnded() const { return State.bDispatched || State.bEvacuated; }
-    bool IsCoreReleased() const { return State.bCollarReleased && State.bBallastCleared && State.bArmBraced; }
+    bool IsCoreReleased() const;
     bool IsArmSafe() const;
     bool IsPressSafe() const;
     int32 GetBattery() const { return State.Battery; }
@@ -221,18 +266,24 @@ public:
 
 private:
     FExpeditionWorldState State;
+    FExpeditionSiteDefinition SiteDefinition;
     TArray<FExpeditionObstacle> Obstacles;
     TArray<FExpeditionEvent> Events;
     TArray<int32> PendingCyclones;
     FExpeditionBody* MutableBody(int32 Id);
     void AddEvent(EExpeditionEventKind Kind, const FString& Message, const FVector2D& Position, const TArray<int32>& Ids = {}, int32 Amount = 0);
     void BuildObstacles();
+    void ConfigureAuthoredLayout();
+    static bool IsKnownLayout(FName Id, int32 Revision, int32 SiteIndex);
+    float PadMass(FVector2D Center, float Radius) const;
+    bool IsTerminalPowered(int32 Id) const;
+    bool HasTerminalWork(int32 Id) const;
     void Sever(int32 Id, const FExpeditionRig& Rig);
     void UpdateMechanisms();
     void Integrate(float Delta, const FExpeditionRig& Rig);
     void Quench(const FString& Reason);
-    void Impact(FExpeditionBody& Body, const FVector2D& Normal, float Speed, const FExpeditionRig& Rig);
-    bool ArcPath(int32 Target, const FExpeditionRig& Rig, TArray<int32>& OutPath) const;
+    void Impact(FExpeditionBody& Body, const FVector2D& Normal, float Speed, const FExpeditionRig& Rig, bool bResolveVelocity = true);
+    bool ArcPath(int32 Target, const FExpeditionRig& Rig, TArray<int32>& OutPath, bool* bUsedBridge = nullptr) const;
     TArray<int32> ConductiveNeighbors(int32 Id, const FExpeditionRig& Rig) const;
     bool CircuitLoop(const FExpeditionRig& Rig, TArray<int32>& Reachable) const;
     void FireTerminal(int32 Id);

@@ -171,17 +171,17 @@ void FExpeditionRuntime::CycleCargo()
 }
 FString FExpeditionRuntime::RecoveryHint() const
 {
-    const auto& S=World->GetState();
     if(World->IsUnsafe())return TEXT("Right-click now to drop the whole haul safely. A spill at fuse expiry also costs 12 battery. Dropped scrap can be recovered.");
-    if(FVector2D::Distance(Magnet,FExpeditionWorld::FurnacePosition())<115 && World->GetCargoMass()>0)
+    if(FVector2D::Distance(Magnet,FExpeditionWorld::FurnacePosition())<115 && World->GetCargoValue()>0)
         return TEXT("Press E to smelt settled scrap here. Iron, copper and alloy can be mixed. The mission core is protected and goes to the receiver.");
-    if(!S.bCollarReleased)return TEXT("Hold LMB over the brass collar, then move left to the COLLAR STOP. Shift narrows pickup. The collar slides along its guide; it is not furnace scrap.");
-    if(!S.bBallastCleared)return TEXT("Use Shift + LMB to collect the 12 kg ballast. Carry it to BALLAST CATCH, then right-click to place it. Placement releases the retaining latch.");
-    if(!S.bArmBraced)return TEXT("Collect the 8 kg iron brace. Carry it to BRACE SLOT and right-click during the arm's clear phase. It locks the arm away from the core.");
+    for(const auto& Objective:World->GetObjectives())
+        if(Objective.bRequired && !Objective.bSatisfied)return Objective.Hint;
     const auto* Core=World->FindBody(0);
     if(Core && Core->State==EExpeditionBodyState::Cargo)
-        return TEXT("Carry the core to DELIVER HERE on the right. Wait for it to settle in the receiver, then press E to complete the site and earn your next choice.");
-    return TEXT("All restraints are open. Empty your haul, then collect the glowing core. Carry it around hazards to DELIVER HERE and press E. The final core completes the expedition.");
+        return SiteIndex==3?TEXT("Carry the core to MACHINE RECEIVER on the right. Wait for it to settle, then press E to complete the expedition and archive this rig."):
+            TEXT("Carry the core to MACHINE RECEIVER on the right. Wait for it to settle, then press E to earn this site's recovery credits.");
+    return FString::Printf(TEXT("Make room for the %.0f kg core; you hold %.0f of 24 safe kg. Collect the glowing core, carry it to MACHINE RECEIVER and press E once settled."),
+        Core?Core->Mass:8.f+4.f*SiteIndex,World->GetCargoMass());
 }
 void FExpeditionRuntime::ClearPreparation()
 {
@@ -374,12 +374,17 @@ void FExpeditionRuntime::Depart()
 {
     if(Screen!=EExpeditionScreen::Depot) return;
     FString Reason; const int32 Battery=FMath::RoundToInt(Rig->GetStartingBattery());
-    if(!Rig->Depart(Reason)){Show(Reason); return;}
-    World->StartSite(SiteIndex,Rig->GetSeed()+SiteIndex,Battery);
+    if(!Rig->CanDepart(Reason)){Show(Reason); return;}
+    const auto& PreviewState=World->GetState();
+    auto NextWorld=MakeUnique<FExpeditionWorld>();
+    if(!NextWorld->StartSite(SiteIndex,Rig->GetSeed()+SiteIndex,Battery,PreviewState.LayoutId,PreviewState.LayoutRevision))
+    {Show(TEXT("The saved worksite definition is unavailable. Your depot is preserved."));return;}
+    if(!Rig->Depart(Reason)){Show(Reason);return;}
+    World=MoveTemp(NextWorld);
     Screen=EExpeditionScreen::Site; bPaused=false; Magnet=FVector2D(0,-240);
     Input.Cancel(); ClearPreparation(); ToolOperation[0]=ToolOperation[1]=0;World->Tick(.001f,Magnet,*Rig);
     SiteEntry=MakeState(false); BuildMechanismVisuals();
-    Show(TEXT("Recover the marked machinery. Move each fitting into its highlighted stop, then deliver the released core."));
+    Show(World->GetSiteDefinition().Summary);
     Save();
 }
 void FExpeditionRuntime::RetrySite()
@@ -462,6 +467,9 @@ bool FExpeditionRuntime::RestoreState(const TSharedPtr<FJsonObject>& J,FString& 
     {Error=TEXT("This is not a valid expedition save. Legacy careers use a separate format."); return false;}
     auto NewRig=MakeUnique<FExpeditionRig>(); auto NewWorld=MakeUnique<FExpeditionWorld>();
     if(!NewRig->FromJson(**RigJson,Error) || !NewWorld->FromJson(*WorldJson,Error)) return false;
+    // Capabilities follow the exact saved worksite; refreshing them never rerolls its existing stock.
+    // This also adds newly explicit opportunity tags to a compatible older E1 depot.
+    NewRig->SetShopContext(NewWorld->GetOpportunityTags(),ImplementedModules());
     const auto& NewState=NewWorld->GetState();
     const int64 SiteSeed=int64(NewRig->GetSeed())+int32(Site);
     if(NewRig->GetSiteIndex()!=int32(Site) || NewState.SiteIndex!=int32(Site)
@@ -493,6 +501,7 @@ bool FExpeditionRuntime::RestoreState(const TSharedPtr<FJsonObject>& J,FString& 
             && Entry.GetFittedActives()==NewRig->GetFittedActives() && Entry.GetFittedPassives()==NewRig->GetFittedPassives()
             && Entry.IsPrecharged()==NewRig->IsPrecharged() && Entry.GetOutput(int32(Site))==0
             && EntryWorld.ActionSerial==0 && EntryWorld.Battery==FMath::RoundToInt(Entry.GetStartingBattery())
+            && EntryWorld.LayoutId==NewState.LayoutId && EntryWorld.LayoutRevision==NewState.LayoutRevision
             && Before.RunsWon==Now.RunsWon && Before.BestOutput==Now.BestOutput
             && Before.DiscoveredModules==Now.DiscoveredModules && Before.UnlockedStarters==Now.UnlockedStarters
             && Before.LastWinningRig==Now.LastWinningRig;
@@ -506,7 +515,7 @@ bool FExpeditionRuntime::RestoreState(const TSharedPtr<FJsonObject>& J,FString& 
         if(int32(Site)<3)for(int32 M=0;M<2;++M)
             if(NewRig->GetOutput(int32(Site))>=FExpeditionRig::RefiningThreshold(int32(Site),M))Earned+=2;
         Matching &= Entry.GetCash()+Earned==NewRig->GetCash();
-        if(!Matching){Error=TEXT("Retry checkpoint belongs to different equipment, rewards or run history.");return false;}
+        if(!Matching){Error=TEXT("Retry checkpoint belongs to different equipment, worksite, rewards or run history.");return false;}
         Checkpoint=*P;
     }
     // Publish only after rig, world and checkpoint all validate.

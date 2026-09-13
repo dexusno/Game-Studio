@@ -1,6 +1,26 @@
 # Magnet Sweep — build and run
 
-## Expedition Lab 0.6.0
+## Expedition Sites 0.6.1
+
+The current source adds distinct later worksites and independently witnessed support effects. [Play Expedition Sites.cmd](Play%20Expedition%20Sites.cmd) targets the separate `BuildOutput/ExpeditionSites/Windows` archive and its own `expedition_sites_preview` profile. Build/cook/stage/archive succeeded in 39.86 seconds. All 69 engine cases pass (48 Expedition plus 21 legacy), report 2026.09.13-00.38.45. Both actual 480-output recovery routes, remote counterweight alternatives and electrical final dispatch pass. Starting equipment in the late capability cases is a labelled fixture; output, rewards and physical actions are actually earned. The previous 0.6.0 child hash is unchanged.
+
+The first two sites preserve their teaching and earned recovery routes. The third is a **Balanced Recovery Rack**: place 10–14 kg of resting material on each platform, with no more than 2 kg difference, then secure the 16 kg core. Three valuable optional targets need support, physical fracture or heat transfer; loose ordinary pools total 208, below the first 240 refining milestone. The final **Counterweight Exchange** uses a 20 kg core and a 20 kg replacement weight. Basic controls can stage the core to make room; Winch or Relay can move the weight while the core stays secured. A preserved finite generator can power isolated receivers.
+
+World schema 3 records the exact layout ID/revision. Packaged schema 2 restores frozen E1 geometry, including existing depot previews and site-entry retries. Restoring an old depot refreshes its capability information without rerolling its stock. New depots exclude Closed Circuit where no functioning return loop exists. This exposes an unresolved design issue: some expensive combinations lose useful opportunities before the finale; current encounter variety is not proof of a rewarding complete build.
+
+The recovery panel, markers and hints follow the saved worksite definition. Valuable anchored, hot and functional objects show their actual appraisal. Authored support/power connections identify the payload being manipulated. Actual rendering, sound, native controls and enjoyment remain unverified while the earlier foreground handoff is unanswered.
+
+```powershell
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName ExpeditionSites
+```
+
+Current verification history: [expedition-sites-verification.json](evidence/expedition-sites-verification.json). Exact encounter contracts and open gameplay issues: [EXPEDITION-SITES.md](design/EXPEDITION-SITES.md).
+
+## Preserved Expedition Lab 0.6.0
+
+This package corresponds to source commit `2045723cdeb8d77cb36fbb24bfe47a995801ef84`. Its commands below describe that revision; use the separate archive above for current source.
 
 The new `-Expedition` mode runs a separate four-site salvage expedition with a fresh rig, earned depot choices and a physical final core. [Play Expedition Lab.cmd](Play%20Expedition%20Lab.cmd) targets `BuildOutput/Expedition/Windows/MagnetSweep.exe` with its own `-ExpeditionProfile=expedition_preview`. Build/cook/stage/archive succeeded; all 52 engine cases pass (31 Expedition plus 21 legacy) in report 2026.09.12-23.45.53. The package has not been launched natively. Exact artifact hashes and test history are in [expedition-verification.json](evidence/expedition-verification.json); native and effect-coverage limits are in QA-EXPEDITION.md.
 

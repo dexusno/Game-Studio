@@ -184,7 +184,7 @@ const TArray<FExpeditionModule>& FExpeditionRig::Catalog()
             K::Passive,24,2,{}, {TEXT("Launch")},{},{TEXT("BrittleBrace")});
         Add(TEXT("closed_circuit"),TEXT("Closed Circuit"),
             TEXT("A completed conducting loop discharges each unique live source once through valid branches. Normal arc cost; uses two sockets."),
-            K::Passive,24,2,{}, {TEXT("Arc")},{},{TEXT("LiveSource")});
+            K::Passive,24,2,{}, {TEXT("Arc")},{},{TEXT("LiveSource"),TEXT("ClosedReturn")});
         Add(TEXT("walking_gantry"),TEXT("Walking Gantry"),
             TEXT("Move supported intact machinery while maintaining its working supports. +6 battery per winch tow; uses two sockets."),
             K::Passive,24,2,{}, {TEXT("PhysicalTether")},{},{TEXT("SupportedLoad"),TEXT("FunctionalAssembly")});

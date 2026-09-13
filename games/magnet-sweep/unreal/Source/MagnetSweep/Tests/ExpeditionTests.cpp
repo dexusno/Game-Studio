@@ -196,8 +196,73 @@ void RuntimeMove(FExpeditionRuntime& Runtime, const FVector2D& Destination)
     RuntimeAdvance(Runtime, .3f);
 }
 
+bool RuntimePickBody(FExpeditionRuntime& Runtime, int32 Id, const FVector2D& Approach, FString& Error)
+{
+    const auto* Body = Runtime.World->FindBody(Id);
+    if (!Body) { Error = TEXT("Missing actual pickup body"); return false; }
+    RuntimeMove(Runtime, Body->Position + Approach);
+    Runtime.Key(EKeys::LeftShift, true); Runtime.Key(EKeys::LeftMouseButton, true);
+    RuntimeAdvance(Runtime, 1.4f);
+    Runtime.Key(EKeys::LeftMouseButton, false); Runtime.Key(EKeys::LeftShift, false);
+    if (Runtime.World->FindBody(Id)->State != EExpeditionBodyState::Cargo)
+    { Error = TEXT("Actual precision did not secure ") + Runtime.World->FindBody(Id)->Role.ToString(); return false; }
+    return true;
+}
+
+void RuntimePlaceHaul(FExpeditionRuntime& Runtime, const FVector2D& Destination)
+{
+    RuntimeMove(Runtime, Destination); Runtime.Key(EKeys::RightMouseButton, true); RuntimeAdvance(Runtime, .25f);
+}
+
+bool RuntimeBalanceRack(FExpeditionRuntime& Runtime, FString& Error)
+{
+    const auto* Left = Runtime.World->FindMarker(TEXT("balance_left"));
+    const auto* Right = Runtime.World->FindMarker(TEXT("balance_right"));
+    if (!Left || !Right) { Error = TEXT("Balanced worksite is missing its visible platforms"); return false; }
+    const FVector2D L = Left->Position, R = Right->Position;
+    if (!RuntimePickBody(Runtime, RoleBody(*Runtime.World, TEXT("ballast")), FVector2D(0, 25), Error)) return false;
+    RuntimePlaceHaul(Runtime, L);
+    if (!RuntimePickBody(Runtime, RoleBody(*Runtime.World, TEXT("brace")), FVector2D(0, 25), Error)) return false;
+    RuntimePlaceHaul(Runtime, R);
+    // These two stable source pieces are ordinary iron in the authored rack,
+    // not keys. Their actual mass and positions enter the same platform rule.
+    for (int32 I = 0; I < 2; ++I)
+    {
+        if (!RuntimePickBody(Runtime, 12 + I, FVector2D(0, -25), Error)) return false;
+        RuntimePlaceHaul(Runtime, R + FVector2D(I == 0 ? -45 : 45, 0));
+    }
+    if (!Runtime.World->IsCoreReleased()) { Error = TEXT("Actually placed twelve-versus-twelve platforms did not release the core"); return false; }
+    return true;
+}
+
 bool RuntimeRecoverCore(FExpeditionRuntime& Runtime, FString& Error)
 {
+    const FName Layout = Runtime.World->GetState().LayoutId;
+    if (Layout == TEXT("balanced_rack"))
+    {
+        if (!RuntimeBalanceRack(Runtime, Error)) return false;
+        if (!RuntimePickBody(Runtime, RoleBody(*Runtime.World, TEXT("core")), FVector2D(0, 25), Error)) return false;
+        RuntimeMove(Runtime, FVector2D(Runtime.Magnet.X, -260));
+        RuntimeMove(Runtime, FExpeditionWorld::ReceiverPosition()); return true;
+    }
+    if (Layout == TEXT("counterweight_exchange"))
+    {
+        const auto* CoverPark = Runtime.World->FindMarker(TEXT("cover"));
+        const auto* Stage = Runtime.World->FindMarker(TEXT("staging"));
+        const auto* Seat = Runtime.World->FindMarker(TEXT("counterbalance"));
+        if (!CoverPark || !Stage || !Seat) { Error = TEXT("Final worksite is missing its actual recovery markers"); return false; }
+        const FVector2D ParkPoint = CoverPark->Position, StagePoint = Stage->Position, SeatPoint = Seat->Position;
+        const int32 Cover = RoleBody(*Runtime.World, TEXT("counterweight_cover")), Core = RoleBody(*Runtime.World, TEXT("core"));
+        if (!RuntimePickBody(Runtime, Cover, FVector2D(0, 25), Error)) return false;
+        RuntimePlaceHaul(Runtime, ParkPoint);
+        if (!RuntimePickBody(Runtime, Core, FVector2D(0, 25), Error)) return false;
+        RuntimeMove(Runtime, FVector2D(Runtime.Magnet.X, -260)); RuntimePlaceHaul(Runtime, StagePoint);
+        if (!RuntimePickBody(Runtime, Cover, FVector2D(0, 25), Error)) return false;
+        RuntimePlaceHaul(Runtime, SeatPoint);
+        if (!RuntimePickBody(Runtime, Core, FVector2D(0, -25), Error)) return false;
+        RuntimeMove(Runtime, FExpeditionWorld::ReceiverPosition()); return true;
+    }
+    if (Layout != TEXT("e1")) { Error = TEXT("No independently authored input route for layout ") + Layout.ToString(); return false; }
     const int32 Collar = RoleBody(*Runtime.World, TEXT("collar"));
     if (Collar == INDEX_NONE) return false;
     RuntimeMove(Runtime, Runtime.World->FindBody(Collar)->Position + FVector2D(-25, 0));
@@ -234,6 +299,54 @@ bool RuntimeRecoverCore(FExpeditionRuntime& Runtime, FString& Error)
         { Error = TEXT("Runtime drop missed the ballast catch"); return false; }
     }
     Error = TEXT("Core route did not reach dispatch"); return false;
+}
+
+bool FireActualBrace(FExpeditionWorld& World, const FExpeditionRig& Rig,
+                     const FVector2D& Position, const FVector2D& Aim, int32& Shot)
+{
+    Shot = RoleBody(World, TEXT("brace"));
+    if (!Pull(World, Rig, Shot, World.FindBody(Shot)->Position + FVector2D(0, -55))) return false;
+    MoveMagnet(World, Rig, FVector2D(World.GetState().Magnet.X, -270));
+    MoveMagnet(World, Rig, FVector2D(Position.X, -270)); MoveMagnet(World, Rig, Position);
+    FExpeditionCommand Launch; Launch.Action = EExpeditionAction::Launch; Launch.TargetId = Shot;
+    Launch.BodyIds = {Shot}; Launch.Magnet = Position; Launch.Aim = Aim;
+    return World.Execute(Launch, Rig).bSucceeded;
+}
+
+void EncodeLegacyWorldV2(const TSharedPtr<FJsonObject>& World)
+{
+    // Controlled historical-format fixture; no owner save is read. The actual
+    // source bodies, paid motion and earned ledger are deliberately unchanged.
+    World->SetNumberField(TEXT("Version"), 2);
+    World->RemoveField(TEXT("LayoutId")); World->RemoveField(TEXT("LayoutRevision"));
+    for (const auto& Body : World->GetArrayField(TEXT("Bodies"))) Body->AsObject()->RemoveField(TEXT("PenetratedBody"));
+}
+
+bool ReachRackWithFixtureEquipment(FExpeditionRuntime& Runtime, const TArray<FName>& Actives,
+                                  const TArray<FName>& Passives, FString& Error)
+{
+    // Only initial equipment is a labelled found-gear fixture. All subsequent
+    // site history, energy, source appraisal and refining rewards are earned.
+    Runtime.World->StartSite(0,103);
+    if (!FixtureRig(*Runtime.Rig,*Runtime.World,Actives,Passives,Error)) return false;
+    Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=0; Runtime.bWorldHit=true;
+    for (int32 Site=0; Site<2; ++Site)
+    {
+        if (!RuntimeRecoverCore(Runtime,Error)) return false;
+        Runtime.Key(EKeys::E,true);
+        if (Runtime.Screen!=EExpeditionScreen::Depot || Runtime.SiteIndex!=Site+1)
+        { Error=TEXT("Actual earlier dispatch did not advance the earned fixture"); return false; }
+        if (Site==0) Runtime.Depart();
+    }
+    if (!Runtime.Rig->Precharge(Error)) return false; // Real four-credit purchase.
+    Runtime.Depart();
+    return Runtime.Screen==EExpeditionScreen::Site && Runtime.World->GetState().LayoutId==TEXT("balanced_rack");
+}
+
+void RuntimeSmelt(FExpeditionRuntime& Runtime)
+{
+    RuntimeMove(Runtime,{Runtime.Magnet.X,-280}); RuntimeMove(Runtime,{650,-280});
+    RuntimeMove(Runtime,FExpeditionWorld::FurnacePosition()); Runtime.Key(EKeys::E,true);
 }
 }
 
@@ -404,11 +517,16 @@ bool FExpeditionAnchoredObjectiveTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("The visible objective begins physically secured"), World.FindBody(Core)->bAnchored);
     const int32 Battery = World.GetBattery();
     const FVector2D Original = World.FindBody(Core)->Position;
+    FExpeditionCommand Broad; Broad.Aim = Original; Broad.Magnet = Original;
+    const auto BroadPreview = World.Preview(Broad, Rig);
+    TestTrue(TEXT("A broad field can select the legitimate nearby cover"), BroadPreview.bAllowed);
+    TestFalse(TEXT("That broad field cannot include the anchored objective"), BroadPreview.BodyIds.Contains(Core));
     for (const auto Action : {EExpeditionAction::Attract, EExpeditionAction::Extract})
     {
         FExpeditionCommand Command;
         Command.Action = Action; Command.TargetId = Core; Command.BodyIds = {Core};
         Command.Magnet = Original + FVector2D(0, -50); Command.Aim = Original;
+        Command.bPrecision = true;
         TestFalse(TEXT("Preview rejects pickup through unresolved physical restraints"), World.Preview(Command, Rig).bAllowed);
         TestFalse(TEXT("Dispatch cannot bypass preview by directly executing extraction"), World.Execute(Command, Rig).bSucceeded);
     }
@@ -466,7 +584,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionPhysicalFinalRouteTest,
     EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
 bool FExpeditionPhysicalFinalRouteTest::RunTest(const FString& Parameters)
 {
-    FExpeditionWorld World; World.StartSite(3, 97);
+    // Frozen E1 acceptance; this does not certify a later default finale.
+    FExpeditionWorld World; World.StartSite(3, 97, 100, TEXT("e1"), 1);
     FExpeditionRig Rig; Configure(Rig, World, TEXT("extraction_coil"), 97);
     FString Error;
     const bool Recovered = ReleaseAndCarryCore(World, Rig, Error);
@@ -811,6 +930,8 @@ bool FExpeditionFourSiteRuntimeTest::RunTest(const FString& Parameters)
     for (int32 Site = 0; Site < 4; ++Site)
     {
         TestEqual(TEXT("The runtime is on the expected sequential worksite"), Runtime.SiteIndex, Site);
+        const FName ExpectedLayout = Site < 2 ? FName(TEXT("e1")) : Site == 2 ? FName(TEXT("balanced_rack")) : FName(TEXT("counterweight_exchange"));
+        TestTrue(TEXT("A current new run enters its real default authored layout"), Runtime.World->GetState().LayoutId == ExpectedLayout);
         const int32 CashBefore = Runtime.Rig->GetCash();
         const bool Recovered = RuntimeRecoverCore(Runtime, Error);
         if (!TestTrue(*FString::Printf(TEXT("Site %d actual key/physical route: %s"), Site + 1, *Error), Recovered)) return false;
@@ -902,7 +1023,8 @@ bool FExpeditionZeroEnergyDeliveryTest::RunTest(const FString& Parameters)
 {
     // Controlled low starting charge; every body/goal transition is still earned
     // through the actual baseline operation and no energy is rewritten mid-run.
-    FExpeditionWorld World; World.StartSite(3, 151, 24);
+    // Four pulls is the explicit frozen E1 route, not a future-layout quota.
+    FExpeditionWorld World; World.StartSite(3, 151, 24, TEXT("e1"), 1);
     FExpeditionRig Rig; Configure(Rig, World, TEXT("extraction_coil"), 151);
     FString Error; const bool Recovered = ReleaseAndCarryCore(World, Rig, Error);
     if (!TestTrue(*FString::Printf(TEXT("Four paid physical pulls with the final charge: %s"), *Error), Recovered)) return false;
@@ -1449,6 +1571,688 @@ bool FExpeditionEarnedRefiningRoutesTest::RunTest(const FString& Parameters)
         FExpeditionRuntime Resumed(nullptr);
         TestTrue(TEXT("Actual earned optional route saves and restores transactionally"), Resumed.DecodeSave(Runtime.EncodeSave(), Error));
     }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionGroundRelevanceTest,
+    "MagnetSweep.Expedition.RuntimeGroundChangesOnlyItsPhysicalCircuitBranch",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionGroundRelevanceTest::RunTest(const FString& Parameters)
+{
+    for (FName GroundRole : {FName(TEXT("brace")), FName(TEXT("return_diode")), FName(TEXT("source_terminal"))})
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(0, 103); FString Error;
+        if (!TestTrue(TEXT("Labelled Coil/Arc/Ground fixture validates"), FixtureRig(*Runtime.Rig, *Runtime.World,
+            {TEXT("extraction_coil"), TEXT("arc_driver")}, {TEXT("ground_clip")}, Error))) return false;
+        Runtime.Screen = EExpeditionScreen::Site; Runtime.bWorldHit = true;
+        const int32 Conductor = RoleBody(*Runtime.World, TEXT("conductor"));
+        if (!TestTrue(TEXT("Actual seam extraction supplies the circuit"), Pull(*Runtime.World, *Runtime.Rig, Conductor, FVector2D(-280, -160), EExpeditionAction::Extract))) return false;
+        MoveMagnet(*Runtime.World, *Runtime.Rig, FExpeditionWorld::CircuitSocket()); Runtime.World->Drop();
+        Advance(*Runtime.World, *Runtime.Rig, FExpeditionWorld::CircuitSocket(), .1f);
+        Runtime.Magnet = Runtime.World->GetState().Magnet;
+        const int32 Ground = RoleBody(*Runtime.World, GroundRole);
+        Runtime.Click(65); Runtime.Aim = Runtime.World->FindBody(Ground)->Position;
+        Runtime.Key(EKeys::F, true); Runtime.Key(EKeys::F, false);
+        TestEqual(TEXT("The real Ground button selects the aimed endpoint for no battery"), Runtime.World->GetBattery(), 94);
+        TestEqual(TEXT("Ground keeps the actual selected body identity"), Runtime.World->GetState().GroundBody, Ground);
+        Runtime.Click(64); Runtime.Aim = Runtime.World->FindBody(RoleBody(*Runtime.World, TEXT("receiver_terminal")))->Position;
+        Runtime.Key(EKeys::F, true); Runtime.Key(EKeys::F, false);
+        const bool SourceBlocked = GroundRole == TEXT("source_terminal");
+        TestEqual(*FString::Printf(TEXT("Ground at %s has the correct actual circuit outcome"), *GroundRole.ToString()), Runtime.World->GetState().bBallastCleared, !SourceBlocked);
+        TestEqual(TEXT("A blocked path refuses without buying an arc"), Runtime.World->GetBattery(), SourceBlocked ? 94 : 86);
+        TestEqual(TEXT("Unrelated ground cannot magically prevent return heat"), Runtime.World->FindBody(Conductor)->bHot, GroundRole == TEXT("brace"));
+        FExpeditionWorld Loaded; TestTrue(TEXT("Chosen termination and resulting heat remain saveable"), Loaded.FromJson(Runtime.World->ToJson(), Error));
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionConductiveTetherTest,
+    "MagnetSweep.Expedition.StoredPhysicalTetherEnablesOtherwiseOpenCircuit",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionConductiveTetherTest::RunTest(const FString& Parameters)
+{
+    for (const bool Conductive : {false, true})
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(0, 103); FString Error;
+        TArray<FName> Supports = {TEXT("twin_anchor")}; if (Conductive) Supports.Add(TEXT("conductive_tether"));
+        if (!TestTrue(TEXT("Labelled Winch/Arc/stored-anchor fixture validates"), FixtureRig(*Runtime.Rig, *Runtime.World,
+            {TEXT("anchor_winch"), TEXT("arc_driver")}, Supports, Error))) return false;
+        Runtime.Screen = EExpeditionScreen::Site; Runtime.bWorldHit = true;
+        const int32 WireEnd = RoleBody(*Runtime.World, TEXT("brace"));
+        if (!TestTrue(TEXT("A real body is collected for the wire endpoint"), Pull(*Runtime.World, *Runtime.Rig, WireEnd, FVector2D(-150, 75)))) return false;
+        MoveMagnet(*Runtime.World, *Runtime.Rig, FVector2D(20, -160)); Runtime.World->Drop();
+        Advance(*Runtime.World, *Runtime.Rig, FVector2D(20, -160), .1f);
+        Runtime.Magnet = Runtime.World->GetState().Magnet; RuntimeMove(Runtime, FVector2D(-180, -160));
+        Runtime.Aim = Runtime.World->FindBody(WireEnd)->Position;
+        Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+        const int32 Other = RoleBody(*Runtime.World, TEXT("ballast"));
+        Runtime.Aim = Runtime.World->FindBody(Other)->Position;
+        Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+        TestEqual(TEXT("Two real placed anchors cost sixteen after the six-energy collection"), Runtime.World->GetBattery(), 78);
+        TestEqual(TEXT("The source wire is a retained paid anchor, not a fabricated graph edge"), Runtime.World->GetState().SecondTetherBody, WireEnd);
+        RuntimeAdvance(Runtime, .35f);
+        const int32 Receiver = RoleBody(*Runtime.World, TEXT("receiver_terminal"));
+        Runtime.Aim = Runtime.World->FindBody(Receiver)->Position;
+        Runtime.Key(EKeys::F, true); Runtime.Key(EKeys::F, false);
+        TestEqual(TEXT("Only conductive metal in that real tether completes the open path"), Runtime.World->GetState().bBallastCleared, Conductive);
+        TestEqual(TEXT("Conductive effect still requires a separately paid arc"), Runtime.World->GetBattery(), Conductive ? 70 : 78);
+        FExpeditionWorld Loaded; TestTrue(TEXT("The physical endpoint and retained paid anchor serialize together"), Loaded.FromJson(Runtime.World->ToJson(), Error));
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionInductionGapTest,
+    "MagnetSweep.Expedition.InductionBridgesOneActuallyPlacedAirGap",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionInductionGapTest::RunTest(const FString& Parameters)
+{
+    for (const bool Induction : {false, true})
+    {
+        FExpeditionWorld World; World.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+        TArray<FName> Supports; if (Induction) Supports.Add(TEXT("induction_bridge"));
+        if (!TestTrue(TEXT("Labelled Coil/Arc gap fixture validates"), FixtureRig(Rig, World,
+            {TEXT("extraction_coil"), TEXT("arc_driver")}, Supports, Error))) return false;
+        const int32 Conductor = RoleBody(World, TEXT("conductor"));
+        const int32 Bridge = RoleBody(World, TEXT("conductor_ballast_a"));
+        if (!TestTrue(TEXT("Actual cut frees the long conductor and loose bridge stock"), Pull(World, Rig, Conductor, FVector2D(-280, -160), EExpeditionAction::Extract))) return false;
+        MoveMagnet(World, Rig, FVector2D(-40, -160)); World.Drop(); Advance(World, Rig, FVector2D(-40, -160), .1f);
+        if (!TestTrue(TEXT("A separate real iron body is recovered for the near side"), Pull(World, Rig, Bridge, World.FindBody(Bridge)->Position + FVector2D(0, -55)))) return false;
+        MoveMagnet(World, Rig, FVector2D(-120, -160)); World.Drop(); Advance(World, Rig, FVector2D(-120, -160), .1f);
+        FExpeditionCommand Arc; Arc.Action = EExpeditionAction::Arc; Arc.TargetId = RoleBody(World, TEXT("receiver_terminal")); Arc.Aim = World.FindBody(Arc.TargetId)->Position;
+        const int32 Before = World.GetBattery(); const auto Result = World.Execute(Arc, Rig);
+        TestEqual(TEXT("The clear physical air gap requires Induction"), Result.bSucceeded, Induction);
+        TestEqual(TEXT("One valid gap costs four beyond the normal arc"), World.GetBattery(), Before - (Induction ? 12 : 0));
+        if (Induction)
+        {
+            TestTrue(TEXT("The resulting path includes both deliberately placed bodies"), Result.BodyIds.Contains(Bridge) && Result.BodyIds.Contains(Conductor));
+            TestTrue(TEXT("The completed physical circuit actuates the real receiver"), World.GetState().bBallastCleared);
+        }
+        FExpeditionWorld Loaded; TestTrue(TEXT("The committed path and finite cost remain saveable"), Loaded.FromJson(World.ToJson(), Error));
+    }
+    FExpeditionWorld Wired; Wired.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+    if (!TestTrue(TEXT("Labelled wired control retains the same Induction loadout"), FixtureRig(Rig, Wired,
+        {TEXT("extraction_coil"), TEXT("arc_driver")}, {TEXT("induction_bridge")}, Error))) return false;
+    const int32 Conductor = RoleBody(Wired, TEXT("conductor"));
+    if (!TestTrue(TEXT("Actual placement can eliminate the gap entirely"), Pull(Wired, Rig, Conductor, FVector2D(-280, -160), EExpeditionAction::Extract))) return false;
+    MoveMagnet(Wired, Rig, FExpeditionWorld::CircuitSocket()); Wired.Drop(); Advance(Wired, Rig, FExpeditionWorld::CircuitSocket(), .1f);
+    FExpeditionCommand Arc; Arc.Action = EExpeditionAction::Arc; Arc.TargetId = RoleBody(Wired, TEXT("receiver_terminal")); Arc.Aim = Wired.FindBody(Arc.TargetId)->Position;
+    const int32 Before = Wired.GetBattery();
+    TestTrue(TEXT("Induction-equipped rig still uses an existing wired path"), Wired.Execute(Arc, Rig).bSucceeded);
+    TestEqual(TEXT("Unused Induction does not tax an ordinary wired discharge"), Wired.GetBattery(), Before - 8);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionInvalidSplitRangeTest,
+    "MagnetSweep.Expedition.RuntimeSplitRejectsOutOfReachSecondReceiver",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionInvalidSplitRangeTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(0, 103); FString Error;
+    if (!TestTrue(TEXT("Labelled Relay/Split fixture validates"), FixtureRig(*Runtime.Rig, *Runtime.World,
+        {TEXT("relay_projector")}, {TEXT("flow_splitter")}, Error))) return false;
+    Runtime.Screen = EExpeditionScreen::Site; Runtime.bWorldHit = true;
+    const int32 Source = RoleBody(*Runtime.World, TEXT("rich_scrap"));
+    Runtime.Click(63); Runtime.Aim = Runtime.World->FindBody(Source)->Position;
+    Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    Runtime.Aim += FVector2D(0, 95); Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    Runtime.Aim = FVector2D(-470, 270); // Inside tray, but far beyond the source's 440 reach.
+    TestFalse(TEXT("The real preview rejects receiver B's range"), Runtime.World->Preview(Runtime.CommandFor(0), *Runtime.Rig).bAllowed);
+    Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    TestEqual(TEXT("Invalid final targeting does not spend the whole split action"), Runtime.World->GetBattery(), 100);
+    TestTrue(TEXT("Neither half of the invalid split began moving"), Runtime.World->GetState().RelayIds.IsEmpty() && Runtime.World->GetState().SecondRelayIds.IsEmpty());
+    Runtime.Aim = FVector2D(175, -225); Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    TestEqual(TEXT("The player can correct the endpoint without restarting preparation"), Runtime.World->GetBattery(), 86);
+    TestFalse(TEXT("Corrected split commits the actual secondary group"), Runtime.World->GetState().SecondRelayIds.IsEmpty());
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionTwinAnchorSwitchTest,
+    "MagnetSweep.Expedition.RuntimeTwinAnchorReturnsToActualPaidPlacement",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionTwinAnchorSwitchTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(0, 103); FString Error;
+    if (!TestTrue(TEXT("Labelled Winch/Twin fixture validates"), FixtureRig(*Runtime.Rig, *Runtime.World,
+        {TEXT("anchor_winch")}, {TEXT("twin_anchor")}, Error))) return false;
+    Runtime.Screen = EExpeditionScreen::Site; Runtime.bWorldHit = true;
+    const int32 First = RoleBody(*Runtime.World, TEXT("brace")), Second = RoleBody(*Runtime.World, TEXT("ballast"));
+    const FVector2D A(-150, 230), B(390, 100);
+    RuntimeMove(Runtime, A); Runtime.Aim = Runtime.World->FindBody(First)->Position;
+    Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false); RuntimeAdvance(Runtime, 1.f);
+    TestTrue(TEXT("First paid tether physically moves its load"), Runtime.World->FindBody(First)->Position.Y > 155);
+    RuntimeMove(Runtime, B); Runtime.Aim = Runtime.World->FindBody(Second)->Position;
+    Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    TestEqual(TEXT("Placing the second actual anchor pays another eight"), Runtime.World->GetBattery(), 84);
+    TestTrue(TEXT("The first body and its original anchor are retained"), Runtime.World->GetState().SecondTetherBody == First && Runtime.World->GetState().SecondTetherAnchor.Equals(A, .1f));
+    Runtime.Click(61); Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    TestEqual(TEXT("Actual Switch mode restores a previously paid anchor for free"), Runtime.World->GetBattery(), 84);
+    TestTrue(TEXT("Switch uses the saved physical placement, not current magnet position"), Runtime.World->GetState().TetherBody == First && Runtime.World->GetState().TetherAnchor.Equals(A, .1f));
+    FExpeditionWorld Loaded; TestTrue(TEXT("Both paid placements survive strict save"), Loaded.FromJson(Runtime.World->ToJson(), Error));
+    Runtime.Key(EKeys::RightMouseButton, true);
+    TestTrue(TEXT("Whole-haul cancellation clears both live anchor actions"), Runtime.World->GetState().TetherBody == INDEX_NONE && Runtime.World->GetState().SecondTetherBody == INDEX_NONE);
+    Runtime.Key(EKeys::Q, true); Runtime.Key(EKeys::Q, false);
+    TestEqual(TEXT("An invalid switch after cancellation cannot buy a hidden replacement"), Runtime.World->GetBattery(), 84);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionRatchetHoldTest,
+    "MagnetSweep.Expedition.RatchetResistsRealDisturbanceWhileWinchWorksElsewhere",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionRatchetHoldTest::RunTest(const FString& Parameters)
+{
+    float Displacement[2] = {0, 0};
+    for (int32 Variant = 0; Variant < 2; ++Variant)
+    {
+        FExpeditionWorld World; World.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+        TArray<FName> Supports; if (Variant == 1) Supports.Add(TEXT("ratchet_pawl"));
+        if (!TestTrue(TEXT("Labelled Winch/Vector ratchet fixture validates"), FixtureRig(Rig, World,
+            {TEXT("anchor_winch"), TEXT("vector_emitter")}, Supports, Error))) return false;
+        const int32 Held = RoleBody(World, TEXT("brace")); const FVector2D Anchor(-150, 230);
+        FExpeditionCommand Tow; Tow.Action = EExpeditionAction::Winch; Tow.TargetId = Held;
+        Tow.Aim = World.FindBody(Held)->Position; Tow.Destination = Anchor; Tow.Magnet = Anchor;
+        if (!TestTrue(TEXT("A real paid tow reaches the latch position"), World.Execute(Tow, Rig).bSucceeded)) return false;
+        Advance(World, Rig, Anchor, 2.5f);
+        if (Variant == 1) TestEqual(TEXT("The reached load is the one actually latched"), World.GetState().LatchedBody, Held);
+        Tow.TargetId = RoleBody(World, TEXT("ballast")); Tow.Aim = World.FindBody(Tow.TargetId)->Position;
+        Tow.Destination = FVector2D(-430, -270); Tow.Magnet = Tow.Destination;
+        TestTrue(TEXT("The same winch starts a different distant load"), World.Execute(Tow, Rig).bSucceeded);
+        FExpeditionCommand Push; Push.Action = EExpeditionAction::Vector; Push.TargetId = Held;
+        Push.Aim = World.FindBody(Held)->Position; Push.Magnet = Push.Aim + FVector2D(100, 0);
+        TestTrue(TEXT("A separately paid force actually disturbs the released first load"), World.Execute(Push, Rig).bSucceeded);
+        Advance(World, Rig, Push.Magnet, 1.f);
+        Displacement[Variant] = FVector2D::Distance(World.FindBody(Held)->Position, Anchor);
+        AddInfo(FString::Printf(TEXT("Ratchet=%d, disturbed first-load distance=%.1f"), Variant, Displacement[Variant]));
+        TestEqual(TEXT("Ratchet pays two extra for each real tow, with no refund loop"), World.GetBattery(), Variant ? 74 : 78);
+        FExpeditionWorld Loaded; TestTrue(TEXT("Actual reached latch and new tow survive save"), Loaded.FromJson(World.ToJson(), Error));
+    }
+    TestTrue(TEXT("The support holds materially closer than the otherwise identical unlatched body"), Displacement[1] + 35 < Displacement[0] && Displacement[1] < 30);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionReboundMomentumTest,
+    "MagnetSweep.Expedition.ReboundRetainsActualReflectedMomentumOnce",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionReboundMomentumTest::RunTest(const FString& Parameters)
+{
+    float Reflected[2] = {0, 0};
+    for (int32 Variant = 0; Variant < 2; ++Variant)
+    {
+        FExpeditionWorld World; World.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+        TArray<FName> Supports; if (Variant) Supports.Add(TEXT("rebound_plate"));
+        if (!TestTrue(TEXT("Labelled Rail reflection fixture validates"), FixtureRig(Rig, World, {TEXT("rail_impeller")}, Supports, Error))) return false;
+        int32 Shot = INDEX_NONE;
+        if (!TestTrue(TEXT("Real collected iron is fired at the actual tray wall"), FireActualBrace(World, Rig, FVector2D(450, -270), FVector2D(650, -270), Shot))) return false;
+        const float Incoming = World.FindBody(Shot)->Velocity.Size();
+        for (int32 Frame = 0; Frame < 120 && World.FindBody(Shot)->Velocity.X > 0; ++Frame) World.Tick(1.f / 240.f, FVector2D(450, -270), Rig);
+        const auto* Body = World.FindBody(Shot); Reflected[Variant] = -Body->Velocity.X;
+        TestTrue(TEXT("The actual collision reverses the projectile"), Body->Velocity.X < 0 && Body->Position.X > 460);
+        TestTrue(TEXT("Reflection never creates more speed than arrived"), Body->Velocity.Size() <= Incoming + .1f);
+        TestEqual(TEXT("The actual first reflection consumes the fitted plate's one-shot state"), Body->bRebounded, Variant != 0);
+        TestEqual(TEXT("Reflection cannot create or refund battery"), World.GetBattery(), 86);
+        FExpeditionWorld Loaded; TestTrue(TEXT("Spent reflection and moving source survive save"), Loaded.FromJson(World.ToJson(), Error));
+    }
+    TestTrue(TEXT("Rebound retains substantially more real return momentum than an ordinary wall impact"), Reflected[1] > Reflected[0] + 200);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionImpactFuseTest,
+    "MagnetSweep.Expedition.ImpactFuseProducesOneDelayedPhysicalSecondaryImpulse",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionImpactFuseTest::RunTest(const FString& Parameters)
+{
+    FVector2D WitnessPosition[2];
+    for (int32 Variant = 0; Variant < 2; ++Variant)
+    {
+        FExpeditionWorld World; World.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+        TArray<FName> Supports = {TEXT("rebound_plate")}; if (Variant) Supports.Add(TEXT("impact_fuse"));
+        if (!TestTrue(TEXT("Labelled Rail/Fuse comparison validates"), FixtureRig(Rig, World, {TEXT("rail_impeller")}, Supports, Error))) return false;
+        int32 Witness = INDEX_NONE;
+        for (const auto& B : World.GetBodies()) if (B.Role == TEXT("rich_scrap") && B.Position.Equals(FVector2D(315, -222), .1f)) Witness = B.Id;
+        if (!TestTrue(TEXT("A real nearby unlinked salvage body witnesses the secondary force"), Witness != INDEX_NONE)) return false;
+        int32 Shot = INDEX_NONE;
+        if (!TestTrue(TEXT("Actual iron capture and wall shot prepare the impact"), FireActualBrace(World, Rig, FVector2D(450, -270), FVector2D(650, -270), Shot))) return false;
+        World.DrainEvents(); int32 Bursts = 0; float FirstImpactAt = -1, BurstAt = -1;
+        for (int32 Frame = 0; Frame < 360; ++Frame)
+        {
+            World.Tick(1.f / 240.f, FVector2D(450, -270), Rig);
+            for (const auto& Event : World.DrainEvents())
+            {
+                if (Event.BodyIds.Contains(Shot) && Event.Kind == EExpeditionEventKind::Impact && FirstImpactAt < 0) FirstImpactAt = World.GetState().WorldTime;
+                if (Event.Message.Contains(TEXT("Delayed impact fuse"))) { ++Bursts; BurstAt = World.GetState().WorldTime; }
+            }
+        }
+        WitnessPosition[Variant] = World.FindBody(Witness)->Position;
+        TestEqual(TEXT("Only a fitted fuse generates exactly one delayed burst"), Bursts, Variant);
+        if (Variant) TestTrue(TEXT("The burst follows the actual impact after its meaningful delay"), BurstAt - FirstImpactAt > .28f);
+        TestEqual(TEXT("Impact triggers do not buy extra tool operations"), World.GetBattery(), 86);
+        TestTrue(TEXT("Secondary force conserves original material identity"), World.CheckInvariants(Error));
+    }
+    AddInfo(FString::Printf(TEXT("Fuse witness displacement between matched shots: %.1f"), FVector2D::Distance(WitnessPosition[0], WitnessPosition[1])));
+    TestTrue(TEXT("The delayed burst changes a real neighboring body's motion"), FVector2D::Distance(WitnessPosition[0], WitnessPosition[1]) > 15);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionPunchThroughTest,
+    "MagnetSweep.Expedition.PunchThroughPreservesProjectileTravelBeyondFracturedBrace",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionPunchThroughTest::RunTest(const FString& Parameters)
+{
+    float SpeedAfterHit[2] = {0, 0}, FurthestX[2] = {0, 0};
+    for (int32 Variant = 0; Variant < 2; ++Variant)
+    {
+        FExpeditionWorld World; World.StartSite(0, 103); FExpeditionRig Rig; FString Error;
+        TArray<FName> Supports; if (Variant) Supports.Add(TEXT("punch_through_collar"));
+        if (!TestTrue(TEXT("Labelled Rail/Punch comparison validates"), FixtureRig(Rig, World, {TEXT("rail_impeller")}, Supports, Error))) return false;
+        int32 Shot = INDEX_NONE; const int32 Target = RoleBody(World, TEXT("brittle_brace"));
+        if (!TestTrue(TEXT("Actual iron is launched into the real brittle fitting"), FireActualBrace(World, Rig, FVector2D(70, 0), FVector2D(300, 0), Shot))) return false;
+        for (int32 Frame = 0; Frame < 180 && World.FindBody(Target)->bAnchored; ++Frame) World.Tick(1.f / 240.f, FVector2D(70, 0), Rig);
+        if (!TestTrue(TEXT("The actual collision fractures the fitting"), !World.FindBody(Target)->bAnchored)) return false;
+        SpeedAfterHit[Variant] = World.FindBody(Shot)->Velocity.X; FurthestX[Variant] = World.FindBody(Shot)->Position.X;
+        FExpeditionWorld Loaded; TestTrue(TEXT("The first-hit projectile state saves before continued travel"), Loaded.FromJson(World.ToJson(), Error));
+        for (int32 Frame = 0; Frame < 60; ++Frame)
+        {
+            World.Tick(1.f / 240.f, FVector2D(70, 0), Rig);
+            Loaded.Tick(1.f / 240.f, FVector2D(70, 0), Rig);
+            FurthestX[Variant] = FMath::Max(FurthestX[Variant], float(World.FindBody(Shot)->Position.X));
+        }
+        TestTrue(TEXT("Reloaded penetration preserves the same actual continued trajectory"),
+            Loaded.FindBody(Shot)->Position.Equals(World.FindBody(Shot)->Position, .1f) && Loaded.FindBody(Shot)->Velocity.Equals(World.FindBody(Shot)->Velocity, .1f));
+        TestEqual(TEXT("Punch pays its three-energy cost only as part of the actual shot"), World.GetBattery(), Variant ? 83 : 86);
+        TestTrue(TEXT("The fractured body and projectile remain conserved material"), World.CheckInvariants(Error));
+    }
+    AddInfo(FString::Printf(TEXT("Punch comparison: forward speed %.1f/%.1f, furthest x %.1f/%.1f"), SpeedAfterHit[0], SpeedAfterHit[1], FurthestX[0], FurthestX[1]));
+    TestTrue(TEXT("Punch preserves materially greater actual forward momentum"), SpeedAfterHit[1] > SpeedAfterHit[0] + 60);
+    TestTrue(TEXT("The paid projectile travels farther beyond the fractured fitting"), FurthestX[1] > FurthestX[0] + 20);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionFrozenLegacyLayoutTest,
+    "MagnetSweep.Expedition.LegacyLayoutSurvivesDepotDeparturePaidSaveAndRetry",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionFrozenLegacyLayoutTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Earned(nullptr); FString Error;
+    if (!TestTrue(TEXT("A real starter departs for the compatibility history"), StartRuntime(Earned, 233))) return false;
+    for (int32 Site = 0; Site < 2; ++Site)
+    {
+        const bool Recovered = RuntimeRecoverCore(Earned, Error);
+        if (!TestTrue(*FString::Printf(TEXT("Actual earlier core route earns old depot history: %s"), *Error), Recovered)) return false;
+        Earned.Key(EKeys::E, true);
+        if (Site == 0) Earned.Depart();
+    }
+    if (!TestTrue(TEXT("Earned history really reached depot index two"), Earned.SiteIndex == 2 && Earned.Screen == EExpeditionScreen::Depot)) return false;
+    // Recreate the documented old authored board explicitly. This is a layout
+    // compatibility fixture, not a claim that a current new run selected it.
+    if (!TestTrue(TEXT("Frozen e1 remains an explicit supported authored definition"),
+        Earned.World->StartSite(2, Earned.Rig->GetSeed() + 2, 100, TEXT("e1"), 1))) return false;
+    Earned.Rig->SetShopContext(Earned.World->GetOpportunityTags(), Implemented());
+    auto OldDepot = ParseJson(Earned.EncodeSave()); EncodeLegacyWorldV2(OldDepot->GetObjectField(TEXT("world")));
+    const int32 EarnedCash = Earned.Rig->GetCash();
+    FExpeditionRuntime Loaded(nullptr);
+    const bool DepotLoaded = Loaded.DecodeSave(JsonText(OldDepot), Error);
+    if (!TestTrue(*FString::Printf(TEXT("An earned legacy-schema2 depot loads: %s"), *Error), DepotLoaded)) return false;
+    TestTrue(TEXT("Missing old layout metadata maps to frozen e1 revision one"), Loaded.World->GetState().LayoutId == TEXT("e1") && Loaded.World->GetState().LayoutRevision == 1);
+    TestEqual(TEXT("Legacy format migration cannot mint or delete earned cash"), Loaded.Rig->GetCash(), EarnedCash);
+    Loaded.Depart();
+    if (!TestTrue(TEXT("Actual departure preserves that saved worksite instead of choosing a fresh layout"), Loaded.Screen == EExpeditionScreen::Site && Loaded.World->GetState().LayoutId == TEXT("e1"))) return false;
+    TestTrue(TEXT("The retry checkpoint contains the same frozen authored identity"),
+        Loaded.SiteEntry->GetObjectField(TEXT("world"))->GetStringField(TEXT("LayoutId")) == TEXT("e1"));
+    const int32 Body = LooseBody(*Loaded.World);
+    Loaded.Magnet = Loaded.World->FindBody(Body)->Position + FVector2D(0, -75);
+    FExpeditionCommand PullCommand; PullCommand.Magnet = Loaded.Magnet; PullCommand.Aim = Loaded.World->FindBody(Body)->Position; PullCommand.bPrecision = true;
+    if (!TestTrue(TEXT("The restored old site can commit a real paid action"), Loaded.World->Execute(PullCommand, *Loaded.Rig).bSucceeded)) return false;
+    Loaded.World->Tick(.05f, Loaded.Magnet, *Loaded.Rig);
+    const FVector2D PaidPosition = Loaded.World->FindBody(Body)->Position;
+    auto OldActive = ParseJson(Loaded.EncodeSave());
+    EncodeLegacyWorldV2(OldActive->GetObjectField(TEXT("world")));
+    EncodeLegacyWorldV2(OldActive->GetObjectField(TEXT("site_entry"))->GetObjectField(TEXT("world")));
+    FExpeditionRuntime Resumed(nullptr);
+    const bool ActiveLoaded = Resumed.DecodeSave(JsonText(OldActive), Error);
+    if (!TestTrue(*FString::Printf(TEXT("Legacy active world and its legacy retry checkpoint load together: %s"), *Error), ActiveLoaded)) return false;
+    TestTrue(TEXT("Migration preserves the real paid in-flight position"), Resumed.World->FindBody(Body)->Position.Equals(PaidPosition, .001f));
+    TestEqual(TEXT("Migration preserves paid battery"), Resumed.World->GetBattery(), 94);
+    TestTrue(TEXT("Saved content is explicitly tagged schema3 e1 after migration"),
+        Resumed.World->ToJson()->GetIntegerField(TEXT("Version")) == 3 && Resumed.World->GetState().LayoutId == TEXT("e1"));
+    Resumed.RetrySite();
+    TestTrue(TEXT("Actual retry retains the same frozen site definition"), Resumed.World->GetState().LayoutId == TEXT("e1") && Resumed.World->GetState().LayoutRevision == 1);
+    TestEqual(TEXT("Retry rolls back the actual paid operation within that definition"), Resumed.World->GetBattery(), 100);
+    TestEqual(TEXT("Retry retains the genuinely earned earlier rewards"), Resumed.Rig->GetCash(), EarnedCash);
+    TestTrue(TEXT("Frozen site retry restores available material rather than regenerating another board"), Resumed.World->FindBody(Body)->State == EExpeditionBodyState::Available);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionUnknownLayoutTransactionTest,
+    "MagnetSweep.Expedition.UnknownLayoutIdentityOrRevisionRefusesAtomically",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionUnknownLayoutTransactionTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    if (!TestTrue(TEXT("An actual current site provides a valid live session"), StartRuntime(Runtime, 239))) return false;
+    const FString Before = Runtime.EncodeSave();
+    for (int32 Variant = 0; Variant < 3; ++Variant)
+    {
+        auto Broken = ParseJson(Before); const auto World = Broken->GetObjectField(TEXT("world"));
+        if (Variant == 0) World->SetStringField(TEXT("LayoutId"), TEXT("qa_unknown_layout"));
+        else if (Variant == 1) World->SetNumberField(TEXT("LayoutRevision"), 999);
+        else World->RemoveField(TEXT("LayoutId"));
+        TestFalse(TEXT("Unknown or missing current layout identity never silently regenerates content"), Runtime.DecodeSave(JsonText(Broken), Error));
+        TestTrue(TEXT("Rejected composite restore leaves earned rig/world/checkpoint unchanged"), Runtime.EncodeSave() == Before);
+    }
+    auto BrokenEntry = ParseJson(Before);
+    BrokenEntry->GetObjectField(TEXT("site_entry"))->GetObjectField(TEXT("world"))->SetNumberField(TEXT("LayoutRevision"), 999);
+    TestFalse(TEXT("An unavailable retry definition invalidates the whole restore"), Runtime.DecodeSave(JsonText(BrokenEntry), Error));
+    TestTrue(TEXT("Invalid retry metadata never replaces the valid session"), Runtime.EncodeSave() == Before);
+    const FString WorldBefore = JsonText(Runtime.World->ToJson());
+    TestFalse(TEXT("Explicit unknown new-site layout refuses before mutation"), Runtime.World->StartSite(2, 999, 100, TEXT("qa_unknown_layout"), 1));
+    TestTrue(TEXT("Failed site construction preserves actual world content"), JsonText(Runtime.World->ToJson()) == WorldBefore);
+    TestFalse(TEXT("Known layout with unknown revision also refuses before mutation"), Runtime.World->StartSite(2, 999, 100, TEXT("e1"), 999));
+    TestTrue(TEXT("Failed revision lookup preserves the previous world"), JsonText(Runtime.World->ToJson()) == WorldBefore);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionBalancedMassTest,
+    "MagnetSweep.Expedition.BalancedRackUsesRestingMassAndLatchesOnlyAfterCapture",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionBalancedMassTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(2, 251); FString Error;
+    if (!TestTrue(TEXT("Labelled isolated rack fixture has ordinary Coil equipment"), FixtureRig(*Runtime.Rig, *Runtime.World, {TEXT("extraction_coil")}, {}, Error))) return false;
+    Runtime.Screen = EExpeditionScreen::Site; Runtime.SiteIndex = 2; Runtime.bWorldHit = true;
+    const FVector2D Left = Runtime.World->FindMarker(TEXT("balance_left"))->Position;
+    const FVector2D Right = Runtime.World->FindMarker(TEXT("balance_right"))->Position;
+    const int32 Ballast = RoleBody(*Runtime.World, TEXT("ballast")), Brace = RoleBody(*Runtime.World, TEXT("brace"));
+    const int32 Core = RoleBody(*Runtime.World, TEXT("core"));
+    if (!TestTrue(TEXT("Actual twelve-kilogram ballast is captured"), RuntimePickBody(Runtime, Ballast, {0,25}, Error))) return false;
+    RuntimePlaceHaul(Runtime, Left);
+    if (!TestTrue(TEXT("Actual eight-kilogram brace is captured"), RuntimePickBody(Runtime, Brace, {0,25}, Error))) return false;
+    RuntimePlaceHaul(Runtime, Right);
+    TestFalse(TEXT("Twelve against eight is insufficient despite two occupied platforms"), Runtime.World->IsCoreReleased());
+    if (!TestTrue(TEXT("One actual two-kilogram trim weight is captured"), RuntimePickBody(Runtime, 12, {0,-25}, Error))) return false;
+    RuntimePlaceHaul(Runtime, Right + FVector2D(-45,0));
+    TestTrue(TEXT("Twelve against ten is an actual valid tolerant balance"), Runtime.World->IsCoreReleased());
+    TestFalse(TEXT("Merely releasing the rack has not secured the core"), Runtime.World->GetState().bCoreSecured);
+    if (!TestTrue(TEXT("The player can reclaim the left weight before taking the core"), RuntimePickBody(Runtime, Ballast, {0,-25}, Error))) return false;
+    TestFalse(TEXT("Held weight no longer counts toward the platform condition"), Runtime.World->IsCoreReleased());
+    TestTrue(TEXT("The untouched core physically reanchors when support is removed"), Runtime.World->FindBody(Core)->bAnchored);
+    RuntimePlaceHaul(Runtime, Left);
+    if (!TestTrue(TEXT("Replacing the real mass restores the physical release"), Runtime.World->IsCoreReleased())) return false;
+    if (!TestTrue(TEXT("Actual useful core capture completes the support operation"), RuntimePickBody(Runtime, Core, {0,25}, Error))) return false;
+    TestTrue(TEXT("Only actual Cargo arrival latches the secured objective"), Runtime.World->GetState().bCoreSecured);
+    RuntimePlaceHaul(Runtime, {430,-260});
+    if (!TestTrue(TEXT("The player reclaims a platform weight after staging the secured core"), RuntimePickBody(Runtime, Ballast, {0,-25}, Error))) return false;
+    TestTrue(TEXT("Already secured material stays recoverable after the weights are removed"), Runtime.World->IsCoreReleased() && !Runtime.World->FindBody(Core)->bAnchored);
+    FExpeditionWorld Resumed;
+    TestTrue(*FString::Printf(TEXT("Actual secured-stage state restores: %s"), *Error), Resumed.FromJson(Runtime.World->ToJson(), Error));
+    TestTrue(TEXT("Restored core remains available and its latch is preserved"), Resumed.GetState().bCoreSecured && Resumed.FindBody(Core)->State == EExpeditionBodyState::Available);
+    TestFalse(TEXT("A staged core is not a delivered core"), Resumed.Dispatch().bSucceeded);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionRemoteFinalCounterweightTest,
+    "MagnetSweep.Expedition.FinalRemoteToolsMoveRealReplacementWhileCoreStaysHeld",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionRemoteFinalCounterweightTest::RunTest(const FString& Parameters)
+{
+    // Controlled equipment comparisons, not claims about shop acquisition.
+    // Variant two uses ordinary twelve-plus-eight mass, not the cover's ID.
+    for (int32 Variant = 0; Variant < 3; ++Variant)
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(3, 257); FString Error;
+        const FName Tool = Variant == 1 ? FName(TEXT("relay_projector")) : FName(TEXT("anchor_winch"));
+        if (!TestTrue(TEXT("Labelled final remote-tool fixture validates"), FixtureRig(*Runtime.Rig, *Runtime.World, {Tool}, {}, Error))) return false;
+        Runtime.Screen = EExpeditionScreen::Site; Runtime.SiteIndex = 3; Runtime.bWorldHit = true;
+        const FVector2D Park = Runtime.World->FindMarker(TEXT("cover"))->Position;
+        const FVector2D Seat = Runtime.World->FindMarker(TEXT("counterbalance"))->Position;
+        const int32 Cover = RoleBody(*Runtime.World, TEXT("counterweight_cover")), Core = RoleBody(*Runtime.World, TEXT("core"));
+        if (!TestTrue(TEXT("Actual baseline pull moves the twenty-kilogram cover"), RuntimePickBody(Runtime, Cover, {0,25}, Error))) return false;
+        RuntimePlaceHaul(Runtime, Park);
+        if (!TestTrue(TEXT("The physically exposed twenty-kilogram core is really secured"), RuntimePickBody(Runtime, Core, {0,25}, Error))) return false;
+        const int32 Before = Runtime.World->GetBattery();
+        RuntimeMove(Runtime, {Runtime.Magnet.X,-260}); RuntimeMove(Runtime, Park + FVector2D(0,-25));
+        Runtime.Key(EKeys::LeftShift,true); Runtime.Key(EKeys::LeftMouseButton,true); RuntimeAdvance(Runtime,.1f);
+        Runtime.Key(EKeys::LeftMouseButton,false); Runtime.Key(EKeys::LeftShift,false);
+        TestEqual(TEXT("Ordinary field cannot pay for an impossible forty-kilogram double haul"), Runtime.World->GetBattery(), Before);
+        TestTrue(TEXT("Refused double pickup leaves the cover available and the core safely held"),
+            Runtime.World->FindBody(Cover)->State == EExpeditionBodyState::Available && Runtime.World->FindBody(Core)->State == EExpeditionBodyState::Cargo && !Runtime.World->IsUnsafe());
+        RuntimeMove(Runtime, {Runtime.Magnet.X,-260}); RuntimeMove(Runtime, FExpeditionWorld::ReceiverPosition());
+        TestFalse(TEXT("Physical core arrival alone cannot bypass the counterbalance"), Runtime.World->Dispatch().bSucceeded);
+
+        // Place the far/right mass first, so the second incoming load does not
+        // have to travel through the first resting replacement.
+        const TArray<int32> Weights = Variant == 2 ? TArray<int32>{RoleBody(*Runtime.World,TEXT("brace")),RoleBody(*Runtime.World,TEXT("ballast"))} : TArray<int32>{Cover};
+        for (int32 I=0; I<Weights.Num(); ++I)
+        {
+            const FVector2D Destination = Seat + (Variant == 2 ? FVector2D(I == 0 ? 23 : -23,0) : FVector2D::ZeroVector);
+            RuntimeMove(Runtime,{Runtime.Magnet.X,-260}); RuntimeMove(Runtime,{Destination.X,-260}); RuntimeMove(Runtime,Destination);
+            Runtime.Aim = Runtime.World->FindBody(Weights[I])->Position;
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+            if (Variant == 1)
+            {
+                TestEqual(TEXT("Selecting a Relay source is free"), Runtime.World->GetBattery(), Before);
+                Runtime.Aim = Destination; Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+            }
+            Runtime.Aim = Destination; RuntimeAdvance(Runtime,5.f);
+            const auto* Weight = Runtime.World->FindBody(Weights[I]);
+            AddInfo(FString::Printf(TEXT("Remote variant %d weight %d reached (%.1f,%.1f), speed %.1f"),Variant,Weights[I],Weight->Position.X,Weight->Position.Y,Weight->Velocity.Size()));
+            TestTrue(TEXT("The paid tool physically moves and settles its available replacement"),
+                Weight->State == EExpeditionBodyState::Available && FVector2D::Distance(Weight->Position,Seat)<=28 && Weight->Velocity.Size()<45);
+            TestTrue(TEXT("The core never requires staging during remote transport"), Runtime.World->FindBody(Core)->State == EExpeditionBodyState::Cargo && FMath::IsNearlyEqual(Runtime.World->GetCargoMass(),20.f));
+        }
+        const int32 Cost = Variant == 1 ? 10 : Variant == 2 ? 16 : 8;
+        TestEqual(TEXT("Only the actually committed remote operations spend energy"), Runtime.World->GetBattery(), Before-Cost);
+        RuntimeMove(Runtime,{Runtime.Magnet.X,-260}); RuntimeMove(Runtime,FExpeditionWorld::ReceiverPosition());
+        for (int32 Id:Weights)
+        {
+            const auto* B=Runtime.World->FindBody(Id);
+            AddInfo(FString::Printf(TEXT("At receiver variant %d weight %d: (%.2f,%.2f), speed %.2f, state %d, mass %.0f"),Variant,Id,B->Position.X,B->Position.Y,B->Velocity.Size(),int32(B->State),B->Mass));
+        }
+        TestTrue(TEXT("The empty cradle now has actual twenty-kilogram available support"), Runtime.World->GetState().bBallastCleared);
+        if (Variant == 2) TestTrue(TEXT("Generic mixed replacement does not require the cover on its old seat"), FVector2D::Distance(Runtime.World->FindBody(Cover)->Position,Seat)>130);
+        TestTrue(TEXT("Real receiver delivery succeeds after actual support movement"), Runtime.World->Dispatch().bSucceeded);
+        TestFalse(TEXT("Completed dispatch cannot pay or complete twice"), Runtime.World->Dispatch().bSucceeded);
+        TestTrue(TEXT("Remote route preserves source material invariants"), Runtime.World->CheckInvariants(Error));
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionRackMechanicalRefiningTest,
+    "MagnetSweep.Expedition.RackWinchAndRailEarnDistinctPhysicalRecoveries",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionRackMechanicalRefiningTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    const bool Ready=ReachRackWithFixtureEquipment(Runtime,{TEXT("anchor_winch"),TEXT("rail_impeller")},{TEXT("counterweight_hook")},Error);
+    if (!TestTrue(*FString::Printf(TEXT("Found-equipment fixture earns preceding sites and pays for battery: %s"),*Error),Ready)) return false;
+    const int32 Cash=Runtime.Rig->GetCash();
+    const int32 Weight=RoleBody(*Runtime.World,TEXT("brace")), Machine=RoleBody(*Runtime.World,TEXT("supported_machine"));
+    const int32 Brittle=RoleBody(*Runtime.World,TEXT("brittle_brace")), Ammo=RoleBody(*Runtime.World,TEXT("ballast"));
+    if (!TestTrue(TEXT("Actual eight-kilogram brace becomes the mechanical support"),RuntimePickBody(Runtime,Weight,{0,25},Error))) return false;
+    RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("counterweight"))->Position);
+    RuntimeMove(Runtime,{-260,-130});
+    const int32 Before=Runtime.World->GetBattery();
+    Runtime.Aim=Runtime.World->FindBody(Brittle)->Position; Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+    TestEqual(TEXT("A prepared counterweight cannot pay to bypass an unrelated bolted brace"),Runtime.World->GetBattery(),Before);
+    TestTrue(TEXT("The unsupported brittle mounting remains physically anchored"),Runtime.World->FindBody(Brittle)->bAnchored);
+    Runtime.Aim=Runtime.World->FindBody(Machine)->Position; Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+    Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,2.f);
+    TestEqual(TEXT("The same support enables the genuine machine tow for eight energy"),Runtime.World->GetBattery(),Before-8);
+    if (!TestTrue(TEXT("The supported machine actually moved away from its mount"),!Runtime.World->FindBody(Machine)->bAnchored && Runtime.World->FindBody(Machine)->Position.X < -215)) return false;
+    if (!TestTrue(TEXT("The mechanically released machine is physically captured"),RuntimePickBody(Runtime,Machine,{0,-25},Error))) return false;
+    RuntimeSmelt(Runtime);
+    TestEqual(TEXT("Actual first machine refinement banks its intact appraisal"),Runtime.World->GetOutput(),220);
+    TestEqual(TEXT("Sub-threshold recovery does not prematurely pay a milestone"),Runtime.Rig->GetCash(),Cash);
+
+    if (!TestTrue(TEXT("Real twelve-kilogram ballast supplies the separate impact tool"),RuntimePickBody(Runtime,Ammo,{0,25},Error))) return false;
+    RuntimeMove(Runtime,{Runtime.Magnet.X,-280}); RuntimeMove(Runtime,{220,-280}); RuntimeMove(Runtime,{220,-140});
+    Runtime.Click(2000+Ammo); Runtime.Aim=Runtime.World->FindBody(Brittle)->Position;
+    Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false); Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,3.f);
+    if (!TestTrue(TEXT("A real selected Rail collision releases the different bolted target"),!Runtime.World->FindBody(Brittle)->bAnchored)) return false;
+    const FVector2D Away=(Runtime.World->FindBody(Brittle)->Position-Runtime.World->FindBody(Ammo)->Position).GetSafeNormal()*30.f;
+    if (!TestTrue(TEXT("The fractured iron is then actually recovered"),RuntimePickBody(Runtime,Brittle,Away,Error))) return false;
+    RuntimeSmelt(Runtime);
+    TestEqual(TEXT("Two different physical mechanisms bank two intact iron/machine appraisals"),Runtime.World->GetOutput(),440);
+    TestEqual(TEXT("Only that real pour pays the first rack milestone"),Runtime.Rig->GetCash(),Cash+2);
+    for (int32 Id=36; Id<=40; ++Id)
+        if (!TestTrue(TEXT("Actual ordinary top-row alloy supplements the specialized recovery"),RuntimePickBody(Runtime,Id,{0,-25},Error))) return false;
+    RuntimeSmelt(Runtime);
+    TestEqual(TEXT("The actually banked mechanical route reaches 480"),Runtime.World->GetOutput(),480);
+    TestEqual(TEXT("Physical output pays both milestones once"),Runtime.Rig->GetCash(),Cash+4);
+    Runtime.Key(EKeys::E,true); TestEqual(TEXT("Empty repeated settlement never duplicates those earnings"),Runtime.Rig->GetCash(),Cash+4);
+    FExpeditionRuntime Resumed(nullptr);
+    TestTrue(*FString::Printf(TEXT("Real earned mechanical outcome restores: %s"),*Error),Resumed.DecodeSave(Runtime.EncodeSave(),Error));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionRackGeneratorRefiningTest,
+    "MagnetSweep.Expedition.PreservedGeneratorPowersTwoIsolatedRecoveriesAndRealRewards",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionRackGeneratorRefiningTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    const bool Ready=ReachRackWithFixtureEquipment(Runtime,{TEXT("extraction_coil"),TEXT("arc_driver")},{TEXT("intact_recovery")},Error);
+    if (!TestTrue(*FString::Printf(TEXT("Labelled found Coil/Arc/Intact rig earns the actual rack: %s"),*Error),Ready)) return false;
+    const int32 Cash=Runtime.Rig->GetCash(), Generator=RoleBody(*Runtime.World,TEXT("portable_generator"));
+    if (!TestTrue(TEXT("The physical portable source exists"),Generator!=INDEX_NONE)) return false;
+    const int32 Before=Runtime.World->GetBattery();
+    Runtime.Aim=Runtime.World->FindBody(4)->Position; Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+    TestEqual(TEXT("An isolated receiver cannot buy an imaginary internal charge"),Runtime.World->GetBattery(),Before);
+    TestEqual(TEXT("A refused disconnected operation leaves both actual stored charges intact"),Runtime.World->FindBody(Generator)->Charge,2);
+    RuntimeMove(Runtime,Runtime.World->FindBody(Generator)->Position+FVector2D(0,-25));
+    Runtime.Aim=Runtime.World->FindBody(Generator)->Position; Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+    Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,1.4f);
+    if (!TestTrue(TEXT("Actual twelve-energy preservation frees a functioning two-charge source"),
+        Runtime.World->FindBody(Generator)->State==EExpeditionBodyState::Cargo && Runtime.World->FindBody(Generator)->bFunctional && Runtime.World->FindBody(Generator)->Charge==2)) return false;
+    TestEqual(TEXT("Preservation paid its actual extraction plus function cost"),Runtime.World->GetBattery(),Before-12);
+    for (int32 I=0; I<2; ++I)
+    {
+        // The left dock has a loose iron below it. Approach its source from
+        // above with the real narrow field so the eventual drop stays singular.
+        if (I==1 && !TestTrue(TEXT("The same finite source is physically collected again"),RuntimePickBody(Runtime,Generator,{0,35},Error))) return false;
+        if (!TestTrue(TEXT("The actual selected haul contains the eight-kilogram source alone"),FMath::IsNearlyEqual(Runtime.World->GetCargoMass(),8.f))) return false;
+        const FVector2D Dock=Runtime.World->FindMarker(I==0?FName(TEXT("circuit")):FName(TEXT("brace_power")))->Position;
+        RuntimePlaceHaul(Runtime,Dock);
+        const int32 Terminal=I==0?4:11;
+        Runtime.Aim=Runtime.World->FindBody(Terminal)->Position;
+        const auto Command=Runtime.CommandFor(1); const auto Preview=Runtime.World->Preview(Command,*Runtime.Rig);
+        const auto* Source=Runtime.World->FindBody(Generator);
+        AddInfo(FString::Printf(TEXT("Arc%d target%d source(%.1f,%.1f) state%d charge%d: %s"),I,Command.TargetId,Source->Position.X,Source->Position.Y,int32(Source->State),Source->Charge,*Preview.Reason));
+        Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        TestEqual(TEXT("Each useful isolated operation consumes one real source charge"),Runtime.World->FindBody(Generator)->Charge,1-I);
+        TestTrue(TEXT("The selected receiver's actual different payload is released"),!Runtime.World->FindBody(I==0?9:10)->bAnchored);
+        const int32 PaidBattery=Runtime.World->GetBattery(); Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        TestEqual(TEXT("An already satisfied receiver cannot consume a second payment"),Runtime.World->GetBattery(),PaidBattery);
+    }
+    TestEqual(TEXT("Both isolated releases leave the finite source empty"),Runtime.World->FindBody(Generator)->Charge,0);
+    TestEqual(TEXT("Unlocking material alone never settles output or credits"),Runtime.World->GetOutput(),0);
+    TestEqual(TEXT("No invisible reward arrives before the furnace"),Runtime.Rig->GetCash(),Cash);
+    for (int32 Id : {9,10})
+    {
+        if (!TestTrue(TEXT("Each electrically released prize is physically captured"),RuntimePickBody(Runtime,Id,{0,-25},Error))) return false;
+        RuntimeSmelt(Runtime);
+    }
+    for (int32 Id=36; Id<=40; ++Id)
+        if (!TestTrue(TEXT("Five real ordinary alloys supply the visible supplement"),RuntimePickBody(Runtime,Id,{0,-25},Error))) return false;
+    RuntimeSmelt(Runtime);
+    TestEqual(TEXT("Actual finite-source route banks 480 appraisal"),Runtime.World->GetOutput(),480);
+    TestEqual(TEXT("Banking those actual materials earns four spendable credits"),Runtime.Rig->GetCash(),Cash+4);
+    const bool Recovered=RuntimeRecoverCore(Runtime,Error);
+    if (!TestTrue(*FString::Printf(TEXT("The optional electrical recovery still leaves a real core route: %s"),*Error),Recovered)) return false;
+    Runtime.Key(EKeys::E,true);
+    TestTrue(TEXT("Actual core delivery reaches the final depot"),Runtime.SiteIndex==3 && Runtime.Screen==EExpeditionScreen::Depot);
+    TestEqual(TEXT("Physical rack completion adds its real fourteen-credit award"),Runtime.Rig->GetCash(),Cash+18);
+    FExpeditionRuntime Resumed(nullptr);
+    if (!TestTrue(*FString::Printf(TEXT("Earned electrical recovery and final depot restore: %s"),*Error),Resumed.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    Resumed.Depart();
+    const int32 FinalGenerator=RoleBody(*Resumed.World,TEXT("portable_generator"));
+    RuntimeMove(Resumed,Resumed.World->FindBody(FinalGenerator)->Position+FVector2D(0,-25));
+    Resumed.Aim=Resumed.World->FindBody(FinalGenerator)->Position; Resumed.Key(EKeys::Q,true); Resumed.Key(EKeys::Q,false);
+    Resumed.Aim=Resumed.Magnet; RuntimeAdvance(Resumed,1.4f);
+    if (!TestTrue(TEXT("The saved two-tool rig really preserves the final worksite's separate source"),Resumed.World->FindBody(FinalGenerator)->State==EExpeditionBodyState::Cargo && Resumed.World->FindBody(FinalGenerator)->Charge==2)) return false;
+    RuntimePlaceHaul(Resumed,Resumed.World->FindMarker(TEXT("circuit"))->Position);
+    Resumed.Aim=Resumed.World->FindBody(4)->Position; Resumed.Key(EKeys::F,true); Resumed.Key(EKeys::F,false);
+    TestEqual(TEXT("The final isolated latch consumes one actual portable charge"),Resumed.World->FindBody(FinalGenerator)->Charge,1);
+    if (!TestTrue(TEXT("The final alternate dispatch condition is really powered"),Resumed.World->GetState().bCircuitClosed)) return false;
+    const int32 Cover=RoleBody(*Resumed.World,TEXT("counterweight_cover")), Core=RoleBody(*Resumed.World,TEXT("core"));
+    if (!TestTrue(TEXT("Powered route still requires physically moving the cover"),RuntimePickBody(Resumed,Cover,{0,25},Error))) return false;
+    RuntimePlaceHaul(Resumed,Resumed.World->FindMarker(TEXT("cover"))->Position);
+    if (!TestTrue(TEXT("Powered route still requires actual core capture"),RuntimePickBody(Resumed,Core,{0,25},Error))) return false;
+    RuntimeMove(Resumed,{Resumed.Magnet.X,-260}); RuntimeMove(Resumed,FExpeditionWorld::ReceiverPosition());
+    TestFalse(TEXT("This electrical route deliberately leaves the physical replacement empty"),Resumed.World->GetState().bBallastCleared);
+    Resumed.Key(EKeys::E,true);
+    TestTrue(TEXT("Actual final powered delivery completes and archives the same two-tool expedition"),Resumed.Screen==EExpeditionScreen::Victory && Resumed.Rig->IsRunWon());
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionLateRelaySourceTest,
+    "MagnetSweep.Expedition.LateSensorRelayRequiresAndReservesRealPortableCharge",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionLateRelaySourceTest::RunTest(const FString& Parameters)
+{
+    for (int32 Site : {2,3})
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(Site,269); FString Error;
+        if (!TestTrue(TEXT("Labelled late relay equipment fixture validates"),FixtureRig(*Runtime.Rig,*Runtime.World,
+            {TEXT("extraction_coil"),TEXT("arc_driver")},{TEXT("intact_recovery"),TEXT("escapement_relay")},Error))) return false;
+        Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=Site; Runtime.bWorldHit=true;
+        const int32 Generator=RoleBody(*Runtime.World,TEXT("portable_generator")), Sensor=RoleBody(*Runtime.World,TEXT("brace"));
+        Runtime.Click(66); Runtime.Aim=Runtime.World->FindBody(Sensor)->Position; Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        Runtime.Aim=Runtime.World->FindBody(4)->Position; Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        TestEqual(TEXT("Disconnected late relay cannot reserve an internal free charge"),Runtime.World->GetBattery(),100);
+        TestEqual(TEXT("Refusal leaves no deferred trigger"),Runtime.World->GetState().DeferredCharge,0);
+        TestEqual(TEXT("Refusal leaves the source untouched"),Runtime.World->FindBody(Generator)->Charge,2);
+        Runtime.Key(EKeys::RightMouseButton,true);
+        RuntimeMove(Runtime,Runtime.World->FindBody(Generator)->Position+FVector2D(0,-25));
+        Runtime.Aim=Runtime.World->FindBody(Generator)->Position; Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,1.4f);
+        if (!TestTrue(TEXT("A real intact extraction prepares the finite portable source"),Runtime.World->FindBody(Generator)->State==EExpeditionBodyState::Cargo && Runtime.World->FindBody(Generator)->bFunctional)) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("circuit"))->Position);
+        Runtime.Click(66); Runtime.Aim=Runtime.World->FindBody(Sensor)->Position; Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        Runtime.Aim=Runtime.World->FindBody(4)->Position; Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+        TestEqual(TEXT("A useful deferred operation really reserves one finite source charge"),Runtime.World->FindBody(Generator)->Charge,1);
+        TestEqual(TEXT("The real reservation pays eleven once after twelve for source preservation"),Runtime.World->GetBattery(),77);
+        TestEqual(TEXT("The charged physical sensor is pending rather than already triggered"),Runtime.World->GetState().DeferredCharge,1);
+        TestFalse(TEXT("Paid reservation alone does not actuate the mechanism"),Runtime.World->GetState().PoweredTerminals.Contains(4));
+        Runtime.Key(EKeys::RightMouseButton,true);
+        TestEqual(TEXT("Dropping cannot return the already reserved source charge"),Runtime.World->FindBody(Generator)->Charge,1);
+        FExpeditionWorld Resumed;
+        const bool Loaded=Resumed.FromJson(Runtime.World->ToJson(),Error);
+        if (!TestTrue(*FString::Printf(TEXT("Pending finite relay restores with real endpoints: %s"),*Error),Loaded)) return false;
+        TestEqual(TEXT("Reload preserves paid source consumption"),Resumed.FindBody(Generator)->Charge,1);
+        FExpeditionCommand Duplicate; Duplicate.Action=EExpeditionAction::ArmRelay; Duplicate.TargetId=Sensor; Duplicate.SecondaryId=4;
+        Duplicate.Magnet=Runtime.Magnet; Duplicate.Aim=Runtime.World->FindBody(4)->Position;
+        TestFalse(TEXT("Another trigger cannot reserve over the outstanding paid sensor"),Runtime.World->Execute(Duplicate,*Runtime.Rig).bSucceeded);
+        TestEqual(TEXT("Repeated refused reserve cannot double spend energy"),Runtime.World->GetBattery(),77);
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionSavedOpportunityRefreshTest,
+    "MagnetSweep.Expedition.SavedWorksiteRefreshesExactOpportunitiesWithoutReroll",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionSavedOpportunityRefreshTest::RunTest(const FString& Parameters)
+{
+    for (int32 Site : {2,3})
+    {
+        FExpeditionWorld World; World.StartSite(Site,277); FExpeditionRig Rig;
+        Configure(Rig,World,TEXT("arc_driver"),277);
+        TestFalse(TEXT("An isolated late receiver is not an authored closed return circuit"),Rig.HasOpportunity(TEXT("closed_circuit")));
+        TestFalse(TEXT("Actual late generated stock excludes unsupported Closed Circuit"),Rig.GetOffers().Contains(TEXT("closed_circuit")));
+    }
+    FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(0,281);
+    Configure(*Runtime.Rig,*Runtime.World,TEXT("arc_driver"),281); Runtime.Screen=EExpeditionScreen::Depot;
+    const TArray<FName> Stock=Runtime.Rig->GetOffers(); const int32 Cash=Runtime.Rig->GetCash();
+    auto Legacy=ParseJson(Runtime.EncodeSave()); EncodeLegacyWorldV2(Legacy->GetObjectField(TEXT("world")));
+    const auto RigJson=Legacy->GetObjectField(TEXT("rig")); TArray<TSharedPtr<FJsonValue>> OldTags;
+    for (const auto& Value:RigJson->GetArrayField(TEXT("opportunities")))
+        if (Value->AsString()!=TEXT("ClosedReturn")) OldTags.Add(Value);
+    RigJson->SetArrayField(TEXT("opportunities"),OldTags);
+    FExpeditionRuntime Resumed(nullptr); FString Error;
+    const bool Loaded=Resumed.DecodeSave(JsonText(Legacy),Error);
+    if (!TestTrue(*FString::Printf(TEXT("Actual old E1 depot context remains compatible: %s"),*Error),Loaded)) return false;
+    TestTrue(TEXT("Restoring the exact old board refreshes its now-explicit closed-return opportunity"),Resumed.Rig->HasOpportunity(TEXT("closed_circuit")));
+    TestTrue(TEXT("Compatibility refresh never rerolls the player's saved stock"),Resumed.Rig->GetOffers()==Stock);
+    TestEqual(TEXT("A metadata refresh cannot create money"),Resumed.Rig->GetCash(),Cash);
+    TestTrue(TEXT("The old depot is still frozen E1"),Resumed.World->GetState().LayoutId==TEXT("e1"));
     return true;
 }
 

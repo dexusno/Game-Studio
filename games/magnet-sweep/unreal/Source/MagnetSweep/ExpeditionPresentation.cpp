@@ -144,30 +144,40 @@ void FExpeditionRuntime::BuildMechanismVisuals()
     for(auto* S:MechanismShapes)if(S)S->DestroyComponent();MechanismShapes.Reset();
     auto Mark=[&](FVector2D P,FVector Size,FName Mat)
     {MechanismShapes.Add(Display->Shape(TEXT("Cube"),Display->World(P,18),Size,Mat,FRotator::ZeroRotator,false));};
-    Mark(FExpeditionWorld::CollarStop(),FVector(65,50,6),TEXT("Dark"));
-    Mark(FExpeditionWorld::BallastCatch(),FVector(70,70,6),TEXT("Dark"));
-    Mark(FExpeditionWorld::ArmStopper(),FVector(70,48,6),TEXT("Dark"));
-    Mark(FExpeditionWorld::CircuitSocket(),FVector(100,40,8),TEXT("Copper"));
-    Mark(FExpeditionWorld::CounterweightPad(),FVector(100,85,10),TEXT("Dark"));
-    Mark(FExpeditionWorld::ReceiverPosition(),FVector(170,130,25),TEXT("Dark"));
-    MechanismShapes.Add(Display->Shape(TEXT("SM_Ring"),Display->World(FExpeditionWorld::ReceiverPosition(),38),FVector(110,110,12),TEXT("Glow"),FRotator::ZeroRotator,false));
+    const auto& Definition=World->GetSiteDefinition();
+    for(const auto& Marker:Definition.Markers)
+    {
+        if(Marker.Id==TEXT("furnace"))continue; // Existing furnace mesh remains the shared receiver for scrap.
+        Mark(Marker.Position,FVector(Marker.Radius*2,Marker.Radius*2,6),Marker.Id==TEXT("circuit")?TEXT("Copper"):TEXT("Dark"));
+        if(Marker.Id==TEXT("receiver"))
+            MechanismShapes.Add(Display->Shape(TEXT("SM_Ring"),Display->World(Marker.Position,38),FVector(110,110,12),TEXT("Glow"),FRotator::ZeroRotator,false));
+    }
     for(const auto& O:World->GetObstacles())
         Mark(O.Center,FVector(O.HalfSize.X*2,O.HalfSize.Y*2,30),O.Role.ToString().Contains(TEXT("press"))?FName(TEXT("Hazard")):FName(TEXT("Edge")));
-    PressVisual=Display->Shape(TEXT("Cube"),Display->World(FExpeditionWorld::PressCenter(),120),
-        FVector(FExpeditionWorld::PressHalfSize().X*2,FExpeditionWorld::PressHalfSize().Y*2,18),TEXT("Hazard"),FRotator::ZeroRotator,false);
-    ArmVisual=Display->Shape(TEXT("Cube"),Display->World(FExpeditionWorld::ArmPivot(),52),FVector(90,15,16),TEXT("Brass"),FRotator::ZeroRotator,false);
-    MechanismShapes.Add(PressVisual);MechanismShapes.Add(ArmVisual);
+    PressVisual=nullptr;ArmVisual=nullptr;
+    if(Definition.bHasPress)
+    {
+        PressVisual=Display->Shape(TEXT("Cube"),Display->World(Definition.PressCenter,120),
+            FVector(Definition.PressHalfSize.X*2,Definition.PressHalfSize.Y*2,18),TEXT("Hazard"),FRotator::ZeroRotator,false);
+        MechanismShapes.Add(PressVisual);
+    }
+    if(Definition.bHasArm)
+    {
+        ArmVisual=Display->Shape(TEXT("Cube"),Display->World(Definition.ArmPivot,52),FVector(90,15,16),TEXT("Brass"),FRotator::ZeroRotator,false);
+        MechanismShapes.Add(ArmVisual);
+    }
     for(auto& P:Visuals){if(P.Value.Mesh)P.Value.Mesh->DestroyComponent();if(P.Value.Detail)P.Value.Detail->DestroyComponent();}Visuals.Reset();
 }
 void FExpeditionRuntime::UpdateVisuals(float Delta)
 {
     if(!Display)return;
     Display->Time=Elapsed;Display->Magnet=Magnet;
-    if(PressVisual)Display->Place(PressVisual,Display->World(FExpeditionWorld::PressCenter(),World->IsPressSafe()?125:55),
-        FVector(FExpeditionWorld::PressHalfSize().X*2,FExpeditionWorld::PressHalfSize().Y*2,18));
+    const auto& Definition=World->GetSiteDefinition();
+    if(PressVisual)Display->Place(PressVisual,Display->World(Definition.PressCenter,World->IsPressSafe()?125:55),
+        FVector(Definition.PressHalfSize.X*2,Definition.PressHalfSize.Y*2,18));
     if(ArmVisual)
     {
-        const FVector2D Pivot=FExpeditionWorld::ArmPivot(),Tip=World->GetArmTip(),Direction=Tip-Pivot;
+        const FVector2D Pivot=Definition.ArmPivot,Tip=World->GetArmTip(),Direction=Tip-Pivot;
         Display->Place(ArmVisual,Display->World((Pivot+Tip)*.5,52),FVector(Direction.Size(),15,16),
             FRotator(0,FMath::RadiansToDegrees(FMath::Atan2(Direction.Y,Direction.X)),0));
     }
@@ -209,13 +219,18 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
 {
     if(!Display)return;
     const auto& State=World->GetState();
-    const FVector2D Press=FExpeditionWorld::PressCenter(),Half=FExpeditionWorld::PressHalfSize();
+    const auto& Definition=World->GetSiteDefinition();
+    const auto Objectives=World->GetObjectives();
+    if(Definition.bHasPress)
+    {
+    const FVector2D Press=Definition.PressCenter,Half=Definition.PressHalfSize;
     const TArray<FVector2D> Corners={Press-Half,Press+FVector2D(Half.X,-Half.Y),Press+Half,Press+FVector2D(-Half.X,Half.Y)};
     for(int32 I=0;I<4;++I)Display->Line(C,Display->Project(Display->World(Corners[I],27)),Display->Project(Display->World(Corners[(I+1)%4],27)),World->IsPressSafe()?Copper:Red,3);
     const FVector2D PressLabel=Display->Project(Display->World(Press+FVector2D(0,-Half.Y-25),38));
     const float Phase=FMath::Fmod(State.WorldTime,5.5f);
     const FString PressHint=World->IsPressSafe()?FString::Printf(TEXT("PRESS CLOSES %.1fs"),3.4f-Phase):FString::Printf(TEXT("PRESS OPENS %.1fs"),5.5f-Phase);
     Text(C,PressHint,(PressLabel.X-Display->UX)/Display->UIScale-62,(PressLabel.Y-Display->UY)/Display->UIScale,.77f,World->IsPressSafe()?Copper:Red);
+    }
     for(const auto& B:World->GetBodies())if(IsVisible(B))
     {
         if(B.Charge>0)
@@ -234,25 +249,32 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
         for(int32 Link:B.Links)if(B.Id<Link)
             if(const auto* Other=World->FindBody(Link))if(IsVisible(*Other))
                 Display->Line(C,Display->Project(Display->World(B.Position,40)),Display->Project(Display->World(Other->Position,40)),Copper,3);
-        if(B.bGoal || B.bAnchored)
+        if(B.bGoal || B.bAnchored || B.bHot || B.bFunctional)
         {
-            Display->WorldCircle(C,B.Position,B.Radius+7,B.bGoal?Mint:Copper,2,20);
+            const FLinearColor BodyColor=B.bHot?Red:B.bGoal?Mint:Copper;
+            Display->WorldCircle(C,B.Position,B.Radius+7,BodyColor,2,20);
             const FVector2D P=Display->Project(Display->World(B.Position,65));
-            Display->DrawText(C,LabelOf(B),(P.X-Display->UX)/Display->UIScale-45,(P.Y-Display->UY)/Display->UIScale,.72f,B.bGoal?Mint:Quiet);
+            FString BodyLabel=LabelOf(B);
+            if(!B.bGoal && B.Appraisal>0)BodyLabel+=FString::Printf(TEXT(" / %d value"),B.Appraisal);
+            Display->DrawText(C,BodyLabel,(P.X-Display->UX)/Display->UIScale-45,(P.Y-Display->UY)/Display->UIScale,.72f,BodyColor);
         }
     }
-    auto Mark=[&](FVector2D Pos,const FString& Label,bool Done)
+    auto Mark=[&](FVector2D Pos,float Radius,const FString& Label,bool Done)
     {
-        Display->WorldCircle(C,Pos,36,Done?Mint:Copper,2,25);
+        Display->WorldCircle(C,Pos,Radius,Done?Mint:Copper,2,25);
         const FVector2D P=Display->Project(Display->World(Pos,48));
         Text(C,Label,(P.X-Display->UX)/Display->UIScale-45,(P.Y-Display->UY)/Display->UIScale,.73f,Done?Mint:Copper);
     };
-    Mark(FExpeditionWorld::CollarStop(),TEXT("COLLAR STOP"),State.bCollarReleased);
-    Mark(FExpeditionWorld::BallastCatch(),TEXT("BALLAST CATCH"),State.bBallastCleared);
-    Mark(FExpeditionWorld::ArmStopper(),TEXT("BRACE SLOT"),State.bArmBraced);
-    Mark(FExpeditionWorld::CircuitSocket(),TEXT("CONDUCTOR GAP"),State.bCircuitClosed);
-    Mark(FExpeditionWorld::CounterweightPad(),TEXT("COUNTERWEIGHT"),State.bCounterweightUsed);
-    Mark(FExpeditionWorld::ReceiverPosition(),TEXT("DELIVER HERE"),World->IsCoreReleased());
+    for(const auto& Marker:Definition.Markers)
+    {
+        if(Marker.Id==TEXT("furnace"))continue;
+        if(const auto* Payload=World->FindBody(Marker.LinkedBodyId);Payload&&IsVisible(*Payload)&&Payload->bAnchored)
+            Display->Line(C,Display->Project(Display->World(Marker.Position,31)),Display->Project(Display->World(Payload->Position,31)),
+                Quiet.CopyWithNewOpacity(.6f),2);
+        const auto* Objective=Objectives.FindByPredicate([&](const auto& Item){return Item.Id==Marker.Id;});
+        const bool Done=Objective?Objective->bSatisfied:Marker.Id==TEXT("receiver")&&World->IsCoreReleased();
+        Mark(Marker.Position,Marker.Radius,Marker.Label,Done);
+    }
     const FVector2D FP=Display->Project(Display->World(FExpeditionWorld::FurnacePosition(),100));
     Text(C,TEXT("E: SMELT SCRAP"),(FP.X-Display->UX)/Display->UIScale-60,(FP.Y-Display->UY)/Display->UIScale,.85f,Copper);
     if(State.TetherBody!=INDEX_NONE)if(const auto* B=World->FindBody(State.TetherBody))
@@ -305,6 +327,13 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
     {
         Display->Line(C,Display->Project(Display->World(Magnet,82)),Display->Project(Display->World(Aim,25)),Mint,2);
         const auto Cmd=CommandFor(Input.ArmedSlot);const auto P=World->Preview(Cmd,*Rig);
+        if(Cmd.Action==EExpeditionAction::Arc && P.bAllowed)
+            for(int32 I=1;I<P.BodyIds.Num();++I)
+            {
+                const auto* From=World->FindBody(P.BodyIds[I-1]);const auto* To=World->FindBody(P.BodyIds[I]);
+                if(From&&To)Display->Line(C,Display->Project(Display->World(From->Position,48)),
+                    Display->Project(Display->World(To->Position,48)),Mint,3);
+            }
         for(int32 I=1;I<P.PathPoints.Num();++I)
             Display->Line(C,Display->Project(Display->World(P.PathPoints[I-1],39)),Display->Project(Display->World(P.PathPoints[I],39)),Mint,3);
         const FString Preparation=PreparationHint(Input.ArmedSlot);
@@ -384,7 +413,9 @@ void FExpeditionRuntime::Paint(UCanvas* C)
     Display->UX=(C->ClipX-1600*Display->UIScale)*.5f;Display->UY=(C->ClipY-900*Display->UIScale)*.5f;
     Buttons.Reset();Display->Rect(C,0,0,1600,102,Panel);
     Text(C,TEXT("MAGNET SWEEP  /  EXPEDITION LAB"),26,19,1,Paper,true);
-    Text(C,TEXT("Recover machinery. Earn new capabilities. Bring the final core home."),28,60,.92f,Quiet);
+    if(Screen==EExpeditionScreen::Site || Screen==EExpeditionScreen::Depot)
+        Wrap(C,World->GetSiteDefinition().Name+TEXT(" — ")+World->GetSiteDefinition().Summary,28,57,147,.79f,Quiet);
+    else Text(C,TEXT("Recover machinery. Earn new capabilities. Bring the final core home."),28,60,.92f,Quiet);
     Text(C,FString::Printf(TEXT("SITE %d / 4       %d CREDITS"),SiteIndex+1,Rig->GetCash()),1170,32,1,Mint);
     if(Screen==EExpeditionScreen::Starter)
     {
@@ -408,10 +439,13 @@ void FExpeditionRuntime::Paint(UCanvas* C)
         Text(C,TEXT("YOUR RECOVERY"),37,149,.94f,Mint,true);
         Wrap(C,World->GetGoalText(),37,193,32,.9f,Paper);
         const auto& S=World->GetState();
-        const TArray<FString> Steps={TEXT("Collar in relief stop"),TEXT("Ballast in side catch"),TEXT("Iron brace holds arm")};
-        const bool Done[]={S.bCollarReleased,S.bBallastCleared,S.bArmBraced};
-        bool NextShown=false;
-        for(int32 I=0;I<3;++I){const bool Next=!Done[I]&&!NextShown;NextShown|=Next;Text(C,(Done[I]?TEXT("DONE  "):Next?TEXT("NEXT  "):TEXT("      "))+Steps[I],37,300+I*27,.79f,Done[I]?Mint:Next?Paper:Quiet);}
+        bool NextShown=false;int32 Step=0;
+        for(const auto& Objective:World->GetObjectives())if(Objective.bRequired)
+        {
+            const bool Next=!Objective.bSatisfied&&!NextShown;NextShown|=Next;
+            Text(C,(Objective.bSatisfied?TEXT("DONE  "):Next?TEXT("NEXT  "):TEXT("      "))+Objective.Label,
+                37,290+Step*25,.75f,Objective.bSatisfied?Mint:Next?Paper:Quiet);++Step;
+        }
         Text(C,FString::Printf(TEXT("BATTERY   %d"),World->GetBattery()),37,402,1,Mint);
         Text(C,FString::Printf(TEXT("CARGO   %.0f / 24 kg"),World->GetCargoMass()),37,435,1,World->IsUnsafe()?Red:Paper);
         if(World->IsUnsafe())Text(C,FString::Printf(TEXT("DROP NOW — %.1f s / lose 12 energy"),FMath::Max(0.f,3-S.UnsafeElapsed)),37,468,.77f,Red);
