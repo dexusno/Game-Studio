@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner requests interacting capabilities, competing prices/builds and a clear rewarding goal. Separate Expedition Frames 0.6.2 is packaged with 76 passing engine cases, real earned Gantry14 use across both late sites, and physical electrical/Reaction/cheap support alternatives. Earlier packages and receipts preserved. Native clarity, feel, remaining high-price value and replay are unproven; full goal active. Timeline unconstrained; zero time fields mean unset. No purchases or release authorized.",
+  "budget_note": "Owner requests meaningful interacting abilities, competing prices/builds and a clear rewarding goal. Expedition Choices 0.6.3 is separately packaged with 82 passing engine cases, earned Closed Circuit/Reaction complete runs, real companion purchases and explicit refit/cost forecasts. Existing packages/profiles preserved. Native feel, remaining price appeal and replay are unproven; full goal active. Next decisive action is the pending native playtest, not catalogue expansion. Timeline unconstrained; zero time fields mean unset. No purchases or release authorized.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -24,6 +24,7 @@
       "games/magnet-sweep/evidence/expedition-verification.json",
       "games/magnet-sweep/evidence/expedition-sites-verification.json",
       "games/magnet-sweep/evidence/expedition-frames-verification.json",
+      "games/magnet-sweep/evidence/expedition-choices-verification.json",
       "games/magnet-sweep/DECISIONS.md",
       "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
       "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
@@ -40,17 +41,18 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T01:29:42+00:00",
-      "record_sha256": "b2c4ab96b3e22781382b3e70214dd9b925153036f56c69a817458df5d4e20cdd",
+      "captured_at": "2026-09-13T02:07:30+00:00",
+      "record_sha256": "cbd6020d0f3f3990bd191c07fea88f2b3c66ff6686edde173a6d5b59d867dd79",
       "files": {
-        "games/magnet-sweep/STATUS.md": "510cfef3402dbc8cbe4f89391369837b5d4951c292a4518b36dfef156154b6fe",
-        "games/magnet-sweep/design/BUILD-SYSTEM.md": "0273258db9c99281b379b8085a6fd2fb7d97e5ccf2b4cba0fe1ebe8c52348c84",
-        "games/magnet-sweep/design/EXPEDITION-SITES.md": "de665ad336b427a8006e4ef8e28374fb64e115cd6545ecae4491f301de0ee195",
-        "games/magnet-sweep/QA-EXPEDITION.md": "b4b6119bd650efabf520d1bd8d86aa06cbb359b8e11a96eb55c19d2aee25ba71",
+        "games/magnet-sweep/STATUS.md": "d6127925273ff76f9b983fe9dc0359f1b6efff37188af9332abe65edb21b0624",
+        "games/magnet-sweep/design/BUILD-SYSTEM.md": "1fc1efeb769a64c27c870dfbf35875f171c7a907038a3b9acc2d065d899eb76b",
+        "games/magnet-sweep/design/EXPEDITION-SITES.md": "3a722eb2bec81a887791b0fcc77726795fc1123e006f5d4d06e9b728f6670938",
+        "games/magnet-sweep/QA-EXPEDITION.md": "2a4f9ec7a9c9a1ba38acb58ca1fee99f324b557afe04bfa53679b63851d19e96",
         "games/magnet-sweep/evidence/expedition-verification.json": "9a3d02f68314d6ac77ca4e6711061a9e45313280cd5228d29b563db6f852f7e4",
         "games/magnet-sweep/evidence/expedition-sites-verification.json": "409e9772cbc33d61d92376597f3597d241d427d15e78c8174f7069173fee721a",
         "games/magnet-sweep/evidence/expedition-frames-verification.json": "98af4fd71e78624dd79927d7f6ec60b9e34fad112c46ca0b3a04aca6203fc653",
-        "games/magnet-sweep/DECISIONS.md": "faa55dbad9b021e77e494cfa92192af15bc8e4c82174a953057839a071118134",
+        "games/magnet-sweep/evidence/expedition-choices-verification.json": "1680e274520bb5d31907edd815f55c768de529bfbe3e83c9d96facbde7487d06",
+        "games/magnet-sweep/DECISIONS.md": "d97e1e4c8a5285f104e3230d4e8e4d927dc9df00458c3ae49ed265a3256fcdd3",
         "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md": "3cce17d04e25e08f2ca9882ecdff7dd788e5504d7d349d40ef6033aa79c4f8e6",
         "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md": "c77998494876feae4e616546c6f4630f7ad640753d5898fb24304e687a03cbf0",
         "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md": "293e852f66d2af1af9fa225e2095d64b99385482fcf00b7741dec60c37cc46f3",
@@ -62,7 +64,7 @@
         "games/magnet-sweep/PRODUCTION-PLAN.md": "cfd91e32540e2aa33afa5fd60a8d4487765c55141a8c41e11c070d4f4a48dc5d",
         "games/magnet-sweep/QA-EXTRACTION.md": "5a0633eddd3baa29447a43c45653ef3e468c32f77cf4692456dec8a1495691e4",
         "games/magnet-sweep/QA-CLARITY.md": "23eb956b32abd2c075feaddaaf405db9aa8693b7111decb82930efd0272dd682",
-        "games/magnet-sweep/BUILD.md": "431894005b5126b340edc793224b54dcdc1246a5ccec451acd0059ecdcb2c6d9"
+        "games/magnet-sweep/BUILD.md": "b7d0e281fff0f909d20636753ac282f2f6d6101a3f0698e245e9a5b02892edbf"
       }
     }
   }

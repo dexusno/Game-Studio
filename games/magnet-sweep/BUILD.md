@@ -1,6 +1,22 @@
 # Magnet Sweep — build and run
 
-## Expedition Frames 0.6.2
+## Expedition Choices 0.6.3
+
+The current build adds affordable same-shop tool/support combinations, concrete purchase/refit forecasts and actual new free-starter notifications. It preserves the existing four-card stock size, earned frame routes, exact saved inventories and prior packages. A conditional support requires its actual tool to be fitted before purchase; no gear is automatically removed. Native rendering, input, sound, performance and enjoyment remain unverified.
+
+Editor compilation and 82 engine cases pass (60 Expedition behavior, one shop diagnostic, 21 legacy), report 2026.09.13-02.01.30. Build/cook/stage/archive succeeded in 39.75 seconds. The earned Closed Circuit and Reaction full runs pass; actual Relay+Flow acquisition and a legal two-tool Conductive Tether refit pass. The 128-seed diagnostic is budget/availability evidence with declared reward assumptions, not physical gameplay or proof of fun.
+
+[Play Expedition Choices.cmd](Play%20Expedition%20Choices.cmd) targets separate `BuildOutput/ExpeditionChoices/Windows` with profile `expedition_choices_preview`. The child EXE is 332,920,320 bytes, SHA-256 **3d5195fc81a5016a4a4cc2470540d774399264a698a8a2f4146ae9929b806ad6**. The package has not been launched. Exact source/artifact hashes, preserved old child hashes and verification history: [expedition-choices-verification.json](evidence/expedition-choices-verification.json).
+
+```powershell
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName ExpeditionChoices
+```
+
+Run Tests only after Editor succeeds. The former 0.6.2 reproduction commands below apply to its archived revision `0a6b2db3a134aea0c25385765cf64fc9c3e3be68`; do not overwrite that archive with current source. Native control remains stopped at the unanswered foreground handoff.
+
+## Preserved Expedition Frames 0.6.2
 
 Current source adds one optional 40 kg power frame to each new late-site revision 2. Ordinary pickup stops at 36 kg. The frame needs an actual supported move or powered hoist, then explicit E receipt at FRAME DOCK. Receipt records its current appraisal once and leaves an installed machine. Final-site installation also supplies the existing counterbalance. Existing revision 1 worlds, depots and source identities remain available.
 

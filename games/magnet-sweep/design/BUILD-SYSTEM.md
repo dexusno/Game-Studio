@@ -1,6 +1,6 @@
 # Magnet Sweep — a rig worth building
 
-Integrated recommendation, 13 September 2026, Europe/Oslo. This describes a proposed successor mode. The playable package remains Extraction E1 / 0.5.0; the expedition system below has not been implemented or playtested. No development deadline governs this design. Existing careers and the current owner session remain separate.
+Design basis, 13 September 2026, Europe/Oslo. The expedition successor is now implemented in the separate 0.6.3 prototype; [STATUS.md](../STATUS.md) records current evidence and the next acceptance step. This paper retains the design rationale and identifies remaining proposals; its descriptions are not blanket claims of implemented or enjoyable behavior. Native playtesting remains pending. No development deadline governs this design. Existing careers and the current owner session remain separate.
 
 ## Decision: keep the magnet, change the game around it
 
@@ -20,7 +20,7 @@ Each of the first three sites has one marked physical objective, optional valuab
 
 The fourth site ends in freeing and delivering a 20 kg core. It fits an empty baseline 24 kg rig; a capacity purchase is not a mandatory key. The challenge is its securing mechanisms and transport route. Progress belongs to actual clamps, supports and moved obstructions visible from entry.
 
-Between sites, buy from four saved offers, freely refit and consider half-price resale. **The recommendation is fresh run equipment with permanent discoveries, unlocked options, records and archived winning rigs.** An archived rig can be inspected and used in practice. This remains the working progression choice: Klaus has not selected between it and a persistent workshop/rig alternative. No old save is converted.
+Between sites, buy from four saved offers, freely refit and consider half-price resale. **The recommendation is fresh run equipment with permanent discoveries, unlocked options and records.** The current implementation shows the last winning rig at the ending and preserves it in records; a browsable archive and practice with archived rigs remain unimplemented proposals. This remains the working progression choice: Klaus has not selected between it and a persistent workshop/rig alternative. No old save is converted.
 
 Replay means trying the attractive purchase declined last time, discovering another interaction, preserving a device previously smashed or completing an optional risky recovery. Winning must feel worthwhile before collection completion or challenge modifiers are added.
 

@@ -17,6 +17,39 @@ namespace
 const FLinearColor Paper(.89f,.96f,.91f), Quiet(.59f,.74f,.72f), Mint(.31f,.94f,.69f);
 const FLinearColor Copper(1.f,.59f,.25f), Red(1.f,.28f,.18f), Panel(.008f,.025f,.029f,.96f);
 FString NameOf(FName Id){const auto* M=FExpeditionRig::FindModule(Id);return M?M->Name:TEXT("Empty socket");}
+bool FindCompanionPlan(const FExpeditionRig& Rig,FName Support,FName& Tool,FExpeditionPairPlan& Plan)
+{
+    if(Rig.IsCompatible(Support) || Rig.Owns(Support))return false;
+    TArray<FName> Candidates=Rig.GetOffers();
+    for(const auto& Owned:Rig.GetInventory())Candidates.AddUnique(Owned.Id);
+    for(FName Id:Candidates)
+    {
+        auto Candidate=Rig.PreviewPair(Id,Support);
+        if(Candidate.bPossible){Tool=Id;Plan=MoveTemp(Candidate);return true;}
+    }
+    return false;
+}
+FString ModuleNames(const TArray<FName>& Ids)
+{
+    FString Names;
+    for(FName Id:Ids){if(!Names.IsEmpty())Names+=TEXT(", ");Names+=NameOf(Id);}
+    return Names;
+}
+FString RequiredTools(const FExpeditionModule& Support)
+{
+    auto NamesFor=[](const TArray<FName>& Tags,const TCHAR* Separator)
+    {
+        FString Names;
+        for(FName Tag:Tags)for(const auto& Tool:FExpeditionRig::Catalog())
+            if(Tool.Kind==EExpeditionModuleKind::Active && Tool.Provides.Contains(Tag))
+            {if(!Names.IsEmpty())Names+=Separator;Names+=Tool.Name;}
+        return Names;
+    };
+    FString Result=NamesFor(Support.RequiresAll,TEXT(" + "));
+    const FString Any=NamesFor(Support.RequiresAny,TEXT(" or "));
+    if(!Any.IsEmpty()){if(!Result.IsEmpty())Result+=TEXT(" + ");Result+=Any;}
+    return Result;
+}
 FName MaterialOf(const FExpeditionBody& B)
 {
     if(B.bHot) return TEXT("Hazard"); if(B.bGoal) return TEXT("Core");
@@ -394,11 +427,22 @@ void FExpeditionRuntime::RenderDepot(UCanvas* C)
     {
         const auto* M=FExpeditionRig::FindModule(Offer);if(!M)continue;
         const int32 Index=Catalog.IndexOfByPredicate([&](const auto& V){return V.Id==Offer;});
-        const float X=260+(I%2)*535,Y=255+(I/2)*110;++I;
+        const float X=260+(I%2)*535,Y=255+(I/2)*118;++I;
         AddButton(C,1000+Index,FString::Printf(TEXT("%s   %d credits   %d socket%s"),*M->Name,M->Price,M->Slots,M->Slots==1?TEXT(""):TEXT("s")),X,Y,505,36);
-        Wrap(C,M->Description,X+8,Y+44,65,.79f);
+        FName PairTool;FExpeditionPairPlan Pair;
+        if(FindCompanionPlan(*Rig,M->Id,PairTool,Pair))
+        {
+            Text(C,FString::Printf(TEXT("With %s / %d credits total"),*NameOf(PairTool),Pair.Cost),X+8,Y+43,.73f,Copper);
+            Wrap(C,M->Description,X+8,Y+63,76,.70f);
+        }
+        else if(!Rig->IsCompatible(M->Id))
+        {
+            Text(C,TEXT("Requires ")+RequiredTools(*M),X+8,Y+43,.73f,Copper);
+            Wrap(C,M->Description,X+8,Y+63,76,.70f);
+        }
+        else Wrap(C,M->Description,X+8,Y+44,65,.79f);
     }
-    if(!Rig->HasVerifiedShopPair())Wrap(C,Rig->GetShopNotice(),260,490,125,.85f,Copper);
+    if(!Rig->HasVerifiedShopPair())Text(C,TEXT("Limited current-rig choices. Refit, keep your rig, or save."),260,490,.78f,Copper);
     float X=260,Y=510;Text(C,TEXT("OWNED — click to inspect, fit or sell"),X,Y,.85f,Quiet);Y+=28;
     for(const auto& Owned:Rig->GetInventory())
     {
@@ -414,15 +458,40 @@ void FExpeditionRuntime::RenderDepot(UCanvas* C)
     AddButton(C,11,TEXT("Precharge next site +20 battery / 4 cr"),260,684,410,36,!Rig->IsPrecharged()&&Rig->GetCash()>=4);
     if(Catalog.IsValidIndex(SelectedModule))
     {
-        const auto& M=Catalog[SelectedModule];Display->Rect(C,230,741,1150,112,Panel);
+        const auto& M=Catalog[SelectedModule];Display->Rect(C,230,741,1150,143,Panel);
         Text(C,M.Name,254,751,.98f,Paper);Wrap(C,M.Description,254,780,89,.82f);
         FString BuyReason,FitReason;const bool CanBuy=Rig->CanBuy(M.Id,BuyReason),CanFit=Rig->CanFit(M.Id,FitReason);
-        AddButton(C,12,TEXT("BUY"),1020,748,150,32,CanBuy);
+        const auto Purchase=Rig->PreviewPurchase(M.Id);
+        AddButton(C,12,CanBuy?(Purchase.bFitsNow?TEXT("BUY + FIT"):TEXT("BUY / STORE")):TEXT("BUY"),1020,748,150,32,CanBuy);
         AddButton(C,13,TEXT("FIT"),1185,748,160,32,CanFit);
         AddButton(C,14,TEXT("UNFIT"),1020,792,150,32,Rig->GetFittedActives().Contains(M.Id)||Rig->GetFittedPassives().Contains(M.Id));
         AddButton(C,15,FString::Printf(TEXT("SELL / %d cr"),Rig->GetResaleValue(M.Id)),1185,792,160,32,Rig->Owns(M.Id));
         const bool Fitted=Rig->GetFittedActives().Contains(M.Id)||Rig->GetFittedPassives().Contains(M.Id);
-        const FString Block=Rig->Owns(M.Id)?(!Fitted&&!CanFit?FitReason:!Rig->Has(M.Id)&&Fitted?TEXT("Inactive: fit the active tool required by this support."):TEXT("")):!CanBuy?BuyReason:TEXT("");
+        FString Block=Rig->Owns(M.Id)?(!Fitted&&!CanFit?FitReason:!Rig->Has(M.Id)&&Fitted?TEXT("Inactive: fit the active tool required by this support."):TEXT("")):!CanBuy?BuyReason:TEXT("");
+        if(!Rig->Owns(M.Id) && CanBuy)
+            Block=Purchase.bFitsNow?FString::Printf(TEXT("After purchase: %d credits. Installs now; your current equipment stays fitted."),Purchase.CreditsAfter):
+                FString::Printf(TEXT("After purchase: %d credits. Stored until you free %d %s socket%s; nothing is removed automatically."),Purchase.CreditsAfter,
+                    Purchase.SlotsToFree,M.Kind==EExpeditionModuleKind::Active?TEXT("tool"):TEXT("passive"),Purchase.SlotsToFree==1?TEXT(""):TEXT("s"));
+        FName PairTool;FExpeditionPairPlan Pair;
+        if(FindCompanionPlan(*Rig,M.Id,PairTool,Pair))
+        {
+            Block=FString::Printf(TEXT("Requires %s fitted. %d credits to %s; %d remain."),*NameOf(PairTool),Pair.Cost,
+                Rig->Owns(PairTool)?TEXT("complete the pair"):TEXT("buy both"),Pair.CreditsAfter);
+            TArray<FName> Removed=Pair.UnfitActives;Removed.Append(Pair.UnfitPassives);
+            Block+=Removed.IsEmpty()?TEXT(" Both fit without removing equipment."):
+                TEXT(" One valid refit: unfit ")+ModuleNames(Removed)+TEXT(" (kept in inventory).");
+            Block+=Rig->Owns(PairTool)?TEXT(" Fit your tool, then buy and fit this support."):
+                TEXT(" Buy and fit the tool, then this support.");
+        }
+        else if(!Rig->IsCompatible(M.Id))Block=TEXT("Requires fitted tools: ")+RequiredTools(M)+TEXT(". ")+Block;
+        const auto Disabled=Rig->DisabledByUnfit(M.Id);
+        if(!Disabled.IsEmpty())
+        {
+            if(!Block.IsEmpty())Block+=TEXT(" ");Block+=TEXT("Unfitting this tool disables: ");
+            for(int32 DisabledIndex=0;DisabledIndex<Disabled.Num();++DisabledIndex)
+            {if(DisabledIndex)Block+=TEXT(", ");Block+=NameOf(Disabled[DisabledIndex]);}
+            Block+=TEXT(". Those parts remain owned.");
+        }
         if(!Block.IsEmpty())Wrap(C,Block,254,836,126,.71f,Copper);
     }
 }
@@ -442,7 +511,7 @@ void FExpeditionRuntime::Paint(UCanvas* C)
     {
         Display->Rect(C,285,155,1030,588,Panel);
         Text(C,TEXT("CHOOSE YOUR STARTING TOOL"),322,185,1,Paper,true);
-        Wrap(C,TEXT("Run equipment and credits start fresh. Discoveries and archived winning rigs stay. Your previous career is separate."),322,226,110,.95f);
+        Wrap(C,TEXT("Run equipment and credits start fresh; discoveries and your last winning rig stay. Recover a core while owning a new tool to unlock it as a free starter next run."),322,226,110,.95f);
         const TArray<FName> Starters={TEXT("extraction_coil"),TEXT("rail_impeller"),TEXT("arc_driver"),TEXT("anchor_winch"),TEXT("vector_emitter"),TEXT("relay_projector")};
         for(int32 I=0;I<Starters.Num();++I)
         {
@@ -555,7 +624,7 @@ void FExpeditionRuntime::Paint(UCanvas* C)
         Wrap(C,Screen==EExpeditionScreen::Victory?TEXT("You built this rig and brought the machine home. Your winning loadout is archived. Which capability would you choose differently next time?"):
              TEXT("Dispatched discoveries remain. Start another expedition with a different tool, or return later."),365,352,96,1,Paper);
         int32 TotalOutput=0;for(int32 I=0;I<4;++I)TotalOutput+=Rig->GetOutput(I);
-        Text(C,FString::Printf(TEXT("Refined output: %d    Completed expeditions: %d"),TotalOutput,Rig->GetRecords().RunsWon),365,434,.9f,Copper);
+        Text(C,FString::Printf(TEXT("Recovered output: %d    Completed expeditions: %d"),TotalOutput,Rig->GetRecords().RunsWon),365,434,.9f,Copper);
         if(Screen==EExpeditionScreen::Victory)
         {
             FString Build=TEXT("Your recovered rig: ");

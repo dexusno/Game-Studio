@@ -27,6 +27,26 @@ struct FExpeditionOwnedModule
     int32 Paid = 0; // Actual basis: free starter/found equipment resells for zero.
 };
 
+struct FExpeditionPurchasePlan
+{
+    bool bCanBuy = false;
+    bool bFitsNow = false;
+    int32 CreditsAfter = 0;
+    int32 SlotsToFree = 0;
+    FString Reason;
+};
+
+// One possible explicit refit, never an automatic equipment change.
+struct FExpeditionPairPlan
+{
+    bool bPossible = false;
+    int32 Cost = 0;
+    int32 CreditsAfter = 0;
+    TArray<FName> UnfitActives;
+    TArray<FName> UnfitPassives;
+    FString Reason;
+};
+
 struct FExpeditionRigRecords
 {
     int32 RunsStarted = 0;
@@ -65,6 +85,9 @@ public:
     bool Depart(FString& Reason);
 
     bool CanBuy(FName Id, FString& Reason) const;
+    FExpeditionPurchasePlan PreviewPurchase(FName Id) const;
+    FExpeditionPairPlan PreviewPair(FName ActiveId, FName SupportId) const;
+    TArray<FName> DisabledByUnfit(FName Id) const;
     bool Buy(FName Id, FString& Reason);
     bool CanFit(FName Id, FString& Reason) const;
     bool Fit(FName Id, FString& Reason);
@@ -138,6 +161,7 @@ private:
 
     bool CompatibleWith(FName Id, const TArray<FName>& Actives) const;
     bool CanUseAfterRefit(FName Id) const;
+    FExpeditionPairPlan PlanPair(FName ActiveId, FName SupportId, bool bRequireStock) const;
     bool AtShop(FString& Reason) const;
     void Discover(FName Id);
 };

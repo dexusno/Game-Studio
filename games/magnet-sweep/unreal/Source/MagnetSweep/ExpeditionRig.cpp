@@ -368,9 +368,19 @@ bool FExpeditionRig::GenerateOffers(FString& Reason)
         return M.Kind == EExpeditionModuleKind::Active && M.Price <= Cash;
     });
     if (!Alternative) Alternative = Pick([&](const FExpeditionModule& M) { return M.Price <= Cash; });
-    // Remaining stock still needs real capability/opportunity compatibility;
-    // expensive aspirational items are not counted as the affordable pair.
-    Pick([](const FExpeditionModule& M) { return M.Kind == EExpeditionModuleKind::Active; });
+    // A newly offered tool can bring one affordable companion into this same
+    // saved shop. It is conditional on fitting that tool, so never counts as the
+    // guaranteed support for the current rig. Do not reroll the chosen active.
+    FName NewActive;
+    for (FName Id : Offers) if (FindModule(Id)->Kind == EExpeditionModuleKind::Active) { NewActive=Id; break; }
+    TArray<FName> Companions;
+    if (!NewActive.IsNone())
+        for (const auto& M : Catalog())
+            if (M.Kind == EExpeditionModuleKind::Passive && !Owns(M.Id) && !Offers.Contains(M.Id)
+                && !IsCompatible(M.Id) && PlanPair(NewActive,M.Id,false).bPossible) Companions.Add(M.Id);
+    if (!Companions.IsEmpty()) Offers.Add(Companions[Random.RandRange(0,Companions.Num()-1)]);
+    else Pick([](const FExpeditionModule& M) { return M.Kind == EExpeditionModuleKind::Active; });
+    // Expensive aspirations are not counted as the affordable current-rig pair.
     if (Offers.Num() < 4) Pick([](const FExpeditionModule& M) { return M.Price >= 14; });
     while (Offers.Num() < 4 && Pick([](const FExpeditionModule&) { return true; })) {}
     GeneratedStock = Offers; bOffersGenerated = true;
@@ -400,6 +410,81 @@ bool FExpeditionRig::CanBuy(FName Id, FString& Reason) const
     if (Cash < M->Price) return Refuse(Reason,TEXT("Not enough credits."));
     if (TotalPurchased > MaxLedger-M->Price) return Refuse(Reason,TEXT("Expedition transaction limit reached."));
     Reason.Reset(); return true;
+}
+
+FExpeditionPurchasePlan FExpeditionRig::PreviewPurchase(FName Id) const
+{
+    FExpeditionPurchasePlan Plan;Plan.CreditsAfter=Cash;
+    const auto* Module=FindModule(Id);
+    if(!Module){Plan.Reason=TEXT("Unknown module.");return Plan;}
+    Plan.CreditsAfter=Cash-Module->Price;
+    const int32 Limit=Module->Kind==EExpeditionModuleKind::Active?ActiveSlots:PassiveSlots;
+    Plan.SlotsToFree=FMath::Max(0,GetUsedSlots(Module->Kind)+Module->Slots-Limit);
+    Plan.bCanBuy=CanBuy(Id,Plan.Reason);
+    if(!Plan.bCanBuy)return Plan;
+    // Run the same transaction/fitting rules on a copy. Inspection must never
+    // spend credits, change inventory, eject equipment or reroll saved stock.
+    FExpeditionRig Candidate=*this;
+    if(!Candidate.Buy(Id,Plan.Reason)){Plan.bCanBuy=false;return Plan;}
+    Plan.bFitsNow=Candidate.Fit(Id,Plan.Reason);
+    return Plan;
+}
+
+FExpeditionPairPlan FExpeditionRig::PreviewPair(FName ActiveId, FName SupportId) const
+{
+    return PlanPair(ActiveId,SupportId,true);
+}
+
+FExpeditionPairPlan FExpeditionRig::PlanPair(FName ActiveId, FName SupportId, bool bRequireStock) const
+{
+    FExpeditionPairPlan Plan;Plan.CreditsAfter=Cash;
+    const auto* Active=FindModule(ActiveId);const auto* Support=FindModule(SupportId);
+    if(!AtShop(Plan.Reason))return Plan;
+    if(!Active || !Support || Active->Kind!=EExpeditionModuleKind::Active || Support->Kind!=EExpeditionModuleKind::Passive)
+    {Plan.Reason=TEXT("Choose one active tool and its support.");return Plan;}
+    Plan.Cost=(Owns(ActiveId)?0:Active->Price)+Support->Price;Plan.CreditsAfter=Cash-Plan.Cost;
+    if(Owns(SupportId) || (bRequireStock && !Offers.Contains(SupportId)) || (!Owns(ActiveId) && !Offers.Contains(ActiveId)))
+    {Plan.Reason=TEXT("The required equipment is not in this saved stock or inventory.");return Plan;}
+    if(!IsImplemented(ActiveId) || !IsImplemented(SupportId) || !HasOpportunity(SupportId)
+        || (!Owns(ActiveId) && !HasOpportunity(ActiveId)))
+    {Plan.Reason=TEXT("This worksite does not support that combination.");return Plan;}
+    if(Plan.CreditsAfter<0){Plan.Reason=TEXT("Not enough credits for both parts.");return Plan;}
+    FExpeditionRig Purchased=*this;
+    // During generation only, test this candidate before it joins saved stock.
+    // Public inspection always requires actual stock. Neither path changes us.
+    if(!bRequireStock)Purchased.Offers.AddUnique(SupportId);
+    if(!Purchased.Owns(ActiveId) && !Purchased.Buy(ActiveId,Plan.Reason))return Plan;
+    auto CountBits=[](int32 Mask){int32 Count=0;for(;Mask;Mask>>=1)Count+=Mask&1;return Count;};
+    for(int32 Removed=0;Removed<=FittedActives.Num()+FittedPassives.Num();++Removed)
+        for(int32 A=0;A<(1<<FittedActives.Num());++A)
+            for(int32 P=0;P<(1<<FittedPassives.Num());++P)
+            {
+                if(CountBits(A)+CountBits(P)!=Removed)continue;
+                FExpeditionRig Candidate=Purchased;FString Why;
+                TArray<FName> RemovedActives,RemovedPassives;
+                for(int32 Index=0;Index<FittedActives.Num();++Index)if(A&(1<<Index))
+                {Candidate.Unfit(FittedActives[Index],Why);RemovedActives.Add(FittedActives[Index]);}
+                for(int32 Index=0;Index<FittedPassives.Num();++Index)if(P&(1<<Index))
+                {Candidate.Unfit(FittedPassives[Index],Why);RemovedPassives.Add(FittedPassives[Index]);}
+                // Validate the actual retained tools. Arc+Winch supports must
+                // never be justified by imagining a third simultaneous active.
+                if(!Candidate.FittedActives.Contains(ActiveId) && !Candidate.Fit(ActiveId,Why))continue;
+                if(!Candidate.Buy(SupportId,Why) || !Candidate.Fit(SupportId,Why)
+                    || !Candidate.Has(ActiveId) || !Candidate.Has(SupportId) || !Candidate.CanDepart(Why))continue;
+                Plan.bPossible=true;Plan.UnfitActives=MoveTemp(RemovedActives);Plan.UnfitPassives=MoveTemp(RemovedPassives);
+                Plan.Reason.Reset();return Plan;
+            }
+    Plan.Reason=TEXT("No legal refit can operate both parts with the available tools and sockets.");
+    return Plan;
+}
+
+TArray<FName> FExpeditionRig::DisabledByUnfit(FName Id) const
+{
+    TArray<FName> Disabled;FExpeditionRig Candidate=*this;FString Reason;
+    if(!Candidate.Unfit(Id,Reason))return Disabled;
+    for(FName Support:FittedPassives)
+        if(Support!=Id && Has(Support) && !Candidate.Has(Support))Disabled.Add(Support);
+    return Disabled;
 }
 
 bool FExpeditionRig::Buy(FName Id, FString& Reason)

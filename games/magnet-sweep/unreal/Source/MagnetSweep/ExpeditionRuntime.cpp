@@ -368,15 +368,19 @@ void FExpeditionRuntime::BankOrDeliver()
         const auto R=World->Dispatch(); Show(R.Message);
         if(R.bSucceeded)
         {
+            const auto PreviousStarters=Rig->GetRecords().UnlockedStarters;
             const int32 Pay=Rig->AwardSite(SiteIndex);
-            if(SiteIndex==3){Screen=EExpeditionScreen::Victory; Show(TEXT("CORE RECOVERED. Your winning rig is archived."),TEXT("contract_success"));}
+            FString Unlocks;
+            for(FName Starter:Rig->GetRecords().UnlockedStarters)if(!PreviousStarters.Contains(Starter))
+                Unlocks+=TEXT(" ")+ToolName(Starter)+TEXT(" unlocked as a free starter.");
+            if(SiteIndex==3){Screen=EExpeditionScreen::Victory; Show(TEXT("CORE RECOVERED. Your winning rig is archived.")+Unlocks,TEXT("contract_success"));}
             else
             {
                 ++SiteIndex; World->StartSite(SiteIndex,Rig->GetSeed()+SiteIndex);
                 Rig->SetShopContext(World->GetOpportunityTags(),ImplementedModules());
                 FString Reason;
                 if(!Rig->NextDepot(Reason)) Show(Reason);
-                else Show(FString::Printf(TEXT("Recovery complete: +%d credits. Choose the next rig improvement."),Pay),TEXT("contract_success"));
+                else Show(FString::Printf(TEXT("Recovery complete: +%d credits. Choose the next rig improvement."),Pay)+Unlocks,TEXT("contract_success"));
                 Screen=EExpeditionScreen::Depot; BuildMechanismVisuals();
             }
             SiteEntry.Reset();

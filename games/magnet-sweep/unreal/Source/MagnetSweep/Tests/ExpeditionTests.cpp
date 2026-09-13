@@ -684,19 +684,33 @@ bool FExpeditionEarnedShopPivotTest::RunTest(const FString& Parameters)
         const auto* Module = FExpeditionRig::FindModule(Id);
         if (Module && Module->Kind == EExpeditionModuleKind::Active && Runtime.Rig->CanBuy(Id, Error)) Alternatives.Add(Id);
     }
-    if (!TestTrue(TEXT("Earned shop provides two independently purchasable active directions"), Alternatives.Num() >= 2)) return false;
+    if (!TestTrue(TEXT("Earned shop provides an independently purchasable new active direction"), Alternatives.Num() >= 1)) return false;
     if (!TestTrue(TEXT("Earned funds buy and fit a second active"),
         Runtime.Rig->Buy(Alternatives[0], Error) && Runtime.Rig->Fit(Alternatives[0], Error))) return false;
+    // The same shop may now offer a companion instead of a second active
+    // wildcard. Earn the next actual depot before testing a different pivot.
+    Runtime.Depart();
+    const bool NextRecovered=RuntimeRecoverCore(Runtime,Error);
+    if (!TestTrue(*FString::Printf(TEXT("The purchased rig reaches another real shop through physical core recovery: %s"),*Error),NextRecovered)) return false;
+    Runtime.Key(EKeys::E,true);
+    if (!TestTrue(TEXT("The real second dispatch opens the rack's saved stock"),Runtime.Screen==EExpeditionScreen::Depot && Runtime.SiteIndex==2)) return false;
+    FName Pivot;
+    for (FName Id:Runtime.Rig->GetOffers())
+        if (const auto* M=FExpeditionRig::FindModule(Id); M && M->Kind==EExpeditionModuleKind::Active && Runtime.Rig->CanBuy(Id,Error)) {Pivot=Id;break;}
+    if (!TestFalse(TEXT("The actually earned next shop offers a different active pivot"),Pivot.IsNone())) return false;
     const int32 BeforeSale = Runtime.Rig->GetCash();
     TestTrue(TEXT("Paid active can be sold while a working starter remains"), Runtime.Rig->Sell(Alternatives[0], Error));
     TestEqual(TEXT("Resale uses the actual 10-credit purchase basis"), Runtime.Rig->GetCash(), BeforeSale + 5);
     TestTrue(TEXT("Early specialist can be sold for a deliberate pivot"), Runtime.Rig->Sell(Support, Error));
     TestEqual(TEXT("Odd-price support resale rounds down, never mints money"), Runtime.Rig->GetCash(), BeforeSale + 5 + SupportPrice / 2);
     TestTrue(TEXT("The remaining saved offer supports a real affordable pivot"),
-        Runtime.Rig->Buy(Alternatives[1], Error) && Runtime.Rig->Fit(Alternatives[1], Error));
+        Runtime.Rig->Buy(Pivot, Error) && Runtime.Rig->Fit(Pivot, Error));
     TestFalse(TEXT("Sold item is not silently restocked for another cycle"), Runtime.Rig->GetOffers().Contains(Alternatives[0]));
     TestTrue(TEXT("The replacement rig can actually depart"), Runtime.Rig->CanDepart(Error));
     TestTrue(TEXT("Final earned transaction history validates"), Runtime.Rig->Validate(Error));
+    FExpeditionRuntime Restored(nullptr);
+    if (!TestTrue(TEXT("The real purchase, sale and chosen pivot restore as one earned session"),Restored.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    TestTrue(TEXT("Restored money, fitted pivot and original remaining stock are exact"),Restored.Rig->GetCash()==Runtime.Rig->GetCash() && Restored.Rig->Has(Pivot) && Restored.Rig->GetOffers()==Runtime.Rig->GetOffers() && !Restored.Rig->Owns(Alternatives[0]));
     return true;
 }
 
@@ -2317,7 +2331,7 @@ bool FExpeditionEarnedGantryFrameTest::RunTest(const FString& Parameters)
     TestEqual(TEXT("Buying the repriced specialist leaves ten genuinely earned credits"),Runtime.Rig->GetCash(),10);
     if (!TestTrue(TEXT("The player explicitly fits the purchased two-socket support"),Runtime.Rig->Fit(TEXT("walking_gantry"),Error))) return false;
     TestEqual(TEXT("The actual purchase retains its fourteen-credit receipt"),Runtime.Rig->GetResaleValue(TEXT("walking_gantry")),7);
-    TestTrue(TEXT("The generated ten-credit Arc remains a real affordable second-tool choice"),Runtime.Rig->GetOffers().Contains(TEXT("arc_driver")) && Runtime.Rig->CanBuy(TEXT("arc_driver"),Error));
+    TestTrue(TEXT("An actual generated ten-credit active remains an affordable second-tool choice"),Runtime.Rig->GetOffers().ContainsByPredicate([&](FName Id){const auto* M=FExpeditionRig::FindModule(Id);return M && M->Kind==EExpeditionModuleKind::Active && M->Price==10 && Runtime.Rig->CanBuy(Id,Error);}));
     FExpeditionRuntime Restored(nullptr);
     if (!TestTrue(TEXT("The actual paid purchase and generated depot restore"),Restored.DecodeSave(Runtime.EncodeSave(),Error))) return false;
     Restored.Depart();
@@ -2746,6 +2760,385 @@ bool FExpeditionFrameRetainedCoreSupportTest::RunTest(const FString& Parameters)
     }
     TestEqual(TEXT("Gantry uses three real preparatory grips plus its coupled tow"),Cost[0],32);
     TestEqual(TEXT("Cheaper remote correction uses the same grips plus two ten-energy tows"),Cost[1],38);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionEarnedClosedCircuitRunTest,
+    "MagnetSweep.Expedition.EarnedClosedCircuitCompletesBothLateFramesAndEntireRun",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionEarnedClosedCircuitRunTest::RunTest(const FString& Parameters)
+{
+    // Entire run is earned from the ordinary Arc starter. No free equipment,
+    // outcome flags, replacement stock, source values or synthetic cash.
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    const bool Earned=EarnFirstSiteKeystoneBudget(Runtime,TEXT("arc_driver"),1,Error);
+    if (!TestTrue(*FString::Printf(TEXT("Actual Arc start earns 120 output and the first core's twenty-four-credit depot: %s"),*Error),Earned)) return false;
+    if (!TestTrue(TEXT("Actual seed-one stock offers Closed Circuit"),Runtime.Rig->GetOffers().Contains(TEXT("closed_circuit")))) return false;
+    if (!TestTrue(TEXT("The actual twenty-four-credit Closed Circuit purchase succeeds"),Runtime.Rig->Buy(TEXT("closed_circuit"),Error))) return false;
+    TestEqual(TEXT("The earned capstone consumes exactly the available wallet"),Runtime.Rig->GetCash(),0);
+    if (!TestTrue(TEXT("The bought capstone is explicitly fitted"),Runtime.Rig->Fit(TEXT("closed_circuit"),Error))) return false;
+    TestEqual(TEXT("The actual paid receipt preserves twelve-credit resale"),Runtime.Rig->GetResaleValue(TEXT("closed_circuit")),12);
+    FExpeditionRuntime Resumed(nullptr);
+    const bool Loaded=Resumed.DecodeSave(Runtime.EncodeSave(),Error);
+    if (!TestTrue(*FString::Printf(TEXT("The genuinely earned paid depot restores: %s"),*Error),Loaded)) return false;
+    Resumed.Depart();
+    const bool SecondCore=RuntimeRecoverCore(Resumed,Error);
+    if (!TestTrue(*FString::Printf(TEXT("The earned Arc rig completes its next actual baseline core: %s"),*Error),SecondCore)) return false;
+    Resumed.Key(EKeys::E,true);
+    if (!TestTrue(TEXT("Real second dispatch reaches the rack depot"),Resumed.Screen==EExpeditionScreen::Depot && Resumed.SiteIndex==2)) return false;
+    TestEqual(TEXT("Only the real second core earned its twelve-credit payment"),Resumed.Rig->GetCash(),12);
+
+    for (int32 Site : {2,3})
+    {
+        Resumed.Depart();
+        if (!TestTrue(TEXT("The earned rig enters the actual late frame definition"),Resumed.Screen==EExpeditionScreen::Site && Resumed.World->FindFrameBody()!=nullptr)) return false;
+        const int32 Frame=Resumed.World->FindFrameBody()->Id, BeforeCash=Resumed.Rig->GetCash();
+        if (!TestTrue(*FString::Printf(TEXT("The actual return tile is picked up on site%d: %s"),Site,*Error),RuntimePickBody(Resumed,64,{-25,0},Error))) return false;
+        RuntimePlaceHaul(Resumed,Resumed.World->FindMarker(TEXT("frame_loop"))->Position);
+        const FVector2D Tile=Resumed.World->FindBody(64)->Position;
+        if (!TestTrue(*FString::Printf(TEXT("Actual tile placement completes the marked return on site%d at(%.2f,%.2f)"),Site,Tile.X,Tile.Y),FVector2D::Distance(Tile,Resumed.World->FindMarker(TEXT("frame_loop"))->Position)<10)) return false;
+        Resumed.Aim=Resumed.World->FindBody(62)->Position;
+        const auto Preview=Resumed.World->Preview(Resumed.CommandFor(0),*Resumed.Rig);
+        if (!TestTrue(*FString::Printf(TEXT("The purchased capstone can actually energize this completed return: %s"),*Preview.Reason),Preview.bAllowed)) return false;
+        Resumed.Key(EKeys::Q,true); Resumed.Key(EKeys::Q,false);
+        TestEqual(TEXT("The actual paired operation spends the two finite source charges"),Resumed.World->FindBody(Frame)->Charge,0);
+        if (!TestTrue(TEXT("Paid Closed Circuit starts a real receiving hoist"),Resumed.World->GetState().bFrameHoistActive)) return false;
+        Resumed.Aim=Resumed.Magnet; RuntimeAdvance(Resumed,5.f);
+        RuntimeMove(Resumed,Resumed.World->FindMarker(TEXT("frame_receiver"))->Position); RuntimeAdvance(Resumed,1.f);
+        const bool Ready=Resumed.World->CanReceiveFrame(Error);
+        const auto* Body=Resumed.World->FindBody(Frame);
+        AddInfo(FString::Printf(TEXT("Earned Closed Circuit site%d: frame(%.2f,%.2f), speed%.2f, appraisal%d, battery%d, cash%d, receipt: %s"),Site,Body->Position.X,Body->Position.Y,Body->Velocity.Size(),Body->Appraisal,Resumed.World->GetBattery(),Resumed.Rig->GetCash(),*Error));
+        if (!TestTrue(*FString::Printf(TEXT("Actual earned circuit motion reaches the receiving dock: %s"),*Error),Ready)) return false;
+        TestEqual(TEXT("Tile pickup plus one completed-return pulse costs fourteen"),Resumed.World->GetBattery(),86);
+        TestEqual(TEXT("Physical circuit operation still earns nothing before E"),Resumed.World->GetOutput(),0);
+        TestEqual(TEXT("No cash arrives from merely using the paid module"),Resumed.Rig->GetCash(),BeforeCash);
+        const int32 Appraisal=Body->Appraisal;
+        TestTrue(TEXT("The actual recovered frame retains meaningful appraisal"),Appraisal>=240);
+        Resumed.Key(EKeys::E,true); Resumed.Key(EKeys::E,true);
+        TestEqual(TEXT("Actual E installs one frame and pays its current appraisal once"),Resumed.World->GetOutput(),Appraisal);
+        TestEqual(TEXT("Only the rack's real refinement milestone adds credits"),Resumed.Rig->GetCash(),BeforeCash+(Site==2?2:0));
+        if (Site==2)
+        {
+            const bool Core=RuntimeRecoverCore(Resumed,Error);
+            if (!TestTrue(*FString::Printf(TEXT("The earned circuit recovery leaves a physical balanced-core route: %s"),*Error),Core)) return false;
+            Resumed.Key(EKeys::E,true);
+            if (!TestTrue(TEXT("The actual balanced core reaches the final depot"),Resumed.Screen==EExpeditionScreen::Depot && Resumed.SiteIndex==3)) return false;
+            TestEqual(TEXT("Real rack frame and core awards leave twenty-eight earned credits"),Resumed.Rig->GetCash(),28);
+        }
+        else
+        {
+            // The installed frame supplies the counterbalance, so do not
+            // perform an unnecessary stage-and-regrip sequence for proof.
+            const int32 Cover=RoleBody(*Resumed.World,TEXT("counterweight_cover")), Core=RoleBody(*Resumed.World,TEXT("core"));
+            if (!TestTrue(TEXT("The actual final cover still must be moved"),RuntimePickBody(Resumed,Cover,{0,25},Error))) return false;
+            RuntimePlaceHaul(Resumed,Resumed.World->FindMarker(TEXT("cover"))->Position);
+            if (!TestTrue(TEXT("The actual final core still must be physically secured"),RuntimePickBody(Resumed,Core,{0,25},Error))) return false;
+            RuntimeMove(Resumed,{Resumed.Magnet.X,-260}); RuntimeMove(Resumed,FExpeditionWorld::ReceiverPosition());
+            Resumed.Key(EKeys::E,true);
+            TestTrue(TEXT("The actually earned Closed Circuit run wins through the real final receiver"),Resumed.Screen==EExpeditionScreen::Victory && Resumed.Rig->IsRunWon());
+            TestEqual(TEXT("Winning does not invent another currency award"),Resumed.Rig->GetCash(),28);
+            FExpeditionRuntime Won(nullptr);
+            if (!TestTrue(TEXT("The actual winning paid rig and its recovered outputs restore"),Won.DecodeSave(Resumed.EncodeSave(),Error))) return false;
+            TestTrue(TEXT("Winning restore retains the paid capstone and completed expedition"),Won.Rig->IsRunWon() && Won.Rig->GetResaleValue(TEXT("closed_circuit"))==12);
+        }
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionEarnedReactionRunTest,
+    "MagnetSweep.Expedition.EarnedArcVectorReactionRunUnlocksStarterAndCompletesBothFrames",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionEarnedReactionRunTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    // Seed selection is an explicitly separate budget-model probe. Its assumed
+    // awards are never copied into Runtime: the selected seed must repeat the
+    // entire actual collection, purchase and core route below.
+    int32 SelectedSeed=0;
+    for (int32 Seed=1; Seed<=128 && SelectedSeed==0; ++Seed)
+    {
+        FExpeditionWorld ProbeWorld; ProbeWorld.StartSite(0,Seed); FExpeditionRig Probe;
+        if (!Configure(Probe,ProbeWorld,TEXT("arc_driver"),Seed) || !Probe.Depart(Error)) continue;
+        Probe.AwardOutput(0,120); Probe.AwardSite(0);
+        ProbeWorld.StartSite(1,Seed+1); Probe.SetShopContext(ProbeWorld.GetOpportunityTags(),Implemented());
+        if (!Probe.NextDepot(Error) || !Probe.Buy(TEXT("vector_emitter"),Error) || !Probe.Fit(TEXT("vector_emitter"),Error) || !Probe.Depart(Error)) continue;
+        Probe.AwardSite(1); ProbeWorld.StartSite(2,Seed+2); Probe.SetShopContext(ProbeWorld.GetOpportunityTags(),Implemented());
+        if (Probe.NextDepot(Error) && Probe.CanBuy(TEXT("reaction_frame"),Error)) SelectedSeed=Seed;
+    }
+    if (!TestTrue(TEXT("A bounded actual-generator budget probe finds a complete prospective purchase path"),SelectedSeed>0)) return false;
+    AddInfo(FString::Printf(TEXT("Earned Reaction physical replay uses generator-selected seed%d; budget probe outcomes are discarded."),SelectedSeed));
+    const bool Earned=EarnFirstSiteKeystoneBudget(Runtime,TEXT("arc_driver"),SelectedSeed,Error);
+    if (!TestTrue(*FString::Printf(TEXT("Actual selected-seed Arc start earns the twenty-four-credit depot: %s"),*Error),Earned)) return false;
+    TestFalse(TEXT("This fresh career has not been given a Vector starter unlock"),Runtime.Rig->IsStarterUnlocked(TEXT("vector_emitter")));
+    if (!TestTrue(TEXT("The actual generated first depot offers Vector"),Runtime.Rig->GetOffers().Contains(TEXT("vector_emitter")))) return false;
+    const int32 VectorIndex=FExpeditionRig::Catalog().IndexOfByPredicate([](const FExpeditionModule& M){return M.Id==TEXT("vector_emitter");});
+    Runtime.Click(1000+VectorIndex); Runtime.Click(12);
+    if (!TestTrue(TEXT("Actual purchase callback pays and fits Vector as the second active"),Runtime.Rig->Has(TEXT("vector_emitter")) && Runtime.Rig->GetCash()==14)) return false;
+    TestFalse(TEXT("Merely buying the tool does not award its next-run starter"),Runtime.Rig->IsStarterUnlocked(TEXT("vector_emitter")));
+    Runtime.Depart();
+    const bool Second=RuntimeRecoverCore(Runtime,Error);
+    if (!TestTrue(*FString::Printf(TEXT("The same paid rig completes the second physical core: %s"),*Error),Second)) return false;
+    TestFalse(TEXT("Carrying a core before dispatch still does not unlock the starter"),Runtime.Rig->IsStarterUnlocked(TEXT("vector_emitter")));
+    Runtime.Key(EKeys::E,true);
+    if (!TestTrue(TEXT("Actual dispatch reaches the rack shop and unlocks the owned Vector"),Runtime.Screen==EExpeditionScreen::Depot && Runtime.SiteIndex==2 && Runtime.Rig->IsStarterUnlocked(TEXT("vector_emitter")))) return false;
+    TestTrue(TEXT("The real earned starter name is included in the completion feedback"),Runtime.Notice.Contains(TEXT("Vector Emitter")) && Runtime.Notice.Contains(TEXT("free starter")));
+    TestEqual(TEXT("The actual second-core award leaves twenty-six credits"),Runtime.Rig->GetCash(),26);
+    const FString Once=Runtime.EncodeSave(); Runtime.Key(EKeys::E,true);
+    TestTrue(TEXT("Repeated dispatch key at the depot cannot award or record the unlock twice"),Runtime.EncodeSave()==Once);
+    if (!TestTrue(TEXT("Actual physically earned rack stock offers Reaction Frame"),Runtime.Rig->GetOffers().Contains(TEXT("reaction_frame")))) return false;
+    const int32 ReactionIndex=FExpeditionRig::Catalog().IndexOfByPredicate([](const FExpeditionModule& M){return M.Id==TEXT("reaction_frame");});
+    Runtime.Click(1000+ReactionIndex); Runtime.Click(12);
+    if (!TestTrue(TEXT("The actual twenty-four-credit capstone purchase is paid and fitted"),Runtime.Rig->Has(TEXT("reaction_frame")) && Runtime.Rig->GetCash()==2)) return false;
+    const FString Fitted=Runtime.EncodeSave();
+    const auto Disabled=Runtime.Rig->DisabledByUnfit(TEXT("vector_emitter"));
+    TestTrue(TEXT("Refit forecast identifies the actual equipped dependent support"),Disabled.Num()==1 && Disabled.Contains(TEXT("reaction_frame")));
+    TestTrue(TEXT("Inspecting that consequence does not unfit or mutate anything"),Runtime.EncodeSave()==Fitted);
+    Runtime.Click(1000+VectorIndex); Runtime.Click(14);
+    TestTrue(TEXT("Actual Vector removal leaves its support owned but inactive"),Runtime.Rig->Owns(TEXT("reaction_frame")) && !Runtime.Rig->Has(TEXT("reaction_frame")));
+    TestFalse(TEXT("The real incompatible departure is blocked until corrected"),Runtime.Rig->CanDepart(Error));
+    Runtime.Click(13);
+    if (!TestTrue(TEXT("Explicit refitting restores the same paid combination without another purchase"),Runtime.Rig->Has(TEXT("reaction_frame")) && Runtime.Rig->GetCash()==2 && Runtime.Rig->CanDepart(Error))) return false;
+
+    for (int32 Site : {2,3})
+    {
+        Runtime.Depart();
+        const int32 Frame=Runtime.World->FindFrameBody()->Id;
+        const int32 Weight=RoleBody(*Runtime.World,Site==2?FName(TEXT("ballast")):FName(TEXT("counterweight_cover")));
+        const FVector2D Dock=Runtime.World->FindMarker(TEXT("frame_receiver"))->Position;
+        const FVector2D WeightDock=Runtime.World->FindMarker(TEXT("frame_support_receiver"))->Position;
+        const FVector2D Direction=(Runtime.World->FindBody(Frame)->Position-Dock).GetSafeNormal();
+        if (!TestTrue(TEXT("The earned build picks up the actual available reaction mass"),RuntimePickBody(Runtime,Weight,{0,25},Error))) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("frame_reaction"))->Position);
+        const int32 Impulses=Site==2?2:1;
+        for (int32 I=0; I<Impulses; ++I)
+        {
+            Runtime.Click(67); Runtime.Aim=Runtime.World->FindBody(Weight)->Position;
+            Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+            Runtime.Aim=Runtime.World->FindBody(Frame)->Position;
+            Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+            Runtime.Aim=Runtime.Magnet+Direction*100.f;
+            const auto Preview=Runtime.World->Preview(Runtime.CommandFor(1),*Runtime.Rig);
+            if (!TestTrue(*FString::Printf(TEXT("Actual purchased Vector/Reaction stages can commit: %s"),*Preview.Reason),Preview.bAllowed)) return false;
+            Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+            Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,3.f);
+        }
+        RuntimeMove(Runtime,Dock); RuntimeAdvance(Runtime,1.f);
+        const bool Ready=Runtime.World->CanReceiveFrame(Error);
+        const auto* Body=Runtime.World->FindBody(Frame);
+        AddInfo(FString::Printf(TEXT("Earned Reaction site%d: frame(%.2f,%.2f), support(%.2f,%.2f), appraisal%d, battery%d, cash%d, receipt: %s"),Site,Body->Position.X,Body->Position.Y,Runtime.World->FindBody(Weight)->Position.X,Runtime.World->FindBody(Weight)->Position.Y,Body->Appraisal,Runtime.World->GetBattery(),Runtime.Rig->GetCash(),*Error));
+        if (!TestTrue(*FString::Printf(TEXT("Actual earned reaction movement places both receiving loads: %s"),*Error),Ready)) return false;
+        TestTrue(TEXT("The real support, not a success flag, arrives in its own receiving ring"),FVector2D::Distance(Runtime.World->FindBody(Weight)->Position,WeightDock)<=20);
+        TestEqual(TEXT("Real source preparation and impulses pay their actual cost"),Runtime.World->GetBattery(),100-6-12*Impulses);
+        TestEqual(TEXT("No module-use reward precedes actual installation"),Runtime.World->GetOutput(),0);
+        const int32 Appraisal=Body->Appraisal, Cash=Runtime.Rig->GetCash();
+        Runtime.Key(EKeys::E,true); Runtime.Key(EKeys::E,true);
+        TestEqual(TEXT("The actual earned frame pays current appraisal once"),Runtime.World->GetOutput(),Appraisal);
+        TestEqual(TEXT("Only the rack's earned milestone adds spendable money"),Runtime.Rig->GetCash(),Cash+(Site==2?2:0));
+        if (Site==2)
+        {
+            const bool Core=RuntimeRecoverCore(Runtime,Error);
+            if (!TestTrue(*FString::Printf(TEXT("The actual reused ballast still permits the balanced core route: %s"),*Error),Core)) return false;
+            Runtime.Key(EKeys::E,true);
+            TestTrue(TEXT("The next actual dispatch reaches the final depot"),Runtime.Screen==EExpeditionScreen::Depot && Runtime.SiteIndex==3);
+            TestFalse(TEXT("A later recovery does not announce the already earned starter as new"),Runtime.Notice.Contains(TEXT("unlocked as a free starter")));
+            TestEqual(TEXT("Actual rack rewards leave eighteen credits after both paid modules"),Runtime.Rig->GetCash(),18);
+        }
+        else
+        {
+            // The actual cover already did useful work as the reaction mass.
+            // Do not move it again merely to copy the baseline sequence.
+            if (!TestTrue(TEXT("The useful cover reaction leaves the actual final core accessible"),RuntimePickBody(Runtime,RoleBody(*Runtime.World,TEXT("core")),{0,25},Error))) return false;
+            RuntimeMove(Runtime,{Runtime.Magnet.X,-260}); RuntimeMove(Runtime,FExpeditionWorld::ReceiverPosition());
+            Runtime.Key(EKeys::E,true);
+            TestTrue(TEXT("The wholly earned Arc-to-Vector-to-Reaction run completes"),Runtime.Screen==EExpeditionScreen::Victory && Runtime.Rig->IsRunWon());
+            TestFalse(TEXT("Victory also avoids reannouncing an old unlock"),Runtime.Notice.Contains(TEXT("unlocked as a free starter")));
+            FExpeditionRuntime Saved(nullptr);
+            if (!TestTrue(TEXT("Actual completed paid rig and newly earned starter restore"),Saved.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+            TestTrue(TEXT("Restored career retains both the actual win and its earned Vector starter"),Saved.Rig->IsRunWon() && Saved.Rig->IsStarterUnlocked(TEXT("vector_emitter")));
+            TestEqual(TEXT("Reaction remains a paid twenty-four-credit receipt"),Saved.Rig->GetResaleValue(TEXT("reaction_frame")),12);
+            const int32 Wins=Saved.Rig->GetRecords().RunsWon;
+            Saved.Click(30); Saved.Click(30); Saved.Click(104);
+            TestTrue(TEXT("The actual new-run controls now permit Vector as a genuinely free starter"),Saved.Screen==EExpeditionScreen::Depot && Saved.Rig->Has(TEXT("vector_emitter")) && Saved.Rig->GetResaleValue(TEXT("vector_emitter"))==0 && Saved.Rig->GetCash()==12);
+            TestEqual(TEXT("Using the earned starter preserves the prior actual victory record"),Saved.Rig->GetRecords().RunsWon,Wins);
+        }
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionPurchaseForecastCallbackTest,
+    "MagnetSweep.Expedition.EarnedFullSocketPurchaseForecastDoesNotEjectOrSpendUntilChosen",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionPurchaseForecastCallbackTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    if (!TestTrue(TEXT("Forecast starts from a real earned Arc depot"),EarnFirstSiteKeystoneBudget(Runtime,TEXT("arc_driver"),16,Error))) return false;
+    const auto Select=[&](FName Id)
+    {
+        const int32 Index=FExpeditionRig::Catalog().IndexOfByPredicate([Id](const FExpeditionModule& M){return M.Id==Id;});
+        Runtime.Click(1000+Index);
+    };
+    const auto OfferedActive=[&]() -> FName
+    {
+        for (FName Id:Runtime.Rig->GetOffers())
+            if (const auto* M=FExpeditionRig::FindModule(Id); M && M->Kind==EExpeditionModuleKind::Active && Runtime.Rig->CanBuy(Id,Error)) return Id;
+        return NAME_None;
+    };
+    const FName FirstTool=OfferedActive();
+    if (!TestFalse(TEXT("The actual first depot supplies an affordable independent active"),FirstTool.IsNone())) return false;
+    const FString EmptySlot=Runtime.EncodeSave();
+    auto Plan=Runtime.Rig->PreviewPurchase(FirstTool);
+    TestTrue(TEXT("An affordable tool with room forecasts purchase and immediate fitting"),Plan.bCanBuy && Plan.bFitsNow && Plan.CreditsAfter==14 && Plan.SlotsToFree==0);
+    TestTrue(TEXT("Inspection of an available fit never changes the earned session"),Runtime.EncodeSave()==EmptySlot);
+    Select(FirstTool); Runtime.Click(12);
+    if (!TestTrue(TEXT("Actual BUY+FIT fills the second active socket and pays ten"),Runtime.Rig->Has(FirstTool) && Runtime.Rig->GetCash()==14 && Runtime.Rig->GetUsedSlots(EExpeditionModuleKind::Active)==2)) return false;
+    Runtime.Depart();
+    if (!TestTrue(TEXT("The newly equipped rig earns another actual depot instead of requiring a wildcard offer"),RuntimeRecoverCore(Runtime,Error))) return false;
+    Runtime.Key(EKeys::E,true);
+    if (!TestTrue(TEXT("The next real core brings the full rig to a twenty-six-credit depot"),Runtime.Screen==EExpeditionScreen::Depot && Runtime.Rig->GetCash()==26)) return false;
+    const FName StoredTool=OfferedActive();
+    if (!TestFalse(TEXT("This next actual depot supplies a different affordable active"),StoredTool.IsNone())) return false;
+    const FString Full=Runtime.EncodeSave(); const auto Actives=Runtime.Rig->GetFittedActives();
+    for (int32 Inspect=0; Inspect<3; ++Inspect)
+    {
+        Plan=Runtime.Rig->PreviewPurchase(StoredTool);
+        TestTrue(TEXT("A full rig forecasts stored purchase, exact wallet and one socket to free"),Plan.bCanBuy && !Plan.bFitsNow && Plan.CreditsAfter==16 && Plan.SlotsToFree==1 && !Plan.Reason.IsEmpty());
+        TestTrue(TEXT("Repeated inspection cannot buy, eject, alter cash or reroll stock"),Runtime.EncodeSave()==Full);
+    }
+    Select(StoredTool); Runtime.Click(12);
+    TestTrue(TEXT("Actual BUY/STORE owns the paid tool without silently equipping it"),Runtime.Rig->Owns(StoredTool) && !Runtime.Rig->Has(StoredTool) && Runtime.Rig->GetCash()==16);
+    TestTrue(TEXT("Both original actives remain fitted after the stored purchase"),Runtime.Rig->GetFittedActives()==Actives);
+    TestTrue(TEXT("The actual callback tells the player to refit"),Runtime.Notice.Contains(TEXT("Refit")));
+    Runtime.Click(13);
+    TestTrue(TEXT("Trying to fit into full sockets cannot silently evict another tool"),Runtime.Rig->GetFittedActives()==Actives && !Runtime.Rig->Has(StoredTool));
+    Select(TEXT("arc_driver")); Runtime.Click(14);
+    Select(StoredTool); Runtime.Click(13);
+    TestTrue(TEXT("Explicit chosen replacement fits the stored tool without another purchase"),Runtime.Rig->Has(StoredTool) && Runtime.Rig->Has(FirstTool) && !Runtime.Rig->Has(TEXT("arc_driver")) && Runtime.Rig->Owns(TEXT("arc_driver")) && Runtime.Rig->GetCash()==16);
+    TestTrue(TEXT("The explicitly corrected rig can depart"),Runtime.Rig->CanDepart(Error));
+    FExpeditionRuntime Saved(nullptr);
+    if (!TestTrue(TEXT("Actual stored-purchase and refit transactions restore"),Saved.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    TestTrue(TEXT("The saved fitted choices and retained inventory remain exact"),Saved.Rig->GetFittedActives()==Runtime.Rig->GetFittedActives() && Saved.Rig->Owns(TEXT("arc_driver")) && Saved.Rig->GetCash()==16);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionEarnedCompanionPurchaseTest,
+    "MagnetSweep.Expedition.EarnedGeneratedCompanionWaitsForItsToolAndKeepsExactStock",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionEarnedCompanionPurchaseTest::RunTest(const FString& Parameters)
+{
+    TUniquePtr<FExpeditionRuntime> Chosen; FName Active, Support; int32 ChosenSeed=0; FString Error;
+    for (int32 Seed=1; Seed<=32 && !Chosen; ++Seed)
+    {
+        auto Candidate=MakeUnique<FExpeditionRuntime>(nullptr);
+        if (!EarnFirstSiteKeystoneBudget(*Candidate,TEXT("arc_driver"),Seed,Error))
+        {AddError(FString::Printf(TEXT("Actual first-site earning failed at seed%d: %s"),Seed,*Error));return false;}
+        for (FName Tool:Candidate->Rig->GetOffers())
+        {
+            if (FExpeditionRig::FindModule(Tool)->Kind!=EExpeditionModuleKind::Active) continue;
+            for (FName Mod:Candidate->Rig->GetOffers())
+            {
+                if (FExpeditionRig::FindModule(Mod)->Kind!=EExpeditionModuleKind::Passive || Candidate->Rig->IsCompatible(Mod)) continue;
+                if (Candidate->Rig->PreviewPair(Tool,Mod).bPossible) {Active=Tool;Support=Mod;break;}
+            }
+            if (!Support.IsNone()) break;
+        }
+        if (!Support.IsNone()) {ChosenSeed=Seed;Chosen=MoveTemp(Candidate);}
+    }
+    if (!TestTrue(TEXT("A bounded search of actually earned depots exposes a new tool and conditional companion"),bool(Chosen))) return false;
+    auto& Runtime=*Chosen;
+    const auto Select=[&](FName Id)
+    {Runtime.Click(1000+FExpeditionRig::Catalog().IndexOfByPredicate([Id](const FExpeditionModule& M){return M.Id==Id;}));};
+    const auto Stock=Runtime.Rig->GetOffers(); const FString Before=Runtime.EncodeSave();
+    const auto Plan=Runtime.Rig->PreviewPair(Active,Support);
+    AddInfo(FString::Printf(TEXT("Earned companion seed%d: %s + %s, cost%d, credits%d→%d, active removals%d, passive removals%d"),ChosenSeed,*Active.ToString(),*Support.ToString(),Plan.Cost,Runtime.Rig->GetCash(),Plan.CreditsAfter,Plan.UnfitActives.Num(),Plan.UnfitPassives.Num()));
+    TestTrue(TEXT("The genuine one-tool rig has a fully affordable pair needing no replacement"),Plan.bPossible && Plan.Cost<=24 && Plan.CreditsAfter==24-Plan.Cost && Plan.UnfitActives.IsEmpty() && Plan.UnfitPassives.IsEmpty());
+    TestTrue(TEXT("Pair inspection cannot spend, fit or change the exact saved stock"),Runtime.EncodeSave()==Before);
+    Select(Support); Runtime.Click(12);
+    TestTrue(TEXT("Buying the companion before its required tool is refused without spending"),!Runtime.Rig->Owns(Support) && Runtime.Rig->GetCash()==24 && Runtime.Rig->GetOffers()==Stock);
+    FExpeditionRuntime Restored(nullptr);
+    if (!TestTrue(TEXT("The actual conditional stock is legal in a saved earned depot"),Restored.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    TestTrue(TEXT("Save restoration preserves the exact offered companion while still incompatible"),Restored.Rig->GetOffers()==Stock && !Restored.Rig->IsCompatible(Support));
+    Select(Active); Runtime.Click(12);
+    if (!TestTrue(TEXT("Actual tool purchase pays and fits in the free second socket"),Runtime.Rig->Has(Active))) return false;
+    TArray<FName> Remaining=Stock; Remaining.Remove(Active);
+    TestTrue(TEXT("Buying the tool removes only itself and keeps the original companion"),Runtime.Rig->GetOffers()==Remaining && Runtime.Rig->GetOffers().Contains(Support));
+    Runtime.Rig->SetShopContext(Runtime.World->GetOpportunityTags(),Implemented()); Runtime.Rig->GenerateOffers(Error);
+    TestTrue(TEXT("Context refresh after a new capability cannot reroll companion stock"),Runtime.Rig->GetOffers()==Remaining);
+    const auto Now=Runtime.Rig->PreviewPair(Active,Support);
+    TestTrue(TEXT("The already paid fitted tool is not charged twice by the remaining pair plan"),Now.bPossible && Now.Cost==FExpeditionRig::FindModule(Support)->Price && Now.CreditsAfter==Plan.CreditsAfter);
+    Select(Active); Runtime.Click(14);
+    TestFalse(TEXT("Owning but unfitting the tool does not satisfy the companion prerequisite"),Runtime.Rig->IsCompatible(Support));
+    const int32 PaidCash=Runtime.Rig->GetCash(); Select(Support); Runtime.Click(12);
+    TestTrue(TEXT("The explicit unfitted-tool refusal also preserves money and stock"),Runtime.Rig->GetCash()==PaidCash && Runtime.Rig->GetOffers()==Remaining && !Runtime.Rig->Owns(Support));
+    Select(Active); Runtime.Click(13); Select(Support); Runtime.Click(12);
+    if (!TestTrue(TEXT("Actual refit then companion purchase enables both paid parts in the same shop"),Runtime.Rig->Has(Active) && Runtime.Rig->Has(Support))) return false;
+    Remaining.Remove(Support);
+    TestTrue(TEXT("Actual pair consumes exactly the forecast credits and original offers"),Runtime.Rig->GetCash()==Plan.CreditsAfter && Runtime.Rig->GetOffers()==Remaining);
+    TestTrue(TEXT("The bought pair is an actually operable departure loadout"),Runtime.Rig->CanDepart(Error));
+    FExpeditionRuntime Bought(nullptr);
+    if (!TestTrue(TEXT("The actual pair purchase and refits restore transactionally"),Bought.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    TestTrue(TEXT("Restored equipped pair, exact stock and payment remain intact"),Bought.Rig->Has(Active) && Bought.Rig->Has(Support) && Bought.Rig->GetOffers()==Remaining && Bought.Rig->GetCash()==Plan.CreditsAfter);
+    Bought.Depart();
+    TestTrue(TEXT("The real bought pair can actually leave this depot"),Bought.Screen==EExpeditionScreen::Site && Bought.Rig->Has(Active) && Bought.Rig->Has(Support));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionPairLegalRefitTest,
+    "MagnetSweep.Expedition.ConductiveCompanionPlanRetainsArcWithinTwoActualToolSockets",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionPairLegalRefitTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Earned(nullptr); FString Error;
+    if (!TestTrue(TEXT("The model comparison starts from a genuinely earned twenty-four-credit depot"),EarnFirstSiteKeystoneBudget(Earned,TEXT("arc_driver"),1,Error))) return false;
+    // Explicit model fixture for the crowded-socket trap, not another claimed
+    // generated shop or earned build: add free found Vector/Shear/Ground and
+    // controlled stock while preserving the genuinely earned cash ledger.
+    auto Fixture=ParseJson(Earned.EncodeSave()); auto J=Fixture->GetObjectField(TEXT("rig"));
+    TArray<TSharedPtr<FJsonValue>> Inventory=J->GetArrayField(TEXT("inventory"));
+    for (FName Id : {FName(TEXT("vector_emitter")),FName(TEXT("shear_gate")),FName(TEXT("ground_clip"))})
+    {
+        auto Item=MakeShared<FJsonObject>();Item->SetStringField(TEXT("id"),Id.ToString());Item->SetNumberField(TEXT("paid"),0);
+        Inventory.Add(MakeShared<FJsonValueObject>(Item));
+    }
+    J->SetArrayField(TEXT("inventory"),Inventory);
+    const auto Names=[](std::initializer_list<const TCHAR*> Ids)
+    {TArray<TSharedPtr<FJsonValue>> Values;for(const TCHAR* Id:Ids)Values.Add(MakeShared<FJsonValueString>(Id));return Values;};
+    J->SetArrayField(TEXT("actives"),Names({TEXT("arc_driver"),TEXT("vector_emitter")}));
+    J->SetArrayField(TEXT("passives"),Names({TEXT("ground_clip"),TEXT("shear_gate")}));
+    const auto Stock=Names({TEXT("anchor_winch"),TEXT("conductive_tether"),TEXT("extraction_coil"),TEXT("closed_circuit")});
+    J->SetArrayField(TEXT("offers"),Stock);J->SetArrayField(TEXT("stock"),Stock);
+    FExpeditionRuntime Runtime(nullptr);
+    const bool Loaded=Runtime.DecodeSave(JsonText(Fixture),Error);
+    if (!TestTrue(*FString::Printf(TEXT("The labelled conditional-stock/socket fixture validates: %s"),*Error),Loaded)) return false;
+    const FString Before=Runtime.EncodeSave();
+    const auto Plan=Runtime.Rig->PreviewPair(TEXT("anchor_winch"),TEXT("conductive_tether"));
+    if (!TestTrue(*FString::Printf(TEXT("A real two-active refit can operate the pair: %s"),*Plan.Reason),Plan.bPossible)) return false;
+    TestTrue(TEXT("The minimal active change removes Vector and necessarily retains Arc"),Plan.UnfitActives.Num()==1 && Plan.UnfitActives.Contains(TEXT("vector_emitter")) && !Plan.UnfitActives.Contains(TEXT("arc_driver")));
+    TestTrue(TEXT("The plan also removes the now-inactive Vector support but retains Arc's useful support"),Plan.UnfitPassives.Num()==1 && Plan.UnfitPassives.Contains(TEXT("shear_gate")) && !Plan.UnfitPassives.Contains(TEXT("ground_clip")));
+    TestTrue(TEXT("Both actual prices are included without imaginary resale proceeds"),Plan.Cost==19 && Plan.CreditsAfter==5);
+    TestTrue(TEXT("The complete minimal-removal plan is only inspection"),Runtime.EncodeSave()==Before);
+    Runtime.Rig->Unfit(TEXT("arc_driver"),Error);
+    const FString MissingArc=Runtime.EncodeSave();
+    TestFalse(TEXT("An owned but unfitted Arc cannot be counted as an imaginary extra active"),Runtime.Rig->PreviewPair(TEXT("anchor_winch"),TEXT("conductive_tether")).bPossible);
+    TestTrue(TEXT("An impossible plan leaves the actual incomplete rig unchanged"),Runtime.EncodeSave()==MissingArc);
+    Runtime.Rig->Fit(TEXT("arc_driver"),Error);
+    const auto Select=[&](FName Id)
+    {Runtime.Click(1000+FExpeditionRig::Catalog().IndexOfByPredicate([Id](const FExpeditionModule& M){return M.Id==Id;}));};
+    Select(TEXT("anchor_winch"));Runtime.Click(12);
+    TestTrue(TEXT("The real full rig stores the bought Winch without auto-ejecting a tool"),Runtime.Rig->Owns(TEXT("anchor_winch")) && !Runtime.Rig->Has(TEXT("anchor_winch")) && Runtime.Rig->GetCash()==14);
+    const auto Remaining=Runtime.Rig->GetOffers(); Select(TEXT("conductive_tether"));Runtime.Click(12);
+    TestTrue(TEXT("Still-unfitted Winch cannot authorize the dependent purchase"),!Runtime.Rig->Owns(TEXT("conductive_tether")) && Runtime.Rig->GetCash()==14 && Runtime.Rig->GetOffers()==Remaining);
+    const auto PaidToolPlan=Runtime.Rig->PreviewPair(TEXT("anchor_winch"),TEXT("conductive_tether"));
+    TestTrue(TEXT("The stored paid Winch is available to a legal refit without paying ten again"),PaidToolPlan.bPossible && PaidToolPlan.Cost==9 && PaidToolPlan.CreditsAfter==5);
+    for (FName Id:Plan.UnfitPassives){Select(Id);Runtime.Click(14);}
+    for (FName Id:Plan.UnfitActives){Select(Id);Runtime.Click(14);}
+    Select(TEXT("anchor_winch"));Runtime.Click(13);
+    Select(TEXT("conductive_tether"));Runtime.Click(12);
+    TestTrue(TEXT("Executing the explicit plan operates Arc, Winch and Tether in exactly two active sockets"),Runtime.Rig->Has(TEXT("arc_driver")) && Runtime.Rig->Has(TEXT("anchor_winch")) && Runtime.Rig->Has(TEXT("conductive_tether")) && Runtime.Rig->GetUsedSlots(EExpeditionModuleKind::Active)==2);
+    TestTrue(TEXT("No removed part is sold or deleted to make the forecast work"),Runtime.Rig->Owns(TEXT("vector_emitter")) && Runtime.Rig->Owns(TEXT("shear_gate")) && !Runtime.Rig->Has(TEXT("shear_gate")) && Runtime.Rig->Has(TEXT("ground_clip")));
+    TestTrue(TEXT("The actual execution matches the nineteen-credit plan and can depart"),Runtime.Rig->GetCash()==5 && Runtime.Rig->CanDepart(Error));
+    FExpeditionRuntime Saved(nullptr);
+    if (!TestTrue(TEXT("Executed explicit pair plan and conditional stock restore"),Saved.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    TestTrue(TEXT("The restored pair needs no third active or hidden refit"),Saved.Rig->Has(TEXT("conductive_tether")) && Saved.Rig->GetUsedSlots(EExpeditionModuleKind::Active)==2 && Saved.Rig->GetCash()==5);
     return true;
 }
 
