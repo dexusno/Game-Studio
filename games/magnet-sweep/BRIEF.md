@@ -1,6 +1,6 @@
 # Magnet Sweep — salvage career brief
 
-> 2026-09-13 scope note: this document records the implemented career and prior increments. The active broad build-system recommendation and ordered next experiment are in [design/BUILD-SYSTEM.md](design/BUILD-SYSTEM.md). Its proposed expedition rules are not yet implemented and do not rewrite old saves. The nine permanent purchases and four-pour structure below are historical implementation context, not the requested final upgrade system.
+> 2026-09-13 superseded-brief notice: the owner requests a complete redesign with 2.5D side view, stacked metal and a hanging, swinging magnet. Review [the proposed redesign plan](design/REDESIGN-PLAN.md) and current STATUS/DECISIONS. This legacy career brief and design/BUILD-SYSTEM.md are historical references, not the redesign's accepted contract. Player purpose, story, visual style, exact stakes and progression will be settled through goals Klaus sets individually. No new implementation is authorized by the planning request.
 
 Revised 2026-09-12 after Klaus rejected the first playable demo as boring and explicitly requested goals, challenge, risk, satisfying attraction and melting, better presentation, music, upgrades, leveling and loot. This brief describes the implemented rework. The unlimited, risk-free demo and its earlier design at Git revision `8af011f` are rejected historical alternatives, not governing policy.
 

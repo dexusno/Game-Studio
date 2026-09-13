@@ -1,6 +1,6 @@
 # Magnet Sweep — rebuild production plan
 
-> 2026-09-13 scope note: this document records the implemented career and prior increments. The active broad build-system recommendation and ordered next experiment are in [design/BUILD-SYSTEM.md](design/BUILD-SYSTEM.md). Its proposed expedition rules are not yet implemented and do not rewrite old saves. The nine permanent purchases and four-pour structure below are historical implementation context, not the requested final upgrade system.
+> 2026-09-13 superseded-plan notice: the owner rejects the current game's overall coherence and requests a complete 2.5D side-view redesign. The current draft for owner review is [the complete redesign plan](design/REDESIGN-PLAN.md). Klaus will set each implementation goal individually. Everything below is historical career/rebuild context; neither this old plan nor the expedition recommendation in design/BUILD-SYSTEM.md authorizes new implementation. Preserve old saves and builds.
 
 Updated 2026-09-12. The owner rejected the first playable demo and authorized implementation of meaningful goals, challenge, risk, satisfying attraction/melting, improved graphics and sound, music, upgrades, leveling and loot. [BRIEF.md](BRIEF.md) is the current contract. The prior unlimited, risk-free brief and plan at Git revision `8af011f` are historical rejected alternatives.
 

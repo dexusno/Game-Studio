@@ -14,10 +14,11 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner rejects the current cluttered UI and weak losing stakes, and requires player identity/purpose/endgame meaning; no new story or loss model is selected. Immediate assignment was UI/UX specialist setup only, then STOP. Added ui-ux-designer role and game-ui-ux skill; structural validation and isolated scenario review pass. Await owner goals. Expedition Visuals 0.7.0, packages/profiles and prior 82-case evidence remain unchanged; gameplay goal incomplete. Timeline unconstrained; zero time fields mean unset. No purchases/release authorized.",
+  "budget_note": "Complete redesign requested: 2.5D side view, hanging swinging magnet, stacked metal, readable causal machinery, plain language, purposeful progression and real losing stakes. Current authorization is PLAN ONLY. Nine-step redesign draft delivered for owner review; Klaus sets each later goal and judges revisions before the next. Art exploration will provide at least 5 styles x 5 variants when authorized. Story/style/exact loss and progression rules remain unchosen. Old prototype, packages and saves preserved; no redesign implementation begun. Timeline unconstrained; zero time fields mean unset. No purchases/release authorized.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
+      "games/magnet-sweep/design/REDESIGN-PLAN.md",
       "games/magnet-sweep/design/VISUAL-OVERHAUL.md",
       "games/magnet-sweep/evidence/visual-overhaul-verification.json",
       "games/magnet-sweep/evidence/visual-regression.json",
@@ -39,15 +40,15 @@
       "games/magnet-sweep/BRIEF.md",
       "games/magnet-sweep/PRODUCTION-PLAN.md",
       "games/magnet-sweep/QA-EXTRACTION.md",
-      "games/magnet-sweep/QA-CLARITY.md",
       "games/magnet-sweep/BUILD.md"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T11:02:26+00:00",
-      "record_sha256": "a7576b770ed6077cc4f8cd69178d2695cb99c852dfd5467533bcd327ec15204e",
+      "captured_at": "2026-09-13T11:20:56+00:00",
+      "record_sha256": "497404e61ed204281a1bc49afbe69126ed7d7710ed5e2c03b6346efd187061db",
       "files": {
-        "games/magnet-sweep/STATUS.md": "c6e073443bd0250cc773b980934d4b5bb6d4fb576102e170c19202743e717028",
+        "games/magnet-sweep/STATUS.md": "b0e5abaeb9477745400b584ac5bd859d1999b792ede01b6b6d2ae994510438d7",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "401dfc457611a65c8f4c0e06169121e52022f36e6cda864f96ef58d61a6465e1",
         "games/magnet-sweep/design/VISUAL-OVERHAUL.md": "0e40f3c26ede21aa57b6a25f3f3ed3a3bd5b6766e9d3e44025e6c2c4812c3589",
         "games/magnet-sweep/evidence/visual-overhaul-verification.json": "4ac439fa5bfabfc62266a152f62863b7182bad5af7d2ded97b975571fceaec41",
         "games/magnet-sweep/evidence/visual-regression.json": "0ec88c12d436b393b2b669dd5f1335dd0d672ade1ee3a1d07b65937e6e2d0002",
@@ -58,7 +59,7 @@
         "games/magnet-sweep/evidence/expedition-sites-verification.json": "409e9772cbc33d61d92376597f3597d241d427d15e78c8174f7069173fee721a",
         "games/magnet-sweep/evidence/expedition-frames-verification.json": "98af4fd71e78624dd79927d7f6ec60b9e34fad112c46ca0b3a04aca6203fc653",
         "games/magnet-sweep/evidence/expedition-choices-verification.json": "1680e274520bb5d31907edd815f55c768de529bfbe3e83c9d96facbde7487d06",
-        "games/magnet-sweep/DECISIONS.md": "37ce7b9c44f938199fc689a3bd16432c3e30be2c6c3377764a183b6d9aa2be23",
+        "games/magnet-sweep/DECISIONS.md": "7b927ed0c43c5520818319f4f40a55bf507956277e8996476054aae893548f4c",
         "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md": "3cce17d04e25e08f2ca9882ecdff7dd788e5504d7d349d40ef6033aa79c4f8e6",
         "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md": "c77998494876feae4e616546c6f4630f7ad640753d5898fb24304e687a03cbf0",
         "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md": "293e852f66d2af1af9fa225e2095d64b99385482fcf00b7741dec60c37cc46f3",
@@ -66,10 +67,9 @@
         "games/magnet-sweep/scripts/VerifyBuildEconomy.py": "eaaab86c6ea3477de5c4853609fc9b6b97b9ee9c8f15a369b45364368ba07003",
         "games/magnet-sweep/evidence/build-economy-verification.json": "09732838a326bd8b30f5da6698cfffc28cae6d1768107bbb980aa5d37e178c74",
         "games/magnet-sweep/evidence/build-economy-invalid-scenarios.json": "5b05ce6b135ff3f9aa805ea28601fbe77ad28860555fad7436ed60dc59fe9e45",
-        "games/magnet-sweep/BRIEF.md": "68085c5d68329db3e76a974a20e0f487a4b5c7e436ecbe1d41ba5e2b06e65a10",
-        "games/magnet-sweep/PRODUCTION-PLAN.md": "cfd91e32540e2aa33afa5fd60a8d4487765c55141a8c41e11c070d4f4a48dc5d",
+        "games/magnet-sweep/BRIEF.md": "c7f469561f55b26be351343eb4b04dcd71dd521fd451902b7e5ce55383dcfc98",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "50dd56a939abaa084fb22a01ba4ee5b60e4515484cf6e9611f0454d53a668bc3",
         "games/magnet-sweep/QA-EXTRACTION.md": "5a0633eddd3baa29447a43c45653ef3e468c32f77cf4692456dec8a1495691e4",
-        "games/magnet-sweep/QA-CLARITY.md": "23eb956b32abd2c075feaddaaf405db9aa8693b7111decb82930efd0272dd682",
         "games/magnet-sweep/BUILD.md": "2d06c8e809cedecfe8ca84877c5969d75deec645532a05d7f61d1f8d43a69ad7"
       }
     }

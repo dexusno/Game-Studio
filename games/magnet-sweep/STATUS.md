@@ -1,8 +1,16 @@
-# Magnet Sweep — Expedition Visuals 0.7.0
+# Magnet Sweep — complete redesign planning
 
-Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: create the missing dedicated game UI/UX agent and skill, then STOP for the owner's next goals. Timeline is not a consideration.
+Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: write an ordered, owner-readable plan for a complete redesign, then stop for plan review. Klaus will set each subsequent goal; implement and revise that goal until he is satisfied. Timeline is not a consideration.
 
-## Latest owner direction — specialist setup only
+## Current owner direction — plan first, goals individually
+
+The owner now requests a complete redesign plan. Adopt a 2.5D side view, stacked metal and a magnet suspended from a chain or similar support that swings with movement; physical behavior is central. A later authorized art-exploration step must provide at least five overall styles with five variants each (at least 25 examples). Objects must be recognisable, mechanisms must visibly communicate cause and effect, instructions must use familiar language, progression must have a clear purpose, UI must support play, and winning/losing must matter within an understandable world.
+
+This authorizes planning and recording decisions now, not starting art generation or implementation. The plan's proposed order and contents remain subject to owner revision. The owner has not chosen the story, visual style, detailed controls, failure/loss/reset model, upgrade catalogue or level count. Existing mechanics and catalogue sizes are not requirements for the redesign. Preserve the old prototype and saves as historical work. The prior setup-only stop is superseded only by this planning assignment; wait for the owner's individual goals before executing any planned step.
+
+Delivered [the proposed complete redesign plan](design/REDESIGN-PLAN.md): nine owner-reviewed steps from purpose and meaningful stakes through 25 visual anchors, a swinging-magnet experiment, one readable level, tutorial/UI, useful progression, an integrated concept demo and then full development. The UI/UX role participates from the start; full production follows owner satisfaction with the representative demo. Each step states its artifact and the player-facing question Klaus judges. The five style families and their variants are proposed art directions, not generated images or owner selections. Review and revise the plan next. No game source/assets/builds/saves changed; checks are scoped document/link/record validation, not a game test.
+
+## Preserved owner feedback and specialist setup
 
 **Owner scope clarification:** this comprehension failure applies throughout the whole game. The named first-worksite labels are examples, not an exhaustive bug list. Treat the current overall interaction language, mechanical/visual logic, guidance, progression explanation and screen presentation as unaccepted. A handful of renamed labels or repaired pads cannot establish acceptance. Future authorized work must assess coherence across the player journey and representative early, middle and late play, equipment decisions and outcomes. The diagnostic evidence below samples one existing worksite capture and relevant code; it is not a completed whole-game audit. Do not narrow the owner's criticism to that sample.
 
@@ -30,7 +38,7 @@ Editor compilation and all **82 existing engine cases pass** (zero failed/warnin
 
 Source/art/assets and reviewed evidence are integrated on main at **1a65f7c2d14d1873698e5e20bbea65f028cdb5f8**. The normal continuity handoff helper was attempted after commit and refused because unrelated Dreambound work remains dirty. Preserve that work; use this exact source revision when handing the visual preview to another task.
 
-The visual-overhaul increment remains implemented and packaged, but its interface has now been rejected by the owner. The UI/UX specialist setup is complete. Await the owner's next goals; no gameplay, interface redesign or story development is authorized in this setup turn. The broad earlier gameplay goal remains incomplete. Preserve all existing packages, saves and visual assets.
+The old visual-overhaul increment remains implemented and packaged, but its overall coherence and interface have been rejected by the owner. The UI/UX specialist setup and redesign-plan draft are complete. Await Klaus's review/revisions of [REDESIGN-PLAN.md](design/REDESIGN-PLAN.md), then only execute the goal he sets. The redesign is not implemented. Preserve all existing packages, saves and visual assets.
 
 Observed corrections include late instruction overflow, a frame panel covering machinery, overlapping optional fitting labels, excessive trim and an occluded furnace. A checked material pass caught previously silent Unreal 5.8 pin-name mismatches. The intermediate cook after that failed import is explicitly excluded; only the later validated import/package/captures are accepted. Preserve the recorded visual scope and exact hashes when resuming.
 
