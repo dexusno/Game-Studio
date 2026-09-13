@@ -1,8 +1,12 @@
 # Magnet Sweep — complete redesign planning
 
-Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner assignment: write an ordered, owner-readable plan for a complete redesign, then stop for plan review. Klaus will set each subsequent goal; implement and revise that goal until he is satisfied. Timeline is not a consideration.
+Updated 2026-09-13, Europe/Oslo. Stage: prototype. Current owner goal: redesign step 1, give five compact premise examples explaining player identity, situation, why the magnet helps and how ordinary recovery advances a visible end goal. Klaus chooses or iterates on the examples; later steps remain individually authorized. Timeline is not a consideration.
 
 ## Current owner direction — plan first, goals individually
+
+**Step 1 is now authorized:** prepare five distinct premise options for the owner. Communicate each through its opening, environment and visible progress; keep the backstory compact. This goal requests options, not an automatic story selection. Do not start art generation, detailed level/loss-system design or implementation. The rest of the proposed redesign sequence remains available for owner revision.
+
+Delivered [five premise options](design/PREMISE-OPTIONS.md): The Last Light (restore power for a settlement), Your Own Yard (save and rebuild the family scrapyard), One Small Robot, One Way Home (repair a ship and leave a scrap planet), Open the Harbour (clear a blocked supply route), and The Scrap Carnival (restore a travelling fair). Each identifies the player/situation, the magnet's purpose, ordinary recovery work, visible intermediate progress, opening/ending and provisional risk context. Root favors Last Light for emotional purpose and Harbour for direct work-to-outcome causality; that is a recommendation, not owner selection. Fiction names and all ideas remain proposals. This is prose design work only; no market evidence, art, game changes or playtest is claimed. Next: owner selects, combines or revises these examples.
 
 The owner now requests a complete redesign plan. Adopt a 2.5D side view, stacked metal and a magnet suspended from a chain or similar support that swings with movement; physical behavior is central. A later authorized art-exploration step must provide at least five overall styles with five variants each (at least 25 examples). Objects must be recognisable, mechanisms must visibly communicate cause and effect, instructions must use familiar language, progression must have a clear purpose, UI must support play, and winning/losing must matter within an understandable world.
 
@@ -38,7 +42,7 @@ Editor compilation and all **82 existing engine cases pass** (zero failed/warnin
 
 Source/art/assets and reviewed evidence are integrated on main at **1a65f7c2d14d1873698e5e20bbea65f028cdb5f8**. The normal continuity handoff helper was attempted after commit and refused because unrelated Dreambound work remains dirty. Preserve that work; use this exact source revision when handing the visual preview to another task.
 
-The old visual-overhaul increment remains implemented and packaged, but its overall coherence and interface have been rejected by the owner. The UI/UX specialist setup and redesign-plan draft are complete. Await Klaus's review/revisions of [REDESIGN-PLAN.md](design/REDESIGN-PLAN.md), then only execute the goal he sets. The redesign is not implemented. Preserve all existing packages, saves and visual assets.
+The old visual-overhaul increment remains implemented and packaged, but its overall coherence and interface have been rejected by the owner. The UI/UX specialist setup and redesign-plan draft are complete. Redesign step 1 now has [five delivered premise options](design/PREMISE-OPTIONS.md); await Klaus's selection or revisions. A selected/refined premise and any later goal must come from the owner; do not automatically start the level/risk or art steps. The redesign is not implemented. Preserve all existing packages, saves and visual assets.
 
 Observed corrections include late instruction overflow, a frame panel covering machinery, overlapping optional fitting labels, excessive trim and an occluded furnace. A checked material pass caught previously silent Unreal 5.8 pin-name mismatches. The intermediate cook after that failed import is explicitly excluded; only the later validated import/package/captures are accepted. Preserve the recorded visual scope and exact hashes when resuming.
 

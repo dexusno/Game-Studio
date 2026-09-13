@@ -1,6 +1,6 @@
 # Magnet Sweep — proposed complete redesign plan
 
-Prepared for Klaus, 13 September 2026. **Draft for review. No step below has started.**
+Prepared for Klaus, 13 September 2026. **Sequence remains a draft for owner revision. Step 1 is authorized and five premise options have been prepared; none is selected. Later steps have not started.**
 
 The aim is a game whose purpose, objects, actions and consequences make sense while you play, with an expressive swinging magnet and a visual style you want to spend time in. This is a redesign of the whole experience. Existing features earn their place by serving the new design.
 
@@ -13,6 +13,8 @@ Already directed by you: a **2.5D side view**, metal that can stack vertically, 
 Still to choose: who you are, what you are working toward, the world/tone, exact controls, level objectives, loss and retry consequences, progression/reset rules, visual style and content scope. A dystopian survivor, factory operator or construction project is not selected merely because it was mentioned earlier. Neither the current four-site structure nor its equipment catalogue is automatically retained.
 
 ## 1. Decide who we are and why the work matters
+
+Current deliverable: [five premise options](PREMISE-OPTIONS.md), awaiting Klaus's choice or revisions. Preparing the choices does not settle the premise.
 
 Establish the game's simple premise: the player's role, their situation, why using this magnet helps, and the larger result they want to achieve. Connect ordinary recovery work to a visible end goal. Keep the backstory compact enough to communicate through the opening, environment and progress rather than a lore manual.
 
@@ -120,4 +122,4 @@ Polish pacing, sound, music, controls and presentation as the game grows. Check 
 
 The game designer connects purpose, choices, stakes and progression. The UI/UX designer works from the start on comprehension, interaction flow and visual hierarchy. The art director creates and carries the selected visual language into usable assets. The engineer implements and verifies the physics and game behavior; the audio designer connects sound to action and tone. Gameplay critique challenges clarity, fairness, reward and replay appeal. The producer coordinates the current goal, and QA independently checks the resulting build. Use these roles only where the authorized goal benefits from them.
 
-**Next action: your review of this draft.** No art generation, mechanics implementation or new level production has been authorized by requesting the plan. Store preparation, publication, marketing and purchases are outside this plan's current scope.
+**Next action: choose or revise the five premise options for step 1.** The remaining sequence can still be revised. No art generation, mechanics implementation or new level production is authorized by the premise goal. Store preparation, publication, marketing and purchases remain outside the current scope.
