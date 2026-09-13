@@ -1,5 +1,7 @@
 # Magnet Sweep — complete redesign planning
 
+**Implementation boundary, reconfirmed by Klaus on 2026-09-13:** this is a full redesign and its gameplay code has not been implemented. The recorded `prototype` stage and existing game code belong to the old design. Little of that code may be suitable for reuse; assess individual pieces against the new design rather than assuming the old game is its foundation. The storyboard, review page and standalone Blender scripts are art experiments, not the redesigned game's implementation. Continue the current design/art work; implementation follows Klaus's later goals.
+
 ## Art direction — 16C preference and two-view combat flow
 
 **Current result, 2026-09-13:** Klaus explicitly confirmed the supplied board's graphics and bottom two layouts: **16B for preparation/assembly, 16C for action**. The [review page](assets/concepts/combat-camera-2026-09-13/index.html) presents the four-panel storyboard in loading and discharge versions, plus a separate eight-second Blender motion study. A targeted ImageGen refinement shows body/capsule/nose joined in the open chamber. [Storyboard provenance](assets/concepts/combat-camera-2026-09-13/PROVENANCE.md) preserves prompts, hashes and observed housing/damage-state drift.

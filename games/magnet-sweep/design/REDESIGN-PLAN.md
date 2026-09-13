@@ -12,6 +12,8 @@ Further owner steering: assemble physical ammunition by stacking components, spe
 
 ## How we will work
 
+**Full redesign; implementation not started.** Klaus reconfirmed that little of the old game's code may be usable. Design the new game on its own requirements, and assess old code for reuse only where it fits. Existing prototype code and its recorded stage describe the old design. Storyboards, the review page and standalone Blender camera tests are design/art tools; they are not a partially implemented redesign or a commitment to its code architecture.
+
 You review and revise this plan as the direction evolves, and set a goal for the work you want to pursue. We complete that goal, give you something concrete to judge, and revise it until you are satisfied. We begin another implementation step only when you set its goal. A step can be split into smaller goals if useful. The current art goal is already authorized; no development timetable is imposed.
 
 ## Current instructions and preferences
