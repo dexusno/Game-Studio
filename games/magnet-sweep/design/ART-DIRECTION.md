@@ -24,7 +24,7 @@ The comparison uses the same functional scene: hanging magnet, airborne scrap, a
 | 2.5D side view | Action stays on a lateral plane; art can combine 3D objects and layered illustration | Visible chain swing, object volume and pile depth while retaining a readable side view | Do depth and shadows help rather than hide selectable pieces? |
 | 3D perspective | A spatial camera views a fully modelled encounter | Flexible camera and dimensional impact shots | Do occlusion, depth picking and camera movement add anything useful to this turn-based loop? |
 
-The owner's preferred combination is now **2.5D for preparation and 3D for action**, using 16C's visual treatment throughout. Root recommends exploring shared 3D assets and two authored camera layouts to keep both views consistent. That implementation route still needs a real asset/motion test.
+The owner's preferred combination is **16B preparation and 16C action**, using the same graphics treatment throughout. The [first shared-scene motion study](../art-tests/camera-motion/README.md) now demonstrates two authored cameras with consistent geometry and remaining stock. Its simple models and scripted motion do not yet reproduce the reference's finish or establish interactive game feel.
 
 ## Boards
 

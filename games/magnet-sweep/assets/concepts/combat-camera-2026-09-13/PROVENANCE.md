@@ -2,7 +2,7 @@
 
 Created 13 September 2026 with built-in ImageGen. The tool does not expose an exact model version. No CLI/API fallback or third-party stock assets were used. Reference: the project's generated [board 16](../art-direction-2026-09-13/16-depth-camera.webp), with 16B preparation and 16C action now explicitly selected by Klaus.
 
-The first generation used [PROMPT.md](PROMPT.md) exactly. It showed the three ingredients in preparation and a combined airborne projectile in Fire, but omitted the visible loading channel. A targeted edit used [REFINEMENT-PROMPT.md](REFINEMENT-PROMPT.md) and that first result to expose the joined assembly entering the cannon. [storyboard.webp](storyboard.webp) is the refined result, 1536 × 1024. Its lossless WebP encoding has identical decoded RGBA pixels to the generated PNG; no cropping, resizing or content edits were made during conversion. Original PNGs remain in ignored `raw/` locally.
+The first generation used [PROMPT.md](PROMPT.md) exactly. It showed the three ingredients in preparation and a combined airborne projectile in Fire, but omitted the visible loading channel. It is preserved as [the discharge companion](storyboard-discharge.webp), so the actual muzzle discharge remains reviewable. A targeted edit used [REFINEMENT-PROMPT.md](REFINEMENT-PROMPT.md) and that first result to expose the joined assembly entering the cannon. [storyboard.webp](storyboard.webp) is the refined loading result, 1536 × 1024. Both lossless WebP encodings have identical decoded RGBA pixels to their generated PNGs; no cropping, resizing or content edits were made during conversion. Original PNGs remain in ignored `raw/` locally.
 
 | File | SHA-256 |
 | --- | --- |
@@ -10,6 +10,7 @@ The first generation used [PROMPT.md](PROMPT.md) exactly. It showed the three in
 | Initial raw/storyboard-v1.png | `bd462c639b4a3946ff7559f8130843f7a300bcd5e925ffc92922e28593371e09` |
 | Refined raw/storyboard-v2.png | `8e085f78bfebe70372f938d4d4371d05511dcabd9df35516c3b8d0a1e5adb346` |
 | Committed storyboard.webp | `a96df2a6f2220d47583705f7c3e4ec7371dadd526e0e1431902a123dcc07871e` |
+| Committed storyboard-discharge.webp | `92149418c7d59ff823eff67c0a7e92016d4f19e0f355d2d436f43fac45d2a8dd` |
 
 ## Static inspection
 

@@ -1,0 +1,23 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "24/1",
+      "nb_frames": "192"
+    }
+  ],
+  "format": {
+    "duration": "8.000000",
+    "size": "480711"
+  },
+  "sha256": {
+    "camera-motion.mp4": "b55b69ca8e5bd5c465b6a03f1781743d3a3b89ff2ffc668f92fe1f9dc04e3bbe",
+    "preparation.png": "d4a9b16ba9dc6d645131b12fd13ad0b2c54e3f810da6a574582c5e8bc66a23f9",
+    "action-impact.png": "f71989e44bc386759bfc9b329226d1388413b62f95fc18a6420188f720b58062",
+    "build_scene.py": "27eeff8d0d5e63dec72dcdf44cb6706bfc34f663b87ac2634c8dc9a4a4df1bf3"
+  },
+  "interpretation": "Scripted art study; no gameplay, physical simulation, engine import or owner acceptance established."
+}
