@@ -1,8 +1,30 @@
 # Magnet Sweep — build and run
 
-## Expedition Sites 0.6.1
+## Expedition Frames 0.6.2
 
-The current source adds distinct later worksites and independently witnessed support effects. [Play Expedition Sites.cmd](Play%20Expedition%20Sites.cmd) targets the separate `BuildOutput/ExpeditionSites/Windows` archive and its own `expedition_sites_preview` profile. Build/cook/stage/archive succeeded in 39.86 seconds. All 69 engine cases pass (48 Expedition plus 21 legacy), report 2026.09.13-00.38.45. Both actual 480-output recovery routes, remote counterweight alternatives and electrical final dispatch pass. Starting equipment in the late capability cases is a labelled fixture; output, rewards and physical actions are actually earned. The previous 0.6.0 child hash is unchanged.
+Current source adds one optional 40 kg power frame to each new late-site revision 2. Ordinary pickup stops at 36 kg. The frame needs an actual supported move or powered hoist, then explicit E receipt at FRAME DOCK. Receipt records its current appraisal once and leaves an installed machine. Final-site installation also supplies the existing counterbalance. Existing revision 1 worlds, depots and source identities remain available.
+
+Walking Gantry is now a 14-credit, two-socket specialist. The first controlled comparison recovered the same 320 appraisal for 20 battery with Gantry and 22 with Hook + Ratchet; that result did not justify the earlier 24-credit price. Historical paid-24 receipts retain their actual purchase and 12-credit resale basis. New paid-14 receipts use 7-credit resale. No owner save has been read or changed.
+
+Editor compilation and **76 engine cases pass** (55 Expedition plus 21 legacy), report **2026.09.13-01.24.34**. Build/cook/stage/archive succeeded in **44.46 seconds**. The actual earned Gantry run recovers both late frames and reaches victory; electrical and Reaction alternatives use clearly labelled equipment fixtures with real physical inputs. Old/current receipts and frozen old layouts pass. The first report's retry failure was a test attempting input while intentionally paused; the corrected witness uses the normal Resume control.
+
+The child EXE is **332,807,168 bytes**, SHA-256 **d5d2741ed194ab9fc7298400445624397238b53079946675063845e612a2a50f**. Earlier 0.6.1 and 0.6.0 child hashes remain unchanged. Actual native controls, rendering, sound, performance and enjoyment are still unverified.
+
+[Play Expedition Frames.cmd](Play%20Expedition%20Frames.cmd) targets the separate `BuildOutput/ExpeditionFrames/Windows` archive and its own `expedition_frames_preview` profile. It has not been launched. Reproduce the current increment with:
+
+```powershell
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Editor
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Tests
+pwsh -NoProfile -File games/magnet-sweep/scripts/Build.ps1 -Stage Package -ArchiveName ExpeditionFrames
+```
+
+Current evidence: [expedition-frames-verification.json](evidence/expedition-frames-verification.json). Native control remains stopped at the unanswered foreground handoff.
+
+## Preserved Expedition Sites 0.6.1
+
+The following describes the package committed at `609e8dd8de0ae44576c5dc1f7c9d874669f15349`.
+
+This archived source revision adds distinct later worksites and independently witnessed support effects. [Play Expedition Sites.cmd](Play%20Expedition%20Sites.cmd) targets the separate `BuildOutput/ExpeditionSites/Windows` archive and its own `expedition_sites_preview` profile. Build/cook/stage/archive succeeded in 39.86 seconds. All 69 engine cases pass (48 Expedition plus 21 legacy), report 2026.09.13-00.38.45. Both actual 480-output recovery routes, remote counterweight alternatives and electrical final dispatch pass. Starting equipment in the late capability cases is a labelled fixture; output, rewards and physical actions are actually earned. The previous 0.6.0 child hash is unchanged.
 
 The first two sites preserve their teaching and earned recovery routes. The third is a **Balanced Recovery Rack**: place 10–14 kg of resting material on each platform, with no more than 2 kg difference, then secure the 16 kg core. Three valuable optional targets need support, physical fracture or heat transfer; loose ordinary pools total 208, below the first 240 refining milestone. The final **Counterweight Exchange** uses a 20 kg core and a 20 kg replacement weight. Basic controls can stage the core to make room; Winch or Relay can move the weight while the core stays secured. A preserved finite generator can power isolated receivers.
 

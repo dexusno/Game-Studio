@@ -122,10 +122,12 @@ struct FExpeditionRuntime
     void RefreshCargoSelection();
     void CycleCargo();
     FString RecoveryHint() const;
+    FString FrameRecoveryHint() const;
     void ClearPreparation();
     FString PreparationHint(int32 Slot) const;
     bool PrepareAction(int32 Slot);
     void BankOrDeliver();
+    void ReceiveFrame();
     void Depart();
     void SetPaused(bool bValue);
     void Show(const FString& Text, FName Cue = NAME_None);

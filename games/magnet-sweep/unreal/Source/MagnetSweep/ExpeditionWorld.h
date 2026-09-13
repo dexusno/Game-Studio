@@ -37,6 +37,7 @@ struct FExpeditionBody
     bool bPunched = false;
     bool bSinkUsed = false;
     bool bFunctional = false;
+    bool bFloorContact = false; // Flush electrical contact: visible and targetable, never a physical obstruction.
     float FuseDelay = -1.f;
     float RecoverDelay = 0.f;
     int32 RootAction = 0;
@@ -118,6 +119,14 @@ struct FExpeditionSiteObjective
     bool bRequired = true;
 };
 
+struct FExpeditionSupportDefinition
+{
+    int32 PayloadId = INDEX_NONE;
+    FName AnchorMarker;
+    FName ReceivingMarker;
+    float MinimumMass = 8.f;
+};
+
 // Immutable authored definition selected by the saved layout identity, not by a new-run default.
 struct FExpeditionSiteDefinition
 {
@@ -127,6 +136,7 @@ struct FExpeditionSiteDefinition
     FString Summary;
     TArray<FExpeditionSiteMarker> Markers;
     TArray<FExpeditionObstacle> Obstacles;
+    TArray<FExpeditionSupportDefinition> Supports;
     bool bHasPress = true;
     FVector2D PressCenter = FVector2D(217.5, 0);
     FVector2D PressHalfSize = FVector2D(27.5, 130);
@@ -169,6 +179,9 @@ struct FExpeditionWorldState
     bool bDispatched = false;
     bool bEvacuated = false;
     bool bCoreSecured = false; // Latched by an actual capture; staged cores remain released.
+    bool bFrameHoistPowered = false;
+    bool bFrameHoistActive = false;
+    bool bFrameReceived = false;
     TArray<int32> PoweredTerminals;
     int32 TetherBody = INDEX_NONE;
     FVector2D TetherAnchor = FVector2D::ZeroVector;
@@ -237,6 +250,10 @@ public:
     FExpeditionResult Bank(); // Scrap only; objective remains cargo.
     bool CanDispatch(FString& Reason) const;
     FExpeditionResult Dispatch();
+    bool CanReceiveFrame(FString& Reason) const;
+    FExpeditionResult ReceiveFrame(); // Explicit E handoff of the actual available frame; one existing output ledger.
+    const FExpeditionBody* FindFrameBody() const;
+    bool IsManualTargetExposed(int32 Id) const;
     void Evacuate();
     const FExpeditionWorldState& GetState() const { return State; }
     const TArray<FExpeditionBody>& GetBodies() const { return State.Bodies; }
@@ -274,10 +291,13 @@ private:
     void AddEvent(EExpeditionEventKind Kind, const FString& Message, const FVector2D& Position, const TArray<int32>& Ids = {}, int32 Amount = 0);
     void BuildObstacles();
     void ConfigureAuthoredLayout();
+    void ConfigurePowerFrame();
     static bool IsKnownLayout(FName Id, int32 Revision, int32 SiteIndex);
     float PadMass(FVector2D Center, float Radius) const;
     bool IsTerminalPowered(int32 Id) const;
     bool HasTerminalWork(int32 Id) const;
+    const FExpeditionSupportDefinition* FindSupport(int32 PayloadId) const;
+    bool HasReceivingSupport(int32 PayloadId) const;
     void Sever(int32 Id, const FExpeditionRig& Rig);
     void UpdateMechanisms();
     void Integrate(float Delta, const FExpeditionRig& Rig);
@@ -285,7 +305,7 @@ private:
     void Impact(FExpeditionBody& Body, const FVector2D& Normal, float Speed, const FExpeditionRig& Rig, bool bResolveVelocity = true);
     bool ArcPath(int32 Target, const FExpeditionRig& Rig, TArray<int32>& OutPath, bool* bUsedBridge = nullptr) const;
     TArray<int32> ConductiveNeighbors(int32 Id, const FExpeditionRig& Rig) const;
-    bool CircuitLoop(const FExpeditionRig& Rig, TArray<int32>& Reachable) const;
+    bool CircuitLoop(const FExpeditionRig& Rig, TArray<int32>& Reachable, int32 SourceId = 5) const;
     void FireTerminal(int32 Id);
     void ResolveSensor(int32 Id);
     void MakeCyclone(int32 BodyId);

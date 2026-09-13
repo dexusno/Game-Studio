@@ -45,6 +45,15 @@ bool VisibleBody(const FExpeditionBody& B)
     return B.State != EExpeditionBodyState::Banked && B.State != EExpeditionBodyState::Consumed
         && B.State != EExpeditionBodyState::Dispatched;
 }
+int32 ElectricalTarget(const FExpeditionWorld& World,const FVector2D& Aim)
+{
+    // A marked floor contact can sit under its payload. Select the intended
+    // contact so the shared exposure check explains the physical obstruction.
+    for(const auto& Body:World.GetBodies())
+        if(Body.bFloorContact && VisibleBody(Body) && FVector2D::Distance(Aim,Body.Position)<=Body.Radius)
+            return Body.Id;
+    return World.FindBodyAt(Aim,24);
+}
 FName BodyMaterial(const FExpeditionBody& B)
 {
     if (B.bHot) return TEXT("Hazard");
@@ -172,6 +181,12 @@ void FExpeditionRuntime::CycleCargo()
 FString FExpeditionRuntime::RecoveryHint() const
 {
     if(World->IsUnsafe())return TEXT("Right-click now to drop the whole haul safely. A spill at fuse expiry also costs 12 battery. Dropped scrap can be recovered.");
+    if(const auto* Frame=World->FindFrameBody();Frame && !World->GetState().bFrameReceived)
+    {
+        const auto* Dock=World->FindMarker(TEXT("frame_receiver"));
+        if(FVector2D::Distance(Aim,Frame->Position)<Frame->Radius+40 ||
+            (Dock && FVector2D::Distance(Magnet,Dock->Position)<100))return FrameRecoveryHint();
+    }
     if(FVector2D::Distance(Magnet,FExpeditionWorld::FurnacePosition())<115 && World->GetCargoValue()>0)
         return TEXT("Press E to smelt settled scrap here. Iron, copper and alloy can be mixed. The mission core is protected and goes to the receiver.");
     for(const auto& Objective:World->GetObjectives())
@@ -182,6 +197,17 @@ FString FExpeditionRuntime::RecoveryHint() const
             TEXT("Carry the core to MACHINE RECEIVER on the right. Wait for it to settle, then press E to earn this site's recovery credits.");
     return FString::Printf(TEXT("Make room for the %.0f kg core; you hold %.0f of 24 safe kg. Collect the glowing core, carry it to MACHINE RECEIVER and press E once settled."),
         Core?Core->Mass:8.f+4.f*SiteIndex,World->GetCargoMass());
+}
+FString FExpeditionRuntime::FrameRecoveryHint() const
+{
+    const auto* Frame=World->FindFrameBody();
+    if(!Frame)return TEXT("");
+    if(World->GetState().bFrameReceived)return TEXT("Power frame installed. Its appraisal is recorded in this expedition's output.");
+    FString Reason;
+    if(World->CanReceiveFrame(Reason))return FString::Printf(TEXT("Frame ready. Move the magnet to FRAME DOCK and press E to recover +%d output. The frame stays installed here."),Frame->Appraisal);
+    if(World->GetState().bFrameHoistActive)return TEXT("Hoist moving the frame. Let it settle at FRAME DOCK, then move the magnet there and press E to recover it.");
+    if(Frame->bAnchored)return TEXT("Optional 40 kg frame exceeds the 36 kg pickup limit. Support its mount to move it, or power the exposed loop input. Recover it at FRAME DOCK with E.");
+    return Reason;
 }
 void FExpeditionRuntime::ClearPreparation()
 {
@@ -255,7 +281,7 @@ FExpeditionCommand FExpeditionRuntime::CommandFor(int32 Slot) const
         return C;
     }
     if(C.Action==EExpeditionAction::ArmRelay || C.Action==EExpeditionAction::TransferHeat)
-    {C.TargetId=RelaySource;C.SecondaryId=World->FindBodyAt(Aim,24);return C;}
+    {C.TargetId=RelaySource;C.SecondaryId=C.Action==EExpeditionAction::ArmRelay?ElectricalTarget(*World,Aim):World->FindBodyAt(Aim,24);return C;}
     if(C.Action==EExpeditionAction::LayGuide)
     {C.Aim=PreparedPoint;C.SecondaryPoint=PreparedBend;C.bHasSecondaryPoint=PreparationStage>=2;return C;}
     if(C.Action==EExpeditionAction::Relay)
@@ -266,7 +292,7 @@ FExpeditionCommand FExpeditionRuntime::CommandFor(int32 Slot) const
     }
     if(C.Action==EExpeditionAction::Vector && ToolOperation[Slot]==3 && Rig->Has(TEXT("reaction_frame")))
     {C.TargetId=RelaySource;C.SecondaryId=PreparedPartner;return C;}
-    C.TargetId=World->FindBodyAt(Aim,24);
+    C.TargetId=C.Action==EExpeditionAction::Arc?ElectricalTarget(*World,Aim):World->FindBodyAt(Aim,24);
     return C;
 }
 void FExpeditionRuntime::Act(int32 Slot)
@@ -334,6 +360,8 @@ void FExpeditionRuntime::Key(const FKey& K,bool bPressed,bool bRepeat)
 void FExpeditionRuntime::BankOrDeliver()
 {
     if(Screen!=EExpeditionScreen::Site || bPaused) return;
+    if(const auto* Dock=World->FindMarker(TEXT("frame_receiver"));Dock && FVector2D::Distance(Magnet,Dock->Position)<=95)
+    {ReceiveFrame();return;}
     Input.Cancel(); ClearPreparation(); World->CancelPull();
     if(FVector2D::Distance(Magnet,FExpeditionWorld::ReceiverPosition())<100)
     {
@@ -367,6 +395,23 @@ void FExpeditionRuntime::BankOrDeliver()
     {
         FExpeditionCommand C; C.Action=EExpeditionAction::Interact; C.Magnet=Magnet; C.Aim=Aim;
         C.TargetId=World->FindBodyAt(Aim,30); Show(World->Execute(C,*Rig).Message);
+    }
+    Save();
+}
+void FExpeditionRuntime::ReceiveFrame()
+{
+    if(Screen!=EExpeditionScreen::Site || bPaused)return;
+    const auto* Dock=World->FindMarker(TEXT("frame_receiver"));
+    if(!Dock)return;
+    if(FVector2D::Distance(Magnet,Dock->Position)>95)
+    {Show(TEXT("Move the magnet to FRAME DOCK, then press E to recover the settled frame."));return;}
+    Input.Cancel();ClearPreparation();World->CancelPull();
+    const auto Result=World->ReceiveFrame();Show(Result.Message);
+    if(Result.bSucceeded)
+    {
+        const int32 Paid=Rig->AwardOutput(SiteIndex,World->GetOutput());
+        if(Paid>0)Show(FString::Printf(TEXT("Frame installed. Output %d / refining reward +%d credits."),World->GetOutput(),Paid),TEXT("payout"));
+        else Show(Result.Message,TEXT("contract_success"));
     }
     Save();
 }
@@ -427,7 +472,11 @@ void FExpeditionRuntime::Tick(float Delta)
             case EExpeditionEventKind::Mechanism: Cue=TEXT("upgrade"); Show(Event.Message); break;
             case EExpeditionEventKind::Quench: Cue=TEXT("overload"); Color=Red; Count=36; Input.Cancel(); Show(Event.Message); break;
             case EExpeditionEventKind::Dropped: Cue=TEXT("vent"); break;
-            case EExpeditionEventKind::Banked: Cue=TEXT("smelt"); Color=Copper; Count=32; break;
+            case EExpeditionEventKind::Banked:
+                if(const auto* Frame=World->FindFrameBody();Frame && Event.BodyIds.Contains(Frame->Id))
+                {Cue=TEXT("pickup_heavy");Impact=.6f;Color=Mint;Count=24;}
+                else {Cue=TEXT("smelt");Color=Copper;Count=32;}
+                break;
             default: break;
             }
             if(Display)

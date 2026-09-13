@@ -12,6 +12,7 @@ bool Finite(const FVector2D& V) { return FMath::IsFinite(V.X) && FMath::IsFinite
 FVector2D Limit(const FVector2D& V, float Max) { const double S = V.Size(); return S > Max ? V * (Max / S) : V; }
 FVector2D InTray(const FVector2D& P, float R = 16.f) { return FVector2D(FMath::Clamp(P.X, -500.0 + R, 500.0 - R), FMath::Clamp(P.Y, -300.0 + R, 300.0 - R)); }
 bool Near(const FVector2D& A, const FVector2D& B, float R) { return FVector2D::DistSquared(A, B) <= R * R; }
+bool IsTerminalBody(const FExpeditionBody& B) {return B.Role==TEXT("ordinary_terminal")||B.Role==TEXT("receiver_terminal")||B.Role==TEXT("source_terminal")||B.Role==TEXT("frame_input")||B.Role==TEXT("frame_contact");}
 void Damage(FExpeditionBody& B,int32 Amount)
 { const int32 Old=B.Quality;B.Quality=FMath::Clamp(Old-Amount,0,Old);if(Old>0)B.Appraisal=int32(int64(B.Appraisal)*B.Quality/Old); }
 FName ToolFor(EExpeditionAction Action)
@@ -37,6 +38,7 @@ void FExpeditionWorld::BuildObstacles()
     SiteDefinition.LayoutId=State.LayoutId;SiteDefinition.LayoutRevision=State.LayoutRevision;
     SiteDefinition.Name=State.SiteIndex==0?TEXT("Preload Workshop"):State.SiteIndex==1?TEXT("Salvage Exchange"):TEXT("Preload Workshop — original layout");
     SiteDefinition.Summary=TEXT("Release the preload, park the ballast and brace the arm; deliver the protected machine separately from scrap.");
+    SiteDefinition.Supports={{9,TEXT("counterweight"),NAME_None,8}};
     SiteDefinition.Markers={
         {TEXT("collar"),TEXT("PRELOAD STOP"),CollarStop(),34,true},
         {TEXT("ballast"),TEXT("BALLAST CATCH"),BallastCatch(),62,true},
@@ -66,6 +68,7 @@ void FExpeditionWorld::BuildObstacles()
     }
     else if(State.LayoutId==TEXT("counterweight_exchange"))
     {
+        SiteDefinition.Supports.Reset();
         SiteDefinition.Name=TEXT("Counterweight Exchange");
         SiteDefinition.Summary=TEXT("Lift the 20 kg machine, then replace its counterweight or power the remote latch. Stage your haul, or use remote tools to keep the core secured.");
         SiteDefinition.bHasArm=false;SiteDefinition.PressCenter=FVector2D(450,-50);SiteDefinition.PressHalfSize=FVector2D(22,120);
@@ -78,17 +81,32 @@ void FExpeditionWorld::BuildObstacles()
             {TEXT("receiver"),TEXT("MACHINE RECEIVER"),ReceiverPosition(),100,true}};
         Obstacles={{FVector2D(80,-110),FVector2D(12,60),TEXT("exchange_partition")}};
     }
+    if(State.LayoutRevision==2&&State.LayoutId!=TEXT("e1"))
+    {
+        const FVector2D F(State.SiteIndex==2?0:200,-150);
+        SiteDefinition.Markers.Append({
+            {TEXT("frame_receiver"),TEXT("E: RECOVER FRAME"),F+FVector2D(64,48),24,false,61},
+            {TEXT("frame_support"),TEXT("FRAME SUPPORT: 8+ KG"),F+FVector2D(-204,202),55,false,61},
+            {TEXT("frame_support_receiver"),TEXT("ARRIVING SUPPORT"),F+FVector2D(-140,250),20,false,61},
+            {TEXT("frame_reaction"),State.SiteIndex==2?TEXT("REACTION SETUP: 12 KG"):TEXT("REACTION SETUP: 20 KG"),State.SiteIndex==2?FVector2D(73.3333,260):F+FVector2D(-12,346),28,false,61},
+            {TEXT("frame_loop"),TEXT("DIRECTED RETURN TILE"),F+FVector2D(-20,-40),16,false,61},
+            {TEXT("frame_input"),TEXT("EXPOSED LOOP INPUT"),F+FVector2D(0,-62),18,false,61},
+            {TEXT("frame_contact"),TEXT("COVERED HOIST CONTACT"),F,12,false,61},
+            {TEXT("frame_service"),TEXT("EXPOSE FLOOR CONTACT"),F+FVector2D(55,0),18,false,61}});
+        SiteDefinition.Supports.Add({61,TEXT("frame_support"),TEXT("frame_support_receiver"),8});
+        if(State.SiteIndex==2)for(auto& O:Obstacles)if(O.Role==TEXT("rack_right_partition"))O.Center=FVector2D(115,-180);
+    }
     SiteDefinition.Obstacles=Obstacles;
 }
 
 bool FExpeditionWorld::IsKnownLayout(FName Id,int32 Revision,int32 SiteIndex)
 {
-    return Revision==1&&((SiteIndex>=0&&SiteIndex<=3&&Id==TEXT("e1"))||(SiteIndex==2&&Id==TEXT("balanced_rack"))||(SiteIndex==3&&Id==TEXT("counterweight_exchange")));
+    return (Revision==1&&SiteIndex>=0&&SiteIndex<=3&&Id==TEXT("e1"))||((Revision==1||Revision==2)&&((SiteIndex==2&&Id==TEXT("balanced_rack"))||(SiteIndex==3&&Id==TEXT("counterweight_exchange"))));
 }
 
 bool FExpeditionWorld::StartSite(int32 SiteIndex, int32 Seed, int32 InitialBattery,FName LayoutId,int32 LayoutRevision)
 {
-    if(LayoutId.IsNone()) {LayoutId=SiteIndex==2?TEXT("balanced_rack"):SiteIndex==3?TEXT("counterweight_exchange"):TEXT("e1");LayoutRevision=1;}
+    if(LayoutId.IsNone()) {LayoutId=SiteIndex==2?TEXT("balanced_rack"):SiteIndex==3?TEXT("counterweight_exchange"):TEXT("e1");LayoutRevision=SiteIndex>=2?2:1;}
     if(!IsKnownLayout(LayoutId,LayoutRevision,FMath::Clamp(SiteIndex,0,3)))return false;
     State = FExpeditionWorldState();
     State.SiteIndex = FMath::Clamp(SiteIndex, 0, 3);
@@ -191,7 +209,29 @@ bool FExpeditionWorld::StartSite(int32 SiteIndex, int32 Seed, int32 InitialBatte
         }
     }
     ConfigureAuthoredLayout();
+    ConfigurePowerFrame();
     return true;
+}
+
+void FExpeditionWorld::ConfigurePowerFrame()
+{
+    if(State.LayoutRevision!=2||State.LayoutId==TEXT("e1"))return;
+    const FVector2D F(State.SiteIndex==2?0:200,-150);
+    auto Add=[&](FName Role,EExpeditionMaterial Material,FVector2D Position,float Mass,int32 Value,float Radius)
+    {
+        FExpeditionBody B;B.Id=State.NextBodyId++;B.Role=Role;B.Material=Material;B.Position=Position;B.Mass=Mass;B.Value=Value;B.Appraisal=Value;B.Radius=Radius;B.SourceIds={B.Id};State.Bodies.Add(B);
+    };
+    Add(TEXT("power_frame"),EExpeditionMaterial::Alloy,F,40,320,35);
+    auto* Frame=MutableBody(61);Frame->bAnchored=true;Frame->bFunctional=true;Frame->Charge=2;
+    Add(TEXT("frame_input"),EExpeditionMaterial::Mechanism,F+FVector2D(0,-62),2,0,14);MutableBody(62)->bAnchored=true;
+    Add(TEXT("frame_contact"),EExpeditionMaterial::Mechanism,F,2,0,10);MutableBody(63)->bAnchored=true;MutableBody(63)->bFloorContact=true;
+    Add(TEXT("frame_return"),EExpeditionMaterial::Copper,F+FVector2D(-85,70),2,0,8);MutableBody(64)->FlowDirection=FVector2D(20,40).GetSafeNormal();
+    if(State.SiteIndex==2)
+    {
+        MutableBody(33)->Position=FVector2D(350,250);MutableBody(34)->Position=FVector2D(400,250); // Clear the real 12 kg reaction setup.
+        MutableBody(38)->Position=FVector2D(310,-270); // Leave the frame receiving ring free of ordinary alloy.
+    }
+    if(State.SiteIndex==3)MutableBody(38)->Position=FVector2D(100,-270); // The exposed input is not hidden inside ordinary alloy.
 }
 
 void FExpeditionWorld::ConfigureAuthoredLayout()
@@ -284,6 +324,63 @@ FVector2D FExpeditionWorld::GetArmTip() const
 const FExpeditionSiteMarker* FExpeditionWorld::FindMarker(FName Id) const
 {return SiteDefinition.Markers.FindByPredicate([Id](const FExpeditionSiteMarker& M){return M.Id==Id;});}
 
+const FExpeditionSupportDefinition* FExpeditionWorld::FindSupport(int32 Id) const
+{return SiteDefinition.Supports.FindByPredicate([Id](const FExpeditionSupportDefinition& S){return S.PayloadId==Id;});}
+
+const FExpeditionBody* FExpeditionWorld::FindFrameBody() const
+{return State.Bodies.FindByPredicate([](const FExpeditionBody& B){return B.Role==TEXT("power_frame");});}
+
+bool FExpeditionWorld::IsManualTargetExposed(int32 Id) const
+{
+    const auto* Target=FindBody(Id);const auto* Frame=FindFrameBody();
+    return !Target||Target->Role!=TEXT("frame_contact")||!Frame||!Live(*Frame)||!Near(Target->Position,Frame->Position,Frame->Radius+Target->Radius);
+}
+
+bool FExpeditionWorld::HasReceivingSupport(int32 Id) const
+{
+    const auto* Definition=FindSupport(Id);
+    const auto* Pad=Definition?FindMarker(Definition->ReceivingMarker):nullptr;
+    if(!Definition||!Pad)return false;
+    for(const auto& K:State.Constraints)
+    {
+        if(!K.bActive||K.BodyA!=Id)continue;
+        const auto* Support=FindBody(K.BodyB);
+        if(!Support||Support->State!=EExpeditionBodyState::Available||Support->bAnchored||Support->Mass<Definition->MinimumMass||Support->Velocity.Size()>=45||!Near(Support->Position,Pad->Position,Pad->Radius))continue;
+        // A fixed support at its old foundation cannot serve the arrival. A real pawl
+        // can hold the payload while that support is moved to the new receiving point.
+        if(K.Kind!=EExpeditionConstraintKind::Counterweight||Near(Support->Position,K.Anchor,55)||State.LatchedBody==Id)return true;
+    }
+    return false;
+}
+
+bool FExpeditionWorld::CanReceiveFrame(FString& Reason) const
+{
+    const auto* Frame=FindFrameBody();const auto* Dock=FindMarker(TEXT("frame_receiver"));
+    if(!Frame||!Dock){Reason=TEXT("This worksite has no heavy-frame receiving dock");return false;}
+    if(IsEnded()||State.bFrameReceived||Frame->State==EExpeditionBodyState::Banked){Reason=TEXT("This frame handoff is already settled");return false;}
+    if(Frame->State!=EExpeditionBodyState::Available||Frame->bAnchored||Frame->Velocity.Size()>=45||!Near(Frame->Position,Dock->Position,Dock->Radius)){Reason=TEXT("Bring the actual released 40 kg frame into its receiving ring and let it settle");return false;}
+    if(!State.bFrameHoistPowered&&!HasReceivingSupport(Frame->Id)){Reason=TEXT("The receiving support must arrive with the frame, or the wired hoist contact must be powered");return false;}
+    if(!Near(State.Magnet,Dock->Position,95)){Reason=TEXT("Move the magnet to E: RECOVER FRAME for the handoff");return false;}
+    Reason.Reset();return true;
+}
+
+FExpeditionResult FExpeditionWorld::ReceiveFrame()
+{
+    FExpeditionResult R;if(!CanReceiveFrame(R.Message))return R;
+    auto* Frame=MutableBody(FindFrameBody()->Id);
+    R.bSucceeded=true;R.Output=Frame->Appraisal;R.BodyIds={Frame->Id};
+    State.Output+=R.Output;State.bFrameReceived=true;State.bFrameHoistActive=false;
+    Frame->State=EExpeditionBodyState::Banked;Frame->Velocity=FVector2D::ZeroVector;
+    for(auto& K:State.Constraints)if(K.BodyA==Frame->Id||K.BodyB==Frame->Id)K.bActive=false;
+    if(State.TetherBody==Frame->Id)State.TetherBody=INDEX_NONE;
+    if(State.SecondTetherBody==Frame->Id)State.SecondTetherBody=INDEX_NONE;
+    if(State.LatchedBody==Frame->Id)State.LatchedBody=INDEX_NONE;
+    if(State.LayoutId==TEXT("counterweight_exchange"))State.bCircuitClosed=true;
+    R.Message=FString::Printf(TEXT("Frame installed — +%d actual output%s"),R.Output,State.LayoutId==TEXT("counterweight_exchange")?TEXT("; final counterbalance supplied"):TEXT(""));
+    AddEvent(EExpeditionEventKind::Banked,R.Message,Frame->Position,R.BodyIds,R.Output);
+    return R;
+}
+
 bool FExpeditionWorld::IsCoreReleased() const
 {
     if(State.LayoutId==TEXT("balanced_rack"))return State.bCoreSecured||State.bCollarReleased;
@@ -307,6 +404,11 @@ bool FExpeditionWorld::IsTerminalPowered(int32 Id) const
 
 bool FExpeditionWorld::HasTerminalWork(int32 Id) const
 {
+    if(const auto* Frame=FindFrameBody())
+    {
+        if(Id==62)return Live(*Frame)&&(Frame->bAnchored||State.Constraints.ContainsByPredicate([&](const FExpeditionConstraint& K){return K.bActive&&K.BodyA==Frame->Id;}));
+        if(Id==63)return Live(*Frame)&&!State.bFrameHoistPowered;
+    }
     if(State.LayoutId!=TEXT("balanced_rack"))return !IsTerminalPowered(Id);
     const auto* Payload=FindBody(Id==4?9:10);
     return Payload&&Live(*Payload)&&!Held(*Payload)&&(Payload->bAnchored||State.Constraints.ContainsByPredicate([&](const FExpeditionConstraint& K){return K.bActive&&K.BodyA==Payload->Id;}));
@@ -314,6 +416,16 @@ bool FExpeditionWorld::HasTerminalWork(int32 Id) const
 
 TArray<FExpeditionSiteObjective> FExpeditionWorld::GetObjectives() const
 {
+    auto WithFrame=[&](TArray<FExpeditionSiteObjective> Items)
+    {
+        if(const auto* Frame=FindFrameBody())
+        {
+            FString Reason;const bool Ready=CanReceiveFrame(Reason);
+            const FString Hint=State.bFrameReceived?(State.LayoutId==TEXT("counterweight_exchange")?TEXT("Frame installed and its output banked; the final counterbalance is supplied."):TEXT("Frame installed; its actual output is already banked.")):(Ready?TEXT("Press E at E: RECOVER FRAME. This banks the actual frame output once."):Reason);
+            Items.Add({TEXT("frame"),State.bFrameReceived?TEXT("Optional frame installed"):FString::Printf(TEXT("Optional frame: %d output"),Frame->Appraisal),Hint,State.bFrameReceived,false});
+        }
+        return Items;
+    };
     const auto* Core=FindBody(0);
     const bool Carried=Core&&Core->State==EExpeditionBodyState::Cargo;
     const FString Reward=State.SiteIndex==3?TEXT("Final delivery archives this rig."):TEXT("Delivery earns recovery credits.");
@@ -323,27 +435,27 @@ TArray<FExpeditionSiteObjective> FExpeditionWorld::GetObjectives() const
         const float Left=PadMass({-250,160},60),Right=PadMass({250,160},60);
         const bool LeftReady=Left>=10&&Left<=14,RightReady=Right>=10&&Right<=14;
         const bool Balanced=LeftReady&&RightReady&&FMath::Abs(Left-Right)<=2;
-        return {
+        return WithFrame({
             {TEXT("balance_left"),FString::Printf(TEXT("Left %.0f kg / 10–14"),Left),TEXT("Shift + LMB the 12 kg ballast; carry it to LEFT: 10–14 KG and right-click. Only resting loose mass counts. Keep both platforms within 2 kg."),State.bCoreSecured||LeftReady,true},
             {TEXT("balance_right"),FString::Printf(TEXT("Right %.0f kg; difference %.0f"),Right,FMath::Abs(Left-Right)),TEXT("Shift + LMB the 8 kg brace and two 2 kg irons, then right-click on RIGHT: 10–14 KG. Each platform needs 10–14 kg; their difference must be at most 2 kg."),State.bCoreSecured||Balanced,true},
             {TEXT("core"),TEXT("Secure the 16 kg machine"),TEXT("While both platforms stay balanced, make room for 16 kg and Shift + LMB the core. Once actually secured, the rack stays unlocked; you may reclaim the weights."),State.bCoreSecured,true},
-            {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}};
+            {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}});
     }
     if(State.LayoutId==TEXT("counterweight_exchange"))
     {
         const bool Replaced=State.bBallastCleared||State.bCircuitClosed;
         const float Mass=PadMass({300,0},28);
-        return {
+        return WithFrame({
             {TEXT("cover"),TEXT("Clear the heavy cover"),TEXT("Shift + LMB the 20 kg cover. Move it clear of the core, then right-click near SET COVER ASIDE. The marked parking spot is a suggestion; leave room to recover the core."),State.bCoreSecured||State.bCollarReleased,true},
             {TEXT("core"),TEXT("Secure the 20 kg core"),TEXT("With the cover clear and room for 20 kg, Shift + LMB the core. Two 20 kg loads exceed 36 kg: plan to stage the core or move the replacement remotely."),State.bCoreSecured,true},
             {TEXT("counterbalance"),FString::Printf(TEXT("Replace weight %.0f / 20 kg"),Mass),TEXT("RMB the core at SAFE CORE STAGING; move 20 kg to its empty cradle, then regrip. Or keep it held and move weight with Winch/Relay. Place a preserved generator at GENERATOR DOCK, then Arc the receiver."),Replaced,true},
-            {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}};
+            {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}});
     }
-    return {
+    return WithFrame({
         {TEXT("collar"),TEXT("Release preload"),TEXT("Hold LMB over the brass collar, then move left to PRELOAD STOP. Shift narrows pickup. The collar slides along its guide; it is not furnace scrap."),State.bCollarReleased,true},
         {TEXT("ballast"),TEXT("Park the ballast"),TEXT("Use Shift + LMB to collect the 12 kg ballast. Carry it to BALLAST CATCH, then right-click to place it. Placement releases the retaining latch."),State.bBallastCleared,true},
         {TEXT("arm"),TEXT("Hold the arm clear"),TEXT("Collect the 8 kg iron brace. Carry it to ARM STOPPER and right-click during the arm's clear phase. It locks the arm away from the core."),State.bArmBraced,true},
-        {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}};
+        {TEXT("receiver"),TEXT("Deliver the machine"),DeliveryHint,State.bDispatched,true}});
 }
 
 FString FExpeditionWorld::GetGoalText() const
@@ -399,7 +511,7 @@ bool FExpeditionWorld::ArcPath(int32 Target,const FExpeditionRig& Rig,TArray<int
     const auto* T=FindBody(Target);
     if(!T||!Live(*T)||Target==State.GroundBody)return false;
     if(T->Role==TEXT("ordinary_terminal")){OutPath.Add(Target);return true;}
-    if(T->Role!=TEXT("receiver_terminal")&&T->Role!=TEXT("source_terminal"))return false;
+    if(!IsTerminalBody(*T))return false;
     // Prefer a wired route, then search (body, gap-used) states. Exploring an unhelpful
     // candidate must not consume the one permitted gap for every other branch.
     for(int32 Pass=0;Pass<=(Has(Rig,TEXT("induction_bridge"))?1:0);++Pass)
@@ -433,15 +545,17 @@ bool FExpeditionWorld::ArcPath(int32 Target,const FExpeditionRig& Rig,TArray<int
     return false;
 }
 
-bool FExpeditionWorld::CircuitLoop(const FExpeditionRig& Rig,TArray<int32>& Reachable) const
+bool FExpeditionWorld::CircuitLoop(const FExpeditionRig& Rig,TArray<int32>& Reachable,int32 SourceId) const
 {
-    Reachable={5};
+    const auto* Source=FindBody(SourceId);
+    if(!Source||!Live(*Source)||!Source->bConductive){Reachable.Reset();return false;}
+    Reachable={SourceId};
     for(int32 I=0;I<Reachable.Num();++I)for(int32 N:ConductiveNeighbors(Reachable[I],Rig))Reachable.AddUnique(N);
     for(int32 Node:Reachable)
     {
         const auto* B=FindBody(Node); if(!B||B->FlowDirection.IsNearlyZero())continue;
         // A reachable directed return physically closes the source path; a two-node backtrack is not a circuit.
-        if(ConductiveNeighbors(Node,Rig).Contains(5)&&Reachable.Contains(4))return true;
+        if(ConductiveNeighbors(Node,Rig).Contains(SourceId)&&Reachable.ContainsByPredicate([&](int32 Id){const auto* T=FindBody(Id);return Id!=SourceId&&T&&IsTerminalBody(*T);}))return true;
     }
     return false;
 }
@@ -512,12 +626,18 @@ FExpeditionPreview FExpeditionWorld::Preview(const FExpeditionCommand& C, const 
         break;
     case EExpeditionAction::Arc:
     {
+        if(!IsManualTargetExposed(TargetId))return Refuse(TEXT("Contact covered by the frame. Move the frame, or energize the exposed loop input."));
         TArray<int32> Path; bool UsedBridge=false;
         if (!ArcPath(TargetId, Rig, Path, &UsedBridge)) return Refuse(State.LayoutId==TEXT("e1")?TEXT("No conducting path: free the long conductor, place it in the socket, then pulse the terminal"):TEXT("Connect a free, working generator with stored charge to this receiver; check where the source actually landed"));
         P.BodyIds = Path; P.BatteryCost = 8;
         if (UsedBridge) P.BatteryCost += 4;
-        if(IsTerminalPowered(TargetId==5?4:TargetId))return Refuse(TEXT("That terminal has already actuated its mechanism"));
-        if(!HasTerminalWork(TargetId==5?4:TargetId))return Refuse(TEXT("That payload is already independently released or recovered"));
+        const int32 Terminal=TargetId==5?4:TargetId;
+        if(IsTerminalPowered(Terminal)||!HasTerminalWork(Terminal))
+        {
+            TArray<int32> Reachable;
+            const bool UsefulReturn=Has(Rig,TEXT("closed_circuit"))&&!Path.IsEmpty()&&CircuitLoop(Rig,Reachable,Path[0])&&Reachable.ContainsByPredicate([&](int32 Id){const auto* B=FindBody(Id);return Id!=Terminal&&Id!=State.GroundBody&&B&&IsTerminalBody(*B)&&!IsTerminalPowered(Id)&&HasTerminalWork(Id);});
+            if(!UsefulReturn)return Refuse(TEXT("This terminal has no new mechanism work; complete a live return circuit to power an unpowered branch"));
+        }
         break;
     }
     case EExpeditionAction::Winch:
@@ -526,10 +646,11 @@ FExpeditionPreview FExpeditionWorld::Preview(const FExpeditionCommand& C, const 
         if (Target->Material == EExpeditionMaterial::Mechanism && Target->Role != TEXT("collar")) return Refuse(TEXT("That fixed terminal is not a tow point"));
         if (Target->bAnchored)
         {
-            if(Target->Role!=TEXT("supported_machine"))return Refuse(TEXT("This fixed mount needs a real impact or its powered release; a counterweight cannot lift an arbitrary anchor"));
+            const auto* Support=FindSupport(TargetId);
+            if(!Support)return Refuse(TEXT("This fixed mount needs a real impact or its powered release; a counterweight cannot lift an arbitrary anchor"));
             bool Weight = false;
-            const auto* Pad=FindMarker(TEXT("counterweight"));
-            for (const auto& B : State.Bodies) if (Pad&&B.Id!=Target->Id&&Live(B) && !Held(B) && B.Mass >= 8 && Near(B.Position,Pad->Position,Pad->Radius)&&B.Velocity.Size()<45) Weight = true;
+            const auto* Pad=FindMarker(Support->AnchorMarker);
+            for (const auto& B : State.Bodies) if (Pad&&B.Id!=Target->Id&&Live(B) && !Held(B) && B.Mass >= Support->MinimumMass && Near(B.Position,Pad->Position,Pad->Radius)&&B.Velocity.Size()<45) Weight = true;
             if ((!Has(Rig,TEXT("counterweight_hook"))&&!Has(Rig,TEXT("walking_gantry"))) || !Weight) return Refuse(TEXT("Support needs one real 8 kg body resting on the marked counterweight pad"));
         }
         if (!Near(C.Destination, InTray(C.Destination), 1)) return Refuse(TEXT("Place the anchor inside the worksite"));
@@ -557,7 +678,7 @@ FExpeditionPreview FExpeditionWorld::Preview(const FExpeditionCommand& C, const 
         if(Has(Rig,TEXT("reaction_frame"))&&C.SecondaryId!=INDEX_NONE)
         {
             const auto* Partner=FindBody(C.SecondaryId);
-            if(!Partner||Partner->Id==Target->Id||!Live(*Partner)||Held(*Partner)||Partner->Role!=TEXT("supported_machine"))return Refuse(TEXT("Choose the supported machine as the reaction partner"));
+            if(!Partner||Partner->Id==Target->Id||!Live(*Partner)||Held(*Partner)||!FindSupport(Partner->Id))return Refuse(TEXT("Choose a visibly supported payload as the reaction partner"));
             if(Target->Mass<8)return Refuse(TEXT("This support needs at least 8 kg of real ballast to lift its payload"));
             P.BatteryCost+=6;if(P.PathPoints.IsEmpty())P.PathPoints={Target->Position,Partner->Position};
         }
@@ -587,7 +708,8 @@ FExpeditionPreview FExpeditionWorld::Preview(const FExpeditionCommand& C, const 
     case EExpeditionAction::ArmRelay:
     {
         const auto* Receiver=FindBody(C.SecondaryId);
-        if(!Has(Rig,TEXT("escapement_relay"))||!Target||!Live(*Target)||!Receiver||(Receiver->Role!=TEXT("ordinary_terminal")&&Receiver->Role!=TEXT("receiver_terminal")))return Refuse(TEXT("Choose a physical sensor body, then a receiver terminal"));
+        if(!Has(Rig,TEXT("escapement_relay"))||!Target||!Live(*Target)||!Receiver||!IsTerminalBody(*Receiver))return Refuse(TEXT("Choose a physical sensor body, then a receiver terminal"));
+        if(!IsManualTargetExposed(C.SecondaryId))return Refuse(TEXT("Contact covered by the frame. Move the frame, or energize the exposed loop input."));
         if(State.DeferredCharge>0)return Refuse(TEXT("A real relay charge is already waiting for its sensor impact"));
         if(IsTerminalPowered(C.SecondaryId))return Refuse(TEXT("That terminal has already actuated its mechanism"));
         if(!HasTerminalWork(C.SecondaryId))return Refuse(TEXT("That payload is already independently released or recovered"));
@@ -723,21 +845,27 @@ FExpeditionResult FExpeditionWorld::Execute(const FExpeditionCommand& C, const F
     case EExpeditionAction::Arc:
     {
         const int32 Terminal=P.TargetId==5?4:P.TargetId;
-        FireTerminal(Terminal); R.Message=Terminal==11?TEXT("Local terminal powered — arm parked clear"):TEXT("Conducting path actuated the remote latch");
-        if(State.LayoutId==TEXT("balanced_rack"))R.Message=Terminal==4?TEXT("Stored generator charge released the supported machine"):TEXT("Stored generator charge released the brittle brace intact");
+        const bool PrimaryWork=!IsTerminalPowered(Terminal)&&HasTerminalWork(Terminal);
+        if(PrimaryWork)FireTerminal(Terminal);
+        R.Message=Terminal==11?TEXT("Local terminal powered — arm parked clear"):TEXT("Conducting path actuated the remote latch");
+        if(Terminal==62)R.Message=PrimaryWork?TEXT("Frame mount released by its stored charge"):TEXT("Exposed input passes the remaining charge into the completed return");
+        else if(Terminal==63)R.Message=TEXT("Floor contact powered — the receiving hoist is moving the real frame");
+        else if(State.LayoutId==TEXT("balanced_rack"))R.Message=Terminal==4?TEXT("Stored generator charge released the supported machine"):TEXT("Stored generator charge released the brittle brace intact");
         else if(State.LayoutId==TEXT("counterweight_exchange"))R.Message=TEXT("Stored generator charge latched the dispatch counterbalance");
         // A portable recovered source is depleted when it supplies an otherwise unavailable path.
-        if(!P.BodyIds.IsEmpty())if(auto* Source=MutableBody(P.BodyIds[0]);Source&&Source->bFunctional&&Source->Charge>0)--Source->Charge;
+        if(PrimaryWork&&!P.BodyIds.IsEmpty())if(auto* Source=MutableBody(P.BodyIds[0]);Source&&Source->bFunctional&&Source->Charge>0)--Source->Charge;
         TArray<int32> Reachable=P.BodyIds;
         for(int32 I=0;I<Reachable.Num();++I)for(int32 N:ConductiveNeighbors(Reachable[I],Rig))Reachable.AddUnique(N);
         const bool GroundOnBranch=State.GroundBody!=INDEX_NONE&&Reachable.Contains(State.GroundBody);
-        if(Has(Rig,TEXT("closed_circuit"))&&CircuitLoop(Rig,Reachable))
+        const int32 SourceId=P.BodyIds.IsEmpty()?INDEX_NONE:P.BodyIds[0];
+        if(Has(Rig,TEXT("closed_circuit"))&&CircuitLoop(Rig,Reachable,SourceId))
         {
-            TArray<int32> Terminals;for(int32 Id:Reachable)if(const auto* B=FindBody(Id);B&&(B->Role==TEXT("ordinary_terminal")||B->Role==TEXT("receiver_terminal"))&&Id!=Terminal&&Id!=State.GroundBody)Terminals.AddUnique(Id);
+            TArray<int32> Terminals;for(int32 Id:Reachable)if(const auto* B=FindBody(Id);B&&IsTerminalBody(*B)&&Id!=Terminal&&Id!=State.GroundBody)Terminals.AddUnique(Id);
             for(int32 Id:Terminals)
             {
-                FExpeditionBody* Source=nullptr;for(auto& B:State.Bodies)if(B.Charge>0&&Live(B)&&Reachable.Contains(B.Id)){Source=&B;break;}
-                if(IsTerminalPowered(Id))continue;
+                FExpeditionBody* Source=MutableBody(SourceId);
+                if(!Source||Source->Charge<=0||!Live(*Source))Source=nullptr;
+                if(IsTerminalPowered(Id)||!HasTerminalWork(Id))continue;
                 if(!Source)break;--Source->Charge;FireTerminal(Id);R.BodyIds.AddUnique(Id);
                 AddEvent(EExpeditionEventKind::Discharge,TEXT("Closed return circuit — distinct stored charge powers another branch"),FindBody(Id)->Position,{Source->Id,Id});
             }
@@ -751,11 +879,12 @@ FExpeditionResult FExpeditionWorld::Execute(const FExpeditionCommand& C, const F
     case EExpeditionAction::Winch:
     {
         auto* B = MutableBody(P.TargetId);
-        if(B->bAnchored)
+        const auto* Support=FindSupport(B->Id);
+        if(B->bAnchored||(B->Role==TEXT("power_frame")&&!State.bFrameHoistPowered&&(Has(Rig,TEXT("walking_gantry"))||Has(Rig,TEXT("counterweight_hook")))))
         {
-            check(B->Role==TEXT("supported_machine")); // Preview permits only a physically supported payload.
-            const auto* Pad=FindMarker(TEXT("counterweight"));
-            int32 Weight=INDEX_NONE;for(const auto& W:State.Bodies)if(Pad&&W.Id!=B->Id&&Live(W)&&!Held(W)&&W.Mass>=8&&W.Velocity.Size()<45&&Near(W.Position,Pad->Position,Pad->Radius)){Weight=W.Id;break;}
+            check(Support); // Preview permits only an authored physical support relation.
+            const auto* Pad=FindMarker(Support->AnchorMarker);
+            int32 Weight=INDEX_NONE;for(const auto& W:State.Bodies)if(Pad&&W.Id!=B->Id&&Live(W)&&!Held(W)&&W.Mass>=Support->MinimumMass&&W.Velocity.Size()<45&&Near(W.Position,Pad->Position,Pad->Radius)){Weight=W.Id;break;}
             if(Weight!=INDEX_NONE)
             {
                 State.Constraints.RemoveAll([&](const FExpeditionConstraint& K){return K.BodyA==B->Id;});
@@ -785,7 +914,8 @@ FExpeditionResult FExpeditionWorld::Execute(const FExpeditionCommand& C, const F
             if(Has(Rig,TEXT("reaction_frame"))&&C.SecondaryId!=INDEX_NONE)
             {
                 auto* A=MutableBody(C.SecondaryId);auto* B=MutableBody(P.TargetId);A->bAnchored=false;A->Velocity-=Direction*360.f*(B->Mass/A->Mass);
-                FExpeditionConstraint K;K.Kind=EExpeditionConstraintKind::Reaction;K.BodyA=A->Id;K.BodyB=B->Id;K.Anchor=(A->Position*A->Mass+B->Position*B->Mass)/(A->Mass+B->Mass);K.Offset=B->Position-A->Position;State.Constraints.Add(K);
+                FExpeditionConstraint K;K.Kind=EExpeditionConstraintKind::Reaction;K.BodyA=A->Id;K.BodyB=B->Id;K.Anchor=(A->Position*A->Mass+B->Position*B->Mass)/(A->Mass+B->Mass);K.Offset=B->Position-A->Position;
+                State.Constraints.Add(K);
                 AddEvent(EExpeditionEventKind::Mechanism,TEXT("Support routes opposite force into the second real load"),K.Anchor,{A->Id,B->Id});
             }
             R.Message = TEXT("Directional impulse committed");
@@ -825,7 +955,7 @@ void FExpeditionWorld::CancelPull()
 FExpeditionResult FExpeditionWorld::Drop()
 {
     FExpeditionResult R;
-    const FVector2D Origin = InTray(State.Magnet,70);
+    const FVector2D Origin = State.Magnet;
     TArray<int32> Ids;
     for (const auto& B : State.Bodies) if (Held(B)) Ids.Add(B.Id);
     // Preserve group-relative positions. Different components are placed on separated deterministic grid cells.
@@ -839,7 +969,19 @@ FExpeditionResult FExpeditionWorld::Drop()
         if (!Count) continue;
         Center /= Count;
         const FVector2D Offset = Slot==0 ? FVector2D::ZeroVector : FVector2D(((Slot-1)%3-1)*54.f,((Slot-1)/3+1)*54.f); ++Slot;
-        FVector2D Goal = InTray(Origin+Offset,60);
+        // Clamp the component as a whole against its real translated bounds. A
+        // singleton can be placed at the visible cursor near an edge; linked
+        // members keep their offsets instead of being individually crushed there.
+        FVector2D Lower(MinX,MinY),Upper(MaxX,MaxY);
+        for(int32 G:Group)if(const auto* B=FindBody(G);B&&Held(*B))
+        {
+            const FVector2D Relative=B->Position-Center;
+            Lower.X=FMath::Max(Lower.X,double(MinX+B->Radius-Relative.X));
+            Lower.Y=FMath::Max(Lower.Y,double(MinY+B->Radius-Relative.Y));
+            Upper.X=FMath::Min(Upper.X,double(MaxX-B->Radius-Relative.X));
+            Upper.Y=FMath::Min(Upper.Y,double(MaxY-B->Radius-Relative.Y));
+        }
+        const FVector2D Goal(FMath::Clamp(Origin.X+Offset.X,Lower.X,Upper.X),FMath::Clamp(Origin.Y+Offset.Y,Lower.Y,Upper.Y));
         for (int32 G : Group) if (auto* B = MutableBody(G); B && Held(*B))
         {
             B->State = EExpeditionBodyState::Available; B->Position = InTray(Goal+(B->Position-Center),B->Radius); B->Velocity = FVector2D::ZeroVector; B->RecoverDelay = .5f; B->CargoOffset = FVector2D::ZeroVector; R.BodyIds.Add(G); Placed.Add(G);
@@ -941,7 +1083,20 @@ void FExpeditionWorld::FireTerminal(int32 Id)
 {
     if(IsTerminalPowered(Id)||!HasTerminalWork(Id))return;
     State.PoweredTerminals.AddUnique(Id);
-    if(State.LayoutId==TEXT("balanced_rack"))
+    if((Id==62||Id==63)&&FindFrameBody())
+    {
+        const int32 FrameId=FindFrameBody()->Id;
+        State.Constraints.RemoveAll([&](const FExpeditionConstraint& K){return K.BodyA==FrameId;});
+        MutableBody(FrameId)->bAnchored=false;
+        if(Id==63)
+        {
+            State.bFrameHoistPowered=true;State.bFrameHoistActive=true;
+            if(State.TetherBody==FrameId)State.TetherBody=INDEX_NONE;
+            if(State.SecondTetherBody==FrameId)State.SecondTetherBody=INDEX_NONE;
+            if(State.LatchedBody==FrameId)State.LatchedBody=INDEX_NONE;
+        }
+    }
+    else if(State.LayoutId==TEXT("balanced_rack"))
     {
         if(auto* B=MutableBody(Id==4?9:10))
         {
@@ -1040,6 +1195,11 @@ void FExpeditionWorld::Integrate(float Delta, const FExpeditionRig& Rig)
     State.WorldTime += Delta; State.HazardCooldown=FMath::Max(0.f,State.HazardCooldown-Delta);
     State.PullRemaining=FMath::Max(0.f,State.PullRemaining-Delta);
     State.RelayRemaining=FMath::Max(0.f,State.RelayRemaining-Delta);
+    if(State.LatchedBody!=INDEX_NONE)
+    {
+        const auto* Latched=FindBody(State.LatchedBody);
+        if(!Latched||!Live(*Latched)||Held(*Latched))State.LatchedBody=INDEX_NONE;
+    }
     UpdateConstraints(Delta);
     State.ShearRemaining=FMath::Max(0.f,State.ShearRemaining-Delta);
     if(State.ShearRemaining<=0)State.ShearIds.Reset();
@@ -1060,6 +1220,14 @@ void FExpeditionWorld::Integrate(float Delta, const FExpeditionRig& Rig)
         }
         if (B.bAnchored) { B.Velocity=FVector2D::ZeroVector; continue; }
         FVector2D Accel=FVector2D::ZeroVector;
+        if(State.bFrameHoistActive&&B.Role==TEXT("power_frame"))
+        {
+            if(const auto* Dock=FindMarker(TEXT("frame_receiver")))
+            {
+                Accel+=Limit((Dock->Position-B.Position)*22.f-B.Velocity*9.f,1800.f);
+                if(Near(B.Position,Dock->Position,8)&&B.Velocity.Size()<25)State.bFrameHoistActive=false;
+            }
+        }
         if(State.CycloneIds.Contains(B.Id))
         {
             const int32 Index=State.CycloneIds.Find(B.Id);const float Angle=State.WorldTime*1.8f+Index*2.f*PI/FMath::Max(1,State.CycloneIds.Num());
@@ -1092,7 +1260,7 @@ void FExpeditionWorld::Integrate(float Delta, const FExpeditionRig& Rig)
             if (BodyId==INDEX_NONE || !GetGroup(BodyId).Contains(B.Id)) return;
             const auto* Root=FindBody(BodyId); if (!Root) return;
             Accel+=Limit((Anchor-Root->Position)*18.f-B.Velocity*8.f,1800.f);
-            if (Near(Root->Position,Anchor,24) && Has(Rig,TEXT("ratchet_pawl"))) { State.LatchedBody=BodyId; State.LatchPosition=Anchor; }
+            if (Near(Root->Position,Anchor,24) && Has(Rig,TEXT("ratchet_pawl")) && (State.LatchedBody==INDEX_NONE||State.LatchedBody==BodyId)) { State.LatchedBody=BodyId; State.LatchPosition=Anchor; }
         };
         Tow(State.TetherBody,State.TetherAnchor); // The second paid anchor is saved, not another simultaneous force.
         if (State.LatchedBody==B.Id && State.TetherBody!=B.Id && State.SecondTetherBody!=B.Id) Accel+=Limit((State.LatchPosition-B.Position)*35.f-B.Velocity*10.f,1800.f);
@@ -1129,7 +1297,7 @@ void FExpeditionWorld::Integrate(float Delta, const FExpeditionRig& Rig)
     for (int32 I=0;I<State.Bodies.Num();++I) for (int32 J=I+1;J<State.Bodies.Num();++J)
     {
         auto& A=State.Bodies[I]; auto& B=State.Bodies[J];
-        if (!Live(A)||!Live(B)||Held(A)||Held(B)) continue;
+        if (!Live(A)||!Live(B)||Held(A)||Held(B)||A.bFloorContact||B.bFloorContact) continue;
         if((A.bLaunched&&A.PenetratedBody==B.Id)||(B.bLaunched&&B.PenetratedBody==A.Id))continue;
         FVector2D D=B.Position-A.Position; float Distance=D.Size();
         if (A.Links.Contains(B.Id))
@@ -1221,7 +1389,8 @@ TArray<FName> FExpeditionWorld::GetOpportunityTags() const
     if(State.LayoutId==TEXT("e1"))Tags.Add(TEXT("ClosedReturn"));
     else
     {
-        if(!State.Bodies.ContainsByPredicate([](const FExpeditionBody& B){return Live(B)&&B.Role==TEXT("supported_machine");}))Tags.Remove(TEXT("SupportedLoad"));
+        if(FindFrameBody()&&!State.bFrameReceived)Tags.Add(TEXT("ClosedReturn"));
+        if(!State.Bodies.ContainsByPredicate([&](const FExpeditionBody& B){return Live(B)&&FindSupport(B.Id);}))Tags.Remove(TEXT("SupportedLoad"));
         if(!State.Bodies.ContainsByPredicate([](const FExpeditionBody& B){return Live(B)&&B.bBrittle;})){Tags.Remove(TEXT("BrittleBrace"));Tags.Remove(TEXT("BrittleEligible"));}
         if(!State.Bodies.ContainsByPredicate([](const FExpeditionBody& B){return Live(B)&&!Held(B)&&B.Velocity.Size()>100;}))Tags.Remove(TEXT("MovingBody"));
     }
@@ -1277,6 +1446,7 @@ TSharedPtr<FJsonObject> FExpeditionWorld::ToJson() const
     EW_INT(DeferredSensor);EW_INT(GroundBody);EW_INT(ShearRemaining);EW_INT(SecondRelayBody);EW_INT(GuideUses);EW_INT(GuideBody);EW_INT(GuideSegment);EW_INT(GuideSpeed);
     EW_BOOL(bCollarReleased); EW_BOOL(bBallastCleared); EW_BOOL(bArmBraced); EW_BOOL(bCircuitClosed); EW_BOOL(bCounterweightUsed); EW_BOOL(bDispatched); EW_BOOL(bEvacuated); EW_BOOL(bDeferredWasSafe);
     EW_BOOL(bCoreSecured);PutIds(*J,TEXT("PoweredTerminals"),State.PoweredTerminals);
+    EW_BOOL(bFrameHoistPowered);EW_BOOL(bFrameHoistActive);EW_BOOL(bFrameReceived);
     EW_VEC(Magnet); EW_VEC(TetherAnchor); EW_VEC(SecondTetherAnchor); EW_VEC(LatchPosition); EW_VEC(RelayDestination); PutIds(*J,TEXT("PullIds"),State.PullIds);
     EW_VEC(ShearOrigin);EW_VEC(ShearNormal);EW_VEC(SecondRelayDestination);EW_VEC(CycloneCenter);
     PutIds(*J,TEXT("ShearIds"),State.ShearIds);PutIds(*J,TEXT("RelayIds"),State.RelayIds);PutIds(*J,TEXT("SecondRelayIds"),State.SecondRelayIds);PutIds(*J,TEXT("CycloneIds"),State.CycloneIds);PutVecs(*J,TEXT("GuidePoints"),State.GuidePoints);
@@ -1293,7 +1463,7 @@ TSharedPtr<FJsonObject> FExpeditionWorld::ToJson() const
         PutVec(*Item,TEXT("Position"),B.Position); PutVec(*Item,TEXT("Velocity"),B.Velocity); PutVec(*Item,TEXT("CargoOffset"),B.CargoOffset);PutVec(*Item,TEXT("FlowDirection"),B.FlowDirection);
         EB_NUM(Radius); EB_NUM(Mass); EB_NUM(Value);EB_NUM(Appraisal); EB_NUM(Quality); EB_NUM(Charge); EB_NUM(FuseDelay); EB_NUM(RecoverDelay); EB_NUM(RootAction);EB_NUM(PenetratedBody);
         EB_BOOL(bAnchored); EB_BOOL(bConductive); EB_BOOL(bHot); EB_BOOL(bBrittle); EB_BOOL(bGoal); EB_BOOL(bLaunched); EB_BOOL(bRebounded); EB_BOOL(bPunched); EB_BOOL(bSinkUsed);
-        EB_BOOL(bFunctional);
+        EB_BOOL(bFunctional);EB_BOOL(bFloorContact);
         PutIds(*Item,TEXT("Links"),B.Links); PutIds(*Item,TEXT("SourceIds"),B.SourceIds);
 #undef EB_NUM
 #undef EB_BOOL
@@ -1335,6 +1505,10 @@ bool FExpeditionWorld::FromJson(const TSharedPtr<FJsonObject>& J,FString& Error)
     if(J->HasField(TEXT("bCoreSecured"))&&!GetBool(*J,TEXT("bCoreSecured"),S.bCoreSecured))return false;
     if(J->HasField(TEXT("PoweredTerminals"))&&!GetIds(*J,TEXT("PoweredTerminals"),S.PoweredTerminals))return false;
     if(S.LayoutId!=TEXT("e1")&&(!J->HasField(TEXT("bCoreSecured"))||!J->HasField(TEXT("PoweredTerminals"))))return false;
+    for(const TCHAR* Key:{TEXT("bFrameHoistPowered"),TEXT("bFrameHoistActive"),TEXT("bFrameReceived")})if(S.LayoutRevision==2&&!J->HasField(Key))return false;
+    if(J->HasField(TEXT("bFrameHoistPowered"))&&!GetBool(*J,TEXT("bFrameHoistPowered"),S.bFrameHoistPowered))return false;
+    if(J->HasField(TEXT("bFrameHoistActive"))&&!GetBool(*J,TEXT("bFrameHoistActive"),S.bFrameHoistActive))return false;
+    if(J->HasField(TEXT("bFrameReceived"))&&!GetBool(*J,TEXT("bFrameReceived"),S.bFrameReceived))return false;
     READ_VEC(Magnet); READ_VEC(TetherAnchor); READ_VEC(SecondTetherAnchor); READ_VEC(LatchPosition); READ_VEC(RelayDestination);
     READ_VEC(ShearOrigin);READ_VEC(ShearNormal);READ_VEC(SecondRelayDestination);READ_VEC(CycloneCenter);
     if(!GetIds(*J,TEXT("PullIds"),S.PullIds))return false;
@@ -1360,6 +1534,8 @@ bool FExpeditionWorld::FromJson(const TSharedPtr<FJsonObject>& J,FString& Error)
         if(Item->HasField(TEXT("PenetratedBody"))&&!GetInt(*Item,TEXT("PenetratedBody"),B.PenetratedBody))return false;
         READ_B_BOOL(bAnchored); READ_B_BOOL(bConductive); READ_B_BOOL(bHot); READ_B_BOOL(bBrittle); READ_B_BOOL(bGoal); READ_B_BOOL(bLaunched); READ_B_BOOL(bRebounded); READ_B_BOOL(bPunched); READ_B_BOOL(bSinkUsed);
         READ_B_BOOL(bFunctional);
+        if(S.LayoutRevision==2&&!Item->HasField(TEXT("bFloorContact")))return false;
+        if(Item->HasField(TEXT("bFloorContact"))&&!GetBool(*Item,TEXT("bFloorContact"),B.bFloorContact))return false;
 #undef READ_B_INT
 #undef READ_B_FLOAT
 #undef READ_B_BOOL
@@ -1391,6 +1567,9 @@ bool FExpeditionWorld::CheckInvariants(FString& Error) const
         if(B.State==EExpeditionBodyState::Dispatched){++DispatchCount;if(!B.bGoal)return Fail(TEXT("Ordinary scrap dispatched as goal"));}
         if(B.Appraisal<0||B.Appraisal>B.Value||!Finite(B.FlowDirection))return Fail(TEXT("Invalid appraisal or conductor direction"));
         if(B.PenetratedBody!=INDEX_NONE&&(!B.bPunched||B.PenetratedBody==B.Id||!FindBody(B.PenetratedBody)))return Fail(TEXT("Invalid paid penetration target"));
+        const auto* Authored=Original.FindBody(B.Id);
+        if(B.bFloorContact!=(Authored&&Authored->bFloorContact))return Fail(TEXT("Changed physical floor-contact geometry"));
+        if(State.LayoutRevision==2&&B.Id>=61&&B.Id<=64&&(!Authored||B.Role!=Authored->Role||!FMath::IsNearlyEqual(B.Radius,Authored->Radius,.01f)))return Fail(TEXT("Changed authored frame component"));
         if(B.State==EExpeditionBodyState::Banked)Banked+=B.Appraisal;
         float ExpectedMass=0; int32 ExpectedValue=0;
         if(B.SourceIds.IsEmpty())return Fail(TEXT("Body lost source lineage"));
@@ -1407,7 +1586,18 @@ bool FExpeditionWorld::CheckInvariants(FString& Error) const
     if(Goals!=1||Banked!=State.Output||Sources.Num()!=Original.State.Bodies.Num()||DispatchCount!=(State.bDispatched?1:0))return Fail(TEXT("World settlement or source conservation mismatch"));
     if(State.bCoreSecured&&FindBody(0)->bAnchored)return Fail(TEXT("A secured core was re-anchored"));
     if(State.LayoutId!=TEXT("e1")&&(FindBody(0)->State==EExpeditionBodyState::Cargo||State.bDispatched)&&!State.bCoreSecured)return Fail(TEXT("Captured objective lost its secured latch"));
-    for(int32 Id:State.PoweredTerminals)if(const auto* B=FindBody(Id);!B||(B->Role!=TEXT("receiver_terminal")&&B->Role!=TEXT("ordinary_terminal")&&B->Role!=TEXT("source_terminal")))return Fail(TEXT("Unknown powered terminal"));
+    for(int32 Id:State.PoweredTerminals)if(const auto* B=FindBody(Id);!B||!IsTerminalBody(*B))return Fail(TEXT("Unknown powered terminal"));
+    const auto* Frame=FindFrameBody();
+    if(!Frame&&(State.bFrameHoistPowered||State.bFrameHoistActive||State.bFrameReceived))return Fail(TEXT("Frame state on a worksite without a frame"));
+    if(Frame)
+    {
+        if(Frame->Id!=61||State.LayoutRevision!=2||Frame->State==EExpeditionBodyState::Consumed||Held(*Frame))return Fail(TEXT("Heavy frame bypassed physical transport"));
+        if(State.bFrameReceived!=(Frame->State==EExpeditionBodyState::Banked))return Fail(TEXT("Frame receiving ledger disagrees with its real body"));
+        if(State.bFrameHoistPowered!=State.PoweredTerminals.Contains(63))return Fail(TEXT("Frame hoist lost its paid contact state"));
+        if(State.bFrameHoistActive&&(!State.bFrameHoistPowered||State.bFrameReceived||!Live(*Frame)||Frame->bAnchored))return Fail(TEXT("Invalid active receiving hoist"));
+        if(State.bFrameReceived&&(Frame->bAnchored||!FindMarker(TEXT("frame_receiver"))||!Near(Frame->Position,FindMarker(TEXT("frame_receiver"))->Position,FindMarker(TEXT("frame_receiver"))->Radius)))return Fail(TEXT("Installed frame is outside its physical receiver"));
+        if(State.bFrameReceived&&State.LayoutId==TEXT("counterweight_exchange")&&!State.bCircuitClosed)return Fail(TEXT("Installed frame lost final counterbalance"));
+    }
     for(int32 Id:State.PullIds){const auto* B=FindBody(Id);if(!B||B->State!=EExpeditionBodyState::Pulling)return Fail(TEXT("Invalid pending pull target"));}
     for(int32 Id:{State.TetherBody,State.SecondTetherBody,State.LatchedBody,State.RelayBody,State.SecondRelayBody,State.GuideBody,State.DeferredSensor,State.DeferredTerminal,State.GroundBody})if(Id!=INDEX_NONE&&!FindBody(Id))return Fail(TEXT("Unknown physical constraint body"));
     if(State.GuideUses<0||State.GuideUses>1||State.GuideSegment<0||State.GuideSegment>3||State.GuideSpeed<0||State.GuideSpeed>1000||State.ShearRemaining<0||State.ShearRemaining>2.01||State.CycloneIds.Num()>6)return Fail(TEXT("Invalid bounded secondary operation"));

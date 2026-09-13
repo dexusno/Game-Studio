@@ -1,7 +1,7 @@
 {
   "kind": "design-economy-evidence",
   "source": "games\\magnet-sweep\\design\\build-economy.json",
-  "source_sha256": "d08f783c0c7681b13cfa2d260b349b8dd06f331197c16dea0b931f22fbf2c988",
+  "source_sha256": "dcb879b817d1ea3bbea91602897dd178d33b79b62f7794554ff6f259216a5ad9",
   "modules_checked": 30,
   "routes_checked": 6,
   "routes": [
@@ -961,8 +961,8 @@
     },
     {
       "id": "D",
-      "cash_remaining": 0,
-      "spent": 52,
+      "cash_remaining": 10,
+      "spent": 42,
       "resale_refunds": 0,
       "build": [
         "anchor_winch",
@@ -1085,9 +1085,9 @@
         },
         {
           "step": 12,
-          "action": "precharge",
+          "action": "buy",
           "cash_before": 22,
-          "cash_after": 18,
+          "cash_after": 8,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
@@ -1096,53 +1096,57 @@
         },
         {
           "step": 13,
-          "action": "reward",
-          "cash_before": 18,
-          "cash_after": 32,
+          "action": "fit",
+          "cash_before": 8,
+          "cash_after": 8,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
-            "twin_anchor"
+            "twin_anchor",
+            "walking_gantry"
           ]
         },
         {
           "step": 14,
-          "action": "reward",
-          "cash_before": 32,
-          "cash_after": 34,
+          "action": "precharge",
+          "cash_before": 8,
+          "cash_after": 4,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
-            "twin_anchor"
+            "twin_anchor",
+            "walking_gantry"
           ]
         },
         {
           "step": 15,
-          "action": "offers",
-          "cash_before": 34,
-          "cash_after": 34,
+          "action": "reward",
+          "cash_before": 4,
+          "cash_after": 18,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
-            "twin_anchor"
+            "twin_anchor",
+            "walking_gantry"
           ]
         },
         {
           "step": 16,
-          "action": "buy",
-          "cash_before": 34,
-          "cash_after": 10,
+          "action": "reward",
+          "cash_before": 18,
+          "cash_after": 20,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
-            "twin_anchor"
+            "twin_anchor",
+            "walking_gantry"
           ]
         },
         {
           "step": 17,
-          "action": "fit",
-          "cash_before": 10,
-          "cash_after": 10,
+          "action": "offers",
+          "cash_before": 20,
+          "cash_after": 20,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
@@ -1153,8 +1157,8 @@
         {
           "step": 18,
           "action": "buy",
-          "cash_before": 10,
-          "cash_after": 0,
+          "cash_before": 20,
+          "cash_after": 10,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
@@ -1165,8 +1169,8 @@
         {
           "step": 19,
           "action": "fit",
-          "cash_before": 0,
-          "cash_after": 0,
+          "cash_before": 10,
+          "cash_after": 10,
           "fitted": [
             "anchor_winch",
             "counterweight_hook",
@@ -1200,7 +1204,8 @@
           "candidates": [
             "arc_driver",
             "extraction_coil",
-            "ratchet_pawl"
+            "ratchet_pawl",
+            "walking_gantry"
           ],
           "physical_opportunity_verified": false
         },
@@ -1209,7 +1214,7 @@
           "candidates": [
             "arc_driver",
             "extraction_coil",
-            "walking_gantry"
+            "ratchet_pawl"
           ],
           "physical_opportunity_verified": false
         }

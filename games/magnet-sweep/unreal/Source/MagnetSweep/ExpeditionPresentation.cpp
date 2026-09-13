@@ -24,9 +24,11 @@ FName MaterialOf(const FExpeditionBody& B)
     if(B.Material==EExpeditionMaterial::Alloy) return TEXT("Alloy");
     return B.Material==EExpeditionMaterial::Mechanism?FName(TEXT("Brass")):FName(TEXT("Steel"));
 }
-bool IsVisible(const FExpeditionBody& B){return B.State==EExpeditionBodyState::Available||B.State==EExpeditionBodyState::Pulling||B.State==EExpeditionBodyState::Cargo;}
+bool IsVisible(const FExpeditionBody& B){return B.State==EExpeditionBodyState::Available||B.State==EExpeditionBodyState::Pulling||B.State==EExpeditionBodyState::Cargo||
+    (B.Role==TEXT("power_frame") && B.State==EExpeditionBodyState::Banked);}
 FString LabelOf(const FExpeditionBody& B)
 {
+    if(B.Role==TEXT("power_frame") && B.State==EExpeditionBodyState::Banked)return TEXT("POWER FRAME / INSTALLED");
     FString Name=B.Role.ToString();Name.ReplaceInline(TEXT("_"),TEXT(" "));
     return FString::Printf(TEXT("%s  %.0f kg%s%s%s"),*Name,B.Mass,B.bHot?TEXT("  HOT"):TEXT(""),
         B.bFunctional?TEXT("  WORKING"):TEXT(""),B.bBrittle?TEXT("  BRITTLE"):TEXT(""));
@@ -59,6 +61,7 @@ void FExpeditionRuntime::AddButton(UCanvas* C,int32 Id,const FString& Label,floa
 void FExpeditionRuntime::Click(int32 Id)
 {
     Input.Cancel();ClearPreparation();
+    if(Id==50){ReceiveFrame();return;}
     if(Screen==EExpeditionScreen::Site && !bPaused && Id>=60 && Id<68)
     {ToolOperation[(Id-60)/4]=(Id-60)%4;return;}
     if(Screen==EExpeditionScreen::Site && !bPaused && Id>=2000)
@@ -149,6 +152,8 @@ void FExpeditionRuntime::BuildMechanismVisuals()
     {
         if(Marker.Id==TEXT("furnace"))continue; // Existing furnace mesh remains the shared receiver for scrap.
         Mark(Marker.Position,FVector(Marker.Radius*2,Marker.Radius*2,6),Marker.Id==TEXT("circuit")?TEXT("Copper"):TEXT("Dark"));
+        if(Marker.Id==TEXT("frame_receiver"))
+            MechanismShapes.Add(Display->Shape(TEXT("SM_Ring"),Display->World(Marker.Position,23),FVector(Marker.Radius*2,Marker.Radius*2,5),TEXT("Glow"),FRotator::ZeroRotator,false));
         if(Marker.Id==TEXT("receiver"))
             MechanismShapes.Add(Display->Shape(TEXT("SM_Ring"),Display->World(Marker.Position,38),FVector(110,110,12),TEXT("Glow"),FRotator::ZeroRotator,false));
     }
@@ -195,22 +200,26 @@ void FExpeditionRuntime::UpdateVisuals(float Delta)
         {
             FExpeditionVisual V;V.Spin=B.Id*43.f;V.Previous=Display->World(B.Position,B.State==EExpeditionBodyState::Cargo?47.f:B.bGoal?35.f:24.f);
             FName Mesh=B.bGoal?FName(TEXT("Cylinder")):B.Material==EExpeditionMaterial::Iron?FName(TEXT("SM_Bolt")):FName(TEXT("SM_Plate"));
+            if(B.Role==TEXT("power_frame") || B.bFloorContact)Mesh=TEXT("Cube");
             if(B.Role==TEXT("welded_slug"))Mesh=TEXT("Cylinder");
             V.Mesh=Display->Shape(Mesh,V.Previous,FVector(B.Radius*2,B.Radius*2,B.bGoal?40:18),MaterialOf(B),FRotator::ZeroRotator,false);
             if(B.bGoal)V.Detail=Display->Shape(TEXT("SM_Ring"),V.Previous+FVector(0,0,25),FVector(B.Radius*2.1f,B.Radius*2.1f,10),TEXT("Glow"),FRotator::ZeroRotator,false);
+            else if(B.Role==TEXT("power_frame"))V.Detail=Display->Shape(TEXT("Cylinder"),V.Previous+FVector(0,0,27),FVector(B.Radius*1.4f,B.Radius*1.4f,32),TEXT("Brass"),FRotator::ZeroRotator,false);
             Visuals.Add(B.Id,V);Existing=Visuals.Find(B.Id);
         }
         auto& V=*Existing;const bool Visible=IsVisible(B);
         V.Mesh->SetVisibility(Visible);if(V.Detail)V.Detail->SetVisibility(Visible);if(!Visible)continue;
         const bool Cargo=B.State==EExpeditionBodyState::Cargo;
-        const float Z=Cargo?47.f:B.bGoal?35.f:24.f;
+        const bool Frame=B.Role==TEXT("power_frame");
+        const float Z=Cargo?47.f:B.bFloorContact?19.f:B.bGoal?35.f:Frame?30.f:24.f;
         const FVector Target=Display->World(B.Position,Z);
         V.Previous=FMath::VInterpTo(V.Previous,Target,Delta,24.f);
-        if(Delta>0 && !Cargo)V.Spin+=B.Velocity.Size()*Delta*.15f;
+        if(Delta>0 && !Cargo && !Frame && !B.bFloorContact)V.Spin+=B.Velocity.Size()*Delta*.15f;
         const float Scale=Cargo?.8f:1.f;
-        Display->Place(V.Mesh,V.Previous,FVector(B.Radius*2,B.Radius*2,B.bGoal?42:18)*Scale,FRotator(0,V.Spin,0));
+        Display->Place(V.Mesh,V.Previous,FVector(B.Radius*2,B.Radius*2,B.bFloorContact?2:Frame?28:B.bGoal?42:18)*Scale,FRotator(0,Frame||B.bFloorContact?0:V.Spin,0));
         if(auto* M=Display->Materials.Find(MaterialOf(B)))V.Mesh->SetMaterial(0,*M);
-        if(V.Detail)Display->Place(V.Detail,V.Previous+FVector(0,0,25*Scale),FVector(B.Radius*2.1f,B.Radius*2.1f,10)*Scale);
+        if(V.Detail)Display->Place(V.Detail,V.Previous+FVector(0,0,(Frame?27:25)*Scale),
+            (Frame?FVector(B.Radius*1.4f,B.Radius*1.4f,32):FVector(B.Radius*2.1f,B.Radius*2.1f,10))*Scale);
     }
     for(auto& P:Display->Particles){P.Life-=Delta;P.Position+=P.Velocity*Delta;P.Velocity.Z-=260*Delta;}
     Display->Particles.RemoveAll([](const auto& P){return P.Life<=0;});
@@ -233,7 +242,8 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
     }
     for(const auto& B:World->GetBodies())if(IsVisible(B))
     {
-        if(B.Charge>0)
+        const bool Installed=B.Role==TEXT("power_frame") && B.State==EExpeditionBodyState::Banked;
+        if(B.Charge>0 && !Installed)
         {
             Display->WorldCircle(C,B.Position,B.Radius+3,Mint,2,20);
             const FVector2D P=Display->Project(Display->World(B.Position,75));
@@ -249,13 +259,13 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
         for(int32 Link:B.Links)if(B.Id<Link)
             if(const auto* Other=World->FindBody(Link))if(IsVisible(*Other))
                 Display->Line(C,Display->Project(Display->World(B.Position,40)),Display->Project(Display->World(Other->Position,40)),Copper,3);
-        if(B.bGoal || B.bAnchored || B.bHot || B.bFunctional)
+        if(B.bGoal || B.bAnchored || B.bHot || B.bFunctional || Installed)
         {
             const FLinearColor BodyColor=B.bHot?Red:B.bGoal?Mint:Copper;
             Display->WorldCircle(C,B.Position,B.Radius+7,BodyColor,2,20);
             const FVector2D P=Display->Project(Display->World(B.Position,65));
             FString BodyLabel=LabelOf(B);
-            if(!B.bGoal && B.Appraisal>0)BodyLabel+=FString::Printf(TEXT(" / %d value"),B.Appraisal);
+            if(!B.bGoal && B.Appraisal>0 && !Installed)BodyLabel+=FString::Printf(TEXT(" / %d value"),B.Appraisal);
             Display->DrawText(C,BodyLabel,(P.X-Display->UX)/Display->UIScale-45,(P.Y-Display->UY)/Display->UIScale,.72f,BodyColor);
         }
     }
@@ -268,12 +278,23 @@ void FExpeditionRuntime::RenderWorld(UCanvas* C)
     for(const auto& Marker:Definition.Markers)
     {
         if(Marker.Id==TEXT("furnace"))continue;
-        if(const auto* Payload=World->FindBody(Marker.LinkedBodyId);Payload&&IsVisible(*Payload)&&Payload->bAnchored)
+        const bool FrameMarker=Marker.Id.ToString().StartsWith(TEXT("frame_"));
+        if(const auto* Payload=World->FindBody(Marker.LinkedBodyId);Payload&&IsVisible(*Payload)&&Payload->bAnchored&&
+            (!FrameMarker||Marker.Id==TEXT("frame_support")))
             Display->Line(C,Display->Project(Display->World(Marker.Position,31)),Display->Project(Display->World(Payload->Position,31)),
                 Quiet.CopyWithNewOpacity(.6f),2);
         const auto* Objective=Objectives.FindByPredicate([&](const auto& Item){return Item.Id==Marker.Id;});
-        const bool Done=Objective?Objective->bSatisfied:Marker.Id==TEXT("receiver")&&World->IsCoreReleased();
-        Mark(Marker.Position,Marker.Radius,Marker.Label,Done);
+        const bool Done=Marker.Id==TEXT("frame_receiver")?State.bFrameReceived:Objective?Objective->bSatisfied:Marker.Id==TEXT("receiver")&&World->IsCoreReleased();
+        FString Label=Marker.Label;
+        if(Marker.Id==TEXT("frame_contact"))Label=World->IsManualTargetExposed(63)?TEXT("HOIST CONTACT / EXPOSED"):TEXT("HOIST CONTACT / UNDER FRAME");
+        if(Marker.Id==TEXT("frame_receiver"))Label=State.bFrameReceived?TEXT("FRAME INSTALLED"):TEXT("FRAME DOCK / E: RECOVER");
+        Mark(Marker.Position,Marker.Radius,Label,Done);
+    }
+    if(Definition.LayoutId==TEXT("counterweight_exchange"))
+    {
+        const auto* Dock=World->FindMarker(TEXT("frame_receiver"));const auto* Counterbalance=World->FindMarker(TEXT("counterbalance"));
+        if(Dock&&Counterbalance)Display->Line(C,Display->Project(Display->World(Dock->Position,23)),
+            Display->Project(Display->World(Counterbalance->Position,23)),State.bFrameReceived?Mint:Quiet.CopyWithNewOpacity(.5f),3);
     }
     const FVector2D FP=Display->Project(Display->World(FExpeditionWorld::FurnacePosition(),100));
     Text(C,TEXT("E: SMELT SCRAP"),(FP.X-Display->UX)/Display->UIScale-60,(FP.Y-Display->UY)/Display->UIScale,.85f,Copper);
@@ -456,6 +477,18 @@ void FExpeditionRuntime::Paint(UCanvas* C)
         Text(C,SiteIndex<3?FString::Printf(TEXT("DELIVER CORE  = +%d credits"),10+SiteIndex*2):TEXT("DELIVER CORE  = expedition complete"),37,548,.73f,Mint);
         Display->Rect(C,18,594,307,139,Panel);
         Wrap(C,RecoveryHint(),33,608,36,.78f,Paper);
+        if(const auto* Frame=World->FindFrameBody();Frame && !bPaused)
+        {
+            Display->Rect(C,990,178,326,167,Panel);
+            Text(C,S.bFrameReceived?TEXT("POWER FRAME INSTALLED"):TEXT("OPTIONAL POWER FRAME / 40 kg"),1004,191,.78f,S.bFrameReceived?Mint:Copper);
+            FString Reason;const auto* Dock=World->FindMarker(TEXT("frame_receiver"));
+            const bool Ready=World->CanReceiveFrame(Reason);
+            const bool Near=Dock && FVector2D::Distance(Magnet,Dock->Position)<=95;
+            Wrap(C,S.bFrameReceived?(SiteIndex==3?TEXT("Output recorded. The installed frame supplies the final counterbalance. Recover the core."):
+                TEXT("Output recorded. Continue the core recovery.")):Ready?TEXT("Frame and receiving support ready. Press E to install and collect its appraisal."):Reason,
+                1004,217,39,.73f,Paper);
+            AddButton(C,50,S.bFrameReceived?TEXT("INSTALLED"):FString::Printf(TEXT("E: RECOVER FRAME / +%d OUTPUT"),Frame->Appraisal),1004,304,298,31,Ready&&Near);
+        }
         if(Rig->Has(TEXT("rail_impeller")) && !bPaused)
         {
             Display->Rect(C,1330,182,252,550,Panel);

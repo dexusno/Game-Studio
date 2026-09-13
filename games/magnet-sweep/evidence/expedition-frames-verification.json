@@ -1,0 +1,1877 @@
+{
+  "version": "0.6.2",
+  "mode": "Expedition Frames",
+  "base_revision": "609e8dd8de0ae44576c5dc1f7c9d874669f15349",
+  "status": "Separate Win64 Development build, cook, stage and archive succeeded;76 engine cases pass; native acceptance pending",
+  "tests": [
+    {
+      "report_created_on": "2026.09.13-01.09.56",
+      "succeeded": 71,
+      "failed": 1,
+      "warnings": 0,
+      "not_run": 0,
+      "report_sha256": "9161568678cc1b53652b9d3545b515050aea834b9a6fc385a16b71a058366134",
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.BalancedRackUsesRestingMassAndLatchesOnlyAfterCapture",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedGantryPurchaseRecoversOversizedFramesAcrossLateSites",
+          "state": "Fail",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Earned Gantry site2 frame(63.98,-102.01), speed0.05, appraisal320, battery80",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Error",
+              "message": "Expected 'The same earned rig can physically repeat the restored operation' to be true.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedSiteTwoBuildsReachBothRefiningRewards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FinalRemoteToolsMoveRealReplacementWhileCoreStaysHeld",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Remote variant 0 weight 1 reached (300.0,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 0 weight 1: (300.00,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 1 weight 1 reached (284.1,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 1 weight 1: (284.14,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 3 reached (323.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 2 reached (277.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 3: (323.00,0.00), speed 0.00, state 0, mass 8",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 2: (277.00,0.00), speed 0.00, state 0, mass 12",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameAcceptsCheaperPhysicalSupportWithoutKeystoneGate",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Frame support route0: energy20, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Frame support route1: energy22, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.ImpactFuseProducesOneDelayedPhysicalSecondaryImpulse",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Fuse witness displacement between matched shots: 96.3",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.InductionBridgesOneActuallyPlacedAirGap",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LateSensorRelayRequiresAndReservesRealPortableCharge",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacyLayoutSurvivesDepotDeparturePaidSaveAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PackagedLateRevisionOneSurvivesNewFrameDefaultsAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PreservedGeneratorPowersTwoIsolatedRecoveriesAndRealRewards",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Arc0 target4 source(-219.7,-204.5) state0 charge2: 8 battery — 14 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Arc1 target11 source(190.0,-230.0) state0 charge1: 8 battery — 11 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.PunchThroughPreservesProjectileTravelBeyondFracturedBrace",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Punch comparison: forward speed 24.1/547.3, furthest x 108.5/238.4",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.RackWinchAndRailEarnDistinctPhysicalRecoveries",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RatchetResistsRealDisturbanceWhileWinchWorksElsewhere",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Ratchet=0, disturbed first-load distance=130.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Ratchet=1, disturbed first-load distance=1.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.ReboundRetainsActualReflectedMomentumOnce",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeGroundChangesOnlyItsPhysicalCircuitBranch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitRejectsOutOfReachSecondReceiver",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeTwinAnchorReturnsToActualPaidPlacement",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.SavedWorksiteRefreshesExactOpportunitiesWithoutReroll",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.StoredPhysicalTetherEnablesOtherwiseOpenCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnknownLayoutIdentityOrRevisionRefusesAtomically",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Shear trajectory: head=(317.6,42.6), plane=(335.0,65.0), normal=(0.00,-1.00), brittle=0, links=0, remaining=0.500",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Job 1 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 2 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 3 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 4 optional assembly minimum center clearance: 43.81 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 5 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 6 optional assembly minimum center clearance: 42.46 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "events": []
+        }
+      ]
+    },
+    {
+      "report_created_on": "2026.09.13-01.20.41",
+      "succeeded": 74,
+      "failed": 0,
+      "warnings": 0,
+      "not_run": 0,
+      "report_sha256": "e36599e1f8f25244dd844391245ee2cec0692dfed50efa07d0be1f8b5381caed",
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.BalancedRackUsesRestingMassAndLatchesOnlyAfterCapture",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedGantryPurchaseRecoversOversizedFramesAcrossLateSites",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Earned Gantry site2 frame(63.98,-102.01), speed0.05, appraisal320, battery80",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Earned Gantry site3 frame(263.98,-102.01), speed0.05, appraisal320, battery68",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedSiteTwoBuildsReachBothRefiningRewards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FinalRemoteToolsMoveRealReplacementWhileCoreStaysHeld",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Remote variant 0 weight 1 reached (300.0,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 0 weight 1: (300.00,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 1 weight 1 reached (284.1,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 1 weight 1: (284.14,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 3 reached (323.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 2 reached (277.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 3: (323.00,0.00), speed 0.00, state 0, mass 8",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 2: (277.00,0.00), speed 0.00, state 0, mass 12",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameAcceptsCheaperPhysicalSupportWithoutKeystoneGate",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Frame support route0: energy20, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Frame support route1: energy22, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameElectricalRoutesShareOcclusionFiniteChargeAndRealHandoff",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route0: battery76, appraisal320, position(263.93,-102.36), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route1: battery86, appraisal320, position(263.72,-102.21), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route2: battery78, appraisal320, position(263.72,-102.21), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.GantryPriceChangePreservesHistoricalReceiptWithoutCashGrant",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ImpactFuseProducesOneDelayedPhysicalSecondaryImpulse",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Fuse witness displacement between matched shots: 96.3",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.InductionBridgesOneActuallyPlacedAirGap",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LateSensorRelayRequiresAndReservesRealPortableCharge",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacyLayoutSurvivesDepotDeparturePaidSaveAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PackagedLateRevisionOneSurvivesNewFrameDefaultsAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PreservedGeneratorPowersTwoIsolatedRecoveriesAndRealRewards",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Arc0 target4 source(-219.7,-204.5) state0 charge2: 8 battery — 14 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Arc1 target11 source(190.0,-230.0) state0 charge1: 8 battery — 11 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.PunchThroughPreservesProjectileTravelBeyondFracturedBrace",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Punch comparison: forward speed 24.1/547.3, furthest x 108.5/238.4",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.RackWinchAndRailEarnDistinctPhysicalRecoveries",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RatchetResistsRealDisturbanceWhileWinchWorksElsewhere",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Ratchet=0, disturbed first-load distance=130.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Ratchet=1, disturbed first-load distance=1.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.ReboundRetainsActualReflectedMomentumOnce",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeGroundChangesOnlyItsPhysicalCircuitBranch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitRejectsOutOfReachSecondReceiver",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeTwinAnchorReturnsToActualPaidPlacement",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.SavedWorksiteRefreshesExactOpportunitiesWithoutReroll",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.StoredPhysicalTetherEnablesOtherwiseOpenCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnknownLayoutIdentityOrRevisionRefusesAtomically",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Shear trajectory: head=(317.6,42.6), plane=(335.0,65.0), normal=(0.00,-1.00), brittle=0, links=0, remaining=0.500",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Job 1 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 2 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 3 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 4 optional assembly minimum center clearance: 43.81 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 5 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 6 optional assembly minimum center clearance: 42.46 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "events": []
+        }
+      ]
+    },
+    {
+      "report_created_on": "2026.09.13-01.24.34",
+      "succeeded": 76,
+      "failed": 0,
+      "warnings": 0,
+      "not_run": 0,
+      "report_sha256": "b285ea0f23c0bd89174977f04b799efdd56b8507470ab87377a5e037b1ae1b32",
+      "cases": [
+        {
+          "name": "MagnetSweep.Expedition.AnchoredObjectiveCannotBePlucked",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.AtomicRuntimeSaveRetryAndAwards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.BalancedRackUsesRestingMassAndLatchesOnlyAfterCapture",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CheapRemoteFrameSupportPreservesActualHeldFinalCore",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Retained-core support0: battery68, frame(264.00,-102.00), support(60.00,100.00), mass20, appraisal320, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Retained-core support1: battery62, frame(264.00,-102.00), support(60.00,100.00), mass20, appraisal320, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.ClosedCircuitPowersDistinctBranchFromFiniteSource",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.CycloneConservesActualImpactFragmentsAndPaidRelaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.DamagedWeldPreservesSourceAndAppraisal",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedDispatchShopAndPivot",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedGantryPurchaseRecoversOversizedFramesAcrossLateSites",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Earned Gantry site2 frame(63.98,-102.01), speed0.05, appraisal320, battery80",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Earned Gantry site3 frame(263.98,-102.01), speed0.05, appraisal320, battery68",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.EarnedSiteTwoBuildsReachBothRefiningRewards",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractedConductorCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ExtractionSupportsChangeHazardAndSeamOutcome",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FinalRemoteToolsMoveRealReplacementWhileCoreStaysHeld",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Remote variant 0 weight 1 reached (300.0,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 0 weight 1: (300.00,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 1 weight 1 reached (284.1,0.0), speed 0.0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 1 weight 1: (284.14,0.00), speed 0.00, state 0, mass 20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 3 reached (323.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Remote variant 2 weight 2 reached (277.0,0.0), speed 0.1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 3: (323.00,0.00), speed 0.00, state 0, mass 8",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "At receiver variant 2 weight 2: (277.00,0.00), speed 0.00, state 0, mass 12",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FourSiteRuntimeRecoveryAndEarnedRig",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameAcceptsCheaperPhysicalSupportWithoutKeystoneGate",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Frame support route0: energy20, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Frame support route1: energy22, appraisal320, carried0, frame(264.0,-102.0), support(60.0,100.0)",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameElectricalRoutesShareOcclusionFiniteChargeAndRealHandoff",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route0: battery76, appraisal320, position(263.93,-102.36), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route1: battery86, appraisal320, position(263.72,-102.21), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Covered Arc: Contact covered by the frame. Move the frame, or energize the exposed loop input.",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Electrical frame route2: battery78, appraisal320, position(263.72,-102.21), speed0.00, receipt: ",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.FrameReactionMovesActualTwelveAndTwentyKilogramSupportsToReceipt",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Reaction site2 impulse1: frame(34.14,-124.39) d37.32 v0.06; weight12kg(-40.47,174.65) d124.41 v0.20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Reaction site2 impulse2: frame(68.30,-98.77) d5.38 v0.06; weight12kg(-154.34,89.24) d17.93 v0.20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Reaction site3 impulse1: frame(256.90,-107.32) d8.87 v0.10; weight20kg(74.19,110.65) d17.74 v0.20",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.GantryPriceChangePreservesHistoricalReceiptWithoutCashGrant",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ImpactFuseProducesOneDelayedPhysicalSecondaryImpulse",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Fuse witness displacement between matched shots: 96.3",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.InductionBridgesOneActuallyPlacedAirGap",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.InputCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.IntactRecoveryPreservesUsableFiniteGenerator",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=0, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=0",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Last-support recovery: capstone=1, selected cage=1",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.LastActiveCannotStrandInitialRun",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LateSensorRelayRequiresAndReservesRealPortableCharge",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacyLayoutSurvivesDepotDeparturePaidSaveAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.LegacySchemaIsolation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.MassBoundariesAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PackagedLateRevisionOneSurvivesNewFrameDefaultsAndRetry",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PendingPhysicalPullSave",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalCaptureAndFieldOff",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PhysicalFinalCoreRoute",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.PreservedGeneratorPowersTwoIsolatedRecoveriesAndRealRewards",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Arc0 target4 source(-219.7,-204.5) state0 charge2: 8 battery — 14 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Arc1 target11 source(190.0,-230.0) state0 charge1: 8 battery — 11 kg",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.PunchThroughPreservesProjectileTravelBeyondFracturedBrace",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Punch comparison: forward speed 24.1/547.3, furthest x 108.5/238.4",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.RackWinchAndRailEarnDistinctPhysicalRecoveries",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RatchetResistsRealDisturbanceWhileWinchWorksElsewhere",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Ratchet=0, disturbed first-load distance=130.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Ratchet=1, disturbed first-load distance=1.7",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.ReboundRetainsActualReflectedMomentumOnce",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeFieldLoomGuidesActualPaidProjectile",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeGroundChangesOnlyItsPhysicalCircuitBranch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeHeatTransferMovesDangerToChosenIron",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimePauseFreezesCommittedWork",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReactionIsOptionalAndCoupled",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeReleaseCancellation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSensorRelayRequiresChosenPhysicalImpact",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitKeepsBasicTransferAndConservesGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeSplitRejectsOutOfReachSecondReceiver",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeTwinAnchorReturnsToActualPaidPlacement",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.RuntimeWeldSubsetAndChosenLaunch",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.SavedWorksiteRefreshesExactOpportunitiesWithoutReroll",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.StoredPhysicalTetherEnablesOtherwiseOpenCircuit",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnknownLayoutIdentityOrRevisionRefusesAtomically",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.UnsafeFieldOffDropAndQuench",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.VectorBrakeAndPhysicalShearHaveDistinctEffects",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Shear trajectory: head=(317.6,42.6), plane=(335.0,65.0), normal=(0.00,-1.00), brittle=0, links=0, remaining=0.500",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Expedition.WalkingGantryMovesRealSupportWithPayload",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.WeldedCounterweightMovesMachine",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Expedition.ZeroEnergySecuredCoreDelivery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawaySelectionAndAtomicRefusals",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.BreakawayTiersRefillAndSavedState",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CapacityAndAtomicGroups",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.CareerPurchasesFailureAndCollection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.DeterministicJobsAndFeasibleLoads",
+          "state": "Success",
+          "events": [
+            {
+              "type": "Info",
+              "message": "Job 1 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 2 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 3 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 4 optional assembly minimum center clearance: 43.81 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 5 optional assembly minimum center clearance: 46.00 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            },
+            {
+              "type": "Info",
+              "message": "Job 6 optional assembly minimum center clearance: 42.46 units",
+              "context": "",
+              "artifact": "00000000000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "name": "MagnetSweep.Rework.FullHaulDropPlacementAndRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.JsonPersistenceAndBackupRecovery",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.OverloadConsumesExistingFuel",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.PersistentFuseVentAndForecastLoss",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.SmeltGoalsAndOneTimeBonuses",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Rework.TransactionalSnapshotValidation",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ActualActionSequence",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.EarlyRiskAndRetryHold",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionInputAndEarnedUse",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.ExtractionSaveContinuity",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.MetadataRoundTripAndTransactionalRejection",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.NaturalDragReleasePayout",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.OffPathPlayAndExhaustedTray",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.RuntimeRescueAndSkipCallbacks",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.SafeFirstPayoutAndCaptureGuard",
+          "state": "Success",
+          "events": []
+        },
+        {
+          "name": "MagnetSweep.Tutorial.TerminalAndPersistenceValidation",
+          "state": "Success",
+          "events": []
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Headless model/runtime evidence only. Native control remains stopped at the unanswered handoff.",
+    "Controlled equipment comparisons are fixtures; earned routes are identified separately.",
+    "No owner save, native game, purchase or publication accessed."
+  ],
+  "package": {
+    "result": "BUILD SUCCESSFUL",
+    "engine": "Unreal Engine 5.8.2",
+    "platform": "Win64 Development",
+    "archive": "BuildOutput/ExpeditionFrames/Windows",
+    "build_cook_run_seconds": 44.46,
+    "native_launched": false,
+    "artifacts": [
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep.exe",
+        "bytes": 171520,
+        "sha256": "22683cd117beda9d3de1d5b040ded3204601ebac9e07de450381b036eb5de801"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Binaries/Win64/MagnetSweep.exe",
+        "bytes": 332807168,
+        "sha256": "d5d2741ed194ab9fc7298400445624397238b53079946675063845e612a2a50f"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Content/Paks/global.ucas",
+        "bytes": 3207392,
+        "sha256": "267eeaa2d73f11a0bab0ecaf9fadd376d4a84d980535213e4c23b04682fbd542"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Content/Paks/global.utoc",
+        "bytes": 782,
+        "sha256": "df381a3bf10f7f0cb553af0afb5538c29e5dd50dceebda6976672b33c892cbf1"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.pak",
+        "bytes": 10652987,
+        "sha256": "3706ea9ee1ef82f7fb1d21e180cc7f096b22c0fb4012c91eee69a70f04b10b99"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.ucas",
+        "bytes": 137779056,
+        "sha256": "a2013fb0a098da3fbb166aaa8d35d83932cc2df4d331c75ee4a07baab13f10a0"
+      },
+      {
+        "path": "games/magnet-sweep/BuildOutput/ExpeditionFrames/Windows/MagnetSweep/Content/Paks/MagnetSweep-Windows.utoc",
+        "bytes": 138215,
+        "sha256": "b2517ffdd7265780e6efad9bb085ac9c56b638352a0fdb37767586610579a99d"
+      }
+    ]
+  },
+  "preserved_child_sha256": {
+    "ExpeditionSites": "72aac2034acf8dbb94e9a5547960a28da4049f584783e92cf236cbb864e49106",
+    "Expedition": "6485ed0efb9c512ba8b33044b87bc330b515d98d5a410cabd7320f7c8b69aa6f"
+  },
+  "equipment_evidence_limit": "The Gantry14 seed1 run has actual generated stock, earned cash, fitting, paid receipts and both late recoveries through final victory. Electrical, Reaction and comparative support rigs are explicitly labelled equipment fixtures; their physical material, charge and recovery actions are real. Arc10 affordability is verified but that second tool is not bought or used in the earned Gantry run.",
+  "source_sha256": {
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionPresentation.cpp": "ccbab20e7845c535695e0ad4f507ab36c51ebee3236c23e6e6d56ccc3a62c162",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionRig.cpp": "34124b2ae926e11ed5045aa1cee128a324e6673a248554565a60e93af966ba5b",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionRig.h": "624fddfba2e1a2038c3c2e26ee7b941e25d984bc820ce8406bb3f88d1f234b41",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionRuntime.cpp": "fb0bdcdd7dd60f70335da915a14d14c67f94f41d60035a6d61678163c435a0a1",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionRuntime.h": "f9c4d3e63722672997849503cf60a118e12db5bae9fc0d5856afa0ab1a83d869",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionWorld.cpp": "5605e9f491a814fad9b3ada15d468c7f4634c33aec20402b63162230a801bac7",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/ExpeditionWorld.h": "5d9d98cd3cbdf893a9d17a77643c6a4c0136be9d487d187f0bc1e0efd85a3efe",
+    "games/magnet-sweep/unreal/Source/MagnetSweep/Tests/ExpeditionTests.cpp": "645fc7b982f71f2bdfc42b056784bc285fa99ec3143772e2271ff8cb3e74a732",
+    "games/magnet-sweep/unreal/Config/DefaultGame.ini": "98239f2dcf91018a417e342df92d8a580853b3876b4df9ae6ad9bfb846dec076"
+  },
+  "checks": {
+    "scoped_whitespace": "passed",
+    "studio_validation": "Only pre-existing unrelated games/scrapstorm/QA.md link to build/Sixfold-Recoil-Beta.html fails",
+    "native": "Not launched; existing foreground handoff unanswered"
+  }
+}

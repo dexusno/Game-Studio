@@ -186,8 +186,8 @@ const TArray<FExpeditionModule>& FExpeditionRig::Catalog()
             TEXT("A completed conducting loop discharges each unique live source once through valid branches. Normal arc cost; uses two sockets."),
             K::Passive,24,2,{}, {TEXT("Arc")},{},{TEXT("LiveSource"),TEXT("ClosedReturn")});
         Add(TEXT("walking_gantry"),TEXT("Walking Gantry"),
-            TEXT("Move supported intact machinery while maintaining its working supports. +6 battery per winch tow; uses two sockets."),
-            K::Passive,24,2,{}, {TEXT("PhysicalTether")},{},{TEXT("SupportedLoad"),TEXT("FunctionalAssembly")});
+            TEXT("Tow machinery and its support together without another support pickup. +6 battery per tow; uses two sockets."),
+            K::Passive,14,2,{}, {TEXT("PhysicalTether")},{},{TEXT("SupportedLoad"),TEXT("FunctionalAssembly")});
         Add(TEXT("cold_seam"),TEXT("Cold Seam"),
             TEXT("A sever makes eligible neighboring material brittle for one hit within 70 units. +2 battery; weakening a load-bearing support can be dangerous."),
             K::Passive,6,1,{}, {TEXT("Sever")},{},{TEXT("BrittleEligible")});
@@ -677,7 +677,10 @@ bool FExpeditionRig::Validate(FString& Reason) const
     for (const auto& Owned : Inventory)
     {
         const auto* M = FindModule(Owned.Id);
-        if (!M || OwnedIds.Contains(Owned.Id) || (Owned.Paid != 0 && Owned.Paid != M->Price))
+        // The coupled-tow specialist was priced at 24 in packaged 0.6.1.
+        // Keep that actual receipt and its half-paid resale basis intact.
+        const bool HistoricalGantry=Owned.Id==TEXT("walking_gantry") && Owned.Paid==24;
+        if (!M || OwnedIds.Contains(Owned.Id) || (Owned.Paid != 0 && Owned.Paid != M->Price && !HistoricalGantry))
             return Refuse(Reason,TEXT("Unknown, duplicate or mispriced owned module."));
         OwnedIds.Add(Owned.Id); OwnedCost += Owned.Paid;
     }

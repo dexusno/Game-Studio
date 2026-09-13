@@ -348,6 +348,51 @@ void RuntimeSmelt(FExpeditionRuntime& Runtime)
     RuntimeMove(Runtime,{Runtime.Magnet.X,-280}); RuntimeMove(Runtime,{650,-280});
     RuntimeMove(Runtime,FExpeditionWorld::FurnacePosition()); Runtime.Key(EKeys::E,true);
 }
+
+bool EarnFirstSiteKeystoneBudget(FExpeditionRuntime& Runtime, FName Starter, int32 Seed, FString& Error)
+{
+    // No fixture equipment, synthetic rewards or inventory edits: this is the
+    // actual free starter, five original sources, one pour and core delivery.
+    Runtime.World->StartSite(0,Seed);
+    if (!Configure(*Runtime.Rig,*Runtime.World,Starter,Seed)) return false;
+    Runtime.Screen=EExpeditionScreen::Depot; Runtime.Depart();
+    if (Runtime.Screen!=EExpeditionScreen::Site) return false;
+    for (int32 Id=36; Id<=40; ++Id)
+    {
+        if (!RuntimePickBody(Runtime,Id,FVector2D(0,-25),Error)) return false;
+    }
+    RuntimeSmelt(Runtime);
+    if (Runtime.World->GetOutput()!=120 || Runtime.Rig->GetCash()!=14)
+    { Error=TEXT("Actual first-site source recovery did not earn its first milestone"); return false; }
+    if (!RuntimeRecoverCore(Runtime,Error)) return false;
+    Runtime.Key(EKeys::E,true);
+    if (Runtime.Screen!=EExpeditionScreen::Depot || Runtime.SiteIndex!=1 || Runtime.Rig->GetCash()!=24)
+    { Error=TEXT("Actual first-site delivery did not leave the earned twenty-four credits"); return false; }
+    return true;
+}
+
+bool RuntimeMoveFrameWithGantry(FExpeditionRuntime& Runtime, FString& Error, bool bRetainFinalCore=false)
+{
+    const auto* Frame=Runtime.World->FindFrameBody();
+    const auto* Support=Runtime.World->FindMarker(TEXT("frame_support"));
+    const auto* Dock=Runtime.World->FindMarker(TEXT("frame_receiver"));
+    if (!Frame || !Support || !Dock) { Error=TEXT("Actual frame definition is missing"); return false; }
+    const int32 FrameId=Frame->Id;
+    const int32 Weight=RoleBody(*Runtime.World,TEXT("brace"));
+    if (!RuntimePickBody(Runtime,Weight,{0,25},Error)) return false;
+    RuntimePlaceHaul(Runtime,Support->Position);
+    if (bRetainFinalCore)
+    {
+        if (!RuntimePickBody(Runtime,RoleBody(*Runtime.World,TEXT("counterweight_cover")),{0,25},Error)) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("cover"))->Position);
+        if (!RuntimePickBody(Runtime,RoleBody(*Runtime.World,TEXT("core")),{0,25},Error)) return false;
+    }
+    RuntimeMove(Runtime,Dock->Position);
+    Runtime.Aim=Runtime.World->FindBody(FrameId)->Position;
+    Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+    Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,4.f);
+    return Runtime.World->CanReceiveFrame(Error);
+}
 }
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionInputCancellationTest,
@@ -2233,7 +2278,9 @@ bool FExpeditionSavedOpportunityRefreshTest::RunTest(const FString& Parameters)
 {
     for (int32 Site : {2,3})
     {
-        FExpeditionWorld World; World.StartSite(Site,277); FExpeditionRig Rig;
+        // Frozen revision one has isolated receivers. New frame revisions
+        // intentionally add a useful return circuit and must not be excluded.
+        FExpeditionWorld World; World.StartSite(Site,277,100,Site==2?FName(TEXT("balanced_rack")):FName(TEXT("counterweight_exchange")),1); FExpeditionRig Rig;
         Configure(Rig,World,TEXT("arc_driver"),277);
         TestFalse(TEXT("An isolated late receiver is not an authored closed return circuit"),Rig.HasOpportunity(TEXT("closed_circuit")));
         TestFalse(TEXT("Actual late generated stock excludes unsupported Closed Circuit"),Rig.GetOffers().Contains(TEXT("closed_circuit")));
@@ -2253,6 +2300,452 @@ bool FExpeditionSavedOpportunityRefreshTest::RunTest(const FString& Parameters)
     TestTrue(TEXT("Compatibility refresh never rerolls the player's saved stock"),Resumed.Rig->GetOffers()==Stock);
     TestEqual(TEXT("A metadata refresh cannot create money"),Resumed.Rig->GetCash(),Cash);
     TestTrue(TEXT("The old depot is still frozen E1"),Resumed.World->GetState().LayoutId==TEXT("e1"));
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionEarnedGantryFrameTest,
+    "MagnetSweep.Expedition.EarnedGantryPurchaseRecoversOversizedFramesAcrossLateSites",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionEarnedGantryFrameTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    const bool Earned=EarnFirstSiteKeystoneBudget(Runtime,TEXT("anchor_winch"),1,Error);
+    if (!TestTrue(*FString::Printf(TEXT("Real first-site recovery earns the keystone budget: %s"),*Error),Earned)) return false;
+    TestEqual(TEXT("Partial first-site recovery and its real clear leave exactly twenty-four credits"),Runtime.Rig->GetCash(),24);
+    if (!TestTrue(TEXT("The actual generated depot offers Walking Gantry"),Runtime.Rig->GetOffers().Contains(TEXT("walking_gantry")))) return false;
+    if (!TestTrue(TEXT("The real fourteen-credit specialist purchase succeeds"),Runtime.Rig->Buy(TEXT("walking_gantry"),Error))) return false;
+    TestEqual(TEXT("Buying the repriced specialist leaves ten genuinely earned credits"),Runtime.Rig->GetCash(),10);
+    if (!TestTrue(TEXT("The player explicitly fits the purchased two-socket support"),Runtime.Rig->Fit(TEXT("walking_gantry"),Error))) return false;
+    TestEqual(TEXT("The actual purchase retains its fourteen-credit receipt"),Runtime.Rig->GetResaleValue(TEXT("walking_gantry")),7);
+    TestTrue(TEXT("The generated ten-credit Arc remains a real affordable second-tool choice"),Runtime.Rig->GetOffers().Contains(TEXT("arc_driver")) && Runtime.Rig->CanBuy(TEXT("arc_driver"),Error));
+    FExpeditionRuntime Restored(nullptr);
+    if (!TestTrue(TEXT("The actual paid purchase and generated depot restore"),Restored.DecodeSave(Runtime.EncodeSave(),Error))) return false;
+    Restored.Depart();
+    if (!TestTrue(TEXT("The paid rig completes the actual second core route"),RuntimeRecoverCore(Restored,Error))) return false;
+    Restored.Key(EKeys::E,true);
+    if (!TestTrue(TEXT("Real second recovery reaches the first large-frame depot"),Restored.SiteIndex==2 && Restored.Screen==EExpeditionScreen::Depot)) return false;
+
+    for (int32 Site=2; Site<=3; ++Site)
+    {
+        Restored.Depart();
+        const auto* Frame=Restored.World->FindFrameBody();
+        if (!TestTrue(TEXT("New default late layout exposes an actual forty-kilogram source"),Frame && Frame->Mass>FExpeditionWorld::HardCapacity && Restored.World->GetState().LayoutRevision==2)) return false;
+        const int32 FrameId=Frame->Id, BeforeCash=Restored.Rig->GetCash();
+        const bool Arrived=RuntimeMoveFrameWithGantry(Restored,Error,Site==3);
+        if (!TestTrue(*FString::Printf(TEXT("Paid Gantry moves both actual receiving loads on site %d: %s"),Site,*Error),Arrived)) return false;
+        const auto* ArrivedFrame=Restored.World->FindBody(FrameId);
+        AddInfo(FString::Printf(TEXT("Earned Gantry site%d frame(%.2f,%.2f), speed%.2f, appraisal%d, battery%d"),Site,ArrivedFrame->Position.X,ArrivedFrame->Position.Y,ArrivedFrame->Velocity.Size(),ArrivedFrame->Appraisal,Restored.World->GetBattery()));
+        const float RetainedMass=Site==3?20.f:0.f;
+        TestTrue(TEXT("Oversized recovery remains available while the real chosen haul stays held"),ArrivedFrame->State==EExpeditionBodyState::Available && FMath::IsNearlyEqual(Restored.World->GetCargoMass(),RetainedMass));
+        if (Site==3)
+        {
+            // Branch an actual earned state; do not manufacture cargo or gear.
+            // The ordinary regrip is a counterfactual control comparison, not
+            // a claim that the cheaper rig was equipped in this paid run.
+            FExpeditionRuntime Regrip(nullptr);
+            if (!TestTrue(TEXT("The actual paid final-core state can be cloned in memory for comparison"),Regrip.DecodeSave(Restored.EncodeSave(),Error))) return false;
+            TestTrue(TEXT("An active saved operation restores intentionally paused"),Regrip.bPaused);
+            Regrip.Key(EKeys::Escape,true);
+            const int32 SupportBody=RoleBody(*Regrip.World,TEXT("brace"));
+            if (!TestTrue(TEXT("An ordinary regrip really adds the actual eight-kilogram support"),RuntimePickBody(Regrip,SupportBody,{0,25},Error))) return false;
+            TestTrue(TEXT("That regrip with the actual final core creates twenty-eight kilograms and a real unsafe haul"),FMath::IsNearlyEqual(Regrip.World->GetCargoMass(),28.f) && Regrip.World->IsUnsafe());
+            Regrip.Key(EKeys::RightMouseButton,true);
+            TestTrue(TEXT("The player's real whole-haul rescue clears that danger without fabricating a loss"),!Regrip.World->IsUnsafe() && FMath::IsNearlyZero(Regrip.World->GetCargoMass()));
+        }
+        TestEqual(TEXT("Entering the dock alone cannot pay output"),Restored.World->GetOutput(),0);
+        const int32 BeforeGrip=Restored.World->GetBattery();
+        RuntimeMove(Restored,ArrivedFrame->Position);
+        Restored.Key(EKeys::LeftShift,true); Restored.Key(EKeys::LeftMouseButton,true); RuntimeAdvance(Restored,.1f);
+        Restored.Key(EKeys::LeftMouseButton,false); Restored.Key(EKeys::LeftShift,false);
+        TestTrue(TEXT("An actually unanchored forty-kilogram frame still cannot enter the thirty-six-kilogram grip"),Restored.World->FindBody(FrameId)->State==EExpeditionBodyState::Available && FMath::IsNearlyEqual(Restored.World->GetCargoMass(),RetainedMass));
+        TestEqual(TEXT("Refused oversized pickup cannot spend another cast"),Restored.World->GetBattery(),BeforeGrip);
+        RuntimeMove(Restored,Restored.World->FindMarker(TEXT("frame_receiver"))->Position);
+        const int32 Appraisal=Restored.World->FindBody(FrameId)->Appraisal;
+        if (!TestTrue(TEXT("The delivered frame retains meaningful actual appraisal"),Appraisal>=240)) return false;
+        Restored.Key(EKeys::E,true);
+        TestEqual(TEXT("Only actual E settlement banks current frame appraisal"),Restored.World->GetOutput(),Appraisal);
+        TestTrue(TEXT("The installed frame uses the existing once-only material ledger"),Restored.World->FindBody(FrameId)->State==EExpeditionBodyState::Banked);
+        TestEqual(TEXT("Frame refinement pays the existing site milestone, never a new final currency"),Restored.Rig->GetCash(),BeforeCash+(Site==2?2:0));
+        Restored.Key(EKeys::E,true);
+        TestEqual(TEXT("Repeated frame handoff cannot duplicate appraisal"),Restored.World->GetOutput(),Appraisal);
+        TestTrue(TEXT("Actual source identities, charge and appraisal remain conserved"),Restored.World->CheckInvariants(Error));
+        if (Site==2)
+        {
+            Restored.RetrySite();
+            TestEqual(TEXT("Retry rolls back the actual frame output transaction"),Restored.World->GetOutput(),0);
+            TestEqual(TEXT("Retry rolls back its site reward without deleting the earned keystone"),Restored.Rig->GetCash(),BeforeCash);
+            TestTrue(TEXT("Retry retains the paid prior-depot specialist"),Restored.Rig->Has(TEXT("walking_gantry")) && Restored.Rig->GetResaleValue(TEXT("walking_gantry"))==7);
+            TestTrue(TEXT("Retry waits for the player's explicit Resume"),Restored.bPaused);
+            Restored.Key(EKeys::Escape,true);
+            const bool Repeated=RuntimeMoveFrameWithGantry(Restored,Error);
+            if (!TestTrue(*FString::Printf(TEXT("The same earned rig can physically repeat the restored operation after Resume: %s"),*Error),Repeated)) return false;
+            Restored.Key(EKeys::E,true);
+            if (!TestTrue(TEXT("The optional frame still permits the baseline rack core recovery"),RuntimeRecoverCore(Restored,Error))) return false;
+            Restored.Key(EKeys::E,true);
+            if (!TestTrue(TEXT("Actual third core leads to the final depot"),Restored.Screen==EExpeditionScreen::Depot && Restored.SiteIndex==3)) return false;
+        }
+        else
+        {
+            const int32 Core=RoleBody(*Restored.World,TEXT("core"));
+            TestTrue(TEXT("Actual final core remains held through frame movement and settlement"),Restored.World->FindBody(Core)->State==EExpeditionBodyState::Cargo && FMath::IsNearlyEqual(Restored.World->GetCargoMass(),20.f));
+            RuntimeMove(Restored,{Restored.Magnet.X,-260}); RuntimeMove(Restored,FExpeditionWorld::ReceiverPosition());
+            Restored.Key(EKeys::E,true);
+            TestTrue(TEXT("The same genuinely purchased keystone supplies the final alternate recovery and winning rig"),Restored.Screen==EExpeditionScreen::Victory && Restored.Rig->IsRunWon());
+        }
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionPackagedLateRevisionTest,
+    "MagnetSweep.Expedition.PackagedLateRevisionOneSurvivesNewFrameDefaultsAndRetry",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionPackagedLateRevisionTest::RunTest(const FString& Parameters)
+{
+    for (int32 LateSite : {2,3})
+    {
+        FExpeditionRuntime Runtime(nullptr); FString Error;
+        if (!TestTrue(TEXT("Compatibility history starts as a real expedition"),StartRuntime(Runtime,293))) return false;
+        for (int32 Site=0; Site<LateSite; ++Site)
+        {
+            if (!TestTrue(TEXT("Actual earlier objective earns the late saved depot"),RuntimeRecoverCore(Runtime,Error))) return false;
+            Runtime.Key(EKeys::E,true);
+            if (Site+1<LateSite) Runtime.Depart();
+        }
+        const FName Layout=LateSite==2?FName(TEXT("balanced_rack")):FName(TEXT("counterweight_exchange"));
+        if (!TestTrue(TEXT("Packaged revision one remains an explicit legal authored definition"),Runtime.World->StartSite(LateSite,Runtime.Rig->GetSeed()+LateSite,100,Layout,1))) return false;
+        Runtime.Rig->SetShopContext(Runtime.World->GetOpportunityTags(),Implemented());
+        const int32 OldBodies=Runtime.World->GetBodies().Num(), Cash=Runtime.Rig->GetCash();
+        auto OldDepot=ParseJson(Runtime.EncodeSave()); const auto OldWorld=OldDepot->GetObjectField(TEXT("world"));
+        for (const TCHAR* Field : {TEXT("bFrameHoistPowered"),TEXT("bFrameHoistActive"),TEXT("bFrameReceived")}) OldWorld->RemoveField(Field);
+        for (const auto& Body:OldWorld->GetArrayField(TEXT("Bodies"))) Body->AsObject()->RemoveField(TEXT("bFloorContact"));
+        FExpeditionRuntime Loaded(nullptr);
+        const bool Restored=Loaded.DecodeSave(JsonText(OldDepot),Error);
+        if (!TestTrue(*FString::Printf(TEXT("Old late depot without new frame fields restores: %s"),*Error),Restored)) return false;
+        TestTrue(TEXT("The exact saved revision and absence of new source material are preserved"),Loaded.World->GetState().LayoutRevision==1 && Loaded.World->GetBodies().Num()==OldBodies && Loaded.World->FindFrameBody()==nullptr);
+        Loaded.Depart();
+        TestTrue(TEXT("Actual old-depot departure never silently adds the new frame"),Loaded.Screen==EExpeditionScreen::Site && Loaded.World->GetState().LayoutRevision==1 && Loaded.World->GetBodies().Num()==OldBodies);
+        const int32 Id=LooseBody(*Loaded.World); const FVector2D Point=Loaded.World->FindBody(Id)->Position;
+        RuntimeMove(Loaded,Point+FVector2D(0,-25)); Loaded.Key(EKeys::LeftShift,true); Loaded.Key(EKeys::LeftMouseButton,true);
+        RuntimeAdvance(Loaded,.05f);
+        const FVector2D PaidPosition=Loaded.World->FindBody(Id)->Position;
+        const FString PaidSave=Loaded.EncodeSave(); FExpeditionRuntime Resumed(nullptr);
+        if (!TestTrue(TEXT("Old-revision actual paid motion resumes"),Resumed.DecodeSave(PaidSave,Error))) return false;
+        TestTrue(TEXT("Restore preserves actual source motion exactly"),Resumed.World->FindBody(Id)->Position.Equals(PaidPosition,.001f));
+        FExpeditionWorld NewDefault; NewDefault.StartSite(LateSite,Loaded.Rig->GetSeed()+LateSite);
+        TestTrue(TEXT("Fresh default is revision two with additional actual frame sources"),NewDefault.GetState().LayoutRevision==2 && NewDefault.FindFrameBody()!=nullptr && NewDefault.GetBodies().Num()>OldBodies);
+        auto WrongEntry=ParseJson(PaidSave);
+        WrongEntry->GetObjectField(TEXT("site_entry"))->SetObjectField(TEXT("world"),NewDefault.ToJson());
+        TestFalse(TEXT("A separately valid new-revision checkpoint cannot replace an old active site"),Resumed.DecodeSave(JsonText(WrongEntry),Error));
+        TestTrue(TEXT("Rejected checkpoint keeps the actual old paid session unchanged"),Resumed.EncodeSave()==PaidSave);
+        Resumed.RetrySite();
+        TestTrue(TEXT("Real retry returns to the saved revision-one entry"),Resumed.World->GetState().LayoutRevision==1 && Resumed.World->GetBodies().Num()==OldBodies && Resumed.World->FindFrameBody()==nullptr);
+        TestEqual(TEXT("Old-layout retry restores its actual entry battery"),Resumed.World->GetBattery(),100);
+        TestEqual(TEXT("Old-layout retry retains prior earned money"),Resumed.Rig->GetCash(),Cash);
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionFrameCheapSupportTest,
+    "MagnetSweep.Expedition.FrameAcceptsCheaperPhysicalSupportWithoutKeystoneGate",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionFrameCheapSupportTest::RunTest(const FString& Parameters)
+{
+    int32 Cost[2]={0,0}, PaidAppraisal[2]={0,0};
+    for (int32 Variant=0; Variant<2; ++Variant)
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(3,307); FString Error;
+        const TArray<FName> Supports=Variant==0?TArray<FName>{TEXT("walking_gantry")}:TArray<FName>{TEXT("counterweight_hook"),TEXT("ratchet_pawl")};
+        if (!TestTrue(TEXT("Labelled controlled support comparison validates"),FixtureRig(*Runtime.Rig,*Runtime.World,{TEXT("anchor_winch")},Supports,Error))) return false;
+        Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=3; Runtime.bWorldHit=true;
+        const int32 Frame=Runtime.World->FindFrameBody()->Id, Weight=RoleBody(*Runtime.World,TEXT("brace"));
+        const FVector2D Dock=Runtime.World->FindMarker(TEXT("frame_receiver"))->Position;
+        const FVector2D WeightDock=Runtime.World->FindMarker(TEXT("frame_support_receiver"))->Position;
+        if (!TestTrue(TEXT("Both routes use the same real eight-kilogram support"),RuntimePickBody(Runtime,Weight,{0,25},Error))) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("frame_support"))->Position);
+        RuntimeMove(Runtime,Dock); Runtime.Aim=Runtime.World->FindBody(Frame)->Position;
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false); Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,4.f);
+        if (Variant==1)
+        {
+            TestFalse(TEXT("A fixed counterweight left behind cannot count as receiving support"),Runtime.World->CanReceiveFrame(Error));
+            TestTrue(TEXT("The cheaper pawl actually holds the moved frame at its reached destination"),Runtime.World->GetState().LatchedBody==Frame && FVector2D::Distance(Runtime.World->FindBody(Frame)->Position,Dock)<24);
+            if (!TestTrue(TEXT("The staged route physically regrips its old support"),RuntimePickBody(Runtime,Weight,{0,-25},Error))) return false;
+            RuntimePlaceHaul(Runtime,WeightDock); RuntimeMove(Runtime,Dock); RuntimeAdvance(Runtime,1.f);
+        }
+        const bool Ready=Runtime.World->CanReceiveFrame(Error);
+        if (!TestTrue(*FString::Printf(TEXT("Actual support arrangement, not capstone ownership, enables receipt: %s"),*Error),Ready)) return false;
+        Cost[Variant]=100-Runtime.World->GetBattery(); PaidAppraisal[Variant]=Runtime.World->FindBody(Frame)->Appraisal;
+        AddInfo(FString::Printf(TEXT("Frame support route%d: energy%d, appraisal%d, carried%.0f, frame(%.1f,%.1f), support(%.1f,%.1f)"),Variant,Cost[Variant],PaidAppraisal[Variant],Runtime.World->GetCargoMass(),Runtime.World->FindBody(Frame)->Position.X,Runtime.World->FindBody(Frame)->Position.Y,Runtime.World->FindBody(Weight)->Position.X,Runtime.World->FindBody(Weight)->Position.Y));
+        TestEqual(TEXT("Physical arrival still does not automatically settle value"),Runtime.World->GetOutput(),0);
+        Runtime.Key(EKeys::E,true);
+        TestEqual(TEXT("Both routes explicitly settle the actual source appraisal"),Runtime.World->GetOutput(),PaidAppraisal[Variant]);
+        TestTrue(TEXT("Receiving conserves source identity and accounting"),Runtime.World->CheckInvariants(Error));
+        if (Variant==1) TestFalse(TEXT("The accepted cheaper route has no hidden Gantry fixture"),Runtime.Rig->Has(TEXT("walking_gantry")));
+    }
+    TestEqual(TEXT("Gantry setup uses one actual support grip and the fourteen-energy coupled tow"),Cost[0],20);
+    TestEqual(TEXT("Cheaper staged setup pays one additional six-energy regrip but a ten-energy tow"),Cost[1],22);
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionFrameElectricalTest,
+    "MagnetSweep.Expedition.FrameElectricalRoutesShareOcclusionFiniteChargeAndRealHandoff",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionFrameElectricalTest::RunTest(const FString& Parameters)
+{
+    for (int32 Variant=0; Variant<3; ++Variant)
+    {
+        // Found equipment is deliberate here. Purchase reachability is tested
+        // by the separate earned Gantry run, not asserted for these fixtures.
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(3,313); FString Error;
+        const TArray<FName> Actives=Variant==0?TArray<FName>{TEXT("arc_driver"),TEXT("anchor_winch")}:TArray<FName>{TEXT("arc_driver")};
+        TArray<FName> Passives={TEXT("escapement_relay")};
+        if (Variant!=0) Passives.Add(TEXT("closed_circuit"));
+        if (!TestTrue(TEXT("Labelled electrical equipment validates"),FixtureRig(*Runtime.Rig,*Runtime.World,Actives,Passives,Error))) return false;
+        Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=3; Runtime.bWorldHit=true;
+        const int32 Frame=Runtime.World->FindFrameBody()->Id;
+        const FVector2D Initial=Runtime.World->FindBody(Frame)->Position;
+        Runtime.Aim=Runtime.World->FindBody(63)->Position;
+        TestEqual(TEXT("Actual Arc targeting selects the marked floor contact under the frame"),Runtime.CommandFor(0).TargetId,63);
+        auto Denied=Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig);
+        TestFalse(TEXT("The shared exposure rule refuses the covered manual contact"),Denied.bAllowed);
+        AddInfo(FString::Printf(TEXT("Covered Arc: %s"),*Denied.Reason));
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        Runtime.Click(62); Runtime.Aim=Runtime.World->FindBody(3)->Position;
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        Runtime.Aim=Runtime.World->FindBody(63)->Position;
+        TestEqual(TEXT("Actual staged sensor receiver selects the same floor contact"),Runtime.CommandFor(0).SecondaryId,63);
+        TestFalse(TEXT("Sensor preparation cannot bypass that same covered contact"),Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig).bAllowed);
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        TestEqual(TEXT("Both covered-target attempts are free refusals"),Runtime.World->GetBattery(),100);
+        TestEqual(TEXT("Refusals reserve no finite frame charge"),Runtime.World->FindBody(Frame)->Charge,2);
+        TestEqual(TEXT("Refusals leave no deferred trigger"),Runtime.World->GetState().DeferredCharge,0);
+        Runtime.Key(EKeys::RightMouseButton,true); Runtime.Click(60);
+
+        const auto PlaceReturn=[&]()
+        {
+            if (!RuntimePickBody(Runtime,64,{-25,0},Error)) return false;
+            RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("frame_loop"))->Position);
+            return FVector2D::Distance(Runtime.World->FindBody(64)->Position,Runtime.World->FindMarker(TEXT("frame_loop"))->Position)<10;
+        };
+        if (Variant==1 && !TestTrue(TEXT("The actual directional return tile is physically placed"),PlaceReturn())) return false;
+        Runtime.Aim=Runtime.World->FindBody(62)->Position;
+        TestEqual(TEXT("The normal Arc input is the exposed marked receiver"),Runtime.CommandFor(0).TargetId,62);
+        const auto FirstPreview=Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig);
+        if (!TestTrue(*FString::Printf(TEXT("Actual exposed input has a source-backed operation: %s"),*FirstPreview.Reason),FirstPreview.bAllowed)) return false;
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        if (Variant!=1)
+        {
+            TestEqual(TEXT("An early ordinary pulse spends one finite source charge"),Runtime.World->FindBody(Frame)->Charge,1);
+            TestFalse(TEXT("Mount release alone does not invent a powered hoist"),Runtime.World->GetState().bFrameHoistPowered);
+            Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,.2f);
+            TestTrue(TEXT("The flush contact does not physically push the released frame away"),Runtime.World->FindBody(Frame)->Position.Equals(Initial,2.f));
+            if (Variant==0)
+            {
+                RuntimeMove(Runtime,Runtime.World->FindMarker(TEXT("frame_service"))->Position);
+                Runtime.Aim=Runtime.World->FindBody(Frame)->Position;
+                Runtime.Key(EKeys::F,true); Runtime.Key(EKeys::F,false);
+                Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,4.f);
+                if (!TestTrue(TEXT("The cheaper real tow exposes the contact rather than bypassing it"),Runtime.World->IsManualTargetExposed(63))) return false;
+                Runtime.Aim=Runtime.World->FindBody(63)->Position;
+            }
+            else
+            {
+                if (!TestTrue(TEXT("After an early pulse the player can still physically complete the return"),PlaceReturn())) return false;
+                Runtime.Aim=Runtime.World->FindBody(62)->Position;
+            }
+            const auto SecondPreview=Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig);
+            if (!TestTrue(*FString::Printf(TEXT("A still-useful physical branch accepts its remaining charge: %s"),*SecondPreview.Reason),SecondPreview.bAllowed)) return false;
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        }
+        TestEqual(TEXT("Actual mount and hoist operations consume exactly the two source charges"),Runtime.World->FindBody(Frame)->Charge,0);
+        if (!TestTrue(TEXT("The paid circuit starts the actual hoist"),Runtime.World->GetState().bFrameHoistPowered && Runtime.World->GetState().bFrameHoistActive)) return false;
+        TestEqual(TEXT("Electrical preparation creates no automatic output"),Runtime.World->GetOutput(),0);
+        Runtime.Key(EKeys::RightMouseButton,true);
+        TestTrue(TEXT("Dropping cancels free hand preparation but preserves the paid hoist"),Runtime.World->GetState().bFrameHoistActive);
+        const FVector2D PausedPosition=Runtime.World->FindBody(Frame)->Position;
+        Runtime.Key(EKeys::Escape,true); RuntimeAdvance(Runtime,.5f);
+        TestTrue(TEXT("Actual pause freezes the paid physical hoist"),Runtime.World->FindBody(Frame)->Position.Equals(PausedPosition,.001f));
+        Runtime.Key(EKeys::Escape,true);
+        FExpeditionWorld Reloaded;
+        const bool Loaded=Reloaded.FromJson(Runtime.World->ToJson(),Error);
+        if (!TestTrue(*FString::Printf(TEXT("The real paid hoist state restores without another charge: %s"),*Error),Loaded)) return false;
+        TestTrue(TEXT("Saved paid motion and finite source charge remain present"),Reloaded.GetState().bFrameHoistActive && Reloaded.FindBody(Frame)->Charge==0);
+        Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,5.f);
+        RuntimeMove(Runtime,Runtime.World->FindMarker(TEXT("frame_receiver"))->Position); RuntimeAdvance(Runtime,1.f);
+        const bool Ready=Runtime.World->CanReceiveFrame(Error);
+        const auto* Body=Runtime.World->FindBody(Frame);
+        AddInfo(FString::Printf(TEXT("Electrical frame route%d: battery%d, appraisal%d, position(%.2f,%.2f), speed%.2f, receipt: %s"),Variant,Runtime.World->GetBattery(),Body->Appraisal,Body->Position.X,Body->Position.Y,Body->Velocity.Size(),*Error));
+        if (!TestTrue(*FString::Printf(TEXT("Actual hoist arrival permits explicit receipt: %s"),*Error),Ready)) return false;
+        TestTrue(TEXT("The forty-kilogram body arrives physically without entering cargo"),Body->State==EExpeditionBodyState::Available && FMath::IsNearlyZero(Runtime.World->GetCargoMass()));
+        const int32 Appraisal=Body->Appraisal, Battery=Runtime.World->GetBattery();
+        Runtime.Key(EKeys::E,true);
+        TestEqual(TEXT("E settles the current physical appraisal exactly once"),Runtime.World->GetOutput(),Appraisal);
+        Runtime.Key(EKeys::E,true); Runtime.Aim=Runtime.World->FindBody(62)->Position;
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+        TestEqual(TEXT("The exhausted installed source cannot produce another payment"),Runtime.World->GetOutput(),Appraisal);
+        TestEqual(TEXT("Repeated unavailable operations do not spend or refund battery"),Runtime.World->GetBattery(),Battery);
+        TestTrue(TEXT("Electrical recovery conserves source, charge and appraisal"),Runtime.World->CheckInvariants(Error));
+        TestEqual(TEXT("The distinct routes pay their actual preparation costs"),100-Battery,Variant==0?24:Variant==1?14:22);
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionGantryHistoricalReceiptTest,
+    "MagnetSweep.Expedition.GantryPriceChangePreservesHistoricalReceiptWithoutCashGrant",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionGantryHistoricalReceiptTest::RunTest(const FString& Parameters)
+{
+    FExpeditionRuntime Runtime(nullptr); FString Error;
+    const bool Earned=EarnFirstSiteKeystoneBudget(Runtime,TEXT("anchor_winch"),1,Error);
+    if (!TestTrue(*FString::Printf(TEXT("Receipt compatibility uses a genuinely earned twenty-four-credit depot: %s"),*Error),Earned)) return false;
+    if (!TestTrue(TEXT("The current generated purchase pays fourteen"),Runtime.Rig->Buy(TEXT("walking_gantry"),Error))) return false;
+    TestEqual(TEXT("The current transaction retains ten cash"),Runtime.Rig->GetCash(),10);
+    const FString Current=Runtime.EncodeSave();
+    // Serialization compatibility fixture: reconstruct the earlier legal
+    // paid-24 receipt on the same genuinely earned 24-credit ledger. This is
+    // not a claim that today's shop sold at the historical price.
+    auto Historical=ParseJson(Current); auto RigJson=Historical->GetObjectField(TEXT("rig"));
+    RigJson->SetNumberField(TEXT("cash"),0); RigJson->SetNumberField(TEXT("purchased"),24);
+    for (const auto& Item:RigJson->GetArrayField(TEXT("inventory")))
+        if (Item->AsObject()->GetStringField(TEXT("id"))==TEXT("walking_gantry")) Item->AsObject()->SetNumberField(TEXT("paid"),24);
+    FExpeditionRuntime Old(nullptr);
+    const bool Loaded=Old.DecodeSave(JsonText(Historical),Error);
+    if (!TestTrue(*FString::Printf(TEXT("A coherent historical paid-24 receipt remains legal: %s"),*Error),Loaded)) return false;
+    TestEqual(TEXT("Restoring the price change never grants a difference refund"),Old.Rig->GetCash(),0);
+    TestEqual(TEXT("Historical resale remains based on actual twenty-four paid"),Old.Rig->GetResaleValue(TEXT("walking_gantry")),12);
+    if (!TestTrue(TEXT("Actual historical-receipt sale succeeds"),Old.Rig->Sell(TEXT("walking_gantry"),Error))) return false;
+    TestEqual(TEXT("Its one real sale pays twelve"),Old.Rig->GetCash(),12);
+    FExpeditionRuntime OldSale(nullptr);
+    if (!TestTrue(TEXT("Historical resale transaction restores"),OldSale.DecodeSave(Old.EncodeSave(),Error))) return false;
+    TestEqual(TEXT("Resale restore cannot replay the refund"),OldSale.Rig->GetCash(),12);
+    TestFalse(TEXT("An already sold historical item cannot pay again"),OldSale.Rig->Sell(TEXT("walking_gantry"),Error));
+    TestEqual(TEXT("Today's receipt has seven-credit resale"),Runtime.Rig->GetResaleValue(TEXT("walking_gantry")),7);
+    if (!TestTrue(TEXT("Actual current-price sale succeeds"),Runtime.Rig->Sell(TEXT("walking_gantry"),Error))) return false;
+    TestEqual(TEXT("Ten retained cash plus seven refund is seventeen"),Runtime.Rig->GetCash(),17);
+    for (int32 InvalidPrice : {15,23})
+    {
+        auto Invalid=ParseJson(Current); auto BadRig=Invalid->GetObjectField(TEXT("rig"));
+        BadRig->SetNumberField(TEXT("cash"),24-InvalidPrice); BadRig->SetNumberField(TEXT("purchased"),InvalidPrice);
+        for (const auto& Item:BadRig->GetArrayField(TEXT("inventory")))
+            if (Item->AsObject()->GetStringField(TEXT("id"))==TEXT("walking_gantry")) Item->AsObject()->SetNumberField(TEXT("paid"),InvalidPrice);
+        const FString Before=Runtime.EncodeSave();
+        TestFalse(TEXT("Coherent arithmetic does not legalize another fabricated historical price"),Runtime.DecodeSave(JsonText(Invalid),Error));
+        TestTrue(TEXT("Receipt rejection preserves the actual live resale transaction"),Runtime.EncodeSave()==Before);
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionFrameReactionArrivalTest,
+    "MagnetSweep.Expedition.FrameReactionMovesActualTwelveAndTwentyKilogramSupportsToReceipt",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionFrameReactionArrivalTest::RunTest(const FString& Parameters)
+{
+    for (int32 Site : {2,3})
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(Site,317); FString Error;
+        if (!TestTrue(TEXT("Labelled found Vector/Reaction equipment validates"),FixtureRig(*Runtime.Rig,*Runtime.World,
+            {TEXT("vector_emitter")},{TEXT("reaction_frame")},Error))) return false;
+        Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=Site; Runtime.bWorldHit=true;
+        const int32 Frame=Runtime.World->FindFrameBody()->Id;
+        const int32 Weight=RoleBody(*Runtime.World,Site==2?FName(TEXT("ballast")):FName(TEXT("counterweight_cover")));
+        const FVector2D FrameStart=Runtime.World->FindBody(Frame)->Position;
+        const FVector2D Dock=Runtime.World->FindMarker(TEXT("frame_receiver"))->Position;
+        const FVector2D WeightDock=Runtime.World->FindMarker(TEXT("frame_support_receiver"))->Position;
+        const FVector2D Stage=Runtime.World->FindMarker(TEXT("frame_reaction"))->Position;
+        const FVector2D Direction=(FrameStart-Dock).GetSafeNormal();
+        if (!TestTrue(TEXT("The support is actually available, not an injected freed machine"),!Runtime.World->FindBody(Weight)->bAnchored)) return false;
+        TestEqual(TEXT("Each layout uses its real available source mass"),Runtime.World->FindBody(Weight)->Mass,Site==2?12.f:20.f);
+        if (!TestTrue(TEXT("Ordinary paid pickup supplies the actual reaction partner"),RuntimePickBody(Runtime,Weight,{0,25},Error))) return false;
+        RuntimePlaceHaul(Runtime,Stage);
+        if (!TestTrue(*FString::Printf(TEXT("Actual component-sized drop reaches the authored setup: (%.2f,%.2f)"),Runtime.World->FindBody(Weight)->Position.X,Runtime.World->FindBody(Weight)->Position.Y),Runtime.World->FindBody(Weight)->Position.Equals(Stage,3.f))) return false;
+        const int32 Impulses=Site==2?2:1;
+        for (int32 PullIndex=0; PullIndex<Impulses; ++PullIndex)
+        {
+            Runtime.Click(63); Runtime.Aim=Runtime.World->FindBody(Weight)->Position;
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+            Runtime.Aim=Runtime.World->FindBody(Frame)->Position;
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+            TestEqual(TEXT("Actual staged target is the selected ballast"),Runtime.CommandFor(0).TargetId,Weight);
+            TestEqual(TEXT("Actual staged supported partner is the oversized frame"),Runtime.CommandFor(0).SecondaryId,Frame);
+            Runtime.Aim=Runtime.Magnet+Direction*100.f;
+            const auto Preview=Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig);
+            if (!TestTrue(*FString::Printf(TEXT("The real staged reaction can commit: %s"),*Preview.Reason),Preview.bAllowed)) return false;
+            const int32 Battery=Runtime.World->GetBattery();
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false);
+            TestEqual(TEXT("Each deliberately repeated impulse is a new twelve-energy payment"),Runtime.World->GetBattery(),Battery-12);
+            Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,3.f);
+            AddInfo(FString::Printf(TEXT("Reaction site%d impulse%d: frame(%.2f,%.2f) d%.2f v%.2f; weight%.0fkg(%.2f,%.2f) d%.2f v%.2f"),Site,PullIndex+1,
+                Runtime.World->FindBody(Frame)->Position.X,Runtime.World->FindBody(Frame)->Position.Y,FVector2D::Distance(Runtime.World->FindBody(Frame)->Position,Dock),Runtime.World->FindBody(Frame)->Velocity.Size(),Runtime.World->FindBody(Weight)->Mass,
+                Runtime.World->FindBody(Weight)->Position.X,Runtime.World->FindBody(Weight)->Position.Y,FVector2D::Distance(Runtime.World->FindBody(Weight)->Position,WeightDock),Runtime.World->FindBody(Weight)->Velocity.Size()));
+        }
+        RuntimeMove(Runtime,Dock); RuntimeAdvance(Runtime,1.f);
+        TestTrue(TEXT("Both actual bodies must settle inside their distinct receiving rings"),FVector2D::Distance(Runtime.World->FindBody(Frame)->Position,Dock)<=24 && FVector2D::Distance(Runtime.World->FindBody(Weight)->Position,WeightDock)<=20);
+        const bool Ready=Runtime.World->CanReceiveFrame(Error);
+        if (!TestTrue(*FString::Printf(TEXT("Real force and support placement permit the handoff: %s"),*Error),Ready)) return false;
+        TestTrue(TEXT("Neither reaction body needs to enter oversized cargo"),Runtime.World->FindBody(Frame)->State==EExpeditionBodyState::Available && FMath::IsNearlyZero(Runtime.World->GetCargoMass()));
+        TestEqual(TEXT("Reaction placement alone is not a reward"),Runtime.World->GetOutput(),0);
+        const int32 Appraisal=Runtime.World->FindBody(Frame)->Appraisal;
+        TestTrue(TEXT("The recovered optional frame retains meaningful real appraisal"),Appraisal>=240);
+        Runtime.Key(EKeys::E,true); Runtime.Key(EKeys::E,true);
+        TestEqual(TEXT("Actual E receipt banks current appraisal once"),Runtime.World->GetOutput(),Appraisal);
+        TestEqual(TEXT("The real lighter support needs a second paid impulse, not a material key"),100-Runtime.World->GetBattery(),6+12*Impulses);
+        TestTrue(TEXT("Reaction recovery conserves both real source bodies and appraisal"),Runtime.World->CheckInvariants(Error));
+        FExpeditionWorld Saved;
+        if (!TestTrue(*FString::Printf(TEXT("Settled reaction receipt restores strictly: %s"),*Error),Saved.FromJson(Runtime.World->ToJson(),Error))) return false;
+        TestEqual(TEXT("Reload cannot repay the installed frame"),Saved.GetOutput(),Appraisal);
+        TestFalse(TEXT("Installed frame remains unavailable to another settlement"),Saved.ReceiveFrame().bSucceeded);
+    }
+    return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FExpeditionFrameRetainedCoreSupportTest,
+    "MagnetSweep.Expedition.CheapRemoteFrameSupportPreservesActualHeldFinalCore",
+    EAutomationTestFlags::EditorContext | EAutomationTestFlags::EngineFilter)
+bool FExpeditionFrameRetainedCoreSupportTest::RunTest(const FString& Parameters)
+{
+    int32 Cost[2]={0,0};
+    for (int32 Variant=0; Variant<2; ++Variant)
+    {
+        FExpeditionRuntime Runtime(nullptr); Runtime.World->StartSite(3,331); FString Error;
+        const TArray<FName> Supports=Variant==0?TArray<FName>{TEXT("walking_gantry")}:TArray<FName>{TEXT("counterweight_hook"),TEXT("ratchet_pawl")};
+        if (!TestTrue(TEXT("Labelled matched support loadouts validate"),FixtureRig(*Runtime.Rig,*Runtime.World,{TEXT("anchor_winch")},Supports,Error))) return false;
+        Runtime.Screen=EExpeditionScreen::Site; Runtime.SiteIndex=3; Runtime.bWorldHit=true;
+        const int32 Frame=Runtime.World->FindFrameBody()->Id, Weight=RoleBody(*Runtime.World,TEXT("brace"));
+        const int32 Cover=RoleBody(*Runtime.World,TEXT("counterweight_cover")), Core=RoleBody(*Runtime.World,TEXT("core"));
+        const FVector2D Dock=Runtime.World->FindMarker(TEXT("frame_receiver"))->Position;
+        const FVector2D WeightDock=Runtime.World->FindMarker(TEXT("frame_support_receiver"))->Position;
+        if (!TestTrue(TEXT("The eight-kilogram receiving support is physically prepared"),RuntimePickBody(Runtime,Weight,{0,25},Error))) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("frame_support"))->Position);
+        if (!TestTrue(TEXT("The actual final cover is picked up normally"),RuntimePickBody(Runtime,Cover,{0,25},Error))) return false;
+        RuntimePlaceHaul(Runtime,Runtime.World->FindMarker(TEXT("cover"))->Position);
+        if (!TestTrue(TEXT("The actual newly exposed twenty-kilogram core is secured"),RuntimePickBody(Runtime,Core,{0,25},Error))) return false;
+        TestTrue(TEXT("Both comparisons begin with a real twenty-kilogram held core"),Runtime.World->FindBody(Core)->State==EExpeditionBodyState::Cargo && FMath::IsNearlyEqual(Runtime.World->GetCargoMass(),20.f));
+        RuntimeMove(Runtime,Dock); Runtime.Aim=Runtime.World->FindBody(Frame)->Position;
+        Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false); Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,4.f);
+        if (Variant==1)
+        {
+            if (!TestTrue(TEXT("The real reached pawl holds the frame before the support is moved"),Runtime.World->GetState().LatchedBody==Frame)) return false;
+            RuntimeMove(Runtime,WeightDock); Runtime.Aim=Runtime.World->FindBody(Weight)->Position;
+            const auto Preview=Runtime.World->Preview(Runtime.CommandFor(0),*Runtime.Rig);
+            if (!TestTrue(*FString::Printf(TEXT("A separate paid tow can move the existing support: %s"),*Preview.Reason),Preview.bAllowed)) return false;
+            Runtime.Key(EKeys::Q,true); Runtime.Key(EKeys::Q,false); Runtime.Aim=Runtime.Magnet; RuntimeAdvance(Runtime,4.f);
+            TestEqual(TEXT("Towing a second load does not silently replace the still-needed frame pawl"),Runtime.World->GetState().LatchedBody,Frame);
+        }
+        RuntimeMove(Runtime,Dock); RuntimeAdvance(Runtime,1.f);
+        const bool Ready=Runtime.World->CanReceiveFrame(Error);
+        AddInfo(FString::Printf(TEXT("Retained-core support%d: battery%d, frame(%.2f,%.2f), support(%.2f,%.2f), mass%.0f, appraisal%d, receipt: %s"),Variant,Runtime.World->GetBattery(),Runtime.World->FindBody(Frame)->Position.X,Runtime.World->FindBody(Frame)->Position.Y,Runtime.World->FindBody(Weight)->Position.X,Runtime.World->FindBody(Weight)->Position.Y,Runtime.World->GetCargoMass(),Runtime.World->FindBody(Frame)->Appraisal,*Error));
+        if (!TestTrue(*FString::Printf(TEXT("Actual remotely moved receiving loads are ready: %s"),*Error),Ready)) return false;
+        TestTrue(TEXT("The cheaper route can avoid regrip overload without discarding the core"),Runtime.World->FindBody(Core)->State==EExpeditionBodyState::Cargo && FMath::IsNearlyEqual(Runtime.World->GetCargoMass(),20.f) && !Runtime.World->IsUnsafe());
+        const int32 Appraisal=Runtime.World->FindBody(Frame)->Appraisal;
+        Cost[Variant]=100-Runtime.World->GetBattery();
+        Runtime.Key(EKeys::E,true);
+        TestEqual(TEXT("The same explicit handoff settles real appraisal"),Runtime.World->GetOutput(),Appraisal);
+        TestTrue(TEXT("Frame installation does not burn or drop the held mission core"),Runtime.World->FindBody(Core)->State==EExpeditionBodyState::Cargo);
+        RuntimeMove(Runtime,{Runtime.Magnet.X,-260}); RuntimeMove(Runtime,FExpeditionWorld::ReceiverPosition());
+        TestTrue(TEXT("The physically retained core has a genuine final receiver route"),Runtime.World->CanDispatch(Error));
+        TestTrue(TEXT("The matched support routes conserve source and output accounting"),Runtime.World->CheckInvariants(Error));
+    }
+    TestEqual(TEXT("Gantry uses three real preparatory grips plus its coupled tow"),Cost[0],32);
+    TestEqual(TEXT("Cheaper remote correction uses the same grips plus two ten-energy tows"),Cost[1],38);
     return true;
 }
 

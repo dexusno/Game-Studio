@@ -495,8 +495,8 @@
       "id": "walking_gantry",
       "name": "Walking Gantry",
       "kind": "passive",
-      "price": 24,
-      "tier": "keystone",
+      "price": 14,
+      "tier": "advanced",
       "slots": 2,
       "source": {
         "path": "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
@@ -507,7 +507,8 @@
       "requires_all": [
         "PhysicalTether"
       ],
-      "requires_any": []
+      "requires_any": [],
+      "pricing_note": "Current price accepted after the real empty-haul frame comparison: Gantry20 total battery/320 appraisal versus Hook+Ratchet22/320. Historical paid24 receipts retain their actual basis; this design catalogue prices new purchases at14."
     },
     {
       "id": "cold_seam",
@@ -1349,7 +1350,7 @@
     },
     {
       "id": "D",
-      "name": "Save for a walking retrieval rig",
+      "name": "Fit paired retrieval, then add a second tool",
       "source": {
         "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
         "sequence": "D"
@@ -1453,61 +1454,62 @@
             "visit": "depot 2",
             "table_row": "D / depot 2"
           },
-          "integration_note": "Independent final critique: Ratchet Pawl supplies an affordable support for the installed Winch; its physical site opportunity remains a requirement."
+          "integration_note": "Gantry14 and Ratchet6 are affordable Winch supports; the selected path installs Gantry here before precharge. Actual physical opportunities still require level evidence."
+        },
+        {
+          "type": "buy",
+          "module": "walking_gantry",
+          "cash_after": 8
+        },
+        {
+          "type": "fit",
+          "module": "walking_gantry",
+          "cash_after": 8
         },
         {
           "type": "precharge",
           "depot": 2,
           "cost": 4,
-          "cash_after": 18
+          "cash_after": 4
         },
         {
           "type": "reward",
           "id": "site_3_clear",
-          "cash_after": 32
+          "cash_after": 18
         },
         {
           "type": "reward",
           "id": "site_3_refine_240",
-          "cash_after": 34
+          "cash_after": 20
         },
         {
           "type": "offers",
           "depot": 3,
           "modules": [
-            "walking_gantry",
+            "ratchet_pawl",
             "extraction_coil",
             "arc_driver",
             "ground_clip"
           ],
-          "cash_after": 34,
+          "cash_after": 20,
           "source": {
             "path": "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
             "section": "Exact stock and budget contract for later executable checks",
             "sequence": "D",
             "visit": "depot 3",
             "table_row": "D / depot 3"
-          }
-        },
-        {
-          "type": "buy",
-          "module": "walking_gantry",
-          "cash_after": 10
-        },
-        {
-          "type": "fit",
-          "module": "walking_gantry",
-          "cash_after": 10
+          },
+          "integration_note": "Ratchet replaces the now-owned Gantry. Fitting another passive requires a real refit because the chosen rig uses all four passive sockets."
         },
         {
           "type": "buy",
           "module": "extraction_coil",
-          "cash_after": 0
+          "cash_after": 10
         },
         {
           "type": "fit",
           "module": "extraction_coil",
-          "cash_after": 0
+          "cash_after": 10
         }
       ],
       "expected_build": [
@@ -1517,9 +1519,11 @@
         "twin_anchor",
         "walking_gantry"
       ],
-      "expected_cash_remaining": 0,
+      "expected_cash_remaining": 10,
       "limits": [
-        "Site3 must be completable with early winch supports and precharge before Walking Gantry can be bought."
+        "The preceding two sites earn the Gantry purchase before the third recovery; its future capability is not required to earn itself.",
+        "This authored stock/budget route is not a generated-shop or physical-play witness.",
+        "Hook remains a legal earlier purchase but is not claimed to add a second effect while Gantry is fitted."
       ],
       "starter_access": "initially_available"
     },

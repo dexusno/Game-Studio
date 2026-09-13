@@ -122,18 +122,18 @@ Final rig: Arc + Coil; Ground Clip + Intact Recovery + Insulated Jaw. The pivot 
 
 Induction Bridge is deliberately offered as an alternative that works with the existing Arc Driver and an authored short conductive gap. The former Crack Follower offer required buying Coil first, as did the other surgical supports, and therefore did not provide an independent choice. Replacing that unused offer leaves the chosen pivot and budget intact.
 
-### D. Save for a walking retrieval rig, accepting less early flexibility
+### D. Fit paired retrieval, then add a second tool
 
-Free starter: Anchor Winch. Counterweight Hook lets a suspended weight reduce another object's effective tow load. Twin Anchor switches between two placed anchors. Walking Gantry moves an anchored intact machine while maintaining supports.
+Free starter: Anchor Winch. Counterweight Hook lets a suspended weight reduce another object's effective tow load. Twin Anchor switches between two placed anchors. Walking Gantry is a 14-credit advanced specialist that moves the actual support and intact payload together, occupying two passive sockets.
 
 | Visit | Credits available | Important displayed alternatives | Chosen transaction | Credits left |
 | --- | ---: | --- | --- | ---: |
 | Outfitting | 12 | Counterweight Hook 5; Extraction Coil 10; precharge 4 | Buy Hook 5 | 7 |
 | Depot 1 | 7 +10 =17 | Twin Anchor 9; Coil 10; precharge 4 | Buy Twin Anchor 9 | 8 |
-| Depot 2 | 8 +12 +2 =22 | Walking Gantry 24; Coil 10; precharge 4 | Buy precharge 4; save 18 | 18 |
-| Depot 3 | 18 +14 +2 =34 | Walking Gantry 24; Coil 10; Ground Clip 5 | Buy Gantry 24 and Coil 10 | 0 |
+| Depot 2 | 8 +12 +2 =22 | Walking Gantry 14; Coil 10; Ratchet 6; precharge 4 | Buy and fit Gantry 14, then precharge 4 | 4 |
+| Depot 3 | 4 +14 +2 =20 | Ratchet 6; Coil 10; Arc 10; Ground Clip 5 | Buy and fit Coil 10 | 10 |
 
-Final rig: Winch + Coil; Hook + Twin Anchor + Gantry. Site 3 must be completable with the early winch combination and the purchased battery headroom; the keystone is not retroactively required to earn itself. This path has fewer early alternatives than Route C and accepts that opportunity cost.
+Final rig: Winch + Coil; Hook + Twin Anchor + Gantry, filling all four passive sockets. Gantry is bought before the third recovery; its cost is earned through preceding work. The final depot replaces the now-owned Gantry offer with Ratchet, which would require unfit/refit choices on the full rig. Keeping the earlier Hook is a legal historical purchase choice, not a claim that it adds another Gantry effect. The player retains ten credits rather than being required to spend every remaining coin.
 
 ### E. Directional control, then reaction-assisted extraction
 
@@ -163,7 +163,7 @@ Final rig: Relay + Rail; Eddy Brake + Rebound Plate + Field Loom. Flow Splitter'
 
 ### Exact stock and budget contract for later executable checks
 
-Starting funds are 12; the one chosen starter is installed free with zero resale basis. A-D use the initial four choices; E-F use explicitly unlocked Vector/Relay choices. Buying another active costs its listed 10 credits; it is not another free starter selection. Every stock below has exactly four module offers and the separate 4-credit precharge service. Bought offers disappear; there is no restock, reroll or duplicate purchase at that depot. Prices below override broad category ranges for these test scenarios. All six keystones cost 24. The companion JSON contains all thirty current catalogue identities, including unpurchased rare alternatives, using the systems designer's prices and slot sizes.
+Starting funds are 12; the one chosen starter is installed free with zero resale basis. A-D use the initial four choices; E-F use explicitly unlocked Vector/Relay choices. Buying another active costs its listed 10 credits; it is not another free starter selection. Every stock below has exactly four module offers and the separate 4-credit precharge service. Bought offers disappear; there is no restock, reroll or duplicate purchase at that depot. Prices below override broad category ranges for these test scenarios. The five keystones cost 24; Walking Gantry costs 14 as an advanced specialist and retains two sockets. The companion JSON contains all thirty current catalogue identities, including unpurchased rare alternatives, using the reviewed prices and slot sizes.
 
 | Sequence / visit | Offer 1 | Offer 2 | Offer 3 | Offer 4 |
 | --- | --- | --- | --- | --- |
@@ -181,8 +181,8 @@ Starting funds are 12; the one chosen starter is installed free with zero resale
 | C / depot 3 | Intact Recovery 24 | Extraction Coil 10 | Insulated Jaw 5 | Induction Bridge 16 |
 | D / outfit | Counterweight Hook 5 | Extraction Coil 10 | Arc Driver 10 | Ground Clip 5 |
 | D / depot 1 | Twin Anchor 9 | Extraction Coil 10 | Arc Driver 10 | Ground Clip 5 |
-| D / depot 2 | Walking Gantry 24 | Extraction Coil 10 | Arc Driver 10 | Ratchet Pawl 6 |
-| D / depot 3 | Walking Gantry 24 | Extraction Coil 10 | Arc Driver 10 | Ground Clip 5 |
+| D / depot 2 | Walking Gantry 14 | Extraction Coil 10 | Arc Driver 10 | Ratchet Pawl 6 |
+| D / depot 3 | Ratchet Pawl 6 | Extraction Coil 10 | Arc Driver 10 | Ground Clip 5 |
 | E / outfit | Eddy Brake 6 | Extraction Coil 10 | Rail Impeller 10 | Arc Driver 10 |
 | E / depot 1 | Shear Gate 14 | Extraction Coil 10 | Heat-Sink Mould 16 | Anchor Winch 10 |
 | E / depot 2 | Extraction Coil 10 | Cold Seam 6 | Heat-Sink Mould 16 | Reaction Frame 24 |
@@ -192,7 +192,7 @@ Starting funds are 12; the one chosen starter is installed free with zero resale
 | F / depot 2 | Rail Impeller 10 | Rebound Plate 5 | Field Loom 24 | Heat-Sink Mould 16 |
 | F / depot 3 | Field Loom 24 | Heat-Sink Mould 16 | Punch-Through Collar 14 | Arc Driver 10 |
 
-Fixed site clear pay is `[10,12,14]`; refining thresholds are `[[120,240],[180,360],[240,480]]`, paying 2 credits at each crossing exactly once. Scenario refining bonuses are A `[2,2,4]`, B `[2,2,2]`, C `[2,2,4]`, D `[0,2,2]`, E `[2,2,4]`, F `[2,2,4]`. Expected final cash is A **1**, revised B **16**, C **2**, D **0**, E **3**, F **2**. Purchased-item resale uses integer floor at half the actual paid price. Free items give zero. A, B, D and F each buy one precharge; C and E buy none. Precharge is a next-site effect, never a permanent battery upgrade.
+Fixed site clear pay is `[10,12,14]`; refining thresholds are `[[120,240],[180,360],[240,480]]`, paying 2 credits at each crossing exactly once. Scenario refining bonuses are A `[2,2,4]`, B `[2,2,2]`, C `[2,2,4]`, D `[0,2,2]`, E `[2,2,4]`, F `[2,2,4]`. Expected final cash is A **1**, revised B **16**, C **2**, revised D **10**, E **3**, F **2**. Purchased-item resale uses integer floor at half the actual paid price. Free items give zero. A, B, D and F each buy one precharge; C and E buy none. Precharge is a next-site effect, never a permanent battery upgrade.
 
 The rejected original B stock remains a counterexample: the generator must not treat a merely affordable or technically usable offer as proof of a meaningful choice. Revised B provides immediate corner-shot utility, credible active-tool alternatives and a costly two-slot choice; its success still depends on actual level opportunities.
 
@@ -235,6 +235,12 @@ Do not add loot-box purchases, real spending, a crafting ingredient economy, pas
 
 The smallest evidence-producing iteration is a shared extraction site plus an opening depot, a later pivot depot and a final-operation fixture, using the actual priced paths above and at least two contrasting tool families. Test whether the player can predict an interaction, use it, recognize the extra reward and voluntarily choose a different approach. Extend to all six families before claiming broad build viability. Design agreement, arithmetic and successful compilation cannot answer the playtest question: **“Did your purchases make you want to solve the next site differently, and did the resulting operation feel worth earning?”**
 
-Final integration critique replaced Route D / depot 2's unused Insulated Jaw with Ratchet Pawl 6. At 22 credits, the Winch rig now has an affordable installed-tool support alongside two active pivots; the 24-credit Gantry remains an aspiration. The chosen precharge path and final balance are unchanged. Site 3 must actually provide a useful latched-support sequence; logical compatibility is not proof of that opportunity.
+The earlier integration critique replaced Route D / depot 2's unused Insulated Jaw with Ratchet Pawl 6. Following the measured Gantry price correction, that 22-credit depot now permits Gantry 14 as well as the cheaper support and two active pivots. Revised D buys Gantry there, then precharge, and finishes with ten credits. Site 3 must actually provide a useful support sequence; logical compatibility is not proof of that opportunity.
+
+Current price decision, 2026-09-13: the [first frame engine comparison](../evidence/expedition-frames-verification.json), report `2026.09.13-01.09.56`, measured **Gantry 20 total battery / 320 appraisal** against **Hook + Ratchet 22 / 320**, starting without cargo. Root accepted **Gantry 14 / two sockets / advanced specialist**, replacing its former 24-credit ultimate classification. The evidence measures one physical handling benefit, not player preference or general balance. The full earned route in that first batch failed during retry and is still under correction; do not describe it as a passed four-site purchase witness.
+
+Gantry alone now needs no optional first-site refining: starting 12 + core dispatch 10 =22. The 120-output milestone adds two, so a 14-credit Gantry and 10-credit second active fit the resulting 24-credit budget together. Seed-1 Winch stock predictions include Arc and Relay, but a budget calculation or authored offer table is not proof of the new real generated purchase path; QA owns that assertion. Old paid-24 Gantry receipts, historical totals and 12-credit resale are preserved. New paid-14 receipts resell for seven; no automatic compensation or retroactive wallet rewrite is part of this change. Existing 0.6.1 evidence remains historical.
+
+The updated [economy verification](../evidence/build-economy-verification.json) passed once for all **30 modules and six authored routes**, with final cash **A 1, B 16, C 2, D 10, E 3, F 2**. D spends 42 with zero resale refunds. Its final stock contains three affordable capability-compatible candidates, each still requiring a real physical opportunity and any necessary socket refit. The input SHA-256 is `dcb879b817d1ea3bbea91602897dd178d33b79b62f7794554ff6f259216a5ad9`. This verifies the authored arithmetic, slot/prerequisite and offer constraints; it does not validate generated stock, field handling or enjoyment.
 
 The same stricter audit repairs C / depot 1 with Induction Bridge 16 instead of unused Jaw 5, and E / depot 2 with Heat-Sink Mould 16 instead of unused Rail 10. Both now offer an affordable support for the currently installed capability as well as another direction. Existing purchases and balances are unchanged; their next-site electrical-gap and heat-transfer opportunities remain authored-content requirements.

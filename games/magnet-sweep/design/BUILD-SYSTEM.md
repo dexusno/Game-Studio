@@ -45,12 +45,12 @@ Fit **two active tools and four passive sockets**. A keystone occupies two passi
 |---|---:|---|
 | Focused support | 4–6 | Rebound Plate gives a physical reflection; Ground Clip terminates an electrical branch at chosen ground. |
 | Specialist | 8–12 | Another active operation, welding selected scrap into a slug, a conductive tether or second anchor. |
-| Advanced support | 14–18 | A broader interaction such as an induction bridge or a shear gate; must justify passing up two cheaper purchases. |
-| Keystone | 22–26 | A major transformation such as relocating a working supported assembly. Two passive sockets; never required to win. |
+| Advanced support | 14–18 | A broader interaction such as an induction bridge, shear gate or Gantry's paired transport. Gantry costs 14 and occupies two sockets; compare its handling benefit against cheaper supports. |
+| Keystone | 22–26 | A major transformation such as a real multi-branch electrical operation. Two passive sockets; never required to win. |
 
 Price and offer frequency are separate. A situational 5-credit part may be the better purchase than a 24-credit keystone. Normal duplicates do not stack. No automatic three-rank ladders: another rank would need a new consequence.
 
-The [mechanics catalogue](BUILD-SYSTEM-MECHANICS.md) defines **30 distinct starting modules**, including six active tools and six keystones, with triggers, targets, costs, risks and required world opportunities. Thirty is a seed catalogue, not a ceiling or a claim of finished content. The [economy proposal](BUILD-SYSTEM-ECONOMY.md) and [machine-readable scenarios](build-economy.json) supply the priced choices.
+The [mechanics catalogue](BUILD-SYSTEM-MECHANICS.md) defines **30 distinct starting modules**, including six active tools and five keystones, with triggers, targets, costs, risks and required world opportunities. Walking Gantry is now a 14-credit advanced specialist: its controlled frame recovery used 20 battery versus Hook + Ratchet's 22, both preserving 320 appraisal. That small advantage did not justify the former 24-credit ultimate classification. Thirty is a seed catalogue, not a ceiling or a claim of finished content. The [economy proposal](BUILD-SYSTEM-ECONOMY.md) and [machine-readable scenarios](build-economy.json) supply the priced choices; the historical 24-credit receipts remain valid.
 
 A module composes **when it happens → what it affects → what it does → what it consumes → what explains the result**. Shared primitives include severing/joining real pieces, impulses, impacts, finite charge, tethers, support constraints and bounded transfer. New combinations of those primitives can become data-defined modules. A new world behavior, such as a functioning portable machine, requires implementation; naming it in data does not create it.
 
