@@ -44,10 +44,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-13T15:17:41+00:00",
+      "captured_at": "2026-09-13T15:20:00+00:00",
       "record_sha256": "59a12e5d9602d2a87fccc5ee78e807ab8758a7dc6db5b8736a3ee8d4265a8c42",
       "files": {
-        "games/magnet-sweep/STATUS.md": "b4a08f7839368e1d849b24349e266ae761101f3d751f24547f654435cbf4f900",
+        "games/magnet-sweep/STATUS.md": "30e4bae862771ab11afe1b612aa10744271ec58655e983f83edcf84b534896ff",
         "games/magnet-sweep/design/ART-DIRECTION.md": "7f0e8816e28aa6f38f670a898d447df707189b9deef5bb7992a0654bc94142bb",
         "games/magnet-sweep/design/art-direction-boards.json": "ac11de71edbf457df4b1ce9cd03639bd95c9d460ac82806a1c9adebfb676b07b",
         "games/magnet-sweep/assets/manifest.csv": "dc8243ca4fff1b12c4025e4c46b0a3a60eadda2b81ebe93b923ff873af52f9bd",
