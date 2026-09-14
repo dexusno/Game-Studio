@@ -34,13 +34,28 @@ Illustrative values, not chosen economy: a turn guarantees **8 mixed material un
 
 In the occasional version, manual handling replaces the automatic bonus calculation for that one collection event. It is not a second haul and does not add another ordinary gathering activation. The exact frequency, bonus bands and automatic result remain open. This example illustrates a small edge, not proof that eight materials support our recipes or that the material types have equal value.
 
+### Rare and legendary recipes for perfect timing
+
+**Owner proposal, 14 September 2026:** some Rare or Legendary recipes could increase the bonus awarded for perfect gathering timing. This would let a player invest in a precision-focused build through recipe choices. It does not yet select the claw, timing frequency or final supply model, and no entries in the 600-recipe catalogue have been changed.
+
+Two illustrative directions, with costs and cooldowns still to balance:
+
+| Proposed recipe / part | Rarity | Proposed next-round effect |
+| --- | --- | --- |
+| Calibrated Jaws / Precision Coupler | Rare | Next round's haul gains 1 extra unit of the chosen material. Perfect timing grants 2 more units. The ordinary extra unit also applies with automatic handling |
+| Perfect Salvage / Salvage Amplifier | Legendary | On perfect timing next round, double the normal precision bonus once. A normal perfect bonus of 3 becomes 6; baseline supplies and bonuses from other parts are not doubled |
+
+These are crafted enhancements for **the next round only**, following the existing gathering-recipe timing. Baseline supplies remain unaffected by a miss. Choosing one of these recipes is an explicit investment in timing; ordinary gathering upgrades and their guaranteed supplies must continue to work without it. Proposed stacking rule: identical precision parts refresh rather than multiply, and the Legendary effect reads the unmodified precision bonus so amplifiers cannot multiply one another.
+
+**Recommendation if precision remains occasional:** crafting a precision-enhancement recipe should make precision handling available on next round's single collection event, so its condition can be attempted. Several such parts still create only one opportunity and never another haul. This scheduling rule, automatic/assisted treatment of the conditional bonus, exact costs/cooldowns and interactions between different named precision parts remain proposals to settle with the gathering design.
+
 ### Guardrails for usefulness and repetition
 
 - Baseline **composition** matters as well as quantity. Starting kits need a useful attack or defence route without precision success; this does not promise maximum damage and complete protection at once. Rare materials must have a route that does not require perfect timing.
 - Automatic handling should retain material targeting and gathering-upgrade benefits. Calling a lower-paying mode optional does not by itself remove pressure to perform the minigame.
 - One brief input, roughly one or two seconds as an initial presentation target; no multi-click power/accuracy chain, long score screen, retries to fish for a perfect haul, or accumulating perfect streak needed for ordinary combat. Show and hear the claw deliver the actual extra scrap, then continue planning.
 - Vary the **useful resource decision**, not just marker speed or target position. A Copper shortage before a shield recipe makes precision matter more than an arbitrary score. Avoid resource offers that have one strictly better choice regardless of the build.
-- Shop-only permanent gathering upgrades should improve dependable yield, resource targeting or available choices. Existing next-round gathering recipes must apply on that next round with either automatic or manual handling, even when no precision opportunity occurs. Their promised supplies must not depend on perfect timing. All ordinary raw/part fight-end clearing remains unchanged unless the owner chooses otherwise.
+- Shop-only permanent gathering upgrades should improve dependable yield, resource targeting or available choices. Existing unconditional next-round gathering recipes must apply on that next round with either automatic or manual handling, even when no precision opportunity occurs. Their promised supplies must not depend on perfect timing. The newly proposed precision recipes can explicitly add a conditional perfect-timing bonus; keep that condition separate from guaranteed supplies. All ordinary raw/part fight-end clearing remains unchanged unless the owner chooses otherwise.
 - Include an automatic/no-timing option and readable visual feedback with sound as reinforcement. Decide later whether assists match an average result or another chosen reward level; do not accidentally make access to a material depend on input dexterity.
 
 **Reference check:** Nintendo's [Super Mario RPG battle guide](https://www.nintendo.com/us/whatsnew/heres-all-you-need-to-know-about-battling-in-super-mario-rpg/), published 27 November 2023 and read 14 September 2026, describes timed button presses attached to existing battle actions and rewards for successful timing. The transferable idea is a short input inside an action already happening. Its combat rewards and timing chains do not demonstrate that repeated salvage will be fun here; avoid copying those chains simply to give gathering more systems. This was a text-source inspection, not a playtest or capture review.

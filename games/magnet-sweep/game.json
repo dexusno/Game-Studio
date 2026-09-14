@@ -44,13 +44,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T13:55:29+00:00",
+      "captured_at": "2026-09-14T14:50:05+00:00",
       "record_sha256": "267f335046013ae071fbe23b33ce5b40ce8c3e3cf0abce96cd457798ab403ff6",
       "files": {
-        "games/magnet-sweep/STATUS.md": "9156934bf3cce0826801ef1d28d92fc9d5c5ce24ca060560c691fb9aec15878d",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "2aae59da06d05b3f1a716d39f9f7e8ee023013516c1cb8cd5ee68ac5fb74aa81",
+        "games/magnet-sweep/STATUS.md": "798960cd7152d59c6bdb90465fdc05307e0f4b102d36e328eff439f8e4c17e3e",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "71b32a6bec679d54da38cfd36d7b69d365056917d59ca840972377b8f546bd0d",
         "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "0da3055171a95f63cb428419ee2d7bb7b1a8e00fd133b94ff7a6b5de137e2400",
-        "games/magnet-sweep/DECISIONS.md": "59a430ae2a6760ee2f4e3d3920edbf9b6a6974e96c3a2adee5abdfb6b8626789",
+        "games/magnet-sweep/DECISIONS.md": "8f6ef95f4af763ac5963ff09f8adb9103e1d53af3f358921d6f7f9740c04fb08",
         "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
         "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "d37337895db08c4bf6afc1729ada745cac408915c623c8f027c0d50f6d3497d3",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
