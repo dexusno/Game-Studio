@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 600-recipe Markdown draft for four proposed mercenaries, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects automatic normal supplies each turn with one optional manual timing grab per fight, at a chosen turn. Precision recipes enhance the saved next-round grab without granting another use. Claw replacement, targeting, supply amounts and bonus bands remain open; no minigame implementation.",
+  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 606-recipe Markdown draft for four proposed mercenaries: original 600 plus six shared Rare/Legendary next-round manual-grab enhancements, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects automatic normal supplies each turn with one optional manual timing grab per fight, at a chosen turn. Precision recipes enhance the saved next-round grab without granting another use. Claw replacement, targeting, supply amounts and bonus bands remain open; no minigame implementation.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -44,13 +44,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T14:55:06+00:00",
-      "record_sha256": "8e4b8b445db8975af1020ab783244e5bc8dc889b55757cd1dd64f2f213fd44b1",
+      "captured_at": "2026-09-14T15:19:02+00:00",
+      "record_sha256": "4cc52056aebfce104bbca8f960cf6250bdb419b24c12a9367cc3a22d6c747f54",
       "files": {
-        "games/magnet-sweep/STATUS.md": "87d2ae725601e9d356e40bccdc5284d12fbcd132d3c57e4b0156bafe0466f32d",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "2835e07a2dd311ce77e835aa85c3d17bf71dd927483bf8c060b21d473b3d31ed",
-        "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "0da3055171a95f63cb428419ee2d7bb7b1a8e00fd133b94ff7a6b5de137e2400",
-        "games/magnet-sweep/DECISIONS.md": "7a8040b51c3c35bfda4ffc7c69601566557d2c2f59f07a8d4e63affbee0944df",
+        "games/magnet-sweep/STATUS.md": "bf8c4bcf2e59517b336876faa2b95fc4a66489804f9bd06d8425c7ef659de11b",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "9bd369c023b8a3c6702fbd1180d87fe08fba12673da8eb863a2db41e89b54811",
+        "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "039629dab4fcb317089e4ae5ad64353080182f45468ec9b9d7b9857371aa02b0",
+        "games/magnet-sweep/DECISIONS.md": "8ef1a2f36f86cb3e397ea18aa08705d065dcfdded4dc5f49374b9184f0d0b75b",
         "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
         "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "d37337895db08c4bf6afc1729ada745cac408915c623c8f027c0d50f6d3497d3",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
@@ -59,7 +59,7 @@
         "games/magnet-sweep/art-tests/camera-motion/scene-metrics.json": "80aa6c5204b10408562d8cbb1d8e8c41f40f1432e67f17b81e83a6fa807b424c",
         "games/magnet-sweep/design/ART-DIRECTION.md": "bca557a1fc6e22e427fe247b0348ecc084149ba7df7d268465fa1be60b246db3",
         "games/magnet-sweep/design/art-direction-boards.json": "7167c77977531bd02216d4767d48f4c427f74dfeb9f10d985e3b7ca658fb2d93",
-        "games/magnet-sweep/assets/manifest.csv": "3579a883dac5ca4f739aebda715e3840407ebccc4cb262b090a2bb8eefa66e2b",
+        "games/magnet-sweep/assets/manifest.csv": "95f2bf4b33d75335ab711039495c39b34766284d1832eca5ba5fe543f25d7c48",
         "games/magnet-sweep/design/BALANCE-RESEARCH.md": "64618cc2781e0a9e9d211c93db191f27c706e208358ffbfd3440c36d88e30a9d",
         "games/magnet-sweep/design/SCRAP-COMBAT-DIRECTION.md": "c4c43ee34df45911114cec7b8a598054e5c65047cae45b03b7933c08e760a8bd",
         "games/magnet-sweep/design/PREMISE-OPTIONS.md": "7dfe8a7265b625708ee7af7b22fb7b87e96d51add3d4aa3e40d042b0e8fdf4db",

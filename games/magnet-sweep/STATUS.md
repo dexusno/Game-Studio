@@ -1,10 +1,22 @@
 # Magnet Sweep — complete redesign planning
 
+## Latest addition — six manual-grab recipes
+
+**Owner request and delivery, 14 September 2026:** add Rare and Legendary recipes for perfect-timing bonuses. [The catalogue](design/RECIPE-CATALOGUE.md#rare--manual-grab-enhancements) now includes six new shared entries SH121–SH126: Calibrated Jaws, Clean Separation and Chip Finder (Rare); Perfect Salvage, Full Spectrum and Salvage Foundry (Legendary). Each has a named output, material cost, cooldown, unconditional next-round addition and perfect-only bonus. They cover selected materials, mixed supplies, Circuit recovery, a doubled ordinary precision bonus and ready-made Ammo/Shield parts. The original 600 recipe rows and starter kits are preserved.
+
+**Current totals:** 606 recipes: 126 shared and 120 exclusive per mercenary, giving each character 246 possible discoveries subject to memory capacity. Tiers are 24 Base, 176 Common, 200 Uncommon, 143 Rare and 63 Legendary. These numbers update the original delivery below.
+
+**Rules and limits:** fit enhancements when crafted for next round only. They improve the saved once-per-fight manual attempt; none grants, restores or retries one. Identical enhancements refresh; different names can combine. Perfect Salvage reads the ordinary precision bundle once and excludes baseline, other boosts and generated parts. Perfect-only bonuses expire if unused; unconditional additions still work automatically. Fight-end clearing is preserved. Costs, strengths and cooldowns remain proposals awaiting the supply model and playtests.
+
+**Evidence:** scoped author review covers next-round expiry, spent attempts, miss/automatic fallbacks, duplicate effects, reward ordering, multiplier exclusions and generated-part handling. The worked combination gives 10 Copper above baseline when its ordinary perfect bonus is 3 Copper and sufficient stock exists; this is an illustrative calculation, not the selected economy. Structural/count/name/reference checks cover the revised catalogue. No independent review or gameplay test is claimed for these six additions.
+
+**Next:** define baseline supply and manual bonus bands, then compare the material cost and memory-slot value of these six recipes, including all six fitted together and a missed grab. The claw choice and other prototype-readiness questions remain open.
+
 ## Current decision — one optional manual grab per fight
 
 **Owner decision, 14 September 2026:** Klaus selects option C, occasional precision handling: once per fight, the player may choose when to use the manual grab timing marker. Normal resources arrive automatically each turn. Spending the opportunity uses it for that fight regardless of timing quality; each fight has its own allowance, without banking unused attempts. A miss leaves baseline supplies and held materials intact. The claw replacement, material targeting, baseline quantities and manual/automatic bonus amounts remain open. Keep the selected style, rear gathering area and two combat views.
 
-**Precision-recipe interaction:** the earlier owner proposal for Rare/Legendary perfect-timing bonuses remains a possible build direction. Next-round enhancements improve the saved manual grab; they do not grant or recharge uses. This supersedes root's earlier suggestion that crafting a precision part schedules another opportunity. Crafting on turn 2 and saving the grab for turn 3 illustrates the planning choice. Unconditional next-round resource grants still apply with automatic collection; removing recipe cooldown counters does not reset the separate manual allowance. No extra-use exception is selected, and no catalogue entries, costs or cooldowns have changed.
+**Precision-recipe interaction:** the owner has now requested recipe entries for Rare/Legendary perfect-timing bonuses; the six additions above implement that direction in the design catalogue. Next-round enhancements improve the saved manual grab; they do not grant or recharge uses. This supersedes root's earlier suggestion that crafting a precision part schedules another opportunity. Crafting on turn 2 and saving the grab for turn 3 illustrates the planning choice. Unconditional next-round resource grants still apply with automatic collection; removing recipe cooldown counters does not reset the separate manual allowance. No extra-use exception is selected. The new catalogue entries specify draft costs and cooldowns without changing the original 600 recipes.
 
 [The gathering section](design/REDESIGN-PLAN.md#gathering-options--baseline-supply-and-claw) records this selection and retains A/B as earlier alternatives. The example of 8 baseline units, automatic +2 Copper and manual +1/+2/+3 Copper remains illustrative. The possible claw and persistent resource priority are supporting proposals. Preserve useful baseline composition, one ordinary collection event per turn, shop-only permanent gathering upgrades and next-round recipe boosts. Aluminium is not added as a material.
 
@@ -22,7 +34,7 @@
 
 **Next:** resolve what magnet handling changes in the haul and exactly when the player commits the round; then specify one complete example fight, including supply, intentions, actions, resolution, reward and defeat. Demo scope and temporary rules are proposals for Klaus's next decisions. This review does not start implementation.
 
-## Latest delivery — four-mercenary recipe catalogue
+## Original delivery — four-mercenary recipe catalogue
 
 **Delivered, 2026-09-14:** [one Markdown recipe catalogue](design/RECIPE-CATALOGUE.md) with **600 original recipe designs**: 120 shared plus 120 each for proposed Mara (Heat), Ivo (Corrosion/Mark/saved parts), Ada (Bolt the helper) and Noor (Charge). Each character has a proposed 12-recipe starter kit, 240 possible discoveries subject to memory capacity, three build examples and brief future upgrade hooks. Total tiers: 24 Base, 176 Common, 200 Uncommon, 140 Rare and 60 Legendary. Every recipe specifies its counted named output, kind, material cost, cooldown and effect in plain language. Shared recipes are written once and explicitly belong to every character's pool.
 

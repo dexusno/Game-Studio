@@ -1,10 +1,11 @@
 # Magnet Sweep — recipes for four mercenaries
 
-Design draft, 14 September 2026. **600 original recipes: 120 shared and 120 exclusive to each of four proposed mercenaries.** Names, starting kits, material costs, damage values, helper rules and new effect details are proposals for review and later playtesting. The confirmed recipe-memory, cooldown and fight-reset rules are preserved. This document contains no graphics or game functionality.
+Design draft, 14 September 2026. **606 original recipes: 126 shared and 120 exclusive to each of four proposed mercenaries.** Six shared manual-grab enhancements (three Rare, three Legendary) extend the original 600 at the owner's request. Names, starting kits, material costs, damage values, helper rules and new effect details are proposals for review and later playtesting. The confirmed recipe-memory, cooldown and fight-reset rules are preserved. This document contains no graphics or game functionality.
 
 ## Find a recipe pool
 
 - [How recipes work](#how-recipes-work)
+- [Manual grab enhancements](#manual-grab-enhancements)
 - [Four mercenaries and their starting kits](#four-mercenaries-and-their-starting-kits)
 - [Shared recipes — every mercenary](#shared-recipes--every-mercenary)
 - [Mara Kiln Voss](#mara-kiln-voss)
@@ -19,7 +20,7 @@ Design draft, 14 September 2026. **600 original recipes: 120 shared and 120 excl
 
 These pools are possible discoveries, not a deck or the contents of starting memory. Keep only the recipes that fit memory capacity. When memory is full, a new recipe can replace an old one; an offer can also be skipped. The final memory size is still open. The proposed 12-recipe starting kits below must be adjusted if the chosen starting capacity is smaller; they never override the hard memory limit.
 
-Each mercenary uses the 120 shared recipes plus their own 120 exclusive recipes: **240 possible recipes per character**. Shared recipes are written once in this document and belong to all four pools. Base recipes are starting knowledge. Common, uncommon, rare and legendary entries are discoveries. The owner's encounter and rarity rules still apply: regular fights do not give legendary recipes; stronger encounters and shops have their own reward pools. Pool sizes do not set drop chances or shop prices.
+Each mercenary uses the 126 shared recipes plus their own 120 exclusive recipes: **246 possible recipes per character**. Shared recipes are written once in this document and belong to all four pools. Base recipes are starting knowledge. Common, uncommon, rare and legendary entries are discoveries. The owner's encounter and rarity rules still apply: regular fights do not give legendary recipes; stronger encounters and shops have their own reward pools. Pool sizes do not set drop chances or shop prices.
 
 ### Materials
 
@@ -94,27 +95,39 @@ Copies arrive as newly received parts: their age starts again, and they keep the
 
 Magnet boosts change the next haul's amount or preference; they do not add a magnet activation. An extra named material must exist in the pile. If fewer units remain than the stated bonus, take only those available. Different named temporary magnet boosts may combine in this draft; identical copies refresh the same boost. Permanent magnet upgrades are shop items and stay outside this recipe list.
 
+### Manual grab enhancements
+
+**Owner-selected rule:** normal supplies arrive automatically each turn. Once per fight, choose a turn to use the manual timing marker for a bonus. That attempt is spent regardless of its accuracy. Baseline supplies and held resources cannot be lost through a miss. Each new fight has one fresh attempt; unused attempts do not accumulate.
+
+SH121–SH126 are shared discoveries: [three Rare](#rare--manual-grab-enhancements) and [three Legendary](#legendary--manual-grab-enhancements). They use the existing **Magnet** kind as the catalogue's gathering-system category; this does not decide whether the physical tool remains a magnet or becomes a claw. Craft and fit them now to affect **next round's single collection event only**. They cannot be stored for a later round. Choose any listed materials when crafting. A recipe's unconditional addition works with automatic handling, a missed timing attempt, or an already-spent manual grab. Its perfect-only addition requires spending this fight's unused manual grab next round and achieving Perfect. Skipping the grab next round does not preserve the enhancement.
+
+**Draft resolution and stacking:** an enhancement expires after that collection event, or at the end of its target round if no collection occurs; all pending effects clear if the fight ends first. Identical enhancements refresh rather than stack, including after a cooldown reset. Different named enhancements can combine. None widens the timing window, turns a miss into Perfect, grants a retry, restores a manual attempt or adds an ordinary haul. Removing recipe cooldown counters only changes crafting availability.
+
+For Perfect Salvage, the **unmodified precision bonus** is the material bundle the ordinary timing result would award before temporary or permanent bonus additions and multipliers. Use the same bundle once more; exclude baseline supplies, automatic supplies, every recipe/upgrade bonus and generated parts. Two Salvage Amplifiers still add only one copy. Other perfect-triggered effects each resolve once; doubling the reward never repeats the timing event or those effects. The normal haul resolves first, followed by extra material requests in the order the enhancements were fitted. Material extras use only stock remaining in the pile under the catalogue's existing availability rule; a missing bonus material never reduces the baseline. Generated parts in SH126 are a stated part reward and require no second material payment or separate recipe in memory.
+
+**Example, not a selected haul size:** fit Calibrated Jaws choosing Copper and Perfect Salvage on turn 2. On turn 3, suppose the ordinary perfect bonus is 3 Copper and sufficient Copper is available. The resulting bonus is 3 ordinary + 3 from Perfect Salvage + 1 unconditional from each enhancement + 2 from Calibrated Jaws = **10 Copper above baseline**. Recrafting either recipe does not increase its duplicate effect or add an attempt. With a non-perfect result or automatic collection, only the two unconditional Copper remain from these enhancements, on top of that mode's ordinary supplies. If the fight ends before turn 3, nothing carries over. Costs are paid on turn 2 and are not refunded. All costs, quantities and cooldowns below are tuning proposals.
+
 ## Four mercenaries and their starting kits
 
 These identities and traits are proposed ways to make the characters feel different from the first fight.
 
 | Mercenary | Weapon and specialty | Starting recipes | Full discovery pool |
 | --- | --- | --- | --- |
-| Mara “Kiln” Voss | Furnace Cannon. Build Heat, turn metal defence into a heavy hit, decide when to cool down. | SH001–SH008 + MA001–MA004 | SH001–SH120 + MA001–MA120 |
-| Ivo “Rook” Vale | Needle Cannon. Corrode a chosen enemy, mark weak points and save the right part for a later round. | SH001–SH008 + IV001–IV004 | SH001–SH120 + IV001–IV120 |
-| Ada “Patch” Flint | Rivet Cannon and Bolt the helper robot. Spend parts on attack, protection or keeping Bolt working. | SH001–SH008 + AD001–AD004 | SH001–SH120 + AD001–AD120 |
-| Noor “Flux” Sayeed | Coil Cannon. Store Charge, split it between protection and damage, and cool useful recipes. | SH001–SH008 + NO001–NO004 | SH001–SH120 + NO001–NO120 |
+| Mara “Kiln” Voss | Furnace Cannon. Build Heat, turn metal defence into a heavy hit, decide when to cool down. | SH001–SH008 + MA001–MA004 | SH001–SH126 + MA001–MA120 |
+| Ivo “Rook” Vale | Needle Cannon. Corrode a chosen enemy, mark weak points and save the right part for a later round. | SH001–SH008 + IV001–IV004 | SH001–SH126 + IV001–IV120 |
+| Ada “Patch” Flint | Rivet Cannon and Bolt the helper robot. Spend parts on attack, protection or keeping Bolt working. | SH001–SH008 + AD001–AD004 | SH001–SH126 + AD001–AD120 |
+| Noor “Flux” Sayeed | Coil Cannon. Store Charge, split it between protection and damage, and cool useful recipes. | SH001–SH008 + NO001–NO004 | SH001–SH126 + NO001–NO120 |
 
 The weapon's name does not force a particular final model. Every character still builds a single shot from parts and prepares defence. Their separate mechanics sit beside the shared recipes, which provide enough basic damage, protection, targeting and cooling for all four.
 
 | Pool | Base | Common | Uncommon | Rare | Legendary | Unique recipes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Shared | 8 | 32 | 40 | 28 | 12 | 120 |
+| Shared | 8 | 32 | 40 | 31 | 15 | 126 |
 | Mara | 4 | 36 | 40 | 28 | 12 | 120 |
 | Ivo | 4 | 36 | 40 | 28 | 12 | 120 |
 | Ada | 4 | 36 | 40 | 28 | 12 | 120 |
 | Noor | 4 | 36 | 40 | 28 | 12 | 120 |
-| **Total** | **24** | **176** | **200** | **140** | **60** | **600** |
+| **Total** | **24** | **176** | **200** | **143** | **63** | **606** |
 
 Rarity is a discovery tier, not a second hidden level. Stronger rank variants of the same recipe can be designed later; they are not counted as additional unique recipes here. Higher rarities generally buy more effect per material or add a stronger combination. Cooldowns, targets, setup costs and risks still matter, so a legendary recipe is not automatically the right choice for every memory set.
 
@@ -267,11 +280,32 @@ Every mercenary starts with SH001–SH008 and can discover the remaining shared 
 | SH119 | Targeted Crane | 1 Targeted Crane Ring | Magnet | 2 Iron + 1 Copper + 1 Glass + 2 Circuit | 3 | Choose two different resource types when crafted. Next round, gather up to 3 extra units of each chosen type from the pile. |
 | SH120 | Balanced Haul | 1 Balanced Haul Controller | Magnet | 1 Iron + 2 Copper + 1 Glass + 2 Circuit | 3 | Next round, reserve up to five normal haul positions for one of each resource type. Fill unavailable positions normally, then gather 4 extra units using the normal mix. |
 
+### Rare — manual grab enhancements
+
+Shared additions SH121–SH123. The [manual grab rules](#manual-grab-enhancements) define next-round expiry, the perfect condition and stacking.
+
+| ID | Recipe | Makes | Kind | Resources | Cooldown | Effect |
+| --- | --- | --- | --- | --- | --- | --- |
+| SH121 | Calibrated Jaws | 1 Precision Coupler | Magnet | 1 Copper + 1 Glass | 2 | Choose Iron, Copper, Carbon or Glass when crafted. Next round's haul gains 1 extra unit of that material with any handling result. If you use the manual grab next round and achieve Perfect, gain 2 more units of that material. |
+| SH122 | Clean Separation | 1 Sorting Gate | Magnet | 1 Iron + 1 Copper + 1 Glass | 2 | Choose two different materials from Iron, Copper, Carbon and Glass when crafted, naming a first and second. Next round's haul gains 1 extra unit of the first with any handling result. On a Perfect manual grab next round, gain 1 more of the first and 2 of the second. |
+| SH123 | Chip Finder | 1 Chip Sieve | Magnet | 1 Copper + 1 Glass | 2 | Next round's haul gains 1 extra Glass with any handling result. On a Perfect manual grab next round, also recover 2 extra Circuit from the pile. This does not make Circuit exclusive to timing rewards. |
+
+### Legendary — manual grab enhancements
+
+Shared additions SH124–SH126. They enhance the same once-per-fight attempt and never grant another.
+
+| ID | Recipe | Makes | Kind | Resources | Cooldown | Effect |
+| --- | --- | --- | --- | --- | --- | --- |
+| SH124 | Perfect Salvage | 1 Salvage Amplifier | Magnet | 1 Copper + 1 Circuit | 3 | Next round's haul gains 1 extra Copper with any handling result. On a Perfect manual grab next round, collect one additional copy of the unmodified precision-bonus material bundle. Exclude baseline supplies, other recipe/upgrade bonuses and generated parts. Identical amplifiers do not stack. |
+| SH125 | Full Spectrum | 1 Spectrum Sorter | Magnet | 2 Copper + 1 Glass + 1 Circuit | 3 | Next round's haul gains 1 extra Iron and 1 extra Copper with any handling result. On a Perfect manual grab next round, also collect 1 extra Iron, Copper, Carbon, Glass and Circuit. Each named material is checked separately for availability. |
+| SH126 | Salvage Foundry | 1 Auto-Forge Die | Magnet | 1 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | Next round's haul gains 1 extra Iron with any handling result. On a Perfect manual grab next round, also receive 1 Salvage Slug and 1 Salvage Shield Plate in reserve after collection, with no further material cost. The slug is Ammo adding 10 damage; the plate is Shield giving 10 Shield when used. Each is consumed on use and can be saved within this fight. |
+
 ### Shared combinations to try
 
 - **Crowd clear:** SH001 Plain Slug + SH052 Settled Charge saved from an earlier round + SH083 Layered Charge + SH082 Wide Burst Nozzle. The multiplier strengthens the main shot and its spread; it does not repeat every payload.
 - **Defence into damage:** SH091 Heavy Wall Plate, then SH085 Pressure Release Collar, with SH026 Folding Shield Brace. Decide how much of the protection to spend and how much to keep.
 - **Plan a better next round:** SH069 Stock Order Token, SH037 Iron-Seeking Ring and SH034 Delayed Plate Pack. Pay now for supplies and protection later; all of it is lost if the fight ends first.
+- **Save the manual grab:** fit SH121 Precision Coupler and SH124 Salvage Amplifier, survive the enemy phase, then spend the saved manual attempt next round. A Perfect result improves that one bonus haul; a miss retains the baseline and unconditional additions. The calculation above separates each contribution.
 
 These are examples, not extra recipes. Shared cooling can help any mercenary reuse a recipe with counters, but cannot grant another use of a recipe whose cooldown is None.
 
@@ -933,7 +967,7 @@ Three future permanent-upgrade directions, not an upgrade catalogue: increase th
 
 ### Reference used
 
-The [Slay the Spire 2 Cards List](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cards_List) showed **595 entries** when rechecked in its rendered browser page on 14 September 2026; its footer dated the last edit to 24 August. The count includes statuses, curses, quests, generated and multiplayer cards, not just normal rewards. This catalogue instead offers **600 craftable recipes** across four characters and a shared pool. It does not reproduce the source list entry for entry. The database is a community reference; its figures are not our balance specification.
+The [Slay the Spire 2 Cards List](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cards_List) showed **595 entries** when rechecked in its rendered browser page on 14 September 2026; its footer dated the last edit to 24 August. The count includes statuses, curses, quests, generated and multiplayer cards, not just normal rewards. This catalogue now offers **606 craftable recipes** across four characters and a shared pool. It does not reproduce the source list entry for entry. The database is a community reference; its figures are not our balance specification.
 
 | Reference examples | Strategic question translated into parts |
 | --- | --- |
@@ -947,9 +981,11 @@ The [earlier project study](BUILD-STRATEGY-STUDY.md#what-the-reference-study-act
 
 ### Review evidence
 
-All **600 rows** received a second rules review beyond their author's pass. Integration corrected kill-trigger timing, separate payments across saved helper parts, Shield retention and interception, copied-part identity, next-round magnet timing, and several recipes that were chiefly stronger versions of existing functions. Automated document checks verify all IDs, five pool sizes, rarity totals, required fields, material names, positive costs, cooldown values and recipe references. These are document and arithmetic checks, not game tests.
+The original **600 rows** received a second rules review beyond their author's pass. Integration corrected kill-trigger timing, separate payments across saved helper parts, Shield retention and interception, copied-part identity, next-round magnet timing, and several recipes that were chiefly stronger versions of existing functions. Automated document checks verify all IDs, five pool sizes, rarity totals, required fields, material names, positive costs, cooldown values and recipe references. These are document and arithmetic checks, not game tests.
 
-Three small calculations checked under the proposed rules, with no other effects or enemy protection:
+The six later manual-grab additions received a scoped author consistency review for next-round timing, automatic/missed handling, spent attempts, duplicate enhancements, multiplier exclusions, generated-part use and fight-end clearing. Structural checks cover all 606 entries, their names, costs, cooldowns, IDs and rarity totals. The additions have not received an independent second review or gameplay testing. Their worked bonus example checks arithmetic only.
+
+Three earlier small calculations checked under the proposed rules, with no other effects or enemy protection:
 
 - A Plain Slug and a saved Settled Charge add 6 + 15 to the gun's 4 damage. Layered Charge sees two Ammo parts, so adds 16%: the main shot deals 29 after rounding down. Wide Burst gives each extra enemy 14 damage. It does not repeat the main target's payloads.
 - With Bolt at 8 HP, two loaded Fist Launchers add 30 + 10 damage: the first pays 7 HP, leaving the second unable to pay. The gun's 4 makes 44 main damage; Bolt remains at 1 HP.
@@ -965,6 +1001,7 @@ In later paper tests and a playable prototype, check these concrete cases:
 - Does a saved multiplier combined with a spread part create the stronger multi-enemy shot the owner described? Does the shot remain readable with 20 or more parts, without accidentally firing every payload several times?
 - Does using material for cooling beat crafting a different ready recipe only in useful situations? Do finite positive costs still prevent a closed loop when several cooling, copying and delayed-refund recipes meet?
 - Do Heat and HP costs make Mara's aggressive route meaningfully different from Ivo's corrosion and target planning? Is withholding an attack to save parts sometimes useful without making stalling the best strategy?
+- Does preparing the one manual grab change when it is used? Does the reward justify materials and a memory slot without making a Perfect result compulsory? Check all six precision enhancements together for an excessive once-per-fight resource burst, then check their much smaller automatic fallback.
 - Can players understand the final damage, Shield and delayed effects before committing? Which low-rarity recipes are consistently ignored, and which rare recipes dominate unrelated builds?
 
 The interface must support at least 20 parts in each bullet and shield. The final shot/defence part cap, starting recipe-memory size, exact haul composition, final round-ending control and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.

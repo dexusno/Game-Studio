@@ -2,7 +2,7 @@
 
 Prepared for Klaus, 13 September 2026; updated 14 September. **Current decision: one optional manual precision grab per fight, chosen by the player.** The four-mercenary recipe catalogue is delivered as a draft. Klaus authorized proposed specialties and recipe designs at a comparable scale to the Slay the Spire 2 card database, using original names, prose and material-based rules. The owner has chosen a mercenary campaign through fortified cities under robot attack, with recipe crafting, branching encounter choices, shops and permanent weapon-system upgrades. Detailed combat tuning, final character identities and campaign ending remain open; redesign gameplay implementation has not started. The old five premises are archived alternatives. The four-panel storyboard is concept art and graphics direction, not actual game screens or a finished UI specification.
 
-The [four-mercenary recipe catalogue](RECIPE-CATALOGUE.md) contains 600 draft recipes: 120 shared and 120 exclusive per mercenary, with shared/exclusive Base, Common, Uncommon, Rare and Legendary pools. It proposes Mara's Heat, Ivo's Corrosion/Mark and saved parts, Ada's helper Bolt, and Noor's Charge. Each character can discover 240 recipes but carries only what fits recipe memory. The proposed 12-recipe starter kit never overrides the still-open memory capacity. Numbers, names and catalogue timing conventions are proposals; the owner-confirmed rules below govern. This pass adds no graphics or gameplay functionality. Full permanent upgrades, buffs and other modifier assets are later work.
+The [four-mercenary recipe catalogue](RECIPE-CATALOGUE.md) contains 606 draft recipes: 126 shared and 120 exclusive per mercenary, with shared/exclusive Base, Common, Uncommon, Rare and Legendary pools. It proposes Mara's Heat, Ivo's Corrosion/Mark and saved parts, Ada's helper Bolt, and Noor's Charge. Each character can discover 246 recipes but carries only what fits recipe memory. The proposed 12-recipe starter kit never overrides the still-open memory capacity. Numbers, names and catalogue timing conventions are proposals; the owner-confirmed rules below govern. This pass adds no graphics or gameplay functionality. Full permanent upgrades, buffs and other modifier assets are later work.
 
 Current art anchor, confirmed 14 September 2026: [art anchor.png](art%20anchor.png) is the game's **STYLE reference, not gameplay screenshots**. Its bottom **16C / 3D Perspective** image anchors the attack camera's look and composition. The concept's prop placement is not a gameplay layout requirement: planning/loading now places the magnet and scrap gathering behind the player/gun, with enemies and intent indicators ahead. Every city must have a unique backdrop and surroundings while retaining this shared style. [Asset provenance](ART-DIRECTION.md#owner-supplied-style-anchor--14-september-2026) records the preserved PNG.
 
@@ -36,14 +36,18 @@ In this illustrative reward model, manual handling replaces the automatic bonus 
 
 ### Rare and legendary recipes for perfect timing
 
-**Owner proposal, 14 September 2026:** some Rare or Legendary recipes could increase the bonus awarded for perfect gathering timing. This would let a player invest in a precision-focused build through recipe choices. The subsequent once-per-fight choice fixes the manual frequency; the claw and final supply model remain open, and no entries in the 600-recipe catalogue have been changed.
+**Owner request, 14 September 2026:** add Rare and Legendary perfect-timing enhancements to the recipe collection. [SH121–SH126 in the catalogue](RECIPE-CATALOGUE.md#rare--manual-grab-enhancements) now supply six shared recipes, three of each rarity, with named parts, material costs and cooldowns. This extends the catalogue to 606 recipes; each character can discover 246. The owner selected this content direction; exact names, costs, strengths and cooldowns remain balance proposals.
 
-Two illustrative directions, with costs and cooldowns still to balance:
-
-| Proposed recipe / part | Rarity | Proposed next-round effect |
+| Recipe | Rarity | Next-round direction |
 | --- | --- | --- |
-| Calibrated Jaws / Precision Coupler | Rare | Next round's haul gains 1 extra unit of the chosen material. Perfect timing grants 2 more units. The ordinary extra unit also applies with automatic handling |
-| Perfect Salvage / Salvage Amplifier | Legendary | On perfect timing next round, double the normal precision bonus once. A normal perfect bonus of 3 becomes 6; baseline supplies and bonuses from other parts are not doubled |
+| Calibrated Jaws | Rare | One selected bulk material; a Perfect grab adds more of it |
+| Clean Separation | Rare | A planned pair of different bulk materials |
+| Chip Finder | Rare | Extra Circuit on Perfect, with an unconditional Glass addition |
+| Perfect Salvage | Legendary | One extra copy of the unmodified perfect-bonus bundle; excludes baseline and other bonuses |
+| Full Spectrum | Legendary | Extra supplies across all five materials on Perfect |
+| Salvage Foundry | Legendary | A ready-made Ammo part and Shield part on Perfect |
+
+The catalogue owns the current numbers and complete rules. Each recipe includes an unconditional next-round material addition that also works with automatic or missed handling. Earlier examples of two possible recipes are replaced by these complete entries. The claw choice and final supply/bonus model remain open.
 
 These are crafted enhancements for **the next round only**, following the existing gathering-recipe timing. Baseline supplies remain unaffected by a miss. Choosing one of these recipes is an explicit investment in timing; ordinary gathering upgrades and their guaranteed supplies must continue to work without it. Proposed stacking rule: identical precision parts refresh rather than multiply, and the Legendary effect reads the unmodified precision bonus so amplifiers cannot multiply one another.
 
@@ -60,13 +64,13 @@ These are crafted enhancements for **the next round only**, following the existi
 
 **Reference check:** Nintendo's [Super Mario RPG battle guide](https://www.nintendo.com/us/whatsnew/heres-all-you-need-to-know-about-battling-in-super-mario-rpg/), published 27 November 2023 and read 14 September 2026, describes timed button presses attached to existing battle actions and rewards for successful timing. The transferable idea is a short input inside an action already happening. Its combat rewards and timing chains do not demonstrate that repeated salvage will be fun here; avoid copying those chains simply to give gathering more systems. This was a text-source inspection, not a playtest or capture review.
 
-**First playtest, proposed only:** test the selected one optional manual grab per fight, using automatic targeted collection as a comparison control. Keep expected rewards comparable and observe a 30–50-turn session, including ordinary and pressured rounds. Does precision change a crafting plan? Is it still chosen when it pays about the same on average? Does the player start skipping it, resent its delay, or feel forced to maximise it? Keep it only if the action itself remains enjoyable. No playable minigame, graphics, input implementation or change to the 600 recipes has been made in this discussion.
+**First playtest, proposed only:** test the selected one optional manual grab per fight, using automatic targeted collection as a comparison control. Keep expected rewards comparable and observe a 30–50-turn session, including ordinary and pressured rounds. Does precision change a crafting plan? Is it still chosen when it pays about the same on average? Does the player start skipping it, resent its delay, or feel forced to maximise it? Keep it only if the action itself remains enjoyable. Six precision recipes have been added as design content; no playable minigame, graphics or input implementation has been made.
 
 **Next:** define the baseline material mix, automatic result, manual bonus bands and gathering-upgrade/next-round-boost mapping. The once-per-fight manual frequency is settled; exact input/commit/cancel behaviour and the claw choice remain open. The other prototype-readiness gaps below remain open.
 
 ## Prototype readiness review — 14 September 2026
 
-**Assessment:** the core loop, scene sequence and visual direction are established. A working demo still needs a consistent round, a supply model, actual enemies and clear boundaries between fights. The 600 recipes provide candidate content; their introductory combat rules are explicitly proposals. Review those existing defaults rather than treating them as either approved rules or missing work. This assessment authorizes no gameplay implementation and selects none of the recommendations below.
+**Assessment:** the core loop, scene sequence and visual direction are established. A working demo still needs a consistent round, a supply model, actual enemies and clear boundaries between fights. The 606 recipes provide candidate content; their introductory combat rules are explicitly proposals. Review those existing defaults rather than treating them as either approved rules or missing work. This assessment authorizes no gameplay implementation and selects none of the recommendations below.
 
 ### Decisions that affect the first playable loop
 
@@ -93,7 +97,7 @@ At implementation start, assess the existing Windows/Unreal project and reusable
 
 ### Proposed demo boundary and evidence
 
-For the first playable experiment, propose **one complete mercenary, one city environment, about 30 selected recipes and a three-fight sample**. Begin with a city offer of three real upgrades, then a teaching fight, recipe reward and core-sale/shop visit. The next encounter choice should include an optional Officer; a follow-up fight must let the player use its earned upgrade/recipe. Include defeat and restart. Other mercenaries and the full 600-recipe pool remain part of the planned game. This is a labelled demo sample, not a replacement for the owner's 10–20-fight city wave or evidence of full-campaign balance. The content boundary remains a proposal; no development time limit is imposed.
+For the first playable experiment, propose **one complete mercenary, one city environment, about 30 selected recipes and a three-fight sample**. Begin with a city offer of three real upgrades, then a teaching fight, recipe reward and core-sale/shop visit. The next encounter choice should include an optional Officer; a follow-up fight must let the player use its earned upgrade/recipe. Include defeat and restart. Other mercenaries and the full 606-recipe pool remain part of the planned game. This is a labelled demo sample, not a replacement for the owner's 10–20-fight city wave or evidence of full-campaign balance. The content boundary remains a proposal; no development time limit is imposed.
 
 The full upgrade/modifier catalogues, every mystery service, additional city environments, final campaign ending and profile unlock economy can wait for a later increment. The demo needs only the upgrades/effects it actually uses. Standalone recipe removal can be left out of this sample while its value remains unresolved. If the demo instead includes city completion or mystery events, settle boss-offer handling and whether noncombat mysteries advance the wave before building those scenes.
 
