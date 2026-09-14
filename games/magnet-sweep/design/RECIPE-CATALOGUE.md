@@ -47,6 +47,10 @@ Raw resources and unused parts stay between turns and both clear at fight end. R
 
 ### Using parts
 
+**Later owner flow, 14 September:** the full-screen Recipe view's **Use** button crafts a part, paying resources and adding its output to the parts pool. Selecting a build part stages it in the bullet or shield; Load prepares the build, target selection follows, and Fire resolves the shot then surviving enemies act. End Turn / Defend supports a no-shot round. See the [current turn sequence](REDESIGN-PLAN.md#owner-defined-encounter-and-turn-sequence--14-september-2026).
+
+**Activation conflict under discussion:** the table below is the earlier effect draft. Immediate Shield activation may conflict with preparing defence at Load/Defend; Klaus is choosing the exact point. Utility/Helper actions and dual-purpose Modifiers cannot all be treated as passive bullet/shield attachments. Their activation controls and ordering need an explicit decision. Cooling must remain usable during preparation if clearing counters is to permit the owner-selected same-round recrafting. Gathering parts also currently fit automatically when crafted for next round; whether the new general parts-pool step should include an explicit fitting click is unresolved. Preserve these questions rather than rewriting the 606 recipe effects or equating crafting with ordinary part use.
+
 | Kind | When it works |
 | --- | --- |
 | Ammo | Load into the next bullet. Added damage contributes to one assembled main shot. The part is consumed when fired. Extra payload effects happen after the main hit unless the recipe says otherwise. |
@@ -56,7 +60,7 @@ Raw resources and unused parts stay between turns and both clear at fight end. R
 | Helper | Use during planning to repair, restore or command Ada's helper. Follow its stated timing; it is not an extra player turn. |
 | Magnet | Craft and fit a temporary magnet part for **next round only**. Its effect applies to that round's one haul and expires after it. These special parts are not held for an arbitrary later round. |
 
-The proposed ordinary round is planning, the assembled shot, then enemy actions. The exact Fire/End Turn flow remains a later decision. Helpers and delayed parts may make support hits; these are distinct from firing another main shot. Enemy intent is visible while choosing your shot and defence.
+The selected ordinary round is collection and planning, Load, target selection, Fire, then surviving enemies' actions; End Turn / Defend skips the shot. Exact activation and round-boundary ordering remain open. Helpers and delayed parts may make support hits; these are distinct from firing another main shot. Enemy intent is visible while choosing your shot and defence.
 
 **Numbers and targets:** the draft basic gun contributes 4 damage. `Add 6 damage` adds six to the assembled main shot, not six separate attacks. Flat additions add together. Percentage increases to a shot add together before being applied, rather than multiplying one another. Round fractions down unless a row says otherwise. A multiplier changes damage, not the number of times every payload triggers. Ammo effects concern the main target unless they name other targets. A shot-spreading part uses the shot's damage before target-specific Mark or defence; each extra target applies its own protection. If several spread parts reach the same enemy, use the largest stated share for that enemy, not several copies of the whole bullet. Explicit small support hits still happen as written.
 
@@ -97,9 +101,9 @@ Magnet boosts change the next haul's amount or preference; they do not add a mag
 
 ### Manual grab enhancements
 
-**Owner-selected rule:** normal supplies arrive automatically each turn. Once per fight, choose a turn to use the manual timing marker for a bonus. That attempt is spent regardless of its accuracy. Baseline supplies and held resources cannot be lost through a miss. Each new fight has one fresh attempt; unused attempts do not accumulate.
+**Owner-selected rule:** each turn choose baseline ingredient options and press Collect for ordinary handling without a timing input, or choose Precision. Once per fight, choose a turn to use the manual timing marker for a bonus. That attempt is spent regardless of its accuracy. Baseline supplies and held resources cannot be lost through a miss. Each new fight has one fresh attempt; unused attempts do not accumulate.
 
-SH121–SH126 are shared discoveries: [three Rare](#rare--manual-grab-enhancements) and [three Legendary](#legendary--manual-grab-enhancements). They use the existing **Magnet** kind as the catalogue's gathering-system category; this does not decide whether the physical tool remains a magnet or becomes a claw. Craft and fit them now to affect **next round's single collection event only**. They cannot be stored for a later round. Choose any listed materials when crafting. A recipe's unconditional addition works with automatic handling, a missed timing attempt, or an already-spent manual grab. Its perfect-only addition requires spending this fight's unused manual grab next round and achieving Perfect. Skipping the grab next round does not preserve the enhancement.
+SH121–SH126 are shared discoveries: [three Rare](#rare--manual-grab-enhancements) and [three Legendary](#legendary--manual-grab-enhancements). They retain the existing **Magnet** kind as a legacy gathering-system category. The owner's later turn sequence selects a physical claw; renaming this catalogue category and all older recipe names is separate work. Craft and fit them now to affect **next round's single collection event only**. They cannot be stored for a later round. Choose any listed materials when crafting. A recipe's unconditional addition works with automatic handling, a missed timing attempt, or an already-spent manual grab. Its perfect-only addition requires spending this fight's unused manual grab next round and achieving Perfect. Skipping the grab next round does not preserve the enhancement.
 
 **Draft resolution and stacking:** an enhancement expires after that collection event, or at the end of its target round if no collection occurs; all pending effects clear if the fight ends first. Identical enhancements refresh rather than stack, including after a cooldown reset. Different named enhancements can combine. None widens the timing window, turns a miss into Perfect, grants a retry, restores a manual attempt or adds an ordinary haul. Removing recipe cooldown counters only changes crafting availability.
 
@@ -1004,7 +1008,7 @@ In later paper tests and a playable prototype, check these concrete cases:
 - Does preparing the one manual grab change when it is used? Does the reward justify materials and a memory slot without making a Perfect result compulsory? Check all six precision enhancements together for an excessive once-per-fight resource burst, then check their much smaller automatic fallback.
 - Can players understand the final damage, Shield and delayed effects before committing? Which low-rarity recipes are consistently ignored, and which rare recipes dominate unrelated builds?
 
-The interface must support at least 20 parts in each bullet and shield. The final shot/defence part cap, starting recipe-memory size, exact haul composition, final round-ending control and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
+The interface must support at least 20 parts in each bullet and shield. The final shot/defence part cap, starting recipe-memory size, exact haul composition, Load/undo and non-Ammo activation details, and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
 
 ### What comes next
 
