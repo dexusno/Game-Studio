@@ -53,9 +53,11 @@ Raw resources and unused parts stay between turns and both clear at fight end. R
 
 ### Using parts
 
-**Later owner flow, 14 September:** the full-screen Recipe view's **Use** button crafts a part, paying resources and adding its output to the parts pool. Selecting a build part stages it in the bullet or shield; Load prepares the build, target selection follows, and Fire resolves the shot then surviving enemies act. End Turn / Defend supports a no-shot round. See the [current turn sequence](REDESIGN-PLAN.md#owner-defined-encounter-and-turn-sequence--14-september-2026).
+**Latest owner flow, 14 September:** the full-screen Recipe view's **Use** button crafts a part, paying resources and adding its output to reserve. Selecting a build part stages it; Load prepares the build and may be undone before Fire. Select legal targets, then Fire consumes/resolves that shot and returns to preparation while combat continues. Multiple shots are allowed while parts/resources and recipe availability permit. Only **End Turn** ends the player turn and starts surviving enemies' actions, including after zero shots. See the [current turn sequence](REDESIGN-PLAN.md#owner-defined-encounter-and-turn-sequence--14-september-2026).
 
-**Activation details still open:** cooling must remain available during preparation to support same-round recrafting; other Utility/Helper actions and dual-purpose Modifiers still need final controls. The round reset does not itself settle Shield secondary-effect activation or Load/undo. Permanent claw upgrades activate on purchase/acceptance and never enter the parts pool. Temporary gathering recipes remain the next-round-only craft-and-fit exception.
+**Multiple-shot reconciliation:** a shot is not a new round. Firing does not repeat collection, restore recipe uses, tick cooldowns or clear Shield. The earlier single-main-shot convention is superseded. Recipe rows remain unchanged in this clarification; review their shot-versus-round modifiers, draft 4 base gun damage, post-hit resource/status gains and non-Ammo activation under the new flow. Do not silently apply an effect written for one shot to every shot or introduce a firing cost/cap.
+
+**Activation details still open:** cooling must remain available during preparation to support same-round recrafting; other Utility/Helper actions and dual-purpose Modifiers still need final controls. The round reset does not itself settle Shield secondary-effect activation or remaining Load controls; unloading and editing before Fire is confirmed. Permanent claw upgrades activate on purchase/acceptance and never enter the parts pool. Temporary gathering recipes remain the next-round-only craft-and-fit exception.
 
 | Kind | When it works |
 | --- | --- |
@@ -66,7 +68,7 @@ Raw resources and unused parts stay between turns and both clear at fight end. R
 | Helper | Use during planning to repair, restore or command Ada's helper. Follow its stated timing; it is not an extra player turn. |
 | Magnet | Craft and fit a temporary magnet part for **next round only**. Its effect applies to that round's one haul and expires after it. These special parts are not held for an arbitrary later round. |
 
-The selected ordinary round is collection and planning, Load, target selection, Fire, then surviving enemies' actions; End Turn / Defend skips the shot. Exact activation and round-boundary ordering remain open. Helpers and delayed parts may make support hits; these are distinct from firing another main shot. Enemy intent is visible while choosing your shot and defence.
+The selected round is collection, preparation with zero or more separately built shots, End Turn, surviving enemies' actions and the enemy-turn-end reset/tick. Fire returns to preparation while combat continues. Helpers and delayed parts may make support hits; these are distinct from the assembled main shots. Exact non-Ammo activation, shot-versus-round effect duration and remaining round-boundary ordering stay open. Enemy intent remains visible while choosing attack and defence.
 
 **Numbers and targets:** the draft basic gun contributes 4 damage. `Add 6 damage` adds six to the assembled main shot, not six separate attacks. Flat additions add together. Percentage increases to a shot add together before being applied, rather than multiplying one another. Round fractions down unless a row says otherwise. A multiplier changes damage, not the number of times every payload triggers. Ammo effects concern the main target unless they name other targets. A shot-spreading part uses the shot's damage before target-specific Mark or defence; each extra target applies its own protection. If several spread parts reach the same enemy, use the largest stated share for that enemy, not several copies of the whole bullet. Explicit small support hits still happen as written.
 
@@ -1018,7 +1020,7 @@ In later paper tests and a playable prototype, check these concrete cases:
 - Does preparing the one manual grab change when it is used? Does the reward justify materials and a memory slot without making a Perfect result compulsory? Check all six precision enhancements together for an excessive once-per-fight resource burst, then check their much smaller automatic fallback.
 - Can players understand the final damage, Shield and delayed effects before committing? Which low-rarity recipes are consistently ignored, and which rare recipes dominate unrelated builds?
 
-The interface must support at least 20 parts in each bullet and shield. The final shot/defence part cap, starting recipe-memory size, exact haul composition, Load/undo and non-Ammo activation details, and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
+The interface must support at least 20 parts in each bullet and shield. The final shot/defence part cap, starting recipe-memory size, exact haul composition, remaining Load controls, shot-versus-round effect behaviour and non-Ammo activation details, and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
 
 ### What comes next
 
