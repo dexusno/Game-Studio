@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 600-recipe Markdown draft for four proposed mercenaries, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Current owner discussion reopens gathering: possible claw, baseline supplies and timing bonus. Automatic targeting and occasional precision are proposals, not selected mechanics; no minigame implementation.",
+  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 600-recipe Markdown draft for four proposed mercenaries, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects automatic normal supplies each turn with one optional manual timing grab per fight, at a chosen turn. Precision recipes enhance the saved next-round grab without granting another use. Claw replacement, targeting, supply amounts and bonus bands remain open; no minigame implementation.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -44,13 +44,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T14:50:05+00:00",
-      "record_sha256": "267f335046013ae071fbe23b33ce5b40ce8c3e3cf0abce96cd457798ab403ff6",
+      "captured_at": "2026-09-14T14:55:06+00:00",
+      "record_sha256": "8e4b8b445db8975af1020ab783244e5bc8dc889b55757cd1dd64f2f213fd44b1",
       "files": {
-        "games/magnet-sweep/STATUS.md": "798960cd7152d59c6bdb90465fdc05307e0f4b102d36e328eff439f8e4c17e3e",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "71b32a6bec679d54da38cfd36d7b69d365056917d59ca840972377b8f546bd0d",
+        "games/magnet-sweep/STATUS.md": "87d2ae725601e9d356e40bccdc5284d12fbcd132d3c57e4b0156bafe0466f32d",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "2835e07a2dd311ce77e835aa85c3d17bf71dd927483bf8c060b21d473b3d31ed",
         "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "0da3055171a95f63cb428419ee2d7bb7b1a8e00fd133b94ff7a6b5de137e2400",
-        "games/magnet-sweep/DECISIONS.md": "8f6ef95f4af763ac5963ff09f8adb9103e1d53af3f358921d6f7f9740c04fb08",
+        "games/magnet-sweep/DECISIONS.md": "7a8040b51c3c35bfda4ffc7c69601566557d2c2f59f07a8d4e63affbee0944df",
         "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
         "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "d37337895db08c4bf6afc1729ada745cac408915c623c8f027c0d50f6d3497d3",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
