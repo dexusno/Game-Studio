@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 600-recipe Markdown draft for four proposed mercenaries, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset.",
+  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 600-recipe Markdown draft for four proposed mercenaries, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Current owner discussion reopens gathering: possible claw, baseline supplies and timing bonus. Automatic targeting and occasional precision are proposals, not selected mechanics; no minigame implementation.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -44,13 +44,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T12:04:37+00:00",
-      "record_sha256": "43ee5d9d427c354ff331fb46e940d0a23bf01af4b2df0a79b2bc5e573a75eb56",
+      "captured_at": "2026-09-14T13:55:29+00:00",
+      "record_sha256": "267f335046013ae071fbe23b33ce5b40ce8c3e3cf0abce96cd457798ab403ff6",
       "files": {
-        "games/magnet-sweep/STATUS.md": "9ded08a14e8e2b540685f927dadebc63d4606e47fe54b964fd7b6050dd83fc37",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "794279df143ea2b2eb5c56c73f1eb48eeed385f2640b73c3ae89642832ea1c7c",
+        "games/magnet-sweep/STATUS.md": "9156934bf3cce0826801ef1d28d92fc9d5c5ce24ca060560c691fb9aec15878d",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "2aae59da06d05b3f1a716d39f9f7e8ee023013516c1cb8cd5ee68ac5fb74aa81",
         "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "0da3055171a95f63cb428419ee2d7bb7b1a8e00fd133b94ff7a6b5de137e2400",
-        "games/magnet-sweep/DECISIONS.md": "98257fbc731d2b0794cf9b8ee3c4a96da53e3f2918b9ccfdfdfe146b4ea27da9",
+        "games/magnet-sweep/DECISIONS.md": "59a430ae2a6760ee2f4e3d3920edbf9b6a6974e96c3a2adee5abdfb6b8626789",
         "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
         "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "d37337895db08c4bf6afc1729ada745cac408915c623c8f027c0d50f6d3497d3",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",

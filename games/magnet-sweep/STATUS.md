@@ -1,5 +1,15 @@
 # Magnet Sweep — complete redesign planning
 
+## Current discussion — a smaller role for gathering
+
+**Owner direction, 14 September 2026:** Klaus reopens gathering's role and asks for meaningful, enjoyable options that avoid a repeated chore. He proposes a guaranteed baseline resource pool each turn, possibly a mechanical claw replacing the magnet, and golf-style timing for a bonus haul. These are proposals under discussion; the tool, baseline and timing design are not yet selected. Earlier insistence on a central magnet-physics challenge must not block this exploration. Keep the selected style, rear gathering area and two combat views.
+
+[Gathering options in the existing plan](design/REDESIGN-PLAN.md#gathering-options--baseline-supply-and-claw) compare a quick targeted timing grab each turn, untimed resource-bundle selection, and occasional precision handling. Root recommends baseline supplies plus resource targeting with occasional precision to compare against automatic collection. The example of 8 baseline units, automatic +2 Copper and manual +1/+2/+3 Copper is illustrative only. Preserve useful baseline composition, a useful automatic mode, one collection event per turn and next-round gathering boosts that work independently of timing. Existing magnet recipes/upgrades have not been renamed or mechanically rewritten; aluminium is not added as a material.
+
+**Evidence/limits:** design comparison and independent game-designer critique of fatigue, resource access and auto/manual fairness; one first-party Nintendo text reference for timing within an existing action. No in-game observations, minigame implementation or proof of fun. The proposed later comparison is 30–50 turns with comparable expected supplies, checking whether timing remains enjoyable or feels compulsory.
+
+**Next:** Klaus chooses the preferred gathering direction/frequency, then the baseline mix, standard automatic result and upgrade/boost application can be specified. Other demo-readiness questions remain open. No prototype implementation begins from this options request.
+
 ## Latest review — gaps before a working prototype
 
 **Owner request, 14 September 2026:** review the design plan for gaps before building a working prototype demo. [The readiness review](design/REDESIGN-PLAN.md#prototype-readiness-review--14-september-2026) records eight areas needing demo rules: magnet handling/supply, turn commitment, preparation budget, combat resolution, enemy threats, memory/duplicates, fight boundaries/defeat, and reward/shop/upgrade transactions. The 600-recipe catalogue already provides draft effect conventions; their adoption is open, not missing authoring. Four mercenaries are now in recipe-design scope; the plan's older character-count wording is corrected. Extra global energy remains explicitly undecided rather than silently mandatory.
