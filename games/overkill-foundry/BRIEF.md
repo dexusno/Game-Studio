@@ -16,7 +16,7 @@ Select parts for bullet and shield. Load requires a nonempty bullet, then select
 
 ## Build and persistence
 
-Recipe memory has a hard capacity, amount still open; all stored recipes are visible without a deck/draw system. Numeric cooldowns start at crafting; global cooling removes X from every cooling recipe. At zero counters, an affordable recipe can be crafted again immediately. No-cooldown recipes are once per turn unless a permanent upgrade says otherwise. Unused materials and parts carry between rounds but both clear at fight end. Recipes/upgrades persist for the current game. Fresh Shield or supplies may be granted by upgrades on their defined triggers.
+Recipe memory has a hard capacity, amount still open; all stored recipes are visible without a deck/draw system. Numeric cooldowns start at crafting; global cooling removes X from every cooling recipe. At zero counters, an affordable recipe can be crafted again immediately. No-cooldown recipes are once per turn unless a permanent upgrade says otherwise. Unused materials and parts carry between rounds but both clear at fight end. Recipes/upgrades persist for the current game. Shield resets after the complete enemy turn by default, unless a permanent upgrade explicitly says otherwise. Permanent upgrades may grant beginning Shield each turn, at fight start or on a specified turn; fresh grants do not automatically preserve old Shield. Recipe drafts do not supply reset exceptions. Upgrades may also grant fresh supplies on their defined triggers.
 
 Accept desired loot items individually and Skip the remainder. Recipe rewards allow zero or one of three; at full memory, exchange a held recipe or skip without changing it. Cores sell for credits. Permanent claw upgrades come from shops or Officer loot and activate on purchase/acceptance. The 23 temporary next-round gathering recipes remain alongside them. Neither implicitly grants another Precision attempt.
 
@@ -28,7 +28,7 @@ Use the owner-supplied [style anchor](design/art%20anchor.png). Prepare in 16B's
 
 ## Next proof and limits
 
-Resolve remaining Shield-retention exceptions, Load/undo, secondary-effect activation, supply amounts, enemy moves, shop stock/prices, fleeing rewards and profile/retry consequences. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
+Resolve Load/undo, secondary-effect activation, supply amounts, enemy moves, shop stock/prices, fleeing rewards and profile/retry consequences. Reconcile conflicting Shield recipes with the settled upgrade-only exceptions; do not reopen the base rule. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
 
 The first playable should test whether different enemy intentions and supplies cause meaningful changes in crafting, saving, attack and defence, and whether an earned reward changes a later choice. Game feel and commercial appeal are untested. Naming research will screen current market relevance and public conflicts without treating an absence of search hits as legal clearance.
 
