@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 606-recipe Markdown draft for four proposed mercenaries: original 600 plus six shared Rare/Legendary next-round manual-grab enhancements, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects baseline ingredient options with Collect/Precision on a claw screen, one ordinary haul per turn and one manual timing grab per fight. Loadout includes full-screen recipe crafting and an in-fight shop. Load then select targets then Fire leads to surviving enemies; End Turn / Defend supports no-shot rounds. Death shows Game Over with a gloating AI. Precision recipes enhance the saved next-round grab without granting another use. Raise conflicts for owner resolution: Shield/non-Ammo activation, gathering-part fitting, Load/undo and shop timing. Supply amounts, bonus bands and exact effect/reward/reset details remain open; no implementation.",
+  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 606-recipe Markdown draft for four proposed mercenaries: original 600 plus six shared Rare/Legendary next-round manual-grab enhancements, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects baseline ingredient options with Collect/Precision on a claw screen, one ordinary haul per turn and one manual timing grab per fight. Loadout includes full-screen recipe crafting and an in-fight shop. Load then select targets then Fire leads to surviving enemies; End Turn / Defend supports no-shot rounds. Death shows Game Over with a gloating AI. Precision recipes enhance the saved next-round grab without granting another use. Owner confirms round Shield/build reset after enemies, fresh upgrade Shield, same-round enemy-end cooldown ticks and global cooling. All 23 temporary gathering recipes coexist with immediately installed permanent claw upgrades from shops/Officer loot. Accept loot individually; recipes allow zero or one of three and free skipping at capacity. Revised 34 cooling-effect rows without numeric retuning. Remaining conflicts: Shield-retention exceptions, secondary-effect activation, Load/undo and shop stock timing. Supply amounts, bonus bands and exact effect/reward/reset details remain open; no implementation.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
@@ -44,15 +44,15 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T16:13:34+00:00",
-      "record_sha256": "0dad52848472384e839cfbf04160d7c9b79b499bfd31f10043d63e7007e776ff",
+      "captured_at": "2026-09-14T16:59:58+00:00",
+      "record_sha256": "124e4f96f92497e61762bb03245aac216108a46be9d43516727cb8c29fe8451e",
       "files": {
-        "games/magnet-sweep/STATUS.md": "988769cdd591b0f0b52bab26e2a1fbec4bf41a57291b134e0498c0c2f3b4d77f",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "3199539c2446a28c1106ae78fcbf90cd26d07111d439c88a895529bac33796f0",
-        "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "60664189edcc9f32e307d11f2347d06430f0211046b250c4b4e20efece160806",
-        "games/magnet-sweep/DECISIONS.md": "4237845bb2014035907bf302cfcb12c22c4fc876cdf2263452418fc6e643b655",
+        "games/magnet-sweep/STATUS.md": "ea640db1ede04192987712a45a21a6838bc18861bf60e14f029f75277d61e703",
+        "games/magnet-sweep/design/REDESIGN-PLAN.md": "a42d1f8d3966173ef13c31e0cb437347cabe2c50ed942bcc6d5fd52a1eaa11bc",
+        "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "5fbbbd99b67f9c00fad6208a518c851fb76c02723bcd84df996ffdecc808f3b9",
+        "games/magnet-sweep/DECISIONS.md": "0844abe64bfbfc9ffe26291b1e604ebc2971f798142476168bedd67b95c44cd6",
         "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
-        "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "b2279c1f1c747eda38f916c0238d48a8b2fff433b55b7e1f217e6a023a91cbf5",
+        "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "ab3df4194abb5c6d7c6b02e9ac563c489438cab38a8905b8f27b973a56146c7f",
         "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
         "games/magnet-sweep/art-tests/camera-motion/README.md": "90a69eaf7492966fbcc920b03295018b7eb64574761c7b40b0e128369087db9d",
         "games/magnet-sweep/art-tests/camera-motion/build_scene.py": "27eeff8d0d5e63dec72dcdf44cb6706bfc34f663b87ac2634c8dc9a4a4df1bf3",
