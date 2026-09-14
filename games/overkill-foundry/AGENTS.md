@@ -1,0 +1,12 @@
+# Overkill Foundry — independent game
+
+Follow the root studio instructions. Bind to `game:overkill-foundry`, read [STATUS.md](STATUS.md), then only the relevant design sections. This is the active mercenary/robot recipe-combat design formerly discussed under Magnet Sweep.
+
+- This is a new game. Do not copy or adapt Magnet Sweep's gameplay source, Unreal project, save schema or build pipeline into it. Use a fresh implementation when authorized. Shared studio tooling and preserved art-reference generators are separate from old gameplay code.
+- Owner selected Overkill Foundry on 14 September 2026. Catalogue ID: `overkill-foundry`. The naming study records completed checks and their limits; do not claim worldwide non-use or legal clearance.
+- The [design plan](design/REDESIGN-PLAN.md) owns current mechanics and scenes. Preserve owner decisions separately from catalogue numbers and earlier alternatives. Flag conflicting rules for the owner; do not silently decide them.
+- The [recipe catalogue](design/RECIPE-CATALOGUE.md) contains 606 draft recipes. Costs/strengths are not tested balance. Current global-cooling changes, Shield-retention questions and other known issues are in STATUS.
+- Preserve the STYLE anchor, 16B planning with rear claw and visible intents, 16C action perspective, unique city surroundings and support for at least 20 parts each in bullet and shield. Concept art is not gameplay imagery.
+- Current stage is concept. No playable implementation, new-game QA result or shipping build exists. Windows/Unreal remains the planned direction; choosing the same engine does not authorize reusing old code.
+- Owner exception: development timeline is not a design constraint. Zero budget fields are unset, not an estimate. Do not shrink the design to the studio's default day/hour budget.
+- Keep records and future game work here. Preserve source provenance, use scoped checks, and maintain this game's STATUS/DECISIONS and content checkpoint. Old Magnet Sweep records are a parked historical archive.

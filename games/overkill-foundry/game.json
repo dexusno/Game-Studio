@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "slug": "overkill-foundry",
+  "title": "Overkill Foundry",
+  "engine": "unreal",
+  "platforms": [
+    "windows"
+  ],
+  "stage": "concept",
+  "created_on": "2026-09-14",
+  "source_opportunity": null,
+  "budget": {
+    "target_days": 0,
+    "human_hours": 0,
+    "cash_usd": 0
+  },
+  "budget_note": "Independent owner-selected mercenary/robot recipe-combat game; fresh gameplay implementation, no Magnet Sweep code reuse. Owner selected Overkill Foundry on 2026-09-14 after market/title-conflict screening; no global clearance claim. Windows/Unreal planned, engine project absent. 606 draft recipes and original design/art evidence preserved. No playable or runtime QA claims; timeline unconstrained and zero budgets unset.",
+  "context": {
+    "entrypoint": "games/overkill-foundry/STATUS.md",
+    "read_first": [
+      "games/overkill-foundry/BRIEF.md",
+      "games/overkill-foundry/DECISIONS.md",
+      "games/overkill-foundry/design/REDESIGN-PLAN.md",
+      "games/overkill-foundry/design/RECIPE-CATALOGUE.md",
+      "games/overkill-foundry/design/COMBAT-CAMERA-FLOW.md",
+      "games/overkill-foundry/design/ART-DIRECTION.md",
+      "games/overkill-foundry/design/BUILD-STRATEGY-STUDY.md",
+      "games/overkill-foundry/design/BALANCE-RESEARCH.md",
+      "games/overkill-foundry/assets/manifest.csv",
+      "games/overkill-foundry/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md",
+      "games/overkill-foundry/art-tests/camera-motion/README.md",
+      "games/overkill-foundry/design/NAMING-STUDY.md"
+    ],
+    "checkpoint": {
+      "schema_version": 1,
+      "captured_at": "2026-09-14T19:19:47+00:00",
+      "record_sha256": "ce15f8fa13a1aac11d2b8582b8211bb0a0f982bca7a870b54c91793dbc5218ec",
+      "files": {
+        "games/overkill-foundry/STATUS.md": "c68c88449ffd037143ebf247c96dcdb65324fe199c78fe1ac51b95a6ae23194e",
+        "games/overkill-foundry/BRIEF.md": "bbe78ce7e87885f984b06f1511b7ce7c3395988ac5f9e80222cf20490768b48c",
+        "games/overkill-foundry/DECISIONS.md": "f028d29d34c3ce4c73b24da16d9d493a694e65c2d70e038301999a7a5b9d7669",
+        "games/overkill-foundry/design/REDESIGN-PLAN.md": "db1dda709dd77465fd3c9c99855dd8a837df3f65745bf130ce4482aac1d46326",
+        "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "f94e299bfd73b1a95369dfbacd0cb95498d907edea0a8e9e051fe1565a707a0e",
+        "games/overkill-foundry/design/COMBAT-CAMERA-FLOW.md": "75bfba748ef0a1c5b435881aa7fff9368061843296c81435357512953d042072",
+        "games/overkill-foundry/design/ART-DIRECTION.md": "1053b0f0fcc971c28dd373f04076650bb71e4d988268c17d2305ac91707cd2f8",
+        "games/overkill-foundry/design/BUILD-STRATEGY-STUDY.md": "a1a0db4d6c077de59033c3214c42911edc238ba280a26cfbab07f2021f43adda",
+        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "0a2f2ef7a4201b3f09b094350feb35fa92414f8619497263cb57830d220dee72",
+        "games/overkill-foundry/assets/manifest.csv": "671052db771f707a6a49e3e1c5685925106a7bd4b14ea7548dcf2e10cfe72dbc",
+        "games/overkill-foundry/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
+        "games/overkill-foundry/art-tests/camera-motion/README.md": "b6ae907726277f73f68ddd37d64d64703bebda771ff876c3a93409aab6c48c6a",
+        "games/overkill-foundry/design/NAMING-STUDY.md": "2d270b01f7800d489da7c12a1349095f3840998fb9cac44b45def276166d5432"
+      }
+    }
+  }
+}

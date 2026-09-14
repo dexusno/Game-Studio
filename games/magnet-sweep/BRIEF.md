@@ -1,5 +1,7 @@
 # Magnet Sweep — salvage career brief
 
+**Parked project, 14 September 2026.** The complete redesign is now the independent [Scrap Combat game](../overkill-foundry/STATUS.md), public title pending. Continue redesign work there. This directory preserves the old Magnet Sweep implementation and historical records; it is not the new game's codebase.
+
 > 2026-09-13 superseded-brief notice: the owner requests a complete redesign with 2.5D side view, stacked metal and a hanging, swinging magnet. Review [the proposed redesign plan](design/REDESIGN-PLAN.md) and current STATUS/DECISIONS. This legacy career brief and design/BUILD-SYSTEM.md are historical references, not the redesign's accepted contract. Player purpose, story, visual style, exact stakes and progression will be settled through goals Klaus sets individually. No new implementation is authorized by the planning request.
 
 Revised 2026-09-12 after Klaus rejected the first playable demo as boring and explicitly requested goals, challenge, risk, satisfying attraction and melting, better presentation, music, upgrades, leveling and loot. This brief describes the implemented rework. The unlimited, risk-free demo and its earlier design at Git revision `8af011f` are rejected historical alternatives, not governing policy.

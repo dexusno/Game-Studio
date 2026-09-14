@@ -6,7 +6,7 @@
   "platforms": [
     "windows"
   ],
-  "stage": "prototype",
+  "stage": "parked",
   "created_on": "2026-09-11",
   "source_opportunity": "magnet-sweep",
   "budget": {
@@ -14,63 +14,29 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Full redesign; gameplay unimplemented and old-code reuse unassessed. Owner-selected mercenary/city campaign, recipe memory/cooldowns and system upgrades. Delivered 606-recipe Markdown draft for four proposed mercenaries: original 600 plus six shared Rare/Legendary next-round manual-grab enhancements, with shared/exclusive rarity pools; numeric values and new character/timing rules are proposals, not playtested balance. No graphics or game functionality in this pass. Prototype-readiness review delivered: settle magnet supply, turn rules, enemy threats and fight/reward boundaries before a playable build. One-character three-fight sample is proposed, not approved. Full permanent-upgrade and modifier catalogues are later work. Preserve the STYLE anchor, 16B planning/rear gathering/intents, 16C attack perspective, unique city surroundings and support for at least 20 parts each in shot and shield. Timeline unconstrained; zero time fields mean unset. Owner selects baseline ingredient options with Collect/Precision on a claw screen, one ordinary haul per turn and one manual timing grab per fight. Loadout includes full-screen recipe crafting and an in-fight shop. Load then select targets then Fire leads to surviving enemies; End Turn / Defend supports no-shot rounds. Death shows Game Over with a gloating AI. Precision recipes enhance the saved next-round grab without granting another use. Owner confirms round Shield/build reset after enemies, fresh upgrade Shield, same-round enemy-end cooldown ticks and global cooling. All 23 temporary gathering recipes coexist with immediately installed permanent claw upgrades from shops/Officer loot. Accept loot individually; recipes allow zero or one of three and free skipping at capacity. Revised 34 cooling-effect rows without numeric retuning. Remaining conflicts: Shield-retention exceptions, secondary-effect activation, Load/undo and shop stock timing. Supply amounts, bonus bands and exact effect/reward/reset details remain open; no implementation.",
+  "budget_note": "Parked legacy Magnet Sweep/Expedition project. On 2026-09-14 the owner separated the turn-based mercenary/robot redesign into game:overkill-foundry, with public naming under research and a fresh gameplay implementation. Preserve this old codebase, assets, saves, builds and QA evidence. No active work here unless the owner explicitly resumes this original game. Original budget values remain unset.",
   "context": {
     "entrypoint": "games/magnet-sweep/STATUS.md",
     "read_first": [
-      "games/magnet-sweep/design/REDESIGN-PLAN.md",
-      "games/magnet-sweep/design/RECIPE-CATALOGUE.md",
-      "games/magnet-sweep/DECISIONS.md",
-      "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md",
-      "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md",
-      "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md",
-      "games/magnet-sweep/art-tests/camera-motion/README.md",
-      "games/magnet-sweep/art-tests/camera-motion/build_scene.py",
-      "games/magnet-sweep/art-tests/camera-motion/scene-metrics.json",
-      "games/magnet-sweep/design/ART-DIRECTION.md",
-      "games/magnet-sweep/design/art-direction-boards.json",
-      "games/magnet-sweep/assets/manifest.csv",
-      "games/magnet-sweep/design/BALANCE-RESEARCH.md",
-      "games/magnet-sweep/design/SCRAP-COMBAT-DIRECTION.md",
-      "games/magnet-sweep/design/PREMISE-OPTIONS.md",
-      "games/magnet-sweep/design/BUILD-SYSTEM.md",
-      "games/magnet-sweep/design/EXPEDITION-SITES.md",
-      "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md",
-      "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md",
-      "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md",
-      "games/magnet-sweep/design/build-economy.json",
       "games/magnet-sweep/BRIEF.md",
-      "games/magnet-sweep/PRODUCTION-PLAN.md"
+      "games/magnet-sweep/DECISIONS.md",
+      "games/magnet-sweep/BUILD.md",
+      "games/magnet-sweep/QA.md",
+      "games/magnet-sweep/PRODUCTION-PLAN.md",
+      "games/magnet-sweep/assets/manifest.csv"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-14T16:59:58+00:00",
-      "record_sha256": "124e4f96f92497e61762bb03245aac216108a46be9d43516727cb8c29fe8451e",
+      "captured_at": "2026-09-14T19:19:48+00:00",
+      "record_sha256": "62ed2d86c3f9f0361498064b2b56ea73d4b01903c1a57ca019cd98378eacda8a",
       "files": {
-        "games/magnet-sweep/STATUS.md": "ea640db1ede04192987712a45a21a6838bc18861bf60e14f029f75277d61e703",
-        "games/magnet-sweep/design/REDESIGN-PLAN.md": "a42d1f8d3966173ef13c31e0cb437347cabe2c50ed942bcc6d5fd52a1eaa11bc",
-        "games/magnet-sweep/design/RECIPE-CATALOGUE.md": "5fbbbd99b67f9c00fad6208a518c851fb76c02723bcd84df996ffdecc808f3b9",
-        "games/magnet-sweep/DECISIONS.md": "0844abe64bfbfc9ffe26291b1e604ebc2971f798142476168bedd67b95c44cd6",
-        "games/magnet-sweep/design/BUILD-STRATEGY-STUDY.md": "498f27c637bca394e0738e7b87abe09bf8abda2ae862a3c42a4a335027187483",
-        "games/magnet-sweep/design/COMBAT-CAMERA-FLOW.md": "ab3df4194abb5c6d7c6b02e9ac563c489438cab38a8905b8f27b973a56146c7f",
-        "games/magnet-sweep/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
-        "games/magnet-sweep/art-tests/camera-motion/README.md": "90a69eaf7492966fbcc920b03295018b7eb64574761c7b40b0e128369087db9d",
-        "games/magnet-sweep/art-tests/camera-motion/build_scene.py": "27eeff8d0d5e63dec72dcdf44cb6706bfc34f663b87ac2634c8dc9a4a4df1bf3",
-        "games/magnet-sweep/art-tests/camera-motion/scene-metrics.json": "80aa6c5204b10408562d8cbb1d8e8c41f40f1432e67f17b81e83a6fa807b424c",
-        "games/magnet-sweep/design/ART-DIRECTION.md": "bca557a1fc6e22e427fe247b0348ecc084149ba7df7d268465fa1be60b246db3",
-        "games/magnet-sweep/design/art-direction-boards.json": "7167c77977531bd02216d4767d48f4c427f74dfeb9f10d985e3b7ca658fb2d93",
-        "games/magnet-sweep/assets/manifest.csv": "95f2bf4b33d75335ab711039495c39b34766284d1832eca5ba5fe543f25d7c48",
-        "games/magnet-sweep/design/BALANCE-RESEARCH.md": "64618cc2781e0a9e9d211c93db191f27c706e208358ffbfd3440c36d88e30a9d",
-        "games/magnet-sweep/design/SCRAP-COMBAT-DIRECTION.md": "c4c43ee34df45911114cec7b8a598054e5c65047cae45b03b7933c08e760a8bd",
-        "games/magnet-sweep/design/PREMISE-OPTIONS.md": "7dfe8a7265b625708ee7af7b22fb7b87e96d51add3d4aa3e40d042b0e8fdf4db",
-        "games/magnet-sweep/design/BUILD-SYSTEM.md": "1fc1efeb769a64c27c870dfbf35875f171c7a907038a3b9acc2d065d899eb76b",
-        "games/magnet-sweep/design/EXPEDITION-SITES.md": "3a722eb2bec81a887791b0fcc77726795fc1123e006f5d4d06e9b728f6670938",
-        "games/magnet-sweep/design/BUILD-SYSTEM-MECHANICS.md": "3cce17d04e25e08f2ca9882ecdff7dd788e5504d7d349d40ef6033aa79c4f8e6",
-        "games/magnet-sweep/design/BUILD-SYSTEM-ECONOMY.md": "c77998494876feae4e616546c6f4630f7ad640753d5898fb24304e687a03cbf0",
-        "games/magnet-sweep/design/BUILD-SYSTEM-CRITIQUE.md": "293e852f66d2af1af9fa225e2095d64b99385482fcf00b7741dec60c37cc46f3",
-        "games/magnet-sweep/design/build-economy.json": "dcb879b817d1ea3bbea91602897dd178d33b79b62f7794554ff6f259216a5ad9",
-        "games/magnet-sweep/BRIEF.md": "c7f469561f55b26be351343eb4b04dcd71dd521fd451902b7e5ce55383dcfc98",
-        "games/magnet-sweep/PRODUCTION-PLAN.md": "50dd56a939abaa084fb22a01ba4ee5b60e4515484cf6e9611f0454d53a668bc3"
+        "games/magnet-sweep/STATUS.md": "c0f72908e48dc5f7e82c3bab0bd524d6e5844754a6d9b44228a77e4f886c752f",
+        "games/magnet-sweep/BRIEF.md": "47340d53dad85cb6d8d775d7dac3eb19a236bc35195f472b2c1c329c5a8d3e31",
+        "games/magnet-sweep/DECISIONS.md": "300a2a26765f3638058867397e327aac4ca7380bdec0c08fcb8be3c23273e384",
+        "games/magnet-sweep/BUILD.md": "2d06c8e809cedecfe8ca84877c5969d75deec645532a05d7f61d1f8d43a69ad7",
+        "games/magnet-sweep/QA.md": "ab5ecc1fdc62ccf9475e10b11d135c184d0f4e85be5ac65a818e07191f22d54c",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "815a0a77a1836581cc40ad9f87651d54844b8c8df3811257a8dae43c46f2080f",
+        "games/magnet-sweep/assets/manifest.csv": "95f2bf4b33d75335ab711039495c39b34766284d1832eca5ba5fe543f25d7c48"
       }
     }
   }

@@ -1,0 +1,28 @@
+{
+  "blender": "5.2.1 LTS",
+  "seed": 16,
+  "frames": 192,
+  "fps": 24,
+  "resolution": [
+    960,
+    540
+  ],
+  "objects": 342,
+  "mesh_objects": 316,
+  "source_vertices": 21978,
+  "source_polygons": 19919,
+  "materials": 14,
+  "camera_objects": [
+    "CAMERA Preparation | 16B",
+    "CAMERA Action | 16C"
+  ],
+  "shot_component_ids": [
+    "SHOT gear body",
+    "SHOT hex collar",
+    "SHOT bolt core"
+  ],
+  "stock_roots": 24,
+  "shared_scene": true,
+  "note": "Not an engine performance measure; bevels increase evaluated polygons.",
+  "stock_return_transform_match": true
+}

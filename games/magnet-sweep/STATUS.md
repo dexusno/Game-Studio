@@ -1,4 +1,12 @@
-# Magnet Sweep — complete redesign planning
+# Magnet Sweep — parked legacy game
+
+**Owner separation, 14 September 2026:** the turn-based mercenary/robot redesign is now a separate game. Continue it at [Overkill Foundry](../overkill-foundry/STATUS.md), internal ID `game:overkill-foundry`. The owner requests fresh gameplay implementation; this project's code, engine project, saves and builds are not its starting codebase.
+
+**Current status:** parked. The original Magnet Sweep/Expedition prototypes, original source, assets, build instructions, QA evidence and saves are preserved. [BUILD.md](BUILD.md) and [QA.md](QA.md) describe this old project only. Its design files below are frozen pre-split history; the successor's copies are the active design records.
+
+**Next:** no active implementation work on this game. Resume only if the owner explicitly chooses to revisit the old magnet/salvage game. The owner selected Overkill Foundry; design Q&A continues in that separate game.
+
+## Historical record before separation
 
 ## Latest clarification — round reset, global cooling and claw loot
 

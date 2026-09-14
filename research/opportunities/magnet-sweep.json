@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "selected",
+  "status": "held",
   "trend_stage": "unverified",
   "confidence": "low",
   "research_run": "research/runs/2026-09-11-small-game-income/README.md",
@@ -15,13 +15,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-11T21:20:21+00:00",
-      "record_sha256": "afae45e3b37405d1de41741ff683b2f31fad59d84681851c94cd5ae2ebb7e364",
+      "captured_at": "2026-09-14T19:19:48+00:00",
+      "record_sha256": "18a52e43865a9edac1b095f50af750bcec757abf7f452e3154fc0199625d9d41",
       "files": {
-        "games/magnet-sweep/STATUS.md": "d7eda7bc9cb1b9b3fa65b828bab3e9c38d476ec4b5ec91cbff5e95f421206348",
-        "games/magnet-sweep/BRIEF.md": "b5157837eab386fd2b9ee1693f24fc5d87eeb63590fcc19a9bb909375a8a8e7d",
-        "games/magnet-sweep/PRODUCTION-PLAN.md": "22bba90b7ff718c43f5dd6a4f51c1ad4fc1a06a3384205a1409faca33ae64348",
-        "games/magnet-sweep/DECISIONS.md": "a7314857fde4571be2df085b97613fbe906f8c615a2426dbdbd7cedd1352f97a",
+        "games/magnet-sweep/STATUS.md": "c0f72908e48dc5f7e82c3bab0bd524d6e5844754a6d9b44228a77e4f886c752f",
+        "games/magnet-sweep/BRIEF.md": "47340d53dad85cb6d8d775d7dac3eb19a236bc35195f472b2c1c329c5a8d3e31",
+        "games/magnet-sweep/PRODUCTION-PLAN.md": "815a0a77a1836581cc40ad9f87651d54844b8c8df3811257a8dae43c46f2080f",
+        "games/magnet-sweep/DECISIONS.md": "300a2a26765f3638058867397e327aac4ca7380bdec0c08fcb8be3c23273e384",
         "games/magnet-sweep/design/CRITIQUE.md": "e344421b5777fbf44b45306dc415092a6ef1c0aabcdafdb6c07c667535b8c38c"
       }
     }
@@ -61,8 +61,8 @@
     "Fresh arrangements may not earn voluntary replay once unlock novelty ends.",
     "Positive per-pull feedback must avoid making ordinary collecting feel like a scoring mistake."
   ],
-  "next_test": "Implement an isolated Windows project and the representative sweep/tug/linked-burst/forge/improvement loop from the completed plan. Test understandable satisfying control and voluntary replay on different arrangements with the full rig; no development-time ceiling.",
-  "decision_reason": "Klaus selected the magnet experiment on 2026-09-11 and requested three designers to debate directly, a professional planner, and an independent critic. This assignment is design/planning; executable feasibility, fun and paid value remain untested.",
+  "next_test": "No active prototype test for the original magnet/salvage opportunity. Its implementation is parked. Continue the independently selected mercenary/robot design at game:overkill-foundry; it does not inherit this opportunity's market evidence as proof of demand.",
+  "decision_reason": "Klaus selected the magnet experiment on 2026-09-11 and requested three designers to debate directly, a professional planner, and an independent critic. This assignment is design/planning; executable feasibility, fun and paid value remain untested. On 2026-09-14 the owner separated the substantially changed mercenary/robot design into its own game (Overkill Foundry, ID overkill-foundry) with fresh implementation. The original magnet/salvage opportunity and its implementation are held/parked; all original evidence is preserved.",
   "scope_hypothesis": {
     "price_usd": "2.99-4.99 (historical research hypothesis; reassess for actual game)",
     "note": "Owner explicitly removes development timelines from consideration. Simple coherent gameplay, reward and replay are the governing design goals; design is being revised through gameplay critique and direct designer dialogue."
