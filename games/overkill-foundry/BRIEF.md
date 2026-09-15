@@ -24,6 +24,8 @@ Recipe memory starts with a hard capacity of **20 recipes**, expandable by perma
 
 Accept desired loot items individually and Skip the remainder. Recipe rewards allow zero or one of three; at full memory, exchange a held recipe or skip without changing it. Cores sell for credits. Permanent claw upgrades come from shops or Officer loot and activate on purchase/acceptance. The 23 temporary next-round gathering recipes remain alongside them. Neither implicitly grants another Precision attempt.
 
+Shops offer no direct healing service. They may sell healing recipes or permanent upgrades that increase maximum HP and heal for that same amount. For example, gaining +10 maximum HP changes 40/80 HP to 50/90. Buying a recipe does not itself activate its healing effect. Stock, prices and upgrade amounts remain to balance.
+
 ## Content and presentation
 
 The catalogue has 606 drafts: 126 shared and 120 exclusive to each of four proposed mercenaries, for 246 possible recipes per character. Character identities, starter sizes, recipe numbers and detailed status rules remain proposals where the owner has not selected them.

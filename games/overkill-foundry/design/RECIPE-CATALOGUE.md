@@ -51,6 +51,8 @@ If an effect removes every counter from a cooldown recipe, it becomes usable imm
 
 Raw resources and unused parts stay between turns and both clear at fight end. **Remaining player HP carries into the next fight, without automatic healing at fight transitions.** Explicit healing effects can restore HP; their values remain draft. Retained recipes and permanent systems last through the current game. **Owner-confirmed, 15 September:** every new fight starts with all recipe cooldown counters cleared. **Remaining draft convention:** Heat, Charge, helper state and other temporary effects start fresh in a new fight; these resets are not selected merely by confirming cooldown reset. Delayed supplies or effects do not carry through a fight ending before they trigger.
 
+**Shop healing boundary — owner decision, 15 September:** shops offer no direct healing service. Healing recipes may be sold as knowledge to use under normal resource/cooldown rules. Shops may also offer permanent upgrades that raise maximum HP and heal for that same amount: +X maximum HP restores X current HP, not all missing HP. These upgrade entries, their values/prices and stock availability remain later content work.
+
 ### Utility catalogue reconciliation — 14 September
 
 All 181 Utility rows now identify an immediate effect with no part. Former object names are retained only as effect labels, not inventory objects. In a Utility row, activation means using the recipe; extra effect costs and targets must be handled in that action, not postponed by storing an item. Exact validation/target-selection ordering remains to specify. Delayed/ongoing effect wording registers the effect now rather than manufacturing an activation part.
