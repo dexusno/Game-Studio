@@ -32,6 +32,12 @@ def reduce_damage(damage: int, percent: int) -> int:
     return whole_share(damage, 100 - percent, 100)
 
 
+def spread_contribution_total(damage: int, *eligible_share_percents: int) -> int:
+    """Sum whole contributions to one extra target; do not decide hit grouping."""
+    whole_share(damage, 0, 100)
+    return sum(whole_share(damage, percent, 100) for percent in eligible_share_percents)
+
+
 def main() -> None:
     catalogue = Path(__file__).resolve().parents[1] / "RECIPE-CATALOGUE.md"
     rows = []
@@ -56,8 +62,12 @@ def main() -> None:
         "enemy_9_damage_reduced_by_50_percent": reduce_damage(9, 50),
         "half_of_5_shield_removed": whole_share(5, 1, 2),
         "40_percent_of_1_damage": whole_share(1, 40, 100),
+        "overlapping_50_and_40_percent_of_20_damage": spread_contribution_total(20, 50, 40),
+        "overlapping_50_and_40_percent_of_9_damage": spread_contribution_total(9, 50, 40),
     }
-    assert list(examples.values()) == [14, 15, 4, 24, 12, 4, 4, 2, 0]
+    assert list(examples.values()) == [14, 15, 4, 24, 12, 4, 4, 2, 0, 18, 7]
+    assert spread_contribution_total(20, 50, 40) == spread_contribution_total(20, 40, 50)
+    assert spread_contribution_total(20) == 0
 
     # Include every whole damage amount from 0 through 200 and percentages
     # through 200, covering zero damage, odd splits, large bonuses and reductions.
