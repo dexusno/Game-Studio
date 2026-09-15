@@ -2,6 +2,110 @@
 
 13 September 2026. Requested by Klaus during the stacked-ammunition discussion. This records developer documentation and a proposed method for our game. It does not establish tuned values or authorize implementation. Companion: [stacked ammunition and build strategies](BUILD-STRATEGY-STUDY.md).
 
+## Current beta haul recommendation — 15 September 2026
+
+**Recommendation for the first beta supply profile: 10 materials per normal haul in total — an 8-material foundation plus 2 materials directed by the existing steering choice.** The earlier 8+2 illustration was not a selected balance value; it now has a recipe-cost basis. These are proposed beta numbers, not an owner-approved economy or a tested result. Do not reopen whether gathering has steering.
+
+Klaus requested this cost analysis on 15 September. The recorded rules already select baseline ingredient choices, one Collect/Precision collection per round, one optional Precision attempt per fight, material/part carryover within fights, and clearing both at fight end. There is no separate action-point/energy budget and no reserve or bullet/shield part-count cap. Recipe costs, use limits and cooldowns still apply; all cooldowns start clear in each fight. Memory begins at 20 recipes, with 12 starters: 8 shared and 4 character-specific. These rules determine what supply must support.
+
+### What was measured
+
+The [reproducible Python audit](analysis/resource_haul.py) parses all 606 recipe rows in the [catalogue](RECIPE-CATALOGUE.md), validates the five-material cost syntax and compares each selected starter kit. Run `python games/overkill-foundry/design/analysis/resource_haul.py` from the repository root for JSON results. It changes no files. Recipe-row SHA-256 at this analysis: `87f652df4b372d5a48b54ee170f6ed9dfc5fb4895213e24811c202677bcba4ee`.
+
+This is **printed material cost analysis**, including the retained costs of recipes flagged for revision. It does not treat those recipes as implementation-ready. Equal weight per recipe is a descriptive inventory measure, not reward frequency, player usage or equivalent material value. Extra Heat/Charge/HP costs, sacrifices, effect legality, resource refunds, ongoing effects, damage and enemies are outside the calculation. No gameplay or win-rate simulation was run.
+
+| Recipe tier | Rows | Average materials per use | Range |
+| --- | ---: | ---: | ---: |
+| Base | 24 | 1.67 | 1–3 |
+| Common | 176 | 2.36 | 1–3 |
+| Uncommon | 200 | 3.17 | 2–4 |
+| Rare | 140 | 4.12 | 3–5 |
+| Legendary | 66 | 5.24 | 2–6 |
+
+Overall, the mean is **3.32** and the median is **3**. The full distribution is 12 recipes costing 1, 143 costing 2, 206 costing 3, 157 costing 4, 59 costing 5 and 29 costing 6. Ammo and Shield both average **3.35**, while Utilities average **3.32**: Utilities need a real share of the haul. These figures describe separate printed uses, not the cost of a complete shot or turn.
+
+Each selected starter kit averages **1.75 materials per recipe**, except Ada's **1.83**. Crafting every starter once would cost 21 materials, or 22 for Ada, before any effect grants. A 10-material haul therefore supports a selection of the kit, with early common/uncommon discoveries asking roughly 2–3 materials per use. Do not divide ten by the whole catalogue's average and claim a guaranteed number of useful actions.
+
+### Mix matters as much as total supply
+
+Across all catalogue costs, Iron accounts for 36.4% of units and Copper 26.6%; Carbon, Glass and Circuit account for 10.2%, 13.8% and 13.0%. **236 of 606 recipes require Circuit**, so making it inaccessible until late would strand many offers. Those are draft cost frequencies, not spawn probabilities.
+
+The following includes the 126 shared recipes plus each character's 120 exclusive recipes, counted once each:
+
+| Eligible character pool | Iron | Copper | Carbon | Glass | Circuit |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mara | 39.1% | 20.3% | 14.4% | 13.8% | 12.5% |
+| Ivo | 32.4% | 21.3% | 11.6% | 19.6% | 15.1% |
+| Ada | 40.5% | 23.6% | 8.4% | 13.9% | 13.5% |
+| Noor | 31.2% | 32.7% | 5.2% | 16.4% | 14.5% |
+
+Mara's pool asks for more Carbon than Noor's; Ivo's asks for more Glass; Ada's leans heavily on Iron; Noor's on Copper. This supports the **already-selected steering choice**. A single average mix should not be expected to serve every build equally. Actual demand depends on the player's current 12–20 recipes and choices, not all 246 eligible recipes at once.
+
+For a reproducible beta test, use this proposed foundation:
+
+| Portion of one normal haul | Proposed materials | Total |
+| --- | --- | ---: |
+| Baseline | 3 Iron, 2 Copper, 1 Carbon, 1 Glass, 1 Circuit | 8 |
+| Steering allocation | 2 more of the material selected through the existing steering choice | 2 |
+| Normal haul before upgrades | Baseline plus steering | **10** |
+
+This is a concrete test mapping of steering, not a claim that its exact +2 formula or offer contents were already approved. The fixed basket is a controlled starting fixture; any eventual variety in the available ingredient choices must be measured against the same affordability checks. The ten units are **one haul**, not ten plus another automatic bonus. Precision and permanent/temporary gathering modifiers remain separate; their exact bonus bands are not selected here. Establish the ordinary supply first so a precision success is not required to make the starter kit function. No additional fight-entry stash is assumed by this opening-haul probe.
+
+### What those resources buy
+
+These examples use distinct no-cooldown shared recipes once each; all costs are paid. Damage below is **added by parts**, excluding the unselected draft gun base damage, target defences and other modifiers. Prepared Shield activates only at End Turn.
+
+| Package | Exact recipes | Material cost | Draft effect before other modifiers |
+| --- | --- | --- | --- |
+| Basic attack and defence | SH001 Solid Casting + SH003 Powder Packing + SH002 Flat Plate | 2 Iron + 1 Copper + 1 Carbon = **4** | 9 added shot damage and 6 Shield at End Turn |
+| Stronger shared attack and defence | Basic package + SH004 Simple Sighting + SH006 Basic Insulation | 3 Iron + 2 Copper + 1 Carbon + 2 Glass = **8** | 13 added damage, or 17 against an attacking main target; 10 Shield at End Turn, plus insulation's conditional benefit |
+| Attack, defence and future supply | Basic package + SH004 + SH008 Extra Lift | 3 Iron + 2 Copper + 1 Carbon + 1 Glass + 1 Circuit = **8** | Same added shot damage as the stronger package, 6 Shield, and the draft next-round haul boost if its pending fitting/timing requirements are met |
+
+The proposed 10-material haul can afford the stronger shared package when steering toward Glass. Its two leftover units are Glass and Circuit; that is **not** two freely interchangeable materials. They cannot immediately pay for another Flat Plate or repeat an already-used no-cooldown recipe. Choosing the haul investment trades away immediate protection; its exact value needs the content issue below resolved.
+
+This is the useful budget tension: ordinary attack plus some defence remains possible, while a stronger attack, more defence, cooling, character setup and saving for later compete for the remaining compatible materials. Cost alone cannot establish whether 6 or 10 Shield is sufficient against the eventual enemy intents.
+
+### Sensitivity check across all four starter kits
+
+For each candidate below, enumerate all 4,096 subsets of each 12-recipe starter kit and each of five possible steering materials. A subset includes each recipe at most once. The entries report the **maximum number of distinct printed recipe costs affordable**, with the range taken over steering choices. They are not recommended action counts or proof that the effects can all activate meaningfully.
+
+Each candidate adds **2 of one chosen material** to the listed foundation; the first column includes those two units.
+
+| Normal haul total | Fixed foundation before steering | Mara | Ivo | Ada | Noor |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 6 | 1 Iron, 1 Copper, 1 Carbon, 1 Glass | 3–4 | 4 | 3–4 | 3–5 |
+| 8 | 2 Iron, 2 Copper, 1 Carbon, 1 Glass | 5–6 | 5–6 | 4–5 | 5–6 |
+| 10 | 3 Iron, 2 Copper, 1 Carbon, 1 Glass, 1 Circuit | 5–7 | 5–7 | 5–6 | 5–7 |
+| 12 | 4 Iron, 3 Copper, 1 Carbon, 1 Glass, 1 Circuit | 6–8 | 6–7 | 6–7 | 6–8 |
+
+All candidate recipes begin ready and opening reserves are empty. The probe excludes cooling-enabled repeat uses and does not resolve Heat, Charge, Bolt, extra payments, Utility targets or effect grants. For example, affording Quick Vent does not prove Mara has its required Heat. The subset counts are an affordability envelope, not a combat simulator. Automatic cooldown ticks still skip the use round in the actual rules; nothing here changes their timing.
+
+**Interpretation:** 6 is a lean stress case; 8 is worth comparing as the tighter economy; **10 is the recommended first beta profile**, giving Ada more material room while retaining a choice among the 12 starters and providing some access to higher-cost discoveries. Twelve is a generous stress case, with more room for early stockpiling and cooling. The baskets differ in composition as well as total, so these results do not isolate the causal effect of two extra units. In particular, 10 introduces a guaranteed Circuit and another Iron relative to the 8-material fixture. Test quantity and mix separately before attributing a problem to total supply.
+
+### Cost problems that a bigger haul will not solve
+
+- **Extra Lift (SH008):** costs 1 Copper + 1 Circuit now and grants 2 mixed units next round. It has zero net material-count gain before other synergies and transforms known materials into a delayed mix. That may be a conversion choice, but it is weak as the introductory quantity upgrade. Compare a proposed **+3 next-round yield** (+1 net unit) against the current +2 during beta; no recipe row has been changed or that buff selected. Evaluate actual useful types and missed immediate defence, not just the count.
+- **Copper/Glass competition:** cooling, defence and utility setup frequently compete for the same materials. When a player has plenty of total scrap but cannot use it, adjust mix/steering or a specific recipe before raising everyone's haul. A permanent +1 material per turn is 10% of a ten-unit haul, but its tactical benefit may jump when it completes a recipe cost.
+- **Multiple cheap shots:** the catalogue's draft base gun damage must be reviewed under the selected multiple-shot rule. If +4 base damage applies freely to every shot, SH001 and SH003 give 13 damage together but 17 across two shots before other effects. No added firing cost or shot cap is proposed here. Compare this incentive with intended large-shot synergies before balancing enemy HP or interpreting a supply test.
+- **Cooling and stockpiling:** positive printed costs alone do not prove a full refund/cooling chain cannot pay for itself. New counters can be cleared by explicit cooling, and surplus stock carries across rounds without a cap. Probe repeated cheap shots, resource refunds, global cooling and waiting for large builds in complete fights. Repeated no-cooldown uses remain blocked absent explicit permanent upgrades.
+- **Pending catalogue timing:** shield-spending effects that need active Shield during preparation cannot assume an End-Turn-only prepared shield is already active. Utility dependencies and the character-specific draft rules also require reconciliation. Increasing supply cannot make an illegal timing chain valid.
+
+### Slay the Spire inspiration for the beta
+
+Mega Crit's [GDC 2019 balance slides](https://media.gdcvault.com/gdc2019/presentations/Giovannetti_Anthony_SlayTheSpire.pdf), rechecked on 15 September 2026, support iterative changes informed by both player feedback and metrics, preserving uses for different cards and comparing player skill groups. They do not supply a universal resource formula. The 22-page slide text was reviewed; no full video or current live-game balance audit is claimed.
+
+**Our application:** seek several worthwhile ways to spend a constrained haul. Start with the costed ten-unit profile, observe why players choose or skip recipes, and change a specific cause. Preserve our visible recipe memory and carried materials; do not import a draw/discard system, energy budget or Slay the Spire win-rate target.
+
+For the first playable beta comparison, record the supply profile, seed, character, starting recipes/upgrades, encounter and player familiarity. Log each haul by material and steering choice; recipe use and extra payments; resources returned, spent and banked; cooldown state; shots per turn; effective damage, overkill and Shield; HP lost and turns to victory/death; and unaffordable desired recipes. Ask what tradeoff the player saw and whether the steering helped. Pair 8/10-material comparisons on matching encounter seeds, then use fresh seeds; keep newcomer and experienced results distinct.
+
+Begin with basic attacking, multi-enemy and setup-pressure encounters once their rules exist. Check all four starter kits before claiming character parity. Persistent HP and no automatic between-fight healing require a later encounter-sequence test; a comfortable isolated fight can still produce an impossible campaign. Reward pick/use rates need denominators, encounter context, acquisition timing and sample counts; a popular recipe is not automatically overpowered. Small early samples expose problems, not reliable target win rates.
+
+Raise supply if useful ordinary choices remain blocked after reasonable steering; adjust mix when total stock is adequate but wrong; adjust a specific recipe or effect when it dominates across different supplies. If almost every ready useful recipe fits repeatedly and reserves grow without sacrificing protection, compare a leaner profile before expanding content. Leave strong earned combinations possible. The next step is owner review of this **10-total / 8+2 proposal**, followed by remaining recipe/enemy rules before any authorized playable test. No gameplay implementation or beta balance claim is made by this analysis.
+
+## Historical research — 13 September 2026
+
+The original research below is preserved as history. Its separate energy budget, paid additional hauls, physical retrieval constraints and older rig terminology are superseded by the owner decisions above where they conflict. Use the current recipe-cost analysis for the beta supply recommendation; the earlier research remains methodological background.
+
 ## Useful primary documentation
 
 All sources accessed 2026-09-13. Historical examples explain design reasoning; they are not claims about the latest balance patch.
