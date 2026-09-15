@@ -35,14 +35,14 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-15T12:49:42+00:00",
+      "captured_at": "2026-09-15T12:56:37+00:00",
       "record_sha256": "2280dc627dbf8ca7447930f84128da268464ca7ef42083c1dc807b98c3c7c17a",
       "files": {
-        "games/overkill-foundry/STATUS.md": "5eaaf0cfd93abed26244a9d602fb96777a35e8ae0868f2abc296fc4ec002fa73",
-        "games/overkill-foundry/BRIEF.md": "8e15e3ba0a5a604ada378c250af98aeca62df201a1c462ee509a7f0a15829894",
-        "games/overkill-foundry/DECISIONS.md": "4052cd482b2579c31abc961940b7ed77829ac38a8c962a495d587764bd6815af",
-        "games/overkill-foundry/design/REDESIGN-PLAN.md": "8e811bec30b672de660472ff4dd7e6e41f3d0246d0453a41778673ba9ca6c86d",
-        "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "5fc160628e9ee09c9e931d3bd05d1fb2b0c5f8086c028d43bb31d8094e3ab142",
+        "games/overkill-foundry/STATUS.md": "399e962b7260aa6e51758e79169d6a2b79b916fcdf8ae01640571d04b393ac75",
+        "games/overkill-foundry/BRIEF.md": "6b09936c724ea85cd0656f23a90925956ad49742ba24e793aff489d8c46dbf1e",
+        "games/overkill-foundry/DECISIONS.md": "6b76f6a55c06b46f7c1dfcf3ca05aa3486c606a5ff809599dd3014971c823359",
+        "games/overkill-foundry/design/REDESIGN-PLAN.md": "bcd670858876e582d40b221c5aa8825e03d9ad382a777e4770f049c41771e46a",
+        "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "ac692e0dffae23012285acafe35b18bb87f83f3ca188748efe64872820a5ed7c",
         "games/overkill-foundry/design/COMBAT-CAMERA-FLOW.md": "29f399f56d87407af88ef50467288824ebdfd60680e22dd72c3ff209a6d96211",
         "games/overkill-foundry/design/ART-DIRECTION.md": "1053b0f0fcc971c28dd373f04076650bb71e4d988268c17d2305ac91707cd2f8",
         "games/overkill-foundry/design/BUILD-STRATEGY-STUDY.md": "a1a0db4d6c077de59033c3214c42911edc238ba280a26cfbab07f2021f43adda",
@@ -52,7 +52,7 @@
         "games/overkill-foundry/art-tests/camera-motion/README.md": "b6ae907726277f73f68ddd37d64d64703bebda771ff876c3a93409aab6c48c6a",
         "games/overkill-foundry/design/NAMING-STUDY.md": "2d270b01f7800d489da7c12a1349095f3840998fb9cac44b45def276166d5432",
         "games/overkill-foundry/design/analysis/resource_haul.py": "6e5f29b476df17d982a90ceec6fcd63a75879bdb1dd39bc6c8c038106f91dbed",
-        "games/overkill-foundry/design/analysis/whole_number_damage.py": "993d0cdc0e4c422a3b4d1a5692273282040ba9826a47949f90ca6f17d2a94bc0"
+        "games/overkill-foundry/design/analysis/whole_number_damage.py": "27d93faa7b45de94662d9db12e61c255f36a7b3ee52884da948206473ec96488"
       }
     }
   }

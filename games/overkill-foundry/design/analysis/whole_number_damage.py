@@ -32,10 +32,19 @@ def reduce_damage(damage: int, percent: int) -> int:
     return whole_share(damage, 100 - percent, 100)
 
 
-def spread_contribution_total(damage: int, *eligible_share_percents: int) -> int:
-    """Sum whole contributions to one extra target; do not decide hit grouping."""
+def spread_hit_amounts(damage: int, *eligible_share_percents: int) -> list[int]:
+    """Keep each eligible spread part's hit separate, in supplied example order.
+
+    Actual game ordering, dead-target and zero-damage trigger rules are outside
+    this arithmetic model.
+    """
     whole_share(damage, 0, 100)
-    return sum(whole_share(damage, percent, 100) for percent in eligible_share_percents)
+    return [whole_share(damage, percent, 100) for percent in eligible_share_percents]
+
+
+def spread_contribution_total(damage: int, *eligible_share_percents: int) -> int:
+    """Return a preview total only; it must not replace the separate hits."""
+    return sum(spread_hit_amounts(damage, *eligible_share_percents))
 
 
 def main() -> None:
@@ -68,6 +77,13 @@ def main() -> None:
     assert list(examples.values()) == [14, 15, 4, 24, 12, 4, 4, 2, 0, 18, 7]
     assert spread_contribution_total(20, 50, 40) == spread_contribution_total(20, 40, 50)
     assert spread_contribution_total(20) == 0
+    hit_examples = {
+        "20_damage_with_50_and_40_percent_parts": spread_hit_amounts(20, 50, 40),
+        "9_damage_with_50_and_40_percent_parts": spread_hit_amounts(9, 50, 40),
+    }
+    assert list(hit_examples.values()) == [[10, 8], [4, 3]]
+    assert spread_hit_amounts(20, 40, 50) == [8, 10]
+    assert spread_hit_amounts(20) == []
 
     # Include every whole damage amount from 0 through 200 and percentages
     # through 200, covering zero damage, odd splits, large bonuses and reductions.
@@ -91,6 +107,7 @@ def main() -> None:
         "percentage_effect_rows": ratio_rows,
         "checked_damage_percentage_pairs": checked_pairs,
         "examples": examples,
+        "separate_spread_hit_examples": hit_examples,
         "result": "All computed damage is whole; no fractional remainder is carried",
     }, indent=2))
 
