@@ -22,7 +22,7 @@ Design draft, 14 September 2026. **606 original recipes: 126 shared and 120 excl
 
 **Recipes have different output types.** Gun and Shield recipes pay their listed materials to create parts in reserve; those parts may be used now or saved, and are consumed when used. **Utility recipes pay their listed materials and activate immediately when used; they produce no part.** There is no stored Utility output or second part-Use action. Recipe Use applies its use/cooldown accounting whether it creates a part or activates a Utility effect. A part-producing recipe that makes two parts is still one recipe and one use.
 
-These pools are possible discoveries, not a deck or the contents of starting memory. Keep only the recipes that fit memory capacity. When memory is full, a new recipe can replace an old one; an offer can also be skipped. **Owner-selected starting capacity: 20 recipes, subject to balancing after beta testing.** Permanent upgrades can expand it. The proposed 12-recipe starting kits below remain unselected; if used, they would leave 8 free slots. Capacity is not the number of starting recipes.
+These pools are possible discoveries, not a deck or the contents of starting memory. Keep only the recipes that fit memory capacity. When memory is full, a new recipe can replace an old one; an offer can also be skipped. **Owner-selected starting capacity: 20 recipes, subject to balancing after beta testing.** Permanent upgrades can expand it. **Owner accepts the listed 12-recipe starter sets for now: 8 shared and 4 character-specific**, leaving 8 free slots. Both capacity and the starter set will be balanced through beta runs; individual recipe tuning remains draft. Capacity and the number of starting recipes remain distinct.
 
 Each mercenary uses the 126 shared recipes plus their own 120 exclusive recipes: **246 possible recipes per character**. Shared recipes are written once in this document and belong to all four pools. Base recipes are starting knowledge. Common, uncommon, rare and legendary entries are discoveries. The owner's encounter and rarity rules still apply: regular fights do not give legendary recipes; stronger encounters and shops have their own reward pools. Pool sizes do not set drop chances or shop prices.
 
@@ -131,7 +131,7 @@ For Perfect Salvage, the **unmodified precision bonus** is the material bundle t
 
 ## Four mercenaries and their starting kits
 
-These identities and traits are proposed ways to make the characters feel different from the first fight.
+These identities and traits remain proposed ways to make the characters feel different from the first fight. Klaus accepted the listed starter sets on 15 September as a provisional beta-balancing baseline: 12 recipes per character, 8 shared plus 4 exclusive. This does not establish final character identities or tested recipe balance.
 
 | Mercenary | Weapon and specialty | Starting recipes | Full discovery pool |
 | --- | --- | --- | --- |
@@ -140,7 +140,7 @@ These identities and traits are proposed ways to make the characters feel differ
 | Ada “Patch” Flint | Rivet Cannon and Bolt the helper robot. Spend parts on attack, protection or keeping Bolt working. | SH001–SH008 + AD001–AD004 | SH001–SH126 + AD001–AD120 |
 | Noor “Flux” Sayeed | Coil Cannon. Store Charge, split it between protection and damage, and cool useful recipes. | SH001–SH008 + NO001–NO004 | SH001–SH126 + NO001–NO120 |
 
-The weapon's name does not force a particular final model. Every character still builds a single shot from parts and prepares defence. Their separate mechanics sit beside the shared recipes, which provide enough basic damage, protection, targeting and cooling for all four.
+The weapon's name does not force a particular final model. Every character assembles each shot from parts and prepares defence; multiple shots are allowed before End Turn. Their separate mechanics sit beside the shared recipes, which provide enough basic damage, protection, targeting and cooling for all four.
 
 | Pool | Base | Common | Uncommon | Rare | Legendary | Unique recipes |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1028,7 +1028,7 @@ In later paper tests and a playable prototype, check these concrete cases:
 - Does preparing the one manual grab change when it is used? Does the reward justify materials and a memory slot without making a Perfect result compulsory? Check all six precision enhancements together for an excessive once-per-fight resource burst, then check their much smaller automatic fallback.
 - Can players understand the final damage, Shield and delayed effects before committing? Which low-rarity recipes are consistently ignored, and which rare recipes dominate unrelated builds?
 
-The interface must support at least 20 parts in each bullet and shield. Starting recipe-memory capacity is 20, with balancing after beta testing still to come. The final shot/defence part cap, starter-kit size/composition, exact haul composition, remaining Load controls, shot-versus-round effect behaviour and non-Ammo activation details, and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
+The interface must support at least 20 parts in each bullet and shield. Starting recipe-memory capacity is 20, with balancing after beta testing still to come. The initial starter set is 12 recipes (8 shared, 4 character-specific), also subject to balancing through beta runs. The final shot/defence part cap, exact haul composition, remaining Load controls, shot-versus-round effect behaviour and non-Ammo activation details, and fight-boundary cooldown reset remain owner decisions or later balance questions. None is silently locked by a recipe count.
 
 ### What comes next
 
