@@ -53,7 +53,7 @@ This is a concrete test mapping of steering, not a claim that its exact +2 formu
 
 ### What those resources buy
 
-These examples use distinct no-cooldown shared recipes once each; all costs are paid. Damage below is **added by parts**, excluding the unselected draft gun base damage, target defences and other modifiers. Prepared Shield activates only at End Turn.
+These examples use distinct no-cooldown shared recipes once each; all costs are paid. Damage below is **supplied by parts**, before target defences and other modifiers. The later owner decision on 15 September confirms zero base gun damage, so these part-only totals remain unchanged. Prepared Shield activates only at End Turn.
 
 | Package | Exact recipes | Material cost | Draft effect before other modifiers |
 | --- | --- | --- | --- |
@@ -86,7 +86,7 @@ All candidate recipes begin ready and opening reserves are empty. The probe excl
 
 - **Extra Lift (SH008):** costs 1 Copper + 1 Circuit now and grants 2 mixed units next round. It has zero net material-count gain before other synergies and transforms known materials into a delayed mix. That may be a conversion choice, but it is weak as the introductory quantity upgrade. Compare a proposed **+3 next-round yield** (+1 net unit) against the current +2 during beta; no recipe row has been changed or that buff selected. Evaluate actual useful types and missed immediate defence, not just the count.
 - **Copper/Glass competition:** cooling, defence and utility setup frequently compete for the same materials. When a player has plenty of total scrap but cannot use it, adjust mix/steering or a specific recipe before raising everyone's haul. A permanent +1 material per turn is 10% of a ten-unit haul, but its tactical benefit may jump when it completes a recipe cost.
-- **Multiple cheap shots:** the catalogue's draft base gun damage must be reviewed under the selected multiple-shot rule. If +4 base damage applies freely to every shot, SH001 and SH003 give 13 damage together but 17 across two shots before other effects. No added firing cost or shot cap is proposed here. Compare this incentive with intended large-shot synergies before balancing enemy HP or interpreting a supply test.
+- **Multiple cheap shots — base damage resolved, 15 September:** the owner specifies zero base gun damage; all bullet damage and effects come from its parts. SH001 and SH003 therefore supply 9 damage together or across two shots before other effects. The earlier 13-versus-17 comparison is superseded. Continue comparing part synergies, targeting and status timing when testing large versus split shots. No firing cost or shot cap is introduced, and the printed-cost supply analysis is unaffected.
 - **Cooling and stockpiling:** positive printed costs alone do not prove a full refund/cooling chain cannot pay for itself. New counters can be cleared by explicit cooling, and surplus stock carries across rounds without a cap. Probe repeated cheap shots, resource refunds, global cooling and waiting for large builds in complete fights. Repeated no-cooldown uses remain blocked absent explicit permanent upgrades.
 - **Pending catalogue timing:** shield-spending effects that need active Shield during preparation cannot assume an End-Turn-only prepared shield is already active. Utility dependencies and the character-specific draft rules also require reconciliation. Increasing supply cannot make an illegal timing chain valid.
 
