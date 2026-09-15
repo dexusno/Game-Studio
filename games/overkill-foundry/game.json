@@ -34,13 +34,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-15T11:11:52+00:00",
+      "captured_at": "2026-09-15T11:14:17+00:00",
       "record_sha256": "902f9f7539633d47a1e497471f5077d5b866746b06e6dcbff6f7735a93ee9286",
       "files": {
-        "games/overkill-foundry/STATUS.md": "5e5af8b8757c3f51ccd6bd6308801050dd9044d8c1fe98ff8f4462a1d91e9bb7",
+        "games/overkill-foundry/STATUS.md": "2c36b1b7a9656ceacfa2dc2490d0ff311f4b702a863e70b841febfdc01306d5d",
         "games/overkill-foundry/BRIEF.md": "9a4fa6f493a9390e2e3005870291963660d5db699eea5b6d15d1fb1360a1c61b",
         "games/overkill-foundry/DECISIONS.md": "d82e15ed6f2e23aae97a5ddfb8dbedbb81791c9665a90838a66dff76f2ee8e1e",
-        "games/overkill-foundry/design/REDESIGN-PLAN.md": "e9f3e8196c33421d679c17367dd2424ff3d301adcc5aebdb21fa6bf6e1f0e02a",
+        "games/overkill-foundry/design/REDESIGN-PLAN.md": "45a19f8562a1b1ea37c9806447b288391c501677644bc0d0988c91d38ea45104",
         "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "c68d5c2dcf0ee6ddf3bbe72807f8f8ba92e5ab4b46cb7cec71a1f2b3314d4106",
         "games/overkill-foundry/design/COMBAT-CAMERA-FLOW.md": "29f399f56d87407af88ef50467288824ebdfd60680e22dd72c3ff209a6d96211",
         "games/overkill-foundry/design/ART-DIRECTION.md": "1053b0f0fcc971c28dd373f04076650bb71e4d988268c17d2305ac91707cd2f8",
