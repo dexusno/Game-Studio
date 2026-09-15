@@ -30,18 +30,19 @@
       "games/overkill-foundry/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md",
       "games/overkill-foundry/art-tests/camera-motion/README.md",
       "games/overkill-foundry/design/NAMING-STUDY.md",
-      "games/overkill-foundry/design/analysis/resource_haul.py"
+      "games/overkill-foundry/design/analysis/resource_haul.py",
+      "games/overkill-foundry/design/analysis/whole_number_damage.py"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-15T12:30:20+00:00",
-      "record_sha256": "902f9f7539633d47a1e497471f5077d5b866746b06e6dcbff6f7735a93ee9286",
+      "captured_at": "2026-09-15T12:40:32+00:00",
+      "record_sha256": "2280dc627dbf8ca7447930f84128da268464ca7ef42083c1dc807b98c3c7c17a",
       "files": {
-        "games/overkill-foundry/STATUS.md": "88e0ac31a515337f719d1138512e5f7329d03b96ea43b8e963e75f654e082c68",
-        "games/overkill-foundry/BRIEF.md": "ee299668ccc02aadf10a581bd24adfa3663580eb04fd6022655f2b98b2f00d71",
-        "games/overkill-foundry/DECISIONS.md": "3cd76fd1ef05f58822d0cef107be9825f625dd41eb49d40ba1f11b24f36ce606",
-        "games/overkill-foundry/design/REDESIGN-PLAN.md": "9ac8bb4923bbb887aef2fe4b385cd2f77a38f377219f79d8084c561d90f0f4ef",
-        "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "c32bfabb37b512acf815125f76917c073941b2fcf27b10c10c0a0400b3bcc71a",
+        "games/overkill-foundry/STATUS.md": "65292a33eb5005fe3050c79fc2e947c323c4e119d81fe95a6af27d1b7cf8d578",
+        "games/overkill-foundry/BRIEF.md": "b47b8f684246072f581d41167c2ab07757c538003a32d0d2b688d0c44b30e735",
+        "games/overkill-foundry/DECISIONS.md": "100dec97226ee68f908251e9e056b0a56281553acdc695f4b05eacdbacea0e1e",
+        "games/overkill-foundry/design/REDESIGN-PLAN.md": "f4ccf905fe5443d58cec9ee56255b4f759aba700dd6eec48d2e7987e386de9ca",
+        "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "4b2816439c55a65418588416a940519af81ba2820804b539ebc7a717d221d112",
         "games/overkill-foundry/design/COMBAT-CAMERA-FLOW.md": "29f399f56d87407af88ef50467288824ebdfd60680e22dd72c3ff209a6d96211",
         "games/overkill-foundry/design/ART-DIRECTION.md": "1053b0f0fcc971c28dd373f04076650bb71e4d988268c17d2305ac91707cd2f8",
         "games/overkill-foundry/design/BUILD-STRATEGY-STUDY.md": "a1a0db4d6c077de59033c3214c42911edc238ba280a26cfbab07f2021f43adda",
@@ -50,7 +51,8 @@
         "games/overkill-foundry/assets/concepts/combat-camera-2026-09-13/PROVENANCE.md": "d893408df0857c996fccb40a0da850f079a3256bdcced08f26be93d3fa3a6edd",
         "games/overkill-foundry/art-tests/camera-motion/README.md": "b6ae907726277f73f68ddd37d64d64703bebda771ff876c3a93409aab6c48c6a",
         "games/overkill-foundry/design/NAMING-STUDY.md": "2d270b01f7800d489da7c12a1349095f3840998fb9cac44b45def276166d5432",
-        "games/overkill-foundry/design/analysis/resource_haul.py": "6e5f29b476df17d982a90ceec6fcd63a75879bdb1dd39bc6c8c038106f91dbed"
+        "games/overkill-foundry/design/analysis/resource_haul.py": "6e5f29b476df17d982a90ceec6fcd63a75879bdb1dd39bc6c8c038106f91dbed",
+        "games/overkill-foundry/design/analysis/whole_number_damage.py": "fb60c7865c4cf06582ccb2d6d56ad9eabcb0a21f10a69431fa6dd7f3c3247fd9"
       }
     }
   }
