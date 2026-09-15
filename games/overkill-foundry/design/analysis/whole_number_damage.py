@@ -33,10 +33,10 @@ def reduce_damage(damage: int, percent: int) -> int:
 
 
 def spread_hit_amounts(damage: int, *eligible_share_percents: int) -> list[int]:
-    """Keep each eligible spread part's hit separate, in supplied example order.
+    """Keep hits separate, with shares supplied in the parts' placement order.
 
-    Actual game ordering, dead-target and zero-damage trigger rules are outside
-    this arithmetic model.
+    Dead-target, interruption and zero-damage trigger rules are outside this
+    arithmetic model, as is target order within one part's multi-target effect.
     """
     whole_share(damage, 0, 100)
     return [whole_share(damage, percent, 100) for percent in eligible_share_percents]
@@ -80,9 +80,9 @@ def main() -> None:
     hit_examples = {
         "20_damage_with_50_and_40_percent_parts": spread_hit_amounts(20, 50, 40),
         "9_damage_with_50_and_40_percent_parts": spread_hit_amounts(9, 50, 40),
+        "20_damage_with_40_percent_part_placed_first": spread_hit_amounts(20, 40, 50),
     }
-    assert list(hit_examples.values()) == [[10, 8], [4, 3]]
-    assert spread_hit_amounts(20, 40, 50) == [8, 10]
+    assert list(hit_examples.values()) == [[10, 8], [4, 3], [8, 10]]
     assert spread_hit_amounts(20) == []
 
     # Include every whole damage amount from 0 through 200 and percentages
