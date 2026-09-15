@@ -36,7 +36,7 @@ Each mercenary uses the 126 shared recipes plus their own 120 exclusive recipes:
 | Glass | Lenses, insulation and sealed chemical containers |
 | Circuit | Control chips, automation and advanced part behaviour |
 
-All five are proposed scrap ingredients, potentially available from the first city. Circuit should be less common than the bulk materials. The exact haul size and mix still need balancing. Energy cores and credits are not crafting ingredients. The costs in this document are material costs, not shop prices; no additional global energy cost is assumed for this first draft.
+All five are proposed scrap ingredients, potentially available from the first city. Circuit should be less common than the bulk materials. The exact haul size and mix still need balancing. Energy cores and credits are not crafting ingredients. The costs in this document are material costs, not shop prices; **owner decision, 15 September: crafting and firing use no separate global energy/action-point budget**. Materials, available parts and recipe use/cooldown requirements provide the action limits. This selects the no-extra-energy rule, not the draft numerical costs, supply amounts or character traits. Explicit recipe-specific resource requirements remain subject to their individual design review. Reserve storage limits remain open.
 
 ### Cooldown
 
