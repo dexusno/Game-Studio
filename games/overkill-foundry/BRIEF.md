@@ -4,7 +4,7 @@ Owner-selected title: **Overkill Foundry**, 14 September 2026. Catalogue ID: `ov
 
 ## Player promise
 
-Build a devastating shot and enough defence from the scrap you have, read the robots' intentions, and turn victories into a stronger mercenary weapon system. Travel between fortified cities in a dystopian world taken over by a hostile AI. Each city has distinct surroundings and a wave of 10–20 fights, ending in a boss.
+Build a devastating shot and enough defence from the scrap you have, read the robots' intentions, and turn victories into a stronger mercenary weapon system. Travel between fortified cities in a dystopian world taken over by a hostile AI. **A full campaign contains 3 cities initially, subject to beta balancing.** Each city has distinct surroundings and a wave of 10–20 fights, ending in a boss. Clearing the third city completes the campaign route; finale presentation and rewards remain open.
 
 ## Selected loop
 
@@ -34,7 +34,7 @@ Use the owner-supplied [style anchor](design/art%20anchor.png). Prepare in 16B's
 
 ## Next proof and limits
 
-Reconcile Utility catalogue dependencies, then resolve remaining build-effect activation, shot-versus-round effects and Load controls, supply amounts, enemy moves, shop stock/prices, fleeing rewards, other profile persistence and save/Game Over controls. Reconcile conflicting Shield recipes with the settled upgrade-only exceptions; do not reopen the base rule. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
+Reconcile Utility catalogue dependencies, then resolve remaining build-effect activation, shot-versus-round effects and Load controls, supply amounts, enemy moves, shop stock/prices, city-boss encounter-choice handling, fleeing rewards, other profile persistence and save/Game Over controls. Reconcile conflicting Shield recipes with the settled upgrade-only exceptions; do not reopen the base rule. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
 
 The first playable should test whether different enemy intentions and supplies cause meaningful changes in crafting, saving, attack and defence, and whether an earned reward changes a later choice. Game feel and commercial appeal are untested. Naming research will screen current market relevance and public conflicts without treating an absence of search hits as legal clearance.
 
