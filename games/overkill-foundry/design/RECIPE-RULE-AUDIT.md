@@ -1,12 +1,12 @@
 # Recipe rule audit — review together
 
-**16 September 2026 · all 606 recipes reviewed · recipe text unchanged**
+**16 September 2026 · all 606 recipes reviewed · SH026 revised by owner; other 605 rows unchanged**
 
-Reviewed all recipe rows from `5aff12e` against the settled owner rules, updated for the 16 September Shield-grant clarification. Found **49 recipes with a definite conflict or obsolete dependency**, **94 additional recipes needing wording/dependency clarification**, and **463 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `dc8c9ec` against the settled owner rules, updated for the Shield-grant clarification and Folding Brace replacement. Found **48 recipes with a definite conflict or obsolete dependency**, **78 additional recipes needing wording/dependency clarification**, and **480 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
-**Owner resolution:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end and is not granted again next round. The earlier no-removal/no-saving restriction was withdrawn. C05's explicit future-grant schedules now need clarification rather than being automatically classed as active-Shield violations.
+**Owner resolutions:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end. Folding Brace now loads 4 Shield on recipe Use and a new 6-Shield part next round, resolving its retention conflict and C05's general future-grant timing concern. An immediate grant does not repeat without an explicit schedule. The earlier no-removal/no-saving restriction was withdrawn.
 
-This is an audit for joint review. The global grant interpretation is selected; no printed recipe effect, category, price, cost or number was rewritten. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. SH026's output/effect was revised as selected by the owner; its cost/cooldown and all other printed rows are unchanged. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
 **Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** replacement content for the remaining retention recipes in C01; the base reset rule is already settled.
 
@@ -14,11 +14,11 @@ This is an audit for joint review. The global grant interpretation is selected; 
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 11 | 21 | 94 |
-| MA | 120 | 5 | 21 | 94 |
-| IV | 120 | 9 | 17 | 94 |
-| AD | 120 | 6 | 11 | 103 |
-| NO | 120 | 18 | 24 | 78 |
+| SH | 126 | 10 | 20 | 96 |
+| MA | 120 | 5 | 18 | 97 |
+| IV | 120 | 9 | 13 | 98 |
+| AD | 120 | 6 | 8 | 106 |
+| NO | 120 | 18 | 19 | 83 |
 
 All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
 
@@ -28,14 +28,15 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 
 | Group | Classification | Recipes | Topic |
 | --- | --- | ---: | --- |
-| [C01](#c01) | conflict | 13 | Recipe-granted Shield retention |
+| [C01](#c01) | conflict | 12 | Recipe-granted Shield retention |
 | [C02](#c02) | conflict | 9 | Utilities create or copy physical parts |
 | [C03](#c03) | conflict | 7 | Saved, split or sacrificed Utility items |
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
-| [C05](#c05) | clarification | 19 | Explicit future-turn Shield schedules |
+| [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
 | [C07](#c07) | conflict | 2 | Obsolete Shield reset or expiry wording |
 | [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
+| [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
 | [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
 | [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
 | [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
@@ -44,7 +45,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [Q06](#q06) | clarification | 6 | Recipe crafting versus immediate Utility use |
 | [Q07](#q07) | clarification | 2 | Cooling rewards restricted to parts |
 | [Q08](#q08) | clarification | 14 | Status recipient implied rather than stated |
-| [Q09](#q09) | clarification | 14 | Canonical sale basis for batches and generated subparts |
+| [Q09](#q09) | clarification | 15 | Canonical sale basis for batches and generated subparts |
 | [Q10](#q10) | clarification | 10 | Spread Modifier lifecycle and placement order |
 
 ## Rule references
@@ -53,7 +54,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 
 - **R01:** Utilities activate on recipe Use without a stored Utility item. The owner explicitly allows Shield grants to create automatically loaded ordinary Shield parts, removable and saveable like any other part. This does not approve arbitrary reserve-part manufacturing or saved Utility items.
 - **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions.
-- **R03:** Only End Turn activates prepared Shield. Immediate recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. Active Shield resets after the enemy turn without an automatic next-round grant. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; secondary-effect accounting remains partly draft.
+- **R03:** Only End Turn activates prepared Shield. Recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. An explicitly scheduled future grant loads a new part at its stated trigger, as selected for Folding Brace. Active Shield resets after the enemy turn; an immediate grant does not automatically repeat. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; enemy-phase secondary-effect accounting remains partly draft.
 - **R04:** The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
@@ -71,7 +72,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH026 — Folding Brace** | Keep up to 4 of your remaining Shield at the start of next turn; that retained Shield expires normally one turn later. |
 | **SH057 — Spare Metal Brace** | If at least 3 Iron remain in your raw pool after use, keep up to 5 Shield at next turn's start. |
 | **SH092 — Hinged Wall** | Keep up to 15 of your remaining Shield at the start of next turn. |
 | **SH113 — Last Wall** | Keep up to 20 remaining Shield at the start of next turn. |
@@ -183,11 +183,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C05
 
-**Explicit future-turn Shield schedules — clarification · R03**
+**Explicit future-turn Shield schedules — resolved · R03**
 
-These rows explicitly schedule a separate future grant. The owner clarified immediate grants as ordinary Shield parts, not immediate active protection, so the original definite timing-conflict classification is no longer justified. Review the explicit scheduled benefit separately from keeping active Shield or saving an unused part. SH034 also has obsolete expiry wording in C07.
+Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and activates at End Turn if left loaded. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording remains in C07, and MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.
 
-**For our review:** Review the explicitly scheduled future benefit. Do not treat an activated immediate grant as an automatic next-round grant; ordinary unused-part storage remains allowed.
+**For our review:** Interpret an explicitly scheduled Shield grant as a new ordinary part at its stated trigger. An immediate grant alone does not repeat next round. Preserve each row's stated conditions and other unresolved findings.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -271,6 +271,20 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **NO081 — Patient Coil** | For this fight, gain 3 Charge after any main-shot impact for which you paid no Charge through the barrel at Fire. |
 | **NO106 — Shot Receipt** | At the start of next turn, recover the Charge paid by Charged Barrel for this shot, up to 3 Charge, and gain 1 Copper. |
 | **NO110 — Reserve Coil** | For this fight, at Fire add 3 damage per Charge still held after the barrel's optional payment, up to 24 extra damage. |
+
+## C09
+
+**Folding Brace owner-selected replacement — resolved · R03**
+
+SH026's old 6 Shield plus retention of up to 4 is replaced by 4 Shield loaded on recipe Use and a new 6-Shield part loaded at the beginning of the next round. Both are ordinary parts. The second delivery is scheduled by recipe Use, regardless of whether the first part is activated or saved. Cost and cooldown are unchanged; the proposed flat 10 Shield was rejected.
+
+**For our review:** The retention conflict is resolved. Q09 retains the normal one-part resale-basis mapping work for the two generated outputs; no price has been invented.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **SH026 — Folding Brace** | On recipe Use, automatically load a regular Shield part worth 4 Shield. |
 
 ## Q01
 
@@ -447,6 +461,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
+| **SH026 — Folding Brace** | On recipe Use, automatically load a regular Shield part worth 4 Shield. At the beginning of the next round, automatically load a new regular Shield part worth 6 Shield. Both parts may be removed and saved normally; parts left loaded activate at End Turn and their active Shield… |
 | **SH076 — Plate Recasting** | Make one Recast Plate Slug adding that amount as shot damage, up to 14; it has no other effect. |
 | **SH126 — Salvage Foundry** | On a Perfect manual grab next round, also receive 1 Salvage Slug and 1 Salvage Shield Plate in reserve after collection, with no further material cost. |
 | **MA038 — Rivet Bundle** | Each Warm Rivet adds 4 damage to the main shot and gives 1 Heat after impact. |

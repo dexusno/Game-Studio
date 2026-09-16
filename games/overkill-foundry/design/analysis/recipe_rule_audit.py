@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "5aff12e2bbc1335b6f464da1ac24e5208081aa0a"
+SOURCE_COMMIT = "dc8c9ec5839bb32c6abd161aa56a466305b76590"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -28,7 +28,7 @@ def finding(key, status, title, rule, reason, ids, focus, review):
 FINDINGS = [
     finding("C01", "conflict", "Recipe-granted Shield retention", "R02",
             "The recipe keeps active Shield through the normal reset. Only permanent upgrades may grant that exception; the existing superseded marker does not repair the effect.",
-            "SH026 SH057 SH092 SH113 MA048 MA099 IV019 IV057 IV061 IV090 AD074 AD092 NO087",
+            "SH057 SH092 SH113 MA048 MA099 IV019 IV057 IV061 IV090 AD074 AD092 NO087",
             r"keep|retain",
             "Review replacement content for these recipes under the already-settled reset rule."),
     finding("C02", "conflict", "Utilities create or copy physical parts", "R01",
@@ -46,11 +46,11 @@ FINDINGS = [
             "SH033 SH045 SH064 SH065 SH095 SH104 SH108 SH111 MA004 MA047 MA078 MA101 MA113 MA116 IV011 IV036 IV038 IV066 IV079 IV098 AD024 AD042 AD049 AD054 AD056 AD060 AD068 AD078 AD082 AD103 AD107 AD114 AD116 AD119 AD120 NO036 NO041 NO054 NO092 NO095 NO111",
             r"gain.*Shield|Shield equal|Each trigger grants",
             "MA004 Quick Vent is resolved: automatically load its 5-Shield part, with ordinary removal/storage available. Other findings on these rows remain separate; AD103/AD107/AD119 also have enemy-phase triggers covered by Q01."),
-    finding("C05", "clarification", "Explicit future-turn Shield schedules", "R03",
-            "These rows explicitly schedule a separate future grant. The owner clarified immediate grants as ordinary Shield parts, not immediate active protection, so the original definite timing-conflict classification is no longer justified. Review the explicit scheduled benefit separately from keeping active Shield or saving an unused part. SH034 also has obsolete expiry wording in C07.",
+    finding("C05", "resolved", "Explicit future-turn Shield schedules", "R03",
+            "Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and activates at End Turn if left loaded. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording remains in C07, and MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.",
             "SH034 SH096 SH115 MA016 MA040 MA092 MA118 IV059 IV097 IV112 IV120 AD063 AD066 AD098 NO018 NO034 NO056 NO098 NO113",
             r"start|next turn",
-            "Review the explicitly scheduled future benefit. Do not treat an activated immediate grant as an automatic next-round grant; ordinary unused-part storage remains allowed."),
+            "Interpret an explicitly scheduled Shield grant as a new ordinary part at its stated trigger. An immediate grant alone does not repeat next round. Preserve each row's stated conditions and other unresolved findings."),
     finding("C06", "conflict", "Shield-part activation expected before a shot", "R03",
             "The effect expects Shield parts to have activated in preparation, or arms a later shot trigger only when the Shield part activates. Under End-Turn-only activation there is no later ordinary Fire in that player turn.",
             "SH044 SH062 MA034 IV107 AD076",
@@ -65,6 +65,10 @@ FINDINGS = [
             "NO005 NO006 NO017 NO025 NO028 NO035 NO039 NO048 NO058 NO075 NO081 NO106 NO110",
             r"barrel|Charged Barrel",
             "Review the affected condition or refund without restoring an independent gun-damage payment. This does not depend on accepting Residual Current's proposed numbers."),
+    finding("C09", "resolved", "Folding Brace owner-selected replacement", "R03",
+            "SH026's old 6 Shield plus retention of up to 4 is replaced by 4 Shield loaded on recipe Use and a new 6-Shield part loaded at the beginning of the next round. Both are ordinary parts. The second delivery is scheduled by recipe Use, regardless of whether the first part is activated or saved. Cost and cooldown are unchanged; the proposed flat 10 Shield was rejected.",
+            "SH026", r"On recipe Use",
+            "The retention conflict is resolved. Q09 retains the normal one-part resale-basis mapping work for the two generated outputs; no price has been invented."),
     finding("Q01", "clarification", "Shield replenishment during enemy actions", "R03",
             "These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.",
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
@@ -104,7 +108,7 @@ FINDINGS = [
             "Make the intended recipient explicit when reviewing these rows; no blanket main-target or all-hit default has been applied."),
     finding("Q09", "clarification", "Canonical sale basis for batches and generated subparts", "R06",
             "The recipe creates multiple parts or a generated subpart without a recorded standard one-part production requirement for every resulting type. Preserve main-recipe-based resale; do not substitute the discounted producer's cost or divide a mixed batch arbitrarily.",
-            "SH076 SH126 MA038 MA107 MA119 IV088 IV118 AD017 AD083 AD117 NO031 NO063 NO107 NO120",
+            "SH026 SH076 SH126 MA038 MA107 MA119 IV088 IV118 AD017 AD083 AD117 NO031 NO063 NO107 NO120",
             r"Each|receive|Make one|gain 2",
             "Record canonical one-part valuation references/requirements for these outputs. Known fresh copies inherit their original type's basis; generic copying alone is not a pricing conflict."),
     finding("Q10", "clarification", "Spread Modifier lifecycle and placement order", "R07",
@@ -117,7 +121,7 @@ FINDINGS = [
 RULES = {
     "R01": "Utilities activate on recipe Use without a stored Utility item. The owner explicitly allows Shield grants to create automatically loaded ordinary Shield parts, removable and saveable like any other part. This does not approve arbitrary reserve-part manufacturing or saved Utility items.",
     "R02": "Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions.",
-    "R03": "Only End Turn activates prepared Shield. Immediate recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. Active Shield resets after the enemy turn without an automatic next-round grant. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; secondary-effect accounting remains partly draft.",
+    "R03": "Only End Turn activates prepared Shield. Recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. An explicitly scheduled future grant loads a new part at its stated trigger, as selected for Folding Brace. Active Shield resets after the enemy turn; an immediate grant does not automatically repeat. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; enemy-phase secondary-effect accounting remains partly draft.",
     "R04": "The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.",
     "R05": "Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.",
     "R06": "A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.",
@@ -188,8 +192,8 @@ def render():
     totals = Counter(r["status"] for r in rows)
     ledger = {
         "audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-16 final owner choice: immediate Shield grants load ordinary parts, removable/saveable; activated Shield resets at enemy-turn end.",
-        "source_commit_scope": "Pins all 606 printed recipe rows; current catalogue rule prose includes the later owner clarification.",
+        "rule_revision": "2026-09-16 owner revision: Folding Brace loads 4 Shield on recipe Use and a new 6-Shield part next round; ordinary parts are removable/saveable, active Shield resets at enemy-turn end.",
+        "source_commit_scope": "Pins all 606 printed recipe rows after the owner-selected SH026 revision; the other 605 rows were verified unchanged from the previous audit.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -200,14 +204,14 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**16 September 2026 · all 606 recipes reviewed · recipe text unchanged**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the 16 September Shield-grant clarification. "
+             "**16 September 2026 · all 606 recipes reviewed · SH026 revised by owner; other 605 rows unchanged**", "",
+             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the Shield-grant clarification and Folding Brace replacement. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
-             "**Owner resolution:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end and is not granted again next round. The earlier no-removal/no-saving restriction was withdrawn. C05's explicit future-grant schedules now need clarification rather than being automatically classed as active-Shield violations.", "",
-             "This is an audit for joint review. The global grant interpretation is selected; no printed recipe effect, category, price, cost or number was rewritten. "
+             "**Owner resolutions:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end. Folding Brace now loads 4 Shield on recipe Use and a new 6-Shield part next round, resolving its retention conflict and C05's general future-grant timing concern. An immediate grant does not repeat without an explicit schedule. The earlier no-removal/no-saving restriction was withdrawn.", "",
+             "This is an audit for joint review. SH026's output/effect was revised as selected by the owner; its cost/cooldown and all other printed rows are unchanged. "
              "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
