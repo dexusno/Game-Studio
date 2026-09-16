@@ -2,6 +2,8 @@
 
 ## Current milestone — design Q&A toward a specified prototype demo
 
+**Analogous Shield corrections authorized, 16 September:** owner accepts Spare Metal Brace's 8-now/conditional-5-next-round replacement and asks to apply similar solutions to similar conflicts. Updating the remaining 12 retention recipes and the obsolete Early Cover expiry clause, preserving costs, cooldowns and recipe conditions. Other conflict types remain for joint review.
+
 **Folding Brace revised, 16 September:** owner selects a regular 4-Shield part automatically loaded on recipe Use and a new regular 6-Shield part at the beginning of the next round. Both remain removable/saveable and follow End Turn activation and enemy-turn-end Shield reset. Cost and cooldown are unchanged. The audit now records its retention conflict as resolved; the other 605 recipe rows are preserved. No implementation or balance test is claimed.
 
 **Shield-grant clarification, 16 September — final owner choice:** recipe Shield grants automatically load ordinary Shield parts. They may be removed and saved just like any other part; the earlier no-removal/no-saving restriction is superseded. Parts left loaded activate at End Turn, and active Shield resets after the enemy phase without an automatic next-round grant. Saved unused parts follow normal storage. MA004 Quick Vent is compatible with this rule. The [catalogue](design/RECIPE-CATALOGUE.md) and [design plan](design/REDESIGN-PLAN.md) record the selected interpretation. The subsequent SH026 change is described above; the other 605 printed rows remain unchanged.
