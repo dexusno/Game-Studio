@@ -2,25 +2,27 @@
 
 **16 September 2026 · all 606 recipes reviewed · recipe text unchanged**
 
-Reviewed the catalogue at `5aff12e` against the settled owner rules. Found **108 recipes with a definite conflict or obsolete dependency**, **73 additional recipes needing wording/dependency clarification**, and **425 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `5aff12e` against the settled owner rules, updated for the 16 September Shield-grant clarification. Found **49 recipes with a definite conflict or obsolete dependency**, **94 additional recipes needing wording/dependency clarification**, and **463 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
-This is an audit for joint review, not a rewrite. No replacement effect, category, price, cost or number has been selected. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+**Owner resolution:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end and is not granted again next round. The earlier no-removal/no-saving restriction was withdrawn. C05's explicit future-grant schedules now need clarification rather than being automatically classed as active-Shield violations.
 
-**Suggested first review:** C04, starting with **MA004 Quick Vent** from Mara's starter set. It is an immediate Utility that grants Shield before End Turn. The other flagged starter is **SH005 Split Outlet**, whose spread-Modifier placement/accounting needs Q10 clarification. The other unique starter rows have no direct conflict identified in this audit.
+This is an audit for joint review. The global grant interpretation is selected; no printed recipe effect, category, price, cost or number was rewritten. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** replacement content for the remaining retention recipes in C01; the base reset rule is already settled.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 21 | 19 | 86 |
-| MA | 120 | 15 | 17 | 88 |
-| IV | 120 | 19 | 13 | 88 |
-| AD | 120 | 24 | 5 | 91 |
-| NO | 120 | 29 | 19 | 72 |
+| SH | 126 | 11 | 21 | 94 |
+| MA | 120 | 5 | 21 | 94 |
+| IV | 120 | 9 | 17 | 94 |
+| AD | 120 | 6 | 11 | 103 |
+| NO | 120 | 18 | 24 | 78 |
 
 All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
 
-The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every ID, name, original row, source line, disposition and finding references. The [audit renderer](analysis/recipe_rule_audit.py) verifies the exact reviewed catalogue before regenerating this document. It validates coverage and evidence preservation; it does not discover or prove semantic conflicts automatically.
+The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every ID, name, original row, source line, disposition and finding references. The [audit renderer](analysis/recipe_rule_audit.py) verifies that all printed recipe rows still match the reviewed revision before regenerating this document. Rule prose may change with recorded owner clarifications; the ledger hashes the current full catalogue. It validates coverage and evidence preservation; it does not discover or prove semantic conflicts automatically.
 
 ## Findings index
 
@@ -29,12 +31,12 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C01](#c01) | conflict | 13 | Recipe-granted Shield retention |
 | [C02](#c02) | conflict | 9 | Utilities create or copy physical parts |
 | [C03](#c03) | conflict | 7 | Saved, split or sacrificed Utility items |
-| [C04](#c04) | conflict | 41 | Shield granted during preparation, collection or after Fire |
-| [C05](#c05) | conflict | 19 | Fresh recipe Shield at a later turn's start |
+| [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
+| [C05](#c05) | clarification | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
-| [C07](#c07) | conflict | 1 | Shield conversion at the old reset point |
+| [C07](#c07) | conflict | 2 | Obsolete Shield reset or expiry wording |
 | [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
-| [Q01](#q01) | clarification | 8 | Shield replenishment during enemy actions |
+| [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
 | [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
 | [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
 | [Q04](#q04) | clarification | 5 | Remaining Shield sampled at enemy-phase end |
@@ -49,9 +51,9 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 
 These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](RECIPE-CATALOGUE.md) and the owner chronology in [DECISIONS.md](../DECISIONS.md). Draft conventions are used to explain dependencies, not promoted into owner decisions.
 
-- **R01:** Utilities activate on recipe Use and produce no part; physical parts and immediate effects are distinct. See the catalogue's How recipes work / Utility reconciliation sections.
+- **R01:** Utilities activate on recipe Use without a stored Utility item. The owner explicitly allows Shield grants to create automatically loaded ordinary Shield parts, removable and saveable like any other part. This does not approve arbitrary reserve-part manufacturing or saved Utility items.
 - **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions.
-- **R03:** Only End Turn activates prepared Shield. Fire, Load, staging and collection do not activate it; explicit upgrade grants retain their own timing. Secondary-effect and non-Ammo accounting still contain draft details.
+- **R03:** Only End Turn activates prepared Shield. Immediate recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. Active Shield resets after the enemy turn without an automatic next-round grant. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; secondary-effect accounting remains partly draft.
 - **R04:** The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
@@ -87,7 +89,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Utilities create or copy physical parts — conflict · R01**
 
-A Utility is labelled as an immediate effect with no part, but its effect manufactures or copies inventory parts, including delayed production. This contradicts the recorded no-part boundary.
+These Utilities manufacture or copy arbitrary inventory parts, including delayed production. That output remains unreconciled with the Utility boundary; the owner-approved ordinary Shield-value grant does not by itself approve generic part copying or other manufactured outputs.
 
 **For our review:** Review the intended recipe category and output; no conversion has been applied.
 
@@ -127,11 +129,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C04
 
-**Shield granted during preparation, collection or after Fire — conflict · R03**
+**Shield granted during preparation, collection or after Fire — resolved · R03**
 
-The text grants active Shield before End Turn, either directly or through a trigger that can occur in preparation. Treating this as pending Shield would change the printed effect and is not silently assumed.
+Resolved by the owner's 16 September clarification: a grant automatically loads an ordinary Shield part worth that amount. It may be removed and saved like any part. End Turn activates parts left loaded; active Shield resets at enemy-turn end without an automatic grant next round. The original audit incorrectly read these grants as immediate active protection.
 
-**For our review:** Review how each intended defence benefit should fit the selected End Turn activation. MA004 is a starter recipe.
+**For our review:** MA004 Quick Vent is resolved: automatically load its 5-Shield part, with ordinary removal/storage available. Other findings on these rows remain separate; AD103/AD107/AD119 also have enemy-phase triggers covered by Q01.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -181,11 +183,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C05
 
-**Fresh recipe Shield at a later turn's start — conflict · R03**
+**Explicit future-turn Shield schedules — clarification · R03**
 
-The recipe directly grants active Shield at collection/turn start instead of End Turn. A delayed grant is not retention, but it still needs an authorised Shield-timing source; permanent-upgrade exceptions do not automatically apply to recipes.
+These rows explicitly schedule a separate future grant. The owner clarified immediate grants as ordinary Shield parts, not immediate active protection, so the original definite timing-conflict classification is no longer justified. Review the explicit scheduled benefit separately from keeping active Shield or saving an unused part. SH034 also has obsolete expiry wording in C07.
 
-**For our review:** Review the intended delayed defence under the established activation boundary; do not reinterpret it as stored parts automatically.
+**For our review:** Review the explicitly scheduled future benefit. Do not treat an activated immediate grant as an automatic next-round grant; ordinary unused-part storage remains allowed.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -231,17 +233,18 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C07
 
-**Shield conversion at the old reset point — conflict · R02**
+**Obsolete Shield reset or expiry wording — conflict · R02**
 
-NO060 schedules a next-turn action 'before clearing or retention', but the selected default reset has already occurred at enemy-turn end. Its stated reset ordering is obsolete even when an upgrade retained some Shield.
+NO060 schedules a next-turn action 'before clearing or retention', although the default reset has already occurred at enemy-turn end. SH034 says its grant expires at the following turn's start unless retained. Once activated, ordinary Shield resets at enemy-turn end; an unused saved part follows normal storage. Neither recipe can move the active-Shield reset boundary.
 
-**For our review:** Review the conversion's intended trigger against the settled reset point.
+**For our review:** Review NO060's conversion trigger and SH034's expiry clause against the settled enemy-turn-end reset.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
 | **NO060 — Field Pocket** | At the start of next turn, before clearing or retention, spend up to 9 remaining Shield and gain 1 Charge per full 3 Shield spent. |
+| **SH034 — Early Cover** | It expires at the following turn's start unless retained. |
 
 ## C08
 
@@ -273,7 +276,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Shield replenishment during enemy actions — clarification · R03**
 
-These gains happen after a Shield part was activated at End Turn, or through an ongoing effect during the enemy phase. The settled activation/reset rules alone do not fully specify whether this reactive replenishment is allowed. It is not labelled a definite retention violation.
+These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.
 
 **For our review:** Review secondary Shield replenishment as one group, keeping it separate from preparation-time grants and next-turn retention.
 
@@ -289,6 +292,9 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **NO042 — Recovering Field** | After the first enemy attack this round finishes, restore up to 8 Shield that attack removed. |
 | **NO083 — Restarting Field** | The first time an enemy attack reduces positive Shield to 0 this round, gain 16 Shield after that attack finishes. |
 | **NO117 — Field Shelter** | Until the end of this enemy phase, after each enemy's first attack against you, gain 4 Shield and 1 Charge. |
+| **AD103 — Trip Alarm** | Until the start of your next turn, the first time Bolt becomes disabled, apply Weaken 9 to every enemy and gain 10 Shield. Triggers once; self-paid HP may trigger it. |
+| **AD107 — Dark Shift** | For this fight, the first time Bolt becomes disabled after installing this reserve, gain 22 Shield. |
+| **AD119 — Stand Back Up** | For this fight, the next two times Bolt is disabled, immediately restore him to 6 HP after the disabling action fully resolves. |
 
 ## Q02
 
@@ -493,6 +499,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Shared specification gaps, not 606 separate questions
 
-Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q04/Q10 identify concrete rows that expose these gaps. A global clarification may resolve several entries; it must not silently rewrite the selected End Turn or reset rules. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q04/Q10 identify concrete rows that expose these gaps. The owner resolved C04 through ordinary Shield-part grants; further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review the grouped conflicts with Klaus and record chosen resolutions. Only then change affected recipe rows and re-audit them. This report selects no replacement designs and authorizes no gameplay implementation.
+**Next action:** review remaining groups with Klaus, starting with C01's retention recipes. Record chosen replacements before changing affected rows and re-auditing them. The immediate-grant interpretation is selected; no other replacement or gameplay implementation is implied.

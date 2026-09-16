@@ -40,7 +40,7 @@ Use the owner-supplied [style anchor](design/art%20anchor.png). Prepare in 16B's
 
 ## Next proof and limits
 
-**Complete recipe audit ready for joint review, 16 September:** [the report](design/RECIPE-RULE-AUDIT.md) reviews all 606 recipes, with 108 conflict/obsolete-dependency cases and 73 additional clarification cases. Every recipe row is preserved. Review the grouped findings with Klaus and record solutions before changing affected recipes; no replacement design is selected by this audit.
+**Recipe audit updated through joint review, 16 September:** [the report](design/RECIPE-RULE-AUDIT.md) covers all 606 recipes, now with 49 conflict/obsolete-dependency cases and 94 additional clarification cases. Immediate Shield grants automatically load ordinary Shield parts, removable and saveable like other parts; End Turn activates those left loaded, then active Shield resets at enemy-turn end. This resolves Quick Vent and the C04 timing group. Every printed recipe row is preserved. Review the remaining groups and record chosen replacements before changing affected recipes.
 
 Reconcile Utility catalogue dependencies, then resolve remaining build-effect activation, shot-versus-round effects and Load controls, supply amounts, enemy moves, shop stock/prices, detailed Mystery outcomes, exact escape countdown display/tick conventions, loot amounts and offer tuning, other profile persistence and save/Game Over controls. Reconcile conflicting Shield recipes with the settled upgrade-only exceptions; do not reopen the base rule. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
 
