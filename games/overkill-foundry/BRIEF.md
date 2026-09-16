@@ -30,6 +30,8 @@ Shops offer no direct healing service. They may sell healing recipes or permanen
 
 ## Content and presentation
 
+**Inherent abilities requested, 16 September:** each mercenary has a unique built-in passive. The [first proposal](design/MERCENARY-ABILITIES.md) gives Mara Heat-spend recovery, Ivo follow-up targeting after Acid Etch, Ada Bolt repair after a paid Helper attack, and Noor Charge after effective Utility cooling. These require no memory slot or purchase. Names and values remain draft; the obsolete independent gun-damage traits are replaced without changing recipe rows.
+
 A [three-city robot roster](design/ENEMY-ROSTER.md), [effect glossary](design/ROBOT-EFFECTS.md) and [Mayor upgrade draft](design/MAYORS.md) were developed through the owner-authorized two-agent STS2 wiki study on 16 September. They propose 42 encounter entries across the three cities, with one final boss chosen from each city's alternatives. City identities, new effects and numerical values remain proposals; only the Mayor role/rarity and previously settled rules are owner-selected. These are documented designs, not a playable build or verified balance.
 
 The catalogue has 606 drafts: 126 shared and 120 exclusive to each of four proposed mercenaries, for 246 possible recipes per character. Character identities, starter sizes, recipe numbers and detailed status rules remain proposals where the owner has not selected them.
