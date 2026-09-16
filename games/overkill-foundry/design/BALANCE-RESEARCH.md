@@ -2,6 +2,39 @@
 
 13 September 2026. Requested by Klaus during the stacked-ammunition discussion. This records developer documentation and a proposed method for our game. It does not establish tuned values or authorize implementation. Companion: [stacked ammunition and build strategies](BUILD-STRATEGY-STUDY.md).
 
+## HP and enemy benchmarks from STS2 — 16 September 2026
+
+**Owner direction:** use Slay the Spire 2's HP/enemy balance as experience for our initial values. Klaus points out that comparable robot balancing would let us draw on its player-HP balance. This selects a reference approach, not a wholesale numerical copy or a change to our recovery rules. The current [robot library](ENEMY-ROSTER.md) adapts tactical behaviours; its printed HP, damage and effects are our provisional values, not already matched STS2 balance.
+
+**Proposed first Mara test fixture: 80 starting HP and 80 maximum HP before Mayor or other upgrades.** Start the controlled test at 80/80; an explicit maximum-HP upgrade still adds its stated amount and heals that amount. This is a usable provisional input for demo studies, not owner-selected final HP or a claim of character parity. Ivo, Ada and Noor's final HP remain to tune. Keep the existing proposed ten-material haul as a separately labelled test input; neither proposal becomes a new owner decision merely by being used in a paper test.
+
+### Verified reference and its limits
+
+Accessed 16 September 2026 through indexed STS2 wiki extracts. These are current retrieved descriptions, not an inspected executable or a verified complete balance model. Use the ordinary single-player, non-Ascension reference when comparing values; do not mix higher-difficulty stats into the same table.
+
+| Source observation | Implication for our initial balance |
+| --- | --- |
+| [Ironclad](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ironclad) starts with 80 maximum HP at ordinary difficulty; its starting relic heals 6 HP at combat end. | 80 is a concrete reference-scale candidate, not an isolated proof that an 80-HP mercenary can survive the same enemy sequence. Mara has no selected equivalent automatic heal. |
+| [Rest Sites](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Rest_Sites) offer healing of 30% maximum HP, rounded down, and a rest site precedes the boss. | At 80 maximum HP one chosen Rest can restore up to 24 HP, limited by missing HP. Choosing an upgrade instead grants no Rest healing. Our routes do not include this recovery by default. |
+| [Map Locations](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Map_Locations) describes Ancient entry healing of all missing HP at ordinary difficulty. | Cross-act recovery changes the campaign's available HP substantially. Our Mayors grant their selected upgrade; they do not automatically restore missing HP. |
+
+Illustration only: losing 10 HP during a fight and then receiving an effective 6-HP heal is a net loss of 4. The same 10 damage without that heal costs 10. Neither amount is an observed average STS2 fight loss. Actual healing is capped by missing HP, so nominal healing cannot simply be added to a campaign budget without checking timing.
+
+### How to transfer the useful balance
+
+For each selected demo formation, pair it with a comparable STS2 role from the existing source research and record the source difficulty/date, HP, attack sequence, hit counts, defence and support effects. Enemy figures can seed a comparison fixture, but a new effect such as our per-hit Armor must be evaluated as its actual mechanic rather than assumed equivalent to a source buff.
+
+Compare four outcomes using our real starter recipes and material costs:
+
+1. **Turns to remove each threat:** effective affordable part damage against its defences, with targeting, saved parts and preparation turns. Total enemy HP alone is insufficient.
+2. **Defensive burden:** damage and status pressure remaining after plausible Shield preparation and early kills. All attacks in a formation must be evaluated together.
+3. **Loss from a mistake:** damage when a player misses a charge warning or keeps the wrong target alive, expressed against the provisional 80 HP. Do not assume the demonstrated zero-loss worked route is typical play.
+4. **Whole-city attrition:** actual HP carried across fights, including only healing recipes/upgrades acquired and paid for in that route. A random healing offer is not guaranteed recovery.
+
+Our full recipe memory is available subject to costs/use limits, supplies and unactivated parts can be saved within fights, and firing has no separate energy budget. These change achievable damage and defence compared with source deck/energy constraints. Matching source enemy stats is therefore a starting experiment; matching the resulting player choices and survival pressure requires costed fights and playtests.
+
+The next concrete comparison is Mara's selected demo encounters at the proposed 80 HP and ten-material haul, including a simpler Regular path and an Officer-taking path. Record healing access explicitly, then adjust enemy HP, attack cadence/damage, supply or the HP fixture according to the observed cause. Preserve the owner's no-automatic-healing rule, End-Turn-only prepared Shield, whole-number damage and uncapped resource-permitted shots. This pass supplies a benchmark and test input; it does not change robot/recipe rows, import a healing system or produce a combat-balance result.
+
 ## Current beta haul recommendation — 15 September 2026
 
 **Recommendation for the first beta supply profile: 10 materials per normal haul in total — an 8-material foundation plus 2 materials directed by the existing steering choice.** The earlier 8+2 illustration was not a selected balance value; it now has a recipe-cost basis. These are proposed beta numbers, not an owner-approved economy or a tested result. Do not reopen whether gathering has steering.
