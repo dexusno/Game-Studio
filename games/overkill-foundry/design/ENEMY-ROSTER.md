@@ -1,14 +1,14 @@
-# Overkill Foundry — robot roster by city
+# Overkill Foundry — robot library by campaign stage
 
 **Research-informed draft · 16 September 2026**
 
-This roster contains **42 encounter entries: eight Regular designs, three Officer designs and three boss alternatives for each of three cities**. Group entries can contain several robot bodies. Five additional summoner templates (the Boot Pod/cutter plus four factory helpers) and one boss helper (Brake Drone) are defined below. A city run still ends with one boss encounter; three alternatives do not mean fighting three city bosses.
+This roster contains **42 encounter entries: eight Regular designs, three Officer designs and three boss alternatives for each of three campaign stages**. The [mercenary progression proposal](CAMPAIGN-PROGRESSION.md) assigns this library across four distinct three-city campaigns, twelve cities in total. C1/C2/C3 are stable threat-tier IDs, not a claim that every mercenary visits the same locations. Group entries can contain several robot bodies. Five additional summoner templates (the Boot Pod/cutter plus four factory helpers) and one boss helper (Brake Drone) are defined below. A city run still ends with one boss encounter; three alternatives do not mean fighting three city bosses.
 
 Klaus authorized using Slay the Spire 2's enemy strengths and tactical patterns as inspiration, with original robot identities and renamed/adapted effects. The city names, individual roster entries, effects beyond settled rules and numerical values below are proposals. Source research does not establish balance in our game. The existing [drone/siege encounter](ENCOUNTER-DRONES-AND-SIEGE.md) remains the approved worked route.
 
 Read the [effect definitions](ROBOT-EFFECTS.md) and [Mayors and opening upgrades](MAYORS.md) alongside this roster. Two research agents examined [Acts 1–2](research/2026-09-16-sts2-acts-1-2.md) and [Act 3/effects/Ancients](research/2026-09-16-sts2-act-3-effects-mayors.md). Source names in the inspiration column are research references, not names used by our game.
 
-## The three cities
+## Original setting anchors — now Mara's proposed cities
 
 | City — working title | Robot identity and surroundings | Tactical progression |
 | --- | --- | --- |
@@ -16,12 +16,12 @@ Read the [effect definitions](ROBOT-EFFECTS.md) and [Mayors and opening upgrades
 | **2. Coilbridge** | Freight bridges, rail depots and automated production districts. Modular loaders, cable bundles, magnetic cranes and assembly pods. | Break support formations, manage reinforcements, use defence to create openings, and decide when to finish paired threats. |
 | **3. Glassward** | Surveillance avenues and the hostile AI's civic control infrastructure. Sensor crowns, enclosed security frames, optical emitters and command machines. | Combine earlier lessons against auras, scaling, several attack shapes and clearly explained boss phases. |
 
-These are distinct proposed city settings within the established robot-takeover world. Mayors represent the fortified cities; they are not the city bosses. The source's alternate Act 1 environments supply ideas for Cinderwall, not a fourth city or an extra selected campaign route.
+These are Mara's three proposed settings within the established robot-takeover world. Ivo, Ada and Noor have nine other city identities and different route shapes in the progression document. Mayors represent the fortified cities; they are not the city bosses. The headings below retain these original setting anchors for readability; their robot IDs are reusable stage libraries.
 
 ## Reading a robot entry
 
 - HP and damage are **our provisional whole-number beta values**, not copied STS2 values. An attack written 4 × 3 means three separate hits of four, total twelve, before buffs/defence. Every source-linked or increasing value must be included in the intent preview.
-- A listed sequence starts at its first action and repeats unless expressly described as an opening, one-time threshold or conditional. Support actions spend the robot's action. Spawning never grants a new robot an immediate surprise attack.
+- A listed sequence is the default/reference pattern: it starts at its first action and repeats unless expressly described as an opening, one-time threshold or conditional. [Bounded pattern generation](ENEMY-PATTERNS.md) may choose only explicitly authored variants after the appropriate gate; the approved drone/siege fixture stays fixed. Support actions spend the robot's action. Spawning never grants a new robot an immediate surprise attack.
 - Ordinary enemies act only after player End Turn. Reactive Mesh is an explicit enemy reaction, not an extra normal turn. Armor is flat reduction per direct hit; prepared player Shield activates only on End Turn and resets after enemy actions.
 - A robot remains targetable unless a row explicitly says otherwise; this first roster contains no untargetable leader behind an unexplained bodyguard. Killing a source removes its linked penalty. Killed-target hits are lost without retargeting.
 - Escape always follows the owner's four-turn advance warning and uses the departure action instead of attacking. It is not an automatic consequence of another robot dying. Killed robots remain eligible for their assigned loot; escaped ones do not.

@@ -1,6 +1,6 @@
 # Mayors — city-entry permanent upgrades
 
-16 September 2026. Companion to the [three-city robot roster](ENEMY-ROSTER.md).
+16 September 2026. Companion to the [robot library](ENEMY-ROSTER.md) and [four mercenary campaigns](CAMPAIGN-PROGRESSION.md).
 
 ## Selected role
 
@@ -8,7 +8,20 @@ Klaus defines Mayors as the equivalent of Slay the Spire 2's Ancients: at the be
 
 The wiki describes an Ancient encounter at act entry and three offered boons. Its names, unlock gates, appearance probabilities and compulsory-selection rule are not adopted. Our Mayor role and rarity are owner decisions; the identities, offer contents and numerical values below are proposals. Sources: [Acts](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Acts), [Ancients](https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ancients), and the dated [agent research](research/2026-09-16-sts2-act-3-effects-mayors.md).
 
-## City identities and first offer candidates
+## Twelve cities and their Mayors
+
+The owner requires different cities and progression trees for each mercenary. These twelve Mayor identities are proposals. The original Cinderwall/Coilbridge/Glassward set belongs to Mara's route. To keep this first progression study bounded, the other routes reuse the nine candidate modules below by campaign stage; different city identities do not require 36 untested upgrade effects. All offers remain three Rare/Legendary choices, with no automatic healing beyond an upgrade's explicit effect.
+
+| Mercenary | City 1 / Mayor | City 2 / Mayor | City 3 / Mayor |
+| --- | --- | --- | --- |
+| Mara | Cinderwall / **Irena Vale**, municipal engineer | Coilbridge / **Tomas Reed**, freight coordinator | Glassward / **Nadi Sol**, signals archivist |
+| Ivo | Brinegate / **Sera Venn**, harbour steward | Sablecross / **Oren Pike**, drainage commissioner | Veilcourt / **Leda Marr**, civic records keeper |
+| Ada | Rivetford / **Anja Holt**, repair cooperative chair | Latchhaven / **Bram Noll**, transit custodian | Relaykeep / **Edda Rook**, emergency services director |
+| Noor | Copperwake / **Mina Voss**, tidal-grid engineer | Stormrail / **Joren Hale**, viaduct warden | Prismhold / **Talia Fen**, optical network custodian |
+
+For the initial fixture, City 1 draws MY1-01/02/03, City 2 draws MY2-01/02/03, and City 3 draws MY3-01/02/03. These are baseline test offers, not a final rarity distribution or final character-specific pool. If a module has already been acquired through an Officer or shop, suppress that duplicate and use an authored same-stage replacement. Replacement pools must be specified before a runtime guarantee of three eligible offers; the nine examples alone do not resolve that economy dependency. Route generation must not assume any one Mayor option was selected.
+
+## First offer candidates
 
 Mayors belong to the fortified cities, while bosses command hostile robots in the surrounding districts. These proposed civic identities do not select character models, portraits or a wider political story.
 
