@@ -2,7 +2,7 @@
 
 ## Current milestone — design Q&A toward a specified prototype demo
 
-**Pocket Screen revised, 17 September:** owner selects Weaken 1/2/3 to every living enemy for 0/1/3+ saved ordinary parts in reserve. The omitted 2-part case is filled as Weaken 2, as stated to Klaus. IV071 counts older reserve parts on immediate recipe Use without consuming them. Material cost and no-cooldown availability remain unchanged. Updating its saved-Utility conflict entry; all other 605 rows are preserved.
+**Pocket Screen revised, 17 September — final owner correction:** IV071 applies Weaken 1 to every living enemy with 0 saved ordinary parts in reserve, Weaken 2 with exactly 1, and Weaken 3 with 2 or more. Count older reserve parts on immediate recipe Use without consuming them. The previous 3+-part threshold and intermediate 2-part assumption are superseded. Material cost and no-cooldown availability remain unchanged. Updating its saved-Utility conflict entry; all other 605 rows are preserved.
 
 **Pre-reset Shield readings clarified, 17 September:** owner confirms counting remaining active Shield after enemy actions and before reset, then granting Field Pocket's recorded Charge at next-round start. NO060 keeps 12 Shield, material cost/cooldown and 1 Charge per complete 3 Shield up to 3 Charge. Applied the same authorized boundary to SH066, SH091, MA055, IV092 and NO044. Deferred rewards record their amount before reset; existing end-phase rewards remain at that boundary. SH066 still spends available Shield for its later Iron. Exactly six effect texts changed this pass; the other 600 rows and all output types/material costs/cooldowns remain unchanged.
 
