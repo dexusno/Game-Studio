@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "36c253ae88049658830130f5cfc9f4448002f1fb"
+SOURCE_COMMIT = "a3a33b036be04fde694ce417782c9e0c6ac489c6"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -38,7 +38,7 @@ FINDINGS = [
             "Review the intended recipe category and output; no conversion has been applied."),
     finding("C03", "conflict", "Saved, split or sacrificed Utility items", "R01",
             "The effect requires an inventory Utility item, its age, or separate stored activations. Utilities activate on recipe Use and do not create those items.",
-            "IV071 IV099 IV105 AD040 AD062 AD097 NO055",
+            "IV099 IV105 AD040 AD062 AD097 NO055",
             r"saved|earlier turn|Utility parts|Service Tab|Small Cell",
             "Determine the intended replacement dependency or output. AD062 is newly identified beyond the existing superseded markers."),
     finding("C04", "resolved", "Shield granted during preparation, collection or after Fire", "R03",
@@ -73,6 +73,10 @@ FINDINGS = [
             "SH034 now schedules a regular 8-Shield part for the beginning of the next round. It loads then and may be removed or saved; if left loaded, End Turn activates it and active Shield resets at enemy-turn end. The obsolete following-turn expiry clause was removed without changing its cost, cooldown or Shield amount.",
             "SH034", r"On recipe Use",
             "The old expiry conflict is resolved under the same ordinary-part rule."),
+    finding("C11", "resolved", "Pocket Screen counts saved ordinary parts", "R01",
+            "The owner replaced the nonexistent saved-Utility-item condition with a count of ordinary parts saved in reserve from an earlier round. Final corrected thresholds: 0 saved parts applies Weaken 1, exactly 1 applies Weaken 2, and 2 or more applies Weaken 3 to every living enemy. Count at immediate recipe Use without consuming those parts. Cost and availability are unchanged.",
+            "IV071", r"Apply Weaken",
+            "The Utility-item conflict is resolved. The owner confirmed flat per-hit enemy damage reduction, persistent until it decays by 1 per round to zero; the 25% damage-taken idea was withdrawn."),
     finding("Q01", "clarification", "Shield replenishment during enemy actions", "R03",
             "These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.",
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
@@ -130,6 +134,7 @@ RULES = {
     "R05": "Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.",
     "R06": "A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.",
     "R07": "Spread contributions are separate hits resolved in contributing-part placement order. Load can be undone before Fire; resolved effects/crafting are not automatically refunded.",
+    "R08": "Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected.",
 }
 
 CHECKED_DIMENSIONS = [
@@ -196,8 +201,8 @@ def render():
     totals = Counter(r["status"] for r in rows)
     ledger = {
         "audit_date": "2026-09-17", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-17 owner clarification: NO060 and five analogous effects read/pay remaining Shield before reset; preserve delayed versus immediate reward timing and explicit costs.",
-        "source_commit_scope": "Pins all 606 printed recipe rows after six pre-reset timing clarifications; the other 600 rows and every cost/cooldown are unchanged in this pass.",
+        "rule_revision": "2026-09-17: Pocket Screen uses 0/1/2+ saved parts for Weaken 1/2/3; enemy Weaken persists across hits and decays by 1 once per enemy phase. Player mirror remains draft.",
+        "source_commit_scope": "Pins all 606 printed recipe rows after the final IV071 correction. The current catalogue prose contains the later owner-selected Weaken persistence rule; no further recipe rows changed.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -208,20 +213,20 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**17 September 2026 · all 606 recipes reviewed · 6 Shield-timing clarifications this pass; other 600 rows unchanged**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the pre-reset Shield-reading clarification. "
+             "**17 September 2026 · all 606 recipes reviewed · Pocket Screen revised this pass; other 605 rows unchanged**", "",
+             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for Pocket Screen's final saved-part thresholds. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
              "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
              "**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.", "",
-             "This is an audit for joint review. This pass clarifies six effect texts, preserving their output types, costs/cooldowns and the other 600 rows. Earlier owner-selected Shield-part replacements remain unchanged. "
+             "This is an audit for joint review. This pass revises IV071: 0/1/2+ saved ordinary parts apply Weaken 1/2/3 to every living enemy, resolving C11. Its output type, cost/cooldown and the other 605 rows are preserved. The owner confirmed persistent flat enemy damage reduction: apply Weaken to every hit, then reduce its strength by 1 once after the full enemy phase. The 25% damage-taken idea was withdrawn. The player counterpart remains a labelled draft mirror. Existing recipe amounts and robot stats have not been retuned. "
              "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** C02's Utility part-production cases, starting with SH071; distinguish ordinary Shield-value grants from copying whole parts and their effects.", "",
+             "**Next joint review:** IV099 Twin Coolant and the remaining saved-Utility dependencies.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -264,7 +269,7 @@ def render():
               "Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
-              "**Next action:** review remaining groups with Klaus, starting with C02's Utility part-production cases. Record chosen replacements before changing affected rows and re-auditing them. "
+              "**Next action:** review IV099 and the other remaining groups with Klaus. Record chosen replacements before changing affected rows and re-auditing them. "
               "Shield-part replacements and pre-reset timing clarifications are applied; unrelated replacements and gameplay implementation are not implied.", ""]
     (DESIGN / "RECIPE-RULE-AUDIT.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"reviewed": len(rows), "counts": dict(totals),

@@ -1,16 +1,16 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · 6 Shield-timing clarifications this pass; other 600 rows unchanged**
+**17 September 2026 · all 606 recipes reviewed · Pocket Screen revised this pass; other 605 rows unchanged**
 
-Reviewed all recipe rows from `36c253a` against the settled owner rules, updated for the pre-reset Shield-reading clarification. Found **34 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **487 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `a3a33b0` against the settled owner rules, updated for Pocket Screen's final saved-part thresholds. Found **33 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **488 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
 **Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-This is an audit for joint review. This pass clarifies six effect texts, preserving their output types, costs/cooldowns and the other 600 rows. Earlier owner-selected Shield-part replacements remain unchanged. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. This pass revises IV071: 0/1/2+ saved ordinary parts apply Weaken 1/2/3 to every living enemy, resolving C11. Its output type, cost/cooldown and the other 605 rows are preserved. The owner confirmed persistent flat enemy damage reduction: apply Weaken to every hit, then reduce its strength by 1 once after the full enemy phase. The 25% damage-taken idea was withdrawn. The player counterpart remains a labelled draft mirror. Existing recipe amounts and robot stats have not been retuned. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C02's Utility part-production cases, starting with SH071; distinguish ordinary Shield-value grants from copying whole parts and their effects.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** IV099 Twin Coolant and the remaining saved-Utility dependencies.
 
 ## Coverage
 
@@ -18,7 +18,7 @@ This is an audit for joint review. This pass clarifies six effect texts, preserv
 | --- | ---: | ---: | ---: | ---: |
 | SH | 126 | 6 | 21 | 99 |
 | MA | 120 | 3 | 19 | 98 |
-| IV | 120 | 5 | 16 | 99 |
+| IV | 120 | 4 | 16 | 100 |
 | AD | 120 | 4 | 10 | 106 |
 | NO | 120 | 16 | 19 | 85 |
 
@@ -32,7 +32,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | --- | --- | ---: | --- |
 | [C01](#c01) | resolved | 12 | Recipe-granted Shield retention |
 | [C02](#c02) | conflict | 9 | Utilities create or copy physical parts |
-| [C03](#c03) | conflict | 7 | Saved, split or sacrificed Utility items |
+| [C03](#c03) | conflict | 6 | Saved, split or sacrificed Utility items |
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
@@ -40,6 +40,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
 | [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
 | [C10](#c10) | resolved | 1 | Early Cover uses ordinary Shield-part expiry |
+| [C11](#c11) | resolved | 1 | Pocket Screen counts saved ordinary parts |
 | [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
 | [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
 | [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
@@ -62,6 +63,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
 - **R07:** Spread contributions are separate hits resolved in contributing-part placement order. Load can be undone before Fire; resolved effects/crafting are not automatically refunded.
+- **R08:** Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected.
 
 ## C01
 
@@ -122,7 +124,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **IV071 — Pocket Screen** | If this part was saved, apply Weaken 3 instead. |
 | **IV099 — Twin Coolant** | If this part was saved, also apply Corrosion 3 to one chosen enemy now. |
 | **IV105 — Empty the Tools** | Choose and reserve up to two saved Utility parts until firing. |
 | **AD040 — Service Pair** | Each Service Tab repairs 3 Bolt HP while he is active. |
@@ -301,6 +302,20 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | Recipe | Existing wording |
 | --- | --- |
 | **SH034 — Early Cover** | On recipe Use, schedule a new regular 8-Shield part to load at the beginning of the next round. |
+
+## C11
+
+**Pocket Screen counts saved ordinary parts — resolved · R01**
+
+The owner replaced the nonexistent saved-Utility-item condition with a count of ordinary parts saved in reserve from an earlier round. Final corrected thresholds: 0 saved parts applies Weaken 1, exactly 1 applies Weaken 2, and 2 or more applies Weaken 3 to every living enemy. Count at immediate recipe Use without consuming those parts. Cost and availability are unchanged.
+
+**For our review:** The Utility-item conflict is resolved. The owner confirmed flat per-hit enemy damage reduction, persistent until it decays by 1 per round to zero; the 25% damage-taken idea was withdrawn.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **IV071 — Pocket Screen** | Apply Weaken to every living enemy: 1 with 0 saved parts, 2 with exactly 1 saved part, or 3 with at least 2 saved parts. |
 
 ## Q01
 
@@ -544,4 +559,4 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review remaining groups with Klaus, starting with C02's Utility part-production cases. Record chosen replacements before changing affected rows and re-auditing them. Shield-part replacements and pre-reset timing clarifications are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review IV099 and the other remaining groups with Klaus. Record chosen replacements before changing affected rows and re-auditing them. Shield-part replacements and pre-reset timing clarifications are applied; unrelated replacements and gameplay implementation are not implied.
