@@ -1,24 +1,26 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · 13 analogous Shield corrections this pass; other 593 rows unchanged**
+**17 September 2026 · all 606 recipes reviewed · 6 Shield-timing clarifications this pass; other 600 rows unchanged**
 
-Reviewed all recipe rows from `a0b3e10` against the settled owner rules, updated for the authorized analogous Shield replacements. Found **35 recipes with a definite conflict or obsolete dependency**, **90 additional recipes needing wording/dependency clarification**, and **481 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `36c253a` against the settled owner rules, updated for the pre-reset Shield-reading clarification. Found **34 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **487 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
-This is an audit for joint review. This pass changed the twelve C01 rows plus SH034, preserving their costs/cooldowns and the other 593 rows. The earlier owner-selected SH026 replacement remains unchanged. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** NO060 Field Pocket in C07 converts Shield into Charge at the obsolete reset point and needs a distinct timing correction.
+This is an audit for joint review. This pass clarifies six effect texts, preserving their output types, costs/cooldowns and the other 600 rows. Earlier owner-selected Shield-part replacements remain unchanged. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C02's Utility part-production cases, starting with SH071; distinguish ordinary Shield-value grants from copying whole parts and their effects.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 6 | 23 | 97 |
-| MA | 120 | 3 | 20 | 97 |
-| IV | 120 | 5 | 17 | 98 |
+| SH | 126 | 6 | 21 | 99 |
+| MA | 120 | 3 | 19 | 98 |
+| IV | 120 | 5 | 16 | 99 |
 | AD | 120 | 4 | 10 | 106 |
-| NO | 120 | 17 | 20 | 83 |
+| NO | 120 | 16 | 19 | 85 |
 
 All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
 
@@ -34,14 +36,14 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
-| [C07](#c07) | conflict | 1 | Shield conversion at the obsolete reset point |
+| [C07](#c07) | resolved | 1 | Field Pocket counts before reset and rewards next round |
 | [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
 | [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
 | [C10](#c10) | resolved | 1 | Early Cover uses ordinary Shield-part expiry |
 | [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
 | [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
 | [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
-| [Q04](#q04) | clarification | 5 | Remaining Shield sampled at enemy-phase end |
+| [Q04](#q04) | resolved | 5 | Remaining Shield sampled at enemy-phase end |
 | [Q05](#q05) | clarification | 4 | Utility item wording left after conversion |
 | [Q06](#q06) | clarification | 6 | Recipe crafting versus immediate Utility use |
 | [Q07](#q07) | clarification | 2 | Cooling rewards restricted to parts |
@@ -54,7 +56,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](RECIPE-CATALOGUE.md) and the owner chronology in [DECISIONS.md](../DECISIONS.md). Draft conventions are used to explain dependencies, not promoted into owner decisions.
 
 - **R01:** Utilities activate on recipe Use without a stored Utility item. The owner explicitly allows Shield grants to create automatically loaded ordinary Shield parts, removable and saveable like any other part. This does not approve arbitrary reserve-part manufacturing or saved Utility items.
-- **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions.
+- **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.
 - **R03:** Only End Turn activates prepared Shield. Recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. An explicitly scheduled future grant loads a new part at its stated trigger, as selected for Folding Brace. Active Shield resets after the enemy turn; an immediate grant does not automatically repeat. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; enemy-phase secondary-effect accounting remains partly draft.
 - **R04:** The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
@@ -234,17 +236,17 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C07
 
-**Shield conversion at the obsolete reset point — conflict · R02**
+**Field Pocket counts before reset and rewards next round — resolved · R02**
 
-NO060 schedules a next-turn action 'before clearing or retention', although the default reset has already occurred at enemy-turn end. It converts leftover protection into Charge rather than granting a fresh Shield part, so the authorized fresh-part replacement does not automatically select its conversion timing.
+The owner confirmed that Field Pocket counts total remaining active Shield after enemy actions and before reset, then grants its recorded Charge next round. The clarified row uses 1 Charge per complete 3 Shield, capped at 3 Charge, while retaining 12 Shield, cost and cooldown. The mechanic needs a stored reward amount, not retained active Shield or a next-round Shield read.
 
-**For our review:** Review NO060's conversion trigger against the settled enemy-turn-end reset. SH034's former expiry issue is resolved in C10.
+**For our review:** The timing issue is resolved by explicit count-before-reset wording. Noor's broader Charge mechanic remains a draft.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **NO060 — Field Pocket** | At the start of next turn, before clearing or retention, spend up to 9 remaining Shield and gain 1 Charge per full 3 Shield spent. |
+| **NO060 — Field Pocket** | After enemies finish their actions, just before the Shield reset, count your total remaining active Shield and record 1 Charge per complete 3 Shield, up to 3 Charge. |
 
 ## C08
 
@@ -369,21 +371,21 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q04
 
-**Remaining Shield sampled at enemy-phase end — clarification · R02**
+**Remaining Shield sampled at enemy-phase end — resolved · R02**
 
-The bonus reads or spends remaining Shield at/after enemy-phase end, where the selected reset also occurs. A precise snapshot/trigger ordering is needed; the recipe does not necessarily retain Shield.
+The owner authorized the same pre-reset timing clarification for similar effects. These five rows now evaluate remaining Shield after enemy actions and before reset. Deferred Iron rewards are recorded then and delivered next round; support damage, Mark and Charge already due at enemy-phase end stay there. SH066 still pays available Shield before reset rather than receiving a free count-only reward.
 
-**For our review:** Review the timing of the read/payment relative to reset without changing the reset itself.
+**For our review:** Reset-relative timing is resolved. Preserve actual payments and original reward timing; general ordering among interacting end-phase effects remains part of the shared resolution specification.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH066 — Sweep the Plates** | At the end of the enemy phase, spend up to 9 remaining Shield. |
-| **SH091 — Wall Casting** | After this enemy phase, if any Shield remains, deal 6 support damage to each surviving enemy that attacked you this round. |
-| **MA055 — Reclaimed Plate** | At the start of next turn, gain 1 Iron for every full 5 Shield remaining from your total Shield pool at the end of this enemy phase, up to 3 Iron. |
-| **IV092 — Untouched Cover** | After this enemy phase, if that enemy is still alive, apply Mark to it equal to your remaining Shield, up to Mark 8. |
-| **NO044 — Charge Cage** | If at least 5 Shield remains at the end of this enemy phase, gain 3 Charge. |
+| **SH066 — Sweep the Plates** | After enemies finish their actions, before the Shield reset, spend up to 9 remaining Shield. |
+| **SH091 — Wall Casting** | After enemies finish their actions, before the Shield reset, if any active Shield remains, deal 6 support damage to each surviving enemy that attacked you this round. |
+| **MA055 — Reclaimed Plate** | After enemies finish their actions, before the Shield reset, count your total remaining active Shield and record 1 Iron per complete 5 Shield, up to 3 Iron. |
+| **IV092 — Untouched Cover** | After enemies finish their actions, before the Shield reset, if that enemy is still alive, apply Mark to it equal to your total remaining active Shield, up to Mark 8. |
+| **NO044 — Charge Cage** | After enemies finish their actions, before the Shield reset, if at least 5 total active Shield remains, gain 3 Charge at that time. |
 
 ## Q05
 
@@ -540,6 +542,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Shared specification gaps, not 606 separate questions
 
-Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q04/Q10 identify concrete rows that expose these gaps. The owner resolved C04 through ordinary Shield-part grants; further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review remaining groups with Klaus, starting with C07/NO060's Shield-to-Charge conversion. Record chosen replacements before changing affected rows and re-auditing them. The analogous Shield-part replacements are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review remaining groups with Klaus, starting with C02's Utility part-production cases. Record chosen replacements before changing affected rows and re-auditing them. Shield-part replacements and pre-reset timing clarifications are applied; unrelated replacements and gameplay implementation are not implied.
