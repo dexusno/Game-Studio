@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "dc8c9ec5839bb32c6abd161aa56a466305b76590"
+SOURCE_COMMIT = "a0b3e105f93a2a5892aafab6137b13aefc3890c2"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -26,11 +26,11 @@ def finding(key, status, title, rule, reason, ids, focus, review):
 
 
 FINDINGS = [
-    finding("C01", "conflict", "Recipe-granted Shield retention", "R02",
-            "The recipe keeps active Shield through the normal reset. Only permanent upgrades may grant that exception; the existing superseded marker does not repair the effect.",
+    finding("C01", "resolved", "Recipe-granted Shield retention", "R02",
+            "The owner authorized analogous fresh-part replacements after approving Spare Metal Brace. These twelve rows now schedule regular Shield parts instead of retaining active protection. Costs, cooldowns and meaningful conditions are preserved. Saved source parts still use their normal activation clock. Last Wall checks leftover Shield before reset for its conditional cooling reward; its future Shield part is a separate fixed grant.",
             "SH057 SH092 SH113 MA048 MA099 IV019 IV057 IV061 IV090 AD074 AD092 NO087",
-            r"keep|retain",
-            "Review replacement content for these recipes under the already-settled reset rule."),
+            r"next round|next two rounds|beginning",
+            "Retention conflicts are resolved. Q09 retains standard one-part valuation mapping for the added outputs; numerical balance remains untested."),
     finding("C02", "conflict", "Utilities create or copy physical parts", "R01",
             "These Utilities manufacture or copy arbitrary inventory parts, including delayed production. That output remains unreconciled with the Utility boundary; the owner-approved ordinary Shield-value grant does not by itself approve generic part copying or other manufactured outputs.",
             "SH071 SH076 SH102 SH118 MA107 MA119 IV118 NO107 NO120",
@@ -47,7 +47,7 @@ FINDINGS = [
             r"gain.*Shield|Shield equal|Each trigger grants",
             "MA004 Quick Vent is resolved: automatically load its 5-Shield part, with ordinary removal/storage available. Other findings on these rows remain separate; AD103/AD107/AD119 also have enemy-phase triggers covered by Q01."),
     finding("C05", "resolved", "Explicit future-turn Shield schedules", "R03",
-            "Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and activates at End Turn if left loaded. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording remains in C07, and MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.",
+            "Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and activates at End Turn if left loaded. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording is now corrected in C10; MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.",
             "SH034 SH096 SH115 MA016 MA040 MA092 MA118 IV059 IV097 IV112 IV120 AD063 AD066 AD098 NO018 NO034 NO056 NO098 NO113",
             r"start|next turn",
             "Interpret an explicitly scheduled Shield grant as a new ordinary part at its stated trigger. An immediate grant alone does not repeat next round. Preserve each row's stated conditions and other unresolved findings."),
@@ -56,10 +56,10 @@ FINDINGS = [
             "SH044 SH062 MA034 IV107 AD076",
             r"used at least|next main shot|After this round|planning phase",
             "Review which event these bonuses should measure. Staging a part and activating it are already different events."),
-    finding("C07", "conflict", "Obsolete Shield reset or expiry wording", "R02",
-            "NO060 schedules a next-turn action 'before clearing or retention', although the default reset has already occurred at enemy-turn end. SH034 says its grant expires at the following turn's start unless retained. Once activated, ordinary Shield resets at enemy-turn end; an unused saved part follows normal storage. Neither recipe can move the active-Shield reset boundary.",
-            "NO060 SH034", r"before clearing|expires",
-            "Review NO060's conversion trigger and SH034's expiry clause against the settled enemy-turn-end reset."),
+    finding("C07", "conflict", "Shield conversion at the obsolete reset point", "R02",
+            "NO060 schedules a next-turn action 'before clearing or retention', although the default reset has already occurred at enemy-turn end. It converts leftover protection into Charge rather than granting a fresh Shield part, so the authorized fresh-part replacement does not automatically select its conversion timing.",
+            "NO060", r"before clearing",
+            "Review NO060's conversion trigger against the settled enemy-turn-end reset. SH034's former expiry issue is resolved in C10."),
     finding("C08", "conflict", "Removed Charged Barrel payment", "R04",
             "The row refers to a separate barrel Charge payment at Fire, which belonged to the superseded independent gun-damage trait. Positive-payment branches lose their trigger, no-payment branches become automatic, and 'after payment' or exclusion clauses refer to a removed operation.",
             "NO005 NO006 NO017 NO025 NO028 NO035 NO039 NO048 NO058 NO075 NO081 NO106 NO110",
@@ -69,6 +69,10 @@ FINDINGS = [
             "SH026's old 6 Shield plus retention of up to 4 is replaced by 4 Shield loaded on recipe Use and a new 6-Shield part loaded at the beginning of the next round. Both are ordinary parts. The second delivery is scheduled by recipe Use, regardless of whether the first part is activated or saved. Cost and cooldown are unchanged; the proposed flat 10 Shield was rejected.",
             "SH026", r"On recipe Use",
             "The retention conflict is resolved. Q09 retains the normal one-part resale-basis mapping work for the two generated outputs; no price has been invented."),
+    finding("C10", "resolved", "Early Cover uses ordinary Shield-part expiry", "R03",
+            "SH034 now schedules a regular 8-Shield part for the beginning of the next round. It loads then and may be removed or saved; if left loaded, End Turn activates it and active Shield resets at enemy-turn end. The obsolete following-turn expiry clause was removed without changing its cost, cooldown or Shield amount.",
+            "SH034", r"On recipe Use",
+            "The old expiry conflict is resolved under the same ordinary-part rule."),
     finding("Q01", "clarification", "Shield replenishment during enemy actions", "R03",
             "These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.",
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
@@ -108,7 +112,7 @@ FINDINGS = [
             "Make the intended recipient explicit when reviewing these rows; no blanket main-target or all-hit default has been applied."),
     finding("Q09", "clarification", "Canonical sale basis for batches and generated subparts", "R06",
             "The recipe creates multiple parts or a generated subpart without a recorded standard one-part production requirement for every resulting type. Preserve main-recipe-based resale; do not substitute the discounted producer's cost or divide a mixed batch arbitrarily.",
-            "SH026 SH076 SH126 MA038 MA107 MA119 IV088 IV118 AD017 AD083 AD117 NO031 NO063 NO107 NO120",
+            "SH026 SH057 SH076 SH092 SH113 SH126 MA038 MA048 MA099 MA107 MA119 IV019 IV057 IV061 IV088 IV090 IV118 AD017 AD074 AD083 AD092 AD117 NO031 NO063 NO087 NO107 NO120",
             r"Each|receive|Make one|gain 2",
             "Record canonical one-part valuation references/requirements for these outputs. Known fresh copies inherit their original type's basis; generic copying alone is not a pricing conflict."),
     finding("Q10", "clarification", "Spread Modifier lifecycle and placement order", "R07",
@@ -191,9 +195,9 @@ def render():
         row["review"] = "Reviewed against the recorded rule dimensions; not an approval or balance result."
     totals = Counter(r["status"] for r in rows)
     ledger = {
-        "audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-16 owner revision: Folding Brace loads 4 Shield on recipe Use and a new 6-Shield part next round; ordinary parts are removable/saveable, active Shield resets at enemy-turn end.",
-        "source_commit_scope": "Pins all 606 printed recipe rows after the owner-selected SH026 revision; the other 605 rows were verified unchanged from the previous audit.",
+        "audit_date": "2026-09-17", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
+        "rule_revision": "2026-09-17 integration of the authorized analogous replacements: twelve remaining retention recipes grant fresh regular parts; SH034 follows ordinary expiry. Existing conditions, costs and cooldowns preserved.",
+        "source_commit_scope": "Pins all 606 printed recipe rows after the analogous Shield batch: 13 rows changed in this pass, 593 unchanged, including the earlier SH026 replacement.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -204,19 +208,19 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**16 September 2026 · all 606 recipes reviewed · SH026 revised by owner; other 605 rows unchanged**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the Shield-grant clarification and Folding Brace replacement. "
+             "**17 September 2026 · all 606 recipes reviewed · 13 analogous Shield corrections this pass; other 593 rows unchanged**", "",
+             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the authorized analogous Shield replacements. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
-             "**Owner resolutions:** C04 grants automatically load ordinary Shield parts, removable and saveable like any other part. End Turn activates parts left loaded; active Shield resets at enemy-turn end. Folding Brace now loads 4 Shield on recipe Use and a new 6-Shield part next round, resolving its retention conflict and C05's general future-grant timing concern. An immediate grant does not repeat without an explicit schedule. The earlier no-removal/no-saving restriction was withdrawn.", "",
-             "This is an audit for joint review. SH026's output/effect was revised as selected by the owner; its cost/cooldown and all other printed rows are unchanged. "
+             "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
+             "This is an audit for joint review. This pass changed the twelve C01 rows plus SH034, preserving their costs/cooldowns and the other 593 rows. The earlier owner-selected SH026 replacement remains unchanged. "
              "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** replacement content for the remaining retention recipes in C01; the base reset rule is already settled.", "",
+             "**Next joint review:** NO060 Field Pocket in C07 converts Shield into Charge at the obsolete reset point and needs a distinct timing correction.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -259,8 +263,8 @@ def render():
               "Q03/Q04/Q10 identify concrete rows that expose these gaps. The owner resolved C04 through ordinary Shield-part grants; further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
-              "**Next action:** review remaining groups with Klaus, starting with C01's retention recipes. Record chosen replacements before changing affected rows and re-auditing them. "
-              "The immediate-grant interpretation is selected; no other replacement or gameplay implementation is implied.", ""]
+              "**Next action:** review remaining groups with Klaus, starting with C07/NO060's Shield-to-Charge conversion. Record chosen replacements before changing affected rows and re-auditing them. "
+              "The analogous Shield-part replacements are applied; unrelated replacements and gameplay implementation are not implied.", ""]
     (DESIGN / "RECIPE-RULE-AUDIT.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"reviewed": len(rows), "counts": dict(totals),
                       "groups": {g['id']: len(g['recipes']) for g in FINDINGS}}, indent=2))
