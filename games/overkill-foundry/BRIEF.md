@@ -40,6 +40,8 @@ Use the owner-supplied [style anchor](design/art%20anchor.png). Prepare in 16B's
 
 ## Next proof and limits
 
+**Complete recipe audit ready for joint review, 16 September:** [the report](design/RECIPE-RULE-AUDIT.md) reviews all 606 recipes, with 108 conflict/obsolete-dependency cases and 73 additional clarification cases. Every recipe row is preserved. Review the grouped findings with Klaus and record solutions before changing affected recipes; no replacement design is selected by this audit.
+
 Reconcile Utility catalogue dependencies, then resolve remaining build-effect activation, shot-versus-round effects and Load controls, supply amounts, enemy moves, shop stock/prices, detailed Mystery outcomes, exact escape countdown display/tick conventions, loot amounts and offer tuning, other profile persistence and save/Game Over controls. Reconcile conflicting Shield recipes with the settled upgrade-only exceptions; do not reopen the base rule. Global cooling creates balance overlaps that need review. A proposed first demo is one mercenary, one city environment, about 30 recipes and a three-fight sample; this has not been selected and does not replace the full city wave.
 
 The first playable should test whether different enemy intentions and supplies cause meaningful changes in crafting, saving, attack and defence, and whether an earned reward changes a later choice. Game feel and commercial appeal are untested. Naming research will screen current market relevance and public conflicts without treating an absence of search hits as legal clearance.
