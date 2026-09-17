@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "5e937dbc43ccb96004cb21b01fc29a463ee20c43"
+SOURCE_COMMIT = "93c739d28cd95a59c644fb0aa6fce198d2d99c43"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -36,11 +36,11 @@ FINDINGS = [
             "SH071 SH076 SH102 SH118 MA107 MA119 IV118 NO107 NO120",
             r"receive|make one|gain 2",
             "Review the intended recipe category and output; no conversion has been applied."),
-    finding("C03", "conflict", "Sacrificed Utility items", "R01",
-            "The effect consumes inventory Utility items. Utilities activate on recipe Use and do not create those items. Saved-item bonus conditions are resolved in C12, and split activations in C13.",
+    finding("C03", "resolved", "Ordinary parts replace Utility-item sacrifices", "R01",
+            "The owner approved sacrificing ordinary physical parts instead of nonexistent Utility items. Empty the Tools chooses up to two unused parts saved from earlier rounds for the next shot this turn, consuming them for +7 damage each instead of their normal effects. Selection is editable before Fire; End Turn without firing releases them unused. They still count as parts consumed by the shot. Supply Courier consumes two unused ordinary reserve parts as its additional cost, with no age requirement, and delivers 3 Iron, 2 Copper and 1 Carbon at next-turn start. Categories, material costs and cooldowns are preserved. Saved-item bonus conditions are resolved in C12, and split activations in C13.",
             "IV105 AD097",
-            r"saved|Utility parts",
-            "Review the replacement sacrifice dependency. Apply a selected solution to equivalent rows without repeating the same question."),
+            r"Choose|Consume",
+            "The Utility-item sacrifice conflict is resolved. Normal reversible loading applies before Fire; paying Supply Courier's sacrifice is an actual consumption, not a refundable selection. Broader Helper/Modifier lifecycle details and numerical balance remain separate."),
     finding("C04", "resolved", "Shield granted during preparation, collection or after Fire", "R03",
             "Resolved by the owner's 16 September clarification: a grant automatically loads an ordinary Shield part worth that amount. It may be removed and saved like any part. End Turn activates parts left loaded; active Shield resets at enemy-turn end without an automatic grant next round. The original audit incorrectly read these grants as immediate active protection.",
             "SH033 SH045 SH064 SH065 SH095 SH104 SH108 SH111 MA004 MA047 MA078 MA101 MA113 MA116 IV011 IV036 IV038 IV066 IV079 IV098 AD024 AD042 AD049 AD054 AD056 AD060 AD068 AD078 AD082 AD103 AD107 AD114 AD116 AD119 AD120 NO036 NO041 NO054 NO092 NO095 NO111",
@@ -80,11 +80,11 @@ FINDINGS = [
     finding("C12", "resolved", "Equivalent Utility bonuses count saved ordinary parts", "R01",
             "The owner directed applying the same solution to the same problem. Twin Coolant and Packed Lunch now check for at least two ordinary parts saved from earlier rounds still in reserve on immediate recipe Use, without consuming them. Twin Coolant retains global cooling, conditional Corrosion 3 and its requirement for a recipe already cooling before Use. Packed Lunch restores 5 Bolt HP, or 10 when the saved-part condition is met, including while disabled. Costs and cooldowns are unchanged.",
             "IV099 AD062", r"On recipe Use",
-            "Both saved-Utility bonus conflicts are resolved. Split activations are resolved separately in C13; Utility-item sacrifices remain in C03. Numerical balance is untested."),
+            "Both saved-Utility bonus conflicts are resolved. Split activations are resolved separately in C13 and ordinary-part sacrifices in C03. Numerical balance is untested."),
     finding("C13", "resolved", "Split Utilities combine into one immediate effect", "R01",
             "The owner approved combining the original two activations on recipe Use. Service Pair immediately repairs 6 Bolt HP and can only be used while Bolt is active. Split Battery immediately grants 4 Charge. Neither creates a part or separately stored activation. Original totals, costs, cooldowns, normal use limits and existing HP/Charge limits are preserved.",
             "AD040 NO055", r"On recipe Use",
-            "Both split-activation conflicts are resolved. This does not select a replacement for Utility-item sacrifices, nor establish tested balance."),
+            "Both split-activation conflicts are resolved. Ordinary-part sacrifices are resolved separately in C03. Numerical balance is untested."),
     finding("Q01", "clarification", "Shield replenishment during enemy actions", "R03",
             "These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.",
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
@@ -106,7 +106,7 @@ FINDINGS = [
             r"After enemies",
             "Reset-relative timing is resolved. Preserve actual payments and original reward timing; general ordering among interacting end-phase effects remains part of the shared resolution specification."),
     finding("Q05", "clarification", "Utility item wording left after conversion", "R01",
-            "The immediate effect is usable without an inventory item, but leftover 'pack crafted' or 'copies of its part' wording describes the former Utility-item model. Unlike C03, the main effect does not require storing the Utility.",
+            "The immediate effect is usable without an inventory item, but leftover 'pack crafted' or 'copies of its part' wording describes the former Utility-item model. Unlike the former C03 dependencies, the main effect does not require storing the Utility.",
             "SH029 SH030 SH031 SH074", r"crafted|copies of its part",
             "Review wording/cap ownership; no numerical retuning is implied by this finding."),
     finding("Q06", "clarification", "Recipe crafting versus immediate Utility use", "R01",
@@ -209,8 +209,8 @@ def render():
     totals = Counter(r["status"] for r in rows)
     ledger = {
         "audit_date": "2026-09-17", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-17: Service Pair immediately repairs 6 Bolt HP only while active; Split Battery immediately grants 4 Charge. No stored split activations remain in these rows. Prior saved-part bonuses and persistent enemy Weaken are unchanged; player Weaken mirror remains draft.",
-        "source_commit_scope": "Pins all 606 printed recipe rows after the AD040/NO055 immediate-effect corrections. Other 604 rows are unchanged in this pass; current rule prose is included in the catalogue hash.",
+        "rule_revision": "2026-09-17: Empty the Tools sacrifices up to two saved ordinary parts on Fire for +7 damage each, with reversible selection; Supply Courier sacrifices two unused ordinary parts for its next-turn materials. Prior split-Utility, saved-part and enemy Weaken corrections are unchanged.",
+        "source_commit_scope": "Pins all 606 printed recipe rows after the IV105/AD097 ordinary-part sacrifice corrections. Other 604 rows are unchanged in this pass; current rule prose is included in the catalogue hash.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -221,20 +221,20 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**17 September 2026 · all 606 recipes reviewed · Service Pair and Split Battery revised this pass; other 604 rows unchanged**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the combined immediate Utility effects. "
+             "**17 September 2026 · all 606 recipes reviewed · Empty the Tools and Supply Courier revised this pass; other 604 rows unchanged**", "",
+             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for ordinary-part sacrifices. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
              "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
              "**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.", "",
-             "This is an audit for joint review. This pass revises AD040 and NO055 under the owner's selected combined immediate-effect solution: Service Pair repairs 6 Bolt HP only while Bolt is active, and Split Battery grants 4 Charge on recipe Use. No parts or separately stored activations are produced. This resolves C13. Original totals, output types, costs/cooldowns, existing HP/Charge limits and the other 604 rows are preserved. C12's saved-part bonus fixes, Pocket Screen's tiers and persistent enemy Weaken remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Robot stats have not been retuned. "
+             "This is an audit for joint review. This pass revises IV105 and AD097 under the owner's selected ordinary-part sacrifice solution. Empty the Tools chooses up to two saved ordinary parts to consume on the next shot this turn for +7 damage each instead of their normal effects; the selection remains editable before Fire. Supply Courier consumes two unused ordinary parts for its existing next-turn delivery of 3 Iron, 2 Copper and 1 Carbon. This resolves C03. Output types, material costs/cooldowns, reward amounts and the other 604 rows are preserved. Prior split-Utility, saved-part bonus and persistent enemy Weaken corrections remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Robot stats have not been retuned. "
              "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** IV105 Empty the Tools and AD097 Supply Courier still sacrifice nonexistent Utility items. Review the replacement dependency as a group.", "",
+             "**Next joint review:** C02, Utilities that manufacture or copy arbitrary physical parts, beginning with SH071. Distinguish these outputs from the explicitly allowed ordinary Shield-value grants.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -277,8 +277,8 @@ def render():
               "Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
-              "**Next action:** review Utility-item sacrifices in IV105/AD097. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. "
-              "Shield-part replacements, pre-reset timing clarifications, saved-Utility bonus replacements and combined immediate Utility effects are applied; unrelated replacements and gameplay implementation are not implied.", ""]
+              "**Next action:** review C02's Utility-produced/copied physical parts, beginning with SH071. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. "
+              "Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.", ""]
     (DESIGN / "RECIPE-RULE-AUDIT.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"reviewed": len(rows), "counts": dict(totals),
                       "groups": {g['id']: len(g['recipes']) for g in FINDINGS}}, indent=2))

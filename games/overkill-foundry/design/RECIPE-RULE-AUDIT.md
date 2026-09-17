@@ -1,16 +1,16 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · Service Pair and Split Battery revised this pass; other 604 rows unchanged**
+**17 September 2026 · all 606 recipes reviewed · Empty the Tools and Supply Courier revised this pass; other 604 rows unchanged**
 
-Reviewed all recipe rows from `5e937db` against the settled owner rules, updated for the combined immediate Utility effects. Found **29 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **492 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `93c739d` against the settled owner rules, updated for ordinary-part sacrifices. Found **27 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **494 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
 **Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-This is an audit for joint review. This pass revises AD040 and NO055 under the owner's selected combined immediate-effect solution: Service Pair repairs 6 Bolt HP only while Bolt is active, and Split Battery grants 4 Charge on recipe Use. No parts or separately stored activations are produced. This resolves C13. Original totals, output types, costs/cooldowns, existing HP/Charge limits and the other 604 rows are preserved. C12's saved-part bonus fixes, Pocket Screen's tiers and persistent enemy Weaken remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Robot stats have not been retuned. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. This pass revises IV105 and AD097 under the owner's selected ordinary-part sacrifice solution. Empty the Tools chooses up to two saved ordinary parts to consume on the next shot this turn for +7 damage each instead of their normal effects; the selection remains editable before Fire. Supply Courier consumes two unused ordinary parts for its existing next-turn delivery of 3 Iron, 2 Copper and 1 Carbon. This resolves C03. Output types, material costs/cooldowns, reward amounts and the other 604 rows are preserved. Prior split-Utility, saved-part bonus and persistent enemy Weaken corrections remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Robot stats have not been retuned. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** IV105 Empty the Tools and AD097 Supply Courier still sacrifice nonexistent Utility items. Review the replacement dependency as a group.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C02, Utilities that manufacture or copy arbitrary physical parts, beginning with SH071. Distinguish these outputs from the explicitly allowed ordinary Shield-value grants.
 
 ## Coverage
 
@@ -18,8 +18,8 @@ This is an audit for joint review. This pass revises AD040 and NO055 under the o
 | --- | ---: | ---: | ---: | ---: |
 | SH | 126 | 6 | 21 | 99 |
 | MA | 120 | 3 | 19 | 98 |
-| IV | 120 | 3 | 16 | 101 |
-| AD | 120 | 2 | 10 | 108 |
+| IV | 120 | 2 | 16 | 102 |
+| AD | 120 | 1 | 10 | 109 |
 | NO | 120 | 15 | 19 | 86 |
 
 All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
@@ -32,7 +32,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | --- | --- | ---: | --- |
 | [C01](#c01) | resolved | 12 | Recipe-granted Shield retention |
 | [C02](#c02) | conflict | 9 | Utilities create or copy physical parts |
-| [C03](#c03) | conflict | 2 | Sacrificed Utility items |
+| [C03](#c03) | resolved | 2 | Ordinary parts replace Utility-item sacrifices |
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
@@ -116,18 +116,18 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C03
 
-**Sacrificed Utility items — conflict · R01**
+**Ordinary parts replace Utility-item sacrifices — resolved · R01**
 
-The effect consumes inventory Utility items. Utilities activate on recipe Use and do not create those items. Saved-item bonus conditions are resolved in C12, and split activations in C13.
+The owner approved sacrificing ordinary physical parts instead of nonexistent Utility items. Empty the Tools chooses up to two unused parts saved from earlier rounds for the next shot this turn, consuming them for +7 damage each instead of their normal effects. Selection is editable before Fire; End Turn without firing releases them unused. They still count as parts consumed by the shot. Supply Courier consumes two unused ordinary reserve parts as its additional cost, with no age requirement, and delivers 3 Iron, 2 Copper and 1 Carbon at next-turn start. Categories, material costs and cooldowns are preserved. Saved-item bonus conditions are resolved in C12, and split activations in C13.
 
-**For our review:** Review the replacement sacrifice dependency. Apply a selected solution to equivalent rows without repeating the same question.
+**For our review:** The Utility-item sacrifice conflict is resolved. Normal reversible loading applies before Fire; paying Supply Courier's sacrifice is an actual consumption, not a refundable selection. Broader Helper/Modifier lifecycle details and numerical balance remain separate.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **IV105 — Empty the Tools** | Choose and reserve up to two saved Utility parts until firing. |
-| **AD097 — Supply Courier** | Consume two unused Utility parts from reserve as an additional cost. |
+| **IV105 — Empty the Tools** | Choose up to two unused ordinary parts saved from an earlier round to sacrifice when firing your next shot this turn. |
+| **AD097 — Supply Courier** | Consume two unused ordinary parts from reserve as an additional cost. |
 
 ## C04
 
@@ -321,7 +321,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 The owner directed applying the same solution to the same problem. Twin Coolant and Packed Lunch now check for at least two ordinary parts saved from earlier rounds still in reserve on immediate recipe Use, without consuming them. Twin Coolant retains global cooling, conditional Corrosion 3 and its requirement for a recipe already cooling before Use. Packed Lunch restores 5 Bolt HP, or 10 when the saved-part condition is met, including while disabled. Costs and cooldowns are unchanged.
 
-**For our review:** Both saved-Utility bonus conflicts are resolved. Split activations are resolved separately in C13; Utility-item sacrifices remain in C03. Numerical balance is untested.
+**For our review:** Both saved-Utility bonus conflicts are resolved. Split activations are resolved separately in C13 and ordinary-part sacrifices in C03. Numerical balance is untested.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -336,7 +336,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 The owner approved combining the original two activations on recipe Use. Service Pair immediately repairs 6 Bolt HP and can only be used while Bolt is active. Split Battery immediately grants 4 Charge. Neither creates a part or separately stored activation. Original totals, costs, cooldowns, normal use limits and existing HP/Charge limits are preserved.
 
-**For our review:** Both split-activation conflicts are resolved. This does not select a replacement for Utility-item sacrifices, nor establish tested balance.
+**For our review:** Both split-activation conflicts are resolved. Ordinary-part sacrifices are resolved separately in C03. Numerical balance is untested.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -434,7 +434,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Utility item wording left after conversion — clarification · R01**
 
-The immediate effect is usable without an inventory item, but leftover 'pack crafted' or 'copies of its part' wording describes the former Utility-item model. Unlike C03, the main effect does not require storing the Utility.
+The immediate effect is usable without an inventory item, but leftover 'pack crafted' or 'copies of its part' wording describes the former Utility-item model. Unlike the former C03 dependencies, the main effect does not require storing the Utility.
 
 **For our review:** Review wording/cap ownership; no numerical retuning is implied by this finding.
 
@@ -587,4 +587,4 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review Utility-item sacrifices in IV105/AD097. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonus replacements and combined immediate Utility effects are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review C02's Utility-produced/copied physical parts, beginning with SH071. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
