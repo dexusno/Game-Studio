@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "93c739d28cd95a59c644fb0aa6fce198d2d99c43"
+SOURCE_COMMIT = "48ed523b7e5cd54932753ff30827369ab0b8fa04"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -31,11 +31,11 @@ FINDINGS = [
             "SH057 SH092 SH113 MA048 MA099 IV019 IV057 IV061 IV090 AD074 AD092 NO087",
             r"next round|next two rounds|beginning",
             "Retention conflicts are resolved. Q09 retains standard one-part valuation mapping for the added outputs; numerical balance remains untested."),
-    finding("C02", "conflict", "Utilities create or copy physical parts", "R01",
-            "These Utilities manufacture or copy arbitrary inventory parts, including delayed production. That output remains unreconciled with the Utility boundary; the owner-approved ordinary Shield-value grant does not by itself approve generic part copying or other manufactured outputs.",
-            "SH071 SH076 SH102 SH118 MA107 MA119 IV118 NO107 NO120",
-            r"receive|make one|gain 2",
-            "Review the intended recipe category and output; no conversion has been applied."),
+    finding("C02", "resolved", "Copy effects and scheduled Shield grants are not Utility items", "R01",
+            "The owner corrected the copying finding: production means resource-based crafting; a Utility copying an existing part is an effect, not crafting that copy from resources. SH071/SH102/SH118 retain their copy eligibility, amounts, timing and printed-effect restrictions. MA107/NO107 are already covered by the selected scheduled ordinary-Shield-part rule. The obsolete conflict markers are removed without changing functional effects, costs or cooldowns. The four other conversion/generated-output rows are clarification cases in Q11, not asserted violations based solely on part output.",
+            "SH071 SH102 SH118 MA107 NO107",
+            r"copy|copies|gain 2",
+            "These five Utility-boundary findings are resolved. Q09 still covers the two Shield batches' canonical one-part resale references. No additional production-cost payment for a copied part is introduced."),
     finding("C03", "resolved", "Ordinary parts replace Utility-item sacrifices", "R01",
             "The owner approved sacrificing ordinary physical parts instead of nonexistent Utility items. Empty the Tools chooses up to two unused parts saved from earlier rounds for the next shot this turn, consuming them for +7 damage each instead of their normal effects. Selection is editable before Fire; End Turn without firing releases them unused. They still count as parts consumed by the shot. Supply Courier consumes two unused ordinary reserve parts as its additional cost, with no age requirement, and delivers 3 Iron, 2 Copper and 1 Carbon at next-turn start. Categories, material costs and cooldowns are preserved. Saved-item bonus conditions are resolved in C12, and split activations in C13.",
             "IV105 AD097",
@@ -132,10 +132,14 @@ FINDINGS = [
             "SH005 SH051 SH082 SH110 MA041 MA111 IV076 NO050 NO082 NO115",
             r"shot|Fire|extra enemy",
             "Define how these consumed Modifier effects retain the player's chosen bullet order through Load/unload. This is not permission to refund resolved effects."),
+    finding("Q11", "clarification", "Other Utility conversions and generated outputs", "R01",
+            "These four effects convert a Shield part or grant named parts without selecting an existing part to copy. The owner's copying clarification resolves the copying rows; it does not require calling every other generated output a rule violation. Their classification under the production/effect distinction remains to clarify. Existing effects, costs and cooldowns are preserved; only their review annotations change.",
+            "SH076 MA119 IV118 NO120", r"Sacrifice|gain 2|receive 1",
+            "Review their precise conversion/grant behavior only if it exposes a real unresolved distinction. Do not reopen copying, ordinary Shield grants or stored-Utility rules; do not invent extra production costs."),
 ]
 
 RULES = {
-    "R01": "Utilities activate on recipe Use without a stored Utility item. The owner explicitly allows Shield grants to create automatically loaded ordinary Shield parts, removable and saveable like any other part. This does not approve arbitrary reserve-part manufacturing or saved Utility items.",
+    "R01": "Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears.",
     "R02": "Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.",
     "R03": "Only End Turn activates prepared Shield. Recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. An explicitly scheduled future grant loads a new part at its stated trigger, as selected for Folding Brace. Active Shield resets after the enemy turn; an immediate grant does not automatically repeat. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; enemy-phase secondary-effect accounting remains partly draft.",
     "R04": "The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.",
@@ -209,8 +213,8 @@ def render():
     totals = Counter(r["status"] for r in rows)
     ledger = {
         "audit_date": "2026-09-17", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-17: Empty the Tools sacrifices up to two saved ordinary parts on Fire for +7 damage each, with reversible selection; Supply Courier sacrifices two unused ordinary parts for its next-turn materials. Prior split-Utility, saved-part and enemy Weaken corrections are unchanged.",
-        "source_commit_scope": "Pins all 606 printed recipe rows after the IV105/AD097 ordinary-part sacrifice corrections. Other 604 rows are unchanged in this pass; current rule prose is included in the catalogue hash.",
+        "rule_revision": "2026-09-17: copying is a Utility effect, not resource-based production of the copy. Three copying rows and two already-authorized Shield grants are cleared; four other outputs are clarification cases. All functional effects, costs and cooldowns are preserved.",
+        "source_commit_scope": "Pins all 606 printed recipe rows after five obsolete conflict markers were removed and four were relabelled as classification questions. All functional effects and numeric fields are unchanged; the other 597 rows are byte-for-byte unchanged in this pass.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -221,20 +225,20 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**17 September 2026 · all 606 recipes reviewed · Empty the Tools and Supply Courier revised this pass; other 604 rows unchanged**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for ordinary-part sacrifices. "
+             "**17 September 2026 · all 606 recipes reviewed · nine audit annotations corrected; all functional effects unchanged**", "",
+             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, corrected for copying versus resource-based production. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
              "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
              "**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.", "",
-             "This is an audit for joint review. This pass revises IV105 and AD097 under the owner's selected ordinary-part sacrifice solution. Empty the Tools chooses up to two saved ordinary parts to consume on the next shot this turn for +7 damage each instead of their normal effects; the selection remains editable before Fire. Supply Courier consumes two unused ordinary parts for its existing next-turn delivery of 3 Iron, 2 Copper and 1 Carbon. This resolves C03. Output types, material costs/cooldowns, reward amounts and the other 604 rows are preserved. Prior split-Utility, saved-part bonus and persistent enemy Weaken corrections remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Robot stats have not been retuned. "
+             "This is an audit for joint review. The owner corrected the premise of the copying finding: copying an existing part is an effect, not producing that part from resources. SH071/SH102/SH118 are cleared, as are MA107/NO107 under the already-selected scheduled Shield-grant rule. Four other conversion/generated-output rows move to Q11 clarification; part output alone is not proof of a conflict. Five obsolete markers are removed and four relabelled, with all 606 functional effects, costs, cooldowns and numeric fields unchanged. The other 597 rows are unchanged in full. Prior owner corrections remain selected, and robot stats are unchanged. "
              "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** C02, Utilities that manufacture or copy arbitrary physical parts, beginning with SH071. Distinguish these outputs from the explicitly allowed ordinary Shield-value grants.", "",
+             "**Next joint review:** C06, Shield-part effects that expect another shot after End Turn activation, beginning with SH044. Copying and the ordinary Shield-grant rule are settled.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -277,7 +281,7 @@ def render():
               "Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
-              "**Next action:** review C02's Utility-produced/copied physical parts, beginning with SH071. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. "
+              "**Next action:** review C06's Shield-to-shot timing, beginning with SH044. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. "
               "Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.", ""]
     (DESIGN / "RECIPE-RULE-AUDIT.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"reviewed": len(rows), "counts": dict(totals),
