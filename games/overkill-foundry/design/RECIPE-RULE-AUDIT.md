@@ -1,28 +1,28 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · nine audit annotations corrected; all functional effects unchanged**
+**17 September 2026 · all 606 recipes reviewed · installed Shield rule recorded; two recipe effects corrected**
 
-Reviewed all recipe rows from `48ed523` against the settled owner rules, corrected for copying versus resource-based production. Found **18 recipes with a definite conflict or obsolete dependency**, **91 additional recipes needing wording/dependency clarification**, and **497 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `5e73bd8` against the settled owner rules, updated for automatic protection from installed Shield parts. Found **13 recipes with a definite conflict or obsolete dependency**, **110 additional recipes needing wording/dependency clarification**, and **483 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
-**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
+**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
 **Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-This is an audit for joint review. The owner corrected the premise of the copying finding: copying an existing part is an effect, not producing that part from resources. SH071/SH102/SH118 are cleared, as are MA107/NO107 under the already-selected scheduled Shield-grant rule. Four other conversion/generated-output rows move to Q11 clarification; part output alone is not proof of a conflict. Five obsolete markers are removed and four relabelled, with all 606 functional effects, costs, cooldowns and numeric fields unchanged. The other 597 rows are unchanged in full. Prior owner corrections remain selected, and robot stats are unchanged. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. The owner replaces Shield activation with protection from parts installed when enemies attack. IV107 and SH044 now count installed Shield parts at Fire, preserving saved-part eligibility where stated, values, costs and cooldowns. Other 604 rows are unchanged. Reactive grants can protect subsequent attacks, resolving Q01. Three remaining shot/install hooks move from C06 to Q12; Q13 records implicit secondary costs/snapshots that still require timing reconciliation. Earlier rule corrections remain selected. These findings do not imply tested balance or a finished secondary-effect specification. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C06, Shield-part effects that expect another shot after End Turn activation, beginning with SH044. Copying and the ordinary Shield-grant rule are settled.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C08, references to the removed Charged Barrel payment. Shield protection and installed-part counting are settled; secondary costs/hooks are grouped in Q03/Q12/Q13.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 2 | 22 | 102 |
-| MA | 120 | 1 | 21 | 98 |
-| IV | 120 | 1 | 17 | 102 |
-| AD | 120 | 1 | 10 | 109 |
-| NO | 120 | 13 | 21 | 86 |
+| SH | 126 | 0 | 23 | 103 |
+| MA | 120 | 0 | 31 | 89 |
+| IV | 120 | 0 | 16 | 104 |
+| AD | 120 | 0 | 9 | 111 |
+| NO | 120 | 13 | 31 | 76 |
 
-All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
+All rows were read for: output kind and Utility lifecycle; installed Shield protection, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
 
 The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every ID, name, original row, source line, disposition and finding references. The [audit renderer](analysis/recipe_rule_audit.py) verifies that all printed recipe rows still match the reviewed revision before regenerating this document. Rule prose may change with recorded owner clarifications; the ledger hashes the current full catalogue. It validates coverage and evidence preservation; it does not discover or prove semantic conflicts automatically.
 
@@ -35,7 +35,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C03](#c03) | resolved | 2 | Ordinary parts replace Utility-item sacrifices |
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
-| [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
+| [C06](#c06) | resolved | 2 | Shot bonuses count installed Shield parts |
 | [C07](#c07) | resolved | 1 | Field Pocket counts before reset and rewards next round |
 | [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
 | [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
@@ -43,9 +43,9 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C11](#c11) | resolved | 1 | Pocket Screen counts saved ordinary parts |
 | [C12](#c12) | resolved | 2 | Equivalent Utility bonuses count saved ordinary parts |
 | [C13](#c13) | resolved | 2 | Split Utilities combine into one immediate effect |
-| [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
-| [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
-| [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
+| [Q01](#q01) | resolved | 11 | Reactive installed Shield protects subsequent attacks |
+| [Q02](#q02) | clarification | 12 | Preparation-time Shield readings and payments |
+| [Q03](#q03) | clarification | 5 | Installed Shield order and secondary payments |
 | [Q04](#q04) | resolved | 5 | Remaining Shield sampled at enemy-phase end |
 | [Q05](#q05) | clarification | 4 | Utility item wording left after conversion |
 | [Q06](#q06) | clarification | 6 | Recipe crafting versus immediate Utility use |
@@ -54,6 +54,8 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [Q09](#q09) | clarification | 27 | Canonical sale basis for batches and generated subparts |
 | [Q10](#q10) | clarification | 10 | Spread Modifier lifecycle and placement order |
 | [Q11](#q11) | clarification | 4 | Other Utility conversions and generated outputs |
+| [Q12](#q12) | clarification | 3 | Installed Shield parts and shot/install hooks |
+| [Q13](#q13) | clarification | 28 | Implicit Shield secondary-effect costs and stat sampling |
 
 ## Rule references
 
@@ -61,7 +63,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 
 - **R01:** Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears.
 - **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.
-- **R03:** Only End Turn activates prepared Shield. Recipe grants automatically load ordinary Shield parts worth their granted amount; they may be removed and saved. An explicitly scheduled future grant loads a new part at its stated trigger, as selected for Folding Brace. Active Shield resets after the enemy turn; an immediate grant does not automatically repeat. Unused-part storage differs from active-Shield retention. Explicit upgrade exceptions keep their timing; enemy-phase secondary-effect accounting remains partly draft.
+- **R03:** Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Parts are counted at a recipe's stated event without being consumed by counting. Installed values add and damage depletes remaining Shield across attacks; normal enemy-turn-end reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, protecting subsequent attacks without retroactive blocking or refilling prior loss. Implicit secondary costs/snapshots remain draft; explicit End Turn conditions retain that clock and check installed source parts.
 - **R04:** The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
@@ -72,7 +74,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 
 **Recipe-granted Shield retention — resolved · R02**
 
-The owner authorized analogous fresh-part replacements after approving Spare Metal Brace. These twelve rows now schedule regular Shield parts instead of retaining active protection. Costs, cooldowns and meaningful conditions are preserved. Saved source parts still use their normal activation clock. Last Wall checks leftover Shield before reset for its conditional cooling reward; its future Shield part is a separate fixed grant.
+The owner authorized analogous fresh-part replacements after approving Spare Metal Brace. These twelve rows now schedule regular Shield parts instead of retaining active protection. Costs, cooldowns and meaningful conditions are preserved. Saved source parts retain explicit schedule clocks, checking that they are installed at those times. Last Wall checks leftover Shield before reset for its conditional cooling reward; its future Shield part is a separate fixed grant.
 
 **For our review:** Retention conflicts are resolved. Q09 retains standard one-part valuation mapping for the added outputs; numerical balance remains untested.
 
@@ -130,7 +132,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Shield granted during preparation, collection or after Fire — resolved · R03**
 
-Resolved by the owner's 16 September clarification: a grant automatically loads an ordinary Shield part worth that amount. It may be removed and saved like any part. End Turn activates parts left loaded; active Shield resets at enemy-turn end without an automatic grant next round. The original audit incorrectly read these grants as immediate active protection.
+Resolved by the owner's 16 September clarification: a grant automatically loads an ordinary Shield part worth that amount. It may be removed and saved like any part. Parts left installed protect when enemies attack; active Shield resets at enemy-turn end without an automatic grant next round. The original audit incorrectly read these grants as immediate active protection.
 
 **For our review:** MA004 Quick Vent is resolved: automatically load its 5-Shield part, with ordinary removal/storage available. Other findings on these rows remain separate; AD103/AD107/AD119 also have enemy-phase triggers covered by Q01.
 
@@ -184,7 +186,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Explicit future-turn Shield schedules — resolved · R03**
 
-Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and activates at End Turn if left loaded. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording is now corrected in C10; MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.
+Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and protects automatically against enemy attacks if still installed. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording is now corrected in C10; MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.
 
 **For our review:** Interpret an explicitly scheduled Shield grant as a new ordinary part at its stated trigger. An immediate grant alone does not repeat next round. Preserve each row's stated conditions and other unresolved findings.
 
@@ -214,21 +216,18 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C06
 
-**Shield-part activation expected before a shot — conflict · R03**
+**Shot bonuses count installed Shield parts — resolved · R03**
 
-The effect expects Shield parts to have activated in preparation, or arms a later shot trigger only when the Shield part activates. Under End-Turn-only activation there is no later ordinary Fire in that player turn.
+The owner replaces Shield activation with automatic protection from parts installed at enemy attack time. Needle Thread counts older saved Shield parts installed at Fire for its existing 5-per-part support hit, capped at 15. Guarded Loading checks for at least three installed Shield parts at Fire for its existing +5 damage. Counting does not consume them. Costs and cooldowns are preserved. The three former shot-hook cases move to Q12; a nonexistent activation phase is no longer grounds to call them impossible.
 
-**For our review:** Review which event these bonuses should measure. Staging a part and activating it are already different events.
+**For our review:** These installed-count conditions are resolved. Remaining shot-hook timing is recorded separately; do not reopen whether a shield needs activation.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH044 — Guarded Loading** | Add 8 damage, plus 5 more if you used at least three Shield parts this round. |
-| **SH062 — Impact Catch** | After your next main shot this round deals HP damage, gain another 7 Shield once. |
-| **MA034 — Backplate** | After this round's main shot, gain 4 more Shield if it consumed at most one Ammo part. |
-| **IV107 — Needle Thread** | After this turn's main damage, deal a separate 5 damage to the main target for each saved Shield part you activated during this planning phase, up to 15 separate damage in one support hit. |
-| **AD076 — Rivet Collectors** | Each of the next four Shield parts you use this planning phase repairs 2 Bolt HP if he is active. |
+| **SH044 — Guarded Loading** | Add 8 damage, plus 5 more if at least three Shield parts are installed in your shield when you Fire this shot. |
+| **IV107 — Needle Thread** | When you Fire the next shot this turn, count Shield parts saved from an earlier round that are currently installed in your shield. |
 
 ## C07
 
@@ -288,7 +287,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Early Cover uses ordinary Shield-part expiry — resolved · R03**
 
-SH034 now schedules a regular 8-Shield part for the beginning of the next round. It loads then and may be removed or saved; if left loaded, End Turn activates it and active Shield resets at enemy-turn end. The obsolete following-turn expiry clause was removed without changing its cost, cooldown or Shield amount.
+SH034 now schedules a regular 8-Shield part for the beginning of the next round. It loads then and may be removed or saved; if left installed, it protects when enemies attack and active Shield resets at enemy-turn end. The obsolete following-turn expiry clause was removed without changing its cost, cooldown or Shield amount.
 
 **For our review:** The old expiry conflict is resolved under the same ordinary-part rule.
 
@@ -344,11 +343,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q01
 
-**Shield replenishment during enemy actions — clarification · R03**
+**Reactive installed Shield protects subsequent attacks — resolved · R03**
 
-These gains can happen after End Turn's Shield activation, through an ongoing effect or a Bolt-disable trigger during enemy actions. The ordinary-part grant rule does not yet specify activation when End Turn has already resolved. Do not silently make such a grant active protection or a fresh automatic next-round Shield balance.
+The installed-part rule removes the old missed-activation objection. A stated reactive Shield grant installs ordinary parts at its trigger and can protect against subsequent attacks while installed. It does not retroactively block the triggering damage or refill previously depleted Shield. Values, trigger conditions, reset and explicit upgrade exceptions remain unchanged.
 
-**For our review:** Review secondary Shield replenishment as one group, keeping it separate from preparation-time grants and next-turn retention.
+**For our review:** Automatic protection is resolved. Q13 separately retains NO083's implicit Charge-payment timing; inter-effect ordering still follows the shared specification work.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -368,11 +367,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q02
 
-**Preparation-time active-Shield dependencies — clarification · R03**
+**Preparation-time Shield readings and payments — clarification · R03**
 
-The recipe spends or checks active Shield while preparing a shot. Ordinary staged Shield cannot supply it. An explicit permanent-upgrade grant/retention can make the effect legal, so this is a build dependency to review, not an automatic rule violation.
+These recipes read or spend Shield during preparation. The installed-part clarification establishes protection at enemy attack time, but does not define how a preparation payment removes protection from installed parts or how removal/reinstallation interacts with that payment. It is no longer valid to claim that only an upgrade can make these effects usable.
 
-**For our review:** Check whether the intended recipe should require an active-Shield upgrade. Do not confuse pending parts with an available Shield balance.
+**For our review:** Clarify installed-value sampling and real payment bookkeeping without inventing Shield activation or granting refunds by reinstalling a paid-down part.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -393,11 +392,11 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q03
 
-**Order within End Turn's Shield activation — clarification · R03**
+**Installed Shield order and secondary payments — clarification · R03**
 
-The value or legality depends on another Shield part having activated, or on Shield accumulated so far. Values add at End Turn, but the owner has not selected ordering/payment validation for these interdependent Shield parts.
+These effects reference other Shield parts already used or a current Shield balance. The former End Turn activation sequence is superseded by installed protection. Exact readings of prior/other installed parts and secondary payment ordering still need explicit wording; there is no activation prerequisite for protection itself.
 
-**For our review:** Establish the activation-order reading needed by these five rows; this also informs Heat/Charge payments across a staged Shield build.
+**For our review:** Reconcile the remaining order/payment clauses with installed parts as one group, preserving values and existing costs.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -585,6 +584,63 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **IV118 — Spare Needle Bench** | **Utility-output classification requires review.** For this fight, when a main shot consumes at least two saved Ammo parts, receive 1 Plain Needle at your next turn's start. |
 | **NO120 — Pocket Generator** | **Utility-output classification requires review.** At the start of next turn, gain 2 Pulse Tips and 2 Charged Plates. |
 
+## Q12
+
+**Installed Shield parts and shot/install hooks — clarification · R03**
+
+Impact Catch, Backplate and Rivet Collectors still use the former Shield-use timing. Automatic installed protection removes the old impossible-activation argument, but their next-shot or next-installed-part hooks need explicit arming, expiry and removal/reinstallation accounting. Their effects and values have not been silently changed.
+
+**For our review:** Specify these secondary hooks under the installed-part rule, without a separate Shield activation or repeat rewards from reinstalling the same part.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **SH062 — Impact Catch** | After your next main shot this round deals HP damage, gain another 7 Shield once. |
+| **MA034 — Backplate** | After this round's main shot, gain 4 more Shield if it consumed at most one Ammo part. |
+| **AD076 — Rivet Collectors** | Each of the next four Shield parts you use this planning phase repairs 2 Bolt HP if he is active. |
+
+## Q13
+
+**Implicit Shield secondary-effect costs and stat sampling — clarification · R03**
+
+These Shield rows attach payments, other resource/status gains or conditional snapshots to an implicit activation. The owner's installed-part rule replaces the protection model, but does not by itself choose when each secondary payment or snapshot happens. Preserve printed costs, conditions and values; do not pay or grant them once per enemy attack or repeatedly through removal/reinstallation. Explicitly named End Turn schedules elsewhere retain their clock under the catalogue's legacy-wording rule.
+
+**For our review:** Choose a consistent secondary-cost/snapshot boundary for this group before implementation. These are timing questions, not a revival of Shield activation.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **MA003 — Boiler Jacket** | Gain 6 Shield and 1 Heat when activated. |
+| **MA013 — Flameproof Liner** | Gain 4 more if at least one living enemy has Burn when activated. |
+| **MA014 — Breathing Plate** | Gain 5 Shield and 2 Heat when activated. |
+| **MA017 — Quench Ribs** | Pay 3 Heat when activated. |
+| **MA022 — Scrap Weld** | When activated, consume one unused Ammo part from reserve without its effect. |
+| **MA024 — Front Brace** | Gain 3 more if the sum of currently shown enemy attack damage is at least 15 when activated. |
+| **MA031 — Firebreak** | Gain 4 Shield for each living enemy that has Burn when activated, up to 12 Shield. |
+| **MA040 — Long Cooling** | Pay 4 Heat when activated. |
+| **MA054 — Emergency Grate** | Lose 3 HP when activated, leaving at least 1 HP, then gain 18 Shield. |
+| **MA062 — Cold Riveting** | Gain 10 more if Heat is 0 when activated; otherwise lose 2 Heat after gaining Shield. |
+| **MA070 — Stoked Armour** | Gain 8 Shield, plus 1 Shield for each Heat you have when activated. |
+| **MA079 — Furnace Rest** | Gain 2 Heat at the start of next turn if no Heat was paid as an activation cost after this part was activated this round. |
+| **MA096 — Heated Parapet** | When activated, choose and pay 3 to 8 Heat. |
+| **AD079 — Tools in Reserve** | Gain 6 Shield plus 2 per unused Helper part remaining in reserve after this activation, up to 8 extra Shield. |
+| **NO003 — Field Plate** | You may pay 1 Charge when activated to gain 4 more Shield. |
+| **NO008 — Closed Field** | If Charge is at least 8 when activated, gain 3 more without spending Charge. |
+| **NO009 — Starting Field** | Gain 4 Shield and 2 Charge when activated. |
+| **NO018 — Field Anchor** | Pay 2 Charge when activated. |
+| **NO022 — Glass Guard** | Gain 3 more if you have paid Charge as a part activation cost this round. |
+| **NO026 — Emergency Ground** | Pay all your Charge, at least 1, when activated. |
+| **NO032 — Sudden Field** | Reduce the total damage of the first enemy attack against you this round by your Charge when this part was activated, up to a reduction of 6. |
+| **NO053 — Lightning Post** | You may pay 1 to 3 Charge when activated. |
+| **NO058 — Discharge Gate** | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. |
+| **NO064 — Empty Socket** | Can activate only at 0 Charge. |
+| **NO069 — Full Ground** | Pay all your Charge, at least 6, when activated. |
+| **NO076 — Reserve Screen** | Gain 8 more if at least two recipes in memory currently have numeric cooldown counters when activated. |
+| **NO083 — Restarting Field** | Pay 4 Charge when activated. |
+| **NO105 — Ground Shield** | Pay 6 Charge when activated. |
+
 ## Cases deliberately not called rule conflicts
 
 - Percentages, half-values and multipliers remain legal: the selected integer arithmetic floors their results. They are not automatically fractional-damage violations.
@@ -599,6 +655,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Shared specification gaps, not 606 separate questions
 
-Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft under the installed-part rule. Q03/Q10/Q12/Q13 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review C06's Shield-to-shot timing, beginning with SH044. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review C08's removed Charged Barrel payment references. Apply settled fixes to equivalent cases and distinguish remaining Shield secondary-effect timing from its settled automatic protection. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
