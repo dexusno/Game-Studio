@@ -1,16 +1,16 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · Pocket Screen revised this pass; other 605 rows unchanged**
+**17 September 2026 · all 606 recipes reviewed · Twin Coolant and Packed Lunch revised this pass; other 604 rows unchanged**
 
-Reviewed all recipe rows from `a3a33b0` against the settled owner rules, updated for Pocket Screen's final saved-part thresholds. Found **33 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **488 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `62a7625` against the settled owner rules, updated for the analogous saved-Utility bonus fixes. Found **31 recipes with a definite conflict or obsolete dependency**, **85 additional recipes needing wording/dependency clarification**, and **490 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. End Turn activates parts left loaded, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
 **Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-This is an audit for joint review. This pass revises IV071: 0/1/2+ saved ordinary parts apply Weaken 1/2/3 to every living enemy, resolving C11. Its output type, cost/cooldown and the other 605 rows are preserved. The owner confirmed persistent flat enemy damage reduction: apply Weaken to every hit, then reduce its strength by 1 once after the full enemy phase. The 25% damage-taken idea was withdrawn. The player counterpart remains a labelled draft mirror. Existing recipe amounts and robot stats have not been retuned. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. This pass revises IV099 and AD062 under the owner's direction to use the same solution for equivalent conflicts: their existing bonuses require at least two ordinary parts saved from earlier rounds still in reserve on immediate recipe Use, without consuming the parts. This resolves C12. Output types, costs/cooldowns and the other 604 rows are preserved. Pocket Screen's 0/1/2+ tiers and persistent enemy Weaken remain unchanged. The player Weaken counterpart remains a labelled draft mirror. Existing reward amounts and robot stats have not been retuned. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** IV099 Twin Coolant and the remaining saved-Utility dependencies.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** AD040 Service Pair and NO055 Split Battery split Utilities into separately stored activations. Review this distinct case once and apply its solution to both; Utility-item sacrifices also remain open.
 
 ## Coverage
 
@@ -18,8 +18,8 @@ This is an audit for joint review. This pass revises IV071: 0/1/2+ saved ordinar
 | --- | ---: | ---: | ---: | ---: |
 | SH | 126 | 6 | 21 | 99 |
 | MA | 120 | 3 | 19 | 98 |
-| IV | 120 | 4 | 16 | 100 |
-| AD | 120 | 4 | 10 | 106 |
+| IV | 120 | 3 | 16 | 101 |
+| AD | 120 | 3 | 10 | 107 |
 | NO | 120 | 16 | 19 | 85 |
 
 All rows were read for: output kind and Utility lifecycle; Shield activation, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
@@ -32,7 +32,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | --- | --- | ---: | --- |
 | [C01](#c01) | resolved | 12 | Recipe-granted Shield retention |
 | [C02](#c02) | conflict | 9 | Utilities create or copy physical parts |
-| [C03](#c03) | conflict | 6 | Saved, split or sacrificed Utility items |
+| [C03](#c03) | conflict | 4 | Split or sacrificed Utility items |
 | [C04](#c04) | resolved | 41 | Shield granted during preparation, collection or after Fire |
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | conflict | 5 | Shield-part activation expected before a shot |
@@ -41,6 +41,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
 | [C10](#c10) | resolved | 1 | Early Cover uses ordinary Shield-part expiry |
 | [C11](#c11) | resolved | 1 | Pocket Screen counts saved ordinary parts |
+| [C12](#c12) | resolved | 2 | Equivalent Utility bonuses count saved ordinary parts |
 | [Q01](#q01) | clarification | 11 | Shield replenishment during enemy actions |
 | [Q02](#q02) | clarification | 12 | Preparation-time active-Shield dependencies |
 | [Q03](#q03) | clarification | 5 | Order within End Turn's Shield activation |
@@ -114,20 +115,18 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C03
 
-**Saved, split or sacrificed Utility items — conflict · R01**
+**Split or sacrificed Utility items — conflict · R01**
 
-The effect requires an inventory Utility item, its age, or separate stored activations. Utilities activate on recipe Use and do not create those items.
+The effect requires separate stored Utility activations or consumes inventory Utility items. Utilities activate on recipe Use and do not create those items. The saved-item bonus conditions in IV099/AD062 are now resolved separately in C12.
 
-**For our review:** Determine the intended replacement dependency or output. AD062 is newly identified beyond the existing superseded markers.
+**For our review:** Review split activations and item-sacrifice replacements as distinct cases. Apply a selected solution to equivalent rows without repeating the same question.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **IV099 — Twin Coolant** | If this part was saved, also apply Corrosion 3 to one chosen enemy now. |
 | **IV105 — Empty the Tools** | Choose and reserve up to two saved Utility parts until firing. |
 | **AD040 — Service Pair** | Each Service Tab repairs 3 Bolt HP while he is active. |
-| **AD062 — Packed Lunch** | Restore 10 instead if this part was crafted on an earlier turn. |
 | **AD097 — Supply Courier** | Consume two unused Utility parts from reserve as an additional cost. |
 | **NO055 — Split Battery** | Each Small Cell gives 2 Charge when activated. |
 
@@ -316,6 +315,21 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | Recipe | Existing wording |
 | --- | --- |
 | **IV071 — Pocket Screen** | Apply Weaken to every living enemy: 1 with 0 saved parts, 2 with exactly 1 saved part, or 3 with at least 2 saved parts. |
+
+## C12
+
+**Equivalent Utility bonuses count saved ordinary parts — resolved · R01**
+
+The owner directed applying the same solution to the same problem. Twin Coolant and Packed Lunch now check for at least two ordinary parts saved from earlier rounds still in reserve on immediate recipe Use, without consuming them. Twin Coolant retains global cooling, conditional Corrosion 3 and its requirement for a recipe already cooling before Use. Packed Lunch restores 5 Bolt HP, or 10 when the saved-part condition is met, including while disabled. Costs and cooldowns are unchanged.
+
+**For our review:** Both saved-Utility bonus conflicts are resolved. This condition does not resolve recipes that split Utility activations or sacrifice Utility items; those remain in C03. Numerical balance is untested.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **IV099 — Twin Coolant** | On recipe Use, check whether at least two ordinary parts currently in reserve were saved from an earlier round, without consuming them. |
+| **AD062 — Packed Lunch** | On recipe Use, restore 5 Bolt HP, including while disabled. |
 
 ## Q01
 
@@ -559,4 +573,4 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft. Q03/Q10 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review IV099 and the other remaining groups with Klaus. Record chosen replacements before changing affected rows and re-auditing them. Shield-part replacements and pre-reset timing clarifications are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review the split-activation Utility group, beginning with AD040/NO055. Apply settled replacements directly to equivalent conflicts; reserve joint review for genuinely different design choices. Shield-part replacements, pre-reset timing clarifications and saved-Utility bonus replacements are applied; unrelated replacements and gameplay implementation are not implied.
