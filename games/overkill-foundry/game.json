@@ -45,13 +45,13 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-18T10:20:14+00:00",
+      "captured_at": "2026-09-18T10:41:40+00:00",
       "record_sha256": "1b4de51c251d2334b0b531f70da52f7ab6b6366f45aefd96385468711dd99eeb",
       "files": {
-        "games/overkill-foundry/STATUS.md": "55ef9c7261942b692724c61ce966998f4c7299c4aafaee350ae36e3eb67d6f23",
-        "games/overkill-foundry/BRIEF.md": "2fbfbc4a91857151d1a1b74951fffc836d877da4e0e3cf6b71ef7627245d6ee9",
-        "games/overkill-foundry/DECISIONS.md": "87b1c0f2a0dcadfc7757ac912838da4ada1445018627d1dab1e874a604638ff6",
-        "games/overkill-foundry/design/REDESIGN-PLAN.md": "7715b7f66c6b29d87bc8d4e66916f525a89d6e8b3379c77de0ff9b01d052e49a",
+        "games/overkill-foundry/STATUS.md": "2db56e87bdcc38e27d7ef927b3252a9b3a6f149f09b42cd156540a6b696b55f7",
+        "games/overkill-foundry/BRIEF.md": "4936f6aed30fcdb614c1b239751ad136aa2d02b96d8e1846e67030fd2e564a77",
+        "games/overkill-foundry/DECISIONS.md": "6ec4d9a6eec53a6815beb713c5bb5c73cd311c7a3482035dd15be24fe9c74111",
+        "games/overkill-foundry/design/REDESIGN-PLAN.md": "5e3f22940abb2fda207645e45b34342f9a6885cb748e477671ba0f97098c88eb",
         "games/overkill-foundry/design/ENDGAME-PROGRESSION.md": "2d8126e7d837741e33eb627d8589ec785193b169236093ee9617aa7176c9e42e",
         "games/overkill-foundry/design/ACHIEVEMENTS.md": "54879a4f04e2d5d5dde6a21c78b5c19023d43912e9993cae4aa5cee9d1fc134c",
         "games/overkill-foundry/design/STEAM-ACHIEVEMENTS.md": "c770a3f43e5ecc69738888590c8bd6a2d14c3f5fe334039fe66e3b6eb753b968",
@@ -72,7 +72,7 @@
         "games/overkill-foundry/design/ENEMY-ROSTER.md": "f5ab83f707cbaec61927804f3b9f3ee89d34f26bae5f09828d84f330dbc62de2",
         "games/overkill-foundry/design/ENEMY-PATTERNS.md": "7a4b913e00b8f4164ce5997b4c991b025c569048a245fa136981fa4a84c5d330",
         "games/overkill-foundry/design/ROBOT-EFFECTS.md": "c93b4896f4ad564cf8ec7158439c0ac410065b7984293b5672589c94db7198be",
-        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "d9f733ad6ba86138e82c15ce3485da92c74d659e343db03ab981afb6f047cfae"
+        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "e871e76043b1610f8658ab231e197a77b1fe6739fb6b5af877bf5c30d5404e6d"
       }
     }
   }

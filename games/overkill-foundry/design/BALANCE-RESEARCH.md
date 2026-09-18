@@ -2,6 +2,44 @@
 
 13 September 2026. Requested by Klaus during the stacked-ammunition discussion. This records developer documentation and a proposed method for our game. It does not establish tuned values or authorize implementation. Companion: [stacked ammunition and build strategies](BUILD-STRATEGY-STUDY.md).
 
+## Graphics-free balancing version — owner direction, 18 September 2026
+
+Build a graphics-free version of the game for Codex to play and run hundreds of games in fast succession. Use it for encounter, economy and full-campaign balance, including all four mercenaries, three-city routes, permanent upgrades, Lockdown tiers and the final challenge as those systems become implemented. This is now a planned development deliverable. No simulator or automated campaign results exist yet; the existing Python reports inspect printed costs and design data only.
+
+The owner explicitly also requires **human tests for graphics verification and approval**. Automated balance evidence does not approve graphics or replace human playability tests. Klaus must review the rendered game and approve its visual result, including the selected style, camera flow, animations, effects and readable combat feedback.
+
+### One rules implementation, two ways to play
+
+Implement a shared, presentation-independent rules core used by both the graphical game and the graphics-free runner. Share content definitions, legal-action validation, whole-number calculations, event order, enemy AI, rewards and save/seed handling. Preserve all scoped character/recipe/upgrade exceptions. Avoid maintaining a simplified second combat engine whose values or timing can drift from the playable version.
+
+The graphical game translates player input into commands and displays resulting events. The runner accepts the same commands through a text/structured interface: inspect observable state and legal actions, choose an encounter or offer, steer/collect, Use recipes, install/unload parts, target, Fire, buy/sell and End Turn. It resolves turns without rendering, audio, camera transitions, animation waits or real-time presentation delays. Use simulation steps rather than merely speeding up the frame clock. Rendering must not be responsible for applying damage or advancing cooldowns.
+
+Codex can directly play selected runs through this interface, inspect why a choice succeeded or failed, and orchestrate repeatable batches. Fast automated player policies handle bulk runs; an LLM call for every action is not required. Compare aggressive, defensive, resource-saving, synergy-focused and deliberately imperfect policies, with bounded lookahead where useful. Agents receive the information a player is entitled to see, not future random draws, concealed offers or the seed as a planning oracle. Record policy identity, version and search budget. Random actions are useful for bug finding, not evidence of human difficulty.
+
+Collection skill needs an explicit boundary: full combat/economy rules stay shared, while fast batches may supply recorded haul outcomes or a labelled Precision/physical-claw success model. Compare low, medium and high execution skill rather than assuming perfect collection. Calibrate those inputs from the rendered interaction later. Such batches are conditional on the stated collection model; they do not establish that claw physics, timing or controls feel good. Where collection physics itself affects balance, include separate headless fixed-step integration checks and rendered human tests.
+
+### Batch experiments and reproducible reports
+
+Start with known encounter fixtures, then short routes, then complete three-city campaigns with persistent HP and actual reward/shop decisions. Advance to hundreds of runs per experiment once legality, event ordering and deterministic replay agree with the playable rules. Begin the wider matrix with each mercenary at Tier 0, 1, 5 and 10, then cover intermediate tiers. Sample normal eligible builds; label forced rare combinations and guaranteed healing as targeted stress fixtures rather than ordinary play.
+
+For each run preserve the build/content/rules versions, seed, collection model, player policy, starting state, ordered action/event trace and final outcome. Use separately seeded random streams for encounters, rewards and supplies where appropriate, so an unrelated extra draw does not accidentally scramble every later comparison. Replaying the same version, initial state and command trace must reproduce the same state. Retain failing/extreme traces for a readable turn-by-turn review and eventual visual replay. Keep bulk logs in ignored local output directories and commit compact evidence summaries.
+
+Compare proposed changes on the same seed sets and player policies, then check fresh held-out seeds and other policies. Split reports by mercenary, tier, encounter type and strategy; hundreds pooled across many categories are not hundreds of observations for each category. Include sample sizes and uncertainty with win rates. Investigate why a policy loses before weakening an enemy, and why an item is selected before declaring it too strong. Do not tune exclusively against the bot used to discover a problem.
+
+Record city/campaign completion, loss causes, HP attrition and healing access, turns per fight, material shortages and leftovers, recipe/upgrade offer-pick-use rates, damage/Shield effectiveness, shop economy and growth loops. Distinguish an earned powerful build from an illegal action or a nonterminating loop. A runner watchdog may halt a suspected loop or excessive search, but record that result as unresolved/timeout rather than a loss; it must not add an in-game shot or turn cap. Report simulated turns separately from machine throughput: wall-clock simulation speed is not human campaign duration.
+
+Propose focused balance changes, rerun affected comparisons and preserve the before/after report. Running a batch does not authorize rewriting settled game rules. Measure actual completed campaigns per minute and resource use before making a speed claim. The requirement is rapid batches of hundreds; no seconds-per-campaign performance is claimed before measurement.
+
+### Implementation sequence and acceptance
+
+1. Extract the shared rules core as part of the first combat implementation, with a text action interface and reproducible single-encounter traces. Keep presentation adapters thin; choose the concrete build target during implementation.
+2. Verify graphical/headless agreement after each command for representative Shield reset/retention, cooldown clearing, character bonuses, recoil death, sales, upgrades and same-seed restart. Reuse recorded collection outcomes when isolating combat parity.
+3. Add automated player policies and full route/reward/shop decisions. Explicitly list unsupported mechanics; do not run incomplete full-game content with silently ignored effects.
+4. Produce a first several-hundred-run report with declared coverage, policy/seed versions, invalid/timeout counts, throughput and selected replayable cases. Test the modified settings on fresh seeds before treating a result as general.
+5. Have humans test the rendered build for decisions, pacing, understandable losses, controls and enjoyment. Klaus verifies graphics and approves the visual result in motion: style fidelity, city identity, both camera views, animation/effect readability and larger resource-permitted builds. Numeric reports, screenshot checks and successful headless tests cannot substitute for that approval.
+
+Unreal's current documentation lists `nullrhi` for running without a rendering interface, and its [Automation Test Framework](https://dev.epicgames.com/documentation/en-us/unreal-engine/automation-test-framework-in-unreal-engine) supports automated checks. These are available implementation tools, not an already-built balance runner or a guarantee of speed/determinism. Source checked 18 September 2026: [Epic command-line reference](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-command-line-arguments-reference). The shared-core architecture and experimental method above are our design recommendations.
+
 ## HP and enemy benchmarks from STS2 — 16 September 2026
 
 **Owner direction:** use Slay the Spire 2's HP/enemy balance as experience for our initial values. Klaus points out that comparable robot balancing would let us draw on its player-HP balance. This selects a reference approach, not a wholesale numerical copy or a change to our recovery rules. The current [robot library](ENEMY-ROSTER.md) adapts tactical behaviours; its printed HP, damage and effects are our provisional values, not already matched STS2 balance.

@@ -1,5 +1,7 @@
 # Overkill Foundry — proposed complete redesign plan
 
+**Graphics-free balancing and human graphics approval, owner direction 18 September:** build a version without graphics for Codex-led rapid batches of hundreds of games, sharing the graphical game's rules and content. Use reproducible automated players, seeds and reports to investigate balance. Human testing remains required for playability, graphics verification and Klaus's visual approval. The [balancing-version specification](BALANCE-RESEARCH.md#graphics-free-balancing-version--owner-direction-18-september-2026) defines scope, collection-model limits, parity checks and delivery evidence. This is a planned deliverable, not an implemented simulator or an existing batch result.
+
 **Post-campaign progression, 18 September:** the owner requests Steam achievements, escalating resource/HP difficulty and an ultimate reveal earned with all four mercenaries. The [Lockdown and finale proposal](ENDGAME-PROGRESSION.md), [40-achievement roster](ACHIEVEMENTS.md) and [Steam integration specification](STEAM-ACHIEVEMENTS.md) now make that direction concrete. Ten cumulative levels, the all-four base-route entry assumption, Tier 5 signatures and CROWN-0 are proposed details. Normal City 3 victory remains a completed route; a later optional epilogue has separately recorded victory/defeat. Preserve recipes available from the first campaign and specific character/upgrade exceptions. Actual gameplay and Steam integration remain future work.
 
 **Owner direction, 18 September — permanent upgrades:** upgrades have the campaign role of STS2 relics and may be high-tech items that explicitly change game defaults, beyond weapon and Shield improvements. Include shared and mercenary-specific pools at a comparable four-character scale. Mayor gifts specifically use Ancient relics as inspiration and grow stronger through the three city waves; three Rare/Legendary choices remain the selected presentation. Upgrade rarities must correspond to source relic rarities. The [upgrade catalogue](UPGRADE-CATALOGUE.md) and [system proposal](UPGRADE-SYSTEM.md) own the new draft effects and acquisition details. Existing character exceptions remain intact; individual item numbers are not owner-selected final balance.
@@ -500,6 +502,14 @@ Explain how careful play differs from a risky move and how a player can recognis
 
 **What you judge:** “Would beating this feel earned? Could I lose, understand why, and want another attempt?”
 
+## 2a. Build the shared rules core and graphics-free balancing version
+
+Alongside the first combat implementation, separate authoritative game rules from presentation. The graphical game and text/batch runner must call the same legal-action and state-transition code. Run a complete fight first, then full three-city campaigns with real economic and reward choices. Codex can inspect and play individual runs; multiple fast automated strategies supply hundreds of reproducible trials. Expand coverage to all four mercenaries, upgrades, Lockdown tiers and the finale as those systems are implemented. See [the detailed method](BALANCE-RESEARCH.md#graphics-free-balancing-version--owner-direction-18-september-2026).
+
+**What you receive:** a graphics-free play interface, batch runner, declared content/policy coverage, measured throughput, comparative balance reports and seeds/action logs that reproduce notable outcomes. Unsupported mechanics and modelled collection skill must be visible in the evidence.
+
+**What this establishes:** rule correctness and numerical balance evidence under specified automated play. Human playtests still establish clarity, difficulty for real players, enjoyment and control feel. Klaus separately verifies and approves the rendered graphics, animation, effects, camera flow and style. The runner is a development tool; it does not reduce the visual quality required of the owner-facing demo.
+
 ## 3. Refine the chosen visual foundation and two-view presentation
 
 **Breadth exploration delivered:** the original minimum of five families with five variants was expanded to **15 families with five variants each**, plus a three-panel camera comparison. All 16 boards are saved in [the atlas](ART-DIRECTION.md), with exact prompts, provenance and static observations. Do not repeat that exploration by default.
@@ -568,7 +578,7 @@ Use the selected graphics, sounds and interface together. This demo is where we 
 
 **What you judge:** “Is this the game I want us to finish? Does the whole experience work, and do I want to play again?”
 
-We revise this demo until you are satisfied before expanding into the full game. Passing automated tests alone does not satisfy this step.
+We revise this demo until you are satisfied before expanding into the full game. Passing automated or graphics-free balancing tests alone does not satisfy this step. Human tests must verify the graphics in the rendered build, and Klaus must approve the visual result as well as the playable experience.
 
 ## 9. Build out the approved game and deliver its ending
 
