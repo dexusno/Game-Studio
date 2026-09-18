@@ -1,0 +1,4273 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "status": "design proposal; no runtime implementation or player evidence",
+  "counts": {
+    "ordinary_mercenary": 36,
+    "mayor": 102,
+    "total": 138
+  },
+  "mayor_offer_rule": "At each city entry, draw one unowned Shared infrastructure entry, one unowned Shared tactical entry, and one unowned entry for the current mercenary from that exact city wave. Mayor entries cannot enter other reward pools. Each wave has 22 Shared and 3 per mercenary.",
+  "upgrades": [
+    {
+      "id": "MAU-01",
+      "name": "Ember Primer",
+      "mercenary": "Mara",
+      "rarity": "Common",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start gain 2 Heat, respecting the current Heat cap. This is a fresh grant, not Heat carried between fights.",
+      "strategy": "Earlier Heat thresholds.",
+      "default_exception": "Starting Heat grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "FENCING_MANUAL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fencing_Manual",
+          "name": "Fencing Manual"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Common",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-02",
+      "name": "Expanded Heat Sink",
+      "mercenary": "Mara",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Increase Mara's Heat cap by 4. Do not fill the added capacity. Ordinary Heat decay is unchanged.",
+      "strategy": "Store fuel for later shots.",
+      "default_exception": "Heat cap increase.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "RUNIC_CAPACITOR",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Capacitor",
+          "name": "Runic Capacitor"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is a source acquisition category, not an ordinary rarity. This Uncommon assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "MAU-03",
+      "name": "Vent Fan",
+      "mercenary": "Mara",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, after a successful recipe or part effect actually pays at least 2 Heat in one payment, grant a fresh 3-Shield part. Heat decay is not payment.",
+      "strategy": "Convert a deliberate vent into defence.",
+      "default_exception": "None; new triggered part supply.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GALACTIC_DUST",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Galactic_Dust",
+          "name": "Galactic Dust"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-04",
+      "name": "Heat Seal",
+      "mercenary": "Mara",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Reduce Mara's ordinary enemy-phase-end Heat decay by 1, to a minimum of zero. It does not reduce explicit Heat costs or losses from effects.",
+      "strategy": "Preserve Heat between rounds.",
+      "default_exception": "Ordinary Heat decay reduction.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SELF_FORMING_CLAY",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Self-Forming_Clay",
+          "name": "Self-Forming Clay"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-05",
+      "name": "Refractory Suture",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, after a paid HP recipe and its reactions finish, heal 2 HP if Mara remains alive. Heal at most 6 actual HP per fight; full-HP uses consume that turn's opportunity. Enemy damage does not trigger it.",
+      "strategy": "Support HP-cost manufacturing.",
+      "default_exception": "Explicit bounded healing.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "DEMON_TONGUE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Demon_Tongue",
+          "name": "Demon Tongue"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-06",
+      "name": "Slag Launcher",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, choose and consume one unused ordinary reserve part to deal a separate 5-damage hit to each living enemy. The consumed part's usual effects do not resolve. Resolve enemy reactions normally.",
+      "strategy": "Trade a stored part for crowd damage.",
+      "default_exception": "Adds a paid-by-part equipment action.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "CHARONS_ASHES",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Charon's_Ashes",
+          "name": "Charon's Ashes"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-07",
+      "name": "Thermal Punch",
+      "mercenary": "Mara",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On the first main shot each player turn fired at 8 or more Heat, ignore up to 4 of the target's Armor for that hit. Remaining Armor, Ablative Tiles and any other defenses still apply. No extra damage is created beyond the avoided Armor reduction.",
+      "strategy": "Answer armoured priority targets.",
+      "default_exception": "Limited Armor bypass.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAPER_PHROG",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Paper_Phrog",
+          "name": "Paper Phrog"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-08",
+      "name": "Kiln Shutter",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, when using a Shield-producing recipe at 6 or more Heat, optionally pay 2 extra Heat to add 6 Shield to its first output part. Pay before production; the physical bonus survives saving.",
+      "strategy": "Turn Heat into prepared protection.",
+      "default_exception": "Additional optional Heat payment.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "RUINED_HELMET",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ruined_Helmet",
+          "name": "Ruined Helmet"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MAU-09",
+      "name": "Redline Governor",
+      "mercenary": "Mara",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "For the first main shot each player turn at 8 or more Heat, Hot Barrel adds 2 damage per full 2 Heat instead of 1. Other shots retain ordinary Hot Barrel; no Heat is spent.",
+      "strategy": "A powerful hot opening followed by flexible shots.",
+      "default_exception": "Scoped enhancement of Hot Barrel.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "BRIMSTONE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brimstone",
+          "name": "Brimstone"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is a source acquisition category, not an ordinary rarity. This Legendary assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "IVU-01",
+      "name": "Etchant Nozzle",
+      "mercenary": "Ivo",
+      "rarity": "Common",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, add 1 Acid Etch to the first successful Acid Etch application on one living enemy. Choose that recipient during the action. This bonus is part of that application and cannot retrigger itself.",
+      "strategy": "Improve one corrosion setup.",
+      "default_exception": "None; bounded status bonus.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SNECKO_SKULL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Snecko_Skull",
+          "name": "Snecko Skull"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Common",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-02",
+      "name": "Aerosol Canister",
+      "mercenary": "Ivo",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start apply 2 Acid Etch to every initial enemy. Status protection applies normally. Select a valid recipient for Find the Seam if its ordinary conditions qualify; later spawns receive nothing.",
+      "strategy": "Start pressure before spending parts.",
+      "default_exception": "Opening status application.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TWISTED_FUNNEL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Twisted_Funnel",
+          "name": "Twisted Funnel"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-03",
+      "name": "Fault Recorder",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first positive Weaken stack Ivo applies to an enemy each fight skips its first enemy-phase-end decay. Subsequent decay and all other enemies remain normal. Mark the protected stack visibly.",
+      "strategy": "Stretch one defensive opening.",
+      "default_exception": "One skipped Weaken decay.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "PAPER_KRANE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Paper_Krane",
+          "name": "Paper Krane"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-04",
+      "name": "Survey Lens",
+      "mercenary": "Ivo",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "When Find the Seam succeeds, its Target Paint amount is 4 instead of 2. It still triggers once per player turn on one enemy and does not retroactively alter the triggering hit.",
+      "strategy": "Focus the next assembled shot.",
+      "default_exception": "Scoped enhancement of Find the Seam.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAPER_PHROG",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Paper_Phrog",
+          "name": "Paper Phrog"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-05",
+      "name": "Foam Collector",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each enemy phase, after Acid Etch damage removes enemy HP, schedule a fresh 4-Shield part for the next player-turn start. Several enemies ticking together still grant one part; ending the fight cancels delivery.",
+      "strategy": "Defence earned by sustained corrosion.",
+      "default_exception": "Scheduled part delivery.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOUGH_BANDAGES",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tough_Bandages",
+          "name": "Tough Bandages"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-06",
+      "name": "Scrap Needle",
+      "mercenary": "Ivo",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, sacrifice one ordinary part saved from an earlier round to apply 3 Weaken to one living enemy. Consume the selected reserve part before applying the status; its original effects do not resolve.",
+      "strategy": "Convert reserve inventory into safety.",
+      "default_exception": "Adds a paid-by-part equipment action.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "TINGSHA",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tingsha",
+          "name": "Tingsha"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-07",
+      "name": "Failure Forecast",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Each enemy whose Acid Etch is at least its current HP deals 2 less damage per attack hit, minimum zero. Re-evaluate at each hit. This is separate from Weaken and does not change Weaken decay.",
+      "strategy": "Reward a corrosion execution setup.",
+      "default_exception": "Conditional per-hit damage reduction.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "UNDYING_SIGIL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Undying_Sigil",
+          "name": "Undying Sigil"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is a source acquisition category, not an ordinary rarity. This Rare assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "IVU-08",
+      "name": "Pigment Reclaimer",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, after a main shot consumes Target Paint, recover 1 Copper. The triggering shot and all reactions resolve first; the Copper cannot pay for that shot.",
+      "strategy": "Make repeated marking economical.",
+      "default_exception": "Bounded resource grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "BOOKMARK",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bookmark",
+          "name": "Bookmark"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "IVU-09",
+      "name": "Trace Router",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, when Ivo's direct damage kills a robot with positive Acid Etch, transfer up to 5 of its remaining Acid Etch to one chosen living robot after death resolution. Protected or absent recipients do not refund the trigger; no recursive transfer.",
+      "strategy": "Carry a prepared corrosion investment through a kill.",
+      "default_exception": "Status transfer on death.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "HELICAL_DART",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Helical_Dart",
+          "name": "Helical Dart"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-01",
+      "name": "Brace Beacon",
+      "mercenary": "Ada",
+      "rarity": "Common",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, after a paid Helper command removes enemy Shield or HP, grant Ada a fresh 3-Shield part if Ada is alive. Multiple command hits count once.",
+      "strategy": "Help offensive commands support Ada.",
+      "default_exception": "Triggered Shield supply; no free command.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BONE_FLUTE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bone_Flute",
+          "name": "Bone Flute"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Common",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-02",
+      "name": "Spare Chassis",
+      "mercenary": "Ada",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Increase Bolt's maximum HP by 4, up to 24 under the current helper-cap draft. At fight start restore 4 Bolt HP after the normal starting value is set. Acquisition during a fight increases the maximum only.",
+      "strategy": "More helper endurance.",
+      "default_exception": "Explicit fight-start Bolt restoration.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BOUND_PHYLACTERY",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bound_Phylactery",
+          "name": "Bound Phylactery"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state"
+      ],
+      "status": "proposal",
+      "source_rarity": "Starter",
+      "rarity_basis": "Starter is a source acquisition category, not an ordinary rarity. This Uncommon assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "ADU-03",
+      "name": "Repair Ledger",
+      "mercenary": "Ada",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, when a paid Helper support hit kills a robot, repair active Bolt for 3 HP after reactions. A disabled Bolt is not revived; no healing is given to Ada.",
+      "strategy": "Choose a helper finishing blow.",
+      "default_exception": "Conditional repair.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BOOK_REPAIR_KNIFE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Book_Repair_Knife",
+          "name": "Book Repair Knife"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-04",
+      "name": "Command Cache",
+      "mercenary": "Ada",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start select one installed Helper recipe copy. Its first successful use this fight pays 1 less Iron, minimum zero. All other costs and command requirements remain; the discount is consumed before the effect.",
+      "strategy": "Smooth a planned helper opening.",
+      "default_exception": "One resource discount.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "FUNERARY_MASK",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Funerary_Mask",
+          "name": "Funerary Mask"
+        }
+      ],
+      "implementation_tags": [
+        "copy_identity",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-05",
+      "name": "Service Cradle",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "While Ada has Field Service, that trait repairs 4 Bolt HP instead of 2. Its existing qualifying-command requirement, once-per-turn limit, reactions-before-repair order and active-only restriction remain. Offer this item only when Field Service is present in the selected character definition.",
+      "strategy": "Sustain Bolt through paid offence.",
+      "default_exception": "Scoped enhancement of Field Service.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PHYLACTERY_UNBOUND",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Phylactery_Unbound",
+          "name": "Phylactery Unbound"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "requirements": [
+        "Ada has Field Service; the trait remains a draft addition until selected."
+      ],
+      "source_rarity": "Starter",
+      "rarity_basis": "Starter is a source acquisition category, not an ordinary rarity. This Rare assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "ADU-06",
+      "name": "Reserve Firmware",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At the start of player turn 3, if Bolt is disabled, restore him to 4 HP once that fight. If already active, repair 4 HP instead. No grant of interception or commands.",
+      "strategy": "A visible delayed backup.",
+      "default_exception": "Explicit disabled-Bolt restoration.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BIG_HAT",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Big_Hat",
+          "name": "Big Hat"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-07",
+      "name": "Load Balancer",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, after paying at least 4 raw material units for one Helper recipe use, recover 1 Iron. Count actual material payment only, not HP, meters or copied effects.",
+      "strategy": "Support expensive helper commands.",
+      "default_exception": "Bounded resource return.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "IVORY_TILE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ivory_Tile",
+          "name": "Ivory Tile"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "ADU-08",
+      "name": "Command Multiplexer",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "The first paid Helper command each player turn adds 3 damage to its first direct support hit. A command with no direct hit consumes no trigger; later hits are unchanged.",
+      "strategy": "A stronger directed helper attack.",
+      "default_exception": "Scoped support-hit bonus.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "VITRUVIAN_MINION",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Vitruvian_Minion",
+          "name": "Vitruvian Minion"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is a source acquisition category, not an ordinary rarity. This Rare assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "ADU-09",
+      "name": "Salvage Harness",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, after active Bolt completes an interception and remains active, return one Iron and one Copper. The intercepted attack and reactions finish first. Interception still needs its ordinary paid enabling effect.",
+      "strategy": "Recover materials through careful helper protection.",
+      "default_exception": "Bounded interception reward.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BOOKMARK",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bookmark",
+          "name": "Bookmark"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-01",
+      "name": "Priming Capacitor",
+      "mercenary": "Noor",
+      "rarity": "Common",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start gain 3 Charge, respecting the current Charge cap. It is a fresh grant, not prior-fight carryover.",
+      "strategy": "Earlier electric choices.",
+      "default_exception": "Explicit opening Charge.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "DIVINE_RIGHT",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Divine_Right",
+          "name": "Divine Right"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Starter",
+      "rarity_basis": "Starter is a source acquisition category, not an ordinary rarity. This Common assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "NOU-02",
+      "name": "Deep Cell",
+      "mercenary": "Noor",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Increase Noor's Charge cap by 4 without filling the extra capacity. Existing turn-to-turn carryover remains.",
+      "strategy": "Save a larger burst.",
+      "default_exception": "Charge cap increase.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "RUNIC_CAPACITOR",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Capacitor",
+          "name": "Runic Capacitor"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is a source acquisition category, not an ordinary rarity. This Uncommon assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "NOU-03",
+      "name": "Grounded Meter",
+      "mercenary": "Noor",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After spending a cumulative 6 Charge this fight, grant one fresh 6-Shield part and reset this item's spent counter by 6. Trigger at most once per player turn; keep excess spent count for later qualifying payments. Only actual payments count.",
+      "strategy": "Convert sustained spending into defence.",
+      "default_exception": "New independent spending counter.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GALACTIC_DUST",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Galactic_Dust",
+          "name": "Galactic Dust"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-04",
+      "name": "Bridge Tap",
+      "mercenary": "Noor",
+      "rarity": "Common",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, after a Utility actually removes a cooldown counter, gain 1 Charge. Pay all costs first. Clearing several recipes is one trigger; this item does not refresh no-cooldown recipes.",
+      "strategy": "Support cooling combinations.",
+      "default_exception": "Bounded Charge gain; acquired item, not replacement trait.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "DATA_DISK",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Data_Disk",
+          "name": "Data Disk"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "cooldown_state",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Common",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-05",
+      "name": "Pulse Census",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each fight, after the sixth main shot that actually paid Charge through Charged Barrel, deal one separate 8-damage hit to every living enemy. Finish the sixth shot and its reactions first; support hits do not count.",
+      "strategy": "Build toward an electrical crowd payoff.",
+      "default_exception": "Delayed independent damage trigger.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "METRONOME",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Metronome",
+          "name": "Metronome"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-06",
+      "name": "Night Cell",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At enemy-phase end gain 1 Charge if Noor is alive and the fight continues. This comes after remaining-Shield readings and before next-turn triggers.",
+      "strategy": "Reliable gradual energy.",
+      "default_exception": "Explicit phase-end Charge.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "LUNAR_PASTRY",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lunar_Pastry",
+          "name": "Lunar Pastry"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-07",
+      "name": "Wide Discharge Valve",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Charged Barrel may pay up to 4 Charge per main shot instead of 3, still granting 2 damage per Charge. The optional payment is made before other Charge checks; existing per-shot order is unchanged.",
+      "strategy": "Spend a larger stored burst.",
+      "default_exception": "Scoped Charged Barrel payment-cap increase.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "DIVINE_DESTINY",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Divine_Destiny",
+          "name": "Divine Destiny"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Starter",
+      "rarity_basis": "Starter is a source acquisition category, not an ordinary rarity. This Rare assignment is a proposed power tier for the original acquired adaptation; inherent abilities are not replaced."
+    },
+    {
+      "id": "NOU-08",
+      "name": "Return Coil",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, after a shot that paid at least 3 Charge through Charged Barrel and all reactions finish, regain 1 Charge if Noor is alive. The return cannot fund that shot.",
+      "strategy": "A bounded refund on a committed discharge.",
+      "default_exception": "Explicit delayed Charge return.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "EMOTION_CHIP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Emotion_Chip",
+          "name": "Emotion Chip"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Rare",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "NOU-09",
+      "name": "Phase Comparator",
+      "mercenary": "Noor",
+      "rarity": "Uncommon",
+      "acquisition": [
+        "Officer",
+        "Shop",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, the first main shot fired with at least 8 Charge after its Charged Barrel payment adds 5 damage. Check remaining Charge at Fire; support hits and post-impact Charge do not qualify.",
+      "strategy": "Choose keeping Charge over maximum discharge.",
+      "default_exception": "Conditional main-shot bonus.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GOLD_PLATED_CABLES",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gold-Plated_Cables",
+          "name": "Gold-Plated Cables"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Preserves the primary source relic rarity; adapted power is a beta hypothesis, not a tested equivalence."
+    },
+    {
+      "id": "MY1-03",
+      "name": "Reserve Cassette",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At every fight start grant one fresh 6-damage Plain Slug and one fresh 6-Shield Basic Shield Plate. Recipe ownership is not required. They are ordinary removable parts; unused parts still clear after the fight.",
+      "strategy": "A flexible prepared opening.",
+      "default_exception": "Explicit free opening parts.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "RADIANT_PEARL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Radiant_Pearl",
+          "name": "Radiant Pearl"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-03",
+      "name": "Shield Vault",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At enemy-phase end retain up to 6 remaining Shield instead of clearing that amount. Clear all excess normally. Retention creates no new Shield, and future attacks spend the carried balance normally.",
+      "strategy": "Build defence across rounds.",
+      "default_exception": "Shield reset exception, capped at 6 retained.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "RUNIC_PYRAMID",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Pyramid",
+          "name": "Runic Pyramid"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-04",
+      "name": "Foundry Access Key",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At the start of player turn 1 of each fight gain 3 Iron and 3 Copper, in addition to the ordinary haul. Materials are fight-local and clear normally at fight end.",
+      "strategy": "A reliable material opening.",
+      "default_exception": "Explicit extra opening materials.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "VERY_HOT_COCOA",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Very_Hot_Cocoa",
+          "name": "Very Hot Cocoa"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "haul_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-05",
+      "name": "Emergency Tissue Frame",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "On acquisition gain 18 maximum HP and heal 18 current HP, capped at the new maximum. This acquisition effect happens once, not on each city or fight entry.",
+      "strategy": "A larger survival reserve.",
+      "default_exception": "Explicit maximum-HP increase and one heal.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "NUTRITIOUS_OYSTER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Oyster",
+          "name": "Nutritious Oyster"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-06",
+      "name": "Portable Recipe Archive",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Increase recipe memory by 4. On acquisition choose one of three eligible shared Uncommon recipe copies to install, using a free memory slot. Offers use the normal recipe rarity definitions; no materials or uses are granted.",
+      "strategy": "Broaden available answers.",
+      "default_exception": "Memory expansion and one recipe grant.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "LEAD_PAPERWEIGHT",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lead_Paperweight",
+          "name": "Lead Paperweight"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks",
+        "recipe_memory"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-07",
+      "name": "Inspector Beacon",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At each Officer fight start grant 4 Iron and a fresh 8-Shield part. This does not apply to regular fights or bosses unless their encounter is explicitly tagged Officer.",
+      "strategy": "Accept dangerous optional fights.",
+      "default_exception": "Explicit encounter-tagged supplies.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BOOMING_CONCH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Booming_Conch",
+          "name": "Booming Conch"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-08",
+      "name": "Materials Warrant",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start select Iron, Copper or Carbon. The first successful paid recipe use that fight returns up to 3 units of the chosen resource actually paid by that use, after its effect and reactions finish.",
+      "strategy": "Fund a planned opening recipe.",
+      "default_exception": "One delayed material refund per fight.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GOLDEN_PEARL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Golden_Pearl",
+          "name": "Golden Pearl"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-09",
+      "name": "Rotating Toolhead",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each player turn, after three recipe uses have each actually paid at least one raw material, the next successful recipe use may discount up to 2 raw material units, allocated before payment. That discounted use may cost zero materials; all HP and meter costs remain. Claim the trigger before payment and effects, and count only earlier uses for qualification.",
+      "strategy": "Sequence inexpensive uses into a larger craft.",
+      "default_exception": "Limited fourth-use discount.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "BRILLIANT_SCARF",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+          "name": "Brilliant Scarf"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-10",
+      "name": "Cooling Authorization",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight during preparation, select one cooling recipe copy and remove all its remaining cooldown counters. This equipment action pays no materials; it neither refreshes no-cooldown uses nor ends the turn.",
+      "strategy": "Choose when to reuse a critical recipe.",
+      "default_exception": "One explicit full cooldown removal.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "ELECTRIC_SHRYMP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Electric_Shrymp",
+          "name": "Electric Shrymp"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-11",
+      "name": "Supply Survey Drone",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At each fight start select a material. After the third successful recipe use that actually spends that material, gain 5 of it. Count qualifying uses once each; one payout per fight, after payment and reactions.",
+      "strategy": "Plan a short manufacturing objective.",
+      "default_exception": "Fight-local quest counter and bounded supplies.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "DOWSING_ROD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dowsing_Rod",
+          "name": "Dowsing Rod"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-12",
+      "name": "Forked Route Pass",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Three times per campaign, when choosing a non-boss encounter, replace one offered encounter with a deterministic alternative from the same legal stage band and category. Preview the replacement before committing; using the pass spends a charge and cannot be rerolled again.",
+      "strategy": "Change a route choice without skipping progression.",
+      "default_exception": "Limited encounter-option replacement.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "WINGED_BOOTS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Winged_Boots",
+          "name": "Winged Boots"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-13",
+      "name": "Workshop Subscription",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "After every third completed regular victory, select one installed recipe copy. Its first paid use in every future fight discounts one chosen material by 1, minimum zero. Each copy can receive this subscription once; if no eligible copy exists, retain the earned selection until one exists.",
+      "strategy": "Invest early victories in future efficiency.",
+      "default_exception": "Campaign-long per-copy opening discount.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "FISHING_ROD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fishing_Rod",
+          "name": "Fishing Rod"
+        }
+      ],
+      "implementation_tags": [
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter",
+        "reward_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-14",
+      "name": "Reward Spectrometer",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once after each victorious fight, replace the entire recipe reward offer with a new deterministic eligible offer. Using this action discards the old choices; Collection knowledge gained from seeing them remains.",
+      "strategy": "Steer recipe development.",
+      "default_exception": "One recipe-reward reroll per victory.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "DRIFTWOOD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Driftwood",
+          "name": "Driftwood"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-15",
+      "name": "Field Pattern Pack",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "On acquisition choose an assault or defence pack. Assault adds 2 damage to the first Ammo output each player turn; defence adds 3 Shield to the first Shield output each player turn. Only the selected pack applies and the bonus belongs to that physical part.",
+      "strategy": "Commit to a production specialty.",
+      "default_exception": "Permanent selected production modifier.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SCROLL_BOXES",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Scroll_Boxes",
+          "name": "Scroll Boxes"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-16",
+      "name": "Exchange Seal",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight, after selling an ordinary part, gain bonus Credits equal to that part's canonical base sale price, capped at 12. The ordinary sale still pays normally; unused allowance does not carry between fights.",
+      "strategy": "Recover an opening economy investment.",
+      "default_exception": "One bounded sale bonus.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "LOST_COFFER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lost_Coffer",
+          "name": "Lost Coffer"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-17",
+      "name": "Precision Stabilizer",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight, after an unsuccessful Precision attempt, permit one immediate retry against the same target. The original attempt remains spent, the retry cannot trigger another retry, and the protected base haul is unchanged.",
+      "strategy": "Take a precision risk with one recovery chance.",
+      "default_exception": "Explicit additional Precision attempt.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "CHOICES_PARADOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Choices_Paradox",
+          "name": "Choices Paradox"
+        }
+      ],
+      "implementation_tags": [
+        "claw_attempts",
+        "event_hooks",
+        "haul_generation",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-18",
+      "name": "Steering Fork",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "On the ordinary haul in player turns 1 and 2 of each fight, gain 2 extra units of the material selected by steering. A bonus haul receives no extra units from this item.",
+      "strategy": "Increase early control over materials.",
+      "default_exception": "Two haul bonuses per fight.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PHIAL_HOLSTER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Phial_Holster",
+          "name": "Phial Holster"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "haul_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-19",
+      "name": "Night Delivery Slot",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "If at least 3 unused raw material units remain when ending the player turn, schedule one fresh 5-damage part for next player-turn start. Trigger once per round; do not spend those materials. Delivery expires if the fight ends.",
+      "strategy": "Hold resources for a delayed output.",
+      "default_exception": "Conditional scheduled part supply.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_TEARS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tears",
+          "name": "Pael's Tears"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-20",
+      "name": "Threshold Alarm",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight, immediately before the first enemy attack hit while current HP is at or below half maximum, grant a fresh 10-Shield part. Resolve protection against that hit after this grant; recoil and HP costs do not trigger it.",
+      "strategy": "A readable emergency buffer.",
+      "default_exception": "Explicit pre-hit Shield supply.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_CLAW",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Claw",
+          "name": "Pael's Claw"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-21",
+      "name": "Batch Permit",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start choose one installed no-cooldown recipe copy. It may be used twice on player turn 1 instead of once. Both uses pay all ordinary costs and effects; later turns and other copies remain normal.",
+      "strategy": "A deliberate opening combo.",
+      "default_exception": "One no-cooldown copy gets an extra first-turn use.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "PAELS_GROWTH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Growth",
+          "name": "Pael's Growth"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY1-22",
+      "name": "Reserve Parts Drawer",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start choose between two fresh 4-damage parts or two fresh 4-Shield parts. Grant the chosen pair only; all are ordinary physical parts with normal resale and cleanup.",
+      "strategy": "Adapt opening supplies to the encounter.",
+      "default_exception": "One opening choice of free parts.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SMALL_CAPSULE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Small_Capsule",
+          "name": "Small Capsule"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-23",
+      "name": "Opening Blueprint",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start choose one installed Ammo or Shield recipe copy. Its first successful use that fight adds 5 damage or 7 Shield respectively to its first matching output. Choose only a recipe that makes such an output; its costs stay unchanged.",
+      "strategy": "Make a chosen opening craft matter.",
+      "default_exception": "One enhanced output per fight.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "NEOWS_TALISMAN",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow's_Talisman",
+          "name": "Neow's Talisman"
+        }
+      ],
+      "implementation_tags": [
+        "copy_identity",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY1-M1",
+      "name": "Cinderwall Ignition Bank",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start gain 4 Heat. On player turn 1, the first actual Heat payment of at least 2 grants a fresh 8-Shield part after the paid effect and reactions. Hot Barrel remains unchanged.",
+      "strategy": "An immediately usable heat engine.",
+      "default_exception": "Opening Heat plus a bounded payment reward.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-M2",
+      "name": "Irena's Heat Ledger",
+      "mercenary": "Mara",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each player turn after crafting an Ammo part while at 4 or more Heat, add 3 damage to the first output part and gain 1 Heat. Check the condition before gaining Heat; this item cannot retrigger itself.",
+      "strategy": "Sustain aggressive manufacture.",
+      "default_exception": "New manufacturing bonus.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "TOASTY_MITTENS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toasty_Mittens",
+          "name": "Toasty Mittens"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-M3",
+      "name": "Thermal Recovery Rig",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight, after Mara actually pays a cumulative 6 Heat for effects, heal 6 HP if alive after the triggering reactions. Ordinary decay does not count; unused progress clears at fight end.",
+      "strategy": "Earn healing through planned Heat spending.",
+      "default_exception": "Explicit bounded healing.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "MEAT_CLEAVER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Meat_Cleaver",
+          "name": "Meat Cleaver"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-I1",
+      "name": "Brinegate Surveyor",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start choose one initial enemy. Apply 4 Acid Etch and 2 Weaken to it, with ordinary protections. Later spawns receive nothing. Successful Etch may trigger Find the Seam normally.",
+      "strategy": "Prepare a priority enemy.",
+      "default_exception": "Explicit opening status package.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "NUTRITIOUS_SOUP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Soup",
+          "name": "Nutritious Soup"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-I2",
+      "name": "Sera's Specimen Case",
+      "mercenary": "Ivo",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each player turn, after consuming Target Paint with a main shot, grant one fresh 5-damage part. Finish the shot and reactions before delivery. New parts do not fire automatically.",
+      "strategy": "Build a follow-up shot from marking.",
+      "default_exception": "Bounded free part after main-shot resolution.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_BLOOD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Blood",
+          "name": "Pael's Blood"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-I3",
+      "name": "Corrosion Warranty",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each player turn, the first successful Acid Etch application also grants a fresh 5-Shield part. One application affecting several enemies still grants one part; prevented applications do not qualify.",
+      "strategy": "Defend while setting up corrosion.",
+      "default_exception": "Bounded Shield part supply.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_CLAW",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Claw",
+          "name": "Pael's Claw"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-A1",
+      "name": "Rivetford Service Cart",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start restore 6 Bolt HP after setting his normal opening HP, and grant Ada 2 Iron. Do not exceed Bolt's current maximum HP. No commands or interception are enabled automatically.",
+      "strategy": "A dependable helper opening.",
+      "default_exception": "Explicit Bolt restoration and materials.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "ALCHEMICAL_COFFER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Alchemical_Coffer",
+          "name": "Alchemical Coffer"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-A2",
+      "name": "Anja's Command Token",
+      "mercenary": "Ada",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each fight after the first paid Helper command finishes and reactions resolve, refresh the used recipe copy's availability: clear cooldown or restore one spent no-cooldown use. Reusing it still pays all costs and needs active Bolt.",
+      "strategy": "Repeat a chosen opening helper plan.",
+      "default_exception": "One copy-specific availability refresh.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "THROWING_AXE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Throwing_Axe",
+          "name": "Throwing Axe"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-A3",
+      "name": "Cooperative Repair Arm",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "The first time each fight active Bolt falls to 3 HP or below from an interception, repair him for 6 HP after that attack if he remains active. A disabled Bolt cannot be revived by this repair.",
+      "strategy": "Protect a helper near failure.",
+      "default_exception": "One conditional repair per fight.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "STONE_HUMIDIFIER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Stone_Humidifier",
+          "name": "Stone Humidifier"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-N1",
+      "name": "Copperwake Inductor",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "At fight start gain 5 Charge. After the first main shot that actually pays Charged Barrel Charge finishes, gain 2 Copper if alive. The Copper cannot fund that shot.",
+      "strategy": "Open with an electrical investment.",
+      "default_exception": "Opening Charge and one post-shot material grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "VERY_HOT_COCOA",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Very_Hot_Cocoa",
+          "name": "Very Hot Cocoa"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-N2",
+      "name": "Mina's Discharge Lens",
+      "mercenary": "Noor",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "On the first main shot each player turn, Charged Barrel adds 3 damage per Charge instead of 2. Its payment cap and before-other-checks order are unchanged. Later shots use the ordinary rate.",
+      "strategy": "A strong chosen discharge each round.",
+      "default_exception": "Scoped Charged Barrel rate enhancement.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY1-N3",
+      "name": "Tidal Buffer",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 1,
+      "max_city": 1,
+      "effect": "Once each player turn, after spending at least 3 Charge in one payment, grant a fresh 6-Shield part. One payment can qualify even through Charged Barrel; finish its action and reactions before delivery.",
+      "strategy": "Couple a large spend to defence.",
+      "default_exception": "Bounded Shield supply after payment.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_LEGION",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Legion",
+          "name": "Pael's Legion"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-04",
+      "name": "Municipal Fabricator",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At player-turn start gain 1 Iron and 1 Copper. Starting on player turn 3 also gain 1 Carbon at each player-turn start. All are additional to the ordinary haul and clear at fight end.",
+      "strategy": "A sustained resource engine.",
+      "default_exception": "Explicit per-turn material supply.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_FLESH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Flesh",
+          "name": "Pael's Flesh"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "haul_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-05",
+      "name": "Network Cooling Grid",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At each player-turn start after ordinary cooldown processing, remove one additional counter from every cooling recipe copy. Do not affect no-cooldown uses. Newly used recipes still keep their counters until a later qualifying trigger.",
+      "strategy": "Reuse a broad recipe kit sooner.",
+      "default_exception": "An additional global cooling event each turn.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "PAELS_BLOOD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Blood",
+          "name": "Pael's Blood"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-06",
+      "name": "Servo Claw Coupler",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After every ordinary haul and its Precision resolution, gain 3 extra units of that haul's steered material. This is a bonus to the existing haul, not another haul or Precision attempt; the protected base haul remains intact.",
+      "strategy": "Steer a repeatable economy.",
+      "default_exception": "Permanent haul-yield exception.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PRISMATIC_GEM",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Prismatic_Gem",
+          "name": "Prismatic Gem"
+        }
+      ],
+      "implementation_tags": [
+        "claw_attempts",
+        "event_hooks",
+        "haul_generation",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-07",
+      "name": "Twin Precision Rig",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Each fight begins with two Precision attempts instead of one. Each attempt is spent whether it succeeds or fails, and both retain ordinary rules and base-haul protection. Additional attempts from other explicit items add separately.",
+      "strategy": "Make precision a repeatable tactical resource.",
+      "default_exception": "Precision-attempt allowance increase.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "PHIAL_HOLSTER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Phial_Holster",
+          "name": "Phial Holster"
+        }
+      ],
+      "implementation_tags": [
+        "claw_attempts",
+        "event_hooks",
+        "haul_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-08",
+      "name": "Licensed Recipe Mirror",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "On acquisition gain 2 recipe memory and choose two installed recipe copies to duplicate. Each duplicate is a distinct installed copy with independent ordinary cooldown and use allowance. A copy cannot be selected twice; with only one eligible copy, duplicate that one and leave one slot empty.",
+      "strategy": "Use proven recipes in parallel.",
+      "default_exception": "Two permanent recipe-copy grants.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "GLASS_EYE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Glass_Eye",
+          "name": "Glass Eye"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "cooldown_state",
+        "event_hooks",
+        "recipe_memory"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-09",
+      "name": "Mobile Library Core",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Increase recipe memory by 8. At each fight start choose one of three eligible shared recipes to install temporarily in one of those slots if free. Its copy disappears at fight end; seen knowledge remains. No material costs are waived.",
+      "strategy": "Adapt a large recipe kit to each encounter.",
+      "default_exception": "Memory expansion and temporary recipe access.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "SEA_GLASS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sea_Glass",
+          "name": "Sea Glass"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "recipe_memory"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-10",
+      "name": "Parallel Use Permit",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn select one installed no-cooldown recipe copy before using it. That copy gains one additional use for that turn; both uses pay full ordinary costs. Cooling cannot refresh the permit's spent selection.",
+      "strategy": "Choose one recipe to repeat each turn.",
+      "default_exception": "Explicit extra no-cooldown use.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "BRILLIANT_SCARF",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+          "name": "Brilliant Scarf"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-11",
+      "name": "Defence Extruder",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, the first successfully crafted Shield part gains extra Shield equal to its printed base Shield, capped at 10 extra. Apply other bonuses separately; copied or freely granted parts do not count as crafted outputs.",
+      "strategy": "Make the first defensive craft substantial.",
+      "default_exception": "Bounded first-output Shield multiplier.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_LEGION",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Legion",
+          "name": "Pael's Legion"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-12",
+      "name": "Ballistic Etching Head",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, the first Ammo recipe output with positive printed damage gains extra damage equal to that printed damage, capped at 8 extra. Only its first output gains this physical bonus; other modifiers are not doubled.",
+      "strategy": "A stronger prepared bullet component.",
+      "default_exception": "Bounded first-output damage multiplier.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "NUTRITIOUS_SOUP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Soup",
+          "name": "Nutritious Soup"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-13",
+      "name": "Nonconsumptive Loader",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, before Fire select one ordinary part in the bullet. After that shot and its reactions, return that part to reserve with its pre-shot physical values and no copied delayed schedules. The shot still resolves that part normally; other bullet parts are consumed.",
+      "strategy": "Preserve one valuable component for a later shot.",
+      "default_exception": "One consumed part returns per turn.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "MUSIC_BOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Music_Box",
+          "name": "Music Box"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-14",
+      "name": "Materials Audit Server",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, after paying at least 6 total raw material units for one recipe use, gain 2 Iron and 1 Copper after the effect and reactions. HP and meter costs do not count toward the threshold.",
+      "strategy": "Support expensive manufacturing.",
+      "default_exception": "Bounded post-use materials grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_TEARS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tears",
+          "name": "Pael's Tears"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-15",
+      "name": "Signal Firewall",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each enemy phase prevent the first enemy-applied negative status event targeting the mercenary. One multi-status application counts as one event and all its negative statuses are prevented. Damage, HP costs and self-applied costs are unaffected.",
+      "strategy": "Protect an engine from disruption.",
+      "default_exception": "One negative-status event prevention per phase.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "DELICATE_FROND",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Delicate_Frond",
+          "name": "Delicate Frond"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-16",
+      "name": "Overclocked Distribution Contract",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At every player-turn start gain 2 Iron, 1 Copper and 1 Carbon. Each enemy also deals 1 extra damage per attack hit throughout the fight; show the increase in intents. This penalty does not affect recoil or status ticks.",
+      "strategy": "Accept harder attacks for stronger production.",
+      "default_exception": "Materials supply with explicit enemy attack bonus.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PHILOSOPHERS_STONE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Philosopher's_Stone",
+          "name": "Philosopher's Stone"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-17",
+      "name": "Closed Credit Circuit",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At every player-turn start gain 2 Iron and 2 Copper. For the rest of the campaign, positive Credit gains become zero, including sales and rewards; existing Credits remain spendable. This restriction is shown before selecting the upgrade.",
+      "strategy": "Trade future purchasing power for immediate materials.",
+      "default_exception": "Disables future Credit income in exchange for supplies.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "ECTOPLASM",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ectoplasm",
+          "name": "Ectoplasm"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-18",
+      "name": "Council Purchasing Token",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After each completed fight gain one token for a free stocked Common or Uncommon permanent upgrade at a shop. A new token replaces an unspent token rather than stacking. Keep the token until spent or replaced, including when no eligible item is stocked. Shops keep ordinary finite stock; reopening grants no token.",
+      "strategy": "Convert surviving fights into gradual equipment growth.",
+      "default_exception": "One restricted free shop purchase per fight.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "LORDS_PARASOL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lord's_Parasol",
+          "name": "Lord's Parasol"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shop_stock"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-19",
+      "name": "Officer Salvage Mandate",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After the first Officer victory in each city, receive one additional permanent-upgrade offer of three unowned eligible ordinary Rare upgrades. Pick one. The normal Officer reward remains; no eligible choices means gain 12 Iron at the next fight start instead.",
+      "strategy": "Seek an Officer for a campaign improvement.",
+      "default_exception": "One extra Officer upgrade per city.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "BLACK_STAR",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Black_Star",
+          "name": "Black Star"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "reward_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-20",
+      "name": "Civic Foresight Array",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Before selecting a Mystery encounter, reveal its authored outcome categories and any HP/resource price, without rerolling its seeded result. If the player selects that Mystery, begin the next actual combat with 3 extra Iron and 3 Copper, once per Mystery.",
+      "strategy": "Make an informed route investment.",
+      "default_exception": "Mystery-information reveal and delayed combat supplies.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GOLDEN_COMPASS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Golden_Compass",
+          "name": "Golden Compass"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-21",
+      "name": "Recipe Exchange Charter",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After a victorious fight, the player may forfeit the entire recipe reward to gain one charter mark. At two marks, spend both and choose one of three unowned eligible ordinary Rare upgrades. No mark for absent rewards; purchased recipe copies cannot be exchanged.",
+      "strategy": "Trade recipe growth for equipment.",
+      "default_exception": "A finite reward-conversion action.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_WING",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Wing",
+          "name": "Pael's Wing"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-22",
+      "name": "Precision Medical Probe",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After the first successful Precision attempt in each fight, heal 6 HP after the attempt's consequences if alive. Failed attempts grant no healing; additional successes do not repeat it.",
+      "strategy": "Recover through a successful gathering decision.",
+      "default_exception": "Explicit once-per-fight healing.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "MEAT_CLEAVER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Meat_Cleaver",
+          "name": "Meat Cleaver"
+        }
+      ],
+      "implementation_tags": [
+        "claw_attempts",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-23",
+      "name": "Adaptive Repair Envelope",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At fight start grant a fresh 16-Shield part. At the first enemy-phase-end reset only, retain up to 16 remaining Shield. Subsequent resets are ordinary unless another item applies; this item grants no second Shield refill.",
+      "strategy": "Survive and carry a strong opening buffer.",
+      "default_exception": "One first-reset Shield-retention exception.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "DIAMOND_DIADEM",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Diamond_Diadem",
+          "name": "Diamond Diadem"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY2-24",
+      "name": "Recipe Development Terminal",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "On acquisition select four distinct installed recipe copies. For the rest of the campaign, their first successful use each fight returns one Iron after costs, effects and reactions. A chosen copy keeps its mark if moved within memory; removed copies lose it.",
+      "strategy": "Invest in four reliable opening crafts.",
+      "default_exception": "Four per-copy bounded material returns.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "SAND_CASTLE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sand_Castle",
+          "name": "Sand Castle"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY2-M1",
+      "name": "Coilbridge Furnace Network",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At player-turn start gain 2 Heat. Once each player turn, after a main shot fired at 8 or more Heat completes, gain 2 Iron. Heat gained after impact cannot qualify that shot.",
+      "strategy": "Maintain a hot manufacturing rhythm.",
+      "default_exception": "Per-turn Heat plus one hot-shot supply.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_FLESH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Flesh",
+          "name": "Pael's Flesh"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-M2",
+      "name": "Tomas's Quench Manifold",
+      "mercenary": "Mara",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, after actually paying at least 3 Heat in one effect, grant a fresh Shield part with Shield equal to twice the Heat paid, capped at 12. Resolve after the paid action and reactions; ordinary decay does not qualify.",
+      "strategy": "Build defence by spending a large Heat reserve.",
+      "default_exception": "Bounded Heat-to-Shield conversion reward.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_LEGION",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Legion",
+          "name": "Pael's Legion"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-M3",
+      "name": "Hot Swap Chamber",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn during preparation, pay 3 Heat to clear all cooldown counters from one cooling Ammo recipe copy. This equipment action does not refresh a no-cooldown use or grant ammunition; the next craft still pays all costs.",
+      "strategy": "Exchange Heat for the next manufacturing opportunity.",
+      "default_exception": "A paid Heat equipment action clears one cooldown.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "ELECTRIC_SHRYMP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Electric_Shrymp",
+          "name": "Electric Shrymp"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-I1",
+      "name": "Sablecross Pigment Grid",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "The first two successful Acid Etch applications each player turn each also apply 2 Target Paint to one affected enemy. These are item triggers additional to Find the Seam, each with ordinary protections; no retroactive damage.",
+      "strategy": "Mark two planned follow-ups.",
+      "default_exception": "Two bounded supplemental Paint applications.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_BLOOD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Blood",
+          "name": "Pael's Blood"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-I2",
+      "name": "Oren's Pressure Equalizer",
+      "mercenary": "Ivo",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each enemy phase, immediately before the first attack by an enemy with Weaken, grant a fresh Shield part equal to twice that enemy's Weaken, capped at 12. Its Weaken is not spent; the new part protects against that attack.",
+      "strategy": "Turn a large weakening setup into a barrier.",
+      "default_exception": "Pre-hit Shield from existing status.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_CLAW",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Claw",
+          "name": "Pael's Claw"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-I3",
+      "name": "Dissolution Credit",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, after Ivo directly kills a robot with at least 4 Acid Etch, gain 3 Copper and 1 Carbon. The kill and all reactions finish first; Acid Etch tick kills do not qualify.",
+      "strategy": "Choose a direct finish instead of waiting.",
+      "default_exception": "Bounded kill material grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "SEAL_OF_GOLD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Seal_of_Gold",
+          "name": "Seal of Gold"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-A1",
+      "name": "Latchhaven Command Bus",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, after the second paid Helper recipe use resolves, clear all cooldown counters from one chosen cooling Helper copy. The triggering uses must each pay at least one raw material; extra uses still need their ordinary costs.",
+      "strategy": "Sequence commands into one reuse.",
+      "default_exception": "Bounded Helper cooldown refresh.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "IRON_CLUB",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Iron_Club",
+          "name": "Iron Club"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-A2",
+      "name": "Bram's Rescue Cradle",
+      "mercenary": "Ada",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each fight, after Bolt is disabled by an enemy attack and that attack resolves, restore him to 8 HP if Ada is alive. This does not undo HP damage already dealt to Ada or grant a new interception allowance.",
+      "strategy": "Recover from a costly interception.",
+      "default_exception": "One disabled-Bolt restoration.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-A3",
+      "name": "Transit Tool Locker",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At fight start choose one installed Helper recipe copy. On each of its first three successful uses this fight, discount its Iron cost by 2, minimum zero. All other costs and active-Bolt requirements remain; copies have separate identity.",
+      "strategy": "Commit to a repeatable helper tool.",
+      "default_exception": "Three bounded material discounts.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "ALCHEMICAL_COFFER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Alchemical_Coffer",
+          "name": "Alchemical Coffer"
+        }
+      ],
+      "implementation_tags": [
+        "copy_identity",
+        "event_hooks",
+        "helper_state"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-N1",
+      "name": "Stormrail Current Ring",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Gain 2 Charge at every player-turn start. On player turn 3 also gain 2 Copper and 2 Carbon once that fight. Respect the current Charge cap.",
+      "strategy": "A reliable electrical engine.",
+      "default_exception": "Explicit turn and turn-3 supplies.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_FLESH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Flesh",
+          "name": "Pael's Flesh"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-N2",
+      "name": "Joren's Return Transformer",
+      "mercenary": "Noor",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "Once each player turn, after a main shot that paid at least 3 Charge through Charged Barrel finishes and reactions resolve, clear all cooldown counters from one chosen cooling recipe copy. No-cooldown availability is unaffected.",
+      "strategy": "Discharge to reopen manufacturing.",
+      "default_exception": "Bounded post-shot cooldown refresh.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "BRILLIANT_SCARF",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+          "name": "Brilliant Scarf"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-N3",
+      "name": "Bridge Reserve Cell",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "After enemy actions and remaining-Shield readings, if Noor has at least 6 Charge, retain up to 12 remaining Shield through that reset. Charge is not spent. Retain only existing Shield, and recheck the condition every phase.",
+      "strategy": "Hold Charge to bank protection.",
+      "default_exception": "Conditional Shield-reset exception.",
+      "balance_risk": "Test retained balances and multiple reset exceptions together; moving installed parts must never refill spent Shield.",
+      "inspiration": [
+        {
+          "id": "RUNIC_PYRAMID",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Pyramid",
+          "name": "Runic Pyramid"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY2-25",
+      "name": "Priority Dispatch Ticket",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 2,
+      "max_city": 2,
+      "effect": "At each fight start inspect three seeded bundles: 8 Iron, 6 Copper, or 4 Iron plus 2 Carbon. Select one for delivery at player-turn 2 start. Unchosen bundles vanish and a fight ending early cancels the delivery.",
+      "strategy": "Choose tomorrow's materials from today's intent.",
+      "default_exception": "One chosen delayed supply per fight.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "CHOICES_PARADOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Choices_Paradox",
+          "name": "Choices Paradox"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-04",
+      "name": "Metropolitan Assembly Line",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At every player-turn start choose one fresh 12-damage part or one fresh 16-Shield part. Grant only the chosen part. No automatic Fire occurs; ordinary placement, resale and fight cleanup apply.",
+      "strategy": "A major sustained offensive or defensive supply.",
+      "default_exception": "One large free part each turn.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "CROSSBOW",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Crossbow",
+          "name": "Crossbow"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-05",
+      "name": "Unrestricted Use Charter",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Every installed no-cooldown recipe copy has two uses each player turn instead of one. Additional uses explicitly granted by other items add after this base replacement. All recipe costs still apply; cooling does not refresh these uses.",
+      "strategy": "Turn a wide utility collection into a late engine.",
+      "default_exception": "Global no-cooldown allowance exception.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "BRILLIANT_SCARF",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+          "name": "Brilliant Scarf"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-06",
+      "name": "Foundry Clock Mesh",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, after the fourth recipe use that actually pays at least one raw material, remove every cooldown counter from all cooling recipe copies. Claim this item's trigger before clearing counters. No-cooldown uses stay unchanged.",
+      "strategy": "Earn a major manufacturing reset through setup.",
+      "default_exception": "One full global cooldown reset per turn.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "IRON_CLUB",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Iron_Club",
+          "name": "Iron Club"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-07",
+      "name": "Emergency Haul Satellite",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each fight, immediately after player turn 4's ordinary Collect and its Precision resolution finish, permit one extra haul with a new steering choice. The extra haul uses its own seeded outcome; Precision attempts do not refresh. No extra turn, cooldown tick, enemy-phase skip or flee delay occurs. Declining or ending the fight without that fourth Collect forfeits this fight's opportunity.",
+      "strategy": "A powerful scheduled recovery round.",
+      "default_exception": "One explicit extra haul per fight.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "NEOWS_SACRIFICE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow's_Sacrifice",
+          "name": "Neow's Sacrifice"
+        }
+      ],
+      "implementation_tags": [
+        "claw_attempts",
+        "cooldown_state",
+        "event_hooks",
+        "haul_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-08",
+      "name": "Citywide Retrofit License",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "On acquisition select six distinct installed Ammo or Shield recipe copies. Each selected copy's first output on each successful use gains 4 damage or 6 Shield respectively. The physical bonus survives saving; costs and cooldowns remain normal.",
+      "strategy": "Commit a mature recipe kit to stronger output.",
+      "default_exception": "Persistent per-copy output improvement.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "SAND_CASTLE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sand_Castle",
+          "name": "Sand Castle"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "cooldown_state",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-09",
+      "name": "Orbital Ballistics Link",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Add 7 damage to every valid main shot, once per shot before percentage damage modifiers. A bullet still needs at least one part; this bonus is not added separately to support or spread hits.",
+      "strategy": "Make many paid shots worthwhile.",
+      "default_exception": "Explicit permanent main-shot damage bonus.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "NUTRITIOUS_SOUP",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Soup",
+          "name": "Nutritious Soup"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-10",
+      "name": "Siege Coverage Network",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At every player-turn start grant a fresh 12-Shield part. Once each fight, after the first enemy attack penetrates Shield and removes HP, immediately grant a further fresh 12-Shield part if alive, protecting only subsequent attacks.",
+      "strategy": "Repeatable defence with one emergency refill.",
+      "default_exception": "Explicit regular and reactive Shield supply.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SAI",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sai",
+          "name": "Sai"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-11",
+      "name": "Recursive Mould Array",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, copy the first ordinary Ammo or Shield part produced by a resource-paid recipe. The copy inherits that output's physical damage/Shield modifiers and its normal effects, with fresh per-part state; it does not copy already-scheduled external events. One extra part only; copies do not retrigger this item.",
+      "strategy": "Scale an expensive manufactured component.",
+      "default_exception": "One bounded copy per turn.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "MUSIC_BOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Music_Box",
+          "name": "Music Box"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-12",
+      "name": "Perfect Materials Exchange",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Twice each player turn during preparation, exchange 2 units of one owned raw material for 2 units of another chosen raw material. Pay before receiving; the same material cannot be both sides. HP, Heat, Charge and Credits are not materials.",
+      "strategy": "Make late recipes usable with imperfect hauls.",
+      "default_exception": "Two exact material-conversion actions per turn.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "SEA_GLASS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sea_Glass",
+          "name": "Sea Glass"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-13",
+      "name": "Deep Recovery Engine",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At the starts of player turns 3 and later, heal 4 HP if alive. Restore at most 12 actual HP per fight; full-HP turns do not spend that fight allowance. No healing at victory or city transition.",
+      "strategy": "Earn recovery by surviving longer fights.",
+      "default_exception": "Explicit capped in-fight healing.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_FLESH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Flesh",
+          "name": "Pael's Flesh"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "reward_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-14",
+      "name": "Last Signal Beacon",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once per campaign, immediately before enemy damage would reduce the mercenary to zero HP, prevent that entire damage event, set current HP to 12 or maximum HP if lower, and grant a fresh 20-Shield part. Later hits and reactions still resolve normally. Player-paid HP costs do not trigger it.",
+      "strategy": "A clearly limited emergency rescue.",
+      "default_exception": "One explicit lethal-enemy-damage prevention.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "DISTINGUISHED_CAPE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Distinguished_Cape",
+          "name": "Distinguished Cape"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-15",
+      "name": "Command Disruption Array",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At the beginning of the second enemy phase of each fight, apply 5 Weaken to all living enemies using ordinary protections. Actions, intent progression, end-phase ticks and fleeing remain normal. This is a large reduction, not a skipped enemy turn.",
+      "strategy": "A known second-round defensive window.",
+      "default_exception": "A scheduled area status application.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "PAELS_EYE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Eye",
+          "name": "Pael's Eye"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-16",
+      "name": "Civic Requisition Vault",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "On acquisition make three sequential selections, each from three unowned eligible ordinary Rare upgrades. Already acquired items leave later offers. If fewer than three eligible choices remain, offer those; if none remain, grant 20 maximum HP and heal 20 once instead of all unfilled selections.",
+      "strategy": "Assemble a late equipment combination immediately.",
+      "default_exception": "Three ordinary-upgrade grants with finite exhaustion fallback.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "CALLING_BELL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Calling_Bell",
+          "name": "Calling Bell"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-17",
+      "name": "Open Procurement Network",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At fight start gain a purchase allowance of 60 Credits usable only on stocked raw materials and recipes during that fight. Spend allowance before personal Credits if selected; unused allowance disappears at fight end. Shop stock remains finite and cannot refresh within the fight.",
+      "strategy": "Choose supply at the moment it is useful.",
+      "default_exception": "Restricted temporary purchasing allowance.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "LORDS_PARASOL",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lord's_Parasol",
+          "name": "Lord's Parasol"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "shop_stock"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-18",
+      "name": "Heavy Industry Dividend",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At every player-turn start choose two different raw materials and gain 3 of each. On acquisition also gain 60 Credits once. Materials remain fight-local and the credit grant obeys any explicit Credit-income restriction.",
+      "strategy": "A large flexible production engine.",
+      "default_exception": "Per-turn selected materials and one Credit grant.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "SIGNET_RING",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Signet_Ring",
+          "name": "Signet Ring"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-19",
+      "name": "Preemptive Salvage Radar",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At fight start mark one chosen initial regular robot, excluding Officers and bosses. The first direct hit against it ignores all its Armor and deals 12 additional damage. Consume the mark on that hit even if Ablative Tiles reduce it; no automatic enemy death.",
+      "strategy": "Remove an opening obstacle while respecting hit mechanics.",
+      "default_exception": "One marked hit bypasses Armor and gains damage.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "FUR_COAT",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fur_Coat",
+          "name": "Fur Coat"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-20",
+      "name": "Countermeasure Observatory",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At fight start reveal each initial enemy's next two seeded intended actions, including current variation conditions. Once each player turn reduce the first enemy Reactive Mesh recoil event by 6, minimum zero. Predictions update visibly if an explicit state change changes an action; no secret reroll.",
+      "strategy": "Plan sustained attacks against dangerous reactions.",
+      "default_exception": "Longer intent visibility and bounded recoil reduction.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "GOLDEN_COMPASS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Golden_Compass",
+          "name": "Golden Compass"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-21",
+      "name": "Shield Reinvestment Fund",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "After enemy actions and before the normal Shield reset, if at least 10 Shield remains, spend exactly 10 of it and schedule 4 Iron, 3 Copper and 2 Carbon for next player-turn start. Trigger once per round; do not pay from nonexistent or already-spent Shield. End-of-fight delivery expires.",
+      "strategy": "Convert excess defence into a large next-round supply.",
+      "default_exception": "A real pre-reset Shield payment for future materials.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PAELS_TEARS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tears",
+          "name": "Pael's Tears"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-22",
+      "name": "Sevenfold Calibration Crown",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At fight start choose an installed Ammo recipe copy. Its first three successful uses each fight add 8 damage to the first output part. Only that copy qualifies; copying its output does not spend another calibration use.",
+      "strategy": "Focus a mature ammunition engine.",
+      "default_exception": "Three strong output bonuses per fight.",
+      "balance_risk": "Check per-copy identity, one-use flags, delayed payloads and reaction ordering. Repeated effects remain finite under this item's own limit.",
+      "inspiration": [
+        {
+          "id": "TRI_BOOMERANG",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tri-Boomerang",
+          "name": "Tri-Boomerang"
+        }
+      ],
+      "implementation_tags": [
+        "copy_identity",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-23",
+      "name": "Civilian Evacuation Mesh",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each fight during preparation, choose Emergency Mode before End Turn. At that End Turn, after normally unloading the unfired bullet, consume all unused ordinary reserve parts and grant one fresh Shield part worth 5 Shield per consumed part, capped at 30. Do not consume installed Shield. The turn then ends and enemies act normally. Preview the consumed parts before confirming End Turn.",
+      "strategy": "Trade reserve offence for emergency protection.",
+      "default_exception": "One mass reserve-part conversion with a finite Shield cap.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "WHISPERING_EARRING",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Whispering_Earring",
+          "name": "Whispering Earring"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "tactical"
+    },
+    {
+      "id": "MY3-24",
+      "name": "Victory Workshop Charter",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "On acquisition gain 10 maximum HP and heal 10. After each subsequent regular or Officer victory in this campaign, choose an installed recipe copy to gain an additional permanent first-use-per-fight discount of 1 Iron, minimum zero. At most two such discounts may mark one copy.",
+      "strategy": "Late growth with an immediate survival benefit.",
+      "default_exception": "Bounded per-copy campaign discounts and acquisition heal.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "WAR_HAMMER",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:War_Hammer",
+          "name": "War Hammer"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "copy_identity",
+        "event_hooks",
+        "reward_generation"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure"
+    },
+    {
+      "id": "MY3-25",
+      "name": "Prototype Equipment Trunk",
+      "mercenary": "Shared",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "On acquisition choose four unowned eligible ordinary Uncommon or Rare upgrades, sequentially from up to three choices. Only passive-hook items with no acquisition grant, capacity/stat increase, recipe modification or scheduled permanent change qualify. After each third completed fight retire the oldest selected item and its future hooks. Already-created physical part bonuses remain. If no eligible item remains, skip that selection.",
+      "strategy": "A powerful temporary endgame arsenal.",
+      "default_exception": "Four temporary permanent-upgrade grants with explicit expiry.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOY_BOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toy_Box",
+          "name": "Toy Box"
+        }
+      ],
+      "implementation_tags": [
+        "acquisition_hook",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "infrastructure",
+      "requirements": [
+        "Temporary selection pool excludes acquisition grants, capacity/max-HP/max-meter changes, recipe modifications and permanent scheduled changes."
+      ]
+    },
+    {
+      "id": "MY3-M1",
+      "name": "Glassward Solar Mantle",
+      "mercenary": "Mara",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At player-turn start set Heat to at least 6 without lowering a higher value. Heat cap is at least 14. Hot Barrel adds 2 damage per full 2 Heat on every main shot instead of 1; stronger explicit rate replacements use the highest applicable rate, not a sum.",
+      "strategy": "Sustain a strong hot-barrel build.",
+      "default_exception": "Heat floor/cap and scoped Hot Barrel enhancement.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-M2",
+      "name": "Nadi's Thermal Treasury",
+      "mercenary": "Mara",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, after an effect actually pays at least 4 Heat at once, gain 3 Iron, 2 Copper and a fresh 8-Shield part after its action and reactions. The grant cannot fund its own triggering payment.",
+      "strategy": "Cash in a major Heat commitment.",
+      "default_exception": "Bounded combined material and defence reward.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "SEAL_OF_GOLD",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Seal_of_Gold",
+          "name": "Seal of Gold"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-M3",
+      "name": "Core Reigniter",
+      "mercenary": "Mara",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each fight during preparation, pay 6 Heat to clear all recipe cooldown counters and gain 4 Iron plus 4 Copper. No-cooldown uses do not refresh. Consume the item's fight trigger before clearing counters; ordinary Heat decay cannot pay the cost.",
+      "strategy": "Spend one stored reserve on a major second sequence.",
+      "default_exception": "One paid equipment action resets cooling and supplies materials.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PUMPKIN_CANDLE",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pumpkin_Candle",
+          "name": "Pumpkin Candle"
+        }
+      ],
+      "implementation_tags": [
+        "cooldown_state",
+        "event_hooks",
+        "heat_meter",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-I1",
+      "name": "Veilcourt Corrosion Relay",
+      "mercenary": "Ivo",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, after Ivo directly kills a robot carrying Acid Etch, apply its remaining Acid Etch to every other living robot, up to 8 per recipient. Resolve protections separately; transferred status cannot trigger this item recursively. Find the Seam follows its normal per-turn allowance.",
+      "strategy": "Turn one prepared victim into an area setup.",
+      "default_exception": "One bounded area status transfer per turn.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "PRISMATIC_GEM",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Prismatic_Gem",
+          "name": "Prismatic Gem"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-I2",
+      "name": "Leda's Fault Escrow",
+      "mercenary": "Ivo",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "At each enemy-phase end, the two living enemies with the largest positive Weaken stacks skip that phase's ordinary Weaken decay. Break ties by stable encounter order. Other decay remains normal, and the next phase may select different enemies.",
+      "strategy": "Keep a pair of priority enemies weakened.",
+      "default_exception": "Two explicit Weaken-decay exemptions per phase.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "PAELS_CLAW",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Claw",
+          "name": "Pael's Claw"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-I3",
+      "name": "Seam Convergence Engine",
+      "mercenary": "Ivo",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, after a main shot consumes at least 4 Target Paint and finishes with Ivo alive, apply 3 Weaken to its surviving target and grant a fresh 10-damage part. If the target died, grant the part only. No automatic follow-up Fire.",
+      "strategy": "Reward a large painted shot with another decision.",
+      "default_exception": "One status-plus-part payoff per turn.",
+      "balance_risk": "Persistent flat Weaken can suppress multi-hit attacks heavily. Preserve the chosen decay exceptions and tune values through combat tests.",
+      "inspiration": [
+        {
+          "id": "PAELS_GROWTH",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Growth",
+          "name": "Pael's Growth"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "persistent_counter",
+        "status_decay"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-A1",
+      "name": "Relaykeep Reconstruction Bay",
+      "mercenary": "Ada",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Bolt's maximum HP is at least 24. At fight start restore him to that maximum. Once each player turn after a paid Helper command resolves, repair active Bolt for 4 HP if Ada is alive, separately from Field Service. Commands and interception still require ordinary costs and enabling effects.",
+      "strategy": "Operate an enduring paid helper engine.",
+      "default_exception": "Explicit helper maximum/start restoration and bounded repair.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-A2",
+      "name": "Edda's Parallel Commander",
+      "mercenary": "Ada",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn, after a paid Helper command's first direct support hit and its reactions, repeat that hit's pre-defence damage against the same living target without repeating status payloads, costs, repairs or other command effects. The repeat is a new support hit with ordinary defenses and reactions; skip it if Ada is dead or Bolt is disabled. Its direct damage can satisfy other explicitly compatible hit triggers but cannot retrigger this item.",
+      "strategy": "Make one selected command a stronger attack.",
+      "default_exception": "One bounded support-hit repeat per turn.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "MUSIC_BOX",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Music_Box",
+          "name": "Music Box"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-A3",
+      "name": "Emergency Transit Shield",
+      "mercenary": "Ada",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each enemy phase, after Bolt completes an interception and remains active, grant Ada a fresh Shield part equal to 8 plus Bolt's remaining HP, capped at 20 Shield. Grant after that attack; it protects only subsequent damage.",
+      "strategy": "Use a healthy helper to build a second defensive layer.",
+      "default_exception": "Bounded post-interception Shield grant.",
+      "balance_risk": "Draft power; test immediate usefulness, remaining encounter horizon and combinations before treating the rarity as balanced.",
+      "inspiration": [
+        {
+          "id": "DIAMOND_DIADEM",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Diamond_Diadem",
+          "name": "Diamond Diadem"
+        }
+      ],
+      "implementation_tags": [
+        "event_hooks",
+        "helper_state",
+        "persistent_counter",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-N1",
+      "name": "Prismhold Supercapacitor",
+      "mercenary": "Noor",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Increase Charge cap by 8 and gain 4 Charge at every player-turn start. Charged Barrel's maximum payment is at least 5 per main shot; use the highest explicit payment cap. Its damage rate and before-other-checks order otherwise remain.",
+      "strategy": "Fuel sustained large discharges.",
+      "default_exception": "Charge capacity/supply and barrel-cap enhancement.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "TOUCH_OF_OROBAS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+          "name": "Touch of Orobas"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-N2",
+      "name": "Talia's Phase Dividend",
+      "mercenary": "Noor",
+      "rarity": "Legendary",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "After enemy actions and pre-reset Shield costs, retain up to 18 remaining Shield if Noor has at least 8 Charge. Then gain Charge equal to one per complete 6 Shield actually retained, capped at 3. Charge gained here cannot establish that phase's eligibility.",
+      "strategy": "Maintain Charge for defence and a delayed return.",
+      "default_exception": "Conditional Shield retention and bounded Charge dividend.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "PAELS_TEARS",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tears",
+          "name": "Pael's Tears"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "event_hooks",
+        "shield_part_or_balance"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    },
+    {
+      "id": "MY3-N3",
+      "name": "Arc Foundry Gate",
+      "mercenary": "Noor",
+      "rarity": "Rare",
+      "acquisition": [
+        "Mayor"
+      ],
+      "min_city": 3,
+      "max_city": 3,
+      "effect": "Once each player turn during preparation, pay 6 Charge to grant a fresh 12-damage part and remove 2 counters from every cooling recipe copy. No-cooldown uses remain unchanged. Claim the item's turn trigger before costs and effects; gains afterward cannot pay it.",
+      "strategy": "Convert a large battery into manufacturing momentum.",
+      "default_exception": "One paid Charge equipment action and global cooling.",
+      "balance_risk": "Check resource/refund combinations and resale against whole-fight supply. This item's own trigger allowance is finite; no global shot or recipe cap is implied.",
+      "inspiration": [
+        {
+          "id": "BRILLIANT_SCARF",
+          "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+          "name": "Brilliant Scarf"
+        }
+      ],
+      "implementation_tags": [
+        "charge_meter",
+        "cooldown_state",
+        "copy_identity",
+        "event_hooks",
+        "persistent_counter"
+      ],
+      "status": "proposal",
+      "source_rarity": "Ancient",
+      "rarity_basis": "Ancient is a source acquisition category. Rare marks a focused powerful Mayor benefit; Legendary marks a broad engine or major explicit default exception. All numeric strength remains untested.",
+      "mayor_lane": "mercenary"
+    }
+  ]
+}

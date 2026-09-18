@@ -1,5 +1,7 @@
 # Overkill Foundry — independent game brief
 
+**Permanent upgrades, selected direction 18 September:** campaign upgrades fill the role of STS2 relics, including high-tech tools that may explicitly change game defaults. Shared and mercenary-specific pools are defined in the [upgrade catalogue](design/UPGRADE-CATALOGUE.md). Common/Uncommon/Rare source tiers map directly; special source pools have stated rarity mappings. Mayor gifts draw specifically from Ancient relics and become stronger over the three city waves. Individual effects, values and distributions remain proposals; existing innate character abilities are preserved.
+
 Owner-selected title: **Overkill Foundry**, 14 September 2026. Catalogue ID: `overkill-foundry`. Owner-separated from Magnet Sweep on 14 September 2026; fresh gameplay implementation, currently concept stage. Planned platform/tool direction: Windows and Unreal. Development timeline is unconstrained; implementation scope and numerical budgets are not approved.
 
 ## Player promise

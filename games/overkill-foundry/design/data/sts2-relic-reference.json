@@ -1,0 +1,4221 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-09-18",
+  "coverage_status": "298 named entries with mechanical summaries: all296 pinned stable records plus2 wiki-confirmed beta additions. Known beta changes are separately labelled; this is not an exhaustive current-beta rules diff.",
+  "stable_count": 296,
+  "beta_additional_count": 2,
+  "total_names": 298,
+  "stable_source": "https://github.com/ptrlrd/spire-codex/blob/05dbf2eb917d754ab28360b598a0c82931a309ef/data/eng/relics.json",
+  "stable_source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+  "stable_source_date": "2026-06-19",
+  "wiki_index": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Relics_List",
+  "beta_patch_source": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch",
+  "limits": "Requested wiki direct retrieval failed; stable community-extracted game data fills definitions. Two beta additions supplement the stable list. Per-item facts are paraphrases, not copied flavor text; current/latest installed build equivalence is not claimed.",
+  "relics": [
+    {
+      "id": "AKABEKO",
+      "name": "Akabeko",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Opening Vigor:8.",
+      "source_url": "https://spire-codex.com/relics/AKABEKO",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Akabeko",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/AKABEKO"
+      ]
+    },
+    {
+      "id": "ALCHEMICAL_COFFER",
+      "name": "Alchemical Coffer",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Four additional potion spaces, initially stocked.",
+      "source_url": "https://spire-codex.com/relics/ALCHEMICAL_COFFER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Alchemical_Coffer",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ALCHEMICAL_COFFER"
+      ]
+    },
+    {
+      "id": "AMETHYST_AUBERGINE",
+      "name": "Amethyst Aubergine",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Enemy loot:Gold +15.",
+      "source_url": "https://spire-codex.com/relics/AMETHYST_AUBERGINE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Amethyst_Aubergine",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/AMETHYST_AUBERGINE"
+      ]
+    },
+    {
+      "id": "ANCHOR",
+      "name": "Anchor",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Block:10.",
+      "source_url": "https://spire-codex.com/relics/ANCHOR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Anchor",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ANCHOR"
+      ]
+    },
+    {
+      "id": "FAKE_ANCHOR",
+      "name": "Anchor???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Opening Block:4.",
+      "source_url": "https://spire-codex.com/relics/FAKE_ANCHOR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Anchor%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_ANCHOR"
+      ]
+    },
+    {
+      "id": "ARCANE_SCROLL",
+      "name": "Arcane Scroll",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One random Rare card awarded on acquisition.",
+      "source_url": "https://spire-codex.com/relics/ARCANE_SCROLL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Arcane_Scroll",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ARCANE_SCROLL"
+      ]
+    },
+    {
+      "id": "ARCHAIC_TOOTH",
+      "name": "Archaic Tooth",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One starter card becomes its ancient form.",
+      "source_url": "https://spire-codex.com/relics/ARCHAIC_TOOTH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Archaic_Tooth",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ARCHAIC_TOOTH"
+      ]
+    },
+    {
+      "id": "ART_OF_WAR",
+      "name": "Art of War",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Attack-free turn:next-turn Energy +1.",
+      "source_url": "https://spire-codex.com/relics/ART_OF_WAR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Art_of_War",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ART_OF_WAR"
+      ]
+    },
+    {
+      "id": "ASTROLABE",
+      "name": "Astrolabe",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three selected cards transform and upgrade.",
+      "source_url": "https://spire-codex.com/relics/ASTROLABE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Astrolabe",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ASTROLABE"
+      ]
+    },
+    {
+      "id": "BAG_OF_MARBLES",
+      "name": "Bag of Marbles",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Vulnerable1:all enemies.",
+      "source_url": "https://spire-codex.com/relics/BAG_OF_MARBLES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bag_of_Marbles",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BAG_OF_MARBLES"
+      ]
+    },
+    {
+      "id": "BAG_OF_PREPARATION",
+      "name": "Bag of Preparation",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening draw:+2.",
+      "source_url": "https://spire-codex.com/relics/BAG_OF_PREPARATION",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bag_of_Preparation",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BAG_OF_PREPARATION"
+      ]
+    },
+    {
+      "id": "BEATING_REMNANT",
+      "name": "Beating Remnant",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "HP-loss ceiling:20 per turn.",
+      "source_url": "https://spire-codex.com/relics/BEATING_REMNANT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Beating_Remnant",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BEATING_REMNANT"
+      ]
+    },
+    {
+      "id": "BEAUTIFUL_BRACELET",
+      "name": "Beautiful Bracelet",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three selected cards receive Swift 3.",
+      "source_url": "https://spire-codex.com/relics/BEAUTIFUL_BRACELET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Beautiful_Bracelet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BEAUTIFUL_BRACELET"
+      ]
+    },
+    {
+      "id": "BELLOWS",
+      "name": "Bellows",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "First combat hand:upgraded.",
+      "source_url": "https://spire-codex.com/relics/BELLOWS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bellows",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BELLOWS"
+      ]
+    },
+    {
+      "id": "BELT_BUCKLE",
+      "name": "Belt Buckle",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "No held potions:Dexterity +2.",
+      "source_url": "https://spire-codex.com/relics/BELT_BUCKLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Belt_Buckle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BELT_BUCKLE"
+      ]
+    },
+    {
+      "id": "BIG_HAT",
+      "name": "Big Hat",
+      "rarity": "Rare",
+      "character": "necrobinder",
+      "mechanics": "Opening hand receives two random Ethereal cards.",
+      "source_url": "https://spire-codex.com/relics/BIG_HAT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Big_Hat",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BIG_HAT"
+      ]
+    },
+    {
+      "id": "BIG_MUSHROOM",
+      "name": "Big Mushroom",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Pickup:max HP +20; opening draw -2.",
+      "source_url": "https://spire-codex.com/relics/BIG_MUSHROOM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Big_Mushroom",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BIG_MUSHROOM"
+      ]
+    },
+    {
+      "id": "BIIIG_HUG",
+      "name": "Biiig Hug",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove four cards now; later shuffles create Soot.",
+      "source_url": "https://spire-codex.com/relics/BIIIG_HUG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Biiig_Hug",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BIIIG_HUG"
+      ]
+    },
+    {
+      "id": "BING_BONG",
+      "name": "Bing Bong",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Deck addition:one extra copy.",
+      "source_url": "https://spire-codex.com/relics/BING_BONG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bing_Bong",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BING_BONG"
+      ]
+    },
+    {
+      "id": "BLACK_BLOOD",
+      "name": "Black Blood",
+      "rarity": "Starter",
+      "character": "ironclad",
+      "mechanics": "Combat ending restores 12 HP.",
+      "source_url": "https://spire-codex.com/relics/BLACK_BLOOD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Black_Blood",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BLACK_BLOOD"
+      ]
+    },
+    {
+      "id": "BLACK_STAR",
+      "name": "Black Star",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "An Elite victory yields one extra relic.",
+      "source_url": "https://spire-codex.com/relics/BLACK_STAR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Black_Star",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BLACK_STAR"
+      ]
+    },
+    {
+      "id": "BLESSED_ANTLER",
+      "name": "Blessed Antler",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn; three Dazed inserted each fight.",
+      "source_url": "https://spire-codex.com/relics/BLESSED_ANTLER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Blessed_Antler",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BLESSED_ANTLER"
+      ]
+    },
+    {
+      "id": "BLOOD_VIAL",
+      "name": "Blood Vial",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening heal:2.",
+      "source_url": "https://spire-codex.com/relics/BLOOD_VIAL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Blood_Vial",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BLOOD_VIAL"
+      ]
+    },
+    {
+      "id": "FAKE_BLOOD_VIAL",
+      "name": "Blood Vial???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Opening heal:1.",
+      "source_url": "https://spire-codex.com/relics/FAKE_BLOOD_VIAL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Blood_Vial%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_BLOOD_VIAL"
+      ]
+    },
+    {
+      "id": "BLOOD_SOAKED_ROSE",
+      "name": "Blood-Soaked Rose",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn, with an Enthralled card added.",
+      "source_url": "https://spire-codex.com/relics/BLOOD_SOAKED_ROSE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Blood-Soaked_Rose",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BLOOD_SOAKED_ROSE"
+      ]
+    },
+    {
+      "id": "BONE_FLUTE",
+      "name": "Bone Flute",
+      "rarity": "Common",
+      "character": "necrobinder",
+      "mechanics": "An Osty attack supplies 2 Block.",
+      "source_url": "https://spire-codex.com/relics/BONE_FLUTE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bone_Flute",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BONE_FLUTE"
+      ]
+    },
+    {
+      "id": "BONE_TEA",
+      "name": "Bone Tea",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Next combat:opening hand upgraded.",
+      "source_url": "https://spire-codex.com/relics/BONE_TEA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bone_Tea",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BONE_TEA"
+      ]
+    },
+    {
+      "id": "BOOK_REPAIR_KNIFE",
+      "name": "Book Repair Knife",
+      "rarity": "Uncommon",
+      "character": "necrobinder",
+      "mechanics": "A non-Minion killed by Doom restores 3 HP.",
+      "source_url": "https://spire-codex.com/relics/BOOK_REPAIR_KNIFE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Book_Repair_Knife",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOOK_REPAIR_KNIFE"
+      ]
+    },
+    {
+      "id": "BOOK_OF_FIVE_RINGS",
+      "name": "Book of Five Rings",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Every fifth deck addition:heal20.",
+      "source_url": "https://spire-codex.com/relics/BOOK_OF_FIVE_RINGS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Book_of_Five_Rings",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOOK_OF_FIVE_RINGS"
+      ]
+    },
+    {
+      "id": "BOOKMARK",
+      "name": "Bookmark",
+      "rarity": "Rare",
+      "character": "necrobinder",
+      "mechanics": "At turn end one random retained card becomes 1 cheaper until played.",
+      "source_url": "https://spire-codex.com/relics/BOOKMARK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bookmark",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOOKMARK"
+      ]
+    },
+    {
+      "id": "BOOMING_CONCH",
+      "name": "Booming Conch",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Elite opening: two extra cards and one extra Energy.",
+      "source_url": "https://spire-codex.com/relics/BOOMING_CONCH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Booming_Conch",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOOMING_CONCH"
+      ]
+    },
+    {
+      "id": "BOUND_PHYLACTERY",
+      "name": "Bound Phylactery",
+      "rarity": "Starter",
+      "character": "necrobinder",
+      "mechanics": "Each player-turn opening summons 1.",
+      "source_url": "https://spire-codex.com/relics/BOUND_PHYLACTERY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bound_Phylactery",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOUND_PHYLACTERY"
+      ]
+    },
+    {
+      "id": "BOWLER_HAT",
+      "name": "Bowler Hat",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Gold income:+25%.",
+      "source_url": "https://spire-codex.com/relics/BOWLER_HAT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bowler_Hat",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BOWLER_HAT"
+      ]
+    },
+    {
+      "id": "BREAD",
+      "name": "Bread",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Turn1 Energy -2; later turns Energy +1.",
+      "source_url": "https://spire-codex.com/relics/BREAD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bread",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BREAD"
+      ]
+    },
+    {
+      "id": "BRILLIANT_SCARF",
+      "name": "Brilliant Scarf",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "The fifth hand-played card each turn has zero cost.",
+      "source_url": "https://spire-codex.com/relics/BRILLIANT_SCARF",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brilliant_Scarf",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BRILLIANT_SCARF"
+      ]
+    },
+    {
+      "id": "BRIMSTONE",
+      "name": "Brimstone",
+      "rarity": "Shop",
+      "character": "ironclad",
+      "mechanics": "Each turn adds player Strength 2 and enemy Strength 1.",
+      "source_url": "https://spire-codex.com/relics/BRIMSTONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Brimstone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BRIMSTONE"
+      ]
+    },
+    {
+      "id": "BRONZE_SCALES",
+      "name": "Bronze Scales",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Thorns:3.",
+      "source_url": "https://spire-codex.com/relics/BRONZE_SCALES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Bronze_Scales",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BRONZE_SCALES"
+      ]
+    },
+    {
+      "id": "BURNING_BLOOD",
+      "name": "Burning Blood",
+      "rarity": "Starter",
+      "character": "ironclad",
+      "mechanics": "Combat-end healing amount is 6 HP.",
+      "source_url": "https://spire-codex.com/relics/BURNING_BLOOD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Burning_Blood",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BURNING_BLOOD"
+      ]
+    },
+    {
+      "id": "BURNING_STICKS",
+      "name": "Burning Sticks",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "First exhausted Skill:copy to hand.",
+      "source_url": "https://spire-codex.com/relics/BURNING_STICKS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Burning_Sticks",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BURNING_STICKS"
+      ]
+    },
+    {
+      "id": "BYRDPIP",
+      "name": "Byrdpip",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Pickup:Byrd Swoop; companion.",
+      "source_url": "https://spire-codex.com/relics/BYRDPIP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Byrdpip",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/BYRDPIP"
+      ]
+    },
+    {
+      "id": "CALLING_BELL",
+      "name": "Calling Bell",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three relics come with a unique Curse.",
+      "source_url": "https://spire-codex.com/relics/CALLING_BELL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Calling_Bell",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CALLING_BELL"
+      ]
+    },
+    {
+      "id": "CANDELABRA",
+      "name": "Candelabra",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Turn2 Energy:+2.",
+      "source_url": "https://spire-codex.com/relics/CANDELABRA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Candelabra",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CANDELABRA"
+      ]
+    },
+    {
+      "id": "CAPTAINS_WHEEL",
+      "name": "Captain's Wheel",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Turn3 Block:18.",
+      "source_url": "https://spire-codex.com/relics/CAPTAINS_WHEEL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Captain's_Wheel",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CAPTAINS_WHEEL"
+      ]
+    },
+    {
+      "id": "CAULDRON",
+      "name": "Cauldron",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:five random potions.",
+      "source_url": "https://spire-codex.com/relics/CAULDRON",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cauldron",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CAULDRON"
+      ]
+    },
+    {
+      "id": "CENTENNIAL_PUZZLE",
+      "name": "Centennial Puzzle",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "First HP loss:draw3.",
+      "source_url": "https://spire-codex.com/relics/CENTENNIAL_PUZZLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Centennial_Puzzle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CENTENNIAL_PUZZLE"
+      ]
+    },
+    {
+      "id": "CHANDELIER",
+      "name": "Chandelier",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Turn3 Energy:+3.",
+      "source_url": "https://spire-codex.com/relics/CHANDELIER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Chandelier",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CHANDELIER"
+      ]
+    },
+    {
+      "id": "CHARONS_ASHES",
+      "name": "Charon's Ashes",
+      "rarity": "Rare",
+      "character": "ironclad",
+      "mechanics": "Each exhausted card causes 3 damage to every enemy.",
+      "source_url": "https://spire-codex.com/relics/CHARONS_ASHES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Charon's_Ashes",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CHARONS_ASHES"
+      ]
+    },
+    {
+      "id": "CHEMICAL_X",
+      "name": "Chemical X",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "X-cost effect magnitude:+2.",
+      "source_url": "https://spire-codex.com/relics/CHEMICAL_X",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Chemical_X",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CHEMICAL_X"
+      ]
+    },
+    {
+      "id": "CHOICES_PARADOX",
+      "name": "Choices Paradox",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Opening choice among five random cards; chosen card gains Retain.",
+      "source_url": "https://spire-codex.com/relics/CHOICES_PARADOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Choices_Paradox",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CHOICES_PARADOX"
+      ]
+    },
+    {
+      "id": "CIRCLET",
+      "name": "Circlet",
+      "rarity": "Relic",
+      "character": "shared",
+      "mechanics": "No gameplay effect stated; collection placeholder.",
+      "source_url": "https://spire-codex.com/relics/CIRCLET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Circlet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CIRCLET"
+      ]
+    },
+    {
+      "id": "CLAWS",
+      "name": "Claws",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Up to six selected cards become Maul.",
+      "source_url": "https://spire-codex.com/relics/CLAWS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Claws",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CLAWS"
+      ]
+    },
+    {
+      "id": "CLOAK_CLASP",
+      "name": "Cloak Clasp",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Turn end:1 Block per card remaining in hand.",
+      "source_url": "https://spire-codex.com/relics/CLOAK_CLASP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cloak_Clasp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CLOAK_CLASP"
+      ]
+    },
+    {
+      "id": "CRACKED_CORE",
+      "name": "Cracked Core",
+      "rarity": "Starter",
+      "character": "defect",
+      "mechanics": "One Lightning Orb at combat opening.",
+      "source_url": "https://spire-codex.com/relics/CRACKED_CORE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cracked_Core",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CRACKED_CORE"
+      ]
+    },
+    {
+      "id": "CROSSBOW",
+      "name": "Crossbow",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each turn supplies a random Attack, free for that turn.",
+      "source_url": "https://spire-codex.com/relics/CROSSBOW",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Crossbow",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CROSSBOW"
+      ]
+    },
+    {
+      "id": "CURSED_PEARL",
+      "name": "Cursed Pearl",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Greed added in exchange for 333 Gold.",
+      "source_url": "https://spire-codex.com/relics/CURSED_PEARL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Cursed_Pearl",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CURSED_PEARL"
+      ]
+    },
+    {
+      "id": "DARKSTONE_PERIAPT",
+      "name": "Darkstone Periapt",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Curse acquisition:max HP +6.",
+      "source_url": "https://spire-codex.com/relics/DARKSTONE_PERIAPT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Darkstone_Periapt",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DARKSTONE_PERIAPT"
+      ]
+    },
+    {
+      "id": "DATA_DISK",
+      "name": "Data Disk",
+      "rarity": "Common",
+      "character": "defect",
+      "mechanics": "Fight begins with Focus 1.",
+      "source_url": "https://spire-codex.com/relics/DATA_DISK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Data_Disk",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DATA_DISK"
+      ]
+    },
+    {
+      "id": "DAUGHTER_OF_THE_WIND",
+      "name": "Daughter of the Wind",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Each Attack:Block1.",
+      "source_url": "https://spire-codex.com/relics/DAUGHTER_OF_THE_WIND",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Daughter_of_the_Wind",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DAUGHTER_OF_THE_WIND"
+      ]
+    },
+    {
+      "id": "DELICATE_FROND",
+      "name": "Delicate Frond",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Fill vacant potion spaces at every combat opening.",
+      "source_url": "https://spire-codex.com/relics/DELICATE_FROND",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Delicate_Frond",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DELICATE_FROND"
+      ]
+    },
+    {
+      "id": "DEMON_TONGUE",
+      "name": "Demon Tongue",
+      "rarity": "Rare",
+      "character": "ironclad",
+      "mechanics": "The first HP loss during each player turn is followed by equivalent healing.",
+      "source_url": "https://spire-codex.com/relics/DEMON_TONGUE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Demon_Tongue",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DEMON_TONGUE"
+      ]
+    },
+    {
+      "id": "DIAMOND_DIADEM",
+      "name": "Diamond Diadem",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Snapshot: enemy damage halved on turns with at most two card plays. Wiki beta differs.",
+      "source_url": "https://spire-codex.com/relics/DIAMOND_DIADEM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Diamond_Diadem",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "known_beta_variant": {
+        "mechanics": "v0.109.0 beta: opening Block20, retained through the next turn start, replaces the low-card-count damage reduction.",
+        "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      },
+      "source_urls": [
+        "https://spire-codex.com/relics/DIAMOND_DIADEM",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      ]
+    },
+    {
+      "id": "DINGY_RUG",
+      "name": "Dingy Rug",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Colorless cards enter reward pool.",
+      "source_url": "https://spire-codex.com/relics/DINGY_RUG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dingy_Rug",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DINGY_RUG"
+      ]
+    },
+    {
+      "id": "DISTINGUISHED_CAPE",
+      "name": "Distinguished Cape",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Trade 9 maximum HP for three Apparition cards.",
+      "source_url": "https://spire-codex.com/relics/DISTINGUISHED_CAPE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Distinguished_Cape",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DISTINGUISHED_CAPE"
+      ]
+    },
+    {
+      "id": "DIVINE_DESTINY",
+      "name": "Divine Destiny",
+      "rarity": "Starter",
+      "character": "regent",
+      "mechanics": "Opening Stars: six in snapshot; wiki beta reports seven.",
+      "source_url": "https://spire-codex.com/relics/DIVINE_DESTINY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Divine_Destiny",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DIVINE_DESTINY"
+      ]
+    },
+    {
+      "id": "DIVINE_RIGHT",
+      "name": "Divine Right",
+      "rarity": "Starter",
+      "character": "regent",
+      "mechanics": "Opening resource grant: three Stars.",
+      "source_url": "https://spire-codex.com/relics/DIVINE_RIGHT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Divine_Right",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DIVINE_RIGHT"
+      ]
+    },
+    {
+      "id": "DOLLYS_MIRROR",
+      "name": "Dolly's Mirror",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:duplicate owned card.",
+      "source_url": "https://spire-codex.com/relics/DOLLYS_MIRROR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dolly's_Mirror",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DOLLYS_MIRROR"
+      ]
+    },
+    {
+      "id": "DRAGON_FRUIT",
+      "name": "Dragon Fruit",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Gold gain:max HP +1.",
+      "source_url": "https://spire-codex.com/relics/DRAGON_FRUIT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dragon_Fruit",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DRAGON_FRUIT"
+      ]
+    },
+    {
+      "id": "DREAM_CATCHER",
+      "name": "Dream Catcher",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Resting:card-add opportunity.",
+      "source_url": "https://spire-codex.com/relics/DREAM_CATCHER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dream_Catcher",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DREAM_CATCHER"
+      ]
+    },
+    {
+      "id": "DRIFTWOOD",
+      "name": "Driftwood",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One replacement roll permitted for each card reward.",
+      "source_url": "https://spire-codex.com/relics/DRIFTWOOD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Driftwood",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DRIFTWOOD"
+      ]
+    },
+    {
+      "id": "DUSTY_TOME",
+      "name": "Dusty Tome",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Acquisition provides an Ancient card.",
+      "source_url": "https://spire-codex.com/relics/DUSTY_TOME",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dusty_Tome",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/DUSTY_TOME"
+      ]
+    },
+    {
+      "id": "ECTOPLASM",
+      "name": "Ectoplasm",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each turn gets one Energy, but future Gold income is disabled.",
+      "source_url": "https://spire-codex.com/relics/ECTOPLASM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ectoplasm",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ECTOPLASM"
+      ]
+    },
+    {
+      "id": "ELECTRIC_SHRYMP",
+      "name": "Electric Shrymp",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "A selected Skill receives Imbued.",
+      "source_url": "https://spire-codex.com/relics/ELECTRIC_SHRYMP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Electric_Shrymp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ELECTRIC_SHRYMP"
+      ]
+    },
+    {
+      "id": "EMBER_TEA",
+      "name": "Ember Tea",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Five combat openings:Strength2.",
+      "source_url": "https://spire-codex.com/relics/EMBER_TEA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ember_Tea",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/EMBER_TEA"
+      ]
+    },
+    {
+      "id": "EMOTION_CHIP",
+      "name": "Emotion Chip",
+      "rarity": "Rare",
+      "character": "defect",
+      "mechanics": "Prior-turn HP loss repeats every Orb passive at next turn opening.",
+      "source_url": "https://spire-codex.com/relics/EMOTION_CHIP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Emotion_Chip",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/EMOTION_CHIP"
+      ]
+    },
+    {
+      "id": "EMPTY_CAGE",
+      "name": "Empty Cage",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove two deck entries on acquisition.",
+      "source_url": "https://spire-codex.com/relics/EMPTY_CAGE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Empty_Cage",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/EMPTY_CAGE"
+      ]
+    },
+    {
+      "id": "ETERNAL_FEATHER",
+      "name": "Eternal Feather",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Rest-site entry:heal3 for each complete group of5 deck cards.",
+      "source_url": "https://spire-codex.com/relics/ETERNAL_FEATHER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Eternal_Feather",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ETERNAL_FEATHER"
+      ]
+    },
+    {
+      "id": "FENCING_MANUAL",
+      "name": "Fencing Manual",
+      "rarity": "Common",
+      "character": "regent",
+      "mechanics": "Combat opens with Forge 10.",
+      "source_url": "https://spire-codex.com/relics/FENCING_MANUAL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fencing_Manual",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FENCING_MANUAL"
+      ]
+    },
+    {
+      "id": "FESTIVE_POPPER",
+      "name": "Festive Popper",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening area damage:9.",
+      "source_url": "https://spire-codex.com/relics/FESTIVE_POPPER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Festive_Popper",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FESTIVE_POPPER"
+      ]
+    },
+    {
+      "id": "FIDDLE",
+      "name": "Fiddle",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Draw two extra at turn opening; later in-turn drawing is prohibited.",
+      "source_url": "https://spire-codex.com/relics/FIDDLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fiddle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FIDDLE"
+      ]
+    },
+    {
+      "id": "FISHING_ROD",
+      "name": "Fishing Rod",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each third normal combat upgrades one random deck card.",
+      "source_url": "https://spire-codex.com/relics/FISHING_ROD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fishing_Rod",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FISHING_ROD"
+      ]
+    },
+    {
+      "id": "FORGOTTEN_SOUL",
+      "name": "Forgotten Soul",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Exhausted card:random damage1.",
+      "source_url": "https://spire-codex.com/relics/FORGOTTEN_SOUL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Forgotten_Soul",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FORGOTTEN_SOUL"
+      ]
+    },
+    {
+      "id": "FRAGRANT_MUSHROOM",
+      "name": "Fragrant Mushroom",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Pickup:HP loss15; two random upgrades.",
+      "source_url": "https://spire-codex.com/relics/FRAGRANT_MUSHROOM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fragrant_Mushroom",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FRAGRANT_MUSHROOM"
+      ]
+    },
+    {
+      "id": "FRESNEL_LENS",
+      "name": "Fresnel Lens",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "New Block card:Nimble2.",
+      "source_url": "https://spire-codex.com/relics/FRESNEL_LENS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fresnel_Lens",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FRESNEL_LENS"
+      ]
+    },
+    {
+      "id": "FROZEN_EGG",
+      "name": "Frozen Egg",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "New Powers:upgraded.",
+      "source_url": "https://spire-codex.com/relics/FROZEN_EGG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Frozen_Egg",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FROZEN_EGG"
+      ]
+    },
+    {
+      "id": "FUNERARY_MASK",
+      "name": "Funerary Mask",
+      "rarity": "Uncommon",
+      "character": "necrobinder",
+      "mechanics": "Three Soul cards enter the draw pile each combat.",
+      "source_url": "https://spire-codex.com/relics/FUNERARY_MASK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Funerary_Mask",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FUNERARY_MASK"
+      ]
+    },
+    {
+      "id": "FUR_COAT",
+      "name": "Fur Coat",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Snapshot marks seven future encounters whose enemies start at 1 HP; wiki beta reports eight.",
+      "source_url": "https://spire-codex.com/relics/FUR_COAT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Fur_Coat",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FUR_COAT"
+      ]
+    },
+    {
+      "id": "GALACTIC_DUST",
+      "name": "Galactic Dust",
+      "rarity": "Uncommon",
+      "character": "regent",
+      "mechanics": "Ten cumulative Stars spent produces 10 Block.",
+      "source_url": "https://spire-codex.com/relics/GALACTIC_DUST",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Galactic_Dust",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GALACTIC_DUST"
+      ]
+    },
+    {
+      "id": "GAMBLING_CHIP",
+      "name": "Gambling Chip",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Opening hand:selective discard/redraw.",
+      "source_url": "https://spire-codex.com/relics/GAMBLING_CHIP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gambling_Chip",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GAMBLING_CHIP"
+      ]
+    },
+    {
+      "id": "GAME_PIECE",
+      "name": "Game Piece",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Power played:draw1.",
+      "source_url": "https://spire-codex.com/relics/GAME_PIECE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Game_Piece",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GAME_PIECE"
+      ]
+    },
+    {
+      "id": "GHOST_SEED",
+      "name": "Ghost Seed",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Strikes/Defends:Ethereal.",
+      "source_url": "https://spire-codex.com/relics/GHOST_SEED",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ghost_Seed",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GHOST_SEED"
+      ]
+    },
+    {
+      "id": "GIRYA",
+      "name": "Girya",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Rest-site Strength training:three uses maximum.",
+      "source_url": "https://spire-codex.com/relics/GIRYA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Girya",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GIRYA"
+      ]
+    },
+    {
+      "id": "GLASS_EYE",
+      "name": "Glass Eye",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Receive two Common cards, two Uncommon cards and one Rare card.",
+      "source_url": "https://spire-codex.com/relics/GLASS_EYE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Glass_Eye",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GLASS_EYE"
+      ]
+    },
+    {
+      "id": "GLITTER",
+      "name": "Glitter",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "All future card-reward choices have Glam.",
+      "source_url": "https://spire-codex.com/relics/GLITTER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Glitter",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GLITTER"
+      ]
+    },
+    {
+      "id": "GNARLED_HAMMER",
+      "name": "Gnarled Hammer",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:three Attacks gain Sharp3.",
+      "source_url": "https://spire-codex.com/relics/GNARLED_HAMMER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gnarled_Hammer",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GNARLED_HAMMER"
+      ]
+    },
+    {
+      "id": "GOLD_PLATED_CABLES",
+      "name": "Gold-Plated Cables",
+      "rarity": "Uncommon",
+      "character": "defect",
+      "mechanics": "The rightmost Orb repeats its passive once.",
+      "source_url": "https://spire-codex.com/relics/GOLD_PLATED_CABLES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gold-Plated_Cables",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GOLD_PLATED_CABLES"
+      ]
+    },
+    {
+      "id": "GOLDEN_COMPASS",
+      "name": "Golden Compass",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Act 2 route map becomes a special single path.",
+      "source_url": "https://spire-codex.com/relics/GOLDEN_COMPASS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Golden_Compass",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GOLDEN_COMPASS"
+      ]
+    },
+    {
+      "id": "GOLDEN_PEARL",
+      "name": "Golden Pearl",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Immediate currency grant: 150 Gold.",
+      "source_url": "https://spire-codex.com/relics/GOLDEN_PEARL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Golden_Pearl",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GOLDEN_PEARL"
+      ]
+    },
+    {
+      "id": "GORGET",
+      "name": "Gorget",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Plating:4.",
+      "source_url": "https://spire-codex.com/relics/GORGET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gorget",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GORGET"
+      ]
+    },
+    {
+      "id": "GREMLIN_HORN",
+      "name": "Gremlin Horn",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Enemy death:Energy1 plus draw1.",
+      "source_url": "https://spire-codex.com/relics/GREMLIN_HORN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Gremlin_Horn",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/GREMLIN_HORN"
+      ]
+    },
+    {
+      "id": "HAND_DRILL",
+      "name": "Hand Drill",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Enemy Block broken:Vulnerable2.",
+      "source_url": "https://spire-codex.com/relics/HAND_DRILL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Hand_Drill",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HAND_DRILL"
+      ]
+    },
+    {
+      "id": "HAPPY_FLOWER",
+      "name": "Happy Flower",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Every third turn:Energy1.",
+      "source_url": "https://spire-codex.com/relics/HAPPY_FLOWER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Happy_Flower",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HAPPY_FLOWER"
+      ]
+    },
+    {
+      "id": "FAKE_HAPPY_FLOWER",
+      "name": "Happy Flower???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Every fifth turn:Energy1.",
+      "source_url": "https://spire-codex.com/relics/FAKE_HAPPY_FLOWER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Happy_Flower%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_HAPPY_FLOWER"
+      ]
+    },
+    {
+      "id": "HEFTY_TABLET",
+      "name": "Hefty Tablet",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Select one of three Rare cards, and receive Injury.",
+      "source_url": "https://spire-codex.com/relics/HEFTY_TABLET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Hefty_Tablet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HEFTY_TABLET"
+      ]
+    },
+    {
+      "id": "HELICAL_DART",
+      "name": "Helical Dart",
+      "rarity": "Rare",
+      "character": "silent",
+      "mechanics": "Each Shiv play provides one temporary Dexterity for that turn.",
+      "source_url": "https://spire-codex.com/relics/HELICAL_DART",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Helical_Dart",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HELICAL_DART"
+      ]
+    },
+    {
+      "id": "HISTORY_COURSE",
+      "name": "History Course",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Turn opening:copy last Attack or Skill.",
+      "source_url": "https://spire-codex.com/relics/HISTORY_COURSE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:History_Course",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HISTORY_COURSE"
+      ]
+    },
+    {
+      "id": "HORN_CLEAT",
+      "name": "Horn Cleat",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Turn2 Block:14.",
+      "source_url": "https://spire-codex.com/relics/HORN_CLEAT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Horn_Cleat",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/HORN_CLEAT"
+      ]
+    },
+    {
+      "id": "ICE_CREAM",
+      "name": "Ice Cream",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Energy persists between turns.",
+      "source_url": "https://spire-codex.com/relics/ICE_CREAM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ice_Cream",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ICE_CREAM"
+      ]
+    },
+    {
+      "id": "INFUSED_CORE",
+      "name": "Infused Core",
+      "rarity": "Starter",
+      "character": "defect",
+      "mechanics": "Opening has three Lightning Orbs; Lightning damage increases by one.",
+      "source_url": "https://spire-codex.com/relics/INFUSED_CORE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Infused_Core",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/INFUSED_CORE"
+      ]
+    },
+    {
+      "id": "INTIMIDATING_HELMET",
+      "name": "Intimidating Helmet",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Cost2+ card:Block4.",
+      "source_url": "https://spire-codex.com/relics/INTIMIDATING_HELMET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Intimidating_Helmet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/INTIMIDATING_HELMET"
+      ]
+    },
+    {
+      "id": "IRON_CLUB",
+      "name": "Iron Club",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each four card plays produces one draw.",
+      "source_url": "https://spire-codex.com/relics/IRON_CLUB",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Iron_Club",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/IRON_CLUB"
+      ]
+    },
+    {
+      "id": "IVORY_TILE",
+      "name": "Ivory Tile",
+      "rarity": "Rare",
+      "character": "necrobinder",
+      "mechanics": "Playing a card costing at least three Energy returns one Energy.",
+      "source_url": "https://spire-codex.com/relics/IVORY_TILE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ivory_Tile",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/IVORY_TILE"
+      ]
+    },
+    {
+      "id": "JEWELED_MASK",
+      "name": "Jeweled Mask",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Opening hand gains a random deck Power, free for that combat.",
+      "source_url": "https://spire-codex.com/relics/JEWELED_MASK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Jeweled_Mask",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/JEWELED_MASK"
+      ]
+    },
+    {
+      "id": "JEWELRY_BOX",
+      "name": "Jewelry Box",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Add Apotheosis on acquisition.",
+      "source_url": "https://spire-codex.com/relics/JEWELRY_BOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Jewelry_Box",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/JEWELRY_BOX"
+      ]
+    },
+    {
+      "id": "JOSS_PAPER",
+      "name": "Joss Paper",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Every fifth exhaust:draw1.",
+      "source_url": "https://spire-codex.com/relics/JOSS_PAPER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Joss_Paper",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/JOSS_PAPER"
+      ]
+    },
+    {
+      "id": "JUZU_BRACELET",
+      "name": "Juzu Bracelet",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Mystery rooms exclude normal fights.",
+      "source_url": "https://spire-codex.com/relics/JUZU_BRACELET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Juzu_Bracelet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/JUZU_BRACELET"
+      ]
+    },
+    {
+      "id": "KALEIDOSCOPE",
+      "name": "Kaleidoscope",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Two rewards drawn from other characters' card pools.",
+      "source_url": "https://spire-codex.com/relics/KALEIDOSCOPE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Kaleidoscope",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/KALEIDOSCOPE"
+      ]
+    },
+    {
+      "id": "KIFUDA",
+      "name": "Kifuda",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:up to three cards gain Adroit.",
+      "source_url": "https://spire-codex.com/relics/KIFUDA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Kifuda",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/KIFUDA"
+      ]
+    },
+    {
+      "id": "KUNAI",
+      "name": "Kunai",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Three Attacks in a turn:Dexterity1.",
+      "source_url": "https://spire-codex.com/relics/KUNAI",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Kunai",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/KUNAI"
+      ]
+    },
+    {
+      "id": "KUSARIGAMA",
+      "name": "Kusarigama",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Three Attacks in a turn:random damage6.",
+      "source_url": "https://spire-codex.com/relics/KUSARIGAMA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Kusarigama",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/KUSARIGAMA"
+      ]
+    },
+    {
+      "id": "LANTERN",
+      "name": "Lantern",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Energy:1.",
+      "source_url": "https://spire-codex.com/relics/LANTERN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lantern",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LANTERN"
+      ]
+    },
+    {
+      "id": "LARGE_CAPSULE",
+      "name": "Large Capsule",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Two random relics plus one extra Strike and Defend.",
+      "source_url": "https://spire-codex.com/relics/LARGE_CAPSULE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Large_Capsule",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LARGE_CAPSULE"
+      ]
+    },
+    {
+      "id": "LASTING_CANDY",
+      "name": "Lasting Candy",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Every other combat reward:extra Power option.",
+      "source_url": "https://spire-codex.com/relics/LASTING_CANDY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lasting_Candy",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LASTING_CANDY"
+      ]
+    },
+    {
+      "id": "LAVA_LAMP",
+      "name": "Lava Lamp",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Damage-free fight:card rewards upgraded.",
+      "source_url": "https://spire-codex.com/relics/LAVA_LAMP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lava_Lamp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LAVA_LAMP"
+      ]
+    },
+    {
+      "id": "LAVA_ROCK",
+      "name": "Lava Rock",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Act 1 boss reward includes two relics.",
+      "source_url": "https://spire-codex.com/relics/LAVA_ROCK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lava_Rock",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LAVA_ROCK"
+      ]
+    },
+    {
+      "id": "LEAD_PAPERWEIGHT",
+      "name": "Lead Paperweight",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Select one of two Colorless card choices.",
+      "source_url": "https://spire-codex.com/relics/LEAD_PAPERWEIGHT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lead_Paperweight",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LEAD_PAPERWEIGHT"
+      ]
+    },
+    {
+      "id": "LEAFY_POULTICE",
+      "name": "Leafy Poultice",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Transform one Strike and one Defend; maximum HP decreases by 12.",
+      "source_url": "https://spire-codex.com/relics/LEAFY_POULTICE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Leafy_Poultice",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LEAFY_POULTICE"
+      ]
+    },
+    {
+      "id": "LEES_WAFFLE",
+      "name": "Lee's Waffle",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:max HP7; full healing.",
+      "source_url": "https://spire-codex.com/relics/LEES_WAFFLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lee's_Waffle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LEES_WAFFLE"
+      ]
+    },
+    {
+      "id": "FAKE_LEES_WAFFLE",
+      "name": "Lee's Waffle???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Pickup:healing stated as10% of HP; snapshot text does not specify current versus maximum in this field.",
+      "source_url": "https://spire-codex.com/relics/FAKE_LEES_WAFFLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lee's_Waffle%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_LEES_WAFFLE"
+      ]
+    },
+    {
+      "id": "LETTER_OPENER",
+      "name": "Letter Opener",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Three Skills in a turn:area damage5.",
+      "source_url": "https://spire-codex.com/relics/LETTER_OPENER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Letter_Opener",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LETTER_OPENER"
+      ]
+    },
+    {
+      "id": "LIZARD_TAIL",
+      "name": "Lizard Tail",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Lethal HP loss:one recovery to50% max HP.",
+      "source_url": "https://spire-codex.com/relics/LIZARD_TAIL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lizard_Tail",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LIZARD_TAIL"
+      ]
+    },
+    {
+      "id": "LOOMING_FRUIT",
+      "name": "Looming Fruit",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Immediate maximum-HP increase of 31.",
+      "source_url": "https://spire-codex.com/relics/LOOMING_FRUIT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Looming_Fruit",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LOOMING_FRUIT"
+      ]
+    },
+    {
+      "id": "LORDS_PARASOL",
+      "name": "Lord's Parasol",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Visiting a Merchant grants their entire inventory.",
+      "source_url": "https://spire-codex.com/relics/LORDS_PARASOL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lord's_Parasol",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LORDS_PARASOL"
+      ]
+    },
+    {
+      "id": "LOST_COFFER",
+      "name": "Lost Coffer",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Immediate card reward plus one random potion.",
+      "source_url": "https://spire-codex.com/relics/LOST_COFFER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lost_Coffer",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LOST_COFFER"
+      ]
+    },
+    {
+      "id": "LOST_WISP",
+      "name": "Lost Wisp",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Power played:area damage8.",
+      "source_url": "https://spire-codex.com/relics/LOST_WISP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lost_Wisp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LOST_WISP"
+      ]
+    },
+    {
+      "id": "LUCKY_FYSH",
+      "name": "Lucky Fysh",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Deck addition:Gold15.",
+      "source_url": "https://spire-codex.com/relics/LUCKY_FYSH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lucky_Fysh",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LUCKY_FYSH"
+      ]
+    },
+    {
+      "id": "LUNAR_PASTRY",
+      "name": "Lunar Pastry",
+      "rarity": "Rare",
+      "character": "regent",
+      "mechanics": "Turn ending grants one Star.",
+      "source_url": "https://spire-codex.com/relics/LUNAR_PASTRY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Lunar_Pastry",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/LUNAR_PASTRY"
+      ]
+    },
+    {
+      "id": "MANGO",
+      "name": "Mango",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Pickup:max HP14.",
+      "source_url": "https://spire-codex.com/relics/MANGO",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mango",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MANGO"
+      ]
+    },
+    {
+      "id": "FAKE_MANGO",
+      "name": "Mango???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Pickup:max HP3.",
+      "source_url": "https://spire-codex.com/relics/FAKE_MANGO",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mango%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_MANGO"
+      ]
+    },
+    {
+      "id": "MASSIVE_SCROLL",
+      "name": "Massive Scroll",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Choose one of three multiplayer-card options.",
+      "source_url": "https://spire-codex.com/relics/MASSIVE_SCROLL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Massive_Scroll",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MASSIVE_SCROLL"
+      ]
+    },
+    {
+      "id": "MAW_BANK",
+      "name": "Maw Bank",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Floor progress:Gold12 until first shop spend.",
+      "source_url": "https://spire-codex.com/relics/MAW_BANK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Maw_Bank",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MAW_BANK"
+      ]
+    },
+    {
+      "id": "MEAL_TICKET",
+      "name": "Meal Ticket",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Shop entry:heal15.",
+      "source_url": "https://spire-codex.com/relics/MEAL_TICKET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Meal_Ticket",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MEAL_TICKET"
+      ]
+    },
+    {
+      "id": "MEAT_CLEAVER",
+      "name": "Meat Cleaver",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Unlocks Cook as a Rest Site action.",
+      "source_url": "https://spire-codex.com/relics/MEAT_CLEAVER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Meat_Cleaver",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "known_beta_variant": {
+        "mechanics": "v0.109.0 beta: maximum-HP gain reduced from9 to5.",
+        "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      },
+      "source_urls": [
+        "https://spire-codex.com/relics/MEAT_CLEAVER",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      ]
+    },
+    {
+      "id": "MEAT_ON_THE_BONE",
+      "name": "Meat on the Bone",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Fight end at half HP or less:heal12.",
+      "source_url": "https://spire-codex.com/relics/MEAT_ON_THE_BONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Meat_on_the_Bone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MEAT_ON_THE_BONE"
+      ]
+    },
+    {
+      "id": "MEMBERSHIP_CARD",
+      "name": "Membership Card",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "All shop products:50% discount.",
+      "source_url": "https://spire-codex.com/relics/MEMBERSHIP_CARD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Membership_Card",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MEMBERSHIP_CARD"
+      ]
+    },
+    {
+      "id": "MERCURY_HOURGLASS",
+      "name": "Mercury Hourglass",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Each turn opening:area damage3.",
+      "source_url": "https://spire-codex.com/relics/MERCURY_HOURGLASS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mercury_Hourglass",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MERCURY_HOURGLASS"
+      ]
+    },
+    {
+      "id": "METRONOME",
+      "name": "Metronome",
+      "rarity": "Rare",
+      "character": "defect",
+      "mechanics": "The seventh Orb channel in a combat deals 30 to all enemies, once.",
+      "source_url": "https://spire-codex.com/relics/METRONOME",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Metronome",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/METRONOME"
+      ]
+    },
+    {
+      "id": "MINI_REGENT",
+      "name": "Mini Regent",
+      "rarity": "Rare",
+      "character": "regent",
+      "mechanics": "First Star expenditure each turn grants Strength 1.",
+      "source_url": "https://spire-codex.com/relics/MINI_REGENT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mini_Regent",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MINI_REGENT"
+      ]
+    },
+    {
+      "id": "MINIATURE_CANNON",
+      "name": "Miniature Cannon",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Upgraded Attacks:damage +3.",
+      "source_url": "https://spire-codex.com/relics/MINIATURE_CANNON",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Miniature_Cannon",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MINIATURE_CANNON"
+      ]
+    },
+    {
+      "id": "MINIATURE_TENT",
+      "name": "Miniature Tent",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Rest sites:multiple choices allowed.",
+      "source_url": "https://spire-codex.com/relics/MINIATURE_TENT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Miniature_Tent",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MINIATURE_TENT"
+      ]
+    },
+    {
+      "id": "MOLTEN_EGG",
+      "name": "Molten Egg",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "New Attacks:upgraded.",
+      "source_url": "https://spire-codex.com/relics/MOLTEN_EGG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Molten_Egg",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MOLTEN_EGG"
+      ]
+    },
+    {
+      "id": "MR_STRUGGLES",
+      "name": "Mr. Struggles",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Turn opening:area damage equal to turn number.",
+      "source_url": "https://spire-codex.com/relics/MR_STRUGGLES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mr._Struggles",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MR_STRUGGLES"
+      ]
+    },
+    {
+      "id": "MUMMIFIED_HAND",
+      "name": "Mummified Hand",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Power played:random held card becomes free for that turn.",
+      "source_url": "https://spire-codex.com/relics/MUMMIFIED_HAND",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mummified_Hand",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MUMMIFIED_HAND"
+      ]
+    },
+    {
+      "id": "MUSIC_BOX",
+      "name": "Music Box",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "First Attack played each turn creates an Ethereal copy.",
+      "source_url": "https://spire-codex.com/relics/MUSIC_BOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Music_Box",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MUSIC_BOX"
+      ]
+    },
+    {
+      "id": "MYSTIC_LIGHTER",
+      "name": "Mystic Lighter",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Enchanted Attacks:damage +9.",
+      "source_url": "https://spire-codex.com/relics/MYSTIC_LIGHTER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Mystic_Lighter",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/MYSTIC_LIGHTER"
+      ]
+    },
+    {
+      "id": "NEOWS_BONES",
+      "name": "Neow's Bones",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Two random Neow relics plus a random Curse.",
+      "source_url": "https://spire-codex.com/relics/NEOWS_BONES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow's_Bones",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NEOWS_BONES"
+      ]
+    },
+    {
+      "id": "NEOWS_TALISMAN",
+      "name": "Neow's Talisman",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Upgrade one Strike and one Defend.",
+      "source_url": "https://spire-codex.com/relics/NEOWS_TALISMAN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow's_Talisman",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NEOWS_TALISMAN"
+      ]
+    },
+    {
+      "id": "NEOWS_TORMENT",
+      "name": "Neow's Torment",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Add the Neow's Fury card.",
+      "source_url": "https://spire-codex.com/relics/NEOWS_TORMENT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow's_Torment",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NEOWS_TORMENT"
+      ]
+    },
+    {
+      "id": "NEW_LEAF",
+      "name": "New Leaf",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Transform one selected card.",
+      "source_url": "https://spire-codex.com/relics/NEW_LEAF",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:New_Leaf",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NEW_LEAF"
+      ]
+    },
+    {
+      "id": "NINJA_SCROLL",
+      "name": "Ninja Scroll",
+      "rarity": "Shop",
+      "character": "silent",
+      "mechanics": "Opening hand receives three Shivs.",
+      "source_url": "https://spire-codex.com/relics/NINJA_SCROLL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ninja_Scroll",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NINJA_SCROLL"
+      ]
+    },
+    {
+      "id": "NUNCHAKU",
+      "name": "Nunchaku",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Every tenth Attack:Energy1.",
+      "source_url": "https://spire-codex.com/relics/NUNCHAKU",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nunchaku",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NUNCHAKU"
+      ]
+    },
+    {
+      "id": "NUTRITIOUS_OYSTER",
+      "name": "Nutritious Oyster",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Maximum HP increases by 11.",
+      "source_url": "https://spire-codex.com/relics/NUTRITIOUS_OYSTER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Oyster",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NUTRITIOUS_OYSTER"
+      ]
+    },
+    {
+      "id": "NUTRITIOUS_SOUP",
+      "name": "Nutritious Soup",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Every Strike gains Tezcatara's Ember enchantment.",
+      "source_url": "https://spire-codex.com/relics/NUTRITIOUS_SOUP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Nutritious_Soup",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/NUTRITIOUS_SOUP"
+      ]
+    },
+    {
+      "id": "ODDLY_SMOOTH_STONE",
+      "name": "Oddly Smooth Stone",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Dexterity:1.",
+      "source_url": "https://spire-codex.com/relics/ODDLY_SMOOTH_STONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Oddly_Smooth_Stone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ODDLY_SMOOTH_STONE"
+      ]
+    },
+    {
+      "id": "OLD_COIN",
+      "name": "Old Coin",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Pickup:Gold300.",
+      "source_url": "https://spire-codex.com/relics/OLD_COIN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Old_Coin",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/OLD_COIN"
+      ]
+    },
+    {
+      "id": "ORANGE_DOUGH",
+      "name": "Orange Dough",
+      "rarity": "Rare",
+      "character": "regent",
+      "mechanics": "Opening hand receives two random Colorless cards.",
+      "source_url": "https://spire-codex.com/relics/ORANGE_DOUGH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Orange_Dough",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ORANGE_DOUGH"
+      ]
+    },
+    {
+      "id": "ORICHALCUM",
+      "name": "Orichalcum",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "No Block at turn end:Block6.",
+      "source_url": "https://spire-codex.com/relics/ORICHALCUM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Orichalcum",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ORICHALCUM"
+      ]
+    },
+    {
+      "id": "FAKE_ORICHALCUM",
+      "name": "Orichalcum???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "No Block at turn end:Block3.",
+      "source_url": "https://spire-codex.com/relics/FAKE_ORICHALCUM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Orichalcum%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_ORICHALCUM"
+      ]
+    },
+    {
+      "id": "ORNAMENTAL_FAN",
+      "name": "Ornamental Fan",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Three Attacks in a turn:Block4.",
+      "source_url": "https://spire-codex.com/relics/ORNAMENTAL_FAN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ornamental_Fan",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ORNAMENTAL_FAN"
+      ]
+    },
+    {
+      "id": "ORRERY",
+      "name": "Orrery",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:five card rewards.",
+      "source_url": "https://spire-codex.com/relics/ORRERY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Orrery",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ORRERY"
+      ]
+    },
+    {
+      "id": "PAELS_BLOOD",
+      "name": "Pael's Blood",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Turn-opening hand draw increases by one.",
+      "source_url": "https://spire-codex.com/relics/PAELS_BLOOD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Blood",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_BLOOD"
+      ]
+    },
+    {
+      "id": "PAELS_CLAW",
+      "name": "Pael's Claw",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Every Defend receives Goopy.",
+      "source_url": "https://spire-codex.com/relics/PAELS_CLAW",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Claw",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_CLAW"
+      ]
+    },
+    {
+      "id": "PAELS_EYE",
+      "name": "Pael's Eye",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Once per combat, a zero-card turn exhausts the hand and grants an extra turn.",
+      "source_url": "https://spire-codex.com/relics/PAELS_EYE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Eye",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_EYE"
+      ]
+    },
+    {
+      "id": "PAELS_FLESH",
+      "name": "Pael's Flesh",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "From turn 3 onward, receive one extra Energy per turn.",
+      "source_url": "https://spire-codex.com/relics/PAELS_FLESH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Flesh",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_FLESH"
+      ]
+    },
+    {
+      "id": "PAELS_GROWTH",
+      "name": "Pael's Growth",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "A selected card receives Clone.",
+      "source_url": "https://spire-codex.com/relics/PAELS_GROWTH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Growth",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_GROWTH"
+      ]
+    },
+    {
+      "id": "PAELS_HORN",
+      "name": "Pael's Horn",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Add two Relax cards.",
+      "source_url": "https://spire-codex.com/relics/PAELS_HORN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Horn",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_HORN"
+      ]
+    },
+    {
+      "id": "PAELS_LEGION",
+      "name": "Pael's Legion",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Doubles one card's Block contribution, then sleeps for two turns.",
+      "source_url": "https://spire-codex.com/relics/PAELS_LEGION",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Legion",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_LEGION"
+      ]
+    },
+    {
+      "id": "PAELS_TEARS",
+      "name": "Pael's Tears",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Leaving Energy unused grants two extra Energy next turn.",
+      "source_url": "https://spire-codex.com/relics/PAELS_TEARS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tears",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_TEARS"
+      ]
+    },
+    {
+      "id": "PAELS_TOOTH",
+      "name": "Pael's Tooth",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove five cards; after each combat, one randomly returns upgraded.",
+      "source_url": "https://spire-codex.com/relics/PAELS_TOOTH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Tooth",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_TOOTH"
+      ]
+    },
+    {
+      "id": "PAELS_WING",
+      "name": "Pael's Wing",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Two forfeited card rewards can purchase one relic.",
+      "source_url": "https://spire-codex.com/relics/PAELS_WING",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pael's_Wing",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAELS_WING"
+      ]
+    },
+    {
+      "id": "PANDORAS_BOX",
+      "name": "Pandora's Box",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Transform every Strike and Defend.",
+      "source_url": "https://spire-codex.com/relics/PANDORAS_BOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pandora's_Box",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PANDORAS_BOX"
+      ]
+    },
+    {
+      "id": "PANTOGRAPH",
+      "name": "Pantograph",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Boss opening:heal25.",
+      "source_url": "https://spire-codex.com/relics/PANTOGRAPH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pantograph",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PANTOGRAPH"
+      ]
+    },
+    {
+      "id": "PAPER_KRANE",
+      "name": "Paper Krane",
+      "rarity": "Rare",
+      "character": "silent",
+      "mechanics": "Weak's damage suppression becomes 40 percent instead of 25 percent.",
+      "source_url": "https://spire-codex.com/relics/PAPER_KRANE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Paper_Krane",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAPER_KRANE"
+      ]
+    },
+    {
+      "id": "PAPER_PHROG",
+      "name": "Paper Phrog",
+      "rarity": "Uncommon",
+      "character": "ironclad",
+      "mechanics": "Vulnerable's extra damage becomes 75 percent instead of 50 percent.",
+      "source_url": "https://spire-codex.com/relics/PAPER_PHROG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Paper_Phrog",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PAPER_PHROG"
+      ]
+    },
+    {
+      "id": "PARRYING_SHIELD",
+      "name": "Parrying Shield",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Turn ending with10+ Block:random damage6.",
+      "source_url": "https://spire-codex.com/relics/PARRYING_SHIELD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Parrying_Shield",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PARRYING_SHIELD"
+      ]
+    },
+    {
+      "id": "PEAR",
+      "name": "Pear",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Pickup:max HP10.",
+      "source_url": "https://spire-codex.com/relics/PEAR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pear",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PEAR"
+      ]
+    },
+    {
+      "id": "PEN_NIB",
+      "name": "Pen Nib",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Every tenth Attack:double damage.",
+      "source_url": "https://spire-codex.com/relics/PEN_NIB",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pen_Nib",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PEN_NIB"
+      ]
+    },
+    {
+      "id": "PENDULUM",
+      "name": "Pendulum",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Every third turn:draw1.",
+      "source_url": "https://spire-codex.com/relics/PENDULUM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pendulum",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PENDULUM"
+      ]
+    },
+    {
+      "id": "PERMAFROST",
+      "name": "Permafrost",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "First Power per combat:Block7.",
+      "source_url": "https://spire-codex.com/relics/PERMAFROST",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Permafrost",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PERMAFROST"
+      ]
+    },
+    {
+      "id": "PETRIFIED_TOAD",
+      "name": "Petrified Toad",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Combat opening:one Potion-Shaped Rock.",
+      "source_url": "https://spire-codex.com/relics/PETRIFIED_TOAD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Petrified_Toad",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PETRIFIED_TOAD"
+      ]
+    },
+    {
+      "id": "PHIAL_HOLSTER",
+      "name": "Phial Holster",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One additional potion space; two random potion grants.",
+      "source_url": "https://spire-codex.com/relics/PHIAL_HOLSTER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Phial_Holster",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PHIAL_HOLSTER"
+      ]
+    },
+    {
+      "id": "PHILOSOPHERS_STONE",
+      "name": "Philosopher's Stone",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy each turn; every enemy opens with Strength 1.",
+      "source_url": "https://spire-codex.com/relics/PHILOSOPHERS_STONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Philosopher's_Stone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PHILOSOPHERS_STONE"
+      ]
+    },
+    {
+      "id": "PHYLACTERY_UNBOUND",
+      "name": "Phylactery Unbound",
+      "rarity": "Starter",
+      "character": "necrobinder",
+      "mechanics": "Summon 5 at fight opening and Summon 2 each turn.",
+      "source_url": "https://spire-codex.com/relics/PHYLACTERY_UNBOUND",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Phylactery_Unbound",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PHYLACTERY_UNBOUND"
+      ]
+    },
+    {
+      "id": "PLANISPHERE",
+      "name": "Planisphere",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Mystery entry:heal5.",
+      "source_url": "https://spire-codex.com/relics/PLANISPHERE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Planisphere",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PLANISPHERE"
+      ]
+    },
+    {
+      "id": "POCKETWATCH",
+      "name": "Pocketwatch",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Turn with≤3 cards played:next-turn draw3.",
+      "source_url": "https://spire-codex.com/relics/POCKETWATCH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pocketwatch",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/POCKETWATCH"
+      ]
+    },
+    {
+      "id": "POLLINOUS_CORE",
+      "name": "Pollinous Core",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Every fourth turn:draw2.",
+      "source_url": "https://spire-codex.com/relics/POLLINOUS_CORE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pollinous_Core",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/POLLINOUS_CORE"
+      ]
+    },
+    {
+      "id": "POMANDER",
+      "name": "Pomander",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Upgrade one selected card.",
+      "source_url": "https://spire-codex.com/relics/POMANDER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pomander",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/POMANDER"
+      ]
+    },
+    {
+      "id": "POTION_BELT",
+      "name": "Potion Belt",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Pickup:potion slots +2.",
+      "source_url": "https://spire-codex.com/relics/POTION_BELT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Potion_Belt",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/POTION_BELT"
+      ]
+    },
+    {
+      "id": "POWER_CELL",
+      "name": "Power Cell",
+      "rarity": "Rare",
+      "character": "defect",
+      "mechanics": "Opening hand receives two zero-cost cards from the draw pile.",
+      "source_url": "https://spire-codex.com/relics/POWER_CELL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Power_Cell",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/POWER_CELL"
+      ]
+    },
+    {
+      "id": "PRAYER_WHEEL",
+      "name": "Prayer Wheel",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Normal enemies:extra card reward.",
+      "source_url": "https://spire-codex.com/relics/PRAYER_WHEEL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Prayer_Wheel",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PRAYER_WHEEL"
+      ]
+    },
+    {
+      "id": "PRECARIOUS_SHEARS",
+      "name": "Precarious Shears",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove two cards while losing 16 HP.",
+      "source_url": "https://spire-codex.com/relics/PRECARIOUS_SHEARS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Precarious_Shears",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PRECARIOUS_SHEARS"
+      ]
+    },
+    {
+      "id": "PRECISE_SCISSORS",
+      "name": "Precise Scissors",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove one selected card.",
+      "source_url": "https://spire-codex.com/relics/PRECISE_SCISSORS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Precise_Scissors",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PRECISE_SCISSORS"
+      ]
+    },
+    {
+      "id": "PRESERVED_FOG",
+      "name": "Preserved Fog",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Remove three selected cards and add Folly.",
+      "source_url": "https://spire-codex.com/relics/PRESERVED_FOG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Preserved_Fog",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PRESERVED_FOG"
+      ]
+    },
+    {
+      "id": "PRISMATIC_GEM",
+      "name": "Prismatic Gem",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn; card rewards can use other colors.",
+      "source_url": "https://spire-codex.com/relics/PRISMATIC_GEM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Prismatic_Gem",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PRISMATIC_GEM"
+      ]
+    },
+    {
+      "id": "PUMPKIN_CANDLE",
+      "name": "Pumpkin Candle",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn for five combats; Rest Sites can renew it.",
+      "source_url": "https://spire-codex.com/relics/PUMPKIN_CANDLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Pumpkin_Candle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PUMPKIN_CANDLE"
+      ]
+    },
+    {
+      "id": "PUNCH_DAGGER",
+      "name": "Punch Dagger",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:one Attack gains Momentum5.",
+      "source_url": "https://spire-codex.com/relics/PUNCH_DAGGER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Punch_Dagger",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/PUNCH_DAGGER"
+      ]
+    },
+    {
+      "id": "RADIANT_PEARL",
+      "name": "Radiant Pearl",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Opening hand receives Luminesce.",
+      "source_url": "https://spire-codex.com/relics/RADIANT_PEARL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Radiant_Pearl",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RADIANT_PEARL"
+      ]
+    },
+    {
+      "id": "RAINBOW_RING",
+      "name": "Rainbow Ring",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Attack+Skill+Power in turn:Strength1 and Dexterity1.",
+      "source_url": "https://spire-codex.com/relics/RAINBOW_RING",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Rainbow_Ring",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RAINBOW_RING"
+      ]
+    },
+    {
+      "id": "RAZOR_TOOTH",
+      "name": "Razor Tooth",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Attack/Skill played:that card upgraded for combat.",
+      "source_url": "https://spire-codex.com/relics/RAZOR_TOOTH",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Razor_Tooth",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RAZOR_TOOTH"
+      ]
+    },
+    {
+      "id": "RED_MASK",
+      "name": "Red Mask",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Weak1:all enemies.",
+      "source_url": "https://spire-codex.com/relics/RED_MASK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Red_Mask",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RED_MASK"
+      ]
+    },
+    {
+      "id": "RED_SKULL",
+      "name": "Red Skull",
+      "rarity": "Common",
+      "character": "ironclad",
+      "mechanics": "Strength increases by 3 while HP is at most half maximum.",
+      "source_url": "https://spire-codex.com/relics/RED_SKULL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Red_Skull",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RED_SKULL"
+      ]
+    },
+    {
+      "id": "REGAL_PILLOW",
+      "name": "Regal Pillow",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Rest healing:+15.",
+      "source_url": "https://spire-codex.com/relics/REGAL_PILLOW",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Regal_Pillow",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/REGAL_PILLOW"
+      ]
+    },
+    {
+      "id": "REGALITE",
+      "name": "Regalite",
+      "rarity": "Uncommon",
+      "character": "regent",
+      "mechanics": "Creating a card supplies 2 Block.",
+      "source_url": "https://spire-codex.com/relics/REGALITE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Regalite",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/REGALITE"
+      ]
+    },
+    {
+      "id": "REPTILE_TRINKET",
+      "name": "Reptile Trinket",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Potion use:temporary Strength3.",
+      "source_url": "https://spire-codex.com/relics/REPTILE_TRINKET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Reptile_Trinket",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/REPTILE_TRINKET"
+      ]
+    },
+    {
+      "id": "RING_OF_THE_DRAKE",
+      "name": "Ring of the Drake",
+      "rarity": "Starter",
+      "character": "silent",
+      "mechanics": "First three turn openings each draw two extra cards.",
+      "source_url": "https://spire-codex.com/relics/RING_OF_THE_DRAKE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ring_of_the_Drake",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RING_OF_THE_DRAKE"
+      ]
+    },
+    {
+      "id": "RING_OF_THE_SNAKE",
+      "name": "Ring of the Snake",
+      "rarity": "Starter",
+      "character": "silent",
+      "mechanics": "Combat opening draws two extra cards.",
+      "source_url": "https://spire-codex.com/relics/RING_OF_THE_SNAKE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ring_of_the_Snake",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RING_OF_THE_SNAKE"
+      ]
+    },
+    {
+      "id": "RINGING_TRIANGLE",
+      "name": "Ringing Triangle",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "First-turn hand retention.",
+      "source_url": "https://spire-codex.com/relics/RINGING_TRIANGLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ringing_Triangle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RINGING_TRIANGLE"
+      ]
+    },
+    {
+      "id": "RIPPLE_BASIN",
+      "name": "Ripple Basin",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Attack-free turn:Block4.",
+      "source_url": "https://spire-codex.com/relics/RIPPLE_BASIN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ripple_Basin",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RIPPLE_BASIN"
+      ]
+    },
+    {
+      "id": "ROYAL_POISON",
+      "name": "Royal Poison",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Combat opening:self HP loss4.",
+      "source_url": "https://spire-codex.com/relics/ROYAL_POISON",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Royal_Poison",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ROYAL_POISON"
+      ]
+    },
+    {
+      "id": "ROYAL_STAMP",
+      "name": "Royal Stamp",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Pickup:Attack/Skill gains Royally Approved.",
+      "source_url": "https://spire-codex.com/relics/ROYAL_STAMP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Royal_Stamp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/ROYAL_STAMP"
+      ]
+    },
+    {
+      "id": "RUINED_HELMET",
+      "name": "Ruined Helmet",
+      "rarity": "Rare",
+      "character": "ironclad",
+      "mechanics": "First Strength gain per combat doubles its amount.",
+      "source_url": "https://spire-codex.com/relics/RUINED_HELMET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Ruined_Helmet",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RUINED_HELMET"
+      ]
+    },
+    {
+      "id": "RUNIC_CAPACITOR",
+      "name": "Runic Capacitor",
+      "rarity": "Shop",
+      "character": "defect",
+      "mechanics": "Three additional Orb spaces each combat.",
+      "source_url": "https://spire-codex.com/relics/RUNIC_CAPACITOR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Capacitor",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RUNIC_CAPACITOR"
+      ]
+    },
+    {
+      "id": "RUNIC_PYRAMID",
+      "name": "Runic Pyramid",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "The hand is retained across ordinary turn endings.",
+      "source_url": "https://spire-codex.com/relics/RUNIC_PYRAMID",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Runic_Pyramid",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/RUNIC_PYRAMID"
+      ]
+    },
+    {
+      "id": "SAI",
+      "name": "Sai",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Every turn opening supplies 7 Block.",
+      "source_url": "https://spire-codex.com/relics/SAI",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sai",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SAI"
+      ]
+    },
+    {
+      "id": "SAND_CASTLE",
+      "name": "Sand Castle",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Upgrade six random deck cards.",
+      "source_url": "https://spire-codex.com/relics/SAND_CASTLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sand_Castle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SAND_CASTLE"
+      ]
+    },
+    {
+      "id": "SCREAMING_FLAGON",
+      "name": "Screaming Flagon",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Empty hand at turn end:area damage20.",
+      "source_url": "https://spire-codex.com/relics/SCREAMING_FLAGON",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Screaming_Flagon",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SCREAMING_FLAGON"
+      ]
+    },
+    {
+      "id": "SCROLL_BOXES",
+      "name": "Scroll Boxes",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Choose between two authored card packs.",
+      "source_url": "https://spire-codex.com/relics/SCROLL_BOXES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Scroll_Boxes",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SCROLL_BOXES"
+      ]
+    },
+    {
+      "id": "SEA_GLASS",
+      "name": "Sea Glass",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Inspect fifteen cards from another character and take any subset.",
+      "source_url": "https://spire-codex.com/relics/SEA_GLASS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sea_Glass",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SEA_GLASS"
+      ]
+    },
+    {
+      "id": "SEAL_OF_GOLD",
+      "name": "Seal of Gold",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Snapshot: pay 5 Gold per turn for one Energy; wiki beta price is 3.",
+      "source_url": "https://spire-codex.com/relics/SEAL_OF_GOLD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Seal_of_Gold",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SEAL_OF_GOLD"
+      ]
+    },
+    {
+      "id": "SELF_FORMING_CLAY",
+      "name": "Self-Forming Clay",
+      "rarity": "Uncommon",
+      "character": "ironclad",
+      "mechanics": "In combat, each HP-loss event schedules 3 Block for the next turn.",
+      "source_url": "https://spire-codex.com/relics/SELF_FORMING_CLAY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Self-Forming_Clay",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SELF_FORMING_CLAY"
+      ]
+    },
+    {
+      "id": "SERE_TALON",
+      "name": "Sere Talon",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three Wish cards arrive with two random Curses.",
+      "source_url": "https://spire-codex.com/relics/SERE_TALON",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sere_Talon",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SERE_TALON"
+      ]
+    },
+    {
+      "id": "SHOVEL",
+      "name": "Shovel",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Rest-site digging:random relic.",
+      "source_url": "https://spire-codex.com/relics/SHOVEL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Shovel",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SHOVEL"
+      ]
+    },
+    {
+      "id": "SHURIKEN",
+      "name": "Shuriken",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Three Attacks in a turn:Strength1.",
+      "source_url": "https://spire-codex.com/relics/SHURIKEN",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Shuriken",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SHURIKEN"
+      ]
+    },
+    {
+      "id": "SIGNET_RING",
+      "name": "Signet Ring",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Snapshot immediate grant: 999 Gold; wiki beta lists 888.",
+      "source_url": "https://spire-codex.com/relics/SIGNET_RING",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Signet_Ring",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SIGNET_RING"
+      ]
+    },
+    {
+      "id": "SILKEN_TRESS",
+      "name": "Silken Tress",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Forfeit all Gold; first card reward receives Glam throughout.",
+      "source_url": "https://spire-codex.com/relics/SILKEN_TRESS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Silken_Tress",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SILKEN_TRESS"
+      ]
+    },
+    {
+      "id": "SILVER_CRUCIBLE",
+      "name": "Silver Crucible",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "First three card rewards upgraded; first treasure chest gives nothing.",
+      "source_url": "https://spire-codex.com/relics/SILVER_CRUCIBLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Silver_Crucible",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SILVER_CRUCIBLE"
+      ]
+    },
+    {
+      "id": "SLING_OF_COURAGE",
+      "name": "Sling of Courage",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Elite opening:Strength2.",
+      "source_url": "https://spire-codex.com/relics/SLING_OF_COURAGE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sling_of_Courage",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SLING_OF_COURAGE"
+      ]
+    },
+    {
+      "id": "SMALL_CAPSULE",
+      "name": "Small Capsule",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Receive one random relic immediately.",
+      "source_url": "https://spire-codex.com/relics/SMALL_CAPSULE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Small_Capsule",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SMALL_CAPSULE"
+      ]
+    },
+    {
+      "id": "SNECKO_EYE",
+      "name": "Snecko Eye",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Two extra turn-opening draws, but begin combats Confused.",
+      "source_url": "https://spire-codex.com/relics/SNECKO_EYE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Snecko_Eye",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SNECKO_EYE"
+      ]
+    },
+    {
+      "id": "FAKE_SNECKO_EYE",
+      "name": "Snecko Eye???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Opening Confused status.",
+      "source_url": "https://spire-codex.com/relics/FAKE_SNECKO_EYE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Snecko_Eye%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_SNECKO_EYE"
+      ]
+    },
+    {
+      "id": "SNECKO_SKULL",
+      "name": "Snecko Skull",
+      "rarity": "Common",
+      "character": "silent",
+      "mechanics": "Poison applications receive one extra stack.",
+      "source_url": "https://spire-codex.com/relics/SNECKO_SKULL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Snecko_Skull",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SNECKO_SKULL"
+      ]
+    },
+    {
+      "id": "SOZU",
+      "name": "Sozu",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn, with potion acquisition disabled.",
+      "source_url": "https://spire-codex.com/relics/SOZU",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sozu",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SOZU"
+      ]
+    },
+    {
+      "id": "SPARKLING_ROUGE",
+      "name": "Sparkling Rouge",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Turn3:Strength1 and Dexterity1.",
+      "source_url": "https://spire-codex.com/relics/SPARKLING_ROUGE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sparkling_Rouge",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SPARKLING_ROUGE"
+      ]
+    },
+    {
+      "id": "SPIKED_GAUNTLETS",
+      "name": "Spiked Gauntlets",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn; Powers cost one additional Energy.",
+      "source_url": "https://spire-codex.com/relics/SPIKED_GAUNTLETS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Spiked_Gauntlets",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SPIKED_GAUNTLETS"
+      ]
+    },
+    {
+      "id": "STONE_CALENDAR",
+      "name": "Stone Calendar",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "End of turn7:area damage52.",
+      "source_url": "https://spire-codex.com/relics/STONE_CALENDAR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Stone_Calendar",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STONE_CALENDAR"
+      ]
+    },
+    {
+      "id": "STONE_CRACKER",
+      "name": "Stone Cracker",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Combat opening:temporarily upgrade two random draw-pile cards.",
+      "source_url": "https://spire-codex.com/relics/STONE_CRACKER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Stone_Cracker",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STONE_CRACKER"
+      ]
+    },
+    {
+      "id": "STONE_HUMIDIFIER",
+      "name": "Stone Humidifier",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each Rest adds 5 maximum HP.",
+      "source_url": "https://spire-codex.com/relics/STONE_HUMIDIFIER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Stone_Humidifier",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STONE_HUMIDIFIER"
+      ]
+    },
+    {
+      "id": "STORYBOOK",
+      "name": "Storybook",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Add Brightest Flame on acquisition.",
+      "source_url": "https://spire-codex.com/relics/STORYBOOK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Storybook",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STORYBOOK"
+      ]
+    },
+    {
+      "id": "STRAWBERRY",
+      "name": "Strawberry",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Pickup:max HP7.",
+      "source_url": "https://spire-codex.com/relics/STRAWBERRY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Strawberry",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STRAWBERRY"
+      ]
+    },
+    {
+      "id": "STRIKE_DUMMY",
+      "name": "Strike Dummy",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Cards named Strike:damage +3.",
+      "source_url": "https://spire-codex.com/relics/STRIKE_DUMMY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Strike_Dummy",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STRIKE_DUMMY"
+      ]
+    },
+    {
+      "id": "FAKE_STRIKE_DUMMY",
+      "name": "Strike Dummy???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Cards named Strike:damage +1.",
+      "source_url": "https://spire-codex.com/relics/FAKE_STRIKE_DUMMY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Strike_Dummy%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_STRIKE_DUMMY"
+      ]
+    },
+    {
+      "id": "STURDY_CLAMP",
+      "name": "Sturdy Clamp",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Block retention ceiling:10.",
+      "source_url": "https://spire-codex.com/relics/STURDY_CLAMP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sturdy_Clamp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/STURDY_CLAMP"
+      ]
+    },
+    {
+      "id": "SWORD_OF_JADE",
+      "name": "Sword of Jade",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Opening Strength:3.",
+      "source_url": "https://spire-codex.com/relics/SWORD_OF_JADE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sword_of_Jade",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SWORD_OF_JADE"
+      ]
+    },
+    {
+      "id": "SWORD_OF_STONE",
+      "name": "Sword of Stone",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Five Elite kills:transform into powerful relic.",
+      "source_url": "https://spire-codex.com/relics/SWORD_OF_STONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Sword_of_Stone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SWORD_OF_STONE"
+      ]
+    },
+    {
+      "id": "SYMBIOTIC_VIRUS",
+      "name": "Symbiotic Virus",
+      "rarity": "Uncommon",
+      "character": "defect",
+      "mechanics": "One Dark Orb at each combat opening.",
+      "source_url": "https://spire-codex.com/relics/SYMBIOTIC_VIRUS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Symbiotic_Virus",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/SYMBIOTIC_VIRUS"
+      ]
+    },
+    {
+      "id": "TANXS_WHISTLE",
+      "name": "Tanx's Whistle",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Add the Whistle card.",
+      "source_url": "https://spire-codex.com/relics/TANXS_WHISTLE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tanx's_Whistle",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TANXS_WHISTLE"
+      ]
+    },
+    {
+      "id": "TEA_OF_DISCOURTESY",
+      "name": "Tea of Discourtesy",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Next combat:two Dazed cards added.",
+      "source_url": "https://spire-codex.com/relics/TEA_OF_DISCOURTESY",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tea_of_Discourtesy",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TEA_OF_DISCOURTESY"
+      ]
+    },
+    {
+      "id": "THE_ABACUS",
+      "name": "The Abacus",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Draw-pile shuffle:Block6.",
+      "source_url": "https://spire-codex.com/relics/THE_ABACUS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:The_Abacus",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/THE_ABACUS"
+      ]
+    },
+    {
+      "id": "THE_BOOT",
+      "name": "The Boot",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Unblocked attack damage1–4:raised to5.",
+      "source_url": "https://spire-codex.com/relics/THE_BOOT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:The_Boot",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/THE_BOOT"
+      ]
+    },
+    {
+      "id": "CHOSEN_CHEESE",
+      "name": "The Chosen Cheese",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "Fight completion:max HP1.",
+      "source_url": "https://spire-codex.com/relics/CHOSEN_CHEESE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:The_Chosen_Cheese",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/CHOSEN_CHEESE"
+      ]
+    },
+    {
+      "id": "THE_COURIER",
+      "name": "The Courier",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Merchant restocks; prices20% lower.",
+      "source_url": "https://spire-codex.com/relics/THE_COURIER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:The_Courier",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/THE_COURIER"
+      ]
+    },
+    {
+      "id": "FAKE_MERCHANTS_RUG",
+      "name": "The Merchant's Rug???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "No mechanical effect.",
+      "source_url": "https://spire-codex.com/relics/FAKE_MERCHANTS_RUG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:The_Merchant's_Rug%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_MERCHANTS_RUG"
+      ]
+    },
+    {
+      "id": "THROWING_AXE",
+      "name": "Throwing Axe",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "First card played each combat resolves an additional time.",
+      "source_url": "https://spire-codex.com/relics/THROWING_AXE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Throwing_Axe",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/THROWING_AXE"
+      ]
+    },
+    {
+      "id": "TINGSHA",
+      "name": "Tingsha",
+      "rarity": "Uncommon",
+      "character": "silent",
+      "mechanics": "Discarded cards during your turn each deal 3 to a random enemy.",
+      "source_url": "https://spire-codex.com/relics/TINGSHA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tingsha",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TINGSHA"
+      ]
+    },
+    {
+      "id": "TINY_MAILBOX",
+      "name": "Tiny Mailbox",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Resting:two random potions.",
+      "source_url": "https://spire-codex.com/relics/TINY_MAILBOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tiny_Mailbox",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TINY_MAILBOX"
+      ]
+    },
+    {
+      "id": "TOASTY_MITTENS",
+      "name": "Toasty Mittens",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each turn exhausts the draw pile's top card and adds Strength 1.",
+      "source_url": "https://spire-codex.com/relics/TOASTY_MITTENS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toasty_Mittens",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "known_beta_variant": {
+        "mechanics": "v0.110.0 beta: turn-start exhaust chooses one hand card, replacing top-of-draw-pile exhaust; Strength gain remains1.",
+        "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.110.0_-_Beta_Patch"
+      },
+      "source_urls": [
+        "https://spire-codex.com/relics/TOASTY_MITTENS",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.110.0_-_Beta_Patch"
+      ]
+    },
+    {
+      "id": "TOOLBOX",
+      "name": "Toolbox",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "Opening choice:one of three Colorless cards to hand.",
+      "source_url": "https://spire-codex.com/relics/TOOLBOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toolbox",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TOOLBOX"
+      ]
+    },
+    {
+      "id": "TOUCH_OF_OROBAS",
+      "name": "Touch of Orobas",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Starter relic replaced by its Ancient variant.",
+      "source_url": "https://spire-codex.com/relics/TOUCH_OF_OROBAS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Touch_of_Orobas",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TOUCH_OF_OROBAS"
+      ]
+    },
+    {
+      "id": "TOUGH_BANDAGES",
+      "name": "Tough Bandages",
+      "rarity": "Rare",
+      "character": "silent",
+      "mechanics": "Each card discarded during your turn grants 3 Block.",
+      "source_url": "https://spire-codex.com/relics/TOUGH_BANDAGES",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tough_Bandages",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TOUGH_BANDAGES"
+      ]
+    },
+    {
+      "id": "TOXIC_EGG",
+      "name": "Toxic Egg",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "New Skills:upgraded.",
+      "source_url": "https://spire-codex.com/relics/TOXIC_EGG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toxic_Egg",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TOXIC_EGG"
+      ]
+    },
+    {
+      "id": "TOY_BOX",
+      "name": "Toy Box",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Snapshot grants four temporary Wax relics; eldest expires every three combats. Wiki beta grants five.",
+      "source_url": "https://spire-codex.com/relics/TOY_BOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Toy_Box",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "known_beta_variant": {
+        "mechanics": "v0.109.0 beta: relic acquisition count increased from4 to5.",
+        "url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      },
+      "source_urls": [
+        "https://spire-codex.com/relics/TOY_BOX",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch"
+      ]
+    },
+    {
+      "id": "TRI_BOOMERANG",
+      "name": "Tri-Boomerang",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three chosen Attacks receive Instinct.",
+      "source_url": "https://spire-codex.com/relics/TRI_BOOMERANG",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tri-Boomerang",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TRI_BOOMERANG"
+      ]
+    },
+    {
+      "id": "TUNGSTEN_ROD",
+      "name": "Tungsten Rod",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Each HP-loss instance:reduced by1.",
+      "source_url": "https://spire-codex.com/relics/TUNGSTEN_ROD",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tungsten_Rod",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TUNGSTEN_ROD"
+      ]
+    },
+    {
+      "id": "TUNING_FORK",
+      "name": "Tuning Fork",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "Every tenth Skill:Block7.",
+      "source_url": "https://spire-codex.com/relics/TUNING_FORK",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Tuning_Fork",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TUNING_FORK"
+      ]
+    },
+    {
+      "id": "TWISTED_FUNNEL",
+      "name": "Twisted Funnel",
+      "rarity": "Uncommon",
+      "character": "silent",
+      "mechanics": "All initial enemies receive Poison 4.",
+      "source_url": "https://spire-codex.com/relics/TWISTED_FUNNEL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Twisted_Funnel",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/TWISTED_FUNNEL"
+      ]
+    },
+    {
+      "id": "UNCEASING_TOP",
+      "name": "Unceasing Top",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Empty hand during player turn:draw1.",
+      "source_url": "https://spire-codex.com/relics/UNCEASING_TOP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Unceasing_Top",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/UNCEASING_TOP"
+      ]
+    },
+    {
+      "id": "UNDYING_SIGIL",
+      "name": "Undying Sigil",
+      "rarity": "Shop",
+      "character": "necrobinder",
+      "mechanics": "Enemy damage halves when its Doom is at least its HP.",
+      "source_url": "https://spire-codex.com/relics/UNDYING_SIGIL",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Undying_Sigil",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/UNDYING_SIGIL"
+      ]
+    },
+    {
+      "id": "UNSETTLING_LAMP",
+      "name": "Unsettling Lamp",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "First debuffing card each fight:effect doubled.",
+      "source_url": "https://spire-codex.com/relics/UNSETTLING_LAMP",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Unsettling_Lamp",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/UNSETTLING_LAMP"
+      ]
+    },
+    {
+      "id": "VAJRA",
+      "name": "Vajra",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Opening Strength:1.",
+      "source_url": "https://spire-codex.com/relics/VAJRA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Vajra",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VAJRA"
+      ]
+    },
+    {
+      "id": "VAMBRACE",
+      "name": "Vambrace",
+      "rarity": "Uncommon",
+      "character": "shared",
+      "mechanics": "First card Block per fight:doubled.",
+      "source_url": "https://spire-codex.com/relics/VAMBRACE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Vambrace",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VAMBRACE"
+      ]
+    },
+    {
+      "id": "VELVET_CHOKER",
+      "name": "Velvet Choker",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn, with at most six card plays that turn.",
+      "source_url": "https://spire-codex.com/relics/VELVET_CHOKER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Velvet_Choker",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VELVET_CHOKER"
+      ]
+    },
+    {
+      "id": "VENERABLE_TEA_SET",
+      "name": "Venerable Tea Set",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "After rest:next opening Energy2.",
+      "source_url": "https://spire-codex.com/relics/VENERABLE_TEA_SET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Venerable_Tea_Set",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VENERABLE_TEA_SET"
+      ]
+    },
+    {
+      "id": "FAKE_VENERABLE_TEA_SET",
+      "name": "Venerable Tea Set???",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "After rest:next opening Energy1.",
+      "source_url": "https://spire-codex.com/relics/FAKE_VENERABLE_TEA_SET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Venerable_Tea_Set%3F%3F%3F",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/FAKE_VENERABLE_TEA_SET"
+      ]
+    },
+    {
+      "id": "VERY_HOT_COCOA",
+      "name": "Very Hot Cocoa",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Combat opening grants four additional Energy.",
+      "source_url": "https://spire-codex.com/relics/VERY_HOT_COCOA",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Very_Hot_Cocoa",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VERY_HOT_COCOA"
+      ]
+    },
+    {
+      "id": "VEXING_PUZZLEBOX",
+      "name": "Vexing Puzzlebox",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Opening random card:free this turn.",
+      "source_url": "https://spire-codex.com/relics/VEXING_PUZZLEBOX",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Vexing_Puzzlebox",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VEXING_PUZZLEBOX"
+      ]
+    },
+    {
+      "id": "VITRUVIAN_MINION",
+      "name": "Vitruvian Minion",
+      "rarity": "Shop",
+      "character": "regent",
+      "mechanics": "Cards named with Minion get double damage and Block.",
+      "source_url": "https://spire-codex.com/relics/VITRUVIAN_MINION",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Vitruvian_Minion",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/VITRUVIAN_MINION"
+      ]
+    },
+    {
+      "id": "WAR_HAMMER",
+      "name": "War Hammer",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Each Elite victory upgrades four random cards.",
+      "source_url": "https://spire-codex.com/relics/WAR_HAMMER",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:War_Hammer",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WAR_HAMMER"
+      ]
+    },
+    {
+      "id": "WAR_PAINT",
+      "name": "War Paint",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Pickup:two random Skills upgraded.",
+      "source_url": "https://spire-codex.com/relics/WAR_PAINT",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:War_Paint",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WAR_PAINT"
+      ]
+    },
+    {
+      "id": "WHETSTONE",
+      "name": "Whetstone",
+      "rarity": "Common",
+      "character": "shared",
+      "mechanics": "Pickup:two random Attacks upgraded.",
+      "source_url": "https://spire-codex.com/relics/WHETSTONE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Whetstone",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WHETSTONE"
+      ]
+    },
+    {
+      "id": "WHISPERING_EARRING",
+      "name": "Whispering Earring",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "One extra Energy per turn; Vakuu controls the first turn.",
+      "source_url": "https://spire-codex.com/relics/WHISPERING_EARRING",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Whispering_Earring",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WHISPERING_EARRING"
+      ]
+    },
+    {
+      "id": "WHITE_BEAST_STATUE",
+      "name": "White Beast Statue",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Every combat reward includes potion.",
+      "source_url": "https://spire-codex.com/relics/WHITE_BEAST_STATUE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:White_Beast_Statue",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WHITE_BEAST_STATUE"
+      ]
+    },
+    {
+      "id": "WHITE_STAR",
+      "name": "White Star",
+      "rarity": "Rare",
+      "character": "shared",
+      "mechanics": "Elite reward:extra Rare card offer.",
+      "source_url": "https://spire-codex.com/relics/WHITE_STAR",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:White_Star",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WHITE_STAR"
+      ]
+    },
+    {
+      "id": "WING_CHARM",
+      "name": "Wing Charm",
+      "rarity": "Shop",
+      "character": "shared",
+      "mechanics": "One random reward card:Swift1 enchantment.",
+      "source_url": "https://spire-codex.com/relics/WING_CHARM",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Wing_Charm",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WING_CHARM"
+      ]
+    },
+    {
+      "id": "WINGED_BOOTS",
+      "name": "Winged Boots",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Three route selections can disregard path connections.",
+      "source_url": "https://spire-codex.com/relics/WINGED_BOOTS",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Winged_Boots",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WINGED_BOOTS"
+      ]
+    },
+    {
+      "id": "WONGO_CUSTOMER_APPRECIATION_BADGE",
+      "name": "Wongo Customer Appreciation Badge",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "No mechanical effect.",
+      "source_url": "https://spire-codex.com/relics/WONGO_CUSTOMER_APPRECIATION_BADGE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Wongo_Customer_Appreciation_Badge",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WONGO_CUSTOMER_APPRECIATION_BADGE"
+      ]
+    },
+    {
+      "id": "WONGOS_MYSTERY_TICKET",
+      "name": "Wongo's Mystery Ticket",
+      "rarity": "Event",
+      "character": "shared",
+      "mechanics": "After five combats:three random relics.",
+      "source_url": "https://spire-codex.com/relics/WONGOS_MYSTERY_TICKET",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Wongo's_Mystery_Ticket",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/WONGOS_MYSTERY_TICKET"
+      ]
+    },
+    {
+      "id": "YUMMY_COOKIE",
+      "name": "Yummy Cookie",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Upgrade four selected cards on acquisition.",
+      "source_url": "https://spire-codex.com/relics/YUMMY_COOKIE",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Yummy_Cookie",
+      "branch": "stable snapshot; v0.107.1 provenance",
+      "source_commit": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+      "source_urls": [
+        "https://spire-codex.com/relics/YUMMY_COOKIE"
+      ]
+    },
+    {
+      "id": "DOWSING_ROD",
+      "name": "Dowsing Rod",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Pickup adds one Dowsing card. Its five-Mystery-room quest transforms it into Abundance: choose one of three Powers for the hand, free that turn; Abundance exhausts. The July 30 beta makes the offered Powers always upgraded.",
+      "source_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dowsing_Rod",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dowsing_Rod",
+      "branch": "v0.109.0 beta addition",
+      "source_commit": null,
+      "supporting_urls": [
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.110.0_-_Beta_Patch"
+      ],
+      "source_urls": [
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Dowsing_Rod",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.109.0_-_Beta_Patch",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:V0.110.0_-_Beta_Patch"
+      ]
+    },
+    {
+      "id": "NEOWS_SACRIFICE",
+      "name": "Neow's Sacrifice",
+      "rarity": "Ancient",
+      "character": "shared",
+      "mechanics": "Pickup supplies one Ambergris potion and one Guilty curse. Ambergris heals 50% of maximum HP and, if used during combat, grants an extra turn. Guilty is unplayable and removes itself after five combats.",
+      "source_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow%27s_Sacrifice",
+      "wiki_url": "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow%27s_Sacrifice",
+      "branch": "v0.109.0 beta addition",
+      "source_commit": null,
+      "supporting_urls": [
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Guilty",
+        "https://slaythespire.wiki.gg/wiki/Module:Potions/StS2_data"
+      ],
+      "source_urls": [
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Neow%27s_Sacrifice",
+        "https://slaythespire.wiki.gg/wiki/Slay_the_Spire_2:Guilty",
+        "https://slaythespire.wiki.gg/wiki/Module:Potions/StS2_data"
+      ]
+    }
+  ],
+  "definition_policy": "Mechanical fact summaries paraphrased by two researchers, with no flavor text or art. Basic names, source rarity, character ownership, numeric values and triggers retained; related card/enchantment mechanics are referenced rather than fully reproduced."
+}

@@ -166,7 +166,7 @@ These are conservative content limits, not a proven numerical threat score. If a
 
 ## Mayors, rewards and campaign persistence
 
-Every city has its own proposed Mayor identity in [MAYORS.md](MAYORS.md). Reuse the existing nine candidate modules for the first route study, grouped by campaign stage; twelve locations do not require inventing 36 upgrades before their effects are tested. City-specific offer preferences can follow the actual recipe/upgrade economy study. Each visit still offers three eligible Rare/Legendary modules and grants one campaign-permanent choice.
+Every city has its own proposed Mayor identity in [MAYORS.md](MAYORS.md). The owner's 18 September commission expands the earlier nine-example study into a full [upgrade catalogue](UPGRADE-CATALOGUE.md), with distinct Mayor pools for the three city waves, shared choices and mercenary-specific technology. Ancient relics supply the Mayor inspiration; later-wave gifts must be stronger. Each visit still offers three eligible Rare/Legendary upgrades and grants one campaign-permanent choice. The new pools are authored proposals, not tested numerical balance.
 
 The Regular route must be sufficient to develop a viable boss answer. Officers offer extra power for extra risk, not mandatory upgrades disguised as optional encounters. Rewards retain the selected core/recipe/Officer-upgrade rules. A formation receives one encounter recipe offer; adding summons cannot create unlimited rewards. Ordinary shops remain available in and between fights, with their existing restock triggers. Neither a map junction nor a noncombat Mystery silently adds a fight restock.
 

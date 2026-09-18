@@ -1,0 +1,4600 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-18",
+  "status": "Design proposals; no runtime implementation or playtest evidence.",
+  "source_snapshot": "05dbf2eb917d754ab28360b598a0c82931a309ef",
+  "rarity_policy": "Direct Common/Uncommon/Rare source tiers retained. Shop/Event origins remain source_rarity and acquisition categories, with proposed power tiers.",
+  "upgrades": [
+    {
+      "id": "UGS-001",
+      "name": "Ballistic Starter",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Akabeko's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, queue +6 damage for the first valid main shot this fight. Spend it only on Fire; it survives zero-shot turns and never affects support hits.",
+      "strategy": "Opening burst",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Large opening burst against weak robots.",
+      "inspiration": [
+        {
+          "id": "AKABEKO",
+          "name": "Akabeko",
+          "url": "https://spire-codex.com/relics/AKABEKO"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Vigor:8."
+    },
+    {
+      "id": "UGS-002",
+      "name": "Bounty Transponder",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Amethyst Aubergine's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After victory with at least one robot killed, gain 8 Credits. One payment per fight, independent of robot count.",
+      "strategy": "Economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Credit value depends on shop prices.",
+      "inspiration": [
+        {
+          "id": "AMETHYST_AUBERGINE",
+          "name": "Amethyst Aubergine",
+          "url": "https://spire-codex.com/relics/AMETHYST_AUBERGINE"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Enemy loot:Gold +15."
+    },
+    {
+      "id": "MY3-02",
+      "name": "Opening Relay",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Anchor's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At the first player-turn start of every fight, grant 6 active Shield. It protects during preparation and the enemy phase, then follows the normal enemy-turn-end reset.",
+      "strategy": "Opening protection",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Fight-start grant cannot retrigger on screen reopen.",
+      "inspiration": [
+        {
+          "id": "ANCHOR",
+          "name": "Anchor",
+          "url": "https://spire-codex.com/relics/ANCHOR"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Block:10."
+    },
+    {
+      "id": "UGS-004",
+      "name": "Foldout Safety Rail",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's defence fallback benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At the first End Turn of each fight, if no Shield parts are installed, auto-install one ordinary 4-Shield part. It follows normal depletion and reset.",
+      "strategy": "Defence fallback",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Only one eligibility check per fight.",
+      "inspiration": [
+        {
+          "id": "FAKE_ANCHOR",
+          "name": "Anchor???",
+          "url": "https://spire-codex.com/relics/FAKE_ANCHOR"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Block:4."
+    },
+    {
+      "id": "UGS-005",
+      "name": "Idle Furnace Turbine",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Art of War's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, if no Fire occurred this turn, schedule 2 Iron and 1 Carbon for next player-turn start. One grant per qualifying turn; pending grants expire at fight end.",
+      "strategy": "Save versus shoot",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "May reward overlong defensive stalling.",
+      "inspiration": [
+        {
+          "id": "ART_OF_WAR",
+          "name": "Art of War",
+          "url": "https://spire-codex.com/relics/ART_OF_WAR"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Attack-free turn:next-turn Energy +1."
+    },
+    {
+      "id": "UGS-006",
+      "name": "Rangefinder Beacon",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Bag of Marbles's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, apply Target Paint 2 to the living robot with highest maximum HP; break ties by encounter slot order.",
+      "strategy": "Focus fire",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Opening debuffs combine with Ivo.",
+      "inspiration": [
+        {
+          "id": "BAG_OF_MARBLES",
+          "name": "Bag of Marbles",
+          "url": "https://spire-codex.com/relics/BAG_OF_MARBLES"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Vulnerable1:all enemies."
+    },
+    {
+      "id": "UGS-007",
+      "name": "Ready Rack",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Bag of Preparation's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, grant one fresh SH001 Plain Slug and one SH003 Powder Cap to reserve, at their normal recipe values. Owning those recipes is unnecessary.",
+      "strategy": "Opening assembly",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Finite free parts have normal resale value.",
+      "inspiration": [
+        {
+          "id": "BAG_OF_PREPARATION",
+          "name": "Bag of Preparation",
+          "url": "https://spire-codex.com/relics/BAG_OF_PREPARATION"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening draw:+2."
+    },
+    {
+      "id": "UGS-008",
+      "name": "Impact Governor",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Beating Remnant's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Limit total enemy-caused HP loss to 18 per round. Count actual loss after Shield from attacks, recoil and damage statuses; prevent loss beyond the allowance. Reset at player-turn start. Player-paid HP costs are excluded. A hit can still kill before reaching the allowance.",
+      "strategy": "Burst survival",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Strong against large multi-hit turns.",
+      "inspiration": [
+        {
+          "id": "BEATING_REMNANT",
+          "name": "Beating Remnant",
+          "url": "https://spire-codex.com/relics/BEATING_REMNANT"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "health",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "HP-loss ceiling:20 per turn."
+    },
+    {
+      "id": "UGS-009",
+      "name": "Cold Start Calibrator",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Bellows's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On the first player turn each fight, the first three resource-paid part-producing Uses each add 2 to the first output's direct damage or Shield. Choose one value the part has; outputs with neither spend no trigger. Copies are not production.",
+      "strategy": "Opening production",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Three payouts total, not three per recipe.",
+      "inspiration": [
+        {
+          "id": "BELLOWS",
+          "name": "Bellows",
+          "url": "https://spire-codex.com/relics/BELLOWS"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "First combat hand:upgraded."
+    },
+    {
+      "id": "UGS-010",
+      "name": "Bare-Bay Reinforcer",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's empty reserve build benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, if no ordinary parts remain in reserve, auto-install one ordinary 5-Shield part. Installed parts do not count as reserve. Once per turn.",
+      "strategy": "Empty reserve build",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "May cause unnecessary assembly shuffling.",
+      "inspiration": [
+        {
+          "id": "BELT_BUCKLE",
+          "name": "Belt Buckle",
+          "url": "https://spire-codex.com/relics/BELT_BUCKLE"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "No held potions:Dexterity +2."
+    },
+    {
+      "id": "UGS-011",
+      "name": "Dense Chassis Retrofit",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's durability tradeoff benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition, gain 18 maximum HP and heal 18 HP. Each fight's first base haul delivers 2 fewer material units, minimum zero; steering and Precision bonuses stay intact.",
+      "strategy": "Durability tradeoff",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Opening shortage needs visible preview.",
+      "inspiration": [
+        {
+          "id": "BIG_MUSHROOM",
+          "name": "Big Mushroom",
+          "url": "https://spire-codex.com/relics/BIG_MUSHROOM"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP +20; opening draw -2."
+    },
+    {
+      "id": "UGS-012",
+      "name": "Blueprint Twin Writer",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's recipe duplication benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the first accepted recipe reward from each victory, optionally store one additional exact copy. It uses a normal memory slot and permits an exchange if full. This generated extra cannot trigger the item again.",
+      "strategy": "Recipe duplication",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No trigger from shops or generated copies.",
+      "inspiration": [
+        {
+          "id": "BING_BONG",
+          "name": "Bing Bong",
+          "url": "https://spire-codex.com/relics/BING_BONG"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Deck addition:one extra copy."
+    },
+    {
+      "id": "UGS-013",
+      "name": "Microrepair Reservoir",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Blood Vial's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, heal 2 HP, capped by maximum HP. Restarting the same fight restores its original entry state before this single grant.",
+      "strategy": "Attrition recovery",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Never heal repeatedly by save reload.",
+      "inspiration": [
+        {
+          "id": "BLOOD_VIAL",
+          "name": "Blood Vial",
+          "url": "https://spire-codex.com/relics/BLOOD_VIAL"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening heal:2."
+    },
+    {
+      "id": "UGS-014",
+      "name": "Emergency Sealant Patch",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's delayed recovery benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight, the first enemy hit causing HP loss schedules a 3 HP heal at next player-turn start, only if the player survives. Player HP costs do not qualify.",
+      "strategy": "Delayed recovery",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Cannot prevent death or revive.",
+      "inspiration": [
+        {
+          "id": "FAKE_BLOOD_VIAL",
+          "name": "Blood Vial???",
+          "url": "https://spire-codex.com/relics/FAKE_BLOOD_VIAL"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening heal:1."
+    },
+    {
+      "id": "UGS-015",
+      "name": "Trial Fabricator License",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's limited duplication benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "For the next three fights after acquisition, the first resource-paid Ammo Use each fight also copies its first physical output. Copy that part's committed properties without replaying on-Use or scheduled-delivery effects. Keep the spent license visible afterwards.",
+      "strategy": "Limited duplication",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Copies must not repeat recipe activation effects.",
+      "inspiration": [
+        {
+          "id": "BONE_TEA",
+          "name": "Bone Tea",
+          "url": "https://spire-codex.com/relics/BONE_TEA"
+        }
+      ],
+      "implementation_tags": [],
+      "status": "proposal",
+      "source_fact": "Next combat:opening hand upgraded."
+    },
+    {
+      "id": "UGS-016",
+      "name": "Curriculum Medchip",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Book of Five Rings's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every fifth recipe accepted from victory rewards since acquisition, heal 8 HP. Counter persists across cities; shop purchases and generated extra copies do not count.",
+      "strategy": "Reward sustain",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Count acceptance, not viewing or replacing.",
+      "inspiration": [
+        {
+          "id": "BOOK_OF_FIVE_RINGS",
+          "name": "Book of Five Rings",
+          "url": "https://spire-codex.com/relics/BOOK_OF_FIVE_RINGS"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "health",
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Every fifth deck addition:heal20."
+    },
+    {
+      "id": "UGS-017",
+      "name": "Salvage Contract Stamp",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Bowler Hat's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Increase Credits from victory rewards by 25%, flooring the added amount once per reward screen. Core sales, part sales and other upgrades' direct Credit grants are unaffected.",
+      "strategy": "Reward economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Not a sale-price multiplier.",
+      "inspiration": [
+        {
+          "id": "BOWLER_HAT",
+          "name": "Bowler Hat",
+          "url": "https://spire-codex.com/relics/BOWLER_HAT"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Gold income:+25%."
+    },
+    {
+      "id": "UGS-018",
+      "name": "Delayed Power Coupler",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's slow engine benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Reduce the first turn's base haul by 2 material units, minimum zero. At player-turn starts 2 onward, grant 1 Copper before the ordinary haul. Steering and Precision bonuses are unchanged.",
+      "strategy": "Slow engine",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Long-fight efficiency may dominate.",
+      "inspiration": [
+        {
+          "id": "BREAD",
+          "name": "Bread",
+          "url": "https://spire-codex.com/relics/BREAD"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn1 Energy -2; later turns Energy +1."
+    },
+    {
+      "id": "UGS-019",
+      "name": "Counterpulse Studs",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Bronze Scales's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After an enemy attack hit removes at least 1 Shield or HP, deal 2 direct damage to its living attacker. This is an upgrade reaction, not Fire or a support hit; it cannot trigger itself. Enemy damage reactions still apply.",
+      "strategy": "Defensive retaliation",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Must stop recursive causal chains without disabling other reactions.",
+      "inspiration": [
+        {
+          "id": "BRONZE_SCALES",
+          "name": "Bronze Scales",
+          "url": "https://spire-codex.com/relics/BRONZE_SCALES"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Thorns:3."
+    },
+    {
+      "id": "UGS-020",
+      "name": "Utility Recall Buffer",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's utility reuse benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per fight, after using a no-cooldown Utility recipe, restore one use of that same copy this turn. Every subsequent Use still pays full costs. This restoration cannot restore itself.",
+      "strategy": "Utility reuse",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit exception to no-cooldown use allowance.",
+      "inspiration": [
+        {
+          "id": "BURNING_STICKS",
+          "name": "Burning Sticks",
+          "url": "https://spire-codex.com/relics/BURNING_STICKS"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "First exhausted Skill:copy to hand."
+    },
+    {
+      "id": "UGS-021",
+      "name": "Survey Kite",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's chosen opener benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, select a robot. The first valid main shot targeting it gains +4 damage. If it dies earlier, the bonus expires. The kite adds no helper commands, HP or interception.",
+      "strategy": "Chosen opener",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Target marker must look different from Target Paint.",
+      "inspiration": [
+        {
+          "id": "BYRDPIP",
+          "name": "Byrdpip",
+          "url": "https://spire-codex.com/relics/BYRDPIP"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "health",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:Byrd Swoop; companion."
+    },
+    {
+      "id": "UGS-022",
+      "name": "Second Cycle Feeder",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Candelabra's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn start 2 of each fight, grant 2 Iron and 1 Copper before the haul. No grant if the fight ended earlier.",
+      "strategy": "Second-turn supply",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Delayed supply cannot cross fights.",
+      "inspiration": [
+        {
+          "id": "CANDELABRA",
+          "name": "Candelabra",
+          "url": "https://spire-codex.com/relics/CANDELABRA"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn2 Energy:+2."
+    },
+    {
+      "id": "UGS-023",
+      "name": "Third Cycle Bulwark",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Captain's Wheel's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At player-turn start 3 of each fight, auto-install one ordinary 14-Shield part. It can be removed and saved normally.",
+      "strategy": "Scheduled defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Strong against known windups.",
+      "inspiration": [
+        {
+          "id": "CAPTAINS_WHEEL",
+          "name": "Captain's Wheel",
+          "url": "https://spire-codex.com/relics/CAPTAINS_WHEEL"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn3 Block:18."
+    },
+    {
+      "id": "UGS-024",
+      "name": "Packed Field Supplies",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's limited flexible supply benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain five supply charges. At each of the next five fight starts, spend one charge and choose 2 Iron, 2 Copper or 2 Carbon before the haul. Keep the item visible when spent.",
+      "strategy": "Limited flexible supply",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Five campaign charges, not refillable consumables.",
+      "inspiration": [
+        {
+          "id": "CAULDRON",
+          "name": "Cauldron",
+          "url": "https://spire-codex.com/relics/CAULDRON"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:five random potions."
+    },
+    {
+      "id": "UGS-025",
+      "name": "Damage Diagnostic Cache",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Centennial Puzzle's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight after the first enemy-caused HP loss, grant 1 Iron and 1 Copper if the player survives. Enemy-phase grants remain available next turn. HP costs do not qualify.",
+      "strategy": "Comeback supplies",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Cannot revive or refund HP costs.",
+      "inspiration": [
+        {
+          "id": "CENTENNIAL_PUZZLE",
+          "name": "Centennial Puzzle",
+          "url": "https://spire-codex.com/relics/CENTENNIAL_PUZZLE"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "First HP loss:draw3."
+    },
+    {
+      "id": "UGS-026",
+      "name": "Third Cycle Injector",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Chandelier's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At player-turn start 3 of each fight, grant 2 Copper and 2 Carbon before the haul.",
+      "strategy": "Scheduled burst craft",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Turn3 spike needs encounter testing.",
+      "inspiration": [
+        {
+          "id": "CHANDELIER",
+          "name": "Chandelier",
+          "url": "https://spire-codex.com/relics/CHANDELIER"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn3 Energy:+3."
+    },
+    {
+      "id": "UGS-027",
+      "name": "Batch Expansion Socket",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's batch production benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn, a resource-paid recipe producing at least two ordinary parts also copies its first physical output. Do not replay on-Use effects or scheduled deliveries.",
+      "strategy": "Batch production",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Free output has ordinary resale; finite trigger.",
+      "inspiration": [
+        {
+          "id": "CHEMICAL_X",
+          "name": "Chemical X",
+          "url": "https://spire-codex.com/relics/CHEMICAL_X"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "X-cost effect magnitude:+2."
+    },
+    {
+      "id": "UGS-028",
+      "name": "Reserve Resonator",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Cloak Clasp's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, auto-install one ordinary Shield part worth 1 Shield per ordinary part in reserve, capped at 7. Grant nothing at zero. Installed parts do not count. Once per turn.",
+      "strategy": "Reserve defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Seven caps the payout, never inventory size.",
+      "inspiration": [
+        {
+          "id": "CLOAK_CLASP",
+          "name": "Cloak Clasp",
+          "url": "https://spire-codex.com/relics/CLOAK_CLASP"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn end:1 Block per card remaining in hand."
+    },
+    {
+      "id": "UGS-029",
+      "name": "Hazard Compensation Chip",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's compensated disruption benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first enemy application of each new debuff type to the player in a fight grants 1 maximum HP and heals 1 HP, up to three gains per fight. Extra stacks of a present type and self-applied penalties do not qualify.",
+      "strategy": "Compensated disruption",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Debuff identity and new application require clear tracking.",
+      "inspiration": [
+        {
+          "id": "DARKSTONE_PERIAPT",
+          "name": "Darkstone Periapt",
+          "url": "https://spire-codex.com/relics/DARKSTONE_PERIAPT"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Curse acquisition:max HP +6."
+    },
+    {
+      "id": "UGS-030",
+      "name": "Recoil Harness",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's multi-shot defence benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After each of the first three Fires per player turn, auto-install one ordinary 2-Shield part. Support hits are not Fires; later Fires remain allowed.",
+      "strategy": "Multi-shot defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Local payout limit prevents unlimited grants.",
+      "inspiration": [
+        {
+          "id": "DAUGHTER_OF_THE_WIND",
+          "name": "Daughter of the Wind",
+          "url": "https://spire-codex.com/relics/DAUGHTER_OF_THE_WIND"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Each Attack:Block1."
+    },
+    {
+      "id": "UGS-031",
+      "name": "Open Standard Decoder",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's recipe choice benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Each normal victory recipe offer gains a fourth option from the shared recipe pool, using its current rarity tier. You may still select only one recipe. Officer bonus offers are unchanged.",
+      "strategy": "Recipe choice",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Fourth option needs duplicate filtering.",
+      "inspiration": [
+        {
+          "id": "DINGY_RUG",
+          "name": "Dingy Rug",
+          "url": "https://spire-codex.com/relics/DINGY_RUG"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Colorless cards enter reward pool."
+    },
+    {
+      "id": "UGS-032",
+      "name": "Recipe Carbon Copier",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's duplicate key recipe benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition choose one stored recipe and add one exact ready copy. It needs a memory slot; exchange a different stored copy or decline if full. The upgrade remains owned either way.",
+      "strategy": "Duplicate key recipe",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Specific copy identity matters for other enhancements.",
+      "inspiration": [
+        {
+          "id": "DOLLYS_MIRROR",
+          "name": "Dolly's Mirror",
+          "url": "https://spire-codex.com/relics/DOLLYS_MIRROR"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:duplicate owned card."
+    },
+    {
+      "id": "UGS-033",
+      "name": "Dividend Biolattice",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's economy into survival benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the first core sale following each victory, gain 1 maximum HP and heal 1 HP. Each victory creates at most one entitlement; further individual sales cannot repeat it. Part sales do not qualify.",
+      "strategy": "Economy into survival",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Prevent split-sale growth farming.",
+      "inspiration": [
+        {
+          "id": "DRAGON_FRUIT",
+          "name": "Dragon Fruit",
+          "url": "https://spire-codex.com/relics/DRAGON_FRUIT"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Gold gain:max HP +1."
+    },
+    {
+      "id": "UGS-034",
+      "name": "Repair Manual Receiver",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's periodic reward choice benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every third victory since acquisition, add one shared Utility option to that fight's normal recipe reward. Keep one pick total. The counter carries between cities.",
+      "strategy": "Periodic reward choice",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No rest-site system needed.",
+      "inspiration": [
+        {
+          "id": "DREAM_CATCHER",
+          "name": "Dream Catcher",
+          "url": "https://spire-codex.com/relics/DREAM_CATCHER"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Resting:card-add opportunity."
+    },
+    {
+      "id": "UGS-035",
+      "name": "Temporary Overclock Firmware",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's limited offensive lease benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "For the next five fights, the first two valid main shots each fight gain +3 damage. Mark the item spent after the fifth fight; escape-only completion also consumes a fight charge.",
+      "strategy": "Limited offensive lease",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Bonus expires with its fight if unused.",
+      "inspiration": [
+        {
+          "id": "EMBER_TEA",
+          "name": "Ember Tea",
+          "url": "https://spire-codex.com/relics/EMBER_TEA"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Five combat openings:Strength2."
+    },
+    {
+      "id": "UGS-036",
+      "name": "Archive Recovery Index",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Eternal Feather's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After victory heal 1 HP per complete five stored recipe copies, up to 4 HP. Read memory before rewards. No healing after an escape-only fight or player defeat.",
+      "strategy": "Wide-memory sustain",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Extra capacity helps only up to this item's payout cap.",
+      "inspiration": [
+        {
+          "id": "ETERNAL_FEATHER",
+          "name": "Eternal Feather",
+          "url": "https://spire-codex.com/relics/ETERNAL_FEATHER"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Rest-site entry:heal3 for each complete group of5 deck cards."
+    },
+    {
+      "id": "UGS-037",
+      "name": "Arrival Flare",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Festive Popper's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After robot fight-opening setup, deal 4 direct damage to every living robot. This upgrade attack is not Fire; enemy damage reactions still apply and can harm the player.",
+      "strategy": "Opening area damage",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Opening recoil can be lethal; stop resolution on death.",
+      "inspiration": [
+        {
+          "id": "FESTIVE_POPPER",
+          "name": "Festive Popper",
+          "url": "https://spire-codex.com/relics/FESTIVE_POPPER"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening area damage:9."
+    },
+    {
+      "id": "UGS-038",
+      "name": "Sacrifice Inductor",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's sacrifice payoff benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first two explicit ordinary-part sacrifice events each player turn deal 3 direct damage to the living robot in the lowest occupied encounter slot. Firing, Shield depletion and sales are not sacrifices.",
+      "strategy": "Sacrifice payoff",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Count events, not copied secondary effects.",
+      "inspiration": [
+        {
+          "id": "FORGOTTEN_SOUL",
+          "name": "Forgotten Soul",
+          "url": "https://spire-codex.com/relics/FORGOTTEN_SOUL"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "Exhausted card:random damage1."
+    },
+    {
+      "id": "UGS-039",
+      "name": "Risky Calibration Kit",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's permanent recipe tuning benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition pay 8 HP, requiring at least 9, and choose one Ammo recipe copy and one Shield recipe copy in memory. Their first output gains +2 direct damage or +2 Shield respectively on each paid Use. Offer only if both types are stored.",
+      "strategy": "Permanent recipe tuning",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Enhancement stays with those copies and is lost if removed.",
+      "inspiration": [
+        {
+          "id": "FRAGRANT_MUSHROOM",
+          "name": "Fragrant Mushroom",
+          "url": "https://spire-codex.com/relics/FRAGRANT_MUSHROOM"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "recipes",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:HP loss15; two random upgrades."
+    },
+    {
+      "id": "UGS-040",
+      "name": "Shield Specification Scanner",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's reward-grown defence benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first Shield recipe accepted from each victory reward becomes Reinforced: its first output gains +2 Shield on every resource-paid Use. One tag per physical recipe copy; generated duplicates are not new qualifying acceptances.",
+      "strategy": "Reward-grown defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Track copy enhancements separately from recipe definition.",
+      "inspiration": [
+        {
+          "id": "FRESNEL_LENS",
+          "name": "Fresnel Lens",
+          "url": "https://spire-codex.com/relics/FRESNEL_LENS"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "New Block card:Nimble2."
+    },
+    {
+      "id": "UGS-041",
+      "name": "Utility Bench Compiler",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Frozen Egg's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Each new Utility recipe copy accepted from victory rewards gets a startup coupon: its first Copper-consuming Use each fight costs 1 less Copper. Other costs remain full. Applies only to copies accepted after acquisition.",
+      "strategy": "Utility economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Not a discount on all repeat Uses.",
+      "inspiration": [
+        {
+          "id": "FROZEN_EGG",
+          "name": "Frozen Egg",
+          "url": "https://spire-codex.com/relics/FROZEN_EGG"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "New Powers:upgraded."
+    },
+    {
+      "id": "UGS-042",
+      "name": "Haul Sorter",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Gambling Chip's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the first ordinary haul each fight, exchange up to three of its base-material units for the same number of different standard-material units of your choice. No exchange of steering or Precision bonuses. Confirm once.",
+      "strategy": "Opening flexibility",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No repeated reroll or increased haul size.",
+      "inspiration": [
+        {
+          "id": "GAMBLING_CHIP",
+          "name": "Gambling Chip",
+          "url": "https://spire-codex.com/relics/GAMBLING_CHIP"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening hand:selective discard/redraw."
+    },
+    {
+      "id": "UGS-043",
+      "name": "Utility Assembly Shuttle",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Game Piece's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn, after the third resource-paid Utility Use that turn, grant one fresh SH003 Powder Cap. Reused cooled copies count; free Uses and copied effects do not.",
+      "strategy": "Utility into ammo",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Full third Use costs precede grant.",
+      "inspiration": [
+        {
+          "id": "GAME_PIECE",
+          "name": "Game Piece",
+          "url": "https://spire-codex.com/relics/GAME_PIECE"
+        }
+      ],
+      "implementation_tags": [],
+      "status": "proposal",
+      "source_fact": "Power played:draw1."
+    },
+    {
+      "id": "UGS-044",
+      "name": "Starter Scrap Reclaimer",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's starter economy benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn after firing a bullet containing an SH001 Plain Slug, return 1 Iron. The slug is consumed normally; selling, sacrificing or loading alone do not qualify.",
+      "strategy": "Starter economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "One refund prevents a self-funding slug loop.",
+      "inspiration": [
+        {
+          "id": "GHOST_SEED",
+          "name": "Ghost Seed",
+          "url": "https://spire-codex.com/relics/GHOST_SEED"
+        }
+      ],
+      "implementation_tags": [],
+      "status": "proposal",
+      "source_fact": "Strikes/Defends:Ethereal."
+    },
+    {
+      "id": "UGS-045",
+      "name": "Training Gyroscope",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Girya's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Each Officer victory after acquisition grants one calibration level, capped at 3. At fight start queue twice that level as bonus damage for the first valid main shot. No retroactive levels.",
+      "strategy": "Progressive opener",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Slow acquisition payoff must stay visible.",
+      "inspiration": [
+        {
+          "id": "GIRYA",
+          "name": "Girya",
+          "url": "https://spire-codex.com/relics/GIRYA"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "fight_start",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Rest-site Strength training:three uses maximum."
+    },
+    {
+      "id": "UGS-046",
+      "name": "Precision Die Set",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's recipe specialization benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition select up to three Ammo recipe copies. Each chosen copy adds 1 direct damage to its first physical output on every paid Use. No effect on outputs without direct damage or later-generated recipe copies.",
+      "strategy": "Recipe specialization",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Persistent copy identity needed.",
+      "inspiration": [
+        {
+          "id": "GNARLED_HAMMER",
+          "name": "Gnarled Hammer",
+          "url": "https://spire-codex.com/relics/GNARLED_HAMMER"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:three Attacks gain Sharp3."
+    },
+    {
+      "id": "UGS-047",
+      "name": "Layered Undersuit",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Gorget's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn on player turns 1 and 2 each fight, auto-install an ordinary 3-Shield part. Each named turn grants once; protection and reset stay normal.",
+      "strategy": "Early defence schedule",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Separate fresh parts, never Shield retention.",
+      "inspiration": [
+        {
+          "id": "GORGET",
+          "name": "Gorget",
+          "url": "https://spire-codex.com/relics/GORGET"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Plating:4."
+    },
+    {
+      "id": "UGS-048",
+      "name": "Kill Recovery Servo",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Gremlin Horn's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the first robot killed during each player turn, grant 1 Iron and 1 Carbon if the player survives. Summoned robots qualify; later kills that turn grant nothing.",
+      "strategy": "Target sequencing",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Local allowance limits summon farming.",
+      "inspiration": [
+        {
+          "id": "GREMLIN_HORN",
+          "name": "Gremlin Horn",
+          "url": "https://spire-codex.com/relics/GREMLIN_HORN"
+        }
+      ],
+      "implementation_tags": [],
+      "status": "proposal",
+      "source_fact": "Enemy death:Energy1 plus draw1."
+    },
+    {
+      "id": "UGS-049",
+      "name": "Armor Breach Probe",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's break then follow up benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per player turn, after a player hit whose damage was actually reduced by a robot's Armor, apply Target Paint 2 to that surviving robot. The triggering hit receives no retroactive benefit. Hits reduced only by other effects do not qualify.",
+      "strategy": "Break then follow up",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Adapted to the current roster: Armor mitigation exists, while enemy Shield does not. Require an actual reduction and a surviving target.",
+      "inspiration": [
+        {
+          "id": "HAND_DRILL",
+          "name": "Hand Drill",
+          "url": "https://spire-codex.com/relics/HAND_DRILL"
+        }
+      ],
+      "implementation_tags": [
+        "shield"
+      ],
+      "status": "proposal",
+      "source_fact": "Enemy Block broken:Vulnerable2."
+    },
+    {
+      "id": "UGS-050",
+      "name": "Three-Cycle Hopper",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Happy Flower's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn starts 3, 6, 9 and so on, grant 1 Iron and 1 Copper before the haul. Reset the cycle each fight.",
+      "strategy": "Periodic supply",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Long fights may enable stockpiling, which remains allowed.",
+      "inspiration": [
+        {
+          "id": "HAPPY_FLOWER",
+          "name": "Happy Flower",
+          "url": "https://spire-codex.com/relics/HAPPY_FLOWER"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Every third turn:Energy1."
+    },
+    {
+      "id": "UGS-051",
+      "name": "Five-Cycle Recycler",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's slow steered supply benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the ordinary haul resolves on player turns 5, 10, 15 and so on, gain 1 additional unit of that haul's steered material. Reset the counter each fight. This grants a bonus material, not an extra haul.",
+      "strategy": "Slow steered supply",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Small delayed payoff should not be a trap reward.",
+      "inspiration": [
+        {
+          "id": "FAKE_HAPPY_FLOWER",
+          "name": "Happy Flower???",
+          "url": "https://spire-codex.com/relics/FAKE_HAPPY_FLOWER"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Every fifth turn:Energy1."
+    },
+    {
+      "id": "UGS-052",
+      "name": "Last Shot Recorder",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's alternating heavy shots benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At player-turn start, if a main shot fired last turn, queue bonus damage for the next main shot equal to one quarter of that last shot's damage before enemy mitigation, rounded down, capped at 8. Do not copy parts, statuses, support hits or other effects. Unused queued damage expires at End Turn.",
+      "strategy": "Alternating heavy shots",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Echo reads pre-mitigation final main damage only; capped to prevent self-escalation.",
+      "inspiration": [
+        {
+          "id": "HISTORY_COURSE",
+          "name": "History Course",
+          "url": "https://spire-codex.com/relics/HISTORY_COURSE"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn opening:copy last Attack or Skill."
+    },
+    {
+      "id": "UGS-053",
+      "name": "Second Cycle Shutter",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Horn Cleat's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn start 2 each fight, auto-install one ordinary 10-Shield part. It remains removable and saveable before protection is used.",
+      "strategy": "Scheduled protection",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Compare with early burst versus late defence.",
+      "inspiration": [
+        {
+          "id": "HORN_CLEAT",
+          "name": "Horn Cleat",
+          "url": "https://spire-codex.com/relics/HORN_CLEAT"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn2 Block:14."
+    },
+    {
+      "id": "UGS-054",
+      "name": "Interfight Freight Seal",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Ice Cream's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "After victory, choose up to four unused raw-material units to preserve into the next fight. Other materials and all unused parts still clear normally. Preserved units are delivered at next fight entry before fresh opening grants; no carry after escape-only completion.",
+      "strategy": "Resource continuity",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit exception to fight-end material clearing; pending cargo must save deterministically.",
+      "inspiration": [
+        {
+          "id": "ICE_CREAM",
+          "name": "Ice Cream",
+          "url": "https://spire-codex.com/relics/ICE_CREAM"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "fight_start",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Energy persists between turns."
+    },
+    {
+      "id": "UGS-055",
+      "name": "Heavy Press Brace",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Intimidating Helmet's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first two recipe Uses each turn that actually pay at least 5 material units each auto-install one ordinary 3-Shield part after resolving. HP, Heat and Charge do not count as materials.",
+      "strategy": "Expensive crafting protection",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Discounts alter qualification because actual payment counts.",
+      "inspiration": [
+        {
+          "id": "INTIMIDATING_HELMET",
+          "name": "Intimidating Helmet",
+          "url": "https://spire-codex.com/relics/INTIMIDATING_HELMET"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "resources",
+        "recipes",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Cost2+ card:Block4."
+    },
+    {
+      "id": "UGS-056",
+      "name": "Scrap Cycle Counter",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Joss Paper's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every third explicit ordinary-part sacrifice in a fight, grant 1 Glass. Count individual sacrificed parts, not firing, sales or Shield depletion. Reset the counter each fight.",
+      "strategy": "Sacrifice recycling",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "A recipe sacrificing several parts advances several counts once each.",
+      "inspiration": [
+        {
+          "id": "JOSS_PAPER",
+          "name": "Joss Paper",
+          "url": "https://spire-codex.com/relics/JOSS_PAPER"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "Every fifth exhaust:draw1."
+    },
+    {
+      "id": "UGS-057",
+      "name": "Safe Signal Survey",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Juzu Bracelet's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "During route generation after acquisition, replace a Mystery outcome that would secretly become a Regular fight with a noncombat Mystery outcome from that city's eligible pool. Officer, boss and visibly offered fights are unchanged.",
+      "strategy": "Predictable exploration",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Needs authored noncombat replacement outcomes; no retrospective route rewrite.",
+      "inspiration": [
+        {
+          "id": "JUZU_BRACELET",
+          "name": "Juzu Bracelet",
+          "url": "https://spire-codex.com/relics/JUZU_BRACELET"
+        }
+      ],
+      "implementation_tags": [
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Mystery rooms exclude normal fights."
+    },
+    {
+      "id": "UGS-058",
+      "name": "Claw Dwell Stabilizer",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's claw reliability benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Widen the successful region of the optional Precision timing marker by 20% of its original width, centered on the same point and clamped to the marker track. Attempts and material payout stay unchanged.",
+      "strategy": "Claw reliability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Measures timing width, never fractional damage; success rate requires testing.",
+      "inspiration": [
+        {
+          "id": "KIFUDA",
+          "name": "Kifuda",
+          "url": "https://spire-codex.com/relics/KIFUDA"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:up to three cards gain Adroit."
+    },
+    {
+      "id": "UGS-059",
+      "name": "Defensive Rhythm Servo",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Kunai's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn after the third Fire, gain one brace level for the fight. Every later resource-paid Shield recipe's first physical output gains Shield equal to brace level, capped at +4. The triggering turn's future production qualifies.",
+      "strategy": "Sustained multi-shot defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Level cap limits only bonus; later Fires stay legal.",
+      "inspiration": [
+        {
+          "id": "KUNAI",
+          "name": "Kunai",
+          "url": "https://spire-codex.com/relics/KUNAI"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Three Attacks in a turn:Dexterity1."
+    },
+    {
+      "id": "UGS-060",
+      "name": "Crossfire Tripod",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Kusarigama's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn after the third Fire, deal 5 direct damage to a living robot other than that Fire's main target, choosing the lowest encounter slot. If none exists, target the main target if still alive. It is a separate upgrade hit.",
+      "strategy": "Multiple-target sequencing",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Reaction damage is separate and may trigger recoil.",
+      "inspiration": [
+        {
+          "id": "KUSARIGAMA",
+          "name": "Kusarigama",
+          "url": "https://spire-codex.com/relics/KUSARIGAMA"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Three Attacks in a turn:random damage6."
+    },
+    {
+      "id": "UGS-061",
+      "name": "Opening Hopper Extension",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Lantern's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first ordinary haul each fight gains 1 additional unit of its steered material, after the ordinary haul composition is determined. This is not an extra Precision attempt.",
+      "strategy": "Opening resources",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Preview source of the extra unit.",
+      "inspiration": [
+        {
+          "id": "LANTERN",
+          "name": "Lantern",
+          "url": "https://spire-codex.com/relics/LANTERN"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Energy:1."
+    },
+    {
+      "id": "UGS-062",
+      "name": "Pattern Subscription",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Lasting Candy's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Every second victory since acquisition adds a shared Modifier recipe as a fourth option to the normal recipe offer. Keep one selection total; counter persists across cities.",
+      "strategy": "Build discovery",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Modifier availability must exist at that reward tier.",
+      "inspiration": [
+        {
+          "id": "LASTING_CANDY",
+          "name": "Lasting Candy",
+          "url": "https://spire-codex.com/relics/LASTING_CANDY"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Every other combat reward:extra Power option."
+    },
+    {
+      "id": "UGS-063",
+      "name": "Flawless Workshop Sensor",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's perfect-fight reward benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "After a victory in which the player lost no HP from any source, the chosen normal recipe reward gains one discount tag: its first Use each fight saves 1 unit of its most numerous material cost. Break ties Iron, Copper, Carbon, Glass, Circuit; minimum zero. No tag stacking on a copy.",
+      "strategy": "Perfect-fight reward",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Self-paid HP disqualifies; tag belongs to accepted copy.",
+      "inspiration": [
+        {
+          "id": "LAVA_LAMP",
+          "name": "Lava Lamp",
+          "url": "https://spire-codex.com/relics/LAVA_LAMP"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Damage-free fight:card rewards upgraded."
+    },
+    {
+      "id": "UGS-064",
+      "name": "Medical Chassis Install",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's immediate survivability benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 14 maximum HP and heal exactly 14 HP, capped normally. No additional heal trigger or full-heal shop service is added.",
+      "strategy": "Immediate survivability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Must stay within selected max-HP-plus-equal-heal purchase rule.",
+      "inspiration": [
+        {
+          "id": "LEES_WAFFLE",
+          "name": "Lee's Waffle",
+          "url": "https://spire-codex.com/relics/LEES_WAFFLE"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP7; full healing."
+    },
+    {
+      "id": "UGS-065",
+      "name": "Field Dressing Dispenser",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's delayed finite healing benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At the end of the next fight won after acquisition, heal 10 HP if alive, then mark this permanent item spent. No heal if all enemies escaped with zero kills.",
+      "strategy": "Delayed finite healing",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Do not sell it as a direct shop healing service.",
+      "inspiration": [
+        {
+          "id": "FAKE_LEES_WAFFLE",
+          "name": "Lee's Waffle???",
+          "url": "https://spire-codex.com/relics/FAKE_LEES_WAFFLE"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:healing stated as10% of HP; snapshot text does not specify current versus maximum in this field."
+    },
+    {
+      "id": "UGS-066",
+      "name": "Utility Arc Fork",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Letter Opener's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn after the third resource-paid Utility Use, deal 3 direct damage to every living robot. No extra Use is created. Copied effects and zero-material Uses do not count.",
+      "strategy": "Utility offence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Area reactions can be lethal; resolve in encounter order.",
+      "inspiration": [
+        {
+          "id": "LETTER_OPENER",
+          "name": "Letter Opener",
+          "url": "https://spire-codex.com/relics/LETTER_OPENER"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Three Skills in a turn:area damage5."
+    },
+    {
+      "id": "UGS-067",
+      "name": "Reserve Heart Pump",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Lizard Tail's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per campaign, when enemy-caused HP loss would kill the player, cancel that death and set current HP to one quarter of maximum HP, rounded down, minimum 1. Consume the pump. Remaining hits continue normally; self-paid HP costs remain nonlethal as usual.",
+      "strategy": "One recovery chance",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit defeat exception; can still die to later hits in the same attack.",
+      "inspiration": [
+        {
+          "id": "LIZARD_TAIL",
+          "name": "Lizard Tail",
+          "url": "https://spire-codex.com/relics/LIZARD_TAIL"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Lethal HP loss:one recovery to50% max HP."
+    },
+    {
+      "id": "UGS-068",
+      "name": "Auxiliary Discharge Loop",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's modifier build payoff benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn after using a recipe that produces a Modifier part, deal 4 direct damage to every living robot. Count Use only, not installing or unloading that part; copies do not qualify.",
+      "strategy": "Modifier build payoff",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Damage at craft time must be shown before committing costs.",
+      "inspiration": [
+        {
+          "id": "LOST_WISP",
+          "name": "Lost Wisp",
+          "url": "https://spire-codex.com/relics/LOST_WISP"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Power played:area damage8."
+    },
+    {
+      "id": "UGS-069",
+      "name": "Blueprint Filing Reward",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Lucky Fysh's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After accepting a new recipe from a victory reward, gain 6 Credits. Once per reward screen; generated copies, purchases and viewing do not qualify.",
+      "strategy": "Recipe economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No resale/repurchase farming.",
+      "inspiration": [
+        {
+          "id": "LUCKY_FYSH",
+          "name": "Lucky Fysh",
+          "url": "https://spire-codex.com/relics/LUCKY_FYSH"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Deck addition:Gold15."
+    },
+    {
+      "id": "UGS-070",
+      "name": "Adaptive Life Frame",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Mango's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 12 maximum HP and heal 12 HP. At the start of each boss fight, also gain 1 maximum HP and heal 1 HP. Only one growth per boss entry.",
+      "strategy": "Long-run durability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Boss reload restores pre-grant state; no growth farming.",
+      "inspiration": [
+        {
+          "id": "MANGO",
+          "name": "Mango",
+          "url": "https://spire-codex.com/relics/MANGO"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP14."
+    },
+    {
+      "id": "UGS-071",
+      "name": "Lightweight Rib Cage",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's small durable protection benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 4 maximum HP and heal 4 HP. The first enemy attack hit each fight also deals 1 less damage before Shield, minimum zero.",
+      "strategy": "Small durable protection",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "One mitigation event per fight, not every separate damage source.",
+      "inspiration": [
+        {
+          "id": "FAKE_MANGO",
+          "name": "Mango???",
+          "url": "https://spire-codex.com/relics/FAKE_MANGO"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP3."
+    },
+    {
+      "id": "UGS-072",
+      "name": "Unspent Credit Escrow",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's save or invest benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After each victory, gain 10 Credits until you first buy any shop item after acquisition. That first purchase permanently disables future payouts; existing Credits remain.",
+      "strategy": "Save or invest",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Purchase confirmation should preview loss of the engine.",
+      "inspiration": [
+        {
+          "id": "MAW_BANK",
+          "name": "Maw Bank",
+          "url": "https://spire-codex.com/relics/MAW_BANK"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Floor progress:Gold12 until first shop spend."
+    },
+    {
+      "id": "UGS-073",
+      "name": "Purchase Warranty Nanites",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Meal Ticket's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the first purchase made following each victory, heal 3 HP. Each completed fight creates at most one entitlement; reopening the shop or splitting purchases cannot add healing. This item itself is not shop-sold.",
+      "strategy": "Economy sustain",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No direct healing service; repeated tiny purchases do not farm heals.",
+      "inspiration": [
+        {
+          "id": "MEAL_TICKET",
+          "name": "Meal Ticket",
+          "url": "https://spire-codex.com/relics/MEAL_TICKET"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Shop entry:heal15."
+    },
+    {
+      "id": "UGS-074",
+      "name": "Critical Repair Trigger",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Meat on the Bone's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After victory, if current HP is at or below half maximum HP, heal 8 HP. Check before applying this item's heal, with integer comparison 2×HP ≤ max HP.",
+      "strategy": "Low-health recovery",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Only victory; effects ordering with other heals must be stable.",
+      "inspiration": [
+        {
+          "id": "MEAT_ON_THE_BONE",
+          "name": "Meat on the Bone",
+          "url": "https://spire-codex.com/relics/MEAT_ON_THE_BONE"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Fight end at half HP or less:heal12."
+    },
+    {
+      "id": "UGS-075",
+      "name": "Vendor Access Badge",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's shop economy benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Reduce listed Credit prices of shop materials, recipes and upgrades by 20%, rounding each price down once, minimum 1 Credit. Core and part sale prices are unaffected. It does not discount its own purchase.",
+      "strategy": "Shop economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Credit economy needs later simulation.",
+      "inspiration": [
+        {
+          "id": "MEMBERSHIP_CARD",
+          "name": "Membership Card",
+          "url": "https://spire-codex.com/relics/MEMBERSHIP_CARD"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "All shop products:50% discount."
+    },
+    {
+      "id": "UGS-076",
+      "name": "Pulse Clock Emitter",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Mercury Hourglass's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn starts 2 onward, deal 2 direct damage to every living robot after beginning-of-turn grants. This is upgrade damage, not Fire, and can provoke enemy reactions.",
+      "strategy": "Slow area pressure",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Repeated passive damage may favor stall builds.",
+      "inspiration": [
+        {
+          "id": "MERCURY_HOURGLASS",
+          "name": "Mercury Hourglass",
+          "url": "https://spire-codex.com/relics/MERCURY_HOURGLASS"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Each turn opening:area damage3."
+    },
+    {
+      "id": "UGS-077",
+      "name": "First-Part Ballistic Jig",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Miniature Cannon's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn, when firing a bullet containing at least one part saved from an earlier round, add +3 damage to the main shot. Fresh parts can share that bullet; support hits receive no bonus.",
+      "strategy": "Saved-part attack",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Age belongs to physical part, not recipe.",
+      "inspiration": [
+        {
+          "id": "MINIATURE_CANNON",
+          "name": "Miniature Cannon",
+          "url": "https://spire-codex.com/relics/MINIATURE_CANNON"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Upgraded Attacks:damage +3."
+    },
+    {
+      "id": "UGS-078",
+      "name": "Second Precision Coupler",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's claw opportunity benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Each fight allows one additional optional Precision attempt, for two total before other explicit upgrades. Each attempt follows ordinary collection rules and is spent on success or failure. This item adds no ordinary haul and does not restrict explicit retry effects granted by other items.",
+      "strategy": "Claw opportunity",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit attempt-limit exception, no extra ordinary haul.",
+      "inspiration": [
+        {
+          "id": "MINIATURE_TENT",
+          "name": "Miniature Tent",
+          "url": "https://spire-codex.com/relics/MINIATURE_TENT"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Rest sites:multiple choices allowed."
+    },
+    {
+      "id": "MY1-01",
+      "name": "Feed Press",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Molten Egg's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, the first Ammo recipe producing a direct-damage part adds 2 damage to its first output. The added value stays on that physical part until used; other batch outputs gain nothing.",
+      "strategy": "Efficient ammunition",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Output bonus does not change canonical sale price.",
+      "inspiration": [
+        {
+          "id": "MOLTEN_EGG",
+          "name": "Molten Egg",
+          "url": "https://spire-codex.com/relics/MOLTEN_EGG"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "New Attacks:upgraded."
+    },
+    {
+      "id": "UGS-080",
+      "name": "Escalating Pulse Coil",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's escalating pressure benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At player-turn start, deal direct damage equal to the turn number, capped at 6, to the living robot with greatest current HP. Break ties by encounter slot. This is upgrade damage, not Fire.",
+      "strategy": "Escalating pressure",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Cap limits the emitter, not turn count or normal damage.",
+      "inspiration": [
+        {
+          "id": "MR_STRUGGLES",
+          "name": "Mr. Struggles",
+          "url": "https://spire-codex.com/relics/MR_STRUGGLES"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "health",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn opening:area damage equal to turn number."
+    },
+    {
+      "id": "MY2-01",
+      "name": "Coolant Recirculator",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Mummified Hand's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per player turn, after a Utility Use actually removes at least one cooldown counter, gain 1 Copper. Pay full costs first; globally clearing several recipes still grants only 1 Copper. This is a fresh grant even if no Copper was paid. No-cooldown uses are not refreshed.",
+      "strategy": "Cooling economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "One recovery prevents refund loops.",
+      "inspiration": [
+        {
+          "id": "MUMMIFIED_HAND",
+          "name": "Mummified Hand",
+          "url": "https://spire-codex.com/relics/MUMMIFIED_HAND"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Power played:random held card becomes free for that turn."
+    },
+    {
+      "id": "UGS-082",
+      "name": "Etched Barrel Socket",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's rare-part combination benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn, when a bullet includes parts from at least two different Rare or Legendary recipes, add +6 damage to its main shot. Rarity is the source recipe's rarity; support hits receive no bonus.",
+      "strategy": "Rare-part combination",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Generated parts keep their source recipe identity.",
+      "inspiration": [
+        {
+          "id": "MYSTIC_LIGHTER",
+          "name": "Mystic Lighter",
+          "url": "https://spire-codex.com/relics/MYSTIC_LIGHTER"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Enchanted Attacks:damage +9."
+    },
+    {
+      "id": "UGS-083",
+      "name": "Five-Shot Recuperator",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Nunchaku's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every fifth Fire within a fight, return 1 Copper. Track actual Fires, reset the counter each fight, and do not count support hits. Later Fires remain resource-limited normally.",
+      "strategy": "Sustained firing economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Small-part splitting may be efficient by design.",
+      "inspiration": [
+        {
+          "id": "NUNCHAKU",
+          "name": "Nunchaku",
+          "url": "https://spire-codex.com/relics/NUNCHAKU"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Every tenth Attack:Energy1."
+    },
+    {
+      "id": "MY2-02",
+      "name": "Plate Binder",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Oddly Smooth Stone's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once each player turn, the first Shield recipe producing a Shield-granting part adds 3 Shield to its first output. The extra value stays on the part if saved. While installed, the part protects automatically and follows normal depletion and reset.",
+      "strategy": "Defensive manufacture",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "No activation at End Turn or repeated grant on reinstall.",
+      "inspiration": [
+        {
+          "id": "ODDLY_SMOOTH_STONE",
+          "name": "Oddly Smooth Stone",
+          "url": "https://spire-codex.com/relics/ODDLY_SMOOTH_STONE"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Dexterity:1."
+    },
+    {
+      "id": "UGS-085",
+      "name": "Civic Credit Bond",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Old Coin's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 100 Credits once. Buying this upgrade is permitted only if its undiscounted shop price exceeds 100 Credits; its final discounted price may fall below 100 as an earned combo.",
+      "strategy": "Immediate capital",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Finite once-per-campaign purchase; pricing check must be explicit.",
+      "inspiration": [
+        {
+          "id": "OLD_COIN",
+          "name": "Old Coin",
+          "url": "https://spire-codex.com/relics/OLD_COIN"
+        }
+      ],
+      "implementation_tags": [
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:Gold300."
+    },
+    {
+      "id": "UGS-086",
+      "name": "Vacant Shield Projector",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Orichalcum's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, if total remaining protection from installed Shield parts and active Shield is zero, auto-install one ordinary 5-Shield part. Once per turn; an empty printed part cannot retrigger it.",
+      "strategy": "Defensive fallback",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Check remaining protection, not installed part count.",
+      "inspiration": [
+        {
+          "id": "ORICHALCUM",
+          "name": "Orichalcum",
+          "url": "https://spire-codex.com/relics/ORICHALCUM"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "No Block at turn end:Block6."
+    },
+    {
+      "id": "UGS-087",
+      "name": "Thin-Film Projector",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's waiting defence benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, if no Fire happened and total remaining Shield is zero, auto-install one ordinary 4-Shield part. Once per turn.",
+      "strategy": "Waiting defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Distinct from unrestricted fallback, supports saving.",
+      "inspiration": [
+        {
+          "id": "FAKE_ORICHALCUM",
+          "name": "Orichalcum???",
+          "url": "https://spire-codex.com/relics/FAKE_ORICHALCUM"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "No Block at turn end:Block3."
+    },
+    {
+      "id": "UGS-088",
+      "name": "Burst-Brace Fan",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Ornamental Fan's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn after the second Fire, auto-install one ordinary 4-Shield part. It can protect later enemy reactions; it does not protect retroactively against that Fire's completed reactions.",
+      "strategy": "Shoot then defend",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Damage/recoil order must be clear.",
+      "inspiration": [
+        {
+          "id": "ORNAMENTAL_FAN",
+          "name": "Ornamental Fan",
+          "url": "https://spire-codex.com/relics/ORNAMENTAL_FAN"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Three Attacks in a turn:Block4."
+    },
+    {
+      "id": "UGS-089",
+      "name": "Pattern Library Capsule",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's immediate recipe breadth benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition, show three consecutive ordinary recipe offers of three options each, accepting zero or one per offer. Handle memory exchanges normally; these are acquisition offers, not victory rewards for other item triggers.",
+      "strategy": "Immediate recipe breadth",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Generated reward screens must not masquerade as fight rewards.",
+      "inspiration": [
+        {
+          "id": "ORRERY",
+          "name": "Orrery",
+          "url": "https://spire-codex.com/relics/ORRERY"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:five card rewards."
+    },
+    {
+      "id": "UGS-090",
+      "name": "Boss Entry Triage Unit",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Pantograph's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At boss fight start, heal 12 HP once, capped at maximum HP. No heal at regular or Officer fight entry.",
+      "strategy": "Boss preparation",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit healing exception; restart cannot repeat it.",
+      "inspiration": [
+        {
+          "id": "PANTOGRAPH",
+          "name": "Pantograph",
+          "url": "https://spire-codex.com/relics/PANTOGRAPH"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "fight_start",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Boss opening:heal25."
+    },
+    {
+      "id": "UGS-091",
+      "name": "Shield Pressure Nozzle",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Parrying Shield's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn, if at least 10 Shield remains, deal 5 direct damage to the living robot with lowest current HP, ties by slot. Do not spend Shield. Once per turn, before enemy actions.",
+      "strategy": "Offence through defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Counts remaining Shield once; reactions may follow.",
+      "inspiration": [
+        {
+          "id": "PARRYING_SHIELD",
+          "name": "Parrying Shield",
+          "url": "https://spire-codex.com/relics/PARRYING_SHIELD"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "health",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn ending with10+ Block:random damage6."
+    },
+    {
+      "id": "MY1-02",
+      "name": "Impact Liner",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Pear's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 10 maximum HP and heal 10 current HP. No further healing trigger.",
+      "strategy": "Immediate durability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Equal max-HP and healing increase only.",
+      "inspiration": [
+        {
+          "id": "PEAR",
+          "name": "Pear",
+          "url": "https://spire-codex.com/relics/PEAR"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP10."
+    },
+    {
+      "id": "UGS-093",
+      "name": "Indexed Firing Cam",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Pen Nib's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Every fifth Fire in a fight adds +8 damage to that main shot before other percentage modifiers. Count confirmed valid Fires, not loaded bullets or support hits; reset at fight entry.",
+      "strategy": "Planned burst",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Counter visibility matters; fixed bonus avoids uncapped multiplier cascades.",
+      "inspiration": [
+        {
+          "id": "PEN_NIB",
+          "name": "Pen Nib",
+          "url": "https://spire-codex.com/relics/PEN_NIB"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Every tenth Attack:double damage."
+    },
+    {
+      "id": "UGS-094",
+      "name": "Three-Cycle Archive Port",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Pendulum's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn starts 3, 6, 9 and so on, remove 1 cooldown counter from the stored recipe copy with the most counters. Ties use memory slot order. No effect if all are ready.",
+      "strategy": "Periodic reuse",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "This item explicitly targets one copy, unlike Utility global cooling.",
+      "inspiration": [
+        {
+          "id": "PENDULUM",
+          "name": "Pendulum",
+          "url": "https://spire-codex.com/relics/PENDULUM"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Every third turn:draw1."
+    },
+    {
+      "id": "UGS-095",
+      "name": "First-Modifier Insulation",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Permafrost's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight, after the first resource-paid Modifier recipe Use, auto-install one ordinary 7-Shield part. Copying or installing an existing part does not qualify.",
+      "strategy": "Modifier opening defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Trigger follows Use, never part installation.",
+      "inspiration": [
+        {
+          "id": "PERMAFROST",
+          "name": "Permafrost",
+          "url": "https://spire-codex.com/relics/PERMAFROST"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "First Power per combat:Block7."
+    },
+    {
+      "id": "UGS-096",
+      "name": "Precision Training Cursor",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Petrified Toad's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first failed Precision attempt each fight grants 1 bonus material unit of that haul's steered type. The attempt remains spent and ordinary haul materials stay unchanged. This is a bonus grant, not a refund.",
+      "strategy": "Claw failure cushion",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Failure cannot outperform success after bonus tuning.",
+      "inspiration": [
+        {
+          "id": "PETRIFIED_TOAD",
+          "name": "Petrified Toad",
+          "url": "https://spire-codex.com/relics/PETRIFIED_TOAD"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Combat opening:one Potion-Shaped Rock."
+    },
+    {
+      "id": "UGS-097",
+      "name": "Mystery Route Medsensor",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Planisphere's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After completing a noncombat Mystery encounter, heal 3 HP once. A Mystery that became a fight does not qualify.",
+      "strategy": "Exploration sustain",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Needs encounter completion identity, not page visits.",
+      "inspiration": [
+        {
+          "id": "PLANISPHERE",
+          "name": "Planisphere",
+          "url": "https://spire-codex.com/relics/PLANISPHERE"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Mystery entry:heal5."
+    },
+    {
+      "id": "MY2-03",
+      "name": "Archive Rack",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Pocketwatch's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Increase recipe memory capacity by 4. At player-turn start 3 of each fight, grant one fresh SH003 Powder Cap, initially 3 damage. No grant if the fight ends earlier. Capacity grants no recipes by itself.",
+      "strategy": "Flexible memory",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Capacity and later part are separate benefits.",
+      "inspiration": [
+        {
+          "id": "POCKETWATCH",
+          "name": "Pocketwatch",
+          "url": "https://spire-codex.com/relics/POCKETWATCH"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes",
+        "turn_boundary",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn with≤3 cards played:next-turn draw3."
+    },
+    {
+      "id": "UGS-099",
+      "name": "Four-Cycle Logistics Card",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's flexible delayed supplies benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn starts 4, 8, 12 and so on, choose 2 Iron or 2 Glass to receive before the haul. Reset the cycle per fight.",
+      "strategy": "Flexible delayed supplies",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Choice needs quick UI and no hidden randomness.",
+      "inspiration": [
+        {
+          "id": "POLLINOUS_CORE",
+          "name": "Pollinous Core",
+          "url": "https://spire-codex.com/relics/POLLINOUS_CORE"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Every fourth turn:draw2."
+    },
+    {
+      "id": "UGS-100",
+      "name": "Utility Memory Socket",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Potion Belt's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Add two memory slots that accept only Utility recipe copies. Existing general slots remain unrestricted; moving a copy between slots is permitted only outside fights. Slots start empty.",
+      "strategy": "Utility build breadth",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Requires typed additional slots; does not permit midfight recipe swaps.",
+      "inspiration": [
+        {
+          "id": "POTION_BELT",
+          "name": "Potion Belt",
+          "url": "https://spire-codex.com/relics/POTION_BELT"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:potion slots +2."
+    },
+    {
+      "id": "UGS-101",
+      "name": "Expanded Salvage Dossier",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Prayer Wheel's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After a Regular victory, show a second independent normal recipe offer after the first. Accept zero or one from each and handle memory exchanges normally. Officer and boss rewards are unchanged.",
+      "strategy": "More recipe choices",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Two reward screens can trigger other reward items; screen and fight counters differ.",
+      "inspiration": [
+        {
+          "id": "PRAYER_WHEEL",
+          "name": "Prayer Wheel",
+          "url": "https://spire-codex.com/relics/PRAYER_WHEEL"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Normal enemies:extra card reward."
+    },
+    {
+      "id": "UGS-102",
+      "name": "Momentum Rifle Mount",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's repeated signature recipe benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition select one stored Ammo recipe copy. Each consecutive player turn in which its produced part appears in a fired bullet grants that turn's first qualifying main shot +2, +4, then +6 damage. Missing a turn resets the sequence; cap +6 and reset each fight.",
+      "strategy": "Repeated signature recipe",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Physical outputs retain source-copy identity; no bonus on multiple shots that turn.",
+      "inspiration": [
+        {
+          "id": "PUNCH_DAGGER",
+          "name": "Punch Dagger",
+          "url": "https://spire-codex.com/relics/PUNCH_DAGGER"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:one Attack gains Momentum5."
+    },
+    {
+      "id": "UGS-103",
+      "name": "Mixed Production Bus",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Rainbow Ring's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn after paying for an Ammo, Shield and Utility recipe Use in any order, grant 1 Iron and auto-install a 3-Shield part. Each category must come from a separate Use; one batch cannot fill two categories.",
+      "strategy": "Mixed crafting",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Paid category tracking must be visible.",
+      "inspiration": [
+        {
+          "id": "RAINBOW_RING",
+          "name": "Rainbow Ring",
+          "url": "https://spire-codex.com/relics/RAINBOW_RING"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Attack+Skill+Power in turn:Strength1 and Dexterity1."
+    },
+    {
+      "id": "UGS-104",
+      "name": "Adaptive Tool Teeth",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Razor Tooth's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "After each resource-paid Use of a stored Ammo or Shield recipe copy, enhance that same copy's future first outputs this fight by +1 direct damage or +1 Shield respectively, up to +3. The current output is not enhanced by its own Use. Reset enhancements each fight.",
+      "strategy": "Repeated recipe scaling",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Save copy-specific fight state; duplicates progress independently.",
+      "inspiration": [
+        {
+          "id": "RAZOR_TOOTH",
+          "name": "Razor Tooth",
+          "url": "https://spire-codex.com/relics/RAZOR_TOOTH"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Attack/Skill played:that card upgraded for combat."
+    },
+    {
+      "id": "UGS-105",
+      "name": "Threat Damping Mask",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Red Mask's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start apply Weaken 1 to every living robot. It subtracts 1 from each attack hit and follows ordinary enemy-phase decay.",
+      "strategy": "Opening damage reduction",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Uses selected flat Weaken, not STS percentage Weak.",
+      "inspiration": [
+        {
+          "id": "RED_MASK",
+          "name": "Red Mask",
+          "url": "https://spire-codex.com/relics/RED_MASK"
+        }
+      ],
+      "implementation_tags": [
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Weak1:all enemies."
+    },
+    {
+      "id": "UGS-106",
+      "name": "Restorative Filter",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Regal Pillow's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight, the first recipe effect that actually heals player HP heals 3 additional HP, capped normally. It does not improve Bolt repair, maximum-HP gains or other upgrades' healing.",
+      "strategy": "Healing recipe support",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Requires actual healing; overheal-only effects do not spend trigger.",
+      "inspiration": [
+        {
+          "id": "REGAL_PILLOW",
+          "name": "Regal Pillow",
+          "url": "https://spire-codex.com/relics/REGAL_PILLOW"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Rest healing:+15."
+    },
+    {
+      "id": "UGS-107",
+      "name": "Utility Aim Converter",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Reptile Trinket's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn after a resource-paid Utility Use, queue +3 damage for the next valid main shot this turn. Further Uses cannot stack this item's bonus; unused bonus expires at End Turn.",
+      "strategy": "Utility into attack",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "One queue per turn; no stored Utility item.",
+      "inspiration": [
+        {
+          "id": "REPTILE_TRINKET",
+          "name": "Reptile Trinket",
+          "url": "https://spire-codex.com/relics/REPTILE_TRINKET"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Potion use:temporary Strength3."
+    },
+    {
+      "id": "UGS-108",
+      "name": "Loaded Memory Harness",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's assembly continuity benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight at the first End Turn with an unfired loaded bullet, keep that assembly loaded into the next player turn instead of unloading it. Its parts remain unused and unavailable for sale until unloaded; other expiring bonuses still expire.",
+      "strategy": "Assembly continuity",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit exception to End Turn unload; must not fire automatically.",
+      "inspiration": [
+        {
+          "id": "RINGING_TRIANGLE",
+          "name": "Ringing Triangle",
+          "url": "https://spire-codex.com/relics/RINGING_TRIANGLE"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "First-turn hand retention."
+    },
+    {
+      "id": "UGS-109",
+      "name": "Quiet Cycle Screen",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Ripple Basin's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At End Turn with no Fire this turn, auto-install one ordinary 4-Shield part. Once per turn; parts can subsequently protect against the approaching enemy attacks normally.",
+      "strategy": "Save and defend",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "May combine with other waiting engines; not automatic healing.",
+      "inspiration": [
+        {
+          "id": "RIPPLE_BASIN",
+          "name": "Ripple Basin",
+          "url": "https://spire-codex.com/relics/RIPPLE_BASIN"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Attack-free turn:Block4."
+    },
+    {
+      "id": "UGS-110",
+      "name": "Volatile Freight Adapter",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's supply for danger benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At each player-turn start grant 2 Carbon. At fight start apply an explicit +1 damage-per-hit bonus to every robot's attacks for that fight. This bonus is enemy damage and can kill the player. No change to enemy recoil or status ticks.",
+      "strategy": "Supply for danger",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Tradeoff hurts especially against multi-hit enemies; show it in intent.",
+      "inspiration": [
+        {
+          "id": "ROYAL_POISON",
+          "name": "Royal Poison",
+          "url": "https://spire-codex.com/relics/ROYAL_POISON"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "fight_start",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Combat opening:self HP loss4."
+    },
+    {
+      "id": "UGS-111",
+      "name": "Authorized Pattern Seal",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's signature recipe reuse benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "On acquisition choose one no-cooldown recipe copy in memory. That copy allows two paid Uses per player turn instead of one for the campaign. Its other costs and restrictions remain intact; later copies are unmodified.",
+      "strategy": "Signature recipe reuse",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit extra-use exception; copy removal loses the seal.",
+      "inspiration": [
+        {
+          "id": "ROYAL_STAMP",
+          "name": "Royal Stamp",
+          "url": "https://spire-codex.com/relics/ROYAL_STAMP"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:Attack/Skill gains Royally Approved."
+    },
+    {
+      "id": "UGS-112",
+      "name": "Empty-Bay Shock Emitter",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's spend-out payoff benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At End Turn with no ordinary parts in reserve and no loaded bullet, deal 8 direct damage to every living robot. Installed Shield parts are allowed. Once per turn, before enemy actions.",
+      "strategy": "Spend-out payoff",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Avoid incentivizing meaningless reserve shuffling; reactions still occur.",
+      "inspiration": [
+        {
+          "id": "SCREAMING_FLAGON",
+          "name": "Screaming Flagon",
+          "url": "https://spire-codex.com/relics/SCREAMING_FLAGON"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Empty hand at turn end:area damage20."
+    },
+    {
+      "id": "UGS-113",
+      "name": "Subsurface Survey Drill",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Shovel's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per city after a noncombat Mystery completion, choose one of three eligible unowned Common upgrades instead of that Mystery's normal Credit reward. Declining keeps the normal reward. If there are no eligible upgrades, keep the normal reward.",
+      "strategy": "Alternative reward choice",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Requires authored Mystery reward substitution, not a new room type.",
+      "inspiration": [
+        {
+          "id": "SHOVEL",
+          "name": "Shovel",
+          "url": "https://spire-codex.com/relics/SHOVEL"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Rest-site digging:random relic."
+    },
+    {
+      "id": "UGS-114",
+      "name": "Offensive Rhythm Servo",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Shuriken's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per turn after the third Fire, gain one sighting level for the fight. Each later main shot adds damage equal to that level, capped at +4. Support hits receive no bonus; reset levels each fight.",
+      "strategy": "Multi-shot scaling",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Unlimited shots still require supplies; cap only item bonus.",
+      "inspiration": [
+        {
+          "id": "SHURIKEN",
+          "name": "Shuriken",
+          "url": "https://spire-codex.com/relics/SHURIKEN"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Three Attacks in a turn:Strength1."
+    },
+    {
+      "id": "UGS-115",
+      "name": "Officer Hunter Receiver",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's officer specialization benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "In Officer fights, the first valid main shot each turn gains +3 damage. No effect in Regular or boss fights; support hits receive no bonus.",
+      "strategy": "Officer specialization",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Need enough Officer opportunities for value.",
+      "inspiration": [
+        {
+          "id": "SLING_OF_COURAGE",
+          "name": "Sling of Courage",
+          "url": "https://spire-codex.com/relics/SLING_OF_COURAGE"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Elite opening:Strength2."
+    },
+    {
+      "id": "UGS-116",
+      "name": "Scrambled Discount Chip",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's seeded cost variation benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, seeded-randomly choose one material type. The first paid recipe Use each turn that consumes that type costs 1 less of it, minimum zero. The selected type is revealed before play and fixed for the fight.",
+      "strategy": "Seeded cost variation",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Repeatable same seed; no reroll by reloading or changing UI.",
+      "inspiration": [
+        {
+          "id": "FAKE_SNECKO_EYE",
+          "name": "Snecko Eye???",
+          "url": "https://spire-codex.com/relics/FAKE_SNECKO_EYE"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Confused status."
+    },
+    {
+      "id": "UGS-117",
+      "name": "Third Cycle Calibration",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Sparkling Rouge's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At player-turn start 3, queue +4 damage for the next main shot this fight and auto-install one ordinary 4-Shield part. The shot bonus survives waiting but is spent only once.",
+      "strategy": "Balanced delayed boost",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Both components must be displayed separately.",
+      "inspiration": [
+        {
+          "id": "SPARKLING_ROUGE",
+          "name": "Sparkling Rouge",
+          "url": "https://spire-codex.com/relics/SPARKLING_ROUGE"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "Turn3:Strength1 and Dexterity1."
+    },
+    {
+      "id": "UGS-118",
+      "name": "Siege Countdown Beacon",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Stone Calendar's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At End Turn of player turn 6 each fight, deal 24 direct damage to every living robot before enemy actions. Once per fight; no effect if the fight ended sooner.",
+      "strategy": "Long-fight payoff",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Predictable burst may trivialize one timing band.",
+      "inspiration": [
+        {
+          "id": "STONE_CALENDAR",
+          "name": "Stone Calendar",
+          "url": "https://spire-codex.com/relics/STONE_CALENDAR"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "turn_boundary"
+      ],
+      "status": "proposal",
+      "source_fact": "End of turn7:area damage52."
+    },
+    {
+      "id": "UGS-119",
+      "name": "Pairwise Template Scanner",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Stone Cracker's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start, select two different stored part-producing recipe copies. Their first paid Uses that fight add +2 to the first output's direct damage or Shield, choosing an eligible value. Selecting a copy with neither is disabled.",
+      "strategy": "Opening recipe planning",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Selection should be fast; bonus spent only on an eligible output.",
+      "inspiration": [
+        {
+          "id": "STONE_CRACKER",
+          "name": "Stone Cracker",
+          "url": "https://spire-codex.com/relics/STONE_CRACKER"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat",
+        "recipes",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Combat opening:temporarily upgrade two random draw-pile cards."
+    },
+    {
+      "id": "UGS-120",
+      "name": "Compact Life Frame",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Strawberry's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition gain 6 maximum HP and heal 6 HP. No further healing trigger.",
+      "strategy": "Simple survivability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Basic comparison point for more complicated items.",
+      "inspiration": [
+        {
+          "id": "STRAWBERRY",
+          "name": "Strawberry",
+          "url": "https://spire-codex.com/relics/STRAWBERRY"
+        }
+      ],
+      "implementation_tags": [
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:max HP7."
+    },
+    {
+      "id": "UGS-121",
+      "name": "Standard Ammunition Jig",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Strike Dummy's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first resource-paid SH001 Plain Slug output each turn gains +2 direct damage. Only one physical slug receives it, even if a batch or copy effect creates more.",
+      "strategy": "Starter specialization",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Bonus does not change canonical sale price.",
+      "inspiration": [
+        {
+          "id": "STRIKE_DUMMY",
+          "name": "Strike Dummy",
+          "url": "https://spire-codex.com/relics/STRIKE_DUMMY"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Cards named Strike:damage +3."
+    },
+    {
+      "id": "UGS-122",
+      "name": "Training Cartridge Reader",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's small-shot follow-up benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight, after a valid main shot containing only one SH001 Plain Slug, grant one fresh SH003 Powder Cap. No other bullet parts may be present; the slug is consumed normally.",
+      "strategy": "Small-shot follow-up",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Free grant is once per fight; modifiers count as parts.",
+      "inspiration": [
+        {
+          "id": "FAKE_STRIKE_DUMMY",
+          "name": "Strike Dummy???",
+          "url": "https://spire-codex.com/relics/FAKE_STRIKE_DUMMY"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Cards named Strike:damage +1."
+    },
+    {
+      "id": "UGS-123",
+      "name": "Carryover Latch",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Sturdy Clamp's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At enemy-phase end after pre-reset effects, preserve up to 3 remaining Shield as active Shield into the next round. The rest resets. Add nothing if none remains; the retained balance can later absorb damage.",
+      "strategy": "Shield continuity",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit reset exception; different retention upgrades share one balance, not duplicate it.",
+      "inspiration": [
+        {
+          "id": "STURDY_CLAMP",
+          "name": "Sturdy Clamp",
+          "url": "https://spire-codex.com/relics/STURDY_CLAMP"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Block retention ceiling:10."
+    },
+    {
+      "id": "UGS-124",
+      "name": "Vanguard Sight",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's opening execution benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At fight start queue +9 damage for the first valid main shot. If that shot kills its main target, gain 1 Iron after its full resolution while alive. No support-hit bonus.",
+      "strategy": "Opening execution",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Kill refund counts only the main target and once.",
+      "inspiration": [
+        {
+          "id": "SWORD_OF_JADE",
+          "name": "Sword of Jade",
+          "url": "https://spire-codex.com/relics/SWORD_OF_JADE"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Strength:3."
+    },
+    {
+      "id": "UGS-125",
+      "name": "Dormant Hunter Chip",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's delayed transformation benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Track Officer victories after acquisition. After the third, awaken this item: future fights' first valid main shot gains +7 damage and first haul gains 1 steered material. Before awakening it grants no combat effect. Awakening is automatic and not a second collectible.",
+      "strategy": "Delayed transformation",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Does not count earlier victories or create duplicate upgrades.",
+      "inspiration": [
+        {
+          "id": "SWORD_OF_STONE",
+          "name": "Sword of Stone",
+          "url": "https://spire-codex.com/relics/SWORD_OF_STONE"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "resources",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Five Elite kills:transform into powerful relic."
+    },
+    {
+      "id": "UGS-126",
+      "name": "Static Filter Loan",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's deferred claw improvement benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition, the next fight's first base haul loses 2 material units, minimum zero. After that fight completes, permanently widen the Precision success region by 10% of its original width. No change to attempt count; clamp width to the track.",
+      "strategy": "Deferred claw improvement",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Temporary penalty must be explicit before accepting.",
+      "inspiration": [
+        {
+          "id": "TEA_OF_DISCOURTESY",
+          "name": "Tea of Discourtesy",
+          "url": "https://spire-codex.com/relics/TEA_OF_DISCOURTESY"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Next combat:two Dazed cards added."
+    },
+    {
+      "id": "UGS-127",
+      "name": "Cooldown Register Shield",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's cooling defence benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per turn, after a Utility removes the final cooldown counter from at least one recipe copy, auto-install an ordinary 5-Shield part. Global cooling reaching zero on several copies still grants one part.",
+      "strategy": "Cooling defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Same Use cannot earn multiple payouts from affected copies.",
+      "inspiration": [
+        {
+          "id": "THE_ABACUS",
+          "name": "The Abacus",
+          "url": "https://spire-codex.com/relics/THE_ABACUS"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Draw-pile shuffle:Block6."
+    },
+    {
+      "id": "UGS-128",
+      "name": "Minimum Impact Driver",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's small-hit reliability benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "After enemy mitigation, a positive main-shot HP-damage result below 4 becomes 4. Zero stays zero; support hits, passive damage and damage-over-time are unchanged. The bonus remains main-shot damage for reactions.",
+      "strategy": "Small-hit reliability",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit damage-floor exception; bypasses neither Shield nor immunity.",
+      "inspiration": [
+        {
+          "id": "THE_BOOT",
+          "name": "The Boot",
+          "url": "https://spire-codex.com/relics/THE_BOOT"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Unblocked attack damage1–4:raised to5."
+    },
+    {
+      "id": "UGS-129",
+      "name": "Victory Biopolymer",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's campaign growth benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After each victory gain 1 maximum HP and heal 1 HP. No growth when every enemy escaped without a kill or when the player dies.",
+      "strategy": "Campaign growth",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Accumulation depends on route length; no automatic baseline healing.",
+      "inspiration": [
+        {
+          "id": "CHOSEN_CHEESE",
+          "name": "The Chosen Cheese",
+          "url": "https://spire-codex.com/relics/CHOSEN_CHEESE"
+        }
+      ],
+      "implementation_tags": [
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Fight completion:max HP1."
+    },
+    {
+      "id": "UGS-130",
+      "name": "Supplier Refill Link",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches The Courier's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "After the first raw-material purchase at each post-fight shop stock, refill that one material stack once at its listed price. No refill for recipe or upgrade purchases and no second refill before another fight completes. Other prices are unchanged.",
+      "strategy": "One stock exception",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit finite shop-restock exception; no reopening loops.",
+      "inspiration": [
+        {
+          "id": "THE_COURIER",
+          "name": "The Courier",
+          "url": "https://spire-codex.com/relics/THE_COURIER"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "economy"
+      ],
+      "status": "proposal",
+      "source_fact": "Merchant restocks; prices20% lower."
+    },
+    {
+      "id": "UGS-131",
+      "name": "Counterfeit Detector",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's planning information benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At each new post-fight shop stock, reveal one seeded-random upcoming shared recipe option from the next normal victory reward. This is information only: no reservation, added selection, price change or reward reroll.",
+      "strategy": "Planning information",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "If the route ends before that reward, display no forecast.",
+      "inspiration": [
+        {
+          "id": "FAKE_MERCHANTS_RUG",
+          "name": "The Merchant's Rug???",
+          "url": "https://spire-codex.com/relics/FAKE_MERCHANTS_RUG"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "No mechanical effect."
+    },
+    {
+      "id": "UGS-132",
+      "name": "Supply Locker Relay",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Tiny Mailbox's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After a noncombat Mystery, schedule one fresh SH001 Plain Slug and one SH002 Basic Shield Plate at next fight entry. Multiple qualifying Mysteries before that fight add no extra shipment. Clear the schedule after delivery.",
+      "strategy": "Route into opening parts",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Fresh shipment exception, not retained fight inventory.",
+      "inspiration": [
+        {
+          "id": "TINY_MAILBOX",
+          "name": "Tiny Mailbox",
+          "url": "https://spire-codex.com/relics/TINY_MAILBOX"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "fight_start",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Resting:two random potions."
+    },
+    {
+      "id": "UGS-133",
+      "name": "Field Pattern Toolbox",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Rare is proposed for this adaptation's temporary recipe flexibility benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "At fight start choose one of three seeded shared Common recipe definitions. Borrow a ready copy in one temporary extra memory slot for this fight only. Pay all normal costs and cooldowns; discard the borrowed copy at fight end. It cannot be sold or copied into permanent memory.",
+      "strategy": "Temporary recipe flexibility",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit temporary-slot exception; generated parts keep ordinary resale.",
+      "inspiration": [
+        {
+          "id": "TOOLBOX",
+          "name": "Toolbox",
+          "url": "https://spire-codex.com/relics/TOOLBOX"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening choice:one of three Colorless cards to hand."
+    },
+    {
+      "id": "UGS-134",
+      "name": "Shield Bench Compiler",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Toxic Egg's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Each newly accepted Shield recipe copy from victory rewards gets one coupon per fight: its first Iron-consuming Use costs 1 less Iron. Other material, HP and meter costs remain full. Existing copies are unaffected.",
+      "strategy": "Future Shield economy",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Copy identity matters; coupon spent only when it saves Iron.",
+      "inspiration": [
+        {
+          "id": "TOXIC_EGG",
+          "name": "Toxic Egg",
+          "url": "https://spire-codex.com/relics/TOXIC_EGG"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "resources",
+        "recipes",
+        "health",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "New Skills:upgraded."
+    },
+    {
+      "id": "MY3-01",
+      "name": "Backflow Ground",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Tungsten Rod's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Reduce each incoming enemy Reactive Mesh recoil event by 2, minimum zero. Ordinary attacks, damage statuses and player HP costs are unchanged.",
+      "strategy": "Recoil resistance",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Preserve exact legacy scope; no blanket damage immunity.",
+      "inspiration": [
+        {
+          "id": "TUNGSTEN_ROD",
+          "name": "Tungsten Rod",
+          "url": "https://spire-codex.com/relics/TUNGSTEN_ROD"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "health"
+      ],
+      "status": "proposal",
+      "source_fact": "Each HP-loss instance:reduced by1."
+    },
+    {
+      "id": "UGS-136",
+      "name": "Utility Cycle Barrier",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Tuning Fork's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every fourth resource-paid Utility Use within a fight, auto-install one ordinary 5-Shield part. Counter continues between rounds and resets each fight. Zero-material Uses and copied effects do not count.",
+      "strategy": "Utility sequence defence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Long Utility chains produce multiple finite payouts through paid actions.",
+      "inspiration": [
+        {
+          "id": "TUNING_FORK",
+          "name": "Tuning Fork",
+          "url": "https://spire-codex.com/relics/TUNING_FORK"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "Every tenth Skill:Block7."
+    },
+    {
+      "id": "UGS-137",
+      "name": "Dry Hopper Reserve",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Unceasing Top's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once each player turn, after a paid recipe Use leaves all raw-material quantities at zero, grant 1 Iron and 1 Carbon. No trigger on loading, selling parts, transferring cargo or the grant itself.",
+      "strategy": "Spend-out resource engine",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Local once-per-turn allowance prevents a self-funding infinite loop.",
+      "inspiration": [
+        {
+          "id": "UNCEASING_TOP",
+          "name": "Unceasing Top",
+          "url": "https://spire-codex.com/relics/UNCEASING_TOP"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Empty hand during player turn:draw1."
+    },
+    {
+      "id": "UGS-138",
+      "name": "Status Amplification Prism",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Unsettling Lamp's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "Once per fight, the first recipe effect applying enemy debuffs adds +1 to each positive stack amount of those debuffs, on the same targets. Do not duplicate damage, costs or durations; an effect with no actual application does not spend the trigger.",
+      "strategy": "Status opener",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Stronger persistent Weaken needs particular balance checks.",
+      "inspiration": [
+        {
+          "id": "UNSETTLING_LAMP",
+          "name": "Unsettling Lamp",
+          "url": "https://spire-codex.com/relics/UNSETTLING_LAMP"
+        }
+      ],
+      "implementation_tags": [
+        "combat",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "First debuffing card each fight:effect doubled."
+    },
+    {
+      "id": "UGS-139",
+      "name": "Ballistic Alignment Shim",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Vajra's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "The first valid main shot each player turn gains +1 damage before percentage modifiers. No bonus to support hits or passive attacks.",
+      "strategy": "Reliable offence",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Splitting shots does not multiply this once-per-turn bonus.",
+      "inspiration": [
+        {
+          "id": "VAJRA",
+          "name": "Vajra",
+          "url": "https://spire-codex.com/relics/VAJRA"
+        }
+      ],
+      "implementation_tags": [
+        "combat"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening Strength:1."
+    },
+    {
+      "id": "UGS-140",
+      "name": "Opening Shield Laminator",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Uncommon",
+      "rarity_basis": "Matches Vambrace's Uncommon source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Once per fight, the first resource-paid recipe output with positive Shield gains +4 Shield on its first physical output. Saved output keeps the bonus; copies do not receive another independent grant.",
+      "strategy": "Opening defence craft",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Uses physical output value, not activation.",
+      "inspiration": [
+        {
+          "id": "VAMBRACE",
+          "name": "Vambrace",
+          "url": "https://spire-codex.com/relics/VAMBRACE"
+        }
+      ],
+      "implementation_tags": [
+        "shield",
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "First card Block per fight:doubled."
+    },
+    {
+      "id": "UGS-141",
+      "name": "Precision Victory Voucher",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Venerable Tea Set's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "If a successful Precision attempt occurred in the previous victorious fight, the next fight's first ordinary haul gains 2 base-material units using that haul's normal composition algorithm. The voucher is consumed on delivery and does not stack.",
+      "strategy": "Claw success continuity",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Reward follows successful fight, not every timing input.",
+      "inspiration": [
+        {
+          "id": "VENERABLE_TEA_SET",
+          "name": "Venerable Tea Set",
+          "url": "https://spire-codex.com/relics/VENERABLE_TEA_SET"
+        }
+      ],
+      "implementation_tags": [
+        "resources"
+      ],
+      "status": "proposal",
+      "source_fact": "After rest:next opening Energy2."
+    },
+    {
+      "id": "UGS-142",
+      "name": "Precision Consolation Voucher",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's failure recovery benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "If at least one Precision attempt failed in the previous victorious fight, grant 1 Iron at next fight entry. Multiple failures create no extra voucher; consume it on delivery.",
+      "strategy": "Failure recovery",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Must not make deliberate failure more valuable than success overall.",
+      "inspiration": [
+        {
+          "id": "FAKE_VENERABLE_TEA_SET",
+          "name": "Venerable Tea Set???",
+          "url": "https://spire-codex.com/relics/FAKE_VENERABLE_TEA_SET"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "After rest:next opening Energy1."
+    },
+    {
+      "id": "UGS-143",
+      "name": "Experimental Pattern Cache",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches Vexing Puzzlebox's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 2,
+      "max_city": 3,
+      "effect": "At fight start seeded-randomly choose one stored non-Legendary part-producing recipe. Its first Use that fight waives at most 2 total material units, choosing highest quantity then Iron/Copper/Carbon/Glass/Circuit ties. HP and meter costs remain full; cooldown and use allowance remain normal.",
+      "strategy": "Variable opening discount",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Chosen copy revealed before play; no reroll on reload.",
+      "inspiration": [
+        {
+          "id": "VEXING_PUZZLEBOX",
+          "name": "Vexing Puzzlebox",
+          "url": "https://spire-codex.com/relics/VEXING_PUZZLEBOX"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "health",
+        "fight_start"
+      ],
+      "status": "proposal",
+      "source_fact": "Opening random card:free this turn."
+    },
+    {
+      "id": "UGS-144",
+      "name": "Utility Calibration Stamp",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches War Paint's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition select two stored Utility recipe copies. Once per fight for each, its first numeric cooldown assigned by Use is 1 lower, minimum zero. No-cooldown recipes cannot be selected; later Uses have normal cooldown.",
+      "strategy": "Opening Utility reuse",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "An explicit permanent upgrade changes CD assignment, never the base CD1 definition.",
+      "inspiration": [
+        {
+          "id": "WAR_PAINT",
+          "name": "War Paint",
+          "url": "https://spire-codex.com/relics/WAR_PAINT"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:two random Skills upgraded."
+    },
+    {
+      "id": "UGS-145",
+      "name": "Ammo Calibration Stamp",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Common",
+      "rarity_basis": "Matches Whetstone's Common source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "On acquisition select two stored Ammo recipe copies. Once per fight for each, its first numeric cooldown assigned by Use is 1 lower, minimum zero. No-cooldown recipes cannot be selected; all costs stay full.",
+      "strategy": "Opening ammo reuse",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Cooldown0 permits reuse only if resources still suffice.",
+      "inspiration": [
+        {
+          "id": "WHETSTONE",
+          "name": "Whetstone",
+          "url": "https://spire-codex.com/relics/WHETSTONE"
+        }
+      ],
+      "implementation_tags": [
+        "recipes"
+      ],
+      "status": "proposal",
+      "source_fact": "Pickup:two random Attacks upgraded."
+    },
+    {
+      "id": "UGS-146",
+      "name": "Victory Supply Antenna",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches White Beast Statue's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After every victory, choose 2 units of one standard material to schedule for next fight entry. Shipments from this item do not stack before delivery; unused scheduled goods expire at campaign end.",
+      "strategy": "Reliable next-fight supply",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Fresh supplies, not retention of spent-fight inventory.",
+      "inspiration": [
+        {
+          "id": "WHITE_BEAST_STATUE",
+          "name": "White Beast Statue",
+          "url": "https://spire-codex.com/relics/WHITE_BEAST_STATUE"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "fight_start",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Every combat reward includes potion."
+    },
+    {
+      "id": "UGS-147",
+      "name": "Officer Blueprint Antenna",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Rare",
+      "rarity_basis": "Matches White Star's Rare source tier.",
+      "acquisition": [
+        "Officer",
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After each Officer victory, add one separate Rare recipe offer of three options to the existing rewards. Accept zero or one; memory exchange rules remain normal. It adds no permanent upgrade reward.",
+      "strategy": "Officer build acceleration",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Needs Rare recipe availability for the current mercenary.",
+      "inspiration": [
+        {
+          "id": "WHITE_STAR",
+          "name": "White Star",
+          "url": "https://spire-codex.com/relics/WHITE_STAR"
+        }
+      ],
+      "implementation_tags": [
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "Elite reward:extra Rare card offer."
+    },
+    {
+      "id": "UGS-148",
+      "name": "Light-Touch Recipe Seal",
+      "mercenary": "Shared",
+      "rarity": "Uncommon",
+      "source_rarity": "Shop",
+      "rarity_basis": "Shop is the source acquisition category, not a power tier. Uncommon is proposed for this adaptation's reward efficiency choice benefit; values remain untested.",
+      "acquisition": [
+        "Shop"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Each normal victory recipe offer has one seeded-random option marked Light-Touch. If accepted, that physical copy's first material-paying Use each fight saves 1 unit of its most numerous material cost, ties Iron/Copper/Carbon/Glass/Circuit. No other costs are waived.",
+      "strategy": "Reward efficiency choice",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Discount marker may bias picks; one tag per copy.",
+      "inspiration": [
+        {
+          "id": "WING_CHARM",
+          "name": "Wing Charm",
+          "url": "https://spire-codex.com/relics/WING_CHARM"
+        }
+      ],
+      "implementation_tags": [
+        "resources",
+        "recipes",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "One random reward card:Swift1 enchantment."
+    },
+    {
+      "id": "UGS-149",
+      "name": "Civic Service Badge",
+      "mercenary": "Shared",
+      "rarity": "Common",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Common is proposed for this adaptation's planning information benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "Whenever a non-boss encounter-choice screen contains Mystery options, reveal the authored outcome category of up to the first two Mystery options in screen order before selection. Reveal no exact prices or outcome details. This provides information only and never changes or rerolls seeded outcomes.",
+      "strategy": "Planning information",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Information overlaps Mayor foresight by theme, but reveals fewer outcomes and no prices or supplies. Requires authored Mystery outcome categories.",
+      "inspiration": [
+        {
+          "id": "WONGO_CUSTOMER_APPRECIATION_BADGE",
+          "name": "Wongo Customer Appreciation Badge",
+          "url": "https://spire-codex.com/relics/WONGO_CUSTOMER_APPRECIATION_BADGE"
+        }
+      ],
+      "implementation_tags": [
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "No mechanical effect."
+    },
+    {
+      "id": "UGS-150",
+      "name": "Deferred Salvage Claim",
+      "mercenary": "Shared",
+      "rarity": "Rare",
+      "source_rarity": "Event",
+      "rarity_basis": "Event is the source acquisition category, not a power tier. Rare is proposed for this adaptation's delayed reward benefit; values remain untested.",
+      "acquisition": [
+        "Mystery"
+      ],
+      "min_city": 1,
+      "max_city": 3,
+      "effect": "After the fifth victory following acquisition, choose one of three eligible unowned Uncommon shared upgrades and mark this claim spent. If fewer than three remain, show those remaining; if none remain, grant 30 Credits instead. It triggers once for the campaign.",
+      "strategy": "Delayed reward",
+      "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
+      "balance_risk": "Explicit exhaustion fallback; generated acquisition does not count as another victory.",
+      "inspiration": [
+        {
+          "id": "WONGOS_MYSTERY_TICKET",
+          "name": "Wongo's Mystery Ticket",
+          "url": "https://spire-codex.com/relics/WONGOS_MYSTERY_TICKET"
+        }
+      ],
+      "implementation_tags": [
+        "economy",
+        "campaign"
+      ],
+      "status": "proposal",
+      "source_fact": "After five combats:three random relics."
+    }
+  ]
+}
