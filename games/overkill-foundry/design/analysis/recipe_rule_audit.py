@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "a105bb0b9d6f007f3d60d4f42304081c1a8b2767"
+SOURCE_COMMIT = "5e73bd8fa1757a6235d07b50132a395f8ccae064"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -59,10 +59,10 @@ FINDINGS = [
             "The owner confirmed that Field Pocket counts total remaining active Shield after enemy actions and before reset, then grants its recorded Charge next round. The clarified row uses 1 Charge per complete 3 Shield, capped at 3 Charge, while retaining 12 Shield, cost and cooldown. The mechanic needs a stored reward amount, not retained active Shield or a next-round Shield read.",
             "NO060", r"After enemies",
             "The timing issue is resolved by explicit count-before-reset wording. Noor's broader Charge mechanic remains a draft."),
-    finding("C08", "conflict", "Five triggers still depend on the removed barrel payment", "R04",
-            "These five rows use a positive barrel payment, absence of that payment, or its refund as a real condition. The payment no longer exists. Eight other rows only needed obsolete timing/exclusion wording removed and are resolved in C14.",
+    finding("C08", "resolved", "Charged Barrel is a specific character exception", "R04",
+            "The owner corrected the audit's premise: a new general rule does not automatically revoke a special character effect. Charged Barrel is restored, with its original optional payment of up to 3 Charge at Fire for +2 main-shot damage per Charge, before other Charge checks. The five payment/no-payment/refund triggers therefore retain their original meaning. Their recipe rows were never changed; no generic recipe-spending tally is substituted.",
             "NO028 NO039 NO075 NO081 NO106", r"barrel|Charged Barrel",
-            "Proposed, not selected: count actual Charge paid for recipe/part costs since the preceding Fire in the current player turn, or turn start for the first shot. Snapshot and reset at Fire, including zero spending; drains are not payments. Contact Mark uses at least 2 for Mark 7 instead of 3. Loose Contact uses zero for its extra 4 damage. Shot Ground uses at least 2 for its 2-Charge reward after impact. Patient Coil uses zero for its 3-Charge reward after impact. Shot Receipt records up to 3 counted Charge for next-turn refund, preserving its Copper reward and duplicate-refund restriction. No new firing cost or innate gun damage is proposed."),
+            "This dependency finding is resolved by restoring the wrongly removed character effect. Its numeric values remain draft balance. Replacements based on unrelated Charge payments are withdrawn."),
     finding("C09", "resolved", "Folding Brace owner-selected replacement", "R03",
             "SH026's old 6 Shield plus retention of up to 4 is replaced by 4 Shield loaded on recipe Use and a new 6-Shield part loaded at the beginning of the next round. Both are ordinary parts. The second delivery is scheduled by recipe Use, regardless of whether the first part is activated or saved. Cost and cooldown are unchanged; the proposed flat 10 Shield was rejected.",
             "SH026", r"On recipe Use",
@@ -83,10 +83,10 @@ FINDINGS = [
             "The owner approved combining the original two activations on recipe Use. Service Pair immediately repairs 6 Bolt HP and can only be used while Bolt is active. Split Battery immediately grants 4 Charge. Neither creates a part or separately stored activation. Original totals, costs, cooldowns, normal use limits and existing HP/Charge limits are preserved.",
             "AD040 NO055", r"On recipe Use",
             "Both split-activation conflicts are resolved. Ordinary-part sacrifices are resolved separately in C03. Numerical balance is untested."),
-    finding("C14", "resolved", "Obsolete barrel wording removed without new conditions", "R04",
-            "Five rows now read current Charge at Fire: Live Wire Tip, Grounded Slug, Full Cell Tip, Even Current and Reserve Coil. Hot Contact, Discharge Record and Discharge Gate retain their existing part-cost spending conditions and lose only the obsolete barrel-payment exclusion. All amounts, costs, cooldowns, recipients, durations and limits are preserved. These are direct consequences of the already-selected removal of the independent barrel payment.",
-            "NO005 NO006 NO017 NO025 NO035 NO048 NO058 NO110", r"Charge|costs",
-            "The obsolete references are resolved. Discharge Gate still has the separate implicit secondary-timing question in Q13. This cleanup does not approve a replacement trigger for the five C08 rows or broaden part-only spending conditions."),
+    finding("C14", "resolved", "Original barrel timing and exclusions restored", "R04",
+            "The prior eight-row cleanup relied on the same mistaken assumption that a general zero-base-damage rule removed Charged Barrel. Those edits are reversed. Five rows again read Charge after its optional payment, and Hot Contact, Discharge Record and Discharge Gate retain their explicit exclusion of that payment from part-cost spending. Original amounts, recipients, durations, costs and cooldowns are preserved.",
+            "NO005 NO006 NO017 NO025 NO035 NO048 NO058 NO110", r"barrel|Charge|costs",
+            "The original eight rows are restored exactly. Together with C08, all thirteen interactions are valid with the retained character exception. NO058's separate Q13 timing question remains; this is not a balance result."),
     finding("Q01", "resolved", "Reactive installed Shield protects subsequent attacks", "R03",
             "The installed-part rule removes the old missed-activation objection. A stated reactive Shield grant installs ordinary parts at its trigger and can protect against subsequent attacks while installed. It does not retroactively block the triggering damage or refill previously depleted Shield. Values, trigger conditions, reset and explicit upgrade exceptions remain unchanged.",
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
@@ -153,7 +153,7 @@ RULES = {
     "R01": "Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears.",
     "R02": "Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.",
     "R03": "Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Parts are counted at a recipe's stated event without being consumed by counting. Installed values add and damage depletes remaining Shield across attacks; normal enemy-turn-end reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, protecting subsequent attacks without retroactive blocking or refilling prior loss. Implicit secondary costs/snapshots remain draft; explicit End Turn conditions retain that clock and check installed source parts.",
-    "R04": "The gun contributes zero innate damage/effects. Old Hot Barrel/Charged Barrel independent damage grants are superseded. Recipe-authored effects and explicit Utility bonuses are distinct from gun base damage.",
+    "R04": "Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.",
     "R05": "Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.",
     "R06": "A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.",
     "R07": "Spread contributions are separate hits resolved in contributing-part placement order. Load can be undone before Fire; resolved effects/crafting are not automatically refunded.",
@@ -168,7 +168,7 @@ CHECKED_DIMENSIONS = [
     "whole-number arithmetic and player HP costs/death",
     "resource/part persistence, collection count and Precision protection",
     "part consumption, saved-part age and canonical sale basis",
-    "removed character dependencies; proposed traits are not owner rules",
+    "specific character exceptions, base defaults and unselected trait alternatives",
 ]
 
 
@@ -222,10 +222,12 @@ def render():
                          else "no_direct_conflict_identified")
         row["review"] = "Reviewed against the recorded rule dimensions; not an approval or balance result."
     totals = Counter(r["status"] for r in rows)
+    for status in ("conflict", "clarification", "no_direct_conflict_identified"):
+        totals.setdefault(status, 0)
     ledger = {
         "audit_date": "2026-09-18", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-18: eight obsolete barrel timing/exclusion references removed under the existing zero-innate-damage rule. Five real payment/no-payment/refund dependencies remain pending joint review; their proposed replacement is not selected.",
-        "source_commit_scope": "Pins all 606 printed recipe rows after eight obsolete-reference cleanups. All numeric values, costs, cooldowns and output fields remain unchanged; the other 598 rows are preserved.",
+        "rule_revision": "2026-09-18: explicit character effects can override base rules. Hot Barrel and Charged Barrel restored; all thirteen barrel recipe interactions retained. The eight prior cleanup edits and the unselected replacement-tally proposal are reversed/withdrawn.",
+        "source_commit_scope": "All 606 printed recipe rows match the restored pre-cleanup revision 5e73bd8. The current full catalogue hash includes the newer character-exception rule and restored trait prose. Only eight rows changed relative to the preceding turn, all exact restorations.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -236,20 +238,20 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**18 September 2026 · all 606 recipes reviewed · eight obsolete barrel references removed; five replacement triggers pending**", "",
-             f"Reviewed all recipe rows from `{SOURCE_COMMIT[:7]}` against the settled owner rules, updated for the Charged Barrel group cleanup. "
+             "**18 September 2026 · all 606 recipes reviewed · character exceptions restored; barrel conflict group cleared**", "",
+             f"All recipe rows match restored revision `{SOURCE_COMMIT[:7]}`; the audit now applies the owner's explicit character-exception clarification. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
              "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
              "**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.", "",
-             "This is an audit for joint review. Eight of the thirteen barrel references were obsolete wording rather than mechanics needing replacement: their current-Charge checks and part-cost conditions now omit the removed barrel payment. Values, costs, cooldowns and the other 598 rows are preserved. Five true dependencies remain in C08, with one proposed spending-window rule recorded for joint review. That proposal has not changed those recipes. Prior installed-Shield and other owner decisions remain selected; clarification flags are not confirmed conflicts. "
-             "The four new inherent abilities remain proposals; their values are not treated as owner rules. "
+             "This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. All 606 recipe rows match the pre-cleanup source; earlier totals and removal claims are historical. "
+             "Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** select the replacement spending/no-spending/refund condition for the five C08 recipes. The proposed per-shot spending tally is described in C08 and is not yet selected.", "",
+             "**Next joint review:** review the remaining clarification groups under the corrected exception hierarchy before asking new questions. Start with implicit Shield secondary-cost timing in Q13; protection from installed Shield parts is already settled.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -292,7 +294,7 @@ def render():
               "Q03/Q10/Q12/Q13 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
-              "**Next action:** review C08's proposed Charge-spending tally for its five remaining triggers. Each Fire would consume the tally for condition checking and start a fresh one, so one payment cannot qualify repeated shots. Preserve existing reward amounts, timing and duplicate-refund restrictions. This remains a proposal, not an owner rule. "
+              "**Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. "
               "Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.", ""]
     (DESIGN / "RECIPE-RULE-AUDIT.md").write_text("\n".join(lines), encoding="utf-8")
     print(json.dumps({"reviewed": len(rows), "counts": dict(totals),
