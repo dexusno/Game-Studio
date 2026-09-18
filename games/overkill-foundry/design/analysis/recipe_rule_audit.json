@@ -1,11 +1,11 @@
 {
-  "audit_date": "2026-09-17",
+  "audit_date": "2026-09-18",
   "initial_audit_date": "2026-09-16",
-  "source_commit": "5e73bd8fa1757a6235d07b50132a395f8ccae064",
-  "rule_revision": "2026-09-17: installed Shield provides automatic protection at enemy attack time, without activation. IV107/SH044 count installed parts at Fire; reactive installed grants protect subsequent attacks. Secondary-cost and shot-hook timing remain explicit clarification work.",
-  "source_commit_scope": "Pins all 606 printed recipe rows after IV107/SH044 installed-count corrections. The other 604 rows and all costs/cooldowns/output fields are preserved; current global Shield prose supersedes legacy activation wording.",
+  "source_commit": "a105bb0b9d6f007f3d60d4f42304081c1a8b2767",
+  "rule_revision": "2026-09-18: eight obsolete barrel timing/exclusion references removed under the existing zero-innate-damage rule. Five real payment/no-payment/refund dependencies remain pending joint review; their proposed replacement is not selected.",
+  "source_commit_scope": "Pins all 606 printed recipe rows after eight obsolete-reference cleanups. All numeric values, costs, cooldowns and output fields remain unchanged; the other 598 rows are preserved.",
   "source_path": "games/overkill-foundry/design/RECIPE-CATALOGUE.md",
-  "source_sha256_normalized_utf8": "1a7b02f137402de5864325b6f1e792185cf465d3435d33e3e2af9666edd31652",
+  "source_sha256_normalized_utf8": "8f13442c83ce5f00f16be8a7d67235dae81d5541f0512b8c7612d5b247e33aff",
   "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
   "checked_dimensions": [
     "output kind and Utility lifecycle",
@@ -29,9 +29,9 @@
     "R08": "Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected."
   },
   "counts": {
-    "no_direct_conflict_identified": 483,
-    "clarification": 110,
-    "conflict": 13
+    "no_direct_conflict_identified": 490,
+    "clarification": 111,
+    "conflict": 5
   },
   "findings": [
     {
@@ -196,26 +196,18 @@
     {
       "id": "C08",
       "status": "conflict",
-      "title": "Removed Charged Barrel payment",
+      "title": "Five triggers still depend on the removed barrel payment",
       "rule": "R04",
-      "reason": "The row refers to a separate barrel Charge payment at Fire, which belonged to the superseded independent gun-damage trait. Positive-payment branches lose their trigger, no-payment branches become automatic, and 'after payment' or exclusion clauses refer to a removed operation.",
+      "reason": "These five rows use a positive barrel payment, absence of that payment, or its refund as a real condition. The payment no longer exists. Eight other rows only needed obsolete timing/exclusion wording removed and are resolved in C14.",
       "recipes": [
-        "NO005",
-        "NO006",
-        "NO017",
-        "NO025",
         "NO028",
-        "NO035",
         "NO039",
-        "NO048",
-        "NO058",
         "NO075",
         "NO081",
-        "NO106",
-        "NO110"
+        "NO106"
       ],
       "excerpt_focus": "barrel|Charged Barrel",
-      "review": "Review the affected condition or refund without restoring an independent gun-damage payment. This does not depend on accepting Residual Current's proposed numbers."
+      "review": "Proposed, not selected: count actual Charge paid for recipe/part costs since the preceding Fire in the current player turn, or turn start for the first shot. Snapshot and reset at Fire, including zero spending; drains are not payments. Contact Mark uses at least 2 for Mark 7 instead of 3. Loose Contact uses zero for its extra 4 damage. Shot Ground uses at least 2 for its 2-Charge reward after impact. Patient Coil uses zero for its 3-Charge reward after impact. Shot Receipt records up to 3 counted Charge for next-turn refund, preserving its Copper reward and duplicate-refund restriction. No new firing cost or innate gun damage is proposed."
     },
     {
       "id": "C09",
@@ -278,6 +270,25 @@
       ],
       "excerpt_focus": "On recipe Use",
       "review": "Both split-activation conflicts are resolved. Ordinary-part sacrifices are resolved separately in C03. Numerical balance is untested."
+    },
+    {
+      "id": "C14",
+      "status": "resolved",
+      "title": "Obsolete barrel wording removed without new conditions",
+      "rule": "R04",
+      "reason": "Five rows now read current Charge at Fire: Live Wire Tip, Grounded Slug, Full Cell Tip, Even Current and Reserve Coil. Hot Contact, Discharge Record and Discharge Gate retain their existing part-cost spending conditions and lose only the obsolete barrel-payment exclusion. All amounts, costs, cooldowns, recipients, durations and limits are preserved. These are direct consequences of the already-selected removal of the independent barrel payment.",
+      "recipes": [
+        "NO005",
+        "NO006",
+        "NO017",
+        "NO025",
+        "NO035",
+        "NO048",
+        "NO058",
+        "NO110"
+      ],
+      "excerpt_focus": "Charge|costs",
+      "review": "The obsolete references are resolved. Discharge Gate still has the separate implicit secondary-timing question in Q13. This cleanup does not approve a replacement trigger for the five C08 rows or broaden part-only spending conditions."
     },
     {
       "id": "Q01",
@@ -8396,14 +8407,16 @@
       "kind": "Ammo",
       "cost": "1 Iron + 1 Copper",
       "cooldown": "None",
-      "effect": "Add 7 damage. Add 5 more if Charge is at least 6 at Fire, after the barrel's optional Charge payment.",
+      "effect": "Add 7 damage. Add 5 more if Charge is at least 6 at Fire.",
       "source_line": 926,
-      "source_row": "| NO005 | Live Wire Tip | 1 Live Tip | Ammo | 1 Iron + 1 Copper | None | Add 7 damage. Add 5 more if Charge is at least 6 at Fire, after the barrel's optional Charge payment. |",
+      "source_row": "| NO005 | Live Wire Tip | 1 Live Tip | Ammo | 1 Iron + 1 Copper | None | Add 7 damage. Add 5 more if Charge is at least 6 at Fire. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -8413,14 +8426,16 @@
       "kind": "Ammo",
       "cost": "2 Iron",
       "cooldown": "None",
-      "effect": "Add 8 damage. Add 6 more if Charge is 0 at Fire, after the barrel's optional Charge payment.",
+      "effect": "Add 8 damage. Add 6 more if Charge is 0 at Fire.",
       "source_line": 927,
-      "source_row": "| NO006 | Grounded Slug | 1 Ground Slug | Ammo | 2 Iron | None | Add 8 damage. Add 6 more if Charge is 0 at Fire, after the barrel's optional Charge payment. |",
+      "source_row": "| NO006 | Grounded Slug | 1 Ground Slug | Ammo | 2 Iron | None | Add 8 damage. Add 6 more if Charge is 0 at Fire. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -8586,14 +8601,16 @@
       "kind": "Ammo",
       "cost": "1 Iron + 1 Copper + 1 Carbon",
       "cooldown": "None",
-      "effect": "Add 7 damage. If at least 3 Charge was paid as part activation costs this round, apply Burn 3 to the main target after impact. The barrel's Fire payment does not count.",
+      "effect": "Add 7 damage. If at least 3 Charge was paid as part activation costs this round, apply Burn 3 to the main target after impact.",
       "source_line": 938,
-      "source_row": "| NO017 | Hot Contact | 1 Hot Contact Tip | Ammo | 1 Iron + 1 Copper + 1 Carbon | None | Add 7 damage. If at least 3 Charge was paid as part activation costs this round, apply Burn 3 to the main target after impact. The barrel's Fire payment does not count. |",
+      "source_row": "| NO017 | Hot Contact | 1 Hot Contact Tip | Ammo | 1 Iron + 1 Copper + 1 Carbon | None | Add 7 damage. If at least 3 Charge was paid as part activation costs this round, apply Burn 3 to the main target after impact. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -8715,14 +8732,16 @@
       "kind": "Ammo",
       "cost": "1 Iron + 2 Copper",
       "cooldown": "1",
-      "effect": "Add 8 damage. Add 12 more if Charge is 12 at Fire, after the barrel's optional Charge payment.",
+      "effect": "Add 8 damage. Add 12 more if Charge is 12 at Fire.",
       "source_line": 946,
-      "source_row": "| NO025 | Full Cell Tip | 1 Full Cell Tip | Ammo | 1 Iron + 2 Copper | 1 | Add 8 damage. Add 12 more if Charge is 12 at Fire, after the barrel's optional Charge payment. |",
+      "source_row": "| NO025 | Full Cell Tip | 1 Full Cell Tip | Ammo | 1 Iron + 2 Copper | 1 | Add 8 damage. Add 12 more if Charge is 12 at Fire. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -8881,14 +8900,16 @@
       "kind": "Ammo",
       "cost": "1 Iron + 1 Copper",
       "cooldown": "None",
-      "effect": "Add 6 damage. Add 6 more if you have an even positive amount of Charge at Fire, after the barrel's optional Charge payment. Zero does not qualify.",
+      "effect": "Add 6 damage. Add 6 more if you have an even positive amount of Charge at Fire. Zero does not qualify.",
       "source_line": 956,
-      "source_row": "| NO035 | Even Current | 1 Paired Contact | Ammo | 1 Iron + 1 Copper | None | Add 6 damage. Add 6 more if you have an even positive amount of Charge at Fire, after the barrel's optional Charge payment. Zero does not qualify. |",
+      "source_row": "| NO035 | Even Current | 1 Paired Contact | Ammo | 1 Iron + 1 Copper | None | Add 6 damage. Add 6 more if you have an even positive amount of Charge at Fire. Zero does not qualify. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -9098,14 +9119,16 @@
       "kind": "Modifier",
       "cost": "1 Iron + 2 Copper",
       "cooldown": "1",
-      "effect": "Add 10 damage to this round's main shot. Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%. The barrel's Fire payment does not count.",
+      "effect": "Add 10 damage to this round's main shot. Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%.",
       "source_line": 974,
-      "source_row": "| NO048 | Discharge Record | 1 Discharge Counter | Modifier | 1 Iron + 2 Copper | 1 | Add 10 damage to this round's main shot. Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%. The barrel's Fire payment does not count. |",
+      "source_row": "| NO048 | Discharge Record | 1 Discharge Counter | Modifier | 1 Iron + 2 Copper | 1 | Add 10 damage to this round's main shot. Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -9266,15 +9289,17 @@
       "kind": "Shield",
       "cost": "2 Iron + 1 Copper",
       "cooldown": "None",
-      "effect": "Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. The barrel's Fire payment does not count.",
+      "effect": "Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield.",
       "source_line": 984,
-      "source_row": "| NO058 | Discharge Gate | 1 Discharge Gate | Shield | 2 Iron + 1 Copper | None | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. The barrel's Fire payment does not count. |",
+      "source_row": "| NO058 | Discharge Gate | 1 Discharge Gate | Shield | 2 Iron + 1 Copper | None | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. |",
       "finding_ids": [
-        "C08",
+        "C14",
         "Q13"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "clarification",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {
@@ -10110,14 +10135,16 @@
       "kind": "Utility",
       "cost": "2 Iron + 2 Copper + 1 Circuit",
       "cooldown": "3",
-      "effect": "For this fight, at Fire add 3 damage per Charge still held after the barrel's optional payment, up to 24 extra damage. Charge is not spent. This is counted once per main shot; reusing Reserve Coil does not stack it.",
+      "effect": "For this fight, at Fire add 3 damage per Charge held at Fire, up to 24 extra damage. Charge is not spent. This is counted once per main shot; reusing Reserve Coil does not stack it.",
       "source_line": 1046,
-      "source_row": "| NO110 | Reserve Coil | Immediate effect: Reserve Coil (no part) | Utility | 2 Iron + 2 Copper + 1 Circuit | 3 | For this fight, at Fire add 3 damage per Charge still held after the barrel's optional payment, up to 24 extra damage. Charge is not spent. This is counted once per main shot; reusing Reserve Coil does not stack it. |",
+      "source_row": "| NO110 | Reserve Coil | Immediate effect: Reserve Coil (no part) | Utility | 2 Iron + 2 Copper + 1 Circuit | 3 | For this fight, at Fire add 3 damage per Charge held at Fire, up to 24 extra damage. Charge is not spent. This is counted once per main shot; reusing Reserve Coil does not stack it. |",
       "finding_ids": [
-        "C08"
+        "C14"
       ],
-      "resolved_finding_ids": [],
-      "status": "conflict",
+      "resolved_finding_ids": [
+        "C14"
+      ],
+      "status": "no_direct_conflict_identified",
       "review": "Reviewed against the recorded rule dimensions; not an approval or balance result."
     },
     {

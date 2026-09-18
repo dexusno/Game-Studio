@@ -1,16 +1,16 @@
 # Recipe rule audit — review together
 
-**17 September 2026 · all 606 recipes reviewed · installed Shield rule recorded; two recipe effects corrected**
+**18 September 2026 · all 606 recipes reviewed · eight obsolete barrel references removed; five replacement triggers pending**
 
-Reviewed all recipe rows from `5e73bd8` against the settled owner rules, updated for automatic protection from installed Shield parts. Found **13 recipes with a definite conflict or obsolete dependency**, **110 additional recipes needing wording/dependency clarification**, and **483 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+Reviewed all recipe rows from `a105bb0` against the settled owner rules, updated for the Charged Barrel group cleanup. Found **5 recipes with a definite conflict or obsolete dependency**, **111 additional recipes needing wording/dependency clarification**, and **490 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
 **Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.
 
-This is an audit for joint review. The owner replaces Shield activation with protection from parts installed when enemies attack. IV107 and SH044 now count installed Shield parts at Fire, preserving saved-part eligibility where stated, values, costs and cooldowns. Other 604 rows are unchanged. Reactive grants can protect subsequent attacks, resolving Q01. Three remaining shot/install hooks move from C06 to Q12; Q13 records implicit secondary costs/snapshots that still require timing reconciliation. Earlier rule corrections remain selected. These findings do not imply tested balance or a finished secondary-effect specification. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
+This is an audit for joint review. Eight of the thirteen barrel references were obsolete wording rather than mechanics needing replacement: their current-Charge checks and part-cost conditions now omit the removed barrel payment. Values, costs, cooldowns and the other 598 rows are preserved. Five true dependencies remain in C08, with one proposed spending-window rule recorded for joint review. That proposal has not changed those recipes. Prior installed-Shield and other owner decisions remain selected; clarification flags are not confirmed conflicts. The four new inherent abilities remain proposals; their values are not treated as owner rules. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** C08, references to the removed Charged Barrel payment. Shield protection and installed-part counting are settled; secondary costs/hooks are grouped in Q03/Q12/Q13.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Next joint review:** select the replacement spending/no-spending/refund condition for the five C08 recipes. The proposed per-shot spending tally is described in C08 and is not yet selected.
 
 ## Coverage
 
@@ -20,7 +20,7 @@ This is an audit for joint review. The owner replaces Shield activation with pro
 | MA | 120 | 0 | 31 | 89 |
 | IV | 120 | 0 | 16 | 104 |
 | AD | 120 | 0 | 9 | 111 |
-| NO | 120 | 13 | 31 | 76 |
+| NO | 120 | 5 | 32 | 83 |
 
 All rows were read for: output kind and Utility lifecycle; installed Shield protection, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; removed character dependencies; proposed traits are not owner rules.
 
@@ -37,12 +37,13 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C05](#c05) | resolved | 19 | Explicit future-turn Shield schedules |
 | [C06](#c06) | resolved | 2 | Shot bonuses count installed Shield parts |
 | [C07](#c07) | resolved | 1 | Field Pocket counts before reset and rewards next round |
-| [C08](#c08) | conflict | 13 | Removed Charged Barrel payment |
+| [C08](#c08) | conflict | 5 | Five triggers still depend on the removed barrel payment |
 | [C09](#c09) | resolved | 1 | Folding Brace owner-selected replacement |
 | [C10](#c10) | resolved | 1 | Early Cover uses ordinary Shield-part expiry |
 | [C11](#c11) | resolved | 1 | Pocket Screen counts saved ordinary parts |
 | [C12](#c12) | resolved | 2 | Equivalent Utility bonuses count saved ordinary parts |
 | [C13](#c13) | resolved | 2 | Split Utilities combine into one immediate effect |
+| [C14](#c14) | resolved | 8 | Obsolete barrel wording removed without new conditions |
 | [Q01](#q01) | resolved | 11 | Reactive installed Shield protects subsequent attacks |
 | [Q02](#q02) | clarification | 12 | Preparation-time Shield readings and payments |
 | [Q03](#q03) | clarification | 5 | Installed Shield order and secondary payments |
@@ -245,29 +246,21 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## C08
 
-**Removed Charged Barrel payment — conflict · R04**
+**Five triggers still depend on the removed barrel payment — conflict · R04**
 
-The row refers to a separate barrel Charge payment at Fire, which belonged to the superseded independent gun-damage trait. Positive-payment branches lose their trigger, no-payment branches become automatic, and 'after payment' or exclusion clauses refer to a removed operation.
+These five rows use a positive barrel payment, absence of that payment, or its refund as a real condition. The payment no longer exists. Eight other rows only needed obsolete timing/exclusion wording removed and are resolved in C14.
 
-**For our review:** Review the affected condition or refund without restoring an independent gun-damage payment. This does not depend on accepting Residual Current's proposed numbers.
+**For our review:** Proposed, not selected: count actual Charge paid for recipe/part costs since the preceding Fire in the current player turn, or turn start for the first shot. Snapshot and reset at Fire, including zero spending; drains are not payments. Contact Mark uses at least 2 for Mark 7 instead of 3. Loose Contact uses zero for its extra 4 damage. Shot Ground uses at least 2 for its 2-Charge reward after impact. Patient Coil uses zero for its 3-Charge reward after impact. Shot Receipt records up to 3 counted Charge for next-turn refund, preserving its Copper reward and duplicate-refund restriction. No new firing cost or innate gun damage is proposed.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **NO005 — Live Wire Tip** | Add 5 more if Charge is at least 6 at Fire, after the barrel's optional Charge payment. |
-| **NO006 — Grounded Slug** | Add 6 more if Charge is 0 at Fire, after the barrel's optional Charge payment. |
-| **NO017 — Hot Contact** | The barrel's Fire payment does not count. |
-| **NO025 — Full Cell Tip** | Add 12 more if Charge is 12 at Fire, after the barrel's optional Charge payment. |
 | **NO028 — Contact Mark** | After impact, apply Mark 3 to the main target, or Mark 7 if the barrel paid at least 2 Charge at Fire. |
-| **NO035 — Even Current** | Add 6 more if you have an even positive amount of Charge at Fire, after the barrel's optional Charge payment. |
 | **NO039 — Loose Contact** | If you pay no Charge through the barrel at Fire, add 4 more damage. |
-| **NO048 — Discharge Record** | The barrel's Fire payment does not count. |
-| **NO058 — Discharge Gate** | The barrel's Fire payment does not count. |
 | **NO075 — Shot Ground** | Gain 2 Charge after impact if the barrel paid at least 2 Charge at Fire. |
 | **NO081 — Patient Coil** | For this fight, gain 3 Charge after any main-shot impact for which you paid no Charge through the barrel at Fire. |
 | **NO106 — Shot Receipt** | At the start of next turn, recover the Charge paid by Charged Barrel for this shot, up to 3 Charge, and gain 1 Copper. |
-| **NO110 — Reserve Coil** | For this fight, at Fire add 3 damage per Charge still held after the barrel's optional payment, up to 24 extra damage. |
 
 ## C09
 
@@ -340,6 +333,27 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | --- | --- |
 | **AD040 — Service Pair** | On recipe Use, immediately repair 6 Bolt HP. |
 | **NO055 — Split Battery** | On recipe Use, immediately gain 4 Charge. |
+
+## C14
+
+**Obsolete barrel wording removed without new conditions — resolved · R04**
+
+Five rows now read current Charge at Fire: Live Wire Tip, Grounded Slug, Full Cell Tip, Even Current and Reserve Coil. Hot Contact, Discharge Record and Discharge Gate retain their existing part-cost spending conditions and lose only the obsolete barrel-payment exclusion. All amounts, costs, cooldowns, recipients, durations and limits are preserved. These are direct consequences of the already-selected removal of the independent barrel payment.
+
+**For our review:** The obsolete references are resolved. Discharge Gate still has the separate implicit secondary-timing question in Q13. This cleanup does not approve a replacement trigger for the five C08 rows or broaden part-only spending conditions.
+
+Exact excerpts below; full effects and costs remain in the catalogue and ledger.
+
+| Recipe | Existing wording |
+| --- | --- |
+| **NO005 — Live Wire Tip** | Add 5 more if Charge is at least 6 at Fire. |
+| **NO006 — Grounded Slug** | Add 6 more if Charge is 0 at Fire. |
+| **NO017 — Hot Contact** | If at least 3 Charge was paid as part activation costs this round, apply Burn 3 to the main target after impact. |
+| **NO025 — Full Cell Tip** | Add 12 more if Charge is 12 at Fire. |
+| **NO035 — Even Current** | Add 6 more if you have an even positive amount of Charge at Fire. |
+| **NO048 — Discharge Record** | Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%. |
+| **NO058 — Discharge Gate** | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. |
+| **NO110 — Reserve Coil** | For this fight, at Fire add 3 damage per Charge held at Fire, up to 24 extra damage. |
 
 ## Q01
 
@@ -657,4 +671,4 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 Modifier/Helper lifecycle, Shield-part payment ordering, final secondary-effect timing and precise stat sampling are still partly draft under the installed-part rule. Q03/Q10/Q12/Q13 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review C08's removed Charged Barrel payment references. Apply settled fixes to equivalent cases and distinguish remaining Shield secondary-effect timing from its settled automatic protection. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** review C08's proposed Charge-spending tally for its five remaining triggers. Each Fire would consume the tally for condition checking and start a fresh one, so one payment cannot qualify repeated shots. Preserve existing reward amounts, timing and duplicate-refund restrictions. This remains a proposal, not an owner rule. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
