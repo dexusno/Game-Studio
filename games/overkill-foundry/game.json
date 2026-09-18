@@ -24,7 +24,7 @@
       "games/overkill-foundry/design/ENDGAME-PROGRESSION.md",
       "games/overkill-foundry/design/ACHIEVEMENTS.md",
       "games/overkill-foundry/design/STEAM-ACHIEVEMENTS.md",
-      "games/overkill-foundry/design/research/2026-09-18-endgame-and-achievements.md",
+      "games/overkill-foundry/design/research/2026-09-19-jev-playtesting.md",
       "games/overkill-foundry/design/data/achievements.json",
       "games/overkill-foundry/design/data/lockdown-tiers.json",
       "games/overkill-foundry/design/analysis/endgame_progression.py",
@@ -45,17 +45,17 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-18T10:41:40+00:00",
-      "record_sha256": "1b4de51c251d2334b0b531f70da52f7ab6b6366f45aefd96385468711dd99eeb",
+      "captured_at": "2026-09-18T22:19:38+00:00",
+      "record_sha256": "d5858dab300065a7d00d2fb19b784987a01be3cff453675edff64132f1d872bb",
       "files": {
-        "games/overkill-foundry/STATUS.md": "2db56e87bdcc38e27d7ef927b3252a9b3a6f149f09b42cd156540a6b696b55f7",
+        "games/overkill-foundry/STATUS.md": "e2d7a13ffba6fcb67f13422ea3c073e0c53e1d731ea117e3c4950fe6e38dd259",
         "games/overkill-foundry/BRIEF.md": "4936f6aed30fcdb614c1b239751ad136aa2d02b96d8e1846e67030fd2e564a77",
-        "games/overkill-foundry/DECISIONS.md": "6ec4d9a6eec53a6815beb713c5bb5c73cd311c7a3482035dd15be24fe9c74111",
+        "games/overkill-foundry/DECISIONS.md": "a66ac48cc7281c60f0f1cd63a7e67c112218a05631a8f2392ec07823e4dbad2b",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "5e3f22940abb2fda207645e45b34342f9a6885cb748e477671ba0f97098c88eb",
         "games/overkill-foundry/design/ENDGAME-PROGRESSION.md": "2d8126e7d837741e33eb627d8589ec785193b169236093ee9617aa7176c9e42e",
         "games/overkill-foundry/design/ACHIEVEMENTS.md": "54879a4f04e2d5d5dde6a21c78b5c19023d43912e9993cae4aa5cee9d1fc134c",
         "games/overkill-foundry/design/STEAM-ACHIEVEMENTS.md": "c770a3f43e5ecc69738888590c8bd6a2d14c3f5fe334039fe66e3b6eb753b968",
-        "games/overkill-foundry/design/research/2026-09-18-endgame-and-achievements.md": "b2aa8d357a78e7e2886146c5a3c968e3220a9982ce5c0d3f3315bafc27608658",
+        "games/overkill-foundry/design/research/2026-09-19-jev-playtesting.md": "a1acf65d392c63d6946ff20ccecc2ac0ae5b0e4c5bb2c0c7f25fbfee51dbf0b7",
         "games/overkill-foundry/design/data/achievements.json": "583e820ba9abb2ae6289f92ab830f6eec59e13e073bd874f3ce6f26f2379d4dc",
         "games/overkill-foundry/design/data/lockdown-tiers.json": "9ddc721bfb7c618de12334f7bc950f4d67cbbd1e547878c81b02872ed1c1cfa3",
         "games/overkill-foundry/design/analysis/endgame_progression.py": "a1235a6806dc18c4e07a66ffa392fdbcbfff87e05fedb301fde7b62e9274852b",
@@ -72,7 +72,7 @@
         "games/overkill-foundry/design/ENEMY-ROSTER.md": "f5ab83f707cbaec61927804f3b9f3ee89d34f26bae5f09828d84f330dbc62de2",
         "games/overkill-foundry/design/ENEMY-PATTERNS.md": "7a4b913e00b8f4164ce5997b4c991b025c569048a245fa136981fa4a84c5d330",
         "games/overkill-foundry/design/ROBOT-EFFECTS.md": "c93b4896f4ad564cf8ec7158439c0ac410065b7984293b5672589c94db7198be",
-        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "e871e76043b1610f8658ab231e197a77b1fe6739fb6b5af877bf5c30d5404e6d"
+        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "95710de4a7dd7915fcc9c43b12fcc9ddfc11aa057ad00291f788faf46a69a84e"
       }
     }
   }

@@ -8,6 +8,8 @@ Build a graphics-free version of the game for Codex to play and run hundreds of 
 
 The owner explicitly also requires **human tests for graphics verification and approval**. Automated balance evidence does not approve graphics or replace human playability tests. Klaus must review the rendered game and approve its visual result, including the selected style, camera flow, animations, effects and readable combat feedback.
 
+**Optional automated-player candidate, researched 19 September:** [Jev assessment](research/2026-09-19-jev-playtesting.md) examines TypeSafe AI's hosted decision model. Klaus confirms this is the intended model and hosted use is acceptable in principle. Proposed role: select legal actions from engine-calculated state, with the runner collecting outcomes and Codex producing written analysis. Benchmark against local scripted/search policies before relying on it; strategic ability and throughput are untested. This is an optional adapter candidate, not a selected dependency or an executed paid trial. The existing shared-core and human-test requirements stand.
+
 ### One rules implementation, two ways to play
 
 Implement a shared, presentation-independent rules core used by both the graphical game and the graphics-free runner. Share content definitions, legal-action validation, whole-number calculations, event order, enemy AI, rewards and save/seed handling. Preserve all scoped character/recipe/upgrade exceptions. Avoid maintaining a simplified second combat engine whose values or timing can drift from the playable version.
