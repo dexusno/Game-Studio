@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "authored_date": "2026-09-18",
+  "status": "proposal",
+  "mode_name": "Lockdown",
+  "maximum_tier": 10,
+  "mercenaries": [
+    "Mara",
+    "Ivo",
+    "Ada",
+    "Noor"
+  ],
+  "entry_gate": {
+    "mode": "all_four_base_routes",
+    "status": "Working assumption from owner wording; clarification requested.",
+    "minimum_route_clear_tier": 0
+  },
+  "independent_tier_progress": true,
+  "unlock_rule": "Eligible profile unlocks tier 1 for every mercenary; that mercenary must clear all three cities at tier N to unlock N+1. Lower cleared tiers remain selectable. No skips.",
+  "core_unlock": {
+    "all_mercenary_clear_tier": 5,
+    "minimum_attempt_tier": 5,
+    "boss_id": "END-CROWN0",
+    "achievement": "OF_CORE_CLEAR"
+  },
+  "beta_fixture": {
+    "mara_base_hp": 80,
+    "base_haul": [
+      3,
+      2,
+      1,
+      1,
+      1
+    ],
+    "steered_units": 2,
+    "material_order": [
+      "Iron",
+      "Copper",
+      "Carbon",
+      "Glass",
+      "Circuit"
+    ],
+    "deduction_order": [
+      "Iron",
+      "Copper",
+      "Iron"
+    ],
+    "other_mercenary_hp": "Uncalibrated; use their own eventual base HP."
+  },
+  "tiers": [
+    {
+      "tier": 0,
+      "name": "Open Contract",
+      "ordinary_haul_reduction": 0,
+      "base_mercenary_hp_percent": 100,
+      "enemy_base_hp_percent": 100,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 1,
+      "name": "Supply Watch",
+      "ordinary_haul_reduction": 1,
+      "base_mercenary_hp_percent": 100,
+      "enemy_base_hp_percent": 100,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 2,
+      "name": "Thin Margins",
+      "ordinary_haul_reduction": 1,
+      "base_mercenary_hp_percent": 95,
+      "enemy_base_hp_percent": 100,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 3,
+      "name": "Hardened Frames",
+      "ordinary_haul_reduction": 1,
+      "base_mercenary_hp_percent": 95,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 4,
+      "name": "Blockade",
+      "ordinary_haul_reduction": 2,
+      "base_mercenary_hp_percent": 95,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 5,
+      "name": "Critical Reserve",
+      "ordinary_haul_reduction": 2,
+      "base_mercenary_hp_percent": 90,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 0
+    },
+    {
+      "tier": 6,
+      "name": "Live Ammunition",
+      "ordinary_haul_reduction": 2,
+      "base_mercenary_hp_percent": 90,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 1
+    },
+    {
+      "tier": 7,
+      "name": "Siege Rations",
+      "ordinary_haul_reduction": 3,
+      "base_mercenary_hp_percent": 90,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 1
+    },
+    {
+      "tier": 8,
+      "name": "Last Reserve",
+      "ordinary_haul_reduction": 3,
+      "base_mercenary_hp_percent": 85,
+      "enemy_base_hp_percent": 105,
+      "enemy_attack_hit_bonus": 1
+    },
+    {
+      "tier": 9,
+      "name": "Fortress Protocol",
+      "ordinary_haul_reduction": 3,
+      "base_mercenary_hp_percent": 85,
+      "enemy_base_hp_percent": 110,
+      "enemy_attack_hit_bonus": 1
+    },
+    {
+      "tier": 10,
+      "name": "Absolute Lockdown",
+      "ordinary_haul_reduction": 3,
+      "base_mercenary_hp_percent": 80,
+      "enemy_base_hp_percent": 110,
+      "enemy_attack_hit_bonus": 1
+    }
+  ]
+}

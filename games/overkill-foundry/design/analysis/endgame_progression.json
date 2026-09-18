@@ -1,0 +1,1000 @@
+{
+  "achievements": 40,
+  "groups": {
+    "Progression": 6,
+    "Lockdown": 10,
+    "Finale": 3,
+    "Combat": 8,
+    "Mercenary": 4,
+    "Collection": 4,
+    "Mastery": 4,
+    "Completion": 1
+  },
+  "tiers_above_base": 10,
+  "entry_gate": "all_four_base_routes",
+  "core_unlock_tier_all_mercenaries": 5,
+  "minimum_route_wins_to_reveal": 24,
+  "recipe_rows": 606,
+  "recipe_sha256": "a25a5947b6e7649e9b378ca2e9512bdfea410413d65dcc29712913c50c951b73",
+  "upgrade_ids": 288,
+  "reference_gate_cases": "passed",
+  "starter_cost_probe": [
+    {
+      "mercenary": "Mara",
+      "ordinary_haul": 10,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 5,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 172
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 326
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 7,
+          "ammo_and_shield_subsets": 282
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 204
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 135
+        }
+      }
+    },
+    {
+      "mercenary": "Mara",
+      "ordinary_haul": 9,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 161
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 182
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 170
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 134
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 88
+        }
+      }
+    },
+    {
+      "mercenary": "Mara",
+      "ordinary_haul": 8,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 34
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 156
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 42
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 29
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 22
+        }
+      }
+    },
+    {
+      "mercenary": "Mara",
+      "ordinary_haul": 7,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 32
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 40
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 14
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 10
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 7
+        }
+      }
+    },
+    {
+      "mercenary": "Ivo",
+      "ordinary_haul": 10,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 5,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 182
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 7,
+          "ammo_and_shield_subsets": 328
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 190
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 310
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 143
+        }
+      }
+    },
+    {
+      "mercenary": "Ivo",
+      "ordinary_haul": 9,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 171
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 182
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 116
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 199
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 94
+        }
+      }
+    },
+    {
+      "mercenary": "Ivo",
+      "ordinary_haul": 8,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 37
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 159
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 31
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 44
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 25
+        }
+      }
+    },
+    {
+      "mercenary": "Ivo",
+      "ordinary_haul": 7,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 35
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 44
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 9
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 16
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 8
+        }
+      }
+    },
+    {
+      "mercenary": "Ada",
+      "ordinary_haul": 10,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 5,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 172
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 226
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 139
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 181
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 108
+        }
+      }
+    },
+    {
+      "mercenary": "Ada",
+      "ordinary_haul": 9,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 150
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 88
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 67
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 93
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 55
+        }
+      }
+    },
+    {
+      "mercenary": "Ada",
+      "ordinary_haul": 8,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 31
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 83
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 20
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 23
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 16
+        }
+      }
+    },
+    {
+      "mercenary": "Ada",
+      "ordinary_haul": 7,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 26
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 20
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 7
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 8
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 6
+        }
+      }
+    },
+    {
+      "mercenary": "Noor",
+      "ordinary_haul": 10,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 5,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 124
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 7,
+          "ammo_and_shield_subsets": 526
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 106
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 151
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 106
+        }
+      }
+    },
+    {
+      "mercenary": "Noor",
+      "ordinary_haul": 9,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 120
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 4,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 298
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 74
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 107
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 2,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 74
+        }
+      }
+    },
+    {
+      "mercenary": "Noor",
+      "ordinary_haul": 8,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 4,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 17
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 6,
+          "ammo_and_shield_subsets": 189
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 13
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 17
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 2,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 13
+        }
+      }
+    },
+    {
+      "mercenary": "Noor",
+      "ordinary_haul": 7,
+      "steering": {
+        "Iron": {
+          "supply": {
+            "Iron": 3,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 4,
+          "ammo_and_shield_subsets": 17
+        },
+        "Copper": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 3,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 5,
+          "ammo_and_shield_subsets": 59
+        },
+        "Carbon": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 3,
+            "Glass": 1,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 5
+        },
+        "Glass": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 3,
+            "Circuit": 1
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 7
+        },
+        "Circuit": {
+          "supply": {
+            "Iron": 1,
+            "Copper": 1,
+            "Carbon": 1,
+            "Glass": 1,
+            "Circuit": 3
+          },
+          "maximum_distinct_uses": 3,
+          "ammo_and_shield_subsets": 5
+        }
+      }
+    }
+  ],
+  "scope": "Design arithmetic and printed-cost feasibility only. No effect grants, reuse, upgrades, enemy combat, healing economy, runtime achievement evaluation or Steam calls."
+}
