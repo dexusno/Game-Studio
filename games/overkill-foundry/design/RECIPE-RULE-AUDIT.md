@@ -1,8 +1,8 @@
 # Recipe rule audit — review together
 
-**19 September 2026 · all 606 recipes reviewed · Shield calculations, installation history and hooks clarified**
+**20 September 2026 · all 606 recipes reviewed · spread-part lifecycle clarified**
 
-All recipe rows match reviewed revision `3172708`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **69 additional recipes needing wording/dependency clarification**, and **537 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+All recipe rows match reviewed revision `7ccf66f`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **59 additional recipes needing wording/dependency clarification**, and **547 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
@@ -10,17 +10,17 @@ All recipe rows match reviewed revision `3172708`; settled rules and explicit ch
 
 This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. Those restored interactions remain unchanged by the later Utility wording pass; earlier totals and removal claims are historical. Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Latest owner answers:** stat-based Shield values are calculated once at first installation, retaining normal depletion/reset and explicit exceptions. Order-based recipes count earlier first installations this round even after removal, once per physical part. Q03/Q12/Q13 now close 21 more cases; costs, cooldowns and effect amounts are preserved. Prior resource-bonus/payment and Utility clarifications remain closed. **Pending joint question:** should spread Modifiers such as Split Outlet remain physical bullet parts until Fire, allowing normal unload/reorder/save and unfired End Turn return? That is the recommendation only; consuming them on earlier Use with a pending effect is the alternative. Crafting still pays the recipe cost normally.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. **Latest owner answer:** ten spread Modifiers remain physical bullet parts until Fire, with normal unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character and payment ordering. Q10 closes ten more cases; crafting costs, cooldowns, numeric effects and non-stacking clauses are preserved. Prior Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. **Pending joint question:** should the six Q06 effects counting or discounting recipes crafted include Utility recipe Uses as well as part-producing Uses? For example, should Furnace Receipt count a cooling Utility used afterward toward its next-turn Iron reward? Counting both is recommended, while explicit part-only conditions stay narrower. No answer is assumed.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 0 | 18 | 108 |
-| MA | 120 | 0 | 15 | 105 |
-| IV | 120 | 0 | 15 | 105 |
+| SH | 126 | 0 | 14 | 112 |
+| MA | 120 | 0 | 13 | 107 |
+| IV | 120 | 0 | 14 | 106 |
 | AD | 120 | 0 | 7 | 113 |
-| NO | 120 | 0 | 14 | 106 |
+| NO | 120 | 0 | 11 | 109 |
 
 All rows were read for: output kind and Utility lifecycle; installed Shield protection, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; specific character exceptions, base defaults and unselected trait alternatives.
 
@@ -53,7 +53,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [Q07](#q07) | resolved | 2 | Explicit part-only cooling rewards retained |
 | [Q08](#q08) | clarification | 14 | Status recipient implied rather than stated |
 | [Q09](#q09) | clarification | 27 | Canonical sale basis for batches and generated subparts |
-| [Q10](#q10) | clarification | 10 | Spread Modifier lifecycle and placement order |
+| [Q10](#q10) | resolved | 10 | Spread parts remain physical until Fire |
 | [Q11](#q11) | clarification | 4 | Other Utility conversions and generated outputs |
 | [Q12](#q12) | resolved | 3 | First-installation and next-shot hooks |
 | [Q13](#q13) | resolved | 14 | One-time Shield values and related installation checks |
@@ -70,7 +70,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 - **R04:** Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
-- **R07:** Spread contributions are separate hits resolved in contributing-part placement order. Load can be undone before Fire; resolved effects/crafting are not automatically refunded.
+- **R07:** The ten spread Modifiers remain physical bullet parts until Fire, with ordinary unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character/payment ordering. Spread contributions are separate hits resolved in contributing-part placement order. Other planning Modifiers retain their clocks; resolved effects/crafting are not automatically refunded.
 - **R08:** Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected.
 
 ## C01
@@ -561,26 +561,26 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q10
 
-**Spread Modifier lifecycle and placement order — clarification · R07**
+**Spread parts remain physical until Fire — resolved · R07**
 
-The row is a Modifier used/consumed in planning, while the selected spread rule resolves contributions in their parts' bullet-placement order and Load remains reversible. The catalogue still leaves non-Ammo lifecycle/accounting open; the ordering record and reservation behaviour need specifying.
+The owner selects physical bullet parts for all ten spread Modifiers. Crafting pays the printed recipe cost and creates the part; loading, unloading and reordering are reversible. Fire consumes the part and applies its spread to that shot. Unfired End Turn returns it for normal saving. Additional Heat/Charge/sacrifice costs commit at Fire under the existing character and pre-hit ordering, with complete affordability validated first. Reserved sacrifice parts are released on unload or unfired End Turn. Printed percentages, targets, statuses, caps and non-stacking clauses remain.
 
-**For our review:** Define how these consumed Modifier effects retain the player's chosen bullet order through Load/unload. This is not permission to refund resolved effects.
+**For our review:** All ten lifecycle cases are resolved. Bullet placement determines separate spread-hit order; other planning Modifiers keep their own clocks. This does not refund crafting or resolved effects, change character traits, or establish numerical balance.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH005 — Split Outlet** | The next main shot also hits it for 50% of the shot's damage. |
-| **SH051 — Three-Way Outlet** | The next main shot also hits each for 40% of the shot's damage. |
-| **SH082 — Wide Burst** | The next main shot hits every other living enemy for 50% of its damage. |
-| **SH110 — Full-Spread Outlet** | The next main shot hits every other living enemy for 100% of its damage. |
-| **MA041 — Furnace Fork** | At Fire, choose one extra enemy. |
-| **MA111 — Foundry Split** | Every extra enemy receives 60% of this round's shot damage before target-specific Mark and defence, then applies its own protection. |
-| **IV076 — All Eyes** | This turn's main shot also deals 30% of its calculated damage before target-specific Mark and defence to each other enemy that has Mark at Fire, rounded down. |
-| **NO050 — Branching Coil** | At Fire, choose one extra enemy. |
-| **NO082 — Double Branch** | At Fire, choose up to two extra enemies. |
-| **NO115 — City Arc** | This round's main shot deals 60% of its damage before target-specific Mark and defence to every other enemy, without copied payloads. |
+| **SH005 — Split Outlet** | Load into the bullet; consumed at Fire. |
+| **SH051 — Three-Way Outlet** | Load into the bullet; consumed at Fire. |
+| **SH082 — Wide Burst** | Load into the bullet; consumed at Fire. |
+| **SH110 — Full-Spread Outlet** | Load into the bullet; consumed at Fire. |
+| **MA041 — Furnace Fork** | Load into the bullet; consumed at Fire. |
+| **MA111 — Foundry Split** | Load into the bullet; consumed at Fire. |
+| **IV076 — All Eyes** | Load into the bullet; consumed at Fire. |
+| **NO050 — Branching Coil** | Load into the bullet; consumed at Fire. |
+| **NO082 — Double Branch** | Load into the bullet; consumed at Fire. |
+| **NO115 — City Arc** | Load into the bullet; consumed at Fire. |
 
 ## Q11
 
@@ -697,6 +697,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Shared specification gaps, not 606 separate questions
 
-Spread Modifier lifecycle, allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related Shield hooks now follow the selected first-installation rules. Q02/Q06/Q08/Q09/Q10/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+Allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Spread parts now follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. Q02/Q06/Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
 **Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.

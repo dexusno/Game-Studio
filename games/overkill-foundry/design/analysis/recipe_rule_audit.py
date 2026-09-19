@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "3172708719112b3c9e9c4a3ce8dfc802905dce03"
+SOURCE_COMMIT = "7ccf66f356352c6fbda71bcbf75cfa28f318803b"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -129,11 +129,11 @@ FINDINGS = [
             "SH026 SH057 SH076 SH092 SH113 SH126 MA038 MA048 MA099 MA107 MA119 IV019 IV057 IV061 IV088 IV090 IV118 AD017 AD074 AD083 AD092 AD117 NO031 NO063 NO087 NO107 NO120",
             r"Each|receive|Make one|gain 2",
             "Record canonical one-part valuation references/requirements for these outputs. Known fresh copies inherit their original type's basis; generic copying alone is not a pricing conflict."),
-    finding("Q10", "clarification", "Spread Modifier lifecycle and placement order", "R07",
-            "The row is a Modifier used/consumed in planning, while the selected spread rule resolves contributions in their parts' bullet-placement order and Load remains reversible. The catalogue still leaves non-Ammo lifecycle/accounting open; the ordering record and reservation behaviour need specifying.",
+    finding("Q10", "resolved", "Spread parts remain physical until Fire", "R07",
+            "The owner selects physical bullet parts for all ten spread Modifiers. Crafting pays the printed recipe cost and creates the part; loading, unloading and reordering are reversible. Fire consumes the part and applies its spread to that shot. Unfired End Turn returns it for normal saving. Additional Heat/Charge/sacrifice costs commit at Fire under the existing character and pre-hit ordering, with complete affordability validated first. Reserved sacrifice parts are released on unload or unfired End Turn. Printed percentages, targets, statuses, caps and non-stacking clauses remain.",
             "SH005 SH051 SH082 SH110 MA041 MA111 IV076 NO050 NO082 NO115",
-            r"shot|Fire|extra enemy",
-            "Define how these consumed Modifier effects retain the player's chosen bullet order through Load/unload. This is not permission to refund resolved effects."),
+            r"Load into the bullet|Pay|Reserve",
+            "All ten lifecycle cases are resolved. Bullet placement determines separate spread-hit order; other planning Modifiers keep their own clocks. This does not refund crafting or resolved effects, change character traits, or establish numerical balance."),
     finding("Q11", "clarification", "Other Utility conversions and generated outputs", "R01",
             "These four effects convert a Shield part or grant named parts without selecting an existing part to copy. The owner's copying clarification resolves the copying rows; it does not require calling every other generated output a rule violation. Their classification under the production/effect distinction remains to clarify. Existing effects, costs and cooldowns are preserved; only their review annotations change.",
             "SH076 MA119 IV118 NO120", r"Sacrifice|gain 2|receive 1",
@@ -165,7 +165,7 @@ RULES = {
     "R04": "Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.",
     "R05": "Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.",
     "R06": "A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.",
-    "R07": "Spread contributions are separate hits resolved in contributing-part placement order. Load can be undone before Fire; resolved effects/crafting are not automatically refunded.",
+    "R07": "The ten spread Modifiers remain physical bullet parts until Fire, with ordinary unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character/payment ordering. Spread contributions are separate hits resolved in contributing-part placement order. Other planning Modifiers retain their clocks; resolved effects/crafting are not automatically refunded.",
     "R08": "Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected.",
 }
 
@@ -234,9 +234,9 @@ def render():
     for status in ("conflict", "clarification", "no_direct_conflict_identified"):
         totals.setdefault(status, 0)
     ledger = {
-        "audit_date": "2026-09-19", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-19: owner selects one-time Shield values and earlier first-installation history. Q03/Q12/Q13 are resolved with related hooks and explicit clock preservation. Prior Q05/Q07/Q14/Q15 resolutions and character exceptions remain. Spread Modifier consumption is the next pending question.",
-        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 928fe8e, exactly the four Q03, three Q12 and fourteen Q13 effect texts changed. All names/outputs/kinds/ingredients/cooldowns and the other 585 rows are preserved. NO058's barrel-payment exclusion remains explicit; no character trait is removed.",
+        "audit_date": "2026-09-20", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
+        "rule_revision": "2026-09-20: owner selects physical spread parts consumed at Fire. Q10 resolves with reversible loading/saving and existing character/payment ordering. Previous Shield installation, calculation, history and Utility resolutions remain. Q06 recipe-use eligibility is the next pending question.",
+        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 141804d, exactly ten Q10 spread effect texts changed. All names/outputs/kinds/ingredients/cooldowns, numeric effect values and the other 596 rows are preserved. No character trait or barrel-payment exception is removed.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -247,7 +247,7 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**19 September 2026 · all 606 recipes reviewed · Shield calculations, installation history and hooks clarified**", "",
+             "**20 September 2026 · all 606 recipes reviewed · spread-part lifecycle clarified**", "",
              f"All recipe rows match reviewed revision `{SOURCE_COMMIT[:7]}`; settled rules and explicit character/recipe exceptions remain preserved. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
@@ -259,9 +259,9 @@ def render():
              "Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
-             "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Latest owner answers:** stat-based Shield values are calculated once at first installation, retaining normal depletion/reset and explicit exceptions. Order-based recipes count earlier first installations this round even after removal, once per physical part. Q03/Q12/Q13 now close 21 more cases; costs, cooldowns and effect amounts are preserved. Prior resource-bonus/payment and Utility clarifications remain closed. "
-             "**Pending joint question:** should spread Modifiers such as Split Outlet remain physical bullet parts until Fire, allowing normal unload/reorder/save and unfired End Turn return? That is the recommendation only; consuming them on earlier Use with a pending effect is the alternative. Crafting still pays the recipe cost normally.", "",
+             "SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. "
+             "**Latest owner answer:** ten spread Modifiers remain physical bullet parts until Fire, with normal unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character and payment ordering. Q10 closes ten more cases; crafting costs, cooldowns, numeric effects and non-stacking clauses are preserved. Prior Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. "
+             "**Pending joint question:** should the six Q06 effects counting or discounting recipes crafted include Utility recipe Uses as well as part-producing Uses? For example, should Furnace Receipt count a cooling Utility used afterward toward its next-turn Iron reward? Counting both is recommended, while explicit part-only conditions stay narrower. No answer is assumed.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -300,8 +300,8 @@ def render():
               "- SH060's explicit loss of remaining Shield is not a recipe retention exception; it can be a downside when an upgrade would otherwise preserve Shield. A weaker or redundant effect is not itself a rule conflict.",
               "- The existing same-effect cooling pairs and relative recipe prices remain balance work. Renaming Burn/Corrosion/Mark/Weaken to the proposed robot vocabulary is a separate editorial migration.", "",
               "## Shared specification gaps, not 606 separate questions", "",
-              "Spread Modifier lifecycle, allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related Shield hooks now follow the selected first-installation rules. "
-              "Q02/Q06/Q08/Q09/Q10/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
+              "Allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Spread parts now follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. "
+              "Q02/Q06/Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
               "**Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. "
