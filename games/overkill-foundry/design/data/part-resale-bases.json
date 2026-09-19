@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "recorded_on": "2026-09-20",
+  "policy_status": "Owner-selected fixed normal one-part valuation references; exact unanchored costs are beta tuning.",
+  "formula": "floor(sum(one_part_material_quantity * current_shop_unit_price) / 2)",
+  "new_craftable_recipes": false,
+  "materials": [
+    "Iron",
+    "Copper",
+    "Carbon",
+    "Glass",
+    "Circuit"
+  ],
+  "families": {
+    "plain-ammo": {
+      "parameter": "fixed_damage",
+      "materials_rule": "Iron = ceil(fixed_damage / 6)",
+      "anchor_recipe": "SH001",
+      "scope": "Generated pure direct-damage Ammo only, without secondary effects. Snapshot the generated amount; do not reprice later bonuses."
+    },
+    "plain-shield": {
+      "parameter": "fixed_shield",
+      "materials_rule": "Iron = ceil(fixed_shield / 6); Copper = 1 for positive fixed_shield, otherwise 0",
+      "anchor_recipe": "SH002",
+      "scope": "Generated plain Shield grants only, without secondary effects. Key by original granted value, never remaining protection after spending/damage."
+    }
+  },
+  "bases": {
+    "plain-ammo-4": {
+      "kind": "Ammo",
+      "fixed_damage": 4,
+      "materials": {
+        "Iron": 1
+      },
+      "anchor_recipe": "SH001",
+      "basis_note": "Exact Plain Slug equivalent at 6; other values use the beta plain-ammo family, one Iron per started six damage."
+    },
+    "plain-ammo-6": {
+      "kind": "Ammo",
+      "fixed_damage": 6,
+      "materials": {
+        "Iron": 1
+      },
+      "anchor_recipe": "SH001",
+      "basis_note": "Exact Plain Slug equivalent at 6; other values use the beta plain-ammo family, one Iron per started six damage."
+    },
+    "plain-ammo-8": {
+      "kind": "Ammo",
+      "fixed_damage": 8,
+      "materials": {
+        "Iron": 2
+      },
+      "anchor_recipe": "SH001",
+      "basis_note": "Exact Plain Slug equivalent at 6; other values use the beta plain-ammo family, one Iron per started six damage."
+    },
+    "plain-ammo-10": {
+      "kind": "Ammo",
+      "fixed_damage": 10,
+      "materials": {
+        "Iron": 2
+      },
+      "anchor_recipe": "SH001",
+      "basis_note": "Exact Plain Slug equivalent at 6; other values use the beta plain-ammo family, one Iron per started six damage."
+    },
+    "plain-shield-3": {
+      "kind": "Shield",
+      "fixed_shield": 3,
+      "materials": {
+        "Iron": 1,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-4": {
+      "kind": "Shield",
+      "fixed_shield": 4,
+      "materials": {
+        "Iron": 1,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-5": {
+      "kind": "Shield",
+      "fixed_shield": 5,
+      "materials": {
+        "Iron": 1,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-6": {
+      "kind": "Shield",
+      "fixed_shield": 6,
+      "materials": {
+        "Iron": 1,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-8": {
+      "kind": "Shield",
+      "fixed_shield": 8,
+      "materials": {
+        "Iron": 2,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-9": {
+      "kind": "Shield",
+      "fixed_shield": 9,
+      "materials": {
+        "Iron": 2,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-10": {
+      "kind": "Shield",
+      "fixed_shield": 10,
+      "materials": {
+        "Iron": 2,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-12": {
+      "kind": "Shield",
+      "fixed_shield": 12,
+      "materials": {
+        "Iron": 2,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-14": {
+      "kind": "Shield",
+      "fixed_shield": 14,
+      "materials": {
+        "Iron": 3,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-15": {
+      "kind": "Shield",
+      "fixed_shield": 15,
+      "materials": {
+        "Iron": 3,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "plain-shield-20": {
+      "kind": "Shield",
+      "fixed_shield": 20,
+      "materials": {
+        "Iron": 4,
+        "Copper": 1
+      },
+      "anchor_recipe": "SH002",
+      "basis_note": "Exact Basic Shield Plate equivalent at 6; other values use the beta plain-shield family, one Iron per started six Shield plus one Copper."
+    },
+    "warm-rivet": {
+      "kind": "Ammo",
+      "materials": {
+        "Iron": 1,
+        "Carbon": 1
+      },
+      "anchor_recipe": "MA023",
+      "basis_note": "4 damage plus 1 Heat. Uses Heated Rivet ingredients as a beta reference; retains its own weaker effect and batch cost."
+    },
+    "split-acid-needle": {
+      "kind": "Ammo",
+      "materials": {
+        "Iron": 1,
+        "Carbon": 1,
+        "Glass": 1
+      },
+      "anchor_recipe": "IV001",
+      "basis_note": "6 damage plus Corrosion 2. Needle Acid Capsule ingredient family with a Glass increment for higher unconditional damage; whole-material one-part beta reference, not half the batch cost."
+    },
+    "copper-pin": {
+      "kind": "Ammo",
+      "materials": {
+        "Iron": 1,
+        "Copper": 1
+      },
+      "anchor_recipe": "MA007",
+      "basis_note": "3 damage plus Mark 2. One Iron below the stronger Denting Slug as a beta reference; not half the Copper Pins batch cost."
+    },
+    "pulse-tip": {
+      "kind": "Ammo",
+      "materials": {
+        "Iron": 2,
+        "Copper": 1
+      },
+      "anchor_recipe": "NO002",
+      "basis_note": "10 damage plus 1 Charge. Conducting Pin ingredients with one additional Iron for the stronger damage."
+    }
+  },
+  "recipe_outputs": {
+    "SH026": [
+      {
+        "name": "Regular 4-Shield part",
+        "basis": "plain-shield-4",
+        "quantity": 1,
+        "when": "on recipe Use"
+      },
+      {
+        "name": "Regular 6-Shield part",
+        "basis": "plain-shield-6",
+        "quantity": 1,
+        "when": "next-round delivery"
+      }
+    ],
+    "SH057": [
+      {
+        "name": "Regular 8-Shield part",
+        "basis": "plain-shield-8",
+        "quantity": 1,
+        "when": "on recipe Use"
+      },
+      {
+        "name": "Regular 5-Shield part",
+        "basis": "plain-shield-5",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "SH076": [
+      {
+        "name": "Recast Plate Slug",
+        "basis": "family:plain-ammo",
+        "quantity": 1,
+        "when": "conversion",
+        "value_parameter": "fixed_damage",
+        "minimum": 1,
+        "maximum": 14
+      }
+    ],
+    "SH092": [
+      {
+        "name": "Hinged Wall Brace",
+        "basis": "recipe:SH092",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 15-Shield part",
+        "basis": "plain-shield-15",
+        "quantity": 1,
+        "when": "next-round delivery"
+      }
+    ],
+    "SH113": [
+      {
+        "name": "Last Wall Plate",
+        "basis": "recipe:SH113",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 20-Shield part",
+        "basis": "plain-shield-20",
+        "quantity": 1,
+        "when": "next-round delivery; cooling is a delivery effect, not a part attribute"
+      }
+    ],
+    "SH126": [
+      {
+        "name": "Auto-Forge Die",
+        "basis": "recipe:SH126",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Salvage Slug",
+        "basis": "plain-ammo-10",
+        "quantity": 1,
+        "when": "Perfect-grab reward"
+      },
+      {
+        "name": "Salvage Shield Plate",
+        "basis": "plain-shield-10",
+        "quantity": 1,
+        "when": "Perfect-grab reward"
+      }
+    ],
+    "MA038": [
+      {
+        "name": "Warm Rivet",
+        "basis": "warm-rivet",
+        "quantity": 2,
+        "when": "on recipe Use"
+      }
+    ],
+    "MA048": [
+      {
+        "name": "Locking Plate",
+        "basis": "recipe:MA048",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 12-Shield part",
+        "basis": "plain-shield-12",
+        "quantity": 1,
+        "when": "next round if Heat paid; alternative to 4"
+      },
+      {
+        "name": "Regular 4-Shield part",
+        "basis": "plain-shield-4",
+        "quantity": 1,
+        "when": "next round if Heat not paid; alternative to 12"
+      }
+    ],
+    "MA099": [
+      {
+        "name": "Slag Foundation",
+        "basis": "recipe:MA099",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 14-Shield part",
+        "basis": "plain-shield-14",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "MA107": [
+      {
+        "name": "Ready Plate",
+        "basis": "plain-shield-8",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      }
+    ],
+    "MA119": [
+      {
+        "name": "Siege Slug",
+        "basis": "plain-ammo-10",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      },
+      {
+        "name": "Siege Plate",
+        "basis": "plain-shield-10",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      }
+    ],
+    "IV019": [
+      {
+        "name": "Folded Plate",
+        "basis": "recipe:IV019",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 3-Shield part",
+        "basis": "plain-shield-3",
+        "quantity": 1,
+        "when": "next-round delivery"
+      }
+    ],
+    "IV057": [
+      {
+        "name": "Packed Wall",
+        "basis": "recipe:IV057",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 4-Shield part",
+        "basis": "plain-shield-4",
+        "quantity": 1,
+        "when": "next-round delivery"
+      }
+    ],
+    "IV061": [
+      {
+        "name": "Gap Plate",
+        "basis": "recipe:IV061",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 5-Shield part",
+        "basis": "plain-shield-5",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "IV088": [
+      {
+        "name": "Split Acid Needle",
+        "basis": "split-acid-needle",
+        "quantity": 2,
+        "when": "on recipe Use"
+      }
+    ],
+    "IV090": [
+      {
+        "name": "Stockroom Plate",
+        "basis": "recipe:IV090",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 14-Shield part",
+        "basis": "plain-shield-14",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "IV118": [
+      {
+        "name": "Plain Needle",
+        "basis": "plain-ammo-6",
+        "quantity": 1,
+        "when": "conditional next-turn reward, at most once per round"
+      }
+    ],
+    "AD017": [
+      {
+        "name": "Small Rivet",
+        "basis": "plain-ammo-4",
+        "quantity": 2,
+        "when": "on recipe Use"
+      }
+    ],
+    "AD074": [
+      {
+        "name": "Locking Guard",
+        "basis": "recipe:AD074",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 8-Shield part",
+        "basis": "plain-shield-8",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "AD083": [
+      {
+        "name": "Mixed Order",
+        "basis": "recipe:AD083",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Small Rivet",
+        "basis": "plain-ammo-4",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      },
+      {
+        "name": "Guard Tab",
+        "basis": "plain-shield-8",
+        "quantity": 1,
+        "when": "next-turn delivery"
+      }
+    ],
+    "AD092": [
+      {
+        "name": "Scaffold Guard",
+        "basis": "recipe:AD092",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 12-Shield part",
+        "basis": "plain-shield-12",
+        "quantity": 2,
+        "when": "one conditional delivery in each of the next two rounds"
+      }
+    ],
+    "AD117": [
+      {
+        "name": "Overnight Order",
+        "basis": "recipe:AD117",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Heavy Rivet",
+        "basis": "plain-ammo-8",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      },
+      {
+        "name": "Guard Tab",
+        "basis": "plain-shield-8",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      }
+    ],
+    "NO031": [
+      {
+        "name": "Copper Pin",
+        "basis": "copper-pin",
+        "quantity": 2,
+        "when": "on recipe Use"
+      }
+    ],
+    "NO063": [
+      {
+        "name": "Small Field Ring",
+        "basis": "plain-shield-6",
+        "quantity": 2,
+        "when": "on recipe Use"
+      }
+    ],
+    "NO087": [
+      {
+        "name": "Field Lock",
+        "basis": "recipe:NO087",
+        "quantity": 1,
+        "when": "crafted source part"
+      },
+      {
+        "name": "Regular 12-Shield part",
+        "basis": "plain-shield-12",
+        "quantity": 1,
+        "when": "conditional next-round delivery"
+      }
+    ],
+    "NO107": [
+      {
+        "name": "Stored Field Plate",
+        "basis": "plain-shield-9",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      }
+    ],
+    "NO120": [
+      {
+        "name": "Pulse Tip",
+        "basis": "pulse-tip",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      },
+      {
+        "name": "Charged Plate",
+        "basis": "plain-shield-10",
+        "quantity": 2,
+        "when": "next-turn delivery"
+      }
+    ]
+  },
+  "rules": [
+    "This is a valuation registry, not an effect executor or a new recipe pool. Output times/counts summarize source text; conditional alternatives are not unconditional grants.",
+    "An ordinary single source part retains its normal main-recipe ingredients, even when that part later grants other parts. Do not divide that source cost across future rewards.",
+    "Every mapped batch part uses its fixed one-part reference. Do not divide the actual batch or generator cost, apply a discount twice, or sum credits before rounding each sold part.",
+    "Aliases sharing a reference have identical sale values at the same shop prices. Copies inherit the original reference and any generated fixed-value parameter, without another discount.",
+    "Unmapped ordinary single outputs use their own normal main recipe. Generic plain Shield grants use the plain-shield family. Unknown special generated types must receive an explicit mapping rather than silently borrowing their generator cost.",
+    "Rarity and acquisition source are not price multipliers. Extra Heat/Charge/HP/part payments are not material ingredients in the sale formula.",
+    "Prices use current shop resource prices. No shop price is selected here. Selling remains subject to existing unused-part and unloading eligibility; a pending delivery cannot be sold.",
+    "All family quantities are integers, including ceiling to whole materials. No fractional gameplay resource amount is introduced. These references never charge the player resources.",
+    "Numerical resale balance, generator income and interactions with discounts/repeated deliveries require simulation and human beta testing."
+  ]
+}

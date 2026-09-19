@@ -1,8 +1,8 @@
 # Recipe rule audit — review together
 
-**20 September 2026 · all 606 recipes reviewed · Shield-payment allocation clarified**
+**20 September 2026 · all 606 recipes reviewed · clarification pass complete**
 
-All recipe rows match reviewed revision `de7e6e6`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **41 additional recipes needing wording/dependency clarification**, and **565 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+All recipe rows match reviewed revision `f8a7751`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **0 additional recipes needing wording/dependency clarification**, and **606 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
@@ -10,17 +10,17 @@ All recipe rows match reviewed revision `de7e6e6`; settled rules and explicit ch
 
 This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. Those restored interactions remain unchanged by the later Utility wording pass; earlier totals and removal claims are historical. Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. **Latest owner answer:** Shield payments drain installed parts in installation order, preserving their reduced values through removal/storage/reinstallation. Read-only checks sum remaining installed protection at their stated event. Q02 closes twelve cases with amounts, costs, cooldowns and explicit part-only reward restrictions preserved. Both part-producing and Utility recipe Uses count for Q06; prior spread lifecycle, Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. **Pending joint question:** should the fourteen Q08 Ammo status clauses with omitted recipients explicitly target the main enemy? The owner requested an example. On a 20-damage bullet containing Hot Filling and Split Outlet, the recommendation gives the surviving main target 20 damage and Burn 2, while the extra target receives 10 damage without Burn, before defences. Recipes explicitly naming other or multiple recipients retain their scope. No targeting answer is assumed.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. **Latest owner answers:** Q08 statuses apply to the main target with damage-only splitting, preserving explicit multi-target exceptions. Q11 keeps ordinary-part conversions/grants under the existing specific-exception rule. The owner also approves fixed selling-price references for generated outputs; all 27 Q09 cases are now mapped and checked. Actual recipe costs, cooldowns, effects and output counts are preserved. All previous Shield, recipe-use and spread resolutions remain closed. **No owner answer pending for this audit.** The original 111 clarification cases are resolved in the written design. [Part selling prices](PART-RESALE.md) records the last group, with machine-readable mappings and price checks. Its unanchored numerical references remain beta tuning; this does not claim a playable implementation or tested campaign economy.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 0 | 11 | 115 |
-| MA | 120 | 0 | 5 | 115 |
-| IV | 120 | 0 | 14 | 106 |
-| AD | 120 | 0 | 6 | 114 |
-| NO | 120 | 0 | 5 | 115 |
+| SH | 126 | 0 | 0 | 126 |
+| MA | 120 | 0 | 0 | 120 |
+| IV | 120 | 0 | 0 | 120 |
+| AD | 120 | 0 | 0 | 120 |
+| NO | 120 | 0 | 0 | 120 |
 
 All rows were read for: output kind and Utility lifecycle; installed Shield protection, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; specific character exceptions, base defaults and unselected trait alternatives.
 
@@ -51,10 +51,10 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [Q05](#q05) | resolved | 4 | Immediate Utility payments and shared healing cap |
 | [Q06](#q06) | resolved | 6 | Part-producing and Utility recipe Uses both count |
 | [Q07](#q07) | resolved | 2 | Explicit part-only cooling rewards retained |
-| [Q08](#q08) | clarification | 14 | Status recipient implied rather than stated |
-| [Q09](#q09) | clarification | 27 | Canonical sale basis for batches and generated subparts |
+| [Q08](#q08) | resolved | 14 | Main-target status recipients selected |
+| [Q09](#q09) | resolved | 27 | Fixed one-part sale references mapped |
 | [Q10](#q10) | resolved | 10 | Spread parts remain physical until Fire |
-| [Q11](#q11) | clarification | 4 | Other Utility conversions and generated outputs |
+| [Q11](#q11) | resolved | 4 | Explicit Utility conversions and ordinary-part grants |
 | [Q12](#q12) | resolved | 3 | First-installation and next-shot hooks |
 | [Q13](#q13) | resolved | 14 | One-time Shield values and related installation checks |
 | [Q14](#q14) | resolved | 3 | First-installation Shield resource bonuses |
@@ -64,12 +64,12 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 
 These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](RECIPE-CATALOGUE.md) and the owner chronology in [DECISIONS.md](../DECISIONS.md). Draft conventions are used to explain dependencies, not promoted into owner decisions.
 
-- **R01:** Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears. The six Q06 bonuses/discounts count successful part-producing and Utility recipe Uses; explicit part-only effects remain narrower.
+- **R01:** Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Q11 preserves the four explicit named-part conversions/grants as ordinary-part effects under the specific-exception rule, without stored Utility items or extra production payments. The six Q06 bonuses/discounts count successful part-producing and Utility recipe Uses; explicit part-only effects remain narrower.
 - **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.
 - **R03:** Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Counts do not consume parts. Installed values add and damage depletes protection; normal reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, without retroactive blocking or refilling prior loss. Unless explicitly timed otherwise, immediate bonuses, additional Heat/Charge/HP/part payments and stat-based calculations use first installation once, with no refund, repeat or recalculation on reinstallation. Order-based used-this-round conditions count earlier first installations even after removal; explicit current-installed checks retain their scope. Next-shot and delayed hooks retain named clocks/expiry. Read-only Shield checks use remaining installed protection at their stated event. Shield payments drain current installations oldest-first, preserving reduced values through removal/reinstallation and excluding reserve parts.
 - **R04:** Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.
-- **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
-- **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
+- **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default. The owner selects the main target for the fourteen Q08 Ammo clauses and damage-only spreading for Split Outlet/Three-Way Outlet. Other recipes explicitly naming other or multiple recipients, or their own spread statuses, retain that scope.
+- **R06:** Parts sell for half their normal main-recipe one-part material value at current shop resource prices, floored per sold part. Discounts, actual batch/generator cost and copying do not change that reference. Generated-only and batch parts use the owner-selected fixed one-part references in PART-RESALE.md; equivalent outputs share references. No extra crafting costs or recipes are introduced. Numerical beta values remain subject to balancing.
 - **R07:** The ten spread Modifiers remain physical bullet parts until Fire, with ordinary unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character/payment ordering. Spread contributions are separate hits resolved in contributing-part placement order. Other planning Modifiers retain their clocks; resolved effects/crafting are not automatically refunded.
 - **R08:** Enemy Weaken N reduces each hit of its attacks by N, minimum zero, without being consumed by attacks. Reduce N by 1 once after the full enemy phase, including non-attacking rounds. The player counterpart is a draft mirror using the existing main-shot calculation scope and a player-action-phase-end tick. No percentage or rounding change was selected.
 
@@ -79,7 +79,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 
 The owner authorized analogous fresh-part replacements after approving Spare Metal Brace. These twelve rows now schedule regular Shield parts instead of retaining active protection. Costs, cooldowns and meaningful conditions are preserved. Saved source parts retain explicit schedule clocks, checking that they are installed at those times. Last Wall checks leftover Shield before reset for its conditional cooling reward; its future Shield part is a separate fixed grant.
 
-**For our review:** Retention conflicts are resolved. Q09 retains standard one-part valuation mapping for the added outputs; numerical balance remains untested.
+**For our review:** Retention conflicts are resolved. Q09 now supplies standard one-part valuation mappings for the added outputs; numerical balance remains untested.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -102,9 +102,9 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 **Copy effects and scheduled Shield grants are not Utility items — resolved · R01**
 
-The owner corrected the copying finding: production means resource-based crafting; a Utility copying an existing part is an effect, not crafting that copy from resources. SH071/SH102/SH118 retain their copy eligibility, amounts, timing and printed-effect restrictions. MA107/NO107 are already covered by the selected scheduled ordinary-Shield-part rule. The obsolete conflict markers are removed without changing functional effects, costs or cooldowns. The four other conversion/generated-output rows are clarification cases in Q11, not asserted violations based solely on part output.
+The owner corrected the copying finding: production means resource-based crafting; a Utility copying an existing part is an effect, not crafting that copy from resources. SH071/SH102/SH118 retain their copy eligibility, amounts, timing and printed-effect restrictions. MA107/NO107 are already covered by the selected scheduled ordinary-Shield-part rule. The obsolete conflict markers are removed without changing functional effects, costs or cooldowns. The four other conversion/generated-output rows are now resolved in Q11 by preserving their explicit ordinary-part effects under the specific-exception rule.
 
-**For our review:** These five Utility-boundary findings are resolved. Q09 still covers the two Shield batches' canonical one-part resale references. No additional production-cost payment for a copied part is introduced.
+**For our review:** These five Utility-boundary findings are resolved. Q09 now supplies the two Shield batches' canonical one-part resale references. No additional production-cost payment for a copied part is introduced.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -270,7 +270,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 SH026's old 6 Shield plus retention of up to 4 is replaced by 4 Shield loaded on recipe Use and a new 6-Shield part loaded at the beginning of the next round. Both are ordinary parts. The second delivery is scheduled by recipe Use, regardless of whether the first part is activated or saved. Cost and cooldown are unchanged; the proposed flat 10 Shield was rejected.
 
-**For our review:** The retention conflict is resolved. Q09 retains the normal one-part resale-basis mapping work for the two generated outputs; no price has been invented.
+**For our review:** The retention conflict is resolved. Q09 now maps the two generated outputs under the owner-selected fixed-reference policy; exact unanchored costs remain beta tuning.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -494,38 +494,38 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q08
 
-**Status recipient implied rather than stated — clarification · R05**
+**Main-target status recipients selected — resolved · R05**
 
-The effect names a main hit/target condition but omits the recipient of one status application. The owner requires recipe-defined status scope, especially when a shot has extra targets. This is a wording finding, not a proposal that the status should affect everyone.
+After the Hot Filling/Split Outlet example, the owner selects main-target status wording for these fourteen Ammo recipes. Their effects now explicitly name that recipient while preserving conditions, amounts and timing. Split Outlet and the equivalent Three-Way Outlet explicitly spread direct damage without copying main-target payloads. This does not replace any other recipe's explicit other-target, multi-target or spreading-part status effect.
 
-**For our review:** Make the intended recipient explicit when reviewing these rows; no blanket main-target or all-hit default has been applied.
+**For our review:** All fourteen recipient cases are resolved. A 20-damage bullet containing Hot Filling and Split Outlet gives a surviving main target 20 damage and Burn 2 and the extra robot 10 damage without Burn, before defences. No status values or recipe costs/cooldowns changed.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH013 — Hot Filling** | Add 4 damage and apply Burn 2 after the main hit. |
-| **SH014 — Acid Filling** | Add 2 damage and apply Corrosion 2 after the main hit. |
-| **SH016 — Joint Snare** | Add 5 damage and apply Weaken 4 after the main hit. |
-| **SH055 — Short Fuse** | After the main hit, apply Weaken 3. |
-| **SH086 — Clean Entry** | If the main target has no Shield, apply Corrosion 6 after the main hit. |
-| **IV006 — Painted Acid** | After main damage, apply Corrosion 2 if the main target had Mark at Fire, before any Mark was spent. |
-| **IV008 — Under the Plate** | After main damage, apply Corrosion 3 if the main target had any Shield immediately before main damage. |
-| **IV015 — Read the Guard** | After main damage, apply Weaken 4 if the main target shows attack intent; otherwise apply Corrosion 3. |
-| **IV016 — Follow the Line** | After main damage, apply Weaken 3 if the main target had Mark at Fire, before any Mark was spent. |
-| **IV041 — Acid Booster** | After main damage, apply Corrosion 3, then apply 2 more if the main target now has at least 6 Corrosion. |
-| **IV047 — Settled Powder** | After main damage, apply Corrosion 1 for each round since this part entered reserve, up to Corrosion 4. |
-| **IV084 — Stored Acid** | After main damage, apply Corrosion 8 if this part was saved, otherwise Corrosion 4. |
-| **IV085 — Break the Barrel** | After main damage, apply Weaken equal to the Mark consumed by this main shot, up to Weaken 8. |
-| **AD038 — Screwdriver Tip** | After impact, apply Mark 3 if Bolt is active. |
+| **SH013 — Hot Filling** | Add 4 damage and apply Burn 2 to the main target after the main hit. |
+| **SH014 — Acid Filling** | Add 2 damage and apply Corrosion 2 to the main target after the main hit. |
+| **SH016 — Joint Snare** | Add 5 damage and apply Weaken 4 to the main target after the main hit. |
+| **SH055 — Short Fuse** | After the main hit, apply Weaken 3 to the main target. |
+| **SH086 — Clean Entry** | If the main target has no Shield, apply Corrosion 6 to that main target after the main hit. |
+| **IV006 — Painted Acid** | After main damage, apply Corrosion 2 to the main target if it had Mark at Fire, before any Mark was spent. |
+| **IV008 — Under the Plate** | After main damage, apply Corrosion 3 to the main target if it had any Shield immediately before main damage. |
+| **IV015 — Read the Guard** | After main damage, apply Weaken 4 to the main target if it shows attack intent; otherwise apply Corrosion 3 to that main target. |
+| **IV016 — Follow the Line** | After main damage, apply Weaken 3 to the main target if it had Mark at Fire, before any Mark was spent. |
+| **IV041 — Acid Booster** | After main damage, apply Corrosion 3 to the main target, then apply 2 more to it if it now has at least 6 Corrosion. |
+| **IV047 — Settled Powder** | After main damage, apply Corrosion 1 to the main target for each round since this part entered reserve, up to Corrosion 4. |
+| **IV084 — Stored Acid** | After main damage, apply Corrosion 8 to the main target if this part was saved, otherwise Corrosion 4 to that main target. |
+| **IV085 — Break the Barrel** | After main damage, apply Weaken to the main target equal to the Mark consumed by this main shot, up to Weaken 8. |
+| **AD038 — Screwdriver Tip** | After impact, apply Mark 3 to the main target if Bolt is active. |
 
 ## Q09
 
-**Canonical sale basis for batches and generated subparts — clarification · R06**
+**Fixed one-part sale references mapped — resolved · R06**
 
-The recipe creates multiple parts or a generated subpart without a recorded standard one-part production requirement for every resulting type. Preserve main-recipe-based resale; do not substitute the discounted producer's cost or divide a mixed batch arbitrarily.
+After the Plain Needle/Plain Slug example, the owner approves fixed standard one-part material references for parts without ordinary single-part recipes, using equivalent existing parts where possible. PART-RESALE.md and data/part-resale-bases.json map all 27 cases and 49 output descriptions, with 19 concrete references and two fixed-value families. Single source parts keep their normal main-recipe cost; grants and batch outputs use separate one-part references. Copies and equivalent aliases retain the same reference. No recipes or extra material payments are added.
 
-**For our review:** Record canonical one-part valuation references/requirements for these outputs. Known fresh copies inherit their original type's basis; generic copying alone is not a pricing conflict.
+**For our review:** All sale-reference cases are resolved at design/data level. Current shop resource prices, 50% and per-part floor remain. The checker verifies coverage, integer costs, aliases, exact anchors, price changes and variable boundaries. Unanchored numerical costs and family steps remain beta tuning, not proven economy balance.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -541,13 +541,13 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **MA048 — Holdfast** | When this part activates at End Turn, gain 10 Shield. You may pay 3 Heat at that activation. Schedule a new regular Shield part to load at the beginning of the next round: 12 Shield if you paid, or 4 Shield if you did not. |
 | **MA099 — Settled Slag** | When this part activates at End Turn, gain 22 Shield. |
 | **MA107 — Warm Repair Bench** | At the start of next turn, gain 2 Ready Plates. |
-| **MA119 — Spare Foundry** | **Utility-output classification requires review.** At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. |
+| **MA119 — Spare Foundry** | At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. |
 | **IV019 — Feint Plate** | When this part activates at End Turn, gain 7 Shield and schedule a new regular 3-Shield part to load at the beginning of the next round. If this source part was saved, also apply Weaken 3 to one enemy that currently has Mark; with no eligible enemy, gain only the Shield and… |
 | **IV057 — Stored Wall** | When this part activates at End Turn, gain 10 Shield, or 16 if this source part was saved. Schedule a new regular 4-Shield part to load at the beginning of the next round. |
 | **IV061 — Hold the Gap** | When this part activates at End Turn, gain 11 Shield. If any enemy currently has at least 6 Mark at that activation, schedule a new regular 5-Shield part to load at the beginning of the next round. |
 | **IV088 — Paired Needles** | Each part adds 6 damage and applies Corrosion 2 to the main target after main damage. |
 | **IV090 — Stockroom Wall** | When this part activates at End Turn, gain 12 Shield. If at least three saved parts are currently in reserve at that activation, schedule a new regular 14-Shield part to load at the beginning of the next round. |
-| **IV118 — Spare Needle Bench** | **Utility-output classification requires review.** For this fight, when a main shot consumes at least two saved Ammo parts, receive 1 Plain Needle at your next turn's start. |
+| **IV118 — Spare Needle Bench** | For this fight, when a main shot consumes at least two saved Ammo parts, receive 1 Plain Needle at your next turn's start. |
 | **AD017 — Spare Bolts** | Each Small Rivet adds 4 damage when used in a shot. |
 | **AD074 — Hold the Panel** | When this part activates at End Turn, gain 10 Shield. At the beginning of the next round, automatically load a new regular 8-Shield part if Bolt is active then. |
 | **AD083 — Work Order** | At the start of your next turn, receive 2 Small Rivets and 1 Guard Tab. |
@@ -557,7 +557,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **NO063 — Twin Field** | Each Small Field Ring gives 6 Shield when activated. |
 | **NO087 — Field Lock** | When this part activates at End Turn, gain 18 Shield. If a Fire in this activation round began with at least 8 Charge, schedule one new regular 12-Shield part to load at the beginning of the next round. Several qualifying shots do not add deliveries from this activation; Charge… |
 | **NO107 — Shield Press** | At the start of next turn, gain 2 Stored Field Plates. |
-| **NO120 — Pocket Generator** | **Utility-output classification requires review.** At the start of next turn, gain 2 Pulse Tips and 2 Charged Plates. |
+| **NO120 — Pocket Generator** | At the start of next turn, gain 2 Pulse Tips and 2 Charged Plates. |
 
 ## Q10
 
@@ -584,20 +584,20 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q11
 
-**Other Utility conversions and generated outputs — clarification · R01**
+**Explicit Utility conversions and ordinary-part grants — resolved · R01**
 
-These four effects convert a Shield part or grant named parts without selecting an existing part to copy. The owner's copying clarification resolves the copying rows; it does not require calling every other generated output a rule violation. Their classification under the production/effect distinction remains to clarify. Existing effects, costs and cooldowns are preserved; only their review annotations change.
+Apply the existing specific-effect exception rule. Plate Recasting converts its eligible sacrificed Shield part into the stated Ammo. Spare Foundry and Pocket Generator register their named next-turn deliveries; Spare Needle Bench registers its conditional delayed Ammo reward. They grant ordinary parts, not stored Utility activation items. Preserve printed recipe costs, sacrifices, conditions, output amounts, clocks and fight-end expiry; no extra production payment is introduced. Only obsolete classification-review markers are removed.
 
-**For our review:** Review their precise conversion/grant behavior only if it exposes a real unresolved distinction. Do not reopen copying, ordinary Shield grants or stored-Utility rules; do not invent extra production costs.
+**For our review:** The classification review is closed by preserving explicit effects under already-selected rules, not by claiming a new owner-selected universal Utility-output rule. Q09 now supplies all four standard one-part sale references.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH076 — Plate Recasting** | **Utility-output classification requires review.** Sacrifice one unused Shield part with a printed fixed Shield gain. |
-| **MA119 — Spare Foundry** | **Utility-output classification requires review.** At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. |
-| **IV118 — Spare Needle Bench** | **Utility-output classification requires review.** For this fight, when a main shot consumes at least two saved Ammo parts, receive 1 Plain Needle at your next turn's start. |
-| **NO120 — Pocket Generator** | **Utility-output classification requires review.** At the start of next turn, gain 2 Pulse Tips and 2 Charged Plates. |
+| **SH076 — Plate Recasting** | Sacrifice one unused Shield part with a printed fixed Shield gain. |
+| **MA119 — Spare Foundry** | At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. |
+| **IV118 — Spare Needle Bench** | For this fight, when a main shot consumes at least two saved Ammo parts, receive 1 Plain Needle at your next turn's start. |
+| **NO120 — Pocket Generator** | At the start of next turn, gain 2 Pulse Tips and 2 Charged Plates. |
 
 ## Q12
 
@@ -695,8 +695,8 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 - SH060's explicit loss of remaining Shield is not a recipe retention exception; it can be a downside when an upgrade would otherwise preserve Shield. A weaker or redundant effect is not itself a rule conflict.
 - The existing same-effect cooling pairs and relative recipe prices remain balance work. Renaming Burn/Corrosion/Mark/Weaken to the proposed robot vocabulary is a separate editorial migration.
 
-## Shared specification gaps, not 606 separate questions
+## Remaining implementation and balance work
 
-Exact targets and canonical output definitions remain catalogue work. Q02 now defines installed-value readings and automatic installation-order Shield payments. The six Q06 effects count both part-producing and Utility recipe Uses, preserving explicit part-only exceptions. Spread parts follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+All recorded recipe clarification groups are resolved. Q09 maps the 27 sale-reference cases; Q08 names its fourteen main-target recipients and Q11 retains explicit ordinary-part grants. Earlier Shield payment, recipe-use, spread lifecycle and first-installation rules remain selected. This is a completed written-rule review, not an exhaustive interaction proof. General engine event ordering, income-loop analysis and numerical economy/combat balancing still require implementation and simulation. Preserve End Turn, the Shield reset and explicit exceptions when building those systems. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
-**Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
+**Next action:** use the settled catalogue and beta sale references for costed encounter/route fixtures and shared-core simulator planning. Do not reopen resolved owner decisions or treat unselected alternative traits as replacements. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.

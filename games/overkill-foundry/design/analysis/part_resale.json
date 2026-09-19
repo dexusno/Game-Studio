@@ -1,0 +1,8 @@
+{
+  "recipe_cases": 27,
+  "standard_references": 19,
+  "output_descriptions": 49,
+  "checks": "Recipe/reference coverage, integer quantities, alias consistency, exact ordinary-part anchors, per-part floor, current prices and variable-output boundaries passed.",
+  "limits": "No runtime sales, combat, income-loop search, campaign simulation or balance test.",
+  "registry_sha256": "37fa098af39a05d5c56cc9b21a77ee4ed54e2fb5daf9b9b37f6d9846b91e3f5d"
+}
