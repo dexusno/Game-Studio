@@ -1,8 +1,8 @@
 # Recipe rule audit — review together
 
-**19 September 2026 · all 606 recipes reviewed · Shield resource bonuses and payments use first installation**
+**19 September 2026 · all 606 recipes reviewed · Shield calculations, installation history and hooks clarified**
 
-All recipe rows match reviewed revision `30ba098`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **90 additional recipes needing wording/dependency clarification**, and **516 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
+All recipe rows match reviewed revision `3172708`; settled rules and explicit character/recipe exceptions remain preserved. Found **0 recipes with a definite conflict or obsolete dependency**, **69 additional recipes needing wording/dependency clarification**, and **537 with no direct conflict identified**. A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.
 
 **Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.
 
@@ -10,17 +10,17 @@ All recipe rows match reviewed revision `30ba098`; settled rules and explicit ch
 
 This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. Those restored interactions remain unchanged by the later Utility wording pass; earlier totals and removal claims are historical. Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.
 
-**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Latest owner answers:** immediate extra Heat/Charge and additional Shield-part payments happen once on first installation, without removal refunds or repeated payment/bonus on reinstallation. Fifteen former Q13 rows close in Q14/Q15. Recipe ingredients, cooldowns and effect amounts are preserved. Q05/Q07's six earlier clarifications remain closed. **Pending joint question:** Stoked Armour provides 8 Shield plus Heat. Should installation at 6 Heat fix that part at 14 Shield even if Heat changes later? First-installation sampling retained across removal/reinstallation is the recommendation only. Damage still depletes protection normally. This is distinct from a value based on an actual payment, which is already fixed by that payment.
+**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. **Latest owner answers:** stat-based Shield values are calculated once at first installation, retaining normal depletion/reset and explicit exceptions. Order-based recipes count earlier first installations this round even after removal, once per physical part. Q03/Q12/Q13 now close 21 more cases; costs, cooldowns and effect amounts are preserved. Prior resource-bonus/payment and Utility clarifications remain closed. **Pending joint question:** should spread Modifiers such as Split Outlet remain physical bullet parts until Fire, allowing normal unload/reorder/save and unfired End Turn return? That is the recommendation only; consuming them on earlier Use with a pending effect is the alternative. Crafting still pays the recipe cost normally.
 
 ## Coverage
 
 | Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |
 | --- | ---: | ---: | ---: | ---: |
-| SH | 126 | 0 | 19 | 107 |
-| MA | 120 | 0 | 24 | 96 |
-| IV | 120 | 0 | 16 | 104 |
-| AD | 120 | 0 | 9 | 111 |
-| NO | 120 | 0 | 22 | 98 |
+| SH | 126 | 0 | 18 | 108 |
+| MA | 120 | 0 | 15 | 105 |
+| IV | 120 | 0 | 15 | 105 |
+| AD | 120 | 0 | 7 | 113 |
+| NO | 120 | 0 | 14 | 106 |
 
 All rows were read for: output kind and Utility lifecycle; installed Shield protection, reset and grants; per-copy cooldown, global cooling and no-cooldown uses; part-based damage, multiple shots and modifier duration; status recipients, hit order, explicit copy/stack limits; whole-number arithmetic and player HP costs/death; resource/part persistence, collection count and Precision protection; part consumption, saved-part age and canonical sale basis; specific character exceptions, base defaults and unselected trait alternatives.
 
@@ -46,7 +46,7 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [C14](#c14) | resolved | 8 | Original barrel timing and exclusions restored |
 | [Q01](#q01) | resolved | 11 | Reactive installed Shield protects subsequent attacks |
 | [Q02](#q02) | clarification | 12 | Preparation-time Shield readings and payments |
-| [Q03](#q03) | clarification | 5 | Installed Shield order and secondary payments |
+| [Q03](#q03) | resolved | 4 | Earlier first installations count for order-based recipes |
 | [Q04](#q04) | resolved | 5 | Remaining Shield sampled at enemy-phase end |
 | [Q05](#q05) | resolved | 4 | Immediate Utility payments and shared healing cap |
 | [Q06](#q06) | clarification | 6 | Recipe crafting versus immediate Utility use |
@@ -55,8 +55,8 @@ The [complete per-recipe ledger](analysis/recipe_rule_audit.json) contains every
 | [Q09](#q09) | clarification | 27 | Canonical sale basis for batches and generated subparts |
 | [Q10](#q10) | clarification | 10 | Spread Modifier lifecycle and placement order |
 | [Q11](#q11) | clarification | 4 | Other Utility conversions and generated outputs |
-| [Q12](#q12) | clarification | 3 | Installed Shield parts and shot/install hooks |
-| [Q13](#q13) | clarification | 13 | Conditional Shield values and remaining installation checks |
+| [Q12](#q12) | resolved | 3 | First-installation and next-shot hooks |
+| [Q13](#q13) | resolved | 14 | One-time Shield values and related installation checks |
 | [Q14](#q14) | resolved | 3 | First-installation Shield resource bonuses |
 | [Q15](#q15) | resolved | 12 | Once-only additional Shield installation payments |
 
@@ -66,7 +66,7 @@ These summaries refer to the selected-rule sections in [RECIPE-CATALOGUE.md](REC
 
 - **R01:** Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears.
 - **R02:** Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.
-- **R03:** Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Parts are counted at a recipe's stated event without being consumed by counting. Installed values add and damage depletes remaining Shield across attacks; normal enemy-turn-end reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, protecting subsequent attacks without retroactive blocking or refilling prior loss. Immediate resource bonuses and additional Heat/Charge/HP/part payments resolve once on first installation unless explicitly timed otherwise; removal/reinstallation neither refunds nor repeats them. Unpaid-stat snapshots and Shield-payment allocation remain draft. Explicit End Turn conditions retain that clock and check installed source parts.
+- **R03:** Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Counts do not consume parts. Installed values add and damage depletes protection; normal reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, without retroactive blocking or refilling prior loss. Unless explicitly timed otherwise, immediate bonuses, additional Heat/Charge/HP/part payments and stat-based calculations use first installation once, with no refund, repeat or recalculation on reinstallation. Order-based used-this-round conditions count earlier first installations even after removal; explicit current-installed checks retain their scope. Next-shot and delayed hooks retain named clocks/expiry. Allocation of Shield payments remains open.
 - **R04:** Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.
 - **R05:** Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.
 - **R06:** A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.
@@ -342,7 +342,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 The prior eight-row cleanup relied on the same mistaken assumption that a general zero-base-damage rule removed Charged Barrel. Those edits are reversed. Five rows again read Charge after its optional payment, and Hot Contact, Discharge Record and Discharge Gate retain their explicit exclusion of that payment from part-cost spending. Original amounts, recipients, durations, costs and cooldowns are preserved.
 
-**For our review:** The original eight rows are restored exactly. Together with C08, all thirteen interactions are valid with the retained character exception. NO058's separate Q13 timing question remains; this is not a balance result.
+**For our review:** The eight rows were restored on 18 September. NO058 now additionally has the owner-selected first-installation sampling text from Q13, preserving its amount and barrel-payment exclusion. All thirteen character interactions remain valid; this is not a balance result.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -354,7 +354,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 | **NO025 — Full Cell Tip** | Add 12 more if Charge is 12 at Fire, after the barrel's optional Charge payment. |
 | **NO035 — Even Current** | Add 6 more if you have an even positive amount of Charge at Fire, after the barrel's optional Charge payment. |
 | **NO048 — Discharge Record** | Also add 5% to its damage per Charge paid as part activation costs this round, up to 30%. |
-| **NO058 — Discharge Gate** | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. |
+| **NO058 — Discharge Gate** | On first installation, count Charge already paid as part-use costs this round. |
 | **NO110 — Reserve Coil** | For this fight, at Fire add 3 damage per Charge still held after the barrel's optional payment, up to 24 extra damage. |
 
 ## Q01
@@ -408,21 +408,20 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q03
 
-**Installed Shield order and secondary payments — clarification · R03**
+**Earlier first installations count for order-based recipes — resolved · R03**
 
-These effects reference other Shield parts already used or a current Shield balance. The former End Turn activation sequence is superseded by installed protection. Exact readings of prior/other installed parts and secondary payment ordering still need explicit wording; there is no activation prerequisite for protection itself.
+The owner selects earlier first installations this round, including parts later removed. Count each physical part once and exclude the source; reinstallation does not add history or repeat an eligibility check, gain or calculation. Failed installation adds no history. Preserve other recipes' explicit current-installed conditions. Reinforced Position, the fifth original Q03 row, is resolved with the one-time values in Q13.
 
-**For our review:** Reconcile the remaining order/payment clauses with installed parts as one group, preserving values and existing costs.
+**For our review:** Four order-based cases are resolved without changing costs, cooldowns or amounts. A first installation from an earlier round does not enter the current round's history.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **MA028 — Rivet Screen** | Gain 2 more for each other Shield part already activated this round, up to 6 extra Shield. |
-| **MA075 — Spare Furnace Door** | You cannot activate this part unless at least one other Shield part has already been activated this round. |
-| **IV094 — Reinforced Position** | Gain Shield equal to your current Shield, up to 16. |
-| **NO029 — First Field** | Gain 5 more if no other Shield part has been activated this round. |
-| **NO038 — Field Peg** | For each other Shield part already activated this round, gain 1 Charge, up to 3 Charge. |
+| **MA028 — Rivet Screen** | On first installation, count other Shield parts first installed earlier this round, including any since removed. |
+| **MA075 — Spare Furnace Door** | First installation requires at least one other Shield part to have been first installed earlier this round, even if it was later removed. |
+| **NO029 — First Field** | On first installation, set this part's Shield to 5, plus 5 if no other Shield part was first installed earlier this round. |
+| **NO038 — Field Peg** | On first installation, count other Shield parts first installed earlier this round, including any since removed, and gain 1 Charge per counted part once, up to 3 Charge. |
 
 ## Q04
 
@@ -602,45 +601,46 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Q12
 
-**Installed Shield parts and shot/install hooks — clarification · R03**
+**First-installation and next-shot hooks — resolved · R03**
 
-Impact Catch, Backplate and Rivet Collectors still use the former Shield-use timing. Automatic installed protection removes the old impossible-activation argument, but their next-shot or next-installed-part hooks need explicit arming, expiry and removal/reinstallation accounting. Their effects and values have not been silently changed.
+Apply the settled installation and explicit-clock rules. Impact Catch and Backplate arm once on first installation for the next main shot in that round, checking that the source is installed at the stated trigger. That shot consumes the check even if its condition fails; reinstallation does not re-arm it, and unused checks expire with the round. Rivet Collectors counts the next four first installations after its Modifier Use, repairs after each part's own effects if Bolt is active, and still expires at Fire. Amounts and costs are unchanged.
 
-**For our review:** Specify these secondary hooks under the installed-part rule, without a separate Shield activation or repeat rewards from reinstalling the same part.
+**For our review:** Three hook cases are resolved as consequences of existing rules. This introduces neither another Shield activation nor repeated rewards from reinstallation.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **SH062 — Impact Catch** | After your next main shot this round deals HP damage, gain another 7 Shield once. |
-| **MA034 — Backplate** | After this round's main shot, gain 4 more Shield if it consumed at most one Ammo part. |
-| **AD076 — Rivet Collectors** | Each of the next four Shield parts you use this planning phase repairs 2 Bolt HP if he is active. |
+| **SH062 — Impact Catch** | On first installation, arm a check for your next main shot this round. |
+| **MA034 — Backplate** | On first installation, arm a check for your next main shot this round. |
+| **AD076 — Rivet Collectors** | After using this Modifier, each of the next four Shield-part first installations this planning phase repairs 2 Bolt HP if he is active after that part's own effects. |
 
 ## Q13
 
-**Conditional Shield values and remaining installation checks — clarification · R03**
+**One-time Shield values and related installation checks — resolved · R03**
 
-First-installation resource bonuses and additional payments are now resolved separately in Q14/Q15. These remaining rows depend on unpaid-stat sampling, eligibility or delayed conditional tracking. The owner has not yet chosen whether Stoked Armour's Heat-based value is fixed on first installation or recalculated later. Preserve all printed conditions and explicit recipe clocks; do not silently re-arm effects on reinstallation.
+The owner selects calculating Shield values once. Stat-based values are sampled on first installation and retained across later stat changes or reinstallation, with ordinary depletion and reset preserved. Apply equivalent timing to the remaining eligibility checks, one-time effects and relative schedules while retaining explicitly later checks. Reinforced Position samples existing available Shield before adding its own contribution and grants Mark once. NO058 retains its explicit barrel-payment exclusion. Furnace Rest preserves its next-turn check over Heat payments after installation in that installation round.
 
-**For our review:** Review the pending Stoked Armour value-sampling question, then apply equivalent answers across the relevant rows. Keep actual-payment snapshots from Q15 distinct from unpaid current-stat conditions.
+**For our review:** Fourteen cases are resolved, including Reinforced Position moved from Q03. Actual-payment values from Q15 retain their own basis. Copy/grant exceptions, explicit clocks and draft meter balance remain unchanged.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 | Recipe | Existing wording |
 | --- | --- |
-| **MA013 — Flameproof Liner** | Gain 4 more if at least one living enemy has Burn when activated. |
-| **MA024 — Front Brace** | Gain 3 more if the sum of currently shown enemy attack damage is at least 15 when activated. |
-| **MA031 — Firebreak** | Gain 4 Shield for each living enemy that has Burn when activated, up to 12 Shield. |
-| **MA062 — Cold Riveting** | Gain 10 more if Heat is 0 when activated; otherwise lose 2 Heat after gaining Shield. |
-| **MA070 — Stoked Armour** | Gain 8 Shield, plus 1 Shield for each Heat you have when activated. |
-| **MA079 — Furnace Rest** | Gain 2 Heat at the start of next turn if no Heat was paid as an activation cost after this part was activated this round. |
-| **AD079 — Tools in Reserve** | Gain 6 Shield plus 2 per unused Helper part remaining in reserve after this activation, up to 8 extra Shield. |
-| **NO008 — Closed Field** | If Charge is at least 8 when activated, gain 3 more without spending Charge. |
-| **NO022 — Glass Guard** | Gain 3 more if you have paid Charge as a part activation cost this round. |
-| **NO032 — Sudden Field** | Reduce the total damage of the first enemy attack against you this round by your Charge when this part was activated, up to a reduction of 6. |
-| **NO058 — Discharge Gate** | Gain 6 Shield plus 2 Shield for every Charge paid as part activation costs this round, up to 12 extra Shield. |
-| **NO064 — Empty Socket** | Can activate only at 0 Charge. |
-| **NO076 — Reserve Screen** | Gain 8 more if at least two recipes in memory currently have numeric cooldown counters when activated. |
+| **MA013 — Flameproof Liner** | On first installation, set this part's Shield to 7, plus 4 if at least one living enemy currently has Burn. |
+| **MA024 — Front Brace** | On first installation, set this part's Shield to 9, plus 3 if the sum of currently shown enemy attack damage is at least 15. |
+| **MA031 — Firebreak** | On first installation, set this part's Shield to 4 per living enemy currently having Burn, up to 12 Shield. |
+| **MA062 — Cold Riveting** | On first installation, set this part's Shield to 6, plus 10 if Heat is currently 0. |
+| **MA070 — Stoked Armour** | On first installation, set this part's Shield to 8 plus 1 per Heat currently held, without spending Heat. |
+| **MA079 — Furnace Rest** | On first installation, schedule a check at the start of next turn: gain 2 Heat if no Heat was paid as a part-use cost after this installation during its round. |
+| **AD079 — Tools in Reserve** | On first installation, count unused Helper parts remaining in reserve after this installation. |
+| **NO008 — Closed Field** | On first installation, set this part's Shield to 10, plus 3 if Charge is currently at least 8, without spending Charge. |
+| **NO022 — Glass Guard** | On first installation, set this part's Shield to 8, plus 3 if you have already paid Charge as a part-use cost this round. |
+| **NO032 — Sudden Field** | On first installation, record your current Charge, capped at 6, without spending it. |
+| **NO058 — Discharge Gate** | On first installation, count Charge already paid as part-use costs this round. |
+| **NO064 — Empty Socket** | First installation requires exactly 0 Charge. |
+| **NO076 — Reserve Screen** | On first installation, set this part's Shield to 8, plus 8 if at least two recipes in memory currently have numeric cooldown counters. |
+| **IV094 — Reinforced Position** | On first installation, read your current available Shield before adding this part. |
 
 ## Q14
 
@@ -664,7 +664,7 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 The owner selects Quench Ribs' extra payment once on first installation, sufficient funds required, with no refund on removal or second payment on reinstallation. Apply to analogous Heat/Charge, HP and Ammo-sacrifice costs. Optional choices are committed once, and payment-derived values use the actual payment. Preserve cost-plus-1 HP eligibility, explicit clocks, source-installed reactive checks, committed deliveries and fight-end expiry. Reinstallation repeats no payment, gain or schedule. These twelve rows were previously in Q13.
 
-**For our review:** Payment timing and bookkeeping are resolved without changing recipe costs, cooldowns or effect amounts. Shield-spending allocation in Q02 and unpaid-stat sampling in Q13 remain distinct.
+**For our review:** Payment timing and bookkeeping are resolved without changing recipe costs, cooldowns or effect amounts. Q13 now records the selected one-time stat sampling; Shield-spending allocation in Q02 remains separate.
 
 Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
@@ -697,6 +697,6 @@ Exact excerpts below; full effects and costs remain in the catalogue and ledger.
 
 ## Shared specification gaps, not 606 separate questions
 
-Modifier/Helper lifecycle, allocation of payments from installed Shield, conditional stat sampling and some secondary hooks are still partly draft. Immediate resource bonuses and additional Heat/Charge/HP/part payments now use once-only first installation. Q03/Q10/Q12/Q13 identify concrete rows that expose open gaps. Q04's position before the reset is now clarified; ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
+Spread Modifier lifecycle, allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related Shield hooks now follow the selected first-installation rules. Q02/Q06/Q08/Q09/Q10/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.
 
 **Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. Shield-part replacements, pre-reset timing clarifications, saved-Utility bonuses, combined immediate Utility effects and ordinary-part sacrifices are applied; unrelated replacements and gameplay implementation are not implied.
