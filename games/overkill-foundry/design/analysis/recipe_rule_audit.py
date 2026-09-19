@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "5e73bd8fa1757a6235d07b50132a395f8ccae064"
+SOURCE_COMMIT = "a3b2e042b77ad221ef77837c54e59e1d886a8903"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -107,18 +107,18 @@ FINDINGS = [
             "SH066 SH091 MA055 IV092 NO044",
             r"After enemies",
             "Reset-relative timing is resolved. Preserve actual payments and original reward timing; general ordering among interacting end-phase effects remains part of the shared resolution specification."),
-    finding("Q05", "clarification", "Utility item wording left after conversion", "R01",
-            "The immediate effect is usable without an inventory item, but leftover 'pack crafted' or 'copies of its part' wording describes the former Utility-item model. Unlike the former C03 dependencies, the main effect does not require storing the Utility.",
-            "SH029 SH030 SH031 SH074", r"crafted|copies of its part",
-            "Review wording/cap ownership; no numerical retuning is implied by this finding."),
+    finding("Q05", "resolved", "Immediate Utility payments and shared healing cap", "R01",
+            "Existing immediate-Utility rules resolve the obsolete pack/crafting wording. Copper Recovery, Glass Recovery and Iron Recovery pay their listed cost once on recipe Use and grant the conversion then. Quick Patch restores HP on Use and retains its existing 8-HP-per-fight cap shared across all Uses and duplicate copies of that recipe. No Utility inventory item or second payment is introduced.",
+            "SH029 SH030 SH031 SH074", r"On recipe Use|shared across",
+            "Four wording findings are resolved without changing costs, cooldowns or amounts. The healing cap remains recipe-wide; duplicate recipe availability still tracks each copy independently."),
     finding("Q06", "clarification", "Recipe crafting versus immediate Utility use", "R01",
             "The effect counts crafting, crafting costs or a crafted numeric-cooldown recipe. It does not explicitly say whether immediate Utility recipe Uses count. Part-producing crafts and all recipe Uses are different sets after the Utility conversion.",
             "SH023 SH070 MA069 NO062 NO071 NO109", r"craft",
             "Make the counted event explicit. Existing clauses that explicitly count physical parts can remain narrower."),
-    finding("Q07", "clarification", "Cooling rewards restricted to parts", "R01",
-            "The reward counts cooling performed by a part rather than by a Utility. That can be intentional: NO057 is an Ammo part that really cools recipes. Consequently NO094's old superseded marker is not enough to prove a contradiction.",
+    finding("Q07", "resolved", "Explicit part-only cooling rewards retained", "R01",
+            "Both recipes explicitly restrict their reward to cooling caused by a part. Preserve that narrower condition under the existing recipe-specific scope rule. Recall Pin (NO057) is an eligible Ammo source; direct Utility cooling and normal round progression do not qualify. Remove Charge Receipt's obsolete superseded marker without changing its functional effect. The underlying cooling still affects every eligible recipe under the global-cooling rule.",
             "NO080 NO094", r"parts this round|with a part",
-            "Review intended eligible sources. Do not automatically broaden the reward to Utilities or mistake this for non-global cooling."),
+            "These two eligibility findings are closed by retaining the explicit wording, not by inventing a broader trigger. Recipe amounts, timing and caps remain unchanged."),
     finding("Q08", "clarification", "Status recipient implied rather than stated", "R05",
             "The effect names a main hit/target condition but omits the recipient of one status application. The owner requires recipe-defined status scope, especially when a shot has extra targets. This is a wording finding, not a proposal that the status should affect everyone.",
             "SH013 SH014 SH016 SH055 SH086 IV006 IV008 IV015 IV016 IV041 IV047 IV084 IV085 AD038",
@@ -225,9 +225,9 @@ def render():
     for status in ("conflict", "clarification", "no_direct_conflict_identified"):
         totals.setdefault(status, 0)
     ledger = {
-        "audit_date": "2026-09-18", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-18: explicit character effects can override base rules. Hot Barrel and Charged Barrel restored; all thirteen barrel recipe interactions retained. The eight prior cleanup edits and the unselected replacement-tally proposal are reversed/withdrawn.",
-        "source_commit_scope": "All 606 printed recipe rows match the restored pre-cleanup revision 5e73bd8. The current full catalogue hash includes the newer character-exception rule and restored trait prose. Only eight rows changed relative to the preceding turn, all exact restorations.",
+        "audit_date": "2026-09-19", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
+        "rule_revision": "2026-09-19: Q05 closes through immediate Utility wording and the existing shared healing cap; Q07 retains explicit part-only cooling conditions. Character exceptions and restored barrel interactions remain. The Q13 secondary-bonus timing question is pending, not decided.",
+        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 9d40e07, exactly SH029/SH030/SH031/SH074/NO094 have changed effect text. Every name/output/kind/cost/cooldown and the other 601 rows are preserved. All thirteen restored barrel interactions remain unchanged.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -238,20 +238,21 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**18 September 2026 · all 606 recipes reviewed · character exceptions restored; barrel conflict group cleared**", "",
-             f"All recipe rows match restored revision `{SOURCE_COMMIT[:7]}`; the audit now applies the owner's explicit character-exception clarification. "
+             "**19 September 2026 · all 606 recipes reviewed · six routine clarifications closed; Shield bonus timing pending**", "",
+             f"All recipe rows match reviewed revision `{SOURCE_COMMIT[:7]}`; settled rules and explicit character/recipe exceptions remain preserved. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
              f"**{totals['no_direct_conflict_identified']} with no direct conflict identified**. "
              "A recipe can have findings in several groups; group counts therefore overlap. Clarifications on a conflicting recipe are also retained.", "",
              "**Owner resolutions:** C04/C05 use ordinary Shield parts and explicit future deliveries. Following Folding Brace, the owner approved Spare Metal Brace's 8-now/conditional-5-next-round schedule and authorized analogous replacements. All twelve remaining C01 retention recipes now deliver fresh parts under their stated conditions; SH034's old expiry is resolved in C10. Parts left installed protect when enemies attack, and active Shield resets at enemy-turn end. Parts remain removable/saveable; a delivery does not copy the source's delivery or secondary effects.", "",
              "**Latest timing clarification:** Field Pocket counts remaining Shield before reset and delivers recorded Charge next round. The same pre-reset reading/payment now resolves five Q04 rows. Existing reward timing and explicit Shield costs are preserved.", "",
-             "This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. All 606 recipe rows match the pre-cleanup source; earlier totals and removal claims are historical. "
+             "This is an audit for joint review. The owner corrected the assumption behind all thirteen barrel findings: special character effects can override base rules. Hot Barrel and Charged Barrel are restored as earlier trait drafts, and the eight recipe cleanups are reversed. The other five rows retain their original payment conditions; no replacement Charge-spending tally is introduced. The four-character review found no comparable removal of Ivo's Find the Seam or Ada's Bolt feature. Quench Recovery and Residual Current remain unselected alternatives. Those restored interactions remain unchanged by the later Utility wording pass; earlier totals and removal claims are historical. "
              "Character trait values remain draft balance; proposed alternatives do not automatically replace retained traits. "
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet still needs Q10 spread-Modifier lifecycle clarification. "
-             "**Next joint review:** review the remaining clarification groups under the corrected exception hierarchy before asking new questions. Start with implicit Shield secondary-cost timing in Q13; protection from installed Shield parts is already settled.", "",
+             "**Latest consolidation:** Q05's four Utility descriptions now state immediate recipe Use and the existing shared cap; Q07 preserves two explicit part-only cooling conditions. Five effect texts changed, with all numeric values/costs/cooldowns and the other 601 rows retained. "
+             "**Pending joint question:** Boiler Jacket grants 6 Shield plus 1 Heat. Should the extra Heat arrive once on first installation or at End Turn while installed? First installation, without a repeated bonus on reinstallation, is the recommendation only. Preserve explicit recipe clocks. The secondary bonus is under discussion; automatic Shield protection is settled. Related payment/snapshot cases remain pending.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
