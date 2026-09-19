@@ -4,19 +4,19 @@ Review date: 20 September 2026. Planning only. Source baseline: `1e78ddd`, plus 
 
 ## Readiness verdict
 
-**There is enough settled design to plan and build the common foundations. The complete MVP boundary is not yet ready to call settled.** The original 111 recipe clarifications are closed. The remaining issues are cross-system contracts, content selection and two pending owner choices, not another backlog of unanswered recipe questions. No game implementation starts as part of this planning assignment.
+**There is enough settled design to plan and build the common foundations. The complete MVP boundary is not yet ready to call settled.** The original 111 recipe clarifications are closed. The remaining issues are cross-system contracts, content selection and the pending MVP-scope choice, not another backlog of unanswered recipe questions. No game implementation starts as part of this planning assignment.
 
 | Finding | Why it matters | Treatment before dependent work |
 | --- | --- | --- |
 | First-MVP size has never been selected | A three-fight experiment, one complete city and four full campaigns require different content and acceptance criteria | Owner question pending. Recommend one complete City 1 with Mara. Common rules work is useful for every option. |
-| Robot recoil still says prepared Shield is inactive during firing | Installed Shield now protects automatically; the old robot wording can make the same attack resolve differently in different systems | Owner question pending: recommend installed Shield absorbs ordinary recoil before HP, with explicit bypass exceptions preserved. Recoil remains lethal if HP reaches zero. |
+| Resolved: Shield protects during Fire | Owner clarifies that firing automatically activates Shield when installed parts provide strength | Ordinary recoil depletes that available Shield before HP. No manual activation, refill or repeated first-installation effect; zero-shot enemy-phase protection and explicit exceptions remain. This is no longer a readiness gap. |
 | No single executable order for costs, hits, reactions and delayed effects | Recipe rows and proposed robot/upgrade rules can each be clear while their combined result is ambiguous | Write and test an event contract before complex effects. Preserve explicit clocks and special abilities; ask only if ordering changes an unresolved player-facing outcome. |
 | Fight-end clearing, shop purchases and save transactions are not joined up | Supplies bought for the next fight could be erased; restart could duplicate purchases, rewards or upgrade charges | Define phase ownership and committed transaction IDs before the shop and Continue flows. See the transition contract below. |
 | The full-city offer pool is not selected or executable | There are 606 recipe drafts and 288 upgrade proposals, but free-text effects are not runtime implementations. Detailed Mystery choices/outcomes are still missing | Select a coherent, versioned MVP content list, then implement and test every effect it can offer. Define complete Mystery transactions before enabling those nodes. |
 | Whole-city economy and HP attrition have not been simulated | Paper recipe costs and one worked fight do not establish shop affordability, healing supply, repeated generator sales or a beatable boss | Configurable beta values plus complete-city runs and human tests. This is balance work, not a reason to reopen the base rules. |
 | No fresh Unreal project or playable proof exists | Concept boards and the old camera study establish a direction, not input quality, runtime performance or graphics approval | Verify the new toolchain, build the shared core, then an actual interactive build. Human visual approval remains a delivery gate. |
 
-The first two choices were asked together during this review; neither answer is assumed. The other rows are concrete work packages. They do not require a new questionnaire before every implementation step.
+The owner resolved recoil protection on 20 September: Shield automatically activates when firing if installed parts provide strength. Only the MVP-scope answer remains pending. The other open rows are concrete work packages. They do not require a new questionnaire before every implementation step.
 
 ## Proposed playable boundary
 
@@ -72,11 +72,11 @@ Fight-entry reset must clear recipe cooldowns and fight-local tracking without c
 
 ## Dependency-ordered work packages
 
-These IDs describe build order, not a competing progress tracker. A package may begin only when its listed prerequisites supply the stated contracts. P00 resolves the two owner choices and produces the enabled-content list and contracts above. If an answer remains pending, common contract preparation may proceed but the affected content/acceptance rules remain blocked.
+These IDs describe build order, not a competing progress tracker. A package may begin only when its listed prerequisites supply the stated contracts. P00 resolves the remaining scope choice and produces the enabled-content list and contracts above, applying the settled recoil rule. If an answer remains pending, common contract preparation may proceed but the affected content/acceptance rules remain blocked.
 
 | ID | Package | Depends on | Deliverable and evidence required to finish |
 | --- | --- | --- | --- |
-| P00 | Scope, contracts and content selection | — | Record scope/recoil answers; write event, transition, gathering and save contracts; name the exact enabled content and provisional balance values. No implementation from assumed answers. |
+| P00 | Scope, contracts and content selection | — | Record the scope answer and apply the settled Shield/recoil rule; write event, transition, gathering and save contracts; name the exact enabled content and provisional balance values. No implementation from assumed answers. |
 | P01 | Fresh core and Unreal build setup | P00 | New project/library, headless executable and minimal Unreal host. Record reproducible commands and tool versions; launch both locally. No old game code. |
 | P02 | State, IDs and typed content | P01 | Integer state, source identities, effect operations, manifest validator and versioned serialization. Round-trip representative state; reject duplicate IDs, broken references and unsupported effects. |
 | P03 | Deterministic actions and events | P02 | Legal-action API, atomic costs, queued triggers, separate RNG streams, dry-run preview, logs and entry snapshots. Same version/seed/actions reproduce the state/event trace; preview is side-effect free. |
@@ -126,7 +126,7 @@ These are behavioral checks for the implementation, not new balance rules or tes
 | Turn and cooldown | Zero-shot End Turn; multiple shots without another haul/tick; cooldown 1 blocks the next round; explicit cooling permits a legal reuse; independent copies; no-cooldown use limits and named exceptions. |
 | Parts and Shield | Auto-installed Utility grants; remove/save/reinstall; first-install costs/values counted once; earlier-install history survives removal; drain 6 then 4 by 5 leaves 1 then 4; no refill; next-round delivery versus retention; pre-reset conversion. |
 | Damage and characters | Whole-number combined percentages; independent spread hits in placement order; explicit payload targets; lost later hits on dead targets; zero base damage alongside the enabled character's explicit exception (Hot Barrel for Mara; Charged Barrel when Noor is enabled). |
-| Costs and death | Full cost + 1 for own HP costs; failed atomic payment; enemy recoil Shield rule after selection; lethal recoil interrupts the shot; simultaneous last-robot/player death; an enabled explicit rescue exception. |
+| Costs and death | Full cost + 1 for own HP costs; failed atomic payment; ordinary recoil drains installed Shield before HP, including during Fire; lethal recoil interrupts the shot; simultaneous last-robot/player death; an enabled explicit rescue exception. |
 | Enemies and RNG | Previewed intent stays committed; effects update forecasts lawfully; summoned entities cannot act early; escape warning/actions/departure; no loot for fled enemies; same seed/choices repeat after Continue. |
 | Economy and persistence | Fixed price after a discount/copy/bonus; selling eligible reserves with a loaded bullet; no sale of loaded parts; saved shops do not refill; fight-end clearing preserves later purchases; no duplicate rewards; Collection discoveries survive rollback/death. |
 | Content interactions | Every enabled effect has coverage plus targeted pairings at high-risk boundaries: cooling + extra uses, grant + refund, Shield spend + retention, death + reward, copied part + original-sale reference. Never claim exhaustive combinatorial coverage. |
@@ -141,4 +141,4 @@ Add Lockdown tiers and the final reveal after ordinary full campaigns, balance r
 
 ## Current next step
 
-Finish P00 using the pending scope and recoil answers. The immediate follow-up deliverable is a concrete enabled-content manifest and the small set of event/transition traces needed for that boundary. Then request/receive the owner's next implementation goal under the existing step-by-step workflow. This planning request does not authorize starting the engine project automatically. No balance, gameplay or graphics approval is claimed by completing this document.
+Finish P00 using the pending scope answer and the settled Shield/recoil rule. The immediate follow-up deliverable is a concrete enabled-content manifest and the small set of event/transition traces needed for that boundary. Then request/receive the owner's next implementation goal under the existing step-by-step workflow. This planning request does not authorize starting the engine project automatically. No balance, gameplay or graphics approval is claimed by completing this document.
