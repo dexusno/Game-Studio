@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "351756da84a26d0d21217785974bd1a3caf86e81"
+SOURCE_COMMIT = "de7e6e62bda5e54e7dfd357936b0d162fa49bfab"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -47,7 +47,7 @@ FINDINGS = [
             r"gain.*Shield|Shield equal|Each trigger grants",
             "MA004 Quick Vent is resolved: automatically load its 5-Shield part, with ordinary removal/storage available. Other findings on these rows remain separate; AD103/AD107/AD119 also have enemy-phase triggers covered by Q01."),
     finding("C05", "resolved", "Explicit future-turn Shield schedules", "R03",
-            "Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and protects automatically against enemy attacks if still installed. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording is now corrected in C10; MA118's active-Shield payment remains in Q02. Other printed values are still draft balance.",
+            "Resolved at the timing-rule level by the owner's Folding Brace revision: a recipe may schedule a new ordinary Shield part for the beginning of the next round. It loads then, remains removable/saveable and protects automatically against enemy attacks if still installed. This is neither active-Shield retention nor immediate active protection. SH034's expiry wording is now corrected in C10; MA118's installed-Shield payment is now resolved in Q02. Other printed values are still draft balance.",
             "SH034 SH096 SH115 MA016 MA040 MA092 MA118 IV059 IV097 IV112 IV120 AD063 AD066 AD098 NO018 NO034 NO056 NO098 NO113",
             r"start|next turn",
             "Interpret an explicitly scheduled Shield grant as a new ordinary part at its stated trigger. An immediate grant alone does not repeat next round. Preserve each row's stated conditions and other unresolved findings."),
@@ -92,11 +92,11 @@ FINDINGS = [
             "MA044 MA071 MA090 MA115 IV021 NO042 NO083 NO117 AD103 AD107 AD119",
             r"gain 6 Shield after|gain 12 Shield|after|restore",
             "Automatic protection is resolved. Q13 separately retains NO083's implicit Charge-payment timing; inter-effect ordering still follows the shared specification work."),
-    finding("Q02", "clarification", "Preparation-time Shield readings and payments", "R03",
-            "These recipes read or spend Shield during preparation. The installed-part clarification establishes protection at enemy attack time, but does not define how a preparation payment removes protection from installed parts or how removal/reinstallation interacts with that payment. It is no longer valid to claim that only an upgrade can make these effects usable.",
+    finding("Q02", "resolved", "Installed Shield readings and ordered payments", "R03",
+            "The owner selects automatic Shield payments in installation order. Read or spend the remaining protection on currently installed parts, excluding reserve. A payment drains the oldest current installation first and continues as needed; spending 5 from parts at 6 then 4 leaves 1 then 4. Validate the full chosen cost before committing. Removal, storage and reinstallation preserve reduced values and cannot refund spending; reinstallation goes behind parts still installed without repeating first-installation accounting. Read-only checks sample the available total at their stated event. Part-use and immediate Utility payment clocks and explicit reward restrictions remain.",
             "SH085 MA027 MA037 MA061 MA068 MA081 MA112 MA118 AD095 NO010 NO079 NO116",
-            r"Shield",
-            "Clarify installed-value sampling and real payment bookkeeping without inventing Shield activation or granting refunds by reinstalling a paid-down part."),
+            r"installed parts|currently installed|installation order",
+            "Twelve cases are resolved without changing printed ingredients, cooldowns or numeric effects. Boiler Oath still counts part-use payments only; Utility costs and damage loss do not qualify. Payment does not itself remove an empty part or replace its other effect clocks. No Shield activation or reinstallation refill is introduced."),
     finding("Q03", "resolved", "Earlier first installations count for order-based recipes", "R03",
             "The owner selects earlier first installations this round, including parts later removed. Count each physical part once and exclude the source; reinstallation does not add history or repeat an eligibility check, gain or calculation. Failed installation adds no history. Preserve other recipes' explicit current-installed conditions. Reinforced Position, the fifth original Q03 row, is resolved with the one-time values in Q13.",
             "MA028 MA075 NO029 NO038",
@@ -155,13 +155,13 @@ FINDINGS = [
             "The owner selects Quench Ribs' extra payment once on first installation, sufficient funds required, with no refund on removal or second payment on reinstallation. Apply to analogous Heat/Charge, HP and Ammo-sacrifice costs. Optional choices are committed once, and payment-derived values use the actual payment. Preserve cost-plus-1 HP eligibility, explicit clocks, source-installed reactive checks, committed deliveries and fight-end expiry. Reinstallation repeats no payment, gain or schedule. These twelve rows were previously in Q13.",
             "MA017 MA022 MA040 MA054 MA096 NO003 NO018 NO026 NO053 NO069 NO083 NO105",
             r"first installation",
-            "Payment timing and bookkeeping are resolved without changing recipe costs, cooldowns or effect amounts. Q13 now records the selected one-time stat sampling; Shield-spending allocation in Q02 remains separate."),
+            "Payment timing and bookkeeping are resolved without changing recipe costs, cooldowns or effect amounts. Q13 now records the selected one-time stat sampling; Q02 now records selected installation-order Shield spending."),
 ]
 
 RULES = {
     "R01": "Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears. The six Q06 bonuses/discounts count successful part-producing and Utility recipe Uses; explicit part-only effects remain narrower.",
     "R02": "Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.",
-    "R03": "Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Counts do not consume parts. Installed values add and damage depletes protection; normal reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, without retroactive blocking or refilling prior loss. Unless explicitly timed otherwise, immediate bonuses, additional Heat/Charge/HP/part payments and stat-based calculations use first installation once, with no refund, repeat or recalculation on reinstallation. Order-based used-this-round conditions count earlier first installations even after removal; explicit current-installed checks retain their scope. Next-shot and delayed hooks retain named clocks/expiry. Allocation of Shield payments remains open.",
+    "R03": "Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Counts do not consume parts. Installed values add and damage depletes protection; normal reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, without retroactive blocking or refilling prior loss. Unless explicitly timed otherwise, immediate bonuses, additional Heat/Charge/HP/part payments and stat-based calculations use first installation once, with no refund, repeat or recalculation on reinstallation. Order-based used-this-round conditions count earlier first installations even after removal; explicit current-installed checks retain their scope. Next-shot and delayed hooks retain named clocks/expiry. Read-only Shield checks use remaining installed protection at their stated event. Shield payments drain current installations oldest-first, preserving reduced values through removal/reinstallation and excluding reserve parts.",
     "R04": "Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.",
     "R05": "Each recipe specifies its own status recipients; there is no blanket main-target-only or all-hit-target default.",
     "R06": "A part's sale value uses the main recipe's normal one-part ingredient requirement, current resource prices, a 50% factor and whole-credit floor. Discounts/copies do not change that basis.",
@@ -235,8 +235,8 @@ def render():
         totals.setdefault(status, 0)
     ledger = {
         "audit_date": "2026-09-20", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-20: owner confirms both part-producing and Utility recipe Uses count for the six Q06 effects. Distinct identities, repeated Uses, numeric-cooldown eligibility and explicit part-only exceptions are preserved. Previous spread lifecycle and Shield resolutions remain. Shield-payment allocation is the next pending question.",
-        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 00c2366, exactly six Q06 recipe-use effect texts changed. All names/outputs/kinds/ingredients/cooldowns, numeric effect values and the other 600 rows are preserved. Explicit part-only conditions, character traits and barrel-payment exceptions remain.",
+        "rule_revision": "2026-09-20: owner selects automatic Shield-payment allocation in installation order. Q02 resolves installed-value readings and payments while preserving clocks and explicit part-only conditions. Q06 and previous spread/Shield resolutions remain. Q08 status recipients are pending; the owner requested an example, not application.",
+        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 7349145, exactly twelve Q02 Shield-reading/payment effect texts changed. All names/outputs/kinds/ingredients/cooldowns, numeric effect values and the other 594 rows are preserved. Explicit part-only conditions, character traits and barrel-payment exceptions remain.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -247,7 +247,7 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**20 September 2026 · all 606 recipes reviewed · recipe-use bonuses clarified**", "",
+             "**20 September 2026 · all 606 recipes reviewed · Shield-payment allocation clarified**", "",
              f"All recipe rows match reviewed revision `{SOURCE_COMMIT[:7]}`; settled rules and explicit character/recipe exceptions remain preserved. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
@@ -260,8 +260,8 @@ def render():
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. "
-             "**Latest owner answer:** part-producing and Utility recipe Uses both count for the six Q06 effects. Distinct-recipe conditions count identities, repeat-use conditions aggregate across copies of that recipe, and numeric-cooldown eligibility remains. Wire Lattice counts actual Copper paid and samples once at first installation. Q06 closes six cases with amounts, costs, cooldowns and caps preserved. Prior spread lifecycle, Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. "
-             "**Pending joint question:** should Shield payments automatically drain installed parts in installation order, or should the player choose which parts pay? Shield Boiler spending 5 from a 6-Shield part followed by a 4-Shield part would leave 1 + 4 under the recommended automatic order. Reinstallation already cannot restore spent Shield. Allocation is not yet selected.", "",
+             "**Latest owner answer:** Shield payments drain installed parts in installation order, preserving their reduced values through removal/storage/reinstallation. Read-only checks sum remaining installed protection at their stated event. Q02 closes twelve cases with amounts, costs, cooldowns and explicit part-only reward restrictions preserved. Both part-producing and Utility recipe Uses count for Q06; prior spread lifecycle, Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. "
+             "**Pending joint question:** should the fourteen Q08 Ammo status clauses with omitted recipients explicitly target the main enemy? The owner requested an example. On a 20-damage bullet containing Hot Filling and Split Outlet, the recommendation gives the surviving main target 20 damage and Burn 2, while the extra target receives 10 damage without Burn, before defences. Recipes explicitly naming other or multiple recipients retain their scope. No targeting answer is assumed.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -300,8 +300,8 @@ def render():
               "- SH060's explicit loss of remaining Shield is not a recipe retention exception; it can be a downside when an upgrade would otherwise preserve Shield. A weaker or redundant effect is not itself a rule conflict.",
               "- The existing same-effect cooling pairs and relative recipe prices remain balance work. Renaming Burn/Corrosion/Mark/Weaken to the proposed robot vocabulary is a separate editorial migration.", "",
               "## Shared specification gaps, not 606 separate questions", "",
-              "Allocation of payments from installed Shield, exact targets and canonical output definitions remain catalogue work. The six Q06 effects count both part-producing and Utility recipe Uses, preserving explicit part-only exceptions. Spread parts follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. "
-              "Q02/Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
+              "Exact targets and canonical output definitions remain catalogue work. Q02 now defines installed-value readings and automatic installation-order Shield payments. The six Q06 effects count both part-producing and Utility recipe Uses, preserving explicit part-only exceptions. Spread parts follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. "
+              "Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
               "**Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. "
