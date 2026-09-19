@@ -8,7 +8,7 @@ The owner defines upgrades as campaign-lasting items comparable to STS2 relics. 
 
 The owner also requires rarity parity with the reference. Common, Uncommon and Rare source relics map directly to those upgrade rarities. Shop and Event describe exclusive source pools rather than an ordered power tier: preserve that source category and give the adapted item a stated proposed power rarity. Ancient sources map to Rare/Legendary Mayor gifts. Starter-inspired acquired items extend an innate feature rather than replacing or recounting the existing innate ability; their acquired rarity needs an explicit rationale.
 
-All individual effects, quantities, acquisition distributions and implementation conventions below are proposals. A catalogue entry is an authored exception in its stated scope; it does not silently revoke a different character, recipe or upgrade effect. Existing Hot Barrel, Charged Barrel, Find the Seam and Bolt definitions remain intact. Quench Recovery and Residual Current remain unselected alternatives.
+Individual effects, quantities and acquisition distributions remain proposals. The [timing and persistence contract](TIMING-AND-PERSISTENCE.md), completed under the owner's 20 September instruction, now specifies the shared event order and save behavior; its concrete conventions supersede earlier open timing/save notes below. A catalogue entry is an authored exception in its stated scope; it does not silently revoke a different character, recipe or upgrade effect. Existing Hot Barrel, Charged Barrel, Find the Seam and Bolt definitions remain intact. Quench Recovery and Residual Current remain unselected alternatives.
 
 ## Lifetime and ownership
 
@@ -17,7 +17,7 @@ All individual effects, quantities, acquisition distributions and implementation
 - An on-acquisition effect occurs once. Reopening the shop, loading a save, moving a part or entering another city does not reacquire the item.
 - An upgrade may remain owned after its limited charges are spent. Show the spent state; permanent ownership does not imply unlimited trigger uses.
 - The campaign resets upgrades on New Game/death. Fight-local counters, scheduled deliveries and generated supplies expire at fight end unless an entry explicitly changes that boundary. Campaign counters persist.
-- Continue restores the original fight-entry state and seed. Upgrades bought or triggered inside the abandoned fight must replay from that state; no duplicated purchases, payouts or consumed charges survive outside the restored snapshot.
+- Continue restores the original pre-start fight-entry state and seed, then deterministically runs entry effects once. Upgrades bought or triggered inside the abandoned fight replay from that state; no duplicated purchases, payouts or consumed charges survive outside the restored snapshot. Completed outside-fight purchases/acquisitions persist with their receipts. See the [save contract](TIMING-AND-PERSISTENCE.md#5-fight-completion-and-between-fight-flow).
 
 ## Events and ordering
 
@@ -38,7 +38,7 @@ Use typed events with a stable event ID, source ID, originating player action, p
 | Enemy phase end | Finish attacks/reactions, then read/pay remaining Shield and record deferred rewards before the normal reset. Apply explicit retention only to the remaining value. Weaken decays once per entire enemy phase. |
 | Victory / encounter complete | Commit rewards once. A no-kill, all-escaped fight gives no kill/victory reward. Non-combat Mystery completion advances city progress but is not a combat victory. |
 
-For otherwise simultaneous effects, use acquisition order and then stable ID order. Resolve each effect fully before the next, with death interruption taking priority. Explicit before/after text overrides this fallback. Required choices pause resolution and show their consequence; choices do not reroll the source event.
+For otherwise simultaneous upgrades, use acquisition order and then stable ID order. The [shared contract](TIMING-AND-PERSISTENCE.md#1-effect-ordering) extends this to part hooks using saved binding order, with explicit phase clocks taking precedence. Resolve each effect and its immediate reactions before the next; death prevention/interruption has priority. Required choices pause resolution and show their consequence; persist the choice cursor and do not reroll or reapply its completed steps.
 
 Claim an item's once-per-turn/fight allowance **before** resolving its payload. A fresh resource grant is not a refund; a refund cannot exceed the named eligible material actually paid unless the entry explicitly grants a bonus. A proc that requires a paid recipe cannot trigger from a free copy or passive grant. Cross-item synergies remain possible: this is event attribution, not a blanket ban on upgrades triggering each other. Flag an actual self-sustaining trigger cycle for redesign; do not impose a global shot/action cap to hide it.
 

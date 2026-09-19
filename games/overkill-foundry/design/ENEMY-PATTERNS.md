@@ -31,7 +31,7 @@ For support branches, freeze the selected action at intent selection. If an Asse
 
 Keep existing explicit exceptions: Conveyor Sovereign's displayed crush can be postponed by a Brake Drone kill; Continuity Engine's phase timing follows its roster rule; a killed actor cannot perform its intent. Those are deterministic player-visible consequences, not new RNG rolls. Charge obligations and earned Overbalance recovery have priority over random selection.
 
-Once a pattern is selected, record its state, any promised next action, finite supplies and the random draw position. Fight restart restores entry state, not a new move bag. If identical player choices lead to different intents after Continue, the generator violates the selected restart rule.
+Once a pattern is selected, record its state, any promised next action, finite supplies and the random draw position. Fight restart restores the original pre-start input checkpoint and deterministically reruns start effects once, not a new move bag; see the [timing/save contract](TIMING-AND-PERSISTENCE.md#exact-fight-entry-checkpoint). If identical player choices lead to different intents after Continue, the generator violates the selected restart rule.
 
 ## Whole-formation safeguards
 

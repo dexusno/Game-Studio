@@ -24,6 +24,8 @@ The recipe and upgrade completion requirements reference **versioned launch ID s
 
 ## Event and transaction semantics
 
+The [shared timing/save contract](TIMING-AND-PERSISTENCE.md#6-save-transactions-and-crash-recovery) now owns the local atomic commit, fight-entry rollback, stable reward/choice receipts and post-commit Steam outbox. These achievement predicates consume that contract; they do not create a second save or reward mechanism.
+
 | Event family | Qualification and commit |
 | --- | --- |
 | City / route / Core | Commit only after the required enemies are defeated and the mercenary survives. A normal route is all three cities in one campaign. A Core defeat cannot undo the route clearance already committed before entry. |
