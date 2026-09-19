@@ -1,0 +1,729 @@
+{
+  "profile": "beta-balance-v1",
+  "profile_sha256": "c65d4e8d0305c699bdefeda4139eddc80b6bf6ddca32d3836fd3ab62dd3ec168",
+  "source_sha256": {
+    "recipe_rows": "869e19caaf67fb12496f5f0dd0238664e9850e23b2c1c9ce182beeecd1c84516",
+    "enemy_rows": "61aecc0d928f381f6f7c5efbba6a776e82aff352f24a21b2bea1aa7630862c3e",
+    "shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
+    "character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c"
+  },
+  "scope": "Static source, cost, pricing and arithmetic checks. No fight/run execution, bot policy, win rate, confidence interval or graphical verification.",
+  "counts": {
+    "recipes": 606,
+    "upgrades": 288,
+    "robot_entries": 42,
+    "starter_steering_fixtures": 20
+  },
+  "printed_costs_by_rarity": {
+    "Base": {
+      "recipes": 24,
+      "mean_units": 1.667,
+      "median_units": 2.0,
+      "min_units": 1,
+      "max_units": 3,
+      "cost_histogram": {
+        "1": 9,
+        "2": 14,
+        "3": 1
+      },
+      "material_units": {
+        "Iron": 15,
+        "Copper": 15,
+        "Carbon": 5,
+        "Glass": 4,
+        "Circuit": 1
+      },
+      "material_share_percent": {
+        "Iron": 37.5,
+        "Copper": 37.5,
+        "Carbon": 12.5,
+        "Glass": 10.0,
+        "Circuit": 2.5
+      },
+      "requires_circuit": 1
+    },
+    "Common": {
+      "recipes": 176,
+      "mean_units": 2.358,
+      "median_units": 2.0,
+      "min_units": 1,
+      "max_units": 3,
+      "cost_histogram": {
+        "1": 3,
+        "2": 107,
+        "3": 66
+      },
+      "material_units": {
+        "Iron": 176,
+        "Copper": 119,
+        "Carbon": 52,
+        "Glass": 62,
+        "Circuit": 6
+      },
+      "material_share_percent": {
+        "Iron": 42.41,
+        "Copper": 28.67,
+        "Carbon": 12.53,
+        "Glass": 14.94,
+        "Circuit": 1.45
+      },
+      "requires_circuit": 6
+    },
+    "Uncommon": {
+      "recipes": 200,
+      "mean_units": 3.175,
+      "median_units": 3.0,
+      "min_units": 2,
+      "max_units": 4,
+      "cost_histogram": {
+        "2": 19,
+        "3": 127,
+        "4": 54
+      },
+      "material_units": {
+        "Iron": 232,
+        "Copper": 178,
+        "Carbon": 71,
+        "Glass": 100,
+        "Circuit": 54
+      },
+      "material_share_percent": {
+        "Iron": 36.54,
+        "Copper": 28.03,
+        "Carbon": 11.18,
+        "Glass": 15.75,
+        "Circuit": 8.5
+      },
+      "requires_circuit": 54
+    },
+    "Rare": {
+      "recipes": 140,
+      "mean_units": 4.121,
+      "median_units": 4.0,
+      "min_units": 3,
+      "max_units": 5,
+      "cost_histogram": {
+        "3": 11,
+        "4": 101,
+        "5": 28
+      },
+      "material_units": {
+        "Iron": 201,
+        "Copper": 137,
+        "Carbon": 50,
+        "Glass": 69,
+        "Circuit": 120
+      },
+      "material_share_percent": {
+        "Iron": 34.84,
+        "Copper": 23.74,
+        "Carbon": 8.67,
+        "Glass": 11.96,
+        "Circuit": 20.8
+      },
+      "requires_circuit": 113
+    },
+    "Legendary": {
+      "recipes": 66,
+      "mean_units": 5.242,
+      "median_units": 5.0,
+      "min_units": 2,
+      "max_units": 6,
+      "cost_histogram": {
+        "2": 3,
+        "3": 1,
+        "4": 2,
+        "5": 31,
+        "6": 29
+      },
+      "material_units": {
+        "Iron": 109,
+        "Copper": 86,
+        "Carbon": 28,
+        "Glass": 42,
+        "Circuit": 81
+      },
+      "material_share_percent": {
+        "Iron": 31.5,
+        "Copper": 24.86,
+        "Carbon": 8.09,
+        "Glass": 12.14,
+        "Circuit": 23.41
+      },
+      "requires_circuit": 62
+    }
+  },
+  "starter_affordability": {
+    "Mara": {
+      "Iron": {
+        "supply": [
+          5,
+          2,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 172
+      },
+      "Copper": {
+        "supply": [
+          3,
+          4,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 326
+      },
+      "Carbon": {
+        "supply": [
+          3,
+          2,
+          3,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 7,
+        "affordable_attack_and_shield_subsets_cost_only": 282
+      },
+      "Glass": {
+        "supply": [
+          3,
+          2,
+          1,
+          3,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 204
+      },
+      "Circuit": {
+        "supply": [
+          3,
+          2,
+          1,
+          1,
+          3
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 135
+      }
+    },
+    "Ivo": {
+      "Iron": {
+        "supply": [
+          5,
+          2,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 182
+      },
+      "Copper": {
+        "supply": [
+          3,
+          4,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 7,
+        "affordable_attack_and_shield_subsets_cost_only": 328
+      },
+      "Carbon": {
+        "supply": [
+          3,
+          2,
+          3,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 190
+      },
+      "Glass": {
+        "supply": [
+          3,
+          2,
+          1,
+          3,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 310
+      },
+      "Circuit": {
+        "supply": [
+          3,
+          2,
+          1,
+          1,
+          3
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 143
+      }
+    },
+    "Ada": {
+      "Iron": {
+        "supply": [
+          5,
+          2,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 172
+      },
+      "Copper": {
+        "supply": [
+          3,
+          4,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 226
+      },
+      "Carbon": {
+        "supply": [
+          3,
+          2,
+          3,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 139
+      },
+      "Glass": {
+        "supply": [
+          3,
+          2,
+          1,
+          3,
+          1
+        ],
+        "max_distinct_uses_cost_only": 6,
+        "affordable_attack_and_shield_subsets_cost_only": 181
+      },
+      "Circuit": {
+        "supply": [
+          3,
+          2,
+          1,
+          1,
+          3
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 108
+      }
+    },
+    "Noor": {
+      "Iron": {
+        "supply": [
+          5,
+          2,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 124
+      },
+      "Copper": {
+        "supply": [
+          3,
+          4,
+          1,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 7,
+        "affordable_attack_and_shield_subsets_cost_only": 526
+      },
+      "Carbon": {
+        "supply": [
+          3,
+          2,
+          3,
+          1,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 106
+      },
+      "Glass": {
+        "supply": [
+          3,
+          2,
+          1,
+          3,
+          1
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 151
+      },
+      "Circuit": {
+        "supply": [
+          3,
+          2,
+          1,
+          1,
+          3
+        ],
+        "max_distinct_uses_cost_only": 5,
+        "affordable_attack_and_shield_subsets_cost_only": 106
+      }
+    }
+  },
+  "expected_material_cost_first_reward_slot_by_character": {
+    "1": {
+      "Mara": {
+        "Regular": 2.636,
+        "Officer": 3.195,
+        "Boss": 4.317,
+        "Shop": 2.839
+      },
+      "Ivo": {
+        "Regular": 2.504,
+        "Officer": 3.012,
+        "Boss": 4.044,
+        "Shop": 2.689
+      },
+      "Ada": {
+        "Regular": 2.607,
+        "Officer": 3.144,
+        "Boss": 4.231,
+        "Shop": 2.803
+      },
+      "Noor": {
+        "Regular": 2.619,
+        "Officer": 3.185,
+        "Boss": 4.256,
+        "Shop": 2.824
+      }
+    },
+    "2": {
+      "Mara": {
+        "Regular": 2.748,
+        "Officer": 3.46,
+        "Boss": 4.438,
+        "Shop": 3.083
+      },
+      "Ivo": {
+        "Regular": 2.604,
+        "Officer": 3.257,
+        "Boss": 4.213,
+        "Shop": 2.913
+      },
+      "Ada": {
+        "Regular": 2.714,
+        "Officer": 3.401,
+        "Boss": 4.372,
+        "Shop": 3.038
+      },
+      "Noor": {
+        "Regular": 2.734,
+        "Officer": 3.443,
+        "Boss": 4.37,
+        "Shop": 3.066
+      }
+    },
+    "3": {
+      "Mara": {
+        "Regular": 2.871,
+        "Officer": 3.701,
+        "Boss": 4.558,
+        "Shop": 3.396
+      },
+      "Ivo": {
+        "Regular": 2.714,
+        "Officer": 3.489,
+        "Boss": 4.381,
+        "Shop": 3.207
+      },
+      "Ada": {
+        "Regular": 2.832,
+        "Officer": 3.638,
+        "Boss": 4.514,
+        "Shop": 3.343
+      },
+      "Noor": {
+        "Regular": 2.859,
+        "Officer": 3.674,
+        "Boss": 4.484,
+        "Shop": 3.374
+      }
+    }
+  },
+  "reward_cost_note": "Rarity-weighted uniform eligible recipe mean for the first slot, before removal within an offer or player selection. Not an effect-value or whole-turn damage estimate.",
+  "ready_part_shop_prices": {
+    "SH001": 6,
+    "SH002": 10
+  },
+  "reference_city_economy": {
+    "1": {
+      "11_reference_regulars_and_boss_core_value": 265,
+      "8_reference_regulars_3_officers_and_boss_core_value": 340,
+      "whole_material_stock_purchase_cost": 52
+    },
+    "2": {
+      "11_reference_regulars_and_boss_core_value": 400,
+      "8_reference_regulars_3_officers_and_boss_core_value": 475,
+      "whole_material_stock_purchase_cost": 66
+    },
+    "3": {
+      "11_reference_regulars_and_boss_core_value": 535,
+      "8_reference_regulars_3_officers_and_boss_core_value": 610,
+      "whole_material_stock_purchase_cost": 79
+    }
+  },
+  "regular_route_reference_campaign_credits_including_start": 1300,
+  "economy_note": "Illustrative reference encounters, all cores sold, no escapes/Mysteries, purchases, leftover-part sales, or upgrade income. Actual formations have individual core values; this is not a guaranteed payout or empirical average.",
+  "boss_hp_throughput_envelopes": {
+    "1": {
+      "total_starting_body_hp": [
+        92,
+        100,
+        84
+      ],
+      "assumed_effective_damage_per_turn": 17,
+      "ceil_hp_over_assumed_damage": [
+        6,
+        6,
+        5
+      ]
+    },
+    "2": {
+      "total_starting_body_hp": [
+        136,
+        132,
+        154
+      ],
+      "assumed_effective_damage_per_turn": 24,
+      "ceil_hp_over_assumed_damage": [
+        6,
+        6,
+        7
+      ]
+    },
+    "3": {
+      "total_starting_body_hp": [
+        190,
+        180,
+        166
+      ],
+      "assumed_effective_damage_per_turn": 32,
+      "ceil_hp_over_assumed_damage": [
+        6,
+        6,
+        6
+      ]
+    }
+  },
+  "boss_note": "HP divided by assumed EFFECTIVE throughput, including initial companion HP. Armor, reactions, repairs, move order, status kills, forced downtime and target switching are not modeled; actual turn counts await the shared core.",
+  "starter_stall_witness": {
+    "enemy": "two C1-R01 Rivet Mites, 7 HP each; 5 damage each per enemy phase",
+    "steer": "Glass",
+    "haul": [
+      3,
+      2,
+      1,
+      3,
+      1
+    ],
+    "shield_recipes": [
+      "SH002",
+      "SH006"
+    ],
+    "shield": 10,
+    "incoming_attack_total": 10,
+    "sale_recipes": [
+      "SH001",
+      "SH003",
+      "SH004"
+    ],
+    "whole_credit_sale_values": {
+      "SH001": 2,
+      "SH003": 2,
+      "SH004": 4
+    },
+    "cost_each_round": [
+      3,
+      2,
+      1,
+      2,
+      0
+    ],
+    "unspent_each_round": [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "credits_per_round": 8,
+    "credits_after_20_rounds_excluding_start": 160,
+    "conclusion": "Positive income, zero HP loss, no declining resource or use allowance: unbounded under current draft Mite behaviour. Overtime remains a pending design choice, not implemented by this calculation."
+  },
+  "tier_fixtures": [
+    {
+      "tier": 0,
+      "foundation": [
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 80
+    },
+    {
+      "tier": 1,
+      "foundation": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 80
+    },
+    {
+      "tier": 2,
+      "foundation": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 76
+    },
+    {
+      "tier": 3,
+      "foundation": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 76
+    },
+    {
+      "tier": 4,
+      "foundation": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 76
+    },
+    {
+      "tier": 5,
+      "foundation": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 72
+    },
+    {
+      "tier": 6,
+      "foundation": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 72
+    },
+    {
+      "tier": 7,
+      "foundation": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 72
+    },
+    {
+      "tier": 8,
+      "foundation": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 68
+    },
+    {
+      "tier": 9,
+      "foundation": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 68
+    },
+    {
+      "tier": 10,
+      "foundation": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "steer": 2,
+      "starting_hp_all_mercenaries": 64
+    }
+  ],
+  "precision_expected_extra_materials_per_fight": {
+    "Auto": 0.0,
+    "Learning": 0.55,
+    "Practised": 1.15,
+    "Expert": 1.65
+  },
+  "economic_upgrade_correction": {
+    "id": "UGS-017",
+    "bonus_percent": 25,
+    "basis": "Each sold energy core; excludes part sales and other direct grants",
+    "core_sale_examples": {
+      "5": 6,
+      "15": 18,
+      "25": 31,
+      "40": 50,
+      "100": 125
+    },
+    "note": "Current beta correction to an inert draft cash-reward multiplier. No new cash-drop rule. Whole-Credit floor per core makes grouped and separate sales equivalent."
+  }
+}

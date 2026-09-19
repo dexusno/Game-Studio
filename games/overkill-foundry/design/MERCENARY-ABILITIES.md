@@ -1,5 +1,7 @@
 # Inherent mercenary abilities
 
+**20 September beta tuning:** [BETA-TUNING.md](BETA-TUNING.md) adopts Hot Barrel, Find the Seam, Field Service and Charged Barrel with the printed numerical defaults for the first test profile; all four mercenaries start at 80/80 HP. This is the owner-authorized assistant tuning pass, not proof of equal strength. Quench Recovery and Residual Current remain unselected alternatives. The dated review below preserves why those alternatives were separated.
+
 **18 September 2026 · earlier character effects restored; alternatives and beta values remain proposals**
 
 Klaus requests an inherent ability for every mercenary, comparable in purpose to a character's starting passive but original to our crafting game. The requirement for distinct inherent abilities is selected. The earlier Hot Barrel and Charged Barrel designs are retained; their draft values have not been balanced. Quench Recovery and Residual Current remain unselected alternatives, not replacements or automatic additional traits. They build on the existing Heat, targeting, Bolt and Charge identities rather than adding four unrelated systems.

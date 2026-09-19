@@ -1,0 +1,650 @@
+{
+  "schema_version": 1,
+  "profile_id": "beta-balance-v1",
+  "date": "2026-09-20",
+  "status": "Selected by assistant as owner-authorized initial tuning; not playtested",
+  "scope": "Numerical design fixture for all four mercenaries and all three city tiers; not a runtime content manifest or an MVP scope selection",
+  "materials": [
+    "Iron",
+    "Copper",
+    "Carbon",
+    "Glass",
+    "Circuit"
+  ],
+  "player": {
+    "Mara": {
+      "start_hp": 80,
+      "max_hp": 80,
+      "trait": "Hot Barrel",
+      "heat_start": 0,
+      "heat_cap": 10,
+      "heat_decay_after_enemy_phase": 2,
+      "damage_per_full_2_heat": 1
+    },
+    "Ivo": {
+      "start_hp": 80,
+      "max_hp": 80,
+      "trait": "Find the Seam",
+      "target_paint_on_first_acid_application_per_turn": 2
+    },
+    "Ada": {
+      "start_hp": 80,
+      "max_hp": 80,
+      "trait": "Field Service",
+      "bolt_start_hp": 6,
+      "bolt_max_hp": 12,
+      "bolt_repair_on_first_qualifying_command_per_turn": 2
+    },
+    "Noor": {
+      "start_hp": 80,
+      "max_hp": 80,
+      "trait": "Charged Barrel",
+      "charge_start": 0,
+      "charge_cap": 12,
+      "charge_decay": 0,
+      "optional_barrel_charge_limit": 3,
+      "barrel_damage_per_charge": 2
+    }
+  },
+  "campaign": {
+    "cities": 3,
+    "encounters_per_city": 12,
+    "boss_position": 12,
+    "initial_memory_slots": 20,
+    "shared_starter_recipes": 8,
+    "mercenary_starter_recipes": 4,
+    "start_credits": 100,
+    "start_cores": 0,
+    "regular_only_opening_positions": {
+      "1": 3,
+      "2": 2,
+      "3": 2
+    },
+    "officer_opportunity_positions_per_city": 3,
+    "mystery_opportunity_positions_per_city": 3,
+    "district_favoured_weight": 2,
+    "other_eligible_district_weight": 1,
+    "route_and_formation_source": "CAMPAIGN-PROGRESSION.md",
+    "mystery_outcome_weights": {
+      "Regular combat": 40,
+      "Merchant": 30,
+      "Tech support": 30
+    }
+  },
+  "gathering": {
+    "foundation_by_city": {
+      "1": [
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      "2": [
+        3,
+        2,
+        1,
+        1,
+        1
+      ],
+      "3": [
+        3,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    "steered_units_of_one_selected_material": 2,
+    "additional_automatic_fight_entry_materials": 0,
+    "precision_uses_per_fight_before_exceptions": 1,
+    "precision_bonus_selected_material": {
+      "Miss": 0,
+      "Good": 1,
+      "Perfect": 2
+    },
+    "precision_models_for_future_headless_tests_percent": {
+      "Auto": {
+        "Miss": 100,
+        "Good": 0,
+        "Perfect": 0
+      },
+      "Learning": {
+        "Miss": 55,
+        "Good": 35,
+        "Perfect": 10
+      },
+      "Practised": {
+        "Miss": 20,
+        "Good": 45,
+        "Perfect": 35
+      },
+      "Expert": {
+        "Miss": 5,
+        "Good": 25,
+        "Perfect": 70
+      }
+    },
+    "precision_note": "One bonus event per fight, not per turn. Actual timing controls/windows need human tuning. Bonus stock must exist; never reduce the baseline for a miss or unavailable bonus. Explicit extra-attempt upgrades remain."
+  },
+  "shop": {
+    "material_unit_prices": [
+      4,
+      4,
+      4,
+      5,
+      6
+    ],
+    "material_stock_by_city": {
+      "1": [
+        4,
+        3,
+        2,
+        2,
+        1
+      ],
+      "2": [
+        5,
+        4,
+        2,
+        2,
+        2
+      ],
+      "3": [
+        6,
+        4,
+        3,
+        3,
+        2
+      ]
+    },
+    "recipe_prices": {
+      "Base": 30,
+      "Common": 50,
+      "Uncommon": 75,
+      "Rare": 150,
+      "Legendary": 250
+    },
+    "upgrade_prices": {
+      "Common": 120,
+      "Uncommon": 180,
+      "Rare": 260,
+      "Legendary": 400
+    },
+    "upgrade_price_overrides": {
+      "UGS-085": 110,
+      "UGS-075": 160
+    },
+    "recipe_offer_slots_by_city": {
+      "1": 4,
+      "2": 5,
+      "3": 6
+    },
+    "quantity_per_recipe_offer": 1,
+    "upgrade_offer_slots_by_city": {
+      "1": 2,
+      "2": 2,
+      "3": 3
+    },
+    "quantity_per_upgrade_offer": 1,
+    "ready_part_offers": [
+      {
+        "reference_recipe": "SH001",
+        "quantity": 2
+      },
+      {
+        "reference_recipe": "SH002",
+        "quantity": 2
+      }
+    ],
+    "ready_part_markup_credits": 2,
+    "price_roll_variance_percent": 0,
+    "minimum_positive_product_price_after_discounts": 1,
+    "recovery_access": {
+      "guaranteed_recipe": "SH074",
+      "price": 75,
+      "rule": "Reserve one ordinary recipe offer for Quick Patch in every stock generation while no copy is owned. Uses a listed slot, not a fifth free offer. Buying/receiving it is optional; it is knowledge, not immediate healing."
+    },
+    "stock_rule": "Initial stock once, then the selected completed-fight transaction only; no round, reopen or noncombat-Mystery refresh. Purchases use finite quantities."
+  },
+  "recipe_rarity_order": [
+    "Common",
+    "Uncommon",
+    "Rare",
+    "Legendary"
+  ],
+  "recipe_offer_weights_by_city": {
+    "1": {
+      "Regular": [
+        65,
+        32,
+        3,
+        0
+      ],
+      "Officer": [
+        20,
+        60,
+        18,
+        2
+      ],
+      "Boss": [
+        0,
+        0,
+        85,
+        15
+      ],
+      "Shop": [
+        50,
+        40,
+        9,
+        1
+      ]
+    },
+    "2": {
+      "Regular": [
+        55,
+        39,
+        6,
+        0
+      ],
+      "Officer": [
+        10,
+        55,
+        30,
+        5
+      ],
+      "Boss": [
+        0,
+        0,
+        70,
+        30
+      ],
+      "Shop": [
+        35,
+        45,
+        17,
+        3
+      ]
+    },
+    "3": {
+      "Regular": [
+        45,
+        45,
+        10,
+        0
+      ],
+      "Officer": [
+        5,
+        45,
+        40,
+        10
+      ],
+      "Boss": [
+        0,
+        0,
+        55,
+        45
+      ],
+      "Shop": [
+        20,
+        45,
+        28,
+        7
+      ]
+    }
+  },
+  "upgrade_offer_weights_by_city": {
+    "1": {
+      "Officer": [
+        55,
+        35,
+        10,
+        0
+      ],
+      "Shop": [
+        50,
+        35,
+        15,
+        0
+      ]
+    },
+    "2": {
+      "Officer": [
+        40,
+        40,
+        18,
+        2
+      ],
+      "Shop": [
+        35,
+        40,
+        22,
+        3
+      ]
+    },
+    "3": {
+      "Officer": [
+        25,
+        45,
+        25,
+        5
+      ],
+      "Shop": [
+        20,
+        40,
+        33,
+        7
+      ]
+    }
+  },
+  "mayor_rare_legendary_weights_by_city": {
+    "1": [
+      80,
+      20
+    ],
+    "2": [
+      50,
+      50
+    ],
+    "3": [
+      20,
+      80
+    ]
+  },
+  "offer_rule": "Existing source/character/city/inventory eligibility first. Recipe victory offers show three distinct IDs, choose one or skip; owned recipes remain eligible. Normal Officer upgrades: three unowned eligible choices, choose one. Weight rarity per slot, then uniform eligible IDs within that rarity; remove selected IDs within the offer. Renormalize nonempty allowed rarities if exhausted, never introduce a forbidden source/rarity. Base recipes are starters, not random victory/shop rolls. Mayor lane rules remain as authored, with rarity weights within each eligible lane. No pity accumulator in v1.",
+  "enemy": {
+    "hp_damage_and_patterns_source": "ENEMY-ROSTER.md",
+    "global_hp_multiplier_percent": 100,
+    "global_attack_addition": 0,
+    "default_rivet_mite_hp": 7,
+    "approved_encounter_rivet_mite_hp_override": [
+      6,
+      7
+    ],
+    "ordinary_fight_overtime": "unselected; owner question pending, no overtime in baseline",
+    "core_credit_values_by_roster_id": {
+      "C1-R01": [
+        5
+      ],
+      "C1-R02": [
+        15
+      ],
+      "C1-R03": [
+        18
+      ],
+      "C1-R04": [
+        15
+      ],
+      "C1-R05": [
+        15
+      ],
+      "C1-R06": [
+        12
+      ],
+      "C1-R07": [
+        18
+      ],
+      "C1-R08": [
+        18
+      ],
+      "C1-O01": [
+        40
+      ],
+      "C1-O02": [
+        40
+      ],
+      "C1-O03": [
+        30
+      ],
+      "C1-B01": [
+        100
+      ],
+      "C1-B02": [
+        100
+      ],
+      "C1-B03": [
+        100
+      ],
+      "C2-R01": [
+        22
+      ],
+      "C2-R02": [
+        16
+      ],
+      "C2-R03": [
+        18
+      ],
+      "C2-R04": [
+        16
+      ],
+      "C2-R05": [
+        24
+      ],
+      "C2-R06": [
+        22
+      ],
+      "C2-R07": [
+        24
+      ],
+      "C2-R08": [
+        20
+      ],
+      "C2-O01": [
+        17,
+        17,
+        16
+      ],
+      "C2-O02": [
+        50
+      ],
+      "C2-O03": [
+        50
+      ],
+      "C2-B01": [
+        66,
+        59
+      ],
+      "C2-B02": [
+        125
+      ],
+      "C2-B03": [
+        115,
+        5,
+        5
+      ],
+      "C3-R01": [
+        28
+      ],
+      "C3-R02": [
+        18
+      ],
+      "C3-R03": [
+        24
+      ],
+      "C3-R04": [
+        30
+      ],
+      "C3-R05": [
+        30
+      ],
+      "C3-R06": [
+        26
+      ],
+      "C3-R07": [
+        28
+      ],
+      "C3-R08": [
+        25,
+        22
+      ],
+      "C3-O01": [
+        24,
+        18,
+        18
+      ],
+      "C3-O02": [
+        60
+      ],
+      "C3-O03": [
+        60
+      ],
+      "C3-B01": [
+        88,
+        62
+      ],
+      "C3-B02": [
+        150
+      ],
+      "C3-B03": [
+        150
+      ]
+    },
+    "helper_core_credit_values": {
+      "Rivet Mite": 5,
+      "Boot Pod": 3,
+      "Screen Welder": 4,
+      "Signal Mite": 3,
+      "Seal Cutter": 3,
+      "Arc Spool": 4,
+      "Brake Drone": 5
+    },
+    "core_rule": "Values are Credits paid when each destroyed body's core is sold, not automatic money or materials. Multi-body arrays follow roster body order; listed Brake Drones are already included. Finite spawned helpers get their own stated cores if actually destroyed. No body pays twice, no core for fleeing or unspawned robots. Split Chassis pays 30 plus two 5-Credit death mites when those are destroyed.",
+    "reference_regular_encounter_core_value_by_city": {
+      "1": 15,
+      "2": 25,
+      "3": 35
+    },
+    "reference_officer_encounter_core_value_by_city": {
+      "1": 40,
+      "2": 50,
+      "3": 60
+    },
+    "reference_boss_encounter_core_value_by_city": {
+      "1": 100,
+      "2": 125,
+      "3": 150
+    }
+  },
+  "playtest_targets_not_observations": {
+    "effective_damage_per_player_turn_by_city": {
+      "1": 17,
+      "2": 24,
+      "3": 32
+    },
+    "typical_regular_rounds": [
+      2,
+      4
+    ],
+    "typical_officer_rounds": [
+      3,
+      6
+    ],
+    "typical_boss_rounds": [
+      5,
+      8
+    ],
+    "regular_gross_hp_loss": [
+      0,
+      6
+    ],
+    "officer_gross_hp_loss": [
+      8,
+      16
+    ],
+    "boss_gross_hp_loss": [
+      12,
+      24
+    ],
+    "regular_route_net_hp_loss_per_city_after_paid_recovery": [
+      10,
+      20
+    ],
+    "minimum_paired_seeds_per_mercenary_initial_headless_pass": 100,
+    "note": "Targets for competent developing builds, not enemy damage caps, guarantees, measured win rates or adaptive difficulty. Exceptional formations/builds can fall outside them."
+  },
+  "lockdown": {
+    "tier": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "baseline_haul": [
+      10,
+      9,
+      9,
+      9,
+      8,
+      8,
+      8,
+      7,
+      7,
+      7,
+      7
+    ],
+    "player_base_hp_percent": [
+      100,
+      100,
+      95,
+      95,
+      95,
+      90,
+      90,
+      90,
+      85,
+      85,
+      80
+    ],
+    "enemy_hp_percent": [
+      100,
+      100,
+      100,
+      105,
+      105,
+      105,
+      105,
+      105,
+      105,
+      110,
+      110
+    ],
+    "enemy_positive_attack_hit_addition": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "foundation_removal_order": [
+      "Iron",
+      "Copper",
+      "Iron"
+    ],
+    "note": "Adopts existing numerical ladder for later tests; does not settle unlock/finale proposals or make Lockdown an MVP prerequisite. Floor starting player HP, ceil enemy HP/absolute phase thresholds, preserve the two steered units and later full max-HP upgrade gains."
+  },
+  "content_values": {
+    "recipe_rows": 606,
+    "permanent_upgrades": 288,
+    "robot_roster_entries": 42,
+    "policy": "Use current printed recipe costs/cooldowns/effects and upgrade/robot quantities as v1 inputs. No per-recipe rewrite or automatic rarity multiplier. Report pins source rows and upgrade files. These are candidates for playtesting, not certified parity."
+  },
+  "source_sha256": {
+    "recipe_rows": "869e19caaf67fb12496f5f0dd0238664e9850e23b2c1c9ce182beeecd1c84516",
+    "enemy_rows": "61aecc0d928f381f6f7c5efbba6a776e82aff352f24a21b2bea1aa7630862c3e",
+    "shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
+    "character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c"
+  }
+}

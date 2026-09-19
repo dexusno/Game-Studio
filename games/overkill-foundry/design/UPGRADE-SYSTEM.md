@@ -1,5 +1,7 @@
 # Permanent upgrades — acquisition and implementation proposal
 
+**20 September economy baseline:** [BETA-TUNING.md](BETA-TUNING.md) now supplies initial Credit prices, finite shop quantities, acquisition weights and progressively weighted Mayor tiers. UGS-017 is corrected to apply its 25% bonus to energy-core sales, floored per core, because ordinary victory rewards are cores rather than direct Credits. Other individual effects remain unchanged. No tested balance is claimed.
+
 18 September 2026. Companion to the [upgrade catalogue](UPGRADE-CATALOGUE.md), [Mayor offers](MAYORS.md) and [mercenary abilities](MERCENARY-ABILITIES.md). This is a design contract for future implementation, not implemented gameplay or measured balance.
 
 ## Selected direction and proposed details

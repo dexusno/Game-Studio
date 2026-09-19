@@ -509,10 +509,10 @@
       ],
       "min_city": 1,
       "max_city": 3,
-      "effect": "Increase Credits from victory rewards by 25%, flooring the added amount once per reward screen. Core sales, part sales and other upgrades' direct Credit grants are unaffected.",
+      "effect": "When selling an energy core, gain 25% additional Credits, flooring the bonus once per core. Part sales, direct victory Credit grants and other upgrades' direct Credit grants are unaffected. Calculate each core separately even when selling several together.",
       "strategy": "Reward economy",
       "default_exception": "Only the specific grant, modifier or override stated in this effect applies; all other base rules remain in force.",
-      "balance_risk": "Not a sale-price multiplier.",
+      "balance_risk": "20 September beta tuning: applies to the selected core-sale economy rather than absent baseline cash drops. Credit-income restrictions still apply; grouped sales cannot change rounding.",
       "inspiration": [
         {
           "id": "BOWLER_HAT",

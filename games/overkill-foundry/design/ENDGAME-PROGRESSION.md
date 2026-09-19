@@ -1,5 +1,7 @@
 # Lockdown and the last command
 
+**20 September numerical adoption:** [BETA-TUNING.md](BETA-TUNING.md) adopts this ten-tier numerical ladder as later test inputs, with every mercenary starting from 80 HP (tier 10: 64). This does not select the outstanding unlock/finale proposals, replace the first-MVP scope answer or claim any tier is beatable.
+
 18 September 2026. **Post-campaign design proposal.** The owner requires escalating difficulty, Steam achievements and an ultimate challenge earned through all four mercenaries. The names, ten-tier ladder, numerical penalties, Tier 5 finale threshold and boss below are proposed implementations of that direction.
 
 Read the [achievement roster](ACHIEVEMENTS.md), [Steam implementation plan](STEAM-ACHIEVEMENTS.md) and [dated research](research/2026-09-18-endgame-and-achievements.md). Structured values live in [lockdown-tiers.json](data/lockdown-tiers.json). Nothing here is a playable implementation or proven difficulty curve.

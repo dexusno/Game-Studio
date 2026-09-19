@@ -294,7 +294,7 @@ After every fifth recipe accepted from victory rewards since acquisition, heal 8
 
 **Uncommon · Shared · Officer / Shop · City 1–3**
 
-Increase Credits from victory rewards by 25%, flooring the added amount once per reward screen. Core sales, part sales and other upgrades' direct Credit grants are unaffected.
+When selling an energy core, gain 25% additional Credits, flooring the bonus once per core. Part sales, direct victory Credit grants and other upgrades' direct Credit grants are unaffected. Calculate each core separately even when selling several together.
 
 **Purpose:** Reward economy
 
@@ -302,7 +302,7 @@ Increase Credits from victory rewards by 25%, flooring the added amount once per
 
 **Rarity:** Uncommon source. Matches Bowler Hat's Uncommon source tier.
 
-**Balance watch:** Not a sale-price multiplier.
+**Balance watch:** 20 September beta tuning: applies to the selected core-sale economy rather than absent baseline cash drops. Credit-income restrictions still apply; grouped sales cannot change rounding.
 
 **Inspiration:** [Bowler Hat](https://spire-codex.com/relics/BOWLER_HAT).
 

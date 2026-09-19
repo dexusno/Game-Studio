@@ -1,5 +1,7 @@
 # Overkill Foundry — balance research and proposed test method
 
+**20 September tuning update:** [BETA-TUNING.md](BETA-TUNING.md) and its versioned data now select the initial 80-HP, ten-material, shop/reward and three-city values under Klaus's tuning instruction. Earlier numerical proposals below are the research history. All 606 recipe clarifications are complete; runtime balance remains untested. The profile also records a proven starter resale/stalling loop and its pending overtime question.
+
 13 September 2026. Requested by Klaus during the stacked-ammunition discussion. This records developer documentation and a proposed method for our game. It does not establish tuned values or authorize implementation. Companion: [stacked ammunition and build strategies](BUILD-STRATEGY-STUDY.md).
 
 ## Graphics-free balancing version — owner direction, 18 September 2026
@@ -75,7 +77,7 @@ Compare four outcomes using our real starter recipes and material costs:
 
 Our full recipe memory is available subject to costs/use limits, supplies and unactivated parts can be saved within fights, and firing has no separate energy budget. These change achievable damage and defence compared with source deck/energy constraints. Matching source enemy stats is therefore a starting experiment; matching the resulting player choices and survival pressure requires costed fights and playtests.
 
-The next concrete comparison is Mara's selected demo encounters at the proposed 80 HP and ten-material haul, including a simpler Regular path and an Officer-taking path. Record healing access explicitly, then adjust enemy HP, attack cadence/damage, supply or the HP fixture according to the observed cause. Preserve the owner's no-automatic-healing rule, End-Turn-only prepared Shield, whole-number damage and uncapped resource-permitted shots. This pass supplies a benchmark and test input; it does not change robot/recipe rows, import a healing system or produce a combat-balance result.
+The next concrete comparison is Mara's selected demo encounters at the proposed 80 HP and ten-material haul, including a simpler Regular path and an Officer-taking path. Record healing access explicitly, then adjust enemy HP, attack cadence/damage, supply or the HP fixture according to the observed cause. Preserve the owner's no-automatic-healing rule, installed Shield protecting during Fire and enemy attacks, whole-number damage and uncapped resource-permitted shots. This pass supplies a benchmark and test input; it does not change robot/recipe rows, import a healing system or produce a combat-balance result.
 
 ## Current beta haul recommendation — 15 September 2026
 
@@ -128,7 +130,7 @@ This is a concrete test mapping of steering, not a claim that its exact +2 formu
 
 ### What those resources buy
 
-These examples use distinct no-cooldown shared recipes once each; all costs are paid. Damage below is **supplied by parts**, before target defences and other modifiers. The later owner decision on 15 September confirms zero base gun damage, so these part-only totals remain unchanged. Prepared Shield activates only at End Turn.
+These examples use distinct no-cooldown shared recipes once each; all costs are paid. Damage below is **supplied by parts**, before target defences and other modifiers. The later owner decision on 15 September confirms zero base gun damage, so these part-only totals remain unchanged. Installed Shield protects during Fire and enemy attacks.
 
 | Package | Exact recipes | Material cost | Draft effect before other modifiers |
 | --- | --- | --- | --- |

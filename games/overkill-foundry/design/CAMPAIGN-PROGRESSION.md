@@ -1,5 +1,7 @@
 # Overkill Foundry — gated procedural campaigns
 
+**20 September beta fixture:** [BETA-TUNING.md](BETA-TUNING.md) now adopts twelve encounters per city, the existing gates/registries, 80 starting HP for every mercenary and ten-material hauls, and supplies exact offer/core/shop numbers and 40/30/30 Mystery category weights. These are initial test values, not measured survivability. Individual Mystery outcomes and the runtime manifest still need implementation. The farming/overtime question is pending.
+
 **16 September 2026 · design proposal, not a tested balance curve**
 
 Generate robot attacks from progressively unlocked pools. **Mercenary → city → progress band → district → compatible formation → legal attack pattern.** Early attacks draw from a small pool of lesser robots; later attacks unlock tougher bodies, support combinations and more complex behaviours. Randomness selects inside these gates; it does not decide whether an opening fight should be endgame difficulty.
