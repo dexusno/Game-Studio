@@ -85,6 +85,8 @@ All 181 Utility rows now identify an immediate effect with no part. Former objec
 
 ### Using parts
 
+**Owner-selected Shield resource-bonus timing, 19 September:** a Shield part's immediate extra resource bonus is granted once when that physical part is first installed. Boiler Jacket grants 1 Heat, Breathing Plate grants 2 Heat, and Starting Field grants 2 Charge at that point. Crafting into reserve alone does not grant the bonus. Removing the part does not undo its resolved gain, and reinstalling that same part, including after saving it, does not grant the bonus again. Other newly made parts have their own first-installation event, subject to existing recipe caps and stacking restrictions. Explicitly timed, conditional or reactive effects retain their stated clocks. These resource bonuses do not consume the Shield part or replace normal installed protection, depletion and reset. Additional Heat/Charge/part payments and conditional Shield-value sampling remain separate clarification work; the previously described Heat cap/decay and all numerical tuning remain draft.
+
 **Latest owner flow, 14 September:** the full-screen Recipe view's **Use** button pays resources and applies recipe availability rules. Gun/Shield recipes add crafted parts to reserve; Utility recipes activate their effect immediately and add no part. Selecting a build part stages it; Load prepares the build and may be undone before Fire. Select legal targets, then Fire consumes/resolves that shot and returns to preparation while combat continues. Multiple shots are allowed while parts/resources and recipe availability permit. Only **End Turn** ends the player turn and starts surviving enemies' actions, including after zero shots. See the [current turn sequence](REDESIGN-PLAN.md#owner-defined-encounter-and-turn-sequence--14-september-2026).
 
 **Multiple-shot reconciliation:** a shot is not a new round. Firing does not repeat collection, restore recipe uses, tick cooldowns or clear Shield. The earlier single-main-shot convention is superseded. The earlier turn-flow clarification alone left recipe rows unchanged; the duration decision below now clarifies six Utility effects. The owner rejects the draft 4 base gun damage: all bullet damage and effects come from its assembled parts. Review remaining shot-versus-round modifiers, post-hit resource/status gains and non-Ammo activation under the new flow. Do not silently apply an effect written for one shot to every shot or introduce a firing cost/cap.
@@ -424,7 +426,7 @@ These are examples, not extra recipes. Shared cooling can help any mercenary reu
 | --- | --- | --- | --- | --- | --- | --- |
 | MA001 | Fuel Brick | Immediate effect: Fuel Briquette (no part) | Utility | 1 Carbon | None | Gain 3 Heat when activated. |
 | MA002 | Hot Cast | 1 Fresh Slug | Ammo | 1 Iron + 1 Carbon | None | Add 6 damage. If Heat is at least 4 at Fire, apply Burn 2 to the main target after impact. |
-| MA003 | Boiler Jacket | 1 Wrapped Plate | Shield | 1 Iron + 1 Copper | None | Gain 6 Shield and 1 Heat when activated. |
+| MA003 | Boiler Jacket | 1 Wrapped Plate | Shield | 1 Iron + 1 Copper | None | Provides 6 Shield while installed. When this part is first installed, gain 1 Heat once. Removing and reinstalling this same part does not repeat the Heat gain. |
 | MA004 | Quick Vent | Immediate effect: Vent Valve (no part) | Utility | 1 Copper | None | Pay 2 Heat when activated. Gain 5 Shield. |
 
 ### Common
@@ -440,7 +442,7 @@ These are examples, not extra recipes. Shared cooling can help any mercenary reu
 | MA011 | Furnace Dust | 1 Furnace Ember Capsule | Ammo | 1 Iron + 2 Carbon | None | Add 4 damage. After impact, apply Burn 5 to the main target if Heat was at least 6 at Fire; otherwise apply Burn 2. |
 | MA012 | Split Nose | 1 Forked Tip | Ammo | 2 Iron + 1 Glass | None | Add 5 damage. After impact, deal a separate 3 damage to one other enemy chosen at Fire. If it had Burn immediately before this support hit, gain 2 Heat afterward. If it is dead when the support hit would begin, both effects are lost. |
 | MA013 | Flameproof Liner | 1 Ash Liner | Shield | 1 Iron + 1 Carbon | None | Gain 7 Shield. Gain 4 more if at least one living enemy has Burn when activated. |
-| MA014 | Breathing Plate | 1 Vented Plate | Shield | 1 Iron + 1 Copper | None | Gain 5 Shield and 2 Heat when activated. |
+| MA014 | Breathing Plate | 1 Vented Plate | Shield | 1 Iron + 1 Copper | None | Provides 5 Shield while installed. When this part is first installed, gain 2 Heat once. Removing and reinstalling this same part does not repeat the Heat gain. |
 | MA015 | Thick Insulation | 1 Furnace Wrap | Shield | 2 Iron + 1 Carbon | 1 | Gain 8 Shield. Skip the normal 2 Heat loss after this round's enemy phase. Extra copies do not skip a later round's Heat loss. |
 | MA016 | Spare Lid | 1 Folded Cover | Shield | 2 Iron + 1 Copper | None | Gain 5 Shield now and 5 Shield at the start of next turn, after old Shield clears. |
 | MA017 | Quench Ribs | 1 Cooling Frame | Shield | 1 Iron + 1 Copper | None | Pay 3 Heat when activated. Gain 10 Shield. |
@@ -931,7 +933,7 @@ Three future permanent-upgrade directions, not an upgrade catalogue: increase th
 | NO006 | Grounded Slug | 1 Ground Slug | Ammo | 2 Iron | None | Add 8 damage. Add 6 more if Charge is 0 at Fire, after the barrel's optional Charge payment. |
 | NO007 | Arc Tooth | 1 Arc Tooth | Ammo | 1 Iron + 1 Copper + 1 Glass | None | Add 6 damage. Before main damage, remove up to 5 Shield from the main target. If this removes all 5, gain 1 Charge after impact. |
 | NO008 | Closed Field | 1 Closed Field Ring | Shield | 1 Iron + 2 Copper | None | Gain 10 Shield. If Charge is at least 8 when activated, gain 3 more without spending Charge. |
-| NO009 | Starting Field | 1 Small Field Coil | Shield | 1 Iron + 1 Copper | None | Gain 4 Shield and 2 Charge when activated. |
+| NO009 | Starting Field | 1 Small Field Coil | Shield | 1 Iron + 1 Copper | None | Provides 4 Shield while installed. When this part is first installed, gain 2 Charge once. Removing and reinstalling this same part does not repeat the Charge gain. |
 | NO010 | Shield Tap | Immediate effect: Shield Tap (no part) | Utility | 1 Copper + 1 Glass | None | Pay 6 Shield when activated, then gain 5 Charge. Cannot activate with less than 6 Shield. |
 | NO011 | Coil Collar | 1 Discharge Collar | Modifier | 1 Iron + 1 Copper | None | Pay 3 Charge when activated. Add 10 damage to this round's main shot. |
 | NO012 | Return Pin | 1 Return Pin | Ammo | 1 Iron + 2 Copper | None | Add 6 damage. After impact, gain 1 Charge for every full 6 main-shot damage absorbed by the main target's Shield, up to 4 Charge. Damage absorbed by other enemies does not count. |
