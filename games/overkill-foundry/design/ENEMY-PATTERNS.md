@@ -41,7 +41,7 @@ Evaluate robots together. A light attack from one body can become lethal when a 
 - Preserve any authored preparation/recovery windows. A sequence cannot repeatedly roll away an opening its counterplay depends on. Continuous attackers such as mites and Cable Binder may retain target-removal and defensive counterplay without gaining a new no-attack action.
 - Never create repeated suppression beyond the effect's printed duration/stack limits. Do not extend an expiring penalty through an accidental unlimited streak.
 - Preserve roster summon limits and next-round activation. Pattern choice cannot replenish a spent queue or grant another loot allocation.
-- Never add a global shot cap or automatically end the player turn to contain a strong build. Only End Turn activates normal prepared Shield and passes play to the robots.
+- Never add a global shot cap or automatically end the player turn to contain a strong build. Only End Turn passes play to the robots. Installed Shield protects automatically against enemy attacks without an activation event; apply normal depletion/reset and explicit exceptions.
 - Keep all quantities whole numbers. Do not derive random fractional damage or secretly scale stats with current player power.
 
 Formation-specific safe bounds should come from actual recipe/haul/HP studies. Until those exist, the allowlist is the bound: **unreviewed combinations are ineligible**, even if their average damage resembles an approved fight.
