@@ -16,7 +16,7 @@ import subprocess
 DESIGN = Path(__file__).resolve().parents[1]
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = DESIGN / "RECIPE-CATALOGUE.md"
-SOURCE_COMMIT = "7ccf66f356352c6fbda71bcbf75cfa28f318803b"
+SOURCE_COMMIT = "351756da84a26d0d21217785974bd1a3caf86e81"
 SOURCE_REL = SOURCE.relative_to(ROOT).as_posix()
 
 
@@ -111,10 +111,10 @@ FINDINGS = [
             "Existing immediate-Utility rules resolve the obsolete pack/crafting wording. Copper Recovery, Glass Recovery and Iron Recovery pay their listed cost once on recipe Use and grant the conversion then. Quick Patch restores HP on Use and retains its existing 8-HP-per-fight cap shared across all Uses and duplicate copies of that recipe. No Utility inventory item or second payment is introduced.",
             "SH029 SH030 SH031 SH074", r"On recipe Use|shared across",
             "Four wording findings are resolved without changing costs, cooldowns or amounts. The healing cap remains recipe-wide; duplicate recipe availability still tracks each copy independently."),
-    finding("Q06", "clarification", "Recipe crafting versus immediate Utility use", "R01",
-            "The effect counts crafting, crafting costs or a crafted numeric-cooldown recipe. It does not explicitly say whether immediate Utility recipe Uses count. Part-producing crafts and all recipe Uses are different sets after the Utility conversion.",
-            "SH023 SH070 MA069 NO062 NO071 NO109", r"craft",
-            "Make the counted event explicit. Existing clauses that explicitly count physical parts can remain narrower."),
+    finding("Q06", "resolved", "Part-producing and Utility recipe Uses both count", "R01",
+            "The owner confirms both count after the Furnace Receipt example. All six effects now explicitly include Utility recipe Uses. Count each successful Use once, not each output; distinct-recipe conditions use recipe identity, while repeat-use conditions aggregate across stored copies of the same recipe. Preserve numeric-cooldown eligibility, after-source windows and actual resource payments. Wire Lattice samples once on first installation under the existing rule; Iron Saver can discount a qualifying Utility. Explicitly part-only effects stay narrower.",
+            "SH023 SH070 MA069 NO062 NO071 NO109", r"recipe Uses|recipe you Use|Utility recipe|Utility recipes",
+            "Six cases are resolved. Costs, cooldowns, amounts, caps, durations and non-stacking clauses remain. A copying/granting Utility counts once; its resulting parts, installation and loading are not extra recipe Uses. This is a written-rule clarification, not balance evidence."),
     finding("Q07", "resolved", "Explicit part-only cooling rewards retained", "R01",
             "Both recipes explicitly restrict their reward to cooling caused by a part. Preserve that narrower condition under the existing recipe-specific scope rule. Recall Pin (NO057) is an eligible Ammo source; direct Utility cooling and normal round progression do not qualify. Remove Charge Receipt's obsolete superseded marker without changing its functional effect. The underlying cooling still affects every eligible recipe under the global-cooling rule.",
             "NO080 NO094", r"parts this round|with a part",
@@ -159,7 +159,7 @@ FINDINGS = [
 ]
 
 RULES = {
-    "R01": "Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears.",
+    "R01": "Utilities activate on recipe Use without a stored Utility item. Production means crafting from resources; copying an existing part is a Utility effect, not resource-based production of that copy. Copying does not require paying the copied part's normal production cost; printed recipe-use costs are unchanged. Ordinary Shield-value grants follow the selected automatic loading, removal/storage and End Turn rules. Other named-part conversion/grant classifications remain clarification work, not proven conflicts merely because a part appears. The six Q06 bonuses/discounts count successful part-producing and Utility recipe Uses; explicit part-only effects remain narrower.",
     "R02": "Active Shield resets at enemy-turn end by default; only explicit permanent upgrades provide retention exceptions. End-phase remaining-Shield readings/payments happen after enemy actions and before reset. Record a deferred reward then and deliver it at its stated time; explicit payments still spend available Shield.",
     "R03": "Installed Shield parts protect automatically when enemies attack; neither Fire nor End Turn activates them. End Turn only ends the player turn. Counts do not consume parts. Installed values add and damage depletes protection; normal reset and explicit upgrade exceptions remain. Grants install ordinary removable parts at their stated time, without retroactive blocking or refilling prior loss. Unless explicitly timed otherwise, immediate bonuses, additional Heat/Charge/HP/part payments and stat-based calculations use first installation once, with no refund, repeat or recalculation on reinstallation. Order-based used-this-round conditions count earlier first installations even after removal; explicit current-installed checks retain their scope. Next-shot and delayed hooks retain named clocks/expiry. Allocation of Shield payments remains open.",
     "R04": "Ordinary gun base damage is zero; explicit character effects, upgrades and recipes may override a base rule within their stated scope. A later general rule does not automatically revoke a specific effect. Hot Barrel and Charged Barrel remain character bonuses to valid part-built shots, with their earlier draft values. If the owner's intent to override a specific effect is unclear, ask before deleting or replacing it. Alternatives are not automatically selected or stacked.",
@@ -235,8 +235,8 @@ def render():
         totals.setdefault(status, 0)
     ledger = {
         "audit_date": "2026-09-20", "initial_audit_date": "2026-09-16", "source_commit": SOURCE_COMMIT,
-        "rule_revision": "2026-09-20: owner selects physical spread parts consumed at Fire. Q10 resolves with reversible loading/saving and existing character/payment ordering. Previous Shield installation, calculation, history and Utility resolutions remain. Q06 recipe-use eligibility is the next pending question.",
-        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 141804d, exactly ten Q10 spread effect texts changed. All names/outputs/kinds/ingredients/cooldowns, numeric effect values and the other 596 rows are preserved. No character trait or barrel-payment exception is removed.",
+        "rule_revision": "2026-09-20: owner confirms both part-producing and Utility recipe Uses count for the six Q06 effects. Distinct identities, repeated Uses, numeric-cooldown eligibility and explicit part-only exceptions are preserved. Previous spread lifecycle and Shield resolutions remain. Shield-payment allocation is the next pending question.",
+        "source_commit_scope": "All 606 printed rows match the reviewed snapshot. Compared with 00c2366, exactly six Q06 recipe-use effect texts changed. All names/outputs/kinds/ingredients/cooldowns, numeric effect values and the other 600 rows are preserved. Explicit part-only conditions, character traits and barrel-payment exceptions remain.",
         "source_path": SOURCE_REL,
         "source_sha256_normalized_utf8": hashlib.sha256(text.encode()).hexdigest(),
         "method": "Assistant semantic reading of all 606 rows; manually curated findings; mechanical coverage and source-preservation checks.",
@@ -247,7 +247,7 @@ def render():
     (DESIGN / "analysis/recipe_rule_audit.json").write_text(json.dumps(ledger, indent=2) + "\n", encoding="utf-8")
 
     lines = ["# Recipe rule audit — review together", "",
-             "**20 September 2026 · all 606 recipes reviewed · spread-part lifecycle clarified**", "",
+             "**20 September 2026 · all 606 recipes reviewed · recipe-use bonuses clarified**", "",
              f"All recipe rows match reviewed revision `{SOURCE_COMMIT[:7]}`; settled rules and explicit character/recipe exceptions remain preserved. "
              f"Found **{totals['conflict']} recipes with a definite conflict or obsolete dependency**, "
              f"**{totals['clarification']} additional recipes needing wording/dependency clarification**, and "
@@ -260,8 +260,8 @@ def render():
              "No direct conflict identified means the row passed this written-rule review, not that it is implementation-ready, balanced or proven in every combination.", "",
              "**Resolved starter:** MA004 Quick Vent automatically loads its 5-Shield part; the player may use it at this End Turn or remove and save it. "
              "SH005 Split Outlet now explicitly stays in the bullet until Fire, with normal unloading and saving. "
-             "**Latest owner answer:** ten spread Modifiers remain physical bullet parts until Fire, with normal unload/reorder/save and unfired End Turn return. Their additional costs commit at Fire under existing character and payment ordering. Q10 closes ten more cases; crafting costs, cooldowns, numeric effects and non-stacking clauses are preserved. Prior Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. "
-             "**Pending joint question:** should the six Q06 effects counting or discounting recipes crafted include Utility recipe Uses as well as part-producing Uses? For example, should Furnace Receipt count a cooling Utility used afterward toward its next-turn Iron reward? Counting both is recommended, while explicit part-only conditions stay narrower. No answer is assumed.", "",
+             "**Latest owner answer:** part-producing and Utility recipe Uses both count for the six Q06 effects. Distinct-recipe conditions count identities, repeat-use conditions aggregate across copies of that recipe, and numeric-cooldown eligibility remains. Wire Lattice counts actual Copper paid and samples once at first installation. Q06 closes six cases with amounts, costs, cooldowns and caps preserved. Prior spread lifecycle, Shield calculations, installation history/hooks, resource bonuses/payments and Utility clarifications remain closed. "
+             "**Pending joint question:** should Shield payments automatically drain installed parts in installation order, or should the player choose which parts pay? Shield Boiler spending 5 from a 6-Shield part followed by a 4-Shield part would leave 1 + 4 under the recommended automatic order. Reinstallation already cannot restore spent Shield. Allocation is not yet selected.", "",
              "## Coverage", "", "| Pool | Reviewed | Conflict | Clarification only | No direct conflict identified |",
              "| --- | ---: | ---: | ---: | ---: |"]
     for pool in ("SH", "MA", "IV", "AD", "NO"):
@@ -300,8 +300,8 @@ def render():
               "- SH060's explicit loss of remaining Shield is not a recipe retention exception; it can be a downside when an upgrade would otherwise preserve Shield. A weaker or redundant effect is not itself a rule conflict.",
               "- The existing same-effect cooling pairs and relative recipe prices remain balance work. Renaming Burn/Corrosion/Mark/Weaken to the proposed robot vocabulary is a separate editorial migration.", "",
               "## Shared specification gaps, not 606 separate questions", "",
-              "Allocation of payments from installed Shield, counted recipe-use events, exact targets and canonical output definitions remain catalogue work. Spread parts now follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. "
-              "Q02/Q06/Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
+              "Allocation of payments from installed Shield, exact targets and canonical output definitions remain catalogue work. The six Q06 effects count both part-producing and Utility recipe Uses, preserving explicit part-only exceptions. Spread parts follow the selected Fire-consumption lifecycle. Shield resource bonuses, additional Heat/Charge/HP/part payments, stat calculations and related hooks follow the selected first-installation rules. "
+              "Q02/Q08/Q09/Q11 retain the open findings. Q04's position before the reset is clarified; general ordering among interacting effects remains separate. Further clarification must preserve End Turn and the active-Shield reset. "
               "Main-shot singular wording is generally readable through the existing next-shot/default-duration rules; it is not automatically a one-shot-per-turn restriction. "
               "This review does not label every ordinary row as conflicting merely because the eventual engine still needs an effect-resolution order.", "",
               "**Next action:** review remaining clarification cases as grouped wording/timing work, respecting explicit character and recipe exceptions. Do not reopen the restored barrel-payment interactions or treat unselected alternative traits as replacements. "
