@@ -61,7 +61,7 @@ AFoundryStage* KeyboardStage(UWorld* World)
     if(Stage && Stage->GetCampaign())
     {
         const auto& Campaign=*Stage->GetCampaign();
-        if(Campaign.bPrecisionModal || Campaign.Page!=TEXT("combat") || !Campaign.Drawer.IsEmpty() || Stage->IsActionView())return nullptr;
+        if(Campaign.bPrecisionModal || Campaign.Page!=TEXT("combat") || !Campaign.Drawer.IsEmpty() || Stage->IsPresentationBusy())return nullptr;
         const auto* C=Campaign.Current();
         if(!C || !C->fight.upgradeChoices.empty() || std::any_of(C->upgradeOffers.begin(),C->upgradeOffers.end(),[](const auto& O){return !O.deferred;}))return nullptr;
     }
@@ -171,10 +171,12 @@ void AFoundryStage::BeginPlay()
 #endif
     int32 StageActorCount = 0;
     int32 MaraStageCount = 0;
+    int32 SceneryActorCount = 0;
     TSet<UStaticMesh*> StageMeshes;
     for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
     {
         if (Actor->ActorHasTag(TEXT("MaraGenerated"))) ++MaraStageCount;
+        if (Actor->ActorHasTag(TEXT("CinderwallSceneryV002"))) ++SceneryActorCount;
         if (!Actor->ActorHasTag(TEXT("CinderwallGenerated"))) continue;
         ++StageActorCount;
         UStaticMesh* Mesh = Actor->GetStaticMeshComponent()->GetStaticMesh();
@@ -196,9 +198,10 @@ void AFoundryStage::BeginPlay()
             checkf(FMath::IsNearlyEqual(Extent.X, 98.0, 1.0) && FMath::IsNearlyEqual(Extent.Y, 98.0, 1.0), TEXT("Cinderwall render geometry is not centimetre scale"));
         }
     }
-    checkf(StageActorCount == 47 && StageMeshes.Num() == 18, TEXT("Run Art to rebuild the complete Cinderwall map"));
-    checkf(MaraStageCount == 10, TEXT("Run MaraArt to rebuild the original Mara props and depth extension"));
-    UE_LOG(LogFoundryHost, Display, TEXT("ART_STAGE placements=%d shared_meshes=%d"), StageActorCount, StageMeshes.Num());
+    checkf((SceneryActorCount == 19 && StageActorCount == 0 && MaraStageCount == 1) ||
+        (SceneryActorCount == 0 && StageActorCount == 47 && StageMeshes.Num() == 18 && MaraStageCount == 10),
+        TEXT("Stage must be complete legacy Art+MaraArt or the verified SceneryArt replacement with its Mara hopper"));
+    UE_LOG(LogFoundryHost, Display, TEXT("ART_STAGE legacy_placements=%d legacy_meshes=%d scenery_v002=%d mara_stage=%d"), StageActorCount, StageMeshes.Num(), SceneryActorCount, MaraStageCount);
     Mara = GetWorld()->SpawnActor<AFoundryMara>();
     Mara->Initialize();
     if (bTechnicalMode) SpawnRobots();
@@ -228,13 +231,13 @@ void AFoundryStage::BeginPlay()
     Fill->GetLightComponent()->RecaptureSky();
 
     const FVector PrepareLocation(-130, 2230, 740);
-    const FVector PrepareFocus(-130, -60, 260);
+    const FVector PrepareFocus(-130, -60, 40);
     PreparationCamera = GetWorld()->SpawnActor<ACameraActor>(PrepareLocation, (PrepareFocus - PrepareLocation).Rotation());
     PreparationCamera->GetCameraComponent()->SetFieldOfView(52.0f);
-    const FVector ActionLocation(-720, 1150, 340);
-    const FVector ActionFocus(50, -20, 135);
+    const FVector ActionLocation(-1160, 920, 520);
+    const FVector ActionFocus(240, 0, 60);
     ActionCamera = GetWorld()->SpawnActor<ACameraActor>(ActionLocation, (ActionFocus - ActionLocation).Rotation());
-    ActionCamera->GetCameraComponent()->SetFieldOfView(52.0f);
+    ActionCamera->GetCameraComponent()->SetFieldOfView(55.0f);
 #if WITH_EDITOR
     // Editor -game may rebuild uncooked meshes, textures and animation data.
     // Start the visible encounter only after those loaded products are ready.
@@ -246,6 +249,23 @@ void AFoundryStage::BeginPlay()
     {
         if (Actor->ActorHasTag(TEXT("CinderwallGenerated")) && Actor->GetStaticMeshComponent()->GetStaticMesh()->GetName().Contains(TEXT("SM_CW_deck_")))
             checkf(FMath::IsNearlyEqual(Actor->GetStaticMeshComponent()->Bounds.BoxExtent.X, 98.0, 1.0), TEXT("Deck component culling bounds must match rendered centimetres"));
+        if (Actor->ActorHasTag(TEXT("CinderwallSceneryV002")))
+        {
+            FVector Expected = FVector::ZeroVector;
+            for (const FName& Tag : Actor->Tags)
+            {
+                FString Value = Tag.ToString();
+                if (!Value.RemoveFromStart(TEXT("SceneryBoundsCm="))) continue;
+                TArray<FString> Parts; Value.ParseIntoArray(Parts, TEXT(","));
+                checkf(Parts.Num() == 3, TEXT("Malformed source scenery bounds tag"));
+                Expected = FVector(FCString::Atod(*Parts[0]), FCString::Atod(*Parts[1]), FCString::Atod(*Parts[2]));
+            }
+            const auto* Component = Actor->GetStaticMeshComponent();
+            const FVector Render = Component->GetStaticMesh()->GetRenderData()->Bounds.BoxExtent * 2;
+            const FVector Culling = Component->Bounds.BoxExtent * 2;
+            checkf(!Expected.IsNearlyZero() && Render.Equals(Expected, 1.5) && Culling.Equals(Render, 1.5), TEXT("Scenery source/render/culling centimetre bounds differ: %s"), *Actor->GetName());
+            UE_LOG(LogFoundryHost, Display, TEXT("SCENERY_RUNTIME_BOUNDS asset=%s source_cm=%s render_cm=%s culling_cm=%s ok=1"), *Component->GetStaticMesh()->GetName(), *Expected.ToString(), *Render.ToString(), *Culling.ToString());
+        }
     }
     SetActionView(false, true);
     if (bArtProbe) Session->bShowPanels = false;
@@ -261,7 +281,7 @@ void AFoundryStage::SpawnRobots()
     {
         if (Enemy.dead || Enemy.escaped) continue;
         const bool bRam = Enemy.definition == "C1-R02";
-        const FVector Position = bTechnicalMode ? (bRam ? FVector(360, -65, 1.5) : FVector(130, 20, 1.5)) : FVector(90 + Index * 210, Index % 2 ? -60 : 20, 1.5);
+        const FVector Position = bTechnicalMode ? (bRam ? FVector(460, -180, 1.5) : FVector(100, 200, 1.5)) : RobotPosition(Index);
         AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(Position, FRotator::ZeroRotator);
         Robot->Initialize(Enemy.id, bRam, Enemy.maxHp);
         if (!bRam && Enemy.definition != "C1-R01")
@@ -272,6 +292,30 @@ void AFoundryStage::SpawnRobots()
         Robots.Add(Robot);
         ++Index;
     }
+    FrameRoster();
+}
+
+FVector AFoundryStage::RobotPosition(int32 Index) const
+{
+    // Screen staging only. Core IDs, targets, formation order and hit rules do
+    // not depend on these coordinates. Spread bodies across depth and width.
+    static const FVector Slots[] = {FVector(100, 200, 1.5), FVector(460, -180, 1.5), FVector(830, 220, 1.5), FVector(900, -180, 1.5)};
+    return Slots[Index % UE_ARRAY_COUNT(Slots)] + FVector(160 * (Index / UE_ARRAY_COUNT(Slots)), -340 * (Index / UE_ARRAY_COUNT(Slots)), 0);
+}
+
+void AFoundryStage::FrameRoster()
+{
+    if (!PreparationCamera || !ActionCamera || !Session || Session->State.enemies.empty()) return;
+    const bool Wide = Session->State.enemies.size() > 2;
+    if (Wide == bWideRoster) return;
+    bWideRoster = Wide;
+    const FVector PrepLocation = Wide ? FVector(70, 2430, 800) : FVector(-130, 2230, 740);
+    const FVector PrepFocus = Wide ? FVector(70, -60, 40) : FVector(-130, -60, 40);
+    const FVector ShotLocation = Wide ? FVector(-1300, 1012, 566) : FVector(-1160, 920, 520);
+    const FVector ShotFocus(240, 0, 60);
+    PreparationCamera->SetActorLocationAndRotation(PrepLocation, (PrepFocus - PrepLocation).Rotation());
+    ActionCamera->SetActorLocationAndRotation(ShotLocation, (ShotFocus - ShotLocation).Rotation());
+    UE_LOG(LogFoundryHost, Display, TEXT("CAMERA_ROSTER wide=%d bodies=%d presentation_only=1"), Wide, static_cast<int32>(Session->State.enemies.size()));
 }
 
 #if FOUNDRY_WITH_CAMPAIGN
@@ -283,10 +327,10 @@ void AFoundryStage::RefreshCampaignWorld()
         if(Audio)Audio->StopAll();
         SeenSceneRevision = Campaign->SceneRevision;
         for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->Destroy();
-        Robots.Empty(); Mara->ResetPresentation(); ReturnCameraAfter = 0;
+        Robots.Empty(); Mara->ResetPresentation(); ResetActionPresentation();
         const auto* C = Campaign->Current();
         if (C && C->phase == overkill::CityPhase::Fight && Campaign->Page != TEXT("title")) SpawnRobots();
-        SetActionView(false);
+        SetActionView(!Session->State.bullet.empty(), true);
     }
     if(const auto* C=Campaign->Current(); C && C->phase==overkill::CityPhase::Fight)
     {
@@ -297,31 +341,56 @@ void AFoundryStage::RefreshCampaignWorld()
             if(Enemy.dead || Enemy.escaped)continue;
             bool Exists=false;for(const AFoundryRobot* Robot:Robots)if(IsValid(Robot)&&Robot->GetCoreId()==Enemy.id){Exists=true;break;}
             if(Exists)continue;
-            auto* Robot=GetWorld()->SpawnActor<AFoundryRobot>(FVector(90+(PositionIndex%4)*210,-70-(PositionIndex/4)*140,1.5),FRotator::ZeroRotator);
+            auto* Robot=GetWorld()->SpawnActor<AFoundryRobot>(RobotPosition(PositionIndex),FRotator::ZeroRotator);
             Robot->Initialize(Enemy.id,Enemy.definition=="C1-R02",Enemy.maxHp);Robots.Add(Robot);
             UE_LOG(LogFoundryHost,Display,TEXT("CAMPAIGN_ROBOT_SPAWN id=%llu definition=%s"),Enemy.id,UTF8_TO_TCHAR(Enemy.definition.c_str()));
         }
     }
     for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->SetActorHiddenInGame(Campaign->Page == TEXT("title"));
-    PresentCommittedEvents();
+    if (Campaign->Page == TEXT("title") && !bWasTitle)
+    {
+        ResetActionPresentation();
+        Session->CommittedEvents.clear();
+        if (Audio) Audio->StopAll();
+        Mara->ResetPresentation();
+        SetActionView(false, true);
+    }
+    bWasTitle = Campaign->Page == TEXT("title");
+    FrameRoster();
 }
 #endif
 
 void AFoundryStage::PresentCommittedEvents()
 {
     if (!Session || Session->CommittedEvents.empty()) return;
-    if(Audio) Audio->Present(Session->CommittedEvents);
+    // The saved core result is already final. Only presentation waits for the
+    // End Turn camera; every committed event retains its original order/ID.
+    if (!QueuedEvents.empty())
+    {
+        QueuedEvents.insert(QueuedEvents.end(), Session->CommittedEvents.begin(), Session->CommittedEvents.end());
+        Session->CommittedEvents.clear();
+        return;
+    }
+    PresentEvents(Session->CommittedEvents);
+    Session->CommittedEvents.clear();
+}
+
+void AFoundryStage::PresentEvents(const std::vector<overkill::Event>& Events)
+{
+    if(Audio) Audio->Present(Events);
     TSet<uint64> Died;
     TSet<uint64> NamedActionParents;
-    for (const auto& Event : Session->CommittedEvents) if (Event.type == "enemy_death") Died.Add(Event.target);
-    for (const auto& Event : Session->CommittedEvents) if (Event.type.rfind("robot_action:", 0) == 0) NamedActionParents.Add(Event.parent);
-    for (const auto& Event : Session->CommittedEvents)
+    for (const auto& Event : Events) if (Event.type == "enemy_death") Died.Add(Event.target);
+    for (const auto& Event : Events) if (Event.type.rfind("robot_action:", 0) == 0) NamedActionParents.Add(Event.parent);
+    for (const auto& Event : Events)
     {
+        UE_LOG(LogFoundryHost, Verbose, TEXT("PRESENT_EVENT id=%llu type=%s action_view=%d transition=%.3f time=%.3f"), Event.id, UTF8_TO_TCHAR(Event.type.c_str()), bActionView, CameraTransitionRemaining, GetWorld()->GetTimeSeconds());
         if (Event.type == "collected") Mara->Collect(Event.id, Event.amount);
         else if (Event.type == "loaded") Mara->Load(Event.id, Event.amount);
         else if (Event.type == "unload") Mara->Unload(Event.id);
         else if (Event.type == "fire")
         {
+            UE_LOG(LogFoundryHost, Display, TEXT("SHOT_PRESENT event=%llu action_view=%d settled=%d time=%.3f"), Event.id, bActionView, CameraTransitionRemaining <= 0, GetWorld()->GetTimeSeconds());
             for (AFoundryRobot* Robot : Robots)
                 if (IsValid(Robot) && Robot->GetCoreId() == Event.target) Mara->Fire(Event.id, Event.amount, Robot->GetImpactLocation());
         }
@@ -337,40 +406,80 @@ void AFoundryStage::PresentCommittedEvents()
             else if (Event.type == "enemy_escape" && Event.subject == Id) Robot->Escape(Event.id);
         }
     }
-    Session->CommittedEvents.clear();
+}
+
+void AFoundryStage::PlayPresentationCue(const FString& Cue) { if (Audio) Audio->PlayCue(FName(*Cue)); }
+
+void AFoundryStage::ResetActionPresentation()
+{
+    QueuedEvents.clear();
+    CameraTransitionRemaining = ReturnCameraAfter = 0;
+}
+
+void AFoundryStage::AimAtSelectedTarget()
+{
+    if (!Mara || !Session || ReturnCameraAfter > 0) return;
+    for (const AFoundryRobot* Robot : Robots)
+        if (IsValid(Robot) && Robot->GetCoreId() == Session->Target) { Mara->AimAt(Robot->GetImpactLocation()); break; }
 }
 
 void AFoundryStage::Control(const FString& Command)
 {
     if (!Session) return;
+    if (IsPresentationBusy() && Command != TEXT("diagnostic") && Command != TEXT("restart")) return;
     bool bCommitted = false;
 #if FOUNDRY_WITH_CAMPAIGN
     if (Campaign) bCommitted = Campaign->Control(Command);
     else
 #endif
         bCommitted = Session->Control(Command);
-    PresentCommittedEvents();
-    if (bCommitted && (Command == TEXT("fire") || Command == TEXT("end")))
+    if (bCommitted && Command == TEXT("load"))
     {
         SetActionView(true);
-        ReturnCameraAfter = 2.25f;
+        CameraTransitionRemaining = FMath::Max(CameraTransitionRemaining, .70f);
+        ActionCaption = TEXT("Locking and loading…");
     }
-    if (bTechnicalMode && Command == TEXT("restart")) { if(Audio)Audio->StopAll(); SpawnRobots(); Mara->ResetPresentation(); ReturnCameraAfter = 0.0f; SetActionView(false); }
+    else if (bCommitted && Command == TEXT("unload")) SetActionView(false);
+    else if (bCommitted && Command == TEXT("fire"))
+    {
+        ActionCaption = TEXT("Firing…");
+        ReturnCameraAfter = 2.25f;
+#if FOUNDRY_WITH_CAMPAIGN
+        if (Campaign) ++Campaign->ViewRevision;
+#endif
+    }
+    else if (bCommitted && Command == TEXT("end"))
+    {
+        SetActionView(true);
+        ActionCaption = TEXT("Enemy turn");
+        if (CameraTransitionRemaining > 0)
+        {
+            QueuedEvents = std::move(Session->CommittedEvents);
+            Session->CommittedEvents.clear();
+            UE_LOG(LogFoundryHost, Display, TEXT("ENEMY_PRESENT_QUEUED events=%d core_committed=1 time=%.3f"), static_cast<int32>(QueuedEvents.size()), GetWorld()->GetTimeSeconds());
+        }
+        else ReturnCameraAfter = 2.25f;
+    }
+    PresentCommittedEvents();
+    AimAtSelectedTarget();
+    if (bTechnicalMode && Command == TEXT("restart")) { if(Audio)Audio->StopAll(); SpawnRobots(); Mara->ResetPresentation(); ResetActionPresentation(); SetActionView(false, true); }
 }
 
 void AFoundryStage::SetActionView(bool bAction, bool bInstant)
 {
+    const bool Changed = bActionView != bAction;
     bActionView = bAction;
-    if(bAction)ActionCaption=Session && Session->LastAction==TEXT("end turn")?TEXT("Enemy turn"):TEXT("Firing…");
+    CameraTransitionRemaining = bInstant || !Changed ? 0 : .65f;
+    ActionCaption = bAction ? TEXT("Taking aim…") : TEXT("Returning to preparation…");
 #if FOUNDRY_WITH_CAMPAIGN
     if (Campaign) { ++Campaign->ViewRevision; if (bAction) Campaign->Drawer.Empty(); }
 #endif
     if (APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0))
     {
-        Controller->SetViewTargetWithBlend(bAction ? ActionCamera.Get() : PreparationCamera.Get(), bInstant ? 0.0f : 0.65f,
+        Controller->SetViewTargetWithBlend(bAction ? ActionCamera.Get() : PreparationCamera.Get(), CameraTransitionRemaining,
                                            EViewTargetBlendFunction::VTBlend_Cubic);
     }
-    UE_LOG(LogFoundryHost, Display, TEXT("Camera=%s"), bAction ? TEXT("action") : TEXT("preparation"));
+    UE_LOG(LogFoundryHost, Display, TEXT("Camera=%s transition=%.3f time=%.3f"), bAction ? TEXT("action") : TEXT("preparation"), CameraTransitionRemaining, GetWorld()->GetTimeSeconds());
 }
 
 void AFoundryStage::CaptureView()
@@ -407,15 +516,34 @@ void AFoundryStage::Tick(float DeltaSeconds)
         Audio->SetActive(Active);
         Audio->Tick(DeltaSeconds);
     }
-    if (ReturnCameraAfter > 0.0f)
+#if FOUNDRY_WITH_CAMPAIGN
+    if (Campaign) RefreshCampaignWorld();
+#endif
+    if (CameraTransitionRemaining > 0)
+    {
+        CameraTransitionRemaining = FMath::Max(0.f, CameraTransitionRemaining - DeltaSeconds);
+        if (CameraTransitionRemaining <= 0)
+        {
+            UE_LOG(LogFoundryHost, Display, TEXT("CAMERA_SETTLED action=%d time=%.3f"), bActionView, GetWorld()->GetTimeSeconds());
+            if (!QueuedEvents.empty())
+            {
+                PresentEvents(QueuedEvents);
+                QueuedEvents.clear();
+                ReturnCameraAfter = 2.25f;
+                UE_LOG(LogFoundryHost, Display, TEXT("ENEMY_PRESENT_DISPATCH settled=1 time=%.3f"), GetWorld()->GetTimeSeconds());
+            }
+#if FOUNDRY_WITH_CAMPAIGN
+            if (Campaign) ++Campaign->ViewRevision;
+#endif
+        }
+    }
+    else if (ReturnCameraAfter > 0.0f)
     {
         ReturnCameraAfter -= DeltaSeconds;
         if (ReturnCameraAfter <= 0.0f) SetActionView(false);
     }
     PresentCommittedEvents();
-#if FOUNDRY_WITH_CAMPAIGN
-    if (Campaign) RefreshCampaignWorld();
-#endif
+    AimAtSelectedTarget();
     if (bArtProbe) TickArtProbe(DeltaSeconds);
     if (bCampaignProbe) TickCampaignProbe(DeltaSeconds);
     if (!bSmokeTest) return;

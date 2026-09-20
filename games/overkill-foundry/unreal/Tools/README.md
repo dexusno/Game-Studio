@@ -14,6 +14,8 @@ From the repository root, with the ignored local Unreal/Blender configuration:
 & ./games/overkill-foundry/tools/unreal.ps1 Art
 # Generate/verify Mara first; see art-source/mara_v001_README.md.
 & ./games/overkill-foundry/tools/unreal.ps1 MaraArt
+# Generate/verify scenery-v002 first; see art-source/scenery_v002_README.md.
+& ./games/overkill-foundry/tools/unreal.ps1 SceneryArt
 & ./games/overkill-foundry/tools/unreal.ps1 BuildGame
 & ./games/overkill-foundry/tools/unreal.ps1 ArtProbe
 & ./games/overkill-foundry/tools/unreal.ps1 Fixture
@@ -89,8 +91,12 @@ finite shop, preparation/shot cameras, full-screen recipe and part drawers,
 reward choices, memory exchanges and pending upgrade choices. Mystery route
 cards hide the stored outcome; only production reveal queries expose forecasts.
 
-Use the mouse for choices and target cards. During preparation, C collects,
-L loads the selected bullet, U unloads, Space fires and Enter ends the turn.
+Use the mouse for choices and numbered target cards. During preparation, C collects
+and L or **Lock and load** loads the selected bullet and moves to the shooting
+camera. Once that short transition settles, targeting, Fire, Unload, Recipes and
+Shop remain usable. Space fires; after the shot and impacts the camera returns
+to preparation in the same turn. U unloads and returns to preparation. Closing
+Recipes or Shop retains the loaded shooting view. Enter alone ends the turn.
 Recipe and part pages suppress encounter shortcuts. Recipe details show source
 effects, printed cost, current supplies and the successful shared-core preview's
 actual payment; blocked recipes retain the source cost and exact rejection.
@@ -116,6 +122,9 @@ with twenty memories and twenty-four parts in each pool, plus pending pack and
 nested offer choices. These injected datasets do not prove legitimate acquisition
 or balance. `Run -SavePath <fixture> -InspectSave` opens that exact prepared
 state without Continue; this explicit inspection option is absent in Shipping.
+Its camera fixture contains one Mite and two Rams plus six plain Ammo. This is
+synthetic three-body layout coverage; the actual initial formation remains the
+source-defined Mite/Ram pair, and two live Mites are never used in the fixture.
 
 Audio is original procedural PCM, imported into local `/Game/FoundryAudio`.
 The audio adapter consumes committed events once, uses bounded voice groups,
@@ -221,3 +230,82 @@ source/log identities under `Saved/Validation/precision-ui-20260920-1658`.
 The parent-owned controller also has 46 isolated assertions. Wider bands are
 covered there, not by this 100%-width graphical pass. Save-failure recovery UI,
 held-key hardware repeat and owner feel assessment remain untested.
+
+### Camera and scenery checkpoint, 20 September 2026, 17:42 build
+
+Successful **Lock and load** now transitions from preparation to the settled
+shooting view before Fire is available. Invalid loading leaves both the view and
+save unchanged. The brief transition/playback lock is separate from the stable
+shooting view. Fire returns to preparation without advancing the round; End Turn
+alone plays enemy actions. An End Turn from preparation saves immediately, then
+dispatches the original ordered cosmetic/audio events once the camera arrives.
+Title, Continue and scene reset discard any pending cosmetic queue. The gun's
+cradle and child mechanisms aim toward the actual selected body's impact point;
+its sled remains fixed. Numbered cards, side badges and a selected-target reticle
+connect the choice to the body without placing labels over the robots.
+
+`SceneryArt` imports the separately authored scenery-v002, retaining Mara's
+working gun, claw and hopper. All 19 source/render/component bounds agree within
+1.5 cm after the existing UE bounds synchronization. The import report SHA-256 is
+`419bf1406f0555d0c4ec45cda6a8dda7db1087a52d5bd717e5e8b13232d8f3e3`.
+`SceneryArt-20260920-171503.log` saved the assets but exited 1 because initial
+material lookups logged missing-asset errors. The importer checks existence
+before loading now; `SceneryArt-20260920-171932.log` exited 0. Source/export
+provenance and generation commands remain in `art-source/scenery_v002_README.md`.
+
+Both `Build-20260920-174242.log` and `BuildGame-20260920-174259.log` pass with
+Unreal 5.8.2 CL56702186, MSVC 14.44.35228 and SDK 10.0.22621.0. Final editor
+module SHA-256 is
+`1c523689cce5c464ce49351227a61ea0c9f18dee0b8672a4914a37c8be78ba7a`;
+game executable SHA-256 is
+`f729bb2c40562caed9bf3cd152d856362b1f072667fea615cc169aa0103006ea`.
+These compile the live core, digest
+`b915b36ef05991e865abed40e9ebcd6fe82db70e8bf20556ad47633a5e32f2cf`.
+The explicit historical review snapshot remains a separate option.
+
+`CampaignProbe-20260920-174355.log` passes the real Mite/Ram route, failed-load
+invariance, transition input lock, settled loaded controls, Recipes/Shop return,
+Unload/reload, reward flow and disk reload: position 2, HP 68, revision 42,
+40 receipts, hash `4f4d07160737c9a5`, sixteen captures. It also sends a synthetic
+Slate repeated-Enter event to verify the new repeat guard; hardware key holding
+across modal dismissal remains untested. `Fixture-20260920-174534.log` matches
+all 85 ordered native transcript lines (84 events plus result), final hash
+`965951ac6f2b9563`. `ArtProbe-20260920-174613.log` passes twenty-two captures,
+preview/apply parity, Ram charge/held/blast, Mite attack, graded reactions,
+all fifteen death/dissolve material slots, actor/attached-effect cleanup and
+restart. Each probe's `.binary.json` records identical before/after module hashes.
+The earlier `CampaignProbe-20260920-171613.log` failed its obsolete shot-counter
+assertion when victory cleared the fight; the check now uses the saved revision.
+
+Actual Windows mouse/keyboard input in `Run-20260920-173257.log` exercised the
+prepared one-Mite/two-Ram fixture at 1600×900: select one Ammo, click Lock and load,
+wait for its natural camera transition, click target 3, Space Fire, same-round
+preparation, and Enter enemy turn. The third Ram alone lost one HP; the gun's
+reported bore/target error was 0.564 degrees. Fourteen enemy-turn events were
+saved at world time 111.115 and dispatched once at camera arrival 111.766.
+The wider three-body camera and separated badges are finite synthetic layout
+coverage, not a reachable initial formation or a general larger-roster proof.
+The primary loaded/action captures come from the ordinary Mite/Ram campaign.
+
+That native run also committed a real 1.800000-second Precision timeout Miss and
+a saved MY1-17 retry Good at 0.987520 seconds. The retry ready frame now says
+"Back to retry choice". Only successful saved results call the presentation cue
+(Miss for 0, Good for 1/2); no new master-mix/listening check is claimed here.
+Native module SHA-256 was
+`bde5229116615bcfb8e816cde92b028c27c721b7449fe3ce7fab60fb950ab6f5`.
+The final rebuild differs only by the requested singular "1 part" label.
+
+The local archive `Saved/Validation/camera-scenery-20260920-1742/identity.json`
+records source, binary, import, log and capture hashes, including the actual
+preparation, settled loaded view, impact, return and retry frames. Its source
+collection excludes the new unexecuted roster-v001 importer. All launches here
+use Unreal Editor `-game`; the compiled game target is not a verified package.
+
+This is an intermediate mechanical camera/presentation checkpoint. The close
+dark wall, empty right apron, limited visible city depth, simple shot effects
+and remaining temporary robot designs still fall below the selected F.I.S.T.
+bar. Neither the source renders, successful imports, agent captures nor the
+parent's finite readability review establish owner visual or feel acceptance.
+Next UI work is the already-recorded optional recipe payment/target/sacrifice
+and discount choices; scenery refinement and bespoke roster integration are
+separate work.

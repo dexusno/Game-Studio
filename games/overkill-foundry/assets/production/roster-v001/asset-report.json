@@ -1,0 +1,1985 @@
+{
+  "version": "cinderwall-roster-v001",
+  "blender": "5.2.1 LTS",
+  "units": "metres",
+  "fps": 30,
+  "forward": "-X; Unreal conversion (x,-y,z)*100",
+  "robots": {
+    "CableBinder": {
+      "source_id": "C1-R04",
+      "prefix": "CB_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.1475
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_L",
+          "pivot": [
+            0.2,
+            -0.48,
+            0.6
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_R",
+          "pivot": [
+            0.2,
+            0.48,
+            0.6
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            -0.08,
+            0,
+            1.95
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "spool",
+          "pivot": [
+            0.43,
+            0,
+            1.42
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "arm_L",
+          "pivot": [
+            -0.06,
+            -0.64,
+            1.54
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "arm_R",
+          "pivot": [
+            -0.06,
+            0.64,
+            1.54
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.3259999999999998
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.2,
+            -0.76,
+            1.11
+          ],
+          "parent": "arm_L"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.8499999999999996
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "spray": "CB_spray",
+        "foul": "CB_foul",
+        "punch": "CB_punch"
+      },
+      "vertices": 13434,
+      "triangles": 26524,
+      "materials": [
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_soot",
+        "M_CW_iron",
+        "M_CW_copper",
+        "M_CW_ochre",
+        "M_CW_cool"
+      ],
+      "rest_bounds_m": [
+        2.2649998664855957,
+        1.854759931564331,
+        2.5109524726867676
+      ],
+      "rigid_weights": true
+    },
+    "PressureCask": {
+      "source_id": "C1-R05",
+      "prefix": "PC_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.0575
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_L",
+          "pivot": [
+            0,
+            -0.55,
+            0.5
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_R",
+          "pivot": [
+            0,
+            0.55,
+            0.5
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "lid",
+          "pivot": [
+            0,
+            0,
+            1.91
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "valve",
+          "pivot": [
+            -0.65,
+            0,
+            1.16
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "flywheel",
+          "pivot": [
+            0.1,
+            -0.71,
+            1.23
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.2220000000000002
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -0.98,
+            0,
+            1.24
+          ],
+          "parent": "valve"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.65
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "attack": "PC_attack",
+        "pressurize": "PC_pressurize"
+      },
+      "vertices": 9540,
+      "triangles": 18892,
+      "materials": [
+        "M_CW_oxide",
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_optic",
+        "M_CW_copper",
+        "M_CW_ceramic",
+        "M_CW_ochre",
+        "M_CW_soot"
+      ],
+      "rest_bounds_m": [
+        1.8711999654769897,
+        1.6399999856948853,
+        2.3399999141693115
+      ],
+      "rigid_weights": true
+    },
+    "CoilNest": {
+      "source_id": "C1-R07",
+      "prefix": "CN_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.0125
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "lid_L",
+          "pivot": [
+            0,
+            -0.45,
+            1.35
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "lid_R",
+          "pivot": [
+            0,
+            0.45,
+            1.35
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "feeder",
+          "pivot": [
+            -0.6,
+            0,
+            0.9
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "coil",
+          "pivot": [
+            0.25,
+            0,
+            1.77
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "leg0",
+          "pivot": [
+            -0.625,
+            -0.62,
+            0.67
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg1",
+          "pivot": [
+            -0.625,
+            0.62,
+            0.67
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg2",
+          "pivot": [
+            0.625,
+            -0.62,
+            0.67
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg3",
+          "pivot": [
+            0.625,
+            0.62,
+            0.67
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.17
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.42,
+            0,
+            0.82
+          ],
+          "parent": "feeder"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.55
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "deploy": "CN_deploy",
+        "attack": "CN_attack"
+      },
+      "vertices": 8868,
+      "triangles": 17500,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_cool",
+        "M_CW_patina",
+        "M_CW_ochre"
+      ],
+      "rest_bounds_m": [
+        2.444786548614502,
+        2.4200000762939453,
+        2.1999998092651367
+      ],
+      "rigid_weights": true
+    },
+    "KnucklePress": {
+      "source_id": "C1-R08",
+      "prefix": "KP_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.1475
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_L",
+          "pivot": [
+            0.15,
+            -0.49,
+            0.71
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_R",
+          "pivot": [
+            0.15,
+            0.49,
+            0.71
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "jaw",
+          "pivot": [
+            -0.05,
+            0,
+            1.6
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "fist_L",
+          "pivot": [
+            -0.42,
+            -0.66,
+            1.32
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "fist_R",
+          "pivot": [
+            -0.42,
+            0.66,
+            1.32
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            0.15,
+            0,
+            2.16
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.3259999999999998
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.4,
+            -0.76,
+            1.27
+          ],
+          "parent": "fist_L"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.8499999999999996
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "brace": "KP_brace",
+        "double_punch": "KP_double_punch",
+        "slam": "KP_slam"
+      },
+      "vertices": 8258,
+      "triangles": 16288,
+      "materials": [
+        "M_CW_ochre",
+        "M_CW_edge",
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_copper",
+        "M_CW_ceramic",
+        "M_CW_oxide",
+        "M_CW_optic"
+      ],
+      "rest_bounds_m": [
+        2.2578675746917725,
+        2.0,
+        2.424999952316284
+      ],
+      "rigid_weights": true
+    },
+    "RedlinePursuer": {
+      "source_id": "C1-O01",
+      "prefix": "RP_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.125
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "wheel_L",
+          "pivot": [
+            0.44,
+            -0.57,
+            0.49
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "wheel_R",
+          "pivot": [
+            0.44,
+            0.57,
+            0.49
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "fork",
+          "pivot": [
+            -0.83,
+            0,
+            0.52
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            -0.51,
+            0,
+            1.74
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "gun_L",
+          "pivot": [
+            -0.25,
+            -0.62,
+            1.55
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "gun_R",
+          "pivot": [
+            -0.25,
+            0.62,
+            1.55
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "exhaust",
+          "pivot": [
+            0.8,
+            0,
+            1.79
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.3
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.39,
+            -0.61,
+            1.51
+          ],
+          "parent": "gun_L"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.8
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "strike": "RP_strike",
+        "triple_strike": "RP_triple_strike"
+      },
+      "vertices": 9884,
+      "triangles": 19512,
+      "materials": [
+        "M_CW_oxide",
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_ochre",
+        "M_CW_optic"
+      ],
+      "rest_bounds_m": [
+        2.4119999408721924,
+        1.8300000429153442,
+        2.489000082015991
+      ],
+      "rigid_weights": true
+    },
+    "FoilWarden": {
+      "source_id": "C1-O02",
+      "prefix": "FW_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.314
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_L",
+          "pivot": [
+            0.05,
+            -0.42,
+            0.88
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_R",
+          "pivot": [
+            0.05,
+            0.42,
+            0.88
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            0,
+            0,
+            2.4
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "lance",
+          "pivot": [
+            -0.22,
+            0.56,
+            1.63
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "tile_0",
+          "pivot": [
+            -0.59,
+            -0.76,
+            1.0
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "tile_1",
+          "pivot": [
+            -0.59,
+            -0.76,
+            1.56
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "tile_2",
+          "pivot": [
+            -0.59,
+            -0.76,
+            2.12
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.5184
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.71,
+            0.6,
+            1.69
+          ],
+          "parent": "lance"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            3.2199999999999998
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "attack_9": "FW_attack_9",
+        "gain_drive": "FW_gain_drive",
+        "attack_12": "FW_attack_12"
+      },
+      "vertices": 7571,
+      "triangles": 14922,
+      "materials": [
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_iron",
+        "M_CW_copper",
+        "M_CW_soot",
+        "M_CW_ochre",
+        "M_CW_cool",
+        "M_CW_ceramic"
+      ],
+      "rest_bounds_m": [
+        2.150700092315674,
+        1.8622124195098877,
+        2.8249998092651367
+      ],
+      "rigid_weights": true
+    },
+    "SplitChassis": {
+      "source_id": "C1-O03",
+      "prefix": "SC_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.1835
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "half_L",
+          "pivot": [
+            0,
+            -0.43,
+            1.08
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "half_R",
+          "pivot": [
+            0,
+            0.43,
+            1.08
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "track_L",
+          "pivot": [
+            0.15,
+            -0.86,
+            0.43
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "track_R",
+          "pivot": [
+            0.15,
+            0.86,
+            0.43
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "gun_L",
+          "pivot": [
+            -0.64,
+            -0.67,
+            1.53
+          ],
+          "parent": "half_L"
+        },
+        {
+          "name": "gun_R",
+          "pivot": [
+            -0.64,
+            0.67,
+            1.53
+          ],
+          "parent": "half_R"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            0.05,
+            0,
+            2.12
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.3676
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.1,
+            -0.57,
+            1.56
+          ],
+          "parent": "gun_L"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.9299999999999997
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "double_strike": "SC_double_strike",
+        "thermal_runaway": "SC_thermal_runaway",
+        "triple_strike": "SC_triple_strike",
+        "death_release": "SC_death_release"
+      },
+      "vertices": 11124,
+      "triangles": 22020,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_oxide",
+        "M_CW_ember",
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_optic"
+      ],
+      "rest_bounds_m": [
+        2.24399995803833,
+        2.369999885559082,
+        2.3999998569488525
+      ],
+      "rigid_weights": true
+    },
+    "GatebreakerPrime": {
+      "source_id": "C1-B01",
+      "prefix": "GP_",
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "hull",
+          "pivot": [
+            0,
+            0,
+            1.71
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_L",
+          "pivot": [
+            0.18,
+            -0.8,
+            1.0
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "leg_R",
+          "pivot": [
+            0.18,
+            0.8,
+            1.0
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            -0.05,
+            0,
+            2.94
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "arm_L",
+          "pivot": [
+            -0.1,
+            -1.02,
+            2.33
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "arm_R",
+          "pivot": [
+            -0.1,
+            1.02,
+            2.33
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "hammer_L",
+          "pivot": [
+            -0.93,
+            -1.1,
+            1.91
+          ],
+          "parent": "arm_L"
+        },
+        {
+          "name": "hammer_R",
+          "pivot": [
+            -0.93,
+            1.1,
+            1.91
+          ],
+          "parent": "arm_R"
+        },
+        {
+          "name": "reactor",
+          "pivot": [
+            0.53,
+            0,
+            2.44
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "vent_L",
+          "pivot": [
+            0.5,
+            -0.62,
+            3.17
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "vent_R",
+          "pivot": [
+            0.5,
+            0.62,
+            3.17
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.12,
+            0,
+            1.976
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.75,
+            -1.11,
+            1.63
+          ],
+          "parent": "hammer_L"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            4.1
+          ],
+          "parent": "root"
+        }
+      ],
+      "action_clips": {
+        "phase_one_strike": "GP_phase_one_strike",
+        "recover": "GP_recover",
+        "quad_strike": "GP_quad_strike",
+        "charge": "GP_charge",
+        "blast": "GP_blast"
+      },
+      "vertices": 13306,
+      "triangles": 26276,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_oxide",
+        "M_CW_furnace",
+        "M_CW_copper",
+        "M_CW_soot",
+        "M_CW_ochre",
+        "M_CW_optic"
+      ],
+      "rest_bounds_m": [
+        2.990000009536743,
+        2.9800000190734863,
+        3.7649998664855957
+      ],
+      "rigid_weights": true
+    }
+  },
+  "clips": {
+    "CB_idle": {
+      "robot": "SK_CableBinder",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CB_hit_light": {
+      "robot": "SK_CableBinder",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CB_hit_medium": {
+      "robot": "SK_CableBinder",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CB_hit_heavy": {
+      "robot": "SK_CableBinder",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CB_death": {
+      "robot": "SK_CableBinder",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CB_escape": {
+      "robot": "SK_CableBinder",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "PC_idle": {
+      "robot": "SK_PressureCask",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "PC_hit_light": {
+      "robot": "SK_PressureCask",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "PC_hit_medium": {
+      "robot": "SK_PressureCask",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "PC_hit_heavy": {
+      "robot": "SK_PressureCask",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "PC_death": {
+      "robot": "SK_PressureCask",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "PC_escape": {
+      "robot": "SK_PressureCask",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CN_idle": {
+      "robot": "SK_CoilNest",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CN_hit_light": {
+      "robot": "SK_CoilNest",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CN_hit_medium": {
+      "robot": "SK_CoilNest",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CN_hit_heavy": {
+      "robot": "SK_CoilNest",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "CN_death": {
+      "robot": "SK_CoilNest",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CN_escape": {
+      "robot": "SK_CoilNest",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "KP_idle": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "KP_hit_light": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "KP_hit_medium": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "KP_hit_heavy": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "KP_death": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "KP_escape": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RP_idle": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RP_hit_light": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RP_hit_medium": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RP_hit_heavy": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RP_death": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RP_escape": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "FW_idle": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "FW_hit_light": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "FW_hit_medium": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "FW_hit_heavy": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "FW_death": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "FW_escape": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_idle": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "SC_hit_light": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "SC_hit_medium": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "SC_hit_heavy": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "SC_death": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_escape": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_idle": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "GP_hit_light": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 0.33,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "GP_hit_medium": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 0.5,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "GP_hit_heavy": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "GP_death": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_escape": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CB_spray": {
+      "robot": "SK_CableBinder",
+      "duration_s": 0.88,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.29,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.54,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CB_foul": {
+      "robot": "SK_CableBinder",
+      "duration_s": 1.1,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.48,
+          "event": "fouling_cable_spark"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CB_punch": {
+      "robot": "SK_CableBinder",
+      "duration_s": 0.9,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.38,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "PC_attack": {
+      "robot": "SK_PressureCask",
+      "duration_s": 0.95,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.38,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "PC_pressurize": {
+      "robot": "SK_PressureCask",
+      "duration_s": 1.25,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.4,
+          "event": "pressure_gain"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CN_deploy": {
+      "robot": "SK_CoilNest",
+      "duration_s": 1.3,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.66,
+          "event": "display_committed_summon"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "CN_attack": {
+      "robot": "SK_CoilNest",
+      "duration_s": 0.87,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.35,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "KP_brace": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 1.1,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.5,
+          "event": "armor_lock"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "KP_double_punch": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 1.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.32,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.61,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "KP_slam": {
+      "robot": "SK_KnucklePress",
+      "duration_s": 1.1,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.5,
+          "event": "display_committed_hit"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RP_strike": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 0.8,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.29,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RP_triple_strike": {
+      "robot": "SK_RedlinePursuer",
+      "duration_s": 0.97,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.25,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.43,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        },
+        {
+          "t": 0.61,
+          "event": "display_committed_hit",
+          "hit_index": 2
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "FW_attack_9": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 0.95,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.38,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "FW_attack_12": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 1.1,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.46,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "FW_gain_drive": {
+      "robot": "SK_FoilWarden",
+      "duration_s": 1.2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.6,
+          "event": "drive_gain"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_double_strike": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 0.95,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.3,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.56,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_triple_strike": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 1.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.26,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.44,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        },
+        {
+          "t": 0.62,
+          "event": "display_committed_hit",
+          "hit_index": 2
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_thermal_runaway": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 1.2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.52,
+          "event": "thermal_vent"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "SC_death_release": {
+      "robot": "SK_SplitChassis",
+      "duration_s": 2.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.42,
+          "event": "display_committed_death_spawn"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_phase_one_strike": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.1,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.46,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_recover": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.45,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.28,
+          "event": "recovery_joint_open"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_quad_strike": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.25,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.27,
+          "event": "display_committed_hit",
+          "hit_index": 0
+        },
+        {
+          "t": 0.47,
+          "event": "display_committed_hit",
+          "hit_index": 1
+        },
+        {
+          "t": 0.67,
+          "event": "display_committed_hit",
+          "hit_index": 2
+        },
+        {
+          "t": 0.87,
+          "event": "display_committed_hit",
+          "hit_index": 3
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_charge": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.3,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.4,
+          "event": "boss_pressure_charge"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "GP_blast": {
+      "robot": "SK_GatebreakerPrime",
+      "duration_s": 1.2,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.47,
+          "event": "display_committed_hit"
+        },
+        {
+          "t": 0.58,
+          "event": "steam_vent"
+        }
+      ],
+      "gameplay_authority": false
+    }
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "source_sha256": "99a2db55ee3650db345c610ef55b7442f448b10a616a1bc41366f8be7a2df1d8",
+  "helper_sha256": "a308805fecb51f5ae9dd67c2de701984406a6534b202f40311a0cb3f4575ab44",
+  "palette_dependency": "cinderwall-art-v001 original PBR surfaces, unchanged",
+  "provenance": "Original Game Studio / Codex geometry, rigs and keyframes. No external art.",
+  "limits": "Source art only. No in-engine action coverage, performance, quality or human approval established."
+}

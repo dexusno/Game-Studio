@@ -1,0 +1,641 @@
+{
+  "schema": 1,
+  "checkpoint": "Lock and load camera flow and scenery-v002 mechanical presentation proof",
+  "recorded_at": "2026-09-20T17:50:23+02:00",
+  "engine": "Unreal 5.8.2 CL56702186",
+  "compiler": "MSVC 14.44.35228",
+  "sdk": "Windows 10.0.22621.0",
+  "core_digest": "b915b36ef05991e865abed40e9ebcd6fe82db70e8bf20556ad47633a5e32f2cf",
+  "source_graph_lf_sha256": "3cf91cb72cfcb30c36b992e0c0bdffe9ab8b909ed7a809d665dd2f547cb02f2d",
+  "sources": [
+    {
+      "path": "games/overkill-foundry/tools/unreal.ps1",
+      "bytes": 12419,
+      "sha256": "56042706188aa635233278a0c4def5dcc971a90b72583fe542a33db906e309d5",
+      "sha256_lf": "56042706188aa635233278a0c4def5dcc971a90b72583fe542a33db906e309d5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultEngine.ini",
+      "bytes": 776,
+      "sha256": "42c7b953a62d542fc201f080bb23d36e32d811765339bbc5c2276609355f4af0",
+      "sha256_lf": "71ed0bf8a39ca275cde061613851b106bcd98b1eaa7895249e8dfb506c14e913"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultGame.ini",
+      "bytes": 561,
+      "sha256": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202",
+      "sha256_lf": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultInput.ini",
+      "bytes": 168,
+      "sha256": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9",
+      "sha256_lf": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/OverkillFoundry.uproject",
+      "bytes": 583,
+      "sha256": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129",
+      "sha256_lf": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+      "bytes": 4043,
+      "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+      "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryArtProbe.cpp",
+      "bytes": 8717,
+      "sha256": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7",
+      "sha256_lf": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp",
+      "bytes": 9933,
+      "sha256": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+      "sha256_lf": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 13315,
+      "sha256": "39f9052e506bdea9045fcafb264cff42737208a33c22dcea916c98fbf8b50f49",
+      "sha256_lf": "39f9052e506bdea9045fcafb264cff42737208a33c22dcea916c98fbf8b50f49"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+      "bytes": 11616,
+      "sha256": "3a436f7021ba267d02349acaf27cb425db0cfecad143a57f1c590875d385856c",
+      "sha256_lf": "3a436f7021ba267d02349acaf27cb425db0cfecad143a57f1c590875d385856c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 46993,
+      "sha256": "56703299a0c9d4a0cf4d3d72578f952106922d94bc00705bf29850e218e60b30",
+      "sha256_lf": "56703299a0c9d4a0cf4d3d72578f952106922d94bc00705bf29850e218e60b30"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryDebugHUD.cpp",
+      "bytes": 16091,
+      "sha256": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4",
+      "sha256_lf": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 31564,
+      "sha256": "27884259ad0f4eef62c53fb933c0591f3e149b54a22dcbd4aff5d7cc0bde14ee",
+      "sha256_lf": "27884259ad0f4eef62c53fb933c0591f3e149b54a22dcbd4aff5d7cc0bde14ee"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryMara.cpp",
+      "bytes": 13312,
+      "sha256": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982",
+      "sha256_lf": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecision.cpp",
+      "bytes": 7451,
+      "sha256": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d",
+      "sha256_lf": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp",
+      "bytes": 13100,
+      "sha256": "472e111db1cde49503c8f784922e9d9821cd84a04bd43f41ed8a83e914396bad",
+      "sha256_lf": "472e111db1cde49503c8f784922e9d9821cd84a04bd43f41ed8a83e914396bad"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundrySession.cpp",
+      "bytes": 11857,
+      "sha256": "66008815c81b10dbacfac31f2175809d595d1a8a1cbd76cdcf1818743398a10b",
+      "sha256_lf": "66008815c81b10dbacfac31f2175809d595d1a8a1cbd76cdcf1818743398a10b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/OverkillFoundry.cpp",
+      "bytes": 127,
+      "sha256": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208",
+      "sha256_lf": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaign.cpp",
+      "bytes": 64,
+      "sha256": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a",
+      "sha256_lf": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSerialization.cpp",
+      "bytes": 78,
+      "sha256": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4",
+      "sha256_lf": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSession.cpp",
+      "bytes": 76,
+      "sha256": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2",
+      "sha256_lf": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignUpgrades.cpp",
+      "bytes": 73,
+      "sha256": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e",
+      "sha256_lf": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCatalogue.cpp",
+      "bytes": 113,
+      "sha256": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72",
+      "sha256_lf": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCityContent.cpp",
+      "bytes": 68,
+      "sha256": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462",
+      "sha256_lf": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCore.cpp",
+      "bytes": 110,
+      "sha256": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938",
+      "sha256_lf": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRobots.cpp",
+      "bytes": 110,
+      "sha256": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c",
+      "sha256_lf": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRoute.cpp",
+      "bytes": 61,
+      "sha256": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2",
+      "sha256_lf": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSaveStore.cpp",
+      "bytes": 119,
+      "sha256": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e",
+      "sha256_lf": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSerialization.cpp",
+      "bytes": 117,
+      "sha256": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92",
+      "sha256_lf": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedUpgrades.cpp",
+      "bytes": 64,
+      "sha256": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533",
+      "sha256_lf": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryAudio.h",
+      "bytes": 1382,
+      "sha256": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+      "sha256_lf": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 1895,
+      "sha256": "e1288ddd29c2a286a6696024ad504127d9803aed66ac36ae12a1fc5937726fb4",
+      "sha256_lf": "e1288ddd29c2a286a6696024ad504127d9803aed66ac36ae12a1fc5937726fb4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaignUI.h",
+      "bytes": 172,
+      "sha256": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4",
+      "sha256_lf": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryHost.h",
+      "bytes": 4301,
+      "sha256": "ab568b01e6b107116ada2e917472d7e13aed4e27196899e9868666ec2f44f42a",
+      "sha256_lf": "ab568b01e6b107116ada2e917472d7e13aed4e27196899e9868666ec2f44f42a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryMara.h",
+      "bytes": 2734,
+      "sha256": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd",
+      "sha256_lf": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecision.h",
+      "bytes": 645,
+      "sha256": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421",
+      "sha256_lf": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h",
+      "bytes": 2254,
+      "sha256": "cd8a6f1d18cae0dbe52065e4aca6899f4b3ef4cd4ba82f78066cb832c5ec15d9",
+      "sha256_lf": "cd8a6f1d18cae0dbe52065e4aca6899f4b3ef4cd4ba82f78066cb832c5ec15d9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundrySession.h",
+      "bytes": 1507,
+      "sha256": "f4b3effe35f901d51736c3b28e3acc52f7c7871ced0804896e24b0b27e1ce35f",
+      "sha256_lf": "f4b3effe35f901d51736c3b28e3acc52f7c7871ced0804896e24b0b27e1ce35f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry.Target.cs",
+      "bytes": 360,
+      "sha256": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079",
+      "sha256_lf": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundryEditor.Target.cs",
+      "bytes": 374,
+      "sha256": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d",
+      "sha256_lf": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/build_smoke_content.py",
+      "bytes": 1909,
+      "sha256": "1d9ba1d4c7d1928d99f9fecb4617e7daf0541613fae40887ea65801f1a5ba99b",
+      "sha256_lf": "1d9ba1d4c7d1928d99f9fecb4617e7daf0541613fae40887ea65801f1a5ba99b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_audio.py",
+      "bytes": 2154,
+      "sha256": "d85691b104929165bd921e7037db91bccb7e2ba9881148db2e63dd9cff34e865",
+      "sha256_lf": "d85691b104929165bd921e7037db91bccb7e2ba9881148db2e63dd9cff34e865"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_cinderwall.py",
+      "bytes": 16759,
+      "sha256": "63b6fb6b8c83e25a5137ef1998fbbc684c6352980c30242ec5e55ce43d2a29d4",
+      "sha256_lf": "63b6fb6b8c83e25a5137ef1998fbbc684c6352980c30242ec5e55ce43d2a29d4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_mara.py",
+      "bytes": 9386,
+      "sha256": "d3bdae47601e6a03816d6670edb72aff1c9a8d59665e4f904b08635a8f22b764",
+      "sha256_lf": "d3bdae47601e6a03816d6670edb72aff1c9a8d59665e4f904b08635a8f22b764"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_scenery_v002.py",
+      "bytes": 8924,
+      "sha256": "2c14e1f7f1b1cb4582e02a8f14576c7543071a3a83c139a7f9102bc43fd34b24",
+      "sha256_lf": "2c14e1f7f1b1cb4582e02a8f14576c7543071a3a83c139a7f9102bc43fd34b24"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/precision-tests/CMakeLists.txt",
+      "bytes": 564,
+      "sha256": "bd54bcf48b603356fda77f7a8ba0f562ab0f7cd4e7cde3babcb6ca20c90235b5",
+      "sha256_lf": "bd54bcf48b603356fda77f7a8ba0f562ab0f7cd4e7cde3babcb6ca20c90235b5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/precision-tests/tests.cpp",
+      "bytes": 3187,
+      "sha256": "04d12ad4891e8bfcbf1227171380c82d0d5f0444176c1dc71c11b0dd60f0967a",
+      "sha256_lf": "04d12ad4891e8bfcbf1227171380c82d0d5f0444176c1dc71c11b0dd60f0967a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/README.md",
+      "bytes": 19973,
+      "sha256": "cefcd051c0b2d92e6d0398561ea13e4016dbe076c5d5322242ca85786414f8f1",
+      "sha256_lf": "cefcd051c0b2d92e6d0398561ea13e4016dbe076c5d5322242ca85786414f8f1"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/CMakeLists.txt",
+      "bytes": 288,
+      "sha256": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b",
+      "sha256_lf": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/main.cpp",
+      "bytes": 5571,
+      "sha256": "90230aeccc3e6e80b2b2b6c8123c6ecb1553f6a029c4f80dcdbfa6eed47566c8",
+      "sha256_lf": "90230aeccc3e6e80b2b2b6c8123c6ecb1553f6a029c4f80dcdbfa6eed47566c8"
+    }
+  ],
+  "binaries": [
+    {
+      "file": "UnrealEditor-OverkillFoundry.dll",
+      "bytes": 2247680,
+      "sha256": "1c523689cce5c464ce49351227a61ea0c9f18dee0b8672a4914a37c8be78ba7a"
+    },
+    {
+      "file": "OverkillFoundry.exe",
+      "bytes": 221341184,
+      "sha256": "f729bb2c40562caed9bf3cd152d856362b1f072667fea615cc169aa0103006ea"
+    }
+  ],
+  "native_binary": {
+    "sha256_before": "bde5229116615bcfb8e816cde92b028c27c721b7449fe3ce7fab60fb950ab6f5",
+    "sha256_after_observed": "bde5229116615bcfb8e816cde92b028c27c721b7449fe3ce7fab60fb950ab6f5",
+    "log": "Run-20260920-173257.log",
+    "final_source_difference": "Only singular part/parts label changed after native run."
+  },
+  "imports": [
+    {
+      "file": "cinderwall-import.json",
+      "sha256": "e22b8d744eb871df4aa20a2bc4d8eb4c0cff95ef3b66c1ae4e2a9f00270f815b"
+    },
+    {
+      "file": "mara-import.json",
+      "sha256": "9653a7fca2972098f1e261b56188ecc88a7e0505003eca83d59ffb985c538443"
+    },
+    {
+      "file": "scenery-v002-import.json",
+      "sha256": "419bf1406f0555d0c4ec45cda6a8dda7db1087a52d5bd717e5e8b13232d8f3e3"
+    }
+  ],
+  "captures": [
+    {
+      "file": "art-13-death-burst.png",
+      "bytes": 1950828,
+      "sha256": "60eea4a1e9a48549277a22967b0d4b8410931d8c6b5fe75eed050b42aa339217"
+    },
+    {
+      "file": "art-13-death-collapse.png",
+      "bytes": 1955685,
+      "sha256": "a964dfe548b01c8bff46ef758fe2aa49fd96822bfdd0be7478a7caf2aa87d7ec"
+    },
+    {
+      "file": "art-13-death-dissolve.png",
+      "bytes": 1947815,
+      "sha256": "6b48d7131072d0e6515447db122119cbb5a68d4081a054946f4a5617cd2087b7"
+    },
+    {
+      "file": "art-14-death-burst.png",
+      "bytes": 1944082,
+      "sha256": "a3b584c2038b8bfa730c71e313ff0b8955c0141fe3bba320a294e5a7a46149ff"
+    },
+    {
+      "file": "art-14-death-collapse.png",
+      "bytes": 1951910,
+      "sha256": "3151de1fb89b64313ed63e49481e66f02477940561af6c5f5d59a4d382edbdae"
+    },
+    {
+      "file": "art-14-death-dissolve.png",
+      "bytes": 1960852,
+      "sha256": "23806a627429aa292767541626d3c131576c1cf374e156be04411be24a32737b"
+    },
+    {
+      "file": "art-charge-held.png",
+      "bytes": 1946587,
+      "sha256": "455a5fb79a2f05631879440c7cabdf3455cd36f5ed33767df76180df5d6f358d"
+    },
+    {
+      "file": "art-cleanup.png",
+      "bytes": 1927258,
+      "sha256": "26d09884616eabdf573763a35c7d8a7d372d41c629733c1038fb629eb3f86d83"
+    },
+    {
+      "file": "art-deflection.png",
+      "bytes": 1907993,
+      "sha256": "c0959932d9433ec72843685e614500bf14f29174397899b8aebcc4de8d485cb1"
+    },
+    {
+      "file": "art-hit-heavy.png",
+      "bytes": 1950162,
+      "sha256": "13c3c87943de59520614c5073e0abc2e9948a305dba463bcb0b8752bbbb5561a"
+    },
+    {
+      "file": "art-hit-light.png",
+      "bytes": 1965190,
+      "sha256": "e6ecd9ceb3a2264e59959d15180e9e77cc4ba1a43610328e754a768bc5dc47ca"
+    },
+    {
+      "file": "art-hit-medium.png",
+      "bytes": 1947331,
+      "sha256": "44fb9b9605941ab1100cf058b4fc7a83594f18eb388f0129a97635712a29ecd4"
+    },
+    {
+      "file": "art-mite-attack-ram-charge.png",
+      "bytes": 1947651,
+      "sha256": "799f4df9888e1a7bce41198d5562cf97866e92f1fbc5a68a416ee02cfadd7842"
+    },
+    {
+      "file": "art-mite-hit-heavy.png",
+      "bytes": 1959893,
+      "sha256": "26285a3b9e67fc3807517b6a7ac86ca98b370e9ba8d79982f2cd83ad252d4af0"
+    },
+    {
+      "file": "art-preparation.png",
+      "bytes": 1647682,
+      "sha256": "2e62b77e7844d7e95b9f561951516e4320a80dc81e420df8fb47a920bf7cf0b8"
+    },
+    {
+      "file": "art-ram-blast.png",
+      "bytes": 1963479,
+      "sha256": "a82ce8b43db70191671229a7048e6a99cb72151647137fcb461b789fd0ca905a"
+    },
+    {
+      "file": "art-ram-steam.png",
+      "bytes": 1944647,
+      "sha256": "00b4e4c80d5f265c0c42aded7497e397710c35fde2d71f3efd8814261cae30eb"
+    },
+    {
+      "file": "art-restart-hud.png",
+      "bytes": 952820,
+      "sha256": "673357e134b4d55f3a0fec203aacefa843afa71d24162b56c7b84ef39aa72a26"
+    },
+    {
+      "file": "campaign-action-settled.png",
+      "bytes": 1659418,
+      "sha256": "621426218b8a5396f1203c3fc5c947cd68049f621dbd41756620b908dd618cc9"
+    },
+    {
+      "file": "campaign-action.png",
+      "bytes": 1640076,
+      "sha256": "c6a90ab084394e48a7022d633c6ac78fc0d193f25c1630cdc941efdacc66750a"
+    },
+    {
+      "file": "campaign-collection.png",
+      "bytes": 1186174,
+      "sha256": "aa7679b2dac211d1c52400746887c129d2444819b844eba7097b6a3027aaf017"
+    },
+    {
+      "file": "campaign-enemy-turn.png",
+      "bytes": 1267465,
+      "sha256": "2033dbfa7cfccdb696c9987990b14a6997509ddf3c62a9277161c213ec0e58ba"
+    },
+    {
+      "file": "campaign-locked-and-loaded.png",
+      "bytes": 1380573,
+      "sha256": "2ce5ea780c22983f880872c924fa9fc542f76086d40e570c77dc40dfe9246a6d"
+    },
+    {
+      "file": "campaign-mayor.png",
+      "bytes": 398836,
+      "sha256": "e5c125185840031ecae0646a822ef0616c0d6b52a10480491f11c18af87d866f"
+    },
+    {
+      "file": "campaign-next-route.png",
+      "bytes": 385157,
+      "sha256": "3a737698f3b1b7858339c4531c41e0f0cd7dd8281bfa3581e45d190d51ce1b95"
+    },
+    {
+      "file": "campaign-parts.png",
+      "bytes": 443054,
+      "sha256": "dc339238e863929e0e62cca99f1bec25994b751a11fb118bfcea5eff6595d2dd"
+    },
+    {
+      "file": "campaign-recipe-reward.png",
+      "bytes": 395823,
+      "sha256": "d6aaf6937567a64f4eff8172eca2988072102a0ef38650ffe4d0b0f65daf22ee"
+    },
+    {
+      "file": "campaign-recipes.png",
+      "bytes": 429919,
+      "sha256": "6708c8334e9136949fffb3a660023876dd01399428f1527b9b8f8d5b2a350fd9"
+    },
+    {
+      "file": "campaign-reloaded.png",
+      "bytes": 1386850,
+      "sha256": "68db815c2a28c742a22196840b9af02ccfde4d5ecb306511342a25b26b74f4cc"
+    },
+    {
+      "file": "campaign-route.png",
+      "bytes": 359075,
+      "sha256": "63d1b459328c1e8ac996ccf5e67653b2a411b080b133efa5517d98ede1f589d4"
+    },
+    {
+      "file": "campaign-shop.png",
+      "bytes": 376158,
+      "sha256": "84e941d29c0f527f0e831c8d8b87d0cca67265b8c930b371a6e9c2b99e6588ee"
+    },
+    {
+      "file": "campaign-skip-confirm.png",
+      "bytes": 432458,
+      "sha256": "9f1b7f3d19939df85a4c9ef31df5fc462b28f9231718cc84ea5d6563541610c2"
+    },
+    {
+      "file": "campaign-title.png",
+      "bytes": 1328369,
+      "sha256": "07fee47ba5ee21cc269be538a18ee927c68a60b934a16ab5cd0cc3e5f540b26d"
+    },
+    {
+      "file": "campaign-victory.png",
+      "bytes": 396292,
+      "sha256": "3034a17227ca861f7efa0a795560b083b1f79bbcb9fc71a3e676b6fed8e5d636"
+    },
+    {
+      "file": "mara-collect-dump.png",
+      "bytes": 1589959,
+      "sha256": "75d622a80882364363e0cc1627fd4084179255cb192bd6c201d5095f5f9d35ff"
+    },
+    {
+      "file": "mara-collect-grab.png",
+      "bytes": 1573467,
+      "sha256": "11491656b03e2713336d1408391a143a30f828d35e99be58f378f4904cf961d6"
+    },
+    {
+      "file": "mara-load.png",
+      "bytes": 1776516,
+      "sha256": "490fc95e6fe241b002cf8f1370eed76089378a7d5ce213fbfa2b06b46029a545"
+    },
+    {
+      "file": "mara-unload.png",
+      "bytes": 1927136,
+      "sha256": "019dce4f8140bdf33fc70c008ee9cbc143e2a6d62d0a47aa47a06d29a8296922"
+    },
+    {
+      "file": "native-camera-precision-retry-result.jpg",
+      "bytes": 188363,
+      "sha256": "5d6b2a0fcba2e11716dd245f7a860083d8e0145ff991ee028e87ab397dd17eba"
+    },
+    {
+      "file": "native-camera-three-aim-ram.jpg",
+      "bytes": 201543,
+      "sha256": "5d96e63a65433ab944cdc622cfdd3e140f114ea7dfbd74af3ced2fdbffe1d6d9"
+    },
+    {
+      "file": "native-camera-three-impact.jpg",
+      "bytes": 188041,
+      "sha256": "55926e4d0d73a03d9ef5f1b1341cce9073dd8f24ceec09c65c2fff7e4de30e89"
+    },
+    {
+      "file": "native-camera-three-loaded.jpg",
+      "bytes": 197671,
+      "sha256": "b93dca4d9bef4f51738d8255b53e91e2e3cb5c394cd3cb6c26f03961e5aee525"
+    },
+    {
+      "file": "native-camera-three-preparation.jpg",
+      "bytes": 191817,
+      "sha256": "ef16a5af2be5faccb63c4f350f43b06da5ceaff056906a287f0a02ee287eee7d"
+    },
+    {
+      "file": "native-camera-three-return.jpg",
+      "bytes": 190935,
+      "sha256": "eb8791e56eed01090d6405dec30acffaeb3d20938dafa2213bbafaad89c0d029"
+    },
+    {
+      "file": "native-precision-retry-back-label.jpg",
+      "bytes": 179905,
+      "sha256": "6d0786a81e8afadf3eb936a0b651654de1da3cbcdc4b2597722cb8c10cb5cf8a"
+    }
+  ],
+  "results": {
+    "campaign": {
+      "ok": true,
+      "position": 2,
+      "hp": 68,
+      "revision": 42,
+      "receipts": 40,
+      "hash": "4f4d07160737c9a5",
+      "captures": 16
+    },
+    "core": {
+      "ordered_lines": 85,
+      "events": 84,
+      "hash": "965951ac6f2b9563",
+      "exact_normalized_native_match": true
+    },
+    "art": {
+      "ok": true,
+      "captures": 22,
+      "dissolve_slots": 15,
+      "source_render_component_bounds": 19
+    },
+    "native": {
+      "dataset": "prepared-camera-composition, one Mite and two Rams, six granted plain Ammo",
+      "initial_hash": "c076a12ae95a20ed",
+      "actions": [
+        "select one Ammo",
+        "click Lock and load",
+        "natural settled action camera",
+        "select target 3",
+        "Space Fire",
+        "same-round preparation",
+        "Enter enemy turn",
+        "Precision timeout Miss",
+        "saved retry Good"
+      ],
+      "precision_elapsed_seconds": [
+        1.8,
+        0.98752
+      ],
+      "target3_damage": 1,
+      "bore_target_degrees": 0.564
+    }
+  },
+  "scope_limits": [
+    "Editor -game launches; compiled game target, no package validation.",
+    "Three bodies are synthetic layout coverage, not a reachable initial formation.",
+    "Actual initial Mite/Ram formation is primary campaign proof.",
+    "Repeated Enter check is synthetic Slate input, not held-key hardware test.",
+    "Close dark wall/empty apron/city depth/simple FX remain below benchmark; no owner approval.",
+    "Eight other robot designs remain temporary at runtime; roster-v001 importer excluded and unexecuted.",
+    "Precision cue callback ran after saved result; no new mixed-audio/listening proof.",
+    "Advanced optional recipe payment/target/sacrifice and discount UI remain pending."
+  ],
+  "prior_failures": [
+    "SceneryArt-171503 saved assets but exited 1 on missing-material lookup logs; existence guard and clean SceneryArt-171932 passed.",
+    "CampaignProbe-171613 used cleared post-victory shots counter; assertion repaired to saved revision."
+  ],
+  "archive": "Saved/Validation/camera-scenery-20260920-1742/identity.json",
+  "log_names": [
+    "Build-20260920-174242.log",
+    "BuildGame-20260920-174259.log",
+    "CampaignProbe-20260920-174355.log",
+    "Fixture-20260920-174534.log",
+    "ArtProbe-20260920-174613.log",
+    "Run-20260920-173257.log",
+    "SceneryArt-20260920-171503.log",
+    "SceneryArt-20260920-171932.log",
+    "CampaignProbe-20260920-171613.log"
+  ]
+}

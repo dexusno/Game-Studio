@@ -12,17 +12,47 @@
 
 DEFINE_LOG_CATEGORY_STATIC(LogFoundryMara, Log, All);
 
+void UFoundryAimedGun::FinalizeBoneTransform()
+{
+    // FinalizeBoneTransform flips the evaluated/editable buffer in UE 5.8.
+    // Only modify a newly evaluated buffer, never accumulate onto an old pose.
+    if (bAim && bNeedToFlipSpaceBaseBuffers && GetSkeletalMeshAsset())
+    {
+        auto& Pose = GetEditableComponentSpaceTransforms();
+        const auto& Skeleton = GetSkeletalMeshAsset()->GetRefSkeleton();
+        const int32 Cradle = GetBoneIndex(TEXT("cradle"));
+        if (Pose.IsValidIndex(Cradle))
+        {
+            const FVector Pivot = Pose[Cradle].GetLocation();
+            const FVector Delta = GetComponentTransform().InverseTransformPosition(TargetWorld) - Pivot;
+            // The authored bore is 52 cm above the trunnion. Solve its offset
+            // ray toward the selected robot, rather than aiming the pivot ray.
+            const double Pitch = FMath::Atan2(Delta.Z, FVector2D(Delta.X, Delta.Y).Size()) - FMath::Asin(FMath::Clamp(52.0 / Delta.Size(), -1.0, 1.0));
+            const FQuat Aim = FRotator(FMath::RadiansToDegrees(Pitch), FMath::RadiansToDegrees(FMath::Atan2(Delta.Y, Delta.X)), 0).Quaternion();
+            for (int32 Bone = 0; Bone < Pose.Num(); ++Bone)
+            {
+                int32 Parent = Bone;
+                while (Parent != INDEX_NONE && Parent != Cradle) Parent = Skeleton.GetParentIndex(Parent);
+                if (Parent != Cradle) continue;
+                Pose[Bone].SetLocation(Pivot + Aim.RotateVector(Pose[Bone].GetLocation() - Pivot));
+                Pose[Bone].SetRotation(Aim * Pose[Bone].GetRotation());
+            }
+        }
+    }
+    Super::FinalizeBoneTransform();
+}
+
 AFoundryMara::AFoundryMara()
 {
     PrimaryActorTick.bCanEverTick = true;
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("MaraPresentation")));
-    Gun = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MaraForgeGun"));
+    Gun = CreateDefaultSubobject<UFoundryAimedGun>(TEXT("MaraForgeGun"));
     Gun->SetupAttachment(RootComponent);
     Gun->SetRelativeLocation(FVector(-350, 0, 1.5));
     Claw = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MaraRearClaw"));
     Claw->SetupAttachment(RootComponent);
     Claw->SetRelativeLocation(FVector(-675, -100, 0));
-    for (USkeletalMeshComponent* Rig : {Gun.Get(), Claw.Get()})
+    for (USkeletalMeshComponent* Rig : {static_cast<USkeletalMeshComponent*>(Gun.Get()), Claw.Get()})
     {
         Rig->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         Rig->SetAnimationMode(EAnimationMode::AnimationSingleNode);
@@ -60,7 +90,7 @@ void AFoundryMara::Initialize()
         const FString Name = bGun ? TEXT("MaraGun") : TEXT("MaraClaw");
         USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(nullptr, *FString::Printf(TEXT("/Game/Cinderwall/Mara/Props/SK_%s.SK_%s"), *Name, *Name));
         checkf(Mesh, TEXT("Run MaraArt after generating and verifying Mara source exports"));
-        USkeletalMeshComponent* Rig = bGun ? Gun.Get() : Claw.Get();
+        USkeletalMeshComponent* Rig = bGun ? static_cast<USkeletalMeshComponent*>(Gun.Get()) : Claw.Get();
         Rig->SetSkeletalMeshAsset(Mesh);
         const TArray<FString> Names = bGun ? TArray<FString>{TEXT("idle"), TEXT("load"), TEXT("unload"), TEXT("fire"), TEXT("recovery")} : TArray<FString>{TEXT("idle"), TEXT("collect")};
         for (const FString& Cue : Names)
@@ -106,6 +136,7 @@ void AFoundryMara::PlayClaw(const FString& Name, uint64 EventId)
 void AFoundryMara::ResetPresentation()
 {
     bLoaded = bGrabbed = bDumped = false;
+    Gun->bAim = false;
     FlashRemaining = 0;
     Payload->SetVisibility(false);
     Payload->AttachToComponent(Claw, FAttachmentTransformRules::SnapToTargetNotIncludingScale, TEXT("grab"));
@@ -146,6 +177,11 @@ void AFoundryMara::Unload(uint64 EventId)
 
 void AFoundryMara::Fire(uint64 EventId, int32 ActualShot, const FVector& Target)
 {
+    AimAt(Target);
+    Gun->RefreshBoneTransforms();
+    const FVector Bore = (Gun->GetSocketLocation(TEXT("muzzle")) - Gun->GetSocketLocation(TEXT("recoil"))).GetSafeNormal();
+    const FVector AimDirection = (Target - Gun->GetSocketLocation(TEXT("muzzle"))).GetSafeNormal();
+    UE_LOG(LogFoundryMara, Display, TEXT("MARA_AIM event=%llu bore_target_degrees=%.3f"), EventId, FMath::RadiansToDegrees(FMath::Acos(FMath::Clamp(FVector::DotProduct(Bore, AimDirection), -1.0, 1.0))));
     bLoaded = false;
     ShotTarget = Target;
     ShotStrength = FMath::Clamp(.7f + ActualShot / 50.f, .7f, 1.8f);
@@ -154,6 +190,12 @@ void AFoundryMara::Fire(uint64 EventId, int32 ActualShot, const FVector& Target)
     FlashRemaining = .13f;
     PlayGun(TEXT("fire"), EventId); // Rapid valid Fire replaces the short cosmetic cue.
     UE_LOG(LogFoundryMara, Display, TEXT("MARA_FIRE event=%llu committed_shot=%d target_world=%s"), EventId, ActualShot, *Target.ToString());
+}
+
+void AFoundryMara::AimAt(const FVector& Target)
+{
+    Gun->TargetWorld = Target;
+    Gun->bAim = true;
 }
 
 void AFoundryMara::Tick(float DeltaSeconds)

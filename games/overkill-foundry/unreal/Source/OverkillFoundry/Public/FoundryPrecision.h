@@ -8,6 +8,7 @@ struct FFoundryPrecisionOptions
     FString Title = TEXT("Precision grab");
     // The calling UI derives haul/bonus descriptions with real core previews.
     FString Detail;
+    FString BackLabel = TEXT("Back  ·  keep Precision for later");
     TFunction<void(int32)> OnResult;
     TFunction<void()> OnCancel;
 };

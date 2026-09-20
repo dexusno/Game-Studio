@@ -32,6 +32,8 @@ public:
     void SetActionView(bool bAction, bool bInstant = false);
     void CaptureView();
     bool IsActionView() const { return bActionView; }
+    bool IsPresentationBusy() const { return CameraTransitionRemaining > 0 || ReturnCameraAfter > 0 || !QueuedEvents.empty(); }
+    void PlayPresentationCue(const FString& Cue);
     const FString& GetActionCaption() const { return ActionCaption; }
     FFoundrySession& GetSession() { return *Session; }
     const FFoundrySession& GetSession() const { return *Session; }
@@ -44,6 +46,11 @@ public:
 private:
     void SpawnRobots();
     void PresentCommittedEvents();
+    void PresentEvents(const std::vector<overkill::Event>& Events);
+    void ResetActionPresentation();
+    void AimAtSelectedTarget();
+    FVector RobotPosition(int32 Index) const;
+    void FrameRoster();
     void TickArtProbe(float DeltaSeconds);
     void CaptureNamed(const FString& Name);
     void TickCampaignProbe(float DeltaSeconds);
@@ -66,7 +73,12 @@ private:
     bool bCampaignProbe = false;
     float CampaignProbeElapsed = 0;
     int32 CampaignProbeStep = 0;
+    int32 CameraProbeStep = 0;
     float ReturnCameraAfter = 0.0f;
+    float CameraTransitionRemaining = 0.0f;
+    std::vector<overkill::Event> QueuedEvents;
+    bool bWasTitle = true;
+    bool bWideRoster = false;
     bool bArtProbe = false;
     bool bArtProbeOk = true;
     float ArtElapsed = 0;

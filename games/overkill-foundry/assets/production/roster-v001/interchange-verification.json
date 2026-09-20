@@ -1,0 +1,2487 @@
+{
+  "format": "cinderwall-roster-interchange-v1",
+  "blender": "5.2.1 LTS",
+  "source_report_sha256": "778bba3a2e694807f18a77093b097a9bf77edb4bb4921ad4259a19aafd83c5a3",
+  "checks": [
+    {
+      "name": "current enabled manifest identity",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "current generator identity",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "current original helper identity",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "exact eight remaining enabled definitions",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder metre bounds",
+      "ok": true,
+      "actual": [
+        2.2649998664855957,
+        1.854759931564331,
+        2.5109527111053467
+      ]
+    },
+    {
+      "name": "CableBinder triangle count",
+      "ok": true,
+      "actual": 26524
+    },
+    {
+      "name": "CableBinder muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.2000000476837158,
+        -0.7599999904632568,
+        1.1100000143051147
+      ]
+    },
+    {
+      "name": "CableBinder every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CableBinder required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.02051032753761382
+    },
+    {
+      "name": "CB_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "CB_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.042301544071277355
+    },
+    {
+      "name": "CB_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "CB_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.12140399489088075
+    },
+    {
+      "name": "CB_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "CB_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.26735968443242775
+    },
+    {
+      "name": "CB_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "CB_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.3519295375985056
+    },
+    {
+      "name": "CB_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "CB_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "CB_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "CB_spray imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_spray actual bounded articulation",
+      "ok": true,
+      "actual": 0.29968085822621165
+    },
+    {
+      "name": "CB_spray authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.88,
+        "imported_seconds": 0.8666666666666667,
+        "frames": [
+          2.0,
+          28.0
+        ]
+      }
+    },
+    {
+      "name": "CB_foul imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_foul actual bounded articulation",
+      "ok": true,
+      "actual": 0.30805847365746536
+    },
+    {
+      "name": "CB_foul authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.1,
+        "imported_seconds": 1.1,
+        "frames": [
+          2.0,
+          35.0
+        ]
+      }
+    },
+    {
+      "name": "CB_punch imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CB_punch actual bounded articulation",
+      "ok": true,
+      "actual": 0.6161987557393553
+    },
+    {
+      "name": "CB_punch authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.9,
+        "imported_seconds": 0.9,
+        "frames": [
+          2.0,
+          29.0
+        ]
+      }
+    },
+    {
+      "name": "PressureCask one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask metre bounds",
+      "ok": true,
+      "actual": [
+        1.8711999654769897,
+        1.6400001049041748,
+        2.3400001525878906
+      ]
+    },
+    {
+      "name": "PressureCask triangle count",
+      "ok": true,
+      "actual": 18892
+    },
+    {
+      "name": "PressureCask muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -0.9800000190734863,
+        0.0,
+        1.2400000095367432
+      ]
+    },
+    {
+      "name": "PressureCask every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PressureCask required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.01820895343249768
+    },
+    {
+      "name": "PC_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "PC_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.04585923958556166
+    },
+    {
+      "name": "PC_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "PC_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.12918256636469486
+    },
+    {
+      "name": "PC_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "PC_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.2869745379049855
+    },
+    {
+      "name": "PC_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "PC_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.473842507502061
+    },
+    {
+      "name": "PC_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "PC_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "PC_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "PC_attack imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_attack actual bounded articulation",
+      "ok": true,
+      "actual": 0.1658616263321694
+    },
+    {
+      "name": "PC_attack authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.95,
+        "imported_seconds": 0.9333333333333333,
+        "frames": [
+          2.0,
+          30.0
+        ]
+      }
+    },
+    {
+      "name": "PC_pressurize imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "PC_pressurize actual bounded articulation",
+      "ok": true,
+      "actual": 0.13663033964707208
+    },
+    {
+      "name": "PC_pressurize authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.25,
+        "imported_seconds": 1.2666666666666666,
+        "frames": [
+          2.0,
+          40.0
+        ]
+      }
+    },
+    {
+      "name": "CoilNest one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest metre bounds",
+      "ok": true,
+      "actual": [
+        2.444786548614502,
+        2.4200000762939453,
+        2.200000047683716
+      ]
+    },
+    {
+      "name": "CoilNest triangle count",
+      "ok": true,
+      "actual": 17500
+    },
+    {
+      "name": "CoilNest muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.4199999570846558,
+        0.0,
+        0.8199999928474426
+      ]
+    },
+    {
+      "name": "CoilNest every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CoilNest required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.020246183111609556
+    },
+    {
+      "name": "CN_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "CN_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.05776748415586744
+    },
+    {
+      "name": "CN_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "CN_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.17524713566886704
+    },
+    {
+      "name": "CN_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "CN_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.39279204242545
+    },
+    {
+      "name": "CN_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "CN_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.440392251255611
+    },
+    {
+      "name": "CN_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "CN_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "CN_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "CN_deploy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_deploy actual bounded articulation",
+      "ok": true,
+      "actual": 0.39692811610500556
+    },
+    {
+      "name": "CN_deploy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.3,
+        "imported_seconds": 1.3,
+        "frames": [
+          2.0,
+          41.0
+        ]
+      }
+    },
+    {
+      "name": "CN_attack imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "CN_attack actual bounded articulation",
+      "ok": true,
+      "actual": 0.13946999306266972
+    },
+    {
+      "name": "CN_attack authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.87,
+        "imported_seconds": 0.8666666666666667,
+        "frames": [
+          2.0,
+          28.0
+        ]
+      }
+    },
+    {
+      "name": "KnucklePress one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress metre bounds",
+      "ok": true,
+      "actual": [
+        2.2578675746917725,
+        2.0,
+        2.4250001907348633
+      ]
+    },
+    {
+      "name": "KnucklePress triangle count",
+      "ok": true,
+      "actual": 16288
+    },
+    {
+      "name": "KnucklePress muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.399999976158142,
+        -0.7599999904632568,
+        1.2699999809265137
+      ]
+    },
+    {
+      "name": "KnucklePress every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KnucklePress required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.020835067344999222
+    },
+    {
+      "name": "KP_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "KP_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.04463878135201166
+    },
+    {
+      "name": "KP_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "KP_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.12631493344617528
+    },
+    {
+      "name": "KP_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "KP_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.28409941492399293
+    },
+    {
+      "name": "KP_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "KP_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.2557525292681877
+    },
+    {
+      "name": "KP_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "KP_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "KP_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "KP_brace imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_brace actual bounded articulation",
+      "ok": true,
+      "actual": 0.3047537945492754
+    },
+    {
+      "name": "KP_brace authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.1,
+        "imported_seconds": 1.1,
+        "frames": [
+          2.0,
+          35.0
+        ]
+      }
+    },
+    {
+      "name": "KP_double_punch imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_double_punch actual bounded articulation",
+      "ok": true,
+      "actual": 0.535335587294836
+    },
+    {
+      "name": "KP_double_punch authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.0,
+        "imported_seconds": 1.0,
+        "frames": [
+          2.0,
+          32.0
+        ]
+      }
+    },
+    {
+      "name": "KP_slam imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "KP_slam actual bounded articulation",
+      "ok": true,
+      "actual": 0.6609029363213904
+    },
+    {
+      "name": "KP_slam authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.1,
+        "imported_seconds": 1.1,
+        "frames": [
+          2.0,
+          35.0
+        ]
+      }
+    },
+    {
+      "name": "RedlinePursuer one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer metre bounds",
+      "ok": true,
+      "actual": [
+        2.4119999408721924,
+        1.8300000429153442,
+        2.489000082015991
+      ]
+    },
+    {
+      "name": "RedlinePursuer triangle count",
+      "ok": true,
+      "actual": 19512
+    },
+    {
+      "name": "RedlinePursuer muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.3899999856948853,
+        -0.6100000143051147,
+        1.5099999904632568
+      ]
+    },
+    {
+      "name": "RedlinePursuer every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RedlinePursuer required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.026043435529646695
+    },
+    {
+      "name": "RP_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "RP_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.05310661347478848
+    },
+    {
+      "name": "RP_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "RP_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.16823926062880054
+    },
+    {
+      "name": "RP_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "RP_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.3810228168253876
+    },
+    {
+      "name": "RP_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "RP_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.3885979183370971
+    },
+    {
+      "name": "RP_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "RP_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "RP_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "RP_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.1277273761019547
+    },
+    {
+      "name": "RP_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.8,
+        "imported_seconds": 0.8,
+        "frames": [
+          2.0,
+          26.0
+        ]
+      }
+    },
+    {
+      "name": "RP_triple_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "RP_triple_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.15896578030956507
+    },
+    {
+      "name": "RP_triple_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.97,
+        "imported_seconds": 0.9666666666666667,
+        "frames": [
+          2.0,
+          31.0
+        ]
+      }
+    },
+    {
+      "name": "FoilWarden one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden metre bounds",
+      "ok": true,
+      "actual": [
+        2.150700092315674,
+        1.8622124195098877,
+        2.825000047683716
+      ]
+    },
+    {
+      "name": "FoilWarden triangle count",
+      "ok": true,
+      "actual": 14922
+    },
+    {
+      "name": "FoilWarden muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.7100000381469727,
+        0.6000000238418579,
+        1.690000057220459
+      ]
+    },
+    {
+      "name": "FoilWarden every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FoilWarden required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.019964833594956797
+    },
+    {
+      "name": "FW_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "FW_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.05447644034332874
+    },
+    {
+      "name": "FW_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "FW_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.1674237773100916
+    },
+    {
+      "name": "FW_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "FW_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.3798573299701609
+    },
+    {
+      "name": "FW_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "FW_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.3755635602160852
+    },
+    {
+      "name": "FW_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "FW_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "FW_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "FW_attack_9 imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_attack_9 actual bounded articulation",
+      "ok": true,
+      "actual": 0.427049582929175
+    },
+    {
+      "name": "FW_attack_9 authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.95,
+        "imported_seconds": 0.9333333333333333,
+        "frames": [
+          2.0,
+          30.0
+        ]
+      }
+    },
+    {
+      "name": "FW_attack_12 imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_attack_12 actual bounded articulation",
+      "ok": true,
+      "actual": 0.6264215069333231
+    },
+    {
+      "name": "FW_attack_12 authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.1,
+        "imported_seconds": 1.1,
+        "frames": [
+          2.0,
+          35.0
+        ]
+      }
+    },
+    {
+      "name": "FW_gain_drive imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "FW_gain_drive actual bounded articulation",
+      "ok": true,
+      "actual": 0.14504583197334614
+    },
+    {
+      "name": "FW_gain_drive authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.2,
+        "imported_seconds": 1.2,
+        "frames": [
+          2.0,
+          38.0
+        ]
+      }
+    },
+    {
+      "name": "SplitChassis one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis metre bounds",
+      "ok": true,
+      "actual": [
+        2.244000196456909,
+        2.370000123977661,
+        2.3999998569488525
+      ]
+    },
+    {
+      "name": "SplitChassis triangle count",
+      "ok": true,
+      "actual": 22020
+    },
+    {
+      "name": "SplitChassis muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.100000023841858,
+        -0.5699999928474426,
+        1.559999942779541
+      ]
+    },
+    {
+      "name": "SplitChassis every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SplitChassis required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.019300761928748612
+    },
+    {
+      "name": "SC_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "SC_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.04763132789990148
+    },
+    {
+      "name": "SC_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "SC_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.13423718317878874
+    },
+    {
+      "name": "SC_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "SC_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.3010004855849734
+    },
+    {
+      "name": "SC_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "SC_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_death actual bounded articulation",
+      "ok": true,
+      "actual": 2.3155397495994285
+    },
+    {
+      "name": "SC_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "SC_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "SC_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "SC_double_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_double_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.12488980880014164
+    },
+    {
+      "name": "SC_double_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.95,
+        "imported_seconds": 0.9333333333333333,
+        "frames": [
+          2.0,
+          30.0
+        ]
+      }
+    },
+    {
+      "name": "SC_triple_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_triple_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.12986113880133965
+    },
+    {
+      "name": "SC_triple_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.0,
+        "imported_seconds": 1.0,
+        "frames": [
+          2.0,
+          32.0
+        ]
+      }
+    },
+    {
+      "name": "SC_thermal_runaway imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_thermal_runaway actual bounded articulation",
+      "ok": true,
+      "actual": 0.11999988643447311
+    },
+    {
+      "name": "SC_thermal_runaway authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.2,
+        "imported_seconds": 1.2,
+        "frames": [
+          2.0,
+          38.0
+        ]
+      }
+    },
+    {
+      "name": "SC_death_release imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "SC_death_release actual bounded articulation",
+      "ok": true,
+      "actual": 1.2536182503610316
+    },
+    {
+      "name": "SC_death_release authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2.0,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "SC_death_release complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime one complete actor skeleton/mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime exact bone inventory",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime parent hierarchy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime rigid unit weights on every vertex",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime original UV layer",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime complete original material slots",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime metre bounds",
+      "ok": true,
+      "actual": [
+        2.990000009536743,
+        2.9800000190734863,
+        3.765000104904175
+      ]
+    },
+    {
+      "name": "GatebreakerPrime triangle count",
+      "ok": true,
+      "actual": 26276
+    },
+    {
+      "name": "GatebreakerPrime muzzle ahead of chassis",
+      "ok": true,
+      "actual": [
+        -1.75,
+        -1.1100000143051147,
+        1.6299999952316284
+      ]
+    },
+    {
+      "name": "GatebreakerPrime every enabled distinct action mapped",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime distinct action files",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required idle",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required hit_light",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required hit_medium",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required hit_heavy",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required death",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GatebreakerPrime required escape",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_idle imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_idle actual bounded articulation",
+      "ok": true,
+      "actual": 0.02757662673998964
+    },
+    {
+      "name": "GP_idle authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "GP_hit_light imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_hit_light actual bounded articulation",
+      "ok": true,
+      "actual": 0.048932437636804285
+    },
+    {
+      "name": "GP_hit_light authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.33,
+        "imported_seconds": 0.3333333333333333,
+        "frames": [
+          2.0,
+          12.0
+        ]
+      }
+    },
+    {
+      "name": "GP_hit_medium imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_hit_medium actual bounded articulation",
+      "ok": true,
+      "actual": 0.13671700101828832
+    },
+    {
+      "name": "GP_hit_medium authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.5,
+        "imported_seconds": 0.5,
+        "frames": [
+          2.0,
+          17.0
+        ]
+      }
+    },
+    {
+      "name": "GP_hit_heavy imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_hit_heavy actual bounded articulation",
+      "ok": true,
+      "actual": 0.29857215639583434
+    },
+    {
+      "name": "GP_hit_heavy authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 0.7,
+        "imported_seconds": 0.7,
+        "frames": [
+          2.0,
+          23.0
+        ]
+      }
+    },
+    {
+      "name": "GP_death imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_death actual bounded articulation",
+      "ok": true,
+      "actual": 1.410962759153037
+    },
+    {
+      "name": "GP_death authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 2,
+        "imported_seconds": 2.0,
+        "frames": [
+          2.0,
+          62.0
+        ]
+      }
+    },
+    {
+      "name": "GP_death complete cleanup contract",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_escape imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_escape actual bounded articulation",
+      "ok": true,
+      "actual": 4.0
+    },
+    {
+      "name": "GP_escape authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.05,
+        "imported_seconds": 1.0666666666666667,
+        "frames": [
+          2.0,
+          34.0
+        ]
+      }
+    },
+    {
+      "name": "GP_phase_one_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_phase_one_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.6569290096893674
+    },
+    {
+      "name": "GP_phase_one_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.1,
+        "imported_seconds": 1.1,
+        "frames": [
+          2.0,
+          35.0
+        ]
+      }
+    },
+    {
+      "name": "GP_recover imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_recover actual bounded articulation",
+      "ok": true,
+      "actual": 0.6243478949375
+    },
+    {
+      "name": "GP_recover authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.45,
+        "imported_seconds": 1.4666666666666666,
+        "frames": [
+          2.0,
+          46.0
+        ]
+      }
+    },
+    {
+      "name": "GP_quad_strike imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_quad_strike actual bounded articulation",
+      "ok": true,
+      "actual": 0.4808994665406767
+    },
+    {
+      "name": "GP_quad_strike authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.25,
+        "imported_seconds": 1.2666666666666666,
+        "frames": [
+          2.0,
+          40.0
+        ]
+      }
+    },
+    {
+      "name": "GP_charge imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_charge actual bounded articulation",
+      "ok": true,
+      "actual": 0.5572417844450946
+    },
+    {
+      "name": "GP_charge authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.3,
+        "imported_seconds": 1.3,
+        "frames": [
+          2.0,
+          41.0
+        ]
+      }
+    },
+    {
+      "name": "GP_blast imported animation",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GP_blast actual bounded articulation",
+      "ok": true,
+      "actual": 0.8000222214205397
+    },
+    {
+      "name": "GP_blast authored duration",
+      "ok": true,
+      "actual": {
+        "source_seconds": 1.2,
+        "imported_seconds": 1.2,
+        "frames": [
+          2.0,
+          38.0
+        ]
+      }
+    }
+  ],
+  "failures": [],
+  "files": {
+    "meshes/CableBinder.fbx": "4dc863d6d557cf0a7978165ee7a0dbea89225f5ade8782253478ca195b19cef6",
+    "animations/CB_idle.fbx": "c057dbc6e350562d7c2c8d3f50b5b006bd55c02a48a8b633dc04016813e8db54",
+    "animations/CB_hit_light.fbx": "d29a79541b923ec2133c8d42f76c2a7478dd3aa182684a6424d31177cb45b080",
+    "animations/CB_hit_medium.fbx": "b1aa84c89cf8d77ac74ddfb68e789fd2c9801ca178157bd9fab0b6488e31b377",
+    "animations/CB_hit_heavy.fbx": "728a5f515b5e89d53c1b31beedae778a3fbdda0c79e54fc07b20477c43146100",
+    "animations/CB_death.fbx": "1804d4828564a0efb7f2bfe0eba29dae88d282a79d53b6b0a824de96fbe2253d",
+    "animations/CB_escape.fbx": "5551c9397a13669d03a2f998fa78908ba5fded40e9efbcfbc70916c0422a98e2",
+    "animations/CB_spray.fbx": "d67b8085f137a7863839b6fcfb0eb0a067a8ec12c3bd2a53f1868cebb164a348",
+    "animations/CB_foul.fbx": "99da64c5879e02ffa2e8798d306ca6b4bb914d494fedd7ce6a2004704e586cd2",
+    "animations/CB_punch.fbx": "3f10433c4a4b982a805ad1642492768611941a318f480a4bc92c7d552f89cb11",
+    "meshes/PressureCask.fbx": "bac6d206b2834f386c732d1bd732dadcdbd265118a3d88617fd0865408f1e7c9",
+    "animations/PC_idle.fbx": "e078c5ea31efad0a3df6dcf42aa36a3b5cb98a719e4293064e6ad3278a4d0620",
+    "animations/PC_hit_light.fbx": "a1baf209c387c0cd03650ac428d80cf3c0958a941d881bac9f17fe7125679dc0",
+    "animations/PC_hit_medium.fbx": "4624a981efb569ccb9e407a7d4d3282a9c493a90115bc6e9e1523675133438bb",
+    "animations/PC_hit_heavy.fbx": "21a7e24c58fbdd77be00758d3aed0237587f54dddc4b83d2eafde2917cf36f87",
+    "animations/PC_death.fbx": "9cd3541d399f2ce906a97cb23b01e649917405f0eb3323234ab45c2da5ea257f",
+    "animations/PC_escape.fbx": "cfcb6c04c2986c0f469231c13bc68ff07218285181dc992be316ae60868a3dee",
+    "animations/PC_attack.fbx": "11ac34a98e90b68bfc46ebb5c13740035e15ba5ce26bacdf78993bc5c17d3f19",
+    "animations/PC_pressurize.fbx": "795165dcc2335ce451d0b063867bf79a591247475d145756caecf026f6a62722",
+    "meshes/CoilNest.fbx": "2f5bf67843fcd9a369b793ddc486be238d6b6473860e6674184506cde4cc71d2",
+    "animations/CN_idle.fbx": "8d21e913c1f01aca0680a3c00b7947b390c8bafca76c0cccf49853469ace3f71",
+    "animations/CN_hit_light.fbx": "f3183fa3c898f70b140c3c74658c680834baa78745952d9a99c87f037aea8de5",
+    "animations/CN_hit_medium.fbx": "9aae894225c61def2d283789fc5681ac8528ddb3ba8b227411674b5582766c67",
+    "animations/CN_hit_heavy.fbx": "4446aea7b72d1cc9049040d61ad525a8c66b4283516ceae7638100a7847786bd",
+    "animations/CN_death.fbx": "6127b04770cd3a45ad1b07b1ed475c0a32e5335029ac5b7c0b3bcd99b7181a34",
+    "animations/CN_escape.fbx": "aac3fc31955adebe83c2f4ce0817e5485c361a425a14ae0fc783548cf443ca85",
+    "animations/CN_deploy.fbx": "06c5beda93719f195739c62e1384a5365c7eaf330acdac1555d6c98eb9268ba1",
+    "animations/CN_attack.fbx": "7c0133bcb18be105198268a658fe7e3c28ba8c457733d3958c08a2074ce98bd2",
+    "meshes/KnucklePress.fbx": "6e04acc9a1dc66f33e86c4d0702c33683c4eebc9ac14f8221877c48e4e7f4ae5",
+    "animations/KP_idle.fbx": "3af1da67da54269032a7a8d4c038a4c8fb524f3a71b63a424b2e78fbcd540b36",
+    "animations/KP_hit_light.fbx": "5de7229b3f53a9f6901fa21d512bcd1dac6e2ed7a938c0d8293cef87db2fb1cd",
+    "animations/KP_hit_medium.fbx": "50a7fbfae346af00e519e97e0b6ce1692130a627f15a5a9bad586a9a55eadeed",
+    "animations/KP_hit_heavy.fbx": "da54789104990d5c1658e529b08bc3dc8e6f3da764b6e6ac86b2926e41e106ba",
+    "animations/KP_death.fbx": "1f26279b90ba4594e63971afa9352c3cc6ac1cbe8af68c98f6d5d6cddb65601f",
+    "animations/KP_escape.fbx": "c03f31151a119f4ee0082e90b4883e86f17b532d4c9a26f107897eb38da9e46a",
+    "animations/KP_brace.fbx": "571e7468b0911fb44172648a6a88396494ddc8a54a915552dcbe7ff6be9b0088",
+    "animations/KP_double_punch.fbx": "2bfb0ae2a7edc2189be3ace6e1e98a723dfb6bebf90ce807d945af242e0d0458",
+    "animations/KP_slam.fbx": "744138eac4fdcee155feca2f95fa58ba1ffb45667e264db034f475937429a38c",
+    "meshes/RedlinePursuer.fbx": "bd8e063cd0cd0f6f60a5256fd42c3018b134eae740c3f16eb0d253a6879c346d",
+    "animations/RP_idle.fbx": "0bc32169894885fa4cc6eaf4dda52203fb43963d0cd90fc0b21cbc9dcaea8dce",
+    "animations/RP_hit_light.fbx": "5f49a377a2f1e2a7b46f94ecd3ad1acd5a642784aefc123b5ce91a88c8e08150",
+    "animations/RP_hit_medium.fbx": "9c01cc50dc72567401b3dbd662c64ff643a2f4e1782d3e6ad981fa2dcfb36480",
+    "animations/RP_hit_heavy.fbx": "c7c93e8f968a4721cf28fca15f64db79ce2a49aff1b7e86472a83758589f7dc6",
+    "animations/RP_death.fbx": "6af8c09ea0e404c4520d2ab1eb218a1844740f4da9619e1c41a753fddad3ff74",
+    "animations/RP_escape.fbx": "3ffe6067e4c4367c0ba413b5dd8a931e41405f9d92eeaf54ffabbd514e3bb54b",
+    "animations/RP_strike.fbx": "2506a41c7ca4b4df1e25e0b24a480ad850e9f66bd3b42d27e4e4f49ba1ac1311",
+    "animations/RP_triple_strike.fbx": "965687ebdbd8e7fdfd8424bef5c2eae716af268e139bc79e08789ed873258b9d",
+    "meshes/FoilWarden.fbx": "f53e455e08d76388404f546880b8cae2de7532e05e3382c34d6dc5e22fc9ade2",
+    "animations/FW_idle.fbx": "d4b0b1495688432a61eb3e5ddc29d8fe0e8a9f359835bce070eb2b1459f9583b",
+    "animations/FW_hit_light.fbx": "99f5bd40b8fbb2a0a8b62144a218e2d14633ddfb676fe5798c452f10130087ad",
+    "animations/FW_hit_medium.fbx": "dc4c2f768cfd4915d0a312877a181a5424033c904cf63ab116f65173a64694bf",
+    "animations/FW_hit_heavy.fbx": "4a6198e75902eaf4c75924274bde46c7c7dda6bfb0e4cf00fde41d5ab80d3825",
+    "animations/FW_death.fbx": "dff4cc21623d9db53752003df02e6946705ace8bdffdfc23bdae6f789487d90b",
+    "animations/FW_escape.fbx": "1d7a5a3f5b9bc2e07e4e5ea57b89238f961c304211e706efe37bca110e95545e",
+    "animations/FW_attack_9.fbx": "1a800d598e58ed270b70fe85bce774c4bb5c7db2da426a4cc18da0fb09e7d983",
+    "animations/FW_attack_12.fbx": "62b150a09e78f890eeade0cd96ef11d65b2d338b276847c2a85c48c83f3638e1",
+    "animations/FW_gain_drive.fbx": "19864422e38f3702106a6cb19554a944d6dda7c1067a4231c1093128a945f6c1",
+    "meshes/SplitChassis.fbx": "c28dcfbe7ffb3c8de4afb763a7fe1be27536f0647149a75964cce4447482a074",
+    "animations/SC_idle.fbx": "05ce05dfb05fa6f5d5ce62e3b0c796df9bfbb8f833c19489d342b1ce17438ac3",
+    "animations/SC_hit_light.fbx": "e6e238fc1d8e591622c6dafdd18aca1967bcb05f38b987fc1fa82407c8fa6f4e",
+    "animations/SC_hit_medium.fbx": "724a1335de0e97659296652eb9df32f5c3348b1ab3aa6b91ef93497d5a173965",
+    "animations/SC_hit_heavy.fbx": "cb3093cb7194ad17ae0c3afc905bb465d771cfc13e9c6354662091ecf43b07ed",
+    "animations/SC_death.fbx": "d7d9f4f8a727d2a8b10f1b8bb9b4edbd48d380e0ce468da133ee3bf24f1f6d85",
+    "animations/SC_escape.fbx": "97fe32bcf1ef82a4dd02a1086ac6ce3858b3da4175255e411fe71a411353f4ff",
+    "animations/SC_double_strike.fbx": "5e6bd5cfcd9a1698ebdbce86d93aa03314c0a7b3bda5065ab6341178d9477553",
+    "animations/SC_triple_strike.fbx": "a99b458f5572345887ebb4c2b0934d82349258b24f5fb9e3254d95a943d08c26",
+    "animations/SC_thermal_runaway.fbx": "f8424c7fc7f8de365b8801357418482f6736f8aee303f3cefb6988e6c3a42443",
+    "animations/SC_death_release.fbx": "100524007d42cef0e85cbf03ad3f1dbde099c3c010d72d4b6ddf5cc6e765e91d",
+    "meshes/GatebreakerPrime.fbx": "2835d87ac82bb1b1641174e5e92b57a71f41c22494d8220614367a22d8358c3a",
+    "animations/GP_idle.fbx": "9004edf221d00c726463f2513522e4679024ddfd916542821d5e8ec2a4d560f9",
+    "animations/GP_hit_light.fbx": "8eaa6c6b61cc554bdf212c8a48a1aabd2563aef1a7dde020d0b9a175ea183073",
+    "animations/GP_hit_medium.fbx": "a1da32d2531ff127e3e735e8d93265f018fa4352a16062e59b346a51d36510e7",
+    "animations/GP_hit_heavy.fbx": "bbf3e0433ed13d085940ece4cef49009bd90b262c3b2d0dc770f847dc98b43c4",
+    "animations/GP_death.fbx": "171f6022f970f63a1363189355f060b347b6d1130156157c8893d911d7c3735a",
+    "animations/GP_escape.fbx": "2e5225900737cc55f4bbab12d18b1eb3cb804898a09913a16c8026c445b04520",
+    "animations/GP_phase_one_strike.fbx": "974501b8f88df288cb6e26014b623a17d1564abd7270b47b54862bf3065a154d",
+    "animations/GP_recover.fbx": "d220abaee0ceeaf6bce48f71886be9c23a826633e2a01ebebba5c9257b18366c",
+    "animations/GP_quad_strike.fbx": "12be1000a258c33c524e8078096944bb1a116d334d7904a421f80f6b9bac5020",
+    "animations/GP_charge.fbx": "17d7050a8c3a04babdf35705aa0c9f2bcaeaa2ea3837d8aabb91a388942d2177",
+    "animations/GP_blast.fbx": "89a42dab604ef60c62025c326f470d9df194b727c3adb383f9064e09879035f2"
+  },
+  "limitations": [
+    "FBX and original source coverage only; Unreal playback, action/event mapping and appearance remain unverified.",
+    "No performance, LOD, human visual approval or final art quality claim."
+  ]
+}

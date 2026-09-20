@@ -1,6 +1,8 @@
 #include "FoundryHost.h"
 #if FOUNDRY_WITH_CAMPAIGN
 #include "FoundryCampaign.h"
+#include "FoundryCampaignUI.h"
+#include "Widgets/SWidget.h"
 #include "overkill/robots.hpp"
 #include <algorithm>
 
@@ -9,7 +11,7 @@ void AFoundryStage::TickCampaignProbe(float DeltaSeconds)
 {
     if(!Campaign) return;
     CampaignProbeElapsed+=DeltaSeconds;
-    if(CampaignProbeElapsed<1.0f || ReturnCameraAfter>0) return;
+    if(CampaignProbeElapsed<1.0f || IsPresentationBusy()) return;
     CampaignProbeElapsed=0;
     auto Check=[&](bool Ok,const TCHAR* Label)
     {
@@ -73,9 +75,16 @@ void AFoundryStage::TickCampaignProbe(float DeltaSeconds)
     case 11: Control(TEXT("collect"));Campaign->Drawer=TEXT("recipes");++Campaign->ViewRevision;break;
     case 12: CaptureNamed(TEXT("campaign-recipes.png"));break;
     case 13:
+    {
         Campaign->Drawer.Empty();++Campaign->ViewRevision;
         if(!Check(!Campaign->Control(TEXT("fire")),TEXT("Invalid Fire is rejected without a speculative save")))return;
+        const auto Before=overkill::campaignHash(*Campaign->Current());Control(TEXT("load"));
+        if(!Check(!IsActionView()&&!IsPresentationBusy()&&overkill::campaignHash(*Campaign->Current())==Before,TEXT("Invalid Lock and load leaves preparation and save unchanged")))return;
+        const auto Widget=MakeFoundryCampaignUI(this);
+        const auto Reply=Widget->OnKeyDown(FGeometry(),FKeyEvent(EKeys::Enter,FModifierKeysState(),0,true,0,0));
+        if(!Check(Reply.IsEventHandled()&&overkill::campaignHash(*Campaign->Current())==Before,TEXT("Slate repeat Enter is consumed without End Turn after modal focus return")))return;
         break;
+    }
     case 14:
     {
         const auto& State=Session->State;
@@ -84,9 +93,18 @@ void AFoundryStage::TickCampaignProbe(float DeltaSeconds)
         if(State.phase==overkill::Phase::Collection){Control(TEXT("collect"));return;}
         if(!State.bullet.empty())
         {
+            if(!Check(IsActionView()&&!IsPresentationBusy(),TEXT("Loaded shooting view is settled and interactive before Fire")))return;
+            if(CameraProbeStep==0){CameraProbeStep=1;CaptureNamed(TEXT("campaign-locked-and-loaded.png"));return;}
+            if(CameraProbeStep==1){Campaign->Drawer=TEXT("recipes");++Campaign->ViewRevision;CameraProbeStep=2;return;}
+            if(CameraProbeStep==2){Campaign->Close();if(!Check(IsActionView()&&Campaign->Drawer.IsEmpty(),TEXT("Closing Recipes returns to loaded shooting view")))return;CameraProbeStep=3;return;}
+            if(CameraProbeStep==3){Campaign->Navigate(TEXT("shop"));CameraProbeStep=4;return;}
+            if(CameraProbeStep==4){Campaign->Close();if(!Check(IsActionView()&&Campaign->Page==TEXT("combat"),TEXT("Closing shop returns to loaded shooting view")))return;CameraProbeStep=5;return;}
+            if(CameraProbeStep==5){Control(TEXT("unload"));if(!Check(!IsActionView()&&Session->State.bullet.empty(),TEXT("Unload returns to preparation with unfired parts")))return;CameraProbeStep=6;return;}
+            if(CameraProbeStep==6){CameraProbeStep=7;CaptureNamed(TEXT("campaign-reloaded.png"));return;}
             int32 Best=MAX_int32;for(const auto& E:State.enemies)if(!E.dead&&!E.escaped&&E.hp<Best){Best=E.hp;Session->Target=E.id;}
-            if(!Check(Campaign->Control(TEXT("fire")),TEXT("Loaded shot committed")))return;
-            SetActionView(true);ReturnCameraAfter=2.25f;CaptureNamed(TEXT("campaign-action.png"));CaptureNamed(TEXT("campaign-action-settled.png"));return;
+            const auto Revision=Campaign->Store.revision();Control(TEXT("fire"));
+            if(!Check(Campaign->Store.revision()==Revision+1,TEXT("Loaded shot committed through camera-aware control")))return;
+            CaptureNamed(TEXT("campaign-action.png"));CaptureNamed(TEXT("campaign-action-settled.png"));return;
         }
         for(const auto& P:State.parts)if(P.kind==overkill::Kind::Shield&&P.place==overkill::Place::Reserve)
         {if(!Check(Campaign->Control(FString::Printf(TEXT("part:%llu"),P.id)),TEXT("Shield installed through campaign")))return;return;}
@@ -95,7 +113,12 @@ void AFoundryStage::TickCampaignProbe(float DeltaSeconds)
             {Control(FString::Printf(TEXT("craft:%llu"),Copy.id));return;}
         Session->Selection.clear();for(const auto& P:State.parts)if(P.kind==overkill::Kind::Ammo&&P.place==overkill::Place::Reserve)Session->Selection.push_back(P.id);
         if(!Session->Selection.empty())
-        {if(!Check(Campaign->Control(TEXT("load")),TEXT("Assembled bullet loaded")))return;Campaign->Drawer=TEXT("parts");++Campaign->ViewRevision;CaptureNamed(TEXT("campaign-parts.png"));return;}
+        {
+            if(!RequestedCaptures.Contains(TEXT("campaign-parts.png"))){Campaign->Drawer=TEXT("parts");++Campaign->ViewRevision;CaptureNamed(TEXT("campaign-parts.png"));return;}
+            Control(TEXT("load"));if(!Check(IsActionView()&&!Session->State.bullet.empty(),TEXT("Lock and load starts shooting camera without firing")))return;
+            const auto LoadedHash=overkill::campaignHash(*Campaign->Current());Control(TEXT("fire"));
+            if(!Check(overkill::campaignHash(*Campaign->Current())==LoadedHash,TEXT("Fire input is locked only during camera/load transition")))return;return;
+        }
         Control(TEXT("end"));CaptureNamed(TEXT("campaign-enemy-turn.png"));return;
     }
     case 15: if(!Check(Act(CT::RequestAdvance) && Campaign->Current()->skipConfirmation,TEXT("Unclaimed rewards require explicit abandonment")))return;break;

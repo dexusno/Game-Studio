@@ -32,6 +32,7 @@ public:
     int32 GetDissolveSlotCount() const { return Materials.Num(); }
     bool AreMaterialsSolid() const;
     FVector GetImpactLocation() const;
+    FBox GetBodyBounds() const;
 private:
     void Play(const FString& Clip, uint64 EventId = 0);
     void HoldCharge();

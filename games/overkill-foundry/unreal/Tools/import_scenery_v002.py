@@ -69,7 +69,8 @@ def linear(color):
 
 for name in [n for n in REPORT["palette"] if n.startswith("v2_")] + ["v2_window_warm", "v2_window_cool"]:
     label = "MI_CW_" + name
-    material = EDIT.load_asset(ROOT + "/Materials/" + label)
+    material_path = ROOT + "/Materials/" + label
+    material = EDIT.load_asset(material_path) if EDIT.does_asset_exist(material_path) else None
     if material is None:
         material = TOOLS.create_asset(label, ROOT + "/Materials", u.MaterialInstanceConstant, u.MaterialInstanceConstantFactoryNew())
     MAT.set_material_instance_parent(material, master)
@@ -146,7 +147,10 @@ for item, mesh in mapped:
     p = item["position_m"]
     actor = actors.spawn_actor_from_class(u.StaticMeshActor, u.Vector(p[0] * 100, -p[1] * 100, p[2] * 100))
     actor.set_actor_label(item["name"])
-    actor.tags = ["CinderwallSceneryV002"]
+    # Serialized alongside the cooked actor; runtime validation must not depend
+    # on this machine's ignored source/report directory.
+    bounds_tag = "SceneryBoundsCm=" + ",".join(format(v * 100, ".3f") for v in item["bounds_m"])
+    actor.tags = ["CinderwallSceneryV002", bounds_tag]
     actor.static_mesh_component.set_static_mesh(mesh)
     actor.static_mesh_component.set_collision_enabled(u.CollisionEnabled.NO_COLLISION)
     evidence["stage"].append({"name": item["name"], "asset": mesh.get_path_name(),

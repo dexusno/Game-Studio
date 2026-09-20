@@ -1,6 +1,7 @@
 #include "FoundryHost.h"
 #include "FoundrySession.h"
 #include "FoundryCampaignUI.h"
+#include "FoundryRobot.h"
 
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
@@ -78,6 +79,44 @@ void AFoundryHUD::DrawHUD()
     Super::DrawHUD();
     AFoundryStage* Stage = StageIn(GetWorld());
     if (!Canvas || !GEngine || !Stage) return;
+#if FOUNDRY_WITH_CAMPAIGN
+    if (const auto* Campaign = Stage->GetCampaign(); Campaign && Campaign->Page == TEXT("combat") && Campaign->Drawer.IsEmpty() && !Campaign->bPrecisionModal)
+    {
+        const auto& S = Stage->GetSession().State;
+        const float Scale = FMath::Min(Canvas->SizeX / 1600.f, Canvas->SizeY / 900.f);
+        int32 Number = 0;
+        for (const auto& Enemy : S.enemies)
+        {
+            ++Number;
+            if (Enemy.dead || Enemy.escaped) continue;
+            for (TActorIterator<AFoundryRobot> Robot(GetWorld()); Robot; ++Robot)
+            {
+                if (Robot->GetCoreId() != Enemy.id) continue;
+                const FBox Bounds = Robot->GetBodyBounds();
+                FVector2D Min(MAX_flt,MAX_flt), Max(-MAX_flt,-MAX_flt);
+                for(int32 Corner=0;Corner<8;++Corner)
+                {
+                    const FVector P=Project(FVector(Corner&1?Bounds.Max.X:Bounds.Min.X,Corner&2?Bounds.Max.Y:Bounds.Min.Y,Corner&4?Bounds.Max.Z:Bounds.Min.Z));
+                    Min.X=FMath::Min(Min.X,P.X);Min.Y=FMath::Min(Min.Y,P.Y);Max.X=FMath::Max(Max.X,P.X);Max.Y=FMath::Max(Max.Y,P.Y);
+                }
+                const FVector Position(Max.X+20*Scale,(Min.Y+Max.Y)*.5,0);
+                const bool Selected = Stage->GetSession().Target == Enemy.id;
+                const FLinearColor Color = Selected ? FLinearColor(1, .65f, .22f) : FLinearColor(.85f, .9f, .9f);
+                DrawRect(FLinearColor(.015f,.025f,.03f,.94f), Position.X - 13 * Scale, Position.Y - 3 * Scale, 28 * Scale, 25 * Scale);
+                DrawText(FString::FromInt(Number), Color.ToFColor(true), Position.X - 6 * Scale, Position.Y - 2 * Scale, GEngine->GetMediumFont(), Scale);
+                if (Selected && Stage->IsActionView() && !Stage->IsPresentationBusy())
+                {
+                    const FVector Aim = Project(Robot->GetImpactLocation());
+                    for (float Sign : {-1.f, 1.f})
+                    {
+                        DrawLine(Aim.X + 12 * Scale * Sign, Aim.Y, Aim.X + 22 * Scale * Sign, Aim.Y, Color, 2 * Scale);
+                        DrawLine(Aim.X, Aim.Y + 12 * Scale * Sign, Aim.X, Aim.Y + 22 * Scale * Sign, Color, 2 * Scale);
+                    }
+                }
+            }
+        }
+    }
+#endif
 #if FOUNDRY_WITH_CAMPAIGN
     if (!Stage->IsTechnicalMode())
     {

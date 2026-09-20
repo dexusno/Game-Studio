@@ -94,7 +94,7 @@ public:
                 +SVerticalBox::Slot().AutoHeight()[
                     SNew(SButton).ContentPadding(FMargin(12,9))
                     .Visibility_Lambda([this](){return Attempt.stage()==PrecisionStage::Ready?EVisibility::Visible:EVisibility::Collapsed;})
-                    .OnClicked_Lambda([this](){Cancel();return FReply::Handled();})[Label(TEXT("Back  ·  keep Precision for later"),18)]
+                    .OnClicked_Lambda([this](){Cancel();return FReply::Handled();})[Label(*Options.BackLabel,18)]
                 ]
                 +SVerticalBox::Slot().AutoHeight().Padding(0,15,0,0)[Label(TEXT("Starting commits this attempt. Escape cannot cancel it once the marker moves. Your ordinary haul is safe on a miss."),16)]
             ]

@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
+    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'SceneryArt', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
     [string]$Action = 'Build',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development',
@@ -28,10 +28,19 @@ $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskLog = Join-Path $taskLogs "$Action-$taskStamp.log"
 
 function Invoke-FoundryProcess([string]$Executable, [string[]]$Arguments) {
+    $taskVerifyBinary = $Action -in @('CampaignProbe', 'ArtProbe', 'Smoke', 'Fixture')
+    $taskModulePath = Join-Path $taskProjectDir 'Binaries/Win64/UnrealEditor-OverkillFoundry.dll'
+    if ($taskVerifyBinary) { $taskModuleBefore = (Get-FileHash -LiteralPath $taskModulePath -Algorithm SHA256).Hash }
     # ArgumentList is joined by Windows Start-Process; quote each path safely.
     $taskQuoted = $Arguments | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' }
     $taskProc = Start-Process -FilePath $Executable -ArgumentList $taskQuoted -WorkingDirectory $taskProjectDir -WindowStyle Hidden -PassThru
     $taskProc.WaitForExit()
+    if ($taskVerifyBinary) {
+        $taskModuleAfter = (Get-FileHash -LiteralPath $taskModulePath -Algorithm SHA256).Hash
+        @{ module = 'UnrealEditor-OverkillFoundry.dll'; sha256Before = $taskModuleBefore; sha256After = $taskModuleAfter; log = [IO.Path]::GetFileName($taskLog); exitCode = $taskProc.ExitCode } |
+            ConvertTo-Json | Set-Content -LiteralPath "$taskLog.binary.json" -Encoding utf8
+        if ($taskModuleBefore -ne $taskModuleAfter) { throw "Module identity changed during $Action." }
+    }
     if ($taskProc.ExitCode -ne 0) { throw "$Action failed with exit code $($taskProc.ExitCode). Inspect $taskLog" }
 }
 
@@ -75,6 +84,8 @@ switch ($Action) {
             $taskArgs += '-FoundryInspectSave'
         }
         $taskProc = Start-Process -FilePath $taskEditor -ArgumentList $taskArgs -WorkingDirectory $taskProjectDir -WindowStyle Normal -PassThru
+        @{ module = 'UnrealEditor-OverkillFoundry.dll'; sha256Before = (Get-FileHash -LiteralPath (Join-Path $taskProjectDir 'Binaries/Win64/UnrealEditor-OverkillFoundry.dll') -Algorithm SHA256).Hash; log = [IO.Path]::GetFileName($taskLog); pid = $taskProc.Id } |
+            ConvertTo-Json | Set-Content -LiteralPath "$taskLog.binary.json" -Encoding utf8
         Write-Output "Interactive host PID=$($taskProc.Id)"
     }
     'Teaching' {
@@ -113,6 +124,12 @@ switch ($Action) {
     'ArtProbe' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryArtProbe', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ART_PROBE_COMPLETE ok=1' -Quiet)) { throw "Rendered art probe did not report success: $taskLog" }
+    }
+    'SceneryArt' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_scenery_v002.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_SCENERY_V002_READY' -Quiet)) { throw "Scenery import did not report success: $taskLog" }
     }
     'MaraArt' {
         $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'

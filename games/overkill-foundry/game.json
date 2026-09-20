@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes 246 recipe paths, ten robots and native P08 with finite authored/independent coverage. Two haul compositions remain held. Baseline-4 retains 199 completions and one policy timeout across 200 paired Auto runs, all replayed; earned Heat/Burn and cold-Shield combinations complete cities. Baseline-5 repairs finite-defense valuation, passes independent review and finishes the preregistered 400-case Precision sensitivity matrix with 392 completions, eight explicit held-rule stops and all 400 exact replays. Runtime obligation evidence is being audited without waiving gaps. Live campaign UI, original Mara/Ram/Mite, 23 original sound cues and real Precision work in Unreal 5.8.2. Owner-corrected Lock and load to 16C passes rendered flow; native/framing checks continue. New scenery imports and passes all 19 bounds checks, but visual depth still needs refinement. Advanced recipe controls, remaining roster art/actions, package/performance, human tests and explicit visual approval remain open. Stage remains prototype; no old-game pipeline reused.",
+  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes 246 recipe paths, ten robots and native P08 with bounded authored/independent coverage. Two haul compositions remain held. Reviewed baseline 5 is committed/integrated/pushed as ed8935d: 400 sensitivity runs, 392 completions, eight held-rule stops, all 400 exact replays. Baseline 4 retains two earned build witnesses. Frozen camera/scenery graph implements Lock and load to interactive 16C, Fire to same-turn preparation and enemy cosmetics after camera arrival. Final Editor/Game, rendered campaign, native input and exact parity pass; finite independent review passes with 13 inspected frames and all 50 source/45 capture identities matched. All 19 scenery bounds pass, but visual depth remains below the owner benchmark. Eight original roster sources/72 clips pass 365 FBX checks and source visual inspection, with Unreal import/runtime integration pending. Advanced recipe controls, runtime obligation proof gaps, operator/scene/FX refinement, packaging/performance and human tests/approval remain open. Stage remains prototype; no old-game pipeline reused.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T15:47:13+00:00",
-      "record_sha256": "7855d936f2efbe977b1bf4e24347aabc0443cb51ba3826cfe30ff85ce36d59ac",
+      "captured_at": "2026-09-20T15:58:49+00:00",
+      "record_sha256": "5e6177224760686138c8f02f27d9e1d163ca23f51729ed56de2c6f26999f2570",
       "files": {
-        "games/overkill-foundry/STATUS.md": "9861e798ba588f3be86374251097f6fae32e5d39d726db3502103417008373db",
+        "games/overkill-foundry/STATUS.md": "f7fce275c2652ed5321fe26035cc73aaf537062dbd06052d6f41561c2931f091",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",

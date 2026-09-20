@@ -1,5 +1,6 @@
 #include "overkill/campaign_session.hpp"
 #include "overkill/upgrades.hpp"
+#include "overkill/robots.hpp"
 #include <algorithm>
 #include <filesystem>
 #include <iostream>
@@ -32,6 +33,15 @@ int main(int argc,char** argv){
     for(const auto& o:overkill::routeOffers(precision.route))if(o.formation=="C1-F-MITE-RAM"){a.subject=o.id;break;}
     if(!a.subject)for(const auto& o:overkill::routeOffers(precision.route))if(o.kind==overkill::EncounterKind::Regular){a.subject=o.id;break;}
     apply(precision,a);write("precision-entry",precision);
+    auto composition=precision;
+    composition.fight.enemies=overkill::makeCinderwallFormation("C1-F-MITE-RAM",composition.fight.seed,"prepared-camera-composition",composition.fight.nextId);
+    auto extra=overkill::makeCinderwallFormation("C1-F-MITE-RAM",composition.fight.seed,"prepared-camera-composition",composition.fight.nextId);
+    // Synthetic layout stress only, not a roster claim. Keep the source rule
+    // that only one live Mite can exist: the third body is another Ram.
+    composition.fight.enemies.push_back(extra.back());
+    a={};a.type=overkill::CampaignActionType::Combat;a.combat=overkill::Action::collect(3);apply(composition,a);
+    for(int i=0;i<6;++i){const auto r=fights.grantPlainPart(composition.fight,overkill::Kind::Ammo,4,"Prepared visual fixture");if(!r.ok)throw std::runtime_error(r.reason);}
+    write("camera-three-robots",composition);
     auto precisionRetry=precision;
     a={};a.type=overkill::CampaignActionType::Combat;a.combat=overkill::Action::collect(3,0);apply(precisionRetry,a);write("precision-retry",precisionRetry);
     auto full=base("memory");a={};a.type=overkill::CampaignActionType::ChooseMayor;a.choice="MY1-13";apply(full,a);
