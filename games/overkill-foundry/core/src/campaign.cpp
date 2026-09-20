@@ -17,7 +17,7 @@ void accepted(const Result& result){need(result.ok,result.reason.empty()?"Effect
 bool pending(const Campaign& c){return std::any_of(c.rewards.begin(),c.rewards.end(),[](const RewardEntry& r){return r.claim==ClaimState::Pending;});}
 void canShop(const Campaign& c){need(c.phase==CityPhase::Between || c.phase==CityPhase::Rewards || c.phase==CityPhase::Mystery || c.phase==CityPhase::Fight,"The shop is not available in this phase.");if(c.phase==CityPhase::Fight)need(c.fight.phase==Phase::Collection || c.fight.phase==Phase::Preparation,"The fight result must commit before shopping.");}
 std::string commandKey(const CampaignAction& a){
-    std::ostringstream out;out<<static_cast<int>(a.type)<<' '<<a.subject<<' '<<a.exchange<<' '<<std::quoted(a.choice)<<' '<<a.quantity<<' '<<a.eventShop;
+    std::ostringstream out;out<<std::quoted(a.runId)<<' '<<static_cast<int>(a.type)<<' '<<a.subject<<' '<<a.exchange<<' '<<std::quoted(a.choice)<<' '<<a.quantity<<' '<<a.eventShop;
     if(a.type==CampaignActionType::Combat){
         const auto& b=a.combat;out<<' '<<static_cast<int>(b.type)<<' '<<b.subject<<' '<<b.target<<' '<<b.steering<<' '<<b.precision<<' '<<b.amount;
         auto ids=[&](const auto& values){out<<' '<<values.size();for(const auto& value:values)out<<' '<<value;};
@@ -124,6 +124,7 @@ CampaignResult CampaignRules::apply(Campaign& original,const CampaignAction& act
     try{
         need(original.rulesVersion==RulesVersion && original.contentVersion==ContentVersion && original.manifestHash==content_.manifestHash,"Incompatible campaign content; an explicit migration is required.");
         need(!original.preStart,"Internal fight-entry snapshots must be initialized before gameplay.");
+        need(!action.runId.empty() && action.runId==original.runId,"This command belongs to another campaign; refresh the active run.");
         const auto key=commandKey(action);
         for(const auto& receipt:original.receipts)if(receipt.sequence==action.sequence){need(receipt.command==key,"Transaction identity was reused for a different action.");return {true,true,receipt.message,receipt.events};}
         need(action.sequence==original.nextTransaction && action.sequence!=0,"Campaign changed; reload before another transaction.");

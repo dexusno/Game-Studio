@@ -19,7 +19,7 @@ CampaignHooks fixtureHooks(const Rules& fights){
     h.grantPart=[&fights](Campaign& c,const std::string& id){return fights.grantPart(c.fight,id);};return h;
 }
 CampaignAction action(const Campaign& c,CampaignActionType type,Id subject=0,std::string choice={}){
-    CampaignAction a;a.type=type;a.sequence=c.nextTransaction;a.subject=subject;a.choice=std::move(choice);return a;
+    CampaignAction a;a.runId=c.runId;a.type=type;a.sequence=c.nextTransaction;a.subject=subject;a.choice=std::move(choice);return a;
 }
 void run(Campaign& c,const CampaignRules& rules,const CampaignAction& a){const auto r=rules.apply(c,a);check(r.ok,r.reason);}
 Id iron(const Campaign& c){for(const auto& p:c.shop)if(p.kind==ProductKind::Material && p.material==0)return p.id;throw std::runtime_error("Missing Iron stock.");}
@@ -74,6 +74,13 @@ int wmain(int argc,wchar_t** argv){try{
         check(first.apply(a).ok,"First writer failed.");const auto r=second.apply(b);
         check(!r.ok && r.reconciled && second.state().fight.materials[0]==2 && second.state().fight.credits==92,"Stale writer overwrote or misreported different command.");
         check(second.apply(a).replayed,"Reloaded receipt was not reusable.");
+    }
+    {
+        const auto path=root/"queued-old-run.ofsave";seedFile(path,initial(rules));CampaignSession session(path,rules);check(session.load().ok,"Old run load failed.");
+        const auto queued=purchase(session.state());check(session.newGame(73,"replacement-run").ok,"New Game replacement failed.");
+        auto mayor=action(session.state(),CampaignActionType::ChooseMayor,0,session.state().mayorOffers[0]);check(session.apply(mayor).ok,"New Mayor failed.");
+        const auto bytes=serializeCampaign(session.state());const auto revision=session.revision();
+        check(!session.apply(queued).ok && serializeCampaign(session.state())==bytes && session.revision()==revision,"Queued old-run purchase crossed into the replacement campaign.");
     }
     std::vector<wchar_t> executable(32768);const auto length=GetModuleFileNameW(nullptr,executable.data(),static_cast<DWORD>(executable.size()));check(length>0,"Executable path unavailable.");
     for(int mode=0;mode<3;++mode){

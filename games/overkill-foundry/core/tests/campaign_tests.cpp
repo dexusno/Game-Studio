@@ -8,7 +8,7 @@ using namespace overkill;
 namespace {
 int checks=0;
 void check(bool ok,const std::string& why){++checks;if(!ok)throw std::runtime_error(why);}
-CampaignAction command(const Campaign& c,CampaignActionType type,Id subject=0,std::string choice={}){CampaignAction a;a.sequence=c.nextTransaction;a.type=type;a.subject=subject;a.choice=std::move(choice);return a;}
+CampaignAction command(const Campaign& c,CampaignActionType type,Id subject=0,std::string choice={}){CampaignAction a;a.runId=c.runId;a.sequence=c.nextTransaction;a.type=type;a.subject=subject;a.choice=std::move(choice);return a;}
 CampaignResult run(Campaign& c,const CampaignRules& rules,CampaignAction a){auto result=rules.apply(c,a);check(result.ok,result.reason);return result;}
 void combat(Campaign& c,const CampaignRules& rules,Action action){auto a=command(c,CampaignActionType::Combat);a.combat=std::move(action);run(c,rules,a);}
 CampaignHooks transactionFixtureHooks(const Rules& fights){
@@ -38,6 +38,7 @@ void winControlledRam(Campaign& c,const CampaignRules& rules,const Rules& fights
 }
 Campaign withRewards(const CampaignRules& rules,const Rules& fights,std::uint64_t seed=1){auto c=start(rules,seed);enterRam(c,rules);winControlledRam(c,rules,fights);return c;}
 void roundtrip(Campaign& c){const auto bytes=serializeCampaign(c);Campaign restored;std::string error;check(deserializeCampaign(bytes,restored,error),error);check(serializeCampaign(restored)==bytes,"Campaign roundtrip changed bytes.");c=std::move(restored);}
+void rejectedSnapshot(const Campaign& c){bool rejected=false;try{const auto bytes=serializeCampaign(c);Campaign parsed;std::string error;rejected=!deserializeCampaign(bytes,parsed,error);}catch(const std::exception&){rejected=true;}check(rejected,"Invalid campaign phase/entry identity was accepted.");}
 Campaign mysteryFixture(const CampaignRules& rules,const std::string& outcome){
     // Route-only traversal constructs the transaction boundary. It deliberately
     // does not simulate the intervening fights or claim a balanced city clear.
@@ -160,6 +161,19 @@ int main(){try{
         auto c=start(rules);enterRam(c,rules);c.fight.hp=1;combat(c,rules,Action::collect(0));combat(c,rules,Action::endTurn());
         if(c.phase==CityPhase::Fight){combat(c,rules,Action::collect(0));combat(c,rules,Action::endTurn());}
         check(c.phase==CityPhase::Defeated && c.route.position==1 && c.rewards.empty() && c.entry.empty() && c.cores.empty(),"Defeat granted loot, progressed or retained a Continue checkpoint.");roundtrip(c);
+    }
+    {
+        auto old=start(rules,9);auto queued=command(old,CampaignActionType::Buy,product(old,ProductKind::Material));
+        auto fresh=rules.newGame(9,"replacement-run");run(fresh,rules,command(fresh,CampaignActionType::ChooseMayor,0,fresh.mayorOffers[0]));
+        const auto before=serializeCampaign(fresh);check(queued.sequence==fresh.nextTransaction,"Cross-run regression lacks matching sequence.");
+        check(!rules.apply(fresh,queued).ok && serializeCampaign(fresh)==before,"Queued command crossed a New Game boundary.");
+        queued.runId.clear();check(!rules.apply(fresh,queued).ok && serializeCampaign(fresh)==before,"Missing campaign command identity was accepted.");
+        auto invalid=fresh;invalid.fight.hp=0;invalid.fight.phase=Phase::Defeat;rejectedSnapshot(invalid);
+        invalid=fresh;invalid.phase=CityPhase::Defeated;rejectedSnapshot(invalid);
+        enterRam(fresh,rules);invalid=fresh;++invalid.fight.seed;invalid.fight.encounter="uncommitted-encounter";rejectedSnapshot(invalid);
+        invalid=fresh;auto& node=invalid.route.nodes[0];const auto selected=node.selected;
+        std::size_t chosen=0,other=0;for(std::size_t i=0;i<node.offers.size();++i){if(node.offers[i].id==selected)chosen=i;else other=i;}
+        std::swap(node.offers[chosen].formation,node.offers[other].formation);rejectedSnapshot(invalid);
     }
     std::cout<<"PASS "<<checks<<" campaign/offer/receipt assertions. Uses controlled test-only upgrade payloads and terminal ammo; no full-city balance, P08 or disk-durability claim.\n";return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL "<<e.what()<<'\n';return 1;}}

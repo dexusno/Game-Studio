@@ -1,0 +1,33 @@
+PASS missing P08 executor rejects Mayor acquisition without payment or receipt
+PASS T11 result cleanup precedes purchases and entry keeps new supplies
+PASS T12 repeated Continue restores exact inputs and preserves only profile discoveries
+PASS T19 recipe Back preserves fixed choices and owned cores without automatic sale
+PASS T13 T21 pending exchange survives save and cancel then commits once
+PASS T20 T22 confirmation abandons only pending loot and closes once
+PASS T18 noncombat Mystery consumes one node without combat restock
+PASS transaction sequence reuse with different payload rejects atomically
+PASS queued purchase from old New Game cannot execute in a replacement run
+PASS snapshot rejects living HP represented as a terminal defeated campaign
+PASS snapshot rejects zero-HP defeat represented as between-fight play
+PASS snapshot rejects fight identity diverging from committed encounter
+PASS snapshot rejects current formation diverging from original entry
+PASS postreplacement save error reconciles the committed purchase and receipt
+PASS precommit save error publishes no speculative reward claim
+PASS defeat closes checkpoint without restock or loot and preserves discoveries
+PASS boss completion and unlock receipt survive reload and duplicate final Fire
+PASS process exit mode=0 boundary=0 exit=73
+PASS process exit mode=0 boundary=1 exit=73
+PASS process exit mode=0 boundary=2 exit=73
+PASS process exit mode=0 boundary=3 exit=73
+PASS actual process exits preserve confirmed abandonment atomically
+PASS process exit mode=1 boundary=0 exit=73
+PASS process exit mode=1 boundary=1 exit=73
+PASS process exit mode=1 boundary=2 exit=73
+PASS process exit mode=1 boundary=3 exit=73
+PASS actual process exits preserve terminal Fire atomically
+PASS process exit mode=2 boundary=0 exit=73
+PASS process exit mode=2 boundary=1 exit=73
+PASS process exit mode=2 boundary=2 exit=73
+PASS process exit mode=2 boundary=3 exit=73
+PASS actual process exits preserve recipe exchange atomically
+Campaign independent groups: 20 passed, 0 failed.

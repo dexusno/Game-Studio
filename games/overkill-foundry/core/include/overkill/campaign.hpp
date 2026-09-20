@@ -61,6 +61,7 @@ enum class CampaignActionType : std::uint8_t {
 };
 struct CampaignAction {
     CampaignActionType type=CampaignActionType::RequestAdvance;
+    std::string runId; // Together with sequence identifies this run's command.
     Id sequence=0,subject=0,exchange=0;
     std::string choice;
     Amount quantity=1;

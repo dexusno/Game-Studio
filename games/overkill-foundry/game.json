@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T12:40:07+00:00",
+      "captured_at": "2026-09-20T12:55:59+00:00",
       "record_sha256": "7b19b9e854305bcec3bb4a4aa585c043cfbd566475655eeb59635dc6ce300cc8",
       "files": {
-        "games/overkill-foundry/STATUS.md": "4aa9955e7b502f2c5868911b0b2285376dcfa0bbe260bac3fe75ce6a048d9d96",
+        "games/overkill-foundry/STATUS.md": "2fa37b12f98eaf672f43fb5ea4faefad4e52fd792ebde7a24e612bced98a51c2",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "08d645e68d12908f049385a55b519723701b558d097de60960943133c9faaa44",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",

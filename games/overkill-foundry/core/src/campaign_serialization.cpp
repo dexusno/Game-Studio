@@ -62,6 +62,20 @@ void validate(const Campaign& c,bool allowEntry){
     need(!c.runId.empty() && c.nextId>0 && c.nextTransaction>0 && c.phase<=CityPhase::Complete,"Invalid campaign identity or phase.");
     need(c.memorySlots>0 && c.shopGeneration>0 && c.fight.memory.size()<=static_cast<std::size_t>(c.memorySlots),"Invalid campaign capacity or stock generation.");
     std::string error;need(validateRoute(c.route,error),"Invalid campaign route.");need(c.route.seed==c.seed,"Route seed changed.");
+    const auto* active=selectedRouteOffer(c.route);
+    if(c.phase==CityPhase::Defeated){
+        need(c.fight.hp==0 && c.fight.phase==Phase::Defeat && active && !active->formation.empty(),"Defeated campaign has no terminal defeat.");
+    }else{
+        need(c.fight.hp>0 && c.fight.phase!=Phase::Defeat && c.fight.phase!=Phase::Victory && c.fight.phase!=Phase::Escaped,"Live campaign has a terminal fight state.");
+        if(c.phase!=CityPhase::Fight)need(c.fight.phase==Phase::Collection,"Closed encounter retained an active preparation phase.");
+    }
+    if(c.phase==CityPhase::Arrival || c.phase==CityPhase::Between || c.phase==CityPhase::Rewards || c.phase==CityPhase::Complete)
+        need(active==nullptr,"Closed encounter has a committed next offer.");
+    if(c.phase==CityPhase::Arrival)need(c.route.position==1,"Arrival moved past the opening route position.");
+    if(c.phase==CityPhase::Between)need(c.route.position<=12,"Completed route still offers another encounter.");
+    if(c.phase==CityPhase::Rewards)need(c.route.position>=2,"Victory rewards precede any completed encounter.");
+    if(c.phase==CityPhase::Complete)need(c.route.position==13,"City marked complete before its final encounter.");
+    if(c.phase==CityPhase::Mystery)need(active && active->kind==EncounterKind::Mystery,"Mystery phase lost its committed outcome.");
     unique(c.profile.recipes);unique(c.profile.unlocked);unique(c.profile.cityClearReceipts);unique(c.everAcquired);unique(c.mayorOffers);
     need(c.mayorOffers.size()==3,"Invalid Mayor offer count.");
     need(c.phase!=CityPhase::Arrival || c.mayor.empty(),"Arrival already acquired a Mayor gift.");
@@ -84,26 +98,29 @@ void validate(const Campaign& c,bool allowEntry){
     }
     for(const auto& receipt:c.receipts)need(receipt.sequence>0 && receipt.sequence<c.nextTransaction && receipts.insert(receipt.sequence).second && !receipt.command.empty(),"Invalid transaction receipt.");
     if(c.phase==CityPhase::Fight){
-        need(selectedRouteOffer(c.route)!=nullptr,"Active fight has no committed offer.");
+        need(active && !active->formation.empty() && (active->kind!=EncounterKind::Mystery || active->mystery=="C1-M-PATROL"),"Active fight has no committed combat offer.");
         need(c.preStart?c.entry.empty():!c.entry.empty(),"Missing or recursive fight-entry checkpoint.");
         need(c.fight.phase==Phase::Collection || c.fight.phase==Phase::Preparation,"Unreconciled terminal fight in campaign snapshot.");
+        if(!c.preStart)need(c.fight.seed==active->encounterSeed && c.fight.encounter==active->encounterKey,"Active fight changed its committed seed or encounter.");
     }else need(c.entry.empty() && !c.preStart,"Closed fight retained an active checkpoint.");
     if(!c.entry.empty()){
         need(allowEntry,"Nested fight checkpoints are not supported.");const auto entry=parse(c.entry,false);
         need(entry.preStart && entry.phase==CityPhase::Fight && entry.runId==c.runId && entry.seed==c.seed && entry.manifestHash==c.manifestHash,"Checkpoint does not belong to this campaign.");
         const auto* old=selectedRouteOffer(entry.route);const auto* current=selectedRouteOffer(c.route);
-        need(old && current && old->id==current->id && old->encounterSeed==current->encounterSeed,"Unfinished fight changed its entry identity.");
+        need(old && current && old->id==current->id && old->encounterSeed==current->encounterSeed && old->encounterKey==current->encounterKey &&
+             old->kind==current->kind && old->formation==current->formation && old->mystery==current->mystery && old->district==current->district &&
+             old->binderDefaultSeen==current->binderDefaultSeen,"Unfinished fight changed its entry identity.");
     }
 }
 Campaign parse(const std::string& bytes,bool allowEntry){
     need(bytes.size()>=20,"Truncated campaign envelope.");need(bytes.compare(0,8,"OFCAMP01")==0,"Unsupported campaign envelope.");
     const auto body=bytes.substr(0,bytes.size()-8);Reader tail{bytes,bytes.size()-8};std::uint64_t checksum=0;tail.number(checksum);need(checksum==hashBytes(body),"Campaign integrity check failed.");
-    Reader reader{body,8};std::uint32_t schema=0;reader.number(schema);need(schema==1,"Unsupported campaign schema.");Campaign c;visit(reader,c);
+    Reader reader{body,8};std::uint32_t schema=0;reader.number(schema);need(schema==2,"Unsupported campaign schema.");Campaign c;visit(reader,c);
     need(reader.at==body.size(),"Unexpected campaign fields.");validate(c,allowEntry);return c;
 }
 } // namespace
 std::string serializeCampaign(const Campaign& campaign){
-    validate(campaign,true);Campaign copy=campaign;Writer writer;writer.data="OFCAMP01";std::uint32_t schema=1;writer.number(schema);visit(writer,copy);
+    validate(campaign,true);Campaign copy=campaign;Writer writer;writer.data="OFCAMP01";std::uint32_t schema=2;writer.number(schema);visit(writer,copy);
     auto checksum=hashBytes(writer.data);writer.number(checksum);return writer.data;
 }
 bool deserializeCampaign(const std::string& bytes,Campaign& campaign,std::string& error){try{auto c=parse(bytes,true);campaign=std::move(c);return true;}catch(const std::exception& e){error=e.what();return false;}}
