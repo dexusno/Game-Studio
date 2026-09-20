@@ -1,0 +1,292 @@
+{
+  "version": "cinderwall-scenery-v002",
+  "large_artifacts": "ignored .local/overkill-foundry/art/scenery-v002",
+  "files": [
+    {
+      "path": "Cinderwall_Scenery_v002.blend",
+      "bytes": 7589019,
+      "sha256": "bc7978737d2991aa2b594b564ac86ca37cb265a60193a0d31c1baa26c293e81a",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "meshes/CinderwallSceneryV002.fbx",
+      "bytes": 4270140,
+      "sha256": "b40ed0b4f400186f97ae53f93c77429282d33c6891737198174309b887928cbe",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "renders/action-close-source.png",
+      "bytes": 2172534,
+      "sha256": "715e6169f71a9eb5e916fdccc4c6c575f6ab095fc561288f984f598f6f52a752",
+      "purpose": "source render only; not gameplay"
+    },
+    {
+      "path": "renders/action-source.png",
+      "bytes": 2163930,
+      "sha256": "b14f8cdd1ba1a4e07579a358c3457d8c8d04a7998684d15278fcf1616c1e308a",
+      "purpose": "source render only; not gameplay"
+    },
+    {
+      "path": "renders/preparation-source.png",
+      "bytes": 2078563,
+      "sha256": "63aeb47499bf13d15b1b0e2683d646bafe86303cf80f78057811ec9ea7493a15",
+      "purpose": "source render only; not gameplay"
+    },
+    {
+      "path": "textures/CW_ceramic_BaseColor.png",
+      "bytes": 106758,
+      "sha256": "450b2a11f89c863c528ad58f3aa132889ae0e2cdefc3bf9c6085983d191df750",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_ceramic_Normal.png",
+      "bytes": 91399,
+      "sha256": "befd5314245cc1f2b3e9ac84d405bcb0a7e47db5e7d5570ccc1146b4cc34e1c7",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_ceramic_ORM.png",
+      "bytes": 74825,
+      "sha256": "5398b4f7ced3a2e7136cfaca5ae4418f406e942de8693aaf33d175311130c172",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_copper_BaseColor.png",
+      "bytes": 115974,
+      "sha256": "f62d2e8721581361e264a334b4955ab12ad83f3ace7b046c367a1e5ae728519c",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_copper_Normal.png",
+      "bytes": 91368,
+      "sha256": "0a39b49a85db53e16daa099dcc4ba684be4c92d90db7939f2e6e3a3cf70262dc",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_copper_ORM.png",
+      "bytes": 60937,
+      "sha256": "a1b240cde74c7cd68031c3b54aa2d9348120aa49f927ea7783f595bb321a72dc",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_edge_BaseColor.png",
+      "bytes": 101594,
+      "sha256": "5a286350525b29bbbaaa2a0d5c9bfed6d6c7e1d854fd7e3bc12b584bc02d5e5e",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_edge_Normal.png",
+      "bytes": 91534,
+      "sha256": "8f86a0a2c3c11fee44484825e84f2e578df70505060987f3c5f4fda735f6d4cf",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_edge_ORM.png",
+      "bytes": 66847,
+      "sha256": "7fc0bda4b5d1a57f7a29e2b836ec9100cc22867173be880f1134f93a5c181ca2",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_iron_BaseColor.png",
+      "bytes": 103940,
+      "sha256": "b0605c49f53521b275128e51ed64c59171e7905be0f7525047e5737f1231f057",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_iron_Normal.png",
+      "bytes": 92216,
+      "sha256": "4733b8bb914ef59b08da7db446dd67f9723c6d31681ce00f69f5559b347e2431",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_iron_ORM.png",
+      "bytes": 69849,
+      "sha256": "4109a2a6b58c8547524d8821ca0962a8866c0a77cc82a97d32af03cfda63ac20",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_ochre_BaseColor.png",
+      "bytes": 118324,
+      "sha256": "1d60c3abf6c70518aeec3ef1de4ef0351eef3b060692da5299cb1421ccae5295",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_ochre_Normal.png",
+      "bytes": 91493,
+      "sha256": "0b531bc8d765be91c64eaa30bddc1a41214a1ffa0189a951ece8d50fe5791fad",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_ochre_ORM.png",
+      "bytes": 84290,
+      "sha256": "ed33099c1d1d6f2e6408eaa836c8711a35701cb2d2c5fe072e56b9133d5e7828",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_oxide_BaseColor.png",
+      "bytes": 114251,
+      "sha256": "113e44fc4b016782ef259ef7d22c0c2d7069fd59d1ac7bf20661234e736968f6",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_oxide_Normal.png",
+      "bytes": 91822,
+      "sha256": "63b8fcec986069d7ddf453806eac6d031a505dd2f6f5166510a2ec0c0335136b",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_oxide_ORM.png",
+      "bytes": 80972,
+      "sha256": "93ff59c1075d27299d4634f32b21ed1966707151a38082f3f4975773a3da146f",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_patina_BaseColor.png",
+      "bytes": 110767,
+      "sha256": "2d577c515c0023c8b820c37c44e47cbe67de1072aedb9cb9b2bd34ec65ac9e36",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_patina_Normal.png",
+      "bytes": 92601,
+      "sha256": "d10ddeaabb21dc106453475c511f74e12ed82b8e8e5af2e0dcf955683c6ece9a",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_patina_ORM.png",
+      "bytes": 84399,
+      "sha256": "a9ad1d9ee7dd441c5ee3419334889672e61a3e2057ab53a923c0e0eb02245e54",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_soot_BaseColor.png",
+      "bytes": 91355,
+      "sha256": "74ecafaa7ec15d349da843b8d5499c8ddff1405d61228f6edf2d4cbc6b97bb6c",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_soot_Normal.png",
+      "bytes": 91795,
+      "sha256": "eb0335e87feeb9a3621303ef3af4254710fcc1ce9fd9ea88778a90c46fea7e89",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_soot_ORM.png",
+      "bytes": 74114,
+      "sha256": "caaa59b13598025fe91c82b73642ddabf960a5b77b1c49aad6658f8f8ea4ffc8",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_stone_BaseColor.png",
+      "bytes": 97951,
+      "sha256": "5a6dd4e2525b7c145e821925c5a59b07a0003bf6d2fe30d18ae950ab8cfd8130",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_stone_Normal.png",
+      "bytes": 92726,
+      "sha256": "ab269784db44bfa0bdae6b83ab69ff90b118cdfe0ae6d51df0e32237125fb1de",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_stone_ORM.png",
+      "bytes": 74027,
+      "sha256": "efb2e28742dd467c8c6fe50a5e2f8b75bd471df3c90b736b183c9a0e7764dbf9",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_copper_BaseColor.png",
+      "bytes": 112836,
+      "sha256": "937c688193c43611edaa97733f50ae834a8f35034f46685dbb7f0ded485dce8a",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_copper_Normal.png",
+      "bytes": 91612,
+      "sha256": "484a957e9dfdb10a4c8198e6b71718f5e50e8c0785f0866ab20d36f83ae18993",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_copper_ORM.png",
+      "bytes": 77106,
+      "sha256": "aae07e5a7944e562fc62027dabf5d38eeced65bfd6a387794e786b395b5b7519",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_floor_BaseColor.png",
+      "bytes": 90273,
+      "sha256": "3e781eb7a05c8b8500a449d4b65864274c56918eb1b7ec42e343e515ee7397b7",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_floor_Normal.png",
+      "bytes": 91548,
+      "sha256": "0b839b26b779cf65320c15b4235d894113d61d7d34ad7f1649cb352df1450526",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_floor_ORM.png",
+      "bytes": 81446,
+      "sha256": "9f6808be2aeade123f27e48e676435a79009eda36a5e943b6823b7c1c98b5d2b",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_oxide_BaseColor.png",
+      "bytes": 111029,
+      "sha256": "817d8ff87c907eb826af30e364147656a5795efac8204716d780803a78543057",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_oxide_Normal.png",
+      "bytes": 91176,
+      "sha256": "b6742d92c98308e70716524eb2ed729e0eeda29fe31cb59d5b5bf247f789007a",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_oxide_ORM.png",
+      "bytes": 81115,
+      "sha256": "75250a7c408a2eb7ab03ccb6c041cb8df7feac2d44fcc558d4b79c6230f2de34",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_slate_BaseColor.png",
+      "bytes": 101446,
+      "sha256": "9d79689ab3edfcd5e3bbd9003348853a1adedbb6d2abdde33c5017c55f0ac694",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_slate_Normal.png",
+      "bytes": 91769,
+      "sha256": "fe76faaae61e505d688cd099438928e30c6c7c8ea12146d69291ce795a806f10",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_slate_ORM.png",
+      "bytes": 80002,
+      "sha256": "a3fb6d60101d8365b29aef24741c064c7852d6ebb9d499cacf8b08bbc2424c72",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_stone_BaseColor.png",
+      "bytes": 106824,
+      "sha256": "d1759b11499c05ad56d89661b3747ae7a12d968147cfd20cfbbb75376f6d2cc7",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_stone_Normal.png",
+      "bytes": 92038,
+      "sha256": "441b26a66856992c34c1ca73a8a8a02ca31d1196dc1a39cbd6554135b851854a",
+      "purpose": "original reproducible source product"
+    },
+    {
+      "path": "textures/CW_v2_stone_ORM.png",
+      "bytes": 81193,
+      "sha256": "188de0bb515b790b478cdfe63b6bf325117b5e87576ad8e4ab8a7ae84db6f8fb",
+      "purpose": "original reproducible source product"
+    }
+  ],
+  "source_sha256": "2193e9787022d175b5e96d352ae30c36803443dd01b1a0ef547e02c1a4dd8c5f",
+  "helper_sha256": "a308805fecb51f5ae9dd67c2de701984406a6534b202f40311a0cb3f4575ab44",
+  "rights": "Original Game Studio / Codex Blender geometry and materials. Existing original Cinderwall/Mara heroes appear only in source reviews. No external art; studio distribution licence unset.",
+  "limits": "No Unreal quality or performance claim. Klaus's human visual approval remains required."
+}

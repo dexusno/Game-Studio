@@ -1,0 +1,15 @@
+{
+  "verified_on": "2026-09-20",
+  "platform": "Windows x64 / MSVC19.44.35228 / SDK10.0.26100.0",
+  "target": "foundry_precision_tests Release",
+  "version": "precision-ui-0.1",
+  "assertions": 46,
+  "ctest": "1/1 passed",
+  "scope": "Presentation timer and result categories only; graphical input and human feel not yet tested",
+  "source_sha256": {
+    "presentation/precision.hpp": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b",
+    "unreal/Tools/precision-tests/tests.cpp": "04d12ad4891e8bfcbf1227171380c82d0d5f0444176c1dc71c11b0dd60f0967a",
+    "unreal/Tools/precision-tests/CMakeLists.txt": "bd54bcf48b603356fda77f7a8ba0f562ab0f7cd4e7cde3babcb6ca20c90235b5"
+  },
+  "executable_sha256": "10cbe71a16f5d6c710530cbc26cdfa3f3645aef9eefdc90f46304f6590c3a058"
+}

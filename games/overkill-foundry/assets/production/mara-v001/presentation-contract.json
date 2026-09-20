@@ -1,0 +1,56 @@
+{
+  "schema": "overkill-mara-presentation-1",
+  "art_version": "mara-art-v001",
+  "source": "art-source/mara_v001_build.py",
+  "authority": "Committed core events only. No animation callback grants materials, changes loaded parts, fires, targets or advances turns.",
+  "coordinates": {
+    "source_units": "metres",
+    "source_up": "+Z",
+    "gun_forward": "+X",
+    "unreal_conversion": "(x,-y,z)*100",
+    "gun_actor_cm": [-350, 0, 1.5],
+    "claw_actor_cm": [-675, -100, 0],
+    "normals": "Original Cinderwall OpenGL +Y, linear, flip green in Unreal, strength 0.35",
+    "attachments": "FBX sockets retain armature unit scale; already-centimetre static payloads use absolute world scale 1."
+  },
+  "gun": {
+    "mesh": "/Game/Cinderwall/Mara/Props/SK_MaraGun",
+    "source_bones": 12,
+    "unreal_bones": 13,
+    "sockets": ["muzzle", "load", "eject", "shield_attach", "operator_attach"],
+    "events": {
+      "loaded": {"clip": "MG_load", "duration_s": 0.70, "seat_cue_s": 0.38},
+      "unload": {"clip": "MG_unload", "duration_s": 0.60, "condition": "Presentation was loaded; empty End Turn unload emits no false motion."},
+      "fire": {"clip": "MG_fire", "duration_s": 0.333333, "flash_s": 0.13, "then": "MG_recovery"},
+      "recovery": {"clip": "MG_recovery", "duration_s": 0.466667, "then": "MG_idle"}
+    },
+    "interruptions": "New legal actions replace short gun cosmetics without accumulating a queue. Claw playback remains independent.",
+    "idle_limit": "UE compression removes the source gun idle's sub-centimetre valve drift. Action clips must retain measured motion."
+  },
+  "claw": {
+    "mesh": "/Game/Cinderwall/Mara/Props/SK_MaraClaw",
+    "source_bones": 9,
+    "unreal_bones": 10,
+    "sockets": ["grab", "dump"],
+    "event": "collected",
+    "clip": "MC_collect",
+    "duration_s": 1.4,
+    "cues": [
+      {"t": 0.30, "name": "lower_over_rear_scrap"},
+      {"t": 0.43, "name": "close_fingers_show_cosmetic_payload"},
+      {"t": 0.76, "name": "retract_and_traverse_to_rear_hopper"},
+      {"t": 1.06, "name": "open_fingers_begin_0.18s_cosmetic_drop"},
+      {"t": 1.24, "name": "hide_payload_inside_hopper"},
+      {"t": 1.40, "name": "return_idle_all_payloads_clear"}
+    ],
+    "resource_accounting": "The exact haul is already committed. The scrap cluster is cosmetic, not a material count or second haul."
+  },
+  "stage": {
+    "tag": "MaraGenerated",
+    "placed_modules": 10,
+    "payload_modules": 1,
+    "scope": "Dimensional apron, two side halls, six distant foundry masses/stacks/windows and rear hopper. Hide the earlier static claw when this rig is active."
+  },
+  "restart": "Return both rigs to idle; clear loaded presentation, payload/drop state and all shot effects.",
+  "quality": "Early original hero implementation. Source/import success is not F.I.S.T.-level finish, human playtesting or owner approval."
+}

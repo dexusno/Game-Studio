@@ -1,0 +1,761 @@
+{
+  "format": "scenery-v002-interchange-v1",
+  "blender": "5.2.1 LTS",
+  "checks": [
+    {
+      "id": "complete-scenery-only-inventory",
+      "passed": true,
+      "detail": [
+        "SM_SV2_back_rail",
+        "SM_SV2_channel",
+        "SM_SV2_combat_deck",
+        "SM_SV2_distant_crane",
+        "SM_SV2_factory_00",
+        "SM_SV2_factory_01",
+        "SM_SV2_factory_02",
+        "SM_SV2_factory_03",
+        "SM_SV2_factory_04",
+        "SM_SV2_factory_05",
+        "SM_SV2_factory_06",
+        "SM_SV2_factory_07",
+        "SM_SV2_factory_08",
+        "SM_SV2_factory_09",
+        "SM_SV2_high_service_bridge",
+        "SM_SV2_left_smelter",
+        "SM_SV2_outer_apron",
+        "SM_SV2_rear_crane_support",
+        "SM_SV2_right_accumulator"
+      ]
+    },
+    {
+      "id": "no-review-heroes-cameras-or-lights-exported",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_combat_deck:metre-bounds",
+      "passed": true,
+      "detail": [
+        23.0,
+        7.5,
+        1.28000009059906
+      ]
+    },
+    {
+      "id": "SM_SV2_combat_deck:pivot-placement",
+      "passed": true,
+      "detail": [
+        0.0,
+        0.04999995231628418,
+        -1.1600000858306885
+      ]
+    },
+    {
+      "id": "SM_SV2_combat_deck:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_combat_deck:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_combat_deck:geometry-retained",
+      "passed": true,
+      "detail": 46512
+    },
+    {
+      "id": "SM_SV2_channel:metre-bounds",
+      "passed": true,
+      "detail": [
+        38.0,
+        10.050000190734863,
+        3.6500000953674316
+      ]
+    },
+    {
+      "id": "SM_SV2_channel:pivot-placement",
+      "passed": true,
+      "detail": [
+        0.0,
+        8.024999618530273,
+        -2.200000047683716
+      ]
+    },
+    {
+      "id": "SM_SV2_channel:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_channel:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_channel:geometry-retained",
+      "passed": true,
+      "detail": 8348
+    },
+    {
+      "id": "SM_SV2_channel:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_back_rail:metre-bounds",
+      "passed": true,
+      "detail": [
+        21.66086769104004,
+        0.060744285583496094,
+        0.6483725905418396
+      ]
+    },
+    {
+      "id": "SM_SV2_back_rail:pivot-placement",
+      "passed": true,
+      "detail": [
+        0.0,
+        3.700000047683716,
+        0.04000002145767212
+      ]
+    },
+    {
+      "id": "SM_SV2_back_rail:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_back_rail:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_back_rail:geometry-retained",
+      "passed": true,
+      "detail": 9520
+    },
+    {
+      "id": "SM_SV2_back_rail:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_left_smelter:metre-bounds",
+      "passed": true,
+      "detail": [
+        7.500000476837158,
+        5.0,
+        11.124499320983887
+      ]
+    },
+    {
+      "id": "SM_SV2_left_smelter:pivot-placement",
+      "passed": true,
+      "detail": [
+        -7.850000381469727,
+        12.0,
+        -0.699999988079071
+      ]
+    },
+    {
+      "id": "SM_SV2_left_smelter:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_left_smelter:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_left_smelter:geometry-retained",
+      "passed": true,
+      "detail": 11776
+    },
+    {
+      "id": "SM_SV2_left_smelter:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_right_accumulator:metre-bounds",
+      "passed": true,
+      "detail": [
+        5.025000095367432,
+        3.2499990463256836,
+        6.923600196838379
+      ]
+    },
+    {
+      "id": "SM_SV2_right_accumulator:pivot-placement",
+      "passed": true,
+      "detail": [
+        10.1875,
+        11.600000381469727,
+        0.0
+      ]
+    },
+    {
+      "id": "SM_SV2_right_accumulator:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_right_accumulator:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_right_accumulator:geometry-retained",
+      "passed": true,
+      "detail": 7608
+    },
+    {
+      "id": "SM_SV2_right_accumulator:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:metre-bounds",
+      "passed": true,
+      "detail": [
+        4.699999809265137,
+        2.7799999713897705,
+        6.699999809265137
+      ]
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:pivot-placement",
+      "passed": true,
+      "detail": [
+        -7.849999904632568,
+        2.0999999046325684,
+        0.0
+      ]
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:geometry-retained",
+      "passed": true,
+      "detail": 1880
+    },
+    {
+      "id": "SM_SV2_rear_crane_support:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_00:metre-bounds",
+      "passed": true,
+      "detail": [
+        8.5,
+        7.590000152587891,
+        15.624500274658203
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_00:pivot-placement",
+      "passed": true,
+      "detail": [
+        -16.0,
+        20.954999923706055,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_00:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_00:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_00:geometry-retained",
+      "passed": true,
+      "detail": 12272
+    },
+    {
+      "id": "SM_SV2_factory_00:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_01:metre-bounds",
+      "passed": true,
+      "detail": [
+        9.5,
+        7.590000152587891,
+        15.32450008392334
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_01:pivot-placement",
+      "passed": true,
+      "detail": [
+        -0.8000000715255737,
+        20.954999923706055,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_01:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_01:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_01:geometry-retained",
+      "passed": true,
+      "detail": 12340
+    },
+    {
+      "id": "SM_SV2_factory_01:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_02:metre-bounds",
+      "passed": true,
+      "detail": [
+        6.5,
+        8.59000015258789,
+        20.024499893188477
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_02:pivot-placement",
+      "passed": true,
+      "detail": [
+        11.0,
+        23.954999923706055,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_02:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_02:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_02:geometry-retained",
+      "passed": true,
+      "detail": 10204
+    },
+    {
+      "id": "SM_SV2_factory_02:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_03:metre-bounds",
+      "passed": true,
+      "detail": [
+        7.5,
+        8.59000015258789,
+        18.624500274658203
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_03:pivot-placement",
+      "passed": true,
+      "detail": [
+        -7.0,
+        33.95500183105469,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_03:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_03:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_03:geometry-retained",
+      "passed": true,
+      "detail": 10648
+    },
+    {
+      "id": "SM_SV2_factory_03:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_04:metre-bounds",
+      "passed": true,
+      "detail": [
+        9.5,
+        9.59000015258789,
+        22.824501037597656
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_04:pivot-placement",
+      "passed": true,
+      "detail": [
+        5.0,
+        38.95500183105469,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_04:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_04:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_04:geometry-retained",
+      "passed": true,
+      "detail": 13964
+    },
+    {
+      "id": "SM_SV2_factory_04:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_05:metre-bounds",
+      "passed": true,
+      "detail": [
+        9.5,
+        8.59000015258789,
+        22.024499893188477
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_05:pivot-placement",
+      "passed": true,
+      "detail": [
+        21.0,
+        32.95500183105469,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_05:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_05:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_05:geometry-retained",
+      "passed": true,
+      "detail": 12340
+    },
+    {
+      "id": "SM_SV2_factory_05:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_06:metre-bounds",
+      "passed": true,
+      "detail": [
+        11.5,
+        9.59000015258789,
+        23.624500274658203
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_06:pivot-placement",
+      "passed": true,
+      "detail": [
+        -24.0,
+        37.95500183105469,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_06:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_06:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_06:geometry-retained",
+      "passed": true,
+      "detail": 16032
+    },
+    {
+      "id": "SM_SV2_factory_06:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_07:metre-bounds",
+      "passed": true,
+      "detail": [
+        9.5,
+        11.59000015258789,
+        18.824501037597656
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_07:pivot-placement",
+      "passed": true,
+      "detail": [
+        29.0,
+        17.954999923706055,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_07:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_07:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_07:geometry-retained",
+      "passed": true,
+      "detail": 12340
+    },
+    {
+      "id": "SM_SV2_factory_07:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_08:metre-bounds",
+      "passed": true,
+      "detail": [
+        8.5,
+        13.59000015258789,
+        19.024499893188477
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_08:pivot-placement",
+      "passed": true,
+      "detail": [
+        39.0,
+        7.954999923706055,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_08:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_08:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_08:geometry-retained",
+      "passed": true,
+      "detail": 12272
+    },
+    {
+      "id": "SM_SV2_factory_08:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_factory_09:metre-bounds",
+      "passed": true,
+      "detail": [
+        11.5,
+        14.59000015258789,
+        22.624500274658203
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_09:pivot-placement",
+      "passed": true,
+      "detail": [
+        47.0,
+        -4.045000076293945,
+        -2.5
+      ]
+    },
+    {
+      "id": "SM_SV2_factory_09:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_09:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_factory_09:geometry-retained",
+      "passed": true,
+      "detail": 14408
+    },
+    {
+      "id": "SM_SV2_factory_09:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:metre-bounds",
+      "passed": true,
+      "detail": [
+        10.340433120727539,
+        1.350372314453125,
+        6.378372669219971
+      ]
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:pivot-placement",
+      "passed": true,
+      "detail": [
+        4.739782810211182,
+        18.164813995361328,
+        -0.3000001907348633
+      ]
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:geometry-retained",
+      "passed": true,
+      "detail": 6364
+    },
+    {
+      "id": "SM_SV2_high_service_bridge:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_distant_crane:metre-bounds",
+      "passed": true,
+      "detail": [
+        14.043957710266113,
+        2.440000534057617,
+        17.0219783782959
+      ]
+    },
+    {
+      "id": "SM_SV2_distant_crane:pivot-placement",
+      "passed": true,
+      "detail": [
+        14.0,
+        32.099998474121094,
+        0.0
+      ]
+    },
+    {
+      "id": "SM_SV2_distant_crane:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_distant_crane:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_distant_crane:geometry-retained",
+      "passed": true,
+      "detail": 4772
+    },
+    {
+      "id": "SM_SV2_distant_crane:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "id": "SM_SV2_outer_apron:metre-bounds",
+      "passed": true,
+      "detail": [
+        160.0,
+        140.0,
+        1.0
+      ]
+    },
+    {
+      "id": "SM_SV2_outer_apron:pivot-placement",
+      "passed": true,
+      "detail": [
+        20.0,
+        30.0,
+        -3.0
+      ]
+    },
+    {
+      "id": "SM_SV2_outer_apron:finite-uvs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_outer_apron:material-slots",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "id": "SM_SV2_outer_apron:geometry-retained",
+      "passed": true,
+      "detail": 188
+    },
+    {
+      "id": "SM_SV2_outer_apron:open-firing-volume",
+      "passed": true,
+      "detail": 0
+    }
+  ],
+  "fbx_sha256": "b40ed0b4f400186f97ae53f93c77429282d33c6891737198174309b887928cbe",
+  "source_report_sha256": "4c2d02f6f3db7aa72debf10b959cfdffaeb62914fd4fdc400c2511b092593e51",
+  "failures": [],
+  "limits": [
+    "No Unreal import or material/culling verification in this check.",
+    "Actual 16B/16C camera and multi-enemy readability require rendered gameplay.",
+    "No human visual approval or runtime performance claim."
+  ]
+}

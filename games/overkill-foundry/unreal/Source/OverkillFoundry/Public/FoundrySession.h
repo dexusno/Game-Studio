@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "overkill/core.hpp"
+#include <functional>
 
 // Presentation selection and a read model around the one authoritative rules core.
 // UI selection is reversible; only Rules::apply changes combat state.
@@ -23,6 +24,9 @@ public:
     FString LastAction;
     // Consumed once by the cosmetic adapter; previews never append here.
     std::vector<overkill::Event> CommittedEvents;
+    // The campaign host commits through CampaignSession; the isolated teaching
+    // probe retains its direct Rules path.
+    std::function<bool(const overkill::Action&, const FString&)> CampaignSubmit;
 
     void Restart();
     bool Submit(const overkill::Action& Action, const FString& Description);

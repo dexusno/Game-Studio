@@ -100,6 +100,8 @@ bool AFoundryRobot::AreMaterialsSolid() const
     return Materials.Num() == (bRam ? 8 : 7);
 }
 
+FVector AFoundryRobot::GetImpactLocation() const { return Body->GetSocketLocation(TEXT("core")); }
+
 void AFoundryRobot::Play(const FString& Clip, uint64 EventId)
 {
     UAnimSequence* Sequence = Clips.FindChecked(Clip);

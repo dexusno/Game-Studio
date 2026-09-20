@@ -6,6 +6,12 @@
 
 ## Current owner preference
 
+### Shooting composition reminder — 20 September 2026
+
+Klaus explicitly reaffirms that the shooting scene must show the enemies in a way that makes sense, as in image 16. Inspect the settled 16C action view, with Mara/gun in the foreground and the opposing machines clearly ahead of the barrel, naturally separated in depth. The player must understand the firing direction and distinguish the target from its companions. Check multiple enemies, large/small bodies and the camera transition; an early side-on frame does not prove this composition. This is a presentation requirement, not a new distance, formation or targeting rule. Preserve the selected rear gathering area.
+
+**Camera trigger, confirmed immediately afterward:** change from16B to16C on **Lock and load**, before Fire. Keep the loaded shooting view interactive for target selection, Fire and Unload. Follow the [camera flow](COMBAT-CAMERA-FLOW.md): a completed shot returns to preparation; End Turn alone starts enemy actions. Do not wait until the muzzle effect is already playing to start the shot camera transition.
+
 ### Required visual quality and enemy animation — 20 September 2026
 
 **Owner requirement:** the MVP must deliver **visually stunning graphics and their actual implementation**. Merely serviceable or generically coherent visuals do not satisfy this bar. Judge the integrated game in motion: models, materials, lighting, composition, effects, animation, cameras and interface must work together. The owner approves the result through human play and visual review. Concept art, source renders and a technically successful import are intermediate evidence, not visual acceptance.

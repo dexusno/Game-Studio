@@ -1,0 +1,6 @@
+#if FOUNDRY_WITH_CAMPAIGN
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include FOUNDRY_PLATFORM_WINDOWS_SAVE_STORE
+#endif

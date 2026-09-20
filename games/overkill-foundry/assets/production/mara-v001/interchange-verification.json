@@ -1,0 +1,208 @@
+{
+  "format": "mara-interchange-v1",
+  "blender": "5.2.1 LTS",
+  "checks": [
+    {
+      "name": "MaraGun one skeleton and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraGun exact skeleton",
+      "ok": true,
+      "actual": 12
+    },
+    {
+      "name": "MaraGun attachment bones retained",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraGun rigid weights",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraGun UVs retained",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraGun metre scale",
+      "ok": true,
+      "actual": [
+        3.2699999809265137,
+        1.6650002002716064,
+        2.2120001316070557
+      ]
+    },
+    {
+      "name": "gun muzzle forward +X",
+      "ok": true,
+      "actual": [
+        1.8499999046325684,
+        0.0,
+        1.4800000190734863
+      ]
+    },
+    {
+      "name": "MG_idle sampled motion",
+      "ok": true,
+      "actual": 0.007898092323875871
+    },
+    {
+      "name": "MG_idle duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MG_load sampled motion",
+      "ok": true,
+      "actual": 0.25999999408538516
+    },
+    {
+      "name": "MG_load duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MG_unload sampled motion",
+      "ok": true,
+      "actual": 0.25000005960463767
+    },
+    {
+      "name": "MG_unload duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MG_fire sampled motion",
+      "ok": true,
+      "actual": 0.26320977514261185
+    },
+    {
+      "name": "MG_fire duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "gun recoil moves muzzle rearward",
+      "ok": true,
+      "actual": 1.603361964225769
+    },
+    {
+      "name": "MG_recovery sampled motion",
+      "ok": true,
+      "actual": 0.10181277300068933
+    },
+    {
+      "name": "MG_recovery duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraClaw one skeleton and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraClaw exact skeleton",
+      "ok": true,
+      "actual": 9
+    },
+    {
+      "name": "MaraClaw attachment bones retained",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraClaw rigid weights",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraClaw UVs retained",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MaraClaw metre scale",
+      "ok": true,
+      "actual": [
+        1.2486095428466797,
+        1.2179715633392334,
+        3.575000286102295
+      ]
+    },
+    {
+      "name": "MC_idle sampled motion",
+      "ok": true,
+      "actual": 0.01004653116109016
+    },
+    {
+      "name": "MC_idle duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MC_collect sampled motion",
+      "ok": true,
+      "actual": 1.5585600817766716
+    },
+    {
+      "name": "MC_collect duration",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "claw deploy reaches rear scrap",
+      "ok": true,
+      "actual": [
+        0.0,
+        -2.7370671773496724e-07,
+        1.6799997091293335
+      ]
+    },
+    {
+      "name": "claw cable extension imported",
+      "ok": true,
+      "actual": [
+        1.0,
+        1.7547169923782349,
+        1.0
+      ]
+    },
+    {
+      "name": "depth and payload modules retained",
+      "ok": true,
+      "actual": 11
+    },
+    {
+      "name": "depth modules UVs",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "separate cosmetic scrap payload",
+      "ok": true,
+      "actual": null
+    }
+  ],
+  "failures": [],
+  "files": {
+    "meshes\\MaraGun.fbx": "63aba040149c0253370bd8548c1cf4d7a8655efa182617d33b7d0343bc3d396d",
+    "animations\\MG_idle.fbx": "01a9dd7f6f5cabc28560c97e64753ebebf448abe2de4e4a32f9bb296cc3dbdb2",
+    "animations\\MG_load.fbx": "f7631abd49c4a0344e1524dbdaa0a2b27017f1e5d89cb453bb2326c116db4908",
+    "animations\\MG_unload.fbx": "c86b68cb6dfc290c020c49f68989694392a6633c0f720b9e454c2619960a68f7",
+    "animations\\MG_fire.fbx": "cbc5442bcdfd3843f9da7d727026827772fe453628f62e0e9244ac515d6bdca9",
+    "animations\\MG_recovery.fbx": "d70b34bb85a493b4340b44381de372db2a9215d65ebcf4d2096e7efa3598932e",
+    "meshes\\MaraClaw.fbx": "2f2a7ca7dae397a65716c61dfa606a18cbf49bfa8101dd79dcce248977761b92",
+    "animations\\MC_idle.fbx": "93ff78f4f886ab768ac41f283c9ba625638f2fcf65604820fa93d5b4602ca51a",
+    "animations\\MC_collect.fbx": "8f4ad38ca950f783fa81073660bdb127cd49f242dfe6257312bc096b62d9760b",
+    "meshes\\MaraStageExtension.fbx": "548ac7fbc1b97030dd796401025a5e9f2840607d2ea10f44c480730fc7d4f7c9"
+  },
+  "limitations": [
+    "Source interchange evidence only; actual Unreal event playback and framing require rendered checks.",
+    "No character model, LOD/performance approval, audio or owner approval is established."
+  ]
+}

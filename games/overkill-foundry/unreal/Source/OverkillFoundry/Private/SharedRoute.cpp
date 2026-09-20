@@ -1,0 +1,3 @@
+#if FOUNDRY_WITH_CAMPAIGN
+#include FOUNDRY_CORE_ROUTE
+#endif

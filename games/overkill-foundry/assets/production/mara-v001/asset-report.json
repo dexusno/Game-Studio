@@ -1,0 +1,484 @@
+{
+  "version": "mara-art-v001",
+  "blender": "5.2.1 LTS",
+  "units": "metres",
+  "fps": 30,
+  "props": {
+    "MaraGun": {
+      "vertices": 25624,
+      "triangles": 50744,
+      "bones": 12,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_soot",
+        "M_CW_oxide",
+        "M_CW_copper",
+        "M_CW_furnace",
+        "M_CW_ochre",
+        "M_CW_ceramic"
+      ],
+      "rest_bounds_m": [
+        3.2699999809265137,
+        1.6649999618530273,
+        2.2120001316070557
+      ],
+      "bone_definitions": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "cradle",
+          "pivot": [
+            -0.3,
+            0,
+            0.96
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "recoil",
+          "pivot": [
+            -0.18,
+            0,
+            1.46
+          ],
+          "parent": "cradle"
+        },
+        {
+          "name": "breech",
+          "pivot": [
+            -0.53,
+            0,
+            1.78
+          ],
+          "parent": "recoil"
+        },
+        {
+          "name": "feed",
+          "pivot": [
+            -0.92,
+            0,
+            1.39
+          ],
+          "parent": "cradle"
+        },
+        {
+          "name": "vent",
+          "pivot": [
+            -0.54,
+            0,
+            2.01
+          ],
+          "parent": "recoil"
+        },
+        {
+          "name": "wheel",
+          "pivot": [
+            -0.37,
+            -0.63,
+            0.96
+          ],
+          "parent": "cradle"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            1.85,
+            0,
+            1.48
+          ],
+          "parent": "recoil"
+        },
+        {
+          "name": "load",
+          "pivot": [
+            -0.97,
+            0,
+            1.42
+          ],
+          "parent": "feed"
+        },
+        {
+          "name": "eject",
+          "pivot": [
+            -0.62,
+            0.51,
+            1.5
+          ],
+          "parent": "recoil"
+        },
+        {
+          "name": "shield_attach",
+          "pivot": [
+            0.08,
+            -0.68,
+            0.62
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "operator_attach",
+          "pivot": [
+            -1.32,
+            -0.23,
+            0.02
+          ],
+          "parent": "root"
+        }
+      ],
+      "rigid_weights": true
+    },
+    "MaraClaw": {
+      "vertices": 5324,
+      "triangles": 10524,
+      "bones": 9,
+      "materials": [
+        "M_CW_oxide",
+        "M_CW_soot",
+        "M_CW_edge",
+        "M_CW_iron",
+        "M_CW_ochre",
+        "M_CW_copper"
+      ],
+      "rest_bounds_m": [
+        1.2486095428466797,
+        1.2179715633392334,
+        3.575000047683716
+      ],
+      "bone_definitions": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            0,
+            0
+          ],
+          "parent": null
+        },
+        {
+          "name": "trolley",
+          "pivot": [
+            0,
+            0,
+            5.73
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "cables",
+          "pivot": [
+            0,
+            0,
+            5.54
+          ],
+          "parent": "trolley"
+        },
+        {
+          "name": "head",
+          "pivot": [
+            0,
+            0,
+            3.28
+          ],
+          "parent": "trolley"
+        },
+        {
+          "name": "grab",
+          "pivot": [
+            0,
+            0,
+            2.82
+          ],
+          "parent": "head"
+        },
+        {
+          "name": "dump",
+          "pivot": [
+            0.9,
+            0,
+            1.55
+          ],
+          "parent": "root"
+        },
+        {
+          "name": "finger_0",
+          "pivot": [
+            0.18,
+            0.0,
+            3.2
+          ],
+          "parent": "head"
+        },
+        {
+          "name": "finger_1",
+          "pivot": [
+            -0.08999999999999996,
+            0.15588457268119896,
+            3.2
+          ],
+          "parent": "head"
+        },
+        {
+          "name": "finger_2",
+          "pivot": [
+            -0.09000000000000008,
+            -0.15588457268119893,
+            3.2
+          ],
+          "parent": "head"
+        }
+      ],
+      "rigid_weights": true
+    }
+  },
+  "clips": {
+    "MG_idle": {
+      "robot": "SK_MaraGun",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "MG_load": {
+      "robot": "SK_MaraGun",
+      "duration_s": 0.7,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.38,
+          "event": "cosmetic_breech_seat"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "MG_unload": {
+      "robot": "SK_MaraGun",
+      "duration_s": 0.6,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "MG_fire": {
+      "robot": "SK_MaraGun",
+      "duration_s": 0.34,
+      "loop": false,
+      "events": [
+        {
+          "t": 0,
+          "event": "committed_shot_flash"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "MG_recovery": {
+      "robot": "SK_MaraGun",
+      "duration_s": 0.48,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "MC_idle": {
+      "robot": "SK_MaraClaw",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "MC_collect": {
+      "robot": "SK_MaraClaw",
+      "duration_s": 1.4,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.43,
+          "event": "grab_cosmetic_scrap"
+        },
+        {
+          "t": 1.06,
+          "event": "dump_cosmetic_scrap"
+        }
+      ],
+      "gameplay_authority": false
+    }
+  },
+  "palette_dependency": "cinderwall-art-v001 original PBR surfaces",
+  "stage": {
+    "instances": [
+      {
+        "name": "SM_Mara_depth_apron",
+        "position_m": [
+          0.0,
+          5.0,
+          -0.9650000333786011
+        ],
+        "triangles": 188,
+        "bounds_m": [
+          65.0,
+          60.0,
+          0.4500000476837158
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_sidehall_-14",
+        "position_m": [
+          -13.962499618530273,
+          8.0,
+          0.0
+        ],
+        "triangles": 1128,
+        "bounds_m": [
+          5.875,
+          16.400001525878906,
+          6.389999866485596
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_sidehall_14",
+        "position_m": [
+          13.962499618530273,
+          8.0,
+          0.0
+        ],
+        "triangles": 1128,
+        "bounds_m": [
+          5.875,
+          16.400001525878906,
+          6.389999866485596
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_0",
+        "position_m": [
+          -11.0,
+          20.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          7.5,
+          7.5,
+          16.44499969482422
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_1",
+        "position_m": [
+          -3.0,
+          23.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          6.5,
+          7.5,
+          19.44499969482422
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_2",
+        "position_m": [
+          4.0,
+          20.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          6.5,
+          7.5,
+          14.444999694824219
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_3",
+        "position_m": [
+          11.0,
+          23.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          7.5,
+          7.5,
+          21.44499969482422
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_4",
+        "position_m": [
+          20.0,
+          29.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          9.5,
+          7.5,
+          17.44499969482422
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_foundry_5",
+        "position_m": [
+          -23.0,
+          31.0,
+          0.0
+        ],
+        "triangles": 4396,
+        "bounds_m": [
+          9.5,
+          7.5,
+          21.44499969482422
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_depth_hopper",
+        "position_m": [
+          -5.78125,
+          0.9999999403953552,
+          0.40000003576278687
+        ],
+        "triangles": 1128,
+        "bounds_m": [
+          1.2074999809265137,
+          0.9499999284744263,
+          1.3999998569488525
+        ],
+        "spawn": true
+      },
+      {
+        "name": "SM_Mara_payload",
+        "position_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "triangles": 1520,
+        "bounds_m": [
+          0.5676860213279724,
+          0.5078936815261841,
+          0.42799997329711914
+        ],
+        "spawn": false
+      }
+    ]
+  },
+  "provenance": "Original Game Studio / Codex geometry, rig and keyframes; no external models, textures or image generations.",
+  "forward": "+X gun; Unreal conversion (x,-y,z)*100",
+  "normal_convention": "OpenGL +Y; flip green on UE import"
+}

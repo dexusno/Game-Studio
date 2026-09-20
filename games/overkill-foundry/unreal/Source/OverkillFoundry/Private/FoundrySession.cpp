@@ -45,6 +45,7 @@ void FFoundrySession::FixSelection()
 
 bool FFoundrySession::Submit(const overkill::Action& Action, const FString& Description)
 {
+    if (CampaignSubmit) return CampaignSubmit(Action, Description);
     const overkill::Result Result = Rules.apply(State, Action);
     LastAction = Description;
     if (!Result.ok)

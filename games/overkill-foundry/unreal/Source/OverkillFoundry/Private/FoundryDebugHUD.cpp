@@ -1,8 +1,11 @@
 #include "FoundryHost.h"
 #include "FoundrySession.h"
+#include "FoundryCampaignUI.h"
 
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
+#include "Engine/GameViewportClient.h"
+#include "Widgets/SWidget.h"
 #include "EngineUtils.h"
 #include <algorithm>
 
@@ -75,6 +78,17 @@ void AFoundryHUD::DrawHUD()
     Super::DrawHUD();
     AFoundryStage* Stage = StageIn(GetWorld());
     if (!Canvas || !GEngine || !Stage) return;
+#if FOUNDRY_WITH_CAMPAIGN
+    if (!Stage->IsTechnicalMode())
+    {
+        if (!CampaignWidget.IsValid() && GEngine->GameViewport)
+        {
+            CampaignWidget = MakeFoundryCampaignUI(Stage);
+            GEngine->GameViewport->AddViewportWidgetContent(CampaignWidget.ToSharedRef(), 10);
+        }
+        return;
+    }
+#endif
     FFoundrySession& Session = Stage->GetSession();
     const auto& State = Session.State;
     const float Scale = FMath::Min(Canvas->SizeX / 1600.0f, Canvas->SizeY / 900.0f);
@@ -215,3 +229,9 @@ void AFoundryHUD::NotifyHitBoxClick(FName BoxName)
 }
 void AFoundryHUD::NotifyHitBoxBeginCursorOver(FName BoxName) { HoverCommand = BoxName.ToString(); }
 void AFoundryHUD::NotifyHitBoxEndCursorOver(FName BoxName) { if (HoverCommand == BoxName.ToString()) HoverCommand.Empty(); }
+void AFoundryHUD::EndPlay(const EEndPlayReason::Type Reason)
+{
+    if(CampaignWidget.IsValid() && GEngine && GEngine->GameViewport) GEngine->GameViewport->RemoveViewportWidgetContent(CampaignWidget.ToSharedRef());
+    CampaignWidget.Reset();
+    Super::EndPlay(Reason);
+}

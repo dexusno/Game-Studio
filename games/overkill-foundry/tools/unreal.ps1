@@ -1,10 +1,13 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'ArtProbe', 'Run', 'Smoke', 'Fixture', 'Package')]
+    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
     [string]$Action = 'Build',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development',
     [string]$ArchiveDirectory = '',
+    [string]$CoreRoot = '',
+    [string]$SavePath = '',
+    [switch]$InspectSave,
     [int]$Width = 1600,
     [int]$Height = 900
 )
@@ -32,13 +35,30 @@ function Invoke-FoundryProcess([string]$Executable, [string[]]$Arguments) {
     if ($taskProc.ExitCode -ne 0) { throw "$Action failed with exit code $($taskProc.ExitCode). Inspect $taskLog" }
 }
 
+$taskPreviousCoreRoot = $env:FOUNDRY_CORE_ROOT
+try {
+if ($CoreRoot) {
+    $taskCoreRoot = [IO.Path]::GetFullPath($CoreRoot)
+    if (-not (Test-Path -LiteralPath (Join-Path $taskCoreRoot 'include/overkill/core.hpp'))) { throw 'CoreRoot must name an existing local core source snapshot.' }
+    $env:FOUNDRY_CORE_ROOT = $taskCoreRoot
+    Write-Output "Explicit review core source: $taskCoreRoot"
+} else { $env:FOUNDRY_CORE_ROOT = $null }
+if ($Action -in @('Build', 'BuildGame', 'Package')) {
+    # UBT caches module rules. This tracked local dependency explicitly
+    # invalidates that cache when switching between review and current sources.
+    $taskCoreIdentity = if ($CoreRoot) { $taskCoreRoot } else { [IO.Path]::GetFullPath((Join-Path $taskGame 'core')) }
+    $taskCoreStamp = Join-Path $taskProjectDir 'Saved/BuildCoreRoot.txt'
+    if (-not (Test-Path -LiteralPath $taskCoreStamp) -or (Get-Content -LiteralPath $taskCoreStamp -Raw).Trim() -ne $taskCoreIdentity) {
+        Set-Content -LiteralPath $taskCoreStamp -Value $taskCoreIdentity -NoNewline
+    }
+}
 switch ($Action) {
     'Build' {
-        & (Join-Path $taskEngine 'Build/BatchFiles/Build.bat') OverkillFoundryEditor Win64 Development "-Project=$taskProject" -WaitMutex -NoHotReloadFromIDE "-Log=$taskLog"
+        & (Join-Path $taskEngine 'Build/BatchFiles/Build.bat') OverkillFoundryEditor Win64 Development "-Project=$taskProject" -WaitMutex -NoHotReloadFromIDE -NoUBTMakefiles "-Log=$taskLog"
         if ($LASTEXITCODE -ne 0) { throw "Editor build failed: $LASTEXITCODE; $taskLog" }
     }
     'BuildGame' {
-        & (Join-Path $taskEngine 'Build/BatchFiles/Build.bat') OverkillFoundry Win64 $Configuration "-Project=$taskProject" -WaitMutex -NoHotReloadFromIDE "-Log=$taskLog"
+        & (Join-Path $taskEngine 'Build/BatchFiles/Build.bat') OverkillFoundry Win64 $Configuration "-Project=$taskProject" -WaitMutex -NoHotReloadFromIDE -NoUBTMakefiles "-Log=$taskLog"
         if ($LASTEXITCODE -ne 0) { throw "Game build failed: $LASTEXITCODE; $taskLog" }
     }
     'Content' {
@@ -49,8 +69,39 @@ switch ($Action) {
     }
     'Run' {
         $taskArgs = @("`"$taskProject`"", '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', "`"-abslog=$taskLog`"")
+        if ($SavePath) { $taskArgs += "`"-FoundrySave=$([IO.Path]::GetFullPath($SavePath))`"" }
+        if ($InspectSave) {
+            if (-not $SavePath) { throw 'InspectSave requires an explicit prepared fixture SavePath.' }
+            $taskArgs += '-FoundryInspectSave'
+        }
         $taskProc = Start-Process -FilePath $taskEditor -ArgumentList $taskArgs -WorkingDirectory $taskProjectDir -WindowStyle Normal -PassThru
         Write-Output "Interactive host PID=$($taskProc.Id)"
+    }
+    'Teaching' {
+        $taskArgs = @("`"$taskProject`"", '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-FoundryTeaching', "`"-abslog=$taskLog`"")
+        $taskProc = Start-Process -FilePath $taskEditor -ArgumentList $taskArgs -WorkingDirectory $taskProjectDir -WindowStyle Normal -PassThru
+        Write-Output "Interactive teaching PID=$($taskProc.Id)"
+    }
+    'Audio' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_audio.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-nullrhi', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_AUDIO_IMPORTED 23' -Quiet)) { throw "Audio import did not report success: $taskLog" }
+    }
+    'AudioProbe' {
+        $taskAudioModule = Join-Path $taskProjectDir 'Binaries/Win64/UnrealEditor-OverkillFoundry.dll'
+        $taskAudioBefore = (Get-FileHash -LiteralPath $taskAudioModule -Algorithm SHA256).Hash
+        Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-FoundryAudioProbe', "-abslog=$taskLog")
+        $taskAudioAfter = (Get-FileHash -LiteralPath $taskAudioModule -Algorithm SHA256).Hash
+        @{ module = 'UnrealEditor-OverkillFoundry.dll'; sha256Before = $taskAudioBefore; sha256After = $taskAudioAfter; log = [IO.Path]::GetFileName($taskLog) } |
+            ConvertTo-Json | Set-Content -LiteralPath "$taskLog.binary.json" -Encoding utf8
+        if ($taskAudioBefore -ne $taskAudioAfter) { throw 'Module identity changed during AudioProbe.' }
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_AUDIO_CAPTURE' -Quiet)) { throw "Audio probe did not export a master mix: $taskLog" }
+    }
+    'CampaignProbe' {
+        if (-not $SavePath) { $SavePath = Join-Path $taskProjectDir "Saved/CampaignProbes/$taskStamp/profile.ofsave" }
+        Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryCampaignProbe', '-FoundryTransactionTiming', "-FoundrySave=$([IO.Path]::GetFullPath($SavePath))", "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_CAMPAIGN_PROBE_COMPLETE ok=1' -Quiet)) { throw "Campaign probe did not report success: $taskLog" }
     }
     'Art' {
         $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
@@ -62,6 +113,12 @@ switch ($Action) {
     'ArtProbe' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryArtProbe', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ART_PROBE_COMPLETE ok=1' -Quiet)) { throw "Rendered art probe did not report success: $taskLog" }
+    }
+    'MaraArt' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_mara.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_MARA_READY' -Quiet)) { throw "Mara import did not report success: $taskLog" }
     }
     'Smoke' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundrySmoke', "-abslog=$taskLog")
@@ -80,3 +137,4 @@ switch ($Action) {
     }
 }
 Write-Output "$Action completed. Log: $taskLog"
+} finally { $env:FOUNDRY_CORE_ROOT = $taskPreviousCoreRoot }

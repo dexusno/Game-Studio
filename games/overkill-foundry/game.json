@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Fresh C++17 shared core executes all246 recipe paths, ten robots and native P08 upgrades/campaign adapters with bounded authored and independent tests. Two base-haul composition decisions remain held; full152 acceptance is not claimed. The canonical city runner has independent replay review and40 retained Auto pilot results; policy stalls and a Precision-model distribution mismatch are documented for correction before fresh larger batches. Windows transactions survive tested process exits. Original Ram/Mite/Mara render in Unreal5.8.2; live graphical flows, audio and actual Precision controls are being integrated. Final visuals, two viable builds, standalone package and human approval remain outstanding. No old-game gameplay/project/build pipeline reused. Stage remains prototype.",
+  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes246 recipe paths, ten robots and native P08 with finite authored/independent coverage. Two haul compositions remain held. Baseline-4 runner passes independent exact replay/retained-state review and fresh paired200 Auto runs are in progress;40 development pilot outcomes remain recorded. Live campaign UI, original Mara/Ram/Mite,23 original sound cues and real Precision input now build/run in Unreal5.8.2. Owner requires16C on Lock and load; that corrected camera flow and full advanced recipe controls are next. New scenery source is verified but not yet imported. Final roster visuals, viable-build evidence, package/performance and human approval remain open. Stage remains prototype; no old-game pipeline reused.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,12 +45,12 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T14:31:13+00:00",
-      "record_sha256": "67e84d8f4aaaf5d1c1c00a6b0ee1fca69927043a42d7cb4362c587c13a921461",
+      "captured_at": "2026-09-20T15:04:49+00:00",
+      "record_sha256": "a8cccde5133af1738633dad0bdd7ec637ff0a7f7a3d9eb0ad6ccf5cfd9b2f3bd",
       "files": {
-        "games/overkill-foundry/STATUS.md": "97ce89a43d12a552ef7c5ffda39b31bbce58a98257c721895389e053d8af2ef9",
+        "games/overkill-foundry/STATUS.md": "979c322cf1098770359897425fdae76415a24eb00d24a3b341c398de18672d39",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
-        "games/overkill-foundry/DECISIONS.md": "08d645e68d12908f049385a55b519723701b558d097de60960943133c9faaa44",
+        "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",
         "games/overkill-foundry/design/MVP-IMPLEMENTATION-PLAN.md": "8d05d3ec6ee65755bfc3265ce1a35304bfc2cddd774c43a96dc39dae2c8caae5",
         "games/overkill-foundry/design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
@@ -70,7 +70,7 @@
         "games/overkill-foundry/design/ENEMY-ROSTER.md": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5",
         "games/overkill-foundry/design/ENEMY-PATTERNS.md": "5bf168713b294062f8c94cf30dcaf3d72a83af5d561e66439e0463c9fde0063e",
         "games/overkill-foundry/design/ROBOT-EFFECTS.md": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a",
-        "games/overkill-foundry/design/ART-DIRECTION.md": "40bdd11dff7cc756899b0aba2ac0e67d5b934a1b965f526e6affa0bd3b4fc358",
+        "games/overkill-foundry/design/ART-DIRECTION.md": "ca814ea5623c28e6f0713ed4d227951d79953ebbbd2bc5924bf3dec4d3497f47",
         "games/overkill-foundry/design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
         "games/overkill-foundry/design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf"
       }

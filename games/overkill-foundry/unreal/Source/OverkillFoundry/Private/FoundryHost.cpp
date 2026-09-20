@@ -1,18 +1,23 @@
 #include "FoundryHost.h"
 #include "FoundrySession.h"
 #include "FoundryRobot.h"
+#include "FoundryMara.h"
+#include "FoundryCampaign.h"
 
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DirectionalLightComponent.h"
+#include "Components/ExponentialHeightFogComponent.h"
 #include "Components/InputComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/SkyLightComponent.h"
+#include "Components/SkyAtmosphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Canvas.h"
 #include "Engine/DirectionalLight.h"
 #include "Engine/Engine.h"
+#include "Engine/ExponentialHeightFog.h"
 #include "Engine/PointLight.h"
 #include "Engine/SkyLight.h"
 #include "Engine/StaticMesh.h"
@@ -28,7 +33,13 @@
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
 #include "HAL/FileManager.h"
+#include "TimerManager.h"
 #include "UnrealClient.h"
+#include "UObject/UObjectIterator.h"
+#include <algorithm>
+#if WITH_EDITOR
+#include "AssetCompilingManager.h"
+#endif
 
 DEFINE_LOG_CATEGORY_STATIC(LogFoundryHost, Log, All);
 
@@ -42,6 +53,52 @@ AFoundryStage* FindStage(UWorld* World)
     }
     return nullptr;
 }
+
+AFoundryStage* KeyboardStage(UWorld* World)
+{
+    AFoundryStage* Stage=FindStage(World);
+#if FOUNDRY_WITH_CAMPAIGN
+    if(Stage && Stage->GetCampaign())
+    {
+        const auto& Campaign=*Stage->GetCampaign();
+        if(Campaign.bPrecisionModal || Campaign.Page!=TEXT("combat") || !Campaign.Drawer.IsEmpty() || Stage->IsActionView())return nullptr;
+        const auto* C=Campaign.Current();
+        if(!C || !C->fight.upgradeChoices.empty() || std::any_of(C->upgradeOffers.begin(),C->upgradeOffers.end(),[](const auto& O){return !O.deferred;}))return nullptr;
+    }
+#endif
+    return Stage;
+}
+
+void SynchronizeStaticRenderBounds(UWorld* World)
+{
+    // UE5.8's editor CalculateExtendedBounds prefers cached MeshDescription
+    // bounds before BuildScale. Our pivot-preserving metre FBX imports have
+    // centimetre render geometry: tiny stale bounds cause self-occlusion.
+    // Match the actual render bounds, including their origin, before visibility.
+    TSet<UStaticMesh*> Corrected;
+    int32 Components = 0;
+    for (TObjectIterator<UStaticMeshComponent> It; It; ++It)
+    {
+        UStaticMeshComponent* Component = *It;
+        if (Component->GetWorld() != World) continue;
+        UStaticMesh* Mesh = Component->GetStaticMesh();
+        if (!Mesh || !Mesh->GetRenderData()) continue;
+        const FBoxSphereBounds Actual(Mesh->GetRenderData()->Bounds);
+        const FBoxSphereBounds Cached = Mesh->GetBounds();
+        if (!Cached.BoxExtent.Equals(Actual.BoxExtent, .01) || !Cached.Origin.Equals(Actual.Origin, .01))
+        {
+            Mesh->SetExtendedBounds(Actual);
+            Corrected.Add(Mesh);
+        }
+        if (Corrected.Contains(Mesh))
+        {
+            Component->UpdateBounds();
+            Component->MarkRenderStateDirty();
+            ++Components;
+        }
+    }
+    UE_LOG(LogFoundryHost, Display, TEXT("ART_RENDER_BOUNDS_SYNC assets=%d components=%d"), Corrected.Num(), Components);
+}
 }
 
 AFoundryStage::AFoundryStage()
@@ -52,32 +109,20 @@ AFoundryStage::AFoundryStage()
 
 AFoundryStage::~AFoundryStage() = default;
 
-void AFoundryStage::AddShape(const TCHAR* Label, UStaticMesh* Mesh, const FVector& Location,
-                            const FVector& Scale, const FLinearColor& Color, const FRotator& Rotation)
+void AFoundryStage::EndPlay(const EEndPlayReason::Type Reason)
 {
-    UStaticMeshComponent* Shape = NewObject<UStaticMeshComponent>(this, FName(Label));
-    Shape->SetupAttachment(RootComponent);
-    Shape->SetStaticMesh(Mesh);
-    Shape->SetRelativeLocation(Location);
-    Shape->SetRelativeScale3D(Scale);
-    Shape->SetRelativeRotation(Rotation);
-    Shape->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    if (StageMaterial)
-    {
-        UMaterialInstanceDynamic* Material = UMaterialInstanceDynamic::Create(StageMaterial, this);
-        Material->SetVectorParameterValue(TEXT("Tint"), Color);
-        Shape->SetMaterial(0, Material);
-    }
-    Shape->RegisterComponent();
-    AddInstanceComponent(Shape);
+    if(Audio)Audio->StopAll();
+    Super::EndPlay(Reason);
 }
 
 void AFoundryStage::BeginPlay()
 {
     Super::BeginPlay();
+    UE_LOG(LogFoundryHost, Display, TEXT("FOUNDRY_CORE_BUILD digest=%s review_snapshot=%d"), UTF8_TO_TCHAR(FOUNDRY_CORE_SOURCE_DIGEST), FOUNDRY_CORE_REVIEW_SNAPSHOT);
     uint64 Seed = 1;
     FParse::Value(FCommandLine::Get(), TEXT("FoundrySeed="), Seed);
     Session = MakeUnique<FFoundrySession>(Seed);
+    Audio = MakeUnique<FFoundryAudio>(this);
     if (FParse::Param(FCommandLine::Get(), TEXT("FoundryInputProbe")))
     {
         FString Report;
@@ -107,14 +152,44 @@ void AFoundryStage::BeginPlay()
     }
     bSmokeTest = FParse::Param(FCommandLine::Get(), TEXT("FoundrySmoke"));
     bArtProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryArtProbe"));
+    bCampaignProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryCampaignProbe"));
+#if FOUNDRY_WITH_CAMPAIGN
+    bTechnicalMode = bSmokeTest || bArtProbe || FParse::Param(FCommandLine::Get(), TEXT("FoundryTeaching"));
+    if (!bTechnicalMode)
+    {
+        FString SavePath = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Campaign/profile.ofsave"));
+        FParse::Value(FCommandLine::Get(), TEXT("FoundrySave="), SavePath);
+        Campaign = MakeUnique<FFoundryCampaign>(*Session, FPaths::ConvertRelativePathToFull(SavePath));
+#if !UE_BUILD_SHIPPING
+        if(FParse::Param(FCommandLine::Get(),TEXT("FoundryInspectSave")) && Campaign->Current())
+        {
+            Campaign->Page=Campaign->PhasePage();++Campaign->SceneRevision;
+            Campaign->Message=TEXT("Prepared UI fixture · inspection only");
+        }
+#endif
+    }
+#endif
     int32 StageActorCount = 0;
+    int32 MaraStageCount = 0;
     TSet<UStaticMesh*> StageMeshes;
     for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
     {
+        if (Actor->ActorHasTag(TEXT("MaraGenerated"))) ++MaraStageCount;
         if (!Actor->ActorHasTag(TEXT("CinderwallGenerated"))) continue;
         ++StageActorCount;
         UStaticMesh* Mesh = Actor->GetStaticMeshComponent()->GetStaticMesh();
         StageMeshes.Add(Mesh);
+        if (Mesh->GetName().Contains(TEXT("rear_claw_mount"))) Actor->SetActorHiddenInGame(true);
+        if (Mesh->GetName().Contains(TEXT("SM_CW_furnace_")))
+        {
+            // Background furnaces support the hero silhouettes rather than
+            // presenting seven equally bright orange panels behind them.
+            const int32 Bay = FMath::RoundToInt((Actor->GetActorLocation().X + 900) / 300);
+            const float Glow[] = {.22f, .40f, .14f, .28f, .48f, .18f, .32f};
+            for (int32 Slot = 0; Slot < Actor->GetStaticMeshComponent()->GetNumMaterials(); ++Slot)
+                if (Actor->GetStaticMeshComponent()->GetMaterial(Slot)->GetName().Contains(TEXT("MI_CW_furnace")))
+                    Actor->GetStaticMeshComponent()->CreateDynamicMaterialInstance(Slot)->SetScalarParameterValue(TEXT("Glow"), Glow[FMath::Clamp(Bay, 0, 6)]);
+        }
         if (Mesh->GetName().Contains(TEXT("SM_CW_deck_")))
         {
             const FVector Extent = Mesh->GetRenderData()->Bounds.BoxExtent;
@@ -122,48 +197,56 @@ void AFoundryStage::BeginPlay()
         }
     }
     checkf(StageActorCount == 47 && StageMeshes.Num() == 18, TEXT("Run Art to rebuild the complete Cinderwall map"));
+    checkf(MaraStageCount == 10, TEXT("Run MaraArt to rebuild the original Mara props and depth extension"));
     UE_LOG(LogFoundryHost, Display, TEXT("ART_STAGE placements=%d shared_meshes=%d"), StageActorCount, StageMeshes.Num());
-    UStaticMesh* Cube = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
-    UStaticMesh* Cylinder = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
-    UStaticMesh* Sphere = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere"));
-    StageMaterial = LoadObject<UMaterialInterface>(nullptr, TEXT("/Game/Technical/M_HostMetal.M_HostMetal"));
-    checkf(Cube && Cylinder && Sphere && StageMaterial, TEXT("Generate smoke content before launching the host."));
+    Mara = GetWorld()->SpawnActor<AFoundryMara>();
+    Mara->Initialize();
+    if (bTechnicalMode) SpawnRobots();
 
-    const FLinearColor Iron(0.15f, 0.21f, 0.24f);
-    const FLinearColor Brass(0.48f, 0.22f, 0.065f);
-    const FLinearColor Dark(0.04f, 0.065f, 0.08f);
-    // The cannon remains a clearly provisional host prop; this art package contains
-    // the robots and stage, not Mara's production gun. Stage meshes live in the map.
-    AddShape(TEXT("RigBase"), Cylinder, FVector(-300, 0, 50), FVector(2.8, 2.8, 1), Dark);
-    AddShape(TEXT("RigBody"), Cube, FVector(-300, 0, 145), FVector(2.2, 1.8, 1.5), Brass);
-    AddShape(TEXT("RigBarrel"), Cylinder, FVector(-150, 0, 180), FVector(0.72, 0.72, 2.6), Iron, FRotator(90, 0, 0));
-    AddShape(TEXT("RigRing"), Cylinder, FVector(-35, 0, 180), FVector(0.97, 0.97, 0.22), Brass, FRotator(90, 0, 0));
-    SpawnRobots();
-
+    GetWorld()->SpawnActor<ASkyAtmosphere>();
+    AExponentialHeightFog* Fog = GetWorld()->SpawnActor<AExponentialHeightFog>(FVector(0, 0, -250), FRotator::ZeroRotator);
+    Fog->GetComponent()->SetFogDensity(.009f);
+    Fog->GetComponent()->SetFogHeightFalloff(.2f);
+    Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.18f, .24f, .30f));
+    Fog->GetComponent()->SetFogMaxOpacity(.78f);
+    Fog->GetComponent()->SetStartDistance(1200.f);
     ADirectionalLight* Key = GetWorld()->SpawnActor<ADirectionalLight>(FVector::ZeroVector, FRotator(-40, 35, 0));
-    Key->GetLightComponent()->SetIntensity(5.0f);
-    Key->GetLightComponent()->SetLightColor(FLinearColor(1.0f, 0.80f, 0.57f));
+    CastChecked<UDirectionalLightComponent>(Key->GetLightComponent())->SetAtmosphereSunLight(true);
+    Key->GetLightComponent()->SetIntensity(3.3f);
+    Key->GetLightComponent()->SetLightColor(FLinearColor(1.0f, 0.82f, 0.64f));
     APointLight* Warm = GetWorld()->SpawnActor<APointLight>(FVector(-300, 230, 420), FRotator::ZeroRotator);
-    Warm->PointLightComponent->SetIntensity(100000.0f);
+    Warm->PointLightComponent->SetIntensity(55000.0f);
     Warm->PointLightComponent->SetAttenuationRadius(1250.0f);
-    Warm->PointLightComponent->SetLightColor(FLinearColor(1.0f, 0.38f, 0.10f));
+    Warm->PointLightComponent->SetLightColor(FLinearColor(1.0f, 0.50f, 0.27f));
     APointLight* Cool = GetWorld()->SpawnActor<APointLight>(FVector(650, -240, 380), FRotator::ZeroRotator);
-    Cool->PointLightComponent->SetIntensity(150000.0f);
-    Cool->PointLightComponent->SetAttenuationRadius(1300.0f);
-    Cool->PointLightComponent->SetLightColor(FLinearColor(0.20f, 0.60f, 1.0f));
+    Cool->PointLightComponent->SetIntensity(50000.0f);
+    Cool->PointLightComponent->SetAttenuationRadius(1700.0f);
+    Cool->PointLightComponent->SetLightColor(FLinearColor(0.48f, 0.70f, 1.0f));
     ASkyLight* Fill = GetWorld()->SpawnActor<ASkyLight>();
-    Fill->GetLightComponent()->SetIntensity(0.45f);
-    Fill->GetLightComponent()->SetRealTimeCaptureEnabled(false);
+    Fill->GetLightComponent()->SetIntensity(0.60f);
+    Fill->GetLightComponent()->SetRealTimeCaptureEnabled(true);
     Fill->GetLightComponent()->RecaptureSky();
 
-    const FVector PrepareLocation(-60, 2400, 700);
-    const FVector PrepareFocus(-60, -60, 225);
+    const FVector PrepareLocation(-130, 2230, 740);
+    const FVector PrepareFocus(-130, -60, 260);
     PreparationCamera = GetWorld()->SpawnActor<ACameraActor>(PrepareLocation, (PrepareFocus - PrepareLocation).Rotation());
     PreparationCamera->GetCameraComponent()->SetFieldOfView(52.0f);
-    const FVector ActionLocation(-540, 940, 345);
-    const FVector ActionFocus(260, -20, 140);
+    const FVector ActionLocation(-720, 1150, 340);
+    const FVector ActionFocus(50, -20, 135);
     ActionCamera = GetWorld()->SpawnActor<ACameraActor>(ActionLocation, (ActionFocus - ActionLocation).Rotation());
-    ActionCamera->GetCameraComponent()->SetFieldOfView(50.0f);
+    ActionCamera->GetCameraComponent()->SetFieldOfView(52.0f);
+#if WITH_EDITOR
+    // Editor -game may rebuild uncooked meshes, textures and animation data.
+    // Start the visible encounter only after those loaded products are ready.
+    FAssetCompilingManager::Get().FinishAllCompilation();
+    UE_LOG(LogFoundryHost, Display, TEXT("ART_ASSET_WARMUP remaining=%d"), FAssetCompilingManager::Get().GetNumRemainingAssets());
+#endif
+    SynchronizeStaticRenderBounds(GetWorld());
+    for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
+    {
+        if (Actor->ActorHasTag(TEXT("CinderwallGenerated")) && Actor->GetStaticMeshComponent()->GetStaticMesh()->GetName().Contains(TEXT("SM_CW_deck_")))
+            checkf(FMath::IsNearlyEqual(Actor->GetStaticMeshComponent()->Bounds.BoxExtent.X, 98.0, 1.0), TEXT("Deck component culling bounds must match rendered centimetres"));
+    }
     SetActionView(false, true);
     if (bArtProbe) Session->bShowPanels = false;
     UE_LOG(LogFoundryHost, Display, TEXT("Host P13 ready. Cinderwall-v001 shared-core Mara teaching encounter. Smoke=%d ArtProbe=%d"), bSmokeTest, bArtProbe);
@@ -173,25 +256,75 @@ void AFoundryStage::SpawnRobots()
 {
     for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->Destroy();
     Robots.Empty();
+    int32 Index = 0;
     for (const auto& Enemy : Session->State.enemies)
     {
         if (Enemy.dead || Enemy.escaped) continue;
         const bool bRam = Enemy.definition == "C1-R02";
-        AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(bRam ? FVector(360, -65, 1.5) : FVector(130, 20, 1.5), FRotator::ZeroRotator);
+        const FVector Position = bTechnicalMode ? (bRam ? FVector(360, -65, 1.5) : FVector(130, 20, 1.5)) : FVector(90 + Index * 210, Index % 2 ? -60 : 20, 1.5);
+        AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(Position, FRotator::ZeroRotator);
         Robot->Initialize(Enemy.id, bRam, Enemy.maxHp);
+        if (!bRam && Enemy.definition != "C1-R01")
+        {
+            Robot->SetActorScale3D(FVector(.85 + .08 * (Index % 3), 1, 1.25));
+            UE_LOG(LogFoundryHost, Display, TEXT("TEMPORARY_ROBOT_MODEL id=%llu definition=%s name=%s"), Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()), UTF8_TO_TCHAR(Enemy.name.c_str()));
+        }
         Robots.Add(Robot);
+        ++Index;
     }
 }
+
+#if FOUNDRY_WITH_CAMPAIGN
+void AFoundryStage::RefreshCampaignWorld()
+{
+    if (!Campaign) return;
+    if (SeenSceneRevision != Campaign->SceneRevision)
+    {
+        if(Audio)Audio->StopAll();
+        SeenSceneRevision = Campaign->SceneRevision;
+        for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->Destroy();
+        Robots.Empty(); Mara->ResetPresentation(); ReturnCameraAfter = 0;
+        const auto* C = Campaign->Current();
+        if (C && C->phase == overkill::CityPhase::Fight && Campaign->Page != TEXT("title")) SpawnRobots();
+        SetActionView(false);
+    }
+    if(const auto* C=Campaign->Current(); C && C->phase==overkill::CityPhase::Fight)
+    {
+        int32 Index=0;
+        for(const auto& Enemy:Session->State.enemies)
+        {
+            const int32 PositionIndex=Index++;
+            if(Enemy.dead || Enemy.escaped)continue;
+            bool Exists=false;for(const AFoundryRobot* Robot:Robots)if(IsValid(Robot)&&Robot->GetCoreId()==Enemy.id){Exists=true;break;}
+            if(Exists)continue;
+            auto* Robot=GetWorld()->SpawnActor<AFoundryRobot>(FVector(90+(PositionIndex%4)*210,-70-(PositionIndex/4)*140,1.5),FRotator::ZeroRotator);
+            Robot->Initialize(Enemy.id,Enemy.definition=="C1-R02",Enemy.maxHp);Robots.Add(Robot);
+            UE_LOG(LogFoundryHost,Display,TEXT("CAMPAIGN_ROBOT_SPAWN id=%llu definition=%s"),Enemy.id,UTF8_TO_TCHAR(Enemy.definition.c_str()));
+        }
+    }
+    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->SetActorHiddenInGame(Campaign->Page == TEXT("title"));
+    PresentCommittedEvents();
+}
+#endif
 
 void AFoundryStage::PresentCommittedEvents()
 {
     if (!Session || Session->CommittedEvents.empty()) return;
+    if(Audio) Audio->Present(Session->CommittedEvents);
     TSet<uint64> Died;
     TSet<uint64> NamedActionParents;
     for (const auto& Event : Session->CommittedEvents) if (Event.type == "enemy_death") Died.Add(Event.target);
     for (const auto& Event : Session->CommittedEvents) if (Event.type.rfind("robot_action:", 0) == 0) NamedActionParents.Add(Event.parent);
     for (const auto& Event : Session->CommittedEvents)
     {
+        if (Event.type == "collected") Mara->Collect(Event.id, Event.amount);
+        else if (Event.type == "loaded") Mara->Load(Event.id, Event.amount);
+        else if (Event.type == "unload") Mara->Unload(Event.id);
+        else if (Event.type == "fire")
+        {
+            for (AFoundryRobot* Robot : Robots)
+                if (IsValid(Robot) && Robot->GetCoreId() == Event.target) Mara->Fire(Event.id, Event.amount, Robot->GetImpactLocation());
+        }
         for (AFoundryRobot* Robot : Robots)
         {
             if (!IsValid(Robot)) continue;
@@ -210,19 +343,28 @@ void AFoundryStage::PresentCommittedEvents()
 void AFoundryStage::Control(const FString& Command)
 {
     if (!Session) return;
-    const bool bCommitted = Session->Control(Command);
+    bool bCommitted = false;
+#if FOUNDRY_WITH_CAMPAIGN
+    if (Campaign) bCommitted = Campaign->Control(Command);
+    else
+#endif
+        bCommitted = Session->Control(Command);
     PresentCommittedEvents();
     if (bCommitted && (Command == TEXT("fire") || Command == TEXT("end")))
     {
         SetActionView(true);
         ReturnCameraAfter = 2.25f;
     }
-    if (Command == TEXT("restart")) { SpawnRobots(); ReturnCameraAfter = 0.0f; SetActionView(false); }
+    if (bTechnicalMode && Command == TEXT("restart")) { if(Audio)Audio->StopAll(); SpawnRobots(); Mara->ResetPresentation(); ReturnCameraAfter = 0.0f; SetActionView(false); }
 }
 
 void AFoundryStage::SetActionView(bool bAction, bool bInstant)
 {
     bActionView = bAction;
+    if(bAction)ActionCaption=Session && Session->LastAction==TEXT("end turn")?TEXT("Enemy turn"):TEXT("Firing…");
+#if FOUNDRY_WITH_CAMPAIGN
+    if (Campaign) { ++Campaign->ViewRevision; if (bAction) Campaign->Drawer.Empty(); }
+#endif
     if (APlayerController* Controller = UGameplayStatics::GetPlayerController(this, 0))
     {
         Controller->SetViewTargetWithBlend(bAction ? ActionCamera.Get() : PreparationCamera.Get(), bInstant ? 0.0f : 0.65f,
@@ -239,7 +381,16 @@ void AFoundryStage::CaptureView()
 
 void AFoundryStage::CaptureNamed(const FString& Name)
 {
+    RequestedCaptures.Add(Name);
     const FString ScreenshotPath = FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Screenshots"), Name));
+    if(!bTechnicalMode)
+    {
+        FTimerHandle CaptureTimer;
+        const float Delay=Name==TEXT("campaign-action-settled.png")?.85f:.10f;
+        GetWorldTimerManager().SetTimer(CaptureTimer,FTimerDelegate::CreateWeakLambda(this,[ScreenshotPath](){FScreenshotRequest::RequestScreenshot(ScreenshotPath,true,false);}),Delay,false);
+        UE_LOG(LogFoundryHost,Display,TEXT("Campaign capture queued after layout: %s"),*ScreenshotPath);
+        return;
+    }
     FScreenshotRequest::RequestScreenshot(ScreenshotPath, true, false);
     UE_LOG(LogFoundryHost, Display, TEXT("Rendered screenshot requested: %s"), *ScreenshotPath);
 }
@@ -247,13 +398,26 @@ void AFoundryStage::CaptureNamed(const FString& Name)
 void AFoundryStage::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if(Audio)
+    {
+        bool Active=bTechnicalMode;
+#if FOUNDRY_WITH_CAMPAIGN
+        if(Campaign)Active=Campaign->Page!=TEXT("title") && Campaign->Page!=TEXT("confirm-new");
+#endif
+        Audio->SetActive(Active);
+        Audio->Tick(DeltaSeconds);
+    }
     if (ReturnCameraAfter > 0.0f)
     {
         ReturnCameraAfter -= DeltaSeconds;
         if (ReturnCameraAfter <= 0.0f) SetActionView(false);
     }
     PresentCommittedEvents();
+#if FOUNDRY_WITH_CAMPAIGN
+    if (Campaign) RefreshCampaignWorld();
+#endif
     if (bArtProbe) TickArtProbe(DeltaSeconds);
+    if (bCampaignProbe) TickCampaignProbe(DeltaSeconds);
     if (!bSmokeTest) return;
     SmokeElapsed += DeltaSeconds;
     if (SmokeStep == 0 && SmokeElapsed >= 4.0f) { CaptureView(); ++SmokeStep; }
@@ -292,25 +456,27 @@ void AFoundryPlayerController::SetupInputComponent()
     InputComponent->BindKey(EKeys::Tab, IE_Pressed, this, &AFoundryPlayerController::Steer);
     InputComponent->BindKey(EKeys::P, IE_Pressed, this, &AFoundryPlayerController::Precision);
     InputComponent->BindKey(EKeys::H, IE_Pressed, this, &AFoundryPlayerController::TogglePanels);
+    InputComponent->BindKey(EKeys::F3, IE_Pressed, this, &AFoundryPlayerController::Diagnostic);
     FInputModeGameAndUI InputMode;
     InputMode.SetHideCursorDuringCapture(false);
     InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
     SetInputMode(InputMode);
 }
 
-void AFoundryPlayerController::PreparationView() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->SetActionView(false); }
-void AFoundryPlayerController::ActionView() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->SetActionView(true); }
+void AFoundryPlayerController::PreparationView() { if (AFoundryStage* Stage = FindStage(GetWorld()); Stage && Stage->IsTechnicalMode()) Stage->SetActionView(false); }
+void AFoundryPlayerController::ActionView() { if (AFoundryStage* Stage = FindStage(GetWorld()); Stage && Stage->IsTechnicalMode()) Stage->SetActionView(true); }
 void AFoundryPlayerController::Screenshot() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->CaptureView(); }
-void AFoundryPlayerController::QuitHost() { ConsoleCommand(TEXT("quit")); }
-void AFoundryPlayerController::Collect() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("collect")); }
-void AFoundryPlayerController::LoadParts() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("load")); }
-void AFoundryPlayerController::UnloadParts() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("unload")); }
-void AFoundryPlayerController::Fire() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("fire")); }
-void AFoundryPlayerController::EndTurn() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("end")); }
-void AFoundryPlayerController::Restart() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("restart")); }
-void AFoundryPlayerController::Steer() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("steer")); }
-void AFoundryPlayerController::Precision() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("precision")); }
+void AFoundryPlayerController::QuitHost() { if (AFoundryStage* Stage = FindStage(GetWorld()); Stage && !Stage->IsTechnicalMode()) Stage->Control(TEXT("back")); else ConsoleCommand(TEXT("quit")); }
+void AFoundryPlayerController::Collect() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("collect")); }
+void AFoundryPlayerController::LoadParts() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("load")); }
+void AFoundryPlayerController::UnloadParts() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("unload")); }
+void AFoundryPlayerController::Fire() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("fire")); }
+void AFoundryPlayerController::EndTurn() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("end")); }
+void AFoundryPlayerController::Restart() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("restart")); }
+void AFoundryPlayerController::Steer() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("steer")); }
+void AFoundryPlayerController::Precision() { if (AFoundryStage* Stage = KeyboardStage(GetWorld())) Stage->Control(TEXT("precision")); }
 void AFoundryPlayerController::TogglePanels() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("panels")); }
+void AFoundryPlayerController::Diagnostic() { if (AFoundryStage* Stage = FindStage(GetWorld())) Stage->Control(TEXT("diagnostic")); }
 
 AFoundryGameMode::AFoundryGameMode()
 {

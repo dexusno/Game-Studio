@@ -1,0 +1,140 @@
+{
+  "scope": "Real Unreal master output: cue clock, non-silence and clipping only. Not a listening or gameplay mix approval.",
+  "version": "foundry-mechanical-0.1",
+  "capture": "unreal/Saved/AudioCapture/foundry-audio-20260920-162126.wav",
+  "capture_sha256": "7aeffb93b09689bca459016b35b4005b35f2183a9b4e6437f8130de8a9e43910",
+  "log": "unreal/Saved/BuildLogs/AudioProbe-20260920-162046.log",
+  "log_sha256": "e3a065bd1aa77c034bdba5a0441bc5fc273aef4cde285ecdbe8fef6c65705230",
+  "rate": 48000,
+  "channels": 2,
+  "duration_seconds": 32.704,
+  "logged_seconds": 32.702,
+  "peak_dbfs": -23.308,
+  "rms_dbfs": -50.7,
+  "clipped_samples": 0,
+  "source_audit_sha256": "fb3877d5a44ae6ba43c0a73c93a3407ccf94b4583336934cf750dee543231f39",
+  "cue_windows": [
+    {
+      "name": "cannon_light",
+      "offset_seconds": 0.201,
+      "peak_dbfs": -24.849
+    },
+    {
+      "name": "cannon_heavy",
+      "offset_seconds": 1.394,
+      "peak_dbfs": -23.308
+    },
+    {
+      "name": "metal_hit_light",
+      "offset_seconds": 2.602,
+      "peak_dbfs": -35.439
+    },
+    {
+      "name": "metal_hit_heavy",
+      "offset_seconds": 3.796,
+      "peak_dbfs": -32.704
+    },
+    {
+      "name": "robot_break",
+      "offset_seconds": 5.003,
+      "peak_dbfs": -25.05
+    },
+    {
+      "name": "breech_load",
+      "offset_seconds": 6.196,
+      "peak_dbfs": -36.594
+    },
+    {
+      "name": "breech_unload",
+      "offset_seconds": 7.404,
+      "peak_dbfs": -38.29
+    },
+    {
+      "name": "forge",
+      "offset_seconds": 8.598,
+      "peak_dbfs": -35.253
+    },
+    {
+      "name": "collect",
+      "offset_seconds": 9.806,
+      "peak_dbfs": -34.158
+    },
+    {
+      "name": "shield_on",
+      "offset_seconds": 10.998,
+      "peak_dbfs": -35.299
+    },
+    {
+      "name": "shield_hit",
+      "offset_seconds": 12.193,
+      "peak_dbfs": -33.333
+    },
+    {
+      "name": "player_hit",
+      "offset_seconds": 13.401,
+      "peak_dbfs": -30.511
+    },
+    {
+      "name": "robot_move",
+      "offset_seconds": 14.595,
+      "peak_dbfs": -39.603
+    },
+    {
+      "name": "repair",
+      "offset_seconds": 15.802,
+      "peak_dbfs": -38.011
+    },
+    {
+      "name": "upgrade",
+      "offset_seconds": 16.996,
+      "peak_dbfs": -36.039
+    },
+    {
+      "name": "victory",
+      "offset_seconds": 18.204,
+      "peak_dbfs": -34.364
+    },
+    {
+      "name": "defeat",
+      "offset_seconds": 19.398,
+      "peak_dbfs": -36.812
+    },
+    {
+      "name": "precision_good",
+      "offset_seconds": 20.605,
+      "peak_dbfs": -36.904
+    },
+    {
+      "name": "precision_miss",
+      "offset_seconds": 21.8,
+      "peak_dbfs": -43.227
+    },
+    {
+      "name": "ui_ok",
+      "offset_seconds": 22.994,
+      "peak_dbfs": -46.172
+    },
+    {
+      "name": "ui_error",
+      "offset_seconds": 24.202,
+      "peak_dbfs": -44.919
+    },
+    {
+      "name": "turn",
+      "offset_seconds": 25.396,
+      "peak_dbfs": -41.121
+    },
+    {
+      "name": "factory_room",
+      "offset_seconds": 26.604,
+      "peak_dbfs": -45.35
+    }
+  ],
+  "module_sha256": "8c18e720d2be5befff67186c097d262ad0a9f7cb271617621d0e243d94bd3d10",
+  "source_sha256": {
+    "unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+    "unreal/Source/OverkillFoundry/Public/FoundryAudio.h": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+    "unreal/Tools/import_audio.py": "d85691b104929165bd921e7037db91bccb7e2ba9881148db2e63dd9cff34e865",
+    "audio-source/verify_mix.py": "d2c70938142b9d75549e67a635d88e0dc508ff48f13818d00f1ac9dd42aff904"
+  }
+}

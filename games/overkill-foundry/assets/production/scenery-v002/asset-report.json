@@ -1,0 +1,509 @@
+{
+  "version": "cinderwall-scenery-v002",
+  "blender": "5.2.1 LTS",
+  "units": "metres",
+  "source_provenance": "Original Game Studio / Codex dimensional geometry and deterministic Blender materials; no external art.",
+  "scene_contract": {
+    "firing_lane_x": [
+      -4.5,
+      10
+    ],
+    "firing_lane_y": [
+      -1.5,
+      1.5
+    ],
+    "rear_gathering_x": [
+      -8,
+      -5
+    ],
+    "replace_stage": "CinderwallGenerated",
+    "replace_mara_depth_except": [
+      "hopper",
+      "payload"
+    ],
+    "camera_conversion": "Unreal=(Blender.x,-Blender.y,Blender.z)*100"
+  },
+  "stage": {
+    "mesh_count": 19,
+    "triangles": 223788,
+    "instances": [
+      {
+        "name": "SM_SV2_combat_deck",
+        "position_m": [
+          0.0,
+          0.04999995231628418,
+          -1.1600000858306885
+        ],
+        "bounds_m": [
+          23.0,
+          7.5,
+          1.28000009059906
+        ],
+        "triangles": 46512,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_v2_floor",
+          "M_CW_v2_oxide"
+        ]
+      },
+      {
+        "name": "SM_SV2_channel",
+        "position_m": [
+          0.0,
+          8.024999618530273,
+          -2.200000047683716
+        ],
+        "bounds_m": [
+          38.0,
+          10.050000190734863,
+          3.6500000953674316
+        ],
+        "triangles": 8348,
+        "materials": [
+          "M_CW_v2_slate",
+          "M_CW_v2_stone",
+          "M_CW_v2_copper",
+          "M_CW_iron"
+        ]
+      },
+      {
+        "name": "SM_SV2_back_rail",
+        "position_m": [
+          0.0,
+          3.700000047683716,
+          0.04000002145767212
+        ],
+        "bounds_m": [
+          21.66086769104004,
+          0.060744285583496094,
+          0.6483725905418396
+        ],
+        "triangles": 9520,
+        "materials": [
+          "M_CW_iron"
+        ]
+      },
+      {
+        "name": "SM_SV2_left_smelter",
+        "position_m": [
+          -7.850000381469727,
+          12.0,
+          -0.699999988079071
+        ],
+        "bounds_m": [
+          7.500000476837158,
+          5.0,
+          11.124499320983887
+        ],
+        "triangles": 11776,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_oxide",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_furnace",
+          "M_CW_v2_slate",
+          "M_CW_v2_copper"
+        ]
+      },
+      {
+        "name": "SM_SV2_right_accumulator",
+        "position_m": [
+          10.1875,
+          11.600000381469727,
+          0.0
+        ],
+        "bounds_m": [
+          5.025000095367432,
+          3.2499990463256836,
+          6.923600196838379
+        ],
+        "triangles": 7608,
+        "materials": [
+          "M_CW_v2_copper",
+          "M_CW_iron"
+        ]
+      },
+      {
+        "name": "SM_SV2_rear_crane_support",
+        "position_m": [
+          -7.849999904632568,
+          2.0999999046325684,
+          0.0
+        ],
+        "bounds_m": [
+          4.699999809265137,
+          2.7799999713897705,
+          6.699999809265137
+        ],
+        "triangles": 1880,
+        "materials": [
+          "M_CW_iron",
+          "M_CW_v2_oxide",
+          "M_CW_ochre"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_00",
+        "position_m": [
+          -16.0,
+          20.954999923706055,
+          -2.5
+        ],
+        "bounds_m": [
+          8.5,
+          7.590000152587891,
+          15.624500274658203
+        ],
+        "triangles": 12272,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_warm",
+          "M_CW_v2_window_cool"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_01",
+        "position_m": [
+          -0.8000000715255737,
+          20.954999923706055,
+          -2.5
+        ],
+        "bounds_m": [
+          9.5,
+          7.590000152587891,
+          15.32450008392334
+        ],
+        "triangles": 12340,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_02",
+        "position_m": [
+          11.0,
+          23.954999923706055,
+          -2.5
+        ],
+        "bounds_m": [
+          6.5,
+          8.59000015258789,
+          20.024499893188477
+        ],
+        "triangles": 10204,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_03",
+        "position_m": [
+          -7.0,
+          33.95500183105469,
+          -2.5
+        ],
+        "bounds_m": [
+          7.5,
+          8.59000015258789,
+          18.624500274658203
+        ],
+        "triangles": 10648,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_04",
+        "position_m": [
+          5.0,
+          38.95500183105469,
+          -2.5
+        ],
+        "bounds_m": [
+          9.5,
+          9.59000015258789,
+          22.824501037597656
+        ],
+        "triangles": 13964,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_05",
+        "position_m": [
+          21.0,
+          32.95500183105469,
+          -2.5
+        ],
+        "bounds_m": [
+          9.5,
+          8.59000015258789,
+          22.024499893188477
+        ],
+        "triangles": 12340,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_warm",
+          "M_CW_v2_window_cool"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_06",
+        "position_m": [
+          -24.0,
+          37.95500183105469,
+          -2.5
+        ],
+        "bounds_m": [
+          11.5,
+          9.59000015258789,
+          23.624500274658203
+        ],
+        "triangles": 16032,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_07",
+        "position_m": [
+          29.0,
+          17.954999923706055,
+          -2.5
+        ],
+        "bounds_m": [
+          9.5,
+          11.59000015258789,
+          18.824501037597656
+        ],
+        "triangles": 12340,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_08",
+        "position_m": [
+          39.0,
+          7.954999923706055,
+          -2.5
+        ],
+        "bounds_m": [
+          8.5,
+          13.59000015258789,
+          19.024499893188477
+        ],
+        "triangles": 12272,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_factory_09",
+        "position_m": [
+          47.0,
+          -4.045000076293945,
+          -2.5
+        ],
+        "bounds_m": [
+          11.5,
+          14.59000015258789,
+          22.624500274658203
+        ],
+        "triangles": 14408,
+        "materials": [
+          "M_CW_v2_stone",
+          "M_CW_v2_slate",
+          "M_CW_iron",
+          "M_CW_soot",
+          "M_CW_v2_window_cool",
+          "M_CW_v2_window_warm"
+        ]
+      },
+      {
+        "name": "SM_SV2_high_service_bridge",
+        "position_m": [
+          4.739782810211182,
+          18.164813995361328,
+          -0.3000001907348633
+        ],
+        "bounds_m": [
+          10.340433120727539,
+          1.350372314453125,
+          6.378372669219971
+        ],
+        "triangles": 6364,
+        "materials": [
+          "M_CW_iron"
+        ]
+      },
+      {
+        "name": "SM_SV2_distant_crane",
+        "position_m": [
+          14.0,
+          32.099998474121094,
+          0.0
+        ],
+        "bounds_m": [
+          14.043957710266113,
+          2.440000534057617,
+          17.0219783782959
+        ],
+        "triangles": 4772,
+        "materials": [
+          "M_CW_v2_slate",
+          "M_CW_iron"
+        ]
+      },
+      {
+        "name": "SM_SV2_outer_apron",
+        "position_m": [
+          20.0,
+          30.0,
+          -3.0
+        ],
+        "bounds_m": [
+          160.0,
+          140.0,
+          1.0
+        ],
+        "triangles": 188,
+        "materials": [
+          "M_CW_v2_stone"
+        ]
+      }
+    ]
+  },
+  "palette": {
+    "iron": [
+      "303b42",
+      0.9,
+      0.43
+    ],
+    "edge": [
+      "778082",
+      0.93,
+      0.34
+    ],
+    "oxide": [
+      "a5492e",
+      0.08,
+      0.58
+    ],
+    "ochre": [
+      "b18a4d",
+      0.07,
+      0.58
+    ],
+    "patina": [
+      "427579",
+      0.08,
+      0.54
+    ],
+    "soot": [
+      "161f25",
+      0.35,
+      0.72
+    ],
+    "stone": [
+      "544a42",
+      0.03,
+      0.88
+    ],
+    "copper": [
+      "a46235",
+      0.92,
+      0.34
+    ],
+    "ceramic": [
+      "c3bda8",
+      0.05,
+      0.45
+    ],
+    "v2_floor": [
+      "494e4d",
+      0.38,
+      0.76
+    ],
+    "v2_stone": [
+      "665c50",
+      0.03,
+      0.89
+    ],
+    "v2_slate": [
+      "40494e",
+      0.35,
+      0.76
+    ],
+    "v2_oxide": [
+      "824b38",
+      0.12,
+      0.69
+    ],
+    "v2_copper": [
+      "87694b",
+      0.73,
+      0.57
+    ]
+  },
+  "emissive": {
+    "furnace": [
+      "f35a17",
+      0.65
+    ],
+    "v2_window_warm": [
+      "c78c51",
+      0.4
+    ],
+    "v2_window_cool": [
+      "78949c",
+      0.18
+    ]
+  },
+  "limits": "Source renders only. No rendered Unreal, performance or human visual acceptance yet."
+}

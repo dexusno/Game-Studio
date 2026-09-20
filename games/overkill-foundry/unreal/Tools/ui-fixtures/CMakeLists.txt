@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(FoundryUIFixtures LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+add_subdirectory(../../../platform storage EXCLUDE_FROM_ALL)
+add_executable(foundry_ui_fixtures main.cpp)
+target_link_libraries(foundry_ui_fixtures PRIVATE overkill_campaign_session)

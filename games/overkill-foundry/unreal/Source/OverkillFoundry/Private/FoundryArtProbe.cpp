@@ -1,5 +1,6 @@
 #include "FoundryHost.h"
 #include "FoundryRobot.h"
+#include "FoundryMara.h"
 
 #include "Engine/World.h"
 #include "EngineUtils.h"
@@ -42,6 +43,47 @@ void AFoundryStage::TickArtProbe(float DeltaSeconds)
     };
     const uint64 Mite = Session->State.enemies[0].id;
     const uint64 Ram = Session->State.enemies[1].id;
+    // Exercise visible collection/load/unload before restoring the exact combat
+    // fixture. These are legal actions, independent of the source/import probes.
+    static const float MaraAt[] = {.30f, .79f, 1.60f, 1.80f, 2.06f, 2.80f, 3.04f, 3.50f};
+    if (MaraProbeStep < UE_ARRAY_COUNT(MaraAt) && ArtElapsed >= MaraAt[MaraProbeStep])
+    {
+        switch (MaraProbeStep)
+        {
+        case 0: Submit(overkill::Action::collect(3)); break;
+        case 1:
+            Check(Mara->GetClawCue() == TEXT("collect") && Mara->HasPayload(), TEXT("rear claw grab from committed collection"));
+            CaptureNamed(TEXT("mara-collect-grab.png")); break;
+        case 2:
+            Check(Mara->GetClawCue() == TEXT("collect") && !Mara->HasPayload(), TEXT("rear claw dump clears cosmetic payload"));
+            CaptureNamed(TEXT("mara-collect-dump.png")); break;
+        case 3:
+        {
+            Craft("SH001");
+            std::vector<overkill::Id> Parts;
+            for (const auto& Part : Session->State.parts) if (Part.place == overkill::Place::Reserve && Part.kind == overkill::Kind::Ammo) Parts.push_back(Part.id);
+            Submit(overkill::Action::load(Parts)); break;
+        }
+        case 4:
+            Check(Mara->GetGunCue() == TEXT("load"), TEXT("committed Load opens original breech rig"));
+            SetActionView(true, true);
+            CaptureNamed(TEXT("mara-load.png")); break;
+        case 5:
+        {
+            overkill::Action Unload;
+            Unload.type = overkill::ActionType::Unload;
+            Submit(Unload); break;
+        }
+        case 6:
+            Check(Mara->GetGunCue() == TEXT("unload"), TEXT("committed Unload reverses loading mechanism"));
+            CaptureNamed(TEXT("mara-unload.png")); break;
+        case 7:
+            Control(TEXT("restart"));
+            Session->bShowPanels = false;
+            Check(Mara->IsReset(), TEXT("Mara restart clears cosmetic state")); break;
+        }
+        ++MaraProbeStep;
+    }
     if (ArtElapsed >= 12.60f && !ArtCaptures.Contains(TEXT("art-ram-steam.png")))
     {
         ArtCaptures.Add(TEXT("art-ram-steam.png"));
@@ -73,7 +115,9 @@ void AFoundryStage::TickArtProbe(float DeltaSeconds)
         Submit(overkill::Action::collect(3)); Craft("SH003"); Shoot(Ram); break;
     case 2: CaptureNamed(TEXT("art-deflection.png")); break;
     case 3: Craft("SH004"); Shoot(Ram); break;
-    case 4: CaptureNamed(TEXT("art-hit-light.png")); break;
+    case 4:
+        Check(Mara->GetGunCue() == TEXT("fire"), TEXT("committed shot plays original gun recoil"));
+        CaptureNamed(TEXT("art-hit-light.png")); break;
     case 5: Craft("SH001"); Shoot(Ram); break;
     case 6: CaptureNamed(TEXT("art-hit-medium.png")); break;
     case 7: Submit(overkill::Action::endTurn()); break;
@@ -114,12 +158,13 @@ void AFoundryStage::TickArtProbe(float DeltaSeconds)
         Control(TEXT("restart"));
         Session->bShowPanels = true;
         Check(Robots.Num() == 2 && IsValid(Robots[0]) && IsValid(Robots[1]) && Robots[0]->AreMaterialsSolid() && Robots[1]->AreMaterialsSolid(), TEXT("restart recreates both complete robot actors with all 15 solid slots"));
+        Check(Mara->IsReset(), TEXT("Mara final restart clears payload and muzzle effects"));
         break;
     case 22:
         CaptureNamed(TEXT("art-restart-hud.png"));
         break;
     case 23:
-        UE_LOG(LogFoundryArtProbe, Display, TEXT("FOUNDRY_ART_PROBE_COMPLETE ok=%d snapshots=%d actual_core_actions=1"), bArtProbeOk, ArtCaptures.Num());
+        UE_LOG(LogFoundryArtProbe, Display, TEXT("FOUNDRY_ART_PROBE_COMPLETE ok=%d snapshots=%d actual_core_actions=1"), bArtProbeOk, RequestedCaptures.Num());
         FPlatformMisc::RequestExit(false);
         break;
     }

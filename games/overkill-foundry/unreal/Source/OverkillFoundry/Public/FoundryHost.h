@@ -6,12 +6,17 @@
 #include "GameFramework/HUD.h"
 #include "GameFramework/PlayerController.h"
 #include "FoundrySession.h"
+#include "FoundryCampaign.h"
+#include "FoundryAudio.h"
 #include "FoundryHost.generated.h"
 
 class ACameraActor;
 class UMaterialInterface;
 class UStaticMesh;
 class AFoundryRobot;
+class AFoundryMara;
+class FFoundryCampaign;
+class SWidget;
 
 // Technical presentation adapter. All combat rules live in the shared core.
 UCLASS()
@@ -22,35 +27,53 @@ public:
     AFoundryStage();
     virtual ~AFoundryStage() override;
     virtual void BeginPlay() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void Tick(float DeltaSeconds) override;
     void SetActionView(bool bAction, bool bInstant = false);
     void CaptureView();
     bool IsActionView() const { return bActionView; }
+    const FString& GetActionCaption() const { return ActionCaption; }
     FFoundrySession& GetSession() { return *Session; }
     const FFoundrySession& GetSession() const { return *Session; }
     void Control(const FString& Command);
+    bool IsTechnicalMode() const { return bTechnicalMode; }
+#if FOUNDRY_WITH_CAMPAIGN
+    FFoundryCampaign* GetCampaign() { return Campaign.Get(); }
+    void RefreshCampaignWorld();
+#endif
 private:
     void SpawnRobots();
     void PresentCommittedEvents();
     void TickArtProbe(float DeltaSeconds);
     void CaptureNamed(const FString& Name);
-    void AddShape(const TCHAR* Label, UStaticMesh* Mesh, const FVector& Location,
-                  const FVector& Scale, const FLinearColor& Color, const FRotator& Rotation = FRotator::ZeroRotator);
+    void TickCampaignProbe(float DeltaSeconds);
     UPROPERTY() TObjectPtr<ACameraActor> PreparationCamera;
     UPROPERTY() TObjectPtr<ACameraActor> ActionCamera;
-    UPROPERTY() TObjectPtr<UMaterialInterface> StageMaterial;
     UPROPERTY() TArray<TObjectPtr<AFoundryRobot>> Robots;
+    UPROPERTY() TObjectPtr<AFoundryMara> Mara;
     bool bActionView = false;
+    FString ActionCaption = TEXT("Firing…");
     bool bSmokeTest = false;
     float SmokeElapsed = 0.0f;
     int32 SmokeStep = 0;
     TUniquePtr<FFoundrySession> Session;
+    TUniquePtr<FFoundryAudio> Audio;
+#if FOUNDRY_WITH_CAMPAIGN
+    TUniquePtr<FFoundryCampaign> Campaign;
+    uint64 SeenSceneRevision = 0;
+#endif
+    bool bTechnicalMode = true;
+    bool bCampaignProbe = false;
+    float CampaignProbeElapsed = 0;
+    int32 CampaignProbeStep = 0;
     float ReturnCameraAfter = 0.0f;
     bool bArtProbe = false;
     bool bArtProbeOk = true;
     float ArtElapsed = 0;
     int32 ArtStep = 0;
+    int32 MaraProbeStep = 0;
     TSet<FString> ArtCaptures;
+    TSet<FString> RequestedCaptures;
 };
 
 UCLASS()
@@ -74,6 +97,7 @@ private:
     void Steer();
     void Precision();
     void TogglePanels();
+    void Diagnostic();
 };
 
 UCLASS()
@@ -82,11 +106,13 @@ class OVERKILLFOUNDRY_API AFoundryHUD : public AHUD
     GENERATED_BODY()
 public:
     virtual void DrawHUD() override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     virtual void NotifyHitBoxClick(FName BoxName) override;
     virtual void NotifyHitBoxBeginCursorOver(FName BoxName) override;
     virtual void NotifyHitBoxEndCursorOver(FName BoxName) override;
 private:
     FString HoverCommand;
+    TSharedPtr<SWidget> CampaignWidget;
 };
 
 UCLASS()
