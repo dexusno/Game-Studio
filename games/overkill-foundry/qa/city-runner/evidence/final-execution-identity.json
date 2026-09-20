@@ -1,0 +1,36 @@
+{
+  "completed_utc": "2026-09-20T14:20:05.0132863Z",
+  "source_capture_utc": "2026-09-20T14:12:07.4793412Z",
+  "git_head": "842300e9dcdf6612768485250b0ac2320dbde27c",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "architecture": "x64",
+  "compiler": "MSVC",
+  "compiler_version": "19.44.35228.0",
+  "configuration": "Release",
+  "strict_flags": [
+    "/W4",
+    "/WX",
+    "/permissive-"
+  ],
+  "frozen_source_files_verified": 27,
+  "live_source_files_matching": 27,
+  "cli_cases": 12,
+  "independently_replayed_commands": 4443,
+  "independent_probe_groups_passed": 15,
+  "replay_corruption_checks_passed": 12,
+  "artifact_sha256": {
+    "CMakeLists.txt": "0b8e21e4146cd1a5a885941391e755fc9476c632bf3d44bfdad388f36b89e5d8",
+    "capture.ps1": "dd149e84bf0353c5437e80fb4c0738e26d4b6c4729425b0bce2c242fabd58262",
+    "build.ps1": "96a194532c0071818a708690bac8505c21b4277d35bbde8349281f434bfe52b5",
+    "probes.cpp": "55bede9be2d4d34dd02edb15a07ba21743cfe51cb9db20aa8ffde28af0989521",
+    "adversarial_replay.py": "bf934c9dd337d2b69366278989f3084984874a4791775f4d7f61f82c48c4c8cc",
+    "run_cli_review.py": "4a449a943703eafb7db3097632065db8686ee57f2fa295e8ee8952a3f1b1f402",
+    "build/native/Release/review_city_runner.exe": "e6edf05c35096733ab6601a9bc9f536446db04d0e0bfe1b9cd724758a5fc1131",
+    "build/native/Release/city_runner_probes.exe": "072465d5cd48ec3d29720f9bc09e18491adc08fb85999fc75271582df49f2772",
+    "build/selected/defensive-s2/defensive-auto-2.oftrace": "7d8a2e121f0c76d0bdd06d288852db55463c787f72ab9cb13b878e768ceecaac",
+    "evidence/cli-results.txt": "de7a05f9bc1e5dc881f4dd6ba8edca35a30b50b245ea130532fdf9ed03a4e4dc",
+    "evidence/replay-before.txt": "0ac2a9e3a363b4f0b6fa7b0c484af27ce0fde45797c1055e1598b9a13d128ba8",
+    "evidence/replay-final.txt": "261bba61766a4107dae47680c6de0ef75eda91a189023f4817b63c9ae3fff898",
+    "evidence/runs.json": "37148fcb0b07daa469a9a4a1bffadec9506af4ce2753887e667102e195314908"
+  }
+}

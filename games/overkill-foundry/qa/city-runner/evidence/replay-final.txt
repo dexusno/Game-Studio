@@ -1,0 +1,15 @@
+RUNNER SHA256 e6edf05c35096733ab6601a9bc9f536446db04d0e0bfe1b9cd724758a5fc1131
+BASE TRACE SHA256 7d8a2e121f0c76d0bdd06d288852db55463c787f72ab9cb13b878e768ceecaac
+PASS original: expected=accept observed=accept exit=0; Replayed 342 exact commands/events; final city_complete; hash dae7aea3a8a7e0f5
+PASS metadata_missing_fields: expected=reject observed=reject exit=2; Invalid trace metadata fields
+PASS metadata_wrong_rules: expected=reject observed=reject exit=2; Trace rules/content metadata differs from this build
+PASS metadata_wrong_policy: expected=reject observed=reject exit=2; Unsupported trace policy metadata
+PASS metadata_trailing_fields: expected=reject observed=reject exit=2; Invalid trace metadata fields
+PASS final_false_outcome: expected=reject observed=reject exit=2; Final outcome contradicts replayed campaign/result
+PASS final_trailing_fields: expected=reject observed=reject exit=2; Invalid final trace fields
+PASS final_corrupt_bytes: expected=reject observed=reject exit=2; Final replay state bytes differ
+PASS command_truncated: expected=reject observed=reject exit=2; Truncated command
+PASS event_corrupt: expected=reject observed=reject exit=2; Event mismatch at command 1
+PASS result_trailing_fields: expected=reject observed=reject exit=2; Invalid action result fields
+PASS missing_final: expected=reject observed=reject exit=2; Trace ended without final state
+SUMMARY 12 passed, 0 failed

@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.20)
+project(OverkillIndependentCityReview LANGUAGES CXX)
+set(OVERKILL_BUILD_CORE_TOOLS OFF CACHE BOOL "Independent bounded review" FORCE)
+set(OVERKILL_QA_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." CACHE PATH "Captured game graph")
+add_subdirectory("${OVERKILL_QA_SOURCE_ROOT}/core" core-runtime EXCLUDE_FROM_ALL)
+add_library(review_runner_support STATIC
+  "${OVERKILL_QA_SOURCE_ROOT}/core/runner/policy.cpp"
+  "${OVERKILL_QA_SOURCE_ROOT}/core/runner/trace.cpp")
+target_include_directories(review_runner_support PUBLIC "${OVERKILL_QA_SOURCE_ROOT}/core/runner")
+target_link_libraries(review_runner_support PUBLIC overkill_core)
+target_compile_features(review_runner_support PUBLIC cxx_std_17)
+add_executable(review_city_runner "${OVERKILL_QA_SOURCE_ROOT}/core/runner/main.cpp")
+target_link_libraries(review_city_runner PRIVATE review_runner_support)
+add_executable(city_runner_probes probes.cpp)
+target_link_libraries(city_runner_probes PRIVATE review_runner_support)
+foreach(target review_runner_support review_city_runner city_runner_probes)
+  target_compile_options(${target} PRIVATE /W4 /WX /permissive-)
+endforeach()

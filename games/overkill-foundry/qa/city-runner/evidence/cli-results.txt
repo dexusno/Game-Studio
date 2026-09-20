@@ -1,0 +1,73 @@
+RUNNER SHA256 e6edf05c35096733ab6601a9bc9f536446db04d0e0bfe1b9cd724758a5fc1131
+INDEPENDENT PROBE SHA256 072465d5cd48ec3d29720f9bc09e18491adc08fb85999fc75271582df49f2772
+PASS aggressive-s1: city_complete hp=57 position=13 actions=445 exit=0 hash=96b9bb28bf739a1c
+PASS aggressive-s1 HP ledger: 80 + 0 heal - 23 damage - 0 payment = 57
+PASS aggressive-s1 authored replay: Replayed 445 exact commands/events; final city_complete; hash 96b9bb28bf739a1c
+PASS aggressive-s2: city_complete hp=77 position=13 actions=406 exit=0 hash=8c529a40bde2b64a
+PASS aggressive-s2 HP ledger: 80 + 1 heal - 4 damage - 0 payment = 77
+PASS aggressive-s2 authored replay: Replayed 406 exact commands/events; final city_complete; hash 8c529a40bde2b64a
+PASS aggressive-s3: city_complete hp=69 position=13 actions=336 exit=0 hash=3466d71273b050a1
+PASS aggressive-s3 HP ledger: 80 + 3 heal - 14 damage - 0 payment = 69
+PASS aggressive-s3 authored replay: Replayed 336 exact commands/events; final city_complete; hash 3466d71273b050a1
+PASS defensive-s1: city_complete hp=50 position=13 actions=603 exit=0 hash=f7157860d014f288
+PASS defensive-s1 HP ledger: 80 + 7 heal - 37 damage - 0 payment = 50
+PASS defensive-s1 authored replay: Replayed 603 exact commands/events; final city_complete; hash f7157860d014f288
+PASS defensive-s2: city_complete hp=80 position=13 actions=342 exit=0 hash=dae7aea3a8a7e0f5
+PASS defensive-s2 HP ledger: 80 + 14 heal - 6 damage - 8 payment = 80
+PASS defensive-s2 authored replay: Replayed 342 exact commands/events; final city_complete; hash dae7aea3a8a7e0f5
+PASS defensive-s3: city_complete hp=82 position=13 actions=459 exit=0 hash=9130d86ccf495229
+PASS defensive-s3 HP ledger: 80 + 27 heal - 25 damage - 0 payment = 82
+PASS defensive-s3 authored replay: Replayed 459 exact commands/events; final city_complete; hash 9130d86ccf495229
+PASS skill-learning: city_complete hp=98 position=13 actions=490 exit=0 hash=f0ea6afa7d7a23ba
+PASS skill-learning HP ledger: 80 + 33 heal - 7 damage - 8 payment = 98
+PASS skill-learning authored replay: Replayed 490 exact commands/events; final city_complete; hash f0ea6afa7d7a23ba
+PASS skill-practised: city_complete hp=98 position=13 actions=488 exit=0 hash=370878d81140e9ab
+PASS skill-practised HP ledger: 80 + 33 heal - 7 damage - 8 payment = 98
+PASS skill-practised authored replay: Replayed 488 exact commands/events; final city_complete; hash 370878d81140e9ab
+PASS skill-expert: city_complete hp=98 position=13 actions=498 exit=0 hash=f3cdde7f43ea604e
+PASS skill-expert HP ledger: 80 + 33 heal - 7 damage - 8 payment = 98
+PASS skill-expert authored replay: Replayed 498 exact commands/events; final city_complete; hash f3cdde7f43ea604e
+PASS weak-policy: defeat hp=0 position=1 actions=34 exit=0 hash=ef1d139df91bc451
+PASS weak-policy HP ledger: 80 + 0 heal - 80 damage - 0 payment = 0
+PASS weak-policy authored replay: Replayed 34 exact commands/events; final defeat; hash ef1d139df91bc451
+PASS watchdog: policy_timeout hp=80 position=1 actions=0 exit=2 hash=30038de7e7f89700
+PASS watchdog HP ledger: 80 + 0 heal - 0 damage - 0 payment = 80
+PASS watchdog authored replay: Replayed 0 exact commands/events; final policy_timeout; hash 30038de7e7f89700
+PASS repeat-defensive-s2: city_complete hp=80 position=13 actions=342 exit=0 hash=dae7aea3a8a7e0f5
+PASS repeat-defensive-s2 HP ledger: 80 + 14 heal - 6 damage - 8 payment = 80
+PASS repeat-defensive-s2 authored replay: Replayed 342 exact commands/events; final city_complete; hash dae7aea3a8a7e0f5
+PASS repeat-defensive-s2 full trace bytes equal
+TRACE seed=1 actions=445 recipe_uses=130 collections=36 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=96b9bb28bf739a1c
+PASS R01 independent full-state replay 1
+TRACE seed=2 actions=406 recipe_uses=116 collections=33 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=8c529a40bde2b64a
+PASS R01 independent full-state replay 2
+TRACE seed=3 actions=336 recipe_uses=88 collections=24 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=3466d71273b050a1
+PASS R01 independent full-state replay 3
+TRACE seed=1 actions=603 recipe_uses=196 collections=55 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=f7157860d014f288
+PASS R01 independent full-state replay 4
+TECHNICIAN command=155 before_hp=78 after_hp=70 item=UGS-030
+TRACE seed=2 actions=342 recipe_uses=97 collections=24 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=dae7aea3a8a7e0f5
+PASS R01 independent full-state replay 5
+TRACE seed=3 actions=459 recipe_uses=141 collections=40 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=9130d86ccf495229
+PASS R01 independent full-state replay 6
+TECHNICIAN command=152 before_hp=98 after_hp=90 item=UGS-030
+TRACE seed=4 actions=490 recipe_uses=151 collections=41 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=f0ea6afa7d7a23ba
+PASS R01 independent full-state replay 7
+TECHNICIAN command=150 before_hp=98 after_hp=90 item=UGS-030
+TRACE seed=4 actions=488 recipe_uses=151 collections=40 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=370878d81140e9ab
+PASS R01 independent full-state replay 8
+TECHNICIAN command=150 before_hp=98 after_hp=90 item=UGS-030
+TRACE seed=4 actions=498 recipe_uses=155 collections=41 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=f3cdde7f43ea604e
+PASS R01 independent full-state replay 9
+TRACE seed=2 actions=34 recipe_uses=10 collections=10 technician_payments=0 known_hp_paid=0 outcome=defeat hash=ef1d139df91bc451
+PASS R01 independent full-state replay 10
+TRACE seed=2 actions=0 recipe_uses=0 collections=0 technician_payments=0 known_hp_paid=0 outcome=policy_timeout hash=30038de7e7f89700
+PASS R01 independent full-state replay 11
+TECHNICIAN command=155 before_hp=78 after_hp=70 item=UGS-030
+TRACE seed=2 actions=342 recipe_uses=97 collections=24 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=dae7aea3a8a7e0f5
+PASS R01 independent full-state replay 12
+PASS R02 policy ignores unseen later route slots and all RNG streams
+PASS R04 future enemy pattern changes cannot alter current combat decision
+PASS R03 source inventory and price mutations remain production-validated
+SUMMARY 15 passed, 0 failed
+PASS all independently replayed HP payments equal reported totals

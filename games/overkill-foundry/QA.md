@@ -10,6 +10,12 @@ Rules/content are `of-core-0.4` / `cinderwall-upgrades-0.3`, with fight schema 4
 
 Original Mara gun/claw rendering passes the bounded snapshot probe described in [BUILD.md](BUILD.md), with those art/UI source changes still local and outside this native checkpoint. Root inspected actual loaded, firing, collection and restart captures. Better machinery geometry does not establish the selected F.I.S.T. quality bar; the obstructive debug HUD, repetition, effects, broader enemy coverage and audio still need work. No human approval or packaged build is claimed.
 
+## Reviewed numerical city runner, 20 September 2026
+
+[Independent runner review](qa/city-runner-review.md) verifies canonical initial state, production commands/costs, recorded discovery actions, selected information-boundary invariants and exact replay. Its 12 selected CLI cases, 15 probe groups, 4,443 reapplied actions and 12 valid/corrupt trace checks pass after two reporting/validation repairs. Those selected runs are not a win-rate estimate. A subsequent root source check found that the declared Practised probabilities differ from the canonical data; CR-03 records the pending baseline-3 correction while preserving the actual frozen observations.
+
+The separate [baseline-2 Auto pilot](core/runner/BASELINE-2.md) contains all 40 unfiltered runs: 33 city completions, four genuine defeats and three policy timeouts. Every trace replays. The policies' shallow kill/Shield valuation explains the observed stalls; it does not justify a new game cap. Hundreds of fresh evaluations and two demonstrated viable builds remain required. Synthetic Precision assumptions are uncalibrated, and these native results do not certify graphical input, the game package or human difficulty.
+
 ## Expanded increment, 20 September 2026
 
 Historical reviewed rules/content: `of-core-0.3` / `cinderwall-recipes-0.2`, fight schema 3 and campaign schema 2. [Independent expanded review](qa/expanded-review.md) passes 43 semantic groups with exact frozen identities and source-derived metadata checks. Five independently reproduced defects were fixed: detached MA059/MA086 sources, post-lethal SH087 support processing, untouched generated-Shield copy eligibility, and SH085's ignored chosen Shield payment. Two related author-found fixes (MA102 source presence and per-part MA093 Heat payments) also received independent checks. The original 15 runtime probes still pass unchanged after the new production linkage was added.

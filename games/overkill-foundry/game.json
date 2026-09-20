@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; development timeline unconstrained and zero budgets unset. Fresh C++17 shared core executes all246 recipe paths, ten robots and native P08 upgrades/campaign adapters with bounded authored and independent tests. Two base-haul composition decisions remain pending; full152 acceptance is not claimed. Windows transactions survive tested process exits. Original Ram/Mite/Mara gun-claw render in Unreal5.8.2 against a reviewed snapshot. Live graphical city and full-city runner are under implementation; final visuals, standalone package and human approval remain outstanding. No old game gameplay/project/build pipeline reused. Stage remains prototype.",
+  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Fresh C++17 shared core executes all246 recipe paths, ten robots and native P08 upgrades/campaign adapters with bounded authored and independent tests. Two base-haul composition decisions remain held; full152 acceptance is not claimed. The canonical city runner has independent replay review and40 retained Auto pilot results; policy stalls and a Precision-model distribution mismatch are documented for correction before fresh larger batches. Windows transactions survive tested process exits. Original Ram/Mite/Mara render in Unreal5.8.2; live graphical flows, audio and actual Precision controls are being integrated. Final visuals, two viable builds, standalone package and human approval remain outstanding. No old-game gameplay/project/build pipeline reused. Stage remains prototype.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T13:53:48+00:00",
-      "record_sha256": "0f8b81dbe36241f960dc0089eec9ae5389543ba909ce51caa35aae366983dddf",
+      "captured_at": "2026-09-20T14:31:13+00:00",
+      "record_sha256": "67e84d8f4aaaf5d1c1c00a6b0ee1fca69927043a42d7cb4362c587c13a921461",
       "files": {
-        "games/overkill-foundry/STATUS.md": "57ab107d28a72ca0128ded303b33be08f5c304c5f963d9d32b4de0751bb87a88",
+        "games/overkill-foundry/STATUS.md": "97ce89a43d12a552ef7c5ffda39b31bbce58a98257c721895389e053d8af2ef9",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "08d645e68d12908f049385a55b519723701b558d097de60960943133c9faaa44",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",

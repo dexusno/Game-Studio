@@ -1,0 +1,15 @@
+RUNNER SHA256 b35fd1a8c3be509b621ca27dc04c2b813c14ffd543c49eedaff3bc5cb740a89c
+BASE TRACE SHA256 2f8032999fc2568bf637dcc8ea24d3b1e4faf7d0f7c15f2ba3c7c2617d89d1a1
+PASS original: expected=accept observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+FAIL metadata_missing_fields: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+FAIL metadata_wrong_rules: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+FAIL metadata_wrong_policy: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+FAIL metadata_trailing_fields: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+FAIL final_false_outcome: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final defeat; hash 103a401e19424e4e
+FAIL final_trailing_fields: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+PASS final_corrupt_bytes: expected=reject observed=reject exit=2; Final replay state bytes differ
+PASS command_truncated: expected=reject observed=reject exit=2; Truncated command
+PASS event_corrupt: expected=reject observed=reject exit=2; Event mismatch at command 1
+FAIL result_trailing_fields: expected=reject observed=accept exit=0; Replayed 332 exact commands/events; final city_complete; hash 103a401e19424e4e
+PASS missing_final: expected=reject observed=reject exit=2; Trace ended without final state
+SUMMARY 5 passed, 7 failed
