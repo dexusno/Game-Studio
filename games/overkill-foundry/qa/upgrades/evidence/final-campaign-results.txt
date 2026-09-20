@@ -1,0 +1,24 @@
+PASS C-U01 three acquisition recipe offers preserve exchange cursor without victory payout
+PASS C-U02 exact recipe copy requires different exchange and is once-owned after decline
+PASS C-U03 Utility memory is empty capacity and cannot store Ammo
+PASS C-U04 Borrowed choice is extra, deterministic on Continue, uncopyable and removed at victory
+PASS C-U05 Surveyor decline and exhausted pool keep one normal Mystery credit
+PASS C-U06 nested upgrade acquisition acknowledges parent before forced copy choice
+PASS C-U07 ever-acquired exhaustion pays Compass30 only after fifth victory
+PASS C-U08 real license charge and midfight purchase roll back on Continue
+PASS C-U09 shop discount does not discount its own acquisition or replay
+PASS C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations
+PASS C-U13 cancel staged exchange keeps paid ownership and all seeded candidates
+PASS C-U14 Technician plus Risky Calibration validates combined16HP before commit
+PASS C-U15 two earned deferred subscriptions remain usable after one copy becomes ineligible
+PASS process exit mode=0 boundary=0 exit=73
+PASS process exit mode=0 boundary=1 exit=73
+PASS process exit mode=0 boundary=2 exit=73
+PASS process exit mode=0 boundary=3 exit=73
+PASS C-U10 actual process exits preserve acquisition plus nested offers atomically
+PASS process exit mode=1 boundary=0 exit=73
+PASS process exit mode=1 boundary=1 exit=73
+PASS process exit mode=1 boundary=2 exit=73
+PASS process exit mode=1 boundary=3 exit=73
+PASS C-U11 actual process exits preserve nested memory exchange atomically
+SUMMARY 15 passed, 0 failed

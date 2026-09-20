@@ -9,8 +9,8 @@ namespace overkill {
 using Id = std::uint64_t;
 using Amount = std::int32_t;
 using Materials = std::array<Amount, 5>; // Iron, Copper, Carbon, Glass, Circuit.
-inline constexpr const char* RulesVersion = "of-core-0.3";
-inline constexpr const char* ContentVersion = "cinderwall-recipes-0.2";
+inline constexpr const char* RulesVersion = "of-core-0.4";
+inline constexpr const char* ContentVersion = "cinderwall-upgrades-0.3";
 
 enum class Rarity : std::uint8_t { Base, Common, Uncommon, Rare, Legendary };
 enum class Kind : std::uint8_t { Ammo, Shield, Spread, Utility, Magnet, Modifier };
@@ -38,11 +38,18 @@ struct Recipe {
     Rarity rarity = Rarity::Base;
     Amount outputCount = 1, catalogueCode = 0;
 };
+enum class MemoryKind : std::uint8_t { General, Utility, Borrowed };
+enum class RecipeTagKind : std::uint8_t { Damage, Shield, CopperCoupon, IronCoupon, LightTouch, Subscription, Cooldown };
+struct RecipeTag { std::string source; Id order=0; RecipeTagKind kind=RecipeTagKind::Damage; Amount amount=0,material=0,usedFight=0; };
 struct RecipeCopy {
     Id id = 0;
     std::string recipe;
     Amount cooldown = 0, usedRound = 0, usesThisRound = 0;
+    MemoryKind storage = MemoryKind::General;
+    std::string borrowedFrom;
+    std::vector<RecipeTag> tags;
 };
+enum class PartOrigin : std::uint8_t { Produced, Granted, Copied };
 struct Attachment { std::string source; Amount damage = 0, heat = 0, dueRound = 0; };
 struct Part {
     Id id = 0;
@@ -60,6 +67,10 @@ struct Part {
     std::vector<Attachment> attachments;
     Id reservedBy = 0;
     Amount hookUses = 0;
+    Id sourceRecipeCopy = 0;
+    PartOrigin origin = PartOrigin::Granted;
+    std::string creator, canonicalRecipe;
+    Amount upgradeDamage = 0, upgradeShield = 0;
 };
 struct Protection { Id id = 0, order = 0; Amount amount = 0; };
 enum class Move : std::uint8_t { Attack, Charge, Recover, Escape, GainShield, Support, Deploy, Brace };
@@ -101,12 +112,75 @@ struct Binding {
     std::vector<Amount> choices;
     std::vector<std::string> seen;
 };
-struct ShotBonus { std::string source; Amount flat = 0, percent = 0; };
+struct ShotBonus { std::string source; Amount flat = 0, percent = 0; bool fightLifetime=false; };
 enum class Domain : std::uint8_t { Route, Formation, Robot, Collection, Reward, Shop, Choice, Count };
 struct Rng {
     std::array<std::uint64_t, static_cast<std::size_t>(Domain::Count)> state{};
     static Rng seeded(std::uint64_t seed, std::string encounter);
     std::uint32_t below(Domain domain, std::uint32_t exclusiveMaximum);
+};
+enum class UpgradeScope : std::uint8_t { Campaign, City, Fight, Round };
+struct UpgradeCounter { std::string key; UpgradeScope scope=UpgradeScope::Fight; Amount value=0; };
+// The sole upgrade ledger lives in State. Legacy scalar fields remain for
+// callers; source executors use named, explicitly scoped counters.
+struct OwnedUpgrade {
+    std::string id; Id order=0,recipeCopy=0;
+    Amount charges=0,campaignCount=0,fightCount=0,roundCount=0;
+    std::vector<Amount> values;
+    std::vector<Id> recipes;
+    Id target=0;
+    Materials materials{};
+    std::vector<UpgradeCounter> counters;
+    std::vector<std::string> seen;
+};
+enum class EncounterClass : std::uint8_t { Regular, Officer, Boss };
+enum class UpgradeEventKind : std::uint8_t { Acquire, FightStart, TurnStart, Collect, Victory, Escaped, Noncombat, RecipeAccepted, Purchase, CoreSold, PartSold, ShopRestocked, CityStart };
+enum class AcquisitionSource : std::uint8_t { Victory, Shop, Upgrade, Borrowed };
+enum class PurchaseKind : std::uint8_t { Material, Recipe, Upgrade, Part };
+struct UpgradeEvent {
+    UpgradeEventKind kind=UpgradeEventKind::Victory;
+    AcquisitionSource origin=AcquisitionSource::Victory;
+    PurchaseKind product=PurchaseKind::Material;
+    Id subject=0,reward=0;
+    std::string definition,source;
+    Amount baseValue=0,actualValue=0,steering=0,precision=-1;
+    Materials baseHaul{};
+    bool normalOffer=true,lightTouch=false,snapshotListeners=false;
+    std::vector<std::string> listeners; // Empty snapshots current listeners.
+};
+enum class UpgradeChoiceKind : std::uint8_t { Material, RecipeCopies, Enemy, Pack, HaulExchange, PrecisionRetry };
+struct UpgradeChoice {
+    Id id=0; std::string source; UpgradeChoiceKind kind=UpgradeChoiceKind::Material;
+    Amount minimum=1,maximum=1;
+    std::vector<Id> objects;
+    std::vector<Amount> values;
+    std::vector<std::string> options;
+    Materials baseHaul{};
+    bool optional=false;
+};
+struct UpgradeAnswer {
+    Id choice=0;
+    std::vector<Id> objects;
+    std::vector<Amount> values;
+    std::string option;
+    Materials removed{},added{};
+    bool decline=false;
+};
+enum class UpgradeRequestKind : std::uint8_t { RecipeOffer, UpgradeOffer, CopyRecipe, Subscription, AddRewardOption, AddRewardOffer, RevealReward };
+struct UpgradeRequest {
+    Id id=0;std::string source;UpgradeRequestKind kind=UpgradeRequestKind::RecipeOffer;
+    Amount offers=1,count=3,rarity=-1;
+    Kind recipeKind=Kind::Ammo;
+    bool filterKind=false,sharedOnly=false,optional=true,normalOffer=false;
+    Id recipeCopy=0,reward=0;
+    std::string definition;
+};
+enum class UpgradeContinuation : std::uint8_t { None, FirstTurn, Collection, Preparation };
+struct UpgradeResolution {
+    UpgradeEvent event;
+    std::vector<std::string> sources;
+    Amount cursor=0;
+    UpgradeContinuation after=UpgradeContinuation::None;
 };
 struct State {
     std::string rulesVersion = RulesVersion, contentVersion = ContentVersion, encounter = "teaching";
@@ -135,8 +209,15 @@ struct State {
     Amount mark = 0, carefulHealing = 0;
     Amount recipeFouling = 0, foulingRound = 0, shieldLeak = 0, shieldLeakRound = 0;
     std::vector<Amount> retentionAllowances; // Explicit testable upgrade hooks; no default retention.
+    std::vector<OwnedUpgrade> upgrades;
+    EncounterClass encounterClass=EncounterClass::Regular;
+    Amount fightSerial=0;
+    std::vector<UpgradeResolution> upgradeResolution;
+    std::vector<UpgradeChoice> upgradeChoices;
+    std::vector<UpgradeRequest> upgradeRequests;
+    Amount precisionGoodFight=0,precisionFailedFight=0;
 };
-enum class ActionType : std::uint8_t { Collect, Craft, Install, Remove, Load, Unload, Fire, EndTurn, Activate };
+enum class ActionType : std::uint8_t { Collect, Craft, Install, Remove, Load, Unload, Fire, EndTurn, Activate, ResolveUpgradeChoice, ActivateUpgrade };
 struct SpreadTarget { Id part = 0, enemy = 0; };
 struct Action {
     ActionType type = ActionType::EndTurn;
@@ -153,6 +234,9 @@ struct Action {
     std::vector<SpreadTarget> partTargets; // Source physical part -> extra target (including support hits).
     std::vector<SpreadTarget> partChoices; // Source part -> chosen reserve part for a named modifier.
     Materials discarded{}; // Actual gathered units left by Heavy Magnet Lift.
+    UpgradeAnswer upgradeChoice;
+    Materials discount{}; // MY1-09 allocation, validated before any payment.
+    std::string upgrade; // Explicit equipment action source, e.g. MY1-10.
     static Action collect(Amount material, Amount precisionResult = -1);
     static Action craft(Id copy);
     static Action install(Id part);
@@ -165,6 +249,9 @@ struct Event {
     Id id = 0, parent = 0, subject = 0, target = 0;
     std::string type;
     Amount amount = 0, secondary = 0;
+    std::string source;
+    Amount round=0;
+    Materials paid{};
 };
 struct Result { bool ok = false; std::string reason; std::vector<Event> events; };
 struct Preview { Result result; State state; };
@@ -181,6 +268,10 @@ public:
     Result apply(State& state, const Action& action) const;
     Result grantPart(State& state, const std::string& recipeId, bool installed = false) const;
     Result grantPlainPart(State& state, Kind kind, Amount value, const std::string& source, bool installed = false) const;
+    Result acquireUpgrade(State& state, const std::string& id) const;
+    Result startUpgrades(State& state, EncounterClass encounter) const;
+    Result upgradeEvent(State& state, const UpgradeEvent& event) const;
+    Result resumeUpgrades(State& state) const;
     Preview preview(const State& state, const Action& action) const;
     std::vector<Action> legalActions(const State& state) const;
     static Amount shield(const State& state, bool installedOnly = false);

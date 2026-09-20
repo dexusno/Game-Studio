@@ -17,11 +17,23 @@ struct RewardEntry {
     std::vector<std::string> choices;
     std::vector<EnergyCore> cores;
     Amount credits=0;
+    bool normalOffer=true;
+    std::vector<std::string> lightTouch;
+    std::string pool;
+    Amount fixedRarity=-1;
 };
-struct OwnedUpgrade {
-    std::string id;Id order=0,recipeCopy=0;
-    Amount charges=0,campaignCount=0,fightCount=0,roundCount=0;
-    std::vector<Amount> values;
+struct CampaignOffer {
+    Id id=0,request=0;
+    std::string source;
+    UpgradeRequestKind kind=UpgradeRequestKind::RecipeOffer;
+    std::vector<std::vector<std::string>> candidates;
+    Amount index=0,creditAlternative=0;
+    MemoryKind storage=MemoryKind::General;
+    bool optional=true;
+    std::string selected;
+    std::vector<Id> copies;
+    Id sourceCopy=0;
+    bool deferred=false;
 };
 struct ProfileFacts {
     std::vector<std::string> recipes,unlocked{"Mara"};
@@ -39,13 +51,17 @@ struct Campaign {
     ProfileFacts profile;
     State fight;
     CityRoute route;
+    std::vector<RouteOffer> routePreviews;
     Amount memorySlots=20,shopGeneration=0;
     std::vector<EnergyCore> cores;
-    std::vector<OwnedUpgrade> upgrades;
     std::vector<std::string> everAcquired,mayorOffers;
     std::string mayor;
     std::vector<Product> shop,eventShop;
     std::vector<RewardEntry> rewards;
+    std::vector<UpgradeRequest> rewardAdjustments;
+    std::vector<CampaignOffer> upgradeOffers;
+    Amount pendingMysteryCredits=0;
+    bool revealNextReward=false;
     Id recipeWindow=0;
     std::string pendingRecipeChoice;
     bool skipConfirmation=false,preStart=false;
@@ -57,15 +73,19 @@ struct Campaign {
 enum class CampaignActionType : std::uint8_t {
     ChooseMayor,EnterOffer,EnterPatrol,Combat,OpenRecipes,BackRecipes,ClaimReward,
     RequestAdvance,CancelAdvance,ConfirmAdvance,Buy,SellCore,SellPart,
-    AcceptCalibration,LeaveMystery,Continue,OpenShop
+    AcceptCalibration,LeaveMystery,Continue,OpenShop,ResolveUpgradeChoice,ResolveUpgradeOffer,
+    RerollRecipeReward,PreviewRouteReplacement,ReplaceRouteOffer,CancelUpgradeExchange,MoveRecipeCopy
 };
 struct CampaignAction {
     CampaignActionType type=CampaignActionType::RequestAdvance;
     std::string runId; // Together with sequence identifies this run's command.
     Id sequence=0,subject=0,exchange=0;
+    Id target=0;
     std::string choice;
     Amount quantity=1;
     bool eventShop=false;
+    bool decline=false;
+    Amount material=0;
     Action combat;
 };
 struct CampaignResult {
@@ -79,6 +99,8 @@ struct CampaignHooks {
     std::function<Result(Campaign&,const std::string&)> grantPart;
     std::function<Result(Campaign&)> combatCompleted;
     std::function<Result(Campaign&)> noncombatCompleted;
+    std::function<Result(Campaign&,const UpgradeEvent&)> notifyUpgrade;
+    std::function<Result(Campaign&)> resumeUpgrade;
     std::function<Amount(const Campaign&,const Product&)> productPrice;
     std::function<Amount(const Campaign&,const EnergyCore&)> coreSaleValue;
     std::function<Amount(const Campaign&,const Part&)> partSaleValue;
@@ -89,13 +111,22 @@ public:
     Campaign newGame(std::uint64_t seed,const std::string& runId,const ProfileFacts& profile={}) const;
     CampaignResult apply(Campaign& campaign,const CampaignAction& action) const;
     const CityContent& content() const {return content_;}
+    bool hasFreeMemory(const Campaign& campaign,const std::string& recipe,MemoryKind storage=MemoryKind::General) const;
+    std::string revealedRecipe(const Campaign& campaign,const RouteOffer& offer) const;
+    std::string revealedMysteryCategory(const Campaign& campaign,Id offer) const;
 private:
     const Rules& fights_;CampaignHooks hooks_;CityContent content_;
     void restock(Campaign& campaign) const;
-    void acquireRecipe(Campaign& campaign,const std::string& recipe,Id exchange) const;
-    void acquireUpgrade(Campaign& campaign,const std::string& upgrade,const CampaignAction& action) const;
-    void finishCombat(Campaign& campaign) const;
+    Id acquireRecipe(Campaign& campaign,const std::string& recipe,Id exchange,MemoryKind storage=MemoryKind::General,const std::string& borrowedFrom={}) const;
+    void acquireUpgrade(Campaign& campaign,const std::string& upgrade,const CampaignAction& action,std::vector<Event>& events) const;
+    void finishCombat(Campaign& campaign,std::vector<Event>& events) const;
+    void notifyUpgrade(Campaign& campaign,const UpgradeEvent& event,std::vector<Event>& events) const;
+    void prepareUpgradeOffers(Campaign& campaign,std::vector<Event>& events) const;
+    void resolveUpgradeOffer(Campaign& campaign,const CampaignAction& action,std::vector<Event>& events) const;
+    std::vector<std::string> normalRecipeOffer(const Campaign& campaign,const RouteOffer& offer) const;
 };
+// Production hooks use the same Rules engine. Test-only hooks remain explicit.
+CampaignHooks cinderwallUpgradeHooks(const Rules& fights,CityContent content=cinderwallContent());
 std::string serializeCampaign(const Campaign& campaign);
 bool deserializeCampaign(const std::string& bytes,Campaign& campaign,std::string& error);
 std::string campaignHash(const Campaign& campaign);

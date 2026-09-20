@@ -13,7 +13,7 @@ void check(bool ok,const std::string& message){++checks;if(!ok)throw std::runtim
 CampaignHooks fixtureHooks(const Rules& fights){
     CampaignHooks h;
     // Transaction fixtures only. The P08 upgrade executor is a separate gate.
-    h.acquireUpgrade=[](Campaign& c,const std::string&,const CampaignAction&){c.upgrades.back().charges=1;return Result{true,{},{}};};
+    h.acquireUpgrade=[](Campaign& c,const std::string& id,const CampaignAction&){OwnedUpgrade u;u.id=id;u.order=c.fight.nextOrder++;u.charges=1;c.fight.upgrades.push_back(u);return Result{true,{},{}};};
     h.initializeFight=[](Campaign& c,const RouteOffer& o){c.fight.enemies=makeCinderwallFormation(o.formation,o.encounterSeed,o.encounterKey,c.fight.nextId,o.binderDefaultSeen);return Result{true,{},{}};};
     h.combatCompleted=[](Campaign&){return Result{true,{},{}};};
     h.grantPart=[&fights](Campaign& c,const std::string& id){return fights.grantPart(c.fight,id);};return h;
@@ -24,7 +24,7 @@ CampaignAction action(const Campaign& c,CampaignActionType type,Id subject=0,std
 void run(Campaign& c,const CampaignRules& rules,const CampaignAction& a){const auto r=rules.apply(c,a);check(r.ok,r.reason);}
 Id iron(const Campaign& c){for(const auto& p:c.shop)if(p.kind==ProductKind::Material && p.material==0)return p.id;throw std::runtime_error("Missing Iron stock.");}
 CampaignAction purchase(const Campaign& c){auto a=action(c,CampaignActionType::Buy,iron(c));a.quantity=2;return a;}
-Campaign initial(const CampaignRules& rules){auto c=rules.newGame(73,"disk-transaction-fixture");run(c,rules,action(c,CampaignActionType::ChooseMayor,0,c.mayorOffers[0]));return c;}
+Campaign initial(const CampaignRules& rules){auto c=rules.newGame(73,"disk-transaction-fixture");c.mayorOffers={"MY1-12","MY1-03","MY1-01"};run(c,rules,action(c,CampaignActionType::ChooseMayor,0,c.mayorOffers[0]));return c;}
 void enter(Campaign& c,const CampaignRules& rules){for(const auto& o:routeOffers(c.route))if(o.formation=="C1-F-RAM"){run(c,rules,action(c,CampaignActionType::EnterOffer,o.id));return;}throw std::runtime_error("Missing opening Ram.");}
 Campaign rewardFixture(const CampaignRules& rules,const Rules& fights){
     auto c=initial(rules);enter(c,rules);const auto grant=fights.grantPlainPart(c.fight,Kind::Ammo,50,"disk-test-only");check(grant.ok,grant.reason);
@@ -85,7 +85,7 @@ int wmain(int argc,wchar_t** argv){try{
     std::vector<wchar_t> executable(32768);const auto length=GetModuleFileNameW(nullptr,executable.data(),static_cast<DWORD>(executable.size()));check(length>0,"Executable path unavailable.");
     for(int mode=0;mode<3;++mode){
         auto before=mode==1?rewardFixture(rules,fights):initial(rules);
-        if(mode==2){run(before,rules,purchase(before));enter(before,rules);auto a=action(before,CampaignActionType::Buy,iron(before));run(before,rules,a);before.upgrades.front().charges=0;run(before,rules,action(before,CampaignActionType::OpenShop));}
+        if(mode==2){run(before,rules,purchase(before));enter(before,rules);auto a=action(before,CampaignActionType::Buy,iron(before));run(before,rules,a);before.fight.upgrades.front().charges=0;run(before,rules,action(before,CampaignActionType::OpenShop));}
         const auto command=forMode(before,mode);auto after=before;run(after,rules,command);
         const auto beforeBytes=serializeCampaign(before),afterBytes=serializeCampaign(after);
         for(int point=0;point<4;++point){

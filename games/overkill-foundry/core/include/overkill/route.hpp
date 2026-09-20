@@ -10,6 +10,7 @@ struct RouteOffer {
     std::string formation, mystery, district, encounterKey;
     std::uint64_t encounterSeed=0;
     bool binderDefaultSeen=false;
+    bool replaced=false,surveyed=false;
 };
 struct RouteNode {
     std::vector<RouteOffer> offers;
@@ -26,6 +27,7 @@ struct CityRoute {
     std::vector<std::string> officerOrder;
     std::string district, previousFormation;
     bool binderDefaultSeen=false;
+    bool safeMysteries=false;
 };
 
 // Cinderwall's complete schedule is fixed at creation. Current offers are generated
@@ -35,5 +37,10 @@ const std::vector<RouteOffer>& routeOffers(const CityRoute& route);
 const RouteOffer* selectedRouteOffer(const CityRoute& route);
 bool selectRouteOffer(CityRoute& route,Id offer,std::string& error);
 bool completeRouteNode(CityRoute& route,std::string& error);
+// Pure deterministic preview, followed by an atomic explicit commitment. A
+// spent option cannot be replaced again. Officer replacements swap an unseen
+// scheduled Officer so the three opportunities still use distinct identities.
+bool previewRouteReplacement(const CityRoute& route,Id offer,RouteOffer& replacement,std::string& error);
+bool replaceRouteOffer(CityRoute& route,const RouteOffer& replacement,std::string& error);
 bool validateRoute(const CityRoute& route,std::string& error);
 } // namespace overkill

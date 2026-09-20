@@ -43,5 +43,23 @@ int main(){try{
         auto corrupt=a;corrupt.nodes[0].offers[0].encounterSeed^=1;check(!validateRoute(corrupt,error),"Accepted rerolled encounter identity.");
     }
     check(schedules.size()>400,"Schedule sampling did not exercise expected variety.");check(kinds.size()==4,"Missing category coverage.");check(firstOfficers==std::set<std::string>{"C1-F-PURSUER"},"Preferred first Officer changed.");
+    for(std::uint64_t seed=0;seed<100;++seed){
+        auto route=makeCinderwallRoute(seed);route.safeMysteries=true;std::string error;std::set<std::string> observedOfficers;Amount passes=3;
+        while(route.position<=12){
+            const auto offers=routeOffers(route);const auto rng=route.rng.state;
+            for(const auto& offer:offers){
+                if(offer.kind==EncounterKind::Mystery)check(offer.mystery!="C1-M-PATROL","Safe Survey generated a hidden fight.");
+                if(passes>0 && offer.kind==EncounterKind::Officer){
+                    RouteOffer a,b;if(previewRouteReplacement(route,offer.id,a,error)){
+                        check(previewRouteReplacement(route,offer.id,b,error) && a.formation==b.formation && a.encounterSeed==b.encounterSeed,"Repeated route preview changed alternative.");check(route.rng.state==rng,"Route preview consumed a stream.");
+                        check(replaceRouteOffer(route,a,error),error);--passes;check(!replaceRouteOffer(route,a,error),"Spent Officer alternative rerolled.");check(validateRoute(route,error),error);
+                    }
+                }
+            }
+            auto chosen=routeOffers(route).front().id;for(const auto& offer:routeOffers(route))if(offer.kind==EncounterKind::Officer){check(observedOfficers.insert(offer.formation).second,"Officer pass caused a later duplicate.");chosen=offer.id;}
+            check(selectRouteOffer(route,chosen,error),error);check(completeRouteNode(route,error),error);check(validateRoute(route,error),error);
+        }
+        check(observedOfficers.size()==3,"Route pass skipped Officer progression.");
+    }
     std::cout<<"PASS "<<checks<<" route assertions over 1,000 complete choice paths; "<<schedules.size()<<" schedules observed. This is route validation, not combat simulation.\n";return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL "<<e.what()<<'\n';return 1;}}

@@ -1,6 +1,16 @@
 # Overkill Foundry — build and run
 
-Fresh implementation: an engine-independent C++17 core and a new Unreal 5.8.2 host. Last reviewed rules/content are `of-core-0.3` / `cinderwall-recipes-0.2`, fight snapshot schema 3 and repaired campaign schema 2. The next P08 core 0.4/schema 4 integration is under construction and not yet verified. The complete recipe dispatch, Cinderwall robot/route modules and campaign transaction caller now build; permanent upgrades, graphical campaign integration, full-city balancing and the standalone package remain incomplete.
+Fresh implementation: an engine-independent C++17 core and a new Unreal 5.8.2 host. The reviewed native P08 checkpoint uses `of-core-0.4` / `cinderwall-upgrades-0.3`, fight schema 4 and campaign schema 3. Its native build and bounded independent tests pass; two haul-composition decisions are still held. The graphical campaign, full-city balancing and standalone package remain incomplete.
+
+## Reviewed native P08 checkpoint, 20 September 2026
+
+The sole upgrade ledger now lives in fight State, with persisted ordered reactions, typed decisions, candidate offers and recipe-copy tags. `CampaignRules` with `cinderwallUpgradeHooks` uses that same executor for acquisition, result, purchase/sale and noncombat events. Campaign interfaces handle Borrowed and Utility-only storage, physical-copy moves outside fights, fixed nested offers/exchanges, original-entry Continue, route-pass previews, information effects and reward replacement. The public action contract is in `core/include/overkill/campaign.hpp`.
+
+The latest full native CTest run passes 7/7 suites, including the original 443 core / 2,055 recipe / 2,462 robot assertions and 784 transaction fixtures. Extended route checks total 146,303 assertions. The separate production campaign-upgrade suite subsequently passes 255 assertions, using actual upgrades with controlled zero-price shop stock and terminal ammunition. The engine author separately reports 1,130 upgrade assertions covering 147 source IDs; the four route/interface IDs are handled in campaign tests. This remains bounded evidence, not a balanced city or all-interaction proof. [Independent P08 review](qa/upgrades-review.md) records frozen candidates and rechecks. UGS-141's added haul composition and stacked first-haul deductions remain explicitly unavailable until the pending owner answers.
+
+Independent review passes 36 core groups, 15 production campaign groups and eight actual process exits on the final captured 25-file graph. All seven recorded findings are repaired and rechecked. The platform build separately passes both CTest suites on P08; its campaign suite has 141 assertions and 12 actual process exits. No hardware power-loss test is claimed.
+
+The original Mara gun/rear-claw work in progress builds both Unreal targets on an explicitly recorded `bebb22d` core snapshot. Thirty-three source/interchange checks and 22 rendered capture requests pass. Snapshot fixture parity is unchanged at 85 lines / hash `37978146880e1302`. Rendered attachment-scale and static-culling defects were fixed. These art/UI paths remain local work in progress outside this native checkpoint. Current P08 graphical parity must be rebuilt; the snapshot visual result does not certify the live rules. The live campaign shell and full-city runner are under implementation.
 
 ## Prerequisites
 

@@ -23,36 +23,35 @@
         static const char* names[]={"burn_applied","corrosion_applied","mark_applied","weaken_applied"};emit(names[kind],0,id,n);
     }
     void loseHeat(Amount n){const Amount actual=std::min(s.heat,n);s.heat-=actual;emit("heat_lost",0,0,actual);}
-    void cooling(Amount n){for(auto& c:s.memory){const auto take=std::min(c.cooldown,n);c.cooldown-=take;if(take)emit("cooled",c.id,0,take);}}
+    void cooling(Amount n){for(auto& c:s.memory){const auto take=std::min(c.cooldown,n);c.cooldown-=take;if(take){emit("cooled",c.id,0,take);if(inRecipeUse){useCoolingRemoved=add(useCoolingRemoved,take);if(c.cooldown==0)useReadied=true;}}}}
     void payment(Amount hp,Amount heatCost,Amount shieldCost,bool partUse,Part* part=nullptr) {
         require(s.hp>hp,"Own HP cost must leave at least 1 HP.");require(s.heat>=heatCost,"Not enough Heat.");require(Rules::shield(s,true)>=shieldCost,"Not enough installed Shield.");
         s.hp-=hp;s.hpPaidFight=add(s.hpPaidFight,hp);s.hpLostRound=add(s.hpLostRound,hp);s.heat-=heatCost;s.heatPaidRound=add(s.heatPaidRound,heatCost);
         if(part){part->paidHp=hp;part->paidHeat=heatCost;}
         if(hp)emit("hp_cost",part?part->id:0,0,hp);if(heatCost)emit("heat_cost",part?part->id:0,0,heatCost);
         if(shieldCost){Rules::spendShield(s,shieldCost,true);emit("shield_cost",part?part->id:0,0,shieldCost);}
-        if(partUse&&shieldCost>=4)if(auto* b=binding("MA081",BindingClock::Fight)){if(b->round!=s.round){b->round=s.round;b->count=0;}if(b->count<2){++b->count;heat(2);}}
         if(partUse){s.partHpPaidFight=add(s.partHpPaidFight,hp);s.partHeatPaidRound=add(s.partHeatPaidRound,heatCost);}
-        if(partUse&&heatCost>=3)if(auto* b=binding("MA093",BindingClock::Fight)){if(b->round!=s.round){b->round=s.round;b->count=0;}if(b->count<2){++b->count;materialLater({1,0,0,0,0},"MA093");}}
-        if(partUse&&hp)if(auto* b=binding("MA101",BindingClock::Round)){if(b->count<3){++b->count;shieldPart(5,"MA101",true);}}
+        paidBeforeEffect(hp,heatCost,shieldCost,partUse);
+        if(hp||heatCost)paidEffects.push_back({hp,heatCost,inRecipeUse});
     }
     void materialNow(Materials values){for(std::size_t i=0;i<5;++i)if(values[i]){s.materials[i]=add(s.materials[i],values[i]);emit("material_granted",0,0,values[i],static_cast<Amount>(i));}}
     void materialLater(Materials values,const std::string& source){Delivery d;d.id=s.nextId++;d.source=source;d.dueRound=s.round+1;d.kind=DeliveryKind::Material;d.materials=values;s.deliveries.push_back(d);emit("delivery_scheduled",d.id);}
     void specialLater(const std::string& source,Amount amount=0,Id target=0,Amount detail=0){Delivery d;d.id=s.nextId++;d.source=source;d.dueRound=s.round+1;d.kind=DeliveryKind::Custom;d.amount=amount;d.target=target;d.detail=detail;s.deliveries.push_back(d);emit("delivery_scheduled",d.id);}
     Part plain(Kind kind,Amount value,const std::string& source,const std::string& output="") {
-        Part p;p.recipe=source;p.kind=kind;p.output=output.empty()?(kind==Kind::Shield?"Shield":"Slug"):output;p.originalValue=value;
+        Part p;p.recipe=source;p.kind=kind;p.output=output.empty()?(kind==Kind::Shield?"Shield":"Slug"):output;p.originalValue=value;p.creator=source;p.canonicalRecipe=source;if(source.substr(0,4)=="UGS-"||source.substr(0,4)=="MAU-"||source.substr(0,2)=="MY")p.canonicalRecipe=kind==Kind::Shield?"SH002":"SH001";
         p.resaleReference=std::string("generated:")+(kind==Kind::Shield?"shield:":"ammo:")+std::to_string(value);
         p.effects={{kind==Kind::Shield?Op::ShieldValue:Op::FlatDamage,kind==Kind::Shield?Timing::Install:Timing::Assembly,value,0}};
         if(const auto* r=rules.recipe(source))p.rarity=r->rarity;
         p.materialBasis[0]=checked((static_cast<std::int64_t>(value)+5)/6);if(kind==Kind::Shield&&value>0)p.materialBasis[1]=1;return p;
     }
-    Id receive(Part p,bool installed=false){p.id=s.nextId++;p.createdRound=s.round;p.place=Place::Reserve;p.everInstalled=false;p.firstInstallRound=0;p.bindingOrder=0;p.installOrder=0;p.shield=0;p.paidHeat=p.paidHp=p.hookUses=0;p.attachments.clear();p.reservedBy=0;s.parts.push_back(p);emit("part_created",p.id,0,p.originalValue);if(installed)install(p.id);return p.id;}
+    Id receive(Part p,bool installed=false){p.id=s.nextId++;p.createdRound=s.round;p.place=Place::Reserve;p.everInstalled=false;p.firstInstallRound=0;p.bindingOrder=0;p.installOrder=0;p.shield=0;p.paidHeat=p.paidHp=p.hookUses=0;if(p.origin!=PartOrigin::Copied)p.attachments.clear();p.reservedBy=0;if(inRecipeUse&&p.creator==producingRecipe&&p.origin!=PartOrigin::Copied){p.sourceRecipeCopy=producingCopy;p.origin=PartOrigin::Produced;}s.parts.push_back(p);emit("part_created",p.id,p.sourceRecipeCopy,p.originalValue,static_cast<Amount>(p.origin));events.back().source=p.creator;if(installed)install(p.id);return p.id;}
     void copyLater(const Part& p,Amount count,const std::string& source){Delivery d;d.id=s.nextId++;d.source=source;d.dueRound=s.round+1;d.kind=DeliveryKind::PartCopy;for(Amount i=0;i<count;++i)d.parts.push_back(p);s.deliveries.push_back(d);emit("delivery_scheduled",d.id);}
+    Part printedCopy(Part p,const std::string& source){p.upgradeDamage=p.upgradeShield=0;p.attachments.clear();p.origin=PartOrigin::Copied;p.creator=source;p.originalValue=0;if(p.effects.size()==1&&(p.effects[0].op==Op::ShieldValue||p.effects[0].op==Op::FlatDamage))p.originalValue=p.effects[0].amount;return p;}
     static bool unused(const Part& p){
-        if(!p.everInstalled)return true;
-        return p.kind==Kind::Shield&&p.effects.size()==1&&p.effects[0].op==Op::ShieldValue&&p.shield==p.originalValue&&p.paidHeat==0&&p.paidHp==0&&p.attachments.empty();
+        return isUnusedPart(p);
     }
     bool installedBinding(const Binding& b){const auto* p=byId(s.parts,b.part);return p&&p->place==Place::Installed&&p->firstInstallRound==s.round;}
-    Part sacrifice(Id id,Kind kind=Kind::Utility){auto* p=byId(s.parts,id);require(p&&p->place==Place::Reserve&&unused(*p),"Choose an unused reserve part.");require(kind==Kind::Utility||p->kind==kind,"The sacrificed part has the wrong kind.");const auto copy=*p;s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[id](const Part& v){return v.id==id;}),s.parts.end());s.sacrificesRound=add(s.sacrificesRound,1);emit("part_sacrificed",id);return copy;}
+    Part sacrifice(Id id,Kind kind=Kind::Utility){auto* p=byId(s.parts,id);require(p&&p->place==Place::Reserve&&unused(*p),"Choose an unused reserve part.");require(kind==Kind::Utility||p->kind==kind,"The sacrificed part has the wrong kind.");const auto copy=*p;s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[id](const Part& v){return v.id==id;}),s.parts.end());s.sacrificesRound=add(s.sacrificesRound,1);emit("part_sacrificed",id);sacrificedUpgrades();if(s.phase==Phase::Defeat)throw FinalDeath{};return copy;}
     Part& reserveChoice(const Action& a,Kind kind=Kind::Utility){require(a.parts.size()==1,"Choose exactly one reserve part.");auto* p=byId(s.parts,a.parts[0]);require(p&&p->place==Place::Reserve&&unused(*p),"Choose an unused reserve part.");require(kind==Kind::Utility||p->kind==kind,"The selected part has the wrong kind.");return *p;}
     void attach(Part& p,const std::string& source,Amount damage,Amount heatGain,Amount round){auto it=std::find_if(p.attachments.begin(),p.attachments.end(),[&](const Attachment& b){return b.source==source;});Attachment b{source,damage,heatGain,round};if(it==p.attachments.end())p.attachments.push_back(b);else *it=b;}
     void bonus(const std::string& source,Amount flat=0,Amount percent=0){auto it=std::find_if(s.shotBonuses.begin(),s.shotBonuses.end(),[&](const ShotBonus& b){return b.source==source;});if(it==s.shotBonuses.end())s.shotBonuses.push_back({source,flat,percent});else *it={source,flat,percent};}
@@ -86,12 +85,12 @@
         case 65:{const auto p=reserveChoice(a,Kind::Ammo);sacrifice(p.id,Kind::Ammo);shieldPart(10,source,true);materialLater({1,0,0,0,0},source);break;}
         case 67:cooling(2);break;case 68:case 100:cooling(1);break;
         case 69:{checkMaterials(a.choices,1,3);require(a.choices[0]>0,"Choose Copper, Carbon or Glass.");Materials m{};m[static_cast<std::size_t>(a.choices[0])]=2;materialLater(m,source);break;}
-        case 71:case 102:case 118:{const auto p=reserveChoice(a);require(p.kind==Kind::Ammo||(c!=71&&p.kind==Kind::Shield),"This recipe copies Ammo or eligible Shield only.");require(c==118?p.rarity<=Rarity::Rare:p.rarity==Rarity::Common,"The part rarity is not eligible.");copyLater(p,c==71?1:2,source);break;}
+        case 71:case 102:case 118:{const auto p=reserveChoice(a);require(p.kind==Kind::Ammo||(c!=71&&p.kind==Kind::Shield),"This recipe copies Ammo or eligible Shield only.");require(c==118?p.rarity<=Rarity::Rare:p.rarity==Rarity::Common,"The part rarity is not eligible.");copyLater(printedCopy(p,source),c==71?1:2,source);break;}
         case 73:s.weaken=std::max(0,s.weaken-6);s.mark=std::max(0,s.mark-6);bonus(source,3);break;
         case 76:{const auto p=reserveChoice(a,Kind::Shield);const Amount value=fixedShield(p);require(value>=0,"Choose a Shield part with a printed fixed Shield gain.");sacrifice(p.id,Kind::Shield);receive(plain(Kind::Ammo,std::min(14,value),source,"Recast Plate Slug"));break;}
         case 99:case 116:cooling(std::numeric_limits<Amount>::max());break;
         case 101:{require(a.parts.size()<=2,"Sacrifice at most two parts.");checkMaterials(a.choices,a.parts.size(),3);for(std::size_t i=0;i<a.parts.size();++i){sacrifice(a.parts[i]);Materials m{};m[static_cast<std::size_t>(a.choices[i])]=2;materialLater(m,source);}break;}
-        case 104:{const Amount n=std::min({8,s.maxHp-s.hp,16-s.carefulHealing});s.hp+=n;s.carefulHealing+=n;emit("heal",0,0,n);if(attackers()==0)shieldPart(8,source,true);break;}
+        case 104:{const Amount n=std::min({8,s.maxHp-s.hp,16-s.carefulHealing});s.hp+=n;s.carefulHealing+=n;emit("heal",0,0,n);recipeHealed(n);if(attackers()==0)shieldPart(8,source,true);break;}
         case 115:{s.deliveries.erase(std::remove_if(s.deliveries.begin(),s.deliveries.end(),[&](const Delivery& d){return d.source==source;}),s.deliveries.end());for(Amount i=1;i<=3;++i){schedule(DeliveryKind::ShieldPart,18,source);s.deliveries.back().dueRound=s.round+i;}break;}
         case 117:materialLater({2,2,2,2,0},source);break;
         case 1021:materialLater({0,0,2,0,0},source);break;
@@ -173,7 +172,7 @@
         default:break;
         }
     }
-    void catalogueActivate(const Part& p,const Action& a){
+    void catalogueActivate(Part p,const Action& a){ScopedSource sourceScope(upgradeSource,p.creator.empty()?p.recipe:p.creator);
         const auto c=code(p.recipe);const auto source=p.recipe;
         if(p.kind==Kind::Magnet){auto& b=bind(source,BindingClock::Collection);b.round=s.round+1;b.choices=p.choices;return;}
         switch(c){
@@ -185,21 +184,21 @@
         case 66:bind(source,BindingClock::Round);break;
         case 70:specialLater(source);break;
         case 72:case 83:case 111:bind(source,BindingClock::Shot);if(c==111)bonus(source,0,100);break;
-        case 85:{require(a.amount>=0&&a.amount<=15,"Choose 0 to 15 installed Shield.");payment(0,0,a.amount,true);bonus(source,2*a.amount);break;}
+        case 85:{require(a.amount>=0&&a.amount<=15,"Choose 0 to 15 installed Shield.");payment(0,0,a.amount,true,&p);bonus(source,2*a.amount);break;}
         case 95:{Amount n=0;for(Id id:living()){auto* e=byId(s.enemies,id);if(e->intent.move==Move::Attack)status(id,3,8);else ++n;}shieldPart(std::min(15,n*5),source,true);break;}
         case 103:bind(source,BindingClock::Round,8);break;
-        case 1010:payment(0,3,0,true);bonus(source,10);break;
-        case 1027:payment(0,0,6,true);bonus(source,12);break;
-        case 1045:require(a.amount>=2&&a.amount<=5,"Choose 2 to 5 Heat.");payment(0,a.amount,0,true);bonus(source,3*a.amount);break;
+        case 1010:payment(0,3,0,true,&p);bonus(source,10);break;
+        case 1027:payment(0,0,6,true,&p);bonus(source,12);break;
+        case 1045:require(a.amount>=2&&a.amount<=5,"Choose 2 to 5 Heat.");payment(0,a.amount,0,true,&p);bonus(source,3*a.amount);break;
         case 1052:{require(!a.parts.empty()&&a.parts.size()<=3,"Consume 1 to 3 unused Ammo parts.");for(Id id:a.parts)sacrifice(id,Kind::Ammo);bonus(source,static_cast<Amount>(a.parts.size())*7);break;}
         case 1053:if(s.heat>=6){chosen(a.target);bonus(source,8);status(a.target,2,4);}else{heat(2);bonus(source,3);}break;
-        case 1061:require(a.amount>=4&&a.amount<=12,"Choose 4 to 12 installed Shield.");payment(0,0,a.amount,true);bonus(source,2*a.amount);heat(a.amount/4);break;
+        case 1061:require(a.amount>=4&&a.amount<=12,"Choose 4 to 12 installed Shield.");payment(0,0,a.amount,true,&p);bonus(source,2*a.amount);heat(a.amount/4);break;
         case 1063:case 1078:case 1098:bind(source,BindingClock::Shot);break;
         case 1067:for(Id id:s.bullet){const auto* part=byId(s.parts,id);require(part&&part->kind!=Kind::Spread,"Barrel Weight cannot combine with spreading parts.");}bonus(source,18);bind(source,BindingClock::Shot);break;
-        case 1094:payment(0,6,0,true);bind(source,BindingClock::Shot);break;
+        case 1094:payment(0,6,0,true,&p);bind(source,BindingClock::Shot);break;
         case 1106:bonus(source,8);bind(source,BindingClock::Shot);break;
-        case 1113:{require(s.heat>=8,"Winter Core Sleeve requires at least 8 Heat.");const auto cost=s.heat;payment(0,cost,0,true);bonus(source,30);shieldPart(20,source,true);break;}
-        case 1118:payment(0,0,12,true);bonus(source,28);schedule(DeliveryKind::ShieldPart,24,source);break;
+        case 1113:{require(s.heat>=8,"Winter Core Sleeve requires at least 8 Heat.");const auto cost=s.heat;payment(0,cost,0,true,&p);bonus(source,30);shieldPart(20,source,true);break;}
+        case 1118:payment(0,0,12,true,&p);bonus(source,28);schedule(DeliveryKind::ShieldPart,24,source);break;
         default:throw Invalid("No planning behavior for this catalogue recipe.");
         }
     }
@@ -309,21 +308,22 @@
             }
         }
     }
-    void afterShotHooks(Amount hpDamage,Amount count){
-        for(const auto& p:hooks(false))if((code(p.recipe)==62||code(p.recipe)==1034)&&claim(p.id)){
-            if(p.place==Place::Installed&&((code(p.recipe)==62&&hpDamage>0)||(code(p.recipe)==1034&&count<=1)))shieldPart(code(p.recipe)==62?7:4,p.recipe,true);
-        }
+    void afterShotHooks(Amount hpDamage,Amount count,const std::vector<Part>& fired,Id target){
+        struct Entry{Id order,part;std::string upgrade;};std::vector<Entry> entries;for(const auto& p:hooks(false))if(code(p.recipe)==62||code(p.recipe)==1034)entries.push_back({p.bindingOrder,p.id,{}});for(const auto& u:s.upgrades)entries.push_back({u.order,0,u.id});std::sort(entries.begin(),entries.end(),[](const Entry&a,const Entry&b){return a.order<b.order;});
+        auto payments=std::move(paidEffects);paidEffects.clear();
+        for(const auto& entry:entries){if(s.phase==Phase::Defeat)return;if(!entry.upgrade.empty()){for(const auto& p:payments)paidUpgradeReward(*up(entry.upgrade),p);afterFireUpgrade(entry.upgrade,fired,target);continue;}const auto* current=byId(s.parts,entry.part);if(!current)continue;const auto p=*current;ScopedSource sourceScope(upgradeSource,p.creator.empty()?p.recipe:p.creator);if(claim(p.id)&&p.place==Place::Installed&&((code(p.recipe)==62&&hpDamage>0)||(code(p.recipe)==1034&&count<=1)))shieldPart(code(p.recipe)==62?7:4,p.recipe,true);}
     }
     void endTurnHooks(const Action& a){
-        for(const auto& p:hooks())if(catalogue(p.effects)){
+        struct Entry{Id order,part;std::string upgrade;};std::vector<Entry> entries;for(const auto& p:hooks())entries.push_back({p.bindingOrder,p.id,{}});for(const auto& u:s.upgrades)entries.push_back({u.order,0,u.id});std::sort(entries.begin(),entries.end(),[](const Entry&x,const Entry&y){return x.order<y.order;});
+        for(const auto& entry:entries){if(s.phase==Phase::Defeat)return;if(!entry.upgrade.empty()){endTurnUpgrade(entry.upgrade);continue;}const auto* current=byId(s.parts,entry.part);if(!current||current->place!=Place::Installed)continue;auto p=*current;ScopedSource sourceScope(upgradeSource,p.creator.empty()?p.recipe:p.creator);if(catalogue(p.effects)){
             switch(code(p.recipe)){
             case 92:schedule(DeliveryKind::ShieldPart,15,p.recipe);break;
             case 113:schedule(DeliveryKind::ShieldPart,20,p.recipe);break;
-            case 1048:{Amount cost=0;for(const auto& choice:a.partChoices)if(choice.part==p.id){require(choice.enemy==0||choice.enemy==3,"Holdfast can pay 3 Heat or decline.");cost=static_cast<Amount>(choice.enemy);}require(cost==0||cost==3,"Holdfast can pay 3 Heat or decline.");if(cost)payment(0,3,0,true);schedule(DeliveryKind::ShieldPart,cost?12:4,p.recipe);break;}
+            case 1048:{Amount cost=0;for(const auto& choice:a.partChoices)if(choice.part==p.id){require(choice.enemy==0||choice.enemy==3,"Holdfast can pay 3 Heat or decline.");cost=static_cast<Amount>(choice.enemy);}require(cost==0||cost==3,"Holdfast can pay 3 Heat or decline.");if(cost)payment(0,3,0,true,&p);schedule(DeliveryKind::ShieldPart,cost?12:4,p.recipe);break;}
             case 1099:specialLater(p.recipe,14);break;
             default:break;
             }
-        }
+        }}
     }
     void preReset(){
         struct Ordered{Id order,id;bool part;};std::vector<Ordered> sequence;
@@ -374,7 +374,7 @@
         s.bindings.erase(std::remove_if(s.bindings.begin(),s.bindings.end(),[&](const Binding& b){return b.clock==BindingClock::EndPhase||(b.clock==BindingClock::Round&&b.round<=oldRound)||(b.clock==BindingClock::Collection&&b.round<s.round);}),s.bindings.end());
         if(active("MA056"))heat(1);
     }
-    void collectionEffects(Materials& haul,const Action& a){
+    void collectionEffects(Materials& haul,const Action& a,Materials* baseHaul=nullptr){
         auto ordered=s.bindings;std::sort(ordered.begin(),ordered.end(),[](const Binding& x,const Binding& y){return x.order<y.order;});
         const auto available=[&](Amount k){return !s.finitePile||s.pile[static_cast<std::size_t>(k)]>0;};
         const auto take=[&](Amount k,Amount n){const auto i=static_cast<std::size_t>(k);const Amount actual=s.finitePile?std::min(n,s.pile[i]):n;if(s.finitePile)s.pile[i]-=actual;haul[i]=add(haul[i],actual);return actual;};
@@ -387,9 +387,9 @@
             case 120:for(Amount i=0;i<5;++i)preferred.push_back({i});break;
             default:break;}}
         // Preference slots are ordinary haul positions, never extra units. Binding order allocates them.
-        std::vector<Amount> normal;for(std::size_t i=0;i<5;++i)for(Amount n=0;n<haul[i];++n)normal.push_back(static_cast<Amount>(i));haul={};
+        std::vector<Amount> normal;std::vector<bool> fromBase;for(std::size_t i=0;i<5;++i)for(Amount n=0;n<haul[i];++n){normal.push_back(static_cast<Amount>(i));fromBase.push_back(baseHaul&&n<(*baseHaul)[i]);}haul={};if(baseHaul)*baseHaul={};
         for(std::size_t i=0;i<normal.size();++i){Amount choice=normal[i];if(i<preferred.size()){const auto& options=preferred[i];for(std::size_t n=0;n<options.size();++n){const auto proposed=options[(i+n)%options.size()];if(available(proposed)){choice=proposed;break;}}}
-            if(!available(choice)){auto it=std::find_if(bag.begin(),bag.end(),available);require(it!=bag.end(),"The pile cannot supply the guaranteed baseline.");choice=*it;}take(choice,1);}
+            if(!available(choice)){auto it=std::find_if(bag.begin(),bag.end(),available);require(it!=bag.end(),"The pile cannot supply the guaranteed baseline.");choice=*it;}take(choice,1);if(baseHaul&&fromBase[i])++(*baseHaul)[static_cast<std::size_t>(choice)];}
         Materials precisionBundle{};if(a.precision>0)precisionBundle[static_cast<std::size_t>(a.steering)]=take(a.steering,a.precision);
         randomExtra(s.haulBonus);s.haulBonus=0;Amount discard=0;
         for(const auto& b:ordered)if(b.clock==BindingClock::Collection&&b.round==s.round){
@@ -410,7 +410,7 @@
             default:throw Invalid("Unsupported gathering recipe.");
             }
         }
-        Amount discarded=0;for(std::size_t i=0;i<5;++i){require(a.discarded[i]>=0&&a.discarded[i]<=haul[i],"Leave only units gathered by this collection.");discarded=add(discarded,a.discarded[i]);haul[i]-=a.discarded[i];if(s.finitePile)s.pile[i]=add(s.pile[i],a.discarded[i]);}require(discarded==discard,"Choose the exact Heavy Magnet Lift discard.");
+        Amount discarded=0;for(std::size_t i=0;i<5;++i){require(a.discarded[i]>=0&&a.discarded[i]<=haul[i],"Leave only units gathered by this collection.");discarded=add(discarded,a.discarded[i]);haul[i]-=a.discarded[i];if(baseHaul)(*baseHaul)[i]=std::min((*baseHaul)[i],haul[i]);if(s.finitePile)s.pile[i]=add(s.pile[i],a.discarded[i]);}require(discarded==discard,"Choose the exact Heavy Magnet Lift discard.");
         s.bindings.erase(std::remove_if(s.bindings.begin(),s.bindings.end(),[&](const Binding& b){return b.clock==BindingClock::Collection&&b.round<=s.round;}),s.bindings.end());
     }
     std::set<Id> attackedThisRound;
@@ -423,7 +423,7 @@
         Amount base=s.nextFlat,percent=s.nextPercent,heatCost=0,hpCost=0;for(const auto& b:s.shotBonuses){base=add(base,b.flat);percent=add(percent,b.percent);}
         struct Spread{Id part,target;Amount percent,code;};std::vector<Spread> spreads;std::set<Id> consumedTargetPairs;std::set<Amount> uniqueSpreads;
         bool shoulder=false;
-        for(const auto& p:fired){const auto c=code(p.recipe);
+        for(const auto& p:fired){const auto c=code(p.recipe);base=add(base,p.upgradeDamage);
             for(const auto& f:p.effects)if(f.timing==Timing::Assembly){if(f.op==Op::FlatDamage)base=add(base,f.amount);if(f.op==Op::AttackIntentBonus&&original.intent.move==Move::Attack)base=add(base,f.amount);if(f.op==Op::PercentDamage)percent=add(percent,f.amount);if(f.op==Op::HeatCost)heatCost=add(heatCost,f.amount);if(f.op==Op::HpCost)hpCost=add(hpCost,f.amount);}
             if(catalogue(p.effects)&&p.kind==Kind::Ammo)base=add(base,ammoFlat(p,original,ammoCount,distinct,materialTypes,heatAtFire));
             for(const auto& b:p.attachments)if(b.dueRound==0||b.dueRound==s.round)base=add(base,b.damage);
@@ -439,12 +439,13 @@
         }
         for(const auto& x:a.spreadTargets){const auto it=std::find_if(fired.begin(),fired.end(),[&](const Part&p){return p.id==x.part;});require(it!=fired.end(),"Unused spread target selection.");}
         for(const auto& x:a.partTargets){const auto it=std::find_if(fired.begin(),fired.end(),[&](const Part&p){return p.id==x.part;});require(it!=fired.end(),"Unused part target selection.");}
-        if(auto* b=binding("SH072",BindingClock::Shot)){(void)b;require(a.partChoices.size()==1,"Return Delivery needs one Base or Common Ammo in this shot.");const Id selected=a.partChoices[0].enemy;const auto it=std::find_if(fired.begin(),fired.end(),[selected](const Part&p){return p.id==selected;});require(it!=fired.end()&&it->kind==Kind::Ammo&&it->rarity<=Rarity::Common,"Return Delivery needs Base or Common Ammo.");copyLater(*it,1,"SH072");}
+        if(auto* b=binding("SH072",BindingClock::Shot)){(void)b;require(a.partChoices.size()==1,"Return Delivery needs one Base or Common Ammo in this shot.");const Id selected=a.partChoices[0].enemy;const auto it=std::find_if(fired.begin(),fired.end(),[selected](const Part&p){return p.id==selected;});require(it!=fired.end()&&it->kind==Kind::Ammo&&it->rarity<=Rarity::Common,"Return Delivery needs Base or Common Ammo.");copyLater(printedCopy(*it,"SH072"),1,"SH072");}
         require(s.hp>hpCost,"Own HP cost must leave at least 1 HP.");require(s.heat>=heatCost,"Not enough Heat for the complete bullet.");
         // Full combined affordability is validated before any per-part payment trigger can grant supplies.
-        for(const auto& p:fired){Amount hp=0,heatPayment=0;for(const auto& f:p.effects)if(f.timing==Timing::Assembly){if(f.op==Op::HpCost)hp=add(hp,f.amount);if(f.op==Op::HeatCost)heatPayment=add(heatPayment,f.amount);}if(code(p.recipe)==1041)heatPayment=add(heatPayment,4);if(code(p.recipe)==1111)heatPayment=add(heatPayment,7);payment(hp,heatPayment,0,true);}
+        for(auto& p:fired){ScopedSource sourceScope(upgradeSource,p.creator.empty()?p.recipe:p.creator);Amount hp=0,heatPayment=0;for(const auto& f:p.effects)if(f.timing==Timing::Assembly){if(f.op==Op::HpCost)hp=add(hp,f.amount);if(f.op==Op::HeatCost)heatPayment=add(heatPayment,f.amount);}if(code(p.recipe)==1041)heatPayment=add(heatPayment,4);if(code(p.recipe)==1111)heatPayment=add(heatPayment,7);payment(hp,heatPayment,0,true,&p);}
         for(const auto& p:fired)if(code(p.recipe)==110){auto it=std::find_if(s.parts.begin(),s.parts.end(),[&](const Part& x){return x.place==Place::Payment&&x.reservedBy==p.id;});require(it!=s.parts.end(),"Full-Spread Outlet requires its reserved Shield payment.");const auto id=it->id;it->place=Place::Reserve;sacrifice(id,Kind::Shield);}
         if(s.hotBarrel)base=add(base,heatAtFire/2);
+        base=add(base,fireUpgradeBonus(fired,a.target,heatAtFire));
         if(active("MA112"))base=add(base,std::min(20,Rules::shield(s,true)/2));
         if(active("SH083",BindingClock::Shot))percent=add(percent,std::min(80,8*ammoCount));
         if(active("MA063",BindingClock::Shot))base=add(base,std::min(15,3*distinct));
@@ -457,7 +458,7 @@
         const Amount main=add(shot,before.mark);Amount bypass=0;if(active("SH043",BindingClock::Shot))bypass=12;if(active("MA094",BindingClock::Shot))bypass=main;
         byId(s.enemies,a.target)->mark=0;
         s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[](const Part& p){return p.place==Place::Loaded;}),s.parts.end());s.bullet.clear();++s.shots;s.nextFlat=s.nextPercent=0;s.shotBonuses.clear();
-        emit("fire",0,a.target,shot,heatAtFire);enemyDamage(a.target,main,true,false,0,bypass);if(s.phase==Phase::Defeat)return;
+        emit("fire",0,a.target,shot,heatAtFire);enemyDamage(a.target,main,true,false,0,bypass,fireArmorBypass());if(s.phase==Phase::Defeat)return;
         const auto* mainAfter=byId(s.enemies,a.target);const bool killed=mainAfter&&mainAfter->dead;const Amount hpDamage=mainAfter?before.hp-mainAfter->hp:0;
         for(std::size_t i=0;i<fired.size()&&s.phase!=Phase::Defeat;++i){const auto& p=fired[i];effects(p.effects,Timing::AfterHit,a.target,heatAtFire,p.recipe);if(catalogue(p.effects)&&p.kind==Kind::Ammo)afterAmmo(p,a,before,original,heatAtFire,ammoCount,shot,removed[i],killed);if(s.phase!=Phase::Defeat)for(const auto& b:p.attachments)if(b.heat&&b.dueRound==s.round)heat(b.heat);}
         if(s.phase==Phase::Defeat)return;
@@ -470,6 +471,6 @@
         if(active("MA078",BindingClock::Shot)&&ammoCount>=5){loseHeat(3);shieldPart(6,"MA078",true);}
         if(active("MA106",BindingClock::Shot)&&killed){s.deliveries.erase(std::remove_if(s.deliveries.begin(),s.deliveries.end(),[&](const Delivery& d){return d.source=="MA106"&&d.dueRound==s.round+1;}),s.deliveries.end());specialLater("MA106",16);}
         for(const auto& p:fired)if(code(p.recipe)==1051)++s.recastConsumed;
-        afterShotHooks(hpDamage,ammoCount);
+        afterShotHooks(hpDamage,ammoCount,fired,a.target);
         s.bindings.erase(std::remove_if(s.bindings.begin(),s.bindings.end(),[](const Binding& b){return b.clock==BindingClock::Shot;}),s.bindings.end());terminal();
     }

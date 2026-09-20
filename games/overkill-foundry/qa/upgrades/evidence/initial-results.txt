@@ -1,0 +1,29 @@
+PASS U01 calibration acquisition is nonlethal, atomic, once and reloadable
+PASS U02 acquisition maxHP does not repeat on reload or fight start
+PASS U03 permanent tuning is per copy and first physical output only
+PASS U04 cold-start production allowance excludes free grants and Utilities
+PASS U05 Trial Fabricator copies committed first output without recursion
+PASS U06 Ammo stamp excludes None and is independent per physical copy
+PASS U07 Utility stamp does not waive HP or reset another copy
+PASS U08 Batch Permit changes only selected None copy on turn one
+FAIL U09 Ballistic Starter survives zero-shot turns and expires after one Fire: first fight shot6+6 after two zero-shot turns expected=9988 actual=9994
+PASS U10 Alignment adds before percentage and only on first Fire that turn
+PASS U11 named retention sums but cannot create Shield
+PASS U12 Shield reader and spender use binding order before real retention
+PASS U13 Vent Fan counts actual Heat payment, once, and excludes decay
+PASS U14 later Suture heal cannot finance own HP cost
+PASS U15 first recipe healing excludes acquisition healing
+PASS U16 cooldown tie selects memory position rather than smallest ID
+PASS U17 Momentum uses producing-copy identity, one shot and consecutive turns
+PASS U18 Toolhead claims after three earlier Uses and free Use is not paid
+PASS U19 Toolhead cannot invent ingredients or waive remaining HP cost
+PASS U20 five-material threshold uses actual payment after discounts
+PASS U21 paid Utility counter continues between turns
+PASS U22 counterbattery responds to each actual attack hit
+FAIL U23 lethal Utility Arc recoil interrupts healing and later damage siblings: 1remainingHP must die to2recoil
+FAIL U24 turn-start grants precede Pulse recoil even with later acquisition: fresh10Shield must protect from turn-start4recoil expected=2 actual=0
+PASS U25 nested first-turn choices serialize and preview without replay
+FAIL U26 permanent recipe choices exclude Borrowed copies: copy selection missing
+PASS U27 shop reductions are product-scoped and sale bonus floors per core
+PASS U28 Opening Laminator saves its bonus and fixed resale reference
+SUMMARY 24 passed, 4 failed

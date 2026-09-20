@@ -15,7 +15,7 @@ CampaignHooks transactionFixtureHooks(const Rules& fights){
     CampaignHooks hooks;
     // Deliberately test-only payload: this verifies lifecycle/atomic receipts,
     // not any Mayor or permanent-upgrade effect. P08 remains separately gated.
-    hooks.acquireUpgrade=[](Campaign& c,const std::string&,const CampaignAction&){c.upgrades.back().charges=1;return Result{true,{},{}};};
+    hooks.acquireUpgrade=[](Campaign& c,const std::string& id,const CampaignAction&){OwnedUpgrade u;u.id=id;u.order=c.fight.nextOrder++;u.charges=1;c.fight.upgrades.push_back(u);return Result{true,{},{}};};
     hooks.initializeFight=[](Campaign& c,const RouteOffer& offer){c.fight.enemies=makeCinderwallFormation(offer.formation,offer.encounterSeed,offer.encounterKey,c.fight.nextId,offer.binderDefaultSeen);return Result{true,{},{}};};
     hooks.grantPart=[&fights](Campaign& c,const std::string& id){return fights.grantPart(c.fight,id,false);};
     hooks.combatCompleted=[](Campaign&){return Result{true,{},{}};};
@@ -23,7 +23,7 @@ CampaignHooks transactionFixtureHooks(const Rules& fights){
     hooks.partSaleValue=[](const Campaign&,const Part& p){return p.recipe=="SH001"?2:p.recipe=="SH002"?4:-1;};
     return hooks;
 }
-Campaign start(const CampaignRules& rules,std::uint64_t seed=1){auto c=rules.newGame(seed,"transaction-fixture-"+std::to_string(seed));run(c,rules,command(c,CampaignActionType::ChooseMayor,0,c.mayorOffers[0]));return c;}
+Campaign start(const CampaignRules& rules,std::uint64_t seed=1){auto c=rules.newGame(seed,"transaction-fixture-"+std::to_string(seed));c.mayorOffers={"MY1-12","MY1-03","MY1-01"};run(c,rules,command(c,CampaignActionType::ChooseMayor,0,c.mayorOffers[0]));return c;}
 Id product(const Campaign& c,ProductKind kind,const std::string& definition={},Amount material=0){for(const auto& p:c.shop)if(p.kind==kind && p.definition==definition && (kind!=ProductKind::Material || p.material==material))return p.id;throw std::runtime_error("Missing fixture product.");}
 Id reward(const Campaign& c,RewardKind kind){for(const auto& r:c.rewards)if(r.kind==kind)return r.id;throw std::runtime_error("Missing fixture reward.");}
 const RewardEntry& entry(const Campaign& c,Id id){for(const auto& r:c.rewards)if(r.id==id)return r;throw std::runtime_error("Missing reward entry.");}
@@ -77,11 +77,11 @@ int main(){try{
         check(c.fight.materials[0]==2 && c.fight.credits==92,"Between-fight purchase not staged.");
         enterRam(c,rules);check(c.fight.materials[0]==2 && !c.entry.empty(),"Fight entry cleared purchased supplies.");
         const auto entryHash=stateHash(c.fight);const auto stock=c.shopGeneration;const auto ironItem=product(c,ProductKind::Material);
-        buy=command(c,CampaignActionType::Buy,ironItem);run(c,rules,buy);c.upgrades[0].charges=0;
+        buy=command(c,CampaignActionType::Buy,ironItem);run(c,rules,buy);c.fight.upgrades[0].charges=0;
         run(c,rules,command(c,CampaignActionType::OpenShop));const auto seen=c.profile.recipes;
         check(c.fight.materials[0]==3 && c.fight.credits==88,"In-fight purchase failed.");roundtrip(c);
         run(c,rules,command(c,CampaignActionType::Continue));check(stateHash(c.fight)==entryHash,"Continue did not reconstruct original fight input/seed.");
-        check(c.fight.materials[0]==2 && c.fight.credits==92 && c.upgrades[0].charges==1 && c.shopGeneration==stock,"Continue leaked abandoned inventory/charge/stock state.");
+        check(c.fight.materials[0]==2 && c.fight.credits==92 && c.fight.upgrades[0].charges==1 && c.shopGeneration==stock,"Continue leaked abandoned inventory/charge/stock state.");
         check(c.profile.recipes==seen,"Continue lost profile discoveries.");roundtrip(c);
         run(c,rules,command(c,CampaignActionType::Continue));check(stateHash(c.fight)==entryHash,"Repeated Continue duplicated entry effects.");
     }
@@ -142,13 +142,13 @@ int main(){try{
         const auto selected=c.rewards[0].choices[0];c.fight.hp=8;const auto before=serializeCampaign(c);
         check(!rules.apply(c,command(c,CampaignActionType::AcceptCalibration,0,selected)).ok && serializeCampaign(c)==before,"Calibration paid lethal base cost.");
         run(c,rules,command(c,CampaignActionType::LeaveMystery));check(c.fight.hp==8,"Declining calibration changed HP.");
-        auto hooks=transactionFixtureHooks(fights);hooks.acquireUpgrade=[](Campaign& state,const std::string&,const CampaignAction& a){
-            if(a.type==CampaignActionType::AcceptCalibration){if(state.fight.hp<=14)return Result{false,"Test-only additional acquisition cost.",{}};state.fight.hp-=14;}return Result{true,{},{}};
+        auto hooks=transactionFixtureHooks(fights);hooks.acquireUpgrade=[](Campaign& state,const std::string& id,const CampaignAction& a){
+            if(a.type==CampaignActionType::AcceptCalibration){if(state.fight.hp<=14)return Result{false,"Test-only additional acquisition cost.",{}};state.fight.hp-=14;}OwnedUpgrade u;u.id=id;u.order=state.fight.nextOrder++;state.fight.upgrades.push_back(u);return Result{true,{},{}};
         };
         CampaignRules costRules(fights,hooks);c=mysteryFixture(costRules,"C1-M-TECH");c.fight.hp=20;
         const auto offer=c.rewards[0].choices[0];const auto old=serializeCampaign(c);
         check(!costRules.apply(c,command(c,CampaignActionType::AcceptCalibration,0,offer)).ok && serializeCampaign(c)==old,"Calibration ignored item cost after its own eight HP.");
-        c.fight.hp=23;run(c,costRules,command(c,CampaignActionType::AcceptCalibration,0,offer));check(c.fight.hp==1 && c.upgrades.size()==2,"Combined legal calibration costs were not atomic.");roundtrip(c);
+        c.fight.hp=23;run(c,costRules,command(c,CampaignActionType::AcceptCalibration,0,offer));check(c.fight.hp==1 && c.fight.upgrades.size()==2,"Combined legal calibration costs were not atomic.");roundtrip(c);
     }
     {
         auto c=mysteryFixture(rules,"C1-M-PATROL");const auto position=c.route.position,stock=c.shopGeneration;

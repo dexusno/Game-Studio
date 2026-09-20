@@ -1,0 +1,475 @@
+{
+  "scope": "Mara / Cinderwall / city 1",
+  "evidence_kind": "source selection and expectations, not runtime effect coverage",
+  "eligible_count": 152,
+  "ordinary_count": 127,
+  "mayor_count": 25,
+  "eligible_ids": [
+    "MAU-01",
+    "MAU-02",
+    "MAU-03",
+    "MAU-04",
+    "MAU-05",
+    "MAU-07",
+    "MY1-01",
+    "MY1-02",
+    "MY1-03",
+    "MY1-04",
+    "MY1-05",
+    "MY1-06",
+    "MY1-07",
+    "MY1-08",
+    "MY1-09",
+    "MY1-10",
+    "MY1-11",
+    "MY1-12",
+    "MY1-13",
+    "MY1-14",
+    "MY1-15",
+    "MY1-16",
+    "MY1-17",
+    "MY1-18",
+    "MY1-19",
+    "MY1-20",
+    "MY1-21",
+    "MY1-22",
+    "MY1-23",
+    "MY1-M1",
+    "MY1-M2",
+    "MY1-M3",
+    "MY2-01",
+    "MY2-02",
+    "MY2-03",
+    "MY3-02",
+    "MY3-03",
+    "UGS-001",
+    "UGS-002",
+    "UGS-004",
+    "UGS-005",
+    "UGS-006",
+    "UGS-007",
+    "UGS-009",
+    "UGS-010",
+    "UGS-011",
+    "UGS-012",
+    "UGS-013",
+    "UGS-014",
+    "UGS-015",
+    "UGS-016",
+    "UGS-017",
+    "UGS-018",
+    "UGS-019",
+    "UGS-021",
+    "UGS-022",
+    "UGS-024",
+    "UGS-025",
+    "UGS-028",
+    "UGS-029",
+    "UGS-030",
+    "UGS-031",
+    "UGS-032",
+    "UGS-033",
+    "UGS-034",
+    "UGS-035",
+    "UGS-036",
+    "UGS-037",
+    "UGS-038",
+    "UGS-039",
+    "UGS-040",
+    "UGS-041",
+    "UGS-042",
+    "UGS-044",
+    "UGS-045",
+    "UGS-046",
+    "UGS-047",
+    "UGS-048",
+    "UGS-049",
+    "UGS-050",
+    "UGS-051",
+    "UGS-053",
+    "UGS-055",
+    "UGS-056",
+    "UGS-057",
+    "UGS-058",
+    "UGS-060",
+    "UGS-061",
+    "UGS-062",
+    "UGS-064",
+    "UGS-065",
+    "UGS-066",
+    "UGS-069",
+    "UGS-070",
+    "UGS-071",
+    "UGS-072",
+    "UGS-073",
+    "UGS-074",
+    "UGS-075",
+    "UGS-076",
+    "UGS-077",
+    "UGS-083",
+    "UGS-085",
+    "UGS-086",
+    "UGS-087",
+    "UGS-088",
+    "UGS-089",
+    "UGS-090",
+    "UGS-091",
+    "UGS-093",
+    "UGS-094",
+    "UGS-095",
+    "UGS-096",
+    "UGS-097",
+    "UGS-099",
+    "UGS-100",
+    "UGS-101",
+    "UGS-102",
+    "UGS-105",
+    "UGS-106",
+    "UGS-107",
+    "UGS-108",
+    "UGS-109",
+    "UGS-113",
+    "UGS-115",
+    "UGS-116",
+    "UGS-117",
+    "UGS-119",
+    "UGS-120",
+    "UGS-121",
+    "UGS-122",
+    "UGS-123",
+    "UGS-125",
+    "UGS-126",
+    "UGS-127",
+    "UGS-129",
+    "UGS-131",
+    "UGS-132",
+    "UGS-133",
+    "UGS-134",
+    "UGS-136",
+    "UGS-139",
+    "UGS-140",
+    "UGS-141",
+    "UGS-142",
+    "UGS-144",
+    "UGS-145",
+    "UGS-146",
+    "UGS-147",
+    "UGS-148",
+    "UGS-149",
+    "UGS-150"
+  ],
+  "excluded_rescue": {
+    "id": "UGS-067",
+    "name": "Reserve Heart Pump",
+    "min_city": 2,
+    "max_city": 3,
+    "effect": "Once per campaign, when enemy-caused HP loss would kill the player, cancel that death and set current HP to one quarter of maximum HP, rounded down, minimum 1. Consume the pump. Remaining hits continue normally; self-paid HP costs remain nonlethal as usual."
+  },
+  "source_sha256": {
+    "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
+    "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "design/UPGRADE-SYSTEM.md": "b3347c5069dfd5652562fe157001889eb4e48c0bafbc927d5f3cc93b5f92561a",
+    "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+    "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+    "design/MVP-IMPLEMENTATION-PLAN.md": "8d05d3ec6ee65755bfc3265ce1a35304bfc2cddd774c43a96dc39dae2c8caae5",
+    "design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+    "design/MERCENARY-ABILITIES.md": "414f177004d43c8f9af963ccc7e3a42410a4be6cbf709a1c01e39ca363dbd789"
+  },
+  "selected_contracts": [
+    {
+      "id": "UGS-001",
+      "name": "Ballistic Starter",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At fight start, queue +6 damage for the first valid main shot this fight. Spend it only on Fire; it survives zero-shot turns and never affects support hits."
+    },
+    {
+      "id": "UGS-009",
+      "name": "Cold Start Calibrator",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On the first player turn each fight, the first three resource-paid part-producing Uses each add 2 to the first output's direct damage or Shield. Choose one value the part has; outputs with neither spend no trigger. Copies are not production."
+    },
+    {
+      "id": "UGS-015",
+      "name": "Trial Fabricator License",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "For the next three fights after acquisition, the first resource-paid Ammo Use each fight also copies its first physical output. Copy that part's committed properties without replaying on-Use or scheduled-delivery effects. Keep the spent license visible afterwards."
+    },
+    {
+      "id": "UGS-017",
+      "name": "Salvage Contract Stamp",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "When selling an energy core, gain 25% additional Credits, flooring the bonus once per core. Part sales, direct victory Credit grants and other upgrades' direct Credit grants are unaffected. Calculate each core separately even when selling several together."
+    },
+    {
+      "id": "UGS-019",
+      "name": "Counterpulse Studs",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "After an enemy attack hit removes at least 1 Shield or HP, deal 2 direct damage to its living attacker. This is an upgrade reaction, not Fire or a support hit; it cannot trigger itself. Enemy damage reactions still apply."
+    },
+    {
+      "id": "UGS-032",
+      "name": "Recipe Carbon Copier",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition choose one stored recipe and add one exact ready copy. It needs a memory slot; exchange a different stored copy or decline if full. The upgrade remains owned either way."
+    },
+    {
+      "id": "UGS-038",
+      "name": "Sacrifice Inductor",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "The first two explicit ordinary-part sacrifice events each player turn deal 3 direct damage to the living robot in the lowest occupied encounter slot. Firing, Shield depletion and sales are not sacrifices."
+    },
+    {
+      "id": "UGS-039",
+      "name": "Risky Calibration Kit",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition pay 8 HP, requiring at least 9, and choose one Ammo recipe copy and one Shield recipe copy in memory. Their first output gains +2 direct damage or +2 Shield respectively on each paid Use. Offer only if both types are stored."
+    },
+    {
+      "id": "UGS-044",
+      "name": "Starter Scrap Reclaimer",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Once per turn after firing a bullet containing an SH001 Plain Slug, return 1 Iron. The slug is consumed normally; selling, sacrificing or loading alone do not qualify."
+    },
+    {
+      "id": "UGS-046",
+      "name": "Precision Die Set",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition select up to three Ammo recipe copies. Each chosen copy adds 1 direct damage to its first physical output on every paid Use. No effect on outputs without direct damage or later-generated recipe copies."
+    },
+    {
+      "id": "UGS-053",
+      "name": "Second Cycle Shutter",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At player-turn start 2 each fight, auto-install one ordinary 10-Shield part. It remains removable and saveable before protection is used."
+    },
+    {
+      "id": "UGS-055",
+      "name": "Heavy Press Brace",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "The first two recipe Uses each turn that actually pay at least 5 material units each auto-install one ordinary 3-Shield part after resolving. HP, Heat and Charge do not count as materials."
+    },
+    {
+      "id": "UGS-056",
+      "name": "Scrap Cycle Counter",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "After every third explicit ordinary-part sacrifice in a fight, grant 1 Glass. Count individual sacrificed parts, not firing, sales or Shield depletion. Reset the counter each fight."
+    },
+    {
+      "id": "UGS-066",
+      "name": "Utility Arc Fork",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Once per turn after the third resource-paid Utility Use, deal 3 direct damage to every living robot. No extra Use is created. Copied effects and zero-material Uses do not count."
+    },
+    {
+      "id": "UGS-071",
+      "name": "Lightweight Rib Cage",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition gain 4 maximum HP and heal 4 HP. The first enemy attack hit each fight also deals 1 less damage before Shield, minimum zero."
+    },
+    {
+      "id": "UGS-075",
+      "name": "Vendor Access Badge",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Reduce listed Credit prices of shop materials, recipes and upgrades by 20%, rounding each price down once, minimum 1 Credit. Core and part sale prices are unaffected. It does not discount its own purchase."
+    },
+    {
+      "id": "UGS-076",
+      "name": "Pulse Clock Emitter",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At player-turn starts 2 onward, deal 2 direct damage to every living robot after beginning-of-turn grants. This is upgrade damage, not Fire, and can provoke enemy reactions."
+    },
+    {
+      "id": "UGS-089",
+      "name": "Pattern Library Capsule",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition, show three consecutive ordinary recipe offers of three options each, accepting zero or one per offer. Handle memory exchanges normally; these are acquisition offers, not victory rewards for other item triggers."
+    },
+    {
+      "id": "UGS-094",
+      "name": "Three-Cycle Archive Port",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At player-turn starts 3, 6, 9 and so on, remove 1 cooldown counter from the stored recipe copy with the most counters. Ties use memory slot order. No effect if all are ready."
+    },
+    {
+      "id": "UGS-100",
+      "name": "Utility Memory Socket",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Add two memory slots that accept only Utility recipe copies. Existing general slots remain unrestricted; moving a copy between slots is permitted only outside fights. Slots start empty."
+    },
+    {
+      "id": "UGS-102",
+      "name": "Momentum Rifle Mount",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition select one stored Ammo recipe copy. Each consecutive player turn in which its produced part appears in a fired bullet grants that turn's first qualifying main shot +2, +4, then +6 damage. Missing a turn resets the sequence; cap +6 and reset each fight."
+    },
+    {
+      "id": "UGS-106",
+      "name": "Restorative Filter",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Once per fight, the first recipe effect that actually heals player HP heals 3 additional HP, capped normally. It does not improve Bolt repair, maximum-HP gains or other upgrades' healing."
+    },
+    {
+      "id": "UGS-113",
+      "name": "Subsurface Survey Drill",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Once per city after a noncombat Mystery completion, choose one of three eligible unowned Common upgrades instead of that Mystery's normal Credit reward. Declining keeps the normal reward. If there are no eligible upgrades, keep the normal reward."
+    },
+    {
+      "id": "UGS-116",
+      "name": "Scrambled Discount Chip",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At fight start, seeded-randomly choose one material type. The first paid recipe Use each turn that consumes that type costs 1 less of it, minimum zero. The selected type is revealed before play and fixed for the fight."
+    },
+    {
+      "id": "UGS-119",
+      "name": "Pairwise Template Scanner",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At fight start, select two different stored part-producing recipe copies. Their first paid Uses that fight add +2 to the first output's direct damage or Shield, choosing an eligible value. Selecting a copy with neither is disabled."
+    },
+    {
+      "id": "UGS-123",
+      "name": "Carryover Latch",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At enemy-phase end after pre-reset effects, preserve up to 3 remaining Shield as active Shield into the next round. The rest resets. Add nothing if none remains; the retained balance can later absorb damage."
+    },
+    {
+      "id": "UGS-129",
+      "name": "Victory Biopolymer",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "After each victory gain 1 maximum HP and heal 1 HP. No growth when every enemy escaped without a kill or when the player dies."
+    },
+    {
+      "id": "UGS-133",
+      "name": "Field Pattern Toolbox",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "At fight start choose one of three seeded shared Common recipe definitions. Borrow a ready copy in one temporary extra memory slot for this fight only. Pay all normal costs and cooldowns; discard the borrowed copy at fight end. It cannot be sold or copied into permanent memory."
+    },
+    {
+      "id": "UGS-134",
+      "name": "Shield Bench Compiler",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Each newly accepted Shield recipe copy from victory rewards gets one coupon per fight: its first Iron-consuming Use costs 1 less Iron. Other material, HP and meter costs remain full. Existing copies are unaffected."
+    },
+    {
+      "id": "UGS-136",
+      "name": "Utility Cycle Barrier",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "After every fourth resource-paid Utility Use within a fight, auto-install one ordinary 5-Shield part. Counter continues between rounds and resets each fight. Zero-material Uses and copied effects do not count."
+    },
+    {
+      "id": "UGS-139",
+      "name": "Ballistic Alignment Shim",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "The first valid main shot each player turn gains +1 damage before percentage modifiers. No bonus to support hits or passive attacks."
+    },
+    {
+      "id": "UGS-140",
+      "name": "Opening Shield Laminator",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Once per fight, the first resource-paid recipe output with positive Shield gains +4 Shield on its first physical output. Saved output keeps the bonus; copies do not receive another independent grant."
+    },
+    {
+      "id": "UGS-144",
+      "name": "Utility Calibration Stamp",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition select two stored Utility recipe copies. Once per fight for each, its first numeric cooldown assigned by Use is 1 lower, minimum zero. No-cooldown recipes cannot be selected; later Uses have normal cooldown."
+    },
+    {
+      "id": "UGS-145",
+      "name": "Ammo Calibration Stamp",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "On acquisition select two stored Ammo recipe copies. Once per fight for each, its first numeric cooldown assigned by Use is 1 lower, minimum zero. No-cooldown recipes cannot be selected; all costs stay full."
+    },
+    {
+      "id": "UGS-148",
+      "name": "Light-Touch Recipe Seal",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "Each normal victory recipe offer has one seeded-random option marked Light-Touch. If accepted, that physical copy's first material-paying Use each fight saves 1 unit of its most numerous material cost, ties Iron/Copper/Carbon/Glass/Circuit. No other costs are waived."
+    },
+    {
+      "id": "UGS-150",
+      "name": "Deferred Salvage Claim",
+      "source": "design/data/shared-upgrades.json",
+      "effect": "After the fifth victory following acquisition, choose one of three eligible unowned Uncommon shared upgrades and mark this claim spent. If fewer than three remain, show those remaining; if none remain, grant 30 Credits instead. It triggers once for the campaign."
+    },
+    {
+      "id": "MAU-01",
+      "name": "Ember Primer",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "At fight start gain 2 Heat, respecting the current Heat cap. This is a fresh grant, not Heat carried between fights."
+    },
+    {
+      "id": "MAU-02",
+      "name": "Expanded Heat Sink",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Increase Mara's Heat cap by 4. Do not fill the added capacity. Ordinary Heat decay is unchanged."
+    },
+    {
+      "id": "MAU-03",
+      "name": "Vent Fan",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Once each player turn, after a successful recipe or part effect actually pays at least 2 Heat in one payment, grant a fresh 3-Shield part. Heat decay is not payment."
+    },
+    {
+      "id": "MAU-04",
+      "name": "Heat Seal",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Reduce Mara's ordinary enemy-phase-end Heat decay by 1, to a minimum of zero. It does not reduce explicit Heat costs or losses from effects."
+    },
+    {
+      "id": "MAU-05",
+      "name": "Refractory Suture",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Once each player turn, after a paid HP recipe and its reactions finish, heal 2 HP if Mara remains alive. Heal at most 6 actual HP per fight; full-HP uses consume that turn's opportunity. Enemy damage does not trigger it."
+    },
+    {
+      "id": "MY1-05",
+      "name": "Emergency Tissue Frame",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "On acquisition gain 18 maximum HP and heal 18 current HP, capped at the new maximum. This acquisition effect happens once, not on each city or fight entry."
+    },
+    {
+      "id": "MY1-08",
+      "name": "Materials Warrant",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "At fight start select Iron, Copper or Carbon. The first successful paid recipe use that fight returns up to 3 units of the chosen resource actually paid by that use, after its effect and reactions finish."
+    },
+    {
+      "id": "MY1-09",
+      "name": "Rotating Toolhead",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Once each player turn, after three recipe uses have each actually paid at least one raw material, the next successful recipe use may discount up to 2 raw material units, allocated before payment. That discounted use may cost zero materials; all HP and meter costs remain. Claim the trigger before payment and effects, and count only earlier uses for qualification."
+    },
+    {
+      "id": "MY1-10",
+      "name": "Cooling Authorization",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "Once each fight during preparation, select one cooling recipe copy and remove all its remaining cooldown counters. This equipment action pays no materials; it neither refreshes no-cooldown uses nor ends the turn."
+    },
+    {
+      "id": "MY1-13",
+      "name": "Workshop Subscription",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "After every third completed regular victory, select one installed recipe copy. Its first paid use in every future fight discounts one chosen material by 1, minimum zero. Each copy can receive this subscription once; if no eligible copy exists, retain the earned selection until one exists."
+    },
+    {
+      "id": "MY1-21",
+      "name": "Batch Permit",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "At fight start choose one installed no-cooldown recipe copy. It may be used twice on player turn 1 instead of once. Both uses pay all ordinary costs and effects; later turns and other copies remain normal."
+    },
+    {
+      "id": "MY1-23",
+      "name": "Opening Blueprint",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "At fight start choose one installed Ammo or Shield recipe copy. Its first successful use that fight adds 5 damage or 7 Shield respectively to its first matching output. Choose only a recipe that makes such an output; its costs stay unchanged."
+    },
+    {
+      "id": "MY3-03",
+      "name": "Shield Vault",
+      "source": "design/data/character-mayor-upgrades.json",
+      "effect": "At enemy-phase end retain up to 6 remaining Shield instead of clearing that amount. Clear all excess normally. Retention creates no new Shield, and future attacks spend the carried balance normally."
+    }
+  ]
+}

@@ -73,6 +73,7 @@ void prepareOffers(CityRoute& r){
         else {
             const auto draw=r.rng.below(Domain::Route,100);
             offer.mystery=draw<40?"C1-M-PATROL":draw<70?"C1-M-EXCHANGE":"C1-M-TECH";
+            if(r.safeMysteries && offer.mystery=="C1-M-PATROL"){offer.surveyed=true;offer.mystery=r.rng.below(Domain::Route,2)==0?"C1-M-EXCHANGE":"C1-M-TECH";}
             if(offer.mystery=="C1-M-PATROL")offer.formation=regular(r,offer.district,false,{},0);
         }
         node.offers.push_back(std::move(offer));
@@ -118,12 +119,51 @@ bool completeRouteNode(CityRoute& r,std::string& error){
     if(!selected->formation.empty())r.previousFormation=selected->formation;
     node.resolved=true;++r.position;prepareOffers(r);return true;
 }
+bool previewRouteReplacement(const CityRoute& r,Id id,RouteOffer& replacement,std::string& error){
+    if(r.position<1 || r.position>=12 || selectedRouteOffer(r)){error="Choose a current non-boss option before entering it.";return false;}
+    const auto& offers=routeOffers(r);const auto it=std::find_if(offers.begin(),offers.end(),[id](const RouteOffer& o){return o.id==id;});
+    if(it==offers.end() || it->replaced){error="This offer is unavailable or was already replaced.";return false;}
+    auto out=*it;out.replaced=true;out.surveyed=false;out.encounterKey+="/MY1-12";out.encounterSeed=encounterSeed(r.seed,out.encounterKey);
+    auto rng=Rng::seeded(out.encounterSeed,out.encounterKey+"/alternative");
+    if(out.kind==EncounterKind::Regular){
+        const bool anotherSimple=std::any_of(offers.begin(),offers.end(),[id](const RouteOffer& o){return o.id!=id && o.kind==EncounterKind::Regular && contains(opening,o.formation);});
+        auto pool=anotherSimple?legalRegular(r.position):opening;
+        pool.erase(std::remove(pool.begin(),pool.end(),out.formation),pool.end());
+        if(pool.size()>1)pool.erase(std::remove(pool.begin(),pool.end(),r.previousFormation),pool.end());
+        if(pool.empty()){error="No alternative preserves this stage's legal formation choices.";return false;}
+        out.formation=pool[rng.below(Domain::Formation,static_cast<std::uint32_t>(pool.size()))];
+    }else if(out.kind==EncounterKind::Officer){
+        const auto index=static_cast<std::size_t>(r.position-1);const auto ordinal=static_cast<std::size_t>(std::count(r.officer.begin(),r.officer.begin()+index,true));
+        std::vector<std::string> pool(r.officerOrder.begin()+ordinal+1,r.officerOrder.end());
+        if(pool.empty()){error="No unused Officer remains for a legal replacement.";return false;}
+        out.formation=pool[rng.below(Domain::Formation,static_cast<std::uint32_t>(pool.size()))];
+    }else if(out.kind==EncounterKind::Mystery){
+        std::vector<std::string> pool={"C1-M-PATROL","C1-M-EXCHANGE","C1-M-TECH"};
+        pool.erase(std::remove_if(pool.begin(),pool.end(),[&](const std::string& x){return x==out.mystery || (r.safeMysteries && x=="C1-M-PATROL");}),pool.end());
+        out.mystery=pool[rng.below(Domain::Route,static_cast<std::uint32_t>(pool.size()))];out.formation.clear();
+        if(out.mystery=="C1-M-PATROL"){auto temp=r;temp.rng=rng;out.formation=regular(temp,out.district,false,{},0);}
+    }else{error="Boss encounters cannot be replaced.";return false;}
+    replacement=std::move(out);return true;
+}
+bool replaceRouteOffer(CityRoute& r,const RouteOffer& replacement,std::string& error){
+    RouteOffer expected;if(!previewRouteReplacement(r,replacement.id,expected,error))return false;
+    if(expected.kind!=replacement.kind || expected.formation!=replacement.formation || expected.mystery!=replacement.mystery || expected.encounterKey!=replacement.encounterKey || expected.encounterSeed!=replacement.encounterSeed || expected.district!=replacement.district || expected.binderDefaultSeen!=replacement.binderDefaultSeen || expected.replaced!=replacement.replaced || expected.surveyed!=replacement.surveyed){error="The saved alternative changed before commitment.";return false;}
+    auto& node=r.nodes[static_cast<std::size_t>(r.position-1)];
+    if(expected.kind==EncounterKind::Officer){
+        const auto index=static_cast<std::size_t>(r.position-1);const auto ordinal=static_cast<std::size_t>(std::count(r.officer.begin(),r.officer.begin()+index,true));
+        const auto other=std::find(r.officerOrder.begin()+ordinal+1,r.officerOrder.end(),expected.formation);std::iter_swap(r.officerOrder.begin()+ordinal,other);
+    }
+    for(auto& o:node.offers)if(o.id==expected.id){o=std::move(expected);return true;}
+    error="The current offer disappeared.";return false;
+}
 bool validateRoute(const CityRoute& r,std::string& error){
     auto fail=[&](const char* why){error=why;return false;};
     if(r.position<1 || r.position>13 || r.nextOfferId<1)return fail("Invalid city position or identity.");
     if(std::count(r.officer.begin(),r.officer.end(),true)!=3 || std::count(r.mystery.begin(),r.mystery.end(),true)!=3)return fail("Invalid opportunity count.");
     std::set<std::string> officers(r.officerOrder.begin(),r.officerOrder.end());
-    if(r.officerOrder.size()!=3 || r.officerOrder.front()!="C1-F-PURSUER" || officers!=std::set<std::string>{"C1-F-PURSUER","C1-F-WARDEN","C1-F-CHASSIS"})return fail("Invalid Officer schedule identities.");
+    if(r.officerOrder.size()!=3 || officers!=std::set<std::string>{"C1-F-PURSUER","C1-F-WARDEN","C1-F-CHASSIS"})return fail("Invalid Officer schedule identities.");
+    const auto firstOfficer=static_cast<std::size_t>(std::distance(r.officer.begin(),std::find(r.officer.begin(),r.officer.end(),true)));
+    if(r.officerOrder.front()!="C1-F-PURSUER" && std::none_of(r.nodes[firstOfficer].offers.begin(),r.nodes[firstOfficer].offers.end(),[](const RouteOffer& o){return o.kind==EncounterKind::Officer && o.replaced;}))return fail("The opening Officer changed without a route pass.");
     std::set<Id> ids;std::string committedDistrict,previousFormation;bool binderSeen=false;
     for(std::size_t i=0;i<12;++i){
         const auto pos=static_cast<Amount>(i+1);const auto& node=r.nodes[i];
@@ -139,7 +179,8 @@ bool validateRoute(const CityRoute& r,std::string& error){
         for(const auto& o:node.offers){
             if(o.id==0 || o.id>=r.nextOfferId || !ids.insert(o.id).second)return fail("Invalid route-offer identity.");
             if(o.id==node.selected)selectionFound=true;
-            if(o.kind>EncounterKind::Boss || o.encounterKey!="Mara/cinderwall/position/"+std::to_string(pos)+"/offer/"+std::to_string(o.id) || o.encounterSeed!=encounterSeed(r.seed,o.encounterKey))return fail("Invalid encounter identity or seed.");
+            if(o.kind>EncounterKind::Boss || o.encounterKey!="Mara/cinderwall/position/"+std::to_string(pos)+"/offer/"+std::to_string(o.id)+(o.replaced?"/MY1-12":"") || o.encounterSeed!=encounterSeed(r.seed,o.encounterKey))return fail("Invalid encounter identity or seed.");
+            if((o.replaced && o.kind==EncounterKind::Boss) || (o.surveyed && (o.kind!=EncounterKind::Mystery || o.mystery=="C1-M-PATROL")))return fail("Invalid route modification.");
             if(!o.district.empty() && !contains(lanes,o.district))return fail("Unknown district.");
             if(pos!=4 && pos!=8 && o.district!=committedDistrict)return fail("Offer escaped the committed district.");
             if(o.binderDefaultSeen!=binderSeen)return fail("Robot exposure history changed.");

@@ -1,0 +1,24 @@
+{
+  "utc": "2026-09-20T13:29:58.0939851Z",
+  "git_head_at_execution": "7dd085f5017a5490705ae6475769bf0d66b4e834",
+  "platform": "Windows x64 Release / MSVC 19.44.35228 / SDK 10.0.26100.0",
+  "executable_sha256": "a641836c46d38950c3c9ea0885d3a4b94b678426f184c4eea2f7a65c0fe725ac",
+  "probe_sha256": "836a88a7d9dbe9c2e7b97cad19ee4a5e7bb5502abd7b327c7c263e4d49bd265e",
+  "cmake_sha256": "2020e3cc37abeb62d32c805d294a18422567a9b662dee4f7034af52160307540",
+  "runner_sha256": "aeb2d6950b78a1e54d835405501b6495331f5736345f1c678f29db336ecf7277",
+  "source_unchanged_during_run": true,
+  "runtime_exit": 0,
+  "source_sha256": {
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/core.cpp": "11be7d317c631321841413eb8724b9bf74c94b877a6016a514270405857aa5d6",
+    "core/src/recipe_effects.inl": "30da77ca49bc37fa54b7339b4c114977d6be6d61b08ff4b15383717e43cf5705",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "551318922a8bcbda19790f1fa5628aaf89df23c9f01ce7f6533ad8d6ac68d0a4",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+  }
+}
