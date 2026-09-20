@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "manifest_sha256": null,
+  "verified_build": null,
+  "bindings": {},
+  "note": "No runtime support is claimed by P00. A content binding requires implementation and passed shared-core fixture evidence; descriptive source text is not executable support."
+}

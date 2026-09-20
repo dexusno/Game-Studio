@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(OverkillFoundationReview LANGUAGES CXX)
+add_executable(foundation_probes foundation_probes.cpp ../core/src/core.cpp ../core/src/serialization.cpp)
+target_include_directories(foundation_probes PRIVATE ../core/include)
+target_compile_features(foundation_probes PRIVATE cxx_std_17)
+if(MSVC)
+  target_compile_options(foundation_probes PRIVATE /W4 /WX /permissive-)
+endif()

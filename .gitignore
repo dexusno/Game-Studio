@@ -42,5 +42,7 @@ steam_appid.txt
 *.exe
 *.dll
 *.pdb
+*.sln
+games/overkill-foundry/unreal/Content/Technical/
 .DS_Store
 Thumbs.db

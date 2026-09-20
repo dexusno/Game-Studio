@@ -1,0 +1,15 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Games",
+  "Description": "Overkill Foundry — Mara's Cinderwall campaign",
+  "DisableEnginePluginsByDefault": true,
+  "Modules": [
+    { "Name": "OverkillFoundry", "Type": "Runtime", "LoadingPhase": "Default" }
+  ],
+  "Plugins": [
+    { "Name": "ACLPlugin", "Enabled": true },
+    { "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": ["Editor"] },
+    { "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": ["Editor"] }
+  ]
+}

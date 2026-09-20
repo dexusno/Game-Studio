@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "content_version": "cinderwall-v1",
+  "scope": {
+    "mercenary": "Mara",
+    "city_id": "cinderwall",
+    "city_tier": 1,
+    "city_name": "Cinderwall",
+    "mayor_name": "Irena Vale",
+    "boss_id": "C1-B01",
+    "preferred_first_officer_id": "C1-O01",
+    "excluded_campaigns": ["Ivo", "Ada", "Noor"],
+    "excluded_content": ["Cities 2 and 3", "Alternate tier-1 bosses", "Lockdown", "Final boss reveal", "Steam integration"],
+    "city_victory": {
+      "profile_unlock": "Ivo",
+      "mvp_completion": true,
+      "full_three_city_campaign_clear": false,
+      "next_campaign_message": "Ivo unlocked. His campaign and Mara's next cities are outside this MVP."
+    }
+  },
+  "source_contracts": [
+    "design/MVP-IMPLEMENTATION-PLAN.md",
+    "design/CAMPAIGN-PROGRESSION.md",
+    "design/ENEMY-PATTERNS.md",
+    "design/TIMING-AND-PERSISTENCE.md",
+    "design/MERCENARY-ABILITIES.md",
+    "design/UPGRADE-SYSTEM.md",
+    "design/MAYORS.md",
+    "design/PART-RESALE.md",
+    "design/RECIPE-RULE-AUDIT.md",
+    "design/BETA-TUNING.md"
+  ],
+  "route": {
+    "id": "C1-MARA-ROUTE",
+    "encounters": 12,
+    "boss_position": 12,
+    "opening_positions": [1, 2, 3],
+    "development_positions": [4, 5, 6],
+    "pressure_positions": [7, 8, 9, 10],
+    "approach_positions": [11],
+    "officer_schedule": {"choose": 3, "positions": [4, 5, 6, 7, 8, 9, 10], "nonadjacent": true, "unique_identity": true},
+    "mystery_schedule": {"choose": 3, "positions": [4, 5, 6, 7, 8, 9, 10, 11], "may_overlap_officer": true},
+    "legal_ordinary_offer_sets": [["Regular", "Regular", "Regular"], ["Regular", "Regular", "Officer"], ["Regular", "Regular", "Mystery"], ["Regular", "Officer", "Mystery"]],
+    "forks": [{"choose_at": 4, "committed_through": 6}, {"choose_at": 8, "committed_through": 10}],
+    "junction_positions": [7],
+    "districts": [
+      {"id": "C1-D-FOUNDRY", "name": "Foundry lane", "favours": ["C1-F-RAM", "C1-F-CASK", "C1-F-PRESS"]},
+      {"id": "C1-D-PATROL", "name": "Patrol lane", "favours": ["C1-F-MITE-RAM", "C1-F-NEST"]},
+      {"id": "C1-D-WORKSHOP", "name": "Workshop lane", "favours": ["C1-F-BINDER", "C1-F-PRESS"]}
+    ],
+    "district_rule": "Each fork has one offer leading to each lane; within a committed lane still show three encounters. Favoured eligible formations have weight 2, others 1. Borrow from opening templates to keep a simpler Regular alternative; never add a robot or bypass a gate. Position 7 is the shared junction encounter, not a free encounter.",
+    "history_rule": "Default packet for the first Cable Binder exposure; its authored alternate becomes eligible only after the default has been introduced. Prior formation exclusion applies only when enough distinct legal Regular templates remain. Preserve at least one simpler first-exposure option.",
+    "save_rule": "Persist the whole schedule, resolved offers, district commitment, encounter seed and exposed mechanics. Lane changes, shopping and reopening cannot reroll them."
+  },
+  "formations": [
+    {"id": "C1-F-MITE-RAM", "category": "Regular", "band": "opening", "bodies": [{"robot_id": "C1-R01", "hp": 7}, {"robot_id": "C1-R02", "hp": 24}], "source_fragment": "One Rivet Mite C1-R01 + Breach Ram R02", "teaching_fixture": true},
+    {"id": "C1-F-RAM", "category": "Regular", "band": "opening", "bodies": [{"robot_id": "C1-R02", "hp": 24}], "source_fragment": "solo Breach Ram R02"},
+    {"id": "C1-F-CASK", "category": "Regular", "band": "opening", "bodies": [{"robot_id": "C1-R05", "hp": 24}], "source_fragment": "solo Pressure Cask R05"},
+    {"id": "C1-F-PRESS", "category": "Regular", "band": "middle", "bodies": [{"robot_id": "C1-R08", "hp": 28}], "source_fragment": "Knuckle Press R08"},
+    {"id": "C1-F-BINDER", "category": "Regular", "band": "middle", "bodies": [{"robot_id": "C1-R04", "hp": 22}], "source_fragment": "Cable Binder R04"},
+    {"id": "C1-F-NEST", "category": "Regular", "band": "late", "bodies": [{"robot_id": "C1-R07", "hp": 28}], "source_fragment": "Coil Nest R07"},
+    {"id": "C1-F-PURSUER", "category": "Officer", "band": "officer", "bodies": [{"robot_id": "C1-O01", "hp": 52}]},
+    {"id": "C1-F-WARDEN", "category": "Officer", "band": "officer", "bodies": [{"robot_id": "C1-O02", "hp": 44}]},
+    {"id": "C1-F-CHASSIS", "category": "Officer", "band": "officer", "bodies": [{"robot_id": "C1-O03", "hp": 48}]},
+    {"id": "C1-F-GATEBREAKER", "category": "Boss", "band": "boss", "bodies": [{"robot_id": "C1-B01", "hp": 92}]}
+  ],
+  "robot_annotations": {
+    "C1-R01": {"status_ids": [], "action_ids": ["attack"], "patterns": [["attack"]], "summons": []},
+    "C1-R02": {"status_ids": ["FX01"], "action_ids": ["charge", "blast"], "patterns": [["charge", "blast"]], "summons": []},
+    "C1-R04": {"status_ids": ["FX09"], "action_ids": ["spray", "foul", "punch"], "patterns": [["spray", "foul", "punch"], ["spray", "punch", "foul"]], "variant_gate": "Prior default-packet exposure; select only at packet boundaries.", "summons": []},
+    "C1-R05": {"status_ids": ["FX01", "FX02"], "action_ids": ["attack", "pressurize"], "patterns": [["attack", "pressurize"]], "summons": []},
+    "C1-R07": {"status_ids": ["FX13"], "action_ids": ["deploy", "attack"], "opening_actions": ["deploy"], "repeating_actions": ["attack", "deploy_or_attack"], "selection_rule": "Select Deploy only when no Mite is alive and supply remains, otherwise Attack; freeze the selected intent. A committed Deploy cannot become an Attack if its condition changes before resolution.", "summons": [{"robot_id": "C1-R01", "hp": 7, "max_alive": 1, "lifetime_count": 4, "clock": "Committed Deploy action; when no live Mite and supply remains", "first_action": "Enemy phase of creation round + 1"}]},
+    "C1-R08": {"status_ids": ["FX01", "FX08"], "action_ids": ["brace", "double_punch", "slam"], "patterns": [["brace", "double_punch", "slam"]], "summons": []},
+    "C1-O01": {"status_ids": ["FX02", "FX03"], "action_ids": ["strike", "triple_strike"], "patterns": [["strike", "triple_strike"]], "summons": []},
+    "C1-O02": {"status_ids": ["FX02", "FX05"], "action_ids": ["attack_9", "gain_drive", "attack_12"], "patterns": [["attack_9", "gain_drive", "attack_12"]], "summons": []},
+    "C1-O03": {"status_ids": ["thermal-runaway", "FX13"], "action_ids": ["double_strike", "thermal_runaway", "triple_strike", "death_release"], "patterns": [["double_strike", "thermal_runaway", "triple_strike"]], "summons": [{"robot_id": "C1-R01", "hp": 7, "max_alive": 1, "lifetime_count": 1, "clock": "On destruction; permits lone death-spawn", "first_action": "Enemy phase of creation round + 1"}]},
+    "C1-B01": {"status_ids": ["FX02", "FX15"], "action_ids": ["phase_one_strike", "recover", "quad_strike", "charge", "blast"], "patterns": [["phase_one_strike"], ["recover"], ["quad_strike", "charge", "blast"]], "phase_threshold_hp": 46, "summons": []}
+  },
+  "mysteries": [
+    {
+      "id": "C1-M-PATROL", "name": "Backlot Patrol", "category": "Regular combat", "weight": 40,
+      "player_text": "A patrol blocks the scrap-yard exit. Read its intent and break through.",
+      "actions": [{"id": "continue", "label": "Face the patrol", "operation": "enter_regular_fight", "formation_pool": "current_regular_gate"}],
+      "result": "Use the current legal Regular formation and default/previously introduced patterns. Ordinary Regular cores and recipe rewards; never an Officer or boss. The completed fight counts this Mystery node once and restocks once through its result receipt. Defeat ends the campaign normally.",
+      "acceptance": "The saved Mystery reveals a legal current-band Regular formation, resumes the same fight-entry seed and advances one route position only after completion."
+    },
+    {
+      "id": "C1-M-EXCHANGE", "name": "Night Exchange", "category": "Merchant", "weight": 30,
+      "player_text": "A salvager opens a locked stockcase. The listed items are yours to inspect; buying is optional.",
+      "event_stock": {"recipe_slots": [{"rarity": "Uncommon", "quantity": 1}, {"rarity": "Rare", "quantity": 1}], "upgrade_slots": [{"source": "Shop", "rarities": ["Uncommon", "Rare"], "rarity_weights": [70, 30], "quantity": 1}], "price_source": "beta shop prices and current owned discounts", "ordinary_shop_restock": false},
+      "actions": [{"id": "buy", "label": "Buy selected item", "operation": "buy_event_offer"}, {"id": "leave", "label": "Continue", "operation": "complete_noncombat_mystery"}],
+      "completion_credits": 10,
+      "result": "Purchases are optional and individually receipted. A recipe exchange and payment commit together or neither changes. Leaving grants 10 salvage Credits once, subject to UGS-113's optional replacement. Remaining event stock expires; ordinary shop stock and purchases remain unchanged. No heal and no combat-victory hooks.",
+      "acceptance": "Reload preserves every price, candidate, purchase and completion receipt. Returning to the ordinary shop does not refresh it; leaving this Mystery advances once."
+    },
+    {
+      "id": "C1-M-TECH", "name": "Field Calibration", "category": "Tech support", "weight": 30,
+      "player_text": "A field technician can fit one recovered system using your emergency tissue supply. Inspect its function and full HP cost, or decline.",
+      "upgrade_offer": {"source": "Mystery", "choices": 3, "choose": 1, "rarities": ["Common", "Uncommon", "Rare"], "rarity_weights": [55, 35, 10], "current_hp_cost": 8, "include_item_acquisition_costs_in_validation": true, "never_charge_maximum_hp": true},
+      "actions": [{"id": "accept", "label": "Pay HP and install", "operation": "acquire_mystery_upgrade"}, {"id": "decline", "label": "Decline calibration", "operation": "complete_noncombat_mystery"}],
+      "completion_credits": 10,
+      "result": "Show at most three distinct eligible never-acquired Mystery-source upgrades; current city/mercenary and each item's literal selection/payment requirements apply. All required current-HP costs together must leave at least 1 HP. Accept zero or one. An impossible or exhausted upgrade offer retains Decline. Complete once with 10 salvage Credits, subject to UGS-113's optional replacement; no shop restock or combat-victory hooks.",
+      "acceptance": "At 8 HP a flat 8-HP offer is disabled and spends nothing. At 9 HP it leaves 1 before its acquisition payload. An item with an additional 8-HP cost requires 17 HP. Decline is always available and saved offers never reroll."
+    }
+  ],
+  "authored_tuning": {
+    "status": "Assistant-authored implementation content under the approved complete-city scope; hypotheses, not played balance or additional owner decisions.",
+    "district_names": "Retain the progression document's functional Foundry/Patrol/Workshop lanes. Reuse those lane identities at the second fork; no new travel system.",
+    "mystery_prices_and_rewards": "Night Exchange uses existing price rules and source eligibility. Its rarity weights, the flat 8-current-HP calibration payment and 10-Credit noncombat salvage are initial content tuning.",
+    "nested_ordinary_recipe_offers": "UGS-089's unspecified ordinary acquisition offers use current-city Regular recipe rarity weights. They remain acquisition offers rather than combat-victory triggers.",
+    "ordinary_upgrade_exhaustion": "A mandatory ordinary upgrade offer with no eligible unowned item grants 30 Credits instead, matching UGS-150's authored exhaustion amount. A shop suppresses an empty slot. Field Calibration keeps its free Decline and charges no HP. UGS-113 keeps the normal Credit reward. No Mayor item leaks into ordinary pools.",
+    "playtest_question": "Do Cinderwall's visible intents and rewards make the player change what they craft, save, install and fire? In Mysteries, can they explain the cost and why they accepted or declined?",
+    "build_hypotheses": [
+      {"id": "heat-burn", "purpose": "Appeal and pacing: keep Heat for Hot Barrel while Burn and direct shots finish priority threats.", "recipe_ids": ["MA001", "MA003", "MA015", "MA056", "MA110"], "evidence": "Hypothesis only; no simulated viability or player enjoyment claim."},
+      {"id": "shield-impact", "purpose": "Challenge and readability: install defence, then choose how much protection to spend on burst while saving a recovery part.", "recipe_ids": ["SH034", "SH096", "MA004", "MA027", "MA061", "MA112"], "evidence": "Hypothesis only; no simulated viability or player enjoyment claim."}
+    ]
+  }
+}

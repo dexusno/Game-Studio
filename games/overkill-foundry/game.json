@@ -6,7 +6,7 @@
   "platforms": [
     "windows"
   ],
-  "stage": "concept",
+  "stage": "prototype",
   "created_on": "2026-09-14",
   "source_opportunity": null,
   "budget": {
@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Independent owner-selected mercenary/robot recipe-combat game; fresh gameplay implementation, no Magnet Sweep code reuse. Owner selected Overkill Foundry on 2026-09-14 after market/title-conflict screening; no global clearance claim. Windows/Unreal planned, engine project absent. 606 draft recipes, 288 proposed permanent upgrades and original design/art evidence preserved. No playable or runtime QA claims; timeline unconstrained and zero budgets unset. Owner confirms and authorizes a goal-driven Mara City 1 (Cinderwall) MVP on 2026-09-20, with the existing visual quality and human approval requirements; implementation has not yet begun at this handoff.",
+  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; development timeline unconstrained and zero budgets unset. Fresh C++17 shared core now executes the Mite/Ram teaching fight and behavioral tests; fresh Unreal 5.8.2 host compiles and renders. Full city/content, durable saves, balance runs, final visuals and human approval remain pending. No old game gameplay/project/build pipeline reused. No standalone delivery or production-quality claim.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,12 +45,12 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T10:57:18+00:00",
-      "record_sha256": "03481af5900ca8a4aa2e67d0f9dbdc49a71838cc2de3ab7b37eb66f67f2f2a65",
+      "captured_at": "2026-09-20T11:48:22+00:00",
+      "record_sha256": "85404d26fadbbc551b00fd6038c1898ac17913704cfbb2ac0050678b449ce27a",
       "files": {
-        "games/overkill-foundry/STATUS.md": "0ace4785a5f4bc311bbd0d86d4430f6d41181b919bdbd01594365712ef75c0cf",
+        "games/overkill-foundry/STATUS.md": "4697a707607b78d98d018f4079f4bcf867f64baf3f2185b573a6e6762fba4863",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
-        "games/overkill-foundry/DECISIONS.md": "640bd95f898e745e29ee2cdc2d0837fb6350a9a09e88f8945e769a505caf8188",
+        "games/overkill-foundry/DECISIONS.md": "08d645e68d12908f049385a55b519723701b558d097de60960943133c9faaa44",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",
         "games/overkill-foundry/design/MVP-IMPLEMENTATION-PLAN.md": "8d05d3ec6ee65755bfc3265ce1a35304bfc2cddd774c43a96dc39dae2c8caae5",
         "games/overkill-foundry/design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",

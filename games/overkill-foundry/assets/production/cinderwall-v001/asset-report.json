@@ -1,0 +1,1276 @@
+{
+  "version": "cinderwall-art-v001",
+  "blender": "5.2.1 LTS",
+  "units": "metres",
+  "fps": 30,
+  "robots": {
+    "BreachRam": {
+      "vertices": 24360,
+      "triangles": 48024,
+      "bones": 12,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_oxide",
+        "M_CW_copper",
+        "M_CW_ember",
+        "M_CW_ochre",
+        "M_CW_ceramic",
+        "M_CW_soot"
+      ],
+      "rest_bounds_m": [
+        2.9169998168945312,
+        2.4004998207092285,
+        2.552500009536743
+      ],
+      "sockets": [
+        {
+          "name": "muzzle",
+          "pivot": [
+            -1.77,
+            0,
+            1.69
+          ],
+          "parent": "piston"
+        },
+        {
+          "name": "core",
+          "pivot": [
+            0.31,
+            0,
+            1.52
+          ],
+          "parent": "hull"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            2.83
+          ],
+          "parent": "root"
+        }
+      ],
+      "rigid_weights": true
+    },
+    "RivetMite": {
+      "vertices": 10242,
+      "triangles": 20200,
+      "bones": 20,
+      "materials": [
+        "M_CW_iron",
+        "M_CW_copper",
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_ember",
+        "M_CW_ochre",
+        "M_CW_optic"
+      ],
+      "rest_bounds_m": [
+        1.750999927520752,
+        1.7400000095367432,
+        1.309499979019165
+      ],
+      "sockets": [
+        {
+          "name": "core",
+          "pivot": [
+            0.14,
+            0,
+            0.74
+          ],
+          "parent": "body"
+        },
+        {
+          "name": "muzzle",
+          "pivot": [
+            -0.94,
+            0,
+            0.57
+          ],
+          "parent": "rivet"
+        },
+        {
+          "name": "intent",
+          "pivot": [
+            0,
+            0,
+            1.42
+          ],
+          "parent": "root"
+        }
+      ],
+      "rigid_weights": true
+    }
+  },
+  "stage": {
+    "mesh_count": 47,
+    "triangles": 173512,
+    "instances": [
+      {
+        "name": "SM_CW_deck_-9_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -9.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-9_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -9.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-9_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -9.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-7_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -7.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-7_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -7.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-7_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -7.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-5_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -5.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-5_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -5.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-5_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -5.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-3_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -3.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-3_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -3.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-3_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -3.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-1_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -1.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-1_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -1.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_-1_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          -1.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_1_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          1.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_1_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          1.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_1_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          1.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_3_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          3.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_3_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          3.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_3_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          3.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_5_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          5.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_5_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          5.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_5_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          5.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_7_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          7.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_7_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          7.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_7_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          7.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_9_-2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          9.0,
+          -2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_9_0",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          9.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_deck_9_2",
+        "mesh": "SM_CW_deck_-9_-2_Geo",
+        "position_m": [
+          9.0,
+          2.0,
+          -0.20000000298023224
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_foundation",
+        "mesh": "SM_CW_foundation_Geo",
+        "position_m": [
+          0.0,
+          2.0,
+          -0.6699999570846558
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_0",
+        "mesh": "SM_CW_furnace_0_Geo",
+        "position_m": [
+          -9.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_1",
+        "mesh": "SM_CW_furnace_1_Geo",
+        "position_m": [
+          -6.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_2",
+        "mesh": "SM_CW_furnace_2_Geo",
+        "position_m": [
+          -3.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_3",
+        "mesh": "SM_CW_furnace_3_Geo",
+        "position_m": [
+          0.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_4",
+        "mesh": "SM_CW_furnace_4_Geo",
+        "position_m": [
+          3.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_5",
+        "mesh": "SM_CW_furnace_5_Geo",
+        "position_m": [
+          6.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_furnace_6",
+        "mesh": "SM_CW_furnace_6_Geo",
+        "position_m": [
+          9.0,
+          6.225142478942871,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_service_main",
+        "mesh": "SM_CW_service_main_Geo",
+        "position_m": [
+          0.0,
+          4.25,
+          3.4739999771118164
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_catwalk",
+        "mesh": "SM_CW_catwalk_Geo",
+        "position_m": [
+          0.0,
+          4.119999885559082,
+          4.320000171661377
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_gantry_left",
+        "mesh": "SM_CW_gantry_left_Geo",
+        "position_m": [
+          -8.800000190734863,
+          1.2999999523162842,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_gantry_right",
+        "mesh": "SM_CW_gantry_right_Geo",
+        "position_m": [
+          8.800000190734863,
+          1.2999999523162842,
+          0.0
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_crane",
+        "mesh": "SM_CW_crane_Geo",
+        "position_m": [
+          0.0,
+          1.2999999523162842,
+          6.034999847412109
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_rear_claw_mount",
+        "mesh": "SM_CW_rear_claw_mount_Geo",
+        "position_m": [
+          -6.701134204864502,
+          1.1040488481521606,
+          2.741302967071533
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_scrap_bin_0",
+        "mesh": "SM_CW_scrap_bin_0_Geo",
+        "position_m": [
+          -7.011443614959717,
+          0.7915050983428955,
+          0.009999990463256836
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_scrap_bin_1",
+        "mesh": "SM_CW_scrap_bin_1_Geo",
+        "position_m": [
+          -7.800000190734863,
+          0.7000000476837158,
+          0.009999990463256836
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "SM_CW_scrap_bin_2",
+        "mesh": "SM_CW_scrap_bin_2_Geo",
+        "position_m": [
+          -6.8984150886535645,
+          1.578770637512207,
+          0.009999990463256836
+        ],
+        "rotation_euler_radians": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "clips": {
+    "BR_idle": {
+      "robot": "SK_BreachRam",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "BR_charge": {
+      "robot": "SK_BreachRam",
+      "duration_s": 1.25,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.25,
+          "event": "pressure_start"
+        },
+        {
+          "t": 1.05,
+          "event": "charged_glow_hold"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "BR_attack_blast": {
+      "robot": "SK_BreachRam",
+      "duration_s": 0.9,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.3,
+          "event": "muzzle_flash_and_display_committed_hit"
+        },
+        {
+          "t": 0.45,
+          "event": "steam_vent"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "BR_hit_light": {
+      "robot": "SK_BreachRam",
+      "duration_s": 0.34,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "BR_hit_medium": {
+      "robot": "SK_BreachRam",
+      "duration_s": 0.48,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "BR_hit_heavy": {
+      "robot": "SK_BreachRam",
+      "duration_s": 0.64,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "BR_death": {
+      "robot": "SK_BreachRam",
+      "duration_s": 2.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.85,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2.0,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "BR_escape": {
+      "robot": "SK_BreachRam",
+      "duration_s": 1.05,
+      "loop": false,
+      "events": [
+        {
+          "t": 1.05,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RM_idle": {
+      "robot": "SK_RivetMite",
+      "duration_s": 2,
+      "loop": true,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RM_attack_rivet": {
+      "robot": "SK_RivetMite",
+      "duration_s": 0.85,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.33,
+          "event": "rivet_flash_and_display_committed_hit"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RM_hit_light": {
+      "robot": "SK_RivetMite",
+      "duration_s": 0.3,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RM_hit_medium": {
+      "robot": "SK_RivetMite",
+      "duration_s": 0.43,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RM_hit_heavy": {
+      "robot": "SK_RivetMite",
+      "duration_s": 0.62,
+      "loop": false,
+      "events": [],
+      "gameplay_authority": false
+    },
+    "RM_death": {
+      "robot": "SK_RivetMite",
+      "duration_s": 2.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 0.2,
+          "event": "core_burst_cosmetic"
+        },
+        {
+          "t": 0.6,
+          "event": "collapse_contact"
+        },
+        {
+          "t": 1.1,
+          "event": "dissolve_start_all_components"
+        },
+        {
+          "t": 2,
+          "event": "destroy_actor_and_fx"
+        }
+      ],
+      "gameplay_authority": false
+    },
+    "RM_escape": {
+      "robot": "SK_RivetMite",
+      "duration_s": 1.0,
+      "loop": false,
+      "events": [
+        {
+          "t": 1,
+          "event": "despawn_without_death_fx"
+        }
+      ],
+      "gameplay_authority": false
+    }
+  },
+  "cameras": {
+    "preparation": {
+      "position_m": [
+        -0.6000000238418579,
+        -24.0,
+        7.0
+      ],
+      "rotation_euler_radians": [
+        1.380054235458374,
+        -0.0,
+        0.0
+      ],
+      "focal_length_mm": 48.0,
+      "projection": "ORTHO",
+      "ortho_width_m": 21.600000381469727
+    },
+    "action": {
+      "position_m": [
+        -7.400000095367432,
+        -10.399999618530273,
+        3.700000047683716
+      ],
+      "rotation_euler_radians": [
+        1.4180352687835693,
+        3.4592694930779544e-08,
+        -0.744259238243103
+      ],
+      "focal_length_mm": 46.0,
+      "projection": "PERSP",
+      "ortho_width_m": null
+    },
+    "pair_detail": {
+      "position_m": [
+        -1.5,
+        -7.800000190734863,
+        3.4000000953674316
+      ],
+      "rotation_euler_radians": [
+        1.3362692594528198,
+        2.7758122911336613e-08,
+        -0.49319568276405334
+      ],
+      "focal_length_mm": 52.0,
+      "projection": "PERSP",
+      "ortho_width_m": null
+    }
+  },
+  "palette": {
+    "iron": [
+      "303b42",
+      0.9,
+      0.43
+    ],
+    "edge": [
+      "778082",
+      0.93,
+      0.34
+    ],
+    "oxide": [
+      "a5492e",
+      0.08,
+      0.58
+    ],
+    "ochre": [
+      "b18a4d",
+      0.07,
+      0.58
+    ],
+    "patina": [
+      "427579",
+      0.08,
+      0.54
+    ],
+    "soot": [
+      "161f25",
+      0.35,
+      0.72
+    ],
+    "stone": [
+      "544a42",
+      0.03,
+      0.88
+    ],
+    "copper": [
+      "a46235",
+      0.92,
+      0.34
+    ],
+    "ceramic": [
+      "c3bda8",
+      0.05,
+      0.45
+    ]
+  },
+  "render_evidence": "Original Blender source renders only; no Unreal integration or human visual approval.",
+  "source_provenance": "Original procedural geometry, texture algorithms, rigging and keyframes by Game Studio / Codex; no third-party art."
+}

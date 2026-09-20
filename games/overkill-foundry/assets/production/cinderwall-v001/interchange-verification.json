@@ -1,0 +1,441 @@
+{
+  "format": "cinderwall-interchange-verification-v1",
+  "checks": [
+    {
+      "label": "BreachRam FBX one skeleton and mesh",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam FBX exact bone count",
+      "passed": true,
+      "detail": 12
+    },
+    {
+      "label": "BreachRam FBX UV channel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam FBX rigid weights",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam FBX metres round trip",
+      "passed": true,
+      "detail": [
+        2.9169998168945312,
+        2.4004998207092285,
+        2.5525002479553223
+      ]
+    },
+    {
+      "label": "BreachRam event sockets retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam GLB container valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam GLB own action coverage only",
+      "passed": true,
+      "detail": [
+        "BR_attack_blast",
+        "BR_charge",
+        "BR_death",
+        "BR_escape",
+        "BR_hit_heavy",
+        "BR_hit_light",
+        "BR_hit_medium",
+        "BR_idle"
+      ]
+    },
+    {
+      "label": "BreachRam GLB skin retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam GLB PBR maps retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "BreachRam FBX attack clip actually moves mechanism",
+      "passed": true,
+      "detail": 0.30175230297441513
+    },
+    {
+      "label": "RivetMite FBX one skeleton and mesh",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite FBX exact bone count",
+      "passed": true,
+      "detail": 20
+    },
+    {
+      "label": "RivetMite FBX UV channel",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite FBX rigid weights",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite FBX metres round trip",
+      "passed": true,
+      "detail": [
+        1.750999927520752,
+        1.7400000095367432,
+        1.3095000982284546
+      ]
+    },
+    {
+      "label": "RivetMite event sockets retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite GLB container valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite GLB own action coverage only",
+      "passed": true,
+      "detail": [
+        "RM_attack_rivet",
+        "RM_death",
+        "RM_escape",
+        "RM_hit_heavy",
+        "RM_hit_light",
+        "RM_hit_medium",
+        "RM_idle"
+      ]
+    },
+    {
+      "label": "RivetMite GLB skin retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite GLB PBR maps retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "RivetMite FBX attack clip actually moves mechanism",
+      "passed": true,
+      "detail": 0.34735703182524125
+    },
+    {
+      "label": "Stage GLB all 47 modules",
+      "passed": true,
+      "detail": 47
+    },
+    {
+      "label": "Stage rear claw module present",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "Stage all modules have UVs",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "Stage nonempty module dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "27 portable PBR textures",
+      "passed": true,
+      "detail": 27
+    },
+    {
+      "label": "CW_ceramic_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ceramic_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ceramic_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ceramic_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ceramic_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ceramic_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_copper_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_edge_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_iron_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_ochre_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_oxide_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_patina_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_soot_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_BaseColor.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_BaseColor.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_Normal.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_Normal.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_ORM.png intended 256px dimensions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "label": "CW_stone_ORM.png fully opaque as intended",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Unreal import/material binding not run by this source verification.",
+    "Dissolve, hit event timing and actor cleanup require gameplay presentation integration.",
+    "Animation feel and human visual approval remain unverified."
+  ]
+}

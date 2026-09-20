@@ -1,0 +1,55 @@
+{
+  "schema": "overkill-foundry-presentation-contract-v1",
+  "art_build": "cinderwall-art-v001",
+  "source": "art-source/build_cinderwall.py",
+  "authoritative_gameplay": false,
+  "coordinates": {"units": "metres", "up": "+Z", "enemy_forward": "-X", "fps": 30},
+  "robots": {
+    "C1-R01": {
+      "asset": "RivetMite",
+      "skeleton": "SK_RivetMite",
+      "clips": {"idle": "RM_idle", "attack": "RM_attack_rivet", "hit_light": "RM_hit_light", "hit_medium": "RM_hit_medium", "hit_heavy": "RM_hit_heavy", "death": "RM_death", "escape": "RM_escape"},
+      "attack_display_cue_seconds": 0.33,
+      "collapse_contact_seconds": 0.60
+    },
+    "C1-R02": {
+      "asset": "BreachRam",
+      "skeleton": "SK_BreachRam",
+      "clips": {"idle": "BR_idle", "charge": "BR_charge", "attack": "BR_attack_blast", "hit_light": "BR_hit_light", "hit_medium": "BR_hit_medium", "hit_heavy": "BR_hit_heavy", "death": "BR_death", "escape": "BR_escape"},
+      "hold_charge_final_pose": true,
+      "attack_display_cue_seconds": 0.30,
+      "collapse_contact_seconds": 0.85
+    }
+  },
+  "sockets": {"muzzle": "muzzle", "core_burst": "core", "intent_ui": "intent"},
+  "materials": {
+    "base_color_srgb": true,
+    "orm_srgb": false,
+    "orm_channels": {"r": "constant one; no baked AO", "g": "roughness", "b": "metallic"},
+    "normal_srgb": false,
+    "normal_convention": "OpenGL +Y; flip green when imported for DirectX",
+    "normal_strength": 0.35,
+    "source_alpha": "opaque",
+    "required_runtime_scalar_on_every_slot": "Dissolve"
+  },
+  "reaction_selection": {
+    "status": "provisional presentation tuning; never a gameplay effect",
+    "basis": "resolved effective Shield plus HP loss, excluding unused overkill; compare against enemy maximum HP",
+    "light": "100 * effective_damage < 5 * max_hp",
+    "medium": "5 * max_hp <= 100 * effective_damage < 20 * max_hp",
+    "heavy": "100 * effective_damage >= 20 * max_hp",
+    "zero_damage": "deflection cue only",
+    "death": "always overrides reaction band",
+    "queue": "replace or layer short reactions; never accumulate an unbounded animation queue"
+  },
+  "death": {
+    "clip_seconds": 2.0,
+    "cosmetic_burst_seconds": 0.20,
+    "dissolve_start_seconds": 1.10,
+    "destroy_actor_and_all_fx_seconds": 2.0,
+    "targetability": "ends at committed core death, before the presentation",
+    "cleanup": "all material slots, skinned pieces, attached particles, labels and selection markers",
+    "core_rules": "never wait for or repeat death/loot/summon events from an animation notify"
+  },
+  "integration_status": "Source export and Blender round trip only; Unreal integration, runtime cleanup and human visual approval pending"
+}
