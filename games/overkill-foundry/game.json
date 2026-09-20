@@ -39,20 +39,20 @@
       "games/overkill-foundry/design/ENEMY-ROSTER.md",
       "games/overkill-foundry/design/ENEMY-PATTERNS.md",
       "games/overkill-foundry/design/ROBOT-EFFECTS.md",
-      "games/overkill-foundry/design/BALANCE-RESEARCH.md",
+      "games/overkill-foundry/design/ART-DIRECTION.md",
       "games/overkill-foundry/design/PART-RESALE.md",
       "games/overkill-foundry/design/data/part-resale-bases.json"
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T09:42:12+00:00",
-      "record_sha256": "a229de75dd700778e83981d40753b5daf18fca5326f69d0fcefe4dc55d7557d1",
+      "captured_at": "2026-09-20T10:16:54+00:00",
+      "record_sha256": "90cc711722df87a3f8a768d990c1a39a48708b7c010afdd21aadd239cf0532d6",
       "files": {
-        "games/overkill-foundry/STATUS.md": "613bfc7fcee9ef27e1b5542238094c14607f0656be87e2b26859426dc5c90905",
-        "games/overkill-foundry/BRIEF.md": "c421e96216672ae6228d84579f9bdada5b298438e82877811c307816913c52c2",
-        "games/overkill-foundry/DECISIONS.md": "3b73ad3fb2931fc14ad6211760444a087cc21ed3188997f19dd809207ca11bfc",
+        "games/overkill-foundry/STATUS.md": "c2bd5d8b13526de99a93d78ceed65be13a1fefdb2a37d30b2284e17892cf0bf8",
+        "games/overkill-foundry/BRIEF.md": "9ddcd1998d536132543c7e5de3a5db3959e8dab19a4e1f0cf39048a888a46ab1",
+        "games/overkill-foundry/DECISIONS.md": "a8b95f7e4f27c566b2764b71862328e1c6fac369ed2b21285b551e5b3d62196b",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "85558d2d6af40b6c28f487c316d0143c95ec6c5ddf1ec547ed005a412513b3bd",
-        "games/overkill-foundry/design/MVP-IMPLEMENTATION-PLAN.md": "8bc86705fee49797f4bfa90d6e51ccc35c229c61e14abb25184be43cc03e08d3",
+        "games/overkill-foundry/design/MVP-IMPLEMENTATION-PLAN.md": "a49b9765e22e7e66e9d93356ed2cfc4ada1203b7e2fb13ac01917ec447618880",
         "games/overkill-foundry/design/TIMING-AND-PERSISTENCE.md": "0bd909e708a23da24ebd1ab0b588a582e5a58e7ea4a1bf2547e03d5fc1f96d0d",
         "games/overkill-foundry/design/ENDGAME-PROGRESSION.md": "a74f5590e6357216ab5ee9ff329422ab41380280c41a3181c32e9bd357bb4843",
         "games/overkill-foundry/design/ACHIEVEMENTS.md": "54879a4f04e2d5d5dde6a21c78b5c19023d43912e9993cae4aa5cee9d1fc134c",
@@ -70,7 +70,7 @@
         "games/overkill-foundry/design/ENEMY-ROSTER.md": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5",
         "games/overkill-foundry/design/ENEMY-PATTERNS.md": "5bf168713b294062f8c94cf30dcaf3d72a83af5d561e66439e0463c9fde0063e",
         "games/overkill-foundry/design/ROBOT-EFFECTS.md": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a",
-        "games/overkill-foundry/design/BALANCE-RESEARCH.md": "3d4edb255cb06dfec8629392c0dadf20572bdc513641aa98e3bdbc4c306f992a",
+        "games/overkill-foundry/design/ART-DIRECTION.md": "40bdd11dff7cc756899b0aba2ac0e67d5b934a1b965f526e6affa0bd3b4fc358",
         "games/overkill-foundry/design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
         "games/overkill-foundry/design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf"
       }

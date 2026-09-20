@@ -40,6 +40,14 @@ The full design remains four mercenaries with their own three cities and progres
 
 ## Sources and rule precedence
 
+### Mandatory visual acceptance — owner requirement, 20 September
+
+The MVP requires **visually stunning graphics implemented in actual gameplay**, with **F.I.S.T.: Forged in Shadow Torch** as the selected benchmark for material finish, machinery, lighting and scene depth. Preserve the selected 16B/16C views and supplied STYLE anchor. Every enabled enemy must have its own identity, one animation/sequence per distinct action, multiple hit reactions relative to enemy strength, and a spectacular death that fades away completely. See the [visual contract and source comparison](ART-DIRECTION.md#required-visual-quality-and-enemy-animation--20-september-2026). Light/medium/heavy bands and initial thresholds are implementation tuning proposals, not individually selected owner values.
+
+Prove a representative encounter as soon as P13 supplies the graphical action adapter; source-asset work can start earlier. Show preparation, firing, enemy actions, relative hit reactions and death/cleanup in motion. Establish a viable art/animation pipeline before expanding across the roster. P15 completes this standard for the entire enabled manifest; P17 includes Klaus's visual approval. Headless correctness and attractive concepts do not establish the implemented visual quality. Use ImageGen, TRELLIS and Blender where appropriate; verify their actual production access and raise any additional software need and verified cost with Klaus before a purchase. No additional software need has been established by this plan.
+
+### Rule precedence and source register
+
 Owner decisions override draft defaults. A general default does not remove a named character, recipe or upgrade exception. Older proposals remain history when a later explicit decision resolves that same issue. A completed source audit is not an exhaustive runtime interaction test.
 
 | Area | Implementation input and its limit |
@@ -50,7 +58,7 @@ Owner decisions override draft defaults. A general default does not remove a nam
 | Mercenaries | [Abilities](MERCENARY-ABILITIES.md). Preserve Hot Barrel, Charged Barrel, Find the Seam and Bolt. Quench Recovery/Residual Current are unselected alternatives, not automatic additions. |
 | Enemies and routes | [Roster](ENEMY-ROSTER.md), [effects](ROBOT-EFFECTS.md), [patterns](ENEMY-PATTERNS.md), [progression](CAMPAIGN-PROGRESSION.md). Draft values and optional effect aliases require one implementation identity; aliases must not stack as two mechanics. |
 | Upgrades | [Catalogue](UPGRADE-CATALOGUE.md), [system](UPGRADE-SYSTEM.md) and [Mayors](MAYORS.md). Individual effects/values remain proposals. The 288-item pool requires typed implementation and interaction coverage. |
-| Presentation | [Camera flow](COMBAT-CAMERA-FLOW.md) and the supplied style anchor. 16B preparation, rear claw, visible intentions and 16C action remain the direction. Reference art is not a game asset/build. |
+| Presentation | [Camera flow](COMBAT-CAMERA-FLOW.md), [visual contract](ART-DIRECTION.md#required-visual-quality-and-enemy-animation--20-september-2026), the supplied STYLE anchor and selected F.I.S.T. quality benchmark. 16B preparation, rear claw, visible intentions and 16C action remain the direction. Reference art is not a game asset/build. |
 | Validation | [Worked encounter](ENCOUNTER-DRONES-AND-SIEGE.md) and [balance plan](BALANCE-RESEARCH.md). The paper route is an arithmetic fixture; the existing Python studies are not a combat simulator. |
 | Later progression | [Endgame](ENDGAME-PROGRESSION.md), [achievements](ACHIEVEMENTS.md) and [Steam integration](STEAM-ACHIEVEMENTS.md). Preserve these requirements in the data/event design; their proposed numbers and gates are not silently approved. |
 
@@ -93,9 +101,9 @@ These IDs describe build order, not a competing progress tracker. A package may 
 | P12 | Complete-city simulation and reports | P10, P11 | Run recorded seeds with several simple policies; output wins, HP/resource curves, purchases, recipe/upgrade choices, turns, stalls and exact failure traces. Hundreds of fast runs only after the core fixtures pass. |
 | P13 | Unreal action adapter and debug controls | P04 | Bind visible state and controls to the existing core, including action rejection and logs. Same scripted input sequence produces the headless result; no combat calculations in presentation code. |
 | P14 | Player UI and campaign flows | P05, P07, P09, P10, P11, P13 | Profile/mercenary selection, intents, Recipe/Shop, readable part assembly, target/load/fire, End Turn, rewards, tutorial, death and city completion. Show exact costs/remaining Shield and explain disabled actions. |
-| P15 | Claw, rig, cameras, sound and readable art | P07, P13 | Actual 16B/16C transitions, rear claw with Precision input, distinctive rig/city/robots, clear hit/Shield feedback and brisk repeat firing. Log asset rights and verify 20+ parts without a logical cap. |
+| P15 | Claw, cameras, sound and stunning implemented visuals | P06, P07, P13 | Actual 16B/16C transitions, rear claw/Precision, finished rig/city and distinct robots. Cover every enabled enemy action, relative light/medium/heavy hit responses and spectacular death/fade/cleanup; preserve rule timing. Prove one representative fight early against the F.I.S.T. benchmark, then complete the manifest. Log asset rights, verify 20+ parts without a cap and measure runtime performance. |
 | P16 | Integrated MVP candidate | P08, P12, P14, P15 | Package the selected playable boundary with its entire enabled manifest. Complete a route through the graphical build; cross-check its recorded decisions in the headless core. Finish runtime content coverage and fix integration failures. |
-| P17 | Human tests and balance iteration | P16 | Observe comprehension, meaningful choices, repetition, Precision enjoyment and controller/mouse behavior as applicable. Klaus verifies graphics and approves visuals; compare observed strategies with simulation results and tune/retest changed cases. |
+| P17 | Human tests and balance iteration | P16 | Observe comprehension, meaningful choices, repetition, Precision enjoyment and controller/mouse behavior as applicable. Klaus reviews the in-game visual/animation coverage against the visual contract and F.I.S.T. benchmark and approves the result; compare observed strategies with simulation results and tune/retest changed cases. |
 | P18 | Verified demo delivery | P17 | Reproducible Windows package, independent launch/play/save checks, resolution/input-focus and performance checks, documented build ID and known limitations. Close the selected MVP acceptance criteria with actual evidence. |
 
 P13 is intentionally available after P04 even though listed later: it can run alongside P05–P12 once the core action interface is stable. P06 can proceed alongside P05; P14 and P15 can proceed in parallel after their prerequisites. If agents are assigned later, use separate core/content, Unreal/UI and art/audio paths; one integration owner maintains STATUS and the contracts. Parallel activity does not waive dependencies.
@@ -133,7 +141,7 @@ These are behavioral checks for the implementation, not new balance rules or tes
 | Economy and persistence | Fixed price after a discount/copy/bonus; selling eligible reserves with a loaded bullet; no sale of loaded parts; saved shops do not refill; fight-end clearing preserves later purchases; no duplicate rewards; Collection discoveries survive rollback/death. |
 | Content interactions | Every enabled effect has coverage plus targeted pairings at high-risk boundaries: cooling + extra uses, grant + refund, Shield spend + retention, death + reward, copied part + original-sale reference. Never claim exhaustive combinatorial coverage. |
 | Simulation quality | Compare several policies and common seeds, include poor decisions, report distribution and failures rather than only average win rate. Detect infinite/profit loops and emit a trace; a runner timeout is not a gameplay action cap or forced End Turn. |
-| Presentation | At least 20 applied parts on each assembly plus larger builds; clear intents and recoil forecast; accurate preview; focus/resolution changes; accessible readable text; quick repeated shots; actual human visual approval. |
+| Presentation | At least 20 applied parts on each assembly plus larger builds; clear intents and recoil forecast; accurate preview; focus/resolution changes; readable text; quick repeated shots without animation queues; same hit against weak/strong robots; all enemy actions/reactions/deaths; lethal status, death-spawn and final-kill cleanup; actual human visual approval. |
 
 ## Expansion after the first accepted boundary
 
