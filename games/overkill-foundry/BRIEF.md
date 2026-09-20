@@ -1,5 +1,7 @@
 # Overkill Foundry — independent game brief
 
+**MVP scope and build authorization, 20 September:** Klaus confirms Mara's complete first city, Cinderwall, and authorizes a goal-driven task to implement and deliver it. Include the full city loop, selected visuals, graphics-free balancing, human review and a verified Windows package under the [definition of done](design/MVP-IMPLEMENTATION-PLAN.md#goal-execution-and-definition-of-done). The other mercenaries/cities, Lockdown finale and Steam integration remain later full-game work. Earlier pending-scope and per-step implementation-approval wording is superseded for this MVP.
+
 **Visual quality, selected 20 September:** deliver visually stunning graphics implemented in actual gameplay, using **F.I.S.T.: Forged in Shadow Torch** as the quality benchmark for materials, machinery, lighting and scene depth. Preserve our STYLE anchor and controlled 2.5D/3D camera presentation. Every included enemy needs its own identity and animations: one per distinct action is sufficient, with multiple hit reactions relative to enemy strength and a spectacular death that fades away completely. Klaus approves the integrated result. [Art direction](design/ART-DIRECTION.md#required-visual-quality-and-enemy-animation--20-september-2026) records coverage, initial reaction tuning and the ImageGen/TRELLIS/Blender workflow. Raise additional software needs and verified costs with the owner before any purchase.
 
 **Balancing and visual validation, selected 18 September:** plan a graphics-free version sharing the playable game's rules for Codex-led batches of hundreds of games. Automated runs inform numerical balance; human tests verify playability and graphics, with visual approval by Klaus. See [the simulation plan](design/BALANCE-RESEARCH.md#graphics-free-balancing-version--owner-direction-18-september-2026). No graphics-free build or batch results exist yet.
@@ -8,7 +10,7 @@
 
 **Permanent upgrades, selected direction 18 September:** campaign upgrades fill the role of STS2 relics, including high-tech tools that may explicitly change game defaults. Shared and mercenary-specific pools are defined in the [upgrade catalogue](design/UPGRADE-CATALOGUE.md). Common/Uncommon/Rare source tiers map directly; special source pools have stated rarity mappings. Mayor gifts draw specifically from Ancient relics and become stronger over the three city waves. Individual effects, values and distributions remain proposals; existing innate character abilities are preserved.
 
-Owner-selected title: **Overkill Foundry**, 14 September 2026. Catalogue ID: `overkill-foundry`. Owner-separated from Magnet Sweep on 14 September 2026; fresh gameplay implementation, currently concept stage. Planned platform/tool direction: Windows and Unreal. Development timeline is unconstrained; implementation scope and numerical budgets are not approved.
+Owner-selected title: **Overkill Foundry**, 14 September 2026. Catalogue ID: `overkill-foundry`. Owner-separated from Magnet Sweep on 14 September 2026; fresh gameplay implementation, currently concept stage. Planned platform/tool direction: Windows and Unreal. Development timeline is unconstrained. Mara City 1 is the approved MVP implementation scope; zero budget fields remain unset and do not authorize purchases.
 
 ## Player promise
 
