@@ -1,5 +1,7 @@
 # Overkill Foundry — quality and playtesting
 
+**Runner evaluation update:** [baseline-4](core/runner/BASELINE-4.md) records199 completions and one policy timeout over200 fresh paired Auto cities, all200 exact replays/78,756 commands and two acquired/used combinations. [Independent runner QA](qa/city-runner-review.md) pins the unchanged evaluated source. The Foil Warden stall is retained for the next policy-only repair; no game caps or balance claims follow from this batch.
+
 The complete recipe dispatch, robot/route modules, campaign transactions and Windows save caller have authored runtime tests. The P08 upgrade executor and production campaign adapters have passed the bounded independent review below. The two pending haul rules, complete graphical city, final visuals, full-city balance runs, standalone package and human approval remain outstanding.
 
 ## Reviewed native P08 checkpoint, 20 September 2026

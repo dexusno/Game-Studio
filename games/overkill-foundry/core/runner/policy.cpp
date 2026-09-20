@@ -10,19 +10,20 @@ namespace overkill::runner {
 namespace {
 bool alive(const Enemy& e){return e.hp>0&&!e.dead&&!e.escaped;}
 template<class T> const T* find(const std::vector<T>& xs,Id id){for(const auto& x:xs)if(x.id==id)return &x;return nullptr;}
-double announced(const State& s){double n=0;for(const auto& e:s.enemies)if(alive(e)&&e.intent.move==Move::Attack)n+=std::max(0,e.intent.damage+e.drive-e.weaken)*e.intent.hits;return n+s.burn;}
+double announced(const State& s){double n=0;for(const auto& e:s.enemies)if(alive(e)&&e.bornRound<s.round&&e.intent.move==Move::Attack)n+=std::max(0,e.intent.damage+e.drive-e.weaken)*e.intent.hits;return n+s.burn;}
 CampaignAction command(const Campaign& c,CampaignActionType type,Id subject=0,const std::string& choice={}){CampaignAction a;a.type=type;a.runId=c.runId;a.sequence=c.nextTransaction;a.subject=subject;a.choice=choice;return a;}
 Decision ready(CampaignAction a){return {true,std::move(a),{}};}
 double sumMaterials(const Materials& xs){return std::accumulate(xs.begin(),xs.end(),0.0);}
-// Progressing a visible boss health threshold is necessary even when its
-// transition grants protection. Do not treat that grant as undoing the hit.
-double transitionProgress(const State& before,const State& after){double value=0;for(const auto& e:after.enemies){const auto* old=find(before.enemies,e.id);if(old&&!old->bossTransitioned&&e.bossTransitioned)value+=std::max(0,e.shield-old->shield)*0.75;}return value;}
+// Credit necessary, immediately previewed transitions. A boss's new Shield or
+// a dead Chassis's released helper does not undo damage to the old body. The
+// replacement is fully valued as a living target on the following decision.
+double transitionProgress(const State& before,const State& after){double value=0;for(const auto& e:after.enemies){const auto* old=find(before.enemies,e.id);if(old&&!old->bossTransitioned&&e.bossTransitioned)value+=std::max(0,e.shield-old->shield)*0.75;if(!old&&alive(e)&&after.kills>before.kills)value+=e.hp+e.shield*0.75;}return value;}
 }
 Policy::Policy(const Rules& r,const CampaignRules& c,Options options):rules_(r),campaign_(c),options_(std::move(options)),executionRandom_(options_.seed^0xcb66a4d93e517029ULL){}
 double Policy::hpWeight()const{return options_.policy=="defensive"?3.2:2.0;}
 double Policy::resourceWeight()const{return options_.policy=="defensive"?0.35:0.12;}
 Preview Policy::preview(const State& s,const Action& a){if(decisionPreviews_>=options_.searchBudget)return {{false,"Policy preview budget",{}},s};++decisionPreviews_;++totalPreviews_;return rules_.preview(s,a);}
-Amount Policy::precisionResult(){if(options_.precision=="auto")return -1;executionRandom_+=0x9e3779b97f4a7c15ULL;auto x=executionRandom_;x=(x^(x>>30))*0xbf58476d1ce4e5b9ULL;x=(x^(x>>27))*0x94d049bb133111ebULL;x^=x>>31;const auto roll=x%100;const auto miss=options_.precision=="learning"?55:options_.precision=="practised"?15:5;const auto perfect=options_.precision=="learning"?10:options_.precision=="practised"?30:70;return roll<static_cast<unsigned>(miss)?0:roll>=static_cast<unsigned>(100-perfect)?2:1;}
+Amount Policy::precisionResult(){if(options_.precision=="auto")return -1;executionRandom_+=0x9e3779b97f4a7c15ULL;auto x=executionRandom_;x=(x^(x>>30))*0xbf58476d1ce4e5b9ULL;x=(x^(x>>27))*0x94d049bb133111ebULL;x^=x>>31;const auto roll=x%100;const auto miss=options_.precision=="learning"?55:options_.precision=="practised"?20:5;const auto perfect=options_.precision=="learning"?10:options_.precision=="practised"?35:70;return roll<static_cast<unsigned>(miss)?0:roll>=static_cast<unsigned>(100-perfect)?2:1;}
 double Policy::recipeRank(const State& s,const std::string& id)const{
     const auto* r=rules_.recipe(id);if(!r)return -1000;const double cost=sumMaterials(r->cost);const auto copies=std::count_if(s.memory.begin(),s.memory.end(),[&](const RecipeCopy& c){return c.recipe==id;});
     double value=14+static_cast<int>(r->rarity)*2-cost*0.8-r->cooldown;
@@ -89,9 +90,18 @@ double Policy::simpleValue(const State& s)const{
     if(s.phase==Phase::Defeat)return -1000000;if(s.phase==Phase::Victory)return 100000+s.hp*hpWeight();
     double value=s.hp*hpWeight()+s.maxHp*0.3+s.heat*(options_.policy=="aggressive"?1.0:0.65);
     value+=sumMaterials(s.materials)*resourceWeight();
-    const auto shield=Rules::shield(s);value+=std::min<double>(shield,announced(s))*hpWeight()*0.82;
+    // Penalize exposed current damage. Rewarding Shield against surviving
+    // attackers instead would make eliminating those attackers look costly.
+    const auto shield=Rules::shield(s);value-=std::max<double>(0,announced(s)-shield)*hpWeight()*0.82;
     if(ownedUpgrade(s,"MY3-03")||ownedUpgrade(s,"UGS-123"))value+=std::min<double>(shield,6)*0.25;
-    for(const auto& e:s.enemies)if(alive(e)){value-=e.hp+e.shield*0.75;value-=e.intent.move==Move::Attack?std::max(0,e.intent.damage+e.drive-e.weaken)*e.intent.hits*0.45:1;value+=std::min(e.hp,e.burn)*0.65+std::min(e.hp,e.corrosion)*0.75+e.mark*0.4+e.weaken*0.3;}
+    for(const auto& e:s.enemies)if(alive(e)){
+        value-=e.hp+e.shield*0.75;
+        if(e.bornRound<s.round)value-=e.intent.move==Move::Attack?std::max(0,e.intent.damage+e.drive-e.weaken)*e.intent.hits*0.45:1;
+        // Pending damage helps remove this body's remaining HP. Surplus Mark,
+        // Burn and Corrosion must not make preserving a nearly dead enemy worth
+        // more than killing it. Weaken is already included in current threat.
+        value+=std::min(e.hp*0.9,e.burn*0.65+e.corrosion*0.75+e.mark*0.4);
+    }
     value-=s.burn*1.2+s.corrosion*1.5+s.weaken*0.4+s.mark*0.6;
     for(const auto& c:s.memory)value-=std::min(c.cooldown,4)*0.12;
     for(const auto& b:s.shotBonuses)value+=b.flat*0.5+b.percent*0.025;
@@ -99,9 +109,9 @@ double Policy::simpleValue(const State& s)const{
     for(const auto& b:s.bindings)if(b.clock==BindingClock::Collection)value+=1.4+std::max(0,b.amount)*0.3;
     return value;
 }
-double Policy::partPotential(const State& s){
+double Policy::partPotential(const State& s,Id firstNewPart){
     if(!s.bullet.empty())return 0;double total=0;const auto before=simpleValue(s);const auto incoming=announced(s);
-    for(const auto& p:s.parts){if(p.place!=Place::Reserve)continue;double best=0;
+    for(const auto& p:s.parts){if(p.place!=Place::Reserve||p.id<firstNewPart)continue;double best=0;
         if(p.kind==Kind::Ammo||p.kind==Kind::Spread){auto load=Action::load({p.id});if(p.recipe=="SH110")for(const auto& q:s.parts)if(q.place==Place::Reserve&&q.kind==Kind::Shield&&isUnusedPart(q)){load.sacrifices={q.id};break;}auto loaded=preview(s,load);if(loaded.result.ok)for(const auto& fire:shots(loaded.state)){const auto result=preview(loaded.state,fire);if(result.result.ok)best=std::max(best,std::min(100.0,simpleValue(result.state)-before+transitionProgress(s,result.state)));}}
         else if(p.kind==Kind::Shield){for(const auto& a:choices(s,Action::install(p.id),p.recipe)){const auto result=preview(s,a);if(result.result.ok){const auto gained=std::max(0,Rules::shield(result.state)-Rules::shield(s));best=std::max(best,simpleValue(result.state)-before+std::max(0.0,gained-incoming)*0.08);}}}
         else{Action activate;activate.type=ActionType::Activate;activate.subject=p.id;for(const auto& a:choices(s,activate,p.recipe)){const auto result=preview(s,a);if(result.result.ok)best=std::max(best,simpleValue(result.state)-before+transitionProgress(s,result.state));}}
@@ -141,8 +151,11 @@ Decision Policy::combat(const Campaign& c){
     const auto& s=c.fight;auto submit=[&](Action a){auto out=command(c,CampaignActionType::Combat);out.combat=std::move(a);return ready(out);};
     if(s.phase==Phase::Collection){Materials demand{};for(const auto& copy:s.memory){const auto* r=rules_.recipe(copy.recipe);if(r&&copy.cooldown==0&&(r->kind==Kind::Ammo||r->kind==Kind::Shield||r->id=="MA001"))for(std::size_t i=0;i<5;++i)demand[i]+=r->cost[i];}Amount steering=0;double best=-1;for(Amount i=0;i<5;++i){const auto score=demand[static_cast<std::size_t>(i)]-s.materials[static_cast<std::size_t>(i)]-(i==0?3:i==1?2:1);if(score>best){best=score;steering=i;}}return submit(Action::collect(steering,s.precisionSpent?-1:precisionResult()));}
     const auto base=simpleValue(s);if(!s.bullet.empty()){double best=-std::numeric_limits<double>::max();Action selected;bool found=false;for(const auto& a:shots(s)){const auto result=preview(s,a);if(result.result.ok&&simpleValue(result.state)>best){best=simpleValue(result.state);selected=a;found=true;}}if(found)return submit(selected);return submit(Action{ActionType::Unload});}
-    Action bestAction=Action::endTurn();double best=0.03;const auto potential=partPotential(s);
-    const auto consider=[&](const Action& a,bool production){const auto result=preview(s,a);if(!result.result.ok)return;double score=simpleValue(result.state)-base+transitionProgress(s,result.state);if(production)score+=(partPotential(result.state)-potential)*(options_.policy=="aggressive"?1.35:1.15);if(score>best){best=score;bestAction=a;}};
+    Action bestAction=Action::endTurn();double best=0.03;
+    // Value each candidate's new physical outputs once. Revaluing the whole
+    // reserve for every candidate spent the search budget on old Shields and
+    // compared late candidates against an incompletely evaluated baseline.
+    const auto consider=[&](const Action& a,bool production){const auto result=preview(s,a);if(!result.result.ok)return;double score=simpleValue(result.state)-base+transitionProgress(s,result.state);if(production)score+=partPotential(result.state,s.nextId)*(options_.policy=="aggressive"?1.35:1.15);if(score>best){best=score;bestAction=a;}};
     for(const auto& p:s.parts)if(p.place==Place::Reserve){if(p.kind==Kind::Shield)for(const auto& a:choices(s,Action::install(p.id),p.recipe))consider(a,false);else if(p.kind==Kind::Modifier||p.kind==Kind::Magnet){Action activation;activation.type=ActionType::Activate;activation.subject=p.id;for(const auto& a:choices(s,activation,p.recipe))consider(a,false);}}
     if(ownedUpgrade(s,"MY1-10"))for(const auto& copy:s.memory)if(copy.cooldown>0){Action a;a.type=ActionType::ActivateUpgrade;a.upgrade="MY1-10";a.subject=copy.id;consider(a,false);}
 

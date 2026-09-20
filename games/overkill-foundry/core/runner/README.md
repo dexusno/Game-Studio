@@ -17,8 +17,8 @@ $runnerCtest = 'C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/
 
 & games/overkill-foundry/core/build/Release/overkill_runner.exe --fixture
 & games/overkill-foundry/core/build/Release/overkill_runner.exe --city --seed 2 --policy defensive --precision auto --output games/overkill-foundry/core/build/city-runner
-& games/overkill-foundry/core/build/Release/overkill_runner.exe --batch 1,20,aggressive,auto --output games/overkill-foundry/core/build/runner-baseline-2
-& games/overkill-foundry/core/build/Release/overkill_runner.exe --batch 1,20,defensive,auto --output games/overkill-foundry/core/build/runner-baseline-2
+& games/overkill-foundry/core/build/Release/overkill_runner.exe --batch 21,100,aggressive,auto --output games/overkill-foundry/core/build/runner-baseline-4
+& games/overkill-foundry/core/build/Release/overkill_runner.exe --batch 21,100,defensive,auto --output games/overkill-foundry/core/build/runner-baseline-4
 & games/overkill-foundry/core/build/Release/overkill_runner.exe --replay games/overkill-foundry/core/build/city-runner/defensive-auto-2.oftrace
 ```
 
@@ -30,7 +30,7 @@ Exit `0` means the run reached a city completion or an actual defeat, or a repla
 
 ## Policies and information boundary
 
-`baseline-2` contains two deterministic local numerical policies:
+`baseline-4` contains two deterministic local numerical policies:
 
 | Policy | Main preferences |
 |---|---|
@@ -41,7 +41,7 @@ Both evaluate current legal action previews, including physical-part creation fo
 
 These are shallow policies, not exhaustive solvers for the 246-recipe pool. They can miss profitable target allocations, combinations, saved-part plans and long-term synergies. They currently buy recipes/upgrades and sell cores; they do not optimize material purchases, part sales, route replacement, reward rerolls or every optional haul exchange. They may acquire a recipe that their candidate generator uses poorly. An illegal submitted command is reported as `policy_error`, never silently replaced with free effects or counted as defeat.
 
-Policies read committed enemy intents, visible defenses/statuses, owned recipes/upgrades, currently displayed stock and offers. They do not preview End Turn, inspect future robot pattern packets or core RNG, or plan from future seeded draws. A preview can reveal the immediate consequence of the action being considered. The visible Gatebreaker phase transition is credited as progress even when it grants Shield; otherwise a shallow score can refuse the required transition.
+Policies read committed enemy intents, visible defenses/statuses, owned recipes/upgrades, currently displayed stock and offers. They do not preview End Turn, inspect future robot pattern packets or core RNG, or plan from future seeded draws. A preview can reveal the immediate consequence of the action being considered. Visible boss Shield and death-spawn transitions are credited as progress. Current unprotected threat is penalized, so eliminating an attacker does not look like losing valuable Shield. Pending damage statuses are valued below the target's remaining HP: surplus Mark, Burn or Corrosion cannot make retaining a nearly dead target more valuable than killing it. These are scoring choices; the game statuses are unchanged. Newly produced reserve outputs receive one bounded lookahead, without repeatedly revaluing the entire old reserve for each candidate.
 
 Before entering Mystery, only `revealedMysteryCategory` can reveal its category. Hidden Mystery identifiers and formations are ignored. OpenShop is an actual recorded action, so shop discoveries use production behavior. The seed initializes canonical content and the separate declared Precision model; it is not used to rank hidden future outcomes.
 
@@ -52,10 +52,10 @@ Before entering Mystery, only `revealedMysteryCategory` can reveal its category.
 | Uncalibrated model | Miss / Good / Perfect | Expected Precision bonus |
 |---|---|---:|
 | `learning` | 55% / 35% / 10% | 0.55 |
-| `practised` | 15% / 55% / 30% | 1.15 |
+| `practised` | 20% / 45% / 35% | 1.15 |
 | `expert` | 5% / 25% / 70% | 1.65 |
 
-The model has its own deterministic random state. All haul arithmetic, stock availability, upgrade modifiers and Precision eligibility remain authoritative core rules. These distributions have not been calibrated against rendered claw input or people.
+These full distributions come from `design/data/beta-balance-v1.json`; baseline-2's mean-equivalent Practised mismatch is recorded in [the pilot report](BASELINE-2.md). The model has its own deterministic random state. All haul arithmetic, stock availability, upgrade modifiers and Precision eligibility remain authoritative core rules. These distributions have not been calibrated against rendered claw input or people.
 
 ## Evidence format and metrics
 
@@ -78,6 +78,6 @@ At the native `842300e` baseline, UGS-141 and combined base-haul deductions beyo
 
 ## Validation and next experiment
 
-The runner contract target checks full command encoding, strict trace replay/corruption rejection, two real city runs, Technician HP accounting, concealed-Mystery and future-pattern/RNG decision invariance, and 10,000 samples per Precision model plus once-per-fight eligibility. The sample counts verify the declared synthetic distributions only.
+The runner contract target checks full command encoding, strict trace replay/corruption rejection, two real city runs, Technician HP accounting, concealed-Mystery and future-pattern/RNG decision invariance, Chassis death-spawn and protected-attacker scoring regressions, and 10,000 samples per Precision model with separate category/mean assertions plus once-per-fight eligibility. The sample counts verify the declared synthetic distributions only.
 
-Development pilots reached legitimate city completion with both policies on seeds 1–3. Some defensive bosses took more than 20 rounds; that is evidence of a weak baseline policy, not tuned pacing. The next comparison uses the same unfiltered seeds 1–20 for both policies and Auto collection, retains every loss/error/blocked run, and independently replays recorded commands. Expand to hundreds only after inspecting these failures and the independent review. No winning seeds or favorable rare builds are forced.
+The [baseline-2 development pilot](BASELINE-2.md) retains all 40 outcomes, including three policy stalls and four defeats. Baseline-3 corrected the fresh-run stalls and Practised distribution, but independent recovery tests found that excess Mark still stalled two retained saves. Baseline-4 addresses that valuation defect. Seeds 1–20 remain development data. After regression and independent review, the next comparison uses fresh paired seeds 21–120 and Auto collection. Every loss/error/blocked run stays in the report. No winning seeds or favorable rare builds are forced, and these numerical runs do not establish human difficulty.

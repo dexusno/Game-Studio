@@ -1,0 +1,206 @@
+{
+  "selected_practised_percent": [
+    20,
+    45,
+    35
+  ],
+  "beta_sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+  "fresh_runs": [
+    {
+      "seed": 7,
+      "policy": "aggressive",
+      "policy_version": "baseline-3",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 78,
+      "position": 13,
+      "actions": 324,
+      "previews": 5587,
+      "seconds": 0.282,
+      "income": 255,
+      "spending": 325,
+      "healing": 0,
+      "hp_lost": 2,
+      "hp_paid": 0,
+      "state_hash": "da783f0098a9576f",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-3\\aggressive-auto-7\\aggressive-auto-7.oftrace",
+      "materials_spent": [
+        99,
+        24,
+        24,
+        19,
+        13
+      ],
+      "materials_gained": [
+        119,
+        52,
+        33,
+        25,
+        25
+      ],
+      "trace_sha256": "e6002c1f86315a4e41bf598c8185ac3db4758a6bdb021a67e8e8aa8d6c54ab02",
+      "cli_exit": 0
+    },
+    {
+      "seed": 9,
+      "policy": "aggressive",
+      "policy_version": "baseline-3",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 75,
+      "position": 13,
+      "actions": 436,
+      "previews": 8641,
+      "seconds": 0.464,
+      "income": 245,
+      "spending": 325,
+      "healing": 11,
+      "hp_lost": 16,
+      "hp_paid": 0,
+      "state_hash": "ecfaec0d23c65ce5",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-3\\aggressive-auto-9\\aggressive-auto-9.oftrace",
+      "materials_spent": [
+        121,
+        48,
+        35,
+        25,
+        12
+      ],
+      "materials_gained": [
+        151,
+        64,
+        41,
+        31,
+        33
+      ],
+      "trace_sha256": "f3306de2029a8dada69b031a57c3f706650eb9416e31429a804b416dc3886d20",
+      "cli_exit": 0
+    },
+    {
+      "seed": 13,
+      "policy": "defensive",
+      "policy_version": "baseline-3",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 83,
+      "position": 13,
+      "actions": 435,
+      "previews": 7994,
+      "seconds": 0.414,
+      "income": 188,
+      "spending": 275,
+      "healing": 16,
+      "hp_lost": 5,
+      "hp_paid": 8,
+      "state_hash": "b4f0fb8b56ad0f63",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-3\\defensive-auto-13\\defensive-auto-13.oftrace",
+      "materials_spent": [
+        125,
+        38,
+        32,
+        19,
+        9
+      ],
+      "materials_gained": [
+        157,
+        64,
+        42,
+        34,
+        33
+      ],
+      "trace_sha256": "bfbdaa28b3e82a8bec11399d92b27f440ba3a32411e4677f8c73880356d66d03",
+      "cli_exit": 0
+    },
+    {
+      "seed": 2,
+      "policy": "defensive",
+      "policy_version": "baseline-3",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 78,
+      "position": 13,
+      "actions": 370,
+      "previews": 6730,
+      "seconds": 0.344,
+      "income": 155,
+      "spending": 225,
+      "healing": 16,
+      "hp_lost": 10,
+      "hp_paid": 8,
+      "state_hash": "98cbdcccb0b32362",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-3\\defensive-auto-2\\defensive-auto-2.oftrace",
+      "materials_spent": [
+        102,
+        39,
+        29,
+        22,
+        9
+      ],
+      "materials_gained": [
+        125,
+        52,
+        33,
+        25,
+        25
+      ],
+      "trace_sha256": "b26bb805a3927aa2b34308c11025d46cdfa3e0ab3aa67e442d7aad1c0e20035f",
+      "cli_exit": 0
+    },
+    {
+      "seed": 4,
+      "policy": "defensive",
+      "policy_version": "baseline-3",
+      "precision": "practised",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 98,
+      "position": 13,
+      "actions": 436,
+      "previews": 8474,
+      "seconds": 0.459,
+      "income": 180,
+      "spending": 275,
+      "healing": 35,
+      "hp_lost": 9,
+      "hp_paid": 8,
+      "state_hash": "755a2f5482d42a79",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-3\\defensive-practised-4\\defensive-practised-4.oftrace",
+      "materials_spent": [
+        119,
+        38,
+        26,
+        29,
+        13
+      ],
+      "materials_gained": [
+        165,
+        62,
+        34,
+        33,
+        32
+      ],
+      "trace_sha256": "b4410abb7217e02c468fc921552e6506e9d66b034b3809f3d4e06a2fa470fbf1",
+      "cli_exit": 0
+    }
+  ],
+  "author_traces": {
+    "aggressive-auto-1.oftrace": "c2be1c2f493973da2716454da3b7f2e175bd264cb6d74b0463c0f656ded1061e",
+    "aggressive-auto-2.oftrace": "0d5920c7fc7dfeab11f3ccd4a7f5e8e5cc0c28ecdfef078185694df848b027b1",
+    "aggressive-auto-3.oftrace": "09c462a7255835f4a5ebf24c454f749665ac170d5cbc6b6dabe66ed7f077dbdb",
+    "aggressive-auto-7.oftrace": "e6002c1f86315a4e41bf598c8185ac3db4758a6bdb021a67e8e8aa8d6c54ab02",
+    "aggressive-auto-9.oftrace": "f3306de2029a8dada69b031a57c3f706650eb9416e31429a804b416dc3886d20",
+    "defensive-auto-1.oftrace": "e8b48c160df3095e9fd9bb165f9fe1e515b072a01bfa0f1f70c35262fe12edea",
+    "defensive-auto-2.oftrace": "b26bb805a3927aa2b34308c11025d46cdfa3e0ab3aa67e442d7aad1c0e20035f",
+    "defensive-auto-3.oftrace": "579e2130e92251a69398586173039d80f5f4019a0115d2282a866bcf2ec8cd7f",
+    "defensive-auto-13.oftrace": "bfbdaa28b3e82a8bec11399d92b27f440ba3a32411e4677f8c73880356d66d03"
+  },
+  "prior_stopped_traces": {
+    "aggressive-auto-7.oftrace": "0724c680bba295e5b20c2a07b34be56e0d9d8f5561f8aea8a8e40e1985f4733c",
+    "aggressive-auto-9.oftrace": "3e0586dc1ed55269d1b43242a8c4365446695d99b9a67b9e9fb234d3eea4f3fa",
+    "defensive-auto-13.oftrace": "25a574d311744beb7b79dd8e49ecc520c7682cb4240a8c7b2b7e3757c10d8c33"
+  }
+}

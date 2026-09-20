@@ -1,0 +1,48 @@
+PRACTISED samples=10000 miss=2013 good=4500 perfect=3487 expected_percent=20/45/35
+PASS B301 canonical Practised categories from selected beta data
+LEGAL_WITNESS seed=7 recipe=SH001 target=C1-O03 target_hp=1 kills_before=0 kills_after=1
+RESUME_ACTION seed=7 index=0 type=1 subject=6 heat=8 shield=0 previews=189
+RESUME_ACTION seed=7 index=1 type=2 subject=531 heat=8 shield=0 previews=189
+RESUME_ACTION seed=7 index=2 type=2 subject=533 heat=9 shield=6 previews=188
+RESUME_ACTION seed=7 index=3 type=1 subject=10 heat=10 shield=12 previews=187
+RESUME_ACTION seed=7 index=4 type=2 subject=290 heat=10 shield=12 previews=187
+RESUME_ACTION seed=7 index=5 type=1 subject=76 heat=10 shield=16 previews=186
+RESUME_ACTION seed=7 index=6 type=7 subject=0 heat=10 shield=16 previews=184
+RESUME_ACTION seed=7 index=7 type=0 subject=0 heat=8 shield=0 previews=0
+RESUME_ACTION seed=7 index=8 type=1 subject=3 heat=8 shield=0 previews=187
+RESUME_ACTION seed=7 index=9 type=1 subject=6 heat=8 shield=0 previews=187
+RESUME_ACTION seed=7 index=10 type=2 subject=536 heat=8 shield=0 previews=187
+RESUME_ACTION seed=7 index=11 type=2 subject=292 heat=9 shield=6 previews=186
+RESUME policy=aggressive seed=7 start_round=189 start_parts=134 commands=64 end_phase=2 end_round=197 kills=0 hp=80
+FAIL B302 progress from actual stopped state: did not finish stalled encounter within 64 review commands
+LEGAL_WITNESS seed=9 recipe=SH001 target=C1-O03 target_hp=2 kills_before=0 kills_after=1
+RESUME_ACTION seed=9 index=0 type=1 subject=72 heat=10 shield=18 previews=136
+RESUME_ACTION seed=9 index=1 type=1 subject=1 heat=0 shield=18 previews=134
+RESUME_ACTION seed=9 index=2 type=1 subject=21 heat=3 shield=18 previews=134
+RESUME_ACTION seed=9 index=3 type=1 subject=103 heat=3 shield=18 previews=134
+RESUME_ACTION seed=9 index=4 type=7 subject=0 heat=3 shield=18 previews=134
+RESUME_ACTION seed=9 index=5 type=0 subject=0 heat=2 shield=0 previews=0
+RESUME_ACTION seed=9 index=6 type=1 subject=3 heat=2 shield=0 previews=137
+RESUME_ACTION seed=9 index=7 type=1 subject=1 heat=2 shield=0 previews=137
+RESUME_ACTION seed=9 index=8 type=2 subject=658 heat=5 shield=0 previews=137
+RESUME_ACTION seed=9 index=9 type=1 subject=21 heat=6 shield=6 previews=136
+RESUME_ACTION seed=9 index=10 type=1 subject=6 heat=6 shield=6 previews=136
+RESUME_ACTION seed=9 index=11 type=1 subject=103 heat=6 shield=6 previews=136
+RESUME policy=aggressive seed=9 start_round=213 start_parts=91 commands=64 end_phase=2 end_round=222 kills=0 hp=80
+FAIL B303 progress from actual stopped state: did not finish stalled encounter within 64 review commands
+RESUME_ACTION seed=13 index=0 type=0 subject=0 heat=10 shield=5 previews=0
+RESUME_ACTION seed=13 index=1 type=1 subject=5 heat=10 shield=5 previews=58
+RESUME_ACTION seed=13 index=2 type=1 subject=7 heat=10 shield=5 previews=64
+RESUME_ACTION seed=13 index=3 type=1 subject=2 heat=10 shield=5 previews=64
+RESUME_ACTION seed=13 index=4 type=1 subject=8 heat=10 shield=5 previews=67
+RESUME_ACTION seed=13 index=5 type=4 subject=0 heat=10 shield=5 previews=70
+RESUME_ACTION seed=13 index=6 type=6 subject=0 heat=10 shield=5 previews=2
+RESUME_ACTION seed=13 index=7 type=4 subject=0 heat=10 shield=5 previews=51
+RESUME_ACTION seed=13 index=8 type=6 subject=0 heat=10 shield=5 previews=1
+RESUME policy=defensive seed=13 start_round=715 start_parts=0 commands=9 end_phase=3 end_round=1 kills=0 hp=80
+PASS B304 progress from actual stopped state
+HIDDEN_COMBAT comparisons=60
+PASS B305 stopped-state decisions ignore hidden RNG and future enemy packets
+HIDDEN_ROUTE comparisons=20 position=6
+PASS B306 concealed current Mystery and future RNG do not change route ranking
+SUMMARY 4 passed, 2 failed

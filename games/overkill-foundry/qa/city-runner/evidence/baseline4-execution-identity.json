@@ -1,0 +1,49 @@
+{
+  "completed_utc": "2026-09-20T15:01:15.3550180Z",
+  "capture_utc": "2026-09-20T14:59:02.6178402Z",
+  "git_head": "db092963b07cb4f69c459b955a41b213ee268ee8",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "configuration": "x64 Release",
+  "compiler": "MSVC 19.44.35228.0",
+  "strict_flags": [
+    "/W4",
+    "/WX",
+    "/permissive-"
+  ],
+  "frozen_and_live_sources_verified": 28,
+  "independent_fresh_cities": 5,
+  "authored_regression_traces_replayed": 9,
+  "independently_replayed_commands": 5522,
+  "replay_probe_groups_passed": 17,
+  "targeted_policy_groups_passed": 6,
+  "practised_counts": [
+    2013,
+    4500,
+    3487
+  ],
+  "hidden_combat_variants": 60,
+  "hidden_current_route_variants": 20,
+  "retained_state_recovery_commands": [
+    16,
+    6,
+    9
+  ],
+  "original_and_corruption_cases_passed": 12,
+  "previous_policy_version_rejected": true,
+  "beta_json_sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+  "artifact_sha256": {
+    "CMakeLists.txt": "66a70409f8ac4d2ee6552ce19cac407a25e87228a0a2def893cfe599ccd18e39",
+    "capture.ps1": "dd149e84bf0353c5437e80fb4c0738e26d4b6c4729425b0bce2c242fabd58262",
+    "build.ps1": "afb1807d905c861b0714d10269f3e8db734a047e8fb562569428fbcb82137acc",
+    "probes.cpp": "55bede9be2d4d34dd02edb15a07ba21743cfe51cb9db20aa8ffde28af0989521",
+    "baseline3_probes.cpp": "b06ea5bff01cec56708be8397473ce1bb7d93babe245e6f491eb1bd08af5e856",
+    "baseline3_review.py": "9b697d22eb9f76c58e5684e9424deb3f4e65f50e14a89e1985ade82045cdd9e0",
+    "adversarial_replay.py": "bf934c9dd337d2b69366278989f3084984874a4791775f4d7f61f82c48c4c8cc",
+    "build/native-baseline-4/Release/review_city_runner.exe": "6c549424fd1e6f6707944ccaf08f98da305a3fba8867aca4d0cf40f8e1215773",
+    "build/native-baseline-4/Release/city_runner_probes.exe": "8fb12a66a5c14b76d8870743b81d0b21ad5171a1a8909ff07016ad8bfa660806",
+    "build/native-baseline-4/Release/city_runner_baseline3_probes.exe": "5d167016fa026408fb50c56ae5bccea88e8e2d944303399968a67cb0131c1cd7",
+    "evidence/baseline4-results.txt": "c06ef85a1b979bc0128eef8db6f538281c8edf925faf1178236e9ae1374eb54b",
+    "evidence/baseline4-replay.txt": "f40cb6baf3905496e5db2ae495c9e6369a77a3f36174bf0a0c960817ce4d188a",
+    "evidence/baseline4-runs.json": "6cb7570890432efd11f1f1edffdc52a7ad42897635d84a2aab347b71849dcc12"
+  }
+}

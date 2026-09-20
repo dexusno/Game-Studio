@@ -1,0 +1,90 @@
+RUNNER SHA256 7b78d3916110cf4812d28e0b9a1ae3c9efddbbcaf3f11acdf556f52c4f140467
+INDEPENDENT REPLAY PROBE SHA256 adc4716d85f47b2fd16f3210cae16a41731758027455cdf9202b809cae2d77f9
+INDEPENDENT POLICY PROBE SHA256 1df0429415100e526745932e9625adc9778591ac4323dda9a6d9ed4119c01e35
+SELECTED BETA SHA256 39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b Practised=20/45/35
+PASS fresh aggressive-auto-7: city_complete commands=324 hp=78 seconds=0.282 hash=da783f0098a9576f
+PASS aggressive-auto-7 declares baseline-3
+PASS aggressive-auto-7 HP ledger reconciles
+PASS aggressive-auto-7 full trace equals frozen author regression
+PASS fresh aggressive-auto-9: city_complete commands=436 hp=75 seconds=0.464 hash=ecfaec0d23c65ce5
+PASS aggressive-auto-9 declares baseline-3
+PASS aggressive-auto-9 HP ledger reconciles
+PASS aggressive-auto-9 full trace equals frozen author regression
+PASS fresh defensive-auto-13: city_complete commands=435 hp=83 seconds=0.414 hash=b4f0fb8b56ad0f63
+PASS defensive-auto-13 declares baseline-3
+PASS defensive-auto-13 HP ledger reconciles
+PASS defensive-auto-13 full trace equals frozen author regression
+PASS fresh defensive-auto-2: city_complete commands=370 hp=78 seconds=0.344 hash=98cbdcccb0b32362
+PASS defensive-auto-2 declares baseline-3
+PASS defensive-auto-2 HP ledger reconciles
+PASS defensive-auto-2 full trace equals frozen author regression
+PASS fresh defensive-practised-4: city_complete commands=436 hp=98 seconds=0.459 hash=755a2f5482d42a79
+PASS defensive-practised-4 declares baseline-3
+PASS defensive-practised-4 HP ledger reconciles
+PASS CLI replay aggressive-auto-7.oftrace: Replayed 324 exact commands/events; final city_complete; hash da783f0098a9576f
+PASS CLI replay aggressive-auto-9.oftrace: Replayed 436 exact commands/events; final city_complete; hash ecfaec0d23c65ce5
+PASS CLI replay defensive-auto-13.oftrace: Replayed 435 exact commands/events; final city_complete; hash b4f0fb8b56ad0f63
+PASS CLI replay defensive-auto-2.oftrace: Replayed 370 exact commands/events; final city_complete; hash 98cbdcccb0b32362
+PASS CLI replay defensive-practised-4.oftrace: Replayed 436 exact commands/events; final city_complete; hash 755a2f5482d42a79
+PASS CLI replay aggressive-auto-1.oftrace: Replayed 438 exact commands/events; final city_complete; hash 05e3e535ff1dcfc4
+PASS CLI replay aggressive-auto-2.oftrace: Replayed 391 exact commands/events; final city_complete; hash 2b47092f7d1bbbdb
+PASS CLI replay aggressive-auto-3.oftrace: Replayed 335 exact commands/events; final city_complete; hash d077844e5732df92
+PASS CLI replay aggressive-auto-7.oftrace: Replayed 324 exact commands/events; final city_complete; hash da783f0098a9576f
+PASS CLI replay aggressive-auto-9.oftrace: Replayed 436 exact commands/events; final city_complete; hash ecfaec0d23c65ce5
+PASS CLI replay defensive-auto-1.oftrace: Replayed 456 exact commands/events; final city_complete; hash 06e07340ea478d21
+PASS CLI replay defensive-auto-2.oftrace: Replayed 370 exact commands/events; final city_complete; hash 98cbdcccb0b32362
+PASS CLI replay defensive-auto-3.oftrace: Replayed 325 exact commands/events; final city_complete; hash 3444fc414d3f17b2
+PASS CLI replay defensive-auto-13.oftrace: Replayed 435 exact commands/events; final city_complete; hash b4f0fb8b56ad0f63
+TRACE seed=7 actions=324 recipe_uses=78 collections=25 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=da783f0098a9576f
+PASS R01 independent full-state replay 1
+TRACE seed=9 actions=436 recipe_uses=126 collections=31 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=ecfaec0d23c65ce5
+PASS R01 independent full-state replay 2
+TECHNICIAN command=338 before_hp=80 after_hp=76 item=UGS-071
+TRACE seed=13 actions=435 recipe_uses=112 collections=32 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=b4f0fb8b56ad0f63
+PASS R01 independent full-state replay 3
+TECHNICIAN command=185 before_hp=78 after_hp=70 item=UGS-030
+TRACE seed=2 actions=370 recipe_uses=101 collections=25 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=98cbdcccb0b32362
+PASS R01 independent full-state replay 4
+TECHNICIAN command=158 before_hp=98 after_hp=90 item=UGS-030
+TRACE seed=4 actions=436 recipe_uses=120 collections=30 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=755a2f5482d42a79
+PASS R01 independent full-state replay 5
+TRACE seed=1 actions=438 recipe_uses=129 collections=35 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=05e3e535ff1dcfc4
+PASS R01 independent full-state replay 6
+TRACE seed=2 actions=391 recipe_uses=102 collections=31 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=2b47092f7d1bbbdb
+PASS R01 independent full-state replay 7
+TRACE seed=3 actions=335 recipe_uses=84 collections=23 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=d077844e5732df92
+PASS R01 independent full-state replay 8
+TRACE seed=7 actions=324 recipe_uses=78 collections=25 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=da783f0098a9576f
+PASS R01 independent full-state replay 9
+TRACE seed=9 actions=436 recipe_uses=126 collections=31 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=ecfaec0d23c65ce5
+PASS R01 independent full-state replay 10
+TRACE seed=1 actions=456 recipe_uses=124 collections=36 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=06e07340ea478d21
+PASS R01 independent full-state replay 11
+TECHNICIAN command=185 before_hp=78 after_hp=70 item=UGS-030
+TRACE seed=2 actions=370 recipe_uses=101 collections=25 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=98cbdcccb0b32362
+PASS R01 independent full-state replay 12
+TRACE seed=3 actions=325 recipe_uses=79 collections=23 technician_payments=0 known_hp_paid=0 outcome=city_complete hash=3444fc414d3f17b2
+PASS R01 independent full-state replay 13
+TECHNICIAN command=338 before_hp=80 after_hp=76 item=UGS-071
+TRACE seed=13 actions=435 recipe_uses=112 collections=32 technician_payments=1 known_hp_paid=8 outcome=city_complete hash=b4f0fb8b56ad0f63
+PASS R01 independent full-state replay 14
+PASS R02 policy ignores unseen later route slots and all RNG streams
+PASS R04 future enemy pattern changes cannot alter current combat decision
+PASS R03 source inventory and price mutations remain production-validated
+SUMMARY 17 passed, 0 failed
+PASS separate parser replayed five fresh and nine author traces
+PRACTISED samples=10000 miss=2013 good=4500 perfect=3487 expected_percent=20/45/35
+PASS B301 canonical Practised categories from selected beta data
+RESUME policy=aggressive seed=7 start_round=189 start_parts=134 commands=64 end_phase=2 end_round=197 kills=0 hp=80
+FAIL B302 progress from actual stopped state: did not finish stalled encounter within 64 review commands
+RESUME policy=aggressive seed=9 start_round=213 start_parts=91 commands=64 end_phase=2 end_round=222 kills=0 hp=80
+FAIL B303 progress from actual stopped state: did not finish stalled encounter within 64 review commands
+RESUME policy=defensive seed=13 start_round=715 start_parts=0 commands=9 end_phase=3 end_round=1 kills=0 hp=80
+PASS B304 progress from actual stopped state
+FAIL B305 stopped-state decisions ignore hidden RNG and future enemy packets: Invalid campaign route.
+FAIL B306 concealed current Mystery and future routes do not change route ranking: Invalid campaign route.
+SUMMARY 2 passed, 4 failed
+FAIL canonical categories, stopped-state recovery and observation probes
+PASS version corruption actually changed metadata
+PASS old policy version rejects: Unsupported trace policy metadata
+SUMMARY five fresh CLI cases, nine author traces independently replayed, failed_checks=1

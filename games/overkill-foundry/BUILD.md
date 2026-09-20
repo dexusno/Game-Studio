@@ -1,5 +1,7 @@
 # Overkill Foundry — build and run
 
+**Runner evaluation update:** [baseline-4](core/runner/BASELINE-4.md) records199 completions and one policy timeout over200 fresh paired Auto cities, all200 exact replays/78,756 commands and two acquired/used combinations. [Independent runner QA](qa/city-runner-review.md) pins the unchanged evaluated source. The Foil Warden stall is retained for the next policy-only repair; no game caps or balance claims follow from this batch.
+
 ## Live campaign, audio and Precision checkpoint — 20 September
 
 [Unreal build/input details](unreal/Tools/README.md) record Editor164602 and Game164704, the position2 campaign probe,75 matching source identities and actual timed Precision inputs. [Portable identity](assets/production/campaign-ui-v001/precision-checkpoint.json) pins that graph before the owner-corrected Lock and load camera implementation. The native shared core is the reviewed P08 version; this is a Development target, not a packaged demo. [Mara source](art-source/mara_v001_README.md), [original audio](audio-source/README.md) and [Precision controller](presentation/README.md) preserve their reproducible source and finite evidence. The separately verified [scenery-v002 source](art-source/scenery_v002_README.md) and its importer await actual Unreal integration; source renders are not gameplay.

@@ -1,0 +1,12 @@
+{
+  "utc": "2026-09-20T14:52:20.6782693Z",
+  "status": "CR03 passed; CR04 retained-state valuation finding open",
+  "hashes": {
+    "build/native-baseline-3/Release/review_city_runner.exe": "7b78d3916110cf4812d28e0b9a1ae3c9efddbbcaf3f11acdf556f52c4f140467",
+    "build/native-baseline-3/Release/city_runner_baseline3_probes.exe": "bd4e45808a55ea3ccf9e95c84761ab3f5794e423e67f607bb5352bd1ad8e043e",
+    "baseline3_probes.cpp": "d9219a2a324cf0a706c4a39460b2b0eb0621af56869cf259f4084358e839b06a",
+    "baseline3_review.py": "5b2620151c4694b964d77b2533dafc7836a3663b4eb2a11241dfdaa45010f996",
+    "evidence/baseline3-policy-initial.txt": "a96eb3abfa55b1426881e40a80fb967534dfb548dfebf401216b15dcad38d00b",
+    "evidence/baseline3-replay.txt": "f4a17ce07637d15f6124d819cc7841548ddc34c00fdc621d69e736fc0ef036fe"
+  }
+}
