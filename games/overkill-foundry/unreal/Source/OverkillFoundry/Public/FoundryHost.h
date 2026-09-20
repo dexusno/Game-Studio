@@ -42,6 +42,9 @@ public:
 #if FOUNDRY_WITH_CAMPAIGN
     FFoundryCampaign* GetCampaign() { return Campaign.Get(); }
     void RefreshCampaignWorld();
+    // Typed replay uses the same durable transaction and post-commit visuals
+    // as ordinary controls. Animations never decide hits or alter the result.
+    bool SubmitCampaignAction(const overkill::CampaignAction& Action, std::vector<overkill::Event>& OutEvents);
 #endif
 private:
     void SpawnRobots();
@@ -51,6 +54,7 @@ private:
     void PresentEvents(const std::vector<overkill::Event>& Events);
     void ResetActionPresentation();
     void AimAtSelectedTarget();
+    void FinishCommandPresentation(const FString& Command, bool bCommitted);
     FVector RobotPosition(int32 Index) const;
     void FrameRoster();
     void TickArtProbe(float DeltaSeconds);

@@ -12,9 +12,9 @@
 DEFINE_LOG_CATEGORY_STATIC(LogFoundryCampaign, Log, All);
 namespace { FString Text(const std::string& S) { return UTF8_TO_TCHAR(S.c_str()); } }
 
-FFoundryCampaign::FFoundryCampaign(FFoundrySession& InCombat, const FString& InSavePath)
+FFoundryCampaign::FFoundryCampaign(FFoundrySession& InCombat, const FString& InSavePath, bool bInFixedSavePath)
     : Combat(InCombat), Hooks(overkill::cinderwallUpgradeHooks(Combat.Rules)), Rules(Combat.Rules, Hooks),
-      Store(std::filesystem::path(*InSavePath), Rules), SavePath(InSavePath)
+      Store(std::filesystem::path(*InSavePath), Rules, bInFixedSavePath), SavePath(Store.path().wstring().c_str()), bFixedSavePath(bInFixedSavePath)
 {
     IFileManager::Get().MakeDirectory(*FPaths::GetPath(SavePath), true);
     if (IFileManager::Get().FileExists(*SavePath) || IFileManager::Get().FileExists(*(SavePath + TEXT(".previous"))))
@@ -23,6 +23,7 @@ FFoundryCampaign::FFoundryCampaign(FFoundrySession& InCombat, const FString& InS
         if (!Loaded.ok) { bSaveUnavailable = true; Message = TEXT("Save could not be opened: ") + Text(Loaded.reason); }
         else { ReadCommitted(); Message = Loaded.recoveredPrevious ? TEXT("Recovered the previous valid save.") : TEXT("Campaign ready to continue."); }
     }
+    if(!Store.notice().empty()) Message+=TEXT(" ")+Text(Store.notice());
     Combat.CampaignSubmit = [this](const overkill::Action& Action, const FString& Description)
     {
         overkill::CampaignAction Command;
@@ -38,6 +39,29 @@ bool FFoundryCampaign::HasActiveSave() const
 {
     const auto* C = Current();
     return C && C->phase != overkill::CityPhase::Defeated && C->phase != overkill::CityPhase::Complete;
+}
+bool FFoundryCampaign::CreateProfile(const FString& Name)
+{
+    if(bFixedSavePath || bPrecisionModal || bCollectionChoice || Page!=TEXT("profiles"))return false;
+    const auto Id=std::string(TCHAR_TO_UTF8(*FGuid::NewGuid().ToString(EGuidFormats::Digits).ToLower()));
+    const auto Result=Store.create(Id,TCHAR_TO_UTF8(*Name));
+    Message=Text(Result.reason);++ViewRevision;
+    if(!Result.ok)return false;
+    return SelectProfile(Id);
+}
+bool FFoundryCampaign::SelectProfile(const std::string& Id)
+{
+    if(bFixedSavePath || bPrecisionModal || bCollectionChoice || Page!=TEXT("profiles"))return false;
+    const auto Result=Store.select(Id);Message=Text(Result.reason);++ViewRevision;
+    if(!Result.ok)return false;
+    SavePath=Store.path().wstring().c_str();bSaveUnavailable=false;bCanResumeInMemory=false;
+    Combat.State={};Combat.Target=0;Combat.Steering=3;Combat.Precision=-1;
+    Combat.Selection.clear();Combat.SpreadTargets.Empty();Combat.Drafts.clear();Combat.CommittedEvents.clear();Combat.RecentEvents.Empty();Combat.LastAction.Empty();
+    ReadCommitted();Drawer.Empty();ReturnPage.Empty();FocusRecipe=0;FocusPart=0;
+    PrecisionChoice=0;PrecisionResult=-1;CollectionOptions.clear();CollectionChoiceHash.clear();
+    Page=TEXT("title");++SceneRevision;
+    UE_LOG(LogFoundryCampaign,Display,TEXT("PROFILE_SELECTED id=%s loaded=%d no_campaign_mutation=1"),*Text(Store.activeId()),Store.loaded());
+    return true;
 }
 FString FFoundryCampaign::PhasePage() const
 {
@@ -165,7 +189,8 @@ void FFoundryCampaign::Close()
     if (bCollectionChoice) { CancelCollectionChoice(); return; }
     if (!Drawer.IsEmpty()) Drawer.Empty();
     else if (Page == TEXT("confirm-new")) Page = TEXT("title");
-    else if (Page == TEXT("shop") || Page == TEXT("event-shop") || Page == TEXT("memory") || Page == TEXT("upgrades")) { Page = ReturnPage.IsEmpty() ? PhasePage() : ReturnPage; ReturnPage=PhasePage(); }
+    else if (Page == TEXT("profiles")) Page=TEXT("title");
+    else if (Page == TEXT("collection") || Page == TEXT("shop") || Page == TEXT("event-shop") || Page == TEXT("memory") || Page == TEXT("upgrades")) { Page = ReturnPage.IsEmpty() ? PhasePage() : ReturnPage; ReturnPage=PhasePage(); }
     else if (Page == TEXT("title")) { if (bCanResumeInMemory && HasActiveSave()) Page=PhasePage(); }
     else Page = TEXT("title");
     ++ViewRevision;

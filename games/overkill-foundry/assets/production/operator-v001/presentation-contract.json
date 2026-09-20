@@ -1,0 +1,92 @@
+{
+  "asset": "MaraOperator_v001",
+  "approval": "provisional; owner in-engine approval pending",
+  "mesh_path": "/Game/Cinderwall/Operator/Meshes/SK_MaraOperator",
+  "material_path": "/Game/Cinderwall/Operator/Materials/MI_MaraOperator",
+  "clips": {
+    "MO_idle": {
+      "duration_s": 2.0,
+      "loop": true,
+      "cue": "ready/breathing",
+      "frames": 61,
+      "gameplay_authority": false,
+      "path": "/Game/Cinderwall/Operator/Animations/MO_idle"
+    },
+    "MO_load": {
+      "duration_s": 0.7,
+      "loop": false,
+      "cue": "cosmetic loading reach at .38s",
+      "frames": 22,
+      "gameplay_authority": false,
+      "path": "/Game/Cinderwall/Operator/Animations/MO_load"
+    },
+    "MO_fire": {
+      "duration_s": 0.3333333333333333,
+      "loop": false,
+      "cue": "committed shot; brace at 0s",
+      "frames": 11,
+      "gameplay_authority": false,
+      "path": "/Game/Cinderwall/Operator/Animations/MO_fire"
+    },
+    "MO_recovery": {
+      "duration_s": 0.4666666666666667,
+      "loop": false,
+      "cue": "release shoulder tension",
+      "frames": 15,
+      "gameplay_authority": false,
+      "path": "/Game/Cinderwall/Operator/Animations/MO_recovery"
+    }
+  },
+  "placement_proposal_cm": {
+    "gun_origin": [
+      -350,
+      0,
+      1.5
+    ],
+    "operator_origin": [
+      -496,
+      55,
+      0.7
+    ],
+    "yaw_degrees": 0
+  },
+  "rest_bounds_source_m": [
+    [
+      -0.21359458565711975,
+      -0.4867236316204071,
+      -0.006774102337658405
+    ],
+    [
+      0.21465101838111877,
+      0.486473023891449,
+      1.7860937118530273
+    ]
+  ],
+  "source_to_unreal": "(x,-y,z)*100; do not apply actor unit scale twice",
+  "ready_socket_source_m": {
+    "root": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "grip_l": [
+      0.4230172038078308,
+      0.2953965365886688,
+      1.273055076599121
+    ],
+    "grip_r": [
+      0.5215270519256592,
+      0.12283428758382797,
+      1.0949409008026123
+    ],
+    "portrait": [
+      0.13392139971256256,
+      -3.781208679498604e-09,
+      1.599045991897583
+    ]
+  },
+  "authority": "Cosmetic only. Play load after accepted load, fire after committed shot, recovery then idle. No input validation, ammunition or timing authority.",
+  "aiming": "Fixed source stance. Runtime must inspect cradle rotation and add bounded cosmetic arm matching if needed.",
+  "hand_contact_evidence": "stance-review.json",
+  "runtime_verified": false
+}

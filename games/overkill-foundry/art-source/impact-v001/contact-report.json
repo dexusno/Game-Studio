@@ -1,0 +1,256 @@
+{
+  "method": "CPU-only front contact measurements on the existing original robot meshes.\n\nNo exports, materials, animation or source .blend files are changed. Cast along\nthe authored -X facing and visible flank through each core cue in the rest pose.\nUse the nearer visible surface, so a projecting weapon cannot drag a hull/core\neffect to its distant muzzle. This avoids hiding contact FX inside armour.\n",
+  "robots": [
+    {
+      "robot": "BreachRam",
+      "definition": "C1-R02",
+      "core_source_m": [
+        0.3100000023841858,
+        0.0,
+        1.5199999809265137
+      ],
+      "front_surface_source_m": [
+        0.3100000023841858,
+        -0.6780004501342773,
+        1.5199999809265137
+      ],
+      "fx_offset_component_cm": [
+        0.0,
+        70.30004262924194,
+        0.0
+      ],
+      "outward_component": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "source_height_cm": 255.25000020861626
+    },
+    {
+      "robot": "RivetMite",
+      "definition": "C1-R01",
+      "core_source_m": [
+        0.14000000059604645,
+        0.0,
+        0.7400000095367432
+      ],
+      "front_surface_source_m": [
+        0.14000000059604645,
+        -0.4208364486694336,
+        0.7400000095367432
+      ],
+      "fx_offset_component_cm": [
+        0.0,
+        44.58364546298981,
+        0.0
+      ],
+      "outward_component": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "source_height_cm": 130.94999231398106
+    },
+    {
+      "robot": "CableBinder",
+      "definition": "C1-R04",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.3259999752044678
+      ],
+      "front_surface_source_m": [
+        -0.2357501983642578,
+        0.0,
+        1.3259999752044678
+      ],
+      "fx_offset_component_cm": [
+        -38.07502090930939,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 251.0952576994896
+    },
+    {
+      "robot": "PressureCask",
+      "definition": "C1-R05",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.222000002861023
+      ],
+      "front_surface_source_m": [
+        0.11999999731779099,
+        -0.6773786544799805,
+        1.222000002861023
+      ],
+      "fx_offset_component_cm": [
+        0.0,
+        70.23786306381226,
+        0.0
+      ],
+      "outward_component": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "source_height_cm": 234.000001847744
+    },
+    {
+      "robot": "CoilNest",
+      "definition": "C1-R07",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.1699999570846558
+      ],
+      "front_surface_source_m": [
+        0.875,
+        0.0,
+        1.1699999570846558
+      ],
+      "fx_offset_component_cm": [
+        73.00000190734863,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 219.99999284744263
+    },
+    {
+      "robot": "KnucklePress",
+      "definition": "C1-R08",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.3259999752044678
+      ],
+      "front_surface_source_m": [
+        0.18000030517578125,
+        0.0,
+        1.3259999752044678
+      ],
+      "fx_offset_component_cm": [
+        3.5000309348106384,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 242.50000566244125
+    },
+    {
+      "robot": "RedlinePursuer",
+      "definition": "C1-O01",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.2999999523162842
+      ],
+      "front_surface_source_m": [
+        0.11999999731779099,
+        -0.45865631103515625,
+        1.2999999523162842
+      ],
+      "fx_offset_component_cm": [
+        0.0,
+        48.36563169956207,
+        0.0
+      ],
+      "outward_component": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "source_height_cm": 248.89999963343143
+    },
+    {
+      "robot": "FoilWarden",
+      "definition": "C1-O02",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.518399953842163
+      ],
+      "front_surface_source_m": [
+        -0.27499961853027344,
+        0.0,
+        1.518399953842163
+      ],
+      "fx_offset_component_cm": [
+        -41.99996292591095,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 282.4999913573265
+    },
+    {
+      "robot": "SplitChassis",
+      "definition": "C1-O03",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.3675999641418457
+      ],
+      "front_surface_source_m": [
+        -0.6999998092651367,
+        0.0,
+        1.3675999641418457
+      ],
+      "fx_offset_component_cm": [
+        -84.49997901916504,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 239.99999165534973
+    },
+    {
+      "robot": "GatebreakerPrime",
+      "definition": "C1-B01",
+      "core_source_m": [
+        0.11999999731779099,
+        0.0,
+        1.9759999513626099
+      ],
+      "front_surface_source_m": [
+        -0.6575002670288086,
+        0.0,
+        1.9759999513626099
+      ],
+      "fx_offset_component_cm": [
+        -80.25002479553223,
+        -0.0,
+        0.0
+      ],
+      "outward_component": [
+        -1.0,
+        -0.0,
+        0.0
+      ],
+      "source_height_cm": 376.4999970793724
+    }
+  ],
+  "limits": "Rest-pose source ray, not an Unreal collision or render proof. Runtime rotates this offset with the animated core relative to its reference pose. Existing gameplay impact location stays unchanged."
+}

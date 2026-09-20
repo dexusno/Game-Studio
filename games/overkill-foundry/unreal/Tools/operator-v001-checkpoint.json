@@ -1,0 +1,2540 @@
+{
+  "archive_root": "unreal/Saved/Validation/operator-runtime-20260920-2032",
+  "identity_sha256": "fbee0c4553869b17b6250885c24467e548ea18291c714d76727d8ade0efe82d3",
+  "content_identity_sha256": "c3b92dd3f058f5001a0c8d06e16a6151127bc5d29a9e075181350f6c46b02013",
+  "evidence": {
+    "recorded_at": "2026-09-20T18:35:29.669431+00:00",
+    "scope": "Operator/camera combined source, smoke and legal-action ArtProbe identity. Explicit reviewed pre-terminal core; native temporal and owner approval pending.",
+    "source_graph_lf_sha256": "1282abcaabbce655d2e10518c8f4d1b3e072dab8ccf4e67b91bc35580965d166",
+    "sources": [
+      {
+        "path": "games/overkill-foundry/assets/production/cinderwall-backdrop-v001/asset-report.json",
+        "bytes": 1034,
+        "sha256": "7177e495f1caff6d1deb63c682613644dfb506640796bf387544235c45d50516",
+        "sha256_lf": "3a0de9e07cd38c8e9045e6c560c127bec48bfd7a89e7a26082423bd6b492a287"
+      },
+      {
+        "path": "games/overkill-foundry/assets/production/operator-v001/asset-report.json",
+        "bytes": 10536,
+        "sha256": "6f47d2ea85fdfa3066dbf872878395ff77cb2ad2704b89a861d645eb29855bfe",
+        "sha256_lf": "988be0c7d8a8bc21278283b3dada2120929b7fbd36e306c0e8b71c6d31ebb17b"
+      },
+      {
+        "path": "games/overkill-foundry/assets/production/operator-v001/presentation-contract.json",
+        "bytes": 2517,
+        "sha256": "5e67135369c4fd01ae2f71c1aa5a62601e57a2dde54a4e3b6035faea36bca669",
+        "sha256_lf": "23209355704a282d28377ad18c272eb2eaafece32a8b493c43f7eff4bff117e3"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/campaign.hpp",
+        "bytes": 6370,
+        "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+        "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/city_content.hpp",
+        "bytes": 1431,
+        "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+        "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/core.hpp",
+        "bytes": 14023,
+        "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+        "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/robots.hpp",
+        "bytes": 2566,
+        "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+        "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/route.hpp",
+        "bytes": 1849,
+        "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+        "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+      },
+      {
+        "path": "games/overkill-foundry/core/include/overkill/upgrades.hpp",
+        "bytes": 2568,
+        "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+        "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/campaign.cpp",
+        "bytes": 31250,
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+        "sha256_lf": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/campaign_serialization.cpp",
+        "bytes": 18101,
+        "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+        "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/campaign_upgrades.cpp",
+        "bytes": 19009,
+        "sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+        "sha256_lf": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/catalogue.cpp",
+        "bytes": 848,
+        "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+        "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/catalogue_data.inc",
+        "bytes": 34550,
+        "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+        "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/city_content.cpp",
+        "bytes": 2254,
+        "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+        "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/city_content.generated.inc",
+        "bytes": 89519,
+        "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+        "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/core.cpp",
+        "bytes": 44641,
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb",
+        "sha256_lf": "27972173c2c2f62c35baa32aac65e495c60f102b85d09fe77ac4e1f570c9a3c9"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/recipe_effects.inl",
+        "bytes": 52894,
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+        "sha256_lf": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/robots.cpp",
+        "bytes": 16029,
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+        "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/route.cpp",
+        "bytes": 16099,
+        "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+        "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/serialization.cpp",
+        "bytes": 17652,
+        "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+        "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/upgrade_effects.inl",
+        "bytes": 37125,
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+        "sha256_lf": "1f74d51a227c17d62f6715941286b1e46f684755324d0bdda3aea3d81803b5a9"
+      },
+      {
+        "path": "games/overkill-foundry/core/src/upgrades.cpp",
+        "bytes": 4476,
+        "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+        "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+      },
+      {
+        "path": "games/overkill-foundry/platform/include/overkill/campaign_session.hpp",
+        "bytes": 1565,
+        "sha256": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5",
+        "sha256_lf": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5"
+      },
+      {
+        "path": "games/overkill-foundry/platform/include/overkill/save_store.hpp",
+        "bytes": 1241,
+        "sha256": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d",
+        "sha256_lf": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d"
+      },
+      {
+        "path": "games/overkill-foundry/platform/src/campaign_session.cpp",
+        "bytes": 3999,
+        "sha256": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+        "sha256_lf": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5"
+      },
+      {
+        "path": "games/overkill-foundry/platform/src/windows_save_store.cpp",
+        "bytes": 8175,
+        "sha256": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+        "sha256_lf": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7"
+      },
+      {
+        "path": "games/overkill-foundry/presentation/precision.hpp",
+        "bytes": 2504,
+        "sha256": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b",
+        "sha256_lf": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+      },
+      {
+        "path": "games/overkill-foundry/tools/unreal.ps1",
+        "bytes": 15227,
+        "sha256": "702f35c2a19159d4ac414b05a4e7e431ec27f2f8da059605ca559033babd745f",
+        "sha256_lf": "702f35c2a19159d4ac414b05a4e7e431ec27f2f8da059605ca559033babd745f"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Config/DefaultEngine.ini",
+        "bytes": 776,
+        "sha256": "42c7b953a62d542fc201f080bb23d36e32d811765339bbc5c2276609355f4af0",
+        "sha256_lf": "71ed0bf8a39ca275cde061613851b106bcd98b1eaa7895249e8dfb506c14e913"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Config/DefaultGame.ini",
+        "bytes": 561,
+        "sha256": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202",
+        "sha256_lf": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Config/DefaultInput.ini",
+        "bytes": 168,
+        "sha256": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9",
+        "sha256_lf": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/OverkillFoundry.uproject",
+        "bytes": 583,
+        "sha256": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129",
+        "sha256_lf": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry.Target.cs",
+        "bytes": 360,
+        "sha256": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079",
+        "sha256_lf": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+        "bytes": 4043,
+        "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+        "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryArtProbe.cpp",
+        "bytes": 8717,
+        "sha256": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7",
+        "sha256_lf": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp",
+        "bytes": 9933,
+        "sha256": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+        "sha256_lf": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+        "bytes": 18255,
+        "sha256": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2",
+        "sha256_lf": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+        "bytes": 11842,
+        "sha256": "48045e4f7bd3d83352e014af3909c533edeb7285cf8fc9655207751a188b8e04",
+        "sha256_lf": "48045e4f7bd3d83352e014af3909c533edeb7285cf8fc9655207751a188b8e04"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+        "bytes": 67714,
+        "sha256": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908",
+        "sha256_lf": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryDebugHUD.cpp",
+        "bytes": 16091,
+        "sha256": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4",
+        "sha256_lf": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+        "bytes": 39592,
+        "sha256": "aace43ce10ce08f5996d5f591225bca23d7c0f7be3708a6ce8bdf3991f11a1a0",
+        "sha256_lf": "aace43ce10ce08f5996d5f591225bca23d7c0f7be3708a6ce8bdf3991f11a1a0"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryMara.cpp",
+        "bytes": 24428,
+        "sha256": "27769cdefd4ed60cc5f84eceb79bf8c29922dee441d8b1c3dc20b72a2a7fbe86",
+        "sha256_lf": "27769cdefd4ed60cc5f84eceb79bf8c29922dee441d8b1c3dc20b72a2a7fbe86"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecision.cpp",
+        "bytes": 7451,
+        "sha256": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d",
+        "sha256_lf": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfileProbe.cpp",
+        "bytes": 3650,
+        "sha256": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a",
+        "sha256_lf": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfiles.cpp",
+        "bytes": 8716,
+        "sha256": "071b90abc2a8ddc20f3426047c87baa7f976c1815f4410d574ab81eb5de5656a",
+        "sha256_lf": "071b90abc2a8ddc20f3426047c87baa7f976c1815f4410d574ab81eb5de5656a"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControlProbe.cpp",
+        "bytes": 11280,
+        "sha256": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa",
+        "sha256_lf": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControls.cpp",
+        "bytes": 11103,
+        "sha256": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6",
+        "sha256_lf": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp",
+        "bytes": 18186,
+        "sha256": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f",
+        "sha256_lf": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterData.inl",
+        "bytes": 12712,
+        "sha256": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5",
+        "sha256_lf": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterProbe.cpp",
+        "bytes": 17210,
+        "sha256": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7",
+        "sha256_lf": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundrySession.cpp",
+        "bytes": 13151,
+        "sha256": "dbea0d3ac38b9df57d307a8e0b13af2e5908a5d9d7b556ac2e9cad9582f2bfc7",
+        "sha256_lf": "dbea0d3ac38b9df57d307a8e0b13af2e5908a5d9d7b556ac2e9cad9582f2bfc7"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/OverkillFoundry.cpp",
+        "bytes": 127,
+        "sha256": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208",
+        "sha256_lf": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaign.cpp",
+        "bytes": 64,
+        "sha256": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a",
+        "sha256_lf": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSerialization.cpp",
+        "bytes": 78,
+        "sha256": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4",
+        "sha256_lf": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSession.cpp",
+        "bytes": 76,
+        "sha256": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2",
+        "sha256_lf": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignUpgrades.cpp",
+        "bytes": 73,
+        "sha256": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e",
+        "sha256_lf": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCatalogue.cpp",
+        "bytes": 113,
+        "sha256": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72",
+        "sha256_lf": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCityContent.cpp",
+        "bytes": 68,
+        "sha256": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462",
+        "sha256_lf": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCore.cpp",
+        "bytes": 110,
+        "sha256": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938",
+        "sha256_lf": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRobots.cpp",
+        "bytes": 110,
+        "sha256": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c",
+        "sha256_lf": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRoute.cpp",
+        "bytes": 61,
+        "sha256": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2",
+        "sha256_lf": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSaveStore.cpp",
+        "bytes": 119,
+        "sha256": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e",
+        "sha256_lf": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSerialization.cpp",
+        "bytes": 117,
+        "sha256": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92",
+        "sha256_lf": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedUpgrades.cpp",
+        "bytes": 64,
+        "sha256": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533",
+        "sha256_lf": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryAudio.h",
+        "bytes": 1382,
+        "sha256": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+        "sha256_lf": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+        "bytes": 2344,
+        "sha256": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4",
+        "sha256_lf": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaignUI.h",
+        "bytes": 172,
+        "sha256": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4",
+        "sha256_lf": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryHost.h",
+        "bytes": 4630,
+        "sha256": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f",
+        "sha256_lf": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryMara.h",
+        "bytes": 3937,
+        "sha256": "3be31c9abfeab1f10e9672d4c24d7d17b0b11a272e8c87118395e34853a50911",
+        "sha256_lf": "3be31c9abfeab1f10e9672d4c24d7d17b0b11a272e8c87118395e34853a50911"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecision.h",
+        "bytes": 645,
+        "sha256": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421",
+        "sha256_lf": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryProfileProbe.h",
+        "bytes": 117,
+        "sha256": "7ea0efb6229d2cbf90005f811407c446c5a12c63d2c62cc71fce1df0c89a5fae",
+        "sha256_lf": "7ea0efb6229d2cbf90005f811407c446c5a12c63d2c62cc71fce1df0c89a5fae"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryProfiles.h",
+        "bytes": 2292,
+        "sha256": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e",
+        "sha256_lf": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControlProbe.h",
+        "bytes": 201,
+        "sha256": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0",
+        "sha256_lf": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControls.h",
+        "bytes": 2168,
+        "sha256": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d",
+        "sha256_lf": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h",
+        "bytes": 3501,
+        "sha256": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3",
+        "sha256_lf": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundrySession.h",
+        "bytes": 1860,
+        "sha256": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a",
+        "sha256_lf": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Source/OverkillFoundryEditor.Target.cs",
+        "bytes": 374,
+        "sha256": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d",
+        "sha256_lf": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/import_backdrop_v001.py",
+        "bytes": 6418,
+        "sha256": "df08451315c1debcf1c6247a25b01540c4a127039d66bb636aeb2e1c95769cd4",
+        "sha256_lf": "df08451315c1debcf1c6247a25b01540c4a127039d66bb636aeb2e1c95769cd4"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/import_operator_v001.py",
+        "bytes": 9255,
+        "sha256": "b68c490829b3239a4f39c84ff4e10d7395855c96d7dad3f5d766310bc4347e7a",
+        "sha256_lf": "b68c490829b3239a4f39c84ff4e10d7395855c96d7dad3f5d766310bc4347e7a"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/profile-tests/CMakeLists.txt",
+        "bytes": 1952,
+        "sha256": "56b5d83358278f6e8fbe5878900b66f66ec98e03299bbf0cffb18efe3c8c43e9",
+        "sha256_lf": "56b5d83358278f6e8fbe5878900b66f66ec98e03299bbf0cffb18efe3c8c43e9"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/profile-tests/capture_checkpoint.py",
+        "bytes": 7239,
+        "sha256": "779b95907427d4a3b73952efc8b4dcc4338b35ba967fd70e3b848a332e1ca051",
+        "sha256_lf": "779b95907427d4a3b73952efc8b4dcc4338b35ba967fd70e3b848a332e1ca051"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/profile-tests/fixtures.cpp",
+        "bytes": 3413,
+        "sha256": "8db6f95bcd532acbdfd5ab45a6c24de869d87d1fb5282e10224d5f947992d549",
+        "sha256_lf": "8db6f95bcd532acbdfd5ab45a6c24de869d87d1fb5282e10224d5f947992d549"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/profile-tests/main.cpp",
+        "bytes": 9294,
+        "sha256": "e40097ce42a0e0fb3a98114cd232667d9a6b1cda92d30a35d747a4716c35eadb",
+        "sha256_lf": "e40097ce42a0e0fb3a98114cd232667d9a6b1cda92d30a35d747a4716c35eadb"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/CMakeLists.txt",
+        "bytes": 1660,
+        "sha256": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e",
+        "sha256_lf": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/capture_checkpoint.py",
+        "bytes": 6272,
+        "sha256": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5",
+        "sha256_lf": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/main.cpp",
+        "bytes": 9732,
+        "sha256": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32",
+        "sha256_lf": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/CMakeLists.txt",
+        "bytes": 288,
+        "sha256": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b",
+        "sha256_lf": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/main.cpp",
+        "bytes": 9405,
+        "sha256": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3",
+        "sha256_lf": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3"
+      }
+    ],
+    "artifacts": [
+      {
+        "source": "games/overkill-foundry/unreal/Binaries/Win64/UnrealEditor-OverkillFoundry.dll",
+        "archive": "binaries/UnrealEditor-OverkillFoundry.dll",
+        "sha256": "9d2d671e961a206f0c4ca2144e500d220fd026178b9881d8de9453ee217d5a9d",
+        "bytes": 2608128
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Binaries/Win64/OverkillFoundry.exe",
+        "archive": "binaries/OverkillFoundry.exe",
+        "sha256": "9fb422f304443ac17bdebebc73d0fe1f0e5740a6759cd6cb79805993efe9b61f",
+        "bytes": 221671424
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/host-action.png",
+        "archive": "smoke/host-action.png",
+        "sha256": "fb11c5729edde28cf5d2f979fc1c093753d9c6867cd6e8bfaa29884bbd03980f",
+        "bytes": 1917855
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/host-preparation.png",
+        "archive": "smoke/host-preparation.png",
+        "sha256": "a0a3a8bebd2436aaf2160c46b1e6ce14a82027344a96d06cf0aa769697e78955",
+        "bytes": 1846029
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/OperatorArt-20260920-203155.log",
+        "archive": "logs/OperatorArt-20260920-203155.log",
+        "sha256": "642d42756cd828fa97c98674903a45774d178693022cea40a7ac14084427326b",
+        "bytes": 130861
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Build-20260920-203232.log",
+        "archive": "logs/Build-20260920-203232.log",
+        "sha256": "2d4e22158916a6f463863eb1c6dad00cc42fb9527b74d09145e6e1db8bf06688",
+        "bytes": 9011
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/BuildGame-20260920-203314.log",
+        "archive": "logs/BuildGame-20260920-203314.log",
+        "sha256": "77fbbf3bd18911b34f19337f6f0ae5326736d6c567489d7f96b3ea44b0a25192",
+        "bytes": 8730
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Smoke-20260920-203338.log",
+        "archive": "logs/Smoke-20260920-203338.log",
+        "sha256": "8728d1a35782b2c47f901ef3bcb73959d290b63342897d2c9a65ad1f84dcb4e6",
+        "bytes": 126646
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Smoke-20260920-203338.log.binary.json",
+        "archive": "logs/Smoke-20260920-203338.log.binary.json",
+        "sha256": "c3cea87e1c4efc592db4eed5f1dd3b4d6d4caa8f944a25176ac7191eb19a79d5",
+        "bytes": 284
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/ArtImport/operator-v001-import.json",
+        "archive": "operator-import.json",
+        "sha256": "2c5e4ad0662bcf5511e9378c268d130148d3b6b9ff19430f469faed07aa11cff",
+        "bytes": 4619
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/ArtProbe-20260920-203530.log",
+        "archive": "logs/ArtProbe-20260920-203530.log",
+        "sha256": "1ff863905dd440b04d0f408e057afb415cdb47524cc78460d06c2ddbdb55d205",
+        "bytes": 188026
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/BuildLogs/ArtProbe-20260920-203530.log.binary.json",
+        "archive": "logs/ArtProbe-20260920-203530.log.binary.json",
+        "sha256": "9548a3df29bce98ef5904dbb7c441b65b4a61fac211b58c3b9e57d37f7b31afc",
+        "bytes": 287
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/mara-collect-grab.png",
+        "archive": "artprobe/mara-collect-grab.png",
+        "sha256": "0388727c6bef28ee773db0a8a90b7c882e64c4723f53f6f14ed4e4103fca2fee",
+        "bytes": 1828659
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/mara-collect-dump.png",
+        "archive": "artprobe/mara-collect-dump.png",
+        "sha256": "21fed040227ebe1a37def0f5ab8b5f11e1cf15f5f3c0e0a27ba09ee9296ff757",
+        "bytes": 1838711
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/mara-load.png",
+        "archive": "artprobe/mara-load.png",
+        "sha256": "aa967f2aaa51fb87cbd2cd1e9eceef2bf55b3d7f03b4b0826fb396aaf45b4123",
+        "bytes": 1822420
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/mara-unload.png",
+        "archive": "artprobe/mara-unload.png",
+        "sha256": "264641c8d8f20c08d6f0c28c087b89ed37b87a326e76a67636f81bd5683d96e7",
+        "bytes": 1908002
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-preparation.png",
+        "archive": "artprobe/art-preparation.png",
+        "sha256": "29a7f45ba0aa3d82b6f25e1b404f3811818998aa8f84b6c1297ee4af3f0b0c0e",
+        "bytes": 1859923
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-deflection.png",
+        "archive": "artprobe/art-deflection.png",
+        "sha256": "3d828dbb40b4cf87194b9bee125b3a62dfcfab22edbeabb674974a2b3ec49b8e",
+        "bytes": 1882862
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-hit-light.png",
+        "archive": "artprobe/art-hit-light.png",
+        "sha256": "b530a8527971d102e792a3399b97994f6951e0fc182ce583b2a7b5e570837525",
+        "bytes": 1935814
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-hit-medium.png",
+        "archive": "artprobe/art-hit-medium.png",
+        "sha256": "50303b72ecd7d49198f04f2596ce30d2badb2c97472a1bb20acbc0ceb1f1c988",
+        "bytes": 1921843
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-mite-attack-ram-charge.png",
+        "archive": "artprobe/art-mite-attack-ram-charge.png",
+        "sha256": "9c615721b2dfd12830f114e6795e5c5ccb4d3d48cc22e98c89b0b3079ed303a6",
+        "bytes": 1931269
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-charge-held.png",
+        "archive": "artprobe/art-charge-held.png",
+        "sha256": "3e211feb5a9c8d8732237f997b07e59968c4a516f0cb7f2f81f21c86d8f4d498",
+        "bytes": 1923518
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-hit-heavy.png",
+        "archive": "artprobe/art-hit-heavy.png",
+        "sha256": "a463d2e22f2b3c381f8fd4d30084908bb31799fbb6354c8c340af3c46f1b7b7f",
+        "bytes": 1925630
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-mite-hit-heavy.png",
+        "archive": "artprobe/art-mite-hit-heavy.png",
+        "sha256": "259f4c9b6021742f6a24a72b1fa1785de1f13d3e1ea79ea8e2dae81282d29aa1",
+        "bytes": 1932831
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-ram-blast.png",
+        "archive": "artprobe/art-ram-blast.png",
+        "sha256": "f7f63f0c0aa14bb3b8ceace9a93631ca9e5d6b6122ad9eba802ac60730f5f21d",
+        "bytes": 1938357
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-ram-steam.png",
+        "archive": "artprobe/art-ram-steam.png",
+        "sha256": "3a7b35742903e716309e2c00da0b09b816e24bc4b63ab1dd4aa920410d36d2b5",
+        "bytes": 1921799
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-13-death-burst.png",
+        "archive": "artprobe/art-13-death-burst.png",
+        "sha256": "00d7670775ac49ebdbd1643cfe7b937592a2c5480f9a7092b323bec196570b92",
+        "bytes": 1934617
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-13-death-collapse.png",
+        "archive": "artprobe/art-13-death-collapse.png",
+        "sha256": "49694d52c5a74832084f51bc6f6877722a8b8907613700a663323e51c6f00a6f",
+        "bytes": 1930805
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-13-death-dissolve.png",
+        "archive": "artprobe/art-13-death-dissolve.png",
+        "sha256": "380ab24afc4ed412bdb8b2cf266979f32b3965da46953ec0e0529b49fca4b8e2",
+        "bytes": 1926888
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-14-death-burst.png",
+        "archive": "artprobe/art-14-death-burst.png",
+        "sha256": "0f6781567fb5b0c1b30ce6c5fc080316e111f2ce36ba917693cba47e39242076",
+        "bytes": 1925925
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-14-death-collapse.png",
+        "archive": "artprobe/art-14-death-collapse.png",
+        "sha256": "286b0f7f07e9c248511f1141e3d4a72b69fb3eb0bddbe6f0b0e1f545388a6634",
+        "bytes": 1930338
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-14-death-dissolve.png",
+        "archive": "artprobe/art-14-death-dissolve.png",
+        "sha256": "d1b2d68a6e91ba375d4514b547955a3efb7841b565ffcfce858695cfb4115562",
+        "bytes": 1938204
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-cleanup.png",
+        "archive": "artprobe/art-cleanup.png",
+        "sha256": "d5a5f6b860654210b4775f461d65f60511916f7502631d6311edb0056da80936",
+        "bytes": 1908198
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Saved/Screenshots/art-restart-hud.png",
+        "archive": "artprobe/art-restart-hud.png",
+        "sha256": "5ae3400da2dcee9494dac73dd5e30fcdfa1f0f91ab5b05435d5643e5edf0be7b",
+        "bytes": 1061307
+      }
+    ]
+  },
+  "content": {
+    "scope": "Actual unchanged post-OperatorArt203155 content used by Smoke203338 and ArtProbe203530; captured before next FX imports. Current native profile browsing is read-only for these assets.",
+    "files": [
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_attack_blast.uasset",
+        "archive": "content/Cinderwall/Animations/BR_attack_blast.uasset",
+        "sha256": "94c8aa3a72f23302f6d8c30c7d6dfc90ddaaae508edffd75213658eddcc0bf1a",
+        "bytes": 22457
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_charge.uasset",
+        "archive": "content/Cinderwall/Animations/BR_charge.uasset",
+        "sha256": "d5e73c1129bac0474764d67335ac204c3efe36fa61331f9403d9bf5356be7475",
+        "bytes": 28141
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_death.uasset",
+        "archive": "content/Cinderwall/Animations/BR_death.uasset",
+        "sha256": "7d59927270283dd6b4854cc286979479be868e0b0ef9cd69d51e93cd7c569820",
+        "bytes": 39575
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_escape.uasset",
+        "archive": "content/Cinderwall/Animations/BR_escape.uasset",
+        "sha256": "3d1dfc96e919c9078e5afff409d1264a42fadf77b9f6941bbe890994e1a04de4",
+        "bytes": 25021
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/BR_hit_heavy.uasset",
+        "sha256": "89ae9b42b8c091fa8f5cd45a9cb533d1c8264abfb9f4265f3063efdd21d37fa4",
+        "bytes": 18279
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/BR_hit_light.uasset",
+        "sha256": "f82f296812ef793e7b78bf8b2b74d6daca60af1b1c17392d0fb64e9e0c007b70",
+        "bytes": 13599
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/BR_hit_medium.uasset",
+        "sha256": "61c45c9cebc82c8fd5e588b8109754928b761a71e609cd1331729b9dcf6e8c5c",
+        "bytes": 15685
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/BR_idle.uasset",
+        "archive": "content/Cinderwall/Animations/BR_idle.uasset",
+        "sha256": "ab2bc81f957df5a8cb224185af6a97aadac4977cc60bad9a41ee8fa40feadabe",
+        "bytes": 39569
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_death.uasset",
+        "archive": "content/Cinderwall/Animations/CB_death.uasset",
+        "sha256": "6506e8a493f41d43467b21541e6e20af85ca625678321b631675a5d891457698",
+        "bytes": 36971
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_escape.uasset",
+        "archive": "content/Cinderwall/Animations/CB_escape.uasset",
+        "sha256": "0a1424ab72ff89ea2b55ae6e4a88e0f9b3ce35a00a4ee9132ad8155091bf3283",
+        "bytes": 23537
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_foul.uasset",
+        "archive": "content/Cinderwall/Animations/CB_foul.uasset",
+        "sha256": "ea282af3cdb472829235def9d69bacd3f18b53a209257c93c01b130831ced73a",
+        "bytes": 24005
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/CB_hit_heavy.uasset",
+        "sha256": "6ae03cf125922766a9adef7f8632c8e73c05f62660dcae397b43368bc31585dd",
+        "bytes": 18275
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/CB_hit_light.uasset",
+        "sha256": "ec02b2b36860211cfffd17253048bc2e9392890e450393926dc13160467e19d4",
+        "bytes": 12995
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/CB_hit_medium.uasset",
+        "sha256": "a24ab60496521fdebd533d94065d18a1e4f49f4c2289041a900d5b53c92bcd26",
+        "bytes": 15401
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_idle.uasset",
+        "archive": "content/Cinderwall/Animations/CB_idle.uasset",
+        "sha256": "7e865ffd10faee2e70cae0072de9fcffd7a6556a514f7c4fa6a219f87f46ce59",
+        "bytes": 36965
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_punch.uasset",
+        "archive": "content/Cinderwall/Animations/CB_punch.uasset",
+        "sha256": "131e94dc3d2f21e5f77e4cc9cd0712f4a4deb1bbef99dcdc083d5ee23ee69de4",
+        "bytes": 21131
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CB_spray.uasset",
+        "archive": "content/Cinderwall/Animations/CB_spray.uasset",
+        "sha256": "14c3301d8c54fbdce306c36366398466dc3c109292b59cb2298b76b2173ac377",
+        "bytes": 20651
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_attack.uasset",
+        "archive": "content/Cinderwall/Animations/CN_attack.uasset",
+        "sha256": "21c387b5b7b8cee30d76c437ec524645014d58151fa2940bfb21f6f7b5ef0164",
+        "bytes": 23113
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_death.uasset",
+        "archive": "content/Cinderwall/Animations/CN_death.uasset",
+        "sha256": "6d824efdf96eedc05ee3f7b22ee883c4dbea5b9386aeddc60a7c58f15079b917",
+        "bytes": 42147
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_deploy.uasset",
+        "archive": "content/Cinderwall/Animations/CN_deploy.uasset",
+        "sha256": "be50bd1da61b3caaa2bd89cffd7952e2683e15e06a3f0d34c4d519de116878ee",
+        "bytes": 30393
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_escape.uasset",
+        "archive": "content/Cinderwall/Animations/CN_escape.uasset",
+        "sha256": "baef69dd36c6a0deb8704f46dc0edbfddf68fb6830fe8b53ad398d219d401722",
+        "bytes": 26473
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/CN_hit_heavy.uasset",
+        "sha256": "d7ad0e8075a6e976da8aa7ba3da049da9959cf23a148e4c4748a7a3f95c15c6a",
+        "bytes": 20331
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/CN_hit_light.uasset",
+        "sha256": "09e125e593e69819c720e95b3502b0abbc96cfde2166cd7bca89c6600cf29eae",
+        "bytes": 14171
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/CN_hit_medium.uasset",
+        "sha256": "7e15c6863e3247c7e455f1ff402e60c1b5ea6b61eab48f29cd900ac792e47959",
+        "bytes": 16977
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/CN_idle.uasset",
+        "archive": "content/Cinderwall/Animations/CN_idle.uasset",
+        "sha256": "9897d617e3ac48fe75bf2de85c3be8e6a6e78c5b7f9662a0f8898d7937fed1b8",
+        "bytes": 42141
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_attack_12.uasset",
+        "archive": "content/Cinderwall/Animations/FW_attack_12.uasset",
+        "sha256": "216bffa90a5b4466245399f49ba8ea6dbe8045799bc41979dd6d4a09ea152d02",
+        "bytes": 25512
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_attack_9.uasset",
+        "archive": "content/Cinderwall/Animations/FW_attack_9.uasset",
+        "sha256": "75fff12f02e7e820bbf829d843efae6a4d08a4ffcb67e141efcee0402d647176",
+        "bytes": 22908
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_death.uasset",
+        "archive": "content/Cinderwall/Animations/FW_death.uasset",
+        "sha256": "5d274795049c9d4eacc1034fe2217ee7ac1bfc74484b2e3d507fa02d57ce2dd6",
+        "bytes": 39534
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_escape.uasset",
+        "archive": "content/Cinderwall/Animations/FW_escape.uasset",
+        "sha256": "84c04640294102674cb68c22139e80ff61e211a8379502b81e0ccf8185002b3d",
+        "bytes": 24980
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_gain_drive.uasset",
+        "archive": "content/Cinderwall/Animations/FW_gain_drive.uasset",
+        "sha256": "3df15c70a17c7c8e3aca8fcd104e2f6fdc7bca2aae2108916a05da8f721e63fd",
+        "bytes": 27084
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/FW_hit_heavy.uasset",
+        "sha256": "bf6c94cfb23733d09d1e52cfadf5a1ffa0795773416122b21a594b018a55376a",
+        "bytes": 19278
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/FW_hit_light.uasset",
+        "sha256": "2c9ab24c267b25acc85fe15dc4c7c32824dadf2b5d5f82e107b7b28a66042864",
+        "bytes": 13558
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/FW_hit_medium.uasset",
+        "sha256": "6660c7024f4128154001ed7fef53bc0af8ea04aa3d87a951cbd872d39379c305",
+        "bytes": 16164
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/FW_idle.uasset",
+        "archive": "content/Cinderwall/Animations/FW_idle.uasset",
+        "sha256": "caf83a4b8e69078676b775dba2cef405cd43aab0dd402a845292c05e3b723832",
+        "bytes": 39528
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_blast.uasset",
+        "archive": "content/Cinderwall/Animations/GP_blast.uasset",
+        "sha256": "78acffc940c0f44ac22fcaa4d13fbc43f4af45cd977074f6bc24bc9f945af3cf",
+        "bytes": 32034
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_charge.uasset",
+        "archive": "content/Cinderwall/Animations/GP_charge.uasset",
+        "sha256": "064fc58b86311f119af9f570d6ccec6a5e396e590acb43766359cb3c2a05ba15",
+        "bytes": 33960
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_death.uasset",
+        "archive": "content/Cinderwall/Animations/GP_death.uasset",
+        "sha256": "41de0b0fd49925fc3b8b36394f37fbabab8adedb2dd5603e4cd2c51c9fb2c853",
+        "bytes": 47394
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_escape.uasset",
+        "archive": "content/Cinderwall/Animations/GP_escape.uasset",
+        "sha256": "16bf258b97300fc1c92a10bc555585d7c956737895eba03fa0e2e6fc474baba8",
+        "bytes": 29480
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/GP_hit_heavy.uasset",
+        "sha256": "b5092c84c7b3dc357509d4275d6162a1810671b83b5d1e4e23f23c8260055a71",
+        "bytes": 22458
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/GP_hit_light.uasset",
+        "sha256": "6bc6596926d80baf4bcda9ca90b2e60a8840248dbf3fa5d02811903dca788139",
+        "bytes": 15418
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/GP_hit_medium.uasset",
+        "sha256": "29bac15a51b24e321599805fb0a5d9023e11a9eddfd20586be321a6bfff6f560",
+        "bytes": 18624
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_idle.uasset",
+        "archive": "content/Cinderwall/Animations/GP_idle.uasset",
+        "sha256": "acb36a1f51c031a45f2339c9da2ab07db42fd6845e4ba8666a5cbcf8e82f33cf",
+        "bytes": 47388
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_phase_one_strike.uasset",
+        "archive": "content/Cinderwall/Animations/GP_phase_one_strike.uasset",
+        "sha256": "ba2d9dfad09e2e11eab6d8326ee3016b8c08b895e6dea54ab32cc3954b63434d",
+        "bytes": 30180
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_quad_strike.uasset",
+        "archive": "content/Cinderwall/Animations/GP_quad_strike.uasset",
+        "sha256": "2c75604896b7a82c82a87ed6a5ed0e1b8681ec33d28a0741ace6d7b5cda893a9",
+        "bytes": 33350
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/GP_recover.uasset",
+        "archive": "content/Cinderwall/Animations/GP_recover.uasset",
+        "sha256": "272c803aa68f593a88e9920bf9958fa567b926b3d040a9cb6b0d1be0ae4e9b9b",
+        "bytes": 37166
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_brace.uasset",
+        "archive": "content/Cinderwall/Animations/KP_brace.uasset",
+        "sha256": "b85b6d4586cf1bcbe951b90b0a138a89543453186638f9eeff3c8ef7411ed14e",
+        "bytes": 24016
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_death.uasset",
+        "archive": "content/Cinderwall/Animations/KP_death.uasset",
+        "sha256": "314c2769e74f02fe69dc6c13c2634cb4c8858bd28051383dd336459b90d52b64",
+        "bytes": 36976
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_double_punch.uasset",
+        "archive": "content/Cinderwall/Animations/KP_double_punch.uasset",
+        "sha256": "012ed6b26b3aff3d34bbb5b587c94bfc06f35ff0b9016d08ea987927168c48d5",
+        "bytes": 22618
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_escape.uasset",
+        "archive": "content/Cinderwall/Animations/KP_escape.uasset",
+        "sha256": "da6d0e2722bc065700ab2e37996fb495069093e8da3c2ebbffa1e5f18fc8ca8c",
+        "bytes": 23542
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/KP_hit_heavy.uasset",
+        "sha256": "96ae5337fa46d29670db38015756d798ceb128e7d62932aae579dd64b047197d",
+        "bytes": 18280
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/KP_hit_light.uasset",
+        "sha256": "9cce0d3e47f23c726004a6ef158e6f85534e31fa13e3613f88fbd7e470a2a6d7",
+        "bytes": 13000
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/KP_hit_medium.uasset",
+        "sha256": "84ebdd36e52c46a8bd75fda3069d5d39e0015d871fb1d21740ecab9f90356e46",
+        "bytes": 15406
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_idle.uasset",
+        "archive": "content/Cinderwall/Animations/KP_idle.uasset",
+        "sha256": "d899bb46ce52cb2b8cfac979d302cf3f8c4d6fbf6e6c8c694ab702fc86426cb3",
+        "bytes": 36970
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/KP_slam.uasset",
+        "archive": "content/Cinderwall/Animations/KP_slam.uasset",
+        "sha256": "1781bbd43dd110b6a680107078ce167157cf205bb4e9bc695c28a722074d0cd5",
+        "bytes": 24010
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_attack.uasset",
+        "archive": "content/Cinderwall/Animations/PC_attack.uasset",
+        "sha256": "deac14f0aeae94b09eb9c62bf02a07fb7dbe3040e03663713f886cd754abace8",
+        "bytes": 20307
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_death.uasset",
+        "archive": "content/Cinderwall/Animations/PC_death.uasset",
+        "sha256": "896eae7381051de58305b4fc99d20c7a48c5cff93484e8781723d15aa4f5d606",
+        "bytes": 34381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_escape.uasset",
+        "archive": "content/Cinderwall/Animations/PC_escape.uasset",
+        "sha256": "72c968b68ceb1d0e571f0234c8b75fd5357c54c8505049bcedf101f643731f44",
+        "bytes": 22067
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/PC_hit_heavy.uasset",
+        "sha256": "e9ae2d8b872a7bea591a6250023b4ba53d1432b0ba105d963b4de5ea32b2b25e",
+        "bytes": 17245
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/PC_hit_light.uasset",
+        "sha256": "f8a0c530da4031aaebcaa36b97c83840bbf860a76241e8838e412fcf474ff65c",
+        "bytes": 12405
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/PC_hit_medium.uasset",
+        "sha256": "bb1dee46d91cadee4a1511530846972b550776896dfaac96c34be996e2525a67",
+        "bytes": 14611
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_idle.uasset",
+        "archive": "content/Cinderwall/Animations/PC_idle.uasset",
+        "sha256": "00d0f711e160abe42ac98df5a266b27429da1e3fb51ef5d3167deb7dbc4b13aa",
+        "bytes": 34375
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/PC_pressurize.uasset",
+        "archive": "content/Cinderwall/Animations/PC_pressurize.uasset",
+        "sha256": "8e92a2db8e38df09aba1e8323c6a09a52d3261ffc31fbd56366f96096e4c6aed",
+        "bytes": 24731
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_attack_rivet.uasset",
+        "archive": "content/Cinderwall/Animations/RM_attack_rivet.uasset",
+        "sha256": "bf4345ded1b3bedd48a08dbd0a055efb8c373690f5a928f1490f954dd8a18862",
+        "bytes": 31842
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_death.uasset",
+        "archive": "content/Cinderwall/Animations/RM_death.uasset",
+        "sha256": "3a94b7ae6a41f4c91c70bc72210680bed93187dda790e331a03fe3b18ab8bca9",
+        "bytes": 60360
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_escape.uasset",
+        "archive": "content/Cinderwall/Animations/RM_escape.uasset",
+        "sha256": "a883deabb7ab27e7533316539af00fc2daa70f9088781d56816b753935f5c061",
+        "bytes": 35166
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/RM_hit_heavy.uasset",
+        "sha256": "4e14b0e1b85fb392e7de7efc22f8b03dbfa8112072eb34dc808594794f461cad",
+        "bytes": 25944
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/RM_hit_light.uasset",
+        "sha256": "766f9ada3224ab8c75c5be52c5b75b71ffade9921747716d4997a1cdb3eb2413",
+        "bytes": 17543
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/RM_hit_medium.uasset",
+        "sha256": "947f014dae6b6543555bed648a1f444b4cf36e16a36dd6e65dfaaadf5d881ee2",
+        "bytes": 20910
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RM_idle.uasset",
+        "archive": "content/Cinderwall/Animations/RM_idle.uasset",
+        "sha256": "3a58ddd67c9bb5bd99ef108719e9fde42b1fb66dcf5dd01c6997d8a67d49bda4",
+        "bytes": 60354
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_death.uasset",
+        "archive": "content/Cinderwall/Animations/RP_death.uasset",
+        "sha256": "14041758b689ac3eeabb33f5ab708615ae60bf21ab5a8b2a68861658437f9b7f",
+        "bytes": 39588
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_escape.uasset",
+        "archive": "content/Cinderwall/Animations/RP_escape.uasset",
+        "sha256": "cf4b49bfe7c84b9666c9d22aeef2697d03c354390d66e0b5553de0b562b0b85a",
+        "bytes": 25034
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/RP_hit_heavy.uasset",
+        "sha256": "0738dbbd0d1314d7560e154bc5cf2ae56a90864a3d9b12751f3eaf36faec5826",
+        "bytes": 19332
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/RP_hit_light.uasset",
+        "sha256": "b1157dac186532b09da40a820eaed2ef591c40c8a05d6dbf93ba77d4919ae72b",
+        "bytes": 13612
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/RP_hit_medium.uasset",
+        "sha256": "6f4fa44a82a3d58e6da2fe8d1d4644ddae1bbcd7171cb43ee4ebd15d56743cb6",
+        "bytes": 16218
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_idle.uasset",
+        "archive": "content/Cinderwall/Animations/RP_idle.uasset",
+        "sha256": "2daff28d5002df49a319f0bb2ed03139cd9a1878d4b1a675ae0e0e3c7627ed41",
+        "bytes": 39582
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_strike.uasset",
+        "archive": "content/Cinderwall/Animations/RP_strike.uasset",
+        "sha256": "3a8c971e331f230aec8dee265d871b83271479afe86b271522937c8afd03b989",
+        "bytes": 20874
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/RP_triple_strike.uasset",
+        "archive": "content/Cinderwall/Animations/RP_triple_strike.uasset",
+        "sha256": "fae8ba9f14906b98ca31c381bd0a2d5f50a7502d7b7a0748e0fb08fc6141ac6c",
+        "bytes": 23516
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_death.uasset",
+        "archive": "content/Cinderwall/Animations/SC_death.uasset",
+        "sha256": "5676d41ec28188a39992cdc27000b2d64d1f3d708c862a4bcbeabb29ac5ecbb7",
+        "bytes": 39579
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_death_release.uasset",
+        "archive": "content/Cinderwall/Animations/SC_death_release.uasset",
+        "sha256": "deff0a4b607048958ecd9a721420519d631d52911fc00d5abe2c50483571c14e",
+        "bytes": 39627
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_double_strike.uasset",
+        "archive": "content/Cinderwall/Animations/SC_double_strike.uasset",
+        "sha256": "868dbab7638199d498b28f77a63282f6f2f47ea0a0ed51abe7418a7c0400614e",
+        "bytes": 22987
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_escape.uasset",
+        "archive": "content/Cinderwall/Animations/SC_escape.uasset",
+        "sha256": "8a1fc9a3e1370dfd6612980a48a23efce16a987742188462f5a609684ee87c81",
+        "bytes": 25025
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_hit_heavy.uasset",
+        "archive": "content/Cinderwall/Animations/SC_hit_heavy.uasset",
+        "sha256": "1b8c9afd64f5725da567d89135490f451cb80fc9aeb487eb1b453f8ee7bfbc75",
+        "bytes": 19323
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_hit_light.uasset",
+        "archive": "content/Cinderwall/Animations/SC_hit_light.uasset",
+        "sha256": "3556f2270beacc2d9fcaf68790ed492b9c820a36f0b9e1f11947287099087824",
+        "bytes": 13603
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_hit_medium.uasset",
+        "archive": "content/Cinderwall/Animations/SC_hit_medium.uasset",
+        "sha256": "cd508392784e2ea2dd4e0ed8c446cfbafc0cafc8e9d664552d39f8f92ed30f4b",
+        "bytes": 16209
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_idle.uasset",
+        "archive": "content/Cinderwall/Animations/SC_idle.uasset",
+        "sha256": "954869e088f017a23fd72d54afb8e751b27ebec3063284eff9744d92eb9ffbd4",
+        "bytes": 39573
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_thermal_runaway.uasset",
+        "archive": "content/Cinderwall/Animations/SC_thermal_runaway.uasset",
+        "sha256": "0d8ff914df330b7e3667f56ee2a69030d9c8261dae8b2b19cd35223ba02e4dbc",
+        "bytes": 27159
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Animations/SC_triple_strike.uasset",
+        "archive": "content/Cinderwall/Animations/SC_triple_strike.uasset",
+        "sha256": "ce35e3d925fb24c352facaf72712b23d44d96d968008de949cc94a0e97df161e",
+        "bytes": 24027
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/BackdropV001/M_Cinderwall_DistantCity.uasset",
+        "archive": "content/Cinderwall/BackdropV001/M_Cinderwall_DistantCity.uasset",
+        "sha256": "f3ef15caf8f484877261eeeab90fa31c542987f52b76ec43cd2ada52a2d16a75",
+        "bytes": 7269
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/BackdropV001/SM_Cinderwall_DistantCity.uasset",
+        "archive": "content/Cinderwall/BackdropV001/SM_Cinderwall_DistantCity.uasset",
+        "sha256": "e17ae4dbdcda58b6bf3fb6e032fc74e4efc5b28410cabb99ac0cb76db299ee42",
+        "bytes": 14669
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/BackdropV001/T_Cinderwall_DistantCity.uasset",
+        "archive": "content/Cinderwall/BackdropV001/T_Cinderwall_DistantCity.uasset",
+        "sha256": "000912acb3177588e5910bd719a5317ae3d15d8341e3c83255b47d479f6c08c0",
+        "bytes": 2346777
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MC_collect.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MC_collect.uasset",
+        "sha256": "9d2078dedd2fb9debcd8410582427ae00844a4efe39849cd567d1730bd7122fa",
+        "bytes": 24562
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MC_idle.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MC_idle.uasset",
+        "sha256": "539be582b0436ab81a0dfcd45cb0889cd20905bf793500d749a949546b6fe167",
+        "bytes": 31744
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MG_fire.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MG_fire.uasset",
+        "sha256": "0c0930c1c66dfa6889dabbb47c2bcdc63a49c1181d9db5ca15882a6d92ca1f28",
+        "bytes": 13576
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MG_idle.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MG_idle.uasset",
+        "sha256": "62dcdd00b1f51b085c5bc51262c4409983ca59788889513257fcc5d3c7f615f2",
+        "bytes": 39576
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MG_load.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MG_load.uasset",
+        "sha256": "9e8b4ca365005709fc594469a3b5af2fbc068398457d333153316d062985352d",
+        "bytes": 19296
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MG_recovery.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MG_recovery.uasset",
+        "sha256": "7fb9f77162263b4fae1e631ef6781366ea3a1fe2a4c1f7828ffe8a2d1698c984",
+        "bytes": 15680
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Animations/MG_unload.uasset",
+        "archive": "content/Cinderwall/Mara/Animations/MG_unload.uasset",
+        "sha256": "02f1216b8a237cb3d5814d35058f13ee34f784a5fbbfc07d039a8af1c4342332",
+        "bytes": 17748
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Props/SK_MaraClaw.uasset",
+        "archive": "content/Cinderwall/Mara/Props/SK_MaraClaw.uasset",
+        "sha256": "7844ff4bb8d728e3807fe001f02b8693e69fea8478f594d6f28698fb73ef39c5",
+        "bytes": 1521779
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Props/SK_MaraClaw_Skeleton.uasset",
+        "archive": "content/Cinderwall/Mara/Props/SK_MaraClaw_Skeleton.uasset",
+        "sha256": "41c72fa1978ca9f8434216a35a7877b7269e6912eedb07a885ba24b6147776a9",
+        "bytes": 3521
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Props/SK_MaraGun.uasset",
+        "archive": "content/Cinderwall/Mara/Props/SK_MaraGun.uasset",
+        "sha256": "e028da4f5977dcdf9329a58bc99d2134e7367296c32e03623f93fa9e2ae4229e",
+        "bytes": 8431501
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Props/SK_MaraGun_Skeleton.uasset",
+        "archive": "content/Cinderwall/Mara/Props/SK_MaraGun_Skeleton.uasset",
+        "sha256": "4df3a4619f39acc26cdfc4ea71affaf5096b0f76de6222898c63756d760b29cf",
+        "bytes": 4150
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_apron.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_apron.uasset",
+        "sha256": "41f4cb54c0e0347e50ef2581afd21144e01da985745e74db8fac7913d954f644",
+        "bytes": 16962
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_0.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_0.uasset",
+        "sha256": "ecfd81bd851085a0a4e00ed222c9bd91ec76274eaa7a693195f3967afd51ae4b",
+        "bytes": 85743
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_1.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_1.uasset",
+        "sha256": "1bf53839dff7b32dbf2249ddf0e0726137542061f4ffc7bd3d7b721e51540dab",
+        "bytes": 86934
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_2.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_2.uasset",
+        "sha256": "7751c4e0af7d129f887381afbbe7c9c9650b570d691a04b3a2b7401f8bc35a38",
+        "bytes": 85251
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_3.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_3.uasset",
+        "sha256": "cca8759159158af5b91c4b0e459202db293880deab9571eb11860e180132ac3d",
+        "bytes": 85975
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_4.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_4.uasset",
+        "sha256": "cafbed69a12e63a7e070162f66e8bd00369601b9be3ad444a1e458afd90de10c",
+        "bytes": 86629
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_5.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_foundry_5.uasset",
+        "sha256": "3bf3be4ea87f4ce9576a2f0feb514c3617729c9f96877715fdad3d25fcb4e6d5",
+        "bytes": 86708
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_hopper.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_hopper.uasset",
+        "sha256": "9c55668825365d2611a7a6d567b2b957f24032f624c34185a71ba4ef4a334100",
+        "bytes": 38218
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_sidehall_-14.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_sidehall_-14.uasset",
+        "sha256": "83ed34369a939e206012713f1a735a281379fa7f9dbb140c0ae9770b53d49216",
+        "bytes": 39009
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_sidehall_14.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_depth_sidehall_14.uasset",
+        "sha256": "8515a9aa7d81963e5b2c9f2ff03feb1016a4bf87e9057eb40bf32353fd643ba9",
+        "bytes": 38966
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_payload.uasset",
+        "archive": "content/Cinderwall/Mara/Stage/MaraStageExtension_SM_Mara_payload.uasset",
+        "sha256": "48762c6ab299c741aeccab211c3e5cef894d6880d8ac23f912fdb09d075c352f",
+        "bytes": 45308
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/M_Cinderwall.uasset",
+        "archive": "content/Cinderwall/Materials/M_Cinderwall.uasset",
+        "sha256": "32f4260bda20ffc73fa7ed42041eb2f5a72ebd54c29349ee4402c40c93780f53",
+        "bytes": 23857
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_ceramic.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_ceramic.uasset",
+        "sha256": "dc86bf8561227b48224e72494247dc9c460fa3b7a0ed3b3f663917ea755f8342",
+        "bytes": 6561
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_cool.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_cool.uasset",
+        "sha256": "0b984efc398364ccf48600d6e5d6bdc2dfbcc7cb68aa07eb463da211bdd40c92",
+        "bytes": 5861
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_copper.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_copper.uasset",
+        "sha256": "ede454ddd0f7a253529a381a841bdebbd685220f78f2d19d7ec8144dc2299824",
+        "bytes": 6550
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_edge.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_edge.uasset",
+        "sha256": "a8e7354c7a2ab4f571e5afaee98a8c863f8692a313bfa5653005cdcbe0d2bf73",
+        "bytes": 6528
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_ember.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_ember.uasset",
+        "sha256": "167f6042f55b18f2ed129700ddbb11e9eee3078eec256015dd4c8f4d9bef8ea5",
+        "bytes": 5866
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_furnace.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_furnace.uasset",
+        "sha256": "9906e8e216f03ee19346ce64f8283c9ef3a32c016bf3922990179be7475cfd03",
+        "bytes": 5876
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_iron.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_iron.uasset",
+        "sha256": "201c10a8f55a77a8292e094d3aa54acb4159159ab00c8590eb5defd2002efce6",
+        "bytes": 6528
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_ochre.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_ochre.uasset",
+        "sha256": "91c8be1750316b1f8033e2830fca83c001d5a2f1b0cc531bd3c170c090bace37",
+        "bytes": 6539
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_optic.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_optic.uasset",
+        "sha256": "69082fe25cc6d38e0e618e06ab76c10f9bdf96f0102487b22ded403dace3d560",
+        "bytes": 5866
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_oxide.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_oxide.uasset",
+        "sha256": "56e3b3f0ef9b7b14bcfbfac8b1bf32e60b6de0919d4f0f367a5ae17191c9309e",
+        "bytes": 6539
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_patina.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_patina.uasset",
+        "sha256": "218b14b9721aac685d65ec15cb1679b899d5bb6860a7dce7d8a76a31b9fed5a8",
+        "bytes": 6550
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_soot.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_soot.uasset",
+        "sha256": "2dda65c5bafe9571372599279229e6085c2b820c1cb55515fca447485321c647",
+        "bytes": 6528
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Materials/MI_CW_stone.uasset",
+        "archive": "content/Cinderwall/Materials/MI_CW_stone.uasset",
+        "sha256": "b3b94772027efc941d7be6a35a1d281370656c4bd9c5c082d7dbaaf386e83cb0",
+        "bytes": 6539
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Animations/MO_fire.uasset",
+        "archive": "content/Cinderwall/Operator/Animations/MO_fire.uasset",
+        "sha256": "8a6a3d5e6004ec6b5d1118cfb7324207dee8a464fbaba970b71717c25bbd3dd3",
+        "bytes": 20300
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Animations/MO_idle.uasset",
+        "archive": "content/Cinderwall/Operator/Animations/MO_idle.uasset",
+        "sha256": "7336924eb6239ca2f1077ae3cf07cc202252e15b07d8763ec5ad47acf2691b18",
+        "bytes": 68300
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Animations/MO_load.uasset",
+        "archive": "content/Cinderwall/Operator/Animations/MO_load.uasset",
+        "sha256": "124753d3104e90181d8a7c36808d0c8ccd8937a5ef54899c7954836862b712a1",
+        "bytes": 30860
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Animations/MO_recovery.uasset",
+        "archive": "content/Cinderwall/Operator/Animations/MO_recovery.uasset",
+        "sha256": "b3b646435a6212ebac83d58fbfa6bce1fa399d4665b05cd16d29dcb268ed1034",
+        "bytes": 24164
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Materials/MI_MaraOperator.uasset",
+        "archive": "content/Cinderwall/Operator/Materials/MI_MaraOperator.uasset",
+        "sha256": "be96b5d8f5b1750668f9165782337da181d6d2794fb3ba1036d84997f00a370a",
+        "bytes": 7072
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Meshes/SK_MaraOperator.uasset",
+        "archive": "content/Cinderwall/Operator/Meshes/SK_MaraOperator.uasset",
+        "sha256": "471ecb00b18e6f52541cd471b46b42bdad02c6229465a6893916396719d61adf",
+        "bytes": 20797247
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Meshes/SK_MaraOperator_Skeleton.uasset",
+        "archive": "content/Cinderwall/Operator/Meshes/SK_MaraOperator_Skeleton.uasset",
+        "sha256": "7dabe4dbda3396c45da1ec1463059d42f627979a6eaa01d172553b50056e0409",
+        "bytes": 6359
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Textures/T_Mara_BaseColor.uasset",
+        "archive": "content/Cinderwall/Operator/Textures/T_Mara_BaseColor.uasset",
+        "sha256": "707e27f4790c17e179c81635f0dcf072f7c836c65079407b8363cfb0cb8063b6",
+        "bytes": 2094465
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Textures/T_Mara_Normal.uasset",
+        "archive": "content/Cinderwall/Operator/Textures/T_Mara_Normal.uasset",
+        "sha256": "b7b323fd464ad28a4d0dca8f5d478092c2b938200ae4ff332e7b4fdf3f7a7eef",
+        "bytes": 9030
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Operator/Textures/T_Mara_ORM.uasset",
+        "archive": "content/Cinderwall/Operator/Textures/T_Mara_ORM.uasset",
+        "sha256": "dc1ad9b81183cef05be4cffdb89365512e9f04560173f3e0f710be6cc0975a77",
+        "bytes": 1252329
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_BreachRam.uasset",
+        "archive": "content/Cinderwall/Robots/SK_BreachRam.uasset",
+        "sha256": "1ecb724fa04376b0ce499b58f7ea09aec12f43d4dc6c12de77b5e1ad7ea22d1d",
+        "bytes": 10939622
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_BreachRam_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_BreachRam_Skeleton.uasset",
+        "sha256": "330851dc1520440e0bd093a4536cc59457dc557e4e825b8cc42aeae662de9554",
+        "bytes": 4132
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_CableBinder.uasset",
+        "archive": "content/Cinderwall/Robots/SK_CableBinder.uasset",
+        "sha256": "70aada7f43fea97efbe45a1e39d290ffc5843dc06d52c24dc2cac85661abc24d",
+        "bytes": 4470062
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_CableBinder_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_CableBinder_Skeleton.uasset",
+        "sha256": "9734c06b978d704430a43da59e869dd80367082fe3a10cf2159c3293a340b503",
+        "bytes": 3933
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_CoilNest.uasset",
+        "archive": "content/Cinderwall/Robots/SK_CoilNest.uasset",
+        "sha256": "b61a18b9eb5959cf0958f21970677fdd145faa89909f06b6598aaa5199251442",
+        "bytes": 3445645
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_CoilNest_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_CoilNest_Skeleton.uasset",
+        "sha256": "94e6fadee25903758e41835b4b6ef75a4793bdabe78b19d5652609e0112962ff",
+        "bytes": 4295
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_FoilWarden.uasset",
+        "archive": "content/Cinderwall/Robots/SK_FoilWarden.uasset",
+        "sha256": "589ddbfd1b166b165b3de83137b4c5cf27d236e55f4a3512d29e3ae488956780",
+        "bytes": 3017518
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_FoilWarden_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_FoilWarden_Skeleton.uasset",
+        "sha256": "3d8405fc38350567ced313240f4e34c89a424d6fa7a66c0e22e1944c6ad710ec",
+        "bytes": 4094
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_GatebreakerPrime.uasset",
+        "archive": "content/Cinderwall/Robots/SK_GatebreakerPrime.uasset",
+        "sha256": "76f985ebc7073fd126209390fccf7e8f5de39bf45cfd9314e5450102eefa2bd0",
+        "bytes": 5490061
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_GatebreakerPrime_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_GatebreakerPrime_Skeleton.uasset",
+        "sha256": "8d3659fd074940d36cace2330df5370c112cb8bc8d6c17ef0e260146878e01ed",
+        "bytes": 4755
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_KnucklePress.uasset",
+        "archive": "content/Cinderwall/Robots/SK_KnucklePress.uasset",
+        "sha256": "25c7283e1c612b1b139d9e0e885ce7487c896809b0a3838f13e5640d59e5d3b5",
+        "bytes": 3411663
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_KnucklePress_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_KnucklePress_Skeleton.uasset",
+        "sha256": "6bfc1028b89be11f118f9727df0729eb1c3ecac97b9749ebdbe00489eec7a19c",
+        "bytes": 3939
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_PressureCask.uasset",
+        "archive": "content/Cinderwall/Robots/SK_PressureCask.uasset",
+        "sha256": "49de7f96eb828bb208c940b8a2ebd411009f584d89c7df58ddd5b1cc85d05829",
+        "bytes": 2900834
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_PressureCask_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_PressureCask_Skeleton.uasset",
+        "sha256": "633ecd7a2861b725040d1370fca130eef4bb1bfc4b894b8c9437bcda15c09935",
+        "bytes": 3750
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_RedlinePursuer.uasset",
+        "archive": "content/Cinderwall/Robots/SK_RedlinePursuer.uasset",
+        "sha256": "1d30d00338a207bf1c0723595454085a4ca8edf4d7825a85043ba9e8b74b5878",
+        "bytes": 4787277
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_RedlinePursuer_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_RedlinePursuer_Skeleton.uasset",
+        "sha256": "9e96664ed5455e665cd228c151f3d5b47cac232ce90756ec6139c69fe72c7e20",
+        "bytes": 4154
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_RivetMite.uasset",
+        "archive": "content/Cinderwall/Robots/SK_RivetMite.uasset",
+        "sha256": "b7e6771a33e3b2ab39f386487e41ad0f058163bc8b2e2615e168a54ab68d41d3",
+        "bytes": 4090954
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_RivetMite_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_RivetMite_Skeleton.uasset",
+        "sha256": "e160d8c30404dfbf87b51cc3fba4ed6bcf981b3e6504732bfed228d601a74612",
+        "bytes": 5694
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_SplitChassis.uasset",
+        "archive": "content/Cinderwall/Robots/SK_SplitChassis.uasset",
+        "sha256": "35ce36a8199dc2028285b5f2dd312572a0bbe633f9b30365689af39fb301e784",
+        "bytes": 4530744
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Robots/SK_SplitChassis_Skeleton.uasset",
+        "archive": "content/Cinderwall/Robots/SK_SplitChassis_Skeleton.uasset",
+        "sha256": "b196f3092389851608ea62ab02cf60de23ee0f017c66037adec355ee01e7291d",
+        "bytes": 4144
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_copper.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_copper.uasset",
+        "sha256": "39024a676a153efde4b57086c86e0ab8d72c1678e5b7bce2d8ccf7066722fb98",
+        "bytes": 6643
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_floor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_floor.uasset",
+        "sha256": "c9895b473975b53da5014997db8b11baf72bbac28951b928a3b18ddb4442ec21",
+        "bytes": 6632
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_oxide.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_oxide.uasset",
+        "sha256": "cf70002e7822937ac74423a107d11950b5e70663463d492a36682fbd2e6571a5",
+        "bytes": 6632
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_slate.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_slate.uasset",
+        "sha256": "e7fbdeb593ffe297a0430b2a4d685eaa7d05bb7f2084db043f157657a56df9d9",
+        "bytes": 6632
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_stone.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_stone.uasset",
+        "sha256": "43cb7b72743a6eefda6e21d74ceef986130507a6dd61d2b960febfd1fcdc9220",
+        "bytes": 6632
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_window_cool.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_window_cool.uasset",
+        "sha256": "05536974f48a5103e4ffc6ba0aaf18273ccd7ba5cd8d6aa24980974f51a9626b",
+        "bytes": 6806
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Materials/MI_CW_v2_window_warm.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Materials/MI_CW_v2_window_warm.uasset",
+        "sha256": "e684512f7aa9ce6556562a4a1570285fc9b2cc31a454aaceb7dec674c4735a37",
+        "bytes": 6806
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_back_rail.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_back_rail.uasset",
+        "sha256": "52e771b7689e9eb429e62add8506a169f62ca281316aa9c3216e461340f8f33e",
+        "bytes": 76992
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_channel.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_channel.uasset",
+        "sha256": "403e304660738b15f073ae48fe70603678fd277d7688d202b8b184dbca025c64",
+        "bytes": 194965
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_combat_deck.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_combat_deck.uasset",
+        "sha256": "dffc73f8aadbd3d41780a0418b342ede223e9c10f27ccfd9cae06f5df3fa6068",
+        "bytes": 161358
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_distant_crane.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_distant_crane.uasset",
+        "sha256": "84dd8a86480a2c89e74934c9713c38e36f2d11119e1e908af1622220c6130d36",
+        "bytes": 71364
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_00.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_00.uasset",
+        "sha256": "0ffe0b4f24ba7b1f8fafce4bf0d747d49ef7e16f3065371d49c8af15589c4eef",
+        "bytes": 207738
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_01.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_01.uasset",
+        "sha256": "e42c07b2d92947238bc8a9bdd6eaa692a85146b70c7be7d75e23b026742d83a5",
+        "bytes": 197240
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_02.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_02.uasset",
+        "sha256": "fe66541d4b08ff450aaef2237900d5c429362b4f1fbd7b13e6de8b783ce0e390",
+        "bytes": 172718
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_03.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_03.uasset",
+        "sha256": "b1ca121249a9f7df233eca96afb0f6894bcd51794329cb139e01fe2b17168583",
+        "bytes": 175312
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_04.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_04.uasset",
+        "sha256": "00fc68cc552f11cfd1607d00fb84f8fb7bb50225b2d5f93ebcbb42c971f5f929",
+        "bytes": 204602
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_05.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_05.uasset",
+        "sha256": "969cffad70f6a44c5c1822a7d1999142d74b163227215ca2b50061393466fa6f",
+        "bytes": 197680
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_06.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_06.uasset",
+        "sha256": "4c86ad94d53ddc9b3dc4dbc79b24a7e81bb0d64f7596fc491566c57d2488d530",
+        "bytes": 246586
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_07.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_07.uasset",
+        "sha256": "204f08aed90f61b5b72e431b68b21d877a919c942f15d758184ac74422d28098",
+        "bytes": 197421
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_08.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_08.uasset",
+        "sha256": "b7e5a6c3c9e5d9416509c9b047648fc8211a0486d89e05dd4f9d5af720022db6",
+        "bytes": 206718
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_09.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_factory_09.uasset",
+        "sha256": "29ad9f272414c4a5dd4ada2edc94717baa40e8a7b26143ac7fbad63ec8269cb8",
+        "bytes": 220057
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_high_service_bridge.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_high_service_bridge.uasset",
+        "sha256": "7e5ff9352b01fc9a3674b9d9d1b847c6b2c9d252c34603853fe83948422b890a",
+        "bytes": 66044
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_left_smelter.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_left_smelter.uasset",
+        "sha256": "4c9b335b5c7c5cad279567c66e3e25ae1c65e1b1f3f7128e95380899db3686ab",
+        "bytes": 284964
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_outer_apron.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_outer_apron.uasset",
+        "sha256": "fab2db4e4023f4ff49668b3d1025d40e76c05c050a37b41ff21c2390b42d5093",
+        "bytes": 16827
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_rear_crane_support.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_rear_crane_support.uasset",
+        "sha256": "409fc3e38b90a0f8e640ebdf8b87ba08b0dd1cc14b207b9b1233dd9ca992b8b2",
+        "bytes": 37789
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_right_accumulator.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Stage/CinderwallSceneryV002_SM_SV2_right_accumulator.uasset",
+        "sha256": "a463b65d24a23274540d83a2c5f316a16c1f221ba234296cfec3f88ddf410d8e",
+        "bytes": 216195
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_copper_BaseColor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_copper_BaseColor.uasset",
+        "sha256": "8458a64ca6f0cb917788e31bf24b9364b2b051e4bea2b72753e8ca00411de221",
+        "bytes": 101254
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_copper_Normal.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_copper_Normal.uasset",
+        "sha256": "7f728b542a05d1a01f1c81302a8571f7a6fea3cffc417fd98937b4661fb45b7a",
+        "bytes": 77462
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_copper_ORM.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_copper_ORM.uasset",
+        "sha256": "6c92860e3efc97572427fdf4a9943a878e8f4c79412ec0fa32fac350a8dafbb2",
+        "bytes": 64044
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_floor_BaseColor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_floor_BaseColor.uasset",
+        "sha256": "8d8fdc65a845ac06f7b461eb4c6f6238d291a30a67f05d0455d93a7dc2955521",
+        "bytes": 77929
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_floor_Normal.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_floor_Normal.uasset",
+        "sha256": "04e406d6b4b0fa9f90895b8e3e47d89b15510eb29f70eaf28f9d7f9b24a12826",
+        "bytes": 77129
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_floor_ORM.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_floor_ORM.uasset",
+        "sha256": "8ec50532b622abaac0f883a12c2f34ef9c822f4cc9f3e977f21d78e8139797f6",
+        "bytes": 67609
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_BaseColor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_BaseColor.uasset",
+        "sha256": "3f0cacf4215b108043e7182b9675a018eb36d781bd4af39ce3662c69d5eef4fc",
+        "bytes": 98708
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_Normal.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_Normal.uasset",
+        "sha256": "49c0efe442421e71e26cdc3a560ffb1a46a5378a09bfbacd333c45f6f29c7aed",
+        "bytes": 76483
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_ORM.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_oxide_ORM.uasset",
+        "sha256": "2c1c12147a72681c8ff7860792feabbc8b620f0eda887b10841864c1fa46ca5b",
+        "bytes": 66722
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_slate_BaseColor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_slate_BaseColor.uasset",
+        "sha256": "09e1de8c5a921e440eda1387db9554ce266529e4cad56f15b0ca395527c728cc",
+        "bytes": 87790
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_slate_Normal.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_slate_Normal.uasset",
+        "sha256": "dfad44dbe3a9cef44a4e7babe6119ef1e65085691289925945bd55144d2746fe",
+        "bytes": 77304
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_slate_ORM.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_slate_ORM.uasset",
+        "sha256": "6c023b8221e551a939acf3e782a40a38670555275ab897208ad5e1dd2e7449d1",
+        "bytes": 66306
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_stone_BaseColor.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_stone_BaseColor.uasset",
+        "sha256": "9ba2019ac5063b57757bbe18057a587297425b31f6683f6abdf6c9774bf7092f",
+        "bytes": 95231
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_stone_Normal.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_stone_Normal.uasset",
+        "sha256": "f535f8be21d1208a8c611b83e626aa66b8832b9a9a8e6ca38d7896b9589ce7c5",
+        "bytes": 77663
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/SceneryV002/Textures/CW_v2_stone_ORM.uasset",
+        "archive": "content/Cinderwall/SceneryV002/Textures/CW_v2_stone_ORM.uasset",
+        "sha256": "7da248b61ed1a8655f94926f781fde5d5e6cb86e025ba0e22c7563518d7e4804",
+        "bytes": 67392
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_catwalk.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_catwalk.uasset",
+        "sha256": "ecfe89d354f2dfdddd653cabd1030532a43d8bd7e5f1bb225125b4a358027e5a",
+        "bytes": 45820
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_crane.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_crane.uasset",
+        "sha256": "351b03e27c868af2ab6ae6c551d9fc827dae9ca52293187d3a55d9e693167b31",
+        "bytes": 25176
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_-2.uasset",
+        "sha256": "c939324e1992576a5cadad3bc0717e4d5cad7d8d6bba2eeae12bdb8c8844ef53",
+        "bytes": 29389
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_0.uasset",
+        "sha256": "fa67d7f7a4a9ba0eafd86bed0dfc4fe9a783ea36c2eef4014fde31769b09e241",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-1_2.uasset",
+        "sha256": "2cfd28d2d9cbb7d86cfa368a18b5e2c7ab46c0754fce8eb579a462b9e07cf68e",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_-2.uasset",
+        "sha256": "4d9e2c0c46d0c22230141c07eae26b50c5bb9800bea79eef1a497852a7b98d86",
+        "bytes": 29389
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_0.uasset",
+        "sha256": "1322cc2820def00d23d2284fc734d686549771ec606c71460c29634ec03284d3",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-3_2.uasset",
+        "sha256": "124c3936840a8fc3454089e055d221da43ea4bf2f8153732234d9ece1e432537",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_-2.uasset",
+        "sha256": "a6645719cf8cd94586dc037053b71b6d14e51d74d28541756870e4a8a8cf9c24",
+        "bytes": 29389
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_0.uasset",
+        "sha256": "ddfd979f9f42b26e2f931622f48b94a5217d374730b42ff3e87d044a1b465e36",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-5_2.uasset",
+        "sha256": "c74c411a0dba68cdeeca8002a01f64ea3f3761c7a36af94ba230fe240fcddf99",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_-2.uasset",
+        "sha256": "936626c2e6ebeebd90f6e0ea3c5d03770cbf07cc99da44b7f00c5702b114a9c3",
+        "bytes": 29389
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_0.uasset",
+        "sha256": "455ff38e37038500f97b93f15aa6b0414c03e6a19145381beae73e16516a0393",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-7_2.uasset",
+        "sha256": "b3b29d64a33b01a0848423b4d3fa3c956f522b0639a1b9b53e218fbc7836ba68",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_-2.uasset",
+        "sha256": "422218d5ceb7e0b6ea65dd22af58fa59ea3529b2a30eccc0646f3c35409e894c",
+        "bytes": 29389
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_0.uasset",
+        "sha256": "ef029d745f3c6d681c9828a28fa968f858265e6d18ff7270c53acec077120a03",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_-9_2.uasset",
+        "sha256": "9f03411ac80c440d9b0f5cc8c75940c476b00ed4ce9c89cc283a4e1ae73b0143",
+        "bytes": 29381
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_-2.uasset",
+        "sha256": "1793e9cd0f83ccafd78ea4f8b004c2109e51e123617aa2c5c1986e6af4c9f763",
+        "bytes": 29385
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_0.uasset",
+        "sha256": "a08c289b962b69dacd2a948f75f78aa51495d1978728e0d93db5df6363d335d3",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_1_2.uasset",
+        "sha256": "28dc80b555e21352929c31a935a6ac3ba44c58c6b19b270b0636326877b27a53",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_-2.uasset",
+        "sha256": "4c3eeef0e23882ccb7957b4e6fbdf08a68c0f57167dd6ed5ede599a3be33c989",
+        "bytes": 29385
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_0.uasset",
+        "sha256": "f6c98f5a6ff7bdcd304db69f6e7a60cd022f1947cd2210cbbc0d9314cccff5b9",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_3_2.uasset",
+        "sha256": "fe39dd8f365356a457d6c48d91da692909288a9e690f11b69de817ad4aeda88b",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_-2.uasset",
+        "sha256": "615631f8e9c003f7c4669bf93e0142f7152975a09aa23d581ba4db8ac0682ebd",
+        "bytes": 29385
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_0.uasset",
+        "sha256": "1f88ef6cd60b90809c0da158d57e71b660caee00604d8b37a890a2480a87de3d",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_5_2.uasset",
+        "sha256": "fe88193afe99080b4aa314f18a7bf36f8110302ff8b3e84a04899f2380192bff",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_-2.uasset",
+        "sha256": "4477fccdc1a6e6fcb4ad0b9584054a5d256b36af6a85fa4f710d0cac760f3c4a",
+        "bytes": 29385
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_0.uasset",
+        "sha256": "4a2cf9a3e487a00cce3838aef4d826a14e2ed5dc5ad64f3fb207e69f67be4410",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_7_2.uasset",
+        "sha256": "4e7b505bc403515bfce52350c23207e8a873b6403ee5738ac581fb0970f3b692",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_-2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_-2.uasset",
+        "sha256": "35d66081c1c846d47d37b45237058745ae814e983f67fc7ddf528692a3fcd4aa",
+        "bytes": 29385
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_0.uasset",
+        "sha256": "8d2668638853f5d16a5855e135119b1429b6639289ad5a1ad7f47e7796300a25",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_deck_9_2.uasset",
+        "sha256": "a0c62363b10d52bf74468ae628a8bef046d1737da9e1b25dcae96c584e61e8e4",
+        "bytes": 29377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_foundation.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_foundation.uasset",
+        "sha256": "6cc9211922ec4a590b7e88a0879d95afb10a89184f01cbc548efabe7de9b2154",
+        "bytes": 16663
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_0.uasset",
+        "sha256": "b5e437c6cdbe8f826411b24b90e9284f6c63e6c45c494c5b6a5c70a436017789",
+        "bytes": 151219
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_1.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_1.uasset",
+        "sha256": "45475414a2e96b55293b612d9e64c8bc364842447bb39ccdee1843e40f24b305",
+        "bytes": 150643
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_2.uasset",
+        "sha256": "51090819c2458ac527ff7fe551c4e970dacd69caca4f4b0fd422aefed9194752",
+        "bytes": 149400
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_3.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_3.uasset",
+        "sha256": "8994d952351adde4b5e838f3bc60466c430062bac92da3f93f38407371507878",
+        "bytes": 150139
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_4.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_4.uasset",
+        "sha256": "3a7714354c1685c4aaf0dfc45201b3b1978e6d64bdc30c695448d10736ad8132",
+        "bytes": 150024
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_5.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_5.uasset",
+        "sha256": "8e96133505276a393ad28534c2e0ac5aedbd8707fb8e7e1a99eb72daf8bd0391",
+        "bytes": 150593
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_6.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_furnace_6.uasset",
+        "sha256": "6cd0ec8528c6de26de9eff9005053f74f9d61906dfc4a5d9b5f341d0464714f0",
+        "bytes": 151565
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_gantry_left.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_gantry_left.uasset",
+        "sha256": "365796ab7de422091d1cea56b7716522e85cb6c6e95fb79e01ca3717d9ec32c1",
+        "bytes": 45698
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_gantry_right.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_gantry_right.uasset",
+        "sha256": "08a4320c909fc951e69f30347fb46ca83a48731434b3fd9dba566699bd175ed0",
+        "bytes": 45615
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_rear_claw_mount.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_rear_claw_mount.uasset",
+        "sha256": "cd7ca78fdb81bda0a87d3c853aac84145422e31e4d76013f2aa0b965978da274",
+        "bytes": 104067
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_0.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_0.uasset",
+        "sha256": "0d7393ac856de821d3fd9b0877f7800c7c234ad0c35f82c350ab0aabb4460349",
+        "bytes": 68304
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_1.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_1.uasset",
+        "sha256": "f43cec58b867036f6fcb3a66fbe2e5a211bf6486ed4f5dc21e516dfc1dfb821f",
+        "bytes": 68690
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_2.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_scrap_bin_2.uasset",
+        "sha256": "20f5ca767f426e223430de8454e888d55b30509dd20a3f5b229359c969b10815",
+        "bytes": 67668
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Stage/CinderwallStage_SM_CW_service_main.uasset",
+        "archive": "content/Cinderwall/Stage/CinderwallStage_SM_CW_service_main.uasset",
+        "sha256": "87edf64ce590cb8db6266c5a36763bc9b23b9316023f8296a51308c0451cc944",
+        "bytes": 175849
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ceramic_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ceramic_BaseColor.uasset",
+        "sha256": "e86f0cb0680cf5bd3124a70222210455e8fdc5fba797e95d7edc1e0c133f6f86",
+        "bytes": 98391
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ceramic_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ceramic_Normal.uasset",
+        "sha256": "44a67f55a67d459e7dfe53ea4708cc18263a4102def505ee1d576620592e329b",
+        "bytes": 77022
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ceramic_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ceramic_ORM.uasset",
+        "sha256": "616c7809e2f82c7a44c8fb6d8d0eb44979b1146ed59d7d5b3912421100b97141",
+        "bytes": 61502
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_copper_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_copper_BaseColor.uasset",
+        "sha256": "411a4ed587f9db6c498e5d3b5032483ccd659975a3fa3e195b9c2612c1acfff6",
+        "bytes": 103377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_copper_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_copper_Normal.uasset",
+        "sha256": "ed41d6846d7c06285495c589f26418d8ea3ce32e3a6da14a94e9392aedb4c33e",
+        "bytes": 76812
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_copper_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_copper_ORM.uasset",
+        "sha256": "f84a0cca300162622c07c55c7b3fca8f09c1265086c2c54cac88a90b96fa3f3a",
+        "bytes": 49633
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_edge_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_edge_BaseColor.uasset",
+        "sha256": "25b150ea2dce18a50ff83c514e8519a30f1b8788a823c6deabbe88d298ac5680",
+        "bytes": 90525
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_edge_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_edge_Normal.uasset",
+        "sha256": "051174cdb59b617d5a912d781993459a77089f8428e7c8d3d121d4af97c1cc70",
+        "bytes": 76878
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_edge_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_edge_ORM.uasset",
+        "sha256": "703c23f46db9bdafbe1c1bb457bc4a0ba23e5063d273cac705425568e43a27dc",
+        "bytes": 55285
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_iron_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_iron_BaseColor.uasset",
+        "sha256": "cd9f34420d7d100478fe0661eda3b695ef73d2e6a41d031d49fc32ebdc5aae64",
+        "bytes": 88144
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_iron_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_iron_Normal.uasset",
+        "sha256": "3e0b36727f06f66ce2d55b8cbda5c207eb1cbb85e3bb49d166f1e718cceff9b8",
+        "bytes": 77845
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_iron_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_iron_ORM.uasset",
+        "sha256": "8e12499a9164da21e15bea3aeec5a1654ae0610b4fccbb83ce8b09b68ba59292",
+        "bytes": 58266
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ochre_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ochre_BaseColor.uasset",
+        "sha256": "2b00f544647eeb17b267a76da1db2bf7eec314ccaa61e819ccf4a1a9d243c4fd",
+        "bytes": 106910
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ochre_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ochre_Normal.uasset",
+        "sha256": "031de99a3b9cf7f84f740f43ae0b9b0f9c4d3f57f3dcb9f8a6a729c474910b1d",
+        "bytes": 77086
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_ochre_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_ochre_ORM.uasset",
+        "sha256": "bb9388f5957dd4fd54023a0e4f39f2724f44d76a20f5bd1db2835654c2f1f160",
+        "bytes": 69406
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_oxide_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_oxide_BaseColor.uasset",
+        "sha256": "247ab81670427e8b6a5aa3ed5af20ffc349c2c279f19b26757c85baa2e5240af",
+        "bytes": 102377
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_oxide_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_oxide_Normal.uasset",
+        "sha256": "ea881bc62aa1be773be8345c3768373ba441bc38330422bb5ee910df35ed9f62",
+        "bytes": 77269
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_oxide_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_oxide_ORM.uasset",
+        "sha256": "e7f95f90202381c22fc39bd451c846fe4223c63752580c18ccdb396a314d4e54",
+        "bytes": 66880
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_patina_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_patina_BaseColor.uasset",
+        "sha256": "b4ff0decba68eafd3f5e616c70d7b1d12302634f066bf728c2aae6b09acef7a5",
+        "bytes": 96829
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_patina_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_patina_Normal.uasset",
+        "sha256": "16d5fc510bfbd5f25e8c9cd3e0cd9cf6c5a3eca6441d169c4d3da03a4f431396",
+        "bytes": 78245
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_patina_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_patina_ORM.uasset",
+        "sha256": "dbb72f5869c71aee54049b4f7b618cf19deacf42020bce2f4316580a77887f9f",
+        "bytes": 69983
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_soot_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_soot_BaseColor.uasset",
+        "sha256": "f6299d51cc537a1faad3130022b5011393453893d1499902c59683b98c7cbcaa",
+        "bytes": 74082
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_soot_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_soot_Normal.uasset",
+        "sha256": "4a8d9d755f1878a74967b3e0e65a987625ca1ef8ba52c3a3599984e56c1319d4",
+        "bytes": 77194
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_soot_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_soot_ORM.uasset",
+        "sha256": "50446c4bc424393bfb236c657d07b0d4c5dff77596e7aefdf6cc51a2276768bf",
+        "bytes": 61229
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_stone_BaseColor.uasset",
+        "archive": "content/Cinderwall/Textures/CW_stone_BaseColor.uasset",
+        "sha256": "89e2179512d1269fbb40488729285c82e683f30536520bfbc52a90af5ee4d8e2",
+        "bytes": 86647
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_stone_Normal.uasset",
+        "archive": "content/Cinderwall/Textures/CW_stone_Normal.uasset",
+        "sha256": "24978e54116e8c0e54d8270aee6cf72470036c018e1a4e74afb3822ec5781061",
+        "bytes": 78440
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Cinderwall/Textures/CW_stone_ORM.uasset",
+        "archive": "content/Cinderwall/Textures/CW_stone_ORM.uasset",
+        "sha256": "8f1d74451cf87e75677adde334e6efd098748fe919a03f7ff9a9cf16a20ee01b",
+        "bytes": 61048
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_breech_load.uasset",
+        "archive": "content/FoundryAudio/S_breech_load.uasset",
+        "sha256": "561e9073afc881d082a604da81c965b03de4fe51b0bbe3b22f6c49edc910e349",
+        "bytes": 20275
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_breech_unload.uasset",
+        "archive": "content/FoundryAudio/S_breech_unload.uasset",
+        "sha256": "a96dc281a63fb54c9f3642bf2d4225e609fe9b07acf2d6bf90046b81730c1d60",
+        "bytes": 13326
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_cannon_heavy.uasset",
+        "archive": "content/FoundryAudio/S_cannon_heavy.uasset",
+        "sha256": "b077369741bcd8708fab094a704df28b2ed26109c193ec17265f45c4ad5b7e0c",
+        "bytes": 29784
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_cannon_light.uasset",
+        "archive": "content/FoundryAudio/S_cannon_light.uasset",
+        "sha256": "e74cabeca0f87d65b2088cdd4420139f1a61d83b3bbdf3f87ec17d8fdb6e5aea",
+        "bytes": 27294
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_collect.uasset",
+        "archive": "content/FoundryAudio/S_collect.uasset",
+        "sha256": "ba3bf1157d15ce451e9390583ff1480d06d4a04018d8fd0380a6ecddc0edfd8d",
+        "bytes": 30985
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_defeat.uasset",
+        "archive": "content/FoundryAudio/S_defeat.uasset",
+        "sha256": "093003aced50f2e71b3ac080f00a4b393e90bf894fba858718b7b3f7b954a62a",
+        "bytes": 17526
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_factory_room.uasset",
+        "archive": "content/FoundryAudio/S_factory_room.uasset",
+        "sha256": "05d31e82ad2f494db3b36bb65d80f2764384b94b0af64ab059904376afaec788",
+        "bytes": 66143
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_forge.uasset",
+        "archive": "content/FoundryAudio/S_forge.uasset",
+        "sha256": "1599069396a16270a5c77776e21f89551e18ea0c6e58dfecdcb934bacb8fdeb2",
+        "bytes": 18519
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_metal_hit_heavy.uasset",
+        "archive": "content/FoundryAudio/S_metal_hit_heavy.uasset",
+        "sha256": "2067423c614e21cc2e800c9850780aef40138765ebb34bdcdb34c0b684b4aab9",
+        "bytes": 21227
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_metal_hit_light.uasset",
+        "archive": "content/FoundryAudio/S_metal_hit_light.uasset",
+        "sha256": "85a34c8efe56c55b5dbd80042bfd5264448ee61b871c433890c1eebbbdbffc88",
+        "bytes": 12962
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_player_hit.uasset",
+        "archive": "content/FoundryAudio/S_player_hit.uasset",
+        "sha256": "7a5e85073027fc907fa704325ac0863dc365174ef2a03e00b54d8002215a0537",
+        "bytes": 10390
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_precision_good.uasset",
+        "archive": "content/FoundryAudio/S_precision_good.uasset",
+        "sha256": "b0a1747ffd6e1071b09a8ad54f257bad3ae87e115190ed354f7565b2635d3239",
+        "bytes": 22723
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_precision_miss.uasset",
+        "archive": "content/FoundryAudio/S_precision_miss.uasset",
+        "sha256": "06a0380c661925e600dcba49aa787581fb226b015a679c1362dd1800c3be6f48",
+        "bytes": 11053
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_repair.uasset",
+        "archive": "content/FoundryAudio/S_repair.uasset",
+        "sha256": "003a4f521e057fcb108f318a6a5604e4db4d2de643be3f247282b186cc4df33a",
+        "bytes": 18831
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_robot_break.uasset",
+        "archive": "content/FoundryAudio/S_robot_break.uasset",
+        "sha256": "4ea398cb4dd93198a0290646f94271722c45536baeadb2f17860212497f272ad",
+        "bytes": 63678
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_robot_move.uasset",
+        "archive": "content/FoundryAudio/S_robot_move.uasset",
+        "sha256": "9a5fc390b3edfed8fec810db825818ac34e470c43850f17789dccf0badb6030d",
+        "bytes": 19795
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_shield_hit.uasset",
+        "archive": "content/FoundryAudio/S_shield_hit.uasset",
+        "sha256": "5372661372be8f8918fcff60088d9f27def2bd1fbc3e6b6bb136b0382db6a13e",
+        "bytes": 15341
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_shield_on.uasset",
+        "archive": "content/FoundryAudio/S_shield_on.uasset",
+        "sha256": "637cfbf82faa2aa6c729b7787bddedafe660cdb11cd5e1789c55f4a672361856",
+        "bytes": 15103
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_turn.uasset",
+        "archive": "content/FoundryAudio/S_turn.uasset",
+        "sha256": "da0ae83db0752620c5a26e514503a8744cf563a9118efbac744b055f865102ff",
+        "bytes": 8405
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_ui_error.uasset",
+        "archive": "content/FoundryAudio/S_ui_error.uasset",
+        "sha256": "14811dc4d51d71abb79a6a08789e6e5a8beba2757711dbf6394012c1b784cfdf",
+        "bytes": 6696
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_ui_ok.uasset",
+        "archive": "content/FoundryAudio/S_ui_ok.uasset",
+        "sha256": "d2f99d76b6231f48c46d9037a075ac14ed4177c686f45b4acf031dd8acbc1505",
+        "bytes": 5356
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_upgrade.uasset",
+        "archive": "content/FoundryAudio/S_upgrade.uasset",
+        "sha256": "94f6becd66890b3939d61b627143a16d0f2fd8339028a26575bdf2719f549c90",
+        "bytes": 24300
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/FoundryAudio/S_victory.uasset",
+        "archive": "content/FoundryAudio/S_victory.uasset",
+        "sha256": "b84d2872b5cf3203a5a94ac38023dd3c4c27c3020334ac2764d0c4d37d2c2fcf",
+        "bytes": 30862
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Technical/FoundryHost.umap",
+        "archive": "content/Technical/FoundryHost.umap",
+        "sha256": "be8125c08a2571c73babd01598a160102a1c580733f0599d8bdba235d68357c5",
+        "bytes": 48577
+      },
+      {
+        "source": "games/overkill-foundry/unreal/Content/Technical/M_HostMetal.uasset",
+        "archive": "content/Technical/M_HostMetal.uasset",
+        "sha256": "62117a43922e7ca37269d7737499c485e89a8df9f50e3d96813d25509fed9eb1",
+        "bytes": 5970
+      }
+    ]
+  },
+  "limits": [
+    "Explicit pre-terminal of-core-0.4 reviewed core; later terminal/category corrections excluded.",
+    "Game target built; these runs use Editor -game, not a standalone packaged launch.",
+    "ArtProbe uses controlled legal actions and assertions, not a naturally earned full city.",
+    "CPU source pose/culling review does not prove imported GPU skinning or native target transitions.",
+    "Human listening, playability and visual approval remain pending."
+  ]
+}

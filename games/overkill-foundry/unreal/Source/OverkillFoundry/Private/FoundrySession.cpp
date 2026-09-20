@@ -132,9 +132,9 @@ FString FFoundrySession::PreviewText(const overkill::Action& Action) const
     for (const auto& Event : Result.result.events)
     {
         if (Event.type == "hit" || Event.type == "status_damage")
-            Detail += FString::Printf(TEXT(" | %s: %d HP, %d Shield"), *NameFor(Event.target), Event.amount, Event.secondary);
+            Detail += FString::Printf(TEXT(" | %s: %d HP damage, %d absorbed by Shield"), *NameFor(Event.target), Event.amount, Event.secondary);
         else if (Event.type == "player_damage")
-            Detail += FString::Printf(TEXT(" | Mara: %d HP, %d Shield"), Event.amount, Event.secondary);
+            Detail += FString::Printf(TEXT(" | Mara takes %d HP damage, %d absorbed by Shield"), Event.amount, Event.secondary);
         else if (Event.type == "victory") Detail += TEXT(" | Victory");
         else if (Event.type == "defeat") Detail += TEXT(" | Defeat");
     }
@@ -217,7 +217,7 @@ bool FFoundrySession::Control(const FString& Command)
             if (Part.place == overkill::Place::Loaded) { Message = TEXT("Unload first to change loaded parts."); return false; }
             const auto Found = std::find(Selection.begin(), Selection.end(), Id);
             if (Found == Selection.end()) Selection.push_back(Id); else Selection.erase(Found);
-            Message = FString::Printf(TEXT("%llu bullet parts selected. Load commits this selection."), static_cast<uint64>(Selection.size()));
+            Message = FString::Printf(TEXT("%llu bullet %s selected. Lock and load readies this selection."), static_cast<uint64>(Selection.size()), Selection.size()==1?TEXT("part"):TEXT("parts"));
             return false;
         }
     }

@@ -1,0 +1,56 @@
+{
+  "asset": "MaraOperator_v001",
+  "mode": "offline-raw-geometry-and-vertex-materials",
+  "source_sha256": "2330039a7561bd0f2878e26524a4af039397a4b9eaa7b5aa336dba919c3ae1c9",
+  "source_size": [
+    1024,
+    1536
+  ],
+  "generator": "OpenAI built-in image_gen; exact model identifier not exposed",
+  "seed": 3701,
+  "requested_resolution": 1536,
+  "input_alpha_min_max": [
+    0,
+    254
+  ],
+  "pipeline_source_sha256": "5d1ff347cef412c0988ca190255871234c3bd1ba004483ad8e1e21bf53ac20fb",
+  "encoder_source_sha256": "c690eddbdeb1f24651268cea439987cb1c37ae4b54e4e43c6df5b6a6255c0eea",
+  "excluded_modules": [
+    "nvdiffrast",
+    "nvdiffrec_render",
+    "o_voxel.postprocess"
+  ],
+  "background_model_loaded": false,
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "5.17.0",
+    "cumesh": "0.0.1",
+    "flex_gemm": "1.0.0",
+    "o_voxel": "0.0.1"
+  },
+  "imports_passed": true,
+  "generation_run": true,
+  "pinned_cached_revisions": {
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51"
+  },
+  "load_seconds": 78.007,
+  "actual_resolution": 1536,
+  "generation_seconds": 101.624,
+  "raw_vertices": 3965026,
+  "raw_faces": 8102524,
+  "surface_vertices": 150979,
+  "surface_faces": 346694,
+  "surface_sha256": "0e8ecba5a4617bbe0f0f7167f8de2350921438107589688baa8e6d86f35e3aae",
+  "vertex_attribute_layout": [
+    "base_r",
+    "base_g",
+    "base_b",
+    "metallic",
+    "roughness",
+    "alpha"
+  ],
+  "excluded_modules_loaded": [],
+  "peak_cuda_allocated_bytes": 5277851136
+}

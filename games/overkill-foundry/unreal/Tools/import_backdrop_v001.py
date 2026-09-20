@@ -65,8 +65,8 @@ material.set_editor_property("two_sided", True)
 sample = MAT.create_material_expression(material, u.MaterialExpressionTextureSample, -420, 0)
 sample.texture = texture
 exposure = MAT.create_material_expression(material, u.MaterialExpressionScalarParameter, -420, 140)
-exposure.parameter_name = "BackdropExposure"
-exposure.default_value = .85
+exposure.set_editor_property("parameter_name", "BackdropExposure")
+exposure.set_editor_property("default_value", .85)
 multiply = MAT.create_material_expression(material, u.MaterialExpressionMultiply, -150, 0)
 MAT.connect_material_expressions(sample, "RGB", multiply, "A")
 MAT.connect_material_expressions(exposure, "", multiply, "B")

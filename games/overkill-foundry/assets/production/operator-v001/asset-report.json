@@ -1,0 +1,515 @@
+{
+  "source": "original image_gen + offline TRELLIS direct arrays",
+  "blender": "5.2.1 LTS",
+  "render_device": "CPU",
+  "source_vertices": 314836,
+  "source_triangles": 629680,
+  "vertices": 54995,
+  "triangles": 109998,
+  "height_m": 1.78,
+  "yaw_degrees": 90,
+  "texture_size": 2048,
+  "bounds_min_m": [
+    -0.21359458565711975,
+    -0.4867236316204071,
+    -0.006774102337658405
+  ],
+  "bounds_max_m": [
+    0.21465101838111877,
+    0.486473023891449,
+    1.7860937118530273
+  ],
+  "normal_convention": "Flat tangent normal; either green convention identical",
+  "normal_strength": 1,
+  "surface_processing": "coverage-normalized PBR; closed shell/voxel cleanup with three relaxation passes; adaptive 110k-triangle reduction; original front clothing and landmark-registered face projected with outward-normal masks; restrained brown hair palette correction",
+  "shell_thickness_m": 0.014,
+  "voxel_size_m": 0.0035,
+  "bake_processing": "Original CPU UV triangle rasterization of transferred POINT color/material attributes; 16-iteration padding; geometry supplies shape normals",
+  "covered_texture_pixels": 1151508,
+  "orm": "linear R=1, G=roughness, B=metallic",
+  "base_color": "sRGB",
+  "visual_approval": "pending",
+  "asset": "MaraOperator_v001",
+  "fps": 30,
+  "bones": 23,
+  "bone_definitions": [
+    {
+      "name": "root",
+      "head": [
+        0,
+        0,
+        0
+      ],
+      "tail": [
+        0,
+        0,
+        0.14
+      ],
+      "parent": null,
+      "radius": 0.07,
+      "deform": false
+    },
+    {
+      "name": "pelvis",
+      "head": [
+        0,
+        0,
+        0.97
+      ],
+      "tail": [
+        0,
+        0,
+        1.09
+      ],
+      "parent": "root",
+      "radius": 0.16,
+      "deform": true
+    },
+    {
+      "name": "spine",
+      "head": [
+        0,
+        0,
+        1.09
+      ],
+      "tail": [
+        0,
+        0,
+        1.27
+      ],
+      "parent": "pelvis",
+      "radius": 0.14,
+      "deform": true
+    },
+    {
+      "name": "chest",
+      "head": [
+        0,
+        0,
+        1.27
+      ],
+      "tail": [
+        0,
+        0,
+        1.43
+      ],
+      "parent": "spine",
+      "radius": 0.14,
+      "deform": true
+    },
+    {
+      "name": "neck",
+      "head": [
+        0,
+        0,
+        1.43
+      ],
+      "tail": [
+        0,
+        0,
+        1.53
+      ],
+      "parent": "chest",
+      "radius": 0.065,
+      "deform": true
+    },
+    {
+      "name": "head",
+      "head": [
+        0,
+        0,
+        1.53
+      ],
+      "tail": [
+        0,
+        0,
+        1.74
+      ],
+      "parent": "neck",
+      "radius": 0.13,
+      "deform": true
+    },
+    {
+      "name": "clavicle_l",
+      "head": [
+        0,
+        0.07,
+        1.42
+      ],
+      "tail": [
+        0.02,
+        0.19,
+        1.405
+      ],
+      "parent": "chest",
+      "radius": 0.085,
+      "deform": true
+    },
+    {
+      "name": "upperarm_l",
+      "head": [
+        0.02,
+        0.19,
+        1.405
+      ],
+      "tail": [
+        0.055,
+        0.305,
+        1.16
+      ],
+      "parent": "clavicle_l",
+      "radius": 0.08,
+      "deform": true
+    },
+    {
+      "name": "forearm_l",
+      "head": [
+        0.055,
+        0.305,
+        1.16
+      ],
+      "tail": [
+        0.1,
+        0.43,
+        0.94
+      ],
+      "parent": "upperarm_l",
+      "radius": 0.07,
+      "deform": true
+    },
+    {
+      "name": "hand_l",
+      "head": [
+        0.1,
+        0.43,
+        0.94
+      ],
+      "tail": [
+        0.12,
+        0.46,
+        0.815
+      ],
+      "parent": "forearm_l",
+      "radius": 0.065,
+      "deform": true
+    },
+    {
+      "name": "thigh_l",
+      "head": [
+        0,
+        0.105,
+        0.97
+      ],
+      "tail": [
+        0,
+        0.155,
+        0.54
+      ],
+      "parent": "pelvis",
+      "radius": 0.115,
+      "deform": true
+    },
+    {
+      "name": "calf_l",
+      "head": [
+        0,
+        0.155,
+        0.54
+      ],
+      "tail": [
+        0,
+        0.205,
+        0.13
+      ],
+      "parent": "thigh_l",
+      "radius": 0.085,
+      "deform": true
+    },
+    {
+      "name": "foot_l",
+      "head": [
+        0,
+        0.205,
+        0.13
+      ],
+      "tail": [
+        0.16,
+        0.205,
+        0.075
+      ],
+      "parent": "calf_l",
+      "radius": 0.1,
+      "deform": true
+    },
+    {
+      "name": "grip_l",
+      "head": [
+        0.12,
+        0.46,
+        0.815
+      ],
+      "tail": [
+        0.16,
+        0.46,
+        0.815
+      ],
+      "parent": "hand_l",
+      "radius": 0.07,
+      "deform": false
+    },
+    {
+      "name": "clavicle_r",
+      "head": [
+        0,
+        -0.07,
+        1.42
+      ],
+      "tail": [
+        0.02,
+        -0.19,
+        1.405
+      ],
+      "parent": "chest",
+      "radius": 0.085,
+      "deform": true
+    },
+    {
+      "name": "upperarm_r",
+      "head": [
+        0.02,
+        -0.19,
+        1.405
+      ],
+      "tail": [
+        0.055,
+        -0.305,
+        1.16
+      ],
+      "parent": "clavicle_r",
+      "radius": 0.08,
+      "deform": true
+    },
+    {
+      "name": "forearm_r",
+      "head": [
+        0.055,
+        -0.305,
+        1.16
+      ],
+      "tail": [
+        0.1,
+        -0.43,
+        0.94
+      ],
+      "parent": "upperarm_r",
+      "radius": 0.07,
+      "deform": true
+    },
+    {
+      "name": "hand_r",
+      "head": [
+        0.1,
+        -0.43,
+        0.94
+      ],
+      "tail": [
+        0.12,
+        -0.46,
+        0.815
+      ],
+      "parent": "forearm_r",
+      "radius": 0.065,
+      "deform": true
+    },
+    {
+      "name": "thigh_r",
+      "head": [
+        0,
+        -0.105,
+        0.97
+      ],
+      "tail": [
+        0,
+        -0.155,
+        0.54
+      ],
+      "parent": "pelvis",
+      "radius": 0.115,
+      "deform": true
+    },
+    {
+      "name": "calf_r",
+      "head": [
+        0,
+        -0.155,
+        0.54
+      ],
+      "tail": [
+        0,
+        -0.205,
+        0.13
+      ],
+      "parent": "thigh_r",
+      "radius": 0.085,
+      "deform": true
+    },
+    {
+      "name": "foot_r",
+      "head": [
+        0,
+        -0.205,
+        0.13
+      ],
+      "tail": [
+        0.16,
+        -0.205,
+        0.075
+      ],
+      "parent": "calf_r",
+      "radius": 0.1,
+      "deform": true
+    },
+    {
+      "name": "grip_r",
+      "head": [
+        0.12,
+        -0.46,
+        0.815
+      ],
+      "tail": [
+        0.16,
+        -0.46,
+        0.815
+      ],
+      "parent": "hand_r",
+      "radius": 0.07,
+      "deform": false
+    },
+    {
+      "name": "portrait",
+      "head": [
+        0.08,
+        0,
+        1.63
+      ],
+      "tail": [
+        0.14,
+        0,
+        1.63
+      ],
+      "parent": "head",
+      "radius": 0.07,
+      "deform": false
+    }
+  ],
+  "clips": {
+    "MO_idle": {
+      "duration_s": 2.0,
+      "loop": true,
+      "cue": "ready/breathing",
+      "frames": 61,
+      "gameplay_authority": false
+    },
+    "MO_load": {
+      "duration_s": 0.7,
+      "loop": false,
+      "cue": "cosmetic loading reach at .38s",
+      "frames": 22,
+      "gameplay_authority": false
+    },
+    "MO_fire": {
+      "duration_s": 0.3333333333333333,
+      "loop": false,
+      "cue": "committed shot; brace at 0s",
+      "frames": 11,
+      "gameplay_authority": false
+    },
+    "MO_recovery": {
+      "duration_s": 0.4666666666666667,
+      "loop": false,
+      "cue": "release shoulder tension",
+      "frames": 15,
+      "gameplay_authority": false
+    }
+  },
+  "skinning_method": "heat",
+  "max_influences": 4,
+  "source_forward": "+X",
+  "unreal_conversion": "(x,-y,z)*100; do not apply actor unit scale twice",
+  "placement_proposal_cm": {
+    "gun_origin": [
+      -350,
+      0,
+      1.5
+    ],
+    "operator_origin": [
+      -496,
+      55,
+      0.7
+    ],
+    "yaw_degrees": 0
+  },
+  "sockets_rest_m": {
+    "root": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "grip_l": [
+      0.11999999731779099,
+      0.46000000834465027,
+      0.8149999976158142
+    ],
+    "grip_r": [
+      0.11999999731779099,
+      -0.46000000834465027,
+      0.8149999976158142
+    ],
+    "portrait": [
+      0.07999999821186066,
+      0.0,
+      1.6299999952316284
+    ]
+  },
+  "sockets_ready_m": {
+    "root": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "grip_l": [
+      0.4230172038078308,
+      0.2953965365886688,
+      1.273055076599121
+    ],
+    "grip_r": [
+      0.5215270519256592,
+      0.12283428758382797,
+      1.0949409008026123
+    ],
+    "portrait": [
+      0.13392139971256256,
+      -3.781208679498604e-09,
+      1.599045991897583
+    ]
+  },
+  "limitations": [
+    "Provisional art selection; in-engine owner visual approval pending.",
+    "Generated triangular surface with automatic heat skin weights; not final deforming retopology.",
+    "Close facial geometry and generated side/back details remain softer than the final F.I.S.T.-quality target.",
+    "Simple hands; no individual finger or face animation.",
+    "No root motion, gameplay triggers or resource changes are authored by these clips.",
+    "Runtime hand/gun contact and framing require integration inspection."
+  ],
+  "file_sha256": {
+    "meshes\\MaraOperator.fbx": "566a0dfc2461fd1742d82a9ec6b5725b238ccda66e9ae3656719bbd37b21e45a",
+    "meshes\\MaraOperator.glb": "304098c95db185cf9a983e159363c8d332ccfcc5e2fd32902ee5ff7ed695522e",
+    "animations\\MO_fire.fbx": "75c5cca30e046fd7f629933415fb4ef63aecc2baa8f5b9cff47c21a8c39153a1",
+    "animations\\MO_idle.fbx": "c8c8db6212141728be6256250a756d7dab78bafea78c328ceb801d427a96e9b7",
+    "animations\\MO_load.fbx": "bd8f7914ce0c9947f76e3e6d06bbee3cbb4d2d8ad237791f516c99ed1b05621b",
+    "animations\\MO_recovery.fbx": "0e72bb2b93c27aaddc0df116ff64815b4bef5c8d4fc0c6926836d5d77d4a2a2c",
+    "textures\\Mara_BaseColor.png": "7919df0632067ff4437100291c1071c318bc65175c6f105323383e96ef209275",
+    "textures\\Mara_Normal.png": "123eadc1c58faf317e13bbb0a6e11d0526740a2f4c733c6b41d7f952a9f1c704",
+    "textures\\Mara_ORM.png": "0198844441d616f85440103b0cf1db439f8efca40320f90303b0b6a1e3b14817"
+  }
+}

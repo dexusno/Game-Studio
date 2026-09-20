@@ -2,7 +2,7 @@
 #if FOUNDRY_WITH_CAMPAIGN
 #include "CoreMinimal.h"
 #include "FoundrySession.h"
-#include "overkill/campaign_session.hpp"
+#include "FoundryProfiles.h"
 #include "overkill/upgrades.hpp"
 
 // View state is deliberately separate from the committed campaign envelope.
@@ -10,12 +10,12 @@
 class FFoundryCampaign
 {
 public:
-    FFoundryCampaign(FFoundrySession& InCombat, const FString& InSavePath);
+    FFoundryCampaign(FFoundrySession& InCombat, const FString& InSavePath, bool bInFixedSavePath = true);
     ~FFoundryCampaign();
     FFoundrySession& Combat;
     overkill::CampaignHooks Hooks;
     overkill::CampaignRules Rules;
-    overkill::CampaignSession Store;
+    foundry_profiles::Store Store;
     FString Page = TEXT("title"), ReturnPage, Drawer, Message;
     bool bDiagnostic = false, bSaveUnavailable = false, bCanResumeInMemory = false;
     bool bPrecisionModal = false;
@@ -29,9 +29,12 @@ public:
     overkill::Id FocusRecipe = 0;
     overkill::Id FocusPart = 0;
     FString SavePath;
+    bool bFixedSavePath = true;
 
     const overkill::Campaign* Current() const;
     bool HasActiveSave() const;
+    bool CreateProfile(const FString& Name);
+    bool SelectProfile(const std::string& Id);
     bool StartNew(bool bConfirmed = false, uint64 Seed = 0);
     bool Continue();
     bool Apply(overkill::CampaignAction Action);

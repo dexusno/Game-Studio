@@ -1,0 +1,85 @@
+{
+  "asset": "MaraOperator_v001",
+  "approval": "provisional; owner visual approval pending",
+  "technical_checks": 56,
+  "engine_import": "not performed by this source workflow",
+  "files": {
+    "generation-report.json": {
+      "sha256": "e5626dffe7fa0751ffeafc0976006f6ebc7fe3d8e971e6f6c7a0d18b63f05443",
+      "bytes": 1686
+    },
+    "asset-report.json": {
+      "sha256": "6f47d2ea85fdfa3066dbf872878395ff77cb2ad2704b89a861d645eb29855bfe",
+      "bytes": 10536
+    },
+    "interchange-verification.json": {
+      "sha256": "5b7155ec0b4876cff76c6244531248300f9cfd5611065e483e7449b49fb4aa4c",
+      "bytes": 7781
+    },
+    "stance-review.json": {
+      "sha256": "31be2295dae08178473a01e026953059f2dce3973d213beac75f141aec5eb65d",
+      "bytes": 2505
+    },
+    "textures/Mara_BaseColor.png": {
+      "sha256": "7919df0632067ff4437100291c1071c318bc65175c6f105323383e96ef209275",
+      "bytes": 2365989
+    },
+    "textures/Mara_ORM.png": {
+      "sha256": "0198844441d616f85440103b0cf1db439f8efca40320f90303b0b6a1e3b14817",
+      "bytes": 1729652
+    },
+    "textures/Mara_Normal.png": {
+      "sha256": "123eadc1c58faf317e13bbb0a6e11d0526740a2f4c733c6b41d7f952a9f1c704",
+      "bytes": 59579
+    },
+    "renders/surface_front.png": {
+      "sha256": "006c5879f12d3f927d0226c1eea2eb19c0b36f9b9e52675eac7498622182dab5",
+      "bytes": 894695
+    },
+    "renders/surface_side.png": {
+      "sha256": "75c4541c5d25699ebf331adc5b6da3f9bba663649b9569802ce003ae73b68388",
+      "bytes": 805471
+    },
+    "renders/surface_rear.png": {
+      "sha256": "0a6a72b1691b8ce28ce9ebeb1291efa1c58ab4d2f111ffc5c0c4a0b19eaa157c",
+      "bytes": 848379
+    },
+    "renders/surface_face.png": {
+      "sha256": "25ad6355f6ad31181a26e330b03c1191769391a667674efcd78e3effa5e754ff",
+      "bytes": 956099
+    },
+    "renders/rig_ready.png": {
+      "sha256": "46daf50aa723617cd4feb09a2c69236c1936369ca444ff98822d32480e4822a6",
+      "bytes": 1218844
+    },
+    "renders/rig_action_rear.png": {
+      "sha256": "d48af03bc028af8af705a2642fdb93424f310607e52514e844298a3ec42f693b",
+      "bytes": 1173418
+    },
+    "renders/rig_load.png": {
+      "sha256": "6041b1a434cd9dbd5943519332b6456ef9d602562d8e3dd9e4418521cfb49b03",
+      "bytes": 1219737
+    },
+    "renders/rig_fire.png": {
+      "sha256": "ca8ea4f13aa087da4d6f1e46dc96ce861b815bf093c063b8c71726c3131b4424",
+      "bytes": 1170251
+    },
+    "renders/operator_gun_preparation.png": {
+      "sha256": "076e8a9d9c496b84a16e71d45fd650a13d16a61c5d3edd0cc2bcdf680060a57d",
+      "bytes": 1535928
+    },
+    "renders/operator_gun_action.png": {
+      "sha256": "4c948da0d23f31f7b4f7d20dee100c6604fe8f940b33061721340d8346f4cc15",
+      "bytes": 1653502
+    }
+  },
+  "large_source": "Ignored .local/overkill-foundry/art/operator-v001; rebuild with the owned source scripts.",
+  "limitations": [
+    "Provisional art selection; in-engine owner visual approval pending.",
+    "Generated triangular surface with automatic heat skin weights; not final deforming retopology.",
+    "Close facial geometry and generated side/back details remain softer than the final F.I.S.T.-quality target.",
+    "Simple hands; no individual finger or face animation.",
+    "No root motion, gameplay triggers or resource changes are authored by these clips.",
+    "Runtime hand/gun contact and framing require integration inspection."
+  ]
+}

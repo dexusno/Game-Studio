@@ -1,0 +1,332 @@
+{
+  "asset": "MaraOperator_v001",
+  "blender": "5.2.1 LTS",
+  "checks": [
+    {
+      "name": "MaraOperator one armature and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Exact source skeleton",
+      "ok": true,
+      "actual": 23
+    },
+    {
+      "name": "All named bones and grips survived",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Every vertex has one to four influences",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "All skin weights normalized",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Deformation weights are smooth rather than rigid",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "UV0 retained",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Single runtime PBR surface",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Metre scale and orientation retained",
+      "ok": true,
+      "actual": [
+        0.4282456040382385,
+        0.9731963276863098,
+        1.792867660522461
+      ]
+    },
+    {
+      "name": "Hero triangle budget",
+      "ok": true,
+      "actual": 109998
+    },
+    {
+      "name": "Front portrait grip faces +X",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_idle one armature and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_idle duration",
+      "ok": true,
+      "actual": [
+        1.0,
+        61.0
+      ]
+    },
+    {
+      "name": "MO_idle sampled bone motion",
+      "ok": true,
+      "actual": 0.004817371094240375
+    },
+    {
+      "name": "MO_idle deformation bounds finite and contained",
+      "ok": true,
+      "actual": 1.9079270490144633
+    },
+    {
+      "name": "MO_idle feet remain planted",
+      "ok": true,
+      "actual": 3.706380178885681e-07
+    },
+    {
+      "name": "MO_idle no root motion",
+      "ok": true,
+      "actual": 0.0
+    },
+    {
+      "name": "MO_idle exported bone trajectories match source within 0.1mm",
+      "ok": true,
+      "actual": 1.0263698733476055e-06
+    },
+    {
+      "name": "MO_idle no stretched skin strips above 10cm",
+      "ok": true,
+      "actual": 0.023877549867700146
+    },
+    {
+      "name": "MO_idle seamless position loop",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_load one armature and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_load duration",
+      "ok": true,
+      "actual": [
+        1.0,
+        22.0
+      ]
+    },
+    {
+      "name": "MO_load sampled bone motion",
+      "ok": true,
+      "actual": 0.12660514016114818
+    },
+    {
+      "name": "MO_load deformation bounds finite and contained",
+      "ok": true,
+      "actual": 1.910179231657547
+    },
+    {
+      "name": "MO_load feet remain planted",
+      "ok": true,
+      "actual": 3.680270062183619e-07
+    },
+    {
+      "name": "MO_load no root motion",
+      "ok": true,
+      "actual": 0.0
+    },
+    {
+      "name": "MO_load exported bone trajectories match source within 0.1mm",
+      "ok": true,
+      "actual": 9.87532229768091e-07
+    },
+    {
+      "name": "MO_load no stretched skin strips above 10cm",
+      "ok": true,
+      "actual": 0.024324615238780094
+    },
+    {
+      "name": "Load reaches with left hand",
+      "ok": true,
+      "actual": [
+        0.5025703310966492,
+        0.35506153106689453,
+        1.3514155149459839
+      ]
+    },
+    {
+      "name": "MO_fire one armature and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_fire duration",
+      "ok": true,
+      "actual": [
+        1.0,
+        11.0
+      ]
+    },
+    {
+      "name": "MO_fire sampled bone motion",
+      "ok": true,
+      "actual": 0.11455999206868443
+    },
+    {
+      "name": "MO_fire deformation bounds finite and contained",
+      "ok": true,
+      "actual": 1.9071045312550003
+    },
+    {
+      "name": "MO_fire feet remain planted",
+      "ok": true,
+      "actual": 3.42646362225557e-07
+    },
+    {
+      "name": "MO_fire no root motion",
+      "ok": true,
+      "actual": 0.0
+    },
+    {
+      "name": "MO_fire exported bone trajectories match source within 0.1mm",
+      "ok": true,
+      "actual": 8.481889647697036e-07
+    },
+    {
+      "name": "MO_fire no stretched skin strips above 10cm",
+      "ok": true,
+      "actual": 0.02371182905530876
+    },
+    {
+      "name": "Fire visibly braces backward",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_recovery one armature and mesh",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "MO_recovery duration",
+      "ok": true,
+      "actual": [
+        1.0,
+        15.0
+      ]
+    },
+    {
+      "name": "MO_recovery sampled bone motion",
+      "ok": true,
+      "actual": 0.05700887573315003
+    },
+    {
+      "name": "MO_recovery deformation bounds finite and contained",
+      "ok": true,
+      "actual": 1.9071045312550003
+    },
+    {
+      "name": "MO_recovery feet remain planted",
+      "ok": true,
+      "actual": 3.5288135073702036e-07
+    },
+    {
+      "name": "MO_recovery no root motion",
+      "ok": true,
+      "actual": 0.0
+    },
+    {
+      "name": "MO_recovery exported bone trajectories match source within 0.1mm",
+      "ok": true,
+      "actual": 1.0848209096909342e-06
+    },
+    {
+      "name": "MO_recovery no stretched skin strips above 10cm",
+      "ok": true,
+      "actual": 0.02371182905530876
+    },
+    {
+      "name": "GLB2 container",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GLB exact clip coverage",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GLB single skin",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "GLB packs three baked PBR images",
+      "ok": true,
+      "actual": 3
+    },
+    {
+      "name": "BaseColor 2K texture",
+      "ok": true,
+      "actual": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "ORM 2K texture",
+      "ok": true,
+      "actual": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "Normal 2K texture",
+      "ok": true,
+      "actual": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "Generation used actual1536",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "Restricted modules were never imported",
+      "ok": true,
+      "actual": null
+    },
+    {
+      "name": "No BRIA background model used",
+      "ok": true,
+      "actual": null
+    }
+  ],
+  "failures": [],
+  "files": {
+    "meshes\\MaraOperator.fbx": "566a0dfc2461fd1742d82a9ec6b5725b238ccda66e9ae3656719bbd37b21e45a",
+    "animations\\MO_idle.fbx": "c8c8db6212141728be6256250a756d7dab78bafea78c328ceb801d427a96e9b7",
+    "animations\\MO_load.fbx": "bd8f7914ce0c9947f76e3e6d06bbee3cbb4d2d8ad237791f516c99ed1b05621b",
+    "animations\\MO_fire.fbx": "75c5cca30e046fd7f629933415fb4ef63aecc2baa8f5b9cff47c21a8c39153a1",
+    "animations\\MO_recovery.fbx": "0e72bb2b93c27aaddc0df116ff64815b4bef5c8d4fc0c6926836d5d77d4a2a2c"
+  },
+  "limitations": [
+    "Technical source interchange verification only; no Unreal import or runtime test performed by this script.",
+    "Human visual approval and final art quality remain outstanding."
+  ],
+  "fbx_reimport_settings": {
+    "anim_offset": 0,
+    "bone_connections": "Restore all use_connect=False, matching source; Blender guesses connected tips and otherwise suppresses valid translation keys.",
+    "track_and_transform_edits": "none"
+  }
+}

@@ -1,12 +1,13 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'SceneryArt', 'RosterArt', 'RosterVerify', 'RosterProbe', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
+    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'OperatorArt', 'SceneryArt', 'BackdropArt', 'RosterArt', 'RosterVerify', 'RosterProbe', 'ArtProbe', 'CampaignProbe', 'CityProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
     [string]$Action = 'Build',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development',
     [string]$ArchiveDirectory = '',
     [string]$CoreRoot = '',
     [string]$SavePath = '',
+    [string]$CityTrace = '',
     [switch]$InspectSave,
     [int]$Width = 1600,
     [int]$Height = 900
@@ -28,7 +29,7 @@ $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskLog = Join-Path $taskLogs "$Action-$taskStamp.log"
 
 function Invoke-FoundryProcess([string]$Executable, [string[]]$Arguments) {
-    $taskVerifyBinary = $Action -in @('CampaignProbe', 'ArtProbe', 'RosterProbe', 'Smoke', 'Fixture')
+    $taskVerifyBinary = $Action -in @('CampaignProbe', 'CityProbe', 'ArtProbe', 'RosterProbe', 'Smoke', 'Fixture')
     $taskModulePath = Join-Path $taskProjectDir 'Binaries/Win64/UnrealEditor-OverkillFoundry.dll'
     if ($taskVerifyBinary) { $taskModuleBefore = (Get-FileHash -LiteralPath $taskModulePath -Algorithm SHA256).Hash }
     # ArgumentList is joined by Windows Start-Process; quote each path safely.
@@ -114,6 +115,15 @@ switch ($Action) {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryCampaignProbe', '-FoundryTransactionTiming', "-FoundrySave=$([IO.Path]::GetFullPath($SavePath))", "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_CAMPAIGN_PROBE_COMPLETE ok=1' -Quiet)) { throw "Campaign probe did not report success: $taskLog" }
     }
+    'CityProbe' {
+        if (-not $CityTrace -or -not (Test-Path -LiteralPath $CityTrace -PathType Leaf)) { throw 'CityProbe requires an existing earned OFCITY2 trace in CityTrace.' }
+        $taskCityRoot = Join-Path $taskProjectDir "Saved/CityProbe/render-$taskStamp"
+        if (-not $SavePath) { $SavePath = Join-Path $taskCityRoot 'campaign.ofsave' }
+        if (Test-Path -LiteralPath $SavePath) { throw 'CityProbe requires a fresh isolated save path.' }
+        $taskCityOutput = Join-Path $taskCityRoot 'evidence'
+        Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryCampaignProbe', '-FoundryTransactionTiming', "-FoundryCityTrace=$([IO.Path]::GetFullPath($CityTrace))", "-FoundrySave=$([IO.Path]::GetFullPath($SavePath))", "-FoundryCityOutput=$taskCityOutput", "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -Pattern 'FOUNDRY_CITY_PROBE_COMPLETE ok=1 commands=257 captures=\d+ hash=241e46199e519eef position=13 hp=80 revision=258' -Quiet)) { throw "City replay did not report the expected earned witness: $taskLog" }
+    }
     'Art' {
         $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
         $taskScript = Join-Path $taskProjectDir 'Tools/import_cinderwall.py'
@@ -137,6 +147,12 @@ switch ($Action) {
         Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ROSTER_READY' -Quiet)) { throw "Roster import did not report success: $taskLog" }
     }
+    'BackdropArt' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_backdrop_v001.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_BACKDROP_V001_READY' -Quiet)) { throw "Backdrop import did not report success: $taskLog" }
+    }
     'RosterProbe' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryRosterProbe', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ROSTER_PROBE_COMPLETE ok=1' -Quiet)) { throw "Rendered roster probe did not report success: $taskLog" }
@@ -152,6 +168,12 @@ switch ($Action) {
         $taskScript = Join-Path $taskProjectDir 'Tools/import_mara.py'
         Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_MARA_READY' -Quiet)) { throw "Mara import did not report success: $taskLog" }
+    }
+    'OperatorArt' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_operator_v001.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_OPERATOR_READY' -Quiet)) { throw "Operator import did not report success: $taskLog" }
     }
     'Smoke' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundrySmoke', "-abslog=$taskLog")

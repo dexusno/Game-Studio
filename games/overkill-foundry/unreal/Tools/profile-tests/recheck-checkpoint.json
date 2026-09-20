@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "scope": "Finite native Collection scroll reset and combat wording recheck",
+  "parent_compile_archive": "games/overkill-foundry/unreal/Saved/Validation/operator-runtime-20260920-2032",
+  "parent_identity_sha256": "fbee0c4553869b17b6250885c24467e548ea18291c714d76727d8ade0efe82d3",
+  "source_graph_lf_sha256": "1282abcaabbce655d2e10518c8f4d1b3e072dab8ccf4e67b91bc35580965d166",
+  "ui_source_sha256": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908",
+  "binaries": [
+    {
+      "name": "UnrealEditor-OverkillFoundry.dll",
+      "sha256": "9d2d671e961a206f0c4ca2144e500d220fd026178b9881d8de9453ee217d5a9d",
+      "unchanged_from_parent": true
+    },
+    {
+      "name": "OverkillFoundry.exe",
+      "sha256": "9fb422f304443ac17bdebebc73d0fe1f0e5740a6759cd6cb79805993efe9b61f",
+      "unchanged_from_parent": true
+    }
+  ],
+  "input": "Agent-driven Windows mouse and keyboard; not human usability testing",
+  "runtime": "Existing PID 38220 resumed after the owner explicitly resumed desktop control; no duplicate process was launched. Closed normally with Alt+F4 and observed process exit.",
+  "prepared": "The all-246 discovery Collection is a prepared reference fixture. Its ordinary starting inventory/resources were not granted or modified during this check. The separately copied 1-HP fixture was never opened.",
+  "observations": [
+    "All kinds scrolled to Worn Mould at the bottom; Utility filter now resets to selected Ash Crown at the top.",
+    "Utility scrolled to bottom; search Heat resets to selected Blood Fuel, first of 27 matches.",
+    "Read-only browsing left the save envelope byte-identical at 4df3f873db767675ccb6c703feec7d8a7bb20333d39db27af563b41b2283a208.",
+    "In the same process, Continue then actual Mite/Ram EnterOffer, ordinary Collect, Solid Casting craft, Ammo selection and Lock and load showed the corrected singular grammar and projected damage wording.",
+    "Frame 04 reads 1 bullet part selected. Frame 05 reads LOCKED AND LOADED, 1 part and Rivet Mite: 6 HP damage, 0 absorbed by Shield.",
+    "The camera reached the settled loaded view before capture. No Fire, End Turn, additional campaign traversal or art acceptance was inferred."
+  ],
+  "artifacts": [
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/01-before-filter-bottom.jpg",
+      "bytes": 115252,
+      "sha256": "ab4276528e49ea9f8b1929803ba709ba373018d4966ac47bc9eecb72696722c4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/02-filter-reset-to-first-match.jpg",
+      "bytes": 119493,
+      "sha256": "98919455f35adfe85c1432412c37c9589375c25eb38ed346b41b1fb324690c5c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/03-search-reset-first-of-27.jpg",
+      "bytes": 112758,
+      "sha256": "00e40e8367c96fa2279e425fef55ec6990ce63ab4d3b78fee3ea8ff2567f0293"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/04-singular-one-bullet-part.jpg",
+      "bytes": 94443,
+      "sha256": "52e59000e074d32d61aac0a60207b42d43bd5b0f6fcddbaea5fd3c0a6a490831"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/05-loaded-singular-and-damage-copy.jpg",
+      "bytes": 138494,
+      "sha256": "315fcc25a27a6a86579fe51d36329f8ca1389b04ab478268ee5cfc358a2f94eb"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/after-legal-load.ofsave",
+      "bytes": 11905,
+      "sha256": "437ae3246a7cb29d0ad31d23b042990219e434510e066d5596318996329d8832"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/collection-after-browse.ofsave",
+      "bytes": 4907,
+      "sha256": "4df3f873db767675ccb6c703feec7d8a7bb20333d39db27af563b41b2283a208"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/Run-20260920-204232.log",
+      "bytes": 140230,
+      "sha256": "10e2e81df503f7507c3d20bd61eb4682956e0489ac400287cac88be13b1a5af9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/Run-20260920-204232.log.binary.json",
+      "bytes": 195,
+      "sha256": "9e535f0653d6ba325e2b0430cc41512966cbeea2cba5bc53ac77f2197393e353"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/save-before.json",
+      "bytes": 555,
+      "sha256": "e0e4d13cfda70ed9784b8b7fd648b80f85db54a13c2c8a06d13ad76cf0282ca1"
+    }
+  ],
+  "limits": [
+    "Exact earlier native coverage remains attributed to the separate 2016 snapshot.",
+    "The current combined operator art/source graph is identified by the parent archive; this is only a finite UI recheck.",
+    "No shipping, controller, full-city, human-usability or final visual acceptance claim."
+  ]
+}

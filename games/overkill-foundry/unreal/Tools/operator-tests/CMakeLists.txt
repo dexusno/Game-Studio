@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(FoundryOperatorFixtures LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_subdirectory(../profile-tests profile_support EXCLUDE_FROM_ALL)
+add_executable(foundry_operator_fixtures fixtures.cpp)
+target_link_libraries(foundry_operator_fixtures PRIVATE profile_storage)
+target_compile_options(foundry_operator_fixtures PRIVATE /W4 /WX /permissive- /utf-8)

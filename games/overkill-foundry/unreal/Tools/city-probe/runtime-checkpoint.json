@@ -1,0 +1,1079 @@
+{
+  "recorded_at": "2026-09-20T19:20:56.666285+00:00",
+  "scope": "Mechanics-only CityProbe; explicit reviewed1843 core; no visual approval",
+  "core_root": "unreal/Saved/Validation/roster-v001-runtime-20260920-1843/source/core",
+  "source_graph_lf_sha256": "a73b3af215184d6fae538972fa45a45103ee4b6b95b506028c0a4472f7843430",
+  "sources": [
+    {
+      "path": "games/overkill-foundry/assets/production/cinderwall-backdrop-v001/asset-report.json",
+      "bytes": 1034,
+      "sha256": "7177e495f1caff6d1deb63c682613644dfb506640796bf387544235c45d50516",
+      "sha256_lf": "3a0de9e07cd38c8e9045e6c560c127bec48bfd7a89e7a26082423bd6b492a287"
+    },
+    {
+      "path": "games/overkill-foundry/assets/production/operator-v001/asset-report.json",
+      "bytes": 10536,
+      "sha256": "6f47d2ea85fdfa3066dbf872878395ff77cb2ad2704b89a861d645eb29855bfe",
+      "sha256_lf": "988be0c7d8a8bc21278283b3dada2120929b7fbd36e306c0e8b71c6d31ebb17b"
+    },
+    {
+      "path": "games/overkill-foundry/assets/production/operator-v001/presentation-contract.json",
+      "bytes": 2517,
+      "sha256": "5e67135369c4fd01ae2f71c1aa5a62601e57a2dde54a4e3b6035faea36bca669",
+      "sha256_lf": "23209355704a282d28377ad18c272eb2eaafece32a8b493c43f7eff4bff117e3"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign.cpp",
+      "bytes": 31250,
+      "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+      "sha256_lf": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_upgrades.cpp",
+      "bytes": 19009,
+      "sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+      "sha256_lf": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/core.cpp",
+      "bytes": 44641,
+      "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb",
+      "sha256_lf": "27972173c2c2f62c35baa32aac65e495c60f102b85d09fe77ac4e1f570c9a3c9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/recipe_effects.inl",
+      "bytes": 52894,
+      "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+      "sha256_lf": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrade_effects.inl",
+      "bytes": 37125,
+      "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+      "sha256_lf": "1f74d51a227c17d62f6715941286b1e46f684755324d0bdda3aea3d81803b5a9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/campaign_session.hpp",
+      "bytes": 1565,
+      "sha256": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5",
+      "sha256_lf": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/save_store.hpp",
+      "bytes": 1241,
+      "sha256": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d",
+      "sha256_lf": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/campaign_session.cpp",
+      "bytes": 3999,
+      "sha256": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+      "sha256_lf": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/windows_save_store.cpp",
+      "bytes": 8175,
+      "sha256": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+      "sha256_lf": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7"
+    },
+    {
+      "path": "games/overkill-foundry/presentation/precision.hpp",
+      "bytes": 2504,
+      "sha256": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b",
+      "sha256_lf": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+    },
+    {
+      "path": "games/overkill-foundry/tools/unreal.ps1",
+      "bytes": 16436,
+      "sha256": "12894816f40dc2c01158daeb448f3ead506118f4cf359313faf6b27450bd1c53",
+      "sha256_lf": "12894816f40dc2c01158daeb448f3ead506118f4cf359313faf6b27450bd1c53"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultEngine.ini",
+      "bytes": 776,
+      "sha256": "42c7b953a62d542fc201f080bb23d36e32d811765339bbc5c2276609355f4af0",
+      "sha256_lf": "71ed0bf8a39ca275cde061613851b106bcd98b1eaa7895249e8dfb506c14e913"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultGame.ini",
+      "bytes": 561,
+      "sha256": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202",
+      "sha256_lf": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultInput.ini",
+      "bytes": 168,
+      "sha256": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9",
+      "sha256_lf": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/OverkillFoundry.uproject",
+      "bytes": 583,
+      "sha256": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129",
+      "sha256_lf": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry.Target.cs",
+      "bytes": 360,
+      "sha256": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079",
+      "sha256_lf": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+      "bytes": 4043,
+      "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+      "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryArtProbe.cpp",
+      "bytes": 8717,
+      "sha256": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7",
+      "sha256_lf": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp",
+      "bytes": 9933,
+      "sha256": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+      "sha256_lf": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 18255,
+      "sha256": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2",
+      "sha256_lf": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+      "bytes": 11964,
+      "sha256": "5aa65e81639c2d3390dbf1f7be0293b384377d7ad3f4eb70ff56e1dba5175755",
+      "sha256_lf": "5aa65e81639c2d3390dbf1f7be0293b384377d7ad3f4eb70ff56e1dba5175755"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 67714,
+      "sha256": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908",
+      "sha256_lf": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCityProbe.cpp",
+      "bytes": 16217,
+      "sha256": "7b7651977a92c426b3e74babe52868ce484117334be0e9b3d0e3af02ec2e6ee2",
+      "sha256_lf": "7b7651977a92c426b3e74babe52868ce484117334be0e9b3d0e3af02ec2e6ee2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryDebugHUD.cpp",
+      "bytes": 16091,
+      "sha256": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4",
+      "sha256_lf": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 41276,
+      "sha256": "ef6b69ab10170467a7069bcac882b16e720b6e08f1c5dc1ba4687c60f174b4a7",
+      "sha256_lf": "ef6b69ab10170467a7069bcac882b16e720b6e08f1c5dc1ba4687c60f174b4a7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryMara.cpp",
+      "bytes": 24428,
+      "sha256": "27769cdefd4ed60cc5f84eceb79bf8c29922dee441d8b1c3dc20b72a2a7fbe86",
+      "sha256_lf": "27769cdefd4ed60cc5f84eceb79bf8c29922dee441d8b1c3dc20b72a2a7fbe86"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecision.cpp",
+      "bytes": 7451,
+      "sha256": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d",
+      "sha256_lf": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfileProbe.cpp",
+      "bytes": 3650,
+      "sha256": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a",
+      "sha256_lf": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfiles.cpp",
+      "bytes": 8744,
+      "sha256": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58",
+      "sha256_lf": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControlProbe.cpp",
+      "bytes": 11280,
+      "sha256": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa",
+      "sha256_lf": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControls.cpp",
+      "bytes": 11103,
+      "sha256": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6",
+      "sha256_lf": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp",
+      "bytes": 18186,
+      "sha256": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f",
+      "sha256_lf": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterData.inl",
+      "bytes": 12712,
+      "sha256": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5",
+      "sha256_lf": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterProbe.cpp",
+      "bytes": 17210,
+      "sha256": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7",
+      "sha256_lf": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundrySession.cpp",
+      "bytes": 13151,
+      "sha256": "dbea0d3ac38b9df57d307a8e0b13af2e5908a5d9d7b556ac2e9cad9582f2bfc7",
+      "sha256_lf": "dbea0d3ac38b9df57d307a8e0b13af2e5908a5d9d7b556ac2e9cad9582f2bfc7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/OverkillFoundry.cpp",
+      "bytes": 127,
+      "sha256": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208",
+      "sha256_lf": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaign.cpp",
+      "bytes": 64,
+      "sha256": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a",
+      "sha256_lf": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSerialization.cpp",
+      "bytes": 78,
+      "sha256": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4",
+      "sha256_lf": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSession.cpp",
+      "bytes": 76,
+      "sha256": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2",
+      "sha256_lf": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignUpgrades.cpp",
+      "bytes": 73,
+      "sha256": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e",
+      "sha256_lf": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCatalogue.cpp",
+      "bytes": 113,
+      "sha256": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72",
+      "sha256_lf": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCityContent.cpp",
+      "bytes": 68,
+      "sha256": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462",
+      "sha256_lf": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCore.cpp",
+      "bytes": 110,
+      "sha256": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938",
+      "sha256_lf": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRobots.cpp",
+      "bytes": 110,
+      "sha256": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c",
+      "sha256_lf": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRoute.cpp",
+      "bytes": 61,
+      "sha256": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2",
+      "sha256_lf": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSaveStore.cpp",
+      "bytes": 119,
+      "sha256": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e",
+      "sha256_lf": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSerialization.cpp",
+      "bytes": 117,
+      "sha256": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92",
+      "sha256_lf": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedUpgrades.cpp",
+      "bytes": 64,
+      "sha256": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533",
+      "sha256_lf": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryAudio.h",
+      "bytes": 1382,
+      "sha256": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+      "sha256_lf": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 2344,
+      "sha256": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4",
+      "sha256_lf": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaignUI.h",
+      "bytes": 172,
+      "sha256": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4",
+      "sha256_lf": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCityProbe.h",
+      "bytes": 338,
+      "sha256": "5e9a0326a19329f70582487e4d91944fa1d711fb849ea6ba2000c42599c732b0",
+      "sha256_lf": "5e9a0326a19329f70582487e4d91944fa1d711fb849ea6ba2000c42599c732b0"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryHost.h",
+      "bytes": 4976,
+      "sha256": "f125c5efcbe250d6272317eba360004ab3f59aa0bc981882e6c329dbdcfc2510",
+      "sha256_lf": "f125c5efcbe250d6272317eba360004ab3f59aa0bc981882e6c329dbdcfc2510"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryMara.h",
+      "bytes": 3937,
+      "sha256": "3be31c9abfeab1f10e9672d4c24d7d17b0b11a272e8c87118395e34853a50911",
+      "sha256_lf": "3be31c9abfeab1f10e9672d4c24d7d17b0b11a272e8c87118395e34853a50911"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecision.h",
+      "bytes": 645,
+      "sha256": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421",
+      "sha256_lf": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryProfileProbe.h",
+      "bytes": 117,
+      "sha256": "7ea0efb6229d2cbf90005f811407c446c5a12c63d2c62cc71fce1df0c89a5fae",
+      "sha256_lf": "7ea0efb6229d2cbf90005f811407c446c5a12c63d2c62cc71fce1df0c89a5fae"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryProfiles.h",
+      "bytes": 2292,
+      "sha256": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e",
+      "sha256_lf": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControlProbe.h",
+      "bytes": 201,
+      "sha256": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0",
+      "sha256_lf": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControls.h",
+      "bytes": 2168,
+      "sha256": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d",
+      "sha256_lf": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h",
+      "bytes": 3501,
+      "sha256": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3",
+      "sha256_lf": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundrySession.h",
+      "bytes": 1860,
+      "sha256": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a",
+      "sha256_lf": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundryEditor.Target.cs",
+      "bytes": 374,
+      "sha256": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d",
+      "sha256_lf": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/city-probe/replay.cpp",
+      "bytes": 12424,
+      "sha256": "2ec719355a633979add4322b80b7a745311158734751ff8db8fc1c5efa06e59f",
+      "sha256_lf": "2ec719355a633979add4322b80b7a745311158734751ff8db8fc1c5efa06e59f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/city-probe/replay.hpp",
+      "bytes": 1525,
+      "sha256": "728a40a2d79a8327c679a323072c5443b848df82f72ad5f9f09b01f58d360993",
+      "sha256_lf": "728a40a2d79a8327c679a323072c5443b848df82f72ad5f9f09b01f58d360993"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_backdrop_v001.py",
+      "bytes": 6418,
+      "sha256": "df08451315c1debcf1c6247a25b01540c4a127039d66bb636aeb2e1c95769cd4",
+      "sha256_lf": "df08451315c1debcf1c6247a25b01540c4a127039d66bb636aeb2e1c95769cd4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_operator_v001.py",
+      "bytes": 9255,
+      "sha256": "b68c490829b3239a4f39c84ff4e10d7395855c96d7dad3f5d766310bc4347e7a",
+      "sha256_lf": "b68c490829b3239a4f39c84ff4e10d7395855c96d7dad3f5d766310bc4347e7a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/CMakeLists.txt",
+      "bytes": 1952,
+      "sha256": "56b5d83358278f6e8fbe5878900b66f66ec98e03299bbf0cffb18efe3c8c43e9",
+      "sha256_lf": "56b5d83358278f6e8fbe5878900b66f66ec98e03299bbf0cffb18efe3c8c43e9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/capture_checkpoint.py",
+      "bytes": 7239,
+      "sha256": "779b95907427d4a3b73952efc8b4dcc4338b35ba967fd70e3b848a332e1ca051",
+      "sha256_lf": "779b95907427d4a3b73952efc8b4dcc4338b35ba967fd70e3b848a332e1ca051"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/fixtures.cpp",
+      "bytes": 3413,
+      "sha256": "8db6f95bcd532acbdfd5ab45a6c24de869d87d1fb5282e10224d5f947992d549",
+      "sha256_lf": "8db6f95bcd532acbdfd5ab45a6c24de869d87d1fb5282e10224d5f947992d549"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/main.cpp",
+      "bytes": 9858,
+      "sha256": "04342e46fdc60f3a37d7d207f793e692738bdcc929fe58b310e28582391fb266",
+      "sha256_lf": "04342e46fdc60f3a37d7d207f793e692738bdcc929fe58b310e28582391fb266"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/CMakeLists.txt",
+      "bytes": 1660,
+      "sha256": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e",
+      "sha256_lf": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/capture_checkpoint.py",
+      "bytes": 6272,
+      "sha256": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5",
+      "sha256_lf": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/main.cpp",
+      "bytes": 9732,
+      "sha256": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32",
+      "sha256_lf": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/CMakeLists.txt",
+      "bytes": 288,
+      "sha256": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b",
+      "sha256_lf": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/main.cpp",
+      "bytes": 9405,
+      "sha256": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3",
+      "sha256_lf": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "unreal/Binaries/Win64/UnrealEditor-OverkillFoundry.dll",
+      "archive": "artifacts/unreal/Binaries/Win64/UnrealEditor-OverkillFoundry.dll",
+      "group": "binary",
+      "bytes": 2711040,
+      "sha256": "10564019ce4ba890cab9607ca9f3d8da432fad24f9845e3c0bdd364693949dc9"
+    },
+    {
+      "path": "unreal/Binaries/Win64/OverkillFoundry.exe",
+      "archive": "artifacts/unreal/Binaries/Win64/OverkillFoundry.exe",
+      "group": "binary",
+      "bytes": 221761024,
+      "sha256": "bed36dd7adc1c8aa4e0d1173bd3f2762e7616c2ed8c52a820b54d7c63c203035"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/Build-20260920-212056.log",
+      "archive": "artifacts/unreal/Saved/BuildLogs/Build-20260920-212056.log",
+      "group": "build-or-run-log",
+      "bytes": 12172,
+      "sha256": "87e7957987a1878f8653402911e8696ff97fdd9192dabe6d3c8a7053e0d29683"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/BuildGame-20260920-212212.log",
+      "archive": "artifacts/unreal/Saved/BuildLogs/BuildGame-20260920-212212.log",
+      "group": "build-or-run-log",
+      "bytes": 11363,
+      "sha256": "69ec75c503c3a4acf753646c9f601ded1e21cf5eeca75c669c90cb1a18b734ba"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/CityProbe-20260920-212245.log",
+      "archive": "artifacts/unreal/Saved/BuildLogs/CityProbe-20260920-212245.log",
+      "group": "build-or-run-log",
+      "bytes": 608861,
+      "sha256": "4ea505f474fe9c3c2391b46f2e04ec82e82500577ec9426c7324a32d7b92eeb0"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/CityProbe-20260920-212245.log.binary.json",
+      "archive": "artifacts/unreal/Saved/BuildLogs/CityProbe-20260920-212245.log.binary.json",
+      "group": "build-or-run-log",
+      "bytes": 288,
+      "sha256": "7dfe6a6016653319849a7c45b768ae47c26dc38ede6cedc9c3091e24efa9d0ee"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/CampaignProbe-20260920-212713.log",
+      "archive": "artifacts/unreal/Saved/BuildLogs/CampaignProbe-20260920-212713.log",
+      "group": "build-or-run-log",
+      "bytes": 220680,
+      "sha256": "b4f00a7ed376ad820f3e429142ce7c055374f9849aeaa6a6e7fef7fd8b215255"
+    },
+    {
+      "path": "unreal/Saved/BuildLogs/CampaignProbe-20260920-212713.log.binary.json",
+      "archive": "artifacts/unreal/Saved/BuildLogs/CampaignProbe-20260920-212713.log.binary.json",
+      "group": "build-or-run-log",
+      "bytes": 292,
+      "sha256": "61403e30bf370b5cab87dfeef267a02a92f79a3f9e8fd1cc264adf2e54a55bad"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/captures.jsonl",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/captures.jsonl",
+      "group": "city-replay",
+      "bytes": 5277,
+      "sha256": "3efc7d22bad05764643749a8ccd6157a415f7aa3b634672c1bd92d205d4e7870"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/events.jsonl",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/events.jsonl",
+      "group": "city-replay",
+      "bytes": 130428,
+      "sha256": "89d47ada5857a60c863219fd43b88a798ff926f131f20a583cd0d5a873095057"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/final.ofsave",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/final.ofsave",
+      "group": "city-replay",
+      "bytes": 109400,
+      "sha256": "172c235f8cbce421f7e8ea875efabc759c67da340e2605d070be13842e4ae2e5"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/input.oftrace",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/input.oftrace",
+      "group": "city-replay",
+      "bytes": 414130,
+      "sha256": "36c77c625df0e2b40fba6391c012552a1a92669db90a304cdfc4b2227eb46fdd"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-000-arrival.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-000-arrival.png",
+      "group": "city-replay",
+      "bytes": 424649,
+      "sha256": "38e5c4b6715a77edd2796b7008da8a03bd700b296c470aea5ade9516ab6964b5"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-001-mayor-committed-route.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-001-mayor-committed-route.png",
+      "group": "city-replay",
+      "bytes": 405275,
+      "sha256": "78b66a12e8334b753bb9b99a0e68928e5e066cf164d0d98e11f65b04c162b5a1"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-002-finite-shop.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-002-finite-shop.png",
+      "group": "city-replay",
+      "bytes": 405781,
+      "sha256": "747fafb9c8da7240771fa41c87a1a785038715eace517e31fcf0c3952f9c018a"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-004-position-01-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-004-position-01-encounter.png",
+      "group": "city-replay",
+      "bytes": 1278550,
+      "sha256": "dd7ea60f74000fd02b0e269225ef5eeb97901d1a72c5e91766bb3291210a1530"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-008-position-01-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-008-position-01-loaded.png",
+      "group": "city-replay",
+      "bytes": 1261377,
+      "sha256": "2dfdaed7a9e0f513641fa13198cfbd296968c6ee6c1cc7017e288fbc85b1791b"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-009-position-01-committed-shot.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-009-position-01-committed-shot.png",
+      "group": "city-replay",
+      "bytes": 1481428,
+      "sha256": "bda6b8b204b1e92497819a56b36d66638b973048664ebd3d075d18d65acdfda2"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-022-position-01-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-022-position-01-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425408,
+      "sha256": "e09ec0f33e0e6562da222ebc815bcef8b3836692b31e79008aef88ec8a4a78bd"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-024-earned-memory.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-024-earned-memory.png",
+      "group": "city-replay",
+      "bytes": 446325,
+      "sha256": "c75a62f7466a67a525580ed4399279891e347b2caa5e820e64ffdf05d3d5c187"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-029-position-02-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-029-position-02-encounter.png",
+      "group": "city-replay",
+      "bytes": 1299530,
+      "sha256": "baed94571408c05ec1bd3ed22528d2a78f92313aeab9bae6fa0176410ae23763"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-032-position-02-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-032-position-02-loaded.png",
+      "group": "city-replay",
+      "bytes": 1266206,
+      "sha256": "c13d26d82a9e48d60720edee5f865f42d6d248d6df3977576d2b8f2c060db306"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-049-position-02-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-049-position-02-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 424917,
+      "sha256": "66b8bcf0fe1d41cde8fe3e9b559b8ea35098cf3a7fe443f4cd69c5e71ebdb596"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-057-position-03-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-057-position-03-encounter.png",
+      "group": "city-replay",
+      "bytes": 1319050,
+      "sha256": "276ee37be9dce68a20ed2113611df4906f5d28b514c3a9c6da5c23d314a53de9"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-062-position-03-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-062-position-03-loaded.png",
+      "group": "city-replay",
+      "bytes": 1270746,
+      "sha256": "66e34ee991419cf26fda950ec3f44559ac3af523f4816006bab990842a51dfa3"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-075-position-03-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-075-position-03-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 423852,
+      "sha256": "2ab9b066fb5a1170b6fd3676df161d580ffa26feb698653a3f2cee8b1542f4a3"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-083-position-04-mystery.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-083-position-04-mystery.png",
+      "group": "city-replay",
+      "bytes": 459034,
+      "sha256": "89f353f44906723cb74d32f47bd9a384e13889f18a9e164eaef88ce7bbefb4c7"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-086-position-05-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-086-position-05-encounter.png",
+      "group": "city-replay",
+      "bytes": 1293194,
+      "sha256": "2bd6784c334f3ac8e5688891a912b8eefee2392d87029698334f8765a5e1bc6b"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-091-position-05-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-091-position-05-loaded.png",
+      "group": "city-replay",
+      "bytes": 1259364,
+      "sha256": "eb6f463d59c65c0e5a8b29a71be2cd18d6406db94d60fd3796d75680857f36a7"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-102-position-05-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-102-position-05-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425373,
+      "sha256": "53a656aac0090ba26a37210c1ff60a42c36aeb201caf510fd842980c457ef7cf"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-110-position-06-mystery.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-110-position-06-mystery.png",
+      "group": "city-replay",
+      "bytes": 458644,
+      "sha256": "9b8e58d74358cc5c79fbfd803ead729c2db7f7798499602f95392c0d63c1d380"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-113-position-07-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-113-position-07-encounter.png",
+      "group": "city-replay",
+      "bytes": 1319899,
+      "sha256": "264b5409038428c924408a15959f366584fffa86d8161d60b70f93e2dfa288f7"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-118-position-07-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-118-position-07-loaded.png",
+      "group": "city-replay",
+      "bytes": 1272426,
+      "sha256": "56747bac0ccd104a8b07213a58ba959a6135fe1e67f2db1e012abf2f95cabe00"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-131-position-07-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-131-position-07-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425234,
+      "sha256": "0812b3faa71fb440edfc365d697ac6df74d81acd24dc3fe2d383de7f48eab56b"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-139-position-08-mystery.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-139-position-08-mystery.png",
+      "group": "city-replay",
+      "bytes": 371899,
+      "sha256": "46ee3e78615d27a5229a0d49ba36b5868d2cff067ac9a9bca1025d6067e30442"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-141-position-09-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-141-position-09-encounter.png",
+      "group": "city-replay",
+      "bytes": 1319941,
+      "sha256": "f9d7e2e11e0a666639c5758f2109dc21a54acd4d0a7b1cbbdb427a2068ceea57"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-146-position-09-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-146-position-09-loaded.png",
+      "group": "city-replay",
+      "bytes": 1272697,
+      "sha256": "bea06431359ce77505a6f7266822af10566432fb936f822f63daabd88043eff4"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-159-position-09-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-159-position-09-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425215,
+      "sha256": "dc978381b0ca46774cb6ef4faea90bb1791c36d565ceee5778b8dbd59023f272"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-168-position-10-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-168-position-10-encounter.png",
+      "group": "city-replay",
+      "bytes": 1292916,
+      "sha256": "e79ded1c5b55590a544d06aa9e666603ec6c98cb2b509e73b6c255d7473688c7"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-173-position-10-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-173-position-10-loaded.png",
+      "group": "city-replay",
+      "bytes": 1259195,
+      "sha256": "f02faccc145662d518ec59e15612181206f716a2b7e7da671b835b956fd67b7c"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-182-position-10-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-182-position-10-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425269,
+      "sha256": "840377abcc048f55d797d8a35c9a20860d23ab83c870579ef48c3a0fb07ad35b"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-189-position-11-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-189-position-11-encounter.png",
+      "group": "city-replay",
+      "bytes": 1292734,
+      "sha256": "8cbea18fe6171df957cdc881976ba7929edc7ef1ed58b9cfc2a6c632a868241a"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-194-position-11-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-194-position-11-loaded.png",
+      "group": "city-replay",
+      "bytes": 1259420,
+      "sha256": "c2e35dedf2759f4c1b93dbdbc3a585caaf2e39330d0ffde69f1b73e42802deb7"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-202-position-11-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-202-position-11-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 426014,
+      "sha256": "7b9859794690e34f96d5ceb6c27ad2149c08aac3249e3a5f634f4a91d178b600"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-209-position-12-encounter.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-209-position-12-encounter.png",
+      "group": "city-replay",
+      "bytes": 1300609,
+      "sha256": "9e64c6cfc6d4f76a527a8b0099ecd0e1d0983c8640edddb6aa832a2f10ca0bb6"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-214-position-12-loaded.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-214-position-12-loaded.png",
+      "group": "city-replay",
+      "bytes": 1267356,
+      "sha256": "20f667643aa1ad535ff7b93186f449776b30f29c18ac07d72c3284d98851873e"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-215-position-12-committed-shot.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-215-position-12-committed-shot.png",
+      "group": "city-replay",
+      "bytes": 1490443,
+      "sha256": "69b958b55141924ed00a2865ce8dd304d6ddef88f7650ddd5ef574f24d556390"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-253-position-12-rewards-after-presentation.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-253-position-12-rewards-after-presentation.png",
+      "group": "city-replay",
+      "bytes": 425990,
+      "sha256": "3c45e9d81d1838da4dfc5a946f74f5de276b6d46b26af270e0f7c6342aebba71"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-257-cinderwall-complete.png",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/screenshots/city148-20260920-192251-56776-257-cinderwall-complete.png",
+      "group": "city-replay",
+      "bytes": 452402,
+      "sha256": "fc04dddbecc684520c16c1dc7d46ae770a0402525b321ad605a5221301bfcf78"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/summary.json",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/summary.json",
+      "group": "city-replay",
+      "bytes": 337,
+      "sha256": "ac63c3fa464a522f18ea8b2dd27b89247116ffd0381700a8d5c7baf5c276e909"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/evidence/transactions.jsonl",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/evidence/transactions.jsonl",
+      "group": "city-replay",
+      "bytes": 92403,
+      "sha256": "cc5344bea991e3527a20ad174c7290ba4c55f1218ab56348c30ffa9f6f43a2ff"
+    },
+    {
+      "path": "unreal/Saved/CityProbe/render-20260920-212245/runtime-verification.json",
+      "archive": "artifacts/unreal/Saved/CityProbe/render-20260920-212245/runtime-verification.json",
+      "group": "city-verification",
+      "bytes": 6569,
+      "sha256": "36444c40ae351e58e4a2ffe83aa6d52acf56b57491c8871cfccc9f7971c06953"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-action-settled.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-action-settled.png",
+      "group": "campaign-control-regression",
+      "bytes": 1079539,
+      "sha256": "87b03e12dff1a767a259798d4a8beb496e480c15c0f6d4fba1e3014067a0ca0e"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-action.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-action.png",
+      "group": "campaign-control-regression",
+      "bytes": 1080953,
+      "sha256": "65ab84a5fc1936b6db464e9818f5cb9cc16f30cf2700ce3f8ad604130f82eaed"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-collection.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-collection.png",
+      "group": "campaign-control-regression",
+      "bytes": 868505,
+      "sha256": "aa92ddf3c4eabf92dd2867712f0e89012cf1affec89ffeec03f08fd1533d359d"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-enemy-turn.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-enemy-turn.png",
+      "group": "campaign-control-regression",
+      "bytes": 952439,
+      "sha256": "cc63918e965bdfe99e428784ef02dc4edd667d7d979fff39d945753c83c8db34"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-locked-and-loaded.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-locked-and-loaded.png",
+      "group": "campaign-control-regression",
+      "bytes": 873612,
+      "sha256": "5e970d294d6385bdc9d6449ee5dcc48c7bb020c35368d102dd536bd47fe88905"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-mayor.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-mayor.png",
+      "group": "campaign-control-regression",
+      "bytes": 309110,
+      "sha256": "4a3b262f1659bae6f30d5679f4221fb51d1b35a6ca0ce28e26720c3084e7be22"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-next-route.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-next-route.png",
+      "group": "campaign-control-regression",
+      "bytes": 284803,
+      "sha256": "a0ce6b1433b1f2be929a146726761a90ffd5808353613ad06949129193257f79"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-parts.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-parts.png",
+      "group": "campaign-control-regression",
+      "bytes": 344236,
+      "sha256": "992dc98b187f1c40bc31ff901db33f15e98a2f6a194fc26a50e75c31e1285812"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-recipe-reward.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-recipe-reward.png",
+      "group": "campaign-control-regression",
+      "bytes": 295230,
+      "sha256": "ded98c767f2d9928f4da3dd30ab15f211f90f3f0e88ddf8252dcb80f4ab9d74c"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-recipes.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-recipes.png",
+      "group": "campaign-control-regression",
+      "bytes": 320076,
+      "sha256": "1f8b57e0b384e158db341fb0b2342daa669703e62c8da22a1a683ee04471ec3b"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-reloaded.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-reloaded.png",
+      "group": "campaign-control-regression",
+      "bytes": 872419,
+      "sha256": "11e3291f664c8955edeb82eea728b617196c7470cb6dfe2bee32e9c77892bb40"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-route.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-route.png",
+      "group": "campaign-control-regression",
+      "bytes": 278446,
+      "sha256": "90370a2e17d21313c1ddfbbdc338a42335ed575aeeca1456ec2450218911f146"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-shop.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-shop.png",
+      "group": "campaign-control-regression",
+      "bytes": 278552,
+      "sha256": "39894014bff8185ad9029b2c054af8f96acbeec96b97f0c3c842c19c332957b5"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-skip-confirm.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-skip-confirm.png",
+      "group": "campaign-control-regression",
+      "bytes": 317623,
+      "sha256": "d2c0d245ec9162d4dea6e5956491bb46886da7831006fdbc15b540a625f098ac"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-title.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-title.png",
+      "group": "campaign-control-regression",
+      "bytes": 1000559,
+      "sha256": "9617dce33f59562693d26d925b4a422865013a3cfd83efde2620e9f808484ec2"
+    },
+    {
+      "path": "unreal/Saved/Screenshots/campaign-victory.png",
+      "archive": "artifacts/unreal/Saved/Screenshots/campaign-victory.png",
+      "group": "campaign-control-regression",
+      "bytes": 294194,
+      "sha256": "bd2e508ff9069b7b5ea99a801a6557649cbe8eafd5452f99e9a524f670a0b935"
+    }
+  ],
+  "verified_at": "2026-09-20T19:29:34.075768+00:00",
+  "content_archive": {
+    "path": "unreal/Saved/Validation/operator-runtime-20260920-2032",
+    "identity_sha256": "c3b92dd3f058f5001a0c8d06e16a6151127bc5d29a9e075181350f6c46b02013",
+    "files_checked_unchanged": 296,
+    "bytes": 96686451
+  },
+  "result": {
+    "city_commands": 257,
+    "ordered_events": 781,
+    "captures": 37,
+    "shots_settled_loaded": 39,
+    "city_hash": "241e46199e519eef",
+    "city_position": 13,
+    "city_hp": 80,
+    "city_revision": 258,
+    "campaign_probe": "position2 HP68 receipts40 revision42 hash58e1d02c7e1f809e screenshots16 physical_input0",
+    "source_inputs_unchanged": 93
+  },
+  "root_frame_inspection": [
+    "008-position-01-loaded",
+    "049-position-02-rewards-after-presentation",
+    "062-position-03-loaded",
+    "110-position-06-mystery",
+    "214-position-12-loaded",
+    "257-cinderwall-complete"
+  ],
+  "limits": [
+    "Explicit1843 core excludes live terminal/category/purchase/Shield schedule corrections.",
+    "39 settled shots and camera-return assertions are automated presentation-boundary tests; no human input or usability claim.",
+    "No art refinement, graphic acceptance, package or performance claim.",
+    "Only one earned route and bounded separate CPU lifecycle branches; not all content or balance coverage."
+  ],
+  "local_archive": "unreal/Saved/Validation/city-runtime-20260920-212056",
+  "archive_identity_sha256": "0a995f54bd843b25fee0c87189f76076d3e8e35e63414446648d7b11cf5cb865"
+}

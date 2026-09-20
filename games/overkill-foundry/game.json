@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara/Cinderwall MVP; timeline unconstrained and zero budgets unset. Stage remains prototype. Reviewed runner baseline5 and camera checkpoint are committed/integrated/pushed; 400 sensitivity runs retain392 completions/eight owner-held stops and exact replay. Partial runtime proof checkpoint8972c90 binds133/665 historical obligations with532 explicit gaps. All ten distinct enemy meshes/87clips pass a frozen80-case rendered probe with1144checks/255captures and finite independent review. Native advanced recipe-choice checks pass declared prepared paths; three observed UI corrections pass final native rechecks, strict3090 helper assertions/246 paths, CampaignProbe30 checks and85-line parity. Profile selection, retained Collection browsing and the defeat AI presentation remain to finish. A reproduced duplicate terminal-notification fix passes native regression but rules-version/save compatibility awaits the owner. Two haul compositions remain unanswered. Operator, city-depth/FX finish, full rendered city, runtime proof gaps, package/performance and human play/visual approval remain open. No new purchases or future campaigns are authorized.",
+  "budget_note": "Owner-authorized complete Mara/Cinderwall MVP; timeline unconstrained and zero budgets unset. Stage remains prototype. Owner rejects current graphics/perspective and UI quality; mechanics now take priority, with concept16C/F.I.S.T. graphics and UI iteration deferred. Turn-based core assigns damage/effects; hitbox gameplay is not required. Reviewed baseline5, camera trigger, partial133/665 runtime evidence and roster/recipe controls are committed/integrated/pushed. Profile/Collection native recheck and independent review pass declared scope after a narrow name-validation fix; new Editor/Game builds and ordinary CampaignProbe pass. Earned full-city Unreal replay passes257 exact commands/781 ordered events/257 disk reloads,39 settled loaded shots and37 captures against the explicit1843 core. Physical lifecycle, upgrade and encounter/status proof candidates are preserved separately; remaining recipe clauses are under review. Two haul compositions and rules-version/save compatibility remain owner-held. Current art is provisional and explicitly unapproved. Full reachable mechanics proof, package/performance and human play/visual approval remain open. No purchases or future campaigns are authorized.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T17:37:24+00:00",
-      "record_sha256": "36604b8485d6215b1ffca56f4e28159d09dcdf456919b5c8ae17c29ef8991cf6",
+      "captured_at": "2026-09-20T19:39:36+00:00",
+      "record_sha256": "02899daddef4e738610dcf626147e5c17411fe17789a20bf5654f2dd757563ef",
       "files": {
-        "games/overkill-foundry/STATUS.md": "ecfe123c9e3c4c5af766d88593f860db6aeee52f9e8fed64e226435dd6fe30a8",
+        "games/overkill-foundry/STATUS.md": "4354336e2367d0bd22de2fb21e3f2706f9799dbd8b5e996d441ad6b0610b3bd3",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",
@@ -63,7 +63,7 @@
         "games/overkill-foundry/design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
         "games/overkill-foundry/design/RECIPE-RULE-AUDIT.md": "40c5573bbdca9677536ca71d3bbd41a688ea8761d142fd88ae7c5062d22f167c",
         "games/overkill-foundry/design/UPGRADE-CATALOGUE.md": "1531b9cc12533054bb46d7cfac03a553414c54097fda98617a01548d2de382b6",
-        "games/overkill-foundry/design/UPGRADE-SYSTEM.md": "b3347c5069dfd5652562fe157001889eb4e48c0bafbc927d5f3cc93b5f92561a",
+        "games/overkill-foundry/design/UPGRADE-SYSTEM.md": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a",
         "games/overkill-foundry/design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
         "games/overkill-foundry/design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
         "games/overkill-foundry/design/MAYORS.md": "385301dcbf8ae788d0bdd241dadb3b575568fc681ba7d39a56d12cd2cd9ed42a",

@@ -1,0 +1,311 @@
+{
+  "review": "CPU source mirror of current uncompiled UFoundryAimedOperator, not engine verification or owner approval",
+  "runtime_cpp_sha256": "27769cdefd4ed60cc5f84eceb79bf8c29922dee441d8b1c3dc20b72a2a7fbe86",
+  "frozen_source_fbx_sha256": "566a0dfc2461fd1742d82a9ec6b5725b238ccda66e9ae3656719bbd37b21e45a",
+  "target_world_cm": {
+    "mite": [
+      314.0676574707031,
+      -179.93019104003906,
+      74.65444946289062
+    ],
+    "gatebreaker": [
+      971.676513671875,
+      220.0,
+      200.73294067382812
+    ]
+  },
+  "sampled_clip_frames": 109,
+  "pose_target_combinations": 218,
+  "method": "Mirrors current authored-wrist target, worst-wrist lean azimuth clamped+/-45deg,0.25deg shared tilt steps to10deg, component-space two-bone rotations, current hand rotation times gun aim and relative hand-child transforms.",
+  "maxima": {
+    "wrist_error_cm": {
+      "value": 3.814697265625e-06,
+      "side": "r",
+      "target": "gatebreaker",
+      "clip": "MO_idle",
+      "frame": 2
+    },
+    "grip_error_cm": {
+      "value": 6.157664664214297e-05,
+      "side": "l",
+      "target": "gatebreaker",
+      "clip": "MO_load",
+      "frame": 5
+    },
+    "upper_length_error_cm": {
+      "value": 2.7327649757324934e-05,
+      "side": "l",
+      "target": "mite",
+      "clip": "MO_fire",
+      "frame": 2
+    },
+    "fore_length_error_cm": {
+      "value": 2.694017904047996e-05,
+      "side": "r",
+      "target": "mite",
+      "clip": "MO_recovery",
+      "frame": 6
+    },
+    "upper_rotation_degrees": {
+      "value": 49.579004468045234,
+      "side": "l",
+      "target": "mite",
+      "clip": "MO_idle",
+      "frame": 16
+    },
+    "fore_rotation_degrees": {
+      "value": 46.00973202290416,
+      "side": "r",
+      "target": "mite",
+      "clip": "MO_load",
+      "frame": 11
+    }
+  },
+  "maximum_lean_degrees": 9.5,
+  "maximum_lower_body_motion_cm": 0.0,
+  "culling_envelope": {
+    "method": "FBox union of imported rest-vertex world bounds and each current component-space bone origin transformed to world, expanded by abs(component scale)*28cm. Current placement has identity scale and rotation. All vertices evaluated with normalized source linear skin weights; verified against actual Blender linear modifier on both rendered poses.",
+    "sampled_pose_count": 327,
+    "source_vertices_per_pose": 54995,
+    "total_vertex_samples": 17983365,
+    "all_vertices_finite": true,
+    "maximum_outside_vertex_count": 0,
+    "minimum_clearance_case": {
+      "target": "mite",
+      "clip": "MO_fire",
+      "frame": 3,
+      "all_vertices_finite": true,
+      "outside_vertex_count": 0,
+      "minimum_vertex_clearance_cm": 8.617133144370058,
+      "maximum_vertex_escape_cm": 0.0,
+      "envelope_world_cm": [
+        [
+          -534.5,
+          -1.2520618438720703,
+          -27.30000001192093
+        ],
+        [
+          -408.7925109863281,
+          103.67236316204071,
+          183.3646697998047
+        ]
+      ],
+      "deformed_vertex_world_cm": [
+        [
+          -518.4376001284603,
+          21.01103946798888,
+          -0.03233398434381707
+        ],
+        [
+          -434.30402257839796,
+          86.69193870504655,
+          174.74753665543463
+        ]
+      ]
+    },
+    "per_clip": {
+      "MO_idle": {
+        "poses": 183,
+        "minimum_vertex_clearance_cm": 8.766220801329325,
+        "maximum_vertex_escape_cm": 0.0
+      },
+      "MO_load": {
+        "poses": 66,
+        "minimum_vertex_clearance_cm": 8.73390435560384,
+        "maximum_vertex_escape_cm": 0.0
+      },
+      "MO_fire": {
+        "poses": 33,
+        "minimum_vertex_clearance_cm": 8.617133144370058,
+        "maximum_vertex_escape_cm": 0.0
+      },
+      "MO_recovery": {
+        "poses": 45,
+        "minimum_vertex_clearance_cm": 8.733901181155375,
+        "maximum_vertex_escape_cm": 0.0
+      }
+    },
+    "imported_rest_world_cm": [
+      [
+        -517.359458565712,
+        6.3526976108551025,
+        0.022589754313230515
+      ],
+      [
+        -474.5348981618881,
+        103.67236316204071,
+        179.3093711733818
+      ]
+    ],
+    "asset_dimensions_changed": false
+  },
+  "rendered_idle_extremes": {
+    "mite": {
+      "lean_degrees": 4.75,
+      "lean_azimuth_degrees": -12.676115456560314,
+      "lower_body_motion_cm": 0.0,
+      "hands": {
+        "l": {
+          "wrist_error_cm": 0.0,
+          "grip_error_cm": 0.0,
+          "upper_length_error_cm": 1.852125199164334e-05,
+          "fore_length_error_cm": 5.49193558896377e-06,
+          "upper_rotation_degrees": 49.00525150229124,
+          "fore_rotation_degrees": 33.07988681084113
+        },
+        "r": {
+          "wrist_error_cm": 0.0,
+          "grip_error_cm": 7.62939453125e-06,
+          "upper_length_error_cm": 6.290246652440601e-07,
+          "fore_length_error_cm": 1.0390148332817262e-06,
+          "upper_rotation_degrees": 16.297085784197005,
+          "fore_rotation_degrees": 35.82074610211887
+        }
+      },
+      "pose_application_error_cm": 1.7059844799040144e-05,
+      "maximum_extra_edge_length_cm": 2.8628850675547572,
+      "linear_skin_vs_blender_max_error_cm": 2.9913787124778713e-05,
+      "deformed_bounds_source_m": [
+        [
+          -0.15818816423416138,
+          -0.3169194459915161,
+          -0.007295412011444569
+        ],
+        [
+          0.6902079582214355,
+          0.3458779752254486,
+          1.7695809602737427
+        ]
+      ],
+      "actual_evaluated_vertex_envelope_check": {
+        "all_vertices_finite": true,
+        "outside_vertex_count": 0,
+        "minimum_vertex_clearance_cm": 9.357147514820099,
+        "maximum_vertex_escape_cm": 0.0,
+        "envelope_world_cm": [
+          [
+            -527.5,
+            -3.2869415283203125,
+            -27.30000001192093
+          ],
+          [
+            -401.46771240234375,
+            103.67236316204071,
+            187.01524353027344
+          ]
+        ],
+        "deformed_vertex_world_cm": [
+          [
+            -511.81881642341614,
+            20.41220247745514,
+            -0.02954121306538582
+          ],
+          [
+            -426.97920417785645,
+            86.69194459915161,
+            177.65809601545334
+          ]
+        ]
+      }
+    },
+    "gatebreaker": {
+      "lean_degrees": 9.25,
+      "lean_azimuth_degrees": -45.0,
+      "lower_body_motion_cm": 0.0,
+      "hands": {
+        "l": {
+          "wrist_error_cm": 9.5367431640625e-07,
+          "grip_error_cm": 8.148196931188136e-06,
+          "upper_length_error_cm": 2.8131346567761284e-06,
+          "fore_length_error_cm": 7.644180936239309e-06,
+          "upper_rotation_degrees": 20.16485798663515,
+          "fore_rotation_degrees": 34.37031786582622
+        },
+        "r": {
+          "wrist_error_cm": 0.0,
+          "grip_error_cm": 5.7220458984375e-06,
+          "upper_length_error_cm": 8.38699430971701e-06,
+          "fore_length_error_cm": 7.569966495424296e-06,
+          "upper_rotation_degrees": 12.819656331504156,
+          "fore_rotation_degrees": 19.481231182797742
+        }
+      },
+      "pose_application_error_cm": 1.7059844799040144e-05,
+      "maximum_extra_edge_length_cm": 2.92985417025396,
+      "linear_skin_vs_blender_max_error_cm": 3.554739210880799e-05,
+      "deformed_bounds_source_m": [
+        [
+          -0.15818816423416138,
+          -0.3169194459915161,
+          -0.007295412011444569
+        ],
+        [
+          0.4845329523086548,
+          0.4923211634159088,
+          1.7634819746017456
+        ]
+      ],
+      "actual_evaluated_vertex_envelope_check": {
+        "all_vertices_finite": true,
+        "outside_vertex_count": 0,
+        "minimum_vertex_clearance_cm": 8.785908997058868,
+        "maximum_vertex_escape_cm": 0.0,
+        "envelope_world_cm": [
+          [
+            -527.5,
+            -19.308460235595703,
+            -27.30000001192093
+          ],
+          [
+            -422.3044128417969,
+            103.67236316204071,
+            185.8341064453125
+          ]
+        ],
+        "deformed_vertex_world_cm": [
+          [
+            -511.81881642341614,
+            5.767883658409119,
+            -0.02954121306538582
+          ],
+          [
+            -447.5467047691345,
+            86.69194459915161,
+            177.04819744825363
+          ]
+        ]
+      }
+    }
+  },
+  "clip_summary": {
+    "MO_idle": {
+      "maximum_wrist_error_cm": 3.814697265625e-06,
+      "maximum_lean_degrees": 9.25
+    },
+    "MO_load": {
+      "maximum_wrist_error_cm": 3.814697265625e-06,
+      "maximum_lean_degrees": 9.5
+    },
+    "MO_fire": {
+      "maximum_wrist_error_cm": 1.9073486328125e-06,
+      "maximum_lean_degrees": 9.5
+    },
+    "MO_recovery": {
+      "maximum_wrist_error_cm": 3.814697265625e-06,
+      "maximum_lean_degrees": 9.5
+    }
+  },
+  "discrepancies_from_aim_study": [
+    "Runtime preserves the current authored wrist/hand gesture through aiming, instead of maintaining fixed idle anchors during load/fire. This is intentional and preserves clip motion.",
+    "Runtime chooses one worst-wrist azimuth and quarter-degree steps; the earlier study searched several azimuths and used binary search. This report measures the exact newer choice.",
+    "Current C++ has no explicit target-transition smoothing; the source renders show endpoints only. Rapid target changes require engine inspection."
+  ],
+  "limits": [
+    "Rendered proof is Blender CPU with frozen source materials and geometry, not an Unreal screenshot.",
+    "All109 frames of the four original clips tested at two specified extreme target points. This does not expand runtime target/overflow coverage.",
+    "Only idle extremes rendered; all four clips additionally receive finite linear-skinned vertex and culling-envelope checks at every authored frame.",
+    "Proof uses linear blend skinning in the temporary review scene, matching the usual UE method; frozen authoring geometry, weights, clips and modifier settings are unchanged. Actual UE deformation still needs native review.",
+    "Fresh-pose buffer timing, tick ordering, component scaling and UE quaternion/FBX conventions require native verification."
+  ],
+  "frozen_product_hashes_unchanged": true
+}

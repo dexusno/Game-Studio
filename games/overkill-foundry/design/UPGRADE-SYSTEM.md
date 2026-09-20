@@ -2,6 +2,8 @@
 
 **20 September economy baseline:** [BETA-TUNING.md](BETA-TUNING.md) now supplies initial Credit prices, finite shop quantities, acquisition weights and progressively weighted Mayor tiers. UGS-017 is corrected to apply its 25% bonus to energy-core sales, floored per core, because ordinary victory rewards are cores rather than direct Credits. Other individual effects remain unchanged. No tested balance is claimed.
 
+**UGS-031 owner clarification, 20 September:** Klaus selects the normal victory reward rarity odds for Open Standard Decoder's fourth Shared recipe. Interpret the catalogue's "current rarity tier" as using the normal offer's current rarity rules and eligibility, with the additional Shared-only restriction. Do not match the rarity of a particular offered card. The offer still permits only one recipe selection, filters duplicates and leaves Officer bonus offers unchanged. This clarifies the existing implementation; it changes no rarity weights or other upgrade effects.
+
 18 September 2026. Companion to the [upgrade catalogue](UPGRADE-CATALOGUE.md), [Mayor offers](MAYORS.md) and [mercenary abilities](MERCENARY-ABILITIES.md). This is a design contract for future implementation, not implemented gameplay or measured balance.
 
 ## Selected direction and proposed details

@@ -1,0 +1,424 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-09-20T19:16:19.594960+00:00",
+  "scope": "Independent finite profile storage/routing/Collection mechanics review; no Unreal launch or physical input",
+  "outcome": "pass_after_narrow_c1_source_repair",
+  "acceptance": [
+    "unreal/Tools/profile-tests/README.md:3-29",
+    "design/TIMING-AND-PERSISTENCE.md:82-86,116,122-128",
+    "design/MVP-IMPLEMENTATION-PLAN.md:P11 (finite subset only)"
+  ],
+  "platform": {
+    "os": "Windows 11 x64 10.0.26200",
+    "independent_compiler": "MSVC 19.44.35228.0",
+    "independent_sdk": "10.0.26100.0",
+    "configuration": "Release C++20 /W4 /WX /permissive- /utf-8",
+    "native_engine": "5.8.2-56702186+++UE5+Release-5.8",
+    "native_compiler": "14.44.35228",
+    "native_sdk": "10.0.22621.0"
+  },
+  "checkpoints": {
+    "original": {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/native-checkpoint.json",
+      "sha256": "2308e4a0f7167eb69a05669e5e5e9148505d53b5ffae5ce9af3fb6a49a0869c1",
+      "bytes": 46415
+    },
+    "reset_recheck": {
+      "path": "games/overkill-foundry/unreal/Tools/profile-tests/recheck-checkpoint.json",
+      "sha256": "d6757f60e48320f8740d040e0b4de9e103e390ec529e360f180b1c1f4502f249",
+      "bytes": 5081
+    },
+    "identity_audit": {
+      "result": "pass",
+      "checks": 1026,
+      "native_checkpoint_sha256": "2308e4a0f7167eb69a05669e5e5e9148505d53b5ffae5ce9af3fb6a49a0869c1",
+      "recheck_checkpoint_sha256": "d6757f60e48320f8740d040e0b4de9e103e390ec529e360f180b1c1f4502f249",
+      "primary_sources": 84,
+      "primary_graph_lf_sha256": "5cac35f953ba7ce556720cfc67924398f3b48f23884b38bae3199430dd0c86b6",
+      "primary_artifacts": 73,
+      "primary_binaries": [
+        {
+          "name": "UnrealEditor-OverkillFoundry.dll",
+          "sha256": "828d39bf1020400106ae2ffcd4b6c3ab2ad03b27e752216cc35d926115e12d4d",
+          "bytes": 2574848
+        },
+        {
+          "name": "OverkillFoundry.exe",
+          "sha256": "86a1c861ec1f1d7f46635f80e1af0f9fca64dd7756dd9bbef9c945772a4c15b9",
+          "bytes": 221644288
+        }
+      ],
+      "recheck_parent_sources": 89,
+      "recheck_graph_lf_sha256": "1282abcaabbce655d2e10518c8f4d1b3e072dab8ccf4e67b91bc35580965d166",
+      "recheck_parent_artifacts": 34,
+      "recheck_artifacts": 10,
+      "recheck_binaries": [
+        {
+          "name": "UnrealEditor-OverkillFoundry.dll",
+          "sha256": "9d2d671e961a206f0c4ca2144e500d220fd026178b9881d8de9453ee217d5a9d",
+          "unchanged_from_parent": true
+        },
+        {
+          "name": "OverkillFoundry.exe",
+          "sha256": "9fb422f304443ac17bdebebc73d0fe1f0e5740a6759cd6cb79805993efe9b61f",
+          "unchanged_from_parent": true
+        }
+      ],
+      "supplemental_pre_endturn_sha256": "565ee873ec03903cd8175eb68fc71cf96fbbce033b0dcd8ca7262027469a1b51",
+      "limits": [
+        "Byte identity is not behavioral coverage.",
+        "Earlier map was not archived; no substituted map identity."
+      ]
+    }
+  },
+  "reviewed_original_sources": [
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 18255,
+      "sha256": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2",
+      "sha256_lf": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 67355,
+      "sha256": "2b6ffd26625c5af1c123afc302c48116c6aa6fffb3faa2f0c775e526a3d8b160",
+      "sha256_lf": "2b6ffd26625c5af1c123afc302c48116c6aa6fffb3faa2f0c775e526a3d8b160"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 39592,
+      "sha256": "aace43ce10ce08f5996d5f591225bca23d7c0f7be3708a6ce8bdf3991f11a1a0",
+      "sha256_lf": "aace43ce10ce08f5996d5f591225bca23d7c0f7be3708a6ce8bdf3991f11a1a0"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfileProbe.cpp",
+      "bytes": 3650,
+      "sha256": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a",
+      "sha256_lf": "2ee46034537b09bb05c9d3e8c38d4d0339a067517901e333bf111c7fb6d1b65a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfiles.cpp",
+      "bytes": 8716,
+      "sha256": "071b90abc2a8ddc20f3426047c87baa7f976c1815f4410d574ab81eb5de5656a",
+      "sha256_lf": "071b90abc2a8ddc20f3426047c87baa7f976c1815f4410d574ab81eb5de5656a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 2344,
+      "sha256": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4",
+      "sha256_lf": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryProfiles.h",
+      "bytes": 2292,
+      "sha256": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e",
+      "sha256_lf": "1663fcc032d2d93d5d838aa70530071b75752e9fd3eb463497ba2544a3710a3e"
+    }
+  ],
+  "independent_initial": {
+    "result": "4 groups passed, 1 failed; 61 attempted assertions; exit 1",
+    "exe": {
+      "path": "games/overkill-foundry/core/build/qa-profiles/initial-capture/independent_profiles.exe",
+      "sha256": "d9412ff192f214d826f5ea6daf0a48eb2ba6da199534c47023c6db7f0f00377c",
+      "bytes": 1107456
+    },
+    "source": {
+      "path": "games/overkill-foundry/core/build/qa-profiles/initial-capture/probes.cpp",
+      "sha256": "c3bd29a5a9319d92dc471f8475cdcda785fbcda93ac21c8535a931825745f21e",
+      "bytes": 8679
+    },
+    "result_log": {
+      "path": "games/overkill-foundry/qa/profiles/evidence/initial.txt",
+      "sha256": "c54d17cee71aa99890b8d66def389f8ca2399f2aa6e5469ff4bcab709c8a9176",
+      "bytes": 443
+    },
+    "core": "Archived original 2016 graph, reviewed pre-terminal-fix 1843 core"
+  },
+  "independent_recheck": {
+    "result": "5 groups passed, 69 assertions; exit 0",
+    "exe": {
+      "path": "games/overkill-foundry/core/build/qa-profiles-fixed/Release/independent_profiles.exe",
+      "sha256": "7ab142fb1ce42921e17b9dc6c9d62a08031bea587f4e6e3c0099f5d673c43815",
+      "bytes": 1110016
+    },
+    "source_override": {
+      "path": "games/overkill-foundry/core/build/qa-profiles/inputs/FoundryProfiles-c1.cpp",
+      "sha256": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58",
+      "bytes": 8744
+    },
+    "result_log": {
+      "path": "games/overkill-foundry/qa/profiles/evidence/recheck.txt",
+      "sha256": "b368e54aa6062e3c34ceabb1d2f3941f13ab62085b7af228e138b87a4ac54157",
+      "bytes": 396
+    },
+    "production_change": "Only decoded U+0080-U+009F rejection in FoundryProfiles.cpp; all other production inputs are archived 2016 sources",
+    "groups": [
+      {
+        "id": "P01",
+        "scope": "Real NTFS directory junction excluded from inventory/selection/creation; current Default and external target campaign bytes unchanged"
+      },
+      {
+        "id": "P02",
+        "scope": "Exclusive Windows file locks on both preference revisions and selected name; successful valid campaign selection, fallback label, explicit warning; campaign/preference bytes unchanged and later saving works"
+      },
+      {
+        "id": "P03",
+        "scope": "Unsupported name metadata version remains browsable; valid previous-only name restores; campaign bytes unchanged"
+      },
+      {
+        "id": "P04",
+        "scope": "U+0080/U+0085/U+009F rejection without allocation; U+00A0 accepted and restored with no new campaign"
+      },
+      {
+        "id": "P05",
+        "scope": "Native Alpha/Beta independent run IDs/phases/discoveries, exact one-EndTurn defeat reproduction, new-run retained facts, 246 discovered versus 12 owned copies"
+      }
+    ]
+  },
+  "qa_sources": [
+    {
+      "path": "games/overkill-foundry/qa/profiles/CMakeLists.txt",
+      "sha256": "91f7793b410cc75e4d026ce008e4d31d55528b1e9377dd4d633f69c77683f7e4",
+      "bytes": 1678
+    },
+    {
+      "path": "games/overkill-foundry/qa/profiles/probes.cpp",
+      "sha256": "34e078f11235581c5868c349844b1524d38dde35d71c781e955be69473b4b839",
+      "bytes": 9124
+    },
+    {
+      "path": "games/overkill-foundry/qa/profiles/audit_evidence.py",
+      "sha256": "77da047ce6ef18ca9e059d1f24ad22aeeed2207db10f0e715e0ccdd8de0ec7e5",
+      "bytes": 5417
+    },
+    {
+      "path": "games/overkill-foundry/qa/profiles/README.md",
+      "sha256": "91ad05f72b646c0662b7ac787ae2b797019dfcf819b328c1d2cdbf1f59edefac",
+      "bytes": 2609
+    }
+  ],
+  "findings": [
+    {
+      "id": "PF-01",
+      "severity": "low",
+      "status": "fixed_source_independently_rechecked",
+      "file": "unreal/Source/OverkillFoundry/Private/FoundryProfiles.cpp:16-33",
+      "original_source_sha256": "071b90abc2a8ddc20f3426047c87baa7f976c1815f4410d574ab81eb5de5656a",
+      "steps": "Use a new canonical 32-lowercase-hex identity and Store::create with UTF-8 name Alpha C2 80 Beta",
+      "expected": "Reject control-character name before directory allocation",
+      "observed_original": "Accepted and wrote metadata directory",
+      "fix_sha256": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58",
+      "recheck": "U+0080,U+0085,U+009F rejected without allocation; U+00A0 accepted/round-trips; five groups pass",
+      "native_recheck": "Not run for this source repair"
+    }
+  ],
+  "save_evidence": [
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/alpha-before-browse.ofsave",
+      "sha256": "2ebced59a9217595685657a32c74fe93aef59a8809b8873c21147a1a20a810d7",
+      "bytes": 2855
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/alpha-after-relaunch.ofsave",
+      "sha256": "2ebced59a9217595685657a32c74fe93aef59a8809b8873c21147a1a20a810d7",
+      "bytes": 2855
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/beta-independent-arrival.ofsave",
+      "sha256": "068d312fd25f723b4888e54a826d23d8f351323f8fbc83855ffaea7df1c02104",
+      "bytes": 2350
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/collection-inspection.ofsave",
+      "sha256": "4df3f873db767675ccb6c703feec7d8a7bb20333d39db27af563b41b2283a208",
+      "bytes": 4907
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/defeat-after-endturn.ofsave",
+      "sha256": "93dfe5cc4306038872cd7ee973cdc0d4560508f8d9d1bd9061f31f5aa95e0f80",
+      "bytes": 4370
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/defeat-new-run.ofsave",
+      "sha256": "4f49f5c6294d8e6b4177f655c8793055f0267430832b0757260ccc90421ef5d5",
+      "bytes": 2387
+    }
+  ],
+  "supplemental_pre_endturn": {
+    "original": {
+      "path": "games/overkill-foundry/unreal/Saved/UIFixtures/profiles-20260920-195755/defeat-ready-prepared.ofsave",
+      "sha256": "565ee873ec03903cd8175eb68fc71cf96fbbce033b0dcd8ca7262027469a1b51",
+      "bytes": 6838
+    },
+    "preserved": {
+      "path": "games/overkill-foundry/core/build/qa-profiles/inputs/defeat-ready-prepared.ofsave",
+      "sha256": "565ee873ec03903cd8175eb68fc71cf96fbbce033b0dcd8ca7262027469a1b51",
+      "bytes": 6838
+    },
+    "reason": "Final native archive defeat-input is already the replacement run. Original prepared source matches the pre-action hash recorded in native trace; no author archive modified."
+  },
+  "frame_sample": {
+    "original_jpgs_inspected": 15,
+    "original_jpg_inventory": 24,
+    "reset_recheck_jpgs_inspected": 5,
+    "frames": [
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/04-alpha-created-no-run.jpg",
+        "sha256": "cef073f1cb0a3afb6b35eeaec6fa5621c1841ec56bccad663f62b32a7dc07b9d",
+        "bytes": 145468,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/06-retained-unpurchased-recipe.jpg",
+        "sha256": "103597b8b7b3519deb414e6431cbfe035c3786b33b94ad231ff8175a96fdd807",
+        "bytes": 116869,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/07-active-run-confirmation.jpg",
+        "sha256": "cf104906509ee22ca67b6a1f32da38009cc1a622064ee59dce6b982fa88ca330",
+        "bytes": 148338,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/08-beta-empty-long-header.jpg",
+        "sha256": "7c056274199635806621f9d0631c01e13047c2921126b07e4281472d7b51b313",
+        "bytes": 146525,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/09-beta-independent-mayor.jpg",
+        "sha256": "4850ecd9a982ce7cc7935ddada0d19355537a1df0cace4caa5e851a19ba19ed7",
+        "bytes": 130153,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/11-alpha-restored-16-discoveries.jpg",
+        "sha256": "560c3e3728e42b7afa83dad16387c15d43d99219fd3f3da9b37fbea2dfcdcae0",
+        "bytes": 146416,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/12-relaunch-selected-alpha.jpg",
+        "sha256": "7581170a42b8ca9d0733a8ead6e7894a111f42eac44a5721f7ba1437b3617390",
+        "bytes": 144882,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/14-fixed-path-title.jpg",
+        "sha256": "1fd47f916ce0c1a11a038ad938e47016c47685088dab80837e6aa515248454a4",
+        "bytes": 143394,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/17-filter-scroll-position-defect.jpg",
+        "sha256": "c88b4fabbc3bc2f08b5b419a239345af9cf8de8dd3a928e025f4fc8b2ce20640",
+        "bytes": 121984,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/19-prepared-one-hp-before-endturn.jpg",
+        "sha256": "58258467ade902045d1f6b3bb239642cb589f95871236abc68f796b652c2b8dc",
+        "bytes": 141408,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/20-defeat-enemy-turn-presentation.jpg",
+        "sha256": "7015a20e8b2c7ea5369508c9cc30dc7ab56c0266abc53b74caa8bf02ff528186",
+        "bytes": 126246,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/21-actual-game-over-hostile-ai.jpg",
+        "sha256": "78f9ba4e08797397c9d8219c0bf8fb1b77f3d960aaab631fc8e4cc1e4bc759c1",
+        "bytes": 108088,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/22-defeat-retained-collection.jpg",
+        "sha256": "f54ce8b0f25d0171236c6473361bc85a423087cd4139031e5796f0b0b22dff4b",
+        "bytes": 111835,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/23-new-run-after-defeat.jpg",
+        "sha256": "991a2ee6e3fd5436aeb800542ef59004f90012911d951bf9bb893dd323924463",
+        "bytes": 129900,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-native-archive-20260920-2034/native/24-new-run-retains-sixteen-discoveries.jpg",
+        "sha256": "0d2b78f61257a15e12a317c51770949cd5a8c125b8b4769d3dba8d7f49aa6921",
+        "bytes": 146837,
+        "checkpoint": "2016",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/01-before-filter-bottom.jpg",
+        "sha256": "ab4276528e49ea9f8b1929803ba709ba373018d4966ac47bc9eecb72696722c4",
+        "bytes": 115252,
+        "checkpoint": "2032-reset-recheck",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/02-filter-reset-to-first-match.jpg",
+        "sha256": "98919455f35adfe85c1432412c37c9589375c25eb38ed346b41b1fb324690c5c",
+        "bytes": 119493,
+        "checkpoint": "2032-reset-recheck",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/03-search-reset-first-of-27.jpg",
+        "sha256": "00e40e8367c96fa2279e425fef55ec6990ce63ab4d3b78fee3ea8ff2567f0293",
+        "bytes": 112758,
+        "checkpoint": "2032-reset-recheck",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/04-singular-one-bullet-part.jpg",
+        "sha256": "52e59000e074d32d61aac0a60207b42d43bd5b0f6fcddbaea5fd3c0a6a490831",
+        "bytes": 94443,
+        "checkpoint": "2032-reset-recheck",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      },
+      {
+        "path": "games/overkill-foundry/unreal/Saved/Validation/profiles-recheck-20260920-2044/05-loaded-singular-and-damage-copy.jpg",
+        "sha256": "315fcc25a27a6a86579fe51d36329f8ca1389b04ab478268ee5cfc358a2f94eb",
+        "bytes": 138494,
+        "checkpoint": "2032-reset-recheck",
+        "inspection": "Independent static frame inspection; native actions author-attributed"
+      }
+    ]
+  },
+  "author_execution_inspected": {
+    "helper_logs": "86 assertions C++17 and 86 C++20; inspected, not independently rerun",
+    "engine_profile_probe": "17 engine checks; archived source read",
+    "campaign_probe": "30 recipe controls plus saved loop; position2 HP68 receipts40 revision42 c6eca939d9360880; 16 captures; physical_input=0",
+    "native": "Author agent-driven Windows mouse/keyboard at1280x720; independent reviewer only inspected artifacts",
+    "early_artifacts": "Native JPGs01-03 and two older host PNGs belong to older DLL4545e434...; excluded from final native pass sample"
+  },
+  "limits": [
+    "Finite five-group mechanics sample, not all persistence branches or complete P11",
+    "No desktop/GPU/Unreal build or native input independently executed",
+    "No fresh process-crash or power-loss injection",
+    "No shipping/controller/audio/full-city/human-usability/visual acceptance",
+    "Original map asset missing from archive; later map not substituted",
+    "Original native source is reviewed pre-terminal-fix of-core-0.4; later live core changes and migration/version decisions excluded",
+    "Prepared 246-discovery and1HP states are inspection fixtures, not earned progression or balance evidence",
+    "C1 repaired-source pass does not relabel original2016 or2032 Unreal binaries"
+  ]
+}

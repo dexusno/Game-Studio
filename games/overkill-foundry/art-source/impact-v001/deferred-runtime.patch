@@ -1,0 +1,484 @@
+diff --git a/games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp b/games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp
+index e31e8da..cd680e2 100644
+--- a/games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp
++++ b/games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp
+@@ -14,6 +14,30 @@
+ 
+ DEFINE_LOG_CATEGORY_STATIC(LogFoundryRobot, Log, All);
+ 
++namespace
++{
++constexpr int32 ImpactPoolSize = 32;
++
++// Read-only CPU rays through the original meshes' core cues. The nearest
++// front/visible flank keeps small contact cues outside the armour. In the open
++// Nest/Press chassis the first struck casting lies just behind the core cue.
++// See art-source/impact-v001/contact-report.json. These are cosmetic offsets;
++// the gameplay target and Mara's GetImpactLocation aim point remain unchanged.
++struct FImpactMount { const TCHAR* Definition; FVector Offset; FVector Normal; };
++const FImpactMount ImpactMounts[] = {
++    {TEXT("C1-R01"), FVector(0, 44.584, 0), FVector(0, 1, 0)},
++    {TEXT("C1-R02"), FVector(0, 70.300, 0), FVector(0, 1, 0)},
++    {TEXT("C1-R04"), FVector(-38.075, 0, 0), FVector(-1, 0, 0)},
++    {TEXT("C1-R05"), FVector(0, 70.238, 0), FVector(0, 1, 0)},
++    {TEXT("C1-R07"), FVector(73.000, 0, 0), FVector(-1, 0, 0)},
++    {TEXT("C1-R08"), FVector(3.500, 0, 0), FVector(-1, 0, 0)},
++    {TEXT("C1-O01"), FVector(0, 48.366, 0), FVector(0, 1, 0)},
++    {TEXT("C1-O02"), FVector(-42.000, 0, 0), FVector(-1, 0, 0)},
++    {TEXT("C1-O03"), FVector(-84.500, 0, 0), FVector(-1, 0, 0)},
++    {TEXT("C1-B01"), FVector(-80.250, 0, 0), FVector(-1, 0, 0)},
++};
++}
++
+ AFoundryRobot::AFoundryRobot()
+ {
+     PrimaryActorTick.bCanEverTick = true;
+@@ -37,6 +61,26 @@ AFoundryRobot::AFoundryRobot()
+     SteamMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+     SteamMesh->SetCastShadow(false);
+     SteamMesh->SetVisibility(false);
++    ImpactParticles.SetNum(ImpactPoolSize);
++    for (int32 Index = 0; Index < ImpactPoolSize; ++Index)
++    {
++        UStaticMeshComponent* Piece = CreateDefaultSubobject<UStaticMeshComponent>(*FString::Printf(TEXT("ImpactPiece_%02d"), Index));
++        Piece->SetupAttachment(Body);
++        // Owned by the robot for visibility/destruction, but spent sparks and
++        // chips stay in world space instead of following a collapsing limb.
++        Piece->SetAbsolute(true, true, true);
++        Piece->SetCollisionEnabled(ECollisionEnabled::NoCollision);
++        Piece->SetGenerateOverlapEvents(false);
++        Piece->SetCanEverAffectNavigation(false);
++        Piece->SetCastShadow(false);
++        Piece->bUseAsOccluder = false;
++        Piece->SetVisibility(false);
++        ImpactMeshes.Add(Piece);
++    }
++    ImpactLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("LocalImpactLight"));
++    ImpactLight->SetupAttachment(Body);
++    ImpactLight->SetIntensity(0);
++    ImpactLight->SetCastShadows(false);
+ }
+ 
+ void AFoundryRobot::Initialize(uint64 Id, const FString& InDefinition, int32 InMaxHp, int32 Tiles, bool bInitiallyCharged)
+@@ -84,6 +128,7 @@ void AFoundryRobot::Initialize(uint64 Id, const FString& InDefinition, int32 InM
+     SteamMaterial->SetVectorParameterValue(TEXT("EmissiveColor"), FLinearColor(.03f, .04f, .05f));
+     SteamMesh->SetMaterial(0, SteamMaterial);
+     const FVector Bounds = Mesh->GetImportedBounds().BoxExtent * 2;
++    InitializeImpactEffects(Bounds, Emissive);
+     Body->RefreshBoneTransforms();
+     const FVector Muzzle = Body->GetSocketTransform(TEXT("muzzle"), RTS_Component).GetLocation();
+     checkf(Body->DoesSocketExist(TEXT("muzzle")) && Body->DoesSocketExist(TEXT("core")) && Body->DoesSocketExist(TEXT("intent")) && Muzzle.X < -50, TEXT("Cinderwall socket/facing check failed"));
+@@ -200,7 +245,7 @@ void AFoundryRobot::Hit(int32 HpLoss, int32 ShieldLoss, uint64 EventId)
+     const int64 Effective = static_cast<int64>(HpLoss) + ShieldLoss;
+     if (Effective <= 0)
+     {
+-        Flash(TEXT("core"), false, .25f);
++        EmitImpact(EImpactResponse::Deflect, EventId);
+         UE_LOG(LogFoundryRobot, Display, TEXT("ART_DEFLECT id=%llu event=%llu"), CoreId, EventId);
+         return;
+     }
+@@ -214,7 +259,10 @@ void AFoundryRobot::Hit(int32 HpLoss, int32 ShieldLoss, uint64 EventId)
+             PendingReaction = TEXT("hit_") + Band;
+     }
+     else Play(TEXT("hit_") + Band, EventId);
+-    Flash(TEXT("core"), false, .5f);
++    if (ShieldLoss > 0) EmitImpact(EImpactResponse::Shield, EventId);
++    if (HpLoss > 0)
++        EmitImpact(Band == TEXT("heavy") ? EImpactResponse::Heavy : (Band == TEXT("medium") ? EImpactResponse::Medium : EImpactResponse::Light),
++            EventId, ShieldLoss > 0 ? .045f : 0.f);
+ }
+ 
+ void AFoundryRobot::Die(uint64 EventId, bool bDeathRelease, bool bInCommittedSummon)
+@@ -240,9 +288,272 @@ void AFoundryRobot::Escape(uint64 EventId)
+     if (bTerminal) return;
+     bTerminal = true;
+     bCharged = false;
++    ResetImpactEffects();
+     Play(TEXT("escape"), EventId);
+ }
+ 
++void AFoundryRobot::InitializeImpactEffects(const FVector& ImportedSize, UMaterialInterface* Material)
++{
++    check(Material);
++    ImpactCube = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
++    ImpactSphere = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere"));
++    check(ImpactCube && ImpactSphere);
++    ImpactSizeScale = FMath::Clamp(static_cast<float>(ImportedSize.Z / 240), .55f, 1.5f);
++    bool bMounted = false;
++    for (const FImpactMount& Mount : ImpactMounts) if (Definition == Mount.Definition)
++    {
++        ImpactOffset = Mount.Offset;
++        ImpactNormal = Mount.Normal;
++        bMounted = true;
++        break;
++    }
++    checkf(bMounted, TEXT("Missing original impact mount for %s"), *Definition);
++    const FReferenceSkeleton& Skeleton = Body->GetSkeletalMeshAsset()->GetRefSkeleton();
++    int32 Bone = Skeleton.FindBoneIndex(TEXT("core"));
++    check(Bone != INDEX_NONE);
++    FTransform Reference = Skeleton.GetRefBonePose()[Bone];
++    while ((Bone = Skeleton.GetParentIndex(Bone)) != INDEX_NONE) Reference = Reference * Skeleton.GetRefBonePose()[Bone];
++    ImpactReferenceInverse = Reference.GetRotation().Inverse();
++    if (ImpactMaterials.IsEmpty()) for (UStaticMeshComponent* Piece : ImpactMeshes)
++    {
++        UMaterialInstanceDynamic* Instance = UMaterialInstanceDynamic::Create(Material, this);
++        Instance->SetScalarParameterValue(TEXT("UseTexture"), 0);
++        Instance->SetScalarParameterValue(TEXT("NormalStrength"), 0);
++        Piece->SetStaticMesh(ImpactCube);
++        Piece->SetMaterial(0, Instance);
++        ImpactMaterials.Add(Instance);
++    }
++    ImpactLight->SetAttenuationRadius(115 * ImpactSizeScale);
++    ResetImpactEffects();
++    UE_LOG(LogFoundryRobot, Display, TEXT("ART_IMPACT_INIT id=%llu capacity=%d scale=%.3f core_surface_offset=%s cosmetic_only=1"),
++        CoreId, ImpactMeshes.Num(), ImpactSizeScale, *ImpactOffset.ToString());
++}
++
++void AFoundryRobot::ImpactFrame(FVector& Location, FQuat& Rotation) const
++{
++    const FTransform Core = Body->GetSocketTransform(TEXT("core"));
++    Rotation = Core.GetRotation() * ImpactReferenceInverse;
++    Location = Core.GetLocation() + Rotation.RotateVector(ImpactOffset * Body->GetComponentScale());
++}
++
++int32 AFoundryRobot::GetActiveImpactFxCount() const
++{
++    int32 Count = 0;
++    for (const FImpactParticle& Piece : ImpactParticles) if (Piece.bActive) ++Count;
++    return Count;
++}
++
++void AFoundryRobot::ResetImpactEffects()
++{
++    for (int32 Index = 0; Index < ImpactParticles.Num(); ++Index)
++    {
++        ImpactParticles[Index] = FImpactParticle();
++        ImpactMeshes[Index]->SetVisibility(false);
++        ImpactMeshes[Index]->SetWorldScale3D(FVector(.001));
++        if (ImpactMaterials.IsValidIndex(Index))
++        {
++            ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Dissolve"), 1);
++            ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Glow"), 0);
++        }
++    }
++    NextImpactSlot = 0;
++    bDeathBurstShown = false;
++    ImpactLightRemaining = ImpactLightDuration = ImpactLightPeak = 0;
++    ImpactLight->SetIntensity(0);
++}
++
++void AFoundryRobot::EndPlay(const EEndPlayReason::Type EndPlayReason)
++{
++    const int32 Active = GetActiveImpactFxCount();
++    ResetImpactEffects();
++    UE_LOG(LogFoundryRobot, Display, TEXT("ART_IMPACT_CLEANUP id=%llu cleared=%d active=0 owned_components=%d reason=%d"),
++        CoreId, Active, ImpactMeshes.Num(), static_cast<int32>(EndPlayReason));
++    Super::EndPlay(EndPlayReason);
++}
++
++void AFoundryRobot::EmitImpactPiece(EImpactPiece Kind, const FVector& Location, const FVector& Velocity, const FVector& Acceleration,
++    const FVector& SizeCm, const FQuat& Rotation, const FVector& Spin, const FLinearColor& Color,
++    float Lifetime, float Delay, float Glow, float Growth)
++{
++    if (ImpactMaterials.Num() != ImpactPoolSize) return;
++    int32 Slot = NextImpactSlot;
++    for (int32 Offset = 0; Offset < ImpactPoolSize; ++Offset)
++    {
++        const int32 Candidate = (NextImpactSlot + Offset) % ImpactPoolSize;
++        if (!ImpactParticles[Candidate].bActive) { Slot = Candidate; break; }
++    }
++    // Saturation deterministically replaces one old cue; it never queues more
++    // particles, actors, gameplay events, collision or RNG requests.
++    NextImpactSlot = (Slot + 1) % ImpactPoolSize;
++    FImpactParticle& Piece = ImpactParticles[Slot];
++    Piece = FImpactParticle();
++    Piece.bActive = true;
++    Piece.Kind = Kind;
++    Piece.Origin = Location;
++    Piece.Velocity = Velocity;
++    Piece.Acceleration = Acceleration;
++    Piece.SizeCm = SizeCm;
++    Piece.Rotation = Rotation;
++    Piece.Spin = Spin;
++    Piece.Lifetime = Lifetime;
++    Piece.Age = -Delay;
++    Piece.Glow = Glow;
++    Piece.Growth = Growth;
++    ImpactFrame(Piece.Anchor, Piece.AnchorRotation);
++    UStaticMeshComponent* Component = ImpactMeshes[Slot];
++    Component->SetStaticMesh(Kind == EImpactPiece::Smoke ? ImpactSphere : ImpactCube);
++    Component->SetWorldLocationAndRotation(Location, Rotation);
++    Component->SetWorldScale3D(SizeCm / 100);
++    Component->SetVisibility(Delay <= 0);
++    UMaterialInstanceDynamic* Material = ImpactMaterials[Slot];
++    Material->SetVectorParameterValue(TEXT("FlatColor"), Color);
++    Material->SetVectorParameterValue(TEXT("EmissiveColor"), Kind == EImpactPiece::Smoke ? FLinearColor::Black : Color);
++    Material->SetScalarParameterValue(TEXT("Metallic"), Kind == EImpactPiece::Fragment ? .85f : 0.f);
++    Material->SetScalarParameterValue(TEXT("Roughness"), Kind == EImpactPiece::Smoke ? 1.f : .32f);
++    Material->SetScalarParameterValue(TEXT("Dissolve"), Kind == EImpactPiece::Smoke ? .52f : 0.f);
++    Material->SetScalarParameterValue(TEXT("Glow"), Glow);
++}
++
++void AFoundryRobot::EmitImpact(EImpactResponse Response, uint64 EventId, float Delay)
++{
++    const bool bDeath = Response == EImpactResponse::Death;
++    if (bDeath)
++    {
++        if (bDeathBurstShown) return;
++        ResetImpactEffects();
++        bDeathBurstShown = true;
++    }
++    const bool bDeflect = Response == EImpactResponse::Deflect, bShield = Response == EImpactResponse::Shield;
++    const bool bCollapse = Response == EImpactResponse::Collapse, bHeavy = Response == EImpactResponse::Heavy;
++    const float Scale = ImpactSizeScale;
++    FVector Anchor;
++    FQuat Frame;
++    ImpactFrame(Anchor, Frame);
++    FVector Normal = Frame.RotateVector(ImpactNormal).GetSafeNormal();
++    if (bCollapse) { Anchor.Z = GetActorLocation().Z + 5; Normal = FVector::UpVector; }
++    FVector Across, Up;
++    Normal.FindBestAxisVectors(Across, Up);
++    const uint32 Seed = static_cast<uint32>(CoreId) ^ static_cast<uint32>(CoreId >> 32) ^
++        (static_cast<uint32>(EventId) * 196314165u) ^ static_cast<uint32>(EventId >> 32) ^ (static_cast<uint32>(Response) * 907633515u);
++    FRandomStream Random(static_cast<int32>(Seed)); // Separate, local cosmetic stream only.
++    const FLinearColor White(1.f, .95f, .83f), Blue(.025f, .38f, 1.f), Warm(1.f, .26f, .025f);
++    const FLinearColor Color = bDeflect ? White : (bShield ? Blue : Warm);
++    const FVector Zero = FVector::ZeroVector;
++    if (bShield)
++    {
++        // A small segmented absorption arc on the struck surface, never a
++        // full-body sphere. Radial motion and quick erosion show energy spent.
++        for (int32 Index = 0; Index < 8; ++Index)
++        {
++            const float Angle = (Index + .5f) * PI / 4;
++            const FVector Radial = Across * FMath::Cos(Angle) + Up * FMath::Sin(Angle);
++            const FVector Tangent = -Across * FMath::Sin(Angle) + Up * FMath::Cos(Angle);
++            EmitImpactPiece(EImpactPiece::Arc, Anchor + Radial * (18 * Scale), Radial * (42 * Scale), Zero,
++                FVector(10, 1.4, 1.4) * Scale, Tangent.Rotation().Quaternion(), Zero, Blue, .24f, Delay, 5);
++        }
++    }
++    if (!bCollapse)
++    {
++        const float Length = bDeath ? 28.f : (bHeavy ? 19.f : 12.f);
++        for (const FVector& Axis : {Across, Up})
++            EmitImpactPiece(EImpactPiece::Contact, Anchor, Zero, Zero, FVector(Length, 1.8, 1.8) * Scale,
++                Axis.Rotation().Quaternion(), Zero, bShield ? Blue : White, bDeath ? .12f : .075f, Delay, bDeath ? 10.f : 7.f);
++    }
++    const int32 Sparks = bShield || bCollapse ? 0 : (bDeflect ? 4 : (bDeath ? 11 : (bHeavy ? 8 : (Response == EImpactResponse::Medium ? 6 : 4))));
++    for (int32 Index = 0; Index < Sparks; ++Index)
++    {
++        const float Angle = Random.FRandRange(0, 2 * PI);
++        const FVector Radial = Across * FMath::Cos(Angle) + Up * FMath::Sin(Angle);
++        const FVector Direction = (Normal * Random.FRandRange(.65f, 1.25f) + Radial * Random.FRandRange(.35f, 1.f)).GetSafeNormal();
++        const FVector Velocity = Direction * Random.FRandRange(bDeflect ? 110.f : 170.f, bDeath ? 340.f : 260.f) * Scale;
++        EmitImpactPiece(EImpactPiece::Spark, Anchor + Normal * (2 * Scale), Velocity, FVector(0, 0, -260 * Scale),
++            FVector(Random.FRandRange(9, bDeath ? 22.f : 16.f), .7, .7) * Scale, Direction.Rotation().Quaternion(), Zero,
++            Color, Random.FRandRange(bDeflect ? .08f : .16f, bDeflect ? .14f : .30f), Delay, bDeflect ? 6.f : 8.f);
++    }
++    const int32 Fragments = bDeflect || bShield ? 0 : (bDeath ? 5 : (bCollapse ? 2 : (bHeavy ? 3 : (Response == EImpactResponse::Medium ? 2 : 1))));
++    for (int32 Index = 0; Index < Fragments; ++Index)
++    {
++        const FVector Velocity = (Normal * Random.FRandRange(60, 130) + Across * Random.FRandRange(-75, 75) + FVector(0, 0, Random.FRandRange(45, 125))) * Scale;
++        const FQuat SpinStart = FRotator(Random.FRandRange(0, 360), Random.FRandRange(0, 360), Random.FRandRange(0, 360)).Quaternion();
++        EmitImpactPiece(EImpactPiece::Fragment, Anchor, Velocity, FVector(0, 0, -520 * Scale),
++            FVector(Random.FRandRange(2.5f, 4.5f), Random.FRandRange(1.2f, 2.4f), .6) * Scale, SpinStart,
++            FVector(Random.FRandRange(-5, 5), Random.FRandRange(-5, 5), Random.FRandRange(-5, 5)),
++            FLinearColor(.22f, .25f, .28f), bDeath ? .66f : .46f, Delay, .35f);
++    }
++    const int32 Smoke = bDeath ? 3 : (bCollapse ? 3 : (bHeavy ? 2 : 0));
++    for (int32 Index = 0; Index < Smoke; ++Index)
++    {
++        const FVector Position = Anchor + Across * Random.FRandRange(-10, 10) * Scale;
++        EmitImpactPiece(EImpactPiece::Smoke, Position,
++            (Normal * Random.FRandRange(10, 25) + FVector(0, 0, Random.FRandRange(28, 45))) * Scale, Zero,
++            FVector(Random.FRandRange(10, 15), Random.FRandRange(9, 14), Random.FRandRange(12, 18)) * Scale,
++            FQuat::Identity, Zero, FLinearColor(.11f, .12f, .13f), bDeath ? .70f : .46f,
++            Delay + .045f * Index, 0, 1.2f);
++    }
++    if (!bCollapse)
++    {
++        ImpactLight->SetWorldLocation(Anchor + Normal * (9 * Scale));
++        ImpactLight->SetLightColor(Color);
++        ImpactLightDuration = bDeath ? .18f : (bShield ? .13f : .09f);
++        ImpactLightRemaining = ImpactLightDuration;
++        ImpactLightPeak = (bDeath ? 11000.f : 4800.f) * Scale;
++        ImpactLight->SetIntensity(ImpactLightPeak);
++    }
++    const TCHAR* Label = bDeath ? TEXT("death") : (bDeflect ? TEXT("deflect_white") : (bShield ? TEXT("shield_blue") :
++        (bCollapse ? TEXT("collapse") : (bHeavy ? TEXT("hp_heavy") : (Response == EImpactResponse::Medium ? TEXT("hp_medium") : TEXT("hp_light")))));
++    UE_LOG(LogFoundryRobot, Display, TEXT("ART_IMPACT id=%llu event=%llu kind=%s active=%d capacity=%d scale=%.3f contact=%s sparks=%d fragments=%d smoke=%d cosmetic_only=1"),
++        CoreId, EventId, Label, GetActiveImpactFxCount(), ImpactPoolSize, Scale, *Anchor.ToString(), Sparks, Fragments, Smoke);
++}
++
++void AFoundryRobot::TickImpactEffects(float DeltaSeconds)
++{
++    FVector Anchor;
++    FQuat Frame;
++    ImpactFrame(Anchor, Frame);
++    for (int32 Index = 0; Index < ImpactParticles.Num(); ++Index)
++    {
++        FImpactParticle& Piece = ImpactParticles[Index];
++        if (!Piece.bActive) continue;
++        Piece.Age += FMath::Max(0.f, DeltaSeconds);
++        UStaticMeshComponent* Component = ImpactMeshes[Index];
++        if (Piece.Age >= Piece.Lifetime)
++        {
++            Piece.bActive = false;
++            Component->SetVisibility(false);
++            ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Glow"), 0);
++            ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Dissolve"), 1);
++            continue;
++        }
++        if (Piece.Age < 0) continue;
++        Component->SetVisibility(true);
++        const float Progress = Piece.Age / Piece.Lifetime;
++        FVector Location = Piece.Origin + Piece.Velocity * Piece.Age + Piece.Acceleration * (.5f * Piece.Age * Piece.Age);
++        FQuat Rotation = Piece.Rotation;
++        if (Piece.Kind == EImpactPiece::Arc || Piece.Kind == EImpactPiece::Contact)
++        {
++            const FQuat Follow = Frame * Piece.AnchorRotation.Inverse();
++            Location = Anchor + Follow.RotateVector(Location - Piece.Anchor);
++            Rotation = Follow * Rotation;
++        }
++        else if (Piece.Kind == EImpactPiece::Spark) Rotation = (Piece.Velocity + Piece.Acceleration * Piece.Age).Rotation().Quaternion();
++        else if (Piece.Kind == EImpactPiece::Fragment && !Piece.Spin.IsNearlyZero())
++            Rotation = FQuat(Piece.Spin.GetSafeNormal(), Piece.Spin.Size() * Piece.Age) * Rotation;
++        FVector Size = Piece.SizeCm;
++        if (Piece.Kind == EImpactPiece::Smoke) Size *= 1 + Piece.Growth * Progress;
++        else if (Piece.Kind == EImpactPiece::Spark) Size.X *= 1 - .7f * Progress;
++        const float Fade = Piece.Kind == EImpactPiece::Smoke ? .52f + .48f * Progress : FMath::Clamp((Progress - .25f) / .75f, 0.f, 1.f);
++        Component->SetWorldLocationAndRotation(Location, Rotation);
++        Component->SetWorldScale3D(Size / 100);
++        ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Dissolve"), Fade);
++        ImpactMaterials[Index]->SetScalarParameterValue(TEXT("Glow"), Piece.Glow * FMath::Square(1 - Progress));
++    }
++    if (ImpactLightRemaining > 0)
++    {
++        ImpactLightRemaining = FMath::Max(0.f, ImpactLightRemaining - DeltaSeconds);
++        ImpactLight->SetIntensity(ImpactLightPeak * FMath::Square(ImpactLightRemaining / ImpactLightDuration));
++    }
++}
++
+ void AFoundryRobot::HoldCharge()
+ {
+     UAnimSequence* Sequence = Clips.FindChecked(TEXT("charge"));
+@@ -296,14 +607,19 @@ void AFoundryRobot::DisplayCue(const FString& Name, int32 HitIndex)
+     }
+     else if (Name == TEXT("display_committed_summon") || Name == TEXT("display_committed_death_spawn"))
+     {
++        // Split Chassis's authored release cue is its death burst, including
++        // the capped/no-spawn case. The separate committed summon gate still
++        // owns whether a summon display is counted; FX never creates a robot.
++        if (Name == TEXT("display_committed_death_spawn")) EmitImpact(EImpactResponse::Death, CueEventId);
+         if (!bCommittedSummon) return;
+         Flash(TEXT("muzzle"), false, 1.2f);
+         ++PresentedSummons;
+         UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUMMON_CUE id=%llu event=%llu time=%.3f creates_gameplay_enemy=0"), CoreId, CueEventId, Elapsed);
+     }
+-    else if (Name == TEXT("core_burst_cosmetic")) Flash(TEXT("core"), false, 2);
++    else if (Name == TEXT("core_burst_cosmetic")) EmitImpact(EImpactResponse::Death, CueEventId);
+     else if (Name == TEXT("collapse_contact"))
+     {
++        EmitImpact(EImpactResponse::Collapse, CueEventId);
+         UE_LOG(LogFoundryRobot, Display, TEXT("ART_COLLAPSE_CONTACT id=%llu time=%.3f"), CoreId, Elapsed);
+     }
+     else if (Name != TEXT("dissolve_start_all_components") && Name != TEXT("destroy_actor_and_fx") && Name != TEXT("despawn_without_death_fx"))
+@@ -316,6 +632,7 @@ void AFoundryRobot::DisplayCue(const FString& Name, int32 HitIndex)
+ void AFoundryRobot::Tick(float DeltaSeconds)
+ {
+     Super::Tick(DeltaSeconds);
++    if (ImpactMaterials.Num() == ImpactPoolSize) TickImpactEffects(DeltaSeconds);
+     Elapsed += DeltaSeconds;
+     if (RevealRemaining > 0)
+     {
+@@ -364,6 +681,7 @@ void AFoundryRobot::Tick(float DeltaSeconds)
+         }
+         if (Elapsed >= 2)
+         {
++            ResetImpactEffects();
+             FlashMesh->SetVisibility(false);
+             SteamMesh->SetVisibility(false);
+             FlashLight->SetIntensity(0);
+diff --git a/games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h b/games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h
+index eaa1593..85e35e0 100644
+--- a/games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h
++++ b/games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h
+@@ -6,8 +6,10 @@
+ 
+ class UAnimSequence;
+ class UMaterialInstanceDynamic;
++class UMaterialInterface;
+ class UPointLightComponent;
+ class USkeletalMeshComponent;
++class UStaticMesh;
+ class UStaticMeshComponent;
+ 
+ // Cosmetics only. The committed core state is already final when these cues run.
+@@ -29,6 +31,7 @@ public:
+     void CompletePendingReveal();
+     void SetSceneHidden(bool bInSceneHidden);
+     virtual void Tick(float DeltaSeconds) override;
++    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+     uint64 GetCoreId() const { return CoreId; }
+     bool IsTerminal() const { return bTerminal; }
+     bool IsCharged() const { return bCharged; }
+@@ -44,6 +47,8 @@ public:
+     int32 GetVisibleTileCount() const;
+     FString GetVisualAssetName() const;
+     bool HasAction(const FString& Name) const;
++    int32 GetActiveImpactFxCount() const;
++    int32 GetImpactFxCapacity() const { return ImpactMeshes.Num(); }
+     float GetTerminalDelay() const { return PendingDeath.IsEmpty() ? 0.f : FMath::Max(0.f, Duration - Elapsed); }
+ private:
+     void Play(const FString& Clip, uint64 EventId = 0);
+@@ -51,6 +56,30 @@ private:
+     void Flash(FName Socket, bool bBeam, float Strength = 1.0f);
+     void DisplayCue(const FString& Name, int32 HitIndex);
+     void UpdateVisibility();
++    enum class EImpactResponse : uint8 { Deflect, Shield, Light, Medium, Heavy, Death, Collapse };
++    enum class EImpactPiece : uint8 { Spark, Fragment, Smoke, Arc, Contact };
++    struct FImpactParticle
++    {
++        FVector Origin = FVector::ZeroVector;
++        FVector Velocity = FVector::ZeroVector;
++        FVector Acceleration = FVector::ZeroVector;
++        FVector SizeCm = FVector::OneVector;
++        FVector Anchor = FVector::ZeroVector;
++        FQuat Rotation = FQuat::Identity;
++        FQuat AnchorRotation = FQuat::Identity;
++        FVector Spin = FVector::ZeroVector;
++        float Age = 0, Lifetime = 0, Glow = 0, Growth = 0;
++        EImpactPiece Kind = EImpactPiece::Spark;
++        bool bActive = false;
++    };
++    void InitializeImpactEffects(const FVector& ImportedSize, UMaterialInterface* Material);
++    void ImpactFrame(FVector& Location, FQuat& Rotation) const;
++    void EmitImpact(EImpactResponse Response, uint64 EventId, float Delay = 0);
++    void EmitImpactPiece(EImpactPiece Kind, const FVector& Location, const FVector& Velocity, const FVector& Acceleration,
++        const FVector& SizeCm, const FQuat& Rotation, const FVector& Spin, const FLinearColor& Color,
++        float Lifetime, float Delay, float Glow, float Growth = 0);
++    void TickImpactEffects(float DeltaSeconds);
++    void ResetImpactEffects();
+     UPROPERTY() TObjectPtr<USkeletalMeshComponent> Body;
+     UPROPERTY() TMap<FString, TObjectPtr<UAnimSequence>> Clips;
+     UPROPERTY() TArray<TObjectPtr<UMaterialInstanceDynamic>> Materials;
+@@ -59,6 +88,19 @@ private:
+     UPROPERTY() TObjectPtr<UPointLightComponent> FlashLight;
+     UPROPERTY() TObjectPtr<UStaticMeshComponent> SteamMesh;
+     UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> SteamMaterial;
++    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> ImpactMeshes;
++    UPROPERTY() TArray<TObjectPtr<UMaterialInstanceDynamic>> ImpactMaterials;
++    UPROPERTY() TObjectPtr<UStaticMesh> ImpactCube;
++    UPROPERTY() TObjectPtr<UStaticMesh> ImpactSphere;
++    UPROPERTY() TObjectPtr<UPointLightComponent> ImpactLight;
++    TArray<FImpactParticle> ImpactParticles;
++    FVector ImpactOffset = FVector::ZeroVector;
++    FVector ImpactNormal = FVector(-1, 0, 0);
++    FQuat ImpactReferenceInverse = FQuat::Identity;
++    float ImpactSizeScale = 1;
++    float ImpactLightRemaining = 0, ImpactLightDuration = 0, ImpactLightPeak = 0;
++    int32 NextImpactSlot = 0;
++    bool bDeathBurstShown = false;
+     uint64 CoreId = 0;
+     int32 MaxHp = 1;
+     int32 ExpectedMaterialSlots = 0;

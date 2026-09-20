@@ -5,8 +5,10 @@
 #include "FoundryPrecision.h"
 #include "overkill/robots.hpp"
 #include "Framework/Application/SlateApplication.h"
+#include "Rendering/DrawElements.h"
 #include "Styling/CoreStyle.h"
 #include "Widgets/SCompoundWidget.h"
+#include "Widgets/SLeafWidget.h"
 #include "Widgets/Layout/SBorder.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Layout/SScaleBox.h"
@@ -14,6 +16,7 @@
 #include "Widgets/Layout/SSeparator.h"
 #include "Widgets/Layout/SWrapBox.h"
 #include "Widgets/Input/SButton.h"
+#include "Widgets/Input/SEditableTextBox.h"
 #include "Widgets/Input/SSpinBox.h"
 #include "Widgets/Text/STextBlock.h"
 #include "Widgets/SBoxPanel.h"
@@ -66,6 +69,39 @@ void SavedPrecisionCue(AFoundryStage* Stage,int32 Result,const TCHAR* Source)
     UE_LOG(LogFoundryRecipeUI,Display,TEXT("PRECISION_FEEDBACK cue=%s source=%s after_successful_save=1"),*Cue,Source);
 }
 
+// Original code-drawn terminal portrait. This hostile signal has no named
+// character identity or outside bitmap/font dependency.
+class SFoundryHostileSignal : public SLeafWidget
+{
+public:
+    SLATE_BEGIN_ARGS(SFoundryHostileSignal) {} SLATE_END_ARGS()
+    void Construct(const FArguments&) {}
+    virtual FVector2D ComputeDesiredSize(float)const override{return FVector2D(400,370);}
+    virtual int32 OnPaint(const FPaintArgs&,const FGeometry& G,const FSlateRect&,FSlateWindowElementList& Out,int32 Layer,const FWidgetStyle&,bool)const override
+    {
+        const auto Size=G.GetLocalSize();const double Scale=FMath::Min(Size.X/400.0,Size.Y/370.0);
+        const double Ox=(Size.X-400*Scale)*.5,Oy=(Size.Y-370*Scale)*.5;
+        auto Rect=[&](double X,double Y,double W,double H,FLinearColor Color,int32 Z=0){FSlateDrawElement::MakeBox(Out,Layer+Z,
+            G.ToPaintGeometry(FVector2D(W*Scale,H*Scale),FSlateLayoutTransform(FVector2D(Ox+X*Scale,Oy+Y*Scale))),
+            FCoreStyle::Get().GetBrush(TEXT("WhiteBrush")),ESlateDrawEffect::None,Color);};
+        const FLinearColor Dim(.15f,.22f,.22f),Signal(.95f,.31f,.14f),Glow(.42f,.11f,.065f);
+        Rect(0,0,400,370,FLinearColor(.004f,.012f,.015f));
+        for(int I=0;I<19;++I)Rect(0,I*20,400,1,FLinearColor(.018f,.047f,.046f));
+        for(int I=0;I<20;++I)Rect(I*20,0,1,370,FLinearColor(.018f,.047f,.046f));
+        Rect(22,22,58,3,Dim,1);Rect(22,22,3,52,Dim,1);Rect(320,22,58,3,Dim,1);Rect(375,22,3,52,Dim,1);
+        Rect(22,345,58,3,Dim,1);Rect(22,296,3,52,Dim,1);Rect(320,345,58,3,Dim,1);Rect(375,296,3,52,Dim,1);
+        Rect(80,77,240,210,Glow,1);Rect(99,59,202,248,Glow,1);Rect(88,85,224,194,FLinearColor(.035f,.068f,.07f),2);
+        Rect(107,67,186,232,FLinearColor(.035f,.068f,.07f),2);
+        Rect(52,120,16,104,Dim,2);Rect(332,120,16,104,Dim,2);Rect(67,149,22,48,Glow,2);Rect(312,149,22,48,Glow,2);
+        for(int I=0;I<5;++I){Rect(112+I*13,112+I*7,16,10,Signal,3);Rect(275-I*13,112+I*7,16,10,Signal,3);}
+        Rect(115,156,63,16,Signal,3);Rect(222,156,63,16,Signal,3);Rect(124,159,43,5,FLinearColor(1,.84f,.52f),4);Rect(233,159,43,5,FLinearColor(1,.84f,.52f),4);
+        Rect(195,180,10,27,Dim,3);Rect(180,210,40,5,Glow,3);
+        for(int I=0;I<9;++I){const double Y=241+FMath::Abs(I-4)*-3;Rect(133+I*15,Y,10,17+FMath::Abs(I-4)*2,Signal,3);}
+        Rect(154,314,92,4,Signal,3);Rect(191,35,18,10,Signal,3);
+        return Layer+5;
+    }
+};
+
 class SFoundryCampaignUI : public SCompoundWidget
 {
 public:
@@ -105,6 +141,10 @@ private:
     bool bExchange=false;
     uint64 SeenPrecisionAttempt=0;
     TSharedPtr<SWidget> PrecisionWidget;
+    FString ProfileNameDraft,CollectionQuery,CollectionSearch;
+    std::string SeenProfile,CollectionRecipe;
+    int32 CollectionKind=-1;
+    bool bResetCollectionList=false,bResetCollectionDetail=false;
     CA ExchangeAction;
     FFoundryCampaign& Model() const { return *Stage->GetCampaign(); }
     const overkill::Campaign* Current() const { return Model().Current(); }
@@ -163,6 +203,9 @@ private:
     void Rebuild();
     TSharedRef<SWidget> Header();
     TSharedRef<SWidget> Title();
+    TSharedRef<SWidget> Profiles();
+    TSharedRef<SWidget> Collection();
+    TSharedRef<SWidget> Defeat();
     TSharedRef<SWidget> Arrival();
     TSharedRef<SWidget> Route();
     TSharedRef<SWidget> Shop(bool EventShop);
@@ -185,6 +228,11 @@ void SFoundryCampaignUI::Rebuild()
     if (!Stage.IsValid() || !Stage->GetCampaign()) return;
     for(const auto& Pair:Scrolls) if(Pair.Value.IsValid()) ScrollOffsets.Add(Pair.Key,Pair.Value->GetScrollOffset());
     Scrolls.Empty(); SeenRevision=Model().ViewRevision;
+    // Apply requested resets after preserving the old widgets' scroll positions.
+    if(bResetCollectionList){ScrollOffsets.Add(TEXT("collection-list"),0);bResetCollectionList=false;}
+    if(bResetCollectionDetail){ScrollOffsets.Add(TEXT("collection-detail"),0);bResetCollectionDetail=false;}
+    if(SeenProfile!=Model().Store.activeId())
+    {SeenProfile=Model().Store.activeId();CollectionRecipe.clear();CollectionQuery.Empty();CollectionSearch.Empty();CollectionKind=-1;ProfileNameDraft.Empty();ScrollOffsets.Empty();bExchange=false;}
     if(Model().bPrecisionModal || Model().bCollectionChoice)
     {
         TSharedRef<SWidget> Modal=SNullWidget::NullWidget;
@@ -235,7 +283,10 @@ void SFoundryCampaignUI::Rebuild()
     TSharedRef<SWidget> Content=SNullWidget::NullWidget;
     const FString Page=Model().Page;
     if(Page==TEXT("title") || Page==TEXT("confirm-new")) Content=Title();
+    else if(Page==TEXT("profiles")) Content=Box(Profiles());
+    else if(Page==TEXT("collection")) Content=Box(Collection());
     else if(Stage->IsPresentationBusy()) Content=Combat(true);
+    else if(Page==TEXT("defeat")) Content=Defeat();
     else if(Pending()) Content=Box(UpgradeDecision());
     else if(bExchange) Content=Box(Exchange(ExchangeAction,Model().ItemName(ExchangeAction.choice),true));
     else if(Page==TEXT("arrival")) Content=Box(Arrival());
@@ -259,7 +310,7 @@ void SFoundryCampaignUI::Rebuild()
     Frame->AddSlot().FillHeight(1).Padding(30,20,30,15)[Content];
     auto Footer=SNew(SHorizontalBox);
     Footer->AddSlot().FillWidth(1).VAlign(VAlign_Center)[Text(Model().Message,17,Paper)];
-    if(Page!=TEXT("title"))Footer->AddSlot().AutoWidth()[Button(TEXT("Menu  ·  Esc"),[this](){Model().Close();})];
+    if(Page!=TEXT("title"))Footer->AddSlot().AutoWidth()[Button(Page==TEXT("profiles")||Page==TEXT("collection")?TEXT("Back  ·  Esc"):TEXT("Menu  ·  Esc"),[this](){Model().Close();})];
     Frame->AddSlot().AutoHeight()[Box(Footer,FMargin(30,8))];
     if(Model().bDiagnostic)
     {
@@ -279,11 +330,19 @@ TSharedRef<SWidget> SFoundryCampaignUI::Header()
     auto H=SNew(SHorizontalBox);
     H->AddSlot().FillWidth(1).VAlign(VAlign_Center)[Text(TEXT("OVERKILL FOUNDRY"),23,Gold)];
     const auto* C=Current();
-    if(C && Model().Page!=TEXT("title") && Model().Page!=TEXT("confirm-new"))
+    const auto& Page=Model().Page;
+    const bool MenuPage=Page==TEXT("title")||Page==TEXT("confirm-new")||Page==TEXT("profiles")||Page==TEXT("collection")||Page==TEXT("defeat")||Page==TEXT("complete");
+    if(C && !MenuPage)
     {
         H->AddSlot().AutoWidth().Padding(12,0)[Text(FString::Printf(TEXT("MARA   %d / %d HP     SHIELD %d     HEAT %d     %d CR"),C->fight.hp,C->fight.maxHp,overkill::Rules::shield(C->fight),C->fight.heat,C->fight.credits),21)];
         H->AddSlot().AutoWidth().Padding(12,0)[Button(TEXT("Memory"),[this](){Nav(TEXT("memory"));},!Stage->IsPresentationBusy())];
         H->AddSlot().AutoWidth()[Button(TEXT("Upgrades"),[this](){Nav(TEXT("upgrades"));},!Stage->IsPresentationBusy())];
+    }
+    else if(!Model().bFixedSavePath)
+    {
+        const FText Name=FText::FromString(TEXT("PROFILE  ·  ")+T(Model().Store.activeName()));
+        H->AddSlot().AutoWidth().VAlign(VAlign_Center)[SNew(SBox).WidthOverride(560)[SNew(STextBlock).Text(Name).ToolTipText(Name)
+            .Font(FCoreStyle::GetDefaultFontStyle("Regular",18)).ColorAndOpacity(Muted).OverflowPolicy(ETextOverflowPolicy::Ellipsis)]];
     }
     return Box(H,FMargin(30,15));
 }
@@ -304,10 +363,95 @@ TSharedRef<SWidget> SFoundryCampaignUI::Title()
     {
         Add(V,Button(TEXT("New Game · Mara"),[this](){Model().StartNew();},!Model().bSaveUnavailable));
         Add(V,Button(TEXT("Continue"),[this](){Model().Continue();},Model().HasActiveSave()));
-        if(Current()) Add(V,Text(FString::Printf(TEXT("Collection: %llu discovered recipes"),static_cast<uint64>(Current()->profile.recipes.size())),17,Muted));
+        Add(V,Button(FString::Printf(TEXT("Collection · %llu recipes"),Current()?static_cast<uint64>(Current()->profile.recipes.size()):0),[this](){Nav(TEXT("collection"));},!Model().bSaveUnavailable&&!Stage->IsPresentationBusy()));
+        if(!Model().bFixedSavePath)Add(V,Button(TEXT("Choose profile"),[this](){Nav(TEXT("profiles"));},!Stage->IsPresentationBusy()));
         Add(V,Button(TEXT("Quit"),[](){FPlatformMisc::RequestExit(false);}));
     }
     return SNew(SHorizontalBox)+SHorizontalBox::Slot().AutoWidth().VAlign(VAlign_Center)[SNew(SBox).WidthOverride(540)[Box(V,FMargin(28))]]+SHorizontalBox::Slot().FillWidth(1)[SNullWidget::NullWidget];
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::Profiles()
+{
+    auto V=SNew(SVerticalBox);Add(V,Heading(TEXT("Choose a profile")));
+    Add(V,Text(TEXT("Each profile keeps its own campaign, recipe discoveries and character unlocks. Selecting one does not start or replace a run."),20,Muted));
+    auto List=SNew(SVerticalBox);
+    try
+    {
+        for(const auto& Profile:Model().Store.profiles())
+        {
+            auto Card=SNew(SVerticalBox);const bool Active=Profile.id==Model().Store.activeId();
+            Add(Card,Text(T(Profile.name)+(Active?TEXT("  ·  selected"):TEXT("")),24,Active?Gold:Paper),5);
+            Add(Card,Text(Profile.hasSave?TEXT("Saved campaign and Collection"):TEXT("No campaign yet"),17,Muted),5);
+            if(!Profile.note.empty())Add(Card,Text(T(Profile.note),17,Gold),5);
+            Add(Card,Button(Active?TEXT("Open selected profile"):TEXT("Select profile"),[this,Id=Profile.id](){Model().SelectProfile(Id);},!Stage->IsPresentationBusy(),Active),0);
+            Add(List,Box(Card,FMargin(18)),12);
+        }
+    }catch(const std::exception& E){Add(List,Text(TEXT("Profiles could not be listed: ")+T(E.what()),20,Gold));}
+    auto Create=SNew(SVerticalBox);Add(Create,Heading(TEXT("Create a profile")));
+    Add(Create,Text(TEXT("Give this profile a name. Its first campaign begins only when you choose New Game."),19,Muted));
+    Add(Create,SNew(SEditableTextBox).Text(FText::FromString(ProfileNameDraft)).HintText(FText::FromString(TEXT("Profile name")))
+        .Font(FCoreStyle::GetDefaultFontStyle("Regular",22)).OnTextChanged_Lambda([this](const FText& Value){ProfileNameDraft=Value.ToString();}));
+    Add(Create,Button(TEXT("Create profile"),[this](){if(Model().CreateProfile(ProfileNameDraft))ProfileNameDraft.Empty();},!Stage->IsPresentationBusy()));
+    auto H=SNew(SHorizontalBox);H->AddSlot().FillWidth(1).Padding(0,0,30,0)[Scroll(TEXT("profiles"),List)];
+    H->AddSlot().AutoWidth().VAlign(VAlign_Top)[SNew(SBox).WidthOverride(460)[Box(Create,FMargin(25))]];
+    V->AddSlot().FillHeight(1)[H];return V;
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::Collection()
+{
+    auto V=SNew(SVerticalBox);Add(V,Heading(TEXT("Recipe Collection")));
+    Add(V,Text(TEXT("Recipes you have seen stay here across campaigns. This reference does not add them to your current memory."),19,Muted));
+    auto Search=SNew(SHorizontalBox);
+    auto SearchNow=[this](){CollectionSearch=CollectionQuery.TrimStartAndEnd();bResetCollectionList=true;bResetCollectionDetail=true;++Model().ViewRevision;};
+    Search->AddSlot().FillWidth(1).Padding(0,0,12,0)[SNew(SEditableTextBox).Text(FText::FromString(CollectionQuery))
+        .HintText(FText::FromString(TEXT("Search discovered names or effects"))).Font(FCoreStyle::GetDefaultFontStyle("Regular",20))
+        .OnTextChanged_Lambda([this](const FText& Value){CollectionQuery=Value.ToString();})
+        .OnTextCommitted_Lambda([SearchNow](const FText&,ETextCommit::Type Commit){if(Commit==ETextCommit::OnEnter)SearchNow();})];
+    Search->AddSlot().AutoWidth()[Button(TEXT("Search"),SearchNow)];Add(V,Search);
+    auto Filters=SNew(SWrapBox).UseAllottedSize(true).InnerSlotPadding(FVector2D(8,8));
+    for(int32 I=-1;I<6;++I)Filters->AddSlot()[Button(I<0?TEXT("All kinds"):Kind(static_cast<overkill::Kind>(I)),[this,I](){CollectionKind=I;bResetCollectionList=true;bResetCollectionDetail=true;++Model().ViewRevision;},true,CollectionKind==I)];
+    Add(V,Filters);
+    std::vector<std::string> Matches;
+    if(Current())for(const auto& Id:Current()->profile.recipes)
+    {
+        const auto* R=Model().Combat.Rules.recipe(Id);
+        if(CollectionKind>=0&&(!R||static_cast<int32>(R->kind)!=CollectionKind))continue;
+        if(!CollectionSearch.IsEmpty() && !Model().ItemName(Id).Contains(CollectionSearch,ESearchCase::IgnoreCase) && !Model().ItemDescription(Id).Contains(CollectionSearch,ESearchCase::IgnoreCase))continue;
+        Matches.push_back(Id);
+    }
+    std::sort(Matches.begin(),Matches.end(),[this](const auto& A,const auto& B){return Model().ItemName(A).Compare(Model().ItemName(B),ESearchCase::IgnoreCase)<0;});
+    if(std::find(Matches.begin(),Matches.end(),CollectionRecipe)==Matches.end())CollectionRecipe=Matches.empty()?std::string{}:Matches.front();
+    Add(V,Text(FString::Printf(TEXT("%llu shown · %llu discovered in this profile"),static_cast<uint64>(Matches.size()),Current()?static_cast<uint64>(Current()->profile.recipes.size()):0),17,Muted));
+    auto List=SNew(SVerticalBox);
+    for(const auto& Id:Matches)Add(List,Button(Model().ItemName(Id),[this,Id](){CollectionRecipe=Id;bResetCollectionDetail=true;++Model().ViewRevision;},true,CollectionRecipe==Id),7);
+    if(Matches.empty())Add(List,Text(Current()&&!Current()->profile.recipes.empty()?TEXT("No discovered recipes match. Try another search or kind."):TEXT("Your Collection is empty. Start a campaign and inspect recipes to discover them."),20));
+    auto Detail=SNew(SVerticalBox);
+    if(!CollectionRecipe.empty())
+    {
+        Add(Detail,RecipeFacts(CollectionRecipe));
+        Add(Detail,Text(TEXT("DISCOVERED"),16,Gold));
+        Add(Detail,Text(TEXT("This is the printed recipe. Current-build discounts, cooldowns and copy enhancements are shown in your active Memory."),18,Muted));
+    }
+    auto H=SNew(SHorizontalBox);H->AddSlot().FillWidth(.40f).Padding(0,0,25,0)[Scroll(TEXT("collection-list"),List)];
+    H->AddSlot().FillWidth(.60f)[Box(Scroll(TEXT("collection-detail"),Detail),FMargin(28))];
+    V->AddSlot().FillHeight(1)[H];return V;
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::Defeat()
+{
+    auto Signal=SNew(SVerticalBox);
+    Add(Signal,Text(TEXT("HOSTILE SIGNAL  /  CHANNEL OPEN"),16,Gold));
+    Add(Signal,SNew(SBox).WidthOverride(410).HeightOverride(370)[SNew(SFoundryHostileSignal)]);
+    Add(Signal,Text(TEXT("“Another intruder. Another pile of scrap.”"),25,Gold));
+    auto Outcome=SNew(SVerticalBox);Add(Outcome,Text(TEXT("GAME OVER"),49,Gold));
+    Add(Outcome,Text(TEXT("Mara fell at Cinderwall."),28));
+    Add(Outcome,Text(TEXT("This campaign has ended. Your discovered recipes and character unlocks remain in this profile."),22));
+    Add(Outcome,Text(TEXT("A new campaign starts with Mara's basic weapon and starter recipes. Your previous credits, parts and carried cores do not carry over."),19,Muted));
+    Add(Outcome,Button(TEXT("New Game · Mara"),[this](){Model().StartNew();},!Model().bSaveUnavailable));
+    Add(Outcome,Button(TEXT("Browse retained Collection"),[this](){Nav(TEXT("collection"));}));
+    Add(Outcome,Button(TEXT("Return to title"),[this](){Nav(TEXT("title"));}));
+    auto H=SNew(SHorizontalBox);H->AddSlot().AutoWidth().Padding(25,25,60,25).VAlign(VAlign_Center)[SNew(SBox).WidthOverride(445)[Signal]];
+    H->AddSlot().FillWidth(1).VAlign(VAlign_Center).Padding(15,30,40,30)[Outcome];return Box(H,FMargin(20));
 }
 TSharedRef<SWidget> SFoundryCampaignUI::Arrival()
 {

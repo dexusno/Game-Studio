@@ -99,6 +99,67 @@ void SynchronizeStaticRenderBounds(UWorld* World)
     }
     UE_LOG(LogFoundryHost, Display, TEXT("ART_RENDER_BOUNDS_SYNC assets=%d components=%d"), Corrected.Num(), Components);
 }
+
+void ComposeCinderwallDepth(UWorld* World)
+{
+    // Keep the contact deck and nearby machinery in place. The factory layer
+    // sits beyond the canal, leaving a visible horizon for the fixed far city.
+    AStaticMeshActor* ContactDeck = nullptr;
+    for (TActorIterator<AStaticMeshActor> Actor(World); Actor; ++Actor)
+    {
+        if (!Actor->ActorHasTag(TEXT("CinderwallSceneryV002"))) continue;
+        UStaticMesh* Mesh = Actor->GetStaticMeshComponent()->GetStaticMesh();
+        if (!Mesh || !Mesh->GetRenderData()) continue;
+        if (Mesh->GetName().Contains(TEXT("combat_deck"))) ContactDeck = *Actor;
+        if (Mesh->GetName().Contains(TEXT("outer_apron")))
+        {
+            // The lower industrial yard supports the distant buildings and
+            // closes the view beneath the combat bridge.
+            auto* Component = Actor->GetStaticMeshComponent();
+            Component->SetMobility(EComponentMobility::Movable);
+            Actor->AddActorWorldOffset(FVector(0, 0, -700));
+            Component->SetMobility(EComponentMobility::Static);
+            for (int32 Slot = 0; Slot < Component->GetNumMaterials(); ++Slot)
+                if (auto* Ground = Component->CreateDynamicMaterialInstance(Slot))
+                {
+                    Ground->SetScalarParameterValue(TEXT("UseTexture"), 0);
+                    Ground->SetVectorParameterValue(TEXT("FlatColor"), FLinearColor(.025f, .035f, .043f));
+                    Ground->SetScalarParameterValue(TEXT("Roughness"), .94f);
+                    Ground->SetScalarParameterValue(TEXT("Metallic"), .05f);
+                    Ground->SetScalarParameterValue(TEXT("NormalStrength"), 0);
+                }
+        }
+        else if (Mesh->GetName().Contains(TEXT("factory_")))
+        {
+            const FVector Center = Actor->GetActorTransform().TransformPosition(FVector(Mesh->GetRenderData()->Bounds.Origin));
+            // Imported scenery is static. Permit this one startup placement,
+            // then restore static mobility before the first visible frame.
+            Actor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
+            Actor->AddActorWorldOffset(FVector(Center.X * 1.2, Center.Y * 1.2, -700));
+            Actor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Static);
+            UE_LOG(LogFoundryHost, Display, TEXT("SCENERY_DEPTH asset=%s offset=%s"), *Mesh->GetName(), *Actor->GetActorLocation().ToString());
+        }
+    }
+    if (ContactDeck)
+    {
+        // Continue the authored paving beneath the wider shooting view. These
+        // adjacent static sections are scenery, with no collision or targeting.
+        const FVector Offsets[] = {FVector(2300, 0, 0), FVector(0, 750, 0), FVector(2300, 750, 0)};
+        auto* Source = ContactDeck->GetStaticMeshComponent();
+        for (const FVector& Offset : Offsets)
+        {
+            auto* Extension = World->SpawnActor<AStaticMeshActor>(ContactDeck->GetActorLocation() + Offset, ContactDeck->GetActorRotation());
+            auto* Component = Extension->GetStaticMeshComponent();
+            Component->SetMobility(EComponentMobility::Movable);
+            Component->SetStaticMesh(Source->GetStaticMesh());
+            for (int32 Slot = 0; Slot < Source->GetNumMaterials(); ++Slot) Component->SetMaterial(Slot, Source->GetMaterial(Slot));
+            Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+            Component->SetMobility(EComponentMobility::Static);
+            Extension->Tags.Add(TEXT("CinderwallDepthExtension"));
+            UE_LOG(LogFoundryHost, Display, TEXT("SCENERY_DECK_EXTENSION offset_cm=%s source=%s collision=0"), *Offset.ToString(), *Source->GetStaticMesh()->GetName());
+        }
+    }
+}
 }
 
 AFoundryStage::AFoundryStage()
@@ -159,8 +220,9 @@ void AFoundryStage::BeginPlay()
     if (!bTechnicalMode)
     {
         FString SavePath = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Campaign/profile.ofsave"));
-        FParse::Value(FCommandLine::Get(), TEXT("FoundrySave="), SavePath);
-        Campaign = MakeUnique<FFoundryCampaign>(*Session, FPaths::ConvertRelativePathToFull(SavePath));
+        const bool bExplicitSave = FParse::Value(FCommandLine::Get(), TEXT("FoundrySave="), SavePath);
+        const bool bFixedSave = bExplicitSave || bCampaignProbe || FParse::Param(FCommandLine::Get(), TEXT("FoundryInspectSave"));
+        Campaign = MakeUnique<FFoundryCampaign>(*Session, FPaths::ConvertRelativePathToFull(SavePath), bFixedSave);
 #if !UE_BUILD_SHIPPING
         if(FParse::Param(FCommandLine::Get(),TEXT("FoundryInspectSave")) && Campaign->Current())
         {
@@ -173,11 +235,13 @@ void AFoundryStage::BeginPlay()
     int32 StageActorCount = 0;
     int32 MaraStageCount = 0;
     int32 SceneryActorCount = 0;
+    int32 BackdropActorCount = 0;
     TSet<UStaticMesh*> StageMeshes;
     for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
     {
         if (Actor->ActorHasTag(TEXT("MaraGenerated"))) ++MaraStageCount;
         if (Actor->ActorHasTag(TEXT("CinderwallSceneryV002"))) ++SceneryActorCount;
+        if (Actor->ActorHasTag(TEXT("CinderwallBackdropV001"))) ++BackdropActorCount;
         if (!Actor->ActorHasTag(TEXT("CinderwallGenerated"))) continue;
         ++StageActorCount;
         UStaticMesh* Mesh = Actor->GetStaticMeshComponent()->GetStaticMesh();
@@ -199,18 +263,19 @@ void AFoundryStage::BeginPlay()
             checkf(FMath::IsNearlyEqual(Extent.X, 98.0, 1.0) && FMath::IsNearlyEqual(Extent.Y, 98.0, 1.0), TEXT("Cinderwall render geometry is not centimetre scale"));
         }
     }
-    checkf((SceneryActorCount == 19 && StageActorCount == 0 && MaraStageCount == 1) ||
+    checkf((SceneryActorCount == 19 && StageActorCount == 0 && MaraStageCount == 1 && BackdropActorCount == 1) ||
         (SceneryActorCount == 0 && StageActorCount == 47 && StageMeshes.Num() == 18 && MaraStageCount == 10),
-        TEXT("Stage must be complete legacy Art+MaraArt or the verified SceneryArt replacement with its Mara hopper"));
+        TEXT("Stage must be complete legacy Art+MaraArt or SceneryArt+BackdropArt with its Mara hopper"));
     UE_LOG(LogFoundryHost, Display, TEXT("ART_STAGE legacy_placements=%d legacy_meshes=%d scenery_v002=%d mara_stage=%d"), StageActorCount, StageMeshes.Num(), SceneryActorCount, MaraStageCount);
+    ComposeCinderwallDepth(GetWorld());
     Mara = GetWorld()->SpawnActor<AFoundryMara>();
     Mara->Initialize();
     if (bTechnicalMode) SpawnRobots();
 
     GetWorld()->SpawnActor<ASkyAtmosphere>();
     AExponentialHeightFog* Fog = GetWorld()->SpawnActor<AExponentialHeightFog>(FVector(0, 0, -250), FRotator::ZeroRotator);
-    Fog->GetComponent()->SetFogDensity(.009f);
-    Fog->GetComponent()->SetFogHeightFalloff(.2f);
+    Fog->GetComponent()->SetFogDensity(.018f);
+    Fog->GetComponent()->SetFogHeightFalloff(.15f);
     Fog->GetComponent()->SetFogInscatteringColor(FLinearColor(.18f, .24f, .30f));
     Fog->GetComponent()->SetFogMaxOpacity(.78f);
     Fog->GetComponent()->SetStartDistance(1200.f);
@@ -231,14 +296,14 @@ void AFoundryStage::BeginPlay()
     Fill->GetLightComponent()->SetRealTimeCaptureEnabled(true);
     Fill->GetLightComponent()->RecaptureSky();
 
-    const FVector PrepareLocation(-130, 2230, 740);
-    const FVector PrepareFocus(-130, -60, 40);
+    const FVector PrepareLocation(-130, 2230, 530);
+    const FVector PrepareFocus(-130, -60, 155);
     PreparationCamera = GetWorld()->SpawnActor<ACameraActor>(PrepareLocation, (PrepareFocus - PrepareLocation).Rotation());
     PreparationCamera->GetCameraComponent()->SetFieldOfView(52.0f);
-    const FVector ActionLocation(-1160, 920, 520);
-    const FVector ActionFocus(240, 0, 60);
+    const FVector ActionLocation(-1250, 965, 340);
+    const FVector ActionFocus(220, 0, 150);
     ActionCamera = GetWorld()->SpawnActor<ACameraActor>(ActionLocation, (ActionFocus - ActionLocation).Rotation());
-    ActionCamera->GetCameraComponent()->SetFieldOfView(55.0f);
+    ActionCamera->GetCameraComponent()->SetFieldOfView(57.0f);
 #if WITH_EDITOR
     // Editor -game may rebuild uncooked meshes, textures and animation data.
     // Start the visible encounter only after those loaded products are ready.
@@ -248,6 +313,14 @@ void AFoundryStage::BeginPlay()
     SynchronizeStaticRenderBounds(GetWorld());
     for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
     {
+        if (Actor->ActorHasTag(TEXT("CinderwallBackdropV001")))
+        {
+            const auto* Component = Actor->GetStaticMeshComponent();
+            const FVector Render = Component->GetStaticMesh()->GetRenderData()->Bounds.BoxExtent * 2;
+            const FVector Expected(30598.37, 20694.95, 14428.06);
+            checkf(Render.Equals(Expected, 2) && Component->Bounds.BoxExtent.Equals(Render * .5, 1), TEXT("Far-city source/render/culling dimensions must agree in centimetres"));
+            UE_LOG(LogFoundryHost, Display, TEXT("BACKDROP_RUNTIME_BOUNDS render_cm=%s fixed_world=1 ok=1"), *Render.ToString());
+        }
         if (Actor->ActorHasTag(TEXT("CinderwallGenerated")) && Actor->GetStaticMeshComponent()->GetStaticMesh()->GetName().Contains(TEXT("SM_CW_deck_")))
             checkf(FMath::IsNearlyEqual(Actor->GetStaticMeshComponent()->Bounds.BoxExtent.X, 98.0, 1.0), TEXT("Deck component culling bounds must match rendered centimetres"));
         if (Actor->ActorHasTag(TEXT("CinderwallSceneryV002")))
@@ -269,7 +342,7 @@ void AFoundryStage::BeginPlay()
         }
     }
     SetActionView(false, true);
-    if (bArtProbe || bRosterProbe) Session->bShowPanels = false;
+    if (bSmokeTest || bArtProbe || bRosterProbe) Session->bShowPanels = false;
     UE_LOG(LogFoundryHost, Display, TEXT("Host P13 ready. Cinderwall-v001 shared-core Mara teaching encounter. Smoke=%d ArtProbe=%d"), bSmokeTest, bArtProbe);
 }
 
@@ -280,13 +353,12 @@ void AFoundryStage::SpawnRobots()
     int32 Index = 0;
     for (const auto& Enemy : Session->State.enemies)
     {
+        const int32 PositionIndex = Index++;
         if (Enemy.dead || Enemy.escaped) continue;
-        const bool bRam = Enemy.definition == "C1-R02";
-        const FVector Position = bTechnicalMode && !bRosterProbe ? (bRam ? FVector(460, -180, 1.5) : FVector(100, 200, 1.5)) : RobotPosition(Index);
+        const FVector Position = RobotPosition(PositionIndex);
         AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(Position, FRotator::ZeroRotator);
         Robot->Initialize(Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()), Enemy.maxHp, Enemy.tiles, Enemy.robotAction == "blast");
         Robots.Add(Robot);
-        ++Index;
     }
     FrameRoster();
 }
@@ -316,10 +388,16 @@ void AFoundryStage::SpawnMissingRobots()
 
 FVector AFoundryStage::RobotPosition(int32 Index) const
 {
-    // Screen staging only. Core IDs, targets, formation order and hit rules do
-    // not depend on these coordinates. Spread bodies across depth and width.
-    static const FVector Slots[] = {FVector(100, 200, 1.5), FVector(460, -180, 1.5), FVector(830, 220, 1.5), FVector(900, -180, 1.5)};
-    return Slots[Index % UE_ARRAY_COUNT(Slots)] + FVector(160 * (Index / UE_ARRAY_COUNT(Slots)), -340 * (Index / UE_ARRAY_COUNT(Slots)), 0);
+    // Visual staging only. Keep the single small Mite in the nearer lane and
+    // separate its larger companions behind it. Dead entries retain their slot;
+    // core IDs, formation order, targeting and hit rules do not change.
+    if (Session && Index < static_cast<int32>(Session->State.enemies.size()) && Session->State.enemies[Index].definition == "C1-R01")
+        return FVector(300, -180, 1.5);
+    int32 LargeIndex = 0;
+    if (Session) for (int32 I = 0; I < Index && I < static_cast<int32>(Session->State.enemies.size()); ++I)
+        if (Session->State.enemies[I].definition != "C1-R01") ++LargeIndex;
+    static const FVector Slots[] = {FVector(560, -20, 1.5), FVector(960, 220, 1.5), FVector(940, -230, 1.5)};
+    return Slots[LargeIndex % UE_ARRAY_COUNT(Slots)] + FVector(160 * (LargeIndex / UE_ARRAY_COUNT(Slots)), -340 * (LargeIndex / UE_ARRAY_COUNT(Slots)), 0);
 }
 
 void AFoundryStage::FrameRoster()
@@ -328,10 +406,10 @@ void AFoundryStage::FrameRoster()
     const bool Wide = Session->State.enemies.size() > 2;
     if (Wide == bWideRoster) return;
     bWideRoster = Wide;
-    const FVector PrepLocation = Wide ? FVector(70, 2430, 800) : FVector(-130, 2230, 740);
-    const FVector PrepFocus = Wide ? FVector(70, -60, 40) : FVector(-130, -60, 40);
-    const FVector ShotLocation = Wide ? FVector(-1300, 1012, 566) : FVector(-1160, 920, 520);
-    const FVector ShotFocus(240, 0, 60);
+    const FVector PrepLocation = Wide ? FVector(70, 2430, 580) : FVector(-130, 2230, 530);
+    const FVector PrepFocus = Wide ? FVector(70, -60, 155) : FVector(-130, -60, 155);
+    const FVector ShotLocation = Wide ? FVector(-1400, 1050, 370) : FVector(-1250, 965, 340);
+    const FVector ShotFocus(220, 0, 150);
     PreparationCamera->SetActorLocationAndRotation(PrepLocation, (PrepFocus - PrepLocation).Rotation());
     ActionCamera->SetActorLocationAndRotation(ShotLocation, (ShotFocus - ShotLocation).Rotation());
     UE_LOG(LogFoundryHost, Display, TEXT("CAMERA_ROSTER wide=%d bodies=%d presentation_only=1"), Wide, static_cast<int32>(Session->State.enemies.size()));
@@ -398,6 +476,9 @@ void AFoundryStage::PresentEvents(const std::vector<overkill::Event>& Events)
         // Utility/support kills need the same complete death/fade window as a
         // main shot. Keep the current viewpoint; only presentation/input waits.
         ReturnCameraAfter = FMath::Max(ReturnCameraAfter, 2.25f);
+        if (Session->State.phase == overkill::Phase::Victory) ActionCaption = TEXT("Securing salvage…");
+        else if (Session->State.phase == overkill::Phase::Defeat) ActionCaption = TEXT("Systems failing…");
+        else if (ActionCaption != TEXT("Firing…") && ActionCaption != TEXT("Enemy turn")) ActionCaption = TEXT("Enemy destroyed");
 #if FOUNDRY_WITH_CAMPAIGN
         if (Campaign) ++Campaign->ViewRevision;
 #endif
@@ -480,6 +561,45 @@ void AFoundryStage::Control(const FString& Command)
     else
 #endif
         bCommitted = Session->Control(Command);
+    FinishCommandPresentation(Command, bCommitted);
+}
+
+#if FOUNDRY_WITH_CAMPAIGN
+bool AFoundryStage::SubmitCampaignAction(const overkill::CampaignAction& Action, std::vector<overkill::Event>& OutEvents)
+{
+    OutEvents.clear();
+    if (!Campaign || !Session || IsPresentationBusy() || !Session->CommittedEvents.empty()) return false;
+    const auto* Current = Campaign->Current();
+    // The UI adapter supplies these fields for ordinary controls. A typed
+    // replay must already identify its exact transaction, rather than silently
+    // accepting the adapter's replacement of an incorrect run/sequence.
+    if (!Current || Action.runId != Current->runId || Action.sequence != Current->nextTransaction) return false;
+    if (!Campaign->Apply(Action)) return false;
+    OutEvents = Session->CommittedEvents;
+    FString Command;
+    if (Action.type == overkill::CampaignActionType::Combat)
+    {
+        switch (Action.combat.type)
+        {
+        case overkill::ActionType::Load: Command = TEXT("load"); break;
+        case overkill::ActionType::Unload: Command = TEXT("unload"); break;
+        case overkill::ActionType::Fire: Command = TEXT("fire"); break;
+        case overkill::ActionType::EndTurn: Command = TEXT("end"); break;
+        default: break;
+        }
+    }
+    FinishCommandPresentation(Command, true);
+    return true;
+}
+#endif
+
+void AFoundryStage::FinishCommandPresentation(const FString& Command, bool bCommitted)
+{
+#if FOUNDRY_WITH_CAMPAIGN
+    // A new encounter's actors must exist before its already-committed events
+    // are displayed. This synchronization cannot mutate the rules state.
+    if (Campaign && bCommitted) RefreshCampaignWorld();
+#endif
     if (bCommitted && Command == TEXT("load"))
     {
         SetActionView(true);

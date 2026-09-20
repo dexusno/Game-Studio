@@ -1,0 +1,6 @@
+PASS P01 actual directory junction cannot alias another campaign
+PASS P02 exclusive metadata locks preserve successful selection and campaign
+PASS P03 metadata version failure and previous-only names remain browsable
+PASS P04 Unicode control characters cannot become profile names
+PASS P05 archived campaign isolation and exactly one real EndTurn defeat
+SUMMARY 5 passed, 0 failed, 69 assertions
