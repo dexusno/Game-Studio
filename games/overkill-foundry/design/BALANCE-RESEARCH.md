@@ -1,6 +1,6 @@
 # Overkill Foundry — balance research and proposed test method
 
-**20 September tuning update:** [BETA-TUNING.md](BETA-TUNING.md) and its versioned data now select the initial 80-HP, ten-material, shop/reward and three-city values under Klaus's tuning instruction. Earlier numerical proposals below are the research history. All 606 recipe clarifications are complete; runtime balance remains untested. The profile also records a proven starter resale/stalling loop and its pending overtime question.
+**20 September tuning update:** [BETA-TUNING.md](BETA-TUNING.md) and its versioned data now select the initial 80-HP, ten-material, shop/reward and three-city values under Klaus's tuning instruction. Earlier numerical proposals below are the research history. All 606 recipe clarifications are complete; runtime balance remains untested. The profile records the owner's single-Mite placement decision and accepts residual survivor farming as a beta test concern; overtime is not selected.
 
 13 September 2026. Requested by Klaus during the stacked-ammunition discussion. This records developer documentation and a proposed method for our game. It does not establish tuned values or authorize implementation. Companion: [stacked ammunition and build strategies](BUILD-STRATEGY-STUDY.md).
 

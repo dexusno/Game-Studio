@@ -14,14 +14,13 @@ import re
 from pathlib import Path
 
 
-VERSION = "paper-route-1"
+VERSION = "paper-route-2-single-mite"
 # Each tuple is an authored complete formation. No arbitrary robot attachments.
 FORMATIONS = {
-    "mites": ("C1-R01", "C1-R01"),
+    "ram_mite": ("C1-R02", "C1-R01"),
     "ram": ("C1-R02",), "cask": ("C1-R05",),
     "knuckle": ("C1-R08",), "binder": ("C1-R04",),
     "nest": ("C1-R07",), "sentinel": ("C1-R03",),
-    "worked": ("C1-R01", "C1-R01", "C1-R02"),
     "emitter_mite": ("C1-R06", "C1-R01"),
     "binder_mite": ("C1-R04", "C1-R01"),
     "cargo": ("C2-R01",), "latch": ("C2-R05",),
@@ -36,13 +35,13 @@ FORMATIONS = {
     "aegis_gunner": ("C3-R02", "C3-R03"),
 }
 OPENING = {
-    1: ("mites", "ram", "cask"),
+    1: ("ram_mite", "ram", "cask"),
     2: ("cargo", "latch", "courier"),
     3: ("litany", "vault", "surveyor"),
 }
 # (mercenary, tier, city, added middle, added late, preferred officer, boss)
 CITIES = (
-    ("Mara", 1, "Cinderwall", ("knuckle", "binder"), ("worked", "nest"), 1, 1),
+    ("Mara", 1, "Cinderwall", ("knuckle", "binder"), ("nest",), 1, 1),
     ("Mara", 2, "Coilbridge", ("screen_cargo", "brood"), ("loom_cargo", "booster_cargo"), 1, 1),
     ("Mara", 3, "Glassward", ("aegis_gunner",), ("assembly", "siphon"), 3, 2),
     ("Ivo", 1, "Brinegate", ("knuckle", "nest"), ("sentinel", "emitter_mite"), 3, 2),
@@ -155,6 +154,11 @@ def check_registry():
     document = (design / "CAMPAIGN-PROGRESSION.md").read_text(encoding="utf-8")
     assert len(CITIES) == len({c[2] for c in CITIES}) == 12
     assert len(ids) == 42
+    for robots in FORMATIONS.values():
+        mites = robots.count("C1-R01")
+        assert mites <= 1, "Rivet Mites cannot form a pair."
+        if mites:
+            assert any(robot != "C1-R01" for robot in robots), "A starting Mite needs a stronger companion."
     for city in CITIES:
         character, tier, name, middle, late, preferred, boss = city
         assert name in document
@@ -238,7 +242,7 @@ def main():
     assert len(pattern_variants) == 2
     print(f"PASS: 12 cities, 4 distinct graphs, {args.seeds} seeds/city, "
           f"{states:,} reachable offer states; gated pools, quotas, Regular alternatives, "
-          "boss access, reproducibility and Cable Binder packet boundaries.")
+          "boss access, reproducibility, single-Mite formations and Cable Binder packet boundaries.")
     print("NOT TESTED: combat/HP balance, reward economy, teaching-history filters, "
           "district weights, anti-repeat history, alternate graph variants, engine saves or UI.")
 

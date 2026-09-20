@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "profile_id": "beta-balance-v1",
+  "profile_id": "beta-balance-v1.1",
   "date": "2026-09-20",
   "status": "Selected by assistant as owner-authorized initial tuning; not playtested",
   "scope": "Numerical design fixture for all four mercenaries and all three city tiers; not a runtime content manifest or an MVP scope selection",
@@ -357,11 +357,7 @@
     "global_hp_multiplier_percent": 100,
     "global_attack_addition": 0,
     "default_rivet_mite_hp": 7,
-    "approved_encounter_rivet_mite_hp_override": [
-      6,
-      7
-    ],
-    "ordinary_fight_overtime": "unselected; owner question pending, no overtime in baseline",
+    "ordinary_fight_overtime": "Not selected. Owner accepts a lone surviving Mite as a non-blocking beta case; no overtime.",
     "core_credit_values_by_roster_id": {
       "C1-R01": [
         5
@@ -394,7 +390,7 @@
         40
       ],
       "C1-O03": [
-        30
+        35
       ],
       "C1-B01": [
         100
@@ -508,7 +504,7 @@
       "Arc Spool": 4,
       "Brake Drone": 5
     },
-    "core_rule": "Values are Credits paid when each destroyed body's core is sold, not automatic money or materials. Multi-body arrays follow roster body order; listed Brake Drones are already included. Finite spawned helpers get their own stated cores if actually destroyed. No body pays twice, no core for fleeing or unspawned robots. Split Chassis pays 30 plus two 5-Credit death mites when those are destroyed.",
+    "core_rule": "Values are Credits paid when each destroyed body's core is sold, not automatic money or materials. Multi-body arrays follow roster body order; listed Brake Drones are already included. Finite spawned helpers get their own stated cores if actually destroyed. No body pays twice, no core for fleeing or unspawned robots. Split Chassis pays 35 plus one 5-Credit death mite when it is destroyed, retaining a 40-Credit Officer total.",
     "reference_regular_encounter_core_value_by_city": {
       "1": 15,
       "2": 25,
@@ -523,6 +519,16 @@
       "1": 100,
       "2": 125,
       "3": 150
+    },
+    "approved_encounter_rivet_mite_hp": 7,
+    "rivet_mite_placement": {
+      "max_alive_per_encounter": 1,
+      "initial_placement_requires_stronger_companion": true,
+      "lone_survivor_or_death_spawn_allowed": true,
+      "coil_nest_live_mite_limit": 1,
+      "coil_nest_lifetime_mites": 4,
+      "split_chassis_death_mites": 1,
+      "farming_status": "Residual lone-survivor farming is an accepted beta playtest concern, not a blocker."
     }
   },
   "playtest_targets_not_observations": {
@@ -643,7 +649,7 @@
   },
   "source_sha256": {
     "recipe_rows": "869e19caaf67fb12496f5f0dd0238664e9850e23b2c1c9ce182beeecd1c84516",
-    "enemy_rows": "61aecc0d928f381f6f7c5efbba6a776e82aff352f24a21b2bea1aa7630862c3e",
+    "enemy_rows": "6356c0dbe8c4c2157c508901c96741ef3c45ae5bc66d3cbc8c85ddd96134091c",
     "shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
     "character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c"
   }

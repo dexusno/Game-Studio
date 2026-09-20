@@ -1,9 +1,9 @@
 {
-  "profile": "beta-balance-v1",
-  "profile_sha256": "c65d4e8d0305c699bdefeda4139eddc80b6bf6ddca32d3836fd3ab62dd3ec168",
+  "profile": "beta-balance-v1.1",
+  "profile_sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
   "source_sha256": {
     "recipe_rows": "869e19caaf67fb12496f5f0dd0238664e9850e23b2c1c9ce182beeecd1c84516",
-    "enemy_rows": "61aecc0d928f381f6f7c5efbba6a776e82aff352f24a21b2bea1aa7630862c3e",
+    "enemy_rows": "6356c0dbe8c4c2157c508901c96741ef3c45ae5bc66d3cbc8c85ddd96134091c",
     "shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
     "character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c"
   },
@@ -530,7 +530,7 @@
   },
   "boss_note": "HP divided by assumed EFFECTIVE throughput, including initial companion HP. Armor, reactions, repairs, move order, status kills, forced downtime and target switching are not modeled; actual turn counts await the shared core.",
   "starter_stall_witness": {
-    "enemy": "two C1-R01 Rivet Mites, 7 HP each; 5 damage each per enemy phase",
+    "enemy": "one surviving C1-R01 Rivet Mite, 7 HP; 5 damage per enemy phase after its stronger companion is destroyed",
     "steer": "Glass",
     "haul": [
       3,
@@ -540,20 +540,21 @@
       1
     ],
     "shield_recipes": [
-      "SH002",
-      "SH006"
+      "SH002"
     ],
-    "shield": 10,
-    "incoming_attack_total": 10,
+    "shield": 6,
+    "incoming_attack_total": 5,
     "sale_recipes": [
       "SH001",
       "SH003",
-      "SH004"
+      "SH004",
+      "SH006"
     ],
     "whole_credit_sale_values": {
       "SH001": 2,
       "SH003": 2,
-      "SH004": 4
+      "SH004": 4,
+      "SH006": 4
     },
     "cost_each_round": [
       3,
@@ -569,9 +570,9 @@
       1,
       1
     ],
-    "credits_per_round": 8,
-    "credits_after_20_rounds_excluding_start": 160,
-    "conclusion": "Positive income, zero HP loss, no declining resource or use allowance: unbounded under current draft Mite behaviour. Overtime remains a pending design choice, not implemented by this calculation."
+    "credits_per_round": 12,
+    "credits_after_20_rounds_excluding_start": 240,
+    "conclusion": "Positive income remains possible after the stronger companion dies. The owner accepts a single remaining Mite for beta; retain this test concern without blocking implementation or adding overtime. Standalone or paired-Mite formations are forbidden."
   },
   "tier_fixtures": [
     {

@@ -1,4 +1,4 @@
-"""Check beta-balance-v1 against authored data; no combat engine or win-rate model.
+"""Check the beta-balance-v1 family against authored data; no combat engine or win-rate model.
 
 Run with --write to refresh the compact, deterministic JSON evidence beside this
 script. Source pins deliberately require a reviewed profile update after content
@@ -111,24 +111,25 @@ def analyze(profile):
             }
 
     # This is a repeatable cost/protection witness, not simulated combat.
-    # Two ordinary 7-HP Mites keep attacking for 5 each; player never attacks.
-    defend = [by_id[x] for x in ("SH002", "SH006")]
-    sell = [by_id[x] for x in ("SH001", "SH003", "SH004")]
+    # One 7-HP Mite survives its stronger companion and attacks for 5 each turn.
+    # Owner accepts this residual case for beta; it is not a standalone offer.
+    defend = [by_id["SH002"]]
+    sell = [by_id[x] for x in ("SH001", "SH003", "SH004", "SH006")]
     assert all(r["cooldown"] == "None" for r in defend + sell)
     supply = [n + (steer if m == "Glass" else 0) for m, n in zip(MATERIALS, foundation)]
     used = cost_sum(defend + sell)
     assert affordable(used, supply)
     sales = {r["id"]: sum(c * p for c, p in zip(r["cost"], prices)) // 2 for r in sell}
     stall = {
-        "enemy": "two C1-R01 Rivet Mites, 7 HP each; 5 damage each per enemy phase",
+        "enemy": "one surviving C1-R01 Rivet Mite, 7 HP; 5 damage per enemy phase after its stronger companion is destroyed",
         "steer": "Glass", "haul": supply,
-        "shield_recipes": [r["id"] for r in defend], "shield": 10, "incoming_attack_total": 10,
+        "shield_recipes": [r["id"] for r in defend], "shield": 6, "incoming_attack_total": 5,
         "sale_recipes": [r["id"] for r in sell], "whole_credit_sale_values": sales,
         "cost_each_round": list(used), "unspent_each_round": [s-c for s, c in zip(supply, used)],
         "credits_per_round": sum(sales.values()), "credits_after_20_rounds_excluding_start": 20 * sum(sales.values()),
-        "conclusion": "Positive income, zero HP loss, no declining resource or use allowance: unbounded under current draft Mite behaviour. Overtime remains a pending design choice, not implemented by this calculation."
+        "conclusion": "Positive income remains possible after the stronger companion dies. The owner accepts a single remaining Mite for beta; retain this test concern without blocking implementation or adding overtime. Standalone or paired-Mite formations are forbidden."
     }
-    assert stall["credits_per_round"] == 8
+    assert stall["credits_per_round"] == 12
 
     # Gross purchasing envelopes, expressly not sampled routes or combat results.
     economy = {}

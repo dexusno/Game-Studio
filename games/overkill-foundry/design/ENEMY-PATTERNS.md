@@ -10,7 +10,7 @@ Keep the [roster](ENEMY-ROSTER.md)'s printed cycle as each robot's default/refer
 
 | Pattern family | What may vary | What stays fixed |
 | --- | --- | --- |
-| Teaching/reference | Formation selection between fights | The approved mites/ram worked encounter and its Charge → Blast cycle remain exact fixtures. |
+| Teaching/reference | Formation selection between fights | The revised single-Mite/Ram worked encounter and its Charge → Blast cycle are the current exact fixtures. The older two-Mite version is historical. |
 | Cycle offset | An explicitly allowed starting position | No starting on a blast that requires an earlier Charge; no skipped first-exposure preparation move. |
 | Action packet | Order of named light/debuff actions within a bounded packet | Same actions/counts per packet; locked opener, maximum debuff frequency and required recovery. |
 | Charge chain | Legal light actions before entering the chain | Charge commits its described next heavy action. No random cancellation, surprise heavier blast or another blast without Charge. |
