@@ -1,0 +1,274 @@
+{
+  "scope": "15 proposed operation links; review of all15 named author groups plus13 independent groups",
+  "links": [
+    {
+      "obligation": "robot:C1-R04",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-R04 Cable Binder exact body, default and veteran packets, Fouling clock, core identity"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-R04",
+        "ENEMY-PATTERNS Cable Binder packet/committed intent",
+        "ROBOT-EFFECTS FX09",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "22 HP; 4x2/6+Fouling/12 cycle; default before veteran packets; both saved packet orders with Spray opener and 26 total; next-turn expiry; core15.",
+      "independent_groups": [
+        "E01 Binder actual paid Ammo surcharge excludes Shield and stored Fire; unaffordable use is atomic"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Three Binders in E01 are a controlled stacking boundary, not an allowed formation. Progress-gate eligibility is a separate route obligation."
+    },
+    {
+      "obligation": "robot:C1-R05",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-R05 Pressure Cask exact body, alternating pressure, armour and one core"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-R05",
+        "ROBOT-EFFECTS FX01/FX02",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "24 HP/Armor1; 8 attack, no-hit Drive+2, 10 then12; preview updates; armor reduces real direct hit; core15.",
+      "independent_groups": [
+        "E06 nonlethal enemy Acid Etch bypasses defenses and decays through attack and support turns"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": ""
+    },
+    {
+      "obligation": "robot:C1-R07",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-R07 Coil Nest finite four helpers, birth timing, locked support, distinct cores"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-R07",
+        "ENEMY-PATTERNS conditional support commitments",
+        "ROBOT-EFFECTS FX13",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "28 HP; exactly four7-HP Mites, at most one living; birth delay; alternating six-damage attack; locked attack does not reroll after helper kill; distinct18/5 cores and terminal after final body.",
+      "independent_groups": [
+        "E04 Nest death ends remaining supply without deleting its already living helper"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": ""
+    },
+    {
+      "obligation": "robot:C1-R08",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-R08 Knuckle Press exact body, brace expiry, two hits, one next-turn Leak"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-R08",
+        "ROBOT-EFFECTS FX08",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "28 HP; Brace Armor2 through preparation expires before4x2; next-turn Leak2 once on total; heavy13; repeat; core18.",
+      "independent_groups": [
+        "E02 Press Leak drains assembled parts once and excludes direct protection even when no parts exist"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Direct active protection is a controlled balance, not an acquired upgrade route."
+    },
+    {
+      "obligation": "robot:C1-O01",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-O01",
+        "ROBOT-EFFECTS FX02/FX03",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "52 HP; 13 then4x3 then15 then6x3 after one Drive per completed turn; no gain on actor pre/post-action death or interrupted player death; core40.",
+      "independent_groups": [],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": ""
+    },
+    {
+      "obligation": "robot:C1-O03",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-O03 Split Chassis three-action cycle, Burn timing, one death release and two cores"
+      ],
+      "source_clauses": [
+        "ENEMY-ROSTER C1-O03",
+        "ROBOT-EFFECTS FX13",
+        "TIMING first death and later-hit targeting",
+        "beta-balance core values"
+      ],
+      "reviewed_oracle": "48 HP;5x2, Burn2 without same-phase tick,4x3; single distinct7-HP death helper with next-round activation; core35+5; no premature victory or replacement targeting.",
+      "independent_groups": [
+        "E03 two spread hits cannot retarget a destroyed Chassis to its newly born Mite"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Inspection UI visibility is not exercised. Mixed Ram/Chassis in E03 is a controlled multi-target boundary, not an authored offered formation."
+    },
+    {
+      "obligation": "status:thermal-runaway",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "Thermal Runaway mirrors: post-action enemy tick, pre-enemy player tick, Shield and lethal stops"
+      ],
+      "source_clauses": [
+        "ROBOT-EFFECTS existing vocabulary Burn",
+        "TIMING End Turn and enemy actions"
+      ],
+      "reviewed_oracle": "Enemy Burn after action, Shield before HP, bypass Armor/Tiles, one decrement per round; player Burn before enemy actions uses installed Shield; lethal tick stops later actors; actual Chassis2 to1 to0 timing.",
+      "independent_groups": [],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": ""
+    },
+    {
+      "obligation": "status:acid-etch",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "Acid Etch mirrors: pre-action bypass, player post-reset pre-delivery tick and lethal interruption"
+      ],
+      "source_clauses": [
+        "ROBOT-EFFECTS existing vocabulary Corrosion",
+        "TIMING reset before next-turn grants"
+      ],
+      "reviewed_oracle": "Enemy direct HP loss before actions bypasses Armor/Shield/Tiles; lethal prevents attack; independent3/2/1 ticks through attack/support reach zero. Player post-reset pre-delivery bypass; lethal blocks delivery while survival grants it.",
+      "independent_groups": [
+        "E06 nonlethal enemy Acid Etch bypasses defenses and decays through attack and support turns"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Player Corrosion, defenses and retention are prepared test state. This does not establish an eligible source that applies player Corrosion naturally."
+    },
+    {
+      "obligation": "status:drive-fault",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "Drive Fault mirrors: repeated main shots, target bonus order, multi-hit reduction and no-attack decay"
+      ],
+      "source_clauses": [
+        "ROBOT-EFFECTS existing vocabulary Weaken",
+        "TIMING status-specific decay"
+      ],
+      "reviewed_oracle": "Player reduction repeats across shots without consumption, clamps before Mark; enemy flat reduction per hit, not per attack; one decay at correct phase even without attacks; final decrement reaches zero.",
+      "independent_groups": [
+        "E05 Drive Fault clamps each hit before first-hit Mark and decays only once"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Player Weaken is a prepared mirror boundary, not natural first-city application evidence."
+    },
+    {
+      "obligation": "status:FX03",
+      "graph": "ce72d5dce85a",
+      "author_groups": [
+        "C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor"
+      ],
+      "source_clauses": [
+        "ROBOT-EFFECTS FX03",
+        "ENEMY-ROSTER C1-O01"
+      ],
+      "reviewed_oracle": "One Drive1 after completed real attack or controlled nonattack turn; per-hit next attack scaling; dead robot and terminal player death do not gain.",
+      "independent_groups": [],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Controlled Recover on Pursuer proves the generic nonattack completion clock, not a naturally offered Pursuer move. Boss-specific motor removal remains in its separate boss proof."
+    },
+    {
+      "obligation": "core.core-and-part-sales",
+      "graph": "94daf9b8e9a3",
+      "author_groups": [
+        "actual body core identity, manual sale, exact receipt replay and no resell",
+        "purchased physical identities and canonical per-part rounding",
+        "loaded and installed sale rejection, unload/removal eligibility and spent-Shield exclusion"
+      ],
+      "source_clauses": [
+        "PART-RESALE calculation/eligibility",
+        "TIMING core acceptance, campaign ownership, immutable part identity",
+        "beta-balance core/material values"
+      ],
+      "reviewed_oracle": "Killed per-body cores accepted without autosale; independent two-body allocation, stale/repeated receipt cannot pay again. Canonical9-reference floors each4. Reserve-only, loaded/installed blocked; untouched removed Shield eligible, spent Shield excluded. Actual paid-source/two-copy/free generated equivalent sales with configured5-credit Iron prove cost-origin independence.",
+      "independent_groups": [
+        "L04 paid source copied parts and generated equivalent sell by the current configured one-part reference",
+        "L06 two actual killed bodies produce distinct manually sold cores and stale sales cannot pay twice"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Representative types and configurable fixed shop prices, not all207 outputs or every economic upgrade; full physical-type proof is separate."
+    },
+    {
+      "obligation": "core.collection-discovery",
+      "graph": "94daf9b8e9a3",
+      "author_groups": [
+        "seen shop/reward alternatives, repeated discovery and skipped-choice persistence"
+      ],
+      "source_clauses": [
+        "TIMING profile lifetime, seen offers, Continue",
+        "BRIEF Collection history"
+      ],
+      "reviewed_oracle": "Shop/reward viewing records all candidates without ownership; sightings deduplicate; skipping viewed offers preserves facts. Independent Buy without OpenShop, rollback preservation, unviewed-skip exclusion and defeat/New Game persistence.",
+      "independent_groups": [
+        "L03 actual purchase rollback keeps seen recipe but restores money memory and stock on Continue",
+        "L05 unseen reward alternatives are not discovered by main skip or cancellation",
+        "L07 defeat preserves actually seen recipes and a fresh independent profile receives no leaked facts"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "No Collection screen categories/layout or disk-save behavior is exercised."
+    },
+    {
+      "obligation": "mystery:C1-M-PATROL",
+      "graph": "94daf9b8e9a3",
+      "author_groups": [
+        "Patrol compulsory combat, unchanged Continue, normal rewards and single progression"
+      ],
+      "source_clauses": [
+        "cinderwall-authored C1-M-PATROL acceptance/result",
+        "TIMING exact fight-entry/result commit"
+      ],
+      "reviewed_oracle": "Cannot Leave; actual Regular combat required; entry/Continue stable; ordinary recipe plus killed cores; route/restock once after victory; later reward navigation does not advance twice; defeat produces no noncombat payout, completion or restock.",
+      "independent_groups": [
+        "L02 Patrol defeat ends campaign without a noncombat payout or route completion",
+        "L03 actual purchase rollback keeps seen recipe but restores money memory and stock on Continue"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Prepared route prefix; route gate generation has its separate proof. New supplemental authored source is hashed, not silently treated as an input to the old graph."
+    },
+    {
+      "obligation": "core.profile-and-unlocks",
+      "graph": "94daf9b8e9a3",
+      "author_groups": [
+        "real boss result, single Ivo unlock, completion and profile facts across New Game"
+      ],
+      "source_clauses": [
+        "CAMPAIGN-PROGRESSION Mara city unlocks Ivo",
+        "TIMING profile lifetime, result once",
+        "BRIEF separate profiles and New Game confirmation"
+      ],
+      "reviewed_oracle": "Real boss result creates one Ivo fact and city receipt, no Ada/Noor; repeated receipt does not duplicate; New Game clears campaign ownership but preserves supplied ProfileFacts; final lethal recoil prevents unlock. New independent empty ProfileFacts value has no leaked discoveries.",
+      "independent_groups": [
+        "L01 simultaneous final boss death and lethal recoil cannot unlock Ivo or commit rewards",
+        "L07 defeat preserves actually seen recipes and a fresh independent profile receives no leaked facts"
+      ],
+      "decision": "partial-profile-layer-only",
+      "limits": "This graph does not execute profile-slot selection, one ongoing campaign per profile, replacement confirmation, storage/process recovery or future character routes. Pair with profile-manager evidence before binding the whole profile operation."
+    },
+    {
+      "obligation": "core.city-completion",
+      "graph": "94daf9b8e9a3",
+      "author_groups": [
+        "real boss result, single Ivo unlock, completion and profile facts across New Game"
+      ],
+      "source_clauses": [
+        "TIMING result once, reward abandonment, completion",
+        "CAMPAIGN-PROGRESSION Mara first-city gate",
+        "MVP single Cinderwall boundary"
+      ],
+      "reviewed_oracle": "Actual Gatebreaker destruction commits position13/one city receipt; remaining reward abandonment completes city; independent simultaneous last-robot/player death is defeat with no advancement/unlock.",
+      "independent_groups": [
+        "L01 simultaneous final boss death and lethal recoil cannot unlock Ivo or commit rewards"
+      ],
+      "decision": "supported-within-stated-mvp-core-scope",
+      "limits": "Single Mara Cinderwall MVP; route prefixes and terminal ammunition are prepared. No earned balance, three-city campaign, finale, rendering or disk claim."
+    }
+  ],
+  "production_defects": []
+}

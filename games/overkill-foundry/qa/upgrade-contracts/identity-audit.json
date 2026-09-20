@@ -1,0 +1,43 @@
+{
+  "result": "passed",
+  "scope": "Identity, exact source text, actual PASS and proposal linkage only; semantic sufficiency is in the independent review.",
+  "source_graph_sha256": "49b5f5045b558856d2ceeea4f10639bb2c3c62f209817784a649dc5d96f5ce38",
+  "captured_inputs": 54,
+  "captured_artifacts": 12,
+  "checked_archive_identities_including_failed_history": 144,
+  "source_rows_checked": 100,
+  "actual_named_groups": 106,
+  "proposed_ids": 94,
+  "residual_ids": [
+    "MAU-05",
+    "UGS-011",
+    "UGS-018",
+    "UGS-029",
+    "UGS-126",
+    "UGS-141"
+  ],
+  "rejected_in_memory_negative_controls": [
+    "invented PASS",
+    "wrong source hash",
+    "altered effect",
+    "wrong fixture line"
+  ],
+  "preserved_failed_history": [
+    {
+      "record": "ugs095-failure.json",
+      "inputs": 35,
+      "artifacts": 3,
+      "failures": [
+        "FAIL upgrade:UGS-095: New fight spreading Modifier recipe qualifies"
+      ]
+    },
+    {
+      "record": "ugs085-failure.json",
+      "inputs": 37,
+      "artifacts": 3,
+      "failures": [
+        "FAIL upgrade:UGS-085: Campaign rejection changed state"
+      ]
+    }
+  ]
+}

@@ -234,6 +234,7 @@ CampaignResult CampaignRules::apply(Campaign& original,const CampaignAction& act
             canShop(c);if(action.eventShop){const auto* offer=selectedRouteOffer(c.route);need(c.phase==CityPhase::Mystery && offer && offer->mystery=="C1-M-EXCHANGE","No event merchant is open.");}
             auto& stock=action.eventShop?c.eventShop:c.shop;auto* item=find(stock,action.subject);need(item && action.quantity>0 && item->quantity>=action.quantity,"Selected shop stock is unavailable.");
             const auto product=*item;const auto price=hooks_.productPrice?hooks_.productPrice(c,product):product.price;
+            need(product.kind!=ProductKind::Upgrade || product.definition!="UGS-085" || product.price>100,"Civic Credit Bond requires an undiscounted shop price above 100 Credits.");
             UpgradeEvent purchase;purchase.kind=UpgradeEventKind::Purchase;purchase.product=static_cast<PurchaseKind>(product.kind);purchase.definition=product.definition;purchase.subject=product.id;
             purchase.snapshotListeners=true;auto priorListeners=c.fight.upgrades;std::sort(priorListeners.begin(),priorListeners.end(),[](const OwnedUpgrade& a,const OwnedUpgrade& b){return a.order<b.order;});for(const auto& u:priorListeners)purchase.listeners.push_back(u.id);
             purchase.baseValue=times(product.price,action.quantity);purchase.actualValue=times(price,action.quantity);

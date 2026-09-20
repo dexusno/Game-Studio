@@ -1,0 +1,94 @@
+{
+  "build_commands": [
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "<game>\\core\\tests\\terminal",
+        "-B",
+        "<game>\\core\\build\\terminal-events",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": "core/build/terminal-events/configure.log",
+      "log_sha256": "b455453790bbfe64556cc18acf40f2be5696e93e301e1bb0b332764a648fd4f5"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "<game>\\core\\build\\terminal-events",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": "core/build/terminal-events/build.log",
+      "log_sha256": "e77a615b15819b6e352d3bb389695d5d57aa425d1669774f35a8e2792ab2d3ba"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "<game>\\core\\build\\terminal-events",
+        "--config",
+        "Release",
+        "--clean-first",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": "core/build/terminal-events/build-final.log",
+      "log_sha256": "de965a8d5dc5ce35bec968df810f461e7ad86f96ae6ce3438871c64444cb81e4"
+    }
+  ],
+  "captured_utc": "2026-09-20T17:05:11.967581+00:00",
+  "execution": {
+    "command": [
+      "core/build/terminal-events/Release/terminal_tests.exe"
+    ],
+    "executable_sha256": "3ba569927361f629605d66da6b1d1a965c694eb6d9c64650917ede720882b272",
+    "exit_code": 0,
+    "log": "core/tests/terminal/test.log",
+    "log_sha256": "380e71884ef861437fd683158e01bf82aa009f7ff714f4cc0e707c326414bb48"
+  },
+  "inputs": {
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/terminal/CMakeLists.txt": "c01550f8050e173a07674e1ef9314a0c97830fd33c3abfe0e16c1a5c9eb507b9",
+    "core/tests/terminal/README.md": "4ec0833b5990fb877c62b6acb5b5a9bd4a57e0ec5ebac72753a333b572167d85",
+    "core/tests/terminal/terminal_tests.cpp": "57b5afb7be2a3fe5712903f87cc7007dc162525efa1ba75e2f501f1900c5352c"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "tests": [
+    {
+      "id": "terminal::terminal notifications are unique; campaign completion effects and receipt were exactly once",
+      "result": "passed"
+    }
+  ],
+  "verified_build": "terminal-events-3ba569927361f629"
+}

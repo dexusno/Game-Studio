@@ -1,0 +1,153 @@
+{
+  "scope": "Preserved original failed executables, sources and logs; no failure has been relabeled as a pass.",
+  "captures": [
+    {
+      "archive": "core/build/mara-semantic-01",
+      "source_graph_sha256": "9935e50c2233c147f317ad6f276f8bd94bf0541a143aabe4d97c77087220ebfa",
+      "executable_sha256": "4e3e720079b3c13107f49a6f2bc7a1cba91bd2482a54a18fb30bf06ff6bc6ede",
+      "contracts_log_sha256": "3f9b1ae55a32a57f880a7abe10fac467888f9eb2a4e58b7f699e63a1ec204daa",
+      "recipe_effects_sha256": "10ccb56c16fb0f3f3c0dd8a79ec22f97c3a440d11a55b7e88dcc0a05d638c8c8",
+      "passed_groups": 101,
+      "failed_groups": 6,
+      "failures": [
+        {
+          "id": "mara-recipe:MA012",
+          "recipe": "MA012",
+          "result": "failed",
+          "assertions": 108,
+          "observation": "Second dead-target support has neither hit nor Heat",
+          "triage": "Author event oracle incorrectly required a hit_lost event; printed rule only requires the late hit and Heat to be absent."
+        },
+        {
+          "id": "mara-recipe:MA041",
+          "recipe": "MA041",
+          "result": "failed",
+          "assertions": 49,
+          "observation": "Half3 plus extraMark3 meets2 Shield; ownBurn2 only",
+          "triage": "Author oracle incorrectly gave an extra target ordinary Mark damage; selected spread rules retain and ignore that Mark."
+        },
+        {
+          "id": "mara-recipe:MA082",
+          "recipe": "MA082",
+          "result": "failed",
+          "assertions": 123,
+          "observation": "Fire Heat snapshot and cap",
+          "triage": "Author fixture used Heat12 without capacity upgrade; replaced by legal acquired-MAU-02 plus paid Fuel Brick Heat14 in run02."
+        },
+        {
+          "id": "mara-recipe:MA098",
+          "recipe": "MA098",
+          "result": "failed",
+          "assertions": 76,
+          "observation": "Only unused parts still in reserve counted",
+          "triage": "Author oracle treated untouched installed/removed plain Shield as used; canonical rules retain its unused eligibility."
+        },
+        {
+          "id": "mara-recipe:MA111",
+          "recipe": "MA111",
+          "result": "failed",
+          "assertions": 89,
+          "observation": "Pay14 then four kills capped6 Heat",
+          "triage": "Author fixture used illegal ordinary Heat20; replaced by ordinary10 and acquired-MAU-02 capacity14 with paid Fuel Bricks."
+        },
+        {
+          "id": "mara-recipe:MA120",
+          "recipe": "MA120",
+          "result": "failed",
+          "assertions": 71,
+          "observation": "Echo14 meets the later10 Shield",
+          "triage": "Author controlled Recover target did not execute the assigned GainShield intent; replaced with explicit changed-current-Shield fixture."
+        }
+      ]
+    },
+    {
+      "archive": "core/build/mara-semantic-02",
+      "source_graph_sha256": "88a1b5004b8afc55ac345fcdd82eb09976805cae7643d82d705092fd78418d65",
+      "executable_sha256": "c24078172d08d59d5568f9eb5345bd16404b14a031b6e30a51be335f8a48be57",
+      "contracts_log_sha256": "7f5965ba8ad4865393722ff43cee08a8d183e9309f765ba8f4988bff94aa835b",
+      "recipe_effects_sha256": "10ccb56c16fb0f3f3c0dd8a79ec22f97c3a440d11a55b7e88dcc0a05d638c8c8",
+      "passed_groups": 105,
+      "failed_groups": 2,
+      "failures": [
+        {
+          "id": "mara-recipe:MA082",
+          "recipe": "MA082",
+          "result": "failed",
+          "assertions": 230,
+          "observation": "MA082 adds at most10 Burn at legal Heat14; actual=14",
+          "triage": "MR01 production defect: legal Heat14 applies Burn14 instead of the printed cap10."
+        },
+        {
+          "id": "mara-recipe:MA098",
+          "recipe": "MA098",
+          "result": "failed",
+          "assertions": 430,
+          "observation": "Actual Shield payment fully depletes crafted part",
+          "triage": "Author support-cost oracle expected MA037 to drain6, but its source cost is5; final used-Shield witness has remaining1."
+        }
+      ]
+    },
+    {
+      "archive": "core/build/mara-semantic-03",
+      "source_graph_sha256": "b7ae14bb276d9bc3f4931c96b2f0abe58581d4ef1144adcbdda1beecdb515aee",
+      "executable_sha256": "a460376df5e3378d4ced2ca282592817d1b7781f153ed48ad2b8c438de70d9b8",
+      "contracts_log_sha256": "d198054bde27063835e87894cabca71c14c01d20fe98deb861d21da9cc3b0ea7",
+      "recipe_effects_sha256": "10ccb56c16fb0f3f3c0dd8a79ec22f97c3a440d11a55b7e88dcc0a05d638c8c8",
+      "passed_groups": 105,
+      "failed_groups": 2,
+      "failures": [
+        {
+          "id": "mara-recipe:MA082",
+          "recipe": "MA082",
+          "result": "failed",
+          "assertions": 230,
+          "observation": "MA082 adds at most10 Burn at legal Heat14; actual=14",
+          "triage": "MR01 production defect preserved: legal Heat14 applies Burn14."
+        },
+        {
+          "id": "mara-recipe:MA098",
+          "recipe": "MA098",
+          "result": "failed",
+          "assertions": 486,
+          "observation": "A paid/depleted Shield is not unused reserve; actual=9",
+          "triage": "MR02 production defect: a paid/depleted Shield removed to reserve adds3 despite not being unused."
+        }
+      ]
+    },
+    {
+      "archive": "core/build/mara-semantic-04",
+      "source_graph_sha256": "dc1fcfd0ac97300d9043eb7a250095d1cdd4d9ed0d13a679e5109e9f37371294",
+      "executable_sha256": "3656275e38cb051fe8418214f72c58858f9f13f77bbda37c33480bb84acc035e",
+      "contracts_log_sha256": "fac5704a102db5467598483ff3d94cbe576c7bd7423d41e246b45192691d1da3",
+      "recipe_effects_sha256": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+      "passed_groups": 104,
+      "failed_groups": 3,
+      "failures": [
+        {
+          "id": "mara-recipe:MA091",
+          "recipe": "MA091",
+          "result": "failed",
+          "assertions": 193,
+          "observation": "Chosen victim died before transfer starts",
+          "triage": "Author ordering oracle assumed spread precedes Ammo payloads. Correct witness uses an earlier Ammo support hit to kill the recipient."
+        },
+        {
+          "id": "mara-recipe:MA107",
+          "recipe": "MA107",
+          "result": "failed",
+          "assertions": 131,
+          "observation": "Missing destroyed robot's core value.",
+          "triage": "Author Campaign fixture replaced the canonical robot definition, preventing core-value lookup at real reward creation."
+        },
+        {
+          "id": "mara-recipe:MA119",
+          "recipe": "MA119",
+          "result": "failed",
+          "assertions": 156,
+          "observation": "Missing destroyed robot's core value.",
+          "triage": "Same invalid Campaign robot-definition fixture as MA107; canonical IDs are now retained while only intent/HP are controlled."
+        }
+      ]
+    }
+  ]
+}

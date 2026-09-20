@@ -84,10 +84,16 @@ struct Engine {
     }
     void heat(Amount n) { const auto old = s.heat; s.heat = std::min(upgradeHeatCap(s), add(s.heat, n)); emit("heat", 0, 0, s.heat-old); }
     void terminal() {
-        if (s.hp <= 0) { s.phase = Phase::Defeat; emit("defeat"); return; }
+        if (s.hp <= 0) {
+            if (s.phase != Phase::Defeat) { s.phase = Phase::Defeat; emit("defeat"); }
+            return;
+        }
         if (std::none_of(s.enemies.begin(), s.enemies.end(), alive)) {
-            s.phase = s.kills > 0 ? Phase::Victory : Phase::Escaped;
-            emit(s.kills > 0 ? "victory" : "escape_complete");
+            const auto phase = s.kills > 0 ? Phase::Victory : Phase::Escaped;
+            if (s.phase != phase) {
+                s.phase = phase;
+                emit(s.kills > 0 ? "victory" : "escape_complete");
+            }
         }
     }
     void playerDamage(Amount amount,Id source,Id parent,bool bypass=false,bool attackHit=false,bool enemyCause=false) {

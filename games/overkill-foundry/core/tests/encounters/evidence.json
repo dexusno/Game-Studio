@@ -1,0 +1,234 @@
+{
+  "graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+  "inputs": [
+    {
+      "path": "core/CMakeLists.txt",
+      "bytes": 3270,
+      "sha256": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+      "sha256_lf": "522af5ec509dca3f8f79dfa2b38d5adc9acef5d9beb12eeb9cc4e4d0af49be5e"
+    },
+    {
+      "path": "core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "core/src/campaign.cpp",
+      "bytes": 31433,
+      "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+      "sha256_lf": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+    },
+    {
+      "path": "core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "bytes": 19077,
+      "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+      "sha256_lf": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+    },
+    {
+      "path": "core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "core/src/core.cpp",
+      "bytes": 44321,
+      "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "sha256_lf": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "bytes": 52894,
+      "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+      "sha256_lf": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45"
+    },
+    {
+      "path": "core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "bytes": 37148,
+      "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e",
+      "sha256_lf": "3cfde3ec7d88a233d630e106bbf4a0eeb2ec9dd1638621810e4e4b16c2627c93"
+    },
+    {
+      "path": "core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "core/tests/encounter_contract_tests.cpp",
+      "bytes": 19767,
+      "sha256": "ba50ebdb5256d239e2d05f3513b5ddf5abd43e6a4d3d550d5feb196b74a54c53",
+      "sha256_lf": "ba50ebdb5256d239e2d05f3513b5ddf5abd43e6a4d3d550d5feb196b74a54c53"
+    },
+    {
+      "path": "core/tests/encounters/CMakeLists.txt",
+      "bytes": 710,
+      "sha256": "29069cece4bbf33fb14967bd67f1babfabf49ca6f204b017d468505f7288d042",
+      "sha256_lf": "29069cece4bbf33fb14967bd67f1babfabf49ca6f204b017d468505f7288d042"
+    },
+    {
+      "path": "design/data/beta-balance-v1.json",
+      "bytes": 13396,
+      "sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+      "sha256_lf": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b"
+    },
+    {
+      "path": "design/ENEMY-PATTERNS.md",
+      "bytes": 7427,
+      "sha256": "5bf168713b294062f8c94cf30dcaf3d72a83af5d561e66439e0463c9fde0063e",
+      "sha256_lf": "5bf168713b294062f8c94cf30dcaf3d72a83af5d561e66439e0463c9fde0063e"
+    },
+    {
+      "path": "design/ENEMY-ROSTER.md",
+      "bytes": 32255,
+      "sha256": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5",
+      "sha256_lf": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5"
+    },
+    {
+      "path": "design/ROBOT-EFFECTS.md",
+      "bytes": 17263,
+      "sha256": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a",
+      "sha256_lf": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a"
+    },
+    {
+      "path": "design/TIMING-AND-PERSISTENCE.md",
+      "bytes": 35552,
+      "sha256": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+      "sha256_lf": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5"
+    }
+  ],
+  "schema_version": 1,
+  "date": "2026-09-20",
+  "scope": "Provisional source-defined encounter and status contracts; no active runtime binding or compatibility assertion",
+  "archive": "core/build/encounter-contracts-final/source",
+  "result": {
+    "groups": 9,
+    "assertions": 3946,
+    "ctest": "1/1 passed",
+    "named_groups": [
+      "PASS C1-R04 Cable Binder exact body, default and veteran packets, Fouling clock, core identity",
+      "PASS C1-R05 Pressure Cask exact body, alternating pressure, armour and one core",
+      "PASS C1-R07 Coil Nest finite four helpers, birth timing, locked support, distinct cores",
+      "PASS C1-R08 Knuckle Press exact body, brace expiry, two hits, one next-turn Leak",
+      "PASS C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor",
+      "PASS C1-O03 Split Chassis three-action cycle, Burn timing, one death release and two cores",
+      "PASS Thermal Runaway mirrors: post-action enemy tick, pre-enemy player tick, Shield and lethal stops",
+      "PASS Acid Etch mirrors: pre-action bypass, player post-reset pre-delivery tick and lethal interruption",
+      "PASS Drive Fault mirrors: repeated main shots, target bonus order, multi-hit reduction and no-attack decay"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "core/build/encounter-contracts-final/build/Release/encounter_contract_tests.exe",
+      "bytes": 630784,
+      "sha256": "1f94c929964aef16558783a815718f37f9f0fedaa35d10a2553b6224d5557cb7"
+    },
+    {
+      "path": "core/build/encounter-contracts-final/build/core-runtime/Release/overkill_core.lib",
+      "bytes": 6622490,
+      "sha256": "e817f890e75e47f835667cd2d2992911ef736f50653b95db37eb31d1f16d45a1"
+    },
+    {
+      "path": "core/build/encounter-contracts-final/build/Testing/Temporary/LastTest.log",
+      "bytes": 1845,
+      "sha256": "1578d10ae753cf1591716c96828495b2955ba06ddffd160508c5dbcb571447db"
+    },
+    {
+      "path": "core/build/encounter-contracts-final/build.log",
+      "bytes": 1032,
+      "sha256": "422abb0a62a57dcb034f86a33c5c90f8a34a54a8e03156edd24b56e27911acc4"
+    }
+  ],
+  "candidate_links_pending_review": {
+    "robot:C1-R04": "C1-R04 Cable Binder exact body, default and veteran packets, Fouling clock, core identity",
+    "robot:C1-R05": "C1-R05 Pressure Cask exact body, alternating pressure, armour and one core",
+    "robot:C1-R07": "C1-R07 Coil Nest finite four helpers, birth timing, locked support, distinct cores",
+    "robot:C1-R08": "C1-R08 Knuckle Press exact body, brace expiry, two hits, one next-turn Leak",
+    "robot:C1-O01": "C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor",
+    "robot:C1-O03": "C1-O03 Split Chassis three-action cycle, Burn timing, one death release and two cores",
+    "status:thermal-runaway": "Thermal Runaway mirrors: post-action enemy tick, pre-enemy player tick, Shield and lethal stops",
+    "status:acid-etch": "Acid Etch mirrors: pre-action bypass, player post-reset pre-delivery tick and lethal interruption",
+    "status:drive-fault": "Drive Fault mirrors: repeated main shots, target bonus order, multi-hit reduction and no-attack decay",
+    "status:FX03": "C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor"
+  },
+  "limits": [
+    "Prepared HP/statuses/grants isolate boundaries; not an earned loadout or balance run.",
+    "All accepted actions replay from a canonical serialized input and compare complete state plus ordered events.",
+    "Rules version remains provisional of-core-0.4; terminal/category/purchase changes await version/save decision.",
+    "No graphical, physical-input, packaging or human-play claim.",
+    "Independent clause sufficiency review remains required; the historical 133/665 ledger is unchanged."
+  ]
+}

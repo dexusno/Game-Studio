@@ -1,0 +1,2 @@
+FAIL M02 MA098 excludes paid or recoil-depleted saved Shield and preserves untouched remove/reinstall eligibility: Unused reserve distinction failed: mode=1 actual=9
+SUMMARY 0 passed, 1 failed, 122 assertions

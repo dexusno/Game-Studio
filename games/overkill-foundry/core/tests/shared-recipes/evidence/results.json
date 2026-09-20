@@ -1,0 +1,615 @@
+{
+  "archive": "core/build/shared-recipes/captures/native-shared-recipes-2fc3c09f61506dcf-9b4b7a2b909c",
+  "archive_artifacts": {
+    "capture-build-0.log": "651c1b359894789ee87ad561d53f19e5ba75fe398e1f98dd6df7537e35874f19",
+    "capture-build-1.log": "c99c15e1bdf52d9a8ce32e426223c22cd8b32c98729fef6fce03ff6652387c1d",
+    "capture-ctest.log": "0a00ae911af0973e426a08627b6eb552f315f8acc1fcb826d041aa6afda5c988",
+    "contracts.log": "97fad9e3d5b8357e220a731899af702dc4faf47d713823b5fe5c1a1f7b56fcba",
+    "legacy-recipes.log": "bd82e630f4f77740ce7e81a93d9c1308079a495aee13acc698a0c31c6ddcdb58",
+    "overkill_core.lib": "f5688431c31d3f6244f722598140d01ff2ca40b90edc8809b6cd8fc977575d4f",
+    "shared_recipe_contract_tests.exe": "2fc3c09f61506dcf42dd0782118e9f1527da6004829f58aa64f7e9fa416aec83",
+    "shared_recipe_legacy_tests.exe": "57151fab33eda98f2cce52bd70b90fe9592ed23bae68e6e2b27968597b4dca2c"
+  },
+  "build_commands": [
+    {
+      "command": [
+        "cmake",
+        "-S",
+        "<game>\\core\\tests\\shared-recipes",
+        "-B",
+        "<game>\\core\\build\\shared-recipes",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": "core/build/shared-recipes/capture-build-0.log",
+      "log_sha256": "651c1b359894789ee87ad561d53f19e5ba75fe398e1f98dd6df7537e35874f19"
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "<game>\\core\\build\\shared-recipes",
+        "--config",
+        "Release",
+        "--clean-first",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": "core/build/shared-recipes/capture-build-1.log",
+      "log_sha256": "c99c15e1bdf52d9a8ce32e426223c22cd8b32c98729fef6fce03ff6652387c1d"
+    },
+    {
+      "command": [
+        "ctest",
+        "--test-dir",
+        "<game>\\core\\build\\shared-recipes",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": "core/build/shared-recipes/capture-ctest.log",
+      "log_sha256": "0a00ae911af0973e426a08627b6eb552f315f8acc1fcb826d041aa6afda5c988"
+    }
+  ],
+  "captured_utc": "2026-09-20T19:39:13.635701+00:00",
+  "compiler": "MSVC 19.44.35228.0",
+  "coverage": {
+    "primary_recipe_ids": 101,
+    "proposed_full_bindings": 100,
+    "residual_ids": 1,
+    "supplemental_groups": 12
+  },
+  "executions": [
+    {
+      "assertions": 27881,
+      "command": [
+        "core/build/shared-recipes/Release/shared_recipe_contract_tests.exe"
+      ],
+      "executable": "core/build/shared-recipes/Release/shared_recipe_contract_tests.exe",
+      "executable_sha256": "2fc3c09f61506dcf42dd0782118e9f1527da6004829f58aa64f7e9fa416aec83",
+      "exit_code": 0,
+      "log": "contracts.log",
+      "log_sha256": "97fad9e3d5b8357e220a731899af702dc4faf47d713823b5fe5c1a1f7b56fcba",
+      "named_groups": 113,
+      "suite": "contracts"
+    },
+    {
+      "assertions": 2055,
+      "command": [
+        "core/build/shared-recipes/Release/shared_recipe_legacy_tests.exe"
+      ],
+      "executable": "core/build/shared-recipes/Release/shared_recipe_legacy_tests.exe",
+      "executable_sha256": "57151fab33eda98f2cce52bd70b90fe9592ed23bae68e6e2b27968597b4dca2c",
+      "exit_code": 0,
+      "log": "legacy-recipes.log",
+      "log_sha256": "bd82e630f4f77740ce7e81a93d9c1308079a495aee13acc698a0c31c6ddcdb58",
+      "named_groups": 19,
+      "suite": "legacy-recipes"
+    }
+  ],
+  "flags": "/W4 /WX /permissive- C++17 Release x64",
+  "graph_sha256": "9b4b7a2b909c9da1782b94336511442a743a99e75625d62f2754616464529d89",
+  "inputs": {
+    "content/catalogue.snapshot.json": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "content/runtime-evidence/coverage.json": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802",
+    "content/runtime-support.json": "c3eb16d905ff3f93e592439653929f0cfdacfa88483a68a91502bed8e67f817d",
+    "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "6f124e73049e415a00b522a269851ad1bb74c3de98e03c877b96d5c43c664324",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/recipe_tests.cpp": "4cf92acfa2457a8d80f17219a14c6bbd916daa55595a77e3f89f0041a7d7d4ff",
+    "core/tests/shared-recipes/CMakeLists.txt": "af200307641f6dfc794cb0ecf82aedb4f32480f2dfa0cd097f18a1c4ae945f66",
+    "core/tests/shared-recipes/README.md": "fbdac721b296231d29f23444bd660312ed16c2c5c30064fbd990f422fa09c24b",
+    "core/tests/shared-recipes/ammo.inl": "e5ee14775bf88c10853d60184e9989236c38023df83b2cf1c994a167434cc750",
+    "core/tests/shared-recipes/archive_failure.py": "e895959ee74be420a53a5974432eb261aafba4514e96bdd11bc62da888372b23",
+    "core/tests/shared-recipes/boundaries.inl": "8350fe6dbc50b2982ab16f9c0bbfd5313df206c5bd86254245523d75317a773a",
+    "core/tests/shared-recipes/capture.py": "3b30397c19009761647173b9c5541c772e1647ccc8b6cc966f486717b907631b",
+    "core/tests/shared-recipes/collection.inl": "47bce4178da0be8ad560f729eaea2040b54702eaa8b9bb3c3aa5c79db9c9e554",
+    "core/tests/shared-recipes/history/delayed-shield-schedules.json": "3483f897cd28dc8ba484624fab1cc0f69d6f6def7dab14075c85a61013a14499",
+    "core/tests/shared-recipes/shield.inl": "b9cf492ab8b9df465648936cb895b2727f251ff8d1acd9552a79b020f6a58103",
+    "core/tests/shared-recipes/source-contracts.json": "6a6e4cce3358ea263ec35f63069f3d4c657a6b36cd83c1c153283474aff29b8e",
+    "core/tests/shared-recipes/source-costs.inc": "67fd4da974c7f57a03ce743e0f07f3260a2800a66bafa8bb01c71c77e376ffc9",
+    "core/tests/shared-recipes/source_index.py": "906ca07285220c7371719a7358342ec7feae56a00faa3e8b780d04a2a341d269",
+    "core/tests/shared-recipes/utility.inl": "3139873b8fd90950ac320327efad76b9a3df0fd4cffd3cd4526863bace1aa228",
+    "core/tests/shared_recipe_contract_tests.cpp": "afff728e5bbf34315d77decca291be3acfd3b5884f2c634a071912b1a80076f6",
+    "design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+    "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+    "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+    "design/UPGRADE-SYSTEM.md": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a",
+    "design/data/beta-balance-v1.json": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+    "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+    "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
+    "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6"
+  },
+  "library": {
+    "path": "core/build/shared-recipes/core-runtime/Release/overkill_core.lib",
+    "sha256": "f5688431c31d3f6244f722598140d01ff2ca40b90edc8809b6cd8fc977575d4f"
+  },
+  "limitations": [
+    "Controlled numerical fixtures are not naturally earned builds or balance results.",
+    "SH064 three unavailable status prevention branches unclaimed.",
+    "Finite source-clause author coverage; independent review pending.",
+    "No graphical or human validation."
+  ],
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "schema_version": 1,
+  "status": "Author-operated provisional corrected of-core-0.4. Save/version decision pending; no support ledger activated.",
+  "tests": [
+    {
+      "id": "contracts::recipe:SH009 three OTHER Ammo threshold excludes physical Spread",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH014 Corrosion follows main hit and excludes extra targets",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH015 immediate Mark5 one selected living target once before shot",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH016 Weaken4 after main hit only with ordinary decay",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH018 per OTHER Ammo scaling caps at six and ignores Spread",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH019 first-install attacker count threshold with snapshot and no refill",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH020 first attacker Weaken2 after its complete attack, installed source only",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH021 exactly one attacker selects12 otherwise7 at first install",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH022 Shield6 plus at-most3 Burn removed once on first install",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH023 actual Copper paid by all Uses including Utility and self; cap10 snapshot",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH025 fully blocked attack yields one next-start Iron, not partial or detached",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH027 first enemy attack returns3 after attack once with source installed",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH028 living enemies3 each capped12; dead and escaped excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH029 lossy immediate conversion pays printed2 once gains1 with no part",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH030 lossy immediate conversion pays printed2 once gains1 with no part",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH031 lossy immediate conversion pays printed2 once gains1 with no part",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH032 one unused reserve part sacrificed without payload for nextIron1Glass1",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH033 independent2 Burn/Corrosion cleanse and immediate removableShield3",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH034 Use schedules fresh8 exactly next start independent of later recipe actions",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH035 next first-used Shield+4 once, same-name refresh and turn expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH035.boundaries flat bonus not multiplied by dynamic Shield and copied Shield drops upgrades",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH037 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH038 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH039 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH040 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH041 remove floored half Shield BEFORE the added8 hit",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH042 main kill gates one chosen support hit and validates target",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH043 main-only post-Armor bypass redirects at-most12 once then expires",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH043.boundaries main bypass does not bypass Shield on physical spread hits",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH044 three currently installed physical Shields count without payment",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH045 post-main Shield2 per consumed Ammo capped12 excludes Spread",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH046 Burn2 every other living enemy after main hit",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH047 Corrosion2 all living including surviving main excludes killed main",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH048 Weaken4 all currently attacking recipients only",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH049 immediate chosenMark4 and each other livingMark2",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH051 physicalSpread40 floor to up-to-two selected others no payloads",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH052 earlier-round reserve grants8 once physical age is earned",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH053 Fire-start empty raw pool only; any one resource disqualifies",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH054 actual same-round sacrifices add3 capped9 and reset",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH055 no previous HP loss grants8; Shield loss does not disqualify",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH056 next-start8 same target once, lost when killed or fight ends",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH057 Use grants8 and post-paymentIron>=3 schedules5; source removal irrelevant",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH058 first attack exhausting total Shield weakens all living3 once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH059 half maximum inclusive threshold sampled once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH061 marked living enemy count3 each capped9 extra, snapshot",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH062 next main-shot check once even on failure or removal; round expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH063 remove at-most5 Corrosion first install only and Shield8",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH064 Burn prevention once and fouling/leak exclusions; three unavailable status producers unproved",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH064.boundaries fouling/leak do not consume screen; current-round expiry retains no prevention",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH065 unused reserve Ammo sacrifice has no payload; Shield10 now Iron1 next",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH066 automatic complete groups0..14 cap3; ordered readers see remainder",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH067 cool every currently cooling physical copy, floor0; paid recraft still required",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH068 cool every currently cooling physical copy, floor0; paid recraft still required",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH069 choose Copper Carbon or Glass2 only at next start",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH070 next-turn first qualifying >=2Iron Use includes Utility; cheap Uses do not consume",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH071 Common Ammo printed copy next start with selectors and exclusions",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH072 next shot selected Base/Common Ammo consumed then fresh printed copy once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH072.boundaries unused nextshot copy expires and copying excludes unattached or absent part choices",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH073 cleanse up-to6 each Weaken Mark plus nextshot3 expiresEndTurn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH075 main-kill Copper2 next start once; no direct cores or credits",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH076 sacrifice fixed unused Shield printed value capped14; no secondary effects",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH077 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH078 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH079 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH080 two chosen types take first3 normal slots, no haul-size increase, shortage fallback",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH081 all main Shield removed before14 without affecting others",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH082 all other living half whole-shot floored, payload main only",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH083 nextshot additive8percent per Ammo capped80; Spread excluded and expires",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH084 distinct printed crafting types across Ammo only capped27",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH086 zero Shield at Fire start gates Corrosion6 after main hit",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH087 one chosen Burn-sized support then floored half removal; recoil stops",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH088 Fire-start distinct four statuses each add5 including spent Mark",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH089 separate12 support only on surviving main; defence twice no payload repeat",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH090 full reserve rounds add8 per round capped24 per physical part",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH091 post-actions positive Shield returns6 per surviving attacker only",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH092 first-install15 commits next15; removal never cancels committed delivery",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH092.boundaries saved source no rearm, fatal enemy phase and Campaign completion cleanup",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH093 half total shown multi-hit attack damage floor and30 cap",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH093.boundaries shown multi-hit damage includes Drive and Weaken, excludes nonattack and dead",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH094 direct7 after first two enemy actions not each individual hit",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH095 Weaken8 current attackers and Shield5 per nonattacker cap15",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH096 first-install12 schedules fresh12 next start even after removal",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH097 first positive enemy HP damage prevented by at-most8 once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH098 reserve age Shield10 plus7 per full round max31 snapshot",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH099 cool every currently cooling physical copy, floor0; paid recraft still required",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH100 cool every currently cooling physical copy, floor0; paid recraft still required",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH102 Common Ammo or Shield two next-start printed copies and exclusions",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH103 next crafted Ammo one chosen output+8 firstuse, no grant and round expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH103.boundaries selected batch attachment survives storage and invalid choice is atomic",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH104 actual healing8 clamps max and shared16; no-attackerShield independent",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH104.boundaries full health consumes zero healing allowance; cooldown not bypassed by bonus",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH105 normal10 plus5 actual extras leave exactly2 gathered units back in pile",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH106 chosen one of all5 types adds up-to4 after ordinary haul",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH107 specified next-haul extras only from available pile; normal haul and expiry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH108 four NORMAL slots prioritize chosen type with fallback then freshShield6",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH109 post-hit strips up to12 Shield each other living enemy",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH110 physical all-target spread reserves unusedShield untilFire sacrifice without effect",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH110.boundaries usedShield payment excluded and dead extra gets no Weaken",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH111 nextshot double damage, Shield15 threshold10Ammo excludesSpread",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH112 main kill gates20 each other enemy once without recursive propagation",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH113 first-install38 commits20 independently; leftover10 gates delivery cooling",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH113.boundaries pre-reset10 condition uses current balance and installed source; delivery cooling is live",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH114 fully blocked attack retaliation10 capped three actions",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH116 cool every currently cooling physical copy, floor0; paid recraft still required",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH117 four materials2 nextstart once noCircuit; fight ends before delivery loses grant",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH118 Base throughRare Ammo Shield two fresh printed copies excludesLegendary and nonparts",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH119 two DIFFERENT chosen types up-to3 each independently after normal haul",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH119.boundaries each chosen material's shortage independent; perfect Circuit request cannot steal baseline",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH120 one-each preference uses5 normal positions then4 available normal-mix extras",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH122 ordered two different nonCircuit choices; unconditional1 then Perfect extra1+2",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH122.boundaries manual models share one attempt; finite extras and fitting order preserved",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH123 Glass1 all modes, Perfect Circuit2 extra while ordinary Circuit remains",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::recipe:SH126 Iron1 anymode; Perfect free physicalAmmo10 Shield10 afterhaul with ordinary use",
+      "result": "passed"
+    }
+  ],
+  "verified_build": "native-shared-recipes-2fc3c09f61506dcf"
+}

@@ -1,0 +1,5 @@
+Independent strict rebuild of captured inputs; CTest4/4 passed.
+SUMMARY 106 passed, 0 failed, 6139 assertions. Held UGS-011/018/126/141 are not proposed.
+1130 assertions; 147 explicitly covered upgrade IDs; 0 failures
+PASS 255 production campaign-upgrade assertions; controlled shop grants and terminal ammo, not city balance.
+PASS 784 campaign/offer/receipt assertions. Uses controlled test-only upgrade payloads and terminal ammo; no full-city balance, P08 or disk-durability claim.

@@ -1,0 +1,621 @@
+{
+  "archive": "core/build/upgrade-contracts/captures/native-upgrade-contracts-3fae26e0acb5b90d-49b5f5045b55",
+  "archive_artifacts": {
+    "campaign-upgrades.log": "f15ac02d924ed79aebef952e5a27f40bf9eb3fe90c161635a817a2a46267d2db",
+    "campaign.log": "c40d1c252c0b7efa2da6522dd966aa7c6c93462a8bd428d651ccceacac6f2bb8",
+    "capture-build-0.log": "00dd3c210a94b779d099938b88c079f77037ea61f58259659c2ba8a917c806a6",
+    "capture-build-1.log": "ad6e6146441c98005ae15b6e6780ca896a6e234e79dce71be808b5ec9347b788",
+    "capture-ctest.log": "0fcb53a1d84a9422b022dd0b83340446074c04e9d95df230096f8c40d9c2d8a2",
+    "contracts.log": "5d341d24822310a2f90530949b027957091f5568cc7ceb28738f3cc9c76810af",
+    "legacy-upgrades.log": "3fcba6b1b471f6932dcecae4114369ade7cdd4d09d267e6cc02eafbe963c8304",
+    "overkill_core.lib": "293c415f1cce7ae58999a771cd26b16f1d963da914f6fc8295343f232ed54e15",
+    "upgrade_contract_campaign.exe": "b2c974ac108002270e8447fc5999ac223b6ad46266bdcbb234a5925dea9add27",
+    "upgrade_contract_campaign_upgrades.exe": "204beb5424d6697edaf5f81886429710bb780c8c36caa0f7679d05fbb6abf435",
+    "upgrade_contract_legacy_upgrades.exe": "0654cb5c6c6284dfc89209f713b0137d712f16343db0ab63d9cfe81cffbf3294",
+    "upgrade_contract_tests.exe": "3fae26e0acb5b90dd1de6cc120516dd166262662cf86a40c8393f90bd56f978b"
+  },
+  "build_commands": [
+    {
+      "command": [
+        "cmake",
+        "-S",
+        "<game>\\core\\tests\\upgrade-contracts",
+        "-B",
+        "<game>\\core\\build\\upgrade-contracts",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": "core/build/upgrade-contracts/capture-build-0.log",
+      "log_sha256": "00dd3c210a94b779d099938b88c079f77037ea61f58259659c2ba8a917c806a6"
+    },
+    {
+      "command": [
+        "cmake",
+        "--build",
+        "<game>\\core\\build\\upgrade-contracts",
+        "--config",
+        "Release",
+        "--clean-first",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": "core/build/upgrade-contracts/capture-build-1.log",
+      "log_sha256": "ad6e6146441c98005ae15b6e6780ca896a6e234e79dce71be808b5ec9347b788"
+    },
+    {
+      "command": [
+        "ctest",
+        "--test-dir",
+        "<game>\\core\\build\\upgrade-contracts",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": "core/build/upgrade-contracts/capture-ctest.log",
+      "log_sha256": "0fcb53a1d84a9422b022dd0b83340446074c04e9d95df230096f8c40d9c2d8a2"
+    }
+  ],
+  "captured_utc": "2026-09-20T19:07:49.300741+00:00",
+  "compiler": "MSVC 19.44.35228.0",
+  "coverage": {
+    "explicit_residual_ids": 6,
+    "new_upgrade_ids_executed": 96,
+    "proposed_full_bindings": 94
+  },
+  "executions": [
+    {
+      "assertions": 6139,
+      "command": [
+        "core/build/upgrade-contracts/Release/upgrade_contract_tests.exe"
+      ],
+      "executable": "core/build/upgrade-contracts/Release/upgrade_contract_tests.exe",
+      "executable_sha256": "3fae26e0acb5b90dd1de6cc120516dd166262662cf86a40c8393f90bd56f978b",
+      "exit_code": 0,
+      "log": "contracts.log",
+      "log_sha256": "5d341d24822310a2f90530949b027957091f5568cc7ceb28738f3cc9c76810af",
+      "named_groups": 106,
+      "suite": "contracts"
+    },
+    {
+      "command": [
+        "core/build/upgrade-contracts/Release/upgrade_contract_legacy_upgrades.exe"
+      ],
+      "executable": "core/build/upgrade-contracts/Release/upgrade_contract_legacy_upgrades.exe",
+      "executable_sha256": "0654cb5c6c6284dfc89209f713b0137d712f16343db0ab63d9cfe81cffbf3294",
+      "exit_code": 0,
+      "log": "legacy-upgrades.log",
+      "log_sha256": "3fcba6b1b471f6932dcecae4114369ade7cdd4d09d267e6cc02eafbe963c8304",
+      "named_groups": 31,
+      "suite": "legacy-upgrades"
+    },
+    {
+      "command": [
+        "core/build/upgrade-contracts/Release/upgrade_contract_campaign_upgrades.exe"
+      ],
+      "executable": "core/build/upgrade-contracts/Release/upgrade_contract_campaign_upgrades.exe",
+      "executable_sha256": "204beb5424d6697edaf5f81886429710bb780c8c36caa0f7679d05fbb6abf435",
+      "exit_code": 0,
+      "log": "campaign-upgrades.log",
+      "log_sha256": "f15ac02d924ed79aebef952e5a27f40bf9eb3fe90c161635a817a2a46267d2db",
+      "named_groups": 13,
+      "suite": "campaign-upgrades"
+    },
+    {
+      "command": [
+        "core/build/upgrade-contracts/Release/upgrade_contract_campaign.exe"
+      ],
+      "executable": "core/build/upgrade-contracts/Release/upgrade_contract_campaign.exe",
+      "executable_sha256": "b2c974ac108002270e8447fc5999ac223b6ad46266bdcbb234a5925dea9add27",
+      "exit_code": 0,
+      "log": "campaign.log",
+      "log_sha256": "c40d1c252c0b7efa2da6522dd966aa7c6c93462a8bd428d651ccceacac6f2bb8",
+      "named_groups": 12,
+      "suite": "campaign"
+    }
+  ],
+  "flags": "/W4 /WX /permissive- C++17 Release x64",
+  "graph_sha256": "49b5f5045b558856d2ceeea4f10639bb2c3c62f209817784a649dc5d96f5ce38",
+  "inputs": {
+    "content/catalogue.snapshot.json": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "content/runtime-evidence/coverage.json": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802",
+    "content/runtime-support.json": "c3eb16d905ff3f93e592439653929f0cfdacfa88483a68a91502bed8e67f817d",
+    "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/campaign_tests.cpp": "762eedf12c47588e411da339fc032433f832d7862e1307671bd7521208c10894",
+    "core/tests/campaign_upgrade_tests.cpp": "605c51bc18d359d89a6be3c1ea0c8afe40979a1838d061a56f8679090f02b43c",
+    "core/tests/upgrade-contracts/CMakeLists.txt": "c3320eec9580bae4c67009e3d7551ee0fa7eb066d91e27529a4a224dc2de412d",
+    "core/tests/upgrade-contracts/README.md": "b598486aa57225ccaeeb9aeb9f4b65ae656a5fd4f61ad00de9bf553063b90b15",
+    "core/tests/upgrade-contracts/archive_failure.py": "8a77b9923d88014ed436844d4adda57f2c754daf4b74e2b219aa141cae131111",
+    "core/tests/upgrade-contracts/archive_ugs085_failure.py": "86786f8a53b4915a0e643e2a6b99f30cf4ad30d97352d0c104bc693a1e770b43",
+    "core/tests/upgrade-contracts/campaign_cases.inl": "221801c2b220404400e69fb215ea099866df46cea74f2abe260ab12b1200ca31",
+    "core/tests/upgrade-contracts/capture.py": "a2df5bbf7c44a6cd332ee6e874465373de5fbb572fa34d8f6ef99d622ede9237",
+    "core/tests/upgrade-contracts/combat.inl": "2516f3bfff9a2d3e82e4b603168b28535c595533e63179fbf1baac74fe2551a2",
+    "core/tests/upgrade-contracts/contracts.json": "8083fe05a52e62137e7f8dba42d0a53df520e1e3438702927d8cd6560f738adb",
+    "core/tests/upgrade-contracts/edge_clauses.inl": "62f36eb9e008e30f3fa6357995fea7e3742e939bd6a345ab68231ffb600a150e",
+    "core/tests/upgrade-contracts/end_turn.inl": "0da25da9eca93d99db79bee95b884edf4e06923224a66b24f94126f69b138991",
+    "core/tests/upgrade-contracts/entry_turn.inl": "d19615b07d7ba44d3e3b1b7d7d142df4d977ea4be6bac433a626d917fbb658f2",
+    "core/tests/upgrade-contracts/generate_contracts.py": "ea2f6e1aff7583c3b4ba850b009fa428ea6d4ea515eddf272c5957c83849708b",
+    "core/tests/upgrade-contracts/history/ugs085-failure.json": "1bf4a72f6d64d282369c1265e417f52ffe3b7d9085c20dbd1ffa58c033c8749a",
+    "core/tests/upgrade-contracts/history/ugs095-failure.json": "6d0e97e6028c2b7971dffb7c2f0e2e1ad11dea469e876b97f3c3a3e45b8689f3",
+    "core/tests/upgrade-contracts/production.inl": "7a5d4ca975513704ac73b2b1f6aeca4269fe92324b55e203e1574ec268710310",
+    "core/tests/upgrade-contracts/rewards.inl": "e844c8aeb7cf21e4dfbc3093f824815d175f436e0b3dbcf44b73e174f59d61f5",
+    "core/tests/upgrade_contract_tests.cpp": "8cf7f1f86180f298fdbb35e3bb02c611afd8dfe44bd09bddafab42a849de6cf8",
+    "core/tests/upgrade_tests.cpp": "c9a1f1c0a77f4525b1ceea9a0bf92093bdb3b08358c30d760a6913c838e5a74c",
+    "design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+    "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+    "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+    "design/UPGRADE-SYSTEM.md": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a",
+    "design/data/beta-balance-v1.json": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+    "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+    "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
+    "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
+    "presentation/precision.hpp": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+  },
+  "library": {
+    "path": "core/build/upgrade-contracts/core-runtime/Release/overkill_core.lib",
+    "sha256": "293c415f1cce7ae58999a771cd26b16f1d963da914f6fc8295343f232ed54e15"
+  },
+  "limitations": [
+    "All Rules actions and campaign transactions use the actual current C++ engine and production cinderwallUpgradeHooks.",
+    "Fixed materials, recipe copies, stock, reward candidates and enemy conditions isolate clauses; they are explicit controls, not naturally rolled or balance-tested builds.",
+    "Controlled plain500 Ammo only terminates real Campaign fights to exercise reward dispatch; it is not a player-accessible recipe or a city-winning policy.",
+    "UGS062's restricted content pool isolates the spread-category filter and does not alter production eligibility or weights.",
+    "Controlled CityStart hook calls test campaign-counter retention; UGS045's fourth controlled Officer checks the cap. No second playable city is claimed.",
+    "An executed PASS proves its assertions only. This index's proposed full bindings remain subject to independent clause review."
+  ],
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "schema_version": 1,
+  "status": "Provisional corrected of-core-0.4; exact hash identifies these outcomes; save/version decision pending.",
+  "tests": [
+    {
+      "id": "contracts::upgrade:MAU-05 paid recipe HP healing after ordered reactions, once turn, actual6 fight cap; partial full-HP branch coverage",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MAU-07 first Heat8 main shot ignores at most4Armor while other defenses and later shots remain",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-01 first Ammo output each turn alone receives two, saved physical bonus survives until Fire",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-03 entry pair has independent physical identities and normal saved/installed lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-04 opening material extra is separate from collection and repeats only at entry",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-07 Officer entry alone grants four Iron and removable Shield8",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-08 first successful resource-paid use refunds chosen actually-paid units up to3 after resolution",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-11 third qualifying paid Use counts uses not units and one payout after reactions per fight",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-13 every third Regular victory earns exact-copy subscription, excludes duplicate tags and defers empty sets",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-14 one saved full normal-offer reroll per victory, repeat rejected, old discoveries retained",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-15 persistent typed pack choice selects only Ammo or Shield and renews first physical output per turn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-16 first ordinary part sale per fight matches canonical base capped12, sold id and receipt consumed",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-17 single saved same-target retry preserves spent original and cannot recurse",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-18 first two ordinary hauls add two to selected material without altering base or Precision",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-19 raw total threshold schedules one Ammo5 next start without spending and cancels on terminal",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-20 half-HP condition evaluated before each attack hit once per fight, not own costs or recoil",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-22 each opening choice grants exactly two ordinary fresh physical parts with normal lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-M1 four opening Heat and turn1 actual payment threshold reward after paid reactions, once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-M2 pre-gain Heat threshold, one manufacture trigger per turn, saved output and no self recursion",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY1-M3 cumulative actual paid Heat threshold heals six once alive, decay excluded and progress resets",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY2-01 paid Utility must remove cooldown; one Copper per turn regardless of copies or cost",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY2-02 first Shield recipe output each turn gets three on its physical saved balance",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY2-03 capacity query adds four without copies and turn3 alone grants a fresh Pellet",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:MY3-02 six active opening Shield protects preparation and enemy damage then resets",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-002 production victory with kills pays8 once; all-escape and final defeat never pay",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-004 first EndTurn absence of installed Shield is structural, excludes later ends and respects empty parts",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-005 zero Fire delays two Iron one Carbon to next start regardless of crafting; Fire excludes",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-006 highest maximum HP opening Paint uses stable slot tie and ignores dead/escaped",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-007 opening named Slug and Pellet grant no recipes and retain independent sale identities",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-010 empty ordinary reserve grants five before enemies, installed parts excluded, renewal each turn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-012 first victory recipe optionally duplicates exact copy with saved exchange, no recursive acceptance",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-013 entry heal clamps and production Continue restores original entry without accumulating",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-014 first enemy HP-loss hit alone schedules survivor heal at next start, no cost or lethal rescue",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-015 three-fight paid Ammo lease copies committed first physical properties without replaying Use",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-016 fifth actual victory acceptance heals8 across fights; shops/generated and repeat navigation excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-017 each core sale rounds quarter independently, ordinary parts and direct Credits excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-021 saved live enemy selector grants four on first shot at that target only; dead target loses benefit",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-022 turn2 delivery precedes haul, does not recur and cannot appear after early escape",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-024 five saved entry choices consume one charge each and never recur after exhaustion",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-025 first enemy-caused HP loss grants one Iron/Copper, persists enemy phase, excludes costs/death",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-028 ordinary reserve count grants one capped balance, installed parts excluded and no consumption",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-029 three actual Cinderwall debuff types grant once each; repeat stacks and cleared reapplications excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-030 first three Fires each turn grant Shield2 after reactions; loads and spread are one Fire",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-031 normal offer fourth Shared option retains encounter pool and one pick; bonus offers unchanged",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-033 victory entitlements accumulate until first following core sale and exclude part sales",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-034 third true victory adds one Shared Utility, counter persists through real transitions and one pick",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-037 opening four is separate direct damage with complete recoil and final-death interruption",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-039 acquisition pays8 once, selects one Ammo and one Shield exact copy, bonuses require paid Use",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-040 first Shield reward across both normal offers tags exact accepted copy, no shop or generated trigger",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-041 new victory Utility Copper coupon applies once each fight only to that copy and full other cost",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-042 first haul can exchange at most three base units one-for-one with saved atomic choices",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-045 actual Officer wins after acquisition build capped levels and future first shot consumes bonus once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-046 zero-to-three distinct Ammo copies selectable, later and granted copies excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-047 only first two EndTurns create three physical Shield before enemy attacks",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-048 first player-turn kill grants Iron/Carbon once, includes summons, excludes enemy-phase and death",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-049 actual Armor reduction on surviving hit marks after damage once each turn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-050 three-turn material cycle repeats before collection and resets with fight",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-051 fifth-turn ordinary haul adds one steered unit with fight-local cadence",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-053 turn2 Shield10 is freshly installed, removable unused, and not repeated",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-058 twenty-percent original Precision region widens symmetrically without payouts or attempts",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-060 third actual Fire targets lowest-slot other living enemy, fallback main, separate hit/reaction",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-061 first haul only receives one steered extra, Auto does not consume Precision",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-062 every second victory adds Shared Modifier including spread category; whole offer still one pick",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-065 next true victory heals10 once, escape does not spend, final death cannot rescue",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-070 acquisition growth once and Boss-entry-only further growth",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-071 four acquisition HP then first enemy hit only reduces before Shield with zero floor",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-077 older unused physical part permits three once per turn while fresh-only shots leave trigger intact",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-083 every fifth committed Fire across turns grants one Copper, no load count or action cap",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-085 one acquisition100Credits and its own strict undiscounted purchase-price gate",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-086 zero combined Shield includes active balances, empty printed parts qualify and no recursive trigger",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-087 conjunction requires zero Fire and zero combined Shield at EndTurn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-088 only second Fire each turn grants four after shot reactions, never retroactive rescue",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-091 Shield10 reader does not spend and hits lowest current HP with stable tie before attacks",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-093 every fifth valid Fire gets eight before percentage modifiers, across rounds and reset at fight",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-094 every third start cools only greatest positive copy with stable memory-order tie",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-095 first resource-paid Modifier craft, not grant or activation, gives one physical Shield7",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-096 only first failed Precision grants one same-target bonus without retry or baseline loss",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-099 turn4/8 saved choices allow exactly Iron or Glass before haul and reset",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-101 Regular victories expose two independent optional offers; Officer and Boss have no addition",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-102 chosen physical Ammo copy builds consecutive-turn momentum2/4/6, first only and gaps reset",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-105 opening Weaken affects every attack hit then decays, including ordinary zero floor",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-107 first paid Utility per turn queues one next-main bonus that expires if unused",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-109 zero Fire grants four even with existing Shield; crafting/loading are not Fire",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-115 Officer encounters only first main Fire each turn gains three; other classes never gain",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-116 saved random material fixed per fight, first qualifying use discounts once each turn and renews",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-117 third-turn physical Shield and fight-lived first-shot bonus survive zero-shot turns",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-119 two different saved choices, first paid output each per fight, invalid kinds reject",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-121 only first resource-paid canonical Solid Casting output per turn gains two",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-122 one single canonical Slug bullet per fight grants fresh Pellet, mixed and other Ammo excluded",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-125 third actual Officer victory awakens future entries only, no reacquisition, first haul and shot once",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-127 Utility must finish a cooling copy; multiple completions pay once and renew each turn",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-129 every real victory grows and heals one, all escape and death do not, receipt navigation is inert",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-134 new victory Shield Iron coupon renews each fight, excludes old copies and pays other costs",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-142 failed-Precision victory alone earns one consumed next-entry Iron, misses never stack",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-147 Officer alone adds separate three Rare choices without extra upgrade reward and normal exchange",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:UGS-148 one fixed LightTouch per normal offer, accepted exact-copy coupon uses largest ingredient stable ties",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:category:modifier-spread all six spreading Modifier paid Uses trigger once; lifecycle and exclusions remain distinct",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:bond-reward UGS085 still grants one100Credits when actually accepted as a nonpurchase Officer reward",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:calibration-eligibility UGS039 missing either required stored type rejects before HP payment or ledger insertion",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:entry-setup UGS037 uses actual Warden factory opening tiles and no Fire count",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:normal-rarity UGS031 fourth option uses current normal weighted pool, Shared-only duplicate filtering",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity",
+      "result": "passed"
+    },
+    {
+      "id": "contracts::upgrade:edge:unused-lease UGS015 consumes each entry even without Ammo use and cannot defer its three-fight lease",
+      "result": "passed"
+    }
+  ],
+  "verified_build": "native-upgrade-contracts-3fae26e0acb5b90d"
+}

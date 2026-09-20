@@ -1,0 +1,9 @@
+PASS C01 all24 source orders preserve only earlier ordinary bonuses in the lease copy, never Jig
+PASS C02 later per-part damage and timed Heat attachments remain independent from Jig attribution
+PASS C03 fully discounted actual Use consumes neither first resource-paid Jig nor lease allowance
+PASS C04 adversarial delayed-copy failure rolls back earlier deliveries and the entire round after reload
+PASS C05 valid nested copy control removes one attributed component and leaves no marker for descendants
+OBS LEGACY jig.ofcore unmarked original/copy remain16; fresh corrected Jig pair is14; migration held
+OBS LEGACY mayor.ofcore unmarked original/copy remain16; ordinary Mayor pair correctly remains16
+PASS C06 actual pre-fix saves load without inventing attribution; known historical Jig excess remains
+SUMMARY 6 passed, 0 failed, 1333 assertions; C06 documents an unresolved legacy compatibility limit

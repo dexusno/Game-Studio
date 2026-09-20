@@ -206,7 +206,7 @@
             if(n==119&&total>0&&std::find(u->recipes.begin(),u->recipes.end(),copy.id)!=u->recipes.end()&&claim(*u,"copy_"+std::to_string(copy.id))){if(damage)d=2;else if(shield)h=2;}
             if(n==121&&r.id=="SH001"&&total>0&&claim(*u,"output",1,UpgradeScope::Round))d=2;
             if(n==140&&shield&&total>0&&claim(*u,"output"))h=4;
-            if(d||h)addOutput(first,d,h,x.id);
+            if(d||h){addOutput(first,d,h,x.id);if(n==121)attach(*byId(s.parts,first),x.id,0,0,0);}
             if(n==15&&count(*u,"active")&&r.kind==Kind::Ammo&&total>0&&claim(*u,"copy")){auto duplicated=*byId(s.parts,first);duplicated.origin=PartOrigin::Copied;duplicated.creator=x.id;receive(duplicated);}
         }
     }
@@ -217,7 +217,7 @@
         if(n==2201&&r.kind==Kind::Utility&&removedCooldown>0&&claim(*u,"cool",1,UpgradeScope::Round))materialNow({0,1,0,0,0});
         if(n==55&&total>=5&&claim(*u,"heavy_use",2,UpgradeScope::Round))shieldPart(3,id,true);
         if(n==66&&r.kind==Kind::Utility&&total>0&&increase(*u,"utility",1,UpgradeScope::Round)==3)allDamage(3);
-        if(n==95&&r.kind==Kind::Modifier&&total>0&&claim(*u,"modifier"))shieldPart(7,id,true);
+        if(n==95&&(r.kind==Kind::Modifier||r.kind==Kind::Spread)&&total>0&&claim(*u,"modifier"))shieldPart(7,id,true);
         if(n==107&&r.kind==Kind::Utility&&total>0&&claim(*u,"utility",1,UpgradeScope::Round)){bonus(id,3);setCount(*u,"shot_pending",1,UpgradeScope::Round);}
         if(n==127&&r.kind==Kind::Utility&&reachedReady&&claim(*u,"cool",1,UpgradeScope::Round))shieldPart(5,id,true);
         if(n==136&&r.kind==Kind::Utility&&total>0&&increase(*u,"utility")%4==0)shieldPart(5,id,true);

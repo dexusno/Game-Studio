@@ -1,0 +1,11 @@
+PASS Q01 six source spreading Modifiers retain typed outputs and deterministic paid Shield reward
+PASS Q02 fully discounted Spread Use does not consume first resource-paid Modifier allowance
+PASS Q03 paid Spread reward protects later real Fire recoil without changing support damage
+PASS Q04 second-victory Shared Modifier filter includes all four spread rarities and excludes Mara
+PASS Q05 Bond uses original price gate and exact discounted affordability before all mutations
+PASS Q06 Cooling Dividend grants fresh Copper when a real discount removed all Copper payment
+PASS Q07 actual recipe damage and recoil finish before refund or third-use material reward
+PASS Q08 fifth and tenth actual victory acceptances heal independently across persisted exchanges
+FAIL Q09 Jig bonus is unique across Lease copies in either acquisition order and preserves other modifiers: jigFirst=1, other=0, bonus=4, damage=16, expected=14; jigFirst=1, other=1, bonus=6, damage=18, expected=16; 
+PASS Q10 later printed-effect duplicates omit Jig and attached damage bonuses
+SUMMARY 9 passed, 1 failed, 544 assertions

@@ -1,0 +1,85 @@
+{
+  "candidate": {
+    "archive": "core/build/shared-recipes/captures/native-shared-recipes-2fc3c09f61506dcf-9b4b7a2b909c",
+    "author_executable_sha256": "2fc3c09f61506dcf42dd0782118e9f1527da6004829f58aa64f7e9fa416aec83",
+    "author_results_sha256": "4f6720e222623cf7883ddb7beb5c35a9d85ca9c04b4ebf46877f15285ce01267",
+    "graph_sha256": "9b4b7a2b909c9da1782b94336511442a743a99e75625d62f2754616464529d89",
+    "input_count": 48,
+    "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "original_proposal_sha256": "cc38c026afd5e41ae60c24ac97b43f16d9d2b12cbf2e42ffb8743c2838ddb5fc",
+    "source_hashes": {
+      "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "core/src/recipe_effects.inl": "6f124e73049e415a00b522a269851ad1bb74c3de98e03c877b96d5c43c664324",
+      "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "core/src/upgrade_effects.inl": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e",
+      "core/tests/shared-recipes/source-contracts.json": "6a6e4cce3358ea263ec35f63069f3d4c657a6b36cd83c1c153283474aff29b8e"
+    }
+  },
+  "disposition_file": "qa/shared-recipes/clause-review.json",
+  "disposition_sha256": "ec9448d85e8de5914bc41986931a9aa11be35852b53a61cbf86465ad0f9fe441",
+  "environment": {
+    "compiler": "MSVC 19.44.35228.0",
+    "configuration": "Release /W4 /WX /permissive-",
+    "controls": "Typed Rules actions in CPU-only controlled fixtures; no Unreal or hardware input",
+    "language": "C++17",
+    "platform": "Windows x64",
+    "sdk": "10.0.26100.0"
+  },
+  "findings": [
+    {
+      "actual": "Only printed-cost cases proved; UGS116 Glass discount leaves actual paid Iron/Copper but SH084 main hit remains21, not18 under actual-paid reading.",
+      "disposition": "Withhold full binding pending owner source decision; not a confirmed runtime defect.",
+      "expected": "A full binding needs an authoritative crafting-type definition including discount, free, copied consequences.",
+      "id": "SR-01",
+      "recipe": "SH084",
+      "severity": "Evidence/source hold"
+    }
+  ],
+  "identity_audit": {
+    "archive": "core/build/shared-recipes/captures/native-shared-recipes-2fc3c09f61506dcf-9b4b7a2b909c",
+    "exact_source_rows": 101,
+    "failed_history_verified_inputs": 35,
+    "graph_sha256": "9b4b7a2b909c9da1782b94336511442a743a99e75625d62f2754616464529d89",
+    "named_groups": 113,
+    "negative_controls_rejected": [
+      "Missing named result",
+      "Wrong implementation hash",
+      "Altered printed effect",
+      "Fabricated PASS"
+    ],
+    "original_proposed_ids": 100,
+    "scope": "Identity, source inventory and cited PASS linkage only; semantic dispositions are in clause-review.json.",
+    "verified_artifacts": 8,
+    "verified_inputs": 48
+  },
+  "independent_probes": {
+    "assertions": 469,
+    "cmake_sha256": "e5ac26faf56e658958ea188d7e613e00b1bd206a45eea4b46c1ab0d4a968cf18",
+    "directory": "core/build/qa-shared-recipes",
+    "executable_sha256": "d5980cf2d7db28b45e760c8f8ed7f412bfb050ba6722b9fecb25ffcd66003c12",
+    "failed_groups": 0,
+    "observation": "O01 is unresolved, not an eighth passed semantic group",
+    "passed_groups": 7,
+    "result_sha256": "2a792ac05acef768da24feaea52d124f35ad74e0ed5e9c469bde56fc934529a0",
+    "source_sha256": "06685c3eb4a8d69ca7facced5fb76a18d8552b1c4b454dc473dfe5b453dd380a"
+  },
+  "independent_rebuild": {
+    "contract_assertions": 27881,
+    "contract_groups": 113,
+    "ctest": "2/2 passed",
+    "directory": "core/build/qa-shared-recipe-rebuild",
+    "executable_sha256": "1553772060cab6bb8b2e4ded90c7a763d9177cf70914c60e2651bac4ae195e38",
+    "legacy_recipe_assertions": 2055,
+    "library_sha256": "79d15059915d50cb22630d80cf2d371c30b2794ec4937951c74c15275950f84f",
+    "raw_log": "core/build/qa-shared-recipe-rebuild/Testing/Temporary/LastTest.log"
+  },
+  "limitations": [
+    "Finite controlled native mechanics only; full Shared interaction cross-product, natural acquisition, balance, UI, audio, persistence I/O, packaged startup/exit and human play not tested.",
+    "Reviewed provisional of-core-0.4 source includes earlier terminal guard; save-version/migration decision unresolved.",
+    "Later UC01 and MA082 corrections are outside frozen source identity.",
+    "Original failed SH092/SH113 archive remains intact and independently hash verified.",
+    "Audit initially omitted Uncommon heading; corrected independent parser before final pass. No game defect or failed native run resulted."
+  ],
+  "reviewed_utc": "2026-09-20T19:58:30.468634+00:00",
+  "status": "Bounded provisional review; 99 IDs supported, SH084 source hold, SH064 retained residual. No runtime support activated."
+}

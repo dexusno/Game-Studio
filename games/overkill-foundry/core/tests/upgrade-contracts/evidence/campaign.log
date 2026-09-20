@@ -1,0 +1,12 @@
+PASS campaign purchase: fixed inventory, idempotent receipt and unaffordable rejection
+PASS campaign Continue: original entry, purchase rollback and persistent discoveries
+PASS campaign rewards: owned cores, fixed choices, cancellation and once-only advance
+PASS campaign memory: saved pending exchange, cancellation and atomic replacement
+PASS campaign persistence: empty rewards, abandonment and corrupt snapshot rejection
+PASS campaign missing executor: acquisition rejects without an inert grant
+PASS campaign Night Exchange: finite stock, fixed tiers and noncombat completion
+PASS campaign Technician: fixed offers, refusal and combined nonlethal costs
+PASS campaign Patrol: encounter entry, Continue and internal-checkpoint rejection
+PASS campaign defeat: no loot, advancement or Continue checkpoint
+PASS campaign identity: stale run commands and incompatible phase or formation reject
+PASS 784 campaign/offer/receipt assertions. Uses controlled test-only upgrade payloads and terminal ammo; no full-city balance, P08 or disk-durability claim.

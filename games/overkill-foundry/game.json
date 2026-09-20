@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara/Cinderwall MVP; timeline unconstrained and zero budgets unset. Stage remains prototype. Owner rejects current graphics/perspective and UI quality; mechanics now take priority, with concept16C/F.I.S.T. graphics and UI iteration deferred. Turn-based core assigns damage/effects; hitbox gameplay is not required. Reviewed baseline5, camera trigger, partial133/665 runtime evidence and roster/recipe controls are committed/integrated/pushed. Profile/Collection native recheck and independent review pass declared scope after a narrow name-validation fix; new Editor/Game builds and ordinary CampaignProbe pass. Earned full-city Unreal replay passes257 exact commands/781 ordered events/257 disk reloads,39 settled loaded shots and37 captures against the explicit1843 core. Physical lifecycle, upgrade and encounter/status proof candidates are preserved separately; remaining recipe clauses are under review. Two haul compositions and rules-version/save compatibility remain owner-held. Current art is provisional and explicitly unapproved. Full reachable mechanics proof, package/performance and human play/visual approval remain open. No purchases or future campaigns are authorized.",
+  "budget_note": "Owner-authorized complete Mara/Cinderwall MVP; timeline unconstrained and zero budgets unset. Stage remains prototype. Owner requests a fresh continuing task, with exact committed revision and preserved goal. Current graphics/perspective and UI are explicitly rejected; mechanics take priority. Turn-based shared code assigns damage/effects; hitbox gameplay is not required. Historical earned Unreal city replay passes257 commands/781 events/257 disk reloads using the explicit1843 core. The newer candidate combines source-defined terminal/category/purchase/schedule/copy/Mara repairs:16 native suites pass, and independent part, upgrade, Shared, Mara, copy, encounter/lifecycle, Precision-persistence and integration reviews pass their stated finite scope. Candidate rules identity is still provisional; validate a distinct identity with isolated fresh saves before engine integration, preserving old bytes and strict guards. Two haul compositions, existing-save policy and SH084 interpretation await owner answers. UGS-031 normal rarity odds is settled; wording synchronization remains. Active historical linkage remains133/665. Reachable mechanics acceptance, Windows package/performance, human play and later16C/F.I.S.T. graphics/UI approval remain open. No purchases or future campaigns authorized.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T19:39:36+00:00",
-      "record_sha256": "02899daddef4e738610dcf626147e5c17411fe17789a20bf5654f2dd757563ef",
+      "captured_at": "2026-09-20T20:35:28+00:00",
+      "record_sha256": "f226ec9c3f8efc753d932961af58324a53cf0ff932392281fdc4d4ad2ecb33f3",
       "files": {
-        "games/overkill-foundry/STATUS.md": "4354336e2367d0bd22de2fb21e3f2706f9799dbd8b5e996d441ad6b0610b3bd3",
+        "games/overkill-foundry/STATUS.md": "acf25a9563c05d26589fa6d932651326c89b051a1da36c3db68d0cfa532e93c1",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",

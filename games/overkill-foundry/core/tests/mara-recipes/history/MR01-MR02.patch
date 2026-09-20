@@ -1,0 +1,20 @@
+--- mara-semantic-03/core/src/recipe_effects.inl
++++ mara-semantic-05/core/src/recipe_effects.inl
+@@ -274,7 +274,7 @@
+         case 1039:status(main,3,before.intent.move==Move::Attack?6:3);break;case 1047:shieldPart(8,source,true);break;
+         case 1060:status(main,0,3);t=byId(s.enemies,main);if(t&&alive(*t))t->burnHoldTicks=2;break;
+         case 1077:status(other(),0,std::min(6,(t?t->burn:0)/2));break;
+-        case 1082:status(main,0,heatAtFire);break;
++        case 1082:status(main,0,std::min(10,heatAtFire));break;
+         case 1091:if(killed)status(other(),0,std::min(8,before.burn));break;
+         case 1097:for(Id id:living())if(id!=main&&s.phase!=Phase::Defeat)enemyDamage(id,8,true,false,p.id);break;
+         case 1103:if(t&&alive(*t)&&t->shield>0)enemyDamage(main,14,true,false,p.id);break;
+@@ -457,7 +457,7 @@
+         if(active("SH083",BindingClock::Shot))percent=add(percent,std::min(80,8*ammoCount));
+         if(active("MA063",BindingClock::Shot))base=add(base,std::min(15,3*distinct));
+         if(active("MA078",BindingClock::Shot))base=add(base,std::min(16,4*std::max(0,ammoCount-1)));
+-        if(active("MA098",BindingClock::Shot)){Amount n=0;for(const auto& p:s.parts)if(p.place==Place::Reserve)++n;base=add(base,std::min(18,3*n));}
++        if(active("MA098",BindingClock::Shot)){Amount n=0;for(const auto& p:s.parts)if(p.place==Place::Reserve&&isUnusedPart(p))++n;base=add(base,std::min(18,3*n));}
+         if(shoulder)percent=add(percent,25);
+         std::vector<Amount> removed;for(const auto& p:fired){Amount n=0;if(catalogue(p.effects)&&p.kind==Kind::Ammo)base=add(base,beforeAmmo(p,a.target,n,paidBeforeFire));removed.push_back(n);}
+         const Enemy before=*byId(s.enemies,a.target);

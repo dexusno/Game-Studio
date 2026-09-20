@@ -1,0 +1,10 @@
+PASS C1-R04 Cable Binder exact body, default and veteran packets, Fouling clock, core identity
+PASS C1-R05 Pressure Cask exact body, alternating pressure, armour and one core
+PASS C1-R07 Coil Nest finite four helpers, birth timing, locked support, distinct cores
+PASS C1-R08 Knuckle Press exact body, brace expiry, two hits, one next-turn Leak
+PASS C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor
+PASS C1-O03 Split Chassis three-action cycle, Burn timing, one death release and two cores
+PASS Thermal Runaway mirrors: post-action enemy tick, pre-enemy player tick, Shield and lethal stops
+PASS Acid Etch mirrors: pre-action bypass, player post-reset pre-delivery tick and lethal interruption
+PASS Drive Fault mirrors: repeated main shots, target bonus order, multi-hit reduction and no-attack decay
+ENCOUNTER_CONTRACTS_OK groups=9 assertions=3946

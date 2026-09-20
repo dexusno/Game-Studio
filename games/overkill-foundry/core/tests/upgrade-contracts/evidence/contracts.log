@@ -1,0 +1,107 @@
+PASS upgrade:MAU-05 paid recipe HP healing after ordered reactions, once turn, actual6 fight cap; partial full-HP branch coverage
+PASS upgrade:MAU-07 first Heat8 main shot ignores at most4Armor while other defenses and later shots remain
+PASS upgrade:MY1-01 first Ammo output each turn alone receives two, saved physical bonus survives until Fire
+PASS upgrade:MY1-03 entry pair has independent physical identities and normal saved/installed lifetime
+PASS upgrade:MY1-04 opening material extra is separate from collection and repeats only at entry
+PASS upgrade:MY1-07 Officer entry alone grants four Iron and removable Shield8
+PASS upgrade:MY1-08 first successful resource-paid use refunds chosen actually-paid units up to3 after resolution
+PASS upgrade:MY1-11 third qualifying paid Use counts uses not units and one payout after reactions per fight
+PASS upgrade:MY1-13 every third Regular victory earns exact-copy subscription, excludes duplicate tags and defers empty sets
+PASS upgrade:MY1-14 one saved full normal-offer reroll per victory, repeat rejected, old discoveries retained
+PASS upgrade:MY1-15 persistent typed pack choice selects only Ammo or Shield and renews first physical output per turn
+PASS upgrade:MY1-16 first ordinary part sale per fight matches canonical base capped12, sold id and receipt consumed
+PASS upgrade:MY1-17 single saved same-target retry preserves spent original and cannot recurse
+PASS upgrade:MY1-18 first two ordinary hauls add two to selected material without altering base or Precision
+PASS upgrade:MY1-19 raw total threshold schedules one Ammo5 next start without spending and cancels on terminal
+PASS upgrade:MY1-20 half-HP condition evaluated before each attack hit once per fight, not own costs or recoil
+PASS upgrade:MY1-22 each opening choice grants exactly two ordinary fresh physical parts with normal lifetime
+PASS upgrade:MY1-M1 four opening Heat and turn1 actual payment threshold reward after paid reactions, once
+PASS upgrade:MY1-M2 pre-gain Heat threshold, one manufacture trigger per turn, saved output and no self recursion
+PASS upgrade:MY1-M3 cumulative actual paid Heat threshold heals six once alive, decay excluded and progress resets
+PASS upgrade:MY2-01 paid Utility must remove cooldown; one Copper per turn regardless of copies or cost
+PASS upgrade:MY2-02 first Shield recipe output each turn gets three on its physical saved balance
+PASS upgrade:MY2-03 capacity query adds four without copies and turn3 alone grants a fresh Pellet
+PASS upgrade:MY3-02 six active opening Shield protects preparation and enemy damage then resets
+PASS upgrade:UGS-002 production victory with kills pays8 once; all-escape and final defeat never pay
+PASS upgrade:UGS-004 first EndTurn absence of installed Shield is structural, excludes later ends and respects empty parts
+PASS upgrade:UGS-005 zero Fire delays two Iron one Carbon to next start regardless of crafting; Fire excludes
+PASS upgrade:UGS-006 highest maximum HP opening Paint uses stable slot tie and ignores dead/escaped
+PASS upgrade:UGS-007 opening named Slug and Pellet grant no recipes and retain independent sale identities
+PASS upgrade:UGS-010 empty ordinary reserve grants five before enemies, installed parts excluded, renewal each turn
+PASS upgrade:UGS-012 first victory recipe optionally duplicates exact copy with saved exchange, no recursive acceptance
+PASS upgrade:UGS-013 entry heal clamps and production Continue restores original entry without accumulating
+PASS upgrade:UGS-014 first enemy HP-loss hit alone schedules survivor heal at next start, no cost or lethal rescue
+PASS upgrade:UGS-015 three-fight paid Ammo lease copies committed first physical properties without replaying Use
+PASS upgrade:UGS-016 fifth actual victory acceptance heals8 across fights; shops/generated and repeat navigation excluded
+PASS upgrade:UGS-017 each core sale rounds quarter independently, ordinary parts and direct Credits excluded
+PASS upgrade:UGS-021 saved live enemy selector grants four on first shot at that target only; dead target loses benefit
+PASS upgrade:UGS-022 turn2 delivery precedes haul, does not recur and cannot appear after early escape
+PASS upgrade:UGS-024 five saved entry choices consume one charge each and never recur after exhaustion
+PASS upgrade:UGS-025 first enemy-caused HP loss grants one Iron/Copper, persists enemy phase, excludes costs/death
+PASS upgrade:UGS-028 ordinary reserve count grants one capped balance, installed parts excluded and no consumption
+PASS upgrade:UGS-029 three actual Cinderwall debuff types grant once each; repeat stacks and cleared reapplications excluded
+PASS upgrade:UGS-030 first three Fires each turn grant Shield2 after reactions; loads and spread are one Fire
+PASS upgrade:UGS-031 normal offer fourth Shared option retains encounter pool and one pick; bonus offers unchanged
+PASS upgrade:UGS-033 victory entitlements accumulate until first following core sale and exclude part sales
+PASS upgrade:UGS-034 third true victory adds one Shared Utility, counter persists through real transitions and one pick
+PASS upgrade:UGS-037 opening four is separate direct damage with complete recoil and final-death interruption
+PASS upgrade:UGS-039 acquisition pays8 once, selects one Ammo and one Shield exact copy, bonuses require paid Use
+PASS upgrade:UGS-040 first Shield reward across both normal offers tags exact accepted copy, no shop or generated trigger
+PASS upgrade:UGS-041 new victory Utility Copper coupon applies once each fight only to that copy and full other cost
+PASS upgrade:UGS-042 first haul can exchange at most three base units one-for-one with saved atomic choices
+PASS upgrade:UGS-045 actual Officer wins after acquisition build capped levels and future first shot consumes bonus once
+PASS upgrade:UGS-046 zero-to-three distinct Ammo copies selectable, later and granted copies excluded
+PASS upgrade:UGS-047 only first two EndTurns create three physical Shield before enemy attacks
+PASS upgrade:UGS-048 first player-turn kill grants Iron/Carbon once, includes summons, excludes enemy-phase and death
+PASS upgrade:UGS-049 actual Armor reduction on surviving hit marks after damage once each turn
+PASS upgrade:UGS-050 three-turn material cycle repeats before collection and resets with fight
+PASS upgrade:UGS-051 fifth-turn ordinary haul adds one steered unit with fight-local cadence
+PASS upgrade:UGS-053 turn2 Shield10 is freshly installed, removable unused, and not repeated
+PASS upgrade:UGS-058 twenty-percent original Precision region widens symmetrically without payouts or attempts
+PASS upgrade:UGS-060 third actual Fire targets lowest-slot other living enemy, fallback main, separate hit/reaction
+PASS upgrade:UGS-061 first haul only receives one steered extra, Auto does not consume Precision
+PASS upgrade:UGS-062 every second victory adds Shared Modifier including spread category; whole offer still one pick
+PASS upgrade:UGS-065 next true victory heals10 once, escape does not spend, final death cannot rescue
+PASS upgrade:UGS-070 acquisition growth once and Boss-entry-only further growth
+PASS upgrade:UGS-071 four acquisition HP then first enemy hit only reduces before Shield with zero floor
+PASS upgrade:UGS-077 older unused physical part permits three once per turn while fresh-only shots leave trigger intact
+PASS upgrade:UGS-083 every fifth committed Fire across turns grants one Copper, no load count or action cap
+PASS upgrade:UGS-085 one acquisition100Credits and its own strict undiscounted purchase-price gate
+PASS upgrade:UGS-086 zero combined Shield includes active balances, empty printed parts qualify and no recursive trigger
+PASS upgrade:UGS-087 conjunction requires zero Fire and zero combined Shield at EndTurn
+PASS upgrade:UGS-088 only second Fire each turn grants four after shot reactions, never retroactive rescue
+PASS upgrade:UGS-091 Shield10 reader does not spend and hits lowest current HP with stable tie before attacks
+PASS upgrade:UGS-093 every fifth valid Fire gets eight before percentage modifiers, across rounds and reset at fight
+PASS upgrade:UGS-094 every third start cools only greatest positive copy with stable memory-order tie
+PASS upgrade:UGS-095 first resource-paid Modifier craft, not grant or activation, gives one physical Shield7
+PASS upgrade:UGS-096 only first failed Precision grants one same-target bonus without retry or baseline loss
+PASS upgrade:UGS-099 turn4/8 saved choices allow exactly Iron or Glass before haul and reset
+PASS upgrade:UGS-101 Regular victories expose two independent optional offers; Officer and Boss have no addition
+PASS upgrade:UGS-102 chosen physical Ammo copy builds consecutive-turn momentum2/4/6, first only and gaps reset
+PASS upgrade:UGS-105 opening Weaken affects every attack hit then decays, including ordinary zero floor
+PASS upgrade:UGS-107 first paid Utility per turn queues one next-main bonus that expires if unused
+PASS upgrade:UGS-109 zero Fire grants four even with existing Shield; crafting/loading are not Fire
+PASS upgrade:UGS-115 Officer encounters only first main Fire each turn gains three; other classes never gain
+PASS upgrade:UGS-116 saved random material fixed per fight, first qualifying use discounts once each turn and renews
+PASS upgrade:UGS-117 third-turn physical Shield and fight-lived first-shot bonus survive zero-shot turns
+PASS upgrade:UGS-119 two different saved choices, first paid output each per fight, invalid kinds reject
+PASS upgrade:UGS-121 only first resource-paid canonical Solid Casting output per turn gains two
+PASS upgrade:UGS-122 one single canonical Slug bullet per fight grants fresh Pellet, mixed and other Ammo excluded
+PASS upgrade:UGS-125 third actual Officer victory awakens future entries only, no reacquisition, first haul and shot once
+PASS upgrade:UGS-127 Utility must finish a cooling copy; multiple completions pay once and renew each turn
+PASS upgrade:UGS-129 every real victory grows and heals one, all escape and death do not, receipt navigation is inert
+PASS upgrade:UGS-134 new victory Shield Iron coupon renews each fight, excludes old copies and pays other costs
+PASS upgrade:UGS-142 failed-Precision victory alone earns one consumed next-entry Iron, misses never stack
+PASS upgrade:UGS-147 Officer alone adds separate three Rare choices without extra upgrade reward and normal exchange
+PASS upgrade:UGS-148 one fixed LightTouch per normal offer, accepted exact-copy coupon uses largest ingredient stable ties
+PASS upgrade:category:modifier-spread all six spreading Modifier paid Uses trigger once; lifecycle and exclusions remain distinct
+PASS upgrade:edge:bond-reward UGS085 still grants one100Credits when actually accepted as a nonpurchase Officer reward
+PASS upgrade:edge:calibration-eligibility UGS039 missing either required stored type rejects before HP payment or ledger insertion
+PASS upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid
+PASS upgrade:edge:entry-setup UGS037 uses actual Warden factory opening tiles and no Fire count
+PASS upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening
+PASS upgrade:edge:normal-rarity UGS031 fourth option uses current normal weighted pool, Shared-only duplicate filtering
+PASS upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig
+PASS upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity
+PASS upgrade:edge:unused-lease UGS015 consumes each entry even without Ammo use and cannot defer its three-fight lease
+SUMMARY 106 passed, 0 failed, 6139 assertions. Held UGS-011/018/126/141 are not proposed.

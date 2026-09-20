@@ -1,0 +1,7 @@
+PASS actual body core identity, manual sale, exact receipt replay and no resell
+PASS purchased physical identities and canonical per-part rounding
+PASS loaded and installed sale rejection, unload/removal eligibility and spent-Shield exclusion
+PASS seen shop/reward alternatives, repeated discovery and skipped-choice persistence
+PASS Patrol compulsory combat, unchanged Continue, normal rewards and single progression
+PASS real boss result, single Ivo unlock, completion and profile facts across New Game
+CAMPAIGN_LIFECYCLE_OK groups=6 assertions=652

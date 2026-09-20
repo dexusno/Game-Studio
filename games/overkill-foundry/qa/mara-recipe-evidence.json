@@ -1,0 +1,172 @@
+{
+  "author_original_reproduction": {
+    "assertions": 15210,
+    "executable_sha256": "a460376df5e3378d4ced2ca282592817d1b7781f153ed48ad2b8c438de70d9b8",
+    "exit_code": 1,
+    "failed_groups": 2,
+    "failures": [
+      "MA082 legalHeat14 appliesBurn14",
+      "MA098 depleted removedShield adds3"
+    ],
+    "passed_groups": 105,
+    "raw_logs": [
+      "core/build/qa-mara/author-old-MA082.log",
+      "core/build/qa-mara/author-old-MA098.log"
+    ],
+    "scope_note": "Historical03 predates --case parsing; attempted MA082/MA098 selections each actually ran the full historical suite. Both raw logs retained; not reported as filtered executions.",
+    "source_graph_sha256": "b7ae14bb276d9bc3f4931c96b2f0abe58581d4ef1144adcbdda1beecdb515aee"
+  },
+  "author_read_only_check": {
+    "actual_result": "Verified37 copied sources,107 proposals and frozen artifacts; source stillmatched at check time.",
+    "command": "python -X utf8 core/tests/mara-recipes/publish.py --archive core/build/mara-semantic-05 --check",
+    "exit_code": 0
+  },
+  "binaries": {
+    "independent_executable": {
+      "path": "core/build/qa-mara/probes-final/Release/independent_mara_recipes.exe",
+      "sha256": "dbe4b2d59378cedaa7077a78b2404946d150f0453683ff78cb53a7c66caf96ce"
+    },
+    "independent_old_executable": {
+      "path": "core/build/qa-mara/probes-failed03/Release/independent_mara_recipes.exe",
+      "sha256": "a9bdbf82bb17a87fb3c83d68fb7c7fa0a6c60f0b155ae1670c3baa960dc0b760"
+    },
+    "old_library": {
+      "path": "core/build/mara-semantic-03/build/Release/mara_contract_core.lib",
+      "sha256": "8fd42966d49988fcffc52add65f4cae1a3a96a16ed26ae618fd434ce40b7db44"
+    },
+    "rebuilt_author_executable": {
+      "path": "core/build/qa-mara-rebuild/Release/mara_recipe_contract_tests.exe",
+      "sha256": "cc94970d8339100078eb31343b9e181ce028093355146f8e276011419ec3724c"
+    },
+    "rebuilt_legacy_executable": {
+      "path": "core/build/qa-mara-rebuild/Release/mara_legacy_recipe_tests.exe",
+      "sha256": "13a8312f2269c63e481874f9bce5932480252d2b6ced421d7db9eeae18363d5f"
+    },
+    "rebuilt_library": {
+      "path": "core/build/qa-mara-rebuild/Release/mara_contract_core.lib",
+      "sha256": "9db7df3249560a69f0f7ec9afb2059cd468e43de20158db08a549d18fedee5f9"
+    }
+  },
+  "candidate": {
+    "archive": "core/build/mara-semantic-05",
+    "author_executable_sha256": "f93f37ccb67b3f778ccb5846590f25c0f0f836d52393e8b025f8ccc3f2d861ef",
+    "graph_sha256": "254e4f72c531dcac6f70c1df74cf7a09592aaa15803a191767e54db936556ef3",
+    "inputs": 37,
+    "proposal_sha256": "cad8ede703cee7c18c864e6df6b05cc1c0f5748aaccd1f158c7e7a361002f76e",
+    "residual_sha256": "af75a1b38949058dcc0e1921375dfd645255b274fce3c8cea04c4dcc583ea717",
+    "results_sha256": "4c1f8ecf14015c36fb84eb8c259d635dcc108490ab99f293182563aa040a224e",
+    "source_hashes": {
+      "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "core/src/recipe_effects.inl": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+      "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "core/src/upgrade_effects.inl": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f"
+    }
+  },
+  "clause_dispositions": {
+    "bounded_links": 107,
+    "exhaustive_approvals": 0,
+    "path": "qa/mara-recipes/clause-review.json",
+    "reviewed_extensions": 33,
+    "reviewed_primary_ids": 107,
+    "sha256": "ef75b2d1862025960f13e8169ef2ab0f4941c11463d7c05920e128865af459df"
+  },
+  "disposition": "Finite provisional pass for107 bounded semantic links. MR01/MR02 closures independently verified; no new defect. No exhaustive recipe, active binding, version or save compatibility approval.",
+  "environment": {
+    "cmake": "3.31.6-msvc6",
+    "compiler": "MSVC 19.44.35228.0",
+    "configuration": "Release x64",
+    "controls": "CPU-only prepared native fixtures with actual typed Rules and author Campaign actions; no Unreal/GPU/hardware input",
+    "flags": [
+      "/W4",
+      "/WX",
+      "/permissive-",
+      "/utf-8"
+    ],
+    "language": "C++17",
+    "platform": "Windows x64",
+    "windows_sdk": "10.0.26100.0"
+  },
+  "identity_audit": {
+    "candidate_artifacts_verified": 7,
+    "candidate_inputs_verified": 37,
+    "extensions": 33,
+    "graph_sha256": "254e4f72c531dcac6f70c1df74cf7a09592aaa15803a191767e54db936556ef3",
+    "negative_controls_rejected": [
+      "Missing PASS",
+      "Inflated assertion claim",
+      "Altered source clause",
+      "Activated link"
+    ],
+    "primary_fixtures": 107,
+    "printed_rows_verified": 107,
+    "proposed_status": "bounded proposed_only; no exhaustive/full or active acceptance",
+    "retained_failed_captures": [
+      {
+        "archive": "core/build/mara-semantic-01",
+        "failed_groups": 6,
+        "verified_inputs": 33
+      },
+      {
+        "archive": "core/build/mara-semantic-02",
+        "failed_groups": 2,
+        "verified_inputs": 33
+      },
+      {
+        "archive": "core/build/mara-semantic-03",
+        "failed_groups": 2,
+        "verified_inputs": 33
+      },
+      {
+        "archive": "core/build/mara-semantic-04",
+        "failed_groups": 3,
+        "verified_inputs": 34
+      }
+    ],
+    "scope": "Identity, inventory and assertion linkage; semantic review and additional executions are separate.",
+    "two_line_production_delta_verified": true
+  },
+  "independent": {
+    "assertions": 1346,
+    "failed_groups": 0,
+    "log": "qa/mara-recipes/independent-final.log",
+    "log_sha256": "24eab54130b7444a46a0db71b7e903fcf9790c421e72d4143c1ae4f1af001d6b",
+    "old_negative_controls": [
+      {
+        "assertions": 325,
+        "exit_code": 1,
+        "group": "M01",
+        "observation": "Legal Heat11 plus existingBurn3 produces14 in failed03, expected13 under payload cap10. Final05 independently covers9/10/11/14 and two physical Ammo copies."
+      },
+      {
+        "assertions": 122,
+        "exit_code": 1,
+        "group": "M02",
+        "observation": "Actual paid/removal mode1 produces9 in failed03, expected6. Final05 also covers fully depleted and recoil-depleted history."
+      }
+    ],
+    "passed_groups": 7,
+    "source": "qa/mara-recipes/probes.cpp",
+    "source_sha256": "b1abcbafcc92e8dc9fe6757c5ec27c3f87d724d2111fa696eec77cdb3ed0e446"
+  },
+  "limits": [
+    "Prepared materials/memory/HP/status/intents; real rule effects are not natural earned campaign loadouts.",
+    "All declared per-ID author residuals preserved; selected independent probes add only named finite combinations.",
+    "MARA098 generated/copied/purchased origin interpretation is not expanded by this repair or review.",
+    "Includes earlier UC01 and terminal guard under provisional of-core-0.4; old unmarked output migration and owner version decision remain held.",
+    "No current live source substitution, active binding or global report modification.",
+    "No packaged startup/exit, input, visuals, audio, performance, human play, balance or disk-save durability acceptance."
+  ],
+  "rebuild": {
+    "contract_assertions": 20526,
+    "contract_groups": 107,
+    "ctest_failed": 0,
+    "ctest_passed": 2,
+    "directory": "core/build/qa-mara-rebuild",
+    "legacy_recipe_assertions": 2055,
+    "raw_ctest_log": "core/build/qa-mara-rebuild/Testing/Temporary/LastTest.log",
+    "raw_ctest_log_sha256": "1917f94884cedeb89dd649b2b6181dee9411f189aaf82da0e410016fd57d4501"
+  },
+  "reviewed_utc": "2026-09-20T20:26:18.083869+00:00",
+  "schema_version": 1
+}

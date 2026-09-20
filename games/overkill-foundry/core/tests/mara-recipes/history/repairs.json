@@ -1,0 +1,19 @@
+{
+  "authorized_scope": "Root explicitly authorized only these two source-defined corrections; no schema/rules/content version changes.",
+  "base_inl_sha256": "10ccb56c16fb0f3f3c0dd8a79ec22f97c3a440d11a55b7e88dcc0a05d638c8c8",
+  "fixed_inl_sha256": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+  "minimal_diff": "core/tests/mara-recipes/history/MR01-MR02.patch",
+  "MR01": {
+    "source": "design/RECIPE-CATALOGUE.md:543, MA082 White Casting",
+    "reproduction": "Acquire MAU-02 through Rules; pay five MA001 Uses to fill legal Heat14; pay MA082 craft, load and Fire at a living target.",
+    "before": "Flat12 main damage, Burn14; violates the printed Burn10 cap.",
+    "after": "Flat12 main damage, Burn10 event/stack and unchanged Heat14; lower0/3 and exact10 controls remain unchanged."
+  },
+  "MR02": {
+    "source": "design/RECIPE-CATALOGUE.md:559, MA098 Stored Weight",
+    "reproduction": "Pay SH002 craft/install (Shield6), then MA037 Use drains5, remove the remaining1-Shield part; craft/activate MA098 and craft/load/Fire SH001.",
+    "before": "Main9 despite no unused reserve parts; all Reserve parts were counted.",
+    "after": "Main6 with the used part excluded by isUnusedPart; untouched removed plain Shield still adds3, installed Shield does not, unused0/1/6/7 count/cap controls pass.",
+    "origin_limit": "No extra kind or origin filter was introduced."
+  }
+}

@@ -1,0 +1,8 @@
+PASS UC01 one physical Jig bonus in both acquisition orders with optional other committed tag
+PASS UC02 zero attribution marker leaves ordinary bonus timing eligibility and resale intact
+PASS UC03 printed SH118 descendants strip all later bonuses while saved original retains them
+PASS UC04 committed ordinary damage attachment is preserved beside omitted Jig
+PASS UC05 printed Return Delivery fresh copy excludes Jig without resetting its original turn allowance
+PASS UC06 free named grants and failed paid Uses do not consume first paid Jig output
+PASS UC07 inconsistent copied attribution is rejected before committing delivery or round
+SUMMARY 7 passed, 0 failed, 671 assertions.

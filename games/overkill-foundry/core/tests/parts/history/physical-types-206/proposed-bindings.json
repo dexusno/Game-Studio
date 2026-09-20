@@ -1,0 +1,850 @@
+{
+  "bindings": [
+    {
+      "fixture": "parts::part:recipe-MA002 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA002"
+    },
+    {
+      "fixture": "parts::part:recipe-MA003 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA003"
+    },
+    {
+      "fixture": "parts::part:recipe-MA005 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA005"
+    },
+    {
+      "fixture": "parts::part:recipe-MA006 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA006"
+    },
+    {
+      "fixture": "parts::part:recipe-MA007 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA007"
+    },
+    {
+      "fixture": "parts::part:recipe-MA008 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA008"
+    },
+    {
+      "fixture": "parts::part:recipe-MA009 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA009"
+    },
+    {
+      "fixture": "parts::part:recipe-MA010 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA010"
+    },
+    {
+      "fixture": "parts::part:recipe-MA011 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA011"
+    },
+    {
+      "fixture": "parts::part:recipe-MA012 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA012"
+    },
+    {
+      "fixture": "parts::part:recipe-MA013 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA013"
+    },
+    {
+      "fixture": "parts::part:recipe-MA014 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA014"
+    },
+    {
+      "fixture": "parts::part:recipe-MA015 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA015"
+    },
+    {
+      "fixture": "parts::part:recipe-MA016 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA016"
+    },
+    {
+      "fixture": "parts::part:recipe-MA017 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA017"
+    },
+    {
+      "fixture": "parts::part:recipe-MA018 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA018"
+    },
+    {
+      "fixture": "parts::part:recipe-MA022 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA022"
+    },
+    {
+      "fixture": "parts::part:recipe-MA023 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA023"
+    },
+    {
+      "fixture": "parts::part:recipe-MA024 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA024"
+    },
+    {
+      "fixture": "parts::part:recipe-MA025 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA025"
+    },
+    {
+      "fixture": "parts::part:recipe-MA027 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA027"
+    },
+    {
+      "fixture": "parts::part:recipe-MA028 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA028"
+    },
+    {
+      "fixture": "parts::part:recipe-MA031 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA031"
+    },
+    {
+      "fixture": "parts::part:recipe-MA032 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA032"
+    },
+    {
+      "fixture": "parts::part:recipe-MA033 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA033"
+    },
+    {
+      "fixture": "parts::part:recipe-MA034 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA034"
+    },
+    {
+      "fixture": "parts::part:recipe-MA036 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA036"
+    },
+    {
+      "fixture": "parts::part:recipe-MA039 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA039"
+    },
+    {
+      "fixture": "parts::part:recipe-MA040 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA040"
+    },
+    {
+      "fixture": "parts::part:recipe-MA041 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA041"
+    },
+    {
+      "fixture": "parts::part:recipe-MA042 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA042"
+    },
+    {
+      "fixture": "parts::part:recipe-MA044 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA044"
+    },
+    {
+      "fixture": "parts::part:recipe-MA045 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA045"
+    },
+    {
+      "fixture": "parts::part:recipe-MA047 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA047"
+    },
+    {
+      "fixture": "parts::part:recipe-MA048 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA048"
+    },
+    {
+      "fixture": "parts::part:recipe-MA051 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA051"
+    },
+    {
+      "fixture": "parts::part:recipe-MA052 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA052"
+    },
+    {
+      "fixture": "parts::part:recipe-MA053 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA053"
+    },
+    {
+      "fixture": "parts::part:recipe-MA054 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA054"
+    },
+    {
+      "fixture": "parts::part:recipe-MA055 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA055"
+    },
+    {
+      "fixture": "parts::part:recipe-MA057 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA057"
+    },
+    {
+      "fixture": "parts::part:recipe-MA059 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA059"
+    },
+    {
+      "fixture": "parts::part:recipe-MA060 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA060"
+    },
+    {
+      "fixture": "parts::part:recipe-MA061 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA061"
+    },
+    {
+      "fixture": "parts::part:recipe-MA062 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA062"
+    },
+    {
+      "fixture": "parts::part:recipe-MA063 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA063"
+    },
+    {
+      "fixture": "parts::part:recipe-MA065 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA065"
+    },
+    {
+      "fixture": "parts::part:recipe-MA067 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA067"
+    },
+    {
+      "fixture": "parts::part:recipe-MA068 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA068"
+    },
+    {
+      "fixture": "parts::part:recipe-MA070 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA070"
+    },
+    {
+      "fixture": "parts::part:recipe-MA071 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA071"
+    },
+    {
+      "fixture": "parts::part:recipe-MA072 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA072"
+    },
+    {
+      "fixture": "parts::part:recipe-MA073 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA073"
+    },
+    {
+      "fixture": "parts::part:recipe-MA075 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA075"
+    },
+    {
+      "fixture": "parts::part:recipe-MA076 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA076"
+    },
+    {
+      "fixture": "parts::part:recipe-MA077 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA077"
+    },
+    {
+      "fixture": "parts::part:recipe-MA078 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA078"
+    },
+    {
+      "fixture": "parts::part:recipe-MA079 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA079"
+    },
+    {
+      "fixture": "parts::part:recipe-MA082 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA082"
+    },
+    {
+      "fixture": "parts::part:recipe-MA083 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA083"
+    },
+    {
+      "fixture": "parts::part:recipe-MA084 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA084"
+    },
+    {
+      "fixture": "parts::part:recipe-MA086 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA086"
+    },
+    {
+      "fixture": "parts::part:recipe-MA091 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA091"
+    },
+    {
+      "fixture": "parts::part:recipe-MA094 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA094"
+    },
+    {
+      "fixture": "parts::part:recipe-MA096 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA096"
+    },
+    {
+      "fixture": "parts::part:recipe-MA097 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA097"
+    },
+    {
+      "fixture": "parts::part:recipe-MA098 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA098"
+    },
+    {
+      "fixture": "parts::part:recipe-MA099 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA099"
+    },
+    {
+      "fixture": "parts::part:recipe-MA102 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA102"
+    },
+    {
+      "fixture": "parts::part:recipe-MA103 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA103"
+    },
+    {
+      "fixture": "parts::part:recipe-MA104 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA104"
+    },
+    {
+      "fixture": "parts::part:recipe-MA106 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA106"
+    },
+    {
+      "fixture": "parts::part:recipe-MA108 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA108"
+    },
+    {
+      "fixture": "parts::part:recipe-MA109 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA109"
+    },
+    {
+      "fixture": "parts::part:recipe-MA111 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA111"
+    },
+    {
+      "fixture": "parts::part:recipe-MA113 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA113"
+    },
+    {
+      "fixture": "parts::part:recipe-MA115 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA115"
+    },
+    {
+      "fixture": "parts::part:recipe-MA118 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA118"
+    },
+    {
+      "fixture": "parts::part:recipe-MA120 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA120"
+    },
+    {
+      "fixture": "parts::part:recipe-SH001 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH001"
+    },
+    {
+      "fixture": "parts::part:recipe-SH002 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH002"
+    },
+    {
+      "fixture": "parts::part:recipe-SH003 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH003"
+    },
+    {
+      "fixture": "parts::part:recipe-SH004 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH004"
+    },
+    {
+      "fixture": "parts::part:recipe-SH005 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH005"
+    },
+    {
+      "fixture": "parts::part:recipe-SH006 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH006"
+    },
+    {
+      "fixture": "parts::part:recipe-SH008 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH008"
+    },
+    {
+      "fixture": "parts::part:recipe-SH009 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH009"
+    },
+    {
+      "fixture": "parts::part:recipe-SH010 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH010"
+    },
+    {
+      "fixture": "parts::part:recipe-SH011 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH011"
+    },
+    {
+      "fixture": "parts::part:recipe-SH012 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH012"
+    },
+    {
+      "fixture": "parts::part:recipe-SH013 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH013"
+    },
+    {
+      "fixture": "parts::part:recipe-SH014 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH014"
+    },
+    {
+      "fixture": "parts::part:recipe-SH016 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH016"
+    },
+    {
+      "fixture": "parts::part:recipe-SH017 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH017"
+    },
+    {
+      "fixture": "parts::part:recipe-SH018 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH018"
+    },
+    {
+      "fixture": "parts::part:recipe-SH019 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH019"
+    },
+    {
+      "fixture": "parts::part:recipe-SH020 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH020"
+    },
+    {
+      "fixture": "parts::part:recipe-SH021 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH021"
+    },
+    {
+      "fixture": "parts::part:recipe-SH022 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH022"
+    },
+    {
+      "fixture": "parts::part:recipe-SH023 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH023"
+    },
+    {
+      "fixture": "parts::part:recipe-SH024 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH024"
+    },
+    {
+      "fixture": "parts::part:recipe-SH025 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH025"
+    },
+    {
+      "fixture": "parts::part:recipe-SH027 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH027"
+    },
+    {
+      "fixture": "parts::part:recipe-SH028 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH028"
+    },
+    {
+      "fixture": "parts::part:recipe-SH035 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH035"
+    },
+    {
+      "fixture": "parts::part:recipe-SH036 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH036"
+    },
+    {
+      "fixture": "parts::part:recipe-SH037 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH037"
+    },
+    {
+      "fixture": "parts::part:recipe-SH038 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH038"
+    },
+    {
+      "fixture": "parts::part:recipe-SH039 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH039"
+    },
+    {
+      "fixture": "parts::part:recipe-SH040 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH040"
+    },
+    {
+      "fixture": "parts::part:recipe-SH041 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH041"
+    },
+    {
+      "fixture": "parts::part:recipe-SH042 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH042"
+    },
+    {
+      "fixture": "parts::part:recipe-SH043 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH043"
+    },
+    {
+      "fixture": "parts::part:recipe-SH044 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH044"
+    },
+    {
+      "fixture": "parts::part:recipe-SH045 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH045"
+    },
+    {
+      "fixture": "parts::part:recipe-SH046 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH046"
+    },
+    {
+      "fixture": "parts::part:recipe-SH047 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH047"
+    },
+    {
+      "fixture": "parts::part:recipe-SH048 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH048"
+    },
+    {
+      "fixture": "parts::part:recipe-SH050 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH050"
+    },
+    {
+      "fixture": "parts::part:recipe-SH051 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH051"
+    },
+    {
+      "fixture": "parts::part:recipe-SH052 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH052"
+    },
+    {
+      "fixture": "parts::part:recipe-SH053 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH053"
+    },
+    {
+      "fixture": "parts::part:recipe-SH054 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH054"
+    },
+    {
+      "fixture": "parts::part:recipe-SH055 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH055"
+    },
+    {
+      "fixture": "parts::part:recipe-SH056 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH056"
+    },
+    {
+      "fixture": "parts::part:recipe-SH058 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH058"
+    },
+    {
+      "fixture": "parts::part:recipe-SH059 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH059"
+    },
+    {
+      "fixture": "parts::part:recipe-SH060 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH060"
+    },
+    {
+      "fixture": "parts::part:recipe-SH061 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH061"
+    },
+    {
+      "fixture": "parts::part:recipe-SH062 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH062"
+    },
+    {
+      "fixture": "parts::part:recipe-SH063 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH063"
+    },
+    {
+      "fixture": "parts::part:recipe-SH064 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH064"
+    },
+    {
+      "fixture": "parts::part:recipe-SH070 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH070"
+    },
+    {
+      "fixture": "parts::part:recipe-SH072 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH072"
+    },
+    {
+      "fixture": "parts::part:recipe-SH075 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH075"
+    },
+    {
+      "fixture": "parts::part:recipe-SH077 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH077"
+    },
+    {
+      "fixture": "parts::part:recipe-SH078 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH078"
+    },
+    {
+      "fixture": "parts::part:recipe-SH079 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH079"
+    },
+    {
+      "fixture": "parts::part:recipe-SH080 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH080"
+    },
+    {
+      "fixture": "parts::part:recipe-SH081 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH081"
+    },
+    {
+      "fixture": "parts::part:recipe-SH082 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH082"
+    },
+    {
+      "fixture": "parts::part:recipe-SH083 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH083"
+    },
+    {
+      "fixture": "parts::part:recipe-SH084 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH084"
+    },
+    {
+      "fixture": "parts::part:recipe-SH085 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH085"
+    },
+    {
+      "fixture": "parts::part:recipe-SH086 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH086"
+    },
+    {
+      "fixture": "parts::part:recipe-SH087 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH087"
+    },
+    {
+      "fixture": "parts::part:recipe-SH088 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH088"
+    },
+    {
+      "fixture": "parts::part:recipe-SH089 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH089"
+    },
+    {
+      "fixture": "parts::part:recipe-SH090 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH090"
+    },
+    {
+      "fixture": "parts::part:recipe-SH091 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH091"
+    },
+    {
+      "fixture": "parts::part:recipe-SH092 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH092"
+    },
+    {
+      "fixture": "parts::part:recipe-SH093 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH093"
+    },
+    {
+      "fixture": "parts::part:recipe-SH094 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH094"
+    },
+    {
+      "fixture": "parts::part:recipe-SH095 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH095"
+    },
+    {
+      "fixture": "parts::part:recipe-SH096 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH096"
+    },
+    {
+      "fixture": "parts::part:recipe-SH097 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH097"
+    },
+    {
+      "fixture": "parts::part:recipe-SH098 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH098"
+    },
+    {
+      "fixture": "parts::part:recipe-SH103 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH103"
+    },
+    {
+      "fixture": "parts::part:recipe-SH105 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH105"
+    },
+    {
+      "fixture": "parts::part:recipe-SH106 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH106"
+    },
+    {
+      "fixture": "parts::part:recipe-SH107 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH107"
+    },
+    {
+      "fixture": "parts::part:recipe-SH108 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH108"
+    },
+    {
+      "fixture": "parts::part:recipe-SH109 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH109"
+    },
+    {
+      "fixture": "parts::part:recipe-SH110 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH110"
+    },
+    {
+      "fixture": "parts::part:recipe-SH111 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH111"
+    },
+    {
+      "fixture": "parts::part:recipe-SH112 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH112"
+    },
+    {
+      "fixture": "parts::part:recipe-SH113 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH113"
+    },
+    {
+      "fixture": "parts::part:recipe-SH114 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH114"
+    },
+    {
+      "fixture": "parts::part:recipe-SH119 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH119"
+    },
+    {
+      "fixture": "parts::part:recipe-SH120 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH120"
+    },
+    {
+      "fixture": "parts::part:recipe-SH121 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH121"
+    },
+    {
+      "fixture": "parts::part:recipe-SH122 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH122"
+    },
+    {
+      "fixture": "parts::part:recipe-SH123 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH123"
+    },
+    {
+      "fixture": "parts::part:recipe-SH124 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH124"
+    },
+    {
+      "fixture": "parts::part:recipe-SH125 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH125"
+    },
+    {
+      "fixture": "parts::part:recipe-SH126 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH126"
+    },
+    {
+      "fixture": "parts::part:warm-rivet materialization/copy/resale/place/lifetime",
+      "operation": "part:warm-rivet"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-1 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-1"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-10 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-10"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-11 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-11"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-12 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-12"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-13 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-13"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-14 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-14"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-2 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-2"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-3 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-3"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-4 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-4"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-5 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-5"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-6 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-6"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-7 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-7"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-8 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-8"
+    },
+    {
+      "fixture": "parts::part:plain-ammo-9 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-ammo-9"
+    },
+    {
+      "fixture": "parts::part:plain-shield-1 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-1"
+    },
+    {
+      "fixture": "parts::part:plain-shield-10 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-10"
+    },
+    {
+      "fixture": "parts::part:plain-shield-12 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-12"
+    },
+    {
+      "fixture": "parts::part:plain-shield-14 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-14"
+    },
+    {
+      "fixture": "parts::part:plain-shield-15 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-15"
+    },
+    {
+      "fixture": "parts::part:plain-shield-18 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-18"
+    },
+    {
+      "fixture": "parts::part:plain-shield-2 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-2"
+    },
+    {
+      "fixture": "parts::part:plain-shield-20 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-20"
+    },
+    {
+      "fixture": "parts::part:plain-shield-24 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-24"
+    },
+    {
+      "fixture": "parts::part:plain-shield-3 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-3"
+    },
+    {
+      "fixture": "parts::part:plain-shield-4 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-4"
+    },
+    {
+      "fixture": "parts::part:plain-shield-5 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-5"
+    },
+    {
+      "fixture": "parts::part:plain-shield-6 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-6"
+    },
+    {
+      "fixture": "parts::part:plain-shield-7 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-7"
+    },
+    {
+      "fixture": "parts::part:plain-shield-8 materialization/copy/resale/place/lifetime",
+      "operation": "part:plain-shield-8"
+    }
+  ],
+  "contracts": {
+    "path": "core/tests/parts/contracts.json",
+    "sha256": "b53643d9851b7cb030850a7234bcdd43320ce308d6b72ae9b2719545730680be"
+  },
+  "evidence": {
+    "path": "core/tests/parts/evidence/results.json",
+    "sha256": "7a6f7138cdbe423adb79418428f5e5ff48e3a1b4ae01fc53229cbc75950e5f9d"
+  },
+  "handler": "Engine::recipePart/plain/receive/printedCopy/copyLater/completeFire/install/catalogueActivate/collectionEffects; upgradePartSaleValue; CampaignRules::apply/clearFight",
+  "implementations": {
+    "core/src/campaign.cpp": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+    "core/src/upgrade_effects.inl": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "notice": "Proposed only. Each pair names an actual executed group; the current runtime support ledger is unchanged.",
+  "unbound": {
+    "part:recipe-SH066": "SH066's explicit chosen Shield-payment/remainder clause lacks a proven executable selection contract. Activation/lifecycle enumeration alone does not close it."
+  },
+  "verified_build": "native-part-lifecycle-b65b3081edc070ca"
+}

@@ -31,7 +31,7 @@ std::vector<std::string> drawRecipes(const Rules& fights,const CityContent& cont
     auto pools=content.recipePools;
     if(request.rarity>=0)for(auto& p:pools)if(p.name==pool){p.weights={};p.weights[static_cast<std::size_t>(request.rarity)]=1;}
     return drawCityOffer(content.recipes,pools,pool,c.rng,Domain::Choice,request.count,excluded,[&](const std::string& id){
-        const auto* recipe=fights.recipe(id);return recipe && (!request.sharedOnly || id.substr(0,2)=="SH") && (!request.filterKind || recipe->kind==request.recipeKind);
+        const auto* recipe=fights.recipe(id);return recipe && (!request.sharedOnly || id.substr(0,2)=="SH") && (!request.filterKind || recipe->kind==request.recipeKind || (request.recipeKind==Kind::Modifier&&recipe->kind==Kind::Spread));
     });
 }
 std::vector<std::string> drawUpgrades(const Rules& fights,const CityContent& content,Campaign& c,const UpgradeRequest& request){

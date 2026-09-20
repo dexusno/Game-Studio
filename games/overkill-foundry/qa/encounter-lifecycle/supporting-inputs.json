@@ -1,0 +1,29 @@
+{
+  "scope": "Supplemental source references; no runtime input or change to either historical graph",
+  "inputs": [
+    {
+      "path": "content/cinderwall-authored.json",
+      "bytes": 12436,
+      "sha256": "b76bfc4811b423a1c47eba002aa8a7d8aba4f6a5fc462386eb38c8666537df6d",
+      "copy": "qa/encounter-lifecycle/build/supporting-sources/content/cinderwall-authored.json"
+    },
+    {
+      "path": "content/runtime-evidence/coverage.json",
+      "bytes": 222209,
+      "sha256": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802",
+      "copy": "qa/encounter-lifecycle/build/supporting-sources/content/runtime-evidence/coverage.json"
+    },
+    {
+      "path": "design/RECIPE-CATALOGUE.md",
+      "bytes": 241495,
+      "sha256": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+      "copy": "qa/encounter-lifecycle/build/supporting-sources/design/RECIPE-CATALOGUE.md"
+    },
+    {
+      "path": "BRIEF.md",
+      "bytes": 23258,
+      "sha256": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
+      "copy": "qa/encounter-lifecycle/build/supporting-sources/BRIEF.md"
+    }
+  ]
+}

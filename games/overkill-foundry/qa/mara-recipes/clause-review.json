@@ -1,0 +1,2996 @@
+{
+  "decisions": {
+    "recipe:MA002": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 2,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Fire Heat3/4 boundary; Burn after6 impact, not retroactive damage"
+        },
+        {
+          "kind": "extend",
+          "line": 40,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "earlier payload Heat cannot change Fire snapshot"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Hot Cast",
+      "observed_author_claim": "Fire Heat3/4 boundary; Burn after6 impact, not retroactive damage; earlier payload Heat cannot change Fire snapshot",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA002 | Hot Cast | 1 Fresh Slug | Ammo | 1 Iron + 1 Carbon | None | Add 6 damage. If Heat is at least 4 at Fire, apply Burn 2 to the main target after impact. |",
+        "line": 448,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 6 damage. If Heat is at least 4 at Fire, apply Burn 2 to the main target after impact."
+    },
+    "recipe:MA004": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 2,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat2 required and paid on Use; immediate regular Shield5"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Quick Vent",
+      "observed_author_claim": "Heat2 required and paid on Use; immediate regular Shield5",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA004 | Quick Vent | Immediate effect: Vent Valve (no part) | Utility | 1 Copper | None | Pay 2 Heat when activated. Gain 5 Shield. |",
+        "line": 450,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 2 Heat when activated. Gain 5 Shield."
+    },
+    "recipe:MA005": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 3,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "only one Ammo14, multiple Ammo9 each; planning Modifier excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Long Cast",
+      "observed_author_claim": "only one Ammo14, multiple Ammo9 each; planning Modifier excluded",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "The excluded Modifier control uses a planning Modifier; every physical spread Modifier is not repeated here."
+      ],
+      "source_clause": {
+        "exact_text": "| MA005 | Long Cast | 1 Long Slug | Ammo | 2 Iron | None | Add 9 damage. Add 5 more if this is the only Ammo part consumed in the main shot; Modifier parts do not break this condition. |",
+        "line": 456,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 9 damage. Add 5 more if this is the only Ammo part consumed in the main shot; Modifier parts do not break this condition."
+    },
+    "recipe:MA006": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 4,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "prehit Shield0/5/6/10 removal; Heat2 iff full6 removed"
+        },
+        {
+          "kind": "extend",
+          "line": 41,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "full-strip Heat is after hit"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Iron Teeth",
+      "observed_author_claim": "prehit Shield0/5/6/10 removal; Heat2 iff full6 removed; full-strip Heat is after hit",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA006 | Iron Teeth | 1 Toothed Nose | Ammo | 2 Iron + 1 Glass | None | Add 7 damage. Before main damage, remove up to 6 Shield from the main target. If the full 6 Shield was removed, gain 2 Heat after impact. |",
+        "line": 457,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 7 damage. Before main damage, remove up to 6 Shield from the main target. If the full 6 Shield was removed, gain 2 Heat after impact."
+    },
+    "recipe:MA007": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 5,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "main6 then Mark4; following shot consumes Mark exactly once"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Deep Charge",
+      "observed_author_claim": "main6 then Mark4; following shot consumes Mark exactly once",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA007 | Deep Charge | 1 Denting Slug | Ammo | 2 Iron + 1 Copper | None | Add 6 damage. After impact, apply Mark 4 to the main target. |",
+        "line": 458,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 6 damage. After impact, apply Mark 4 to the main target."
+    },
+    "recipe:MA008": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 6,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "other living enemies Burn2, main/dead/escaped excluded, Heat capped3"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Chain Cinder",
+      "observed_author_claim": "other living enemies Burn2, main/dead/escaped excluded, Heat capped3",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA008 | Chain Cinder | 1 Cinder Collar | Ammo | 1 Iron + 2 Carbon | 1 | Add 5 damage. After impact, apply Burn 2 to every living enemy except the main target, then gain 1 Heat per enemy affected, up to 3 Heat. |",
+        "line": 459,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 5 damage. After impact, apply Burn 2 to every living enemy except the main target, then gain 1 Heat per enemy affected, up to 3 Heat."
+    },
+    "recipe:MA009": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 7,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Heat0/2 grants14, Heat3+ grants8"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Ash Cork",
+      "observed_author_claim": "Heat0/2 grants14, Heat3+ grants8",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA009 | Ash Cork | 1 Cold Plug | Ammo | 1 Iron + 1 Glass | None | Add 8 damage. Add 6 more if Heat is 2 or less at Fire. |",
+        "line": 460,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 8 damage. Add 6 more if Heat is 2 or less at Fire."
+    },
+    "recipe:MA010": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 2,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "Heat3 payment atomic, next main bonus10 once and round expiry"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Molten Collar",
+      "observed_author_claim": "Heat3 payment atomic, next main bonus10 once and round expiry",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA010 | Molten Collar | 1 Hot Collar | Modifier | 1 Iron + 1 Copper | None | Pay 3 Heat when activated. Add 10 damage to this round's main shot. |",
+        "line": 461,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 3 Heat when activated. Add 10 damage to this round's main shot."
+    },
+    "recipe:MA011": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 8,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Heat5/6 selects Burn2/5 after flat4"
+        },
+        {
+          "kind": "extend",
+          "line": 42,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "earlier payload Heat does not upgrade this shot Burn"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Dust",
+      "observed_author_claim": "Heat5/6 selects Burn2/5 after flat4; earlier payload Heat does not upgrade this shot Burn",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA011 | Furnace Dust | 1 Furnace Ember Capsule | Ammo | 1 Iron + 2 Carbon | None | Add 4 damage. After impact, apply Burn 5 to the main target if Heat was at least 6 at Fire; otherwise apply Burn 2. |",
+        "line": 462,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 4 damage. After impact, apply Burn 5 to the main target if Heat was at least 6 at Fire; otherwise apply Burn 2."
+    },
+    "recipe:MA012": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 9,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "separate chosen support3; burning victim Heat2; later dead support loses both"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Split Nose",
+      "observed_author_claim": "separate chosen support3; burning victim Heat2; later dead support loses both",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "No newly inserted enemy or target-replacement interaction is claimed; targets are fixed IDs throughout each test."
+      ],
+      "source_clause": {
+        "exact_text": "| MA012 | Split Nose | 1 Forked Tip | Ammo | 2 Iron + 1 Glass | None | Add 5 damage. After impact, deal a separate 3 damage to one other enemy chosen at Fire. If it had Burn immediately before this support hit, gain 2 Heat afterward. If it is dead when the support hit would begin, both effects are lost. |",
+        "line": 463,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 5 damage. After impact, deal a separate 3 damage to one other enemy chosen at Fire. If it had Burn immediately before this support hit, gain 2 Heat afterward. If it is dead when the support hit would begin, both effects are lost."
+    },
+    "recipe:MA013": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 2,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "living Burn selects7/11 once; later status/reinstallation not recalculated"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Flameproof Liner",
+      "observed_author_claim": "living Burn selects7/11 once; later status/reinstallation not recalculated",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA013 | Flameproof Liner | 1 Ash Liner | Shield | 1 Iron + 1 Carbon | None | On first installation, set this part's Shield to 7, plus 4 if at least one living enemy currently has Burn. Keep that calculated value; later Burn changes or reinstallation do not recalculate it. |",
+        "line": 464,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, set this part's Shield to 7, plus 4 if at least one living enemy currently has Burn. Keep that calculated value; later Burn changes or reinstallation do not recalculate it."
+    },
+    "recipe:MA015": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 3,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "Shield8 skips this round Heat decay once; extra copies no later skip"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M04"
+      ],
+      "name": "Thick Insulation",
+      "observed_author_claim": "Shield8 skips this round Heat decay once; extra copies no later skip",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Removal before the decay boundary and interaction with reduced normal Heat decay are not tested by this group."
+      ],
+      "source_clause": {
+        "exact_text": "| MA015 | Thick Insulation | 1 Furnace Wrap | Shield | 2 Iron + 1 Carbon | 1 | Gain 8 Shield. Skip the normal 2 Heat loss after this round's enemy phase. Extra copies do not skip a later round's Heat loss. |",
+        "line": 466,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 8 Shield. Skip the normal 2 Heat loss after this round's enemy phase. Extra copies do not skip a later round's Heat loss."
+    },
+    "recipe:MA018": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 4,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first complete attack only; blocked attack still counter3 and Heat6 Burn2"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Shard Apron",
+      "observed_author_claim": "first complete attack only; blocked attack still counter3 and Heat6 Burn2",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Removed-source and zero-damage attack interpretations are not separately exercised."
+      ],
+      "source_clause": {
+        "exact_text": "| MA018 | Shard Apron | 1 Jagged Apron | Shield | 2 Iron + 1 Glass | None | Gain 6 Shield. After the first enemy attack against you this round, deal 3 damage to that attacker. If Heat is at least 6 after that attack, also apply Burn 2. These effects work even if Shield absorbed the whole attack. |",
+        "line": 469,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 6 Shield. After the first enemy attack against you this round, deal 3 damage to that attacker. If Heat is at least 6 after that attack, also apply Burn 2. These effects work even if Shield absorbed the whole attack."
+    },
+    "recipe:MA020": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 3,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat1 now and5 next start after normal decay, delivered once"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Overfeed",
+      "observed_author_claim": "Heat1 now and5 next start after normal decay, delivered once",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA020 | Overfeed | Immediate effect: Slow Fuel Cake (no part) | Utility | 2 Carbon | None | Gain 1 Heat now and 5 Heat at the start of next turn. |",
+        "line": 471,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 1 Heat now and 5 Heat at the start of next turn."
+    },
+    "recipe:MA021": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 4,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "next-start raw Carbon2 independent of ordinary collection"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Flue Primer",
+      "observed_author_claim": "next-start raw Carbon2 independent of ordinary collection",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Fight termination before this raw-material delivery is not separately exercised here."
+      ],
+      "source_clause": {
+        "exact_text": "| MA021 | Flue Primer | Immediate effect: Soot Catcher (no part) | Utility | 1 Iron + 1 Copper | None | At the start of next turn, gain 2 Carbon in your raw resource pool. |",
+        "line": 472,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "At the start of next turn, gain 2 Carbon in your raw resource pool."
+    },
+    "recipe:MA022": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 5,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "one unused reserve Ammo payment on first install, no effect/reinstall charge"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Scrap Weld",
+      "observed_author_claim": "one unused reserve Ammo payment on first install, no effect/reinstall charge",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Every possible unused generated Ammo origin is not repeated; the sacrifice witness is a paid ordinary Ammo part."
+      ],
+      "source_clause": {
+        "exact_text": "| MA022 | Scrap Weld | 1 Welding Clamp | Shield | 1 Iron + 1 Carbon | None | On first installation, consume one unused Ammo part from reserve without its effect, once. Cannot install without that payment. Provides 12 Shield. |",
+        "line": 473,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, consume one unused Ammo part from reserve without its effect, once. Cannot install without that payment. Provides 12 Shield."
+    },
+    "recipe:MA023": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 10,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "flat7, Heat2 only after impact and once per consumed rivet"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Heated Rivet",
+      "observed_author_claim": "flat7, Heat2 only after impact and once per consumed rivet",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA023 | Heated Rivet | 1 Glowing Rivet | Ammo | 1 Iron + 1 Carbon | None | Add 7 damage. Gain 2 Heat after the main shot's impact. |",
+        "line": 474,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 7 damage. Gain 2 Heat after the main shot's impact."
+    },
+    "recipe:MA024": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 6,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "shown total attack14/15 boundary including multihits; first-install snapshot"
+        },
+        {
+          "kind": "extend",
+          "line": 43,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "shown Drive/Weaken count, dead attacker excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Front Brace",
+      "observed_author_claim": "shown total attack14/15 boundary including multihits; first-install snapshot; shown Drive/Weaken count, dead attacker excluded",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "The shown-intent arithmetic uses controlled intent/Drive/Weaken inputs, not every live robot action producer."
+      ],
+      "source_clause": {
+        "exact_text": "| MA024 | Front Brace | 1 Bracing Bar | Shield | 2 Iron + 1 Copper | None | On first installation, set this part's Shield to 9, plus 3 if the sum of currently shown enemy attack damage is at least 15. Keep that calculated value; later intent changes or reinstallation do not recalculate it. |",
+        "line": 475,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, set this part's Shield to 9, plus 3 if the sum of currently shown enemy attack damage is at least 15. Keep that calculated value; later intent changes or reinstallation do not recalculate it."
+    },
+    "recipe:MA025": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 11,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "one live target14, two9; dead/escaped bodies not counted"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Narrow Bore",
+      "observed_author_claim": "one live target14, two9; dead/escaped bodies not counted",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA025 | Narrow Bore | 1 Narrow Slug | Ammo | 2 Iron + 1 Copper | None | Add 9 damage. Add 5 more if exactly one enemy is alive at Fire. |",
+        "line": 476,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 9 damage. Add 5 more if exactly one enemy is alive at Fire."
+    },
+    "recipe:MA026": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 5,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat loss3 saturates without affordability requirement; chosen Weaken5"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Cooling Mist",
+      "observed_author_claim": "Heat loss3 saturates without affordability requirement; chosen Weaken5",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA026 | Cooling Mist | Immediate effect: Mist Canister (no part) | Utility | 1 Copper + 1 Glass | 1 | Lose 3 Heat, then apply Weaken 5 to one chosen enemy. Can activate even with less than 3 Heat. |",
+        "line": 477,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Lose 3 Heat, then apply Weaken 5 to one chosen enemy. Can activate even with less than 3 Heat."
+    },
+    "recipe:MA027": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 3,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "installed-only Shield6 payment drains oldest parts, next-shot12"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Armour Chips",
+      "observed_author_claim": "installed-only Shield6 payment drains oldest parts, next-shot12",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA027 | Armour Chips | 1 Shrapnel Press | Modifier | 1 Iron + 1 Glass | None | When this Modifier is used, pay 6 available Shield from installed parts, draining them in installation order. Add 12 damage to this round's main shot. Cannot use with less than 6 available installed Shield. |",
+        "line": 478,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When this Modifier is used, pay 6 available Shield from installed parts, draining them in installation order. Add 12 damage to this round's main shot. Cannot use with less than 6 available installed Shield."
+    },
+    "recipe:MA028": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 7,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "earlier first-installed Shield count including removed, cap3 and no reinstall count"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Rivet Screen",
+      "observed_author_claim": "earlier first-installed Shield count including removed, cap3 and no reinstall count",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Every generated Shield origin is not repeated in the first-install count."
+      ],
+      "source_clause": {
+        "exact_text": "| MA028 | Rivet Screen | 1 Rivet Mesh | Shield | 1 Iron + 1 Copper | None | On first installation, count other Shield parts first installed earlier this round, including any since removed. Set this part's Shield to 5 plus 2 per counted part, up to 6 extra Shield. Reinstallation neither adds another count nor recalculates this value. |",
+        "line": 479,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, count other Shield parts first installed earlier this round, including any since removed. Set this part's Shield to 5 plus 2 per counted part, up to 6 extra Shield. Reinstallation neither adds another count nor recalculates this value."
+    },
+    "recipe:MA029": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 6,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "chosen Mark3 always; activation Heat6 gate adds Weaken2"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Soot Stamp",
+      "observed_author_claim": "chosen Mark3 always; activation Heat6 gate adds Weaken2",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA029 | Soot Stamp | Immediate effect: Blackened Stamp (no part) | Utility | 1 Carbon + 1 Glass | None | Apply Mark 3 to one chosen enemy. If you have at least 6 Heat when activated, also apply Weaken 2 to that enemy. |",
+        "line": 480,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Apply Mark 3 to one chosen enemy. If you have at least 6 Heat when activated, also apply Weaken 2 to that enemy."
+    },
+    "recipe:MA030": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 7,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "exact reserve Ammo gains8 only next-round Fire; duplicates do not stack or leak"
+        },
+        {
+          "kind": "extend",
+          "line": 44,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "sacrificed attached Ammo cannot lend main-shot bonus"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Warm Storage",
+      "observed_author_claim": "exact reserve Ammo gains8 only next-round Fire; duplicates do not stack or leak; sacrificed attached Ammo cannot lend main-shot bonus",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA030 | Warm Storage | Immediate effect: Heated Rack (no part) | Utility | 1 Iron + 1 Copper | 1 | Choose one unused Ammo part already in reserve. If that exact part is consumed in a main shot next round, add 8 damage to that shot only. Multiple racks on the same part do not stack. |",
+        "line": 481,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose one unused Ammo part already in reserve. If that exact part is consumed in a main shot next round, add 8 damage to that shot only. Multiple racks on the same part do not stack."
+    },
+    "recipe:MA031": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 8,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "living burning enemy count0..4 gives0..12 snapshot; dead excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Firebreak",
+      "observed_author_claim": "living burning enemy count0..4 gives0..12 snapshot; dead excluded",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Dead burning enemies are excluded explicitly; escaped burning enemies are not a separate fixture in this group."
+      ],
+      "source_clause": {
+        "exact_text": "| MA031 | Firebreak | 1 Broad Baffle | Shield | 1 Iron + 2 Carbon | None | On first installation, set this part's Shield to 4 per living enemy currently having Burn, up to 12 Shield. Keep that calculated value; later enemy/Burn changes or reinstallation do not recalculate it. |",
+        "line": 482,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, set this part's Shield to 4 per living enemy currently having Burn, up to 12 Shield. Keep that calculated value; later enemy/Burn changes or reinstallation do not recalculate it."
+    },
+    "recipe:MA032": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 12,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Burn4 arrives next start before its first tick; dead original target loses delivery"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Buried Ember",
+      "observed_author_claim": "Burn4 arrives next start before its first tick; dead original target loses delivery",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA032 | Buried Ember | 1 Buried Coal Tip | Ammo | 1 Iron + 1 Carbon + 1 Glass | 1 | Add 8 damage. At the start of next turn, apply Burn 4 to this shot's main target if it is still alive. |",
+        "line": 483,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 8 damage. At the start of next turn, apply Burn 4 to this shot's main target if it is still alive."
+    },
+    "recipe:MA033": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 13,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "GainShield intent gates after-impact Weaken4; Attack/Charge do not"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Scrap Mallet",
+      "observed_author_claim": "GainShield intent gates after-impact Weaken4; Attack/Charge do not",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA033 | Scrap Mallet | 1 Heavy Ram | Ammo | 3 Iron | None | Add 12 damage. If the main target intends to gain Shield this round, apply Weaken 4 to it after impact. |",
+        "line": 484,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 12 damage. If the main target intends to gain Shield this round, apply Weaken 4 to it after impact."
+    },
+    "recipe:MA034": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 9,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "one next-shot check: <=1 Ammo success, failure/removal consumes it, unused expires"
+        },
+        {
+          "kind": "extend",
+          "line": 45,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "Spread is not Ammo and fresh grant is exactly4"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Backplate",
+      "observed_author_claim": "one next-shot check: <=1 Ammo success, failure/removal consumes it, unused expires; Spread is not Ammo and fresh grant is exactly4",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA034 | Backplate | 1 Rear Guard | Shield | 2 Iron | None | Provides 8 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot consumed at most one Ammo part, gain a fresh regular 4-Shield part once. Modifier parts do not count toward the limit. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it. |",
+        "line": 485,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Provides 8 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot consumed at most one Ammo part, gain a fresh regular 4-Shield part once. Modifier parts do not count toward the limit. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it."
+    },
+    "recipe:MA035": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 8,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "pay Heat2; every currently cooling copy loses exactly1 with0 floor"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Clean Valve",
+      "observed_author_claim": "pay Heat2; every currently cooling copy loses exactly1 with0 floor",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Cooldown counters are controlled fixtures; this group does not prove each producer recipe's own cooldown lifecycle."
+      ],
+      "source_clause": {
+        "exact_text": "| MA035 | Clean Valve | Immediate effect: Fresh Valve (no part) | Utility | 1 Copper + 1 Glass | 1 | Pay 2 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe. |",
+        "line": 486,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 2 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe."
+    },
+    "recipe:MA036": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 14,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Burn2/3 threshold for after-impact Weaken5"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Hook",
+      "observed_author_claim": "Burn2/3 threshold for after-impact Weaken5",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA036 | Furnace Hook | 1 Drag Hook | Ammo | 2 Iron + 1 Copper | None | Add 7 damage. After impact, apply Weaken 5 to the main target if it has at least 3 Burn. |",
+        "line": 487,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 7 damage. After impact, apply Weaken 5 to the main target if it has at least 3 Burn."
+    },
+    "recipe:MA037": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 9,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "direct Utility pays installed Shield5 oldest first and gains4 Heat"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Shield Boiler",
+      "observed_author_claim": "direct Utility pays installed Shield5 oldest first and gains4 Heat",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA037 | Shield Boiler | Immediate effect: Pressure Tank (no part) | Utility | 1 Iron + 1 Copper | None | On recipe Use, pay 5 available Shield from installed parts, draining them in installation order, then gain 4 Heat. Cannot use with less than 5 available installed Shield. |",
+        "line": 488,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On recipe Use, pay 5 available Shield from installed parts, draining them in installation order, then gain 4 Heat. Cannot use with less than 5 available installed Shield."
+    },
+    "recipe:MA039": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 15,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Attack intent grants Weaken6, other current intents3"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Dull Cap",
+      "observed_author_claim": "Attack intent grants Weaken6, other current intents3",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA039 | Dull Cap | 1 Blunt Cap | Ammo | 1 Iron + 1 Copper + 1 Glass | None | Add 7 damage. After impact, apply Weaken 3 to the main target; apply 3 more if it is showing an attack intent at Fire. |",
+        "line": 490,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 7 damage. After impact, apply Weaken 3 to the main target; apply 3 more if it is showing an attack intent at Fire."
+    },
+    "recipe:MA040": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 10,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first-install Heat4 and Shield7, committed future7 survives removal, no rearm"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Long Cooling",
+      "observed_author_claim": "first-install Heat4 and Shield7, committed future7 survives removal, no rearm",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Removal, reinstall and once-only delivery are covered; fatal interruption before delivery is not a separate MA040 fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA040 | Long Cooling | 1 Heavy Cooling Fin | Shield | 2 Iron + 1 Copper | 1 | On first installation, pay 4 Heat once; cannot install without enough Heat. Provides 7 Shield and schedules a new regular 7-Shield part to load at the start of next turn, after old Shield clears. Reinstallation does not repeat the delivery. |",
+        "line": 491,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, pay 4 Heat once; cannot install without enough Heat. Provides 7 Shield and schedules a new regular 7-Shield part to load at the start of next turn, after old Shield clears. Reinstallation does not repeat the delivery."
+    },
+    "recipe:MA041": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 4,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "Fire pays4; half-base spread meets own Shield, retains Mark, no main payload copy"
+        },
+        {
+          "kind": "extend",
+          "line": 46,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "killed extra receives no posthit Burn"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Fork",
+      "observed_author_claim": "Fire pays4; half-base spread meets own Shield, retains Mark, no main payload copy; killed extra receives no posthit Burn",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA041 | Furnace Fork | 1 Split Barrel Insert | Modifier | 2 Iron + 1 Copper + 1 Glass | 1 | Load into the bullet; consumed at Fire. Pay 4 Heat at Fire. Choose one extra enemy. It receives 50% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. After that hit, apply Burn 2 to it if alive. Main-target payloads are not copied. Extra copies do not repeat this spread. |",
+        "line": 497,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Load into the bullet; consumed at Fire. Pay 4 Heat at Fire. Choose one extra enemy. It receives 50% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. After that hit, apply Burn 2 to it if alive. Main-target payloads are not copied. Extra copies do not repeat this spread."
+    },
+    "recipe:MA042": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 16,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "prehit remove Burn0/1/6/9 capped6 and add2 per actually removed"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Slag Fuse",
+      "observed_author_claim": "prehit remove Burn0/1/6/9 capped6 and add2 per actually removed",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA042 | Slag Fuse | 1 Slag Charge | Ammo | 2 Iron + 1 Carbon + 1 Glass | 1 | Add 9 damage. Before main damage, remove up to 6 Burn from the main target and add 2 damage for each Burn removed. |",
+        "line": 498,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 9 damage. Before main damage, remove up to 6 Burn from the main target and add 2 damage for each Burn removed."
+    },
+    "recipe:MA043": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 10,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "only already-burning living enemies add3 Burn; one Heat each max3"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Side Flue",
+      "observed_author_claim": "only already-burning living enemies add3 Burn; one Heat each max3",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Only controlled existing Burn stacks are used; all Burn application producers are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA043 | Side Flue | Immediate effect: Flue Fan (no part) | Utility | 1 Copper + 2 Carbon | 1 | Apply Burn 3 to every enemy that already has Burn. Gain 1 Heat for each affected enemy, up to 3 Heat. |",
+        "line": 499,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Apply Burn 3 to every enemy that already has Burn. Gain 1 Heat for each affected enemy, up to 3 Heat."
+    },
+    "recipe:MA044": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 11,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first positive-to-zero Shield break restores6 after whole attack, once"
+        },
+        {
+          "kind": "extend",
+          "line": 47,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "Shield payment is not an enemy-attack break"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Tempered Lip",
+      "observed_author_claim": "first positive-to-zero Shield break restores6 after whole attack, once; Shield payment is not an enemy-attack break",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Attack and planning-payment distinctions are tested, but removed-source and all competing restoration listener orders are not."
+      ],
+      "source_clause": {
+        "exact_text": "| MA044 | Tempered Lip | 1 Spring Plate | Shield | 2 Iron + 1 Copper | 1 | Gain 10 Shield. The first time an enemy attack reduces your Shield from a positive amount to 0 this round, gain 6 Shield after that attack finishes. This cannot protect against the hit that broke the Shield. |",
+        "line": 500,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 10 Shield. The first time an enemy attack reduces your Shield from a positive amount to 0 this round, gain 6 Shield after that attack finishes. This cannot protect against the hit that broke the Shield."
+    },
+    "recipe:MA045": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 5,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "explicit Heat2..5 only; affordable whole payment gives3 per paid Heat"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Heat Balance",
+      "observed_author_claim": "explicit Heat2..5 only; affordable whole payment gives3 per paid Heat",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA045 | Heat Balance | 1 Adjustable Collar | Modifier | 1 Iron + 1 Copper + 1 Carbon | None | When activated, choose and pay 2 to 5 Heat. Add 3 damage to this round's main shot for each Heat paid. |",
+        "line": 501,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When activated, choose and pay 2 to 5 Heat. Add 3 damage to this round's main shot for each Heat paid."
+    },
+    "recipe:MA046": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 11,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "HP2 requires3 independent of Shield; Heat2 now Carbon3 next start"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Coal Debt",
+      "observed_author_claim": "HP2 requires3 independent of Shield; Heat2 now Carbon3 next start",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA046 | Coal Debt | Immediate effect: Sealed Fuel Drum (no part) | Utility | 1 Iron + 1 Carbon | 2 | Lose 2 HP when activated, leaving at least 1 HP. Gain 2 Heat now and 3 Carbon at the start of next turn. Shield cannot pay the HP cost. |",
+        "line": 502,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Lose 2 HP when activated, leaving at least 1 HP. Gain 2 Heat now and 3 Carbon at the start of next turn. Shield cannot pay the HP cost."
+    },
+    "recipe:MA047": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 17,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "impact8 grants Shield8 immediately before later enemy action"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Covering Impact",
+      "observed_author_claim": "impact8 grants Shield8 immediately before later enemy action",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA047 | Covering Impact | 1 Folding Slug | Ammo | 2 Iron + 1 Copper + 1 Glass | 1 | Add 8 damage. Gain 8 Shield after the main shot's impact, before enemy actions. |",
+        "line": 503,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 8 damage. Gain 8 Shield after the main shot's impact, before enemy actions."
+    },
+    "recipe:MA049": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 12,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "requires burning living target; Weaken equals Burn capped8 without consuming it"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Smothering Hood",
+      "observed_author_claim": "requires burning living target; Weaken equals Burn capped8 without consuming it",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "The target eligibility/cap is tested; every robot immunity or retaliation branch is not."
+      ],
+      "source_clause": {
+        "exact_text": "| MA049 | Smothering Hood | Immediate effect: Smoke Hood (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | None | Choose an enemy with Burn. Apply Weaken equal to its current Burn, up to 8. Its Burn is not removed. Cannot activate without a burning enemy. |",
+        "line": 505,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose an enemy with Burn. Apply Weaken equal to its current Burn, up to 8. Its Burn is not removed. Cannot activate without a burning enemy."
+    },
+    "recipe:MA050": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 13,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Attack current intent getsWeaken6; Charge/Recover getMark7 andBurn2"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Foreman's Stamp",
+      "observed_author_claim": "Attack current intent getsWeaken6; Charge/Recover getMark7 andBurn2",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Attack, Charge and Recover are tested; every nonattack intent enum is not separately enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA050 | Foreman's Stamp | Immediate effect: Warning Stamp (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | 1 | Choose one enemy. If it currently shows an attack intent, apply Weaken 6; otherwise apply Mark 7 and Burn 2. |",
+        "line": 506,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose one enemy. If it currently shows an attack intent, apply Weaken 6; otherwise apply Mark 7 and Burn 2."
+    },
+    "recipe:MA051": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 18,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "earlier-shot recast count only, same-shot snapshot and extra12 cap"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Worn Mould",
+      "observed_author_claim": "earlier-shot recast count only, same-shot snapshot and extra12 cap",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA051 | Worn Mould | 1 Recast Slug | Ammo | 2 Iron + 1 Carbon | 1 | Add 6 damage, plus 2 for each Recast Slug consumed in an earlier main shot this fight, up to 12 extra damage. Recast Slugs in the same shot do not increase each other's bonus. |",
+        "line": 507,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 6 damage, plus 2 for each Recast Slug consumed in an earlier main shot this fight, up to 12 extra damage. Recast Slugs in the same shot do not increase each other's bonus."
+    },
+    "recipe:MA052": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 6,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "1..3 unused reserve Ammo consumed without payload; sacrifice not shot Ammo"
+        },
+        {
+          "kind": "extend",
+          "line": 48,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "wrong-kind sacrifice fails atomically"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Scrap Compactor",
+      "observed_author_claim": "1..3 unused reserve Ammo consumed without payload; sacrifice not shot Ammo; wrong-kind sacrifice fails atomically",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA052 | Scrap Compactor | 1 Compacting Sleeve | Modifier | 2 Iron + 1 Copper | 1 | When activated, consume 1 to 3 unused Ammo parts from reserve without their effects. Add 7 damage to this round's main shot per part consumed. Those parts do not count as Ammo consumed in the shot. |",
+        "line": 508,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When activated, consume 1 to 3 unused Ammo parts from reserve without their effects. Add 7 damage to this round's main shot per part consumed. Those parts do not count as Ammo consumed in the shot."
+    },
+    "recipe:MA053": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 7,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "activation Heat5/6 selects gain2+bonus3 or Mark4+bonus8"
+        },
+        {
+          "kind": "extend",
+          "line": 49,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "low-Heat branch does not require a Mark victim"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Window",
+      "observed_author_claim": "activation Heat5/6 selects gain2+bonus3 or Mark4+bonus8; low-Heat branch does not require a Mark victim",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA053 | Furnace Window | 1 Heat Lens | Modifier | 1 Copper + 2 Glass | None | If Heat is at least 6 when activated, add 8 damage to this round's main shot and apply Mark 4 to one chosen enemy now. Otherwise gain 2 Heat and add 3 damage. |",
+        "line": 509,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "If Heat is at least 6 when activated, add 8 damage to this round's main shot and apply Mark 4 to one chosen enemy now. Otherwise gain 2 Heat and add 3 damage."
+    },
+    "recipe:MA054": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 12,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "HP3 requires4, earlier round HP loss gate excludes its own first payment"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Emergency Grate",
+      "observed_author_claim": "HP3 requires4, earlier round HP loss gate excludes its own first payment",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA054 | Emergency Grate | 1 Red Grate | Shield | 2 Iron + 1 Carbon | 1 | On first installation, pay 3 HP once; requires at least 4 HP and leaves at least 1 HP. Provides 18 Shield. If HP had already been lost this round before this payment, also gain 2 Heat once after paying. Shield cannot pay the HP cost. |",
+        "line": 510,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, pay 3 HP once; requires at least 4 HP and leaves at least 1 HP. Provides 18 Shield. If HP had already been lost this round before this payment, also gain 2 Heat once after paying. Shield cannot pay the HP cost."
+    },
+    "recipe:MA055": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 13,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "post-enemy remaining active Shield records floor/5 Iron cap3 before reset"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M03"
+      ],
+      "name": "Reclaimed Plate",
+      "observed_author_claim": "post-enemy remaining active Shield records floor/5 Iron cap3 before reset",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Remaining active Shield fixtures cover rounding/cap; all reactive pre-reset reader orders are not repeated here."
+      ],
+      "source_clause": {
+        "exact_text": "| MA055 | Reclaimed Plate | 1 Return Plate | Shield | 2 Iron + 1 Copper + 1 Carbon | 1 | Gain 10 Shield. After enemies finish their actions, before the Shield reset, count your total remaining active Shield and record 1 Iron per complete 5 Shield, up to 3 Iron. At the beginning of the next round, gain that recorded Iron. |",
+        "line": 511,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 10 Shield. After enemies finish their actions, before the Shield reset, count your total remaining active Shield and record 1 Iron per complete 5 Shield, up to 3 Iron. At the beginning of the next round, gain that recorded Iron."
+    },
+    "recipe:MA056": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 14,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "fight-lifetime next-start Heat1, no immediate gain or duplicate stacking"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Steady Furnace",
+      "observed_author_claim": "fight-lifetime next-start Heat1, no immediate gain or duplicate stacking",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA056 | Steady Furnace | Immediate effect: Steady Burner (no part) | Utility | 2 Carbon + 1 Copper + 1 Circuit | 2 | For this fight, gain 1 Heat at the start of each turn after the current turn. Reusing Steady Burner does not add another Heat source. |",
+        "line": 512,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, gain 1 Heat at the start of each turn after the current turn. Reusing Steady Burner does not add another Heat source."
+    },
+    "recipe:MA057": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 14,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "no enemy attack HP loss grants next4 Heat; planning HP costs excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Banked Coals",
+      "observed_author_claim": "no enemy attack HP loss grants next4 Heat; planning HP costs excluded",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Planning HP cost and enemy-attack HP loss are distinguished; player status-damage and removed-source combinations are not separate fixtures."
+      ],
+      "source_clause": {
+        "exact_text": "| MA057 | Banked Coals | 1 Coal Pocket | Shield | 1 Iron + 2 Carbon | 1 | Gain 8 Shield. If no enemy attack causes you to lose HP during this round's enemy phase, gain 4 Heat at the start of next turn. HP costs paid in planning do not break this condition. |",
+        "line": 513,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 8 Shield. If no enemy attack causes you to lose HP during this round's enemy phase, gain 4 Heat at the start of next turn. HP costs paid in planning do not break this condition."
+    },
+    "recipe:MA058": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 15,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat5 atomic payment; immediate support6 to living targets, no main shot"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Open Exhaust",
+      "observed_author_claim": "Heat5 atomic payment; immediate support6 to living targets, no main shot",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA058 | Open Exhaust | Immediate effect: Exhaust Nozzle (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | 1 | Pay 5 Heat when activated. Deal 6 damage to every enemy now. These are support hits, not a main shot. |",
+        "line": 514,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 5 Heat when activated. Deal 6 damage to every enemy now. These are support hits, not a main shot."
+    },
+    "recipe:MA060": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 19,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "two full Burn ticks before decay; reapplication refreshes duration"
+        },
+        {
+          "kind": "extend",
+          "line": 50,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "printed impact6 precedes first Burn tick"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Long Ember",
+      "observed_author_claim": "two full Burn ticks before decay; reapplication refreshes duration; printed impact6 precedes first Burn tick",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "Tick counts and refresh are tested with one target; simultaneous sticky effects on multiple targets are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA060 | Long Ember | 1 Slow Ember Tip | Ammo | 1 Iron + 2 Carbon + 1 Circuit | 1 | Add 6 damage. After impact, apply Burn 3 to the main target. For its next two Burn ticks, do not reduce that enemy's Burn after the tick. Reapplying refreshes the two-tick duration. |",
+        "line": 516,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 6 damage. After impact, apply Burn 3 to the main target. For its next two Burn ticks, do not reduce that enemy's Burn after the tick. Reapplying refreshes the two-tick duration."
+    },
+    "recipe:MA061": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 8,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "Shield4..12 exact oldest-first cost,2 damage per and floor/4 Heat"
+        },
+        {
+          "kind": "extend",
+          "line": 51,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "valid chosen payment must be available on installed parts"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Pressed Shield",
+      "observed_author_claim": "Shield4..12 exact oldest-first cost,2 damage per and floor/4 Heat; valid chosen payment must be available on installed parts",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA061 | Pressed Shield | 1 Armour Press | Modifier | 2 Iron + 1 Copper | 1 | When this Modifier is used, choose and pay 4 to 12 available Shield from installed parts, draining them in installation order. Add 2 damage to this round's main shot per Shield paid, and gain 1 Heat for each full 4 Shield paid. |",
+        "line": 517,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When this Modifier is used, choose and pay 4 to 12 available Shield from installed parts, draining them in installation order. Add 2 damage to this round's main shot per Shield paid, and gain 1 Heat for each full 4 Shield paid."
+    },
+    "recipe:MA062": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 15,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "Heat0 grants16; Heat1/2/3 grants6 and one saturating loss2; snapshot"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Cold Riveting",
+      "observed_author_claim": "Heat0 grants16; Heat1/2/3 grants6 and one saturating loss2; snapshot",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA062 | Cold Riveting | 1 Cold Rivet Pack | Shield | 2 Iron + 1 Copper | None | On first installation, set this part's Shield to 6, plus 10 if Heat is currently 0. Otherwise, after setting the value, lose 2 Heat once, stopping at 0. Keep the calculated Shield value; reinstallation does not recalculate it or repeat the Heat loss. |",
+        "line": 518,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, set this part's Shield to 6, plus 10 if Heat is currently 0. Otherwise, after setting the value, lose 2 Heat once, stopping at 0. Keep the calculated Shield value; reinstallation does not recalculate it or repeat the Heat loss."
+    },
+    "recipe:MA063": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 9,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "distinct consumed Ammo recipes count once, add3 each capped15"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Grips",
+      "observed_author_claim": "distinct consumed Ammo recipes count once, add3 each capped15",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA063 | Furnace Grips | 1 Heavy Grip | Modifier | 1 Iron + 1 Copper + 1 Carbon | 1 | Add 3 damage to this round's main shot for each different Ammo recipe represented by parts consumed in that shot, up to 15 damage. Multiple copies from one recipe count once. |",
+        "line": 519,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 3 damage to this round's main shot for each different Ammo recipe represented by parts consumed in that shot, up to 15 damage. Multiple copies from one recipe count once."
+    },
+    "recipe:MA064": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 16,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat3 required; all cooling copies lose1 with no resource refund"
+        },
+        {
+          "kind": "extend",
+          "line": 52,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "multiple positive counters and zero floor"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Copper Wash",
+      "observed_author_claim": "Heat3 required; all cooling copies lose1 with no resource refund; multiple positive counters and zero floor",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Cooldown counters are controlled fixtures; producer recipe cooldown lifecycle is separate."
+      ],
+      "source_clause": {
+        "exact_text": "| MA064 | Copper Wash | Immediate effect: Wash Nozzle (no part) | Utility | 2 Copper + 1 Glass | 1 | Pay 3 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe. |",
+        "line": 520,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 3 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe."
+    },
+    "recipe:MA065": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 16,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "each distinct enemy first attack Burn2, not per hit, even if fully blocked"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Cinder Gate",
+      "observed_author_claim": "each distinct enemy first attack Burn2, not per hit, even if fully blocked",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Distinct attackers and multi-hit attacks are covered; removed-source and repeated actions by one robot in one phase are not separately exercised."
+      ],
+      "source_clause": {
+        "exact_text": "| MA065 | Cinder Gate | 1 Hinged Fire Gate | Shield | 2 Iron + 1 Carbon + 1 Glass | 1 | Gain 10 Shield. After each enemy's first attack against you this round, apply Burn 2 to that enemy. Each enemy can trigger this once, whether or not HP is lost. |",
+        "line": 521,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 10 Shield. After each enemy's first attack against you this round, apply Burn 2 to that enemy. Each enemy can trigger this once, whether or not HP is lost."
+    },
+    "recipe:MA066": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 17,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "one exact reserve part next-round use gains4 after effect; duplicate/early/late excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M07"
+      ],
+      "name": "Reheat Box",
+      "observed_author_claim": "one exact reserve part next-round use gains4 after effect; duplicate/early/late excluded",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Ammo Fire and Shield installation are covered; every planning-part activation category and fatal reaction interruption is not."
+      ],
+      "source_clause": {
+        "exact_text": "| MA066 | Reheat Box | Immediate effect: Reheat Box (no part) | Utility | 1 Iron + 2 Carbon | None | Choose one unused part already in reserve. If it is activated or fired during next round, gain 4 Heat immediately after its effect resolves. It can receive this bonus from only one Reheat Box. |",
+        "line": 522,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose one unused part already in reserve. If it is activated or fired during next round, gain 4 Heat immediately after its effect resolves. It can receive this bonus from only one Reheat Box."
+    },
+    "recipe:MA067": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 10,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "mutual spread/load exclusion; flat18 and saturating post-impact Heat loss4"
+        },
+        {
+          "kind": "extend",
+          "line": 53,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "full4 loss and next-round unused-bonus expiry"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Barrel Weight",
+      "observed_author_claim": "mutual spread/load exclusion; flat18 and saturating post-impact Heat loss4; full4 loss and next-round unused-bonus expiry",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "The spread exclusion controls use MA041; the remaining nine physical spread types are not repeated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA067 | Barrel Weight | 1 Barrel Weight | Modifier | 2 Iron + 1 Copper | 1 | Add 18 damage to this round's main shot. After impact, lose 4 Heat. Cannot activate if a spread effect is active or spreading Ammo is loaded. Until this shot resolves, no spread effect may be activated and no spreading Ammo may be loaded. |",
+        "line": 523,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 18 damage to this round's main shot. After impact, lose 4 Heat. Cannot activate if a spread effect is active or spreading Ammo is loaded. Until this shot resolves, no spread effect may be activated and no spreading Ammo may be loaded."
+    },
+    "recipe:MA068": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 20,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "installed remaining11/12 threshold; percentage once across duplicate Ammo"
+        },
+        {
+          "kind": "extend",
+          "line": 54,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "uninstalled Shield cannot satisfy12"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Braced Shot",
+      "observed_author_claim": "installed remaining11/12 threshold; percentage once across duplicate Ammo; uninstalled Shield cannot satisfy12",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA068 | Braced Shot | 1 Shoulder Brace | Ammo | 2 Iron + 1 Copper + 1 Glass | None | Add 10 damage. If the remaining Shield on your currently installed parts totals at least 12 at Fire, also add 25% to this shot's damage. Shield is not spent. Extra Shoulder Braces add their flat damage but do not repeat this percentage bonus. |",
+        "line": 524,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 10 damage. If the remaining Shield on your currently installed parts totals at least 12 at Fire, also add 25% to this shot's damage. Shield is not spent. Extra Shoulder Braces add their flat damage but do not repeat this percentage bonus."
+    },
+    "recipe:MA069": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 18,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "only later recipe Uses, both kinds, unique recipe IDs, max4; no repeat next turn"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Receipt",
+      "observed_author_claim": "only later recipe Uses, both kinds, unique recipe IDs, max4; no repeat next turn",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "A second simultaneous Ledger activation clock is not separately exercised; later duplicate recipe IDs and the four-recipe cap are covered."
+      ],
+      "source_clause": {
+        "exact_text": "| MA069 | Furnace Receipt | Immediate effect: Batch Counter (no part) | Utility | 1 Copper + 1 Circuit | 1 | At the start of next turn, gain 1 Iron for each different recipe you used after using this Utility recipe this round, up to 4 Iron. Part-producing and Utility recipe Uses both count. Reusing the same recipe, including another stored copy, counts once. |",
+        "line": 525,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "At the start of next turn, gain 1 Iron for each different recipe you used after using this Utility recipe this round, up to 4 Iron. Part-producing and Utility recipe Uses both count. Reusing the same recipe, including another stored copy, counts once."
+    },
+    "recipe:MA070": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 17,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first-install Shield8+currentHeat, no spending or later recalculation"
+        },
+        {
+          "kind": "extend",
+          "line": 55,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "legal upgraded Heat14 produces22 Shield"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Stoked Armour",
+      "observed_author_claim": "first-install Shield8+currentHeat, no spending or later recalculation; legal upgraded Heat14 produces22 Shield",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA070 | Stoked Armour | 1 Heat Cladding | Shield | 2 Iron + 1 Copper + 1 Carbon | None | On first installation, set this part's Shield to 8 plus 1 per Heat currently held, without spending Heat. Keep that calculated value; later Heat changes or reinstallation do not recalculate it. |",
+        "line": 526,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "On first installation, set this part's Shield to 8 plus 1 per Heat currently held, without spending Heat. Keep that calculated value; later Heat changes or reinstallation do not recalculate it."
+    },
+    "recipe:MA071": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 18,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first attack with HP loss cools5 and gives12 after it; full block does not trigger"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Rescue Valve",
+      "observed_author_claim": "first attack with HP loss cools5 and gives12 after it; full block does not trigger",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Positive Heat cooling is tested; the zero-floor cooling branch and removal before attack are not separate fixtures."
+      ],
+      "source_clause": {
+        "exact_text": "| MA071 | Rescue Valve | 1 Safety Valve | Shield | 1 Iron + 2 Copper | 1 | Gain 6 Shield. After the first enemy attack that causes you to lose HP this round, lose 5 Heat and gain 12 Shield. This protection arrives after that attack. |",
+        "line": 527,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 6 Shield. After the first enemy attack that causes you to lose HP this round, lose 5 Heat and gain 12 Shield. This protection arrives after that attack."
+    },
+    "recipe:MA072": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 19,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first already-burning attacker schedules one Iron across duplicate meshes"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Smelting Screen",
+      "observed_author_claim": "first already-burning attacker schedules one Iron across duplicate meshes",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Duplicate sources and two burning attackers are covered; a source removed before the qualifying attack is not separately exercised."
+      ],
+      "source_clause": {
+        "exact_text": "| MA072 | Smelting Screen | 1 Smelting Mesh | Shield | 2 Iron + 1 Carbon + 1 Circuit | 2 | Gain 9 Shield. After the first enemy that has Burn attacks you this round, gain 1 Iron at the start of next turn. Extra meshes do not grant more Iron. |",
+        "line": 528,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 9 Shield. After the first enemy that has Burn attacks you this round, gain 1 Iron at the start of next turn. Extra meshes do not grant more Iron."
+    },
+    "recipe:MA073": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 21,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "reserve sacrifice this round grants10; earlier round and direct recipe costs excluded"
+        },
+        {
+          "kind": "extend",
+          "line": 56,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "direct Utility resource cost is not reserve sacrifice"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Heavy Replacement",
+      "observed_author_claim": "reserve sacrifice this round grants10; earlier round and direct recipe costs excluded; direct Utility resource cost is not reserve sacrifice",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA073 | Heavy Replacement | 1 Replacement Shell | Ammo | 3 Iron + 1 Carbon | 1 | Add 12 damage. Add 10 more if you consumed at least one unused part from reserve as another effect's cost this round. |",
+        "line": 529,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 12 damage. Add 10 more if you consumed at least one unused part from reserve as another effect's cost this round."
+    },
+    "recipe:MA074": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 19,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat4 required and paid; only chosen enemy receivesBurn7"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Heat Transfer",
+      "observed_author_claim": "Heat4 required and paid; only chosen enemy receivesBurn7",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA074 | Heat Transfer | Immediate effect: Transfer Tube (no part) | Utility | 1 Copper + 2 Carbon | None | Pay 4 Heat when activated. Apply Burn 7 to one chosen enemy. |",
+        "line": 530,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 4 Heat when activated. Apply Burn 7 to one chosen enemy."
+    },
+    "recipe:MA075": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 20,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first install needs prior different first-installed Shield even if removed; later reinstall legal"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Spare Furnace Door",
+      "observed_author_claim": "first install needs prior different first-installed Shield even if removed; later reinstall legal",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA075 | Spare Furnace Door | 1 Second Door | Shield | 3 Iron + 1 Copper | 1 | First installation requires at least one other Shield part to have been first installed earlier this round, even if it was later removed. Provides 18 Shield. Reinstallation does not repeat this eligibility check or create another first-installation count. |",
+        "line": 531,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "First installation requires at least one other Shield part to have been first installed earlier this round, even if it was later removed. Provides 18 Shield. Reinstallation does not repeat this eligibility check or create another first-installation count."
+    },
+    "recipe:MA076": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 22,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "part Heat5+ removes10 Shield; Utility Heat payments excluded"
+        },
+        {
+          "kind": "extend",
+          "line": 57,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "ordinary Heat loss cannot meet paid5 threshold"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M06"
+      ],
+      "name": "Deep Freeze Cast",
+      "observed_author_claim": "part Heat5+ removes10 Shield; Utility Heat payments excluded; ordinary Heat loss cannot meet paid5 threshold",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "Four and six paid Heat plus ordinary cooling distinguish the threshold; exactly five paid Heat is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA076 | Deep Freeze Cast | 1 Quenched Spike | Ammo | 2 Iron + 1 Copper + 1 Glass | 1 | Add 10 damage. If at least 5 Heat has been paid as part activation costs this round, remove 10 Shield from the main target before main damage. Ordinary Heat loss does not count. |",
+        "line": 532,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 10 damage. If at least 5 Heat has been paid as part activation costs this round, remove 10 Shield from the main target before main damage. Ordinary Heat loss does not count."
+    },
+    "recipe:MA077": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 23,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "chosen other target receives floor half current Burn capped6; source retains Burn"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Smouldering Trail",
+      "observed_author_claim": "chosen other target receives floor half current Burn capped6; source retains Burn",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "Floor-half/cap and retained original Burn are tested; a selected recipient dying earlier in the same payload batch is not separately exercised."
+      ],
+      "source_clause": {
+        "exact_text": "| MA077 | Smouldering Trail | 1 Trailing Wick | Ammo | 1 Iron + 2 Carbon + 1 Glass | 1 | Add 7 damage. After impact, choose one other enemy and give it Burn equal to half the main target's current Burn, rounded down, up to Burn 6. The main target keeps its Burn. |",
+        "line": 533,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 7 damage. After impact, choose one other enemy and give it Burn equal to half the main target's current Burn, rounded down, up to Burn 6. The main target keeps its Burn."
+    },
+    "recipe:MA078": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 11,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "Ammo after first adds4 cap16; five threshold cool3 and Shield6 after impact"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Dense Pack",
+      "observed_author_claim": "Ammo after first adds4 cap16; five threshold cool3 and Shield6 after impact",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "One, two, five and six Ammo cover count scaling and cap; every mixed physical Modifier count is not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA078 | Dense Pack | 1 Packing Ram | Modifier | 2 Iron + 1 Copper + 1 Carbon | 1 | Add 4 damage to this round's main shot per Ammo part consumed after the first, up to 16 damage. If the shot consumes at least five Ammo parts, lose 3 Heat and gain 6 Shield after impact. |",
+        "line": 534,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 4 damage to this round's main shot per Ammo part consumed after the first, up to 16 damage. If the shot consumes at least five Ammo parts, lose 3 Heat and gain 6 Shield after impact."
+    },
+    "recipe:MA080": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 20,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "pay Heat4 now then next-startHeat6 andCopper1, once"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Spare Heat Cell",
+      "observed_author_claim": "pay Heat4 now then next-startHeat6 andCopper1, once",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Delivery and once-only timing are covered; fatal interruption before delivery is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA080 | Spare Heat Cell | Immediate effect: Heat Cell (no part) | Utility | 1 Copper + 1 Carbon + 1 Circuit | 1 | Pay 4 Heat when activated. At the start of next turn, gain 6 Heat and 1 Copper. |",
+        "line": 536,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 4 Heat when activated. At the start of next turn, gain 6 Heat and 1 Copper."
+    },
+    "recipe:MA081": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 21,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "first two Shield4+ part-use payments per round triggerHeat2, Utility cost excluded"
+        },
+        {
+          "kind": "extend",
+          "line": 58,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "inclusive4 Shield payment threshold"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Boiler Oath",
+      "observed_author_claim": "first two Shield4+ part-use payments per round triggerHeat2, Utility cost excluded; inclusive4 Shield payment threshold",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Shield4/6 part costs, direct Utility exclusion and round reset are covered; attack-depletion exclusion is not a separate Boiler fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA081 | Boiler Oath | Immediate effect: Boiler Seal (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | For this fight, the first two times each round you pay at least 4 Shield from installed parts as a part-use cost, gain 2 Heat after paying. Payments drain parts in installation order. Shield lost to attacks and direct Utility recipe payments do not count. Reusing Boiler Seal does not add triggers. |",
+        "line": 542,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, the first two times each round you pay at least 4 Shield from installed parts as a part-use cost, gain 2 Heat after paying. Payments drain parts in installation order. Shield lost to attacks and direct Utility recipe payments do not count. Reusing Boiler Seal does not add triggers."
+    },
+    "recipe:MA082": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 24,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "Heat-at-Fire Burn cap10 with acquired MAU-02 capacity; same-Fire payment snapshot"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M01"
+      ],
+      "name": "White Casting",
+      "observed_author_claim": "Heat-at-Fire Burn cap10 with acquired MAU-02 capacity; same-Fire payment snapshot",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA082 | White Casting | 1 White Slug | Ammo | 2 Iron + 2 Carbon + 1 Circuit | 2 | Add 12 damage. After impact, apply Burn equal to your Heat at Fire to the main target, up to Burn 10. |",
+        "line": 543,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 12 damage. After impact, apply Burn equal to your Heat at Fire to the main target, up to Burn 10."
+    },
+    "recipe:MA083": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 21,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "explicit decline or all-current-Heat payment; partial choice rejected, zero legal"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Door",
+      "observed_author_claim": "explicit decline or all-current-Heat payment; partial choice rejected, zero legal",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Decline, all-Heat, zero and partial-choice rejection are tested; every upgrade-added Heat capacity is not repeated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA083 | Furnace Door | 1 Flood Door | Shield | 3 Iron + 1 Copper + 1 Carbon | 2 | Gain 18 Shield. You may then pay all your current Heat to gain 2 more Shield per Heat paid. Choosing this payment with 0 Heat gives no extra Shield. |",
+        "line": 544,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 18 Shield. You may then pay all your current Heat to gain 2 more Shield per Heat paid. Choosing this payment with 0 Heat gives no extra Shield."
+    },
+    "recipe:MA084": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 25,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "physical HP payments add2 each capped18; Utility/enemy HP loss excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Scarred Mould",
+      "observed_author_claim": "physical HP payments add2 each capped18; Utility/enemy HP loss excluded",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA084 | Scarred Mould | 1 Scarred Slug | Ammo | 2 Iron + 1 Carbon + 1 Circuit | 2 | Add 10 damage, plus 2 for each HP you have paid as recipe-part activation costs this fight, up to 18 extra damage. Enemy damage does not count. |",
+        "line": 545,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 10 damage, plus 2 for each HP you have paid as recipe-part activation costs this fight, up to 18 extra damage. Enemy damage does not count."
+    },
+    "recipe:MA085": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 22,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat6 payment; every living enemy Burn5 andWeaken4, dead excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Open Smelter",
+      "observed_author_claim": "Heat6 payment; every living enemy Burn5 andWeaken4, dead excluded",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Dead target exclusion is explicit; escaped-target and robot-immunity variants are not separate fixtures."
+      ],
+      "source_clause": {
+        "exact_text": "| MA085 | Open Smelter | Immediate effect: Smelter Spray Head (no part) | Utility | 2 Copper + 2 Carbon + 1 Glass | 2 | Pay 6 Heat when activated. Apply Burn 5 and Weaken 4 to every living enemy. |",
+        "line": 546,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 6 Heat when activated. Apply Burn 5 and Weaken 4 to every living enemy."
+    },
+    "recipe:MA087": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 23,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "requiresHeat1; pays all current Heat, Weaken2/Mark1 each capped16/8"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Level Pressure",
+      "observed_author_claim": "requiresHeat1; pays all current Heat, Weaken2/Mark1 each capped16/8",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA087 | Level Pressure | Immediate effect: Pressure Equalizer (no part) | Utility | 1 Iron + 2 Copper + 1 Circuit | 2 | Choose one enemy and pay all your Heat, at least 1. Apply Weaken 2 and Mark 1 to it per Heat paid, up to Weaken 16 and Mark 8. |",
+        "line": 548,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose one enemy and pay all your Heat, at least 1. Apply Weaken 2 and Mark 1 to it per Heat paid, up to Weaken 16 and Mark 8."
+    },
+    "recipe:MA088": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 24,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat5 clears all positive cooldowns but cannot reset None once-per-round copy"
+        },
+        {
+          "kind": "extend",
+          "line": 59,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "all distinct cooling copies cleared"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Full Flush",
+      "observed_author_claim": "Heat5 clears all positive cooldowns but cannot reset None once-per-round copy; all distinct cooling copies cleared",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Positive and None counters are tested; every cooldown-producing recipe is not used to seed those counters."
+      ],
+      "source_clause": {
+        "exact_text": "| MA088 | Full Flush | Immediate effect: Flush Manifold (no part) | Utility | 2 Copper + 1 Glass + 1 Circuit | 2 | Pay 5 Heat when activated. Remove all cooldown counters from every currently cooling recipe. This does not reset a recipe without cooldown. |",
+        "line": 549,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 5 Heat when activated. Remove all cooldown counters from every currently cooling recipe. This does not reset a recipe without cooldown."
+    },
+    "recipe:MA089": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 25,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "unused reserve Shield consumed without activation, nextIron3 Glass1; Ammo invalid"
+        },
+        {
+          "kind": "extend",
+          "line": 60,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "used removed Shield cannot pay"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Offcut Press",
+      "observed_author_claim": "unused reserve Shield consumed without activation, nextIron3 Glass1; Ammo invalid; used removed Shield cannot pay",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Wrong-kind, missing and used Shield payment rejection are covered; fatal interruption before delivery is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA089 | Offcut Press | Immediate effect: Offcut Press (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | When activated, consume one unused Shield part from reserve without its effect. At the start of next turn, gain 3 Iron and 1 Glass. Cannot activate without a Shield part to consume. |",
+        "line": 550,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When activated, consume one unused Shield part from reserve without its effect. At the start of next turn, gain 3 Iron and 1 Glass. Cannot activate without a Shield part to consume."
+    },
+    "recipe:MA090": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 26,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Burn ticks grantShield2 max6 per phase covering later attacks; duplicate frame no stacking"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Burning Shelter",
+      "observed_author_claim": "Burn ticks grantShield2 max6 per phase covering later attacks; duplicate frame no stacking",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Four early ticks, cap, later attack protection and next-phase reset are covered; Burn ticks that kill their target and terminate combat are not separate fixtures."
+      ],
+      "source_clause": {
+        "exact_text": "| MA090 | Burning Shelter | Immediate effect: Fire Shelter Frame (no part) | Utility | 2 Iron + 1 Carbon + 1 Circuit | 2 | For this fight, after an enemy takes a Burn tick, gain 2 Shield, up to 6 Shield per enemy phase. This Shield can cover later attacks in that phase and clears normally next turn. Reusing the frame does not add triggers. |",
+        "line": 551,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, after an enemy takes a Burn tick, gain 2 Shield, up to 6 Shield per enemy phase. This Shield can cover later attacks in that phase and clears normally next turn. Reusing the frame does not add triggers."
+    },
+    "recipe:MA091": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 26,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "killing main shot transfers pre-damage post-prehit Burn capped8, no survival transfer"
+        },
+        {
+          "kind": "extend",
+          "line": 61,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "victim killed by earlier Ammo support receives no copied Burn"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M05"
+      ],
+      "name": "Scattered Coals",
+      "observed_author_claim": "killing main shot transfers pre-damage post-prehit Burn capped8, no survival transfer; victim killed by earlier Ammo support receives no copied Burn",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA091 | Scattered Coals | 1 Coal Scatter Tip | Ammo | 2 Iron + 2 Carbon + 1 Glass | 2 | Add 16 damage. After other pre-hit effects, record the main target's Burn before main damage. If that damage kills it, apply the recorded amount, up to Burn 8, to one other enemy chosen at Fire, if still alive. |",
+        "line": 552,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 16 damage. After other pre-hit effects, record the main target's Burn before main damage. If that damage kills it, apply the recorded amount, up to Burn 8, to one other enemy chosen at Fire, if still alive."
+    },
+    "recipe:MA092": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 27,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "HP5 requires6 independent of Shield, Heat10 now nextShield8 after reset"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Pressure Debt",
+      "observed_author_claim": "HP5 requires6 independent of Shield, Heat10 now nextShield8 after reset",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "HP affordability and delivery after Shield reset are covered; fatal enemy-phase interruption is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA092 | Pressure Debt | Immediate effect: Overpressure Pump (no part) | Utility | 1 Iron + 2 Carbon + 1 Circuit | 2 | Lose 5 HP when activated, leaving at least 1 HP, then gain 10 Heat. At the start of next turn, gain 8 Shield after old Shield clears. Shield cannot pay the HP cost. |",
+        "line": 553,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Lose 5 HP when activated, leaving at least 1 HP, then gain 10 Heat. At the start of next turn, gain 8 Shield after old Shield clears. Shield cannot pay the HP cost."
+    },
+    "recipe:MA093": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 28,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "first two part Heat3+ payments grant nextIron1; reuse preserves limit, Utility excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Ledger",
+      "observed_author_claim": "first two part Heat3+ payments grant nextIron1; reuse preserves limit, Utility excluded",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Planning and per-physical Fire payments plus refresh cap are covered; a fresh following-round qualifying payment is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA093 | Furnace Ledger | Immediate effect: Fuel Meter (no part) | Utility | 1 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | For this fight, each round's first two part activations that pay at least 3 Heat each grant 1 Iron at the start of the following turn. Reusing Fuel Meter does not add triggers. |",
+        "line": 554,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, each round's first two part activations that pay at least 3 Heat each grant 1 Iron at the start of the following turn. Reusing Fuel Meter does not add triggers."
+    },
+    "recipe:MA094": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 12,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "main only bypasses Shield; spread/support still defend, duplicate sleeve no extra hit"
+        },
+        {
+          "kind": "extend",
+          "line": 62,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "below6 Heat cannot activate"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Bore",
+      "observed_author_claim": "main only bypasses Shield; spread/support still defend, duplicate sleeve no extra hit; below6 Heat cannot activate",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "Main/spread/support protection and duplicate refresh are covered; hostile reactions to a fatal main hit are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA094 | Furnace Bore | 1 Penetrating Bore | Modifier | 2 Iron + 1 Copper + 2 Circuit | 3 | Pay 6 Heat when activated. This round's main-shot damage to its main target bypasses Shield. Damage to other targets and separate support hits still meet Shield normally. Extra copies do not repeat the damage. |",
+        "line": 555,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 6 Heat when activated. This round's main-shot damage to its main target bypasses Shield. Damage to other targets and separate support hits still meet Shield normally. Extra copies do not repeat the damage."
+    },
+    "recipe:MA095": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 29,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "exactlyHeat0 gate; chosen Weaken12 andMark8"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Cold Counter",
+      "observed_author_claim": "exactlyHeat0 gate; chosen Weaken12 andMark8",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA095 | Cold Counter | Immediate effect: Cold Sight (no part) | Utility | 1 Copper + 2 Glass + 1 Circuit | 2 | Can activate only at 0 Heat. Apply Weaken 12 and Mark 8 to one chosen enemy. |",
+        "line": 556,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Can activate only at 0 Heat. Apply Weaken 12 and Mark 8 to one chosen enemy."
+    },
+    "recipe:MA097": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 27,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "separate8 to each other living enemy; main-only payload never copied"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Iron Rain",
+      "observed_author_claim": "separate8 to each other living enemy; main-only payload never copied",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "Living/dead/escaped recipient filtering and no payload copying are covered; reaction-caused player death midway through the recipients is not separately exercised."
+      ],
+      "source_clause": {
+        "exact_text": "| MA097 | Iron Rain | 1 Rain Cap | Ammo | 3 Iron + 1 Glass + 1 Circuit | 2 | Add 10 damage. After impact, deal a separate 8 damage to every enemy except the main target. These hits do not carry this shot's payload effects. |",
+        "line": 558,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 10 damage. After impact, deal a separate 8 damage to every enemy except the main target. These hits do not carry this shot's payload effects."
+    },
+    "recipe:MA098": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 13,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "unused crafted reserve count cap6; removed intact Shield counts, depleted or installed does not"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M02"
+      ],
+      "name": "Stored Weight",
+      "observed_author_claim": "unused crafted reserve count cap6; removed intact Shield counts, depleted or installed does not",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "The authorized repair preserves existing kind/origin eligibility. Generated, copied and purchased reserve origins are not reinterpreted or exhaustively tested."
+      ],
+      "source_clause": {
+        "exact_text": "| MA098 | Stored Weight | 1 Counterweight | Modifier | 2 Iron + 1 Copper + 1 Circuit | 2 | At Fire, add 3 damage for each unused crafted part still in reserve, up to 18 damage. Parts already loaded in the shot are not in reserve. The reserve parts remain unused. |",
+        "line": 559,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "At Fire, add 3 damage for each unused crafted part still in reserve, up to 18 damage. Parts already loaded in the shot are not in reserve. The reserve parts remain unused."
+    },
+    "recipe:MA099": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 22,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "next14 only if Heat0 after decay before startup gains; reset precedes arrival"
+        },
+        {
+          "kind": "extend",
+          "line": 63,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "removed source does not schedule End Turn conditional"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Settled Slag",
+      "observed_author_claim": "next14 only if Heat0 after decay before startup gains; reset precedes arrival; removed source does not schedule End Turn conditional",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Before-start Heat, reset order and detached-source behavior are covered; reinstallation in a later round is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA099 | Settled Slag | 1 Slag Foundation + conditional next-round Shield part | Shield | 3 Iron + 1 Carbon + 1 Circuit | 2 | When this part activates at End Turn, gain 22 Shield. At the beginning of the next round, if Heat is 0 before that round's start-of-turn Heat gains, automatically load a new regular 14-Shield part. |",
+        "line": 560,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When this part activates at End Turn, gain 22 Shield. At the beginning of the next round, if Heat is 0 before that round's start-of-turn Heat gains, automatically load a new regular 14-Shield part."
+    },
+    "recipe:MA100": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 30,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "attack target only; HP main/support triggers2 max8; blocked hits/ticks excluded, expires"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Red Warning",
+      "observed_author_claim": "attack target only; HP main/support triggers2 max8; blocked hits/ticks excluded, expires",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Main/support HP damage, fully blocked hits, ticks and expiry are covered; every hostile reaction chain is not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA100 | Red Warning | Immediate effect: Warning Flare (no part) | Utility | 1 Copper + 2 Carbon + 1 Circuit | 2 | Choose an enemy showing an attack intent. Until the end of this enemy phase, each time that enemy loses HP to a main shot or support hit, apply Weaken 2 to it, up to Weaken 8. Burn and Corrosion ticks do not trigger this. |",
+        "line": 561,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose an enemy showing an attack intent. Until the end of this enemy phase, each time that enemy loses HP to a main shot or support hit, apply Weaken 2 to it, up to Weaken 8. Burn and Corrosion ticks do not trigger this."
+    },
+    "recipe:MA101": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 31,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "HP-cost part activations give5 Shield max15; direct Utility excluded, reuse retains cap"
+        },
+        {
+          "kind": "extend",
+          "line": 64,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "enemy HP damage never triggers planning dispenser"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Emergency Forge Rivets",
+      "observed_author_claim": "HP-cost part activations give5 Shield max15; direct Utility excluded, reuse retains cap; enemy HP damage never triggers planning dispenser",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Part HP payments, direct Utility/enemy exclusions, cap/refresh and expiry are covered; every part HP-cost recipe is not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA101 | Emergency Forge Rivets | Immediate effect: Rivet Dispenser (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | For the rest of this round, after each part activation that costs HP, gain 5 Shield, up to 15 Shield. Damage from enemies does not trigger it. Reusing Rivet Dispenser refreshes the effect without resetting its Shield limit. |",
+        "line": 562,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For the rest of this round, after each part activation that costs HP, gain 5 Shield, up to 15 Shield. Damage from enemies does not trigger it. Reusing Rivet Dispenser refreshes the effect without resetting its Shield limit."
+    },
+    "recipe:MA102": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 23,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "remember current Heat capped8; greatest seal survives normal decay once"
+        },
+        {
+          "kind": "extend",
+          "line": 65,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "remembered floor cannot lower later higher Heat"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [
+        "M04"
+      ],
+      "name": "Sealed Kiln",
+      "observed_author_claim": "remember current Heat capped8; greatest seal survives normal decay once; remembered floor cannot lower later higher Heat",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Highest remembered value, cap, normal decay, later higher Heat and expiry are covered; reduced-decay upgrade combinations are not repeated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA102 | Sealed Kiln | 1 Kiln Seal | Shield | 2 Iron + 2 Carbon + 1 Circuit | 3 | Gain 16 Shield and remember your current Heat, up to 8. After this enemy phase's normal Heat loss, restore Heat to the remembered amount if it is lower. Extra Kiln Seals keep only the highest remembered amount. |",
+        "line": 563,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 16 Shield and remember your current Heat, up to 8. After this enemy phase's normal Heat loss, restore Heat to the remembered amount if it is lower. Extra Kiln Seals keep only the highest remembered amount."
+    },
+    "recipe:MA103": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 28,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "remaining Shield after main damage gates separate14; support copies no payload"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Hammer",
+      "observed_author_claim": "remaining Shield after main damage gates separate14; support copies no payload",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA103 | Furnace Hammer | 1 Hammer Slug | Ammo | 3 Iron + 1 Carbon + 1 Circuit | 2 | Add 14 damage. If the main target still has Shield after main damage, deal a separate 14 damage to it after impact. This second hit does not carry shot payload effects. |",
+        "line": 564,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 14 damage. If the main target still has Shield after main damage, deal a separate 14 damage to it after impact. This second hit does not carry shot payload effects."
+    },
+    "recipe:MA104": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 24,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "round1 false; previous enemy attack HP loss yields26, planning HP cost alone12"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Close the Breach",
+      "observed_author_claim": "round1 false; previous enemy attack HP loss yields26, planning HP cost alone12",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "First-round, previous enemy attack and planning HP cost are covered; every status-damage source is not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA104 | Close the Breach | 1 Breach Plate | Shield | 3 Iron + 1 Copper + 1 Circuit | 2 | Gain 12 Shield. If enemy attacks caused you to lose HP during the previous enemy phase, gain 14 more. This condition is false in the first round. |",
+        "line": 565,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 12 Shield. If enemy attacks caused you to lose HP during the previous enemy phase, gain 14 more. This condition is false in the first round."
+    },
+    "recipe:MA105": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 32,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "two distinct living targets, at leastBurn1, move up to8 and double actual amount"
+        },
+        {
+          "kind": "extend",
+          "line": 66,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "single living enemy cannot provide two victims"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Fire Exchange",
+      "observed_author_claim": "two distinct living targets, at leastBurn1, move up to8 and double actual amount; single living enemy cannot provide two victims",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Distinct living recipients, one-enemy rejection, amount/cap and source remainder are covered; immunity reactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA105 | Fire Exchange | Immediate effect: Fire Exchange Tube (no part) | Utility | 1 Copper + 2 Carbon + 1 Circuit | 2 | Choose two different living enemies. Remove up to 8 Burn from the first and apply twice the removed amount as Burn to the second. Cannot activate without two enemies and at least 1 Burn to move. |",
+        "line": 566,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose two different living enemies. Remove up to 8 Burn from the first and apply twice the removed amount as Burn to the second. Cannot activate without two enemies and at least 1 Burn to move."
+    },
+    "recipe:MA106": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 14,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "current8; killing main grants next-round16 once, duplicate refresh/no same-round bonus"
+        },
+        {
+          "kind": "extend",
+          "line": 67,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "earned future bonus expires if next-round shot omitted"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Recovered Force",
+      "observed_author_claim": "current8; killing main grants next-round16 once, duplicate refresh/no same-round bonus; earned future bonus expires if next-round shot omitted",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "Main kill, no kill, refresh, next-round use and expiry are covered; an extra-target-only kill is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA106 | Recovered Force | 1 Recoil Store | Modifier | 2 Iron + 1 Copper + 1 Circuit | 2 | Add 8 damage to this round's main shot. If it kills its main target, add 16 damage to next round's main shot. Extra Recoil Stores in this round do not stack the next-round bonus. |",
+        "line": 567,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 8 damage to this round's main shot. If it kills its main target, add 16 damage to next round's main shot. Extra Recoil Stores in this round do not stack the next-round bonus."
+    },
+    "recipe:MA107": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 33,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "payHeat4, next two independent reserve8 plates may wait then install"
+        },
+        {
+          "kind": "extend",
+          "line": 68,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "production Campaign clears pending and delivered Ready Plates"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Warm Repair Bench",
+      "observed_author_claim": "payHeat4, next two independent reserve8 plates may wait then install; production Campaign clears pending and delivered Ready Plates",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Actual Campaign victory cleanup is covered for pending and delivered outputs; defeat cleanup is represented by MA119's shared production boundary rather than a second MA107 case."
+      ],
+      "source_clause": {
+        "exact_text": "| MA107 | Warm Repair Bench | Immediate effect: Repair Bench Clamp (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | Pay 4 Heat when activated. At the start of next turn, gain 2 Ready Plates. Each is a Shield part that gives 8 Shield when activated; they may be saved for later turns. |",
+        "line": 568,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 4 Heat when activated. At the start of next turn, gain 2 Ready Plates. Each is a Shield part that gives 8 Shield when activated; they may be saved for later turns."
+    },
+    "recipe:MA108": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 25,
+          "path": "core/tests/mara-recipes/shield.inl",
+          "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+          "title": "first fully Shield-absorbed attack counter10+Burn3, once; partial attack excluded"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Counterfire Door",
+      "observed_author_claim": "first fully Shield-absorbed attack counter10+Burn3, once; partial attack excluded",
+      "retained_author_residuals": [
+        "All possible installation-order permutations with other reactive Shields and permanent upgrades are not enumerated.",
+        "Fully absorbed and partially absorbed attacks plus once-only behavior are covered; two Counterfire Doors and source removal are not separate fixtures."
+      ],
+      "source_clause": {
+        "exact_text": "| MA108 | Counterfire Door | 1 Counterfire Door | Shield | 3 Iron + 1 Carbon + 1 Glass | 2 | Gain 18 Shield. After the first enemy attack this round that is fully absorbed by your Shield, deal 10 damage and apply Burn 3 to that attacker. Only one attack triggers each Counterfire Door. |",
+        "line": 569,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Gain 18 Shield. After the first enemy attack this round that is fully absorbed by your Shield, deal 10 damage and apply Burn 3 to that attacker. Only one attack triggers each Counterfire Door."
+    },
+    "recipe:MA109": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 29,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "prehit strip up to20, floor-half actual removed added to24"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Citybreaker",
+      "observed_author_claim": "prehit strip up to20, floor-half actual removed added to24",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo."
+      ],
+      "source_clause": {
+        "exact_text": "| MA109 | Citybreaker | 1 Citybreaker Slug | Ammo | 3 Iron + 1 Carbon + 1 Glass + 1 Circuit | 3 | Add 24 damage. Before main damage, remove up to 20 Shield from the main target and add half the amount removed, rounded down, to this shot's damage. |",
+        "line": 575,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 24 damage. Before main damage, remove up to 20 Shield from the main target and add half the amount removed, rounded down, to this shot's damage."
+    },
+    "recipe:MA110": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 34,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "fight Burn3/Heat8Burn6 once per main shot; duplicate liner no stacking or support payload"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Red Furnace",
+      "observed_author_claim": "fight Burn3/Heat8Burn6 once per main shot; duplicate liner no stacking or support payload",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Fire Heat7/8, duplicate reuse, main-only payload and fight duration are covered; a same-Fire Heat payment crossing8 is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA110 | Red Furnace | Immediate effect: Red Furnace Liner (no part) | Utility | 2 Iron + 2 Carbon + 1 Circuit | 3 | For this fight, your main shot applies Burn 3 to its main target after impact. If Heat was 8 or more at Fire, apply Burn 6 instead. This triggers once per main shot; reusing the liner does not stack it. |",
+        "line": 576,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, your main shot applies Burn 3 to its main target after impact. If Heat was 8 or more at Fire, apply Burn 6 instead. This triggers once per main shot; reusing the liner does not stack it."
+    },
+    "recipe:MA111": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 15,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "Fire7 per physical splitter,60percent once, spread kill Heat cap6, no payload copies"
+        },
+        {
+          "kind": "extend",
+          "line": 69,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "surviving spread victims give no Heat and keep ordinary Mark"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Foundry Split",
+      "observed_author_claim": "Fire7 per physical splitter,60percent once, spread kill Heat cap6, no payload copies; surviving spread victims give no Heat and keep ordinary Mark",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "One/two physical splitters, total affordability, own defense, Mark exclusion, nonkill and four-kill cap are covered; all hostile reaction interruptions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA111 | Foundry Split | 1 Foundry Splitter | Modifier | 2 Iron + 1 Copper + 1 Glass + 1 Circuit | 3 | Load into the bullet; consumed at Fire. Pay 7 Heat at Fire. Every extra enemy receives 60% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. Gain 2 Heat per enemy killed by those spread hits, up to 6 Heat. Main-target payloads are not copied. Extra Foundry Splitters do not repeat this spread. |",
+        "line": 577,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Load into the bullet; consumed at Fire. Pay 7 Heat at Fire. Every extra enemy receives 60% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. Gain 2 Heat per enemy killed by those spread hits, up to 6 Heat. Main-target payloads are not copied. Extra Foundry Splitters do not repeat this spread."
+    },
+    "recipe:MA112": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 35,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "half remaining installed Shield floor capped20, not spent; reserve/duplicate excluded"
+        },
+        {
+          "kind": "extend",
+          "line": 70,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "fight effect survives multiple shots and next round"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Walking Foundry",
+      "observed_author_claim": "half remaining installed Shield floor capped20, not spent; reserve/duplicate excluded; fight effect survives multiple shots and next round",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Current installed value, rounding/cap, no spending, duplicate reuse and later shots/rounds are covered; every Shield-altering upgrade order is not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA112 | Walking Foundry | Immediate effect: Foundry Harness (no part) | Utility | 3 Iron + 1 Copper + 1 Circuit | 3 | For this fight, at Fire add half the total remaining Shield on your currently installed parts, rounded down, to the main shot's damage, up to 20 extra damage. Shield is not spent. This is counted once per main shot; reusing the harness does not stack it. |",
+        "line": 578,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "For this fight, at Fire add half the total remaining Shield on your currently installed parts, rounded down, to the main shot's damage, up to 20 extra damage. Shield is not spent. This is counted once per main shot; reusing the harness does not stack it."
+    },
+    "recipe:MA113": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 16,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "minimum Heat8, pays all, Shield20 now and main30 only this round"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Winter Furnace",
+      "observed_author_claim": "minimum Heat8, pays all, Shield20 now and main30 only this round",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA113 | Winter Furnace | 1 Winter Core Sleeve | Modifier | 2 Iron + 2 Copper + 1 Circuit | 3 | Can activate only with at least 8 Heat. Pay all your Heat. Add 30 damage to this round's main shot and gain 20 Shield. |",
+        "line": 579,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Can activate only with at least 8 Heat. Pay all your Heat. Add 30 damage to this round's main shot and gain 20 Shield."
+    },
+    "recipe:MA114": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 36,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "Heat6 required, every cooling copy loses up to2, no resource/part refund"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Closed Loop Kiln",
+      "observed_author_claim": "Heat6 required, every cooling copy loses up to2, no resource/part refund",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Multiple counters, floor0 and no refund are covered; each producer recipe's lifecycle is separate."
+      ],
+      "source_clause": {
+        "exact_text": "| MA114 | Closed Loop Kiln | Immediate effect: Closed Kiln Manifold (no part) | Utility | 2 Iron + 2 Copper + 1 Carbon + 1 Circuit | 4 | Pay 6 Heat when activated. Remove up to 2 cooldown counters from every currently cooling recipe. No resources or parts are refunded. |",
+        "line": 580,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Pay 6 Heat when activated. Remove up to 2 cooldown counters from every currently cooling recipe. No resources or parts are refunded."
+    },
+    "recipe:MA116": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 37,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "HP6 requires7 despite Shield; Heat6 Shield24 and next-shot18 only current round"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Last Reserve",
+      "observed_author_claim": "HP6 requires7 despite Shield; Heat6 Shield24 and next-shot18 only current round",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "HP affordability, current grants, once-only next shot and expiry are covered; terminal reaction interruptions are not enumerated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA116 | Last Reserve | Immediate effect: Last Reserve Pump (no part) | Utility | 1 Iron + 2 Carbon + 1 Copper + 1 Circuit | 3 | Lose 6 HP when activated, leaving at least 1 HP. Gain 6 Heat and 24 Shield, and add 18 damage to your next main shot this round only. Shield cannot pay the HP cost. |",
+        "line": 582,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Lose 6 HP when activated, leaving at least 1 HP. Gain 6 Heat and 24 Shield, and add 18 damage to your next main shot this round only. Shield cannot pay the HP cost."
+    },
+    "recipe:MA117": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 38,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "burning target required; double current Burn by extra cap12, other living get4"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Ash Crown",
+      "observed_author_claim": "burning target required; double current Burn by extra cap12, other living get4",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Burn requirement, source cap, existing other Burn and escaped exclusion are covered; a separate dead-target fixture is not repeated."
+      ],
+      "source_clause": {
+        "exact_text": "| MA117 | Ash Crown | Immediate effect: Ash Crown Nozzle (no part) | Utility | 1 Iron + 2 Carbon + 1 Glass + 1 Circuit | 3 | Choose one enemy with Burn. Apply extra Burn equal to its current Burn, up to Burn 12, then apply Burn 4 to every other enemy. Cannot activate without a burning enemy. |",
+        "line": 583,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Choose one enemy with Burn. Apply extra Burn equal to its current Burn, up to Burn 12, then apply Burn 4 to every other enemy. Cannot activate without a burning enemy."
+    },
+    "recipe:MA118": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 17,
+          "path": "core/tests/mara-recipes/modifiers.inl",
+          "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+          "title": "installed12 oldest-first paid, current28, independent next-start24 after reset"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Hammer and Anvil",
+      "observed_author_claim": "installed12 oldest-first paid, current28, independent next-start24 after reset",
+      "retained_author_residuals": [
+        "All other named Modifier combinations and permanent-upgrade interactions are not enumerated.",
+        "Installed affordability/order, current bonus and future once-only Shield after reset are covered; fatal interruption before delivery is not a separate fixture."
+      ],
+      "source_clause": {
+        "exact_text": "| MA118 | Hammer and Anvil | 1 Anvil Coupling | Modifier | 3 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | When this Modifier is used, pay 12 available Shield from installed parts, draining them in installation order. Add 28 damage to this round's main shot. At the start of next turn, gain 24 Shield after old Shield clears. |",
+        "line": 584,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "When this Modifier is used, pay 12 available Shield from installed parts, draining them in installation order. Add 28 damage to this round's main shot. At the start of next turn, gain 24 Shield after old Shield clears."
+    },
+    "recipe:MA119": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 39,
+          "path": "core/tests/mara-recipes/utility.inl",
+          "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+          "title": "next two Siege10 Ammo and two Siege10 Shields, independent reserve then combined use"
+        },
+        {
+          "kind": "extend",
+          "line": 71,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "production Campaign clears delivered and pending Siege parts on victory/defeat"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Spare Foundry",
+      "observed_author_claim": "next two Siege10 Ammo and two Siege10 Shields, independent reserve then combined use; production Campaign clears delivered and pending Siege parts on victory/defeat",
+      "retained_author_residuals": [
+        "All permanent-upgrade listeners and competing delayed-effect orderings are not enumerated.",
+        "Saved outputs, independent effects and actual Campaign victory/defeat cleanup are covered; no natural acquisition/route-frequency claim is made."
+      ],
+      "source_clause": {
+        "exact_text": "| MA119 | Spare Foundry | Immediate effect: Foldout Foundry (no part) | Utility | 3 Iron + 1 Copper + 1 Carbon + 1 Circuit | 4 | At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. Each Siege Slug is Ammo that adds 10 damage; each Siege Plate is a Shield part that gives 10 Shield. Parts may be saved or used together and still clear at fight end. |",
+        "line": 585,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. Each Siege Slug is Ammo that adds 10 damage; each Siege Plate is a Shield part that gives 10 Shield. Parts may be saved or used together and still clear at fight end."
+    },
+    "recipe:MA120": {
+      "actual_fixture_locations": [
+        {
+          "kind": "add",
+          "line": 30,
+          "path": "core/tests/mara-recipes/ammo.inl",
+          "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+          "title": "after-enemy echo floor-half original shot max30; changed current Shield and one delivery"
+        },
+        {
+          "kind": "extend",
+          "line": 72,
+          "path": "core/tests/mara-recipes/boundaries.inl",
+          "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+          "title": "echo ignores original Mark, applies no payload, floor-halves odd original damage"
+        }
+      ],
+      "claim_boundary": "Only the named asserted clauses plus explicitly listed independent probes; no exhaustive/full ID claim or active binding.",
+      "disposition": "provisional_bounded_link",
+      "independent_additional_probes": [],
+      "name": "Furnace Echo",
+      "observed_author_claim": "after-enemy echo floor-half original shot max30; changed current Shield and one delivery; echo ignores original Mark, applies no payload, floor-halves odd original damage",
+      "retained_author_residuals": [
+        "Robot-specific armor, tiles, retaliation, immunity and fatal-interruption permutations are not exhaustively enumerated for this Ammo.",
+        "Current Shield is changed as a controlled fixture after Fire; this does not prove a particular enemy's Shield-gain animation/action. Echo rounding/cap, original Mark exclusion, no payload recursion and dead-target loss are covered."
+      ],
+      "source_clause": {
+        "exact_text": "| MA120 | Furnace Echo | 1 Echo Chamber | Ammo | 2 Iron + 1 Copper + 1 Carbon + 1 Glass + 1 Circuit | 3 | Add 18 damage. After the enemy phase, deal a separate hit to this shot's main target if alive: half the original shot's calculated damage before target-specific Mark and defence, rounded down, up to 30. The delayed hit meets the target's current Shield, copies no payloads and cannot create another echo. |",
+        "line": 586,
+        "path": "design/RECIPE-CATALOGUE.md"
+      },
+      "source_effect": "Add 18 damage. After the enemy phase, deal a separate hit to this shot's main target if alive: half the original shot's calculated damage before target-specific Mark and defence, rounded down, up to 30. The delayed hit meets the target's current Shield, copies no payloads and cannot create another echo."
+    }
+  },
+  "dispositions": {
+    "exhaustive_id_approvals": 0,
+    "new_runtime_defects": 0,
+    "provisional_bounded_links": 107
+  },
+  "scope": "All107 printed source rows and primary assertion bodies plus33 extensions manually reviewed. Bounded propositions are supported within the recorded residuals.",
+  "shared_limits": [
+    "Controlled unit supplies, selected memory copies, HP/status/intent and protection fixtures isolate effects. This is not an earned campaign loadout or balance witness.",
+    "All successful Rules actions compare preview with exact committed state and ordered events. This does not prove disk persistence, UI input or presentation.",
+    "Only the explicit cross-recipe, robot-reaction and upgrade combinations named in each passing group are covered; no exhaustive interaction claim is made.",
+    "Physical lifecycle, cooldown availability and full-city route evidence remain separate. Registration or a physical output alone is not counted as this suite's semantic evidence."
+  ]
+}

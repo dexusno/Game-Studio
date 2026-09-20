@@ -1,0 +1,114 @@
+PASS recipe:SH009 three OTHER Ammo threshold excludes physical Spread
+PASS recipe:SH014 Corrosion follows main hit and excludes extra targets
+PASS recipe:SH015 immediate Mark5 one selected living target once before shot
+PASS recipe:SH016 Weaken4 after main hit only with ordinary decay
+PASS recipe:SH018 per OTHER Ammo scaling caps at six and ignores Spread
+PASS recipe:SH019 first-install attacker count threshold with snapshot and no refill
+PASS recipe:SH020 first attacker Weaken2 after its complete attack, installed source only
+PASS recipe:SH021 exactly one attacker selects12 otherwise7 at first install
+PASS recipe:SH022 Shield6 plus at-most3 Burn removed once on first install
+PASS recipe:SH023 actual Copper paid by all Uses including Utility and self; cap10 snapshot
+PASS recipe:SH025 fully blocked attack yields one next-start Iron, not partial or detached
+PASS recipe:SH027 first enemy attack returns3 after attack once with source installed
+PASS recipe:SH028 living enemies3 each capped12; dead and escaped excluded
+PASS recipe:SH029 lossy immediate conversion pays printed2 once gains1 with no part
+PASS recipe:SH030 lossy immediate conversion pays printed2 once gains1 with no part
+PASS recipe:SH031 lossy immediate conversion pays printed2 once gains1 with no part
+PASS recipe:SH032 one unused reserve part sacrificed without payload for nextIron1Glass1
+PASS recipe:SH033 independent2 Burn/Corrosion cleanse and immediate removableShield3
+PASS recipe:SH034 Use schedules fresh8 exactly next start independent of later recipe actions
+PASS recipe:SH035 next first-used Shield+4 once, same-name refresh and turn expiry
+PASS recipe:SH035.boundaries flat bonus not multiplied by dynamic Shield and copied Shield drops upgrades
+PASS recipe:SH037 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH038 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH039 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH040 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH041 remove floored half Shield BEFORE the added8 hit
+PASS recipe:SH042 main kill gates one chosen support hit and validates target
+PASS recipe:SH043 main-only post-Armor bypass redirects at-most12 once then expires
+PASS recipe:SH043.boundaries main bypass does not bypass Shield on physical spread hits
+PASS recipe:SH044 three currently installed physical Shields count without payment
+PASS recipe:SH045 post-main Shield2 per consumed Ammo capped12 excludes Spread
+PASS recipe:SH046 Burn2 every other living enemy after main hit
+PASS recipe:SH047 Corrosion2 all living including surviving main excludes killed main
+PASS recipe:SH048 Weaken4 all currently attacking recipients only
+PASS recipe:SH049 immediate chosenMark4 and each other livingMark2
+PASS recipe:SH051 physicalSpread40 floor to up-to-two selected others no payloads
+PASS recipe:SH052 earlier-round reserve grants8 once physical age is earned
+PASS recipe:SH053 Fire-start empty raw pool only; any one resource disqualifies
+PASS recipe:SH054 actual same-round sacrifices add3 capped9 and reset
+PASS recipe:SH055 no previous HP loss grants8; Shield loss does not disqualify
+PASS recipe:SH056 next-start8 same target once, lost when killed or fight ends
+PASS recipe:SH057 Use grants8 and post-paymentIron>=3 schedules5; source removal irrelevant
+PASS recipe:SH058 first attack exhausting total Shield weakens all living3 once
+PASS recipe:SH059 half maximum inclusive threshold sampled once
+PASS recipe:SH061 marked living enemy count3 each capped9 extra, snapshot
+PASS recipe:SH062 next main-shot check once even on failure or removal; round expiry
+PASS recipe:SH063 remove at-most5 Corrosion first install only and Shield8
+PASS recipe:SH064 Burn prevention once and fouling/leak exclusions; three unavailable status producers unproved
+PASS recipe:SH064.boundaries fouling/leak do not consume screen; current-round expiry retains no prevention
+PASS recipe:SH065 unused reserve Ammo sacrifice has no payload; Shield10 now Iron1 next
+PASS recipe:SH066 automatic complete groups0..14 cap3; ordered readers see remainder
+PASS recipe:SH067 cool every currently cooling physical copy, floor0; paid recraft still required
+PASS recipe:SH068 cool every currently cooling physical copy, floor0; paid recraft still required
+PASS recipe:SH069 choose Copper Carbon or Glass2 only at next start
+PASS recipe:SH070 next-turn first qualifying >=2Iron Use includes Utility; cheap Uses do not consume
+PASS recipe:SH071 Common Ammo printed copy next start with selectors and exclusions
+PASS recipe:SH072 next shot selected Base/Common Ammo consumed then fresh printed copy once
+PASS recipe:SH072.boundaries unused nextshot copy expires and copying excludes unattached or absent part choices
+PASS recipe:SH073 cleanse up-to6 each Weaken Mark plus nextshot3 expiresEndTurn
+PASS recipe:SH075 main-kill Copper2 next start once; no direct cores or credits
+PASS recipe:SH076 sacrifice fixed unused Shield printed value capped14; no secondary effects
+PASS recipe:SH077 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH078 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH079 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH080 two chosen types take first3 normal slots, no haul-size increase, shortage fallback
+PASS recipe:SH081 all main Shield removed before14 without affecting others
+PASS recipe:SH082 all other living half whole-shot floored, payload main only
+PASS recipe:SH083 nextshot additive8percent per Ammo capped80; Spread excluded and expires
+PASS recipe:SH084 distinct printed crafting types across Ammo only capped27
+PASS recipe:SH086 zero Shield at Fire start gates Corrosion6 after main hit
+PASS recipe:SH087 one chosen Burn-sized support then floored half removal; recoil stops
+PASS recipe:SH088 Fire-start distinct four statuses each add5 including spent Mark
+PASS recipe:SH089 separate12 support only on surviving main; defence twice no payload repeat
+PASS recipe:SH090 full reserve rounds add8 per round capped24 per physical part
+PASS recipe:SH091 post-actions positive Shield returns6 per surviving attacker only
+PASS recipe:SH092 first-install15 commits next15; removal never cancels committed delivery
+PASS recipe:SH092.boundaries saved source no rearm, fatal enemy phase and Campaign completion cleanup
+PASS recipe:SH093 half total shown multi-hit attack damage floor and30 cap
+PASS recipe:SH093.boundaries shown multi-hit damage includes Drive and Weaken, excludes nonattack and dead
+PASS recipe:SH094 direct7 after first two enemy actions not each individual hit
+PASS recipe:SH095 Weaken8 current attackers and Shield5 per nonattacker cap15
+PASS recipe:SH096 first-install12 schedules fresh12 next start even after removal
+PASS recipe:SH097 first positive enemy HP damage prevented by at-most8 once
+PASS recipe:SH098 reserve age Shield10 plus7 per full round max31 snapshot
+PASS recipe:SH099 cool every currently cooling physical copy, floor0; paid recraft still required
+PASS recipe:SH100 cool every currently cooling physical copy, floor0; paid recraft still required
+PASS recipe:SH102 Common Ammo or Shield two next-start printed copies and exclusions
+PASS recipe:SH103 next crafted Ammo one chosen output+8 firstuse, no grant and round expiry
+PASS recipe:SH103.boundaries selected batch attachment survives storage and invalid choice is atomic
+PASS recipe:SH104 actual healing8 clamps max and shared16; no-attackerShield independent
+PASS recipe:SH104.boundaries full health consumes zero healing allowance; cooldown not bypassed by bonus
+PASS recipe:SH105 normal10 plus5 actual extras leave exactly2 gathered units back in pile
+PASS recipe:SH106 chosen one of all5 types adds up-to4 after ordinary haul
+PASS recipe:SH107 specified next-haul extras only from available pile; normal haul and expiry
+PASS recipe:SH108 four NORMAL slots prioritize chosen type with fallback then freshShield6
+PASS recipe:SH109 post-hit strips up to12 Shield each other living enemy
+PASS recipe:SH110 physical all-target spread reserves unusedShield untilFire sacrifice without effect
+PASS recipe:SH110.boundaries usedShield payment excluded and dead extra gets no Weaken
+PASS recipe:SH111 nextshot double damage, Shield15 threshold10Ammo excludesSpread
+PASS recipe:SH112 main kill gates20 each other enemy once without recursive propagation
+PASS recipe:SH113 first-install38 commits20 independently; leftover10 gates delivery cooling
+PASS recipe:SH113.boundaries pre-reset10 condition uses current balance and installed source; delivery cooling is live
+PASS recipe:SH114 fully blocked attack retaliation10 capped three actions
+PASS recipe:SH116 cool every currently cooling physical copy, floor0; paid recraft still required
+PASS recipe:SH117 four materials2 nextstart once noCircuit; fight ends before delivery loses grant
+PASS recipe:SH118 Base throughRare Ammo Shield two fresh printed copies excludesLegendary and nonparts
+PASS recipe:SH119 two DIFFERENT chosen types up-to3 each independently after normal haul
+PASS recipe:SH119.boundaries each chosen material's shortage independent; perfect Circuit request cannot steal baseline
+PASS recipe:SH120 one-each preference uses5 normal positions then4 available normal-mix extras
+PASS recipe:SH122 ordered two different nonCircuit choices; unconditional1 then Perfect extra1+2
+PASS recipe:SH122.boundaries manual models share one attempt; finite extras and fitting order preserved
+PASS recipe:SH123 Glass1 all modes, Perfect Circuit2 extra while ordinary Circuit remains
+PASS recipe:SH126 Iron1 anymode; Perfect free physicalAmmo10 Shield10 afterhaul with ordinary use
+SUMMARY 113 passed, 0 failed, 27881 assertions.

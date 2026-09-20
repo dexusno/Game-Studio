@@ -1,0 +1,337 @@
+{
+  "artifacts": {
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/independent_part_probes.exe": "0e04a1100e05a9c93e65a3c0ecddf0f16639c694135183fae5cccaa7ce4fee38",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/overkill_core.lib": "9c1dfbabf7584c24c2f54179e0e31eabad77115792ff2224b66824f94a001a95",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/qa-author.log": "87538ba62b6fca5d15d082be1da7f2b8623331ffe6564ba65cbb07e8668c54a7",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/qa-build.log": "b10eb28fc4f3f821f038bcc208e435ae7d9a1ae630f3badfcc2960be243f18a6",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/qa-configure.log": "3fa90e5bebc280e94132f04baa4675195a95f800b0df2cf7a7f3b6a2ce6e7b2e",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/qa-ctest.log": "d226c6f70d7dafa83ab016ac50da6d3f6f9abd7efa41cb5561da5820ccee5e15",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/qa-probes.log": "80fee8c71da6f06f453c227590a9fc2858ce3fc0cbd9f4a51da5a0a7cf948535",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/rebuilt_author_parts.exe": "58089ce29c182bc54f35fb953a7c0db32158bcd0ffacb152c725b1e489048643",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/sources/CMakeLists.txt": "36651aef1cc9d69d29f654d5c8a6d6f6fbfa2c01c6d840588c3f5a0b4fe8647d",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/sources/audit.py": "426f1517b1d4f49548a22fe6e1713d96033ff35f230ca5e15453ba1f7b2e89bd",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/sources/probes.cpp": "6c43b72e2562b7f925d3b2748d506d29e76a6ad72a57874bff49f286d0d90e52",
+    "core/build/qa-parts/captures/qa-parts-0e04a1100e05a9c9/sources/run.py": "b6c721a84c7c9f8f13ec65e1d7a5c3f9152f2b17ea5055b68446580861e9affd",
+    "qa/parts/evidence/ctest.log": "cfd06a2c75bf4485f02f9d3f985efb9100cb6c6302b7a440579692a4defff92b",
+    "qa/parts/evidence/probes.log": "80fee8c71da6f06f453c227590a9fc2858ce3fc0cbd9f4a51da5a0a7cf948535"
+  },
+  "candidate": {
+    "inputs": {
+      "content/catalogue.snapshot.json": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+      "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+      "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+      "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "core/src/campaign.cpp": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+      "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "core/src/campaign_upgrades.cpp": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+      "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+      "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "core/src/upgrade_effects.inl": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+      "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "core/tests/part_lifecycle_tests.cpp": "f2c207990e92241539db1d7320a86641b6a0a1348ca0a80c5a06bc8d97aac36b",
+      "core/tests/parts/CMakeLists.txt": "e0c54f3dc614fc319172059d8b1cb8820decff16129ff3d8536254102615dd9b",
+      "core/tests/parts/README.md": "dceca351501eaed25ac9068c2c81d33fa69eade671ed8465ea678e5c712b35bf",
+      "core/tests/parts/capture.py": "722d1cddbbcf7bd836d1151b42c7aa80ed488359dd3ce34fc8c949a7762733a4",
+      "core/tests/parts/cases.inc": "da945c48b90464b0d32f9959950b0732c93f613e9a872e2cbdfa75807ec949ee",
+      "core/tests/parts/contracts.json": "9ef773eab5a9b3af9e082904ce53bd09d469bea65c9cafa94f2dd6d259afb87e",
+      "core/tests/parts/extra_lifecycle.inl": "70213965c81b917de59c23593657651af945b5d40a24e57c37cec4e7ac9fe838",
+      "core/tests/parts/generate_cases.py": "71c2310fb07762a7434221678bc8b337270de8b2489c4bf0fda0ecee421065dc",
+      "core/tests/parts/origin-rarity.inc": "dafb40f2d039673353b8ee3741df2e137cc689f3cfd223699d235a74b653ec0b",
+      "core/tests/parts/plain-cases.inc": "31fb7f315d1df32ec586f3d9a9a3e66d195e1b3e24c3d54d28a1d823ccf20942",
+      "core/tests/parts/reference_values.json": "d028398320b0fe78291f46c7d7cd8c01c7f5b0c2621cef9a7d8bf39f47524c23",
+      "design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+      "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+      "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+      "design/data/beta-balance-v1.json": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+      "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+      "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
+      "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6"
+    },
+    "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "rules_status": "Provisional corrected of-core-0.4; version/save compatibility decision pending. A later source/version change requires a new capture.",
+    "source_graph_sha256": "6d015efbe36365278c4b22263cbe9ab1b733cf8c57681d76715344115ef8d13f",
+    "verified_build": "native-part-lifecycle-2fa5fdc71858ffe3"
+  },
+  "candidate_artifacts": {
+    "artifacts": {
+      "capture-build-0.log": "858e706225fe4e4c31831d75c2fa09aab66458088f7b3f7cae58c6e5dc89ef0c",
+      "capture-build-1.log": "88b37c5dacddb7c12779bcb3782bf876787aaefcc7a4589729a7efe2e40bd5f1",
+      "capture-ctest.log": "79efc7be55e1377319b48c9b70fbaf7b057908ad9f74c503477cf7f36796d961",
+      "overkill_core.lib": "9ba5eff9203aa7e545f53e9469a5bb45b3f9bc4bc0887f6db22c25eea14815fc",
+      "part_lifecycle_tests.exe": "2fa5fdc71858ffe34467e24e758b3e51d9bd607474ccdb445fe8959a782efd69",
+      "parts.log": "87538ba62b6fca5d15d082be1da7f2b8623331ffe6564ba65cbb07e8668c54a7"
+    },
+    "root": "core/build/part-lifecycle/captures/native-part-lifecycle-2fa5fdc71858ffe3-6d015efbe363"
+  },
+  "candidate_contracts_sha256": "9ef773eab5a9b3af9e082904ce53bd09d469bea65c9cafa94f2dd6d259afb87e",
+  "candidate_proposed_bindings_sha256": "f366f2beed74930b7db235c0018f036dfe2350b936d046313fa81e72912067bd",
+  "candidate_results_sha256": "b6109b4352f41d39ecd65bae31678cd07b83477635de2d35172bbd6079f87496",
+  "captured_utc": "2026-09-20T18:16:07.982286+00:00",
+  "commands": [
+    {
+      "command": [
+        "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+        "-S",
+        "<game>\\qa\\parts",
+        "-B",
+        "<game>\\core\\build\\qa-parts",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64",
+        "-DFROZEN_INPUTS=<game>/core/build/part-lifecycle/captures/native-part-lifecycle-2fa5fdc71858ffe3-6d015efbe363/inputs"
+      ],
+      "exit_code": 0,
+      "raw_log": "core/build/qa-parts/qa-configure.log",
+      "raw_log_sha256": "3fa90e5bebc280e94132f04baa4675195a95f800b0df2cf7a7f3b6a2ce6e7b2e"
+    },
+    {
+      "command": [
+        "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe",
+        "--build",
+        "<game>\\core\\build\\qa-parts",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "raw_log": "core/build/qa-parts/qa-build.log",
+      "raw_log_sha256": "b10eb28fc4f3f821f038bcc208e435ae7d9a1ae630f3badfcc2960be243f18a6"
+    },
+    {
+      "command": [
+        "<game>\\core\\build\\qa-parts\\Release\\independent_part_probes.exe"
+      ],
+      "exit_code": 0,
+      "raw_log": "core/build/qa-parts/qa-probes.log",
+      "raw_log_sha256": "80fee8c71da6f06f453c227590a9fc2858ce3fc0cbd9f4a51da5a0a7cf948535"
+    },
+    {
+      "command": [
+        "<game>\\core\\build\\qa-parts\\Release\\rebuilt_author_parts.exe"
+      ],
+      "exit_code": 0,
+      "raw_log": "core/build/qa-parts/qa-author.log",
+      "raw_log_sha256": "87538ba62b6fca5d15d082be1da7f2b8623331ffe6564ba65cbb07e8668c54a7"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "<game>\\core\\build\\qa-parts",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "raw_log": "core/build/qa-parts/qa-ctest.log",
+      "raw_log_sha256": "d226c6f70d7dafa83ab016ac50da6d3f6f9abd7efa41cb5561da5820ccee5e15"
+    }
+  ],
+  "environment": {
+    "compiler": "MSVC 19.44.35228.0 / Windows SDK 10.0.26100.0",
+    "configuration": "Release, C++17, /W4 /WX /permissive-",
+    "input": "Native typed Rules/CampaignRules commands in controlled CPU fixtures; no UI/GPU",
+    "machine": "AMD64",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "finding_status": "No reproducible production defect identified in this finite sample.",
+  "independent_build": "qa-parts-0e04a1100e05a9c9",
+  "independent_executable_sha256": "0e04a1100e05a9c93e65a3c0ecddf0f16639c694135183fae5cccaa7ce4fee38",
+  "independent_sources": {
+    "qa/parts/CMakeLists.txt": "36651aef1cc9d69d29f654d5c8a6d6f6fbfa2c01c6d840588c3f5a0b4fe8647d",
+    "qa/parts/audit.py": "426f1517b1d4f49548a22fe6e1713d96033ff35f230ca5e15453ba1f7b2e89bd",
+    "qa/parts/probes.cpp": "6c43b72e2562b7f925d3b2748d506d29e76a6ad72a57874bff49f286d0d90e52",
+    "qa/parts/run.py": "b6c721a84c7c9f8f13ec65e1d7a5c3f9152f2b17ea5055b68446580861e9affd"
+  },
+  "inventory_audit": {
+    "checks": 2914,
+    "direct_recipe_rows": 178,
+    "frozen_inputs": 41,
+    "historical_compact_files": {
+      "physical-types-206": {
+        "README.md": "8c82ea06521af43baa0b299d2bf5e9806eb6116dfba70ced6769845f7d814aa1",
+        "parts.log": "74e3b1737744fef6cc425151b74ef5d5b873d42205a482f7a2c46c9c68f4a05e",
+        "proposed-bindings.json": "23e3f8144eb397dc0a494bfb496b7d7b7f5b0c5227d1b161b09e632fa06fb2aa",
+        "results.json": "7a6f7138cdbe423adb79418428f5e5ff48e3a1b4ae01fc53229cbc75950e5f9d"
+      },
+      "recipe-backed-123": {
+        "README.md": "7d8abad74a655446ccd232c4014d69c0e14c483cde41bcfd6f6675cd42a25500",
+        "parts.log": "fecf2383defe374b192343a9cf543c98d9d0e9ecaff0079fb3c6396854778305",
+        "proposed-bindings.json": "28d63a79cf5581224f2bf6e61a1907679460fae84a2487195a00fa33dc383963",
+        "results.json": "1ad73f4c8c2c9d4461eb3e16124880a95d23ee201e212fda3d65f25b18609446"
+      }
+    },
+    "limits": "This checks complete inventory/linkage and direct prose fields, not semantic sufficiency of every asserted lifecycle or every producer branch.",
+    "live_sources_differing_from_capture": [],
+    "manifest_origins_not_claimed_by_type_fixture": {
+      "plain-shield-10": [
+        "MY1-20",
+        "SH045",
+        "SH095"
+      ],
+      "plain-shield-12": [
+        "MA048",
+        "MA071",
+        "SH045"
+      ],
+      "plain-shield-15": [
+        "SH095",
+        "SH111"
+      ],
+      "plain-shield-2": [
+        "MA090",
+        "UGS-028",
+        "UGS-030"
+      ],
+      "plain-shield-20": [
+        "SH113"
+      ],
+      "plain-shield-24": [
+        "MA118"
+      ],
+      "plain-shield-3": [
+        "MAU-03",
+        "UGS-028",
+        "UGS-047",
+        "UGS-055"
+      ],
+      "plain-shield-4": [
+        "MA034",
+        "MA048",
+        "SH045",
+        "UGS-004",
+        "UGS-028",
+        "UGS-087",
+        "UGS-088",
+        "UGS-109",
+        "UGS-117"
+      ],
+      "plain-shield-5": [
+        "MA016",
+        "MA101",
+        "SH057",
+        "SH064",
+        "SH095",
+        "UGS-010",
+        "UGS-028",
+        "UGS-086",
+        "UGS-127",
+        "UGS-136"
+      ],
+      "plain-shield-6": [
+        "MA044",
+        "MA078",
+        "SH045",
+        "SH108",
+        "UGS-028"
+      ],
+      "plain-shield-7": [
+        "MA040",
+        "UGS-028",
+        "UGS-095"
+      ],
+      "plain-shield-8": [
+        "MA047",
+        "MA092",
+        "MA107",
+        "MY1-07",
+        "SH045",
+        "SH057",
+        "SH104"
+      ],
+      "recipe-SH001": [
+        "UGS-007",
+        "UGS-132"
+      ],
+      "recipe-SH002": [
+        "UGS-132"
+      ],
+      "recipe-SH003": [
+        "MY2-03",
+        "UGS-007",
+        "UGS-122"
+      ]
+    },
+    "named_groups": 207,
+    "non_free_producer_path_claims": 218,
+    "physical_types": 207,
+    "runtime_kind_counts": {
+      "Ammo": 64,
+      "Magnet": 21,
+      "Modifier": 28,
+      "Shield": 59,
+      "Spread": 6
+    },
+    "source_graph_sha256": "6d015efbe36365278c4b22263cbe9ab1b733cf8c57681d76715344115ef8d13f",
+    "status": "passed"
+  },
+  "limits": [
+    "Mechanical coverage of 207 inventories and direct source fields does not establish full semantic coverage of every part/effect/producer.",
+    "Independent runtime: 36 focused groups, including six Spread and 21 Magnet types; other types retain author-operated matrix evidence.",
+    "Generated Ammo domain in author suite uses controlled SH076 inputs; natural availability of every value is not established.",
+    "Provisional corrected of-core-0.4 includes terminal guard; save/version migration decision remains outside this review.",
+    "No bindings activated, no production changed, no full recipe/upgrade gate, balance, visual, native-input, audio, packaging or human acceptance claimed."
+  ],
+  "rebuilt_author_executable_sha256": "58089ce29c182bc54f35fb953a7c0db32158bcd0ffacb152c725b1e489048643",
+  "rebuilt_library_sha256": "9c1dfbabf7584c24c2f54179e0e31eabad77115792ff2224b66824f94a001a95",
+  "review": "Independent bounded physical-part lifecycle review",
+  "runtime": {
+    "assertions": 1908,
+    "author_rebuild": "207 groups / 59169 assertions; complete output identical to frozen original",
+    "ctest": "2/2 passed",
+    "failed_groups": 0,
+    "names": [
+      "P01 paid Warm Rivet / consumed return / immutable per-part floor",
+      "P02 variable Heat and HP first-install history",
+      "P03 capped generated conversion / tuned source / fresh copies",
+      "P04 pristine generated Shield copies do not replay generator",
+      "P05 same-name refresh versus separate payments and distinct bonuses",
+      "P06 odd spread / target defence / payment SH005",
+      "P06 odd spread / target defence / payment SH051",
+      "P06 odd spread / target defence / payment SH082",
+      "P06 odd spread / target defence / payment SH110",
+      "P06 odd spread / target defence / payment MA041",
+      "P06 odd spread / target defence / payment MA111",
+      "P07 Good Circuit / duplicate / partial pile SH008",
+      "P07 Good Circuit / duplicate / partial pile SH037",
+      "P07 Good Circuit / duplicate / partial pile SH038",
+      "P07 Good Circuit / duplicate / partial pile SH039",
+      "P07 Good Circuit / duplicate / partial pile SH040",
+      "P07 Good Circuit / duplicate / partial pile SH077",
+      "P07 Good Circuit / duplicate / partial pile SH078",
+      "P07 Good Circuit / duplicate / partial pile SH079",
+      "P07 Good Circuit / duplicate / partial pile SH080",
+      "P07 Good Circuit / duplicate / partial pile SH105",
+      "P07 Good Circuit / duplicate / partial pile SH106",
+      "P07 Good Circuit / duplicate / partial pile SH107",
+      "P07 Good Circuit / duplicate / partial pile SH108",
+      "P07 Good Circuit / duplicate / partial pile SH119",
+      "P07 Good Circuit / duplicate / partial pile SH120",
+      "P07 Good Circuit / duplicate / partial pile SH121",
+      "P07 Good Circuit / duplicate / partial pile SH122",
+      "P07 Good Circuit / duplicate / partial pile SH123",
+      "P07 Good Circuit / duplicate / partial pile SH124",
+      "P07 Good Circuit / duplicate / partial pile SH125",
+      "P07 Good Circuit / duplicate / partial pile SH126",
+      "P08 Perfect scarcity / unfitted expiry / spent Precision",
+      "P09 ephemeral Shield1 with actual retention and enemy hit",
+      "P10 automatic Sweep / post-enemy ordered reads / remainders",
+      "P11 real sale receipts and armed campaign cleanup"
+    ],
+    "passed_groups": 36
+  }
+}

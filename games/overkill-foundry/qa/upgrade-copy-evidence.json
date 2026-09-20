@@ -1,0 +1,184 @@
+{
+  "audit": {
+    "full_artifact_hashes_verified": 14,
+    "full_input_hashes_verified": 58,
+    "old_failed_artifacts_verified": 4,
+    "old_input_hashes_verified": 54,
+    "path": "qa/upgrade-copy-contracts/audit-results.json",
+    "sha256": "36e98459ae6ded9b0e1304f8a6105413b9a5684466a42eb5873cc48f2193794d"
+  },
+  "binaries": {
+    "full_author_rebuild": {
+      "path": "core/build/qa-upgrade-copy-rebuild/Release/upgrade_copy_contract_tests.exe",
+      "sha256": "8f217f1d9248dff1d0e7c5a3498a150f62266cad1e0285ec325bc10f1d5f8b31"
+    },
+    "full_library": {
+      "path": "core/build/qa-upgrade-copy-rebuild/core-runtime/Release/overkill_core.lib",
+      "sha256": "57df1ad905d0dedf32f3111d6cd4f8b300831f7c9729db98e0db411560f34da5"
+    },
+    "full_original_qa": {
+      "path": "core/build/qa-upgrade-copy/probes-full/Release/original_upgrade_review.exe",
+      "sha256": "3cab28457cdde1be3bca2fbc386502574611b9de0ba8f4813cee7e9c74e4a515"
+    },
+    "full_probe": {
+      "path": "core/build/qa-upgrade-copy/probes-full/Release/independent_upgrade_copies.exe",
+      "sha256": "39f7f4fe554b7bd4978656ad8e04537a74099f1aaadc2e403f4858d554da02b6"
+    },
+    "historical_library": {
+      "path": "core/build/qa-upgrade-contracts/uc01-failure/overkill_core.lib",
+      "sha256": "c7905a329931f4d5062096301669e207683a8e334d4c0a875c209dc4cb6e7e7d"
+    },
+    "legacy_emitter": {
+      "path": "core/build/qa-upgrade-copy/probes-full/Release/legacy_state_emitter.exe",
+      "sha256": "0a11841ea1f6164338533467d079c31ab88e7a5a9b6959bfe8921b8beaeecdda"
+    },
+    "overlay_library": {
+      "path": "core/build/qa-upgrade-copy-overlay/build/core-runtime/Release/overkill_core.lib",
+      "sha256": "da7a3430e39b47dead1a2c3ff1cb7d6be097fa600159fa6510ce236cffcde62b"
+    },
+    "overlay_original_qa": {
+      "path": "core/build/qa-upgrade-copy/probes-overlay/Release/original_upgrade_review.exe",
+      "sha256": "3e6ead06922a0597328dde8c3b02286f6152f6736376c2f0b30b87ba024c0db9"
+    },
+    "overlay_probe": {
+      "path": "core/build/qa-upgrade-copy/probes-overlay/Release/independent_upgrade_copies.exe",
+      "sha256": "5e49ce8784b87fe71f4af035dfca516cb968249f0d625112e85c6283cc382097"
+    }
+  },
+  "candidate": {
+    "archive": "core/build/upgrade-copy-contracts/captures/native-uc01-f04393742ce59384-24edf61b936d",
+    "author_executable_sha256": "f04393742ce593845d20c25201c1882d07da99711316935edcad1cd20683cbf4",
+    "graph_sha256": "24edf61b936dd5b8b034014de1c2331a10b7beedfd87464c5b1be97579b64ef5",
+    "inputs": 58,
+    "results_sha256": "989876e4ad8fd6901aebbcb550a82255a2052ec34848eb5ea8f669af0a1cd84c",
+    "source_hashes": {
+      "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "core/src/recipe_effects.inl": "10ccb56c16fb0f3f3c0dd8a79ec22f97c3a440d11a55b7e88dcc0a05d638c8c8",
+      "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "core/src/upgrade_effects.inl": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f",
+      "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6"
+    }
+  },
+  "disposition": "UC01 repaired for newly attributed outputs on the reviewed graphs. UGS121 copy exclusion is provisionally supported; old unmarked output migration remains held. No active support or version acceptance.",
+  "environment": {
+    "compiler": "MSVC19.44.35228.0",
+    "configuration": "C++17 Release /W4 /WX /permissive-",
+    "controls": "CPU typed Rules actions in prepared native fixtures; no Unreal, GPU or physical input",
+    "platform": "Windows x64",
+    "sdk": "10.0.26100.0"
+  },
+  "isolated_overlay": {
+    "changed_files": [
+      "core/src/recipe_effects.inl",
+      "core/src/upgrade_effects.inl",
+      "core/tests/upgrade_tests.cpp"
+    ],
+    "graph_sha256": "cd81a0f2b296918bb83a3801b7ac673d9f9901c4b7a32d86d3405d72793610a7",
+    "inputs": 54,
+    "only_full_production_difference": "Previously reviewed SH092/SH113 scheduling correction",
+    "original_graph_sha256": "49b5f5045b558856d2ceeea4f10639bb2c3c62f209817784a649dc5d96f5ce38",
+    "patch_sha256": "66ea4e65a19ce61af7bd036e2a979056ccc0a413cf869d14ec95cef4a4dff74d"
+  },
+  "known_limit": {
+    "expected_for_new_output": 14,
+    "id": "UC-L01",
+    "meaning": "Historical parts have aggregate2 each and no attribution marker. Patch intentionally does not guess or migrate them. Fresh-start/version/migration policy unresolved.",
+    "observed_legacy": 16,
+    "severity": "Owner-held compatibility decision",
+    "steps": "Generate historical paid Jig+Lease original and copy with archived original library; load unchanged bytes under either corrected graph, then Fire both."
+  },
+  "legacy_fixtures": {
+    "jig.ofcore": {
+      "path": "core/build/qa-upgrade-copy/legacy/jig.ofcore",
+      "sha256": "c650d1beac8da551ecc980139ce60de7a2eb2e08d3e97372487283b84ad69a9c"
+    },
+    "mayor.ofcore": {
+      "path": "core/build/qa-upgrade-copy/legacy/mayor.ofcore",
+      "sha256": "d4ad2766a1e7d7e0327938d7e38e0b293e360b60b838f5fe9d94bf9b5c0701a4"
+    }
+  },
+  "limits": [
+    "Finite selected source-clause check, not whole-upgrade or full-game acceptance.",
+    "Prior failure and Shared graph kept unchanged; later MA082 correction not included.",
+    "Existing schema/RulesVersion unchanged; migration/fresh-start decision held.",
+    "No natural campaign acquisition, external save I/O durability, packaged startup/exit, input, visuals, audio, balance or human play tested."
+  ],
+  "preserved_harness_error": {
+    "path": "core/build/qa-upgrade-copy/history/same-copy-control-error",
+    "reason": "C03 originally reused one None recipe copy in a round; legitimate core rejection. Corrected independent setup selects another stored copy. No production fix."
+  },
+  "rebuilds": {
+    "full": {
+      "raw_log": "core/build/qa-upgrade-copy-rebuild/Testing/Temporary/LastTest.log",
+      "sha256": "2710f8f73c2a523ef84e611f905c909ebf1e0d863b49099d8a6fb56181ae5b67",
+      "suite_summaries": [
+        "SUMMARY 7 passed, 0 failed, 671 assertions.",
+        "1130 assertions; 147 explicitly covered upgrade IDs; 0 failures",
+        "SUMMARY 106 passed, 0 failed, 6139 assertions. Held UGS-011/018/126/141 are not proposed.",
+        "SUMMARY 113 passed, 0 failed, 27881 assertions.",
+        "SUMMARY 207 passed, 0 failed, 59169 assertions; 0 explicitly untested output types. No full recipe-effect or balance claim."
+      ],
+      "tests_failed": 0,
+      "tests_passed": 5
+    },
+    "overlay": {
+      "raw_log": "core/build/qa-upgrade-copy-overlay/build/Testing/Temporary/LastTest.log",
+      "sha256": "d4cb699d3fc05c2363bf3ff02f494a4182ee967d41551329992bf2580aad541c",
+      "suite_summaries": [
+        "SUMMARY 106 passed, 0 failed, 6139 assertions. Held UGS-011/018/126/141 are not proposed.",
+        "1130 assertions; 147 explicitly covered upgrade IDs; 0 failures"
+      ],
+      "tests_failed": 0,
+      "tests_passed": 4
+    }
+  },
+  "reviewed_utc": "2026-09-20T20:11:10.787458+00:00",
+  "runtime_checks": {
+    "historical_executable": {
+      "assertions": 492,
+      "exit_code": 1,
+      "failure": "Q09 Jig-first pair damage16 versus14; reproduced unchanged",
+      "groups_failed": 1,
+      "groups_passed": 8,
+      "log_sha256": "ac25a23fed249e1ec3cf495022013d65fbe5ec1c2424b5f3b2fa39ed36db3319"
+    },
+    "new_independent_probes": {
+      "byte_identical_output_across_graphs": true,
+      "each_result": {
+        "assertions": 1333,
+        "failed": 0,
+        "passed": 6
+      },
+      "four_source_acquisition_permutations": 24,
+      "graphs": [
+        "full",
+        "isolated_overlay"
+      ],
+      "prepared_common_receive_controls": [
+        "C04 malformed pending attribution after earlier material delivery",
+        "C05 valid pending committed-copy descendants"
+      ],
+      "real_old_library_save_controls": {
+        "C06": "Actual old Jig16 remains16 on reload; fresh corrected14. Mayor16 remains16. This passes the no-guessing characterization, not compatibility acceptance."
+      },
+      "source": "qa/upgrade-copy-contracts/probes.cpp",
+      "source_sha256": "6d071a948c1c6ef7e57c44b7231d3bc6dc0c79fc9ec3449a80b202e22d72106a"
+    },
+    "unchanged_original_source": {
+      "byte_identical_output_across_graphs": true,
+      "each_result": {
+        "assertions": 503,
+        "failed": 0,
+        "passed": 9
+      },
+      "graphs": [
+        "full",
+        "isolated_overlay"
+      ],
+      "source": "core/build/qa-upgrade-contracts/uc01-failure/probes.cpp",
+      "source_sha256": "8a5dc48b9586c032876d8b53b834b5c8a52c27465462e1e76eb46a0b7e6b4d0b"
+    }
+  },
+  "schema_version": 1
+}

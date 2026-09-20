@@ -1,0 +1,594 @@
+{
+  "bindings": [
+    {
+      "fixture": "parts::part:recipe-MA002 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA002"
+    },
+    {
+      "fixture": "parts::part:recipe-MA003 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA003"
+    },
+    {
+      "fixture": "parts::part:recipe-MA005 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA005"
+    },
+    {
+      "fixture": "parts::part:recipe-MA006 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA006"
+    },
+    {
+      "fixture": "parts::part:recipe-MA007 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA007"
+    },
+    {
+      "fixture": "parts::part:recipe-MA008 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA008"
+    },
+    {
+      "fixture": "parts::part:recipe-MA009 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA009"
+    },
+    {
+      "fixture": "parts::part:recipe-MA011 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA011"
+    },
+    {
+      "fixture": "parts::part:recipe-MA012 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA012"
+    },
+    {
+      "fixture": "parts::part:recipe-MA013 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA013"
+    },
+    {
+      "fixture": "parts::part:recipe-MA014 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA014"
+    },
+    {
+      "fixture": "parts::part:recipe-MA015 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA015"
+    },
+    {
+      "fixture": "parts::part:recipe-MA016 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA016"
+    },
+    {
+      "fixture": "parts::part:recipe-MA017 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA017"
+    },
+    {
+      "fixture": "parts::part:recipe-MA018 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA018"
+    },
+    {
+      "fixture": "parts::part:recipe-MA022 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA022"
+    },
+    {
+      "fixture": "parts::part:recipe-MA023 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA023"
+    },
+    {
+      "fixture": "parts::part:recipe-MA024 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA024"
+    },
+    {
+      "fixture": "parts::part:recipe-MA025 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA025"
+    },
+    {
+      "fixture": "parts::part:recipe-MA028 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA028"
+    },
+    {
+      "fixture": "parts::part:recipe-MA031 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA031"
+    },
+    {
+      "fixture": "parts::part:recipe-MA032 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA032"
+    },
+    {
+      "fixture": "parts::part:recipe-MA033 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA033"
+    },
+    {
+      "fixture": "parts::part:recipe-MA034 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA034"
+    },
+    {
+      "fixture": "parts::part:recipe-MA036 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA036"
+    },
+    {
+      "fixture": "parts::part:recipe-MA039 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA039"
+    },
+    {
+      "fixture": "parts::part:recipe-MA040 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA040"
+    },
+    {
+      "fixture": "parts::part:recipe-MA042 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA042"
+    },
+    {
+      "fixture": "parts::part:recipe-MA044 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA044"
+    },
+    {
+      "fixture": "parts::part:recipe-MA047 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA047"
+    },
+    {
+      "fixture": "parts::part:recipe-MA048 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA048"
+    },
+    {
+      "fixture": "parts::part:recipe-MA051 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA051"
+    },
+    {
+      "fixture": "parts::part:recipe-MA054 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA054"
+    },
+    {
+      "fixture": "parts::part:recipe-MA055 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA055"
+    },
+    {
+      "fixture": "parts::part:recipe-MA057 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA057"
+    },
+    {
+      "fixture": "parts::part:recipe-MA059 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA059"
+    },
+    {
+      "fixture": "parts::part:recipe-MA060 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA060"
+    },
+    {
+      "fixture": "parts::part:recipe-MA062 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA062"
+    },
+    {
+      "fixture": "parts::part:recipe-MA065 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA065"
+    },
+    {
+      "fixture": "parts::part:recipe-MA068 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA068"
+    },
+    {
+      "fixture": "parts::part:recipe-MA070 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA070"
+    },
+    {
+      "fixture": "parts::part:recipe-MA071 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA071"
+    },
+    {
+      "fixture": "parts::part:recipe-MA072 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA072"
+    },
+    {
+      "fixture": "parts::part:recipe-MA073 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA073"
+    },
+    {
+      "fixture": "parts::part:recipe-MA075 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA075"
+    },
+    {
+      "fixture": "parts::part:recipe-MA076 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA076"
+    },
+    {
+      "fixture": "parts::part:recipe-MA077 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA077"
+    },
+    {
+      "fixture": "parts::part:recipe-MA079 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA079"
+    },
+    {
+      "fixture": "parts::part:recipe-MA082 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA082"
+    },
+    {
+      "fixture": "parts::part:recipe-MA083 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA083"
+    },
+    {
+      "fixture": "parts::part:recipe-MA084 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA084"
+    },
+    {
+      "fixture": "parts::part:recipe-MA086 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA086"
+    },
+    {
+      "fixture": "parts::part:recipe-MA091 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA091"
+    },
+    {
+      "fixture": "parts::part:recipe-MA096 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA096"
+    },
+    {
+      "fixture": "parts::part:recipe-MA097 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA097"
+    },
+    {
+      "fixture": "parts::part:recipe-MA099 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA099"
+    },
+    {
+      "fixture": "parts::part:recipe-MA102 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA102"
+    },
+    {
+      "fixture": "parts::part:recipe-MA103 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA103"
+    },
+    {
+      "fixture": "parts::part:recipe-MA104 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA104"
+    },
+    {
+      "fixture": "parts::part:recipe-MA108 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA108"
+    },
+    {
+      "fixture": "parts::part:recipe-MA109 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA109"
+    },
+    {
+      "fixture": "parts::part:recipe-MA115 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA115"
+    },
+    {
+      "fixture": "parts::part:recipe-MA120 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-MA120"
+    },
+    {
+      "fixture": "parts::part:recipe-SH001 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH001"
+    },
+    {
+      "fixture": "parts::part:recipe-SH002 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH002"
+    },
+    {
+      "fixture": "parts::part:recipe-SH003 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH003"
+    },
+    {
+      "fixture": "parts::part:recipe-SH004 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH004"
+    },
+    {
+      "fixture": "parts::part:recipe-SH006 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH006"
+    },
+    {
+      "fixture": "parts::part:recipe-SH009 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH009"
+    },
+    {
+      "fixture": "parts::part:recipe-SH010 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH010"
+    },
+    {
+      "fixture": "parts::part:recipe-SH011 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH011"
+    },
+    {
+      "fixture": "parts::part:recipe-SH012 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH012"
+    },
+    {
+      "fixture": "parts::part:recipe-SH013 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH013"
+    },
+    {
+      "fixture": "parts::part:recipe-SH014 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH014"
+    },
+    {
+      "fixture": "parts::part:recipe-SH016 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH016"
+    },
+    {
+      "fixture": "parts::part:recipe-SH017 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH017"
+    },
+    {
+      "fixture": "parts::part:recipe-SH018 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH018"
+    },
+    {
+      "fixture": "parts::part:recipe-SH019 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH019"
+    },
+    {
+      "fixture": "parts::part:recipe-SH020 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH020"
+    },
+    {
+      "fixture": "parts::part:recipe-SH021 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH021"
+    },
+    {
+      "fixture": "parts::part:recipe-SH022 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH022"
+    },
+    {
+      "fixture": "parts::part:recipe-SH023 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH023"
+    },
+    {
+      "fixture": "parts::part:recipe-SH025 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH025"
+    },
+    {
+      "fixture": "parts::part:recipe-SH027 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH027"
+    },
+    {
+      "fixture": "parts::part:recipe-SH028 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH028"
+    },
+    {
+      "fixture": "parts::part:recipe-SH041 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH041"
+    },
+    {
+      "fixture": "parts::part:recipe-SH042 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH042"
+    },
+    {
+      "fixture": "parts::part:recipe-SH044 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH044"
+    },
+    {
+      "fixture": "parts::part:recipe-SH045 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH045"
+    },
+    {
+      "fixture": "parts::part:recipe-SH046 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH046"
+    },
+    {
+      "fixture": "parts::part:recipe-SH047 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH047"
+    },
+    {
+      "fixture": "parts::part:recipe-SH048 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH048"
+    },
+    {
+      "fixture": "parts::part:recipe-SH052 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH052"
+    },
+    {
+      "fixture": "parts::part:recipe-SH053 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH053"
+    },
+    {
+      "fixture": "parts::part:recipe-SH054 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH054"
+    },
+    {
+      "fixture": "parts::part:recipe-SH055 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH055"
+    },
+    {
+      "fixture": "parts::part:recipe-SH056 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH056"
+    },
+    {
+      "fixture": "parts::part:recipe-SH058 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH058"
+    },
+    {
+      "fixture": "parts::part:recipe-SH059 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH059"
+    },
+    {
+      "fixture": "parts::part:recipe-SH060 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH060"
+    },
+    {
+      "fixture": "parts::part:recipe-SH061 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH061"
+    },
+    {
+      "fixture": "parts::part:recipe-SH062 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH062"
+    },
+    {
+      "fixture": "parts::part:recipe-SH063 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH063"
+    },
+    {
+      "fixture": "parts::part:recipe-SH075 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH075"
+    },
+    {
+      "fixture": "parts::part:recipe-SH081 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH081"
+    },
+    {
+      "fixture": "parts::part:recipe-SH084 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH084"
+    },
+    {
+      "fixture": "parts::part:recipe-SH086 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH086"
+    },
+    {
+      "fixture": "parts::part:recipe-SH087 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH087"
+    },
+    {
+      "fixture": "parts::part:recipe-SH088 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH088"
+    },
+    {
+      "fixture": "parts::part:recipe-SH089 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH089"
+    },
+    {
+      "fixture": "parts::part:recipe-SH090 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH090"
+    },
+    {
+      "fixture": "parts::part:recipe-SH091 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH091"
+    },
+    {
+      "fixture": "parts::part:recipe-SH092 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH092"
+    },
+    {
+      "fixture": "parts::part:recipe-SH093 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH093"
+    },
+    {
+      "fixture": "parts::part:recipe-SH094 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH094"
+    },
+    {
+      "fixture": "parts::part:recipe-SH096 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH096"
+    },
+    {
+      "fixture": "parts::part:recipe-SH097 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH097"
+    },
+    {
+      "fixture": "parts::part:recipe-SH098 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH098"
+    },
+    {
+      "fixture": "parts::part:recipe-SH109 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH109"
+    },
+    {
+      "fixture": "parts::part:recipe-SH112 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH112"
+    },
+    {
+      "fixture": "parts::part:recipe-SH113 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH113"
+    },
+    {
+      "fixture": "parts::part:recipe-SH114 materialization/copy/resale/place/lifetime",
+      "operation": "part:recipe-SH114"
+    },
+    {
+      "fixture": "parts::part:warm-rivet materialization/copy/resale/place/lifetime",
+      "operation": "part:warm-rivet"
+    }
+  ],
+  "evidence": {
+    "path": "core/tests/parts/evidence/results.json",
+    "sha256": "1ad73f4c8c2c9d4461eb3e16124880a95d23ee201e212fda3d65f25b18609446"
+  },
+  "handler": "Engine::recipePart/receive/printedCopy/copyLater/completeFire/install; upgradePartSaleValue; CampaignRules::apply/clearFight",
+  "implementation": {
+    "path": "core/src/recipe_effects.inl",
+    "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "notice": "Proposed only. Each pair names an actual executed group; the current runtime support ledger is unchanged.",
+  "unbound": {
+    "part:plain-ammo-1": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-10": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-11": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-12": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-13": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-14": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-2": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-3": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-4": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-5": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-6": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-7": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-8": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-ammo-9": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-1": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-10": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-12": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-14": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-15": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-18": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-2": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-20": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-24": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-3": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-4": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-5": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-6": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-7": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:plain-shield-8": "Generated value type needs an executed authored-origin, source-rarity/copy and delivery/lifetime matrix; a plain factory call alone is insufficient.",
+    "part:recipe-MA010": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA027": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA041": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA045": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA052": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA053": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA061": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA063": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA067": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA078": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA094": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA098": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA106": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA111": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA113": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-MA118": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH005": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH008": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH024": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH035": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH036": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH037": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH038": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH039": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH040": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH043": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH050": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH051": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH064": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH066": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH070": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH072": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH077": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH078": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH079": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH080": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH082": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH083": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH085": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH095": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH103": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH105": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH106": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH107": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH108": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH110": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH111": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH119": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH120": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH121": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH122": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH123": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH124": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH125": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here.",
+    "part:recipe-SH126": "Planning or spread-part activation/reservation and lifetime require a separate per-type matrix; SH066's unresolved proof gap is not guessed here."
+  },
+  "verified_build": "native-part-lifecycle-105b12edcbf90bb1"
+}

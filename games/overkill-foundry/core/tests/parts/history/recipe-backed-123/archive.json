@@ -1,0 +1,11 @@
+{
+  "files": {
+    "README.md": "7d8abad74a655446ccd232c4014d69c0e14c483cde41bcfd6f6675cd42a25500",
+    "parts.log": "fecf2383defe374b192343a9cf543c98d9d0e9ecaff0079fb3c6396854778305",
+    "proposed-bindings.json": "28d63a79cf5581224f2bf6e61a1907679460fae84a2487195a00fa33dc383963",
+    "results.json": "1ad73f4c8c2c9d4461eb3e16124880a95d23ee201e212fda3d65f25b18609446"
+  },
+  "notice": "Unmodified original123-slice evidence. Full inputs and native artifacts are retained under ignored core/build/part-lifecycle/history/recipe-backed-123. Paths inside original result records describe their original execution locations.",
+  "source_graph_sha256": "18465c3d6e65b36705f24aeae89992c677108c8a44816c03ce506dfe09ca7d86",
+  "verified_build": "native-part-lifecycle-105b12edcbf90bb1"
+}

@@ -1,0 +1,20 @@
+PASS full246 exact catalogue registrations and source costs
+PASS every Ammo's main damage in a controlled source-derived reference state
+PASS conditional Ammo snapshots, percentages, prehit order, independent saved copies
+PASS all Utility uses and required choices execute without omitted operation
+PASS all Shield installation values have a source-derived reference result
+PASS all planning Modifiers and Magnet effects have a complete action path
+PASS all physical spread parts validate costs, own targets and resolution
+PASS finite stock preserves baseline when Precision or named bonus stock is missing
+PASS fixed Shield recasting and copying preserve generated identity while dropping later bonuses
+PASS first-install shot check expires on an unsuccessful or removed-source next shot
+PASS part-only Mara costs exclude Utility costs and copying/Use are separate events
+PASS prehit changes cannot rewrite ordinary Fire-condition snapshots
+PASS HP-first Shield prevention and total attack reduction obey whole-attack facts
+PASS Refuge Walls share restoration and Kiln Seals retain greatest remembered Heat
+PASS later killed-target support hit is lost without undoing earlier committed hits
+PASS expanded snapshot preserves choices and rejects unsafe persisted indices/counters
+PASS combined Fire affordability precedes each physical part's payment trigger
+PASS Pressure Release honors optional chosen Shield amount without forced maximum
+PASS source IDs present in tested execution, no metadata-only omission
+All 2055 recipe assertions passed; 246 source recipes have executable action paths. Interaction coverage remains explicit.

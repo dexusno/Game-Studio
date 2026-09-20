@@ -1,0 +1,1235 @@
+{
+  "graph_sha256": "254e4f72c531dcac6f70c1df74cf7a09592aaa15803a191767e54db936556ef3",
+  "candidate_inputs_verified": 37,
+  "candidate_artifacts_verified": 7,
+  "printed_rows_verified": 107,
+  "primary_fixtures": 107,
+  "extensions": 33,
+  "proposed_status": "bounded proposed_only; no exhaustive/full or active acceptance",
+  "retained_failed_captures": [
+    {
+      "archive": "core/build/mara-semantic-01",
+      "verified_inputs": 33,
+      "failed_groups": 6
+    },
+    {
+      "archive": "core/build/mara-semantic-02",
+      "verified_inputs": 33,
+      "failed_groups": 2
+    },
+    {
+      "archive": "core/build/mara-semantic-03",
+      "verified_inputs": 33,
+      "failed_groups": 2
+    },
+    {
+      "archive": "core/build/mara-semantic-04",
+      "verified_inputs": 34,
+      "failed_groups": 3
+    }
+  ],
+  "two_line_production_delta_verified": true,
+  "negative_controls_rejected": [
+    "Missing PASS",
+    "Inflated assertion claim",
+    "Altered source clause",
+    "Activated link"
+  ],
+  "fixture_locations": {
+    "MA002": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 2,
+        "title": "Fire Heat3/4 boundary; Burn after6 impact, not retroactive damage",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 40,
+        "title": "earlier payload Heat cannot change Fire snapshot",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA005": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 3,
+        "title": "only one Ammo14, multiple Ammo9 each; planning Modifier excluded",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA006": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 4,
+        "title": "prehit Shield0/5/6/10 removal; Heat2 iff full6 removed",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 41,
+        "title": "full-strip Heat is after hit",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA007": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 5,
+        "title": "main6 then Mark4; following shot consumes Mark exactly once",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA008": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 6,
+        "title": "other living enemies Burn2, main/dead/escaped excluded, Heat capped3",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA009": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 7,
+        "title": "Heat0/2 grants14, Heat3+ grants8",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA011": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 8,
+        "title": "Heat5/6 selects Burn2/5 after flat4",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 42,
+        "title": "earlier payload Heat does not upgrade this shot Burn",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA012": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 9,
+        "title": "separate chosen support3; burning victim Heat2; later dead support loses both",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA023": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 10,
+        "title": "flat7, Heat2 only after impact and once per consumed rivet",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA025": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 11,
+        "title": "one live target14, two9; dead/escaped bodies not counted",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA032": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 12,
+        "title": "Burn4 arrives next start before its first tick; dead original target loses delivery",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA033": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 13,
+        "title": "GainShield intent gates after-impact Weaken4; Attack/Charge do not",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA036": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 14,
+        "title": "Burn2/3 threshold for after-impact Weaken5",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA039": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 15,
+        "title": "Attack intent grants Weaken6, other current intents3",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA042": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 16,
+        "title": "prehit remove Burn0/1/6/9 capped6 and add2 per actually removed",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA047": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 17,
+        "title": "impact8 grants Shield8 immediately before later enemy action",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA051": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 18,
+        "title": "earlier-shot recast count only, same-shot snapshot and extra12 cap",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA060": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 19,
+        "title": "two full Burn ticks before decay; reapplication refreshes duration",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 50,
+        "title": "printed impact6 precedes first Burn tick",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA068": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 20,
+        "title": "installed remaining11/12 threshold; percentage once across duplicate Ammo",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 54,
+        "title": "uninstalled Shield cannot satisfy12",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA073": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 21,
+        "title": "reserve sacrifice this round grants10; earlier round and direct recipe costs excluded",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 56,
+        "title": "direct Utility resource cost is not reserve sacrifice",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA076": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 22,
+        "title": "part Heat5+ removes10 Shield; Utility Heat payments excluded",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 57,
+        "title": "ordinary Heat loss cannot meet paid5 threshold",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA077": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 23,
+        "title": "chosen other target receives floor half current Burn capped6; source retains Burn",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA082": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 24,
+        "title": "Heat-at-Fire Burn cap10 with acquired MAU-02 capacity; same-Fire payment snapshot",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA084": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 25,
+        "title": "physical HP payments add2 each capped18; Utility/enemy HP loss excluded",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA091": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 26,
+        "title": "killing main shot transfers pre-damage post-prehit Burn capped8, no survival transfer",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 61,
+        "title": "victim killed by earlier Ammo support receives no copied Burn",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA097": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 27,
+        "title": "separate8 to each other living enemy; main-only payload never copied",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA103": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 28,
+        "title": "remaining Shield after main damage gates separate14; support copies no payload",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA109": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 29,
+        "title": "prehit strip up to20, floor-half actual removed added to24",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      }
+    ],
+    "MA120": [
+      {
+        "path": "core/tests/mara-recipes/ammo.inl",
+        "line": 30,
+        "title": "after-enemy echo floor-half original shot max30; changed current Shield and one delivery",
+        "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 72,
+        "title": "echo ignores original Mark, applies no payload, floor-halves odd original damage",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA010": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 2,
+        "title": "Heat3 payment atomic, next main bonus10 once and round expiry",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA027": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 3,
+        "title": "installed-only Shield6 payment drains oldest parts, next-shot12",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA041": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 4,
+        "title": "Fire pays4; half-base spread meets own Shield, retains Mark, no main payload copy",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 46,
+        "title": "killed extra receives no posthit Burn",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA045": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 5,
+        "title": "explicit Heat2..5 only; affordable whole payment gives3 per paid Heat",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA052": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 6,
+        "title": "1..3 unused reserve Ammo consumed without payload; sacrifice not shot Ammo",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 48,
+        "title": "wrong-kind sacrifice fails atomically",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA053": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 7,
+        "title": "activation Heat5/6 selects gain2+bonus3 or Mark4+bonus8",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 49,
+        "title": "low-Heat branch does not require a Mark victim",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA061": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 8,
+        "title": "Shield4..12 exact oldest-first cost,2 damage per and floor/4 Heat",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 51,
+        "title": "valid chosen payment must be available on installed parts",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA063": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 9,
+        "title": "distinct consumed Ammo recipes count once, add3 each capped15",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA067": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 10,
+        "title": "mutual spread/load exclusion; flat18 and saturating post-impact Heat loss4",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 53,
+        "title": "full4 loss and next-round unused-bonus expiry",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA078": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 11,
+        "title": "Ammo after first adds4 cap16; five threshold cool3 and Shield6 after impact",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA094": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 12,
+        "title": "main only bypasses Shield; spread/support still defend, duplicate sleeve no extra hit",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 62,
+        "title": "below6 Heat cannot activate",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA098": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 13,
+        "title": "unused crafted reserve count cap6; removed intact Shield counts, depleted or installed does not",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA106": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 14,
+        "title": "current8; killing main grants next-round16 once, duplicate refresh/no same-round bonus",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 67,
+        "title": "earned future bonus expires if next-round shot omitted",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA111": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 15,
+        "title": "Fire7 per physical splitter,60percent once, spread kill Heat cap6, no payload copies",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 69,
+        "title": "surviving spread victims give no Heat and keep ordinary Mark",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA113": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 16,
+        "title": "minimum Heat8, pays all, Shield20 now and main30 only this round",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA118": [
+      {
+        "path": "core/tests/mara-recipes/modifiers.inl",
+        "line": 17,
+        "title": "installed12 oldest-first paid, current28, independent next-start24 after reset",
+        "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+        "kind": "add"
+      }
+    ],
+    "MA013": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 2,
+        "title": "living Burn selects7/11 once; later status/reinstallation not recalculated",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA015": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 3,
+        "title": "Shield8 skips this round Heat decay once; extra copies no later skip",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA018": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 4,
+        "title": "first complete attack only; blocked attack still counter3 and Heat6 Burn2",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA022": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 5,
+        "title": "one unused reserve Ammo payment on first install, no effect/reinstall charge",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA024": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 6,
+        "title": "shown total attack14/15 boundary including multihits; first-install snapshot",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 43,
+        "title": "shown Drive/Weaken count, dead attacker excluded",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA028": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 7,
+        "title": "earlier first-installed Shield count including removed, cap3 and no reinstall count",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA031": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 8,
+        "title": "living burning enemy count0..4 gives0..12 snapshot; dead excluded",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA034": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 9,
+        "title": "one next-shot check: <=1 Ammo success, failure/removal consumes it, unused expires",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 45,
+        "title": "Spread is not Ammo and fresh grant is exactly4",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA040": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 10,
+        "title": "first-install Heat4 and Shield7, committed future7 survives removal, no rearm",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA044": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 11,
+        "title": "first positive-to-zero Shield break restores6 after whole attack, once",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 47,
+        "title": "Shield payment is not an enemy-attack break",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA054": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 12,
+        "title": "HP3 requires4, earlier round HP loss gate excludes its own first payment",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA055": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 13,
+        "title": "post-enemy remaining active Shield records floor/5 Iron cap3 before reset",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA057": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 14,
+        "title": "no enemy attack HP loss grants next4 Heat; planning HP costs excluded",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA062": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 15,
+        "title": "Heat0 grants16; Heat1/2/3 grants6 and one saturating loss2; snapshot",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA065": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 16,
+        "title": "each distinct enemy first attack Burn2, not per hit, even if fully blocked",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA070": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 17,
+        "title": "first-install Shield8+currentHeat, no spending or later recalculation",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 55,
+        "title": "legal upgraded Heat14 produces22 Shield",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA071": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 18,
+        "title": "first attack with HP loss cools5 and gives12 after it; full block does not trigger",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA072": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 19,
+        "title": "first already-burning attacker schedules one Iron across duplicate meshes",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA075": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 20,
+        "title": "first install needs prior different first-installed Shield even if removed; later reinstall legal",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA083": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 21,
+        "title": "explicit decline or all-current-Heat payment; partial choice rejected, zero legal",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA099": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 22,
+        "title": "next14 only if Heat0 after decay before startup gains; reset precedes arrival",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 63,
+        "title": "removed source does not schedule End Turn conditional",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA102": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 23,
+        "title": "remember current Heat capped8; greatest seal survives normal decay once",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 65,
+        "title": "remembered floor cannot lower later higher Heat",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA104": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 24,
+        "title": "round1 false; previous enemy attack HP loss yields26, planning HP cost alone12",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA108": [
+      {
+        "path": "core/tests/mara-recipes/shield.inl",
+        "line": 25,
+        "title": "first fully Shield-absorbed attack counter10+Burn3, once; partial attack excluded",
+        "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+        "kind": "add"
+      }
+    ],
+    "MA004": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 2,
+        "title": "Heat2 required and paid on Use; immediate regular Shield5",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA020": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 3,
+        "title": "Heat1 now and5 next start after normal decay, delivered once",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA021": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 4,
+        "title": "next-start raw Carbon2 independent of ordinary collection",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA026": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 5,
+        "title": "Heat loss3 saturates without affordability requirement; chosen Weaken5",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA029": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 6,
+        "title": "chosen Mark3 always; activation Heat6 gate adds Weaken2",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA030": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 7,
+        "title": "exact reserve Ammo gains8 only next-round Fire; duplicates do not stack or leak",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 44,
+        "title": "sacrificed attached Ammo cannot lend main-shot bonus",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA035": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 8,
+        "title": "pay Heat2; every currently cooling copy loses exactly1 with0 floor",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA037": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 9,
+        "title": "direct Utility pays installed Shield5 oldest first and gains4 Heat",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA043": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 10,
+        "title": "only already-burning living enemies add3 Burn; one Heat each max3",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA046": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 11,
+        "title": "HP2 requires3 independent of Shield; Heat2 now Carbon3 next start",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA049": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 12,
+        "title": "requires burning living target; Weaken equals Burn capped8 without consuming it",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA050": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 13,
+        "title": "Attack current intent getsWeaken6; Charge/Recover getMark7 andBurn2",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA056": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 14,
+        "title": "fight-lifetime next-start Heat1, no immediate gain or duplicate stacking",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA058": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 15,
+        "title": "Heat5 atomic payment; immediate support6 to living targets, no main shot",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA064": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 16,
+        "title": "Heat3 required; all cooling copies lose1 with no resource refund",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 52,
+        "title": "multiple positive counters and zero floor",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA066": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 17,
+        "title": "one exact reserve part next-round use gains4 after effect; duplicate/early/late excluded",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA069": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 18,
+        "title": "only later recipe Uses, both kinds, unique recipe IDs, max4; no repeat next turn",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA074": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 19,
+        "title": "Heat4 required and paid; only chosen enemy receivesBurn7",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA080": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 20,
+        "title": "pay Heat4 now then next-startHeat6 andCopper1, once",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA081": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 21,
+        "title": "first two Shield4+ part-use payments per round triggerHeat2, Utility cost excluded",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 58,
+        "title": "inclusive4 Shield payment threshold",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA085": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 22,
+        "title": "Heat6 payment; every living enemy Burn5 andWeaken4, dead excluded",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA087": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 23,
+        "title": "requiresHeat1; pays all current Heat, Weaken2/Mark1 each capped16/8",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA088": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 24,
+        "title": "Heat5 clears all positive cooldowns but cannot reset None once-per-round copy",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 59,
+        "title": "all distinct cooling copies cleared",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA089": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 25,
+        "title": "unused reserve Shield consumed without activation, nextIron3 Glass1; Ammo invalid",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 60,
+        "title": "used removed Shield cannot pay",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA090": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 26,
+        "title": "Burn ticks grantShield2 max6 per phase covering later attacks; duplicate frame no stacking",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA092": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 27,
+        "title": "HP5 requires6 independent of Shield, Heat10 now nextShield8 after reset",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA093": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 28,
+        "title": "first two part Heat3+ payments grant nextIron1; reuse preserves limit, Utility excluded",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA095": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 29,
+        "title": "exactlyHeat0 gate; chosen Weaken12 andMark8",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA100": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 30,
+        "title": "attack target only; HP main/support triggers2 max8; blocked hits/ticks excluded, expires",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA101": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 31,
+        "title": "HP-cost part activations give5 Shield max15; direct Utility excluded, reuse retains cap",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 64,
+        "title": "enemy HP damage never triggers planning dispenser",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA105": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 32,
+        "title": "two distinct living targets, at leastBurn1, move up to8 and double actual amount",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 66,
+        "title": "single living enemy cannot provide two victims",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA107": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 33,
+        "title": "payHeat4, next two independent reserve8 plates may wait then install",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 68,
+        "title": "production Campaign clears pending and delivered Ready Plates",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA110": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 34,
+        "title": "fight Burn3/Heat8Burn6 once per main shot; duplicate liner no stacking or support payload",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA112": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 35,
+        "title": "half remaining installed Shield floor capped20, not spent; reserve/duplicate excluded",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 70,
+        "title": "fight effect survives multiple shots and next round",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ],
+    "MA114": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 36,
+        "title": "Heat6 required, every cooling copy loses up to2, no resource/part refund",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA116": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 37,
+        "title": "HP6 requires7 despite Shield; Heat6 Shield24 and next-shot18 only current round",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA117": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 38,
+        "title": "burning target required; double current Burn by extra cap12, other living get4",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      }
+    ],
+    "MA119": [
+      {
+        "path": "core/tests/mara-recipes/utility.inl",
+        "line": 39,
+        "title": "next two Siege10 Ammo and two Siege10 Shields, independent reserve then combined use",
+        "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+        "kind": "add"
+      },
+      {
+        "path": "core/tests/mara-recipes/boundaries.inl",
+        "line": 71,
+        "title": "production Campaign clears delivered and pending Siege parts on victory/defeat",
+        "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+        "kind": "extend"
+      }
+    ]
+  },
+  "scope": "Identity, inventory and assertion linkage; semantic review and additional executions are separate."
+}

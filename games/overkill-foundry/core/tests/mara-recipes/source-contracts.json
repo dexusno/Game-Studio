@@ -1,0 +1,2312 @@
+{
+  "recipe:MA002": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Carbon",
+    "effect": "Add 6 damage. If Heat is at least 4 at Fire, apply Burn 2 to the main target after impact.",
+    "id": "MA002",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Hot Cast",
+    "output_text": "1 Fresh Slug",
+    "rarity": "Base",
+    "source": {
+      "exact_text": "| MA002 | Hot Cast | 1 Fresh Slug | Ammo | 1 Iron + 1 Carbon | None | Add 6 damage. If Heat is at least 4 at Fire, apply Burn 2 to the main target after impact. |",
+      "line": 448,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA004": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper",
+    "effect": "Pay 2 Heat when activated. Gain 5 Shield.",
+    "id": "MA004",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Quick Vent",
+    "output_text": "Immediate effect: Vent Valve (no part)",
+    "rarity": "Base",
+    "source": {
+      "exact_text": "| MA004 | Quick Vent | Immediate effect: Vent Valve (no part) | Utility | 1 Copper | None | Pay 2 Heat when activated. Gain 5 Shield. |",
+      "line": 450,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA005": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "Add 9 damage. Add 5 more if this is the only Ammo part consumed in the main shot; Modifier parts do not break this condition.",
+    "id": "MA005",
+    "kind": "Ammo",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Long Cast",
+    "output_text": "1 Long Slug",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA005 | Long Cast | 1 Long Slug | Ammo | 2 Iron | None | Add 9 damage. Add 5 more if this is the only Ammo part consumed in the main shot; Modifier parts do not break this condition. |",
+      "line": 456,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA006": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Glass",
+    "effect": "Add 7 damage. Before main damage, remove up to 6 Shield from the main target. If the full 6 Shield was removed, gain 2 Heat after impact.",
+    "id": "MA006",
+    "kind": "Ammo",
+    "materials": {
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Iron Teeth",
+    "output_text": "1 Toothed Nose",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA006 | Iron Teeth | 1 Toothed Nose | Ammo | 2 Iron + 1 Glass | None | Add 7 damage. Before main damage, remove up to 6 Shield from the main target. If the full 6 Shield was removed, gain 2 Heat after impact. |",
+      "line": 457,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA007": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 6 damage. After impact, apply Mark 4 to the main target.",
+    "id": "MA007",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Deep Charge",
+    "output_text": "1 Denting Slug",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA007 | Deep Charge | 1 Denting Slug | Ammo | 2 Iron + 1 Copper | None | Add 6 damage. After impact, apply Mark 4 to the main target. |",
+      "line": 458,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA008": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Add 5 damage. After impact, apply Burn 2 to every living enemy except the main target, then gain 1 Heat per enemy affected, up to 3 Heat.",
+    "id": "MA008",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Chain Cinder",
+    "output_text": "1 Cinder Collar",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA008 | Chain Cinder | 1 Cinder Collar | Ammo | 1 Iron + 2 Carbon | 1 | Add 5 damage. After impact, apply Burn 2 to every living enemy except the main target, then gain 1 Heat per enemy affected, up to 3 Heat. |",
+      "line": 459,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA009": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Glass",
+    "effect": "Add 8 damage. Add 6 more if Heat is 2 or less at Fire.",
+    "id": "MA009",
+    "kind": "Ammo",
+    "materials": {
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Ash Cork",
+    "output_text": "1 Cold Plug",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA009 | Ash Cork | 1 Cold Plug | Ammo | 1 Iron + 1 Glass | None | Add 8 damage. Add 6 more if Heat is 2 or less at Fire. |",
+      "line": 460,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA010": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Pay 3 Heat when activated. Add 10 damage to this round's main shot.",
+    "id": "MA010",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Molten Collar",
+    "output_text": "1 Hot Collar",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA010 | Molten Collar | 1 Hot Collar | Modifier | 1 Iron + 1 Copper | None | Pay 3 Heat when activated. Add 10 damage to this round's main shot. |",
+      "line": 461,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA011": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Add 4 damage. After impact, apply Burn 5 to the main target if Heat was at least 6 at Fire; otherwise apply Burn 2.",
+    "id": "MA011",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Dust",
+    "output_text": "1 Furnace Ember Capsule",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA011 | Furnace Dust | 1 Furnace Ember Capsule | Ammo | 1 Iron + 2 Carbon | None | Add 4 damage. After impact, apply Burn 5 to the main target if Heat was at least 6 at Fire; otherwise apply Burn 2. |",
+      "line": 462,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA012": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Glass",
+    "effect": "Add 5 damage. After impact, deal a separate 3 damage to one other enemy chosen at Fire. If it had Burn immediately before this support hit, gain 2 Heat afterward. If it is dead when the support hit would begin, both effects are lost.",
+    "id": "MA012",
+    "kind": "Ammo",
+    "materials": {
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Split Nose",
+    "output_text": "1 Forked Tip",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA012 | Split Nose | 1 Forked Tip | Ammo | 2 Iron + 1 Glass | None | Add 5 damage. After impact, deal a separate 3 damage to one other enemy chosen at Fire. If it had Burn immediately before this support hit, gain 2 Heat afterward. If it is dead when the support hit would begin, both effects are lost. |",
+      "line": 463,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA013": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Carbon",
+    "effect": "On first installation, set this part's Shield to 7, plus 4 if at least one living enemy currently has Burn. Keep that calculated value; later Burn changes or reinstallation do not recalculate it.",
+    "id": "MA013",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Flameproof Liner",
+    "output_text": "1 Ash Liner",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA013 | Flameproof Liner | 1 Ash Liner | Shield | 1 Iron + 1 Carbon | None | On first installation, set this part's Shield to 7, plus 4 if at least one living enemy currently has Burn. Keep that calculated value; later Burn changes or reinstallation do not recalculate it. |",
+      "line": 464,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA015": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon",
+    "effect": "Gain 8 Shield. Skip the normal 2 Heat loss after this round's enemy phase. Extra copies do not skip a later round's Heat loss.",
+    "id": "MA015",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Thick Insulation",
+    "output_text": "1 Furnace Wrap",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA015 | Thick Insulation | 1 Furnace Wrap | Shield | 2 Iron + 1 Carbon | 1 | Gain 8 Shield. Skip the normal 2 Heat loss after this round's enemy phase. Extra copies do not skip a later round's Heat loss. |",
+      "line": 466,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA018": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Glass",
+    "effect": "Gain 6 Shield. After the first enemy attack against you this round, deal 3 damage to that attacker. If Heat is at least 6 after that attack, also apply Burn 2. These effects work even if Shield absorbed the whole attack.",
+    "id": "MA018",
+    "kind": "Shield",
+    "materials": {
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Shard Apron",
+    "output_text": "1 Jagged Apron",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA018 | Shard Apron | 1 Jagged Apron | Shield | 2 Iron + 1 Glass | None | Gain 6 Shield. After the first enemy attack against you this round, deal 3 damage to that attacker. If Heat is at least 6 after that attack, also apply Burn 2. These effects work even if Shield absorbed the whole attack. |",
+      "line": 469,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA020": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Carbon",
+    "effect": "Gain 1 Heat now and 5 Heat at the start of next turn.",
+    "id": "MA020",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2
+    },
+    "mercenary": "Mara",
+    "name": "Overfeed",
+    "output_text": "Immediate effect: Slow Fuel Cake (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA020 | Overfeed | Immediate effect: Slow Fuel Cake (no part) | Utility | 2 Carbon | None | Gain 1 Heat now and 5 Heat at the start of next turn. |",
+      "line": 471,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA021": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "At the start of next turn, gain 2 Carbon in your raw resource pool.",
+    "id": "MA021",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Flue Primer",
+    "output_text": "Immediate effect: Soot Catcher (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA021 | Flue Primer | Immediate effect: Soot Catcher (no part) | Utility | 1 Iron + 1 Copper | None | At the start of next turn, gain 2 Carbon in your raw resource pool. |",
+      "line": 472,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA022": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Carbon",
+    "effect": "On first installation, consume one unused Ammo part from reserve without its effect, once. Cannot install without that payment. Provides 12 Shield.",
+    "id": "MA022",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Scrap Weld",
+    "output_text": "1 Welding Clamp",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA022 | Scrap Weld | 1 Welding Clamp | Shield | 1 Iron + 1 Carbon | None | On first installation, consume one unused Ammo part from reserve without its effect, once. Cannot install without that payment. Provides 12 Shield. |",
+      "line": 473,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA023": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Carbon",
+    "effect": "Add 7 damage. Gain 2 Heat after the main shot's impact.",
+    "id": "MA023",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Heated Rivet",
+    "output_text": "1 Glowing Rivet",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA023 | Heated Rivet | 1 Glowing Rivet | Ammo | 1 Iron + 1 Carbon | None | Add 7 damage. Gain 2 Heat after the main shot's impact. |",
+      "line": 474,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA024": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "On first installation, set this part's Shield to 9, plus 3 if the sum of currently shown enemy attack damage is at least 15. Keep that calculated value; later intent changes or reinstallation do not recalculate it.",
+    "id": "MA024",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Front Brace",
+    "output_text": "1 Bracing Bar",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA024 | Front Brace | 1 Bracing Bar | Shield | 2 Iron + 1 Copper | None | On first installation, set this part's Shield to 9, plus 3 if the sum of currently shown enemy attack damage is at least 15. Keep that calculated value; later intent changes or reinstallation do not recalculate it. |",
+      "line": 475,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA025": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 9 damage. Add 5 more if exactly one enemy is alive at Fire.",
+    "id": "MA025",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Narrow Bore",
+    "output_text": "1 Narrow Slug",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA025 | Narrow Bore | 1 Narrow Slug | Ammo | 2 Iron + 1 Copper | None | Add 9 damage. Add 5 more if exactly one enemy is alive at Fire. |",
+      "line": 476,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA026": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Glass",
+    "effect": "Lose 3 Heat, then apply Weaken 5 to one chosen enemy. Can activate even with less than 3 Heat.",
+    "id": "MA026",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Cooling Mist",
+    "output_text": "Immediate effect: Mist Canister (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA026 | Cooling Mist | Immediate effect: Mist Canister (no part) | Utility | 1 Copper + 1 Glass | 1 | Lose 3 Heat, then apply Weaken 5 to one chosen enemy. Can activate even with less than 3 Heat. |",
+      "line": 477,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA027": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Glass",
+    "effect": "When this Modifier is used, pay 6 available Shield from installed parts, draining them in installation order. Add 12 damage to this round's main shot. Cannot use with less than 6 available installed Shield.",
+    "id": "MA027",
+    "kind": "Modifier",
+    "materials": {
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Armour Chips",
+    "output_text": "1 Shrapnel Press",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA027 | Armour Chips | 1 Shrapnel Press | Modifier | 1 Iron + 1 Glass | None | When this Modifier is used, pay 6 available Shield from installed parts, draining them in installation order. Add 12 damage to this round's main shot. Cannot use with less than 6 available installed Shield. |",
+      "line": 478,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA028": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "On first installation, count other Shield parts first installed earlier this round, including any since removed. Set this part's Shield to 5 plus 2 per counted part, up to 6 extra Shield. Reinstallation neither adds another count nor recalculates this value.",
+    "id": "MA028",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Rivet Screen",
+    "output_text": "1 Rivet Mesh",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA028 | Rivet Screen | 1 Rivet Mesh | Shield | 1 Iron + 1 Copper | None | On first installation, count other Shield parts first installed earlier this round, including any since removed. Set this part's Shield to 5 plus 2 per counted part, up to 6 extra Shield. Reinstallation neither adds another count nor recalculates this value. |",
+      "line": 479,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA029": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Carbon + 1 Glass",
+    "effect": "Apply Mark 3 to one chosen enemy. If you have at least 6 Heat when activated, also apply Weaken 2 to that enemy.",
+    "id": "MA029",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Soot Stamp",
+    "output_text": "Immediate effect: Blackened Stamp (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA029 | Soot Stamp | Immediate effect: Blackened Stamp (no part) | Utility | 1 Carbon + 1 Glass | None | Apply Mark 3 to one chosen enemy. If you have at least 6 Heat when activated, also apply Weaken 2 to that enemy. |",
+      "line": 480,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA030": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Choose one unused Ammo part already in reserve. If that exact part is consumed in a main shot next round, add 8 damage to that shot only. Multiple racks on the same part do not stack.",
+    "id": "MA030",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Warm Storage",
+    "output_text": "Immediate effect: Heated Rack (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA030 | Warm Storage | Immediate effect: Heated Rack (no part) | Utility | 1 Iron + 1 Copper | 1 | Choose one unused Ammo part already in reserve. If that exact part is consumed in a main shot next round, add 8 damage to that shot only. Multiple racks on the same part do not stack. |",
+      "line": 481,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA031": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "On first installation, set this part's Shield to 4 per living enemy currently having Burn, up to 12 Shield. Keep that calculated value; later enemy/Burn changes or reinstallation do not recalculate it.",
+    "id": "MA031",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Firebreak",
+    "output_text": "1 Broad Baffle",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA031 | Firebreak | 1 Broad Baffle | Shield | 1 Iron + 2 Carbon | None | On first installation, set this part's Shield to 4 per living enemy currently having Burn, up to 12 Shield. Keep that calculated value; later enemy/Burn changes or reinstallation do not recalculate it. |",
+      "line": 482,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA032": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Carbon + 1 Glass",
+    "effect": "Add 8 damage. At the start of next turn, apply Burn 4 to this shot's main target if it is still alive.",
+    "id": "MA032",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Buried Ember",
+    "output_text": "1 Buried Coal Tip",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA032 | Buried Ember | 1 Buried Coal Tip | Ammo | 1 Iron + 1 Carbon + 1 Glass | 1 | Add 8 damage. At the start of next turn, apply Burn 4 to this shot's main target if it is still alive. |",
+      "line": 483,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA033": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "3 Iron",
+    "effect": "Add 12 damage. If the main target intends to gain Shield this round, apply Weaken 4 to it after impact.",
+    "id": "MA033",
+    "kind": "Ammo",
+    "materials": {
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Scrap Mallet",
+    "output_text": "1 Heavy Ram",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA033 | Scrap Mallet | 1 Heavy Ram | Ammo | 3 Iron | None | Add 12 damage. If the main target intends to gain Shield this round, apply Weaken 4 to it after impact. |",
+      "line": 484,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA034": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "Provides 8 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot consumed at most one Ammo part, gain a fresh regular 4-Shield part once. Modifier parts do not count toward the limit. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it.",
+    "id": "MA034",
+    "kind": "Shield",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Backplate",
+    "output_text": "1 Rear Guard",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA034 | Backplate | 1 Rear Guard | Shield | 2 Iron | None | Provides 8 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot consumed at most one Ammo part, gain a fresh regular 4-Shield part once. Modifier parts do not count toward the limit. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it. |",
+      "line": 485,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA035": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Glass",
+    "effect": "Pay 2 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe.",
+    "id": "MA035",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Clean Valve",
+    "output_text": "Immediate effect: Fresh Valve (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA035 | Clean Valve | Immediate effect: Fresh Valve (no part) | Utility | 1 Copper + 1 Glass | 1 | Pay 2 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe. |",
+      "line": 486,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA036": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 7 damage. After impact, apply Weaken 5 to the main target if it has at least 3 Burn.",
+    "id": "MA036",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Hook",
+    "output_text": "1 Drag Hook",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA036 | Furnace Hook | 1 Drag Hook | Ammo | 2 Iron + 1 Copper | None | Add 7 damage. After impact, apply Weaken 5 to the main target if it has at least 3 Burn. |",
+      "line": 487,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA037": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "On recipe Use, pay 5 available Shield from installed parts, draining them in installation order, then gain 4 Heat. Cannot use with less than 5 available installed Shield.",
+    "id": "MA037",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Shield Boiler",
+    "output_text": "Immediate effect: Pressure Tank (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA037 | Shield Boiler | Immediate effect: Pressure Tank (no part) | Utility | 1 Iron + 1 Copper | None | On recipe Use, pay 5 available Shield from installed parts, draining them in installation order, then gain 4 Heat. Cannot use with less than 5 available installed Shield. |",
+      "line": 488,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA039": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass",
+    "effect": "Add 7 damage. After impact, apply Weaken 3 to the main target; apply 3 more if it is showing an attack intent at Fire.",
+    "id": "MA039",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Dull Cap",
+    "output_text": "1 Blunt Cap",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA039 | Dull Cap | 1 Blunt Cap | Ammo | 1 Iron + 1 Copper + 1 Glass | None | Add 7 damage. After impact, apply Weaken 3 to the main target; apply 3 more if it is showing an attack intent at Fire. |",
+      "line": 490,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA040": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "On first installation, pay 4 Heat once; cannot install without enough Heat. Provides 7 Shield and schedules a new regular 7-Shield part to load at the start of next turn, after old Shield clears. Reinstallation does not repeat the delivery.",
+    "id": "MA040",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Long Cooling",
+    "output_text": "1 Heavy Cooling Fin",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| MA040 | Long Cooling | 1 Heavy Cooling Fin | Shield | 2 Iron + 1 Copper | 1 | On first installation, pay 4 Heat once; cannot install without enough Heat. Provides 7 Shield and schedules a new regular 7-Shield part to load at the start of next turn, after old Shield clears. Reinstallation does not repeat the delivery. |",
+      "line": 491,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA041": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Load into the bullet; consumed at Fire. Pay 4 Heat at Fire. Choose one extra enemy. It receives 50% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. After that hit, apply Burn 2 to it if alive. Main-target payloads are not copied. Extra copies do not repeat this spread.",
+    "id": "MA041",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Fork",
+    "output_text": "1 Split Barrel Insert",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA041 | Furnace Fork | 1 Split Barrel Insert | Modifier | 2 Iron + 1 Copper + 1 Glass | 1 | Load into the bullet; consumed at Fire. Pay 4 Heat at Fire. Choose one extra enemy. It receives 50% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. After that hit, apply Burn 2 to it if alive. Main-target payloads are not copied. Extra copies do not repeat this spread. |",
+      "line": 497,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA042": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon + 1 Glass",
+    "effect": "Add 9 damage. Before main damage, remove up to 6 Burn from the main target and add 2 damage for each Burn removed.",
+    "id": "MA042",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Slag Fuse",
+    "output_text": "1 Slag Charge",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA042 | Slag Fuse | 1 Slag Charge | Ammo | 2 Iron + 1 Carbon + 1 Glass | 1 | Add 9 damage. Before main damage, remove up to 6 Burn from the main target and add 2 damage for each Burn removed. |",
+      "line": 498,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA043": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 2 Carbon",
+    "effect": "Apply Burn 3 to every enemy that already has Burn. Gain 1 Heat for each affected enemy, up to 3 Heat.",
+    "id": "MA043",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Side Flue",
+    "output_text": "Immediate effect: Flue Fan (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA043 | Side Flue | Immediate effect: Flue Fan (no part) | Utility | 1 Copper + 2 Carbon | 1 | Apply Burn 3 to every enemy that already has Burn. Gain 1 Heat for each affected enemy, up to 3 Heat. |",
+      "line": 499,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA044": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Gain 10 Shield. The first time an enemy attack reduces your Shield from a positive amount to 0 this round, gain 6 Shield after that attack finishes. This cannot protect against the hit that broke the Shield.",
+    "id": "MA044",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Tempered Lip",
+    "output_text": "1 Spring Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA044 | Tempered Lip | 1 Spring Plate | Shield | 2 Iron + 1 Copper | 1 | Gain 10 Shield. The first time an enemy attack reduces your Shield from a positive amount to 0 this round, gain 6 Shield after that attack finishes. This cannot protect against the hit that broke the Shield. |",
+      "line": 500,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA045": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper + 1 Carbon",
+    "effect": "When activated, choose and pay 2 to 5 Heat. Add 3 damage to this round's main shot for each Heat paid.",
+    "id": "MA045",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Heat Balance",
+    "output_text": "1 Adjustable Collar",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA045 | Heat Balance | 1 Adjustable Collar | Modifier | 1 Iron + 1 Copper + 1 Carbon | None | When activated, choose and pay 2 to 5 Heat. Add 3 damage to this round's main shot for each Heat paid. |",
+      "line": 501,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA046": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Carbon",
+    "effect": "Lose 2 HP when activated, leaving at least 1 HP. Gain 2 Heat now and 3 Carbon at the start of next turn. Shield cannot pay the HP cost.",
+    "id": "MA046",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Coal Debt",
+    "output_text": "Immediate effect: Sealed Fuel Drum (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA046 | Coal Debt | Immediate effect: Sealed Fuel Drum (no part) | Utility | 1 Iron + 1 Carbon | 2 | Lose 2 HP when activated, leaving at least 1 HP. Gain 2 Heat now and 3 Carbon at the start of next turn. Shield cannot pay the HP cost. |",
+      "line": 502,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA047": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Add 8 damage. Gain 8 Shield after the main shot's impact, before enemy actions.",
+    "id": "MA047",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Covering Impact",
+    "output_text": "1 Folding Slug",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA047 | Covering Impact | 1 Folding Slug | Ammo | 2 Iron + 1 Copper + 1 Glass | 1 | Add 8 damage. Gain 8 Shield after the main shot's impact, before enemy actions. |",
+      "line": 503,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA049": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper + 1 Carbon + 1 Glass",
+    "effect": "Choose an enemy with Burn. Apply Weaken equal to its current Burn, up to 8. Its Burn is not removed. Cannot activate without a burning enemy.",
+    "id": "MA049",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Smothering Hood",
+    "output_text": "Immediate effect: Smoke Hood (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA049 | Smothering Hood | Immediate effect: Smoke Hood (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | None | Choose an enemy with Burn. Apply Weaken equal to its current Burn, up to 8. Its Burn is not removed. Cannot activate without a burning enemy. |",
+      "line": 505,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA050": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Carbon + 1 Glass",
+    "effect": "Choose one enemy. If it currently shows an attack intent, apply Weaken 6; otherwise apply Mark 7 and Burn 2.",
+    "id": "MA050",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Foreman's Stamp",
+    "output_text": "Immediate effect: Warning Stamp (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA050 | Foreman's Stamp | Immediate effect: Warning Stamp (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | 1 | Choose one enemy. If it currently shows an attack intent, apply Weaken 6; otherwise apply Mark 7 and Burn 2. |",
+      "line": 506,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA051": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon",
+    "effect": "Add 6 damage, plus 2 for each Recast Slug consumed in an earlier main shot this fight, up to 12 extra damage. Recast Slugs in the same shot do not increase each other's bonus.",
+    "id": "MA051",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Worn Mould",
+    "output_text": "1 Recast Slug",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA051 | Worn Mould | 1 Recast Slug | Ammo | 2 Iron + 1 Carbon | 1 | Add 6 damage, plus 2 for each Recast Slug consumed in an earlier main shot this fight, up to 12 extra damage. Recast Slugs in the same shot do not increase each other's bonus. |",
+      "line": 507,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA052": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "When activated, consume 1 to 3 unused Ammo parts from reserve without their effects. Add 7 damage to this round's main shot per part consumed. Those parts do not count as Ammo consumed in the shot.",
+    "id": "MA052",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Scrap Compactor",
+    "output_text": "1 Compacting Sleeve",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA052 | Scrap Compactor | 1 Compacting Sleeve | Modifier | 2 Iron + 1 Copper | 1 | When activated, consume 1 to 3 unused Ammo parts from reserve without their effects. Add 7 damage to this round's main shot per part consumed. Those parts do not count as Ammo consumed in the shot. |",
+      "line": 508,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA053": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper + 2 Glass",
+    "effect": "If Heat is at least 6 when activated, add 8 damage to this round's main shot and apply Mark 4 to one chosen enemy now. Otherwise gain 2 Heat and add 3 damage.",
+    "id": "MA053",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Glass": 2
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Window",
+    "output_text": "1 Heat Lens",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA053 | Furnace Window | 1 Heat Lens | Modifier | 1 Copper + 2 Glass | None | If Heat is at least 6 when activated, add 8 damage to this round's main shot and apply Mark 4 to one chosen enemy now. Otherwise gain 2 Heat and add 3 damage. |",
+      "line": 509,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA054": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon",
+    "effect": "On first installation, pay 3 HP once; requires at least 4 HP and leaves at least 1 HP. Provides 18 Shield. If HP had already been lost this round before this payment, also gain 2 Heat once after paying. Shield cannot pay the HP cost.",
+    "id": "MA054",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Emergency Grate",
+    "output_text": "1 Red Grate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA054 | Emergency Grate | 1 Red Grate | Shield | 2 Iron + 1 Carbon | 1 | On first installation, pay 3 HP once; requires at least 4 HP and leaves at least 1 HP. Provides 18 Shield. If HP had already been lost this round before this payment, also gain 2 Heat once after paying. Shield cannot pay the HP cost. |",
+      "line": 510,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA055": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Carbon",
+    "effect": "Gain 10 Shield. After enemies finish their actions, before the Shield reset, count your total remaining active Shield and record 1 Iron per complete 5 Shield, up to 3 Iron. At the beginning of the next round, gain that recorded Iron.",
+    "id": "MA055",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Reclaimed Plate",
+    "output_text": "1 Return Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA055 | Reclaimed Plate | 1 Return Plate | Shield | 2 Iron + 1 Copper + 1 Carbon | 1 | Gain 10 Shield. After enemies finish their actions, before the Shield reset, count your total remaining active Shield and record 1 Iron per complete 5 Shield, up to 3 Iron. At the beginning of the next round, gain that recorded Iron. |",
+      "line": 511,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA056": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Carbon + 1 Copper + 1 Circuit",
+    "effect": "For this fight, gain 1 Heat at the start of each turn after the current turn. Reusing Steady Burner does not add another Heat source.",
+    "id": "MA056",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Steady Furnace",
+    "output_text": "Immediate effect: Steady Burner (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA056 | Steady Furnace | Immediate effect: Steady Burner (no part) | Utility | 2 Carbon + 1 Copper + 1 Circuit | 2 | For this fight, gain 1 Heat at the start of each turn after the current turn. Reusing Steady Burner does not add another Heat source. |",
+      "line": 512,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA057": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Gain 8 Shield. If no enemy attack causes you to lose HP during this round's enemy phase, gain 4 Heat at the start of next turn. HP costs paid in planning do not break this condition.",
+    "id": "MA057",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Banked Coals",
+    "output_text": "1 Coal Pocket",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA057 | Banked Coals | 1 Coal Pocket | Shield | 1 Iron + 2 Carbon | 1 | Gain 8 Shield. If no enemy attack causes you to lose HP during this round's enemy phase, gain 4 Heat at the start of next turn. HP costs paid in planning do not break this condition. |",
+      "line": 513,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA058": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Carbon + 1 Glass",
+    "effect": "Pay 5 Heat when activated. Deal 6 damage to every enemy now. These are support hits, not a main shot.",
+    "id": "MA058",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Open Exhaust",
+    "output_text": "Immediate effect: Exhaust Nozzle (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA058 | Open Exhaust | Immediate effect: Exhaust Nozzle (no part) | Utility | 1 Copper + 1 Carbon + 1 Glass | 1 | Pay 5 Heat when activated. Deal 6 damage to every enemy now. These are support hits, not a main shot. |",
+      "line": 514,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA060": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Add 6 damage. After impact, apply Burn 3 to the main target. For its next two Burn ticks, do not reduce that enemy's Burn after the tick. Reapplying refreshes the two-tick duration.",
+    "id": "MA060",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Long Ember",
+    "output_text": "1 Slow Ember Tip",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA060 | Long Ember | 1 Slow Ember Tip | Ammo | 1 Iron + 2 Carbon + 1 Circuit | 1 | Add 6 damage. After impact, apply Burn 3 to the main target. For its next two Burn ticks, do not reduce that enemy's Burn after the tick. Reapplying refreshes the two-tick duration. |",
+      "line": 516,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA061": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "When this Modifier is used, choose and pay 4 to 12 available Shield from installed parts, draining them in installation order. Add 2 damage to this round's main shot per Shield paid, and gain 1 Heat for each full 4 Shield paid.",
+    "id": "MA061",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Pressed Shield",
+    "output_text": "1 Armour Press",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA061 | Pressed Shield | 1 Armour Press | Modifier | 2 Iron + 1 Copper | 1 | When this Modifier is used, choose and pay 4 to 12 available Shield from installed parts, draining them in installation order. Add 2 damage to this round's main shot per Shield paid, and gain 1 Heat for each full 4 Shield paid. |",
+      "line": 517,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA062": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "On first installation, set this part's Shield to 6, plus 10 if Heat is currently 0. Otherwise, after setting the value, lose 2 Heat once, stopping at 0. Keep the calculated Shield value; reinstallation does not recalculate it or repeat the Heat loss.",
+    "id": "MA062",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Cold Riveting",
+    "output_text": "1 Cold Rivet Pack",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA062 | Cold Riveting | 1 Cold Rivet Pack | Shield | 2 Iron + 1 Copper | None | On first installation, set this part's Shield to 6, plus 10 if Heat is currently 0. Otherwise, after setting the value, lose 2 Heat once, stopping at 0. Keep the calculated Shield value; reinstallation does not recalculate it or repeat the Heat loss. |",
+      "line": 518,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA063": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Copper + 1 Carbon",
+    "effect": "Add 3 damage to this round's main shot for each different Ammo recipe represented by parts consumed in that shot, up to 15 damage. Multiple copies from one recipe count once.",
+    "id": "MA063",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Grips",
+    "output_text": "1 Heavy Grip",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA063 | Furnace Grips | 1 Heavy Grip | Modifier | 1 Iron + 1 Copper + 1 Carbon | 1 | Add 3 damage to this round's main shot for each different Ammo recipe represented by parts consumed in that shot, up to 15 damage. Multiple copies from one recipe count once. |",
+      "line": 519,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA064": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Copper + 1 Glass",
+    "effect": "Pay 3 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe.",
+    "id": "MA064",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 2,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Copper Wash",
+    "output_text": "Immediate effect: Wash Nozzle (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA064 | Copper Wash | Immediate effect: Wash Nozzle (no part) | Utility | 2 Copper + 1 Glass | 1 | Pay 3 Heat when activated. Remove 1 cooldown counter from every currently cooling recipe. |",
+      "line": 520,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA065": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon + 1 Glass",
+    "effect": "Gain 10 Shield. After each enemy's first attack against you this round, apply Burn 2 to that enemy. Each enemy can trigger this once, whether or not HP is lost.",
+    "id": "MA065",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Cinder Gate",
+    "output_text": "1 Hinged Fire Gate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA065 | Cinder Gate | 1 Hinged Fire Gate | Shield | 2 Iron + 1 Carbon + 1 Glass | 1 | Gain 10 Shield. After each enemy's first attack against you this round, apply Burn 2 to that enemy. Each enemy can trigger this once, whether or not HP is lost. |",
+      "line": 521,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA066": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Choose one unused part already in reserve. If it is activated or fired during next round, gain 4 Heat immediately after its effect resolves. It can receive this bonus from only one Reheat Box.",
+    "id": "MA066",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Reheat Box",
+    "output_text": "Immediate effect: Reheat Box (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA066 | Reheat Box | Immediate effect: Reheat Box (no part) | Utility | 1 Iron + 2 Carbon | None | Choose one unused part already in reserve. If it is activated or fired during next round, gain 4 Heat immediately after its effect resolves. It can receive this bonus from only one Reheat Box. |",
+      "line": 522,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA067": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 18 damage to this round's main shot. After impact, lose 4 Heat. Cannot activate if a spread effect is active or spreading Ammo is loaded. Until this shot resolves, no spread effect may be activated and no spreading Ammo may be loaded.",
+    "id": "MA067",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Barrel Weight",
+    "output_text": "1 Barrel Weight",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA067 | Barrel Weight | 1 Barrel Weight | Modifier | 2 Iron + 1 Copper | 1 | Add 18 damage to this round's main shot. After impact, lose 4 Heat. Cannot activate if a spread effect is active or spreading Ammo is loaded. Until this shot resolves, no spread effect may be activated and no spreading Ammo may be loaded. |",
+      "line": 523,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA068": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Add 10 damage. If the remaining Shield on your currently installed parts totals at least 12 at Fire, also add 25% to this shot's damage. Shield is not spent. Extra Shoulder Braces add their flat damage but do not repeat this percentage bonus.",
+    "id": "MA068",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Braced Shot",
+    "output_text": "1 Shoulder Brace",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA068 | Braced Shot | 1 Shoulder Brace | Ammo | 2 Iron + 1 Copper + 1 Glass | None | Add 10 damage. If the remaining Shield on your currently installed parts totals at least 12 at Fire, also add 25% to this shot's damage. Shield is not spent. Extra Shoulder Braces add their flat damage but do not repeat this percentage bonus. |",
+      "line": 524,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA069": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Circuit",
+    "effect": "At the start of next turn, gain 1 Iron for each different recipe you used after using this Utility recipe this round, up to 4 Iron. Part-producing and Utility recipe Uses both count. Reusing the same recipe, including another stored copy, counts once.",
+    "id": "MA069",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Receipt",
+    "output_text": "Immediate effect: Batch Counter (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA069 | Furnace Receipt | Immediate effect: Batch Counter (no part) | Utility | 1 Copper + 1 Circuit | 1 | At the start of next turn, gain 1 Iron for each different recipe you used after using this Utility recipe this round, up to 4 Iron. Part-producing and Utility recipe Uses both count. Reusing the same recipe, including another stored copy, counts once. |",
+      "line": 525,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA070": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper + 1 Carbon",
+    "effect": "On first installation, set this part's Shield to 8 plus 1 per Heat currently held, without spending Heat. Keep that calculated value; later Heat changes or reinstallation do not recalculate it.",
+    "id": "MA070",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Stoked Armour",
+    "output_text": "1 Heat Cladding",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA070 | Stoked Armour | 1 Heat Cladding | Shield | 2 Iron + 1 Copper + 1 Carbon | None | On first installation, set this part's Shield to 8 plus 1 per Heat currently held, without spending Heat. Keep that calculated value; later Heat changes or reinstallation do not recalculate it. |",
+      "line": 526,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA071": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Copper",
+    "effect": "Gain 6 Shield. After the first enemy attack that causes you to lose HP this round, lose 5 Heat and gain 12 Shield. This protection arrives after that attack.",
+    "id": "MA071",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Rescue Valve",
+    "output_text": "1 Safety Valve",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA071 | Rescue Valve | 1 Safety Valve | Shield | 1 Iron + 2 Copper | 1 | Gain 6 Shield. After the first enemy attack that causes you to lose HP this round, lose 5 Heat and gain 12 Shield. This protection arrives after that attack. |",
+      "line": 527,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA072": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Circuit",
+    "effect": "Gain 9 Shield. After the first enemy that has Burn attacks you this round, gain 1 Iron at the start of next turn. Extra meshes do not grant more Iron.",
+    "id": "MA072",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Smelting Screen",
+    "output_text": "1 Smelting Mesh",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA072 | Smelting Screen | 1 Smelting Mesh | Shield | 2 Iron + 1 Carbon + 1 Circuit | 2 | Gain 9 Shield. After the first enemy that has Burn attacks you this round, gain 1 Iron at the start of next turn. Extra meshes do not grant more Iron. |",
+      "line": 528,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA073": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "3 Iron + 1 Carbon",
+    "effect": "Add 12 damage. Add 10 more if you consumed at least one unused part from reserve as another effect's cost this round.",
+    "id": "MA073",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Heavy Replacement",
+    "output_text": "1 Replacement Shell",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA073 | Heavy Replacement | 1 Replacement Shell | Ammo | 3 Iron + 1 Carbon | 1 | Add 12 damage. Add 10 more if you consumed at least one unused part from reserve as another effect's cost this round. |",
+      "line": 529,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA074": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper + 2 Carbon",
+    "effect": "Pay 4 Heat when activated. Apply Burn 7 to one chosen enemy.",
+    "id": "MA074",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Heat Transfer",
+    "output_text": "Immediate effect: Transfer Tube (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA074 | Heat Transfer | Immediate effect: Transfer Tube (no part) | Utility | 1 Copper + 2 Carbon | None | Pay 4 Heat when activated. Apply Burn 7 to one chosen enemy. |",
+      "line": 530,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA075": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "3 Iron + 1 Copper",
+    "effect": "First installation requires at least one other Shield part to have been first installed earlier this round, even if it was later removed. Provides 18 Shield. Reinstallation does not repeat this eligibility check or create another first-installation count.",
+    "id": "MA075",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Spare Furnace Door",
+    "output_text": "1 Second Door",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA075 | Spare Furnace Door | 1 Second Door | Shield | 3 Iron + 1 Copper | 1 | First installation requires at least one other Shield part to have been first installed earlier this round, even if it was later removed. Provides 18 Shield. Reinstallation does not repeat this eligibility check or create another first-installation count. |",
+      "line": 531,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA076": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Add 10 damage. If at least 5 Heat has been paid as part activation costs this round, remove 10 Shield from the main target before main damage. Ordinary Heat loss does not count.",
+    "id": "MA076",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Deep Freeze Cast",
+    "output_text": "1 Quenched Spike",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA076 | Deep Freeze Cast | 1 Quenched Spike | Ammo | 2 Iron + 1 Copper + 1 Glass | 1 | Add 10 damage. If at least 5 Heat has been paid as part activation costs this round, remove 10 Shield from the main target before main damage. Ordinary Heat loss does not count. |",
+      "line": 532,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA077": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Carbon + 1 Glass",
+    "effect": "Add 7 damage. After impact, choose one other enemy and give it Burn equal to half the main target's current Burn, rounded down, up to Burn 6. The main target keeps its Burn.",
+    "id": "MA077",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Smouldering Trail",
+    "output_text": "1 Trailing Wick",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA077 | Smouldering Trail | 1 Trailing Wick | Ammo | 1 Iron + 2 Carbon + 1 Glass | 1 | Add 7 damage. After impact, choose one other enemy and give it Burn equal to half the main target's current Burn, rounded down, up to Burn 6. The main target keeps its Burn. |",
+      "line": 533,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA078": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Carbon",
+    "effect": "Add 4 damage to this round's main shot per Ammo part consumed after the first, up to 16 damage. If the shot consumes at least five Ammo parts, lose 3 Heat and gain 6 Shield after impact.",
+    "id": "MA078",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Dense Pack",
+    "output_text": "1 Packing Ram",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA078 | Dense Pack | 1 Packing Ram | Modifier | 2 Iron + 1 Copper + 1 Carbon | 1 | Add 4 damage to this round's main shot per Ammo part consumed after the first, up to 16 damage. If the shot consumes at least five Ammo parts, lose 3 Heat and gain 6 Shield after impact. |",
+      "line": 534,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA080": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Carbon + 1 Circuit",
+    "effect": "Pay 4 Heat when activated. At the start of next turn, gain 6 Heat and 1 Copper.",
+    "id": "MA080",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Spare Heat Cell",
+    "output_text": "Immediate effect: Heat Cell (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| MA080 | Spare Heat Cell | Immediate effect: Heat Cell (no part) | Utility | 1 Copper + 1 Carbon + 1 Circuit | 1 | Pay 4 Heat when activated. At the start of next turn, gain 6 Heat and 1 Copper. |",
+      "line": 536,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA081": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "For this fight, the first two times each round you pay at least 4 Shield from installed parts as a part-use cost, gain 2 Heat after paying. Payments drain parts in installation order. Shield lost to attacks and direct Utility recipe payments do not count. Reusing Boiler Seal does not add triggers.",
+    "id": "MA081",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Boiler Oath",
+    "output_text": "Immediate effect: Boiler Seal (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA081 | Boiler Oath | Immediate effect: Boiler Seal (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | For this fight, the first two times each round you pay at least 4 Shield from installed parts as a part-use cost, gain 2 Heat after paying. Payments drain parts in installation order. Shield lost to attacks and direct Utility recipe payments do not count. Reusing Boiler Seal does not add triggers. |",
+      "line": 542,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA082": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Add 12 damage. After impact, apply Burn equal to your Heat at Fire to the main target, up to Burn 10.",
+    "id": "MA082",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "White Casting",
+    "output_text": "1 White Slug",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA082 | White Casting | 1 White Slug | Ammo | 2 Iron + 2 Carbon + 1 Circuit | 2 | Add 12 damage. After impact, apply Burn equal to your Heat at Fire to the main target, up to Burn 10. |",
+      "line": 543,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA083": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Copper + 1 Carbon",
+    "effect": "Gain 18 Shield. You may then pay all your current Heat to gain 2 more Shield per Heat paid. Choosing this payment with 0 Heat gives no extra Shield.",
+    "id": "MA083",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Door",
+    "output_text": "1 Flood Door",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA083 | Furnace Door | 1 Flood Door | Shield | 3 Iron + 1 Copper + 1 Carbon | 2 | Gain 18 Shield. You may then pay all your current Heat to gain 2 more Shield per Heat paid. Choosing this payment with 0 Heat gives no extra Shield. |",
+      "line": 544,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA084": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Circuit",
+    "effect": "Add 10 damage, plus 2 for each HP you have paid as recipe-part activation costs this fight, up to 18 extra damage. Enemy damage does not count.",
+    "id": "MA084",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Scarred Mould",
+    "output_text": "1 Scarred Slug",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA084 | Scarred Mould | 1 Scarred Slug | Ammo | 2 Iron + 1 Carbon + 1 Circuit | 2 | Add 10 damage, plus 2 for each HP you have paid as recipe-part activation costs this fight, up to 18 extra damage. Enemy damage does not count. |",
+      "line": 545,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA085": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Copper + 2 Carbon + 1 Glass",
+    "effect": "Pay 6 Heat when activated. Apply Burn 5 and Weaken 4 to every living enemy.",
+    "id": "MA085",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Copper": 2,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Open Smelter",
+    "output_text": "Immediate effect: Smelter Spray Head (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA085 | Open Smelter | Immediate effect: Smelter Spray Head (no part) | Utility | 2 Copper + 2 Carbon + 1 Glass | 2 | Pay 6 Heat when activated. Apply Burn 5 and Weaken 4 to every living enemy. |",
+      "line": 546,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA087": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Copper + 1 Circuit",
+    "effect": "Choose one enemy and pay all your Heat, at least 1. Apply Weaken 2 and Mark 1 to it per Heat paid, up to Weaken 16 and Mark 8.",
+    "id": "MA087",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Level Pressure",
+    "output_text": "Immediate effect: Pressure Equalizer (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA087 | Level Pressure | Immediate effect: Pressure Equalizer (no part) | Utility | 1 Iron + 2 Copper + 1 Circuit | 2 | Choose one enemy and pay all your Heat, at least 1. Apply Weaken 2 and Mark 1 to it per Heat paid, up to Weaken 16 and Mark 8. |",
+      "line": 548,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA088": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Copper + 1 Glass + 1 Circuit",
+    "effect": "Pay 5 Heat when activated. Remove all cooldown counters from every currently cooling recipe. This does not reset a recipe without cooldown.",
+    "id": "MA088",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Glass": 1
+    },
+    "mercenary": "Mara",
+    "name": "Full Flush",
+    "output_text": "Immediate effect: Flush Manifold (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA088 | Full Flush | Immediate effect: Flush Manifold (no part) | Utility | 2 Copper + 1 Glass + 1 Circuit | 2 | Pay 5 Heat when activated. Remove all cooldown counters from every currently cooling recipe. This does not reset a recipe without cooldown. |",
+      "line": 549,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA089": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "When activated, consume one unused Shield part from reserve without its effect. At the start of next turn, gain 3 Iron and 1 Glass. Cannot activate without a Shield part to consume.",
+    "id": "MA089",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Offcut Press",
+    "output_text": "Immediate effect: Offcut Press (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA089 | Offcut Press | Immediate effect: Offcut Press (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | When activated, consume one unused Shield part from reserve without its effect. At the start of next turn, gain 3 Iron and 1 Glass. Cannot activate without a Shield part to consume. |",
+      "line": 550,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA090": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Circuit",
+    "effect": "For this fight, after an enemy takes a Burn tick, gain 2 Shield, up to 6 Shield per enemy phase. This Shield can cover later attacks in that phase and clears normally next turn. Reusing the frame does not add triggers.",
+    "id": "MA090",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Burning Shelter",
+    "output_text": "Immediate effect: Fire Shelter Frame (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA090 | Burning Shelter | Immediate effect: Fire Shelter Frame (no part) | Utility | 2 Iron + 1 Carbon + 1 Circuit | 2 | For this fight, after an enemy takes a Burn tick, gain 2 Shield, up to 6 Shield per enemy phase. This Shield can cover later attacks in that phase and clears normally next turn. Reusing the frame does not add triggers. |",
+      "line": 551,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA091": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 2 Carbon + 1 Glass",
+    "effect": "Add 16 damage. After other pre-hit effects, record the main target's Burn before main damage. If that damage kills it, apply the recorded amount, up to Burn 8, to one other enemy chosen at Fire, if still alive.",
+    "id": "MA091",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Scattered Coals",
+    "output_text": "1 Coal Scatter Tip",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA091 | Scattered Coals | 1 Coal Scatter Tip | Ammo | 2 Iron + 2 Carbon + 1 Glass | 2 | Add 16 damage. After other pre-hit effects, record the main target's Burn before main damage. If that damage kills it, apply the recorded amount, up to Burn 8, to one other enemy chosen at Fire, if still alive. |",
+      "line": 552,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA092": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Lose 5 HP when activated, leaving at least 1 HP, then gain 10 Heat. At the start of next turn, gain 8 Shield after old Shield clears. Shield cannot pay the HP cost.",
+    "id": "MA092",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Pressure Debt",
+    "output_text": "Immediate effect: Overpressure Pump (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA092 | Pressure Debt | Immediate effect: Overpressure Pump (no part) | Utility | 1 Iron + 2 Carbon + 1 Circuit | 2 | Lose 5 HP when activated, leaving at least 1 HP, then gain 10 Heat. At the start of next turn, gain 8 Shield after old Shield clears. Shield cannot pay the HP cost. |",
+      "line": 553,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA093": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "1 Iron + 1 Copper + 1 Carbon + 1 Circuit",
+    "effect": "For this fight, each round's first two part activations that pay at least 3 Heat each grant 1 Iron at the start of the following turn. Reusing Fuel Meter does not add triggers.",
+    "id": "MA093",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Ledger",
+    "output_text": "Immediate effect: Fuel Meter (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA093 | Furnace Ledger | Immediate effect: Fuel Meter (no part) | Utility | 1 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | For this fight, each round's first two part activations that pay at least 3 Heat each grant 1 Iron at the start of the following turn. Reusing Fuel Meter does not add triggers. |",
+      "line": 554,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA094": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 2 Circuit",
+    "effect": "Pay 6 Heat when activated. This round's main-shot damage to its main target bypasses Shield. Damage to other targets and separate support hits still meet Shield normally. Extra copies do not repeat the damage.",
+    "id": "MA094",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Bore",
+    "output_text": "1 Penetrating Bore",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA094 | Furnace Bore | 1 Penetrating Bore | Modifier | 2 Iron + 1 Copper + 2 Circuit | 3 | Pay 6 Heat when activated. This round's main-shot damage to its main target bypasses Shield. Damage to other targets and separate support hits still meet Shield normally. Extra copies do not repeat the damage. |",
+      "line": 555,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA095": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 2 Glass + 1 Circuit",
+    "effect": "Can activate only at 0 Heat. Apply Weaken 12 and Mark 8 to one chosen enemy.",
+    "id": "MA095",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 2
+    },
+    "mercenary": "Mara",
+    "name": "Cold Counter",
+    "output_text": "Immediate effect: Cold Sight (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA095 | Cold Counter | Immediate effect: Cold Sight (no part) | Utility | 1 Copper + 2 Glass + 1 Circuit | 2 | Can activate only at 0 Heat. Apply Weaken 12 and Mark 8 to one chosen enemy. |",
+      "line": 556,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA097": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Glass + 1 Circuit",
+    "effect": "Add 10 damage. After impact, deal a separate 8 damage to every enemy except the main target. These hits do not carry this shot's payload effects.",
+    "id": "MA097",
+    "kind": "Ammo",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Iron Rain",
+    "output_text": "1 Rain Cap",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA097 | Iron Rain | 1 Rain Cap | Ammo | 3 Iron + 1 Glass + 1 Circuit | 2 | Add 10 damage. After impact, deal a separate 8 damage to every enemy except the main target. These hits do not carry this shot's payload effects. |",
+      "line": 558,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA098": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "At Fire, add 3 damage for each unused crafted part still in reserve, up to 18 damage. Parts already loaded in the shot are not in reserve. The reserve parts remain unused.",
+    "id": "MA098",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Stored Weight",
+    "output_text": "1 Counterweight",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA098 | Stored Weight | 1 Counterweight | Modifier | 2 Iron + 1 Copper + 1 Circuit | 2 | At Fire, add 3 damage for each unused crafted part still in reserve, up to 18 damage. Parts already loaded in the shot are not in reserve. The reserve parts remain unused. |",
+      "line": 559,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA099": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Carbon + 1 Circuit",
+    "effect": "When this part activates at End Turn, gain 22 Shield. At the beginning of the next round, if Heat is 0 before that round's start-of-turn Heat gains, automatically load a new regular 14-Shield part.",
+    "id": "MA099",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Settled Slag",
+    "output_text": "1 Slag Foundation + conditional next-round Shield part",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA099 | Settled Slag | 1 Slag Foundation + conditional next-round Shield part | Shield | 3 Iron + 1 Carbon + 1 Circuit | 2 | When this part activates at End Turn, gain 22 Shield. At the beginning of the next round, if Heat is 0 before that round's start-of-turn Heat gains, automatically load a new regular 14-Shield part. |",
+      "line": 560,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA100": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 2 Carbon + 1 Circuit",
+    "effect": "Choose an enemy showing an attack intent. Until the end of this enemy phase, each time that enemy loses HP to a main shot or support hit, apply Weaken 2 to it, up to Weaken 8. Burn and Corrosion ticks do not trigger this.",
+    "id": "MA100",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Red Warning",
+    "output_text": "Immediate effect: Warning Flare (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA100 | Red Warning | Immediate effect: Warning Flare (no part) | Utility | 1 Copper + 2 Carbon + 1 Circuit | 2 | Choose an enemy showing an attack intent. Until the end of this enemy phase, each time that enemy loses HP to a main shot or support hit, apply Weaken 2 to it, up to Weaken 8. Burn and Corrosion ticks do not trigger this. |",
+      "line": 561,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA101": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "For the rest of this round, after each part activation that costs HP, gain 5 Shield, up to 15 Shield. Damage from enemies does not trigger it. Reusing Rivet Dispenser refreshes the effect without resetting its Shield limit.",
+    "id": "MA101",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Emergency Forge Rivets",
+    "output_text": "Immediate effect: Rivet Dispenser (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA101 | Emergency Forge Rivets | Immediate effect: Rivet Dispenser (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | For the rest of this round, after each part activation that costs HP, gain 5 Shield, up to 15 Shield. Damage from enemies does not trigger it. Reusing Rivet Dispenser refreshes the effect without resetting its Shield limit. |",
+      "line": 562,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA102": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Gain 16 Shield and remember your current Heat, up to 8. After this enemy phase's normal Heat loss, restore Heat to the remembered amount if it is lower. Extra Kiln Seals keep only the highest remembered amount.",
+    "id": "MA102",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Sealed Kiln",
+    "output_text": "1 Kiln Seal",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA102 | Sealed Kiln | 1 Kiln Seal | Shield | 2 Iron + 2 Carbon + 1 Circuit | 3 | Gain 16 Shield and remember your current Heat, up to 8. After this enemy phase's normal Heat loss, restore Heat to the remembered amount if it is lower. Extra Kiln Seals keep only the highest remembered amount. |",
+      "line": 563,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA103": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Carbon + 1 Circuit",
+    "effect": "Add 14 damage. If the main target still has Shield after main damage, deal a separate 14 damage to it after impact. This second hit does not carry shot payload effects.",
+    "id": "MA103",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Hammer",
+    "output_text": "1 Hammer Slug",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA103 | Furnace Hammer | 1 Hammer Slug | Ammo | 3 Iron + 1 Carbon + 1 Circuit | 2 | Add 14 damage. If the main target still has Shield after main damage, deal a separate 14 damage to it after impact. This second hit does not carry shot payload effects. |",
+      "line": 564,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA104": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Copper + 1 Circuit",
+    "effect": "Gain 12 Shield. If enemy attacks caused you to lose HP during the previous enemy phase, gain 14 more. This condition is false in the first round.",
+    "id": "MA104",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Close the Breach",
+    "output_text": "1 Breach Plate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA104 | Close the Breach | 1 Breach Plate | Shield | 3 Iron + 1 Copper + 1 Circuit | 2 | Gain 12 Shield. If enemy attacks caused you to lose HP during the previous enemy phase, gain 14 more. This condition is false in the first round. |",
+      "line": 565,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA105": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 2 Carbon + 1 Circuit",
+    "effect": "Choose two different living enemies. Remove up to 8 Burn from the first and apply twice the removed amount as Burn to the second. Cannot activate without two enemies and at least 1 Burn to move.",
+    "id": "MA105",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Mara",
+    "name": "Fire Exchange",
+    "output_text": "Immediate effect: Fire Exchange Tube (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA105 | Fire Exchange | Immediate effect: Fire Exchange Tube (no part) | Utility | 1 Copper + 2 Carbon + 1 Circuit | 2 | Choose two different living enemies. Remove up to 8 Burn from the first and apply twice the removed amount as Burn to the second. Cannot activate without two enemies and at least 1 Burn to move. |",
+      "line": 566,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA106": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "Add 8 damage to this round's main shot. If it kills its main target, add 16 damage to next round's main shot. Extra Recoil Stores in this round do not stack the next-round bonus.",
+    "id": "MA106",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Recovered Force",
+    "output_text": "1 Recoil Store",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA106 | Recovered Force | 1 Recoil Store | Modifier | 2 Iron + 1 Copper + 1 Circuit | 2 | Add 8 damage to this round's main shot. If it kills its main target, add 16 damage to next round's main shot. Extra Recoil Stores in this round do not stack the next-round bonus. |",
+      "line": 567,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA107": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "Pay 4 Heat when activated. At the start of next turn, gain 2 Ready Plates. Each is a Shield part that gives 8 Shield when activated; they may be saved for later turns.",
+    "id": "MA107",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Warm Repair Bench",
+    "output_text": "Immediate effect: Repair Bench Clamp (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA107 | Warm Repair Bench | Immediate effect: Repair Bench Clamp (no part) | Utility | 2 Iron + 1 Copper + 1 Circuit | 2 | Pay 4 Heat when activated. At the start of next turn, gain 2 Ready Plates. Each is a Shield part that gives 8 Shield when activated; they may be saved for later turns. |",
+      "line": 568,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA108": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Carbon + 1 Glass",
+    "effect": "Gain 18 Shield. After the first enemy attack this round that is fully absorbed by your Shield, deal 10 damage and apply Burn 3 to that attacker. Only one attack triggers each Counterfire Door.",
+    "id": "MA108",
+    "kind": "Shield",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Counterfire Door",
+    "output_text": "1 Counterfire Door",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| MA108 | Counterfire Door | 1 Counterfire Door | Shield | 3 Iron + 1 Carbon + 1 Glass | 2 | Gain 18 Shield. After the first enemy attack this round that is fully absorbed by your Shield, deal 10 damage and apply Burn 3 to that attacker. Only one attack triggers each Counterfire Door. |",
+      "line": 569,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA109": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "3 Iron + 1 Carbon + 1 Glass + 1 Circuit",
+    "effect": "Add 24 damage. Before main damage, remove up to 20 Shield from the main target and add half the amount removed, rounded down, to this shot's damage.",
+    "id": "MA109",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Citybreaker",
+    "output_text": "1 Citybreaker Slug",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA109 | Citybreaker | 1 Citybreaker Slug | Ammo | 3 Iron + 1 Carbon + 1 Glass + 1 Circuit | 3 | Add 24 damage. Before main damage, remove up to 20 Shield from the main target and add half the amount removed, rounded down, to this shot's damage. |",
+      "line": 575,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA110": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 2 Carbon + 1 Circuit",
+    "effect": "For this fight, your main shot applies Burn 3 to its main target after impact. If Heat was 8 or more at Fire, apply Burn 6 instead. This triggers once per main shot; reusing the liner does not stack it.",
+    "id": "MA110",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Red Furnace",
+    "output_text": "Immediate effect: Red Furnace Liner (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA110 | Red Furnace | Immediate effect: Red Furnace Liner (no part) | Utility | 2 Iron + 2 Carbon + 1 Circuit | 3 | For this fight, your main shot applies Burn 3 to its main target after impact. If Heat was 8 or more at Fire, apply Burn 6 instead. This triggers once per main shot; reusing the liner does not stack it. |",
+      "line": 576,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA111": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass + 1 Circuit",
+    "effect": "Load into the bullet; consumed at Fire. Pay 7 Heat at Fire. Every extra enemy receives 60% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. Gain 2 Heat per enemy killed by those spread hits, up to 6 Heat. Main-target payloads are not copied. Extra Foundry Splitters do not repeat this spread.",
+    "id": "MA111",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Foundry Split",
+    "output_text": "1 Foundry Splitter",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA111 | Foundry Split | 1 Foundry Splitter | Modifier | 2 Iron + 1 Copper + 1 Glass + 1 Circuit | 3 | Load into the bullet; consumed at Fire. Pay 7 Heat at Fire. Every extra enemy receives 60% of the consuming shot's damage before target-specific Mark and defence, then applies its own protection. Gain 2 Heat per enemy killed by those spread hits, up to 6 Heat. Main-target payloads are not copied. Extra Foundry Splitters do not repeat this spread. |",
+      "line": 577,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA112": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "3 Iron + 1 Copper + 1 Circuit",
+    "effect": "For this fight, at Fire add half the total remaining Shield on your currently installed parts, rounded down, to the main shot's damage, up to 20 extra damage. Shield is not spent. This is counted once per main shot; reusing the harness does not stack it.",
+    "id": "MA112",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Walking Foundry",
+    "output_text": "Immediate effect: Foundry Harness (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA112 | Walking Foundry | Immediate effect: Foundry Harness (no part) | Utility | 3 Iron + 1 Copper + 1 Circuit | 3 | For this fight, at Fire add half the total remaining Shield on your currently installed parts, rounded down, to the main shot's damage, up to 20 extra damage. Shield is not spent. This is counted once per main shot; reusing the harness does not stack it. |",
+      "line": 578,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA113": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 2 Copper + 1 Circuit",
+    "effect": "Can activate only with at least 8 Heat. Pay all your Heat. Add 30 damage to this round's main shot and gain 20 Shield.",
+    "id": "MA113",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Winter Furnace",
+    "output_text": "1 Winter Core Sleeve",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA113 | Winter Furnace | 1 Winter Core Sleeve | Modifier | 2 Iron + 2 Copper + 1 Circuit | 3 | Can activate only with at least 8 Heat. Pay all your Heat. Add 30 damage to this round's main shot and gain 20 Shield. |",
+      "line": 579,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA114": {
+    "cooldown": 4,
+    "cooldown_text": "4",
+    "cost_text": "2 Iron + 2 Copper + 1 Carbon + 1 Circuit",
+    "effect": "Pay 6 Heat when activated. Remove up to 2 cooldown counters from every currently cooling recipe. No resources or parts are refunded.",
+    "id": "MA114",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Closed Loop Kiln",
+    "output_text": "Immediate effect: Closed Kiln Manifold (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA114 | Closed Loop Kiln | Immediate effect: Closed Kiln Manifold (no part) | Utility | 2 Iron + 2 Copper + 1 Carbon + 1 Circuit | 4 | Pay 6 Heat when activated. Remove up to 2 cooldown counters from every currently cooling recipe. No resources or parts are refunded. |",
+      "line": 580,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA116": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "1 Iron + 2 Carbon + 1 Copper + 1 Circuit",
+    "effect": "Lose 6 HP when activated, leaving at least 1 HP. Gain 6 Heat and 24 Shield, and add 18 damage to your next main shot this round only. Shield cannot pay the HP cost.",
+    "id": "MA116",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Last Reserve",
+    "output_text": "Immediate effect: Last Reserve Pump (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA116 | Last Reserve | Immediate effect: Last Reserve Pump (no part) | Utility | 1 Iron + 2 Carbon + 1 Copper + 1 Circuit | 3 | Lose 6 HP when activated, leaving at least 1 HP. Gain 6 Heat and 24 Shield, and add 18 damage to your next main shot this round only. Shield cannot pay the HP cost. |",
+      "line": 582,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA117": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "1 Iron + 2 Carbon + 1 Glass + 1 Circuit",
+    "effect": "Choose one enemy with Burn. Apply extra Burn equal to its current Burn, up to Burn 12, then apply Burn 4 to every other enemy. Cannot activate without a burning enemy.",
+    "id": "MA117",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Mara",
+    "name": "Ash Crown",
+    "output_text": "Immediate effect: Ash Crown Nozzle (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA117 | Ash Crown | Immediate effect: Ash Crown Nozzle (no part) | Utility | 1 Iron + 2 Carbon + 1 Glass + 1 Circuit | 3 | Choose one enemy with Burn. Apply extra Burn equal to its current Burn, up to Burn 12, then apply Burn 4 to every other enemy. Cannot activate without a burning enemy. |",
+      "line": 583,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA118": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "3 Iron + 1 Copper + 1 Carbon + 1 Circuit",
+    "effect": "When this Modifier is used, pay 12 available Shield from installed parts, draining them in installation order. Add 28 damage to this round's main shot. At the start of next turn, gain 24 Shield after old Shield clears.",
+    "id": "MA118",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Hammer and Anvil",
+    "output_text": "1 Anvil Coupling",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA118 | Hammer and Anvil | 1 Anvil Coupling | Modifier | 3 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | When this Modifier is used, pay 12 available Shield from installed parts, draining them in installation order. Add 28 damage to this round's main shot. At the start of next turn, gain 24 Shield after old Shield clears. |",
+      "line": 584,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA119": {
+    "cooldown": 4,
+    "cooldown_text": "4",
+    "cost_text": "3 Iron + 1 Copper + 1 Carbon + 1 Circuit",
+    "effect": "At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. Each Siege Slug is Ammo that adds 10 damage; each Siege Plate is a Shield part that gives 10 Shield. Parts may be saved or used together and still clear at fight end.",
+    "id": "MA119",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Mara",
+    "name": "Spare Foundry",
+    "output_text": "Immediate effect: Foldout Foundry (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA119 | Spare Foundry | Immediate effect: Foldout Foundry (no part) | Utility | 3 Iron + 1 Copper + 1 Carbon + 1 Circuit | 4 | At the start of next turn, gain 2 Siege Slugs and 2 Siege Plates. Each Siege Slug is Ammo that adds 10 damage; each Siege Plate is a Shield part that gives 10 Shield. Parts may be saved or used together and still clear at fight end. |",
+      "line": 585,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:MA120": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 1 Carbon + 1 Glass + 1 Circuit",
+    "effect": "Add 18 damage. After the enemy phase, deal a separate hit to this shot's main target if alive: half the original shot's calculated damage before target-specific Mark and defence, rounded down, up to 30. The delayed hit meets the target's current Shield, copies no payloads and cannot create another echo.",
+    "id": "MA120",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Mara",
+    "name": "Furnace Echo",
+    "output_text": "1 Echo Chamber",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| MA120 | Furnace Echo | 1 Echo Chamber | Ammo | 2 Iron + 1 Copper + 1 Carbon + 1 Glass + 1 Circuit | 3 | Add 18 damage. After the enemy phase, deal a separate hit to this shot's main target if alive: half the original shot's calculated damage before target-specific Mark and defence, rounded down, up to 30. The delayed hit meets the target's current Shield, copies no payloads and cannot create another echo. |",
+      "line": 586,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  }
+}

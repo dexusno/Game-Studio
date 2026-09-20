@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "status": "frozen read-only MVP applicability audit; no new runtime fixture or support binding",
+  "captured_utc": "2026-09-20T20:31:07.313650+00:00",
+  "input_graph_sha256_lf": "0cf7ab60a60c203661ce3fddeed6a0392680790a182c1d6c17e953c271627531",
+  "inputs": [
+    {
+      "path": "content/catalogue.snapshot.json",
+      "bytes": 1307830,
+      "sha256": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+      "sha256_lf": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c"
+    },
+    {
+      "path": "content/cinderwall-authored.json",
+      "bytes": 12436,
+      "sha256": "b76bfc4811b423a1c47eba002aa8a7d8aba4f6a5fc462386eb38c8666537df6d",
+      "sha256_lf": "b76bfc4811b423a1c47eba002aa8a7d8aba4f6a5fc462386eb38c8666537df6d"
+    },
+    {
+      "path": "content/cinderwall.manifest.json",
+      "bytes": 559877,
+      "sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+      "sha256_lf": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9"
+    },
+    {
+      "path": "core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "core/src/campaign.cpp",
+      "bytes": 31433,
+      "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+      "sha256_lf": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+    },
+    {
+      "path": "core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "bytes": 19077,
+      "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+      "sha256_lf": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+    },
+    {
+      "path": "core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "core/src/core.cpp",
+      "bytes": 44321,
+      "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "sha256_lf": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "bytes": 53468,
+      "sha256": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+      "sha256_lf": "a1fee78b8267810aaf3e4fb4c7c77ba9dd4ee51148dc0faf003578841ec5bc09"
+    },
+    {
+      "path": "core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "bytes": 37199,
+      "sha256": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f",
+      "sha256_lf": "73f77c34abd6e11263402efac20ef964c780bcb6ab2c299c05af1848531bc6ae"
+    },
+    {
+      "path": "core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "design/ENEMY-ROSTER.md",
+      "bytes": 32255,
+      "sha256": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5",
+      "sha256_lf": "18eebc37a0151c641a8b85ed2648490e4e018ca3799f86d2e1a9bcb241d911b5"
+    },
+    {
+      "path": "design/RECIPE-CATALOGUE.md",
+      "bytes": 241495,
+      "sha256": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+      "sha256_lf": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5"
+    },
+    {
+      "path": "design/ROBOT-EFFECTS.md",
+      "bytes": 17263,
+      "sha256": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a",
+      "sha256_lf": "044bb34c7c1d8007e1a243f8989704246072f5dc99a0f4dc565e94329f3dba9a"
+    },
+    {
+      "path": "design/TIMING-AND-PERSISTENCE.md",
+      "bytes": 35552,
+      "sha256": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+      "sha256_lf": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5"
+    },
+    {
+      "path": "design/UPGRADE-SYSTEM.md",
+      "bytes": 16850,
+      "sha256": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a",
+      "sha256_lf": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a"
+    },
+    {
+      "path": "design/data/character-mayor-upgrades.json",
+      "bytes": 188226,
+      "sha256": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+      "sha256_lf": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c"
+    },
+    {
+      "path": "design/data/shared-upgrades.json",
+      "bytes": 179895,
+      "sha256": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
+      "sha256_lf": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6"
+    }
+  ],
+  "graph_algorithm": "SHA-256 of UTF-8 concatenation of lexicographically sorted relative path + TAB + sha256_lf + LF; sha256_lf normalizes CRLF to LF. Raw hashes and byte sizes are also authoritative.",
+  "scope": {
+    "entry": "CampaignRules::newGame with production completeContent, cinderwallUpgradeHooks and generated Cinderwall content",
+    "transitions": "Legal enabled CampaignRules actions and Continue of entries actually produced by them",
+    "recipes": 246,
+    "upgrades_and_mayors": 152,
+    "robots": 10,
+    "formations": 10,
+    "rules_version": "of-core-0.4 (provisional; owner save/version decision pending)",
+    "excludes": [
+      "Arbitrary State mutation or fabricated callbacks/events",
+      "Custom Rules content",
+      "Controlled multi-producer formations",
+      "Foreign or legacy saves not derived from this new run",
+      "Later cities or other mercenaries",
+      "Unselected held haul compositions",
+      "The explicit-1843 graphical runtime"
+    ]
+  },
+  "conclusions": [
+    {
+      "id": "SH064",
+      "branch": "Prevent player Corrosion, Mark or Weaken",
+      "classification": "unreachable_in_current_MVP",
+      "invariant": "All three player counters start zero; no enabled positive producer exists. Remaining writes only cleanse, consume, decay or restore a legitimate snapshot.",
+      "unaffected": "Burn prevention and Fouling/Leak exclusions remain applicable; no earlier test is relabeled."
+    },
+    {
+      "id": "UGS-029",
+      "branch": "Fourth distinct enemy debuff in one fight",
+      "classification": "unreachable_in_current_MVP",
+      "invariant": "Only Burn/Fouling/Leak have producers, and exact legal formations plus Mite-only spawning limit each fight to at most one distinct enemy-applied type. Seen resets at real entry."
+    },
+    {
+      "id": "UGS-029",
+      "branch": "Exclude self-applied debuff",
+      "classification": "unreachable_in_current_MVP",
+      "invariant": "No enabled player action writes a player debuff or invokes the playerStatus callback. HP/Heat/material costs and sacrifices are separate typed payments."
+    },
+    {
+      "id": "MAU-05",
+      "branch": "Zero actual healing because full HP at the post-payment/post-preceding-reaction trigger",
+      "classification": "unreachable_in_current_MVP",
+      "invariant": "Every qualifying recipe Use pays 2/3/5/6 HP, pays zero Heat, and has no intervening applicable healing path. It leaves a deficit of at least two before Suture, or the player dies.",
+      "distinctions": [
+        "Full HP before the Use is reachable but payment creates missing HP.",
+        "Zero healing after the six-actual-HP fight allowance is exhausted is reachable and is a different branch.",
+        "No new execution or minimal legal trace is claimed for the impossible branch."
+      ]
+    }
+  ],
+  "player_status_producers": [
+    {
+      "robot": "C1-R04",
+      "action": "foul",
+      "status": "RecipeFouling",
+      "amount": 1,
+      "formation": "C1-F-BINDER",
+      "implementation": "core/src/robots.cpp:212"
+    },
+    {
+      "robot": "C1-R08",
+      "action": "double_punch",
+      "status": "ShieldLeak",
+      "amount": 2,
+      "formation": "C1-F-PRESS",
+      "implementation": "core/src/robots.cpp:213"
+    },
+    {
+      "robot": "C1-O03",
+      "action": "thermal_runaway",
+      "status": "Burn",
+      "amount": 2,
+      "formation": "C1-F-CHASSIS",
+      "implementation": "core/src/robots.cpp:214"
+    }
+  ],
+  "hp_recipe_use_payments": [
+    {
+      "recipe": "MA019",
+      "hp": 3,
+      "heat_paid": 0,
+      "heat_gained": 5
+    },
+    {
+      "recipe": "MA046",
+      "hp": 2,
+      "heat_paid": 0,
+      "heat_gained": 2
+    },
+    {
+      "recipe": "MA092",
+      "hp": 5,
+      "heat_paid": 0,
+      "heat_gained": 10
+    },
+    {
+      "recipe": "MA116",
+      "hp": 6,
+      "heat_paid": 0,
+      "heat_gained": 6
+    }
+  ],
+  "separate_part_hp_payments": [
+    {
+      "recipe": "SH050",
+      "hp": 4,
+      "clock": "physical Modifier activation; outside inRecipeUse"
+    },
+    {
+      "recipe": "MA054",
+      "hp": 3,
+      "clock": "first Shield installation; outside inRecipeUse"
+    }
+  ],
+  "healing_inventory": [
+    {
+      "ids": [
+        "SH074",
+        "SH104",
+        "UGS-106"
+      ],
+      "clock": "Recipe healing; no HP cost and cannot be nested by the four qualifying Uses"
+    },
+    {
+      "ids": [
+        "MY1-M3"
+      ],
+      "clock": "Positive actual Heat payment reaching six; qualifying HP Uses pay zero Heat"
+    },
+    {
+      "ids": [
+        "UGS-014"
+      ],
+      "clock": "Next player-turn start"
+    },
+    {
+      "ids": [
+        "UGS-013",
+        "UGS-090"
+      ],
+      "clock": "Fight or boss entry"
+    },
+    {
+      "ids": [
+        "UGS-036",
+        "UGS-065",
+        "UGS-074"
+      ],
+      "clock": "Campaign Victory after the entire Rules::apply action"
+    },
+    {
+      "ids": [
+        "UGS-016",
+        "UGS-073",
+        "UGS-097"
+      ],
+      "clock": "Separate recipe acceptance, purchase or noncombat completion"
+    },
+    {
+      "ids": [
+        "UGS-011",
+        "UGS-029",
+        "UGS-033",
+        "UGS-064",
+        "UGS-070",
+        "UGS-071",
+        "UGS-120",
+        "UGS-129",
+        "MY1-02",
+        "MY1-05"
+      ],
+      "clock": "Maximum-HP growth with equal current-HP grant preserves deficit"
+    },
+    {
+      "ids": [
+        "UGS-067"
+      ],
+      "clock": "Excluded city 2\u20133 rescue; no enabled setter of legacy flag"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "core/include/overkill/core.hpp",
+      "symbols": [
+        "State defaults",
+        "Action and Op enums"
+      ]
+    },
+    {
+      "path": "core/src/core.cpp",
+      "symbols": [
+        "Engine::callbacks",
+        "playerDamage",
+        "enemyDamage",
+        "craft",
+        "endTurn",
+        "Rules::startUpgrades",
+        "Rules::execute"
+      ]
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "symbols": [
+        "status",
+        "payment",
+        "catalogueUtility",
+        "catalogueShield",
+        "hpPrevention",
+        "fire",
+        "receive",
+        "delivery resolution"
+      ]
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "symbols": [
+        "upgradeHeal",
+        "grow",
+        "producedUpgrades",
+        "resolvedUseUpgrades",
+        "paidUpgradeReward",
+        "finishPaidUpgrades",
+        "paidBeforeEffect",
+        "recipeHealed",
+        "playerLostUpgrades",
+        "enemyHitUpgrades",
+        "enemyDebuffUpgrade",
+        "completionPayload",
+        "turnStartPayload",
+        "acquirePayload"
+      ]
+    },
+    {
+      "path": "core/src/robots.cpp",
+      "symbols": [
+        "cinderwallRobotDefinitions",
+        "makeCinderwallFormation",
+        "spawnMite",
+        "executeRobotIntent",
+        "onRobotHpLoss",
+        "onRobotDeath"
+      ]
+    },
+    {
+      "path": "core/src/route.cpp",
+      "symbols": [
+        "legalRegular",
+        "prepareOffers",
+        "replaceRouteOffer",
+        "validateRoute"
+      ]
+    },
+    {
+      "path": "core/src/campaign.cpp",
+      "symbols": [
+        "newGame",
+        "clearFight",
+        "acquireUpgrade",
+        "finishCombat",
+        "apply:Combat/Continue/Buy/AcceptCalibration"
+      ]
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "symbols": [
+        "cinderwallUpgradeHooks"
+      ]
+    },
+    {
+      "path": "core/src/catalogue.cpp",
+      "symbols": [
+        "completeContent"
+      ]
+    },
+    {
+      "path": "core/src/upgrades.cpp",
+      "symbols": [
+        "eligibleUpgradeIds",
+        "upgradeEligible"
+      ]
+    }
+  ],
+  "source_clauses": [
+    {
+      "path": "design/RECIPE-CATALOGUE.md",
+      "rows": [
+        "SH064",
+        "SH022",
+        "SH033",
+        "SH063",
+        "SH073",
+        "SH074",
+        "SH104",
+        "SH050",
+        "MA019",
+        "MA046",
+        "MA054",
+        "MA092",
+        "MA116"
+      ]
+    },
+    {
+      "path": "design/data/shared-upgrades.json",
+      "rows": [
+        "UGS-029",
+        "UGS-067",
+        "all eligible healing effects"
+      ]
+    },
+    {
+      "path": "design/data/character-mayor-upgrades.json",
+      "rows": [
+        "MAU-05",
+        "MY1-M3",
+        "eligible maximum-HP grants"
+      ]
+    },
+    {
+      "path": "design/ENEMY-ROSTER.md",
+      "rows": [
+        "C1-R04",
+        "C1-R08",
+        "C1-O03",
+        "remaining enabled roster"
+      ]
+    },
+    {
+      "path": "design/ROBOT-EFFECTS.md",
+      "clauses": [
+        "Player status mirror",
+        "Reactive Mesh",
+        "Fouling",
+        "Shield Leak",
+        "Recovery Joint"
+      ]
+    },
+    {
+      "path": "design/TIMING-AND-PERSISTENCE.md",
+      "clauses": [
+        "Cost before effect",
+        "Immediate reactions before ordinary gains",
+        "Terminal death precedence",
+        "Round boundary and restoration"
+      ]
+    },
+    {
+      "path": "design/UPGRADE-SYSTEM.md",
+      "clauses": [
+        "One named ID per campaign",
+        "Acquisition order",
+        "Typed paid Use and HP loss",
+        "Maximum-HP growth preserves deficit",
+        "Required choices block ordinary resolution"
+      ]
+    }
+  ],
+  "reopening_conditions": [
+    "Any new player status writer, self-status recipe, reflection/transfer or persistence across fights",
+    "New enemy, mercenary, city, mixed formation or non-Mite summon with another debuff",
+    "Qualifying recipe Use that heals or also pays Heat, or invokes another recipe",
+    "Immediate hit/kill reaction healing or full-HP rescue",
+    "Payment queues interleaving player actions or changed trigger ordering",
+    "Duplicate Suture acquisition",
+    "Legacy-save or migration behavior outside the captured New Game transition set"
+  ],
+  "execution": {
+    "native_builds": 0,
+    "new_runtime_fixtures": 0,
+    "new_runtime_assertions": 0,
+    "mode": "Source/data inspection and exact hash verification only"
+  },
+  "changes": [
+    "qa/mvp-reachability-review.md",
+    "qa/mvp-reachability-evidence.json"
+  ],
+  "unchanged": [
+    "All production, versions, generated content, support bindings and historical review residual labels"
+  ],
+  "validation": {
+    "verified_utc": "2026-09-20T20:34:39.198188+00:00",
+    "input_hash_recheck": "28/28 raw hashes, LF hashes and byte sizes unchanged; aggregate reproduced",
+    "manifest_inventories": "246 recipes,152 upgrades,10 robots,10 formations; UGS-067 absent",
+    "formation_status_upper_bound": {
+      "C1-F-MITE-RAM": [],
+      "C1-F-RAM": [],
+      "C1-F-CASK": [],
+      "C1-F-PRESS": [
+        "ShieldLeak"
+      ],
+      "C1-F-BINDER": [
+        "RecipeFouling"
+      ],
+      "C1-F-NEST": [],
+      "C1-F-PURSUER": [],
+      "C1-F-WARDEN": [],
+      "C1-F-CHASSIS": [
+        "Burn"
+      ],
+      "C1-F-GATEBREAKER": []
+    },
+    "exact_robot_callback_types": [
+      "RecipeFouling",
+      "ShieldLeak",
+      "Burn"
+    ],
+    "positive_HP_payment_catalogue_rows": [
+      "SH050",
+      "MA019",
+      "MA046",
+      "MA054",
+      "MA092",
+      "MA116"
+    ],
+    "report_links": "all local targets present",
+    "semantic_validation": "Manual complete producer/payment/healing and boundary inspection described in report; not new runtime assertions"
+  }
+}

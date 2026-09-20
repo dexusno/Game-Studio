@@ -1,0 +1,847 @@
+{
+  "scope": "107 bounded Mara recipe semantic groups; proposed review evidence only",
+  "utc": "2026-09-20T20:08:38.190369+00:00",
+  "archive": "core/build/mara-semantic-05",
+  "source_graph_sha256": "254e4f72c531dcac6f70c1df74cf7a09592aaa15803a191767e54db936556ef3",
+  "sources": {
+    "content/catalogue.snapshot.json": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+    "content/runtime-evidence/coverage.json": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/mara-recipes/ammo.inl": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+    "core/tests/mara-recipes/boundaries.inl": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+    "core/tests/mara-recipes/capture.py": "23be63d4c5d057ba9f0d25f1f176d1935b3664abc78c1d7e78fd68eb2754fa49",
+    "core/tests/mara-recipes/CMakeLists.txt": "665385409cb36bd852dbad986ab0140d5482354db53302bf73dff45c4ba42a57",
+    "core/tests/mara-recipes/modifiers.inl": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+    "core/tests/mara-recipes/shield.inl": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+    "core/tests/mara-recipes/source-contracts.json": "b0052c95ea9b7efc5663b492d60460ea28c9504bde199033cd4f539408153a62",
+    "core/tests/mara-recipes/source-costs.inc": "559e4636c5dca3d0405987802b6c0571224c5ecfa3a0b9861f1d1af5b7bd2bc8",
+    "core/tests/mara-recipes/source_index.py": "e4dbbc202c7acdb625ad33623d69ad2a2d96d193b06c9ed94113e488b4f580d9",
+    "core/tests/mara-recipes/utility.inl": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+    "core/tests/mara_recipe_contract_tests.cpp": "7f80728e2042226be93a33c5129bfdd2542a640b09dd581a245ab647182c7989",
+    "core/tests/recipe_tests.cpp": "4cf92acfa2457a8d80f17219a14c6bbd916daa55595a77e3f89f0041a7d7d4ff",
+    "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+    "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+    "design/UPGRADE-CATALOGUE.md": "1531b9cc12533054bb46d7cfac03a553414c54097fda98617a01548d2de382b6"
+  },
+  "executables": {
+    "build/Release/mara_recipe_contract_tests.exe": "f93f37ccb67b3f778ccb5846590f25c0f0f836d52393e8b025f8ccc3f2d861ef",
+    "build/Release/mara_legacy_recipe_tests.exe": "26b23e2216641185bc1f9398fee464a55b24ac2a8a84d548d3336b8afa16fadd"
+  },
+  "archive_artifacts": {
+    "identity.json": "f0eab379d56ef61af9911f039f5331b099877166c8d6c9442c8e6896f3899e7f",
+    "configure.log": "ed2588bd25cd53823dcfd19e62dd74710ffd05bdadceb15222669d2cbd7e713e",
+    "build.log": "975419ff41384fd8fcd8aba7c1e27e65e49511a53aafa3a2c9f575d2339df312",
+    "contracts.log": "84f84b5621e52654f2e8d9b149a4ca554fc425726d0595e5082f31622c7bae79",
+    "legacy-recipes.log": "712c02e7a45febe53a0b488a5859ad8f02fe3d870faf93e9a033ddb99cb83320"
+  },
+  "toolchain": {
+    "compiler": "MSVC 19.44.35228.0",
+    "windows_sdk": "10.0.26100.0",
+    "cmake": "3.31.6-msvc6",
+    "language": "C++17",
+    "configuration": "Release x64",
+    "flags": [
+      "/W4",
+      "/WX",
+      "/permissive-",
+      "/utf-8"
+    ]
+  },
+  "commands_result": [
+    {
+      "phase": "configure",
+      "exit_code": 0
+    },
+    {
+      "phase": "build",
+      "exit_code": 0
+    },
+    {
+      "phase": "contracts",
+      "exit_code": 0
+    },
+    {
+      "phase": "legacy-recipes",
+      "exit_code": 0
+    }
+  ],
+  "command_record": "Exact machine-local command argv is retained in the ignored archive identity.json; portable reproduction is in README.md.",
+  "passed_groups": 107,
+  "failed_groups": 0,
+  "contract_assertions": 20526,
+  "existing_recipe_assertions": 2055,
+  "copied_source_unchanged": true,
+  "live_sources_still_equal_at_run": true,
+  "residuals_sha256": "af75a1b38949058dcc0e1921375dfd645255b274fce3c8cea04c4dcc583ea717",
+  "tests": [
+    {
+      "id": "mara-recipe:MA002",
+      "recipe": "MA002",
+      "result": "passed",
+      "assertions": 128,
+      "observation": "Fire Heat3/4 boundary; Burn after6 impact, not retroactive damage; earlier payload Heat cannot change Fire snapshot"
+    },
+    {
+      "id": "mara-recipe:MA004",
+      "recipe": "MA004",
+      "result": "passed",
+      "assertions": 17,
+      "observation": "Heat2 required and paid on Use; immediate regular Shield5"
+    },
+    {
+      "id": "mara-recipe:MA005",
+      "recipe": "MA005",
+      "result": "passed",
+      "assertions": 144,
+      "observation": "only one Ammo14, multiple Ammo9 each; planning Modifier excluded"
+    },
+    {
+      "id": "mara-recipe:MA006",
+      "recipe": "MA006",
+      "result": "passed",
+      "assertions": 190,
+      "observation": "prehit Shield0/5/6/10 removal; Heat2 iff full6 removed; full-strip Heat is after hit"
+    },
+    {
+      "id": "mara-recipe:MA007",
+      "recipe": "MA007",
+      "result": "passed",
+      "assertions": 104,
+      "observation": "main6 then Mark4; following shot consumes Mark exactly once"
+    },
+    {
+      "id": "mara-recipe:MA008",
+      "recipe": "MA008",
+      "result": "passed",
+      "assertions": 127,
+      "observation": "other living enemies Burn2, main/dead/escaped excluded, Heat capped3"
+    },
+    {
+      "id": "mara-recipe:MA009",
+      "recipe": "MA009",
+      "result": "passed",
+      "assertions": 140,
+      "observation": "Heat0/2 grants14, Heat3+ grants8"
+    },
+    {
+      "id": "mara-recipe:MA010",
+      "recipe": "MA010",
+      "result": "passed",
+      "assertions": 179,
+      "observation": "Heat3 payment atomic, next main bonus10 once and round expiry"
+    },
+    {
+      "id": "mara-recipe:MA011",
+      "recipe": "MA011",
+      "result": "passed",
+      "assertions": 128,
+      "observation": "Heat5/6 selects Burn2/5 after flat4; earlier payload Heat does not upgrade this shot Burn"
+    },
+    {
+      "id": "mara-recipe:MA012",
+      "recipe": "MA012",
+      "result": "passed",
+      "assertions": 128,
+      "observation": "separate chosen support3; burning victim Heat2; later dead support loses both"
+    },
+    {
+      "id": "mara-recipe:MA013",
+      "recipe": "MA013",
+      "result": "passed",
+      "assertions": 88,
+      "observation": "living Burn selects7/11 once; later status/reinstallation not recalculated"
+    },
+    {
+      "id": "mara-recipe:MA015",
+      "recipe": "MA015",
+      "result": "passed",
+      "assertions": 90,
+      "observation": "Shield8 skips this round Heat decay once; extra copies no later skip"
+    },
+    {
+      "id": "mara-recipe:MA018",
+      "recipe": "MA018",
+      "result": "passed",
+      "assertions": 94,
+      "observation": "first complete attack only; blocked attack still counter3 and Heat6 Burn2"
+    },
+    {
+      "id": "mara-recipe:MA020",
+      "recipe": "MA020",
+      "result": "passed",
+      "assertions": 60,
+      "observation": "Heat1 now and5 next start after normal decay, delivered once"
+    },
+    {
+      "id": "mara-recipe:MA021",
+      "recipe": "MA021",
+      "result": "passed",
+      "assertions": 58,
+      "observation": "next-start raw Carbon2 independent of ordinary collection"
+    },
+    {
+      "id": "mara-recipe:MA022",
+      "recipe": "MA022",
+      "result": "passed",
+      "assertions": 95,
+      "observation": "one unused reserve Ammo payment on first install, no effect/reinstall charge"
+    },
+    {
+      "id": "mara-recipe:MA023",
+      "recipe": "MA023",
+      "result": "passed",
+      "assertions": 55,
+      "observation": "flat7, Heat2 only after impact and once per consumed rivet"
+    },
+    {
+      "id": "mara-recipe:MA024",
+      "recipe": "MA024",
+      "result": "passed",
+      "assertions": 157,
+      "observation": "shown total attack14/15 boundary including multihits; first-install snapshot; shown Drive/Weaken count, dead attacker excluded"
+    },
+    {
+      "id": "mara-recipe:MA025",
+      "recipe": "MA025",
+      "result": "passed",
+      "assertions": 70,
+      "observation": "one live target14, two9; dead/escaped bodies not counted"
+    },
+    {
+      "id": "mara-recipe:MA026",
+      "recipe": "MA026",
+      "result": "passed",
+      "assertions": 64,
+      "observation": "Heat loss3 saturates without affordability requirement; chosen Weaken5"
+    },
+    {
+      "id": "mara-recipe:MA027",
+      "recipe": "MA027",
+      "result": "passed",
+      "assertions": 141,
+      "observation": "installed-only Shield6 payment drains oldest parts, next-shot12"
+    },
+    {
+      "id": "mara-recipe:MA028",
+      "recipe": "MA028",
+      "result": "passed",
+      "assertions": 564,
+      "observation": "earlier first-installed Shield count including removed, cap3 and no reinstall count"
+    },
+    {
+      "id": "mara-recipe:MA029",
+      "recipe": "MA029",
+      "result": "passed",
+      "assertions": 31,
+      "observation": "chosen Mark3 always; activation Heat6 gate adds Weaken2"
+    },
+    {
+      "id": "mara-recipe:MA030",
+      "recipe": "MA030",
+      "result": "passed",
+      "assertions": 489,
+      "observation": "exact reserve Ammo gains8 only next-round Fire; duplicates do not stack or leak; sacrificed attached Ammo cannot lend main-shot bonus"
+    },
+    {
+      "id": "mara-recipe:MA031",
+      "recipe": "MA031",
+      "result": "passed",
+      "assertions": 176,
+      "observation": "living burning enemy count0..4 gives0..12 snapshot; dead excluded"
+    },
+    {
+      "id": "mara-recipe:MA032",
+      "recipe": "MA032",
+      "result": "passed",
+      "assertions": 167,
+      "observation": "Burn4 arrives next start before its first tick; dead original target loses delivery"
+    },
+    {
+      "id": "mara-recipe:MA033",
+      "recipe": "MA033",
+      "result": "passed",
+      "assertions": 106,
+      "observation": "GainShield intent gates after-impact Weaken4; Attack/Charge do not"
+    },
+    {
+      "id": "mara-recipe:MA034",
+      "recipe": "MA034",
+      "result": "passed",
+      "assertions": 484,
+      "observation": "one next-shot check: <=1 Ammo success, failure/removal consumes it, unused expires; Spread is not Ammo and fresh grant is exactly4"
+    },
+    {
+      "id": "mara-recipe:MA035",
+      "recipe": "MA035",
+      "result": "passed",
+      "assertions": 19,
+      "observation": "pay Heat2; every currently cooling copy loses exactly1 with0 floor"
+    },
+    {
+      "id": "mara-recipe:MA036",
+      "recipe": "MA036",
+      "result": "passed",
+      "assertions": 73,
+      "observation": "Burn2/3 threshold for after-impact Weaken5"
+    },
+    {
+      "id": "mara-recipe:MA037",
+      "recipe": "MA037",
+      "result": "passed",
+      "assertions": 81,
+      "observation": "direct Utility pays installed Shield5 oldest first and gains4 Heat"
+    },
+    {
+      "id": "mara-recipe:MA039",
+      "recipe": "MA039",
+      "result": "passed",
+      "assertions": 114,
+      "observation": "Attack intent grants Weaken6, other current intents3"
+    },
+    {
+      "id": "mara-recipe:MA040",
+      "recipe": "MA040",
+      "result": "passed",
+      "assertions": 89,
+      "observation": "first-install Heat4 and Shield7, committed future7 survives removal, no rearm"
+    },
+    {
+      "id": "mara-recipe:MA041",
+      "recipe": "MA041",
+      "result": "passed",
+      "assertions": 186,
+      "observation": "Fire pays4; half-base spread meets own Shield, retains Mark, no main payload copy; killed extra receives no posthit Burn"
+    },
+    {
+      "id": "mara-recipe:MA042",
+      "recipe": "MA042",
+      "result": "passed",
+      "assertions": 152,
+      "observation": "prehit remove Burn0/1/6/9 capped6 and add2 per actually removed"
+    },
+    {
+      "id": "mara-recipe:MA043",
+      "recipe": "MA043",
+      "result": "passed",
+      "assertions": 24,
+      "observation": "only already-burning living enemies add3 Burn; one Heat each max3"
+    },
+    {
+      "id": "mara-recipe:MA044",
+      "recipe": "MA044",
+      "result": "passed",
+      "assertions": 117,
+      "observation": "first positive-to-zero Shield break restores6 after whole attack, once; Shield payment is not an enemy-attack break"
+    },
+    {
+      "id": "mara-recipe:MA045",
+      "recipe": "MA045",
+      "result": "passed",
+      "assertions": 176,
+      "observation": "explicit Heat2..5 only; affordable whole payment gives3 per paid Heat"
+    },
+    {
+      "id": "mara-recipe:MA046",
+      "recipe": "MA046",
+      "result": "passed",
+      "assertions": 62,
+      "observation": "HP2 requires3 independent of Shield; Heat2 now Carbon3 next start"
+    },
+    {
+      "id": "mara-recipe:MA047",
+      "recipe": "MA047",
+      "result": "passed",
+      "assertions": 56,
+      "observation": "impact8 grants Shield8 immediately before later enemy action"
+    },
+    {
+      "id": "mara-recipe:MA049",
+      "recipe": "MA049",
+      "result": "passed",
+      "assertions": 49,
+      "observation": "requires burning living target; Weaken equals Burn capped8 without consuming it"
+    },
+    {
+      "id": "mara-recipe:MA050",
+      "recipe": "MA050",
+      "result": "passed",
+      "assertions": 50,
+      "observation": "Attack current intent getsWeaken6; Charge/Recover getMark7 andBurn2"
+    },
+    {
+      "id": "mara-recipe:MA051",
+      "recipe": "MA051",
+      "result": "passed",
+      "assertions": 688,
+      "observation": "earlier-shot recast count only, same-shot snapshot and extra12 cap"
+    },
+    {
+      "id": "mara-recipe:MA052",
+      "recipe": "MA052",
+      "result": "passed",
+      "assertions": 321,
+      "observation": "1..3 unused reserve Ammo consumed without payload; sacrifice not shot Ammo; wrong-kind sacrifice fails atomically"
+    },
+    {
+      "id": "mara-recipe:MA053",
+      "recipe": "MA053",
+      "result": "passed",
+      "assertions": 182,
+      "observation": "activation Heat5/6 selects gain2+bonus3 or Mark4+bonus8; low-Heat branch does not require a Mark victim"
+    },
+    {
+      "id": "mara-recipe:MA054",
+      "recipe": "MA054",
+      "result": "passed",
+      "assertions": 87,
+      "observation": "HP3 requires4, earlier round HP loss gate excludes its own first payment"
+    },
+    {
+      "id": "mara-recipe:MA055",
+      "recipe": "MA055",
+      "result": "passed",
+      "assertions": 459,
+      "observation": "post-enemy remaining active Shield records floor/5 Iron cap3 before reset"
+    },
+    {
+      "id": "mara-recipe:MA056",
+      "recipe": "MA056",
+      "result": "passed",
+      "assertions": 74,
+      "observation": "fight-lifetime next-start Heat1, no immediate gain or duplicate stacking"
+    },
+    {
+      "id": "mara-recipe:MA057",
+      "recipe": "MA057",
+      "result": "passed",
+      "assertions": 121,
+      "observation": "no enemy attack HP loss grants next4 Heat; planning HP costs excluded"
+    },
+    {
+      "id": "mara-recipe:MA058",
+      "recipe": "MA058",
+      "result": "passed",
+      "assertions": 20,
+      "observation": "Heat5 atomic payment; immediate support6 to living targets, no main shot"
+    },
+    {
+      "id": "mara-recipe:MA060",
+      "recipe": "MA060",
+      "result": "passed",
+      "assertions": 307,
+      "observation": "two full Burn ticks before decay; reapplication refreshes duration; printed impact6 precedes first Burn tick"
+    },
+    {
+      "id": "mara-recipe:MA061",
+      "recipe": "MA061",
+      "result": "passed",
+      "assertions": 493,
+      "observation": "Shield4..12 exact oldest-first cost,2 damage per and floor/4 Heat; valid chosen payment must be available on installed parts"
+    },
+    {
+      "id": "mara-recipe:MA062",
+      "recipe": "MA062",
+      "result": "passed",
+      "assertions": 187,
+      "observation": "Heat0 grants16; Heat1/2/3 grants6 and one saturating loss2; snapshot"
+    },
+    {
+      "id": "mara-recipe:MA063",
+      "recipe": "MA063",
+      "result": "passed",
+      "assertions": 257,
+      "observation": "distinct consumed Ammo recipes count once, add3 each capped15"
+    },
+    {
+      "id": "mara-recipe:MA064",
+      "recipe": "MA064",
+      "result": "passed",
+      "assertions": 37,
+      "observation": "Heat3 required; all cooling copies lose1 with no resource refund; multiple positive counters and zero floor"
+    },
+    {
+      "id": "mara-recipe:MA065",
+      "recipe": "MA065",
+      "result": "passed",
+      "assertions": 51,
+      "observation": "each distinct enemy first attack Burn2, not per hit, even if fully blocked"
+    },
+    {
+      "id": "mara-recipe:MA066",
+      "recipe": "MA066",
+      "result": "passed",
+      "assertions": 323,
+      "observation": "one exact reserve part next-round use gains4 after effect; duplicate/early/late excluded"
+    },
+    {
+      "id": "mara-recipe:MA067",
+      "recipe": "MA067",
+      "result": "passed",
+      "assertions": 316,
+      "observation": "mutual spread/load exclusion; flat18 and saturating post-impact Heat loss4; full4 loss and next-round unused-bonus expiry"
+    },
+    {
+      "id": "mara-recipe:MA068",
+      "recipe": "MA068",
+      "result": "passed",
+      "assertions": 338,
+      "observation": "installed remaining11/12 threshold; percentage once across duplicate Ammo; uninstalled Shield cannot satisfy12"
+    },
+    {
+      "id": "mara-recipe:MA069",
+      "recipe": "MA069",
+      "result": "passed",
+      "assertions": 237,
+      "observation": "only later recipe Uses, both kinds, unique recipe IDs, max4; no repeat next turn"
+    },
+    {
+      "id": "mara-recipe:MA070",
+      "recipe": "MA070",
+      "result": "passed",
+      "assertions": 276,
+      "observation": "first-install Shield8+currentHeat, no spending or later recalculation; legal upgraded Heat14 produces22 Shield"
+    },
+    {
+      "id": "mara-recipe:MA071",
+      "recipe": "MA071",
+      "result": "passed",
+      "assertions": 94,
+      "observation": "first attack with HP loss cools5 and gives12 after it; full block does not trigger"
+    },
+    {
+      "id": "mara-recipe:MA072",
+      "recipe": "MA072",
+      "result": "passed",
+      "assertions": 116,
+      "observation": "first already-burning attacker schedules one Iron across duplicate meshes"
+    },
+    {
+      "id": "mara-recipe:MA073",
+      "recipe": "MA073",
+      "result": "passed",
+      "assertions": 254,
+      "observation": "reserve sacrifice this round grants10; earlier round and direct recipe costs excluded; direct Utility resource cost is not reserve sacrifice"
+    },
+    {
+      "id": "mara-recipe:MA074",
+      "recipe": "MA074",
+      "result": "passed",
+      "assertions": 17,
+      "observation": "Heat4 required and paid; only chosen enemy receivesBurn7"
+    },
+    {
+      "id": "mara-recipe:MA075",
+      "recipe": "MA075",
+      "result": "passed",
+      "assertions": 99,
+      "observation": "first install needs prior different first-installed Shield even if removed; later reinstall legal"
+    },
+    {
+      "id": "mara-recipe:MA076",
+      "recipe": "MA076",
+      "result": "passed",
+      "assertions": 285,
+      "observation": "part Heat5+ removes10 Shield; Utility Heat payments excluded; ordinary Heat loss cannot meet paid5 threshold"
+    },
+    {
+      "id": "mara-recipe:MA077",
+      "recipe": "MA077",
+      "result": "passed",
+      "assertions": 151,
+      "observation": "chosen other target receives floor half current Burn capped6; source retains Burn"
+    },
+    {
+      "id": "mara-recipe:MA078",
+      "recipe": "MA078",
+      "result": "passed",
+      "assertions": 410,
+      "observation": "Ammo after first adds4 cap16; five threshold cool3 and Shield6 after impact"
+    },
+    {
+      "id": "mara-recipe:MA080",
+      "recipe": "MA080",
+      "result": "passed",
+      "assertions": 66,
+      "observation": "pay Heat4 now then next-startHeat6 andCopper1, once"
+    },
+    {
+      "id": "mara-recipe:MA081",
+      "recipe": "MA081",
+      "result": "passed",
+      "assertions": 412,
+      "observation": "first two Shield4+ part-use payments per round triggerHeat2, Utility cost excluded; inclusive4 Shield payment threshold"
+    },
+    {
+      "id": "mara-recipe:MA082",
+      "recipe": "MA082",
+      "result": "passed",
+      "assertions": 276,
+      "observation": "Heat-at-Fire Burn cap10 with acquired MAU-02 capacity; same-Fire payment snapshot"
+    },
+    {
+      "id": "mara-recipe:MA083",
+      "recipe": "MA083",
+      "result": "passed",
+      "assertions": 176,
+      "observation": "explicit decline or all-current-Heat payment; partial choice rejected, zero legal"
+    },
+    {
+      "id": "mara-recipe:MA084",
+      "recipe": "MA084",
+      "result": "passed",
+      "assertions": 428,
+      "observation": "physical HP payments add2 each capped18; Utility/enemy HP loss excluded"
+    },
+    {
+      "id": "mara-recipe:MA085",
+      "recipe": "MA085",
+      "result": "passed",
+      "assertions": 23,
+      "observation": "Heat6 payment; every living enemy Burn5 andWeaken4, dead excluded"
+    },
+    {
+      "id": "mara-recipe:MA087",
+      "recipe": "MA087",
+      "result": "passed",
+      "assertions": 55,
+      "observation": "requiresHeat1; pays all current Heat, Weaken2/Mark1 each capped16/8"
+    },
+    {
+      "id": "mara-recipe:MA088",
+      "recipe": "MA088",
+      "result": "passed",
+      "assertions": 52,
+      "observation": "Heat5 clears all positive cooldowns but cannot reset None once-per-round copy; all distinct cooling copies cleared"
+    },
+    {
+      "id": "mara-recipe:MA089",
+      "recipe": "MA089",
+      "result": "passed",
+      "assertions": 120,
+      "observation": "unused reserve Shield consumed without activation, nextIron3 Glass1; Ammo invalid; used removed Shield cannot pay"
+    },
+    {
+      "id": "mara-recipe:MA090",
+      "recipe": "MA090",
+      "result": "passed",
+      "assertions": 98,
+      "observation": "Burn ticks grantShield2 max6 per phase covering later attacks; duplicate frame no stacking"
+    },
+    {
+      "id": "mara-recipe:MA091",
+      "recipe": "MA091",
+      "result": "passed",
+      "assertions": 187,
+      "observation": "killing main shot transfers pre-damage post-prehit Burn capped8, no survival transfer; victim killed by earlier Ammo support receives no copied Burn"
+    },
+    {
+      "id": "mara-recipe:MA092",
+      "recipe": "MA092",
+      "result": "passed",
+      "assertions": 62,
+      "observation": "HP5 requires6 independent of Shield, Heat10 now nextShield8 after reset"
+    },
+    {
+      "id": "mara-recipe:MA093",
+      "recipe": "MA093",
+      "result": "passed",
+      "assertions": 270,
+      "observation": "first two part Heat3+ payments grant nextIron1; reuse preserves limit, Utility excluded"
+    },
+    {
+      "id": "mara-recipe:MA094",
+      "recipe": "MA094",
+      "result": "passed",
+      "assertions": 157,
+      "observation": "main only bypasses Shield; spread/support still defend, duplicate sleeve no extra hit; below6 Heat cannot activate"
+    },
+    {
+      "id": "mara-recipe:MA095",
+      "recipe": "MA095",
+      "result": "passed",
+      "assertions": 18,
+      "observation": "exactlyHeat0 gate; chosen Weaken12 andMark8"
+    },
+    {
+      "id": "mara-recipe:MA097",
+      "recipe": "MA097",
+      "result": "passed",
+      "assertions": 59,
+      "observation": "separate8 to each other living enemy; main-only payload never copied"
+    },
+    {
+      "id": "mara-recipe:MA098",
+      "recipe": "MA098",
+      "result": "passed",
+      "assertions": 751,
+      "observation": "unused crafted reserve count cap6; removed intact Shield counts, depleted or installed does not"
+    },
+    {
+      "id": "mara-recipe:MA099",
+      "recipe": "MA099",
+      "result": "passed",
+      "assertions": 171,
+      "observation": "next14 only if Heat0 after decay before startup gains; reset precedes arrival; removed source does not schedule End Turn conditional"
+    },
+    {
+      "id": "mara-recipe:MA100",
+      "recipe": "MA100",
+      "result": "passed",
+      "assertions": 304,
+      "observation": "attack target only; HP main/support triggers2 max8; blocked hits/ticks excluded, expires"
+    },
+    {
+      "id": "mara-recipe:MA101",
+      "recipe": "MA101",
+      "result": "passed",
+      "assertions": 242,
+      "observation": "HP-cost part activations give5 Shield max15; direct Utility excluded, reuse retains cap; enemy HP damage never triggers planning dispenser"
+    },
+    {
+      "id": "mara-recipe:MA102",
+      "recipe": "MA102",
+      "result": "passed",
+      "assertions": 337,
+      "observation": "remember current Heat capped8; greatest seal survives normal decay once; remembered floor cannot lower later higher Heat"
+    },
+    {
+      "id": "mara-recipe:MA103",
+      "recipe": "MA103",
+      "result": "passed",
+      "assertions": 205,
+      "observation": "remaining Shield after main damage gates separate14; support copies no payload"
+    },
+    {
+      "id": "mara-recipe:MA104",
+      "recipe": "MA104",
+      "result": "passed",
+      "assertions": 145,
+      "observation": "round1 false; previous enemy attack HP loss yields26, planning HP cost alone12"
+    },
+    {
+      "id": "mara-recipe:MA105",
+      "recipe": "MA105",
+      "result": "passed",
+      "assertions": 51,
+      "observation": "two distinct living targets, at leastBurn1, move up to8 and double actual amount; single living enemy cannot provide two victims"
+    },
+    {
+      "id": "mara-recipe:MA106",
+      "recipe": "MA106",
+      "result": "passed",
+      "assertions": 565,
+      "observation": "current8; killing main grants next-round16 once, duplicate refresh/no same-round bonus; earned future bonus expires if next-round shot omitted"
+    },
+    {
+      "id": "mara-recipe:MA107",
+      "recipe": "MA107",
+      "result": "passed",
+      "assertions": 219,
+      "observation": "payHeat4, next two independent reserve8 plates may wait then install; production Campaign clears pending and delivered Ready Plates"
+    },
+    {
+      "id": "mara-recipe:MA108",
+      "recipe": "MA108",
+      "result": "passed",
+      "assertions": 91,
+      "observation": "first fully Shield-absorbed attack counter10+Burn3, once; partial attack excluded"
+    },
+    {
+      "id": "mara-recipe:MA109",
+      "recipe": "MA109",
+      "result": "passed",
+      "assertions": 194,
+      "observation": "prehit strip up to20, floor-half actual removed added to24"
+    },
+    {
+      "id": "mara-recipe:MA110",
+      "recipe": "MA110",
+      "result": "passed",
+      "assertions": 352,
+      "observation": "fight Burn3/Heat8Burn6 once per main shot; duplicate liner no stacking or support payload"
+    },
+    {
+      "id": "mara-recipe:MA111",
+      "recipe": "MA111",
+      "result": "passed",
+      "assertions": 357,
+      "observation": "Fire7 per physical splitter,60percent once, spread kill Heat cap6, no payload copies; surviving spread victims give no Heat and keep ordinary Mark"
+    },
+    {
+      "id": "mara-recipe:MA112",
+      "recipe": "MA112",
+      "result": "passed",
+      "assertions": 682,
+      "observation": "half remaining installed Shield floor capped20, not spent; reserve/duplicate excluded; fight effect survives multiple shots and next round"
+    },
+    {
+      "id": "mara-recipe:MA113",
+      "recipe": "MA113",
+      "result": "passed",
+      "assertions": 186,
+      "observation": "minimum Heat8, pays all, Shield20 now and main30 only this round"
+    },
+    {
+      "id": "mara-recipe:MA114",
+      "recipe": "MA114",
+      "result": "passed",
+      "assertions": 37,
+      "observation": "Heat6 required, every cooling copy loses up to2, no resource/part refund"
+    },
+    {
+      "id": "mara-recipe:MA116",
+      "recipe": "MA116",
+      "result": "passed",
+      "assertions": 189,
+      "observation": "HP6 requires7 despite Shield; Heat6 Shield24 and next-shot18 only current round"
+    },
+    {
+      "id": "mara-recipe:MA117",
+      "recipe": "MA117",
+      "result": "passed",
+      "assertions": 55,
+      "observation": "burning target required; double current Burn by extra cap12, other living get4"
+    },
+    {
+      "id": "mara-recipe:MA118",
+      "recipe": "MA118",
+      "result": "passed",
+      "assertions": 182,
+      "observation": "installed12 oldest-first paid, current28, independent next-start24 after reset"
+    },
+    {
+      "id": "mara-recipe:MA119",
+      "recipe": "MA119",
+      "result": "passed",
+      "assertions": 309,
+      "observation": "next two Siege10 Ammo and two Siege10 Shields, independent reserve then combined use; production Campaign clears delivered and pending Siege parts on victory/defeat"
+    },
+    {
+      "id": "mara-recipe:MA120",
+      "recipe": "MA120",
+      "result": "passed",
+      "assertions": 506,
+      "observation": "after-enemy echo floor-half original shot max30; changed current Shield and one delivery; echo ignores original Mark, applies no payload, floor-halves odd original damage"
+    }
+  ],
+  "bindings_activated": false
+}

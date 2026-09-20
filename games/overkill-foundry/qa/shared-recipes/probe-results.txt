@@ -1,0 +1,9 @@
+PASS S01 aged reserve first installation schedules once; detached and later reinstalled sources cannot rearm
+PASS S02 committed Shield delivery remains separate from the installed first-attacker Mark hook
+PASS S03 SH113 pre-reset reader keeps first-binding order through removal and reinstallation
+PASS S04 scheduled damage and recoil respect delivery order and final death
+PASS S05 delivery cooling uses actual per-copy clocks and cannot refresh a used None recipe
+PASS S06 different physical delayed Shields retain both fixed schedules after partial depletion
+PASS S07 same-name Magnet reapplication refreshes choices while finite ordinary stock is conserved
+OBS O01 SH084 actual-paid-types=2 actual-Glass=0 main-damage=21; actual-paid interpretation=18, printed-types interpretation=21; unresolved
+SUMMARY 7 passed, 0 failed, 469 assertions; O01 is an unresolved source observation, not semantic acceptance

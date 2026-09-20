@@ -1,0 +1,244 @@
+{
+  "graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+  "inputs": [
+    {
+      "path": "core/CMakeLists.txt",
+      "bytes": 3270,
+      "sha256": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+      "sha256_lf": "522af5ec509dca3f8f79dfa2b38d5adc9acef5d9beb12eeb9cc4e4d0af49be5e"
+    },
+    {
+      "path": "core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "core/src/campaign.cpp",
+      "bytes": 31433,
+      "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+      "sha256_lf": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+    },
+    {
+      "path": "core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "bytes": 19077,
+      "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+      "sha256_lf": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+    },
+    {
+      "path": "core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "core/src/core.cpp",
+      "bytes": 44321,
+      "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "sha256_lf": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "bytes": 52892,
+      "sha256": "6f124e73049e415a00b522a269851ad1bb74c3de98e03c877b96d5c43c664324",
+      "sha256_lf": "75c6357632bfbcd1f01303eb4a17437748eb88feaeedfaaad44f4536a20735c1"
+    },
+    {
+      "path": "core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "bytes": 37148,
+      "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e",
+      "sha256_lf": "3cfde3ec7d88a233d630e106bbf4a0eeb2ec9dd1638621810e4e4b16c2627c93"
+    },
+    {
+      "path": "core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "core/tests/campaign-lifecycle/CMakeLists.txt",
+      "bytes": 771,
+      "sha256": "3a56e9431744c267be31bdda35f8ea18c5658759b279060078bf3616a46d92cb",
+      "sha256_lf": "3a56e9431744c267be31bdda35f8ea18c5658759b279060078bf3616a46d92cb"
+    },
+    {
+      "path": "core/tests/campaign_lifecycle_contract_tests.cpp",
+      "bytes": 13665,
+      "sha256": "4f464fe8b788d68e21a0fb375a496ebcb0fa7b1283fa439eb5ea9d1edb87b38a",
+      "sha256_lf": "4f464fe8b788d68e21a0fb375a496ebcb0fa7b1283fa439eb5ea9d1edb87b38a"
+    },
+    {
+      "path": "design/CAMPAIGN-PROGRESSION.md",
+      "bytes": 24288,
+      "sha256": "5560eba2cccd92bdc22d5ca3f108ea24952fe90f7815729ffda447993c87593c",
+      "sha256_lf": "5560eba2cccd92bdc22d5ca3f108ea24952fe90f7815729ffda447993c87593c"
+    },
+    {
+      "path": "design/data/beta-balance-v1.json",
+      "bytes": 13396,
+      "sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+      "sha256_lf": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b"
+    },
+    {
+      "path": "design/PART-RESALE.md",
+      "bytes": 10579,
+      "sha256": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+      "sha256_lf": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae"
+    },
+    {
+      "path": "design/TIMING-AND-PERSISTENCE.md",
+      "bytes": 35552,
+      "sha256": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+      "sha256_lf": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5"
+    },
+    {
+      "path": "design/UPGRADE-SYSTEM.md",
+      "bytes": 16850,
+      "sha256": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a",
+      "sha256_lf": "5ff17d132240bf9cab3b04ed36538ea07a00ae77727d0227fc57d47e60f54e8a"
+    }
+  ],
+  "schema_version": 1,
+  "date": "2026-09-20",
+  "scope": "Production campaign hooks from prepared economic/route boundaries; no active binding or shipping claim",
+  "archive": "core/build/campaign-lifecycle-final/source",
+  "result": {
+    "groups": 6,
+    "assertions": 652,
+    "ctest": "1/1 passed",
+    "named_groups": [
+      "actual body core identity, manual sale, exact receipt replay and no resell",
+      "purchased physical identities and canonical per-part rounding",
+      "loaded and installed sale rejection, unload/removal eligibility and spent-Shield exclusion",
+      "seen shop/reward alternatives, repeated discovery and skipped-choice persistence",
+      "Patrol compulsory combat, unchanged Continue, normal rewards and single progression",
+      "real boss result, single Ivo unlock, completion and profile facts across New Game"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "core/build/campaign-lifecycle-final/build/Release/campaign_lifecycle_contract_tests.exe",
+      "bytes": 1022976,
+      "sha256": "acd9a95600e4d5d6daa3d1bf0a365e75d89abc1f7e13fd1a8a634f9d04566b53"
+    },
+    {
+      "path": "core/build/campaign-lifecycle-final/build/core-runtime/Release/overkill_core.lib",
+      "bytes": 6623206,
+      "sha256": "56fd3b0b35b38dc8610d8ffecc511bd0b1645f5566cf69d96123632c137d552d"
+    },
+    {
+      "path": "core/build/campaign-lifecycle-final/build/Testing/Temporary/LastTest.log",
+      "bytes": 1514,
+      "sha256": "b8c591a2bd4846a32f447fa239f3bdca28eb6be5fa64f083dd1cffb2a0a3a812"
+    },
+    {
+      "path": "core/build/campaign-lifecycle-final/configure.log",
+      "bytes": 649,
+      "sha256": "f295306e8bf68d5d07d6a74f5addf3eb149b0c6a565929aa7fdaeb05fef2ae02"
+    },
+    {
+      "path": "core/build/campaign-lifecycle-final/build.log",
+      "bytes": 1247,
+      "sha256": "09dccc89394b0b9e29b0250bc81022f7c85a7cbd14d743685cddafd573d81aa9"
+    }
+  ],
+  "candidate_links_pending_review": {
+    "core.core-and-part-sales": [
+      "actual body core identity, manual sale, exact receipt replay and no resell",
+      "purchased physical identities and canonical per-part rounding",
+      "loaded and installed sale rejection, unload/removal eligibility and spent-Shield exclusion"
+    ],
+    "core.collection-discovery": [
+      "seen shop/reward alternatives, repeated discovery and skipped-choice persistence"
+    ],
+    "mystery:C1-M-PATROL": [
+      "Patrol compulsory combat, unchanged Continue, normal rewards and single progression"
+    ],
+    "core.profile-and-unlocks": [
+      "real boss result, single Ivo unlock, completion and profile facts across New Game"
+    ],
+    "core.city-completion": [
+      "real boss result, single Ivo unlock, completion and profile facts across New Game"
+    ]
+  },
+  "limits": [
+    "Prepared route prefixes, Mayor candidates, part grants, reaction and500-damage terminal ammunition isolate rules; not an earned city or natural build.",
+    "Actual CampaignRules production hooks, ordered events, serialization replay and exact receipt retries are exercised. No disk/save-process or input/UI claim in this CPU suite.",
+    "Physical sales are representative body and ordinary part types; complete type inventory and upgrade economic clauses have separate evidence.",
+    "Boss completion covers Mara to Ivo only, matching this single-city MVP; future mercenaries/cities are not implemented here.",
+    "Provisional corrected of-core-0.4 and pending version/save decision; not the old core used by the earned rendered replay.",
+    "No active runtime binding is changed; independent clause review remains required."
+  ]
+}

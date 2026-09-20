@@ -1,0 +1,2388 @@
+{
+  "reviewed_at_utc": "2026-09-20T20:27:48.738263+00:00",
+  "scope": "Read-only integrated build/evidence verification, not semantic approval of reviewer-authored Mara cases; no tests rerun.",
+  "archive": "core/build/mechanics-integration-20260920-221228",
+  "source_graph_lf_sha256": "8ce7ff421aa9bc2a6ed4a1be4d77ad5c4a882f08cc6b48b92a49ca4fa3798637",
+  "shared_core_library_sha256": "afe752450de55d4837b2b5ebe3e1517eb5a21fb77912fdfd0bb03a0649a05228",
+  "checks": [
+    {
+      "check": "mechanics-integration-20260920-221228: input count",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-221228: unique sorted inputs",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-221228: every copied raw/LF digest and length",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-221228: every live raw input matches",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-221228: independently recomputed graph",
+      "passed": true
+    },
+    {
+      "check": "published record differs only by omitted local argv and explicit limits",
+      "passed": true
+    },
+    {
+      "check": "declared final graph",
+      "passed": true
+    },
+    {
+      "check": "status passed",
+      "passed": true
+    },
+    {
+      "check": "configure.log: successful command/log identity",
+      "passed": true
+    },
+    {
+      "check": "build.log: successful command/log identity",
+      "passed": true
+    },
+    {
+      "check": "ctest.log: successful command/log identity",
+      "passed": true
+    },
+    {
+      "check": "exact configure/build/single CTest command sequence",
+      "passed": true
+    },
+    {
+      "check": "build/CMakeFiles/3.31.6-msvc6/CompilerIdCXX/CompilerIdCXX.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_campaign_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_campaign_upgrade_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_core.lib: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_core_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_recipe_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_robot_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_route_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_runner.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_runner_support.lib: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_runner_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/core-runtime/Release/overkill_upgrade_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/campaign_lifecycle_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/encounter_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/mara_recipe_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/part_lifecycle_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/shared_recipe_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/terminal_transition_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/upgrade_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "build/Release/upgrade_copy_contract_tests.exe: binary bytes/hash",
+      "passed": true
+    },
+    {
+      "check": "one core library exact identity",
+      "passed": true
+    },
+    {
+      "check": "original capture tool identity retained",
+      "passed": true
+    },
+    {
+      "check": "later extractor distinct and correctly attributed",
+      "passed": true
+    },
+    {
+      "check": "live extraction source equals copied later extractor",
+      "passed": true
+    },
+    {
+      "check": "full LastTest.log identity",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: output separator",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: output separator",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: output separator",
+      "passed": true
+    },
+    {
+      "check": "JUnit sixteen run/no failure/no skip",
+      "passed": true
+    },
+    {
+      "check": "one complete LastTest execution sequence",
+      "passed": true
+    },
+    {
+      "check": "JUnit/LastTest/result suite order and IDs",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_part_lifecycle: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "part_lifecycle_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_shared_recipe_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "shared_recipe_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_mara_recipe_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "mara_recipe_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_upgrade_copy_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "upgrade_copy_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_encounter_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "encounter_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_campaign_lifecycle_contract: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "campaign_lifecycle_contract_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "integrated_terminal_transitions: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "terminal_transition_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "core_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_core_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "route_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_route_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "robot_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_robot_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "recipe_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_recipe_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "upgrade_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_upgrade_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "campaign_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: truncated JUnit prefix agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "campaign_upgrade_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_campaign_upgrade_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: full extracted stdout equals same-run log",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: JUnit passed run",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: complete JUnit output agrees with full log",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: actual command points to captured executable",
+      "passed": true
+    },
+    {
+      "check": "runner_contracts: unique compiled project",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: exact shared core in linker dependencies",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_tests: actual link read records exact core library",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: one library project",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_core: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: one library project",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: single Release x64 settings",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: strict actual generated compiler options",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: compiled units are copied inputs",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: one actual compile command log",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: actual compile command strict C++17",
+      "passed": true
+    },
+    {
+      "check": "overkill_runner_support: all compiler-read game dependencies captured",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-220954: input count",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-220954: unique sorted inputs",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-220954: every copied raw/LF digest and length",
+      "passed": true
+    },
+    {
+      "check": "mechanics-integration-20260920-220954: independently recomputed graph",
+      "passed": true
+    },
+    {
+      "check": "initial compile failure remains marked failed",
+      "passed": true
+    },
+    {
+      "check": "only precision header added to retry input manifest",
+      "passed": true
+    },
+    {
+      "check": "initial source proves required precision header was omitted",
+      "passed": true
+    },
+    {
+      "check": "only five known production files differ from baseline",
+      "passed": true
+    }
+  ],
+  "passed_checks": 286,
+  "failed_checks": 0,
+  "inputs": [
+    {
+      "path": "core/CMakeLists.txt",
+      "bytes": 3270,
+      "sha256": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+      "sha256_lf": "522af5ec509dca3f8f79dfa2b38d5adc9acef5d9beb12eeb9cc4e4d0af49be5e"
+    },
+    {
+      "path": "core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "core/runner/city_runner.hpp",
+      "bytes": 2634,
+      "sha256": "8077496b2aebbd12a79c583c12fd8089729652c95bbd20bfbda95d9baa42f723",
+      "sha256_lf": "b4fb1b38010f71125d61f1115ab98b99425256ddc20c21f55e720827e6d8a1cb"
+    },
+    {
+      "path": "core/runner/main.cpp",
+      "bytes": 4380,
+      "sha256": "f32a6ebcb20b6083e2769822bb970f56a1eb8bcbc6bd5f3dd1cace7cb7db03d8",
+      "sha256_lf": "f32a6ebcb20b6083e2769822bb970f56a1eb8bcbc6bd5f3dd1cace7cb7db03d8"
+    },
+    {
+      "path": "core/runner/policy.cpp",
+      "bytes": 24613,
+      "sha256": "ab1365fad02c8cf90cafbd56ecaa6fcfa557411d7a99293e12c625328f61a5fe",
+      "sha256_lf": "56ae8555dc84a2c8d46f24fb89f291c4308084b6fdc14b667d4e25d868cbacd3"
+    },
+    {
+      "path": "core/runner/runner_tests.cpp",
+      "bytes": 11083,
+      "sha256": "17757aabed66ab953071d4b1613478d8c532d5952e67ba8e35fb84c3e19d981c",
+      "sha256_lf": "17757aabed66ab953071d4b1613478d8c532d5952e67ba8e35fb84c3e19d981c"
+    },
+    {
+      "path": "core/runner/trace.cpp",
+      "bytes": 15808,
+      "sha256": "6b2b484dbf5f0dac4ebb53368708e8a06d0b85d4cc477bd3f56a2e2b786b0341",
+      "sha256_lf": "15af556a56aa6b2c56de504c6bc94aef45262cc1ddec6571e6b740a2ff2b4e93"
+    },
+    {
+      "path": "core/src/campaign.cpp",
+      "bytes": 31433,
+      "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+      "sha256_lf": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+    },
+    {
+      "path": "core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "bytes": 19077,
+      "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+      "sha256_lf": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+    },
+    {
+      "path": "core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "core/src/core.cpp",
+      "bytes": 44321,
+      "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "sha256_lf": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "bytes": 53468,
+      "sha256": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+      "sha256_lf": "a1fee78b8267810aaf3e4fb4c7c77ba9dd4ee51148dc0faf003578841ec5bc09"
+    },
+    {
+      "path": "core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "bytes": 37199,
+      "sha256": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f",
+      "sha256_lf": "73f77c34abd6e11263402efac20ef964c780bcb6ab2c299c05af1848531bc6ae"
+    },
+    {
+      "path": "core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "core/tests/campaign-lifecycle/CMakeLists.txt",
+      "bytes": 771,
+      "sha256": "3a56e9431744c267be31bdda35f8ea18c5658759b279060078bf3616a46d92cb",
+      "sha256_lf": "3a56e9431744c267be31bdda35f8ea18c5658759b279060078bf3616a46d92cb"
+    },
+    {
+      "path": "core/tests/campaign_lifecycle_contract_tests.cpp",
+      "bytes": 13665,
+      "sha256": "4f464fe8b788d68e21a0fb375a496ebcb0fa7b1283fa439eb5ea9d1edb87b38a",
+      "sha256_lf": "4f464fe8b788d68e21a0fb375a496ebcb0fa7b1283fa439eb5ea9d1edb87b38a"
+    },
+    {
+      "path": "core/tests/campaign_tests.cpp",
+      "bytes": 21025,
+      "sha256": "762eedf12c47588e411da339fc032433f832d7862e1307671bd7521208c10894",
+      "sha256_lf": "762eedf12c47588e411da339fc032433f832d7862e1307671bd7521208c10894"
+    },
+    {
+      "path": "core/tests/campaign_upgrade_tests.cpp",
+      "bytes": 16617,
+      "sha256": "605c51bc18d359d89a6be3c1ea0c8afe40979a1838d061a56f8679090f02b43c",
+      "sha256_lf": "605c51bc18d359d89a6be3c1ea0c8afe40979a1838d061a56f8679090f02b43c"
+    },
+    {
+      "path": "core/tests/core_tests.cpp",
+      "bytes": 18343,
+      "sha256": "5e26f4586e1ba086a80896c8a3630c911a163f66e1bb5b2efc50d4826ccf4d22",
+      "sha256_lf": "5e26f4586e1ba086a80896c8a3630c911a163f66e1bb5b2efc50d4826ccf4d22"
+    },
+    {
+      "path": "core/tests/encounter_contract_tests.cpp",
+      "bytes": 19767,
+      "sha256": "ba50ebdb5256d239e2d05f3513b5ddf5abd43e6a4d3d550d5feb196b74a54c53",
+      "sha256_lf": "ba50ebdb5256d239e2d05f3513b5ddf5abd43e6a4d3d550d5feb196b74a54c53"
+    },
+    {
+      "path": "core/tests/encounters/CMakeLists.txt",
+      "bytes": 710,
+      "sha256": "29069cece4bbf33fb14967bd67f1babfabf49ca6f204b017d468505f7288d042",
+      "sha256_lf": "29069cece4bbf33fb14967bd67f1babfabf49ca6f204b017d468505f7288d042"
+    },
+    {
+      "path": "core/tests/mara-recipes/ammo.inl",
+      "bytes": 14138,
+      "sha256": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b",
+      "sha256_lf": "5424efbbe781accfed6953fd0fe4e05d396f951b4f17b5daf34c7e6ce868d24b"
+    },
+    {
+      "path": "core/tests/mara-recipes/boundaries.inl",
+      "bytes": 12449,
+      "sha256": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7",
+      "sha256_lf": "5083312d32003f0c1fa896ad1535c96a95d7b781fe1066502e5cf1a68e27fcf7"
+    },
+    {
+      "path": "core/tests/mara-recipes/CMakeLists.txt",
+      "bytes": 1463,
+      "sha256": "665385409cb36bd852dbad986ab0140d5482354db53302bf73dff45c4ba42a57",
+      "sha256_lf": "665385409cb36bd852dbad986ab0140d5482354db53302bf73dff45c4ba42a57"
+    },
+    {
+      "path": "core/tests/mara-recipes/modifiers.inl",
+      "bytes": 9710,
+      "sha256": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca",
+      "sha256_lf": "e10107a48031c88e20560d613cf5b3c8eb2a8a69a00fed09df139b54e973bcca"
+    },
+    {
+      "path": "core/tests/mara-recipes/shield.inl",
+      "bytes": 9966,
+      "sha256": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f",
+      "sha256_lf": "1dbbda7eb3965683711e062779c7b329c81d8a2d34538f66f804393cf45e5c5f"
+    },
+    {
+      "path": "core/tests/mara-recipes/source-costs.inc",
+      "bytes": 8558,
+      "sha256": "559e4636c5dca3d0405987802b6c0571224c5ecfa3a0b9861f1d1af5b7bd2bc8",
+      "sha256_lf": "cfa0614b9061bd7d10efe146dd43ee921dd22e4f1a058def2de673a1cbd0704d"
+    },
+    {
+      "path": "core/tests/mara-recipes/utility.inl",
+      "bytes": 17525,
+      "sha256": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a",
+      "sha256_lf": "128c45b98bd77511b8dfccfe2c038239aa3db8e2ac6750f06eb2824136eda84a"
+    },
+    {
+      "path": "core/tests/mara_recipe_contract_tests.cpp",
+      "bytes": 7855,
+      "sha256": "7f80728e2042226be93a33c5129bfdd2542a640b09dd581a245ab647182c7989",
+      "sha256_lf": "7f80728e2042226be93a33c5129bfdd2542a640b09dd581a245ab647182c7989"
+    },
+    {
+      "path": "core/tests/mechanics/CMakeLists.txt",
+      "bytes": 1725,
+      "sha256": "a9aff04938c58485e6e6aa21709b5b55b48feb4a40ec93296cd287567026157c",
+      "sha256_lf": "a9aff04938c58485e6e6aa21709b5b55b48feb4a40ec93296cd287567026157c"
+    },
+    {
+      "path": "core/tests/part_lifecycle_tests.cpp",
+      "bytes": 21817,
+      "sha256": "f2c207990e92241539db1d7320a86641b6a0a1348ca0a80c5a06bc8d97aac36b",
+      "sha256_lf": "f2c207990e92241539db1d7320a86641b6a0a1348ca0a80c5a06bc8d97aac36b"
+    },
+    {
+      "path": "core/tests/parts/cases.inc",
+      "bytes": 14704,
+      "sha256": "da945c48b90464b0d32f9959950b0732c93f613e9a872e2cbdfa75807ec949ee",
+      "sha256_lf": "da945c48b90464b0d32f9959950b0732c93f613e9a872e2cbdfa75807ec949ee"
+    },
+    {
+      "path": "core/tests/parts/CMakeLists.txt",
+      "bytes": 686,
+      "sha256": "e0c54f3dc614fc319172059d8b1cb8820decff16129ff3d8536254102615dd9b",
+      "sha256_lf": "e0c54f3dc614fc319172059d8b1cb8820decff16129ff3d8536254102615dd9b"
+    },
+    {
+      "path": "core/tests/parts/extra_lifecycle.inl",
+      "bytes": 41338,
+      "sha256": "70213965c81b917de59c23593657651af945b5d40a24e57c37cec4e7ac9fe838",
+      "sha256_lf": "70213965c81b917de59c23593657651af945b5d40a24e57c37cec4e7ac9fe838"
+    },
+    {
+      "path": "core/tests/parts/origin-rarity.inc",
+      "bytes": 2355,
+      "sha256": "dafb40f2d039673353b8ee3741df2e137cc689f3cfd223699d235a74b653ec0b",
+      "sha256_lf": "dafb40f2d039673353b8ee3741df2e137cc689f3cfd223699d235a74b653ec0b"
+    },
+    {
+      "path": "core/tests/parts/plain-cases.inc",
+      "bytes": 1051,
+      "sha256": "31fb7f315d1df32ec586f3d9a9a3e66d195e1b3e24c3d54d28a1d823ccf20942",
+      "sha256_lf": "31fb7f315d1df32ec586f3d9a9a3e66d195e1b3e24c3d54d28a1d823ccf20942"
+    },
+    {
+      "path": "core/tests/recipe_tests.cpp",
+      "bytes": 19108,
+      "sha256": "4cf92acfa2457a8d80f17219a14c6bbd916daa55595a77e3f89f0041a7d7d4ff",
+      "sha256_lf": "e384fe923827a9c72c908f172fa1e318956570d7d60d56ad0e02efb678a2bfd7"
+    },
+    {
+      "path": "core/tests/robot_tests.cpp",
+      "bytes": 27144,
+      "sha256": "e98d2a269febdcf3b797a3fcaade4ff9465128317595fea100bb6171849c5429",
+      "sha256_lf": "e98d2a269febdcf3b797a3fcaade4ff9465128317595fea100bb6171849c5429"
+    },
+    {
+      "path": "core/tests/robots/build/CMakeFiles/3.31.6-msvc6/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+      "bytes": 29376,
+      "sha256": "889dac6c9713176b009c4e2662f38728ec305d6f8fa8d308392f53ff7237fc1c",
+      "sha256_lf": "911d6deb85661272b2ddc7a8e26810febd726944c61e1d9495e6a1abb11d9eff"
+    },
+    {
+      "path": "core/tests/robots/CMakeLists.txt",
+      "bytes": 638,
+      "sha256": "cd1e079643320b370851b73951366a0059e09c6d098e0e9e3b2b02a28d7de785",
+      "sha256_lf": "cd1e079643320b370851b73951366a0059e09c6d098e0e9e3b2b02a28d7de785"
+    },
+    {
+      "path": "core/tests/route_tests.cpp",
+      "bytes": 5682,
+      "sha256": "e89f2e5240aa61f226d0133dc7441db0a71d4a5924ade5933a5bbab13ba29d9b",
+      "sha256_lf": "e89f2e5240aa61f226d0133dc7441db0a71d4a5924ade5933a5bbab13ba29d9b"
+    },
+    {
+      "path": "core/tests/shared-recipes/ammo.inl",
+      "bytes": 11255,
+      "sha256": "e5ee14775bf88c10853d60184e9989236c38023df83b2cf1c994a167434cc750",
+      "sha256_lf": "e5ee14775bf88c10853d60184e9989236c38023df83b2cf1c994a167434cc750"
+    },
+    {
+      "path": "core/tests/shared-recipes/boundaries.inl",
+      "bytes": 10210,
+      "sha256": "8350fe6dbc50b2982ab16f9c0bbfd5313df206c5bd86254245523d75317a773a",
+      "sha256_lf": "8350fe6dbc50b2982ab16f9c0bbfd5313df206c5bd86254245523d75317a773a"
+    },
+    {
+      "path": "core/tests/shared-recipes/CMakeLists.txt",
+      "bytes": 925,
+      "sha256": "af200307641f6dfc794cb0ecf82aedb4f32480f2dfa0cd097f18a1c4ae945f66",
+      "sha256_lf": "af200307641f6dfc794cb0ecf82aedb4f32480f2dfa0cd097f18a1c4ae945f66"
+    },
+    {
+      "path": "core/tests/shared-recipes/collection.inl",
+      "bytes": 8957,
+      "sha256": "47bce4178da0be8ad560f729eaea2040b54702eaa8b9bb3c3aa5c79db9c9e554",
+      "sha256_lf": "47bce4178da0be8ad560f729eaea2040b54702eaa8b9bb3c3aa5c79db9c9e554"
+    },
+    {
+      "path": "core/tests/shared-recipes/shield.inl",
+      "bytes": 9311,
+      "sha256": "b9cf492ab8b9df465648936cb895b2727f251ff8d1acd9552a79b020f6a58103",
+      "sha256_lf": "b9cf492ab8b9df465648936cb895b2727f251ff8d1acd9552a79b020f6a58103"
+    },
+    {
+      "path": "core/tests/shared-recipes/source-costs.inc",
+      "bytes": 11514,
+      "sha256": "67fd4da974c7f57a03ce743e0f07f3260a2800a66bafa8bb01c71c77e376ffc9",
+      "sha256_lf": "697a85a692664e7abc0a5f768171502a14806216786754388848955d66705edd"
+    },
+    {
+      "path": "core/tests/shared-recipes/utility.inl",
+      "bytes": 19415,
+      "sha256": "3139873b8fd90950ac320327efad76b9a3df0fd4cffd3cd4526863bace1aa228",
+      "sha256_lf": "3139873b8fd90950ac320327efad76b9a3df0fd4cffd3cd4526863bace1aa228"
+    },
+    {
+      "path": "core/tests/shared_recipe_contract_tests.cpp",
+      "bytes": 7489,
+      "sha256": "afff728e5bbf34315d77decca291be3acfd3b5884f2c634a071912b1a80076f6",
+      "sha256_lf": "afff728e5bbf34315d77decca291be3acfd3b5884f2c634a071912b1a80076f6"
+    },
+    {
+      "path": "core/tests/terminal/CMakeLists.txt",
+      "bytes": 651,
+      "sha256": "c01550f8050e173a07674e1ef9314a0c97830fd33c3abfe0e16c1a5c9eb507b9",
+      "sha256_lf": "c01550f8050e173a07674e1ef9314a0c97830fd33c3abfe0e16c1a5c9eb507b9"
+    },
+    {
+      "path": "core/tests/terminal/terminal_tests.cpp",
+      "bytes": 5641,
+      "sha256": "57b5afb7be2a3fe5712903f87cc7007dc162525efa1ba75e2f501f1900c5352c",
+      "sha256_lf": "57b5afb7be2a3fe5712903f87cc7007dc162525efa1ba75e2f501f1900c5352c"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+      "bytes": 16010,
+      "sha256": "221801c2b220404400e69fb215ea099866df46cea74f2abe260ab12b1200ca31",
+      "sha256_lf": "e74641d1635ba240266b6f7b689df931e1a0d9916b4969011b202fa7a7105135"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/CMakeLists.txt",
+      "bytes": 1301,
+      "sha256": "c3320eec9580bae4c67009e3d7551ee0fa7eb066d91e27529a4a224dc2de412d",
+      "sha256_lf": "c3320eec9580bae4c67009e3d7551ee0fa7eb066d91e27529a4a224dc2de412d"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/combat.inl",
+      "bytes": 18114,
+      "sha256": "2516f3bfff9a2d3e82e4b603168b28535c595533e63179fbf1baac74fe2551a2",
+      "sha256_lf": "2516f3bfff9a2d3e82e4b603168b28535c595533e63179fbf1baac74fe2551a2"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+      "bytes": 7213,
+      "sha256": "62f36eb9e008e30f3fa6357995fea7e3742e939bd6a345ab68231ffb600a150e",
+      "sha256_lf": "62f36eb9e008e30f3fa6357995fea7e3742e939bd6a345ab68231ffb600a150e"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/end_turn.inl",
+      "bytes": 7158,
+      "sha256": "0da25da9eca93d99db79bee95b884edf4e06923224a66b24f94126f69b138991",
+      "sha256_lf": "0da25da9eca93d99db79bee95b884edf4e06923224a66b24f94126f69b138991"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/entry_turn.inl",
+      "bytes": 18036,
+      "sha256": "d19615b07d7ba44d3e3b1b7d7d142df4d977ea4be6bac433a626d917fbb658f2",
+      "sha256_lf": "d19615b07d7ba44d3e3b1b7d7d142df4d977ea4be6bac433a626d917fbb658f2"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/production.inl",
+      "bytes": 17081,
+      "sha256": "7a5d4ca975513704ac73b2b1f6aeca4269fe92324b55e203e1574ec268710310",
+      "sha256_lf": "7a5d4ca975513704ac73b2b1f6aeca4269fe92324b55e203e1574ec268710310"
+    },
+    {
+      "path": "core/tests/upgrade-contracts/rewards.inl",
+      "bytes": 12800,
+      "sha256": "e844c8aeb7cf21e4dfbc3093f824815d175f436e0b3dbcf44b73e174f59d61f5",
+      "sha256_lf": "e844c8aeb7cf21e4dfbc3093f824815d175f436e0b3dbcf44b73e174f59d61f5"
+    },
+    {
+      "path": "core/tests/upgrade-copy-contracts/CMakeLists.txt",
+      "bytes": 1472,
+      "sha256": "ba5cdbfa490500400989745317727eec428a381d254cf163421ed45bcc842c5d",
+      "sha256_lf": "ba5cdbfa490500400989745317727eec428a381d254cf163421ed45bcc842c5d"
+    },
+    {
+      "path": "core/tests/upgrade_contract_tests.cpp",
+      "bytes": 11194,
+      "sha256": "8cf7f1f86180f298fdbb35e3bb02c611afd8dfe44bd09bddafab42a849de6cf8",
+      "sha256_lf": "2c3ff0358a6e64645d5cbfd9169a3f1716fd8b9d141b1477b647adff218fe4d3"
+    },
+    {
+      "path": "core/tests/upgrade_copy_contract_tests.cpp",
+      "bytes": 9639,
+      "sha256": "12f6320fe74b2f8510aa3f13fb425860d4efef78afc09fa01be7ec15b458e16d",
+      "sha256_lf": "12f6320fe74b2f8510aa3f13fb425860d4efef78afc09fa01be7ec15b458e16d"
+    },
+    {
+      "path": "core/tests/upgrade_tests.cpp",
+      "bytes": 46388,
+      "sha256": "3c2389c2868f420e985411da712d3c01317746a2c2197a3c3fcf41e1c133741c",
+      "sha256_lf": "ee678e9ad11138bcca6eb0d487bee72e7101aa390f95b27d31080c247e581cea"
+    },
+    {
+      "path": "core/tests/upgrades/build/CMakeFiles/3.31.6-msvc6/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+      "bytes": 29376,
+      "sha256": "889dac6c9713176b009c4e2662f38728ec305d6f8fa8d308392f53ff7237fc1c",
+      "sha256_lf": "911d6deb85661272b2ddc7a8e26810febd726944c61e1d9495e6a1abb11d9eff"
+    },
+    {
+      "path": "core/tests/upgrades/CMakeLists.txt",
+      "bytes": 913,
+      "sha256": "c1d477f0fa068198f03978448721a6c7fcabd6bd6a0c59036100ff71e0faf0c0",
+      "sha256_lf": "c1d477f0fa068198f03978448721a6c7fcabd6bd6a0c59036100ff71e0faf0c0"
+    },
+    {
+      "path": "presentation/precision.hpp",
+      "bytes": 2504,
+      "sha256": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b",
+      "sha256_lf": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+    }
+  ],
+  "suites": [
+    {
+      "name": "integrated_part_lifecycle",
+      "target": "part_lifecycle_tests",
+      "executable_sha256": "e8aa77d3f0e4bfe54b270bc82b5a15e10fda82eb7b2cbb30c62c8d4af5e52988",
+      "stdout_sha256": "80ff31575a4ebb8a40f0cc980fafd36ec762c98c8dfa958010cd8c21cab07cf1",
+      "stdout_bytes": 13825,
+      "junit_truncated_at_1024": true,
+      "summary": "SUMMARY 207 passed, 0 failed, 59169 assertions; 0 explicitly untested output types. No full recipe-effect or balance claim."
+    },
+    {
+      "name": "integrated_upgrade_contract",
+      "target": "upgrade_contract_tests",
+      "executable_sha256": "34f0040b8e64c00b7eae86c4e74d8426d16275adcc606015e3ade8b8d231152f",
+      "stdout_sha256": "747de9c90b9b9d0af7b45539d76fbc1cebeb1d7e4b75c9a79e8ec471b4adfe29",
+      "stdout_bytes": 11747,
+      "junit_truncated_at_1024": true,
+      "summary": "SUMMARY 106 passed, 0 failed, 6139 assertions. Held UGS-011/018/126/141 are not proposed."
+    },
+    {
+      "name": "integrated_shared_recipe_contract",
+      "target": "shared_recipe_contract_tests",
+      "executable_sha256": "627710eccf1f5c3a71ec54d422d6b44f505d7ece90c19aae7cc1f9acea485a0b",
+      "stdout_sha256": "22f47cb9774561bc44d883899af59d6486594a651f1fad6b896a10985d6d2664",
+      "stdout_bytes": 9863,
+      "junit_truncated_at_1024": true,
+      "summary": "SUMMARY 113 passed, 0 failed, 27881 assertions."
+    },
+    {
+      "name": "integrated_mara_recipe_contract",
+      "target": "mara_recipe_contract_tests",
+      "executable_sha256": "deece8a96ffacecc64226dfa2cc80f2436f31344e297cb97cf8143eb94e83944",
+      "stdout_sha256": "1303411eca68d08638cbbc7ef38a35a27daa20888b6a9cbc21d621f9900d86e5",
+      "stdout_bytes": 12886,
+      "junit_truncated_at_1024": true,
+      "summary": "SUMMARY 107 passed, 0 failed, 20526 assertions."
+    },
+    {
+      "name": "integrated_upgrade_copy_contract",
+      "target": "upgrade_copy_contract_tests",
+      "executable_sha256": "242ae971e4bf6dca7fd7d308fd8ecb0ce371642db1391837058f392903e31e8a",
+      "stdout_sha256": "a189c90c16233e32c3b5cf088d3b96d7032bcb774fba5fe4e5bb9217a20109bc",
+      "stdout_bytes": 683,
+      "junit_truncated_at_1024": false,
+      "summary": "SUMMARY 7 passed, 0 failed, 671 assertions."
+    },
+    {
+      "name": "integrated_encounter_contract",
+      "target": "encounter_contract_tests",
+      "executable_sha256": "17e020e728d5523d1caecfc8e53c78c0b50a5f8bf1c87de7abba8f352f25c4f7",
+      "stdout_sha256": "624f5b5d71ac21169e0cae35f0bc07554d1e0efed34856ca911733c909792bd1",
+      "stdout_bytes": 880,
+      "junit_truncated_at_1024": false,
+      "summary": "ENCOUNTER_CONTRACTS_OK groups=9 assertions=3946"
+    },
+    {
+      "name": "integrated_campaign_lifecycle_contract",
+      "target": "campaign_lifecycle_contract_tests",
+      "executable_sha256": "11c977483589955f62a7264d773b0d8462b6ba6e126479d3985c0d911cc134ba",
+      "stdout_sha256": "a033289634841e1f14b105080ec99673239255e0ea3048cf2d4d420fc293829e",
+      "stdout_bytes": 550,
+      "junit_truncated_at_1024": false,
+      "summary": "CAMPAIGN_LIFECYCLE_OK groups=6 assertions=652"
+    },
+    {
+      "name": "integrated_terminal_transitions",
+      "target": "terminal_transition_tests",
+      "executable_sha256": "0cd96566ae1a6a2e9d6d23fd1d106e3137ec5bcafa902c1405bf5675e63b96cc",
+      "stdout_sha256": "4a22b30032bbb93c2da53731864f46f0660bafd05b1bc92fd85328cb7446c1f2",
+      "stdout_bytes": 403,
+      "junit_truncated_at_1024": false,
+      "summary": "PASS terminal notifications are unique; campaign completion effects and receipt were exactly once"
+    },
+    {
+      "name": "core_contracts",
+      "target": "overkill_core_tests",
+      "executable_sha256": "32c0a787087746b4291bce9cddb95607e6b449fe51de88398568034830bd4432",
+      "stdout_sha256": "1250c00a2258d1910db501442aa84bb3a9f61d766ee22d0de9390d567b387158",
+      "stdout_bytes": 1904,
+      "junit_truncated_at_1024": true,
+      "summary": "All 443 behavioral assertions passed. No complete-city, durable-save, graphical, balance or human-quality claim."
+    },
+    {
+      "name": "route_contracts",
+      "target": "overkill_route_tests",
+      "executable_sha256": "fe997078fc4079253126eaa9f3fb5992c3a22bc8700552181c4d4e15c5324757",
+      "stdout_sha256": "9e13a71c675571126adc02d2cb94baea3652060b76d3efed92cec1f71d7bd569",
+      "stdout_bytes": 323,
+      "junit_truncated_at_1024": false,
+      "summary": "PASS 146303 route assertions over 1,000 complete choice paths; 464 schedules observed. This is route validation, not combat simulation."
+    },
+    {
+      "name": "robot_contracts",
+      "target": "overkill_robot_tests",
+      "executable_sha256": "aa39364e1532f208981dbb94f936e044ec2feb7e24356e7152997b3dffddeeb7",
+      "stdout_sha256": "4721cae935819ee173bd4f6d60a3de0cd7842bfd8e4ca45fbb58d8513d1bc4f8",
+      "stdout_bytes": 582,
+      "junit_truncated_at_1024": false,
+      "summary": "Cinderwall robot module + Engine integration: 2462 assertions passed."
+    },
+    {
+      "name": "recipe_contracts",
+      "target": "overkill_recipe_tests",
+      "executable_sha256": "3377010f765fd91ef2cfb049cba8f15f9581e80877d5e0c80be348340db43d3e",
+      "stdout_sha256": "21a9c75f45de0a6387332ce33bf3b934f62732346dff4c6889da6a041be4c274",
+      "stdout_bytes": 1633,
+      "junit_truncated_at_1024": true,
+      "summary": "All 2055 recipe assertions passed; 246 source recipes have executable action paths. Interaction coverage remains explicit."
+    },
+    {
+      "name": "upgrade_contracts",
+      "target": "overkill_upgrade_tests",
+      "executable_sha256": "62c19cde2be6e58d38da61bbb5bad2b91eab7fcf37d68e4d492fd4842a75a189",
+      "stdout_sha256": "fdd2cf2ff9f2489a306c3a87743ff32661765aa525d21b590b1087ad6d7bfc06",
+      "stdout_bytes": 2231,
+      "junit_truncated_at_1024": true,
+      "summary": "1130 assertions; 147 explicitly covered upgrade IDs; 0 failures"
+    },
+    {
+      "name": "campaign_contracts",
+      "target": "overkill_campaign_tests",
+      "executable_sha256": "993328110678aa0603cc0984a561a213ee96b65451ae86955eae836dc3bd5809",
+      "stdout_sha256": "cd33bc04b73945e92549ff50e85454262088fe553c1c449fc5466af66f331e69",
+      "stdout_bytes": 1049,
+      "junit_truncated_at_1024": true,
+      "summary": "PASS 784 campaign/offer/receipt assertions. Uses controlled test-only upgrade payloads and terminal ammo; no full-city balance, P08 or disk-durability claim."
+    },
+    {
+      "name": "campaign_upgrade_contracts",
+      "target": "overkill_campaign_upgrade_tests",
+      "executable_sha256": "e30d190f3b3fbe2aee8d2183fa8c7b40ff4c33719b476e12a4a21a9fdd0caa9f",
+      "stdout_sha256": "881ff04d31aa2dec80bc892b690727ae2279f68b980ec9ff9bbcb6122d739ea5",
+      "stdout_bytes": 1096,
+      "junit_truncated_at_1024": true,
+      "summary": "PASS 255 production campaign-upgrade assertions; controlled shop grants and terminal ammo, not city balance."
+    },
+    {
+      "name": "runner_contracts",
+      "target": "overkill_runner_tests",
+      "executable_sha256": "cd3dc1f49e5b9087624817d360a66d58f38a88a3352d32ba4a047c7d82bb4c18",
+      "stdout_sha256": "16eb55b5192d31502ad75f89be09938a9e1e2dfaf13aed2531da08c1e503323c",
+      "stdout_bytes": 83,
+      "junit_truncated_at_1024": false,
+      "summary": "PASS 30090 runner codec/replay assertions; seed1 outcome=city_complete, actions=440"
+    }
+  ],
+  "generated_projects_and_actual_logs": [
+    {
+      "target": "part_lifecycle_tests",
+      "project": "build/part_lifecycle_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/part_lifecycle_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/part_lifecycle_tests.cpp",
+        "core/tests/parts/cases.inc",
+        "core/tests/parts/extra_lifecycle.inl",
+        "core/tests/parts/origin-rarity.inc",
+        "core/tests/parts/plain-cases.inc"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/part_lifecycle_tests.vcxproj": "6128067291ded99604bca04310809fb2e8550b2e0303a28cb831d33d5a0760d9",
+        "build/part_lifecycle_tests.dir/Release/part_lif.1AD52A3F.tlog/CL.command.1.tlog": "34cc540219c478e8f4a7c3cf27ce250243520621efc75b9062fe3d6e3b0eccb0",
+        "build/part_lifecycle_tests.dir/Release/part_lif.1AD52A3F.tlog/CL.read.1.tlog": "033eac3a0894b5e07ae58d2640e9e78c6d30c59d1ef225964176e166af60dfef",
+        "build/part_lifecycle_tests.dir/Release/part_lif.1AD52A3F.tlog/link.read.1.tlog": "bf0799767cc11cd83fb343dbf3ade16d47f01d8b023872bcc808767527a3f346"
+      }
+    },
+    {
+      "target": "upgrade_contract_tests",
+      "project": "build/upgrade_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/upgrade_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/upgrade-contracts/campaign_cases.inl",
+        "core/tests/upgrade-contracts/combat.inl",
+        "core/tests/upgrade-contracts/edge_clauses.inl",
+        "core/tests/upgrade-contracts/end_turn.inl",
+        "core/tests/upgrade-contracts/entry_turn.inl",
+        "core/tests/upgrade-contracts/production.inl",
+        "core/tests/upgrade-contracts/rewards.inl",
+        "core/tests/upgrade_contract_tests.cpp",
+        "presentation/precision.hpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/upgrade_contract_tests.vcxproj": "4f159e9fb4f179b7562eb98c02be967a077f6d9207f5899abfaf5d817bba7f23",
+        "build/upgrade_contract_tests.dir/Release/upgrade_.B3248AAD.tlog/CL.command.1.tlog": "5e2169b063de2b9da2289e9459b296e817b83372190de28afa4386912ad5e2aa",
+        "build/upgrade_contract_tests.dir/Release/upgrade_.B3248AAD.tlog/CL.read.1.tlog": "7190a2a01ddafc62698daf6a0a04edc21fc0846067efa074c190380024ced8d5",
+        "build/upgrade_contract_tests.dir/Release/upgrade_.B3248AAD.tlog/link.read.1.tlog": "62731234b059be5b7b86d062562c430ea51ec81207edb4a965c66f554717bc0e"
+      }
+    },
+    {
+      "target": "shared_recipe_contract_tests",
+      "project": "build/shared_recipe_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/shared_recipe_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/shared-recipes/ammo.inl",
+        "core/tests/shared-recipes/boundaries.inl",
+        "core/tests/shared-recipes/collection.inl",
+        "core/tests/shared-recipes/shield.inl",
+        "core/tests/shared-recipes/source-costs.inc",
+        "core/tests/shared-recipes/utility.inl",
+        "core/tests/shared_recipe_contract_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/shared_recipe_contract_tests.vcxproj": "ba049a842065384e717b8faaf671ec47bcf62d3a965b9181a6b273a258d345d3",
+        "build/shared_recipe_contract_tests.dir/Release/shared_r.9B3668A3.tlog/CL.command.1.tlog": "15ef37b13ada6ed9a10dc830418cb27cb9bd584036833dee8581501183283a81",
+        "build/shared_recipe_contract_tests.dir/Release/shared_r.9B3668A3.tlog/CL.read.1.tlog": "52b6c33bcd0ee5457315050270a7be6367fa5ce486f8ad3d200acaa13b6d6d10",
+        "build/shared_recipe_contract_tests.dir/Release/shared_r.9B3668A3.tlog/link.read.1.tlog": "43186c28ebbe4edfa70ca2c0d5f7d375c79f6e6c40b8be7a1e06ddcd99f55d98"
+      }
+    },
+    {
+      "target": "mara_recipe_contract_tests",
+      "project": "build/mara_recipe_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/mara_recipe_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/mara-recipes/ammo.inl",
+        "core/tests/mara-recipes/boundaries.inl",
+        "core/tests/mara-recipes/modifiers.inl",
+        "core/tests/mara-recipes/shield.inl",
+        "core/tests/mara-recipes/source-costs.inc",
+        "core/tests/mara-recipes/utility.inl",
+        "core/tests/mara_recipe_contract_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/mara_recipe_contract_tests.vcxproj": "40ed1462ce0092bb446f290d051dab81b032e07bf3daecdb62e0bc843f248f1a",
+        "build/mara_recipe_contract_tests.dir/Release/mara_rec.41996A4B.tlog/CL.command.1.tlog": "9a2ef5ed75f28426583d608415f6d08163b240178bf2746ed24071de228b8e62",
+        "build/mara_recipe_contract_tests.dir/Release/mara_rec.41996A4B.tlog/CL.read.1.tlog": "b378f8e4dd1223f73ee5a186c62e5fa34e777b928db6f90e49fb069f4df07021",
+        "build/mara_recipe_contract_tests.dir/Release/mara_rec.41996A4B.tlog/link.read.1.tlog": "7687368e25265e5ff29f77d95a15cf2124e72bd2d1576ccc7c6936c0809c3519"
+      }
+    },
+    {
+      "target": "upgrade_copy_contract_tests",
+      "project": "build/upgrade_copy_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/upgrade_copy_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/upgrade_copy_contract_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/upgrade_copy_contract_tests.vcxproj": "fa80145819afbdc9c130114946cefaa39f6a4ed0024942084b9f8a4f25aff1ca",
+        "build/upgrade_copy_contract_tests.dir/Release/upgrade_.AB69F771.tlog/CL.command.1.tlog": "b7709893878ad6e98f21289c2afacd389f71545b4cd0049d455868fb3126964a",
+        "build/upgrade_copy_contract_tests.dir/Release/upgrade_.AB69F771.tlog/CL.read.1.tlog": "f1dfc9a4291d6c1932c0016b63093fd61f978f2ac7b81d31e001eba0f0805797",
+        "build/upgrade_copy_contract_tests.dir/Release/upgrade_.AB69F771.tlog/link.read.1.tlog": "63783d50711116c9bb0366c522e8e2a0da236fbf93e00d5273e80163a6417d66"
+      }
+    },
+    {
+      "target": "encounter_contract_tests",
+      "project": "build/encounter_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/encounter_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/tests/encounter_contract_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/encounter_contract_tests.vcxproj": "3b4c3fa1e5cb55a6d658e66db061463206fcc3c8420185d3c4112980b44bd197",
+        "build/encounter_contract_tests.dir/Release/encounte.646D33DD.tlog/CL.command.1.tlog": "debfc3e43490a10086bbe16507645437016ea242127174e3acc339524e9fc081",
+        "build/encounter_contract_tests.dir/Release/encounte.646D33DD.tlog/CL.read.1.tlog": "9692613cdad460b95485902830b2a379dbf75658477373f4c8474fc247302637",
+        "build/encounter_contract_tests.dir/Release/encounte.646D33DD.tlog/link.read.1.tlog": "73e528658782b15cc2641c096d2ba8bcf747441363994c33ffc9d649e0ceeb3d"
+      }
+    },
+    {
+      "target": "campaign_lifecycle_contract_tests",
+      "project": "build/campaign_lifecycle_contract_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/campaign_lifecycle_contract_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/tests/campaign_lifecycle_contract_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/campaign_lifecycle_contract_tests.vcxproj": "fe784e77a946a182438d3b8371ba630383ecccaae4c7ea147cf7fb0aff91046a",
+        "build/campaign_lifecycle_contract_tests.dir/Release/campaign.F9417A6A.tlog/CL.command.1.tlog": "6dd01f1f992bf96378eee71f60bd975f829c3d4050a5a28472a0ccc6c5f02eed",
+        "build/campaign_lifecycle_contract_tests.dir/Release/campaign.F9417A6A.tlog/CL.read.1.tlog": "1469861f400df1e6f30da632d86128d7cf2c3e2203555146e4a226795444d9f6",
+        "build/campaign_lifecycle_contract_tests.dir/Release/campaign.F9417A6A.tlog/link.read.1.tlog": "8b615af49aa0b0604a2d21481d8f05d98a322a9531e753d041a630d3a55ff5ea"
+      }
+    },
+    {
+      "target": "terminal_transition_tests",
+      "project": "build/terminal_transition_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/terminal/terminal_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/terminal/terminal_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/terminal_transition_tests.vcxproj": "3b53c1fa7088dcd4ce0b82493f5db81452420091446b73a38cac71906c967311",
+        "build/terminal_transition_tests.dir/Release/terminal.DEDB2A88.tlog/CL.command.1.tlog": "0fe1b3a7202eb78bcbdfec325cc0c050b7ab20c7a70749f05f86641c14431efd",
+        "build/terminal_transition_tests.dir/Release/terminal.DEDB2A88.tlog/CL.read.1.tlog": "5ac6a1c44ddbe8c55d32ddf7d338342d4e1ab4f853461449b45fbd92d5f83c24",
+        "build/terminal_transition_tests.dir/Release/terminal.DEDB2A88.tlog/link.read.1.tlog": "14fc05a814f01b6501af52cf1e12ef721952bdb1693333b3d12e8def1118a738"
+      }
+    },
+    {
+      "target": "overkill_core_tests",
+      "project": "build/core-runtime/overkill_core_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/core_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/tests/core_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_core_tests.vcxproj": "0f1a665686407a4f229f65209d54b9d3e7cfb260c9f70e9f04608cbda4996827",
+        "build/core-runtime/overkill_core_tests.dir/Release/overkill.AE3AAAF7.tlog/CL.command.1.tlog": "2e72df86c73a67dde36699881e9c2bdda11e08872db24c50cb3cd65d6a4b88a5",
+        "build/core-runtime/overkill_core_tests.dir/Release/overkill.AE3AAAF7.tlog/CL.read.1.tlog": "82ec05a7dc165be2d3483f45aa052f43cf1f67565a70c8048bf992bf066115e3",
+        "build/core-runtime/overkill_core_tests.dir/Release/overkill.AE3AAAF7.tlog/link.read.1.tlog": "6ec50fadbcfdc0bc3c4cbedf2f73862a060906e36b86a739fc0e2eb28818b2d6"
+      }
+    },
+    {
+      "target": "overkill_route_tests",
+      "project": "build/core-runtime/overkill_route_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/route_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/tests/route_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_route_tests.vcxproj": "3ead1bc8a17f46cc3fc5b5377d234003c07a6936496023a3ffdafab1c53b383b",
+        "build/core-runtime/overkill_route_tests.dir/Release/overkill.85CB9A87.tlog/CL.command.1.tlog": "b7141378f810dc175dfa2175a9aca57411bfb312f96d82e1ed9f82cfcab4a811",
+        "build/core-runtime/overkill_route_tests.dir/Release/overkill.85CB9A87.tlog/CL.read.1.tlog": "17344d374e9dfb90fb2341c8abe3e5cbcb103c76cf50c981d442105d1f6b781f",
+        "build/core-runtime/overkill_route_tests.dir/Release/overkill.85CB9A87.tlog/link.read.1.tlog": "3ec42b89d57fb75d87b5247bb38efc7f09183a4b110e9ca0d28fe3358b67b8ea"
+      }
+    },
+    {
+      "target": "overkill_robot_tests",
+      "project": "build/core-runtime/overkill_robot_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/robot_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/tests/robot_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_robot_tests.vcxproj": "911663e31eedaee24167c98493020594accaca94183fb3efc462a04d37aaaecd",
+        "build/core-runtime/overkill_robot_tests.dir/Release/overkill.0CB06CCB.tlog/CL.command.1.tlog": "692ddd4531c2f57dfe3068560c50455b941f04aa16b75bed210556fa387e4f65",
+        "build/core-runtime/overkill_robot_tests.dir/Release/overkill.0CB06CCB.tlog/CL.read.1.tlog": "4153c962cc667cbb0065929722abf66e8a4efd77b7e07db8992be45824c30f2e",
+        "build/core-runtime/overkill_robot_tests.dir/Release/overkill.0CB06CCB.tlog/link.read.1.tlog": "574c10a62f192313937ee88ac1c4c168a5f10b4f2160363095fad7f3cae3e463"
+      }
+    },
+    {
+      "target": "overkill_recipe_tests",
+      "project": "build/core-runtime/overkill_recipe_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/recipe_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/tests/recipe_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_recipe_tests.vcxproj": "b8f102255a17a2f54f57e8c29316d28bebcd21ac90854aa369a5ba209a00aecf",
+        "build/core-runtime/overkill_recipe_tests.dir/Release/overkill.C8DCA299.tlog/CL.command.1.tlog": "10720e8b1d48b143e3b3458eef75cf2dbde31771003826b825449c8d9e3faaa2",
+        "build/core-runtime/overkill_recipe_tests.dir/Release/overkill.C8DCA299.tlog/CL.read.1.tlog": "73d98bd2f9491f2d8a3342fc0d7e2139db350ced2e0d6a6c6e9f90f8347a40a3",
+        "build/core-runtime/overkill_recipe_tests.dir/Release/overkill.C8DCA299.tlog/link.read.1.tlog": "f6a49d07fabdf83017863f33b28906599d9d92e3f31828ceb46f5e6d26f5132c"
+      }
+    },
+    {
+      "target": "overkill_upgrade_tests",
+      "project": "build/core-runtime/overkill_upgrade_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/upgrade_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/upgrade_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_upgrade_tests.vcxproj": "768325d584243d87375836c7bed9570df9534504a4587b7ea0266ad0f786a77e",
+        "build/core-runtime/overkill_upgrade_tests.dir/Release/overkill.3CC01A7D.tlog/CL.command.1.tlog": "9bc091206fde349c1de4e47cd5d05dcb73205707b05cfeefbee6e9bb6c180118",
+        "build/core-runtime/overkill_upgrade_tests.dir/Release/overkill.3CC01A7D.tlog/CL.read.1.tlog": "ddd51320478cda71e78e1fa93a6012c8ea64148b17e1f21494f5fc6b80beb832",
+        "build/core-runtime/overkill_upgrade_tests.dir/Release/overkill.3CC01A7D.tlog/link.read.1.tlog": "fae352f429372041f57edef9f107f09190101f3edf015c8947d81e49ff37c2d4"
+      }
+    },
+    {
+      "target": "overkill_campaign_tests",
+      "project": "build/core-runtime/overkill_campaign_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/campaign_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/tests/campaign_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_campaign_tests.vcxproj": "7fc9714e31680a92c5ddb4a5c068c9d64065240dfe4895c47908103315400b78",
+        "build/core-runtime/overkill_campaign_tests.dir/Release/overkill.E5531A39.tlog/CL.command.1.tlog": "6134201deb670948c2e7e8dc2155f8d666bec2b610a63a5175bf76ade4851f43",
+        "build/core-runtime/overkill_campaign_tests.dir/Release/overkill.E5531A39.tlog/CL.read.1.tlog": "609466a4aad32b4bb1b5e2620dd21128c722d6670dbcb0f58cd1f599e89dc4ba",
+        "build/core-runtime/overkill_campaign_tests.dir/Release/overkill.E5531A39.tlog/link.read.1.tlog": "a90256387a32ba7dd9d287fcfc5d7d7bf483b761dad9d31e27a83af202568e22"
+      }
+    },
+    {
+      "target": "overkill_campaign_upgrade_tests",
+      "project": "build/core-runtime/overkill_campaign_upgrade_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/tests/campaign_upgrade_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/tests/campaign_upgrade_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_campaign_upgrade_tests.vcxproj": "b21cefaa038b3bc1845622a13d59bb6f8472e9700c681e325582c4ccfe07cf0b",
+        "build/core-runtime/overkill_campaign_upgrade_tests.dir/Release/overkill.BD346D41.tlog/CL.command.1.tlog": "9498f55068a31e7a47277638f1c1d0a71a513f562c4c5a58c2bdc8ac629a48e2",
+        "build/core-runtime/overkill_campaign_upgrade_tests.dir/Release/overkill.BD346D41.tlog/CL.read.1.tlog": "7e4d96f29d347c549e1ba8924acbf36b891381006c40d86878dabb188df8b188",
+        "build/core-runtime/overkill_campaign_upgrade_tests.dir/Release/overkill.BD346D41.tlog/link.read.1.tlog": "eb5afc2d584e97e7fdc3822fc5de05117a92288593fcc8a29a69f6b3a413aa51"
+      }
+    },
+    {
+      "target": "overkill_runner_tests",
+      "project": "build/core-runtime/overkill_runner_tests.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": "%(AdditionalOptions) /utf-8"
+      },
+      "source_units": [
+        "core/runner/runner_tests.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/runner/city_runner.hpp",
+        "core/runner/runner_tests.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_runner_tests.vcxproj": "ae3fe33f276b14e871beacc9fc9e71b76c0e2ad4acbf3c07050e85ca1680c38b",
+        "build/core-runtime/overkill_runner_tests.dir/Release/overkill.A85A8D19.tlog/CL.command.1.tlog": "379cebb97d64265e9c379e54832e31dd9f9f11eccaef9471a1e4521a473576fe",
+        "build/core-runtime/overkill_runner_tests.dir/Release/overkill.A85A8D19.tlog/CL.read.1.tlog": "1a99580d0b95d0c344484532aa38d267a0380ceaa66534d81bddfe65ba1edc2f",
+        "build/core-runtime/overkill_runner_tests.dir/Release/overkill.A85A8D19.tlog/link.read.1.tlog": "638cb01f847e265aeadd300a706c5492c189d2032f4247a7b732db74c59b114d"
+      }
+    },
+    {
+      "target": "overkill_core",
+      "project": "build/core-runtime/overkill_core.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": null
+      },
+      "source_units": [
+        "core/src/core.cpp",
+        "core/src/serialization.cpp",
+        "core/src/catalogue.cpp",
+        "core/src/robots.cpp",
+        "core/src/route.cpp",
+        "core/src/city_content.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_serialization.cpp",
+        "core/src/campaign_upgrades.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/robots.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_serialization.cpp",
+        "core/src/campaign_upgrades.cpp",
+        "core/src/catalogue.cpp",
+        "core/src/catalogue_data.inc",
+        "core/src/city_content.cpp",
+        "core/src/city_content.generated.inc",
+        "core/src/core.cpp",
+        "core/src/recipe_effects.inl",
+        "core/src/robots.cpp",
+        "core/src/route.cpp",
+        "core/src/serialization.cpp",
+        "core/src/upgrade_effects.inl",
+        "core/src/upgrades.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_core.vcxproj": "1992af2a8a44134f89d214e990bd0ac807f81cc33865dff40d37822b5b4a627e",
+        "build/core-runtime/overkill_core.dir/Release/overkill_core.tlog/CL.command.1.tlog": "63b5152236ac6e88833148c5f5de8cb44bef70017bfdc33f6d66242ead86c2ee",
+        "build/core-runtime/overkill_core.dir/Release/overkill_core.tlog/CL.read.1.tlog": "9acae58127e0d32aac475ade32102ebd83385f44279535641c15b58be4da563b"
+      }
+    },
+    {
+      "target": "overkill_runner_support",
+      "project": "build/core-runtime/overkill_runner_support.vcxproj",
+      "flags": {
+        "WarningLevel": "Level4",
+        "TreatWarningAsError": "true",
+        "ConformanceMode": "true",
+        "LanguageStandard": "stdcpp17",
+        "AdditionalOptions": null
+      },
+      "source_units": [
+        "core/runner/policy.cpp",
+        "core/runner/trace.cpp"
+      ],
+      "captured_user_dependencies": [
+        "core/include/overkill/campaign.hpp",
+        "core/include/overkill/city_content.hpp",
+        "core/include/overkill/core.hpp",
+        "core/include/overkill/route.hpp",
+        "core/include/overkill/upgrades.hpp",
+        "core/runner/city_runner.hpp",
+        "core/runner/policy.cpp",
+        "core/runner/trace.cpp"
+      ],
+      "unexpected_user_dependencies": [],
+      "artifact_sha256": {
+        "build/core-runtime/overkill_runner_support.vcxproj": "ea3954a15990cef0ecc736e8a2975435681d243e954bd4fd5b84cf1857ec443d",
+        "build/core-runtime/overkill_runner_support.dir/Release/overkill.1A544552.tlog/CL.command.1.tlog": "e725a689fd0929ace34e2432f8503afc79477d43d5a566879e925b5a08fdf592",
+        "build/core-runtime/overkill_runner_support.dir/Release/overkill.1A544552.tlog/CL.read.1.tlog": "23459abbb22116e041d99cdf75a8b54414ec6467ad3ac28007748014c496c322"
+      }
+    }
+  ],
+  "archive_artifacts": {
+    "identity.json": "2a62d8ea6cacc5663e3bb2ef15ed8bbf418881e400a1dfe496d8e86e88793538",
+    "ctest.xml": "93a6e493976b94482512800652e97bba869d158ce539bd22e3ab155d8e10f4bc",
+    "build/Testing/Temporary/LastTest.log": "045a6bdf796d76283c3d77cc7770b72defd15a1a64e01f606a562971137342f5",
+    "capture.py": "ec7d8544302b00b40af38cb581a12397a860ee83a2e623788a3a5fe3191e01c1",
+    "results-extractor.py": "b5b7e9e9cf0e11c62e14cfb7b109e5adec825e3cd8bc74aa559ae0ffef1d680f",
+    "configure.log": "df83c89ddfbdee3162c01b99ce5d13abb358b24282111d93d26c59899b2d6c6a",
+    "build.log": "69a454875377adc5ddab05ea900ff085e3089a7b1ecd856b1834321f21d76ebe",
+    "ctest.log": "f79064ad5c809c0abb79ad100727ed36a78e0925ee7743f87129bf46ae9bca53"
+  },
+  "published_results_sha256": "9a65ae1bddadcadbfe80bce697bb5be66646d98436ddf489f3981c80d3113454",
+  "initial_failed_capture": {
+    "archive": "core/build/mechanics-integration-20260920-220954",
+    "source_graph_lf_sha256": "eddeb2d6ab7ecd837459231358338443e7c850da6f854b03e70cf789bd144adc",
+    "input_count": 77,
+    "identity_sha256": "9788651abc1ad03d1f0161b9a4e059328b77fdcdf195b6a1fb0376f984e6cad5",
+    "original_compiler_log_retained": false,
+    "only_added_input_on_retry": [
+      "presentation/precision.hpp"
+    ],
+    "attributed_root_observation": "Direct exec session 87257 completion e04b3a reportedly returned exit 1 and C1083 at upgrade_contract_tests.cpp(4,10), missing ../../presentation/precision.hpp. The review verifies the omission and failed record, not that unretained console output."
+  },
+  "baseline_commit": "0e4c019e1435665d73ce4dcf534618b8faf015a2",
+  "production_differences": [
+    {
+      "path": "core/src/campaign.cpp",
+      "base_lf_sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+      "candidate_sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd",
+      "diff_sha256": "02e929fd02d9791df20a4195d29daee20ac3892f6cb4ad9f54a3126cbdeb95ba",
+      "hunks": 1
+    },
+    {
+      "path": "core/src/campaign_upgrades.cpp",
+      "base_lf_sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+      "candidate_sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac",
+      "diff_sha256": "2beff9e523058f8ae9cd44823c10fb3c47d3f1c06014bf7999882a364a264b90",
+      "hunks": 1
+    },
+    {
+      "path": "core/src/core.cpp",
+      "base_lf_sha256": "27972173c2c2f62c35baa32aac65e495c60f102b85d09fe77ac4e1f570c9a3c9",
+      "candidate_sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+      "diff_sha256": "11457a3692dbf7d051d54210fcbb9ce22da63cc92f8bb81e6964d07364d5297e",
+      "hunks": 1
+    },
+    {
+      "path": "core/src/recipe_effects.inl",
+      "base_lf_sha256": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45",
+      "candidate_sha256": "4adce1cd3c24c9e16a771e1ada3a2aac7141668a1ab4258f79be6a9bc6f82ebf",
+      "diff_sha256": "443eda50fe95ab48b30fbbdb5caf4464242dd23095d77ebba52fc45fddddd27d",
+      "hunks": 5
+    },
+    {
+      "path": "core/src/upgrade_effects.inl",
+      "base_lf_sha256": "1f74d51a227c17d62f6715941286b1e46f684755324d0bdda3aea3d81803b5a9",
+      "candidate_sha256": "b47d7f3a3d56fd3588023217c2eaa491bdf58e96b6d7cdc77f9d7886c7315d1f",
+      "diff_sha256": "83f7536dcbb25a4e66be135c69ee21afd58fbcdd3456263367a1310aca104512",
+      "hunks": 2
+    }
+  ],
+  "verifier_sha256": "7be2fca93206e9e220b15030542eb3a9faccd5e68ce9717fe978bb839f0c204e",
+  "test_execution_performed_by_review": false,
+  "manual_production_delta_review": "Five changed production files / ten hunks match terminal notification guards, Modifier/Spread category recognition, UGS-085 base-price gate, SH092/SH113 first-install schedules, UGS121 copy attribution, and MR01/02. No additional production/header/serialization changes were found against the stated baseline.",
+  "note": "Some copied manifest entries are unused standalone CMake files and two existing generated CompilerId sources. Actual compiler-read game dependency closure is checked separately."
+}

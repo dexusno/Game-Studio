@@ -1,0 +1,3396 @@
+{
+  "baseline_coverage_sha256": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802",
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "named_upgrade_cases": 96,
+  "obligations": {
+    "upgrade:MAU-05": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Earlier acquired Arc recoil resolves before later Suture; death halts later targets/heal",
+            "Enemy damage alone cannot trigger recipe heal",
+            "Full-HP-before-Use pays2 then heals2 and consumes opportunity",
+            "MA001",
+            "MA019",
+            "MA046",
+            "MAU-05",
+            "New fight heal allowance",
+            "Same turn further HP recipe cannot heal",
+            "Second paid HP recipe gets no heal",
+            "Two healed once turn with6 actual-fight cap",
+            "UGS-066"
+          ],
+          "id": "contracts::upgrade:MAU-05 paid recipe HP healing after ordered reactions, once turn, actual6 fight cap; partial full-HP branch coverage",
+          "line": 21,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "paid recipe HP healing after ordered reactions, once turn, actual6 fight cap; partial full-HP branch coverage"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Refractory Suture",
+      "propose_full_binding": false,
+      "residual": "Executed paid-HP ordering, death interruption, actual6 cap, once-turn renewal and full-HP-before-Use. Full HP at the post-reaction trigger (zero actual healing but spent opportunity) has no demonstrated eligible natural producer chain; that exact branch remains unclaimed.",
+      "source": {
+        "json_pointer": "/upgrades/4",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each player turn, after a paid HP recipe and its reactions finish, heal 2 HP if Mara remains alive. Heal at most 6 actual HP per fight; full-HP uses consume that turn's opportunity. Enemy damage does not trigger it."
+    },
+    "upgrade:MAU-07": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Ablative tile still applies after Armor",
+            "Below-threshold first shot does not consume qualifying trigger",
+            "MAU-07",
+            "Only avoided Armor creates damage, limit4",
+            "Remaining Armor and ordinary Shield still apply"
+          ],
+          "id": "contracts::upgrade:MAU-07 first Heat8 main shot ignores at most4Armor while other defenses and later shots remain",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "first Heat8 main shot ignores at most4Armor while other defenses and later shots remain"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Thermal Punch",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/6",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "On the first main shot each player turn fired at 8 or more Heat, ignore up to 4 of the target's Armor for that hit. Remaining Armor, Ablative Tiles and any other defenses still apply. No extra damage is created beyond the avoided Armor reduction."
+    },
+    "upgrade:MY1-01": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Grant and Shield do not consume Ammo production allowance",
+            "MY1-01",
+            "New turn renews",
+            "SH001",
+            "SH002",
+            "Saved modifiers belong to their distinct outputs"
+          ],
+          "id": "contracts::upgrade:MY1-01 first Ammo output each turn alone receives two, saved physical bonus survives until Fire",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "first Ammo output each turn alone receives two, saved physical bonus survives until Fire"
+        },
+        {
+          "assertion_messages": [
+            "Actual fully discounted Use follows source paid/unconditional distinction",
+            "Deterministic Iron discount witness",
+            "Free Jig output does not consume first paid production trigger",
+            "UGS-116",
+            "zero-cost"
+          ],
+          "id": "contracts::upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Feed Press",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/78",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once each player turn, the first Ammo recipe producing a direct-damage part adds 2 damage to its first output. The added value stays on that physical part until used; other batch outputs gain nothing."
+    },
+    "upgrade:MY1-03": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Fresh pair every entry",
+            "Fresh pair must not grant recipe ownership",
+            "Granted installed Shield6",
+            "MY1-03",
+            "Plain Ammo6 reserve",
+            "Saved granted Ammo deals6",
+            "Untouched pair can be saved",
+            "Used Ammo and installed Shield clean up"
+          ],
+          "id": "contracts::upgrade:MY1-03 entry pair has independent physical identities and normal saved/installed lifetime",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "entry pair has independent physical identities and normal saved/installed lifetime"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Reserve Cassette",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/36",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At every fight start grant one fresh 6-damage Plain Slug and one fresh 6-Shield Basic Shield Plate. Recipe ownership is not required. They are ordinary removable parts; unused parts still clear after the fight."
+    },
+    "upgrade:MY1-04": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Entry extra3Iron3Copper",
+            "Entry resets opening extra",
+            "MY1-04",
+            "No turn2 extra",
+            "Ordinary composition/steering unchanged"
+          ],
+          "id": "contracts::upgrade:MY1-04 opening material extra is separate from collection and repeats only at entry",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "opening material extra is separate from collection and repeats only at entry"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Foundry Access Key",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/38",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At the start of player turn 1 of each fight gain 3 Iron and 3 Copper, in addition to the ordinary haul. Materials are fight-local and clear normally at fight end."
+    },
+    "upgrade:MY1-07": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "MY1-07",
+            "No repeated turn grant",
+            "Officer filter",
+            "Physical grant",
+            "Untouched Officer Shield is saveable"
+          ],
+          "id": "contracts::upgrade:MY1-07 Officer entry alone grants four Iron and removable Shield8",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "Officer entry alone grants four Iron and removable Shield8"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Inspector Beacon",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/41",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At each Officer fight start grant 4 Iron and a fresh 8-Shield part. This does not apply to regular fights or bosses unless their encounter is explicitly tagged Officer."
+    },
+    "upgrade:MY1-08": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actually paid refund cap3",
+            "First paid use with zero chosen material consumes opportunity",
+            "MA001",
+            "MY1-08",
+            "No repeat on second paid use",
+            "Rejected failed use consumes no opportunity",
+            "SH001"
+          ],
+          "id": "contracts::upgrade:MY1-08 first successful resource-paid use refunds chosen actually-paid units up to3 after resolution",
+          "line": 15,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "first successful resource-paid use refunds chosen actually-paid units up to3 after resolution"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Materials Warrant",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/42",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At fight start select Iron, Copper or Carbon. The first successful paid recipe use that fight returns up to 3 units of the chosen resource actually paid by that use, after its effect and reactions finish."
+    },
+    "upgrade:MY1-11": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "MY1-11",
+            "Not per turn",
+            "Only third qualifying Use, irrespective of paid unit count",
+            "SH001"
+          ],
+          "id": "contracts::upgrade:MY1-11 third qualifying paid Use counts uses not units and one payout after reactions per fight",
+          "line": 16,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "third qualifying paid Use counts uses not units and one payout after reactions per fight"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Supply Survey Drone",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/45",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At each fight start select a material. After the third successful recipe use that actually spends that material, gain 5 of it. Count qualifying uses once each; one payout per fight, after payment and reactions."
+    },
+    "upgrade:MY1-13": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Chosen SH001 copy saves1Iron first Use",
+            "Each physical copy subscribes once",
+            "Earned selection defers without blocking when no eligible copy",
+            "Exact permanent copy tagged",
+            "Later acquisition reopens preserved entitlement",
+            "No Officer/early Regular entitlement",
+            "No per-turn renewal",
+            "SH001",
+            "Third Regular earns one saved selection",
+            "Two complete Regular subscription cycles with Officer exclusion"
+          ],
+          "id": "contracts::upgrade:MY1-13 every third Regular victory earns exact-copy subscription, excludes duplicate tags and defers empty sets",
+          "line": 16,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "every third Regular victory earns exact-copy subscription, excludes duplicate tags and defers empty sets"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Workshop Subscription",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/47",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "After every third completed regular victory, select one installed recipe copy. Its first paid use in every future fight discounts one chosen material by 1, minimum zero. Each copy can receive this subscription once; if no eligible copy exists, retain the earned selection until one exists."
+    },
+    "upgrade:MY1-14": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Entire offer same candidate count",
+            "Next victory renews exactly one reroll",
+            "Old revealed collection knowledge remains",
+            "Saved RNG reroll deterministic"
+          ],
+          "id": "contracts::upgrade:MY1-14 one saved full normal-offer reroll per victory, repeat rejected, old discoveries retained",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "one saved full normal-offer reroll per victory, repeat rejected, old discoveries retained"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Reward Spectrometer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/48",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once after each victorious fight, replace the entire recipe reward offer with a new deterministic eligible offer. Using this action discards the old choices; Collection knowledge gained from seeing them remains."
+    },
+    "upgrade:MY1-15": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First only",
+            "MY1-15",
+            "Only chosen class",
+            "Per-turn renewed on new physical object"
+          ],
+          "id": "contracts::upgrade:MY1-15 persistent typed pack choice selects only Ammo or Shield and renews first physical output per turn",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "persistent typed pack choice selects only Ammo or Shield and renews first physical output per turn"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Field Pattern Pack",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/49",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "On acquisition choose an assault or defence pack. Assault adds 2 damage to the first Ammo output each player turn; defence adds 3 Shield to the first Shield output each player turn. Only the selected pack applies and the bonus belongs to that physical part."
+    },
+    "upgrade:MY1-16": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Exact sold part removed",
+            "New fight resets match, small base not forced to12",
+            "Only first sale doubles base up to12",
+            "Receipt does not resell",
+            "SH001",
+            "SH109"
+          ],
+          "id": "contracts::upgrade:MY1-16 first ordinary part sale per fight matches canonical base capped12, sold id and receipt consumed",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "first ordinary part sale per fight matches canonical base capped12, sold id and receipt consumed"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Exchange Seal",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/50",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each fight, after selling an ordinary part, gain bonus Credits equal to that part's canonical base sale price, capped at 12. The ordinary sale still pays normally; unused allowance does not carry between fights."
+    },
+    "upgrade:MY1-17": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Baseline granted before one retry",
+            "MY1-17",
+            "Original attempt remains spent",
+            "Same target retry payout; failed retry does not recurse",
+            "Successful original never offers retry"
+          ],
+          "id": "contracts::upgrade:MY1-17 single saved same-target retry preserves spent original and cannot recurse",
+          "line": 26,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "single saved same-target retry preserves spent original and cannot recurse"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Precision Stabilizer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/51",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each fight, after an unsuccessful Precision attempt, permit one immediate retry against the same target. The original attempt remains spent, the retry cannot trigger another retry, and the protected base haul is unchanged."
+    },
+    "upgrade:MY1-18": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Entry renews two opening hauls",
+            "First two haul bonus separate from Precision payout",
+            "MY1-18"
+          ],
+          "id": "contracts::upgrade:MY1-18 first two ordinary hauls add two to selected material without altering base or Precision",
+          "line": 22,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "first two ordinary hauls add two to selected material without altering base or Precision"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Steering Fork",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/52",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "On the ordinary haul in player turns 1 and 2 of each fight, gain 2 extra units of the material selected by steering. A bonus haul receives no extra units from this item."
+    },
+    "upgrade:MY1-19": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Fresh delayed Ammo5",
+            "MY1-19",
+            "One further grant per qualifying EndTurn",
+            "Ordinary physical payload",
+            "Terminal fight never delivers scheduled part",
+            "Threshold uses all raw types without spending"
+          ],
+          "id": "contracts::upgrade:MY1-19 raw total threshold schedules one Ammo5 next start without spending and cancels on terminal",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "raw total threshold schedules one Ammo5 next start without spending and cancels on terminal"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Night Delivery Slot",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/53",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "If at least 3 unused raw material units remain when ending the player turn, schedule one fresh 5-damage part for next player-turn start. Trigger once per round; do not spend those materials. Delivery expires if the fight ends."
+    },
+    "upgrade:MY1-20": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First actual attack at low HP autoShield before damage",
+            "First hit above half; before second hit reaches half, Shield protects remaining hits",
+            "HP recipe cost not attack hit",
+            "MA019",
+            "MY1-20",
+            "Once per fight only",
+            "Preparation recoil does not trigger alarm"
+          ],
+          "id": "contracts::upgrade:MY1-20 half-HP condition evaluated before each attack hit once per fight, not own costs or recoil",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "half-HP condition evaluated before each attack hit once per fight, not own costs or recoil"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Threshold Alarm",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/54",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each fight, immediately before the first enemy attack hit while current HP is at or below half maximum, grant a fresh 10-Shield part. Resolve protection against that hit after this grant; recoil and HP costs do not trigger it."
+    },
+    "upgrade:MY1-22": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Both saved Ammo4 can Fire",
+            "Canonical4 grant",
+            "Each untouched Shield saved independently",
+            "Installed pair cleans normally",
+            "MY1-22",
+            "Two distinct outputs without ownership",
+            "Two installed Shield4"
+          ],
+          "id": "contracts::upgrade:MY1-22 each opening choice grants exactly two ordinary fresh physical parts with normal lifetime",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "each opening choice grants exactly two ordinary fresh physical parts with normal lifetime"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Reserve Parts Drawer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/56",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At fight start choose between two fresh 4-damage parts or two fresh 4-Shield parts. Grant the chosen pair only; all are ordinary physical parts with normal resale and cleanup."
+    },
+    "upgrade:MY1-M1": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actual payment1 below threshold",
+            "First actual payment2 rewards ordinary8",
+            "Later Shield cannot save triggering lethal recoil",
+            "MA035",
+            "MA058",
+            "MY1-M1",
+            "Only first qualifying payment",
+            "Opening4 preserves HotBarrel trait",
+            "Turn2 excluded"
+          ],
+          "id": "contracts::upgrade:MY1-M1 four opening Heat and turn1 actual payment threshold reward after paid reactions, once",
+          "line": 19,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "four opening Heat and turn1 actual payment threshold reward after paid reactions, once"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Cinderwall Ignition Bank",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/58",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "At fight start gain 4 Heat. On player turn 1, the first actual Heat payment of at least 2 grants a fresh 8-Shield part after the paid effect and reactions. Hot Barrel remains unchanged."
+    },
+    "upgrade:MY1-M2": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Below4 does not grant Heat or consume qualifying allowance",
+            "MY1-M2",
+            "New turn renews",
+            "No self or later craft repeat",
+            "Saved output retains bonus without Heat condition atFire",
+            "Threshold4 tested before own1Heat"
+          ],
+          "id": "contracts::upgrade:MY1-M2 pre-gain Heat threshold, one manufacture trigger per turn, saved output and no self recursion",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "pre-gain Heat threshold, one manufacture trigger per turn, saved output and no self recursion"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Irena's Heat Ledger",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/59",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each player turn after crafting an Ammo part while at 4 or more Heat, add 3 damage to the first output part and gain 1 Heat. Check the condition before gaining Heat; this item cannot retrigger itself."
+    },
+    "upgrade:MY1-M3": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Cumulative sixth paid Heat heals6",
+            "MA035",
+            "MA058",
+            "MA064",
+            "MY1-M3",
+            "One payout per fight",
+            "Ordinary Heat decay does not progress heal",
+            "Progress cleared at new fight",
+            "Threshold crossed but final death prevents healing",
+            "Two plus three payments remain below6"
+          ],
+          "id": "contracts::upgrade:MY1-M3 cumulative actual paid Heat threshold heals six once alive, decay excluded and progress resets",
+          "line": 20,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "cumulative actual paid Heat threshold heals six once alive, decay excluded and progress resets"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Thermal Recovery Rig",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/60",
+        "path": "design/data/character-mayor-upgrades.json"
+      },
+      "source_effect": "Once each fight, after Mara actually pays a cumulative 6 Heat for effects, heal 6 HP if alive after the triggering reactions. Ordinary decay does not count; unused progress clears at fight end."
+    },
+    "upgrade:MY2-01": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Full cost paid then one Copper, not per cooled copy",
+            "Global cooling and no no-cooldown Use reset",
+            "MY2-01",
+            "Missed earlier use did not consume renewed allowance",
+            "No actual cooldown removal means no payout",
+            "SH001",
+            "SH007",
+            "SH067",
+            "Second qualifying Utility no reward this turn"
+          ],
+          "id": "contracts::upgrade:MY2-01 paid Utility must remove cooldown; one Copper per turn regardless of copies or cost",
+          "line": 17,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "paid Utility must remove cooldown; one Copper per turn regardless of copies or cost"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Coolant Recirculator",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/80",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per player turn, after a Utility Use actually removes at least one cooldown counter, gain 1 Copper. Pay full costs first; globally clearing several recipes still grants only 1 Copper. This is a fresh grant even if no Copper was paid. No-cooldown uses are not refreshed."
+    },
+    "upgrade:MY2-02": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Auto-install first output gains physical3",
+            "Grant and Ammo are ineligible",
+            "MY2-02",
+            "Remove/reinstall cannot duplicate bonus",
+            "SH001",
+            "SH002",
+            "Saved bonus3 on printed6"
+          ],
+          "id": "contracts::upgrade:MY2-02 first Shield recipe output each turn gets three on its physical saved balance",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "first Shield recipe output each turn gets three on its physical saved balance"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Plate Binder",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/83",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once each player turn, the first Shield recipe producing a Shield-granting part adds 3 Shield to its first output. The extra value stays on the part if saved. While installed, the part protects automatically and follows normal depletion and reset."
+    },
+    "upgrade:MY2-03": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Early terminal cancels unearned delivery",
+            "Four capacity only",
+            "Fresh physical Pellet turn3 before haul",
+            "MY2-03",
+            "No turn4 repeat",
+            "Not turn2",
+            "Ordinary3 damage"
+          ],
+          "id": "contracts::upgrade:MY2-03 capacity query adds four without copies and turn3 alone grants a fresh Pellet",
+          "line": 14,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "capacity query adds four without copies and turn3 alone grants a fresh Pellet"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Archive Rack",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/97",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Increase recipe memory capacity by 4. At player-turn start 3 of each fight, grant one fresh SH003 Powder Cap, initially 3 damage. No grant if the fight ends earlier. Capacity grants no recipes by itself."
+    },
+    "upgrade:MY3-02": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Direct balance not a physical part",
+            "Enemy hits consume remaining4; no renewal turn2",
+            "Every fight opening balance",
+            "MY3-02",
+            "Preparation recoil uses opening active Shield"
+          ],
+          "id": "contracts::upgrade:MY3-02 six active opening Shield protects preparation and enemy damage then resets",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "six active opening Shield protects preparation and enemy damage then resets"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Opening Relay",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/2",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At the first player-turn start of every fight, grant 6 active Shield. It protects during preparation and the enemy phase, then follows the normal enemy-turn-end reset."
+    },
+    "upgrade:UGS-002": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Kill-victory only direct8Credits",
+            "Reward navigation does not redispatch victory",
+            "UGS-002"
+          ],
+          "id": "contracts::upgrade:UGS-002 production victory with kills pays8 once; all-escape and final defeat never pay",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "production victory with kills pays8 once; all-escape and final defeat never pay"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Bounty Transponder",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/1",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After victory with at least one robot killed, gain 8 Credits. One payment per fight, independent of robot count."
+    },
+    "upgrade:UGS-004": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First EndTurn consumed even if blocked",
+            "Grant protects current enemy phase",
+            "Installed zero-balance part still excludes grant; reserve does not",
+            "UGS-004"
+          ],
+          "id": "contracts::upgrade:UGS-004 first EndTurn absence of installed Shield is structural, excludes later ends and respects empty parts",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "first EndTurn absence of installed Shield is structural, excludes later ends and respects empty parts"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Foldout Safety Rail",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/3",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At the first End Turn of each fight, if no Shield parts are installed, auto-install one ordinary 4-Shield part. It follows normal depletion and reset."
+    },
+    "upgrade:UGS-005": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Crafting is not Fire and delivery is next start",
+            "Materials are not parts",
+            "No next-turn delivery after escape",
+            "SH001",
+            "UGS-005",
+            "Zero-shot turn renews"
+          ],
+          "id": "contracts::upgrade:UGS-005 zero Fire delays two Iron one Carbon to next start regardless of crafting; Fire excludes",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "zero Fire delays two Iron one Carbon to next start regardless of crafting; Fire excludes"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Idle Furnace Turbine",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/4",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, if no Fire occurred this turn, schedule 2 Iron and 1 Carbon for next player-turn start. One grant per qualifying turn; pending grants expire at fight end."
+    },
+    "upgrade:UGS-006": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Lower maximum not selected",
+            "No per-turn paint reapplication",
+            "UGS-006",
+            "Uses maxHP, living eligibility and stable first tie"
+          ],
+          "id": "contracts::upgrade:UGS-006 highest maximum HP opening Paint uses stable slot tie and ignores dead/escaped",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "highest maximum HP opening Paint uses stable slot tie and ignores dead/escaped"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Rangefinder Beacon",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/5",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, apply Target Paint 2 to the living robot with highest maximum HP; break ties by encounter slot order."
+    },
+    "upgrade:UGS-007": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Both ordinary Ammo consumed for9",
+            "Both unused grants saved",
+            "Named canonical recipe sale references",
+            "New pair next fight",
+            "Two distinct physical grants, no memory",
+            "UGS-007"
+          ],
+          "id": "contracts::upgrade:UGS-007 opening named Slug and Pellet grant no recipes and retain independent sale identities",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "opening named Slug and Pellet grant no recipes and retain independent sale identities"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Ready Rack",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/6",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, grant one fresh SH001 Plain Slug and one SH003 Powder Cap to reserve, at their normal recipe values. Owning those recipes is unnecessary."
+    },
+    "upgrade:UGS-010": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Immediate enemy protection",
+            "Only ordinary reserve blocks",
+            "Renews after reserve consumed",
+            "UGS-010",
+            "controlled-upgrade-fixture"
+          ],
+          "id": "contracts::upgrade:UGS-010 empty ordinary reserve grants five before enemies, installed parts excluded, renewal each turn",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "empty ordinary reserve grants five before enemies, installed parts excluded, renewal each turn"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Bare-Bay Reinforcer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/9",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, if no ordinary parts remain in reserve, auto-install one ordinary 5-Shield part. Installed parts do not count as reserve. Once per turn."
+    },
+    "upgrade:UGS-011": {
+      "fixtures": [],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Dense Chassis Retrofit",
+      "propose_full_binding": false,
+      "residual": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+      "source": {
+        "json_pointer": "/upgrades/10",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition, gain 18 maximum HP and heal 18 HP. Each fight's first base haul delivers 2 fewer material units, minimum zero; steering and Precision bonuses stay intact."
+    },
+    "upgrade:UGS-012": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Exact additional independent copy, no recursive duplicate",
+            "Full memory pauses exact copy exchange",
+            "Next victory renews",
+            "Optional decline creates no copy",
+            "Optional duplicate is tied to actual first accepted physical copy",
+            "SH001",
+            "Second normal offer same victory not another entitlement",
+            "UGS-012",
+            "UGS-101"
+          ],
+          "id": "contracts::upgrade:UGS-012 first victory recipe optionally duplicates exact copy with saved exchange, no recursive acceptance",
+          "line": 11,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "first victory recipe optionally duplicates exact copy with saved exchange, no recursive acceptance"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Blueprint Twin Writer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/11",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After the first accepted recipe reward from each victory, optionally store one additional exact copy. It uses a normal memory slot and permits an exchange if full. This generated extra cannot trigger the item again."
+    },
+    "upgrade:UGS-013": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actual entry heals2",
+            "Clamped to maximum",
+            "Continue restores original pre-entry then executes once",
+            "Repeated Continue cannot stack entry healing",
+            "UGS-013"
+          ],
+          "id": "contracts::upgrade:UGS-013 entry heal clamps and production Continue restores original entry without accumulating",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "entry heal clamps and production Continue restores original entry without accumulating"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Microrepair Reservoir",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/12",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, heal 2 HP, capped by maximum HP. Restarting the same fight restores its original entry state before this single grant."
+    },
+    "upgrade:UGS-014": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Cannot revive lethal first hit",
+            "First real enemy HP loss schedules exactly3 after all attacks",
+            "Fully absorbed attacks do not qualify",
+            "HP cost alone cannot schedule heal",
+            "MA019",
+            "No second recovery in fight",
+            "UGS-014"
+          ],
+          "id": "contracts::upgrade:UGS-014 first enemy HP-loss hit alone schedules survivor heal at next start, no cost or lethal rescue",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "first enemy HP-loss hit alone schedules survivor heal at next start, no cost or lethal rescue"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Emergency Sealant Patch",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/13",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per fight, the first enemy hit causing HP loss schedules a 3 HP heal at next player-turn start, only if the player survives. Player HP costs do not qualify."
+    },
+    "upgrade:UGS-015": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Copy keeps committed bonus and immutable resale",
+            "Copy source remains original physical recipe",
+            "Crafted timed payload is copied as physical part, no immediate Fire/delivery replay",
+            "Exactly first paid Ammo during next3entries copied",
+            "First committed bonus exists",
+            "MY1-01",
+            "No second paid Use copy",
+            "Not per-turn lease allowance",
+            "Only one actual material payment",
+            "SH001",
+            "SH002",
+            "SH014",
+            "Spent lease remains owned and visible",
+            "UGS-015"
+          ],
+          "id": "contracts::upgrade:UGS-015 three-fight paid Ammo lease copies committed first physical properties without replaying Use",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "three-fight paid Ammo lease copies committed first physical properties without replaying Use"
+        },
+        {
+          "assertion_messages": [
+            "One charge consumed at each of first3entries",
+            "UGS-015",
+            "Unused fight licenses cannot be banked"
+          ],
+          "id": "contracts::upgrade:edge:unused-lease UGS015 consumes each entry even without Ammo use and cannot defer its three-fight lease",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS015 consumes each entry even without Ammo use and cannot defer its three-fight lease"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Trial Fabricator License",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/14",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "For the next three fights after acquisition, the first resource-paid Ammo Use each fight also copies its first physical output. Copy that part's committed properties without replaying on-Use or scheduled-delivery effects. Keep the spent license visible afterwards."
+    },
+    "upgrade:UGS-016": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Generated Carbonpaper copy excluded",
+            "One fifth-acceptance heal only",
+            "Only fifth actual acceptance heals8",
+            "SH001",
+            "Shop excluded",
+            "UGS-012",
+            "UGS-016"
+          ],
+          "id": "contracts::upgrade:UGS-016 fifth actual victory acceptance heals8 across fights; shops/generated and repeat navigation excluded",
+          "line": 12,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "fifth actual victory acceptance heals8 across fights; shops/generated and repeat navigation excluded"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Curriculum Medchip",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/15",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After every fifth recipe accepted from victory rewards since acquisition, heal 8 HP. Counter persists across cities; shop purchases and generated extra copies do not count."
+    },
+    "upgrade:UGS-017": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Controlled integer boundary per core, never batch-round",
+            "Individual core sale uses floor(base/4)",
+            "Ordinary Slug sale gets base2 only, no core bonus",
+            "Real destroyed robot cores claimed",
+            "SH001",
+            "Sale receipt does not repeat payment",
+            "UGS-017"
+          ],
+          "id": "contracts::upgrade:UGS-017 each core sale rounds quarter independently, ordinary parts and direct Credits excluded",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "each core sale rounds quarter independently, ordinary parts and direct Credits excluded"
+        },
+        {
+          "assertion_messages": [
+            "Nonpurchase acquisition still grants100 without a shop-price context",
+            "Pay101 then direct100, no quarter multiplier",
+            "UGS-017",
+            "UGS-085"
+          ],
+          "id": "contracts::upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Salvage Contract Stamp",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/16",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "When selling an energy core, gain 25% additional Credits, flooring the bonus once per core. Part sales, direct victory Credit grants and other upgrades' direct Credit grants are unaffected. Calculate each core separately even when selling several together."
+    },
+    "upgrade:UGS-018": {
+      "fixtures": [],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Delayed Power Coupler",
+      "propose_full_binding": false,
+      "residual": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+      "source": {
+        "json_pointer": "/upgrades/17",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Reduce the first turn's base haul by 2 material units, minimum zero. At player-turn starts 2 onward, grant 1 Copper before the ordinary haul. Steering and Precision bonuses are unchanged."
+    },
+    "upgrade:UGS-021": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "MA058",
+            "Not per-turn allowance",
+            "Only first valid main shot at selected body",
+            "Other target does not spend chosen allowance",
+            "UGS-021",
+            "Utility kills chosen enemy before shot; no retargeted bonus"
+          ],
+          "id": "contracts::upgrade:UGS-021 saved live enemy selector grants four on first shot at that target only; dead target loses benefit",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "saved live enemy selector grants four on first shot at that target only; dead target loses benefit"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Survey Kite",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/20",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, select a robot. The first valid main shot targeting it gains +4 damage. If it dies earlier, the bonus expires. The kite adds no helper commands, HP or interception."
+    },
+    "upgrade:UGS-022": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Escape has no next-start delivery",
+            "No opening extra",
+            "Not repeated on turn3",
+            "Turn2 prehaul delivery",
+            "UGS-022"
+          ],
+          "id": "contracts::upgrade:UGS-022 turn2 delivery precedes haul, does not recur and cannot appear after early escape",
+          "line": 15,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "turn2 delivery precedes haul, does not recur and cannot appear after early escape"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Second Cycle Feeder",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/21",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn start 2 of each fight, grant 2 Iron and 1 Copper before the haul. No grant if the fight ended earlier."
+    },
+    "upgrade:UGS-024": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Chosen extra2",
+            "Exactly five opening choices",
+            "No second choice later this fight",
+            "Only Iron/Copper/Carbon offered",
+            "UGS-024",
+            "Visible exact remaining charges"
+          ],
+          "id": "contracts::upgrade:UGS-024 five saved entry choices consume one charge each and never recur after exhaustion",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "five saved entry choices consume one charge each and never recur after exhaustion"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Packed Field Supplies",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/23",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition gain five supply charges. At each of the next five fight starts, spend one charge and choose 2 Iron, 2 Copper or 2 Carbon before the haul. Keep the item visible when spent."
+    },
+    "upgrade:UGS-025": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Fully absorbed damage excluded",
+            "HP cost does not reimburse",
+            "MA019",
+            "No repeated fight grant",
+            "No reward after final death",
+            "One grant remains at next start despite three hits",
+            "UGS-025"
+          ],
+          "id": "contracts::upgrade:UGS-025 first enemy-caused HP loss grants one Iron/Copper, persists enemy phase, excludes costs/death",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "first enemy-caused HP loss grants one Iron/Copper, persists enemy phase, excludes costs/death"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Damage Diagnostic Cache",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/24",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per fight after the first enemy-caused HP loss, grant 1 Iron and 1 Copper if the player survives. Enemy-phase grants remain available next turn. HP costs do not qualify."
+    },
+    "upgrade:UGS-028": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Counting consumes no reserve parts; installed cleans normally",
+            "Renews exactly once per end",
+            "Reserve count cap7, installed part excluded",
+            "UGS-028"
+          ],
+          "id": "contracts::upgrade:UGS-028 ordinary reserve count grants one capped balance, installed parts excluded and no consumption",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "ordinary reserve count grants one capped balance, installed parts excluded and no consumption"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Reserve Resonator",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/27",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, auto-install one ordinary Shield part worth 1 Shield per ordinary part in reserve, capped at 7. Grant nothing at zero. Installed parts do not count. Once per turn."
+    },
+    "upgrade:UGS-029": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "After actual paid cleanse, first genuinely new Burn grants1",
+            "Burn/Fouling/Leak each are actual new enemy debuff types, maximum observed3",
+            "Clearing and reapplying seen types does not grant again",
+            "Extra stacks of existing Burn excluded",
+            "SH033",
+            "UGS-029"
+          ],
+          "id": "contracts::upgrade:UGS-029 three actual Cinderwall debuff types grant once each; repeat stacks and cleared reapplications excluded",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "three actual Cinderwall debuff types grant once each; repeat stacks and cleared reapplications excluded"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Hazard Compensation Chip",
+      "propose_full_binding": false,
+      "residual": "Executed three distinct actual Cinderwall enemy debuff types, existing-stack exclusion and cleared-type reapplication. The fourth distinct enemy debuff needed to distinguish a3 cap from an unbounded counter is not produced by the enabled C1 robots. No positive self-inflicted new debuff producer is present in the tested eligible recipe pool. These branches remain unclaimed.",
+      "source": {
+        "json_pointer": "/upgrades/28",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "The first enemy application of each new debuff type to the player in a fight grants 1 maximum HP and heals 1 HP, up to three gains per fight. Extra stacks of a present type and self-applied penalties do not qualify."
+    },
+    "upgrade:UGS-030": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Grant cannot protect against earlier lethal shot recoil",
+            "Loading is not Fire",
+            "Ordinary installed cleanup",
+            "SH001",
+            "Support hit not extra Fire trigger",
+            "Three grants without action cap",
+            "UGS-030"
+          ],
+          "id": "contracts::upgrade:UGS-030 first three Fires each turn grant Shield2 after reactions; loads and spread are one Fire",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "first three Fires each turn grant Shield2 after reactions; loads and spread are one Fire"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Recoil Harness",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/29",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After each of the first three Fires per player turn, auto-install one ordinary 2-Shield part. Support hits are not Fires; later Fires remain allowed."
+    },
+    "upgrade:UGS-031": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Extra candidate is Shared",
+            "Only normal offers gain fourth",
+            "Separate Officer Rare offer unchanged",
+            "Test reached real Officer",
+            "UGS-031",
+            "UGS-101",
+            "UGS-147"
+          ],
+          "id": "contracts::upgrade:UGS-031 normal offer fourth Shared option retains encounter pool and one pick; bonus offers unchanged",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "normal offer fourth Shared option retains encounter pool and one pick; bonus offers unchanged"
+        },
+        {
+          "assertion_messages": [
+            "Committed route identity",
+            "Duplicate normal cards excluded",
+            "Fourth matches normal reward odds with Shared filter, not first card's rarity",
+            "Normal first3 untouched",
+            "UGS-031"
+          ],
+          "id": "contracts::upgrade:edge:normal-rarity UGS031 fourth option uses current normal weighted pool, Shared-only duplicate filtering",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS031 fourth option uses current normal weighted pool, Shared-only duplicate filtering"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": "UGS031 uses normal victory rarity odds, Shared-only and no duplicate candidates, per the owner clarification in design/UPGRADE-SYSTEM.md.",
+      "name": "Open Standard Decoder",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/30",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Each normal victory recipe offer gains a fourth option from the shared recipe pool, using its current rarity tier. You may still select only one recipe. Officer bonus offers are unchanged."
+    },
+    "upgrade:UGS-033": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Further core sale cannot repeat redeemed entitlements",
+            "Part sale never redeems core entitlements",
+            "SH001",
+            "Two skipped victories redeem together once",
+            "UGS-033"
+          ],
+          "id": "contracts::upgrade:UGS-033 victory entitlements accumulate until first following core sale and exclude part sales",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "victory entitlements accumulate until first following core sale and exclude part sales"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Dividend Biolattice",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/32",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After the first core sale following each victory, gain 1 maximum HP and heal 1 HP. Each victory creates at most one entitlement; further individual sales cannot repeat it. Part sales do not qualify."
+    },
+    "upgrade:UGS-034": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Campaign counter retained through clearFight",
+            "Every third actual victory only",
+            "Extra is Shared Utility",
+            "UGS-034"
+          ],
+          "id": "contracts::upgrade:UGS-034 third true victory adds one Shared Utility, counter persists through real transitions and one pick",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "third true victory adds one Shared Utility, counter persists through real transitions and one pick"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Repair Manual Receiver",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/33",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After every third victory since acquisition, add one shared Utility option to that fight's normal recipe reward. Keep one pick total. The counter carries between cities."
+    },
+    "upgrade:UGS-037": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Direct opening obeys Armor before Shield",
+            "Kills and reactive tile resolve normally",
+            "Lethal recoil halts later opening targets",
+            "Not Fire",
+            "UGS-037"
+          ],
+          "id": "contracts::upgrade:UGS-037 opening four is separate direct damage with complete recoil and final-death interruption",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "opening four is separate direct damage with complete recoil and final-death interruption"
+        },
+        {
+          "assertion_messages": [
+            "Opening setup defense applies before non-Fire flare",
+            "Source Warden starts with tiles",
+            "UGS-037"
+          ],
+          "id": "contracts::upgrade:edge:entry-setup UGS037 uses actual Warden factory opening tiles and no Fire count",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS037 uses actual Warden factory opening tiles and no Fire count"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Arrival Flare",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/36",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After robot fight-opening setup, deal 4 direct damage to every living robot. This upgrade attack is not Fire; enemy damage reactions still apply and can harm the player."
+    },
+    "upgrade:UGS-039": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actual acquisition HP payment8",
+            "Every future paid use, not once fight",
+            "Exact survivable acquisition threshold",
+            "Granted part excluded",
+            "Only selected copies",
+            "Requires9HP atomically",
+            "SH001",
+            "SH002",
+            "UGS-039"
+          ],
+          "id": "contracts::upgrade:UGS-039 acquisition pays8 once, selects one Ammo and one Shield exact copy, bonuses require paid Use",
+          "line": 11,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "acquisition pays8 once, selects one Ammo and one Shield exact copy, bonuses require paid Use"
+        },
+        {
+          "assertion_messages": [
+            "Both one Ammo and one Shield required atomically",
+            "UGS-039"
+          ],
+          "id": "contracts::upgrade:edge:calibration-eligibility UGS039 missing either required stored type rejects before HP payment or ledger insertion",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS039 missing either required stored type rejects before HP payment or ledger insertion"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Risky Calibration Kit",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/38",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition pay 8 HP, requiring at least 9, and choose one Ammo recipe copy and one Shield recipe copy in memory. Their first output gains +2 direct damage or +2 Shield respectively on each paid Use. Offer only if both types are stored."
+    },
+    "upgrade:UGS-040": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Exact tagged paid output gains2",
+            "One whole-victory Shield entitlement, physical identity distinct",
+            "Reinforcement every paid Use of copy",
+            "SH002",
+            "Shop Shield excluded",
+            "UGS-040",
+            "UGS-101"
+          ],
+          "id": "contracts::upgrade:UGS-040 first Shield reward across both normal offers tags exact accepted copy, no shop or generated trigger",
+          "line": 13,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "first Shield reward across both normal offers tags exact accepted copy, no shop or generated trigger"
+        },
+        {
+          "assertion_messages": [
+            "Actual Utility reward gets one specific coupon",
+            "Earlier non-Shield acceptance leaves first Shield reinforcement intact",
+            "Generated copied Shield creates neither reinforcement nor Iron coupon",
+            "SH002",
+            "SH007",
+            "Shop Utility does not receive Copper coupon"
+          ],
+          "id": "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Shield Specification Scanner",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/39",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "The first Shield recipe accepted from each victory reward becomes Reinforced: its first output gains +2 Shield on every resource-paid Use. One tag per physical recipe copy; generated duplicates are not new qualifying acceptances."
+    },
+    "upgrade:UGS-041": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "No per-turn renewal",
+            "One Copper saved, full Glass paid",
+            "Preexisting identical copy excluded",
+            "SH007",
+            "UGS-041"
+          ],
+          "id": "contracts::upgrade:UGS-041 new victory Utility Copper coupon applies once each fight only to that copy and full other cost",
+          "line": 14,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "new victory Utility Copper coupon applies once each fight only to that copy and full other cost"
+        },
+        {
+          "assertion_messages": [
+            "Actual Utility reward gets one specific coupon",
+            "Earlier non-Shield acceptance leaves first Shield reinforcement intact",
+            "Generated copied Shield creates neither reinforcement nor Iron coupon",
+            "SH002",
+            "SH007",
+            "Shop Utility does not receive Copper coupon"
+          ],
+          "id": "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Utility Bench Compiler",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/40",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Each new Utility recipe copy accepted from victory rewards gets a startup coupon: its first Copper-consuming Use each fight costs 1 less Copper. Other costs remain full. Applies only to copies accepted after acquisition."
+    },
+    "upgrade:UGS-042": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Exact unit exchange",
+            "Only base composition offered, excludes steering and Precision",
+            "Only first haul",
+            "UGS-042"
+          ],
+          "id": "contracts::upgrade:UGS-042 first haul can exchange at most three base units one-for-one with saved atomic choices",
+          "line": 27,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "first haul can exchange at most three base units one-for-one with saved atomic choices"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Haul Sorter",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/41",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After the first ordinary haul each fight, exchange up to three of its base-material units for the same number of different standard-material units of your choice. No exchange of steering or Precision bonuses. Confirm once."
+    },
+    "upgrade:UGS-045": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "All three actual city Officers taken",
+            "Controlled future Officer actually won",
+            "Fourth source-qualified win cannot exceed3",
+            "Opening bonus reflects only previously earned levels",
+            "Queued first6 survives, consumed once",
+            "Regular/Boss do not grant levels",
+            "UGS-045"
+          ],
+          "id": "contracts::upgrade:UGS-045 actual Officer wins after acquisition build capped levels and future first shot consumes bonus once",
+          "line": 18,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "actual Officer wins after acquisition build capped levels and future first shot consumes bonus once"
+        },
+        {
+          "assertion_messages": [
+            "No retroactive awakening",
+            "One prior and two subsequent real Officers",
+            "Only two later training levels",
+            "Only two postacquisition Officers remain; never awakens",
+            "Prior Officer excluded at actual paid acquisition"
+          ],
+          "id": "contracts::upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "Officer achievements before acquisition never become UGS045 levels or UGS125 awakening"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Training Gyroscope",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/44",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Each Officer victory after acquisition grants one calibration level, capped at 3. At fight start queue twice that level as bonus damage for the first valid main shot. No retroactive levels."
+    },
+    "upgrade:UGS-046": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Empty optional selection allowed",
+            "Later copy and free grant excluded",
+            "Not consumed once",
+            "SH002",
+            "Tags exact selected physical copies",
+            "UGS-046"
+          ],
+          "id": "contracts::upgrade:UGS-046 zero-to-three distinct Ammo copies selectable, later and granted copies excluded",
+          "line": 12,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "zero-to-three distinct Ammo copies selectable, later and granted copies excluded"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Precision Die Set",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/45",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition select up to three Ammo recipe copies. Each chosen copy adds 1 direct damage to its first physical output on every paid Use. No effect on outputs without direct damage or later-generated recipe copies."
+    },
+    "upgrade:UGS-047": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Enemy hits and reset consume physical3",
+            "New fight renews",
+            "Only two opening turns",
+            "UGS-047"
+          ],
+          "id": "contracts::upgrade:UGS-047 only first two EndTurns create three physical Shield before enemy attacks",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "only first two EndTurns create three physical Shield before enemy attacks"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Layered Undersuit",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/46",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn on player turns 1 and 2 each fight, auto-install an ordinary 3-Shield part. Each named turn grants once; protection and reset stay normal."
+    },
+    "upgrade:UGS-048": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Enemy-phase Burn kill excluded",
+            "Final lethal recoil stops kill grant",
+            "Newly summoned living body is eligible",
+            "Paid Slug cost then first-kill refund1Iron1Carbon",
+            "Second kill no further grant",
+            "UGS-048"
+          ],
+          "id": "contracts::upgrade:UGS-048 first player-turn kill grants Iron/Carbon once, includes summons, excludes enemy-phase and death",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "first player-turn kill grants Iron/Carbon once, includes summons, excludes enemy-phase and death"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Kill Recovery Servo",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/47",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After the first robot killed during each player turn, grant 1 Iron and 1 Carbon if the player survives. Summoned robots qualify; later kills that turn grant nothing."
+    },
+    "upgrade:UGS-049": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Ablative-only mitigation excluded",
+            "Kill did not consume renewed living-target allowance",
+            "Killed armored target excluded",
+            "Mark applied after hit, not to triggering damage",
+            "One surviving Armor trigger across targets",
+            "Shield-only mitigation excluded",
+            "UGS-049"
+          ],
+          "id": "contracts::upgrade:UGS-049 actual Armor reduction on surviving hit marks after damage once each turn",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "actual Armor reduction on surviving hit marks after damage once each turn"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Armor Breach Probe",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/48",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per player turn, after a player hit whose damage was actually reduced by a robot's Armor, apply Target Paint 2 to that surviving robot. The triggering hit receives no retroactive benefit. Hits reduced only by other effects do not qualify."
+    },
+    "upgrade:UGS-050": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Cycle resets each entry",
+            "Normal haul unchanged",
+            "Only next turns divisible by3 grant before haul",
+            "UGS-050"
+          ],
+          "id": "contracts::upgrade:UGS-050 three-turn material cycle repeats before collection and resets with fight",
+          "line": 16,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "three-turn material cycle repeats before collection and resets with fight"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Three-Cycle Hopper",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/49",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn starts 3, 6, 9 and so on, grant 1 Iron and 1 Copper before the haul. Reset the cycle each fight."
+    },
+    "upgrade:UGS-051": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Entry restarts counter",
+            "Only ordinary haul5/10 receives extra steered unit",
+            "UGS-051"
+          ],
+          "id": "contracts::upgrade:UGS-051 fifth-turn ordinary haul adds one steered unit with fight-local cadence",
+          "line": 17,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "fifth-turn ordinary haul adds one steered unit with fight-local cadence"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Five-Cycle Recycler",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/50",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After the ordinary haul resolves on player turns 5, 10, 15 and so on, gain 1 additional unit of that haul's steered material. Reset the counter each fight. This grants a bonus material, not an extra haul."
+    },
+    "upgrade:UGS-053": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "No turn1 Shield",
+            "Turn2 fresh installed10 before collection",
+            "UGS-053",
+            "Unused saved part, no turn3 duplicate"
+          ],
+          "id": "contracts::upgrade:UGS-053 turn2 Shield10 is freshly installed, removable unused, and not repeated",
+          "line": 18,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "turn2 Shield10 is freshly installed, removable unused, and not repeated"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Second Cycle Shutter",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/52",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn start 2 each fight, auto-install one ordinary 10-Shield part. It remains removable and saveable before protection is used."
+    },
+    "upgrade:UGS-058": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Both regions scaled from original",
+            "Centered symmetric region",
+            "Exactly20 percentage points of original width",
+            "Same fixed payouts, one attempt",
+            "Track bounds",
+            "UGS-058"
+          ],
+          "id": "contracts::upgrade:UGS-058 twenty-percent original Precision region widens symmetrically without payouts or attempts",
+          "line": 25,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "twenty-percent original Precision region widens symmetrically without payouts or attempts"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "presentation/precision.hpp"
+      ],
+      "interpretation": null,
+      "name": "Claw Dwell Stabilizer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/57",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Widen the successful region of the optional Precision timing marker by 20% of its original width, centered on the same point and clamped to the marker track. Attempts and material payout stay unchanged."
+    },
+    "upgrade:UGS-060": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Living sole main fallback6+6+6+5",
+            "No fourth-Fire trigger",
+            "Separate5 hit obeys Armor at lowest other slot",
+            "UGS-060"
+          ],
+          "id": "contracts::upgrade:UGS-060 third actual Fire targets lowest-slot other living enemy, fallback main, separate hit/reaction",
+          "line": 11,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "third actual Fire targets lowest-slot other living enemy, fallback main, separate hit/reaction"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Crossfire Tripod",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/59",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per turn after the third Fire, deal 5 direct damage to a living robot other than that Fire's main target, choosing the lowest encounter slot. If none exists, target the main target if still alive. It is a separate upgrade hit."
+    },
+    "upgrade:UGS-061": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Later manual payout independent, no extra opener",
+            "Opening Auto extra1 without attempt",
+            "Renew entry",
+            "UGS-061"
+          ],
+          "id": "contracts::upgrade:UGS-061 first haul only receives one steered extra, Auto does not consume Precision",
+          "line": 23,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "first haul only receives one steered extra, Auto does not consume Precision"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Opening Hopper Extension",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/60",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "The first ordinary haul each fight gains 1 additional unit of its steered material, after the ordinary haul composition is determined. This is not an extra Precision attempt."
+    },
+    "upgrade:UGS-062": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "At least one actual second-victory adapter offer includes previously excluded spread category",
+            "Controlled route Regular exists",
+            "Counter persists across ordinary fight cleanup",
+            "Every second actual victory",
+            "Only source Modifier candidate is spreading SH051",
+            "Shared source Modifier category",
+            "UGS-062"
+          ],
+          "id": "contracts::upgrade:UGS-062 every second victory adds Shared Modifier including spread category; whole offer still one pick",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "every second victory adds Shared Modifier including spread category; whole offer still one pick"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Pattern Subscription",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/61",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Every second victory since acquisition adds a shared Modifier recipe as a fourth option to the normal recipe offer. Keep one selection total; counter persists across cities."
+    },
+    "upgrade:UGS-065": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "All-escaped fight leaves charge",
+            "Final defeat gets neither heal nor victory charge consumption",
+            "First won fight spends and heals10",
+            "Spent upgrade remains owned but pays no second heal",
+            "UGS-065"
+          ],
+          "id": "contracts::upgrade:UGS-065 next true victory heals10 once, escape does not spend, final death cannot rescue",
+          "line": 6,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "next true victory heals10 once, escape does not spend, final death cannot rescue"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Field Dressing Dispenser",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/64",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At the end of the next fight won after acquisition, heal 10 HP if alive, then mark this permanent item spent. No heal if all enemies escaped with zero kills."
+    },
+    "upgrade:UGS-070": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Acquire12max and heal12",
+            "Not each Boss turn",
+            "Only Boss entry grows1 and heals1",
+            "UGS-070"
+          ],
+          "id": "contracts::upgrade:UGS-070 acquisition growth once and Boss-entry-only further growth",
+          "line": 11,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "acquisition growth once and Boss-entry-only further growth"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Adaptive Life Frame",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/69",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition gain 12 maximum HP and heal 12 HP. At the start of each boss fight, also gain 1 maximum HP and heal 1 HP. Only one growth per boss entry."
+    },
+    "upgrade:UGS-071": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Acquisition4",
+            "First later enemy hit still reduced",
+            "No renewal inside fight",
+            "One-point first hit reduction precedes Shield; floor0",
+            "Recoil not enemy attack reduction",
+            "UGS-071"
+          ],
+          "id": "contracts::upgrade:UGS-071 four acquisition HP then first enemy hit only reduces before Shield with zero floor",
+          "line": 12,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "four acquisition HP then first enemy hit only reduces before Shield with zero floor"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Lightweight Rib Cage",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/70",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition gain 4 maximum HP and heal 4 HP. The first enemy attack hit each fight also deals 1 less damage before Shield, minimum zero."
+    },
+    "upgrade:UGS-077": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Fresh-only shot does not consume eligible allowance",
+            "One old plus new permits3 once",
+            "Renewed next-turn age threshold",
+            "Second old shot same turn no bonus",
+            "UGS-077"
+          ],
+          "id": "contracts::upgrade:UGS-077 older unused physical part permits three once per turn while fresh-only shots leave trigger intact",
+          "line": 12,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "older unused physical part permits three once per turn while fresh-only shots leave trigger intact"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "First-Part Ballistic Jig",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/76",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per turn, when firing a bullet containing at least one part saved from an earlier round, add +3 damage to the main shot. Fresh parts can share that bullet; support hits receive no bonus."
+    },
+    "upgrade:UGS-083": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Counter resets fight",
+            "Every fifth actual Fire only",
+            "SH001",
+            "UGS-083"
+          ],
+          "id": "contracts::upgrade:UGS-083 every fifth committed Fire across turns grants one Copper, no load count or action cap",
+          "line": 13,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "every fifth committed Fire across turns grants one Copper, no load count or action cap"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Five-Shot Recuperator",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/82",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After every fifth Fire within a fight, return 1 Copper. Track actual Fires, reset the counter each fight, and do not count support hits. Later Fires remain resource-limited normally."
+    },
+    "upgrade:UGS-085": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actual101 purchase then one100 acquisition credit",
+            "Existing discount lowers final110 price to88",
+            "Gate uses undiscounted own110; paid88 and acquired100 once",
+            "Replay cannot mint100again",
+            "UGS-075",
+            "Upgrade does not ban other cheap purchases"
+          ],
+          "id": "contracts::upgrade:UGS-085 one acquisition100Credits and its own strict undiscounted purchase-price gate",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "one acquisition100Credits and its own strict undiscounted purchase-price gate"
+        },
+        {
+          "assertion_messages": [
+            "Nonpurchase acquisition still grants100 without a shop-price context",
+            "Pay101 then direct100, no quarter multiplier",
+            "UGS-017",
+            "UGS-085"
+          ],
+          "id": "contracts::upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid"
+        },
+        {
+          "assertion_messages": [
+            "No shop gate applied to real reward acquisition",
+            "Real Officer result reached",
+            "Reward receipt cannot grant100again",
+            "UGS-085"
+          ],
+          "id": "contracts::upgrade:edge:bond-reward UGS085 still grants one100Credits when actually accepted as a nonpurchase Officer reward",
+          "line": 2,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS085 still grants one100Credits when actually accepted as a nonpurchase Officer reward"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Civic Credit Bond",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/84",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition gain 100 Credits once. Buying this upgrade is permitted only if its undiscounted shop price exceeds 100 Credits; its final discounted price may fall below 100 as an earned combo."
+    },
+    "upgrade:UGS-086": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Installed grant expires normally",
+            "Next end may trigger once again",
+            "Total balance condition, not printed Shield existence",
+            "UGS-086"
+          ],
+          "id": "contracts::upgrade:UGS-086 zero combined Shield includes active balances, empty printed parts qualify and no recursive trigger",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "zero combined Shield includes active balances, empty printed parts qualify and no recursive trigger"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Vacant Shield Projector",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/85",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, if total remaining protection from installed Shield parts and active Shield is zero, auto-install one ordinary 5-Shield part. Once per turn; an empty printed part cannot retrigger it."
+    },
+    "upgrade:UGS-087": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Both requirements must hold",
+            "New round renews shot condition after Shield reset",
+            "UGS-087"
+          ],
+          "id": "contracts::upgrade:UGS-087 conjunction requires zero Fire and zero combined Shield at EndTurn",
+          "line": 9,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "conjunction requires zero Fire and zero combined Shield at EndTurn"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Thin-Film Projector",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/86",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, if no Fire happened and total remaining Shield is zero, auto-install one ordinary 4-Shield part. Once per turn."
+    },
+    "upgrade:UGS-088": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First Fire excluded",
+            "Round renewal",
+            "Second Fire grants4",
+            "Second-Fire lethal recoil resolves before grant",
+            "Third excluded",
+            "UGS-088"
+          ],
+          "id": "contracts::upgrade:UGS-088 only second Fire each turn grants four after shot reactions, never retroactive rescue",
+          "line": 14,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "only second Fire each turn grants four after shot reactions, never retroactive rescue"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Burst-Brace Fan",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/87",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per turn after the second Fire, auto-install one ordinary 4-Shield part. It can protect later enemy reactions; it does not protect retroactively against that Fire's completed reactions."
+    },
+    "upgrade:UGS-091": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Lowest currentHP tie first eligible slot, threshold10",
+            "No hidden Shield payment",
+            "Reader kill precedes that robot action",
+            "Reader leaves all Shield for enemy hits",
+            "UGS-091"
+          ],
+          "id": "contracts::upgrade:UGS-091 Shield10 reader does not spend and hits lowest current HP with stable tie before attacks",
+          "line": 11,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "Shield10 reader does not spend and hits lowest current HP with stable tie before attacks"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Shield Pressure Nozzle",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/90",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn, if at least 10 Shield remains, deal 5 direct damage to the living robot with lowest current HP, ties by slot. Do not spend Shield. Once per turn, before enemy actions."
+    },
+    "upgrade:UGS-093": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Fifth Fire (6+8)*2, percentage after flat",
+            "Fight counter reset",
+            "Other Fires unmodified",
+            "Rejected Fire does not consume fifth trigger",
+            "UGS-093"
+          ],
+          "id": "contracts::upgrade:UGS-093 every fifth valid Fire gets eight before percentage modifiers, across rounds and reset at fight",
+          "line": 15,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "every fifth valid Fire gets eight before percentage modifiers, across rounds and reset at fight"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Indexed Firing Cam",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/92",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Every fifth Fire in a fight adds +8 damage to that main shot before other percentage modifiers. Count confirmed valid Fires, not loaded bullets or support hits; reset at fight entry."
+    },
+    "upgrade:UGS-094": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "No turn4 upgrade cooling",
+            "Ordinary decay first, then one greatest tied earliest copy",
+            "Ready copies never negative at turn9",
+            "SH013",
+            "Turn6 greatest cooled toready once",
+            "UGS-094"
+          ],
+          "id": "contracts::upgrade:UGS-094 every third start cools only greatest positive copy with stable memory-order tie",
+          "line": 19,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "every third start cools only greatest positive copy with stable memory-order tie"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Three-Cycle Archive Port",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/93",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn starts 3, 6, 9 and so on, remove 1 cooldown counter from the stored recipe copy with the most counters. Ties use memory slot order. No effect if all are ready."
+    },
+    "upgrade:UGS-095": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Existing modifier activation and Ammo excluded",
+            "New fight spreading Modifier recipe qualifies",
+            "No per-turn renewal",
+            "Only first paid Modifier this fight",
+            "Paid Modifier Use triggers immediately",
+            "SH001",
+            "SH005",
+            "SH036",
+            "SH043",
+            "SH050",
+            "UGS-095"
+          ],
+          "id": "contracts::upgrade:UGS-095 first resource-paid Modifier craft, not grant or activation, gives one physical Shield7",
+          "line": 19,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "first resource-paid Modifier craft, not grant or activation, gives one physical Shield7"
+        },
+        {
+          "assertion_messages": [
+            "Category repair does not convert it to planning Modifier",
+            "Full actual crafting payment retained",
+            "Grant is a physical spread, not a paid recipe trigger",
+            "Later planning Modifier cannot repeat first-category reward",
+            "MA001",
+            "No per-turn replay; first use allowance is fight-scoped",
+            "One spread plus one ordinary Shield7 from first paid Modifier",
+            "SH002",
+            "SH036",
+            "SH038",
+            "Shield/Magnet/Utility paid Uses excluded",
+            "UGS-095"
+          ],
+          "id": "contracts::upgrade:category:modifier-spread all six spreading Modifier paid Uses trigger once; lifecycle and exclusions remain distinct",
+          "line": 4,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "all six spreading Modifier paid Uses trigger once; lifecycle and exclusions remain distinct"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "First-Modifier Insulation",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/94",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per fight, after the first resource-paid Modifier recipe Use, auto-install one ordinary 7-Shield part. Copying or installing an existing part does not qualify."
+    },
+    "upgrade:UGS-096": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Consolation renews next fight",
+            "Failure-only consolation, normal haul survives",
+            "No retry and original attempt usage retained",
+            "UGS-096"
+          ],
+          "id": "contracts::upgrade:UGS-096 only first failed Precision grants one same-target bonus without retry or baseline loss",
+          "line": 24,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "only first failed Precision grants one same-target bonus without retry or baseline loss"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Precision Training Cursor",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/95",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "The first failed Precision attempt each fight grants 1 bonus material unit of that haul's steered type. The attempt remains spent and ordinary haul materials stay unchanged. This is a bonus grant, not a refund."
+    },
+    "upgrade:UGS-099": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Chosen2 before haul",
+            "Cycle reset",
+            "Exact fourth-turn choices",
+            "No other start grant",
+            "UGS-099"
+          ],
+          "id": "contracts::upgrade:UGS-099 turn4/8 saved choices allow exactly Iron or Glass before haul and reset",
+          "line": 20,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "turn4/8 saved choices allow exactly Iron or Glass before haul and reset"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Four-Cycle Logistics Card",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/98",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn starts 4, 8, 12 and so on, choose 2 Iron or 2 Glass to receive before the haul. Reset the cycle per fight."
+    },
+    "upgrade:UGS-101": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Accept one from each without combining pools",
+            "Complete source route tested both exclusions; skipping offers remains legal",
+            "Only Regular rewards get second normal offer",
+            "SH001",
+            "SH002",
+            "Second independent offer uses normal saved exchange",
+            "UGS-101"
+          ],
+          "id": "contracts::upgrade:UGS-101 Regular victories expose two independent optional offers; Officer and Boss have no addition",
+          "line": 14,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "Regular victories expose two independent optional offers; Officer and Boss have no addition"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Expanded Salvage Dossier",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/100",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After a Regular victory, show a second independent normal recipe offer after the first. Accept zero or one from each and handle memory exchanges normally. Officer and boss rewards are unchanged."
+    },
+    "upgrade:UGS-102": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Consecutive turns build to6 cap",
+            "Entire missed player turn resets momentum",
+            "Explicit MY1-21 extra Use permits a second selected-copy Fire: no second bonus",
+            "Fight reset, physical selection retained",
+            "MY1-21",
+            "Other physical copy leaves allowance intact",
+            "SH002",
+            "UGS-102"
+          ],
+          "id": "contracts::upgrade:UGS-102 chosen physical Ammo copy builds consecutive-turn momentum2/4/6, first only and gaps reset",
+          "line": 16,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "chosen physical Ammo copy builds consecutive-turn momentum2/4/6, first only and gaps reset"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Momentum Rifle Mount",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/101",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition select one stored Ammo recipe copy. Each consecutive player turn in which its produced part appears in a fired bullet grants that turn's first qualifying main shot +2, +4, then +6 damage. Missing a turn resets the sequence; cap +6 and reset each fight."
+    },
+    "upgrade:UGS-105": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Damage cannot become negative",
+            "Every living opening enemy weakened",
+            "Next turn unweakened",
+            "Three robots times three reduced hits",
+            "UGS-105",
+            "Weaken decays after enemy turn"
+          ],
+          "id": "contracts::upgrade:UGS-105 opening Weaken affects every attack hit then decays, including ordinary zero floor",
+          "line": 13,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "opening Weaken affects every attack hit then decays, including ordinary zero floor"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Threat Damping Mask",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/104",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start apply Weaken 1 to every living robot. It subtracts 1 from each attack hit and follows ordinary enemy-phase decay."
+    },
+    "upgrade:UGS-107": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Current turn has fresh allowance",
+            "MA001",
+            "SH002",
+            "Two Utility uses queue only3 once, consumed first validmain",
+            "UGS-107",
+            "Unused ordinary turn bonus expires"
+          ],
+          "id": "contracts::upgrade:UGS-107 first paid Utility per turn queues one next-main bonus that expires if unused",
+          "line": 20,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "first paid Utility per turn queues one next-main bonus that expires if unused"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Utility Aim Converter",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/106",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per turn after a resource-paid Utility Use, queue +3 damage for the next valid main shot this turn. Further Uses cannot stack this item's bonus; unused bonus expires at End Turn."
+    },
+    "upgrade:UGS-109": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Only actual Fire excludes; Shield does not",
+            "Renewed next turn",
+            "SH001",
+            "UGS-109"
+          ],
+          "id": "contracts::upgrade:UGS-109 zero Fire grants four even with existing Shield; crafting/loading are not Fire",
+          "line": 10,
+          "path": "core/tests/upgrade-contracts/end_turn.inl",
+          "title": "zero Fire grants four even with existing Shield; crafting/loading are not Fire"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Quiet Cycle Screen",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/108",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At End Turn with no Fire this turn, auto-install one ordinary 4-Shield part. Once per turn; parts can subsequently protect against the approaching enemy attacks normally."
+    },
+    "upgrade:UGS-115": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Class and first-Fire filters",
+            "Turn renewal only for Officer",
+            "UGS-115"
+          ],
+          "id": "contracts::upgrade:UGS-115 Officer encounters only first main Fire each turn gains three; other classes never gain",
+          "line": 17,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "Officer encounters only first main Fire each turn gains three; other classes never gain"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Officer Hunter Receiver",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/114",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "In Officer fights, the first valid main shot each turn gains +3 damage. No effect in Regular or boss fights; support hits receive no bonus."
+    },
+    "upgrade:UGS-116": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First actually-consuming Use saves one after unrelated Use",
+            "No reroll between turns or Uses",
+            "No second discount this turn",
+            "Selected standard material",
+            "UGS-116",
+            "daily-discount"
+          ],
+          "id": "contracts::upgrade:UGS-116 saved random material fixed per fight, first qualifying use discounts once each turn and renews",
+          "line": 21,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "saved random material fixed per fight, first qualifying use discounts once each turn and renews"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Scrambled Discount Chip",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/115",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, seeded-randomly choose one material type. The first paid recipe Use each turn that consumes that type costs 1 less of it, minimum zero. The selected type is revealed before play and fixed for the fight."
+    },
+    "upgrade:UGS-117": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "First Fire after idle turns consumes4 once",
+            "No periodic repeat",
+            "No turn2 Shield",
+            "Turn3 physical4",
+            "UGS-117",
+            "Unused installed Shield cleans at turn3 end"
+          ],
+          "id": "contracts::upgrade:UGS-117 third-turn physical Shield and fight-lived first-shot bonus survive zero-shot turns",
+          "line": 21,
+          "path": "core/tests/upgrade-contracts/entry_turn.inl",
+          "title": "third-turn physical Shield and fight-lived first-shot bonus survive zero-shot turns"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Third Cycle Calibration",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/116",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At player-turn start 3, queue +4 damage for the next main shot this fight and auto-install one ordinary 4-Shield part. The shot bonus survives waiting but is spent only once."
+    },
+    "upgrade:UGS-119": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Each selected copy gets appropriate first output bonus",
+            "MA001",
+            "No renewal per turn",
+            "Renewed at next fight",
+            "Same definition other copy excluded",
+            "UGS-119"
+          ],
+          "id": "contracts::upgrade:UGS-119 two different saved choices, first paid output each per fight, invalid kinds reject",
+          "line": 13,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "two different saved choices, first paid output each per fight, invalid kinds reject"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Pairwise Template Scanner",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/118",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "At fight start, select two different stored part-producing recipe copies. Their first paid Uses that fight add +2 to the first output's direct damage or Shield, choosing an eligible value. Selecting a copy with neither is disabled."
+    },
+    "upgrade:UGS-121": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Grant excluded; other Ammo does not consume specific allowance",
+            "Per-turn renewal",
+            "SH001",
+            "SH003",
+            "Saved physical bonus not global shot bonus",
+            "UGS-121"
+          ],
+          "id": "contracts::upgrade:UGS-121 only first resource-paid canonical Solid Casting output per turn gains two",
+          "line": 14,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "only first resource-paid canonical Solid Casting output per turn gains two"
+        },
+        {
+          "assertion_messages": [
+            "Actual fully discounted Use follows source paid/unconditional distinction",
+            "Deterministic Iron discount witness",
+            "Free Jig output does not consume first paid production trigger",
+            "UGS-116",
+            "zero-cost"
+          ],
+          "id": "contracts::upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig",
+          "line": 5,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Standard Ammunition Jig",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/120",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "The first resource-paid SH001 Plain Slug output each turn gains +2 direct damage. Only one physical slug receives it, even if a batch or copy effect creates more."
+    },
+    "upgrade:UGS-122": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Canonical granted plainSlug qualifies next fight",
+            "Fresh named Pellet only after consumed Slug",
+            "MY1-03",
+            "Mixed bullet excluded",
+            "No repeat across turns",
+            "Other sole Ammo excluded",
+            "SH003",
+            "UGS-122"
+          ],
+          "id": "contracts::upgrade:UGS-122 one single canonical Slug bullet per fight grants fresh Pellet, mixed and other Ammo excluded",
+          "line": 18,
+          "path": "core/tests/upgrade-contracts/combat.inl",
+          "title": "one single canonical Slug bullet per fight grants fresh Pellet, mixed and other Ammo excluded"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Training Cartridge Reader",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/121",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per fight, after a valid main shot containing only one SH001 Plain Slug, grant one fresh SH003 Powder Cap. No other bullet parts may be present; the slug is consumed normally."
+    },
+    "upgrade:UGS-125": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Actual future entry after third Officer exercised",
+            "Awakening not second collectible",
+            "First haul only gets1steered after awakening",
+            "First valid main gains7 only",
+            "No combat effect before third Officer, no retroactive bonus in that fight",
+            "Third Officer autoawakens same owned ledger",
+            "UGS-125"
+          ],
+          "id": "contracts::upgrade:UGS-125 third actual Officer victory awakens future entries only, no reacquisition, first haul and shot once",
+          "line": 22,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "third actual Officer victory awakens future entries only, no reacquisition, first haul and shot once"
+        },
+        {
+          "assertion_messages": [
+            "No retroactive awakening",
+            "One prior and two subsequent real Officers",
+            "Only two later training levels",
+            "Only two postacquisition Officers remain; never awakens",
+            "Prior Officer excluded at actual paid acquisition"
+          ],
+          "id": "contracts::upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "Officer achievements before acquisition never become UGS045 levels or UGS125 awakening"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Dormant Hunter Chip",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/124",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Track Officer victories after acquisition. After the third, awaken this item: future fights' first valid main shot gains +7 damage and first haul gains 1 steered material. Before awakening it grants no combat effect. Awakening is automatic and not a second collectible."
+    },
+    "upgrade:UGS-126": {
+      "fixtures": [],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Static Filter Loan",
+      "propose_full_binding": false,
+      "residual": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+      "source": {
+        "json_pointer": "/upgrades/125",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "On acquisition, the next fight's first base haul loses 2 material units, minimum zero. After that fight completes, permanently widen the Precision success region by 10% of its original width. No change to attempt count; clamp width to the track."
+    },
+    "upgrade:UGS-127": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Next turn renewal",
+            "Only once per turn",
+            "Reduction without reaching zero excluded",
+            "SH007",
+            "SH013",
+            "Two simultaneous completions produce one Shield5",
+            "UGS-127"
+          ],
+          "id": "contracts::upgrade:UGS-127 Utility must finish a cooling copy; multiple completions pay once and renew each turn",
+          "line": 18,
+          "path": "core/tests/upgrade-contracts/production.inl",
+          "title": "Utility must finish a cooling copy; multiple completions pay once and renew each turn"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Cooldown Register Shield",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/126",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Once per turn, after a Utility removes the final cooldown counter from at least one recipe copy, auto-install an ordinary 5-Shield part. Global cooling reaching zero on several copies still grants one part."
+    },
+    "upgrade:UGS-129": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "All escape no growth",
+            "Death receives no growth or revive",
+            "One growth and heal each real victory",
+            "UGS-129"
+          ],
+          "id": "contracts::upgrade:UGS-129 every real victory grows and heals one, all escape and death do not, receipt navigation is inert",
+          "line": 7,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "every real victory grows and heals one, all escape and death do not, receipt navigation is inert"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Victory Biopolymer",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/128",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After each victory gain 1 maximum HP and heal 1 HP. No growth when every enemy escaped without a kill or when the player dies."
+    },
+    "upgrade:UGS-134": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Exactly one Iron discount with Copper fully paid",
+            "Only newly accepted Shield tagged",
+            "Per-fight allowance stays consumed next turn",
+            "Preexisting Shield fixture",
+            "SH002",
+            "UGS-134"
+          ],
+          "id": "contracts::upgrade:UGS-134 new victory Shield Iron coupon renews each fight, excludes old copies and pays other costs",
+          "line": 15,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "new victory Shield Iron coupon renews each fight, excludes old copies and pays other costs"
+        },
+        {
+          "assertion_messages": [
+            "Actual Utility reward gets one specific coupon",
+            "Earlier non-Shield acceptance leaves first Shield reinforcement intact",
+            "Generated copied Shield creates neither reinforcement nor Iron coupon",
+            "SH002",
+            "SH007",
+            "Shop Utility does not receive Copper coupon"
+          ],
+          "id": "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity",
+          "line": 3,
+          "path": "core/tests/upgrade-contracts/edge_clauses.inl",
+          "title": "UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Shield Bench Compiler",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/133",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Each newly accepted Shield recipe copy from victory rewards gets one coupon per fight: its first Iron-consuming Use costs 1 less Iron. Other material, HP and meter costs remain full. Existing copies are unaffected."
+    },
+    "upgrade:UGS-141": {
+      "fixtures": [],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Precision Victory Voucher",
+      "propose_full_binding": false,
+      "residual": "Owner-held composition of the +2 first base-haul voucher. No substitute material default.",
+      "source": {
+        "json_pointer": "/upgrades/140",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "If a successful Precision attempt occurred in the previous victorious fight, the next fight's first ordinary haul gains 2 base-material units using that haul's normal composition algorithm. The voucher is consumed on delivery and does not stack."
+    },
+    "upgrade:UGS-142": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Consumed voucher cannot persist without a new failed victory",
+            "Original plus failed retry still makes one voucher",
+            "UGS-142",
+            "Voucher only from failed Precision plus actual victory, not Auto/success/escape"
+          ],
+          "id": "contracts::upgrade:UGS-142 failed-Precision victory alone earns one consumed next-entry Iron, misses never stack",
+          "line": 8,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "failed-Precision victory alone earns one consumed next-entry Iron, misses never stack"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Precision Consolation Voucher",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/141",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "If at least one Precision attempt failed in the previous victorious fight, grant 1 Iron at next fight entry. Multiple failures create no extra voucher; consume it on delivery."
+    },
+    "upgrade:UGS-147": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Every separate candidate Rare",
+            "Exactly existing one Officer permanent upgrade reward, none added",
+            "Full memory pauses ordinary exchange",
+            "Officer-only separate offer",
+            "Regular, Officer and Boss paths executed",
+            "Three saved Rare candidates",
+            "UGS-147"
+          ],
+          "id": "contracts::upgrade:UGS-147 Officer alone adds separate three Rare choices without extra upgrade reward and normal exchange",
+          "line": 15,
+          "path": "core/tests/upgrade-contracts/rewards.inl",
+          "title": "Officer alone adds separate three Rare choices without extra upgrade reward and normal exchange"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Officer Blueprint Antenna",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/146",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "After each Officer victory, add one separate Rare recipe offer of three options to the existing rewards. Accept zero or one; memory exchange rules remain normal. It adds no permanent upgrade reward."
+    },
+    "upgrade:UGS-148": {
+      "fixtures": [
+        {
+          "assertion_messages": [
+            "Equal Iron/Copper chooses Iron by stable order",
+            "Exact copy coupon renews next fight",
+            "Exactly one precommitted eligible LightTouch candidate each",
+            "Largest Copper2 discounted to1",
+            "Navigation and reload do not reroll",
+            "No new-turn coupon reuse",
+            "SH002",
+            "SH023",
+            "Two independent normal offers",
+            "UGS-101",
+            "UGS-148"
+          ],
+          "id": "contracts::upgrade:UGS-148 one fixed LightTouch per normal offer, accepted exact-copy coupon uses largest ingredient stable ties",
+          "line": 16,
+          "path": "core/tests/upgrade-contracts/campaign_cases.inl",
+          "title": "one fixed LightTouch per normal offer, accepted exact-copy coupon uses largest ingredient stable ties"
+        }
+      ],
+      "implementations": [
+        "core/src/upgrade_effects.inl",
+        "core/src/core.cpp",
+        "core/src/upgrades.cpp",
+        "core/src/campaign.cpp",
+        "core/src/campaign_upgrades.cpp"
+      ],
+      "interpretation": null,
+      "name": "Light-Touch Recipe Seal",
+      "propose_full_binding": true,
+      "residual": null,
+      "source": {
+        "json_pointer": "/upgrades/147",
+        "path": "design/data/shared-upgrades.json"
+      },
+      "source_effect": "Each normal victory recipe offer has one seeded-random option marked Light-Touch. If accepted, that physical copy's first material-paying Use each fight saves 1 unit of its most numerous material cost, ties Iron/Copper/Carbon/Glass/Circuit. No other costs are waived."
+    }
+  },
+  "proposed_full_bindings": 94,
+  "residual": {
+    "MAU-05": "Executed paid-HP ordering, death interruption, actual6 cap, once-turn renewal and full-HP-before-Use. Full HP at the post-reaction trigger (zero actual healing but spent opportunity) has no demonstrated eligible natural producer chain; that exact branch remains unclaimed.",
+    "UGS-011": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "UGS-018": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "UGS-029": "Executed three distinct actual Cinderwall enemy debuff types, existing-stack exclusion and cleared-type reapplication. The fourth distinct enemy debuff needed to distinguish a3 cap from an unbounded counter is not produced by the enabled C1 robots. No positive self-inflicted new debuff producer is present in the tested eligible recipe pool. These branches remain unclaimed.",
+    "UGS-126": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "UGS-141": "Owner-held composition of the +2 first base-haul voucher. No substitute material default."
+  },
+  "schema_version": 1,
+  "scope": [
+    "All Rules actions and campaign transactions use the actual current C++ engine and production cinderwallUpgradeHooks.",
+    "Fixed materials, recipe copies, stock, reward candidates and enemy conditions isolate clauses; they are explicit controls, not naturally rolled or balance-tested builds.",
+    "Controlled plain500 Ammo only terminates real Campaign fights to exercise reward dispatch; it is not a player-accessible recipe or a city-winning policy.",
+    "UGS062's restricted content pool isolates the spread-category filter and does not alter production eligibility or weights.",
+    "Controlled CityStart hook calls test campaign-counter retention; UGS045's fourth controlled Officer checks the cap. No second playable city is claimed.",
+    "An executed PASS proves its assertions only. This index's proposed full bindings remain subject to independent clause review."
+  ],
+  "status": "Author-proposed contract linkage; actual named execution required; independent sufficiency review pending.",
+  "supplemental_cases": 10,
+  "unbound_upgrade_obligations_reviewed": 100
+}

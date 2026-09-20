@@ -1,0 +1,8 @@
+PASS M01 MA082 caps each added Burn payload using legal pre-payment Fire Heat, not remaining Heat or total stacks
+PASS M02 MA098 excludes paid or recoil-depleted saved Shield and preserves untouched remove/reinstall eligibility
+PASS M03 MA055 records post-attack remaining protection in original pre-reset binding order
+PASS M04 removed and previous-round MA015/MA102 hooks do not retain Heat under real reduced-decay upgrade
+PASS M05 MA091 records Burn after all pre-hit effects in either Ammo order and stops transfer after lethal recoil
+PASS M06 MA076 exact5 paid part Heat qualifies while4 does not; rejected cost leaves all state unchanged
+PASS M07 MA066 timed Heat occurs after the exact part effect and is interrupted by fatal main-hit recoil
+SUMMARY 7 passed, 0 failed, 1346 assertions

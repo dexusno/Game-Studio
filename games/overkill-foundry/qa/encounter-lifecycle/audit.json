@@ -1,0 +1,33 @@
+{
+  "date_utc": "2026-09-20T20:02:37.137430+00:00",
+  "archives": {
+    "encounters": {
+      "evidence": {
+        "path": "core/tests/encounters/evidence.json",
+        "bytes": 11140,
+        "sha256": "1e0a92eaca88ef711135b4f7eac2bf230f0c0eefb30ca9c4904797d44cff8577"
+      },
+      "declared_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "independent_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "aggregate_formula": "recorded input order; path + '\\t' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 4,
+      "identity_checks": 95
+    },
+    "campaign": {
+      "evidence": {
+        "path": "core/tests/campaign-lifecycle/evidence.json",
+        "bytes": 10994,
+        "sha256": "26251fbefd9c3f953def71258a040cd0d479a3c98cdeb567c76d9cfe9f08452d"
+      },
+      "declared_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "independent_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "aggregate_formula": "recorded input order; path + '\\x00' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 5,
+      "identity_checks": 97
+    }
+  }
+}

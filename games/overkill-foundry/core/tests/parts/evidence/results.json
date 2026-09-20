@@ -1,0 +1,959 @@
+{
+  "archive": {
+    "artifacts": {
+      "capture-build-0.log": "858e706225fe4e4c31831d75c2fa09aab66458088f7b3f7cae58c6e5dc89ef0c",
+      "capture-build-1.log": "88b37c5dacddb7c12779bcb3782bf876787aaefcc7a4589729a7efe2e40bd5f1",
+      "capture-ctest.log": "79efc7be55e1377319b48c9b70fbaf7b057908ad9f74c503477cf7f36796d961",
+      "overkill_core.lib": "9ba5eff9203aa7e545f53e9469a5bb45b3f9bc4bc0887f6db22c25eea14815fc",
+      "part_lifecycle_tests.exe": "2fa5fdc71858ffe34467e24e758b3e51d9bd607474ccdb445fe8959a782efd69",
+      "parts.log": "87538ba62b6fca5d15d082be1da7f2b8623331ffe6564ba65cbb07e8668c54a7"
+    },
+    "root": "core/build/part-lifecycle/captures/native-part-lifecycle-2fa5fdc71858ffe3-6d015efbe363"
+  },
+  "build_commands": [
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "<game>\\core\\tests\\parts",
+        "-B",
+        "<game>\\core\\build\\part-lifecycle",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": "core/build/part-lifecycle/capture-build-0.log",
+      "log_sha256": "858e706225fe4e4c31831d75c2fa09aab66458088f7b3f7cae58c6e5dc89ef0c"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "<game>\\core\\build\\part-lifecycle",
+        "--config",
+        "Release",
+        "--clean-first",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": "core/build/part-lifecycle/capture-build-1.log",
+      "log_sha256": "88b37c5dacddb7c12779bcb3782bf876787aaefcc7a4589729a7efe2e40bd5f1"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "<game>\\core\\build\\part-lifecycle",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": "core/build/part-lifecycle/capture-ctest.log",
+      "log_sha256": "79efc7be55e1377319b48c9b70fbaf7b057908ad9f74c503477cf7f36796d961"
+    }
+  ],
+  "captured_utc": "2026-09-20T17:50:39.444617+00:00",
+  "executions": [
+    {
+      "assertions": 59169,
+      "command": [
+        "core/build/part-lifecycle/Release/part_lifecycle_tests.exe"
+      ],
+      "executable": "core/build/part-lifecycle/Release/part_lifecycle_tests.exe",
+      "executable_sha256": "2fa5fdc71858ffe34467e24e758b3e51d9bd607474ccdb445fe8959a782efd69",
+      "exit_code": 0,
+      "log": "parts.log",
+      "log_sha256": "87538ba62b6fca5d15d082be1da7f2b8623331ffe6564ba65cbb07e8668c54a7",
+      "named_groups": 207,
+      "suite": "parts"
+    }
+  ],
+  "explicit_residual": {},
+  "inputs": {
+    "content/catalogue.snapshot.json": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d",
+    "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/part_lifecycle_tests.cpp": "f2c207990e92241539db1d7320a86641b6a0a1348ca0a80c5a06bc8d97aac36b",
+    "core/tests/parts/CMakeLists.txt": "e0c54f3dc614fc319172059d8b1cb8820decff16129ff3d8536254102615dd9b",
+    "core/tests/parts/README.md": "dceca351501eaed25ac9068c2c81d33fa69eade671ed8465ea678e5c712b35bf",
+    "core/tests/parts/capture.py": "722d1cddbbcf7bd836d1151b42c7aa80ed488359dd3ce34fc8c949a7762733a4",
+    "core/tests/parts/cases.inc": "da945c48b90464b0d32f9959950b0732c93f613e9a872e2cbdfa75807ec949ee",
+    "core/tests/parts/contracts.json": "9ef773eab5a9b3af9e082904ce53bd09d469bea65c9cafa94f2dd6d259afb87e",
+    "core/tests/parts/extra_lifecycle.inl": "70213965c81b917de59c23593657651af945b5d40a24e57c37cec4e7ac9fe838",
+    "core/tests/parts/generate_cases.py": "71c2310fb07762a7434221678bc8b337270de8b2489c4bf0fda0ecee421065dc",
+    "core/tests/parts/origin-rarity.inc": "dafb40f2d039673353b8ee3741df2e137cc689f3cfd223699d235a74b653ec0b",
+    "core/tests/parts/plain-cases.inc": "31fb7f315d1df32ec586f3d9a9a3e66d195e1b3e24c3d54d28a1d823ccf20942",
+    "core/tests/parts/reference_values.json": "d028398320b0fe78291f46c7d7cd8c01c7f5b0c2621cef9a7d8bf39f47524c23",
+    "design/PART-RESALE.md": "61847bb1cad73fe8f5612a9faca6ced73b36d5becbc2dd2f1c1c4880858b4fae",
+    "design/RECIPE-CATALOGUE.md": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5",
+    "design/TIMING-AND-PERSISTENCE.md": "da20a85dec18fb7ecbce5e3cfc00a25bd6c4f33d8663cab2d6beb547d2ee3ff5",
+    "design/data/beta-balance-v1.json": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+    "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
+    "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
+    "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6"
+  },
+  "library": {
+    "path": "core/build/part-lifecycle/core-runtime/Release/overkill_core.lib",
+    "sha256": "9ba5eff9203aa7e545f53e9469a5bb45b3f9bc4bc0887f6db22c25eea14815fc"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "rules_status": "Provisional corrected of-core-0.4; version/save compatibility decision pending. A later source/version change requires a new capture.",
+  "scope": "Author-operated physical lifecycle matrix, pending independent review; no full recipe payload, balance, release or human acceptance claim. Runtime support is unchanged.",
+  "source_graph_sha256": "6d015efbe36365278c4b22263cbe9ab1b733cf8c57681d76715344115ef8d13f",
+  "supported_type_candidates": 207,
+  "tests": [
+    {
+      "id": "parts::part:recipe-MA002 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA003 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA005 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA006 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA007 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA008 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA009 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA010 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA011 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA012 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA013 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA014 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA015 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA016 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA017 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA018 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA022 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA023 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA024 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA025 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA027 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA028 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA031 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA032 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA033 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA034 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA036 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA039 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA040 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA041 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA042 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA044 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA045 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA047 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA048 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA051 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA052 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA053 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA054 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA055 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA057 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA059 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA060 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA061 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA062 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA063 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA065 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA067 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA068 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA070 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA071 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA072 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA073 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA075 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA076 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA077 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA078 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA079 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA082 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA083 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA084 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA086 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA091 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA094 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA096 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA097 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA098 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA099 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA102 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA103 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA104 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA106 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA108 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA109 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA111 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA113 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA115 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA118 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-MA120 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH001 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH002 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH003 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH004 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH005 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH006 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH008 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH009 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH010 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH011 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH012 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH013 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH014 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH016 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH017 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH018 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH019 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH020 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH021 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH022 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH023 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH024 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH025 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH027 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH028 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH035 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH036 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH037 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH038 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH039 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH040 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH041 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH042 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH043 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH044 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH045 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH046 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH047 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH048 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH050 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH051 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH052 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH053 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH054 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH055 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH056 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH058 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH059 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH060 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH061 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH062 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH063 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH064 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH066 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH070 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH072 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH075 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH077 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH078 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH079 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH080 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH081 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH082 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH083 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH084 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH085 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH086 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH087 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH088 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH089 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH090 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH091 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH092 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH093 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH094 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH095 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH096 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH097 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH098 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH103 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH105 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH106 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH107 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH108 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH109 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH110 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH111 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH112 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH113 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH114 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH119 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH120 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH121 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH122 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH123 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH124 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH125 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:recipe-SH126 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:warm-rivet materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-1 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-10 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-11 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-12 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-13 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-14 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-2 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-3 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-4 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-5 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-6 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-7 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-8 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-ammo-9 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-1 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-10 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-12 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-14 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-15 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-18 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-2 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-20 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-24 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-3 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-4 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-5 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-6 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-7 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    },
+    {
+      "id": "parts::part:plain-shield-8 materialization/copy/resale/place/lifetime",
+      "result": "passed"
+    }
+  ],
+  "verified_build": "native-part-lifecycle-2fa5fdc71858ffe3"
+}

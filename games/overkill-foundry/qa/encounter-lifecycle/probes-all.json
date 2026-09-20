@@ -1,0 +1,193 @@
+{
+  "date_utc": "2026-09-20T20:11:42.329619+00:00",
+  "archives": {
+    "encounters": {
+      "evidence": {
+        "path": "core/tests/encounters/evidence.json",
+        "bytes": 11140,
+        "sha256": "1e0a92eaca88ef711135b4f7eac2bf230f0c0eefb30ca9c4904797d44cff8577"
+      },
+      "declared_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "independent_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "aggregate_formula": "recorded input order; path + '\\t' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 4,
+      "identity_checks": 95,
+      "independent_probes": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\qa\\encounter-lifecycle",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64",
+              "-DFROZEN_GAME=${GAME}\\core\\build\\encounter-contracts-final\\source",
+              "-DQA_CAMPAIGN=OFF"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/configure.log",
+              "bytes": 285,
+              "sha256": "98ff83d59b905648e52f2ad2f735a9451f19b35b23731ffd6c690dfb4827bea3"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/build.log",
+              "bytes": 450,
+              "sha256": "5b79b9956dde9f97fbb03354b1137f6f80f703c6a6690ef87b9176403c1f852d"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes\\Release\\independent_probes.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/encounters-probe-results.txt",
+              "bytes": 616,
+              "sha256": "da6307534dfd72cc353ec37320a04e689c20c589713278b77a199364c045d777"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/ctest.log",
+              "bytes": 477,
+              "sha256": "fd7a1dee6b4f66a7ef755d07454953b4bd258491d7b0d1b72f6633990b2a5f1d"
+            }
+          }
+        ],
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/encounters-probes/Release/independent_probes.exe",
+          "bytes": 621568,
+          "sha256": "3be6716ffa176e66af5c495e51e5eab4e3869dd694344ca8fb0c2994df68b867"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/encounters-probes/core-runtime/Release/overkill_core.lib",
+          "bytes": 6622530,
+          "sha256": "151d1c3c1b29d4dc00c96a68dac02872696fb8ce20c1a5d460898668d1d088f1"
+        }
+      },
+      "archive_unchanged_after_execution": true
+    },
+    "campaign": {
+      "evidence": {
+        "path": "core/tests/campaign-lifecycle/evidence.json",
+        "bytes": 10994,
+        "sha256": "26251fbefd9c3f953def71258a040cd0d479a3c98cdeb567c76d9cfe9f08452d"
+      },
+      "declared_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "independent_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "aggregate_formula": "recorded input order; path + '\\x00' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 5,
+      "identity_checks": 97,
+      "independent_probes": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\qa\\encounter-lifecycle",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64",
+              "-DFROZEN_GAME=${GAME}\\core\\build\\campaign-lifecycle-final\\source",
+              "-DQA_CAMPAIGN=ON"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/configure.log",
+              "bytes": 283,
+              "sha256": "b2c8cdc61c0b0abc2fab3b4904cd440753df573065525405b0e7b17444f0f11d"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/build.log",
+              "bytes": 445,
+              "sha256": "3b921e30581657f5a3fdda87469feaaca0894ea831c2085fefc30e00b13cf4c5"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes\\Release\\independent_probes.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/campaign-probe-results.txt",
+              "bytes": 742,
+              "sha256": "34918fb58f7323b4f14901c8a7dd15db71018762db000851e0de8b8681fda1ce"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/ctest.log",
+              "bytes": 473,
+              "sha256": "470f08b17af354fc4474defb19dbcdcf5628b96164075730b5db7fe8179e2f10"
+            }
+          }
+        ],
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/campaign-probes/Release/independent_probes.exe",
+          "bytes": 1035264,
+          "sha256": "239d201b64f67500079addc5dd9155c9d883b211e683366f94a47e304d42a9d3"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/campaign-probes/core-runtime/Release/overkill_core.lib",
+          "bytes": 6623246,
+          "sha256": "06fc42c467261818e82e399ee454bcd13202b3e8edac012f404803c1d7a61cf6"
+        }
+      },
+      "archive_unchanged_after_execution": true
+    }
+  }
+}

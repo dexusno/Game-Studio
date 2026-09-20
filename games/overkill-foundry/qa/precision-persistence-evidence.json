@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-09-20T20:22:52.937262+00:00",
+  "review_mode": "Read-only source, hash, actual run-log and envelope audit; no new native/render execution",
+  "result": "No defect or unsupported claim found in the stated bounded scope",
+  "source_checkpoint": {
+    "path": "unreal/Tools/precision-tests/persistence-checkpoint.json",
+    "bytes": 36106,
+    "sha256": "70fa5a1c23dd9512ee2552a83d17b393d4fcc34eca10dc392e1bc3f27515ad46"
+  },
+  "archive_identity": {
+    "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/identity.json",
+    "bytes": 36106,
+    "sha256": "70fa5a1c23dd9512ee2552a83d17b393d4fcc34eca10dc392e1bc3f27515ad46"
+  },
+  "source_graph_lf_sha256": "7c37c50009576ea164a5fafa80a04d0f9c5944b421f39920544a0c4642ed9714",
+  "core_digest": "b915b36ef05991e865abed40e9ebcd6fe82db70e8bf20556ad47633a5e32f2cf",
+  "core_input_files": 20,
+  "historical_core": "Explicit reviewed1843 source; excludes all newer provisional corrections",
+  "identity_checks": {
+    "independent_checks": 367,
+    "sources": 95,
+    "artifacts": 25,
+    "binaries": 1,
+    "all_raw_sizes_hashes_lf_hashes_matched": true,
+    "aggregate_reconstructed": true,
+    "archive_identity_equals_portable": true,
+    "binary_before_after_matches": true,
+    "core_digest_reconstructed": true
+  },
+  "selected_reviewed_sources": [
+    {
+      "path": "games/overkill-foundry/platform/src/campaign_session.cpp",
+      "bytes": 3999,
+      "sha256": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+      "sha256_lf": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/windows_save_store.cpp",
+      "bytes": 8175,
+      "sha256": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+      "sha256_lf": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+      "bytes": 4043,
+      "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+      "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 18255,
+      "sha256": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2",
+      "sha256_lf": "9b3408ccbe3883f4b73c0d68798366e9f4e380e1467bba975715b289194748d2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+      "bytes": 12075,
+      "sha256": "136bf65a115e7cf230739fd6547b56330f00f1e83ef9f30a7162727e1dc5318c",
+      "sha256_lf": "136bf65a115e7cf230739fd6547b56330f00f1e83ef9f30a7162727e1dc5318c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 67714,
+      "sha256": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908",
+      "sha256_lf": "f89f4b5a13105b55f18062cafcd430562623abc07266f7df2354330a8ac3e908"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 41276,
+      "sha256": "ef6b69ab10170467a7069bcac882b16e720b6e08f1c5dc1ba4687c60f174b4a7",
+      "sha256_lf": "ef6b69ab10170467a7069bcac882b16e720b6e08f1c5dc1ba4687c60f174b4a7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecisionProbe.cpp",
+      "bytes": 11046,
+      "sha256": "3257a9566c3bd9f2b616f904266b783f99d5ce4823b889af7ca634f8838d4432",
+      "sha256_lf": "3257a9566c3bd9f2b616f904266b783f99d5ce4823b889af7ca634f8838d4432"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryProfiles.cpp",
+      "bytes": 8744,
+      "sha256": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58",
+      "sha256_lf": "871b3c6016c5cc7f7d0e9fa8be45475c3249e72d10e7f053f80106e02d9aaf58"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 2344,
+      "sha256": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4",
+      "sha256_lf": "0939a7b84a56c639af2693dd379a1517b10cfad3ddea347e8ccb669f856c11b4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecisionProbe.h",
+      "bytes": 130,
+      "sha256": "35af608a9bd603c00e4379ebc018d8084c7ace9ed3ce51336926e840d85e5abd",
+      "sha256_lf": "35af608a9bd603c00e4379ebc018d8084c7ace9ed3ce51336926e840d85e5abd"
+    }
+  ],
+  "run": {
+    "editor_build": "Build-20260920-220141.log",
+    "probe": "CampaignProbe-20260920-220217.log",
+    "precision_checks": 81,
+    "real_lock_failures": 3,
+    "campaign_position": 2,
+    "campaign_hp": 68,
+    "campaign_receipts": 40,
+    "campaign_revision": 42,
+    "campaign_hash": "dd3d15f93fa3b0a4",
+    "captures": 16,
+    "exit_code": 0
+  },
+  "run_check_labels": {
+    "Prepared persistence fixture has a real Mite/Ram entry and retry Mayor": 1,
+    "Actual Miss produces the saved retry choice": 1,
+    "Prepared protection isolates discard persistence": 1,
+    "Prepared Heavy Magnet materializes through the production factory": 1,
+    "Prepared Heavy Magnet has a physical identity": 1,
+    "Actual activation and End Turn produce the next collection choice": 1,
+    "Production model loads the prepared saved encounter": 3,
+    "Ordinary, saved retry or Heavy Precision opens through the production model": 3,
+    "Stale and invalid callbacks cannot submit a measured category": 3,
+    "Stale cancellation leaves the active attempt and disk untouched": 3,
+    "The original material steering is fixed before measuring": 3,
+    "A real Windows handle holds the isolated save lock": 3,
+    "Actual SaveStore lock conflict rejects the measured transaction": 3,
+    "Failed save retains one frozen measured result": 3,
+    "Failed award preserves exact disk bytes, campaign state and revision": 3,
+    "Failed award publishes no committed presentation or reward events": 3,
+    "Independent production reload sees the original haul and receipt state": 3,
+    "Repeated callbacks and reopening cannot reroll the failed result": 3,
+    "Failed result blocks extra collections, turns, Continue and replacement underneath the modal": 3,
+    "Typed campaign commands cannot bypass the failed-result modal": 3,
+    "Cancel, Back and navigation retain the failed measured category": 3,
+    "Blocked attempts leave both state and emitted events untouched": 3,
+    "The failure exit returns to title without granting resources or bypassing Continue": 3,
+    "Continue after failure restores the exact original encounter entry": 3,
+    "A callback from the closed failed attempt cannot change restarted play": 3,
+    "A new attempt is possible only after the ordinary encounter restart": 3,
+    "Once the real lock is released the normal saved result succeeds": 3,
+    "Successful award equals the authoritative preview and one disk transaction": 3,
+    "Successful measured result and its events cannot be awarded twice": 3,
+    "Successful measured haul and receipts survive a fresh disk reload": 3,
+    "Heavy Precision fixes the category before requesting discards": 1,
+    "Measured Heavy category has not awarded or saved an incomplete haul": 1,
+    "Discard candidates retain the measured category and original steering": 1
+  },
+  "lock_failures": {
+    "count": 3,
+    "windows_error": 32,
+    "committed_revision_each": 1,
+    "session_reconciled_each": true,
+    "before_replacement": true,
+    "mechanism": "Existing real read handle on .lock blocks SaveStore CreateFileW zero-sharing lock; data envelope remains readable"
+  },
+  "saved_envelopes": [
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/heavy.ofsave",
+      "bytes": 6721,
+      "sha256": "7022dd5ce7d4acf49ddfce373a14e4b469dbe09aadcae68499b24e3dcc8bfda6",
+      "revision": 3,
+      "payload_bytes": 6657,
+      "payload_sha256": "fd3394343797479a0d10291138dbec09d54262cc0270afdb0c26662219191d8c",
+      "integrity_verified": true
+    },
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/heavy.ofsave.previous",
+      "bytes": 6293,
+      "sha256": "8e60f39a95cae8e5c5a46891362e218982db605f22efe6d0bcde7832f11364c1",
+      "revision": 2,
+      "payload_bytes": 6229,
+      "payload_sha256": "4115ad4bc9d533189d82171911d224d6fed18d72f5ada2e54e557e51ce2db6a7",
+      "integrity_verified": true
+    },
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/normal.ofsave",
+      "bytes": 6721,
+      "sha256": "fa8676246c0d299ba77bbd86d03a2745a8c57e068e5b8771497fcdb935feaa15",
+      "revision": 3,
+      "payload_bytes": 6657,
+      "payload_sha256": "648e7a9b3bb3bd2c4f6cf9a485ef031bb3b71df963ff689b306786fd23b667b3",
+      "integrity_verified": true
+    },
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/normal.ofsave.previous",
+      "bytes": 6293,
+      "sha256": "f35172d2ff9d9929fce912fbd91a25db8f2b1a5bee4ec67a5db24cdc93cc1e41",
+      "revision": 2,
+      "payload_bytes": 6229,
+      "payload_sha256": "8d7c579ed06062ec12a8bb0236ab523ca8e7d874f167f6815e94ef40a1f087c2",
+      "integrity_verified": true
+    },
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/retry.ofsave",
+      "bytes": 6721,
+      "sha256": "e74f9dfca06ed993f73acada4e9a0536ca5392efb06e02acfb55b614b0349dd9",
+      "revision": 3,
+      "payload_bytes": 6657,
+      "payload_sha256": "f0a1ac240a77434439eba8e485d243d8f7ff718e9d23c67a1f27013ab4c2e6c4",
+      "integrity_verified": true
+    },
+    {
+      "path": "unreal/Saved/Validation/precision-persistence-20260920-220140/saves/retry.ofsave.previous",
+      "bytes": 6293,
+      "sha256": "6499a4a5afadbf2e694f693ea907be2a233bbf345d42b49d770c4db465afcb37",
+      "revision": 2,
+      "payload_bytes": 6229,
+      "payload_sha256": "ad1ce8e7771b992f9724e868c99b7043ac6303af1503684797b26a26ad770acf",
+      "integrity_verified": true
+    }
+  ],
+  "scope_limits": [
+    "Synthetic results; no physical timing, focus, input, audio or visual review.",
+    "Three success recoveries are ordinary new attempts after Continue, not in-place retry/Heavy commit retries.",
+    "Pre-replacement lock failure only; post-replacement ambiguity/crash/process-exit tests are separate.",
+    "Success state and event no-repeat/count are checked; not a new event-by-event preview payload comparison.",
+    "Revision1 bytes were compared during execution, not retained among final revision2/3 envelopes.",
+    "Prepared resources and states; no earned balance or natural acquisition claim."
+  ],
+  "production_changes": false,
+  "review_report": {
+    "path": "qa/precision-persistence-review.md",
+    "bytes": 4837,
+    "sha256": "33f9ec45e64f0ef291f7c9223b76bc9fc23d361ee8d52cb225e3b8fb6aac372a"
+  }
+}

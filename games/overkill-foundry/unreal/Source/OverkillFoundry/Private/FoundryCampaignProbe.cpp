@@ -4,6 +4,7 @@
 #include "FoundryCampaignUI.h"
 #include "FoundryRecipeControlProbe.h"
 #include "FoundryProfileProbe.h"
+#include "FoundryPrecisionProbe.h"
 #include "FoundryCityProbe.h"
 #include "Widgets/SWidget.h"
 #include "overkill/robots.hpp"
@@ -28,7 +29,7 @@ void AFoundryStage::TickCampaignProbe(float DeltaSeconds)
     using CT=overkill::CampaignActionType;
     switch(CampaignProbeStep)
     {
-    case 0: {FString Report;bool Ok=RunFoundryProfileProbe(Report);if(!Check(Ok,*Report))return;Ok=RunFoundryRecipeControlProbe(Report);if(!Check(Ok,*Report))return;CaptureNamed(TEXT("campaign-title.png"));break;}
+    case 0: {FString Report;bool Ok=RunFoundryProfileProbe(Report);if(!Check(Ok,*Report))return;Ok=RunFoundryRecipeControlProbe(Report);if(!Check(Ok,*Report))return;Ok=RunFoundryPrecisionPersistenceProbe(Report);if(!Check(Ok,*Report))return;CaptureNamed(TEXT("campaign-title.png"));break;}
     case 1: if(!Check(Campaign->StartNew(false,20260920),TEXT("New Game persisted")))return;break;
     case 2: CaptureNamed(TEXT("campaign-mayor.png"));break;
     case 3:

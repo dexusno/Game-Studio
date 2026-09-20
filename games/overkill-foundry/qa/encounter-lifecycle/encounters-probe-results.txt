@@ -1,0 +1,7 @@
+PASS E01 Binder actual paid Ammo surcharge excludes Shield and stored Fire; unaffordable use is atomic
+PASS E02 Press Leak drains assembled parts once and excludes direct protection even when no parts exist
+PASS E03 two spread hits cannot retarget a destroyed Chassis to its newly born Mite
+PASS E04 Nest death ends remaining supply without deleting its already living helper
+PASS E05 Drive Fault clamps each hit before first-hit Mark and decays only once
+PASS E06 nonlethal enemy Acid Etch bypasses defenses and decays through attack and support turns
+INDEPENDENT_ENCOUNTERS groups=6 failed=0 assertions=579

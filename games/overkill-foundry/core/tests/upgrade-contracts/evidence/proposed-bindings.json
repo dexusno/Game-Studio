@@ -1,0 +1,2055 @@
+{
+  "bindings": {
+    "upgrade:MAU-07": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MAU-07 first Heat8 main shot ignores at most4Armor while other defenses and later shots remain"
+      ]
+    },
+    "upgrade:MY1-01": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-01 first Ammo output each turn alone receives two, saved physical bonus survives until Fire",
+        "contracts::upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig"
+      ]
+    },
+    "upgrade:MY1-03": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-03 entry pair has independent physical identities and normal saved/installed lifetime"
+      ]
+    },
+    "upgrade:MY1-04": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-04 opening material extra is separate from collection and repeats only at entry"
+      ]
+    },
+    "upgrade:MY1-07": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-07 Officer entry alone grants four Iron and removable Shield8"
+      ]
+    },
+    "upgrade:MY1-08": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-08 first successful resource-paid use refunds chosen actually-paid units up to3 after resolution"
+      ]
+    },
+    "upgrade:MY1-11": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-11 third qualifying paid Use counts uses not units and one payout after reactions per fight"
+      ]
+    },
+    "upgrade:MY1-13": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-13 every third Regular victory earns exact-copy subscription, excludes duplicate tags and defers empty sets"
+      ]
+    },
+    "upgrade:MY1-14": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-14 one saved full normal-offer reroll per victory, repeat rejected, old discoveries retained"
+      ]
+    },
+    "upgrade:MY1-15": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-15 persistent typed pack choice selects only Ammo or Shield and renews first physical output per turn"
+      ]
+    },
+    "upgrade:MY1-16": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-16 first ordinary part sale per fight matches canonical base capped12, sold id and receipt consumed"
+      ]
+    },
+    "upgrade:MY1-17": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-17 single saved same-target retry preserves spent original and cannot recurse"
+      ]
+    },
+    "upgrade:MY1-18": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-18 first two ordinary hauls add two to selected material without altering base or Precision"
+      ]
+    },
+    "upgrade:MY1-19": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-19 raw total threshold schedules one Ammo5 next start without spending and cancels on terminal"
+      ]
+    },
+    "upgrade:MY1-20": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-20 half-HP condition evaluated before each attack hit once per fight, not own costs or recoil"
+      ]
+    },
+    "upgrade:MY1-22": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-22 each opening choice grants exactly two ordinary fresh physical parts with normal lifetime"
+      ]
+    },
+    "upgrade:MY1-M1": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-M1 four opening Heat and turn1 actual payment threshold reward after paid reactions, once"
+      ]
+    },
+    "upgrade:MY1-M2": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-M2 pre-gain Heat threshold, one manufacture trigger per turn, saved output and no self recursion"
+      ]
+    },
+    "upgrade:MY1-M3": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY1-M3 cumulative actual paid Heat threshold heals six once alive, decay excluded and progress resets"
+      ]
+    },
+    "upgrade:MY2-01": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY2-01 paid Utility must remove cooldown; one Copper per turn regardless of copies or cost"
+      ]
+    },
+    "upgrade:MY2-02": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY2-02 first Shield recipe output each turn gets three on its physical saved balance"
+      ]
+    },
+    "upgrade:MY2-03": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY2-03 capacity query adds four without copies and turn3 alone grants a fresh Pellet"
+      ]
+    },
+    "upgrade:MY3-02": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:MY3-02 six active opening Shield protects preparation and enemy damage then resets"
+      ]
+    },
+    "upgrade:UGS-002": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-002 production victory with kills pays8 once; all-escape and final defeat never pay"
+      ]
+    },
+    "upgrade:UGS-004": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-004 first EndTurn absence of installed Shield is structural, excludes later ends and respects empty parts"
+      ]
+    },
+    "upgrade:UGS-005": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-005 zero Fire delays two Iron one Carbon to next start regardless of crafting; Fire excludes"
+      ]
+    },
+    "upgrade:UGS-006": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-006 highest maximum HP opening Paint uses stable slot tie and ignores dead/escaped"
+      ]
+    },
+    "upgrade:UGS-007": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-007 opening named Slug and Pellet grant no recipes and retain independent sale identities"
+      ]
+    },
+    "upgrade:UGS-010": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-010 empty ordinary reserve grants five before enemies, installed parts excluded, renewal each turn"
+      ]
+    },
+    "upgrade:UGS-012": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-012 first victory recipe optionally duplicates exact copy with saved exchange, no recursive acceptance"
+      ]
+    },
+    "upgrade:UGS-013": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-013 entry heal clamps and production Continue restores original entry without accumulating"
+      ]
+    },
+    "upgrade:UGS-014": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-014 first enemy HP-loss hit alone schedules survivor heal at next start, no cost or lethal rescue"
+      ]
+    },
+    "upgrade:UGS-015": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-015 three-fight paid Ammo lease copies committed first physical properties without replaying Use",
+        "contracts::upgrade:edge:unused-lease UGS015 consumes each entry even without Ammo use and cannot defer its three-fight lease"
+      ]
+    },
+    "upgrade:UGS-016": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-016 fifth actual victory acceptance heals8 across fights; shops/generated and repeat navigation excluded"
+      ]
+    },
+    "upgrade:UGS-017": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-017 each core sale rounds quarter independently, ordinary parts and direct Credits excluded",
+        "contracts::upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid"
+      ]
+    },
+    "upgrade:UGS-021": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-021 saved live enemy selector grants four on first shot at that target only; dead target loses benefit"
+      ]
+    },
+    "upgrade:UGS-022": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-022 turn2 delivery precedes haul, does not recur and cannot appear after early escape"
+      ]
+    },
+    "upgrade:UGS-024": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-024 five saved entry choices consume one charge each and never recur after exhaustion"
+      ]
+    },
+    "upgrade:UGS-025": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-025 first enemy-caused HP loss grants one Iron/Copper, persists enemy phase, excludes costs/death"
+      ]
+    },
+    "upgrade:UGS-028": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-028 ordinary reserve count grants one capped balance, installed parts excluded and no consumption"
+      ]
+    },
+    "upgrade:UGS-030": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-030 first three Fires each turn grant Shield2 after reactions; loads and spread are one Fire"
+      ]
+    },
+    "upgrade:UGS-031": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-031 normal offer fourth Shared option retains encounter pool and one pick; bonus offers unchanged",
+        "contracts::upgrade:edge:normal-rarity UGS031 fourth option uses current normal weighted pool, Shared-only duplicate filtering"
+      ]
+    },
+    "upgrade:UGS-033": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-033 victory entitlements accumulate until first following core sale and exclude part sales"
+      ]
+    },
+    "upgrade:UGS-034": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-034 third true victory adds one Shared Utility, counter persists through real transitions and one pick"
+      ]
+    },
+    "upgrade:UGS-037": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-037 opening four is separate direct damage with complete recoil and final-death interruption",
+        "contracts::upgrade:edge:entry-setup UGS037 uses actual Warden factory opening tiles and no Fire count"
+      ]
+    },
+    "upgrade:UGS-039": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-039 acquisition pays8 once, selects one Ammo and one Shield exact copy, bonuses require paid Use",
+        "contracts::upgrade:edge:calibration-eligibility UGS039 missing either required stored type rejects before HP payment or ledger insertion"
+      ]
+    },
+    "upgrade:UGS-040": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-040 first Shield reward across both normal offers tags exact accepted copy, no shop or generated trigger",
+        "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+      ]
+    },
+    "upgrade:UGS-041": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-041 new victory Utility Copper coupon applies once each fight only to that copy and full other cost",
+        "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+      ]
+    },
+    "upgrade:UGS-042": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-042 first haul can exchange at most three base units one-for-one with saved atomic choices"
+      ]
+    },
+    "upgrade:UGS-045": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-045 actual Officer wins after acquisition build capped levels and future first shot consumes bonus once",
+        "contracts::upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening"
+      ]
+    },
+    "upgrade:UGS-046": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-046 zero-to-three distinct Ammo copies selectable, later and granted copies excluded"
+      ]
+    },
+    "upgrade:UGS-047": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-047 only first two EndTurns create three physical Shield before enemy attacks"
+      ]
+    },
+    "upgrade:UGS-048": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-048 first player-turn kill grants Iron/Carbon once, includes summons, excludes enemy-phase and death"
+      ]
+    },
+    "upgrade:UGS-049": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-049 actual Armor reduction on surviving hit marks after damage once each turn"
+      ]
+    },
+    "upgrade:UGS-050": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-050 three-turn material cycle repeats before collection and resets with fight"
+      ]
+    },
+    "upgrade:UGS-051": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-051 fifth-turn ordinary haul adds one steered unit with fight-local cadence"
+      ]
+    },
+    "upgrade:UGS-053": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-053 turn2 Shield10 is freshly installed, removable unused, and not repeated"
+      ]
+    },
+    "upgrade:UGS-058": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "presentation/precision.hpp",
+          "sha256": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-058 twenty-percent original Precision region widens symmetrically without payouts or attempts"
+      ]
+    },
+    "upgrade:UGS-060": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-060 third actual Fire targets lowest-slot other living enemy, fallback main, separate hit/reaction"
+      ]
+    },
+    "upgrade:UGS-061": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-061 first haul only receives one steered extra, Auto does not consume Precision"
+      ]
+    },
+    "upgrade:UGS-062": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-062 every second victory adds Shared Modifier including spread category; whole offer still one pick"
+      ]
+    },
+    "upgrade:UGS-065": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-065 next true victory heals10 once, escape does not spend, final death cannot rescue"
+      ]
+    },
+    "upgrade:UGS-070": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-070 acquisition growth once and Boss-entry-only further growth"
+      ]
+    },
+    "upgrade:UGS-071": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-071 four acquisition HP then first enemy hit only reduces before Shield with zero floor"
+      ]
+    },
+    "upgrade:UGS-077": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-077 older unused physical part permits three once per turn while fresh-only shots leave trigger intact"
+      ]
+    },
+    "upgrade:UGS-083": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-083 every fifth committed Fire across turns grants one Copper, no load count or action cap"
+      ]
+    },
+    "upgrade:UGS-085": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-085 one acquisition100Credits and its own strict undiscounted purchase-price gate",
+        "contracts::upgrade:edge:credit-origin UGS017 never multiplies direct acquisition Credits and UGS085 nonpurchase grant remains valid",
+        "contracts::upgrade:edge:bond-reward UGS085 still grants one100Credits when actually accepted as a nonpurchase Officer reward"
+      ]
+    },
+    "upgrade:UGS-086": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-086 zero combined Shield includes active balances, empty printed parts qualify and no recursive trigger"
+      ]
+    },
+    "upgrade:UGS-087": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-087 conjunction requires zero Fire and zero combined Shield at EndTurn"
+      ]
+    },
+    "upgrade:UGS-088": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-088 only second Fire each turn grants four after shot reactions, never retroactive rescue"
+      ]
+    },
+    "upgrade:UGS-091": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-091 Shield10 reader does not spend and hits lowest current HP with stable tie before attacks"
+      ]
+    },
+    "upgrade:UGS-093": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-093 every fifth valid Fire gets eight before percentage modifiers, across rounds and reset at fight"
+      ]
+    },
+    "upgrade:UGS-094": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-094 every third start cools only greatest positive copy with stable memory-order tie"
+      ]
+    },
+    "upgrade:UGS-095": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-095 first resource-paid Modifier craft, not grant or activation, gives one physical Shield7",
+        "contracts::upgrade:category:modifier-spread all six spreading Modifier paid Uses trigger once; lifecycle and exclusions remain distinct"
+      ]
+    },
+    "upgrade:UGS-096": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-096 only first failed Precision grants one same-target bonus without retry or baseline loss"
+      ]
+    },
+    "upgrade:UGS-099": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-099 turn4/8 saved choices allow exactly Iron or Glass before haul and reset"
+      ]
+    },
+    "upgrade:UGS-101": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-101 Regular victories expose two independent optional offers; Officer and Boss have no addition"
+      ]
+    },
+    "upgrade:UGS-102": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-102 chosen physical Ammo copy builds consecutive-turn momentum2/4/6, first only and gaps reset"
+      ]
+    },
+    "upgrade:UGS-105": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-105 opening Weaken affects every attack hit then decays, including ordinary zero floor"
+      ]
+    },
+    "upgrade:UGS-107": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-107 first paid Utility per turn queues one next-main bonus that expires if unused"
+      ]
+    },
+    "upgrade:UGS-109": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-109 zero Fire grants four even with existing Shield; crafting/loading are not Fire"
+      ]
+    },
+    "upgrade:UGS-115": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-115 Officer encounters only first main Fire each turn gains three; other classes never gain"
+      ]
+    },
+    "upgrade:UGS-116": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-116 saved random material fixed per fight, first qualifying use discounts once each turn and renews"
+      ]
+    },
+    "upgrade:UGS-117": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-117 third-turn physical Shield and fight-lived first-shot bonus survive zero-shot turns"
+      ]
+    },
+    "upgrade:UGS-119": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-119 two different saved choices, first paid output each per fight, invalid kinds reject"
+      ]
+    },
+    "upgrade:UGS-121": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-121 only first resource-paid canonical Solid Casting output per turn gains two",
+        "contracts::upgrade:edge:paid-output zero-resource recipe Use is eligible for unconditional Mayor but excluded from paid-only Jig"
+      ]
+    },
+    "upgrade:UGS-122": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-122 one single canonical Slug bullet per fight grants fresh Pellet, mixed and other Ammo excluded"
+      ]
+    },
+    "upgrade:UGS-125": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-125 third actual Officer victory awakens future entries only, no reacquisition, first haul and shot once",
+        "contracts::upgrade:edge:late-officer Officer achievements before acquisition never become UGS045 levels or UGS125 awakening"
+      ]
+    },
+    "upgrade:UGS-127": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-127 Utility must finish a cooling copy; multiple completions pay once and renew each turn"
+      ]
+    },
+    "upgrade:UGS-129": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-129 every real victory grows and heals one, all escape and death do not, receipt navigation is inert"
+      ]
+    },
+    "upgrade:UGS-134": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-134 new victory Shield Iron coupon renews each fight, excludes old copies and pays other costs",
+        "contracts::upgrade:edge:reward-origin UGS040/041/134 exclude copied and Shop acquisitions; non-Shield acceptance leaves Shield opportunity"
+      ]
+    },
+    "upgrade:UGS-142": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-142 failed-Precision victory alone earns one consumed next-entry Iron, misses never stack"
+      ]
+    },
+    "upgrade:UGS-147": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-147 Officer alone adds separate three Rare choices without extra upgrade reward and normal exchange"
+      ]
+    },
+    "upgrade:UGS-148": {
+      "handler": "Rules/Engine source-specific upgrade dispatch with production CampaignRules mediation where applicable",
+      "implementations": [
+        {
+          "path": "core/src/upgrade_effects.inl",
+          "sha256": "70f855ce127c8fc0208476ef2d8d5b4a2207c3a5913bcb3a1f64407dd72cc45e"
+        },
+        {
+          "path": "core/src/core.cpp",
+          "sha256": "86198fda6e4f4c8d5dfd5a32a203242ba789ace9a91ecfba77ce702dc5e7895d"
+        },
+        {
+          "path": "core/src/upgrades.cpp",
+          "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+        },
+        {
+          "path": "core/src/campaign.cpp",
+          "sha256": "5e6726abfbdf0add82e14a21a102aa237e7437cf709c9e4de9ef5a959d8966fd"
+        },
+        {
+          "path": "core/src/campaign_upgrades.cpp",
+          "sha256": "c8ed3a18295391628e484908d915244dc4a907a6427f3c88d6c62ae108b000ac"
+        }
+      ],
+      "tests": [
+        "contracts::upgrade:UGS-148 one fixed LightTouch per normal offer, accepted exact-copy coupon uses largest ingredient stable ties"
+      ]
+    }
+  },
+  "evidence": {
+    "path": "core/tests/upgrade-contracts/evidence/results.json",
+    "sha256": "a73ed233b07f4781b4fa5458582e8438c75ec9ab729d2c3042885df7bcf97c9e"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "schema_version": 1,
+  "status": "PROPOSED ONLY; no runtime-support or release binding changed",
+  "unbound": {
+    "upgrade:MAU-05": "Executed paid-HP ordering, death interruption, actual6 cap, once-turn renewal and full-HP-before-Use. Full HP at the post-reaction trigger (zero actual healing but spent opportunity) has no demonstrated eligible natural producer chain; that exact branch remains unclaimed.",
+    "upgrade:UGS-011": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "upgrade:UGS-018": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "upgrade:UGS-029": "Executed three distinct actual Cinderwall enemy debuff types, existing-stack exclusion and cleared-type reapplication. The fourth distinct enemy debuff needed to distinguish a3 cap from an unbounded counter is not produced by the enabled C1 robots. No positive self-inflicted new debuff producer is present in the tested eligible recipe pool. These branches remain unclaimed.",
+    "upgrade:UGS-126": "Full combined first-base-haul deduction composition is still owner-held. No full binding proposed.",
+    "upgrade:UGS-141": "Owner-held composition of the +2 first base-haul voucher. No substitute material default."
+  },
+  "verified_build": "native-upgrade-contracts-3fae26e0acb5b90d"
+}

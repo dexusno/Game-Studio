@@ -1,0 +1,17 @@
+{
+  "archive": "core/build/shared-recipes/captures/native-shared-recipes-2fc3c09f61506dcf-9b4b7a2b909c",
+  "exact_source_rows": 101,
+  "failed_history_verified_inputs": 35,
+  "graph_sha256": "9b4b7a2b909c9da1782b94336511442a743a99e75625d62f2754616464529d89",
+  "named_groups": 113,
+  "negative_controls_rejected": [
+    "Missing named result",
+    "Wrong implementation hash",
+    "Altered printed effect",
+    "Fabricated PASS"
+  ],
+  "original_proposed_ids": 100,
+  "scope": "Identity, source inventory and cited PASS linkage only; semantic dispositions are in clause-review.json.",
+  "verified_artifacts": 8,
+  "verified_inputs": 48
+}

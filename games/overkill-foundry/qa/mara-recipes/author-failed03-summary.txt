@@ -1,0 +1,4 @@
+Historical03 predates --case selection; actual whole-suite result follows. Complete original log remains ignored.
+SUMMARY 105 passed, 2 failed, 15210 assertions.
+FAIL recipe:MA082 assertions=230: MA082 adds at most10 Burn at legal Heat14; actual=14
+FAIL recipe:MA098 assertions=486: A paid/depleted Shield is not unused reserve; actual=9

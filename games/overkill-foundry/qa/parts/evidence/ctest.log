@@ -1,0 +1,10 @@
+Internal ctest changing into directory: <game>/core/build/qa-parts
+Test project <game>/core/build/qa-parts
+    Start 1: independent_parts
+1/2 Test #1: independent_parts ................   Passed    0.03 sec
+    Start 2: captured_author_parts
+2/2 Test #2: captured_author_parts ............   Passed    1.05 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   1.08 sec

@@ -1,0 +1,932 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-09-20T20:17:17.158920+00:00",
+  "scope": "Independent review of root-authored frozen encounter/status and campaign-lifecycle tests; prepared shared-core boundaries only",
+  "toolchain": {
+    "compiler": "MSVC19.44.35228.0",
+    "cmake": "3.31.6-msvc6",
+    "windows_sdk": "10.0.26100.0",
+    "standard": "C++17",
+    "flags": [
+      "/W4",
+      "/WX",
+      "/permissive-"
+    ]
+  },
+  "archives": {
+    "encounters": {
+      "evidence": {
+        "path": "core/tests/encounters/evidence.json",
+        "bytes": 11140,
+        "sha256": "1e0a92eaca88ef711135b4f7eac2bf230f0c0eefb30ca9c4904797d44cff8577"
+      },
+      "declared_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "independent_graph_lf_sha256": "ce72d5dce85a30e019c59b77c5c60fb67a770e36d15ddd8023bf9c144ef229bc",
+      "aggregate_formula": "recorded input order; path + '\\t' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 4,
+      "identity_checks": 95,
+      "author_execution": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\core\\build\\encounter-contracts-final\\source\\core\\tests\\encounters",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters/configure.log",
+              "bytes": 637,
+              "sha256": "346bd115082f4bb14806672e5b88231e318cbd1f53849ac7ef743f7510c5a9e0"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters/build.log",
+              "bytes": 1203,
+              "sha256": "f11d375ab3c39b450aea052e9b0209e2b3d7357d3e391c50a488cd40c5df91f1"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters/ctest.log",
+              "bytes": 460,
+              "sha256": "1c0a7a59503062cdbfd460e065628f1d25651270d6cefad4ab0f22a4f482b3b6"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters\\Release\\encounter_contract_tests.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/encounters-suite-results.txt",
+              "bytes": 891,
+              "sha256": "21c781508aae4542fb06273ef66d2e4ec76cdd42db7e339237a0c9eda542661d"
+            }
+          }
+        ],
+        "groups": [
+          "C1-R04 Cable Binder exact body, default and veteran packets, Fouling clock, core identity",
+          "C1-R05 Pressure Cask exact body, alternating pressure, armour and one core",
+          "C1-R07 Coil Nest finite four helpers, birth timing, locked support, distinct cores",
+          "C1-R08 Knuckle Press exact body, brace expiry, two hits, one next-turn Leak",
+          "C1-O01 and FX03 Pursuer hit scaling, once per completed turn, no post-death motor",
+          "C1-O03 Split Chassis three-action cycle, Burn timing, one death release and two cores",
+          "Thermal Runaway mirrors: post-action enemy tick, pre-enemy player tick, Shield and lethal stops",
+          "Acid Etch mirrors: pre-action bypass, player post-reset pre-delivery tick and lethal interruption",
+          "Drive Fault mirrors: repeated main shots, target bonus order, multi-hit reduction and no-attack decay"
+        ],
+        "assertions": 3946,
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/encounters/Release/encounter_contract_tests.exe",
+          "bytes": 630784,
+          "sha256": "972689e29ee7a615c9730aaa81f06e8adeb27772ebde65995c8f765ff0850a13"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/encounters/core-runtime/Release/overkill_core.lib",
+          "bytes": 6622466,
+          "sha256": "da09ad0a3d055eaf6600df155381f21de81c3e7d0c936700afb9fb136c25032e"
+        }
+      },
+      "independent_execution": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\qa\\encounter-lifecycle",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64",
+              "-DFROZEN_GAME=${GAME}\\core\\build\\encounter-contracts-final\\source",
+              "-DQA_CAMPAIGN=OFF"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/configure.log",
+              "bytes": 285,
+              "sha256": "98ff83d59b905648e52f2ad2f735a9451f19b35b23731ffd6c690dfb4827bea3"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/build.log",
+              "bytes": 450,
+              "sha256": "5b79b9956dde9f97fbb03354b1137f6f80f703c6a6690ef87b9176403c1f852d"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes\\Release\\independent_probes.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/encounters-probe-results.txt",
+              "bytes": 616,
+              "sha256": "da6307534dfd72cc353ec37320a04e689c20c589713278b77a199364c045d777"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/encounters-probes/ctest.log",
+              "bytes": 477,
+              "sha256": "fd7a1dee6b4f66a7ef755d07454953b4bd258491d7b0d1b72f6633990b2a5f1d"
+            }
+          }
+        ],
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/encounters-probes/Release/independent_probes.exe",
+          "bytes": 621568,
+          "sha256": "3be6716ffa176e66af5c495e51e5eab4e3869dd694344ca8fb0c2994df68b867"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/encounters-probes/core-runtime/Release/overkill_core.lib",
+          "bytes": 6622530,
+          "sha256": "151d1c3c1b29d4dc00c96a68dac02872696fb8ce20c1a5d460898668d1d088f1"
+        }
+      }
+    },
+    "campaign": {
+      "evidence": {
+        "path": "core/tests/campaign-lifecycle/evidence.json",
+        "bytes": 10994,
+        "sha256": "26251fbefd9c3f953def71258a040cd0d479a3c98cdeb567c76d9cfe9f08452d"
+      },
+      "declared_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "independent_graph_lf_sha256": "94daf9b8e9a3a4eb13a139418d09106c11487db1632e03df94bb8c03e08143a1",
+      "aggregate_formula": "recorded input order; path + '\\x00' + LF hash + newline; UTF-8 SHA256",
+      "aggregate_formula_confirmed": true,
+      "input_count": 28,
+      "artifact_count": 5,
+      "identity_checks": 97,
+      "author_execution": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\core\\build\\campaign-lifecycle-final\\source\\core\\tests\\campaign-lifecycle",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign/configure.log",
+              "bytes": 635,
+              "sha256": "528eb08059e28269e747088c0ab29ab60176280fd504015e1c6eedf99006d98b"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign/build.log",
+              "bytes": 1239,
+              "sha256": "784cee9a1ec6ce85ae435d6ec32523b0b54af1ba6510e95b08cf301d20035536"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign/ctest.log",
+              "bytes": 455,
+              "sha256": "0f26fa12e049966db84f7eacffda67b2232da31eca5c032beae3c4f621373bbc"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign\\Release\\campaign_lifecycle_contract_tests.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/campaign-suite-results.txt",
+              "bytes": 558,
+              "sha256": "ef60425200eb6c63123d0893c31a183bd387836aa76bc9b1afa7ce3ddc5e4fa9"
+            }
+          }
+        ],
+        "groups": [
+          "actual body core identity, manual sale, exact receipt replay and no resell",
+          "purchased physical identities and canonical per-part rounding",
+          "loaded and installed sale rejection, unload/removal eligibility and spent-Shield exclusion",
+          "seen shop/reward alternatives, repeated discovery and skipped-choice persistence",
+          "Patrol compulsory combat, unchanged Continue, normal rewards and single progression",
+          "real boss result, single Ivo unlock, completion and profile facts across New Game"
+        ],
+        "assertions": 652,
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/campaign/Release/campaign_lifecycle_contract_tests.exe",
+          "bytes": 1022976,
+          "sha256": "6e4219484938675b04a9f53dec152d1f4aa876b209731c7a504ef4bae879abb7"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/campaign/core-runtime/Release/overkill_core.lib",
+          "bytes": 6623166,
+          "sha256": "cd072098e849351f4fe67e1f3b8dd0b9d6bf1721f1ee4ccd7d114cb690c9bedf"
+        }
+      },
+      "independent_execution": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "-S",
+              "${GAME}\\qa\\encounter-lifecycle",
+              "-B",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "-G",
+              "Visual Studio 17 2022",
+              "-A",
+              "x64",
+              "-DFROZEN_GAME=${GAME}\\core\\build\\campaign-lifecycle-final\\source",
+              "-DQA_CAMPAIGN=ON"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/configure.log",
+              "bytes": 283,
+              "sha256": "b2c8cdc61c0b0abc2fab3b4904cd440753df573065525405b0e7b17444f0f11d"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+              "--build",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "--config",
+              "Release",
+              "--parallel",
+              "4"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/build.log",
+              "bytes": 445,
+              "sha256": "3b921e30581657f5a3fdda87469feaaca0894ea831c2085fefc30e00b13cf4c5"
+            }
+          },
+          {
+            "command": [
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes\\Release\\independent_probes.exe"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/campaign-probe-results.txt",
+              "bytes": 742,
+              "sha256": "34918fb58f7323b4f14901c8a7dd15db71018762db000851e0de8b8681fda1ce"
+            }
+          },
+          {
+            "command": [
+              "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+              "--test-dir",
+              "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+              "-C",
+              "Release",
+              "--output-on-failure"
+            ],
+            "exit_code": 0,
+            "log": {
+              "path": "qa/encounter-lifecycle/build/campaign-probes/ctest.log",
+              "bytes": 473,
+              "sha256": "470f08b17af354fc4474defb19dbcdcf5628b96164075730b5db7fe8179e2f10"
+            }
+          }
+        ],
+        "executable": {
+          "path": "qa/encounter-lifecycle/build/campaign-probes/Release/independent_probes.exe",
+          "bytes": 1035264,
+          "sha256": "239d201b64f67500079addc5dd9155c9d883b211e683366f94a47e304d42a9d3"
+        },
+        "library": {
+          "path": "qa/encounter-lifecycle/build/campaign-probes/core-runtime/Release/overkill_core.lib",
+          "bytes": 6623246,
+          "sha256": "06fc42c467261818e82e399ee454bcd13202b3e8edac012f404803c1d7a61cf6"
+        }
+      }
+    }
+  },
+  "results": {
+    "author_groups": 15,
+    "author_assertions": 4598,
+    "independent": {
+      "encounters": {
+        "groups": 6,
+        "assertions": 579,
+        "failed": 0
+      },
+      "campaign": {
+        "groups": 7,
+        "assertions": 434,
+        "failed": 0
+      }
+    },
+    "ctest": "4/4 passed across four isolated configurations",
+    "author_identity_link_checks": 192,
+    "all_captured_inputs_unchanged": true
+  },
+  "links": {
+    "reviewed": 15,
+    "supported_within_stated_mvp_core_scope": 14,
+    "partial_profile_layer_only": [
+      "core.profile-and-unlocks"
+    ],
+    "active_bindings_changed": false
+  },
+  "production_defects": [],
+  "evidence_limitations": [
+    "Both graphs are provisional corrected of-core-0.4; version/save compatibility remains held.",
+    "Campaign graph alone includes Shared SH092/SH113 repair. Both precede UC01 and MA082 changes.",
+    "Prepared inputs, controlled mixed formations and resources; no natural-acquisition, earned-balance, all-encounter, full-profile, disk, GUI or human-play claim.",
+    "EL-01 requires companion profile-manager fixtures before full profile/unlocks linkage."
+  ],
+  "commands": [
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "${GAME}\\core\\build\\encounter-contracts-final\\source\\core\\tests\\encounters",
+        "-B",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters/configure.log",
+        "bytes": 637,
+        "sha256": "346bd115082f4bb14806672e5b88231e318cbd1f53849ac7ef743f7510c5a9e0"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters/build.log",
+        "bytes": 1203,
+        "sha256": "f11d375ab3c39b450aea052e9b0209e2b3d7357d3e391c50a488cd40c5df91f1"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters/ctest.log",
+        "bytes": 460,
+        "sha256": "1c0a7a59503062cdbfd460e065628f1d25651270d6cefad4ab0f22a4f482b3b6"
+      }
+    },
+    {
+      "command": [
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters\\Release\\encounter_contract_tests.exe"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/encounters-suite-results.txt",
+        "bytes": 891,
+        "sha256": "21c781508aae4542fb06273ef66d2e4ec76cdd42db7e339237a0c9eda542661d"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "${GAME}\\qa\\encounter-lifecycle",
+        "-B",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64",
+        "-DFROZEN_GAME=${GAME}\\core\\build\\encounter-contracts-final\\source",
+        "-DQA_CAMPAIGN=OFF"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters-probes/configure.log",
+        "bytes": 285,
+        "sha256": "98ff83d59b905648e52f2ad2f735a9451f19b35b23731ffd6c690dfb4827bea3"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters-probes/build.log",
+        "bytes": 450,
+        "sha256": "5b79b9956dde9f97fbb03354b1137f6f80f703c6a6690ef87b9176403c1f852d"
+      }
+    },
+    {
+      "command": [
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes\\Release\\independent_probes.exe"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/encounters-probe-results.txt",
+        "bytes": 616,
+        "sha256": "da6307534dfd72cc353ec37320a04e689c20c589713278b77a199364c045d777"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\encounters-probes",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/encounters-probes/ctest.log",
+        "bytes": 477,
+        "sha256": "fd7a1dee6b4f66a7ef755d07454953b4bd258491d7b0d1b72f6633990b2a5f1d"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "${GAME}\\core\\build\\campaign-lifecycle-final\\source\\core\\tests\\campaign-lifecycle",
+        "-B",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign/configure.log",
+        "bytes": 635,
+        "sha256": "528eb08059e28269e747088c0ab29ab60176280fd504015e1c6eedf99006d98b"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign/build.log",
+        "bytes": 1239,
+        "sha256": "784cee9a1ec6ce85ae435d6ec32523b0b54af1ba6510e95b08cf301d20035536"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign/ctest.log",
+        "bytes": 455,
+        "sha256": "0f26fa12e049966db84f7eacffda67b2232da31eca5c032beae3c4f621373bbc"
+      }
+    },
+    {
+      "command": [
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign\\Release\\campaign_lifecycle_contract_tests.exe"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/campaign-suite-results.txt",
+        "bytes": 558,
+        "sha256": "ef60425200eb6c63123d0893c31a183bd387836aa76bc9b1afa7ce3ddc5e4fa9"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "-S",
+        "${GAME}\\qa\\encounter-lifecycle",
+        "-B",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+        "-G",
+        "Visual Studio 17 2022",
+        "-A",
+        "x64",
+        "-DFROZEN_GAME=${GAME}\\core\\build\\campaign-lifecycle-final\\source",
+        "-DQA_CAMPAIGN=ON"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign-probes/configure.log",
+        "bytes": 283,
+        "sha256": "b2c8cdc61c0b0abc2fab3b4904cd440753df573065525405b0e7b17444f0f11d"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+        "--build",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+        "--config",
+        "Release",
+        "--parallel",
+        "4"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign-probes/build.log",
+        "bytes": 445,
+        "sha256": "3b921e30581657f5a3fdda87469feaaca0894ea831c2085fefc30e00b13cf4c5"
+      }
+    },
+    {
+      "command": [
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes\\Release\\independent_probes.exe"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/campaign-probe-results.txt",
+        "bytes": 742,
+        "sha256": "34918fb58f7323b4f14901c8a7dd15db71018762db000851e0de8b8681fda1ce"
+      }
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+        "--test-dir",
+        "${GAME}\\qa\\encounter-lifecycle\\build\\campaign-probes",
+        "-C",
+        "Release",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "qa/encounter-lifecycle/build/campaign-probes/ctest.log",
+        "bytes": 473,
+        "sha256": "470f08b17af354fc4474defb19dbcdcf5628b96164075730b5db7fe8179e2f10"
+      }
+    }
+  ],
+  "review_files": [
+    {
+      "path": "qa/encounter-lifecycle/audit.json",
+      "bytes": 1412,
+      "sha256": "34a94d9385763847a8f6922dc5d9c5a926adb5ac2b93bcb2f36c1b2daa605dc9"
+    },
+    {
+      "path": "qa/encounter-lifecycle/audit.py",
+      "bytes": 7845,
+      "sha256": "f57608ab219ff04e5827755d9ba60ad2ee6a9078d87cfad177924ae45f3f2336"
+    },
+    {
+      "path": "qa/encounter-lifecycle/campaign-probe-results.txt",
+      "bytes": 742,
+      "sha256": "34918fb58f7323b4f14901c8a7dd15db71018762db000851e0de8b8681fda1ce"
+    },
+    {
+      "path": "qa/encounter-lifecycle/campaign-suite-results.txt",
+      "bytes": 558,
+      "sha256": "ef60425200eb6c63123d0893c31a183bd387836aa76bc9b1afa7ce3ddc5e4fa9"
+    },
+    {
+      "path": "qa/encounter-lifecycle/campaign_probes.cpp",
+      "bytes": 12986,
+      "sha256": "a6531e3f8b8a3b66991beb964f28bcdc16994b93f5a32316238738f78cab0e81"
+    },
+    {
+      "path": "qa/encounter-lifecycle/clause-review.json",
+      "bytes": 14566,
+      "sha256": "648d08e86e549d24af2d8f09a4eb3ea9dc06a3dc752e21d17ebf62c75999abde"
+    },
+    {
+      "path": "qa/encounter-lifecycle/CMakeLists.txt",
+      "bytes": 976,
+      "sha256": "75c7a2247f74bcce4535df7be618d0e44b1899cbb9067c75f8601a6d0495661c"
+    },
+    {
+      "path": "qa/encounter-lifecycle/encounter_probes.cpp",
+      "bytes": 9626,
+      "sha256": "91c2cf36dca8693971354eee77562ea2f7fa4cc607c07b0b3081d3a1ed8a7dc4"
+    },
+    {
+      "path": "qa/encounter-lifecycle/encounters-probe-results.txt",
+      "bytes": 616,
+      "sha256": "da6307534dfd72cc353ec37320a04e689c20c589713278b77a199364c045d777"
+    },
+    {
+      "path": "qa/encounter-lifecycle/encounters-suite-results.txt",
+      "bytes": 891,
+      "sha256": "21c781508aae4542fb06273ef66d2e4ec76cdd42db7e339237a0c9eda542661d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/probes-all.json",
+      "bytes": 8079,
+      "sha256": "ae1a8f4dfc2d6b4f800e4b2f2fd37966297a6b3c95f136e014c60fa08a115b17"
+    },
+    {
+      "path": "qa/encounter-lifecycle/README.md",
+      "bytes": 2569,
+      "sha256": "759f744058b9aa314a94442c4598f91afcf02446a55b37818dcd262f33c142ae"
+    },
+    {
+      "path": "qa/encounter-lifecycle/rebuild-all.json",
+      "bytes": 9227,
+      "sha256": "e5d937032874e11cbda73ec8423b9121d2e8fc2a2b79f9f542123b18ae7d0db3"
+    },
+    {
+      "path": "qa/encounter-lifecycle/supporting-inputs.json",
+      "bytes": 1168,
+      "sha256": "b27291cbb1b45c3a122f0920f5739aac43a1020db50aa0a1fe682b3c7be7f00f"
+    },
+    {
+      "path": "qa/encounter-lifecycle-review.md",
+      "bytes": 4920,
+      "sha256": "a9b33591c5c22fb3312f96e2cc9481efc4f0f22936438286ff9cf8ae3a7afff1"
+    }
+  ],
+  "execution_artifacts": [
+    {
+      "path": "qa/encounter-lifecycle/build/encounters/Release/encounter_contract_tests.exe",
+      "bytes": 630784,
+      "sha256": "972689e29ee7a615c9730aaa81f06e8adeb27772ebde65995c8f765ff0850a13"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters/core-runtime/Release/overkill_core.lib",
+      "bytes": 6622466,
+      "sha256": "da09ad0a3d055eaf6600df155381f21de81c3e7d0c936700afb9fb136c25032e"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters/configure.log",
+      "bytes": 637,
+      "sha256": "346bd115082f4bb14806672e5b88231e318cbd1f53849ac7ef743f7510c5a9e0"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters/build.log",
+      "bytes": 1203,
+      "sha256": "f11d375ab3c39b450aea052e9b0209e2b3d7357d3e391c50a488cd40c5df91f1"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters/ctest.log",
+      "bytes": 460,
+      "sha256": "1c0a7a59503062cdbfd460e065628f1d25651270d6cefad4ab0f22a4f482b3b6"
+    },
+    {
+      "path": "qa/encounter-lifecycle/encounters-suite-results.txt",
+      "bytes": 891,
+      "sha256": "21c781508aae4542fb06273ef66d2e4ec76cdd42db7e339237a0c9eda542661d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters-probes/Release/independent_probes.exe",
+      "bytes": 621568,
+      "sha256": "3be6716ffa176e66af5c495e51e5eab4e3869dd694344ca8fb0c2994df68b867"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters-probes/core-runtime/Release/overkill_core.lib",
+      "bytes": 6622530,
+      "sha256": "151d1c3c1b29d4dc00c96a68dac02872696fb8ce20c1a5d460898668d1d088f1"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters-probes/configure.log",
+      "bytes": 285,
+      "sha256": "98ff83d59b905648e52f2ad2f735a9451f19b35b23731ffd6c690dfb4827bea3"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters-probes/build.log",
+      "bytes": 450,
+      "sha256": "5b79b9956dde9f97fbb03354b1137f6f80f703c6a6690ef87b9176403c1f852d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/encounters-probe-results.txt",
+      "bytes": 616,
+      "sha256": "da6307534dfd72cc353ec37320a04e689c20c589713278b77a199364c045d777"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/encounters-probes/ctest.log",
+      "bytes": 477,
+      "sha256": "fd7a1dee6b4f66a7ef755d07454953b4bd258491d7b0d1b72f6633990b2a5f1d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/encounters/Release/encounter_contract_tests.exe",
+      "bytes": 630784,
+      "sha256": "972689e29ee7a615c9730aaa81f06e8adeb27772ebde65995c8f765ff0850a13"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/encounters/core-runtime/Release/overkill_core.lib",
+      "bytes": 6622466,
+      "sha256": "da09ad0a3d055eaf6600df155381f21de81c3e7d0c936700afb9fb136c25032e"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/encounters-probes/Release/independent_probes.exe",
+      "bytes": 621568,
+      "sha256": "3be6716ffa176e66af5c495e51e5eab4e3869dd694344ca8fb0c2994df68b867"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/encounters-probes/core-runtime/Release/overkill_core.lib",
+      "bytes": 6622530,
+      "sha256": "151d1c3c1b29d4dc00c96a68dac02872696fb8ce20c1a5d460898668d1d088f1"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign/Release/campaign_lifecycle_contract_tests.exe",
+      "bytes": 1022976,
+      "sha256": "6e4219484938675b04a9f53dec152d1f4aa876b209731c7a504ef4bae879abb7"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign/core-runtime/Release/overkill_core.lib",
+      "bytes": 6623166,
+      "sha256": "cd072098e849351f4fe67e1f3b8dd0b9d6bf1721f1ee4ccd7d114cb690c9bedf"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign/configure.log",
+      "bytes": 635,
+      "sha256": "528eb08059e28269e747088c0ab29ab60176280fd504015e1c6eedf99006d98b"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign/build.log",
+      "bytes": 1239,
+      "sha256": "784cee9a1ec6ce85ae435d6ec32523b0b54af1ba6510e95b08cf301d20035536"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign/ctest.log",
+      "bytes": 455,
+      "sha256": "0f26fa12e049966db84f7eacffda67b2232da31eca5c032beae3c4f621373bbc"
+    },
+    {
+      "path": "qa/encounter-lifecycle/campaign-suite-results.txt",
+      "bytes": 558,
+      "sha256": "ef60425200eb6c63123d0893c31a183bd387836aa76bc9b1afa7ce3ddc5e4fa9"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign-probes/Release/independent_probes.exe",
+      "bytes": 1035264,
+      "sha256": "239d201b64f67500079addc5dd9155c9d883b211e683366f94a47e304d42a9d3"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign-probes/core-runtime/Release/overkill_core.lib",
+      "bytes": 6623246,
+      "sha256": "06fc42c467261818e82e399ee454bcd13202b3e8edac012f404803c1d7a61cf6"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign-probes/configure.log",
+      "bytes": 283,
+      "sha256": "b2c8cdc61c0b0abc2fab3b4904cd440753df573065525405b0e7b17444f0f11d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign-probes/build.log",
+      "bytes": 445,
+      "sha256": "3b921e30581657f5a3fdda87469feaaca0894ea831c2085fefc30e00b13cf4c5"
+    },
+    {
+      "path": "qa/encounter-lifecycle/campaign-probe-results.txt",
+      "bytes": 742,
+      "sha256": "34918fb58f7323b4f14901c8a7dd15db71018762db000851e0de8b8681fda1ce"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/campaign-probes/ctest.log",
+      "bytes": 473,
+      "sha256": "470f08b17af354fc4474defb19dbcdcf5628b96164075730b5db7fe8179e2f10"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/campaign/Release/campaign_lifecycle_contract_tests.exe",
+      "bytes": 1022976,
+      "sha256": "6e4219484938675b04a9f53dec152d1f4aa876b209731c7a504ef4bae879abb7"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/campaign/core-runtime/Release/overkill_core.lib",
+      "bytes": 6623166,
+      "sha256": "cd072098e849351f4fe67e1f3b8dd0b9d6bf1721f1ee4ccd7d114cb690c9bedf"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/campaign-probes/Release/independent_probes.exe",
+      "bytes": 1035264,
+      "sha256": "239d201b64f67500079addc5dd9155c9d883b211e683366f94a47e304d42a9d3"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/frozen-review/campaign-probes/core-runtime/Release/overkill_core.lib",
+      "bytes": 6623246,
+      "sha256": "06fc42c467261818e82e399ee454bcd13202b3e8edac012f404803c1d7a61cf6"
+    }
+  ],
+  "supporting_copies": [
+    {
+      "path": "qa/encounter-lifecycle/build/supporting-sources/content/cinderwall-authored.json",
+      "bytes": 12436,
+      "sha256": "b76bfc4811b423a1c47eba002aa8a7d8aba4f6a5fc462386eb38c8666537df6d"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/supporting-sources/content/runtime-evidence/coverage.json",
+      "bytes": 222209,
+      "sha256": "6a14488fc8c5313a040d28556e2fe8e7f39e63ddd38826edd194adf164808802"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/supporting-sources/design/RECIPE-CATALOGUE.md",
+      "bytes": 241495,
+      "sha256": "9c79ab7f4270541d4e4604cfce790a7c540e8f408b0ad840679b91191560a9a5"
+    },
+    {
+      "path": "qa/encounter-lifecycle/build/supporting-sources/BRIEF.md",
+      "bytes": 23258,
+      "sha256": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302"
+    }
+  ]
+}

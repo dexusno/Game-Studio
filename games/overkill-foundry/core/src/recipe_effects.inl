@@ -44,7 +44,13 @@
         if(const auto* r=rules.recipe(source))p.rarity=r->rarity;
         p.materialBasis[0]=checked((static_cast<std::int64_t>(value)+5)/6);if(kind==Kind::Shield&&value>0)p.materialBasis[1]=1;return p;
     }
-    Id receive(Part p,bool installed=false){p.id=s.nextId++;p.createdRound=s.round;p.place=Place::Reserve;p.everInstalled=false;p.firstInstallRound=0;p.bindingOrder=0;p.installOrder=0;p.shield=0;p.paidHeat=p.paidHp=p.hookUses=0;if(p.origin!=PartOrigin::Copied)p.attachments.clear();p.reservedBy=0;if(inRecipeUse&&p.creator==producingRecipe&&p.origin!=PartOrigin::Copied){p.sourceRecipeCopy=producingCopy;p.origin=PartOrigin::Produced;}s.parts.push_back(p);emit("part_created",p.id,p.sourceRecipeCopy,p.originalValue,static_cast<Amount>(p.origin));events.back().source=p.creator;if(installed)install(p.id);return p.id;}
+    Id receive(Part p,bool installed=false){
+        // Jig explicitly modifies one physical output, unlike ordinary copyable bonuses.
+        if(p.origin==PartOrigin::Copied&&std::any_of(p.attachments.begin(),p.attachments.end(),[](const Attachment& b){return b.source=="UGS-121";})){
+            require(p.upgradeDamage>=2,"Copied Jig attribution exceeds committed damage bonus.");p.upgradeDamage-=2;
+            p.attachments.erase(std::remove_if(p.attachments.begin(),p.attachments.end(),[](const Attachment& b){return b.source=="UGS-121";}),p.attachments.end());
+        }
+        p.id=s.nextId++;p.createdRound=s.round;p.place=Place::Reserve;p.everInstalled=false;p.firstInstallRound=0;p.bindingOrder=0;p.installOrder=0;p.shield=0;p.paidHeat=p.paidHp=p.hookUses=0;if(p.origin!=PartOrigin::Copied)p.attachments.clear();p.reservedBy=0;if(inRecipeUse&&p.creator==producingRecipe&&p.origin!=PartOrigin::Copied){p.sourceRecipeCopy=producingCopy;p.origin=PartOrigin::Produced;}s.parts.push_back(p);emit("part_created",p.id,p.sourceRecipeCopy,p.originalValue,static_cast<Amount>(p.origin));events.back().source=p.creator;if(installed)install(p.id);return p.id;}
     void copyLater(const Part& p,Amount count,const std::string& source){Delivery d;d.id=s.nextId++;d.source=source;d.dueRound=s.round+1;d.kind=DeliveryKind::PartCopy;for(Amount i=0;i<count;++i)d.parts.push_back(p);s.deliveries.push_back(d);emit("delivery_scheduled",d.id);}
     Part printedCopy(Part p,const std::string& source){p.upgradeDamage=p.upgradeShield=0;p.attachments.clear();p.origin=PartOrigin::Copied;p.creator=source;p.originalValue=0;if(p.effects.size()==1&&(p.effects[0].op==Op::ShieldValue||p.effects[0].op==Op::FlatDamage))p.originalValue=p.effects[0].amount;return p;}
     static bool unused(const Part& p){
@@ -163,7 +169,10 @@
         const auto c=code(p.recipe);
         switch(c){
         case 22:s.burn=std::max(0,s.burn-3);break;case 63:s.corrosion=std::max(0,s.corrosion-5);break;
-        case 96:schedule(DeliveryKind::ShieldPart,12,p.recipe);break;case 1014:heat(2);break;case 1016:schedule(DeliveryKind::ShieldPart,5,p.recipe);break;
+        case 92:schedule(DeliveryKind::ShieldPart,15,p.recipe);break;
+        case 96:schedule(DeliveryKind::ShieldPart,12,p.recipe);break;
+        case 113:schedule(DeliveryKind::ShieldPart,20,p.recipe);break;
+        case 1014:heat(2);break;case 1016:schedule(DeliveryKind::ShieldPart,5,p.recipe);break;
         case 1040:schedule(DeliveryKind::ShieldPart,7,p.recipe);break;
         case 1059:bind(p.recipe,BindingClock::Round,5,0,p.id);break;
         case 1079:specialLater(p.recipe,s.partHeatPaidRound);break;
@@ -265,7 +274,7 @@
         case 1039:status(main,3,before.intent.move==Move::Attack?6:3);break;case 1047:shieldPart(8,source,true);break;
         case 1060:status(main,0,3);t=byId(s.enemies,main);if(t&&alive(*t))t->burnHoldTicks=2;break;
         case 1077:status(other(),0,std::min(6,(t?t->burn:0)/2));break;
-        case 1082:status(main,0,heatAtFire);break;
+        case 1082:status(main,0,std::min(10,heatAtFire));break;
         case 1091:if(killed)status(other(),0,std::min(8,before.burn));break;
         case 1097:for(Id id:living())if(id!=main&&s.phase!=Phase::Defeat)enemyDamage(id,8,true,false,p.id);break;
         case 1103:if(t&&alive(*t)&&t->shield>0)enemyDamage(main,14,true,false,p.id);break;
@@ -317,8 +326,6 @@
         struct Entry{Id order,part;std::string upgrade;};std::vector<Entry> entries;for(const auto& p:hooks())entries.push_back({p.bindingOrder,p.id,{}});for(const auto& u:s.upgrades)entries.push_back({u.order,0,u.id});std::sort(entries.begin(),entries.end(),[](const Entry&x,const Entry&y){return x.order<y.order;});
         for(const auto& entry:entries){if(s.phase==Phase::Defeat)return;if(!entry.upgrade.empty()){endTurnUpgrade(entry.upgrade);continue;}const auto* current=byId(s.parts,entry.part);if(!current||current->place!=Place::Installed)continue;auto p=*current;ScopedSource sourceScope(upgradeSource,p.creator.empty()?p.recipe:p.creator);if(catalogue(p.effects)){
             switch(code(p.recipe)){
-            case 92:schedule(DeliveryKind::ShieldPart,15,p.recipe);break;
-            case 113:schedule(DeliveryKind::ShieldPart,20,p.recipe);break;
             case 1048:{Amount cost=0;for(const auto& choice:a.partChoices)if(choice.part==p.id){require(choice.enemy==0||choice.enemy==3,"Holdfast can pay 3 Heat or decline.");cost=static_cast<Amount>(choice.enemy);}require(cost==0||cost==3,"Holdfast can pay 3 Heat or decline.");if(cost)payment(0,3,0,true,&p);schedule(DeliveryKind::ShieldPart,cost?12:4,p.recipe);break;}
             case 1099:specialLater(p.recipe,14);break;
             default:break;
@@ -450,7 +457,7 @@
         if(active("SH083",BindingClock::Shot))percent=add(percent,std::min(80,8*ammoCount));
         if(active("MA063",BindingClock::Shot))base=add(base,std::min(15,3*distinct));
         if(active("MA078",BindingClock::Shot))base=add(base,std::min(16,4*std::max(0,ammoCount-1)));
-        if(active("MA098",BindingClock::Shot)){Amount n=0;for(const auto& p:s.parts)if(p.place==Place::Reserve)++n;base=add(base,std::min(18,3*n));}
+        if(active("MA098",BindingClock::Shot)){Amount n=0;for(const auto& p:s.parts)if(p.place==Place::Reserve&&isUnusedPart(p))++n;base=add(base,std::min(18,3*n));}
         if(shoulder)percent=add(percent,25);
         std::vector<Amount> removed;for(const auto& p:fired){Amount n=0;if(catalogue(p.effects)&&p.kind==Kind::Ammo)base=add(base,beforeAmmo(p,a.target,n,paidBeforeFire));removed.push_back(n);}
         const Enemy before=*byId(s.enemies,a.target);

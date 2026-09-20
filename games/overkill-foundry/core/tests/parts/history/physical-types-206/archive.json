@@ -1,0 +1,17 @@
+{
+  "additional_archived_build_logs": {
+    "capture-build-0.log": "d262e6e4806c8fa55a6784eec9cee1e21bf622ba7e1a052e0e1c9cd7b64d63af",
+    "capture-build-1.log": "88b37c5dacddb7c12779bcb3782bf876787aaefcc7a4589729a7efe2e40bd5f1",
+    "capture-ctest.log": "d07fe1e5354420a8b4de6abca50a1c52f14387bc0816645f2f2d67c4227e7360"
+  },
+  "files": {
+    "README.md": "8c82ea06521af43baa0b299d2bf5e9806eb6116dfba70ced6769845f7d814aa1",
+    "parts.log": "74e3b1737744fef6cc425151b74ef5d5b873d42205a482f7a2c46c9c68f4a05e",
+    "proposed-bindings.json": "23e3f8144eb397dc0a494bfb496b7d7b7f5b0c5227d1b161b09e632fa06fb2aa",
+    "results.json": "7a6f7138cdbe423adb79418428f5e5ff48e3a1b4ae01fc53229cbc75950e5f9d"
+  },
+  "native_archive": "core/build/part-lifecycle/captures/native-part-lifecycle-b65b3081edc070ca",
+  "notice": "Unmodified 206-type candidate. Its chosen-SH066-payment exclusion was subsequently corrected by the already-settled automatic contract in TIMING-AND-PERSISTENCE section 3. Preserve this record as historical, not current sufficiency.",
+  "source_graph_sha256": "279444c78a1873fbfe8244b35cf6f7836c12b854d7ac25bc9950f62b6d7ed6ff",
+  "verified_build": "native-part-lifecycle-b65b3081edc070ca"
+}

@@ -1,0 +1,6 @@
+CORE MA058 kills=2 victory_events=1 ids=8,
+CAMPAIGN victory_events=1 upgrade_victory_dispatches=1 hp=30->43 maxHp_delta=1 credits_delta=10 entitlement=1 charges=0 receipt_delta=1 sequence_delta=1
+CORE lethal recoil defeat_events=1 hp=0
+REPEATED phase=2 terminal_events=0
+REPEATED phase=4 terminal_events=0
+PASS terminal notifications are unique; campaign completion effects and receipt were exactly once

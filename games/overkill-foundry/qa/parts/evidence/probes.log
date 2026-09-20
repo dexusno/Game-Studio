@@ -1,0 +1,37 @@
+PASS P01 paid Warm Rivet / consumed return / immutable per-part floor
+PASS P02 variable Heat and HP first-install history
+PASS P03 capped generated conversion / tuned source / fresh copies
+PASS P04 pristine generated Shield copies do not replay generator
+PASS P05 same-name refresh versus separate payments and distinct bonuses
+PASS P06 odd spread / target defence / payment SH005
+PASS P06 odd spread / target defence / payment SH051
+PASS P06 odd spread / target defence / payment SH082
+PASS P06 odd spread / target defence / payment SH110
+PASS P06 odd spread / target defence / payment MA041
+PASS P06 odd spread / target defence / payment MA111
+PASS P07 Good Circuit / duplicate / partial pile SH008
+PASS P07 Good Circuit / duplicate / partial pile SH037
+PASS P07 Good Circuit / duplicate / partial pile SH038
+PASS P07 Good Circuit / duplicate / partial pile SH039
+PASS P07 Good Circuit / duplicate / partial pile SH040
+PASS P07 Good Circuit / duplicate / partial pile SH077
+PASS P07 Good Circuit / duplicate / partial pile SH078
+PASS P07 Good Circuit / duplicate / partial pile SH079
+PASS P07 Good Circuit / duplicate / partial pile SH080
+PASS P07 Good Circuit / duplicate / partial pile SH105
+PASS P07 Good Circuit / duplicate / partial pile SH106
+PASS P07 Good Circuit / duplicate / partial pile SH107
+PASS P07 Good Circuit / duplicate / partial pile SH108
+PASS P07 Good Circuit / duplicate / partial pile SH119
+PASS P07 Good Circuit / duplicate / partial pile SH120
+PASS P07 Good Circuit / duplicate / partial pile SH121
+PASS P07 Good Circuit / duplicate / partial pile SH122
+PASS P07 Good Circuit / duplicate / partial pile SH123
+PASS P07 Good Circuit / duplicate / partial pile SH124
+PASS P07 Good Circuit / duplicate / partial pile SH125
+PASS P07 Good Circuit / duplicate / partial pile SH126
+PASS P08 Perfect scarcity / unfitted expiry / spent Precision
+PASS P09 ephemeral Shield1 with actual retention and enemy hit
+PASS P10 automatic Sweep / post-enemy ordered reads / remainders
+PASS P11 real sale receipts and armed campaign cleanup
+SUMMARY 36 passed, 0 failed, 1908 assertions

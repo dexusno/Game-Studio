@@ -1,0 +1,2174 @@
+{
+  "recipe:SH009": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "Add 8 damage. Add another 2 if the shot contains at least three other Ammo parts.",
+    "id": "SH009",
+    "kind": "Ammo",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Rivet Packing",
+    "output_text": "1 Rivet Bundle",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH009 | Rivet Packing | 1 Rivet Bundle | Ammo | 2 Iron | None | Add 8 damage. Add another 2 if the shot contains at least three other Ammo parts. |",
+      "line": 267,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH014": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Carbon + 1 Glass",
+    "effect": "Add 2 damage and apply Corrosion 2 to the main target after the main hit.",
+    "id": "SH014",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Acid Filling",
+    "output_text": "1 Acid Capsule",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH014 | Acid Filling | 1 Acid Capsule | Ammo | 1 Carbon + 1 Glass | None | Add 2 damage and apply Corrosion 2 to the main target after the main hit. |",
+      "line": 272,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH015": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Carbon + 1 Glass",
+    "effect": "Apply Mark 5 to one enemy now.",
+    "id": "SH015",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Paint Marker",
+    "output_text": "Immediate effect: Bright Paint Pod (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH015 | Paint Marker | Immediate effect: Bright Paint Pod (no part) | Utility | 1 Carbon + 1 Glass | None | Apply Mark 5 to one enemy now. |",
+      "line": 273,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH016": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Add 5 damage and apply Weaken 4 to the main target after the main hit.",
+    "id": "SH016",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Joint Snare",
+    "output_text": "1 Snare Bolt",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH016 | Joint Snare | 1 Snare Bolt | Ammo | 1 Iron + 1 Copper | None | Add 5 damage and apply Weaken 4 to the main target after the main hit. |",
+      "line": 274,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH018": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 2 damage for each other Ammo part in the shot, up to 12 added damage.",
+    "id": "SH018",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Packed Thread",
+    "output_text": "1 Packed Thread Sleeve",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH018 | Packed Thread | 1 Packed Thread Sleeve | Ammo | 2 Iron + 1 Copper | 1 | Add 2 damage for each other Ammo part in the shot, up to 12 added damage. |",
+      "line": 276,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH019": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "Gain 7 Shield, plus 3 more if at least two enemies intend to attack this round.",
+    "id": "SH019",
+    "kind": "Shield",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Mesh Weaving",
+    "output_text": "1 Wide Mesh Plate",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH019 | Mesh Weaving | 1 Wide Mesh Plate | Shield | 2 Iron | None | Gain 7 Shield, plus 3 more if at least two enemies intend to attack this round. |",
+      "line": 277,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH020": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Gain 6 Shield. Apply Weaken 2 to the first enemy that attacks you this round, after its attack.",
+    "id": "SH020",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Sloped Bracing",
+    "output_text": "1 Sloped Plate",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH020 | Sloped Bracing | 1 Sloped Plate | Shield | 1 Iron + 1 Copper | None | Gain 6 Shield. Apply Weaken 2 to the first enemy that attacks you this round, after its attack. |",
+      "line": 278,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH021": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Gain 12 Shield if exactly one enemy intends to attack this round; otherwise gain 7.",
+    "id": "SH021",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Firm Mount",
+    "output_text": "1 Ground Brace",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH021 | Firm Mount | 1 Ground Brace | Shield | 2 Iron + 1 Copper | 1 | Gain 12 Shield if exactly one enemy intends to attack this round; otherwise gain 7. |",
+      "line": 279,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH022": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Glass",
+    "effect": "Gain 6 Shield. Remove up to 3 Burn from yourself now.",
+    "id": "SH022",
+    "kind": "Shield",
+    "materials": {
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Heat Lining",
+    "output_text": "1 Heatproof Liner",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH022 | Heat Lining | 1 Heatproof Liner | Shield | 1 Iron + 1 Glass | None | Gain 6 Shield. Remove up to 3 Burn from yourself now. |",
+      "line": 280,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH023": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Copper + 1 Iron",
+    "effect": "On first installation, set this part's Shield to 5, plus 1 for each Copper actually spent on recipe Uses this round, including Utility recipes, up to 10 total Shield. Later spending or reinstallation does not recalculate it.",
+    "id": "SH023",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Wire Lattice",
+    "output_text": "1 Woven Grid",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH023 | Wire Lattice | 1 Woven Grid | Shield | 2 Copper + 1 Iron | None | On first installation, set this part's Shield to 5, plus 1 for each Copper actually spent on recipe Uses this round, including Utility recipes, up to 10 total Shield. Later spending or reinstallation does not recalculate it. |",
+      "line": 281,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH025": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Gain 5 Shield. If you fully block an enemy attack this round, gain 1 Iron next turn; trigger once.",
+    "id": "SH025",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Scrap Catcher",
+    "output_text": "1 Catch Plate",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH025 | Scrap Catcher | 1 Catch Plate | Shield | 1 Iron + 1 Copper | None | Gain 5 Shield. If you fully block an enemy attack this round, gain 1 Iron next turn; trigger once. |",
+      "line": 283,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH027": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Gain 4 Shield. After the first enemy attack against you this round, deal 3 damage back to that attacker.",
+    "id": "SH027",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Contact Wire",
+    "output_text": "1 Contact Liner",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH027 | Contact Wire | 1 Contact Liner | Shield | 1 Iron + 1 Copper | None | Gain 4 Shield. After the first enemy attack against you this round, deal 3 damage back to that attacker. |",
+      "line": 285,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH028": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "Gain 3 Shield per living enemy, up to 12.",
+    "id": "SH028",
+    "kind": "Shield",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Pitched Roof",
+    "output_text": "1 Angled Cover",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH028 | Pitched Roof | 1 Angled Cover | Shield | 2 Iron | None | Gain 3 Shield per living enemy, up to 12. |",
+      "line": 286,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH029": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron",
+    "effect": "On recipe Use, gain 1 Copper after paying this recipe's listed Iron cost once.",
+    "id": "SH029",
+    "kind": "Utility",
+    "materials": {
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Copper Recovery",
+    "output_text": "Immediate effect: Copper Recovery Pack (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH029 | Copper Recovery | Immediate effect: Copper Recovery Pack (no part) | Utility | 2 Iron | None | On recipe Use, gain 1 Copper after paying this recipe's listed Iron cost once. |",
+      "line": 287,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH030": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Copper",
+    "effect": "On recipe Use, gain 1 Glass after paying this recipe's listed Copper cost once.",
+    "id": "SH030",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 2
+    },
+    "mercenary": "Shared",
+    "name": "Glass Recovery",
+    "output_text": "Immediate effect: Glass Recovery Pack (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH030 | Glass Recovery | Immediate effect: Glass Recovery Pack (no part) | Utility | 2 Copper | None | On recipe Use, gain 1 Glass after paying this recipe's listed Copper cost once. |",
+      "line": 288,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH031": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Carbon",
+    "effect": "On recipe Use, gain 1 Iron after paying this recipe's listed Carbon cost once.",
+    "id": "SH031",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 2
+    },
+    "mercenary": "Shared",
+    "name": "Iron Recovery",
+    "output_text": "Immediate effect: Iron Recovery Pack (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH031 | Iron Recovery | Immediate effect: Iron Recovery Pack (no part) | Utility | 2 Carbon | None | On recipe Use, gain 1 Iron after paying this recipe's listed Carbon cost once. |",
+      "line": 289,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH032": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper",
+    "effect": "Sacrifice one unused part from reserve. Next turn, gain 1 Iron and 1 Glass.",
+    "id": "SH032",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1
+    },
+    "mercenary": "Shared",
+    "name": "Spare Sorting",
+    "output_text": "Immediate effect: Sorting Tray (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH032 | Spare Sorting | Immediate effect: Sorting Tray (no part) | Utility | 1 Copper | None | Sacrifice one unused part from reserve. Next turn, gain 1 Iron and 1 Glass. |",
+      "line": 290,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH033": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Glass + 1 Carbon",
+    "effect": "Remove up to 2 Burn and up to 2 Corrosion from yourself. Gain 3 Shield.",
+    "id": "SH033",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Clean Wash",
+    "output_text": "Immediate effect: Cleaning Bottle (no part)",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH033 | Clean Wash | Immediate effect: Cleaning Bottle (no part) | Utility | 1 Glass + 1 Carbon | 1 | Remove up to 2 Burn and up to 2 Corrosion from yourself. Gain 3 Shield. |",
+      "line": 291,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH034": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "On recipe Use, schedule a new regular 8-Shield part to load at the beginning of the next round. It may be removed and saved normally. If left loaded, it activates at End Turn and its active Shield resets at enemy-turn end under the normal upgrade exceptions.",
+    "id": "SH034",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Early Cover",
+    "output_text": "Immediate effect: schedule 1 Shield part next round",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH034 | Early Cover | Immediate effect: schedule 1 Shield part next round | Utility | 1 Iron + 1 Copper | None | On recipe Use, schedule a new regular 8-Shield part to load at the beginning of the next round. It may be removed and saved normally. If left loaded, it activates at End Turn and its active Shield resets at enemy-turn end under the normal upgrade exceptions. |",
+      "line": 292,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH035": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Glass",
+    "effect": "The next Shield part you use this round gains 4 extra Shield. This bonus applies once and is not multiplied by that part.",
+    "id": "SH035",
+    "kind": "Modifier",
+    "materials": {
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "First Layer",
+    "output_text": "1 Base Reinforcement",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH035 | First Layer | 1 Base Reinforcement | Modifier | 1 Iron + 1 Glass | None | The next Shield part you use this round gains 4 extra Shield. This bonus applies once and is not multiplied by that part. |",
+      "line": 293,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH037": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Circuit",
+    "effect": "Next round's haul gathers up to 2 extra Iron from the pile. No extra Copper, Carbon, Glass or Circuit is granted by this ring.",
+    "id": "SH037",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Shared",
+    "name": "Iron Pull",
+    "output_text": "1 Iron-Seeking Ring",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH037 | Iron Pull | 1 Iron-Seeking Ring | Magnet | 1 Copper + 1 Circuit | 1 | Next round's haul gathers up to 2 extra Iron from the pile. No extra Copper, Carbon, Glass or Circuit is granted by this ring. |",
+      "line": 295,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH038": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Glass + 1 Circuit",
+    "effect": "Next round's haul gathers up to 2 extra Copper from the pile.",
+    "id": "SH038",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Copper Pull",
+    "output_text": "1 Copper-Seeking Ring",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH038 | Copper Pull | 1 Copper-Seeking Ring | Magnet | 1 Glass + 1 Circuit | 1 | Next round's haul gathers up to 2 extra Copper from the pile. |",
+      "line": 296,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH039": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Circuit",
+    "effect": "Next round's haul gathers up to 2 extra Carbon from the pile.",
+    "id": "SH039",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Carbon Pull",
+    "output_text": "1 Carbon-Seeking Ring",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH039 | Carbon Pull | 1 Carbon-Seeking Ring | Magnet | 1 Iron + 1 Circuit | 1 | Next round's haul gathers up to 2 extra Carbon from the pile. |",
+      "line": 297,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH040": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Carbon + 1 Circuit",
+    "effect": "Next round's haul gathers up to 2 extra Glass from the pile.",
+    "id": "SH040",
+    "kind": "Magnet",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1
+    },
+    "mercenary": "Shared",
+    "name": "Glass Pull",
+    "output_text": "1 Glass-Seeking Ring",
+    "rarity": "Common",
+    "source": {
+      "exact_text": "| SH040 | Glass Pull | 1 Glass-Seeking Ring | Magnet | 1 Carbon + 1 Circuit | 1 | Next round's haul gathers up to 2 extra Glass from the pile. |",
+      "line": 298,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH041": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Glass",
+    "effect": "Before the main hit, remove half the target's Shield, rounded down. Add 8 damage.",
+    "id": "SH041",
+    "kind": "Ammo",
+    "materials": {
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Saw Fitting",
+    "output_text": "1 Saw Sleeve",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH041 | Saw Fitting | 1 Saw Sleeve | Ammo | 2 Iron + 1 Glass | 1 | Before the main hit, remove half the target's Shield, rounded down. Add 8 damage. |",
+      "line": 304,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH042": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon",
+    "effect": "Add 8 damage. If the main hit kills its target, deal 10 damage to one other chosen enemy.",
+    "id": "SH042",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Breakaway Filling",
+    "output_text": "1 Breakaway Core",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH042 | Breakaway Filling | 1 Breakaway Core | Ammo | 2 Iron + 1 Carbon | 1 | Add 8 damage. If the main hit kills its target, deal 10 damage to one other chosen enemy. |",
+      "line": 305,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH043": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Glass",
+    "effect": "Up to 12 damage from the next main shot bypasses its main target's Shield. This redirects damage; it does not add another 12.",
+    "id": "SH043",
+    "kind": "Modifier",
+    "materials": {
+      "Glass": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Needle Lining",
+    "output_text": "1 Piercing Liner",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH043 | Needle Lining | 1 Piercing Liner | Modifier | 1 Iron + 2 Glass | 1 | Up to 12 damage from the next main shot bypasses its main target's Shield. This redirects damage; it does not add another 12. |",
+      "line": 306,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH044": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 8 damage, plus 5 more if at least three Shield parts are installed in your shield when you Fire this shot. Counting them does not consume them.",
+    "id": "SH044",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Guarded Loading",
+    "output_text": "1 Braced Slug",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH044 | Guarded Loading | 1 Braced Slug | Ammo | 2 Iron + 1 Copper | None | Add 8 damage, plus 5 more if at least three Shield parts are installed in your shield when you Fire this shot. Counting them does not consume them. |",
+      "line": 307,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH045": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Copper",
+    "effect": "Add 5 damage. After the main hit, gain 2 Shield per Ammo part consumed by the shot, up to 12.",
+    "id": "SH045",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Return Spring",
+    "output_text": "1 Shield Return Spring",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH045 | Return Spring | 1 Shield Return Spring | Ammo | 1 Iron + 2 Copper | 1 | Add 5 damage. After the main hit, gain 2 Shield per Ammo part consumed by the shot, up to 12. |",
+      "line": 308,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH046": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Add 7 damage. After the main hit, apply Burn 2 to every enemy other than the main target.",
+    "id": "SH046",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Ember Scatter",
+    "output_text": "1 Scattering Ember Tip",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH046 | Ember Scatter | 1 Scattering Ember Tip | Ammo | 1 Iron + 2 Carbon | 1 | Add 7 damage. After the main hit, apply Burn 2 to every enemy other than the main target. |",
+      "line": 309,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH047": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Carbon + 2 Glass",
+    "effect": "Add 5 damage. After the main hit, apply Corrosion 2 to each living enemy.",
+    "id": "SH047",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Acid Mist",
+    "output_text": "1 Mist Capsule",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH047 | Acid Mist | 1 Mist Capsule | Ammo | 1 Carbon + 2 Glass | 1 | Add 5 damage. After the main hit, apply Corrosion 2 to each living enemy. |",
+      "line": 310,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH048": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Copper + 1 Circuit",
+    "effect": "Add 8 damage. After the main hit, apply Weaken 4 to every enemy that intends to attack this round.",
+    "id": "SH048",
+    "kind": "Ammo",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Loose Wiring",
+    "output_text": "1 Disrupting Wire Bundle",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH048 | Loose Wiring | 1 Disrupting Wire Bundle | Ammo | 1 Iron + 2 Copper + 1 Circuit | 2 | Add 8 damage. After the main hit, apply Weaken 4 to every enemy that intends to attack this round. |",
+      "line": 311,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH049": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Carbon + 1 Glass + 1 Circuit",
+    "effect": "Apply Mark 4 to one enemy and Mark 2 to every other enemy.",
+    "id": "SH049",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Marker Spray",
+    "output_text": "Immediate effect: Marker Spray Bottle (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH049 | Marker Spray | Immediate effect: Marker Spray Bottle (no part) | Utility | 1 Carbon + 1 Glass + 1 Circuit | 1 | Apply Mark 4 to one enemy and Mark 2 to every other enemy. |",
+      "line": 312,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH051": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Load into the bullet; consumed at Fire. Choose up to two other enemies. The shot consuming this part also hits each for 40% of the shot's damage. This spreads direct shot damage only; it does not copy Burn, Corrosion or other main-target payload effects.",
+    "id": "SH051",
+    "kind": "Modifier",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Three-Way Outlet",
+    "output_text": "1 Three-Way Nozzle",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH051 | Three-Way Outlet | 1 Three-Way Nozzle | Modifier | 2 Iron + 1 Copper + 1 Glass | 2 | Load into the bullet; consumed at Fire. Choose up to two other enemies. The shot consuming this part also hits each for 40% of the shot's damage. This spreads direct shot damage only; it does not copy Burn, Corrosion or other main-target payload effects. |",
+      "line": 314,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH052": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 2 Carbon",
+    "effect": "Add 7 damage. If this part entered reserve in an earlier round, add another 8.",
+    "id": "SH052",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Rested Powder",
+    "output_text": "1 Settled Charge",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH052 | Rested Powder | 1 Settled Charge | Ammo | 1 Iron + 2 Carbon | None | Add 7 damage. If this part entered reserve in an earlier round, add another 8. |",
+      "line": 315,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH053": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Carbon",
+    "effect": "Add 5 damage, or 17 if no raw resources remain when Fire begins.",
+    "id": "SH053",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Last Scrap",
+    "output_text": "1 Last-Scrap Slug",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH053 | Last Scrap | 1 Last-Scrap Slug | Ammo | 2 Iron + 1 Carbon | 1 | Add 5 damage, or 17 if no raw resources remain when Fire begins. |",
+      "line": 316,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH054": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Add 8 damage, plus 3 per reserve part sacrificed this round, up to 17 total.",
+    "id": "SH054",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Salvage Packing",
+    "output_text": "1 Salvage-Fed Core",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH054 | Salvage Packing | 1 Salvage-Fed Core | Ammo | 2 Iron + 1 Copper | 1 | Add 8 damage, plus 3 per reserve part sacrificed this round, up to 17 total. |",
+      "line": 317,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH055": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Carbon + 1 Glass + 1 Circuit",
+    "effect": "Add 8 damage if the main target has not lost HP this fight; otherwise add 4. After the main hit, apply Weaken 3 to the main target.",
+    "id": "SH055",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Short Fuse",
+    "output_text": "1 Quick Burst Tip",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH055 | Short Fuse | 1 Quick Burst Tip | Ammo | 1 Carbon + 1 Glass + 1 Circuit | None | Add 8 damage if the main target has not lost HP this fight; otherwise add 4. After the main hit, apply Weaken 3 to the main target. |",
+      "line": 318,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH056": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Carbon + 1 Circuit",
+    "effect": "Add 7 damage. At the start of next turn, deal 8 damage to the same target if it is still alive.",
+    "id": "SH056",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Late Spark",
+    "output_text": "1 Delayed Spark Capsule",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH056 | Late Spark | 1 Delayed Spark Capsule | Ammo | 1 Iron + 1 Carbon + 1 Circuit | 1 | Add 7 damage. At the start of next turn, deal 8 damage to the same target if it is still alive. |",
+      "line": 319,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH057": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "On recipe Use, automatically load a regular Shield part worth 8 Shield. If at least 3 Iron remain in your raw pool after paying the recipe cost, schedule a new regular 5-Shield part to load at the beginning of the next round. Both parts may be removed and saved normally. The delivery is scheduled by recipe Use, not by activating the first part.",
+    "id": "SH057",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Spare Metal Brace",
+    "output_text": "1 regular Shield part now + conditional part next round",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH057 | Spare Metal Brace | 1 regular Shield part now + conditional part next round | Shield | 2 Iron + 1 Copper | None | On recipe Use, automatically load a regular Shield part worth 8 Shield. If at least 3 Iron remain in your raw pool after paying the recipe cost, schedule a new regular 5-Shield part to load at the beginning of the next round. Both parts may be removed and saved normally. The delivery is scheduled by recipe Use, not by activating the first part. |",
+      "line": 320,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH058": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Circuit",
+    "effect": "Gain 9 Shield. The first time an enemy attack reduces your Shield to zero this round, apply Weaken 3 to every living enemy.",
+    "id": "SH058",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Break Alarm",
+    "output_text": "1 Alarm Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH058 | Break Alarm | 1 Alarm Plate | Shield | 2 Iron + 1 Circuit | 1 | Gain 9 Shield. The first time an enemy attack reduces your Shield to zero this round, apply Weaken 3 to every living enemy. |",
+      "line": 321,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH059": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass",
+    "effect": "Gain 7 Shield, or 13 if your HP is at or below half its maximum.",
+    "id": "SH059",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Emergency Rivets",
+    "output_text": "1 Emergency Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH059 | Emergency Rivets | 1 Emergency Plate | Shield | 1 Iron + 1 Copper + 1 Glass | None | Gain 7 Shield, or 13 if your HP is at or below half its maximum. |",
+      "line": 322,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH061": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Glass + 1 Circuit",
+    "effect": "Gain 7 Shield. Gain another 3 for each living enemy with Mark, up to 16 total.",
+    "id": "SH061",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Watched Approach",
+    "output_text": "1 Sighting Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH061 | Watched Approach | 1 Sighting Plate | Shield | 1 Iron + 1 Glass + 1 Circuit | 1 | Gain 7 Shield. Gain another 3 for each living enemy with Mark, up to 16 total. |",
+      "line": 324,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH062": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper",
+    "effect": "Provides 6 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot dealt HP damage, gain a fresh regular 7-Shield part once. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it.",
+    "id": "SH062",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Impact Catch",
+    "output_text": "1 Catch-and-Brace Plate",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH062 | Impact Catch | 1 Catch-and-Brace Plate | Shield | 2 Iron + 1 Copper | 1 | Provides 6 Shield. On first installation, arm a check for your next main shot this round. After that shot, if this part is installed and the shot dealt HP damage, gain a fresh regular 7-Shield part once. That check ends after the shot even if the condition fails; it expires at round end if unused. Reinstallation does not re-arm it. |",
+      "line": 325,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH063": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 2 Glass",
+    "effect": "Gain 8 Shield. Remove up to 5 Corrosion from yourself.",
+    "id": "SH063",
+    "kind": "Shield",
+    "materials": {
+      "Glass": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Sealed Joints",
+    "output_text": "1 Sealed Joint Cover",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH063 | Sealed Joints | 1 Sealed Joint Cover | Shield | 1 Iron + 2 Glass | None | Gain 8 Shield. Remove up to 5 Corrosion from yourself. |",
+      "line": 326,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH064": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 1 Glass + 1 Circuit",
+    "effect": "The next application of Burn, Corrosion, Mark or Weaken to you this round is prevented. Gain 5 Shield.",
+    "id": "SH064",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Clean Screen",
+    "output_text": "1 Filter Screen",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH064 | Clean Screen | 1 Filter Screen | Modifier | 1 Copper + 1 Glass + 1 Circuit | 2 | The next application of Burn, Corrosion, Mark or Weaken to you this round is prevented. Gain 5 Shield. |",
+      "line": 327,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH065": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Copper",
+    "effect": "Sacrifice one unused Ammo part. Gain 10 Shield now and 1 Iron at the start of next turn.",
+    "id": "SH065",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Salvaged Cover",
+    "output_text": "Immediate effect: Salvage Cover Frame (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH065 | Salvaged Cover | Immediate effect: Salvage Cover Frame (no part) | Utility | 1 Iron + 1 Copper | None | Sacrifice one unused Ammo part. Gain 10 Shield now and 1 Iron at the start of next turn. |",
+      "line": 328,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH066": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Circuit",
+    "effect": "After enemies finish their actions, before the Shield reset, spend up to 9 remaining Shield. Record 1 Iron per complete 3 Shield actually spent, up to 3 Iron. At the beginning of the next round, gain that recorded Iron. Pay from the Shield still available at payment; the same Shield cannot pay two effects.",
+    "id": "SH066",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Sweep the Plates",
+    "output_text": "1 Plate Collection Tray",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH066 | Sweep the Plates | 1 Plate Collection Tray | Modifier | 1 Iron + 1 Circuit | 1 | After enemies finish their actions, before the Shield reset, spend up to 9 remaining Shield. Record 1 Iron per complete 3 Shield actually spent, up to 3 Iron. At the beginning of the next round, gain that recorded Iron. Pay from the Shield still available at payment; the same Shield cannot pay two effects. |",
+      "line": 329,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH067": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 2 Glass",
+    "effect": "Remove 2 cooldown counters from every currently cooling recipe.",
+    "id": "SH067",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Deep Cooling",
+    "output_text": "Immediate effect: Deep Coolant Bottle (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH067 | Deep Cooling | Immediate effect: Deep Coolant Bottle (no part) | Utility | 1 Copper + 2 Glass | 1 | Remove 2 cooldown counters from every currently cooling recipe. |",
+      "line": 330,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH068": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Copper + 1 Glass",
+    "effect": "Remove 1 cooldown counter from every currently cooling recipe.",
+    "id": "SH068",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 2,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Split Cooling",
+    "output_text": "Immediate effect: Twin Coolant Bottle (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH068 | Split Cooling | Immediate effect: Twin Coolant Bottle (no part) | Utility | 2 Copper + 1 Glass | 1 | Remove 1 cooldown counter from every currently cooling recipe. |",
+      "line": 331,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH069": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Iron + 1 Circuit",
+    "effect": "Choose Copper, Carbon or Glass. Gain 2 of that material at the start of next turn.",
+    "id": "SH069",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Tomorrow's Stock",
+    "output_text": "Immediate effect: Stock Order Token (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH069 | Tomorrow's Stock | Immediate effect: Stock Order Token (no part) | Utility | 1 Iron + 1 Circuit | None | Choose Copper, Carbon or Glass. Gain 2 of that material at the start of next turn. |",
+      "line": 332,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH070": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Glass + 1 Circuit",
+    "effect": "Next turn, the first recipe you Use that costs at least 2 Iron costs 1 less Iron, including a Utility recipe. Other costs and recipe-use limits still apply.",
+    "id": "SH070",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Iron Saver",
+    "output_text": "1 Iron-Saving Mould",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH070 | Iron Saver | 1 Iron-Saving Mould | Modifier | 1 Copper + 1 Glass + 1 Circuit | 1 | Next turn, the first recipe you Use that costs at least 2 Iron costs 1 less Iron, including a Utility recipe. Other costs and recipe-use limits still apply. |",
+      "line": 333,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH071": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Choose an unused Common Ammo part in reserve. At the start of next turn, receive one fresh copy with its printed effect; do not copy later bonuses attached to it.",
+    "id": "SH071",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Spare Casting",
+    "output_text": "Immediate effect: Spare Casting Mould (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH071 | Spare Casting | Immediate effect: Spare Casting Mould (no part) | Utility | 2 Iron + 1 Copper + 1 Glass | 2 | Choose an unused Common Ammo part in reserve. At the start of next turn, receive one fresh copy with its printed effect; do not copy later bonuses attached to it. |",
+      "line": 334,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH072": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Glass + 1 Circuit",
+    "effect": "Choose one Base or Common Ammo part loaded in the next shot. Return a fresh copy to reserve next turn after it is consumed. Trigger once; do not copy attached bonuses.",
+    "id": "SH072",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Return Delivery",
+    "output_text": "1 Delivery Catch",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH072 | Return Delivery | 1 Delivery Catch | Modifier | 1 Iron + 1 Glass + 1 Circuit | 2 | Choose one Base or Common Ammo part loaded in the next shot. Return a fresh copy to reserve next turn after it is consumed. Trigger once; do not copy attached bonuses. |",
+      "line": 335,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH073": {
+    "cooldown": null,
+    "cooldown_text": "None",
+    "cost_text": "1 Copper + 1 Glass",
+    "effect": "Remove up to 6 Weaken and up to 6 Mark from yourself. Add 3 damage to the next main shot this round.",
+    "id": "SH073",
+    "kind": "Utility",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Clear Controls",
+    "output_text": "Immediate effect: Control Cleaner (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH073 | Clear Controls | Immediate effect: Control Cleaner (no part) | Utility | 1 Copper + 1 Glass | None | Remove up to 6 Weaken and up to 6 Mark from yourself. Add 3 damage to the next main shot this round. |",
+      "line": 336,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH075": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Circuit",
+    "effect": "Add 8 damage. If the main hit kills its target, gain 2 Copper next turn. This creates no energy core or credits.",
+    "id": "SH075",
+    "kind": "Ammo",
+    "materials": {
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Core-Side Salvage",
+    "output_text": "1 Salvage Hook Tip",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH075 | Core-Side Salvage | 1 Salvage Hook Tip | Ammo | 2 Iron + 1 Circuit | 1 | Add 8 damage. If the main hit kills its target, gain 2 Copper next turn. This creates no energy core or credits. |",
+      "line": 338,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH076": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Carbon + 1 Copper",
+    "effect": "Sacrifice one unused Shield part with a printed fixed Shield gain. Make one Recast Plate Slug adding that amount as shot damage, up to 14; it has no other effect.",
+    "id": "SH076",
+    "kind": "Utility",
+    "materials": {
+      "Carbon": 1,
+      "Copper": 1
+    },
+    "mercenary": "Shared",
+    "name": "Plate Recasting",
+    "output_text": "Immediate effect: Plate Recasting Sleeve (no part)",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH076 | Plate Recasting | Immediate effect: Plate Recasting Sleeve (no part) | Utility | 1 Carbon + 1 Copper | 1 | Sacrifice one unused Shield part with a printed fixed Shield gain. Make one Recast Plate Slug adding that amount as shot damage, up to 14; it has no other effect. |",
+      "line": 339,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH077": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Glass + 1 Circuit",
+    "effect": "Next round's haul gathers up to 1 extra Iron and 1 extra Copper from the pile.",
+    "id": "SH077",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Metal Pair Pull",
+    "output_text": "1 Twin Metal Ring",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH077 | Metal Pair Pull | 1 Twin Metal Ring | Magnet | 1 Glass + 1 Circuit | 1 | Next round's haul gathers up to 1 extra Iron and 1 extra Copper from the pile. |",
+      "line": 340,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH078": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Circuit",
+    "effect": "Next round's haul gathers up to 1 extra Carbon and 1 extra Glass from the pile.",
+    "id": "SH078",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1
+    },
+    "mercenary": "Shared",
+    "name": "Furnace Pair Pull",
+    "output_text": "1 Furnace Supply Ring",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH078 | Furnace Pair Pull | 1 Furnace Supply Ring | Magnet | 1 Copper + 1 Circuit | 1 | Next round's haul gathers up to 1 extra Carbon and 1 extra Glass from the pile. |",
+      "line": 341,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH079": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass",
+    "effect": "Next round's haul gathers up to 1 extra Circuit from the pile.",
+    "id": "SH079",
+    "kind": "Magnet",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Chip Search",
+    "output_text": "1 Circuit Search Head",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH079 | Chip Search | 1 Circuit Search Head | Magnet | 1 Iron + 1 Copper + 1 Glass | 2 | Next round's haul gathers up to 1 extra Circuit from the pile. |",
+      "line": 342,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH080": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Copper + 1 Glass + 1 Circuit",
+    "effect": "Choose two resource types when crafted. Next round, fill the haul's first three available units from those types before taking other scrap. Haul size does not increase.",
+    "id": "SH080",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Selective Grip",
+    "output_text": "1 Selective Grip Head",
+    "rarity": "Uncommon",
+    "source": {
+      "exact_text": "| SH080 | Selective Grip | 1 Selective Grip Head | Magnet | 1 Copper + 1 Glass + 1 Circuit | 1 | Choose two resource types when crafted. Next round, fill the haul's first three available units from those types before taking other scrap. Haul size does not increase. |",
+      "line": 343,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH081": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Glass",
+    "effect": "Remove all Shield from the main target before the hit, then add 14 damage.",
+    "id": "SH081",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Shield Breaker",
+    "output_text": "1 Shield-Breaking Head",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH081 | Shield Breaker | 1 Shield-Breaking Head | Ammo | 2 Iron + 1 Carbon + 1 Glass | 2 | Remove all Shield from the main target before the hit, then add 14 damage. |",
+      "line": 349,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH082": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "Load into the bullet; consumed at Fire. The shot consuming this part hits every other living enemy for 50% of its damage. Main-target payload effects are not copied.",
+    "id": "SH082",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Wide Burst",
+    "output_text": "1 Wide Burst Nozzle",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH082 | Wide Burst | 1 Wide Burst Nozzle | Modifier | 2 Iron + 1 Copper + 1 Circuit | 2 | Load into the bullet; consumed at Fire. The shot consuming this part hits every other living enemy for 50% of its damage. Main-target payload effects are not copied. |",
+      "line": 350,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH083": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Increase the next main shot's damage by 8% per Ammo part it consumes, up to 80%.",
+    "id": "SH083",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Layered Powder",
+    "output_text": "1 Layered Charge",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH083 | Layered Powder | 1 Layered Charge | Modifier | 1 Iron + 2 Carbon + 1 Circuit | 2 | Increase the next main shot's damage by 8% per Ammo part it consumes, up to 80%. |",
+      "line": 351,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH084": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Add 12 damage. Add 3 more for each different resource type used in crafting the Ammo parts in this shot, up to 27 total.",
+    "id": "SH084",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Different Metals",
+    "output_text": "1 Mixed-Metal Core",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH084 | Different Metals | 1 Mixed-Metal Core | Ammo | 2 Iron + 1 Copper + 1 Glass | 1 | Add 12 damage. Add 3 more for each different resource type used in crafting the Ammo parts in this shot, up to 27 total. |",
+      "line": 352,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH086": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Glass + 1 Circuit",
+    "effect": "Add 16 damage. If the main target has no Shield, apply Corrosion 6 to that main target after the main hit.",
+    "id": "SH086",
+    "kind": "Ammo",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Clean Entry",
+    "output_text": "1 Clean Entry Needle",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH086 | Clean Entry | 1 Clean Entry Needle | Ammo | 1 Iron + 2 Glass + 1 Circuit | 2 | Add 16 damage. If the main target has no Shield, apply Corrosion 6 to that main target after the main hit. |",
+      "line": 354,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH087": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Carbon + 1 Glass",
+    "effect": "Add 14 damage. After the main hit, deal damage equal to its target's Burn to one other chosen enemy, then remove half that Burn, rounded down.",
+    "id": "SH087",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Hot Follow-Through",
+    "output_text": "1 Follow-Through Ember",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH087 | Hot Follow-Through | 1 Follow-Through Ember | Ammo | 1 Iron + 2 Carbon + 1 Glass | 2 | Add 14 damage. After the main hit, deal damage equal to its target's Burn to one other chosen enemy, then remove half that Burn, rounded down. |",
+      "line": 355,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH088": {
+    "cooldown": 1,
+    "cooldown_text": "1",
+    "cost_text": "1 Iron + 1 Copper + 2 Glass",
+    "effect": "Add 10 damage, plus 5 for each different effect among Burn, Corrosion, Mark and Weaken present on the target when Fire began.",
+    "id": "SH088",
+    "kind": "Ammo",
+    "materials": {
+      "Copper": 1,
+      "Glass": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Fault Finder",
+    "output_text": "1 Fault-Finding Tip",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH088 | Fault Finder | 1 Fault-Finding Tip | Ammo | 1 Iron + 1 Copper + 2 Glass | 1 | Add 10 damage, plus 5 for each different effect among Burn, Corrosion, Mark and Weaken present on the target when Fire began. |",
+      "line": 356,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH089": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Circuit",
+    "effect": "Add 12 damage. After the main hit, deal a separate 12 damage to its target if it survives. That support hit does not repeat payload effects.",
+    "id": "SH089",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Double Tap Charge",
+    "output_text": "1 Follow-Up Charge",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH089 | Double Tap Charge | 1 Follow-Up Charge | Ammo | 2 Iron + 1 Carbon + 1 Circuit | 2 | Add 12 damage. After the main hit, deal a separate 12 damage to its target if it survives. That support hit does not repeat payload effects. |",
+      "line": 357,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH090": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Carbon + 1 Glass",
+    "effect": "Add 10 damage, plus 8 for each full round this part spent in reserve, up to 34 total.",
+    "id": "SH090",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Stored Momentum",
+    "output_text": "1 Stored-Momentum Slug",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH090 | Stored Momentum | 1 Stored-Momentum Slug | Ammo | 2 Iron + 1 Carbon + 1 Glass | 2 | Add 10 damage, plus 8 for each full round this part spent in reserve, up to 34 total. |",
+      "line": 358,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH091": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "3 Iron + 1 Copper",
+    "effect": "Gain 24 Shield. After enemies finish their actions, before the Shield reset, if any active Shield remains, deal 6 support damage to each surviving enemy that attacked you this round.",
+    "id": "SH091",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Iron": 3
+    },
+    "mercenary": "Shared",
+    "name": "Wall Casting",
+    "output_text": "1 Heavy Wall Plate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH091 | Wall Casting | 1 Heavy Wall Plate | Shield | 3 Iron + 1 Copper | 2 | Gain 24 Shield. After enemies finish their actions, before the Shield reset, if any active Shield remains, deal 6 support damage to each surviving enemy that attacked you this round. |",
+      "line": 359,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH092": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "When this part activates at End Turn, gain 15 Shield and schedule a new regular 15-Shield part to load at the beginning of the next round. After the first enemy attack that removes any of your Shield in this activation round, apply Mark 4 to that attacker.",
+    "id": "SH092",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Hinged Wall",
+    "output_text": "1 Hinged Wall Brace + next-round Shield part",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH092 | Hinged Wall | 1 Hinged Wall Brace + next-round Shield part | Shield | 2 Iron + 1 Copper + 1 Glass | 2 | When this part activates at End Turn, gain 15 Shield and schedule a new regular 15-Shield part to load at the beginning of the next round. After the first enemy attack that removes any of your Shield in this activation round, apply Mark 4 to that attacker. |",
+      "line": 360,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH093": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Glass + 1 Circuit",
+    "effect": "Gain Shield equal to half the total damage currently shown by enemy attack intents, rounded down, up to 30 Shield.",
+    "id": "SH093",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Measured Cover",
+    "output_text": "1 Measured Cover Gauge",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH093 | Measured Cover | 1 Measured Cover Gauge | Shield | 2 Iron + 1 Glass + 1 Circuit | 2 | Gain Shield equal to half the total damage currently shown by enemy attack intents, rounded down, up to 30 Shield. |",
+      "line": 361,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH094": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 2 Copper",
+    "effect": "Gain 16 Shield. After each of the first two enemy attacks against you this round, deal 7 damage to that attacker.",
+    "id": "SH094",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 2,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Rebound Wall",
+    "output_text": "1 Rebound Plate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH094 | Rebound Wall | 1 Rebound Plate | Shield | 2 Iron + 2 Copper | 2 | Gain 16 Shield. After each of the first two enemy attacks against you this round, deal 7 damage to that attacker. |",
+      "line": 362,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH095": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Copper + 1 Circuit",
+    "effect": "Apply Weaken 8 to each enemy that intends to attack this round. Gain 5 Shield for each living enemy that does not, up to 15 Shield.",
+    "id": "SH095",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Quiet Round",
+    "output_text": "1 Quiet-Round Brace",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH095 | Quiet Round | 1 Quiet-Round Brace | Modifier | 1 Iron + 2 Copper + 1 Circuit | 2 | Apply Weaken 8 to each enemy that intends to attack this round. Gain 5 Shield for each living enemy that does not, up to 15 Shield. |",
+      "line": 363,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH096": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "Gain 12 Shield now and another 12 at the start of next turn.",
+    "id": "SH096",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Two-Stage Cover",
+    "output_text": "1 Two-Stage Plate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH096 | Two-Stage Cover | 1 Two-Stage Plate | Shield | 2 Iron + 1 Copper + 1 Circuit | 2 | Gain 12 Shield now and another 12 at the start of next turn. |",
+      "line": 364,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH097": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 2 Glass + 1 Circuit",
+    "effect": "Gain 14 Shield. Until this enemy phase ends, the first time enemy damage would reach your HP, reduce that HP damage by up to 8.",
+    "id": "SH097",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 2,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Crack Sealing",
+    "output_text": "1 Crack-Sealing Foam",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH097 | Crack Sealing | 1 Crack-Sealing Foam | Shield | 1 Iron + 2 Glass + 1 Circuit | 2 | Gain 14 Shield. Until this enemy phase ends, the first time enemy damage would reach your HP, reduce that HP damage by up to 8. |",
+      "line": 365,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH098": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass",
+    "effect": "Gain 10 Shield, plus 7 for each full round this part spent in reserve, up to 31 total.",
+    "id": "SH098",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Stored Plate Casting",
+    "output_text": "1 Waiting Wall Plate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH098 | Stored Plate Casting | 1 Waiting Wall Plate | Shield | 2 Iron + 1 Copper + 1 Glass | 2 | Gain 10 Shield, plus 7 for each full round this part spent in reserve, up to 31 total. |",
+      "line": 366,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH099": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Copper + 2 Glass + 1 Circuit",
+    "effect": "Remove all cooldown counters from every currently cooling recipe. Each still needs its material cost paid to craft again.",
+    "id": "SH099",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Full Cooling",
+    "output_text": "Immediate effect: Full Coolant Canister (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH099 | Full Cooling | Immediate effect: Full Coolant Canister (no part) | Utility | 2 Copper + 2 Glass + 1 Circuit | 2 | Remove all cooldown counters from every currently cooling recipe. Each still needs its material cost paid to craft again. |",
+      "line": 367,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH100": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Copper + 1 Glass + 1 Circuit",
+    "effect": "Remove 1 cooldown counter from every currently cooling recipe.",
+    "id": "SH100",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Cooling Manifold",
+    "output_text": "Immediate effect: Coolant Manifold (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH100 | Cooling Manifold | Immediate effect: Coolant Manifold (no part) | Utility | 2 Copper + 1 Glass + 1 Circuit | 2 | Remove 1 cooldown counter from every currently cooling recipe. |",
+      "line": 368,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH102": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Glass + 1 Circuit",
+    "effect": "Choose one unused Common Ammo or Shield part. Receive two fresh copies next turn. Copies keep printed effects, not bonuses later attached to the original.",
+    "id": "SH102",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Reserve Pattern",
+    "output_text": "Immediate effect: Reserve Pattern Mould (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH102 | Reserve Pattern | Immediate effect: Reserve Pattern Mould (no part) | Utility | 2 Iron + 1 Glass + 1 Circuit | 2 | Choose one unused Common Ammo or Shield part. Receive two fresh copies next turn. Copies keep printed effects, not bonuses later attached to the original. |",
+      "line": 370,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH103": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass + 1 Circuit",
+    "effect": "The next Ammo part crafted this round gains 8 extra damage for its first use. If that recipe makes several parts, choose only one.",
+    "id": "SH103",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Better Moulding",
+    "output_text": "1 Fine Mould",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH103 | Better Moulding | 1 Fine Mould | Modifier | 1 Iron + 1 Copper + 1 Glass + 1 Circuit | 2 | The next Ammo part crafted this round gains 8 extra damage for its first use. If that recipe makes several parts, choose only one. |",
+      "line": 371,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH104": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Glass + 1 Circuit",
+    "effect": "Restore 8 HP, up to your maximum. If no enemies intend to attack this round, also gain 8 Shield. This recipe restores at most 16 HP per fight across all copies.",
+    "id": "SH104",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Careful Repairs",
+    "output_text": "Immediate effect: Careful Repair Kit (no part)",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH104 | Careful Repairs | Immediate effect: Careful Repair Kit (no part) | Utility | 2 Iron + 1 Glass + 1 Circuit | 3 | Restore 8 HP, up to your maximum. If no enemies intend to attack this round, also gain 8 Shield. This recipe restores at most 16 HP per fight across all copies. |",
+      "line": 372,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH105": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "2 Iron + 1 Copper + 1 Circuit",
+    "effect": "Next round, gather 5 extra scrap units. After that haul, choose 2 gathered units and leave them in the pile; keep the rest.",
+    "id": "SH105",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Heavy Magnet Lift",
+    "output_text": "1 Heavy Lift Brace",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH105 | Heavy Magnet Lift | 1 Heavy Lift Brace | Magnet | 2 Iron + 1 Copper + 1 Circuit | 2 | Next round, gather 5 extra scrap units. After that haul, choose 2 gathered units and leave them in the pile; keep the rest. |",
+      "line": 373,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH106": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 1 Glass + 2 Circuit",
+    "effect": "Choose one resource type when crafted. Next round, gather up to 4 extra units of that type from the pile.",
+    "id": "SH106",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Focused Extraction",
+    "output_text": "1 Focused Pull Head",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH106 | Focused Extraction | 1 Focused Pull Head | Magnet | 1 Copper + 1 Glass + 2 Circuit | 2 | Choose one resource type when crafted. Next round, gather up to 4 extra units of that type from the pile. |",
+      "line": 374,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH107": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass + 1 Circuit",
+    "effect": "Next round, gather up to 1 extra Iron, Copper, Carbon and Glass from the pile. The normal haul still occurs.",
+    "id": "SH107",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Broad Collection",
+    "output_text": "1 Broad Collection Ring",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH107 | Broad Collection | 1 Broad Collection Ring | Magnet | 1 Iron + 1 Copper + 1 Glass + 1 Circuit | 2 | Next round, gather up to 1 extra Iron, Copper, Carbon and Glass from the pile. The normal haul still occurs. |",
+      "line": 375,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH108": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 2 Glass + 1 Circuit",
+    "effect": "Choose one type when crafted. Next round, up to 4 normal haul positions prioritise that type. If fewer units of it exist, fill the other positions normally. After the haul, gain 6 Shield.",
+    "id": "SH108",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 1,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Patient Sorting",
+    "output_text": "1 Patient Sorting Head",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH108 | Patient Sorting | 1 Patient Sorting Head | Magnet | 1 Copper + 2 Glass + 1 Circuit | 2 | Choose one type when crafted. Next round, up to 4 normal haul positions prioritise that type. If fewer units of it exist, fill the other positions normally. After the haul, gain 6 Shield. |",
+      "line": 376,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH109": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "3 Iron + 2 Carbon + 1 Circuit",
+    "effect": "Add 36 damage. After the main hit, remove up to 12 Shield from each other enemy.",
+    "id": "SH109",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Iron": 3
+    },
+    "mercenary": "Shared",
+    "name": "Citybreaker Casting",
+    "output_text": "1 Citybreaker Core",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH109 | Citybreaker Casting | 1 Citybreaker Core | Ammo | 3 Iron + 2 Carbon + 1 Circuit | 3 | Add 36 damage. After the main hit, remove up to 12 Shield from each other enemy. |",
+      "line": 382,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH110": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 2 Copper + 1 Glass + 1 Circuit",
+    "effect": "Load into the bullet; consumed at Fire. Reserve one unused Shield part from reserve as its additional cost while loaded; sacrifice it without its effect when firing. The shot consuming this part hits every other living enemy for 100% of its damage. After those hits, apply Weaken 3 to surviving extra targets. Main-target payloads are not copied.",
+    "id": "SH110",
+    "kind": "Modifier",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Full-Spread Outlet",
+    "output_text": "1 Full-Spread Head",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH110 | Full-Spread Outlet | 1 Full-Spread Head | Modifier | 2 Iron + 2 Copper + 1 Glass + 1 Circuit | 3 | Load into the bullet; consumed at Fire. Reserve one unused Shield part from reserve as its additional cost while loaded; sacrifice it without its effect when firing. The shot consuming this part hits every other living enemy for 100% of its damage. After those hits, apply Weaken 3 to surviving extra targets. Main-target payloads are not copied. |",
+      "line": 383,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH111": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Carbon + 2 Glass + 1 Circuit",
+    "effect": "Increase the next main shot's damage by 100%. If it uses at least 10 Ammo parts, also gain 15 Shield after it fires.",
+    "id": "SH111",
+    "kind": "Modifier",
+    "materials": {
+      "Carbon": 2,
+      "Circuit": 1,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Perfect Packing",
+    "output_text": "1 Perfect Charge",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH111 | Perfect Packing | 1 Perfect Charge | Modifier | 2 Carbon + 2 Glass + 1 Circuit | 3 | Increase the next main shot's damage by 100%. If it uses at least 10 Ammo parts, also gain 15 Shield after it fires. |",
+      "line": 384,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH112": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 1 Carbon + 2 Circuit",
+    "effect": "Add 24 damage. If the main hit kills its target, deal 20 damage to every other enemy once. These hits cannot repeat this effect.",
+    "id": "SH112",
+    "kind": "Ammo",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 2,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Chain Breaker",
+    "output_text": "1 Chain-Breaking Head",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH112 | Chain Breaker | 1 Chain-Breaking Head | Ammo | 2 Iron + 1 Copper + 1 Carbon + 2 Circuit | 3 | Add 24 damage. If the main hit kills its target, deal 20 damage to every other enemy once. These hits cannot repeat this effect. |",
+      "line": 385,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH113": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "3 Iron + 1 Copper + 1 Glass",
+    "effect": "When this part activates at End Turn, gain 38 Shield and schedule a new regular 20-Shield part to load at the beginning of the next round. Just before the Shield reset at this enemy-turn end, check whether at least 10 active Shield remains. If so, the next-round delivery also removes 1 cooldown counter from every recipe currently cooling at that delivery. The cooling condition is checked before the reset; the 20-Shield delivery does not require leftover Shield.",
+    "id": "SH113",
+    "kind": "Shield",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 3
+    },
+    "mercenary": "Shared",
+    "name": "Last Wall",
+    "output_text": "1 Last Wall Plate + next-round Shield part",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH113 | Last Wall | 1 Last Wall Plate + next-round Shield part | Shield | 3 Iron + 1 Copper + 1 Glass | 3 | When this part activates at End Turn, gain 38 Shield and schedule a new regular 20-Shield part to load at the beginning of the next round. Just before the Shield reset at this enemy-turn end, check whether at least 10 active Shield remains. If so, the next-round delivery also removes 1 cooldown counter from every recipe currently cooling at that delivery. The cooling condition is checked before the reset; the 20-Shield delivery does not require leftover Shield. |",
+      "line": 386,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH114": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 2 Copper + 1 Circuit",
+    "effect": "Gain 25 Shield. This round, after each enemy attack fully blocked by your Shield, deal 10 damage to that attacker; trigger up to three times.",
+    "id": "SH114",
+    "kind": "Shield",
+    "materials": {
+      "Circuit": 1,
+      "Copper": 2,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Answering Wall",
+    "output_text": "1 Answering Wall Liner",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH114 | Answering Wall | 1 Answering Wall Liner | Shield | 2 Iron + 2 Copper + 1 Circuit | 3 | Gain 25 Shield. This round, after each enemy attack fully blocked by your Shield, deal 10 damage to that attacker; trigger up to three times. |",
+      "line": 387,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH116": {
+    "cooldown": 4,
+    "cooldown_text": "4",
+    "cost_text": "2 Copper + 2 Glass + 2 Circuit",
+    "effect": "Remove all cooldown counters from every currently cooling recipe. Each still needs its material cost paid to craft again.",
+    "id": "SH116",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 2,
+      "Glass": 2
+    },
+    "mercenary": "Shared",
+    "name": "Whole-System Cooling",
+    "output_text": "Immediate effect: Whole-System Coolant (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH116 | Whole-System Cooling | Immediate effect: Whole-System Coolant (no part) | Utility | 2 Copper + 2 Glass + 2 Circuit | 4 | Remove all cooldown counters from every currently cooling recipe. Each still needs its material cost paid to craft again. |",
+      "line": 389,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH117": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 2 Circuit",
+    "effect": "At the start of next turn, gain 2 Iron, 2 Copper, 2 Carbon and 2 Glass. This grant is lost if the fight ends first.",
+    "id": "SH117",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Emergency Stockroom",
+    "output_text": "Immediate effect: Stockroom Order (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH117 | Emergency Stockroom | Immediate effect: Stockroom Order (no part) | Utility | 2 Iron + 1 Copper + 2 Circuit | 3 | At the start of next turn, gain 2 Iron, 2 Copper, 2 Carbon and 2 Glass. This grant is lost if the fight ends first. |",
+      "line": 390,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH118": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass + 2 Circuit",
+    "effect": "Choose one unused Base, Common, Uncommon or Rare Ammo or Shield part. Receive two fresh copies next turn with printed effects only. Cannot copy Utility, Modifier, Helper or Magnet parts.",
+    "id": "SH118",
+    "kind": "Utility",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Exact Duplication",
+    "output_text": "Immediate effect: Exact Casting Mould (no part)",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH118 | Exact Duplication | Immediate effect: Exact Casting Mould (no part) | Utility | 2 Iron + 1 Copper + 1 Glass + 2 Circuit | 3 | Choose one unused Base, Common, Uncommon or Rare Ammo or Shield part. Receive two fresh copies next turn with printed effects only. Cannot copy Utility, Modifier, Helper or Magnet parts. |",
+      "line": 391,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH119": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "2 Iron + 1 Copper + 1 Glass + 2 Circuit",
+    "effect": "Choose two different resource types when crafted. Next round, gather up to 3 extra units of each chosen type from the pile.",
+    "id": "SH119",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 2
+    },
+    "mercenary": "Shared",
+    "name": "Targeted Crane",
+    "output_text": "1 Targeted Crane Ring",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH119 | Targeted Crane | 1 Targeted Crane Ring | Magnet | 2 Iron + 1 Copper + 1 Glass + 2 Circuit | 3 | Choose two different resource types when crafted. Next round, gather up to 3 extra units of each chosen type from the pile. |",
+      "line": 392,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH120": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "1 Iron + 2 Copper + 1 Glass + 2 Circuit",
+    "effect": "Next round, reserve up to five normal haul positions for one of each resource type. Fill unavailable positions normally, then gather 4 extra units using the normal mix.",
+    "id": "SH120",
+    "kind": "Magnet",
+    "materials": {
+      "Circuit": 2,
+      "Copper": 2,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Balanced Haul",
+    "output_text": "1 Balanced Haul Controller",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH120 | Balanced Haul | 1 Balanced Haul Controller | Magnet | 1 Iron + 2 Copper + 1 Glass + 2 Circuit | 3 | Next round, reserve up to five normal haul positions for one of each resource type. Fill unavailable positions normally, then gather 4 extra units using the normal mix. |",
+      "line": 393,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH122": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Iron + 1 Copper + 1 Glass",
+    "effect": "Choose two different materials from Iron, Copper, Carbon and Glass when crafted, naming a first and second. Next round's haul gains 1 extra unit of the first with any handling result. On a Perfect manual grab next round, gain 1 more of the first and 2 of the second.",
+    "id": "SH122",
+    "kind": "Magnet",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Clean Separation",
+    "output_text": "1 Sorting Gate",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH122 | Clean Separation | 1 Sorting Gate | Magnet | 1 Iron + 1 Copper + 1 Glass | 2 | Choose two different materials from Iron, Copper, Carbon and Glass when crafted, naming a first and second. Next round's haul gains 1 extra unit of the first with any handling result. On a Perfect manual grab next round, gain 1 more of the first and 2 of the second. |",
+      "line": 402,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH123": {
+    "cooldown": 2,
+    "cooldown_text": "2",
+    "cost_text": "1 Copper + 1 Glass",
+    "effect": "Next round's haul gains 1 extra Glass with any handling result. On a Perfect manual grab next round, also recover 2 extra Circuit from the pile. This does not make Circuit exclusive to timing rewards.",
+    "id": "SH123",
+    "kind": "Magnet",
+    "materials": {
+      "Copper": 1,
+      "Glass": 1
+    },
+    "mercenary": "Shared",
+    "name": "Chip Finder",
+    "output_text": "1 Chip Sieve",
+    "rarity": "Rare",
+    "source": {
+      "exact_text": "| SH123 | Chip Finder | 1 Chip Sieve | Magnet | 1 Copper + 1 Glass | 2 | Next round's haul gains 1 extra Glass with any handling result. On a Perfect manual grab next round, also recover 2 extra Circuit from the pile. This does not make Circuit exclusive to timing rewards. |",
+      "line": 403,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  },
+  "recipe:SH126": {
+    "cooldown": 3,
+    "cooldown_text": "3",
+    "cost_text": "1 Iron + 1 Copper + 1 Carbon + 1 Circuit",
+    "effect": "Next round's haul gains 1 extra Iron with any handling result. On a Perfect manual grab next round, also receive 1 Salvage Slug and 1 Salvage Shield Plate in reserve after collection, with no further material cost. The slug is Ammo adding 10 damage; the plate is Shield giving 10 Shield when used. Each is consumed on use and can be saved within this fight.",
+    "id": "SH126",
+    "kind": "Magnet",
+    "materials": {
+      "Carbon": 1,
+      "Circuit": 1,
+      "Copper": 1,
+      "Iron": 1
+    },
+    "mercenary": "Shared",
+    "name": "Salvage Foundry",
+    "output_text": "1 Auto-Forge Die",
+    "rarity": "Legendary",
+    "source": {
+      "exact_text": "| SH126 | Salvage Foundry | 1 Auto-Forge Die | Magnet | 1 Iron + 1 Copper + 1 Carbon + 1 Circuit | 3 | Next round's haul gains 1 extra Iron with any handling result. On a Perfect manual grab next round, also receive 1 Salvage Slug and 1 Salvage Shield Plate in reserve after collection, with no further material cost. The slug is Ammo adding 10 damage; the plate is Shield giving 10 Shield when used. Each is consumed on use and can be saved within this fight. |",
+      "line": 413,
+      "path": "design/RECIPE-CATALOGUE.md"
+    }
+  }
+}

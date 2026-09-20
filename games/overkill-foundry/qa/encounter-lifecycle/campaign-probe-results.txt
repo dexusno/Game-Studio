@@ -1,0 +1,8 @@
+PASS L01 simultaneous final boss death and lethal recoil cannot unlock Ivo or commit rewards
+PASS L02 Patrol defeat ends campaign without a noncombat payout or route completion
+PASS L03 actual purchase rollback keeps seen recipe but restores money memory and stock on Continue
+PASS L04 paid source copied parts and generated equivalent sell by the current configured one-part reference
+PASS L05 unseen reward alternatives are not discovered by main skip or cancellation
+PASS L06 two actual killed bodies produce distinct manually sold cores and stale sales cannot pay twice
+PASS L07 defeat preserves actually seen recipes and a fresh independent profile receives no leaked facts
+INDEPENDENT_LIFECYCLE groups=7 failed=0 assertions=434
