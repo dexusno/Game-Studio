@@ -17,6 +17,9 @@ void FFoundrySession::Restart()
     State = overkill::Rules::teachingEncounter(Seed, true);
     Selection.clear();
     SpreadTargets.Empty();
+#if FOUNDRY_WITH_CAMPAIGN
+    Drafts.clear();
+#endif
     Target = State.enemies.empty() ? 0 : State.enemies.front().id;
     InventoryPage = 0;
     RecentEvents.Empty();
@@ -39,7 +42,14 @@ void FFoundrySession::FixSelection()
     for (const auto& Part : State.parts)
     {
         if (Part.kind != overkill::Kind::Spread || Part.place != overkill::Place::Loaded || SpreadTargets.Contains(Part.id)) continue;
-        for (const auto& Enemy : State.enemies) if (Living(Enemy) && Enemy.id != Target) { SpreadTargets.Add(Part.id, Enemy.id); break; }
+        for (const auto& Enemy : State.enemies) if (Living(Enemy) && Enemy.id != Target)
+        {
+            SpreadTargets.Add(Part.id, Enemy.id);
+#if FOUNDRY_WITH_CAMPAIGN
+            if(!CampaignSubmit)Drafts.set(overkill::Action::fire(Target),"extra-"+std::to_string(Part.id),{Enemy.id});
+#endif
+            break;
+        }
     }
 }
 
@@ -76,6 +86,9 @@ bool FFoundrySession::Submit(const overkill::Action& Action, const FString& Desc
 
 overkill::Action FFoundrySession::FireAction() const
 {
+#if FOUNDRY_WITH_CAMPAIGN
+    return Configured(overkill::Action::fire(Target));
+#else
     std::vector<overkill::SpreadTarget> Spreads;
     for (const auto& Part : State.parts)
     {
@@ -85,6 +98,28 @@ overkill::Action FFoundrySession::FireAction() const
         }
     }
     return overkill::Action::fire(Target, std::move(Spreads));
+#endif
+}
+
+overkill::Action FFoundrySession::Configured(overkill::Action Base) const
+{
+#if FOUNDRY_WITH_CAMPAIGN
+    return Drafts.build(Rules,State,std::move(Base));
+#else
+    return Base;
+#endif
+}
+overkill::Action FFoundrySession::CraftAction(uint64 Copy) const { return Configured(overkill::Action::craft(Copy)); }
+overkill::Action FFoundrySession::LoadAction() const { return Configured(overkill::Action::load(Selection)); }
+overkill::Action FFoundrySession::EndAction() const { return Configured(overkill::Action::endTurn()); }
+overkill::Action FFoundrySession::PartAction(uint64 Id) const
+{
+    for(const auto& Part:State.parts)if(Part.id==Id)
+    {
+        if(Part.kind==overkill::Kind::Shield)return Configured(Part.place==overkill::Place::Installed?overkill::Action::remove(Id):overkill::Action::install(Id));
+        overkill::Action A;A.type=overkill::ActionType::Activate;A.subject=Id;return Configured(A);
+    }
+    return overkill::Action::install(Id);
 }
 
 overkill::Preview FFoundrySession::Preview(const overkill::Action& Action) const { return Rules.preview(State, Action); }
@@ -137,11 +172,11 @@ bool FFoundrySession::Control(const FString& Command)
     if (Verb == TEXT("collect")) return Submit(overkill::Action::collect(Steering, Precision), TEXT("collect"));
     if (Verb == TEXT("steer")) { Steering = (Steering + 1) % 5; return false; }
     if (Verb == TEXT("precision")) { Precision = Precision == 2 ? -1 : Precision + 1; return false; }
-    if (Verb == TEXT("craft")) return Submit(overkill::Action::craft(Id), TEXT("craft"));
-    if (Verb == TEXT("load")) return Submit(overkill::Action::load(Selection), TEXT("load"));
+    if (Verb == TEXT("craft")) return Submit(CraftAction(Id), TEXT("craft"));
+    if (Verb == TEXT("load")) return Submit(LoadAction(), TEXT("load"));
     if (Verb == TEXT("unload")) { overkill::Action Action; Action.type = overkill::ActionType::Unload; return Submit(Action, TEXT("unload")); }
     if (Verb == TEXT("fire")) return Submit(FireAction(), TEXT("fire"));
-    if (Verb == TEXT("end")) return Submit(overkill::Action::endTurn(), TEXT("end turn"));
+    if (Verb == TEXT("end")) return Submit(EndAction(), TEXT("end turn"));
     if (Verb == TEXT("restart")) { Restart(); return true; }
     if (Verb == TEXT("panels")) { bShowPanels = !bShowPanels; return false; }
     if (Verb == TEXT("target"))
@@ -161,6 +196,9 @@ bool FFoundrySession::Control(const FString& Command)
             const uint64 Current = SpreadTargets.FindRef(Id);
             const int32 Index = Candidates.IndexOfByKey(Current);
             SpreadTargets.Add(Id, Candidates[(Index + 1) % Candidates.Num()]);
+#if FOUNDRY_WITH_CAMPAIGN
+            Drafts.set(overkill::Action::fire(Target),"extra-"+std::to_string(Id),{SpreadTargets[Id]});
+#endif
             Message = TEXT("Spread target: ") + NameFor(SpreadTargets[Id]);
         }
         return false;
@@ -171,11 +209,10 @@ bool FFoundrySession::Control(const FString& Command)
         {
             if (Part.id != Id) continue;
             if (Part.kind == overkill::Kind::Shield)
-                return Submit(Part.place == overkill::Place::Installed ? overkill::Action::remove(Id) : overkill::Action::install(Id), TEXT("Shield installation"));
+                return Submit(PartAction(Id), TEXT("Shield installation"));
             if (Part.kind == overkill::Kind::Magnet || Part.kind == overkill::Kind::Modifier)
             {
-                overkill::Action Action; Action.type = overkill::ActionType::Activate; Action.subject = Id;
-                return Submit(Action, TEXT("activate part"));
+                return Submit(PartAction(Id), TEXT("activate part"));
             }
             if (Part.place == overkill::Place::Loaded) { Message = TEXT("Unload first to change loaded parts."); return false; }
             const auto Found = std::find(Selection.begin(), Selection.end(), Id);

@@ -20,6 +20,7 @@
 #include "Widgets/SOverlay.h"
 #include <algorithm>
 
+DEFINE_LOG_CATEGORY_STATIC(LogFoundryRecipeUI,Log,All);
 namespace
 {
 using CA = overkill::CampaignAction;
@@ -58,6 +59,12 @@ FString Payable(const overkill::Preview& P)
     return S;
 }
 CA Action(CT Type, uint64 Subject=0, std::string Choice={}) { CA A; A.type=Type; A.subject=Subject; A.choice=std::move(Choice); return A; }
+void SavedPrecisionCue(AFoundryStage* Stage,int32 Result,const TCHAR* Source)
+{
+    const FString Cue=Result==0?TEXT("precision_miss"):TEXT("precision_good");
+    Stage->PlayPresentationCue(Cue);
+    UE_LOG(LogFoundryRecipeUI,Display,TEXT("PRECISION_FEEDBACK cue=%s source=%s after_successful_save=1"),*Cue,Source);
+}
 
 class SFoundryCampaignUI : public SCompoundWidget
 {
@@ -89,7 +96,7 @@ public:
     }
 private:
     TWeakObjectPtr<AFoundryStage> Stage;
-    uint64 SeenRevision=0, ChoiceId=0;
+    uint64 SeenRevision=0, ChoiceId=0, SeenRecipe=0;
     TMap<FString,TSharedPtr<SScrollBox>> Scrolls;
     TMap<FString,float> ScrollOffsets;
     std::vector<overkill::Id> ChoiceObjects;
@@ -161,6 +168,10 @@ private:
     TSharedRef<SWidget> Shop(bool EventShop);
     TSharedRef<SWidget> Memory(bool Crafting);
     TSharedRef<SWidget> Parts();
+    TSharedRef<SWidget> PartDetail();
+    TSharedRef<SWidget> ActionOptions(const overkill::Action& Base);
+    TSharedRef<SWidget> TurnChoices();
+    TSharedRef<SWidget> CollectionChoice();
     TSharedRef<SWidget> Combat(bool ActionView);
     TSharedRef<SWidget> Rewards();
     TSharedRef<SWidget> Mystery();
@@ -174,10 +185,11 @@ void SFoundryCampaignUI::Rebuild()
     if (!Stage.IsValid() || !Stage->GetCampaign()) return;
     for(const auto& Pair:Scrolls) if(Pair.Value.IsValid()) ScrollOffsets.Add(Pair.Key,Pair.Value->GetScrollOffset());
     Scrolls.Empty(); SeenRevision=Model().ViewRevision;
-    if(Model().bPrecisionModal)
+    if(Model().bPrecisionModal || Model().bCollectionChoice)
     {
         TSharedRef<SWidget> Modal=SNullWidget::NullWidget;
-        if(Model().PrecisionResult>=0)
+        if(Model().bCollectionChoice)Modal=SNew(SBox).HeightOverride(820)[CollectionChoice()];
+        else if(Model().PrecisionResult>=0)
         {
             auto Failure=SNew(SVerticalBox);Add(Failure,Heading(TEXT("Precision could not be saved")));
             Add(Failure,Text(Model().Message,21,Gold));
@@ -195,7 +207,9 @@ void SFoundryCampaignUI::Rebuild()
                 if(Model().PrecisionChoice)Options.BackLabel=TEXT("Back to retry choice");
                 Options.Detail=FString::Printf(TEXT("Steering: %s. %s\n"),Material[Model().PrecisionSteering],Model().PrecisionChoice?TEXT("The original material choice is locked."):TEXT("Once per encounter."));
                 const TCHAR* Outcomes[]={TEXT("Miss"),TEXT("Good"),TEXT("Perfect")};
-                for(int32 I=0;I<3;++I)
+                if(!Model().PrecisionChoice && foundry_controls::heavyLiftPending(Model().Combat.State))
+                    Options.Detail+=TEXT("Heavy Magnet Lift: after stopping, choose two gathered units to leave. Your measured result stays fixed while you choose.\n");
+                else for(int32 I=0;I<3;++I)
                 {
                     const auto P=Model().Combat.Preview(Model().PrecisionAction(I));
                     overkill::Materials Gain{};
@@ -203,7 +217,7 @@ void SFoundryCampaignUI::Rebuild()
                     Options.Detail+=FString(Outcomes[I])+TEXT(": ")+(P.result.ok?Supplies(Gain):T(P.result.reason))+TEXT("\n");
                 }
                 const auto WeakStage=Stage;const uint64 Attempt=SeenPrecisionAttempt;
-                Options.OnResult=[WeakStage,Attempt](int32 Result){if(WeakStage.IsValid() && WeakStage->GetCampaign() && WeakStage->GetCampaign()->FinishPrecision(Attempt,Result))WeakStage->PlayPresentationCue(Result==0?TEXT("precision_miss"):TEXT("precision_good"));};
+                Options.OnResult=[WeakStage,Attempt](int32 Result){if(WeakStage.IsValid() && WeakStage->GetCampaign() && WeakStage->GetCampaign()->FinishPrecision(Attempt,Result))SavedPrecisionCue(WeakStage.Get(),Result,TEXT("timing"));};
                 Options.OnCancel=[WeakStage,Attempt](){if(WeakStage.IsValid() && WeakStage->GetCampaign())WeakStage->GetCampaign()->CancelPrecision(Attempt);};
                 PrecisionWidget=MakeFoundryPrecisionWidget(MoveTemp(Options));
             }
@@ -211,7 +225,7 @@ void SFoundryCampaignUI::Rebuild()
         }
         // Replace all other controls while the attempt is visible. Keep this
         // child instance across revisions so focus/UI changes cannot reset time.
-        ChildSlot[SNew(SScaleBox).Stretch(EStretch::ScaleToFit)[SNew(SBox).WidthOverride(1600).HeightOverride(900).HAlign(HAlign_Center).VAlign(VAlign_Center)[SNew(SBox).WidthOverride(1040)[Modal]]]];
+        ChildSlot[SNew(SScaleBox).Stretch(EStretch::ScaleToFit)[SNew(SBox).WidthOverride(1600).HeightOverride(900).HAlign(HAlign_Center).VAlign(VAlign_Center)[SNew(SBox).WidthOverride(1040).MaxDesiredHeight(850)[Modal]]]];
         SlatePrepass(GetCachedGeometry().Scale);
         FSlateApplication::Get().SetUserFocus(0,Modal,EFocusCause::SetDirectly);
         return;
@@ -391,6 +405,9 @@ TSharedRef<SWidget> SFoundryCampaignUI::Memory(bool Crafting)
     if(Crafting)Add(V,Text(Supplies(C.fight.materials),19,Gold));
     auto List=SNew(SVerticalBox);auto Detail=SNew(SVerticalBox);
     if(!Model().FocusRecipe && !C.fight.memory.empty())Model().FocusRecipe=C.fight.memory.front().id;
+    // Rebuild already saved the old widget offset. A different recipe starts
+    // with its name and source effect visible; edits to this recipe stay put.
+    if(SeenRecipe!=Model().FocusRecipe){ScrollOffsets.Remove(TEXT("memory-detail"));SeenRecipe=Model().FocusRecipe;}
     for(const auto& Copy:C.fight.memory)
     {
         const auto* R=Model().Combat.Rules.recipe(Copy.recipe); if(!R) continue;
@@ -402,14 +419,15 @@ TSharedRef<SWidget> SFoundryCampaignUI::Memory(bool Crafting)
         Add(Detail,Text(Model().ItemName(Copy.recipe),28,Gold));
         Add(Detail,Text(Model().ItemDescription(Copy.recipe),21));
         Add(Detail,Text(TEXT("Printed cost: ")+Materials(R->cost),19,Gold));
-        Add(Detail,Text(Kind(R->kind)+TEXT(" · ")+(R->kind==overkill::Kind::Utility?TEXT("Immediate effect"):FString::Printf(TEXT("Produces %d"),R->outputCount))+TEXT(" · ")+Cooldown(*R),18,Muted));
+        Add(Detail,Text(Kind(R->kind)+TEXT(" · ")+(R->kind==overkill::Kind::Utility||R->automaticOutput?TEXT("Immediate effect"):FString::Printf(TEXT("Produces %d"),R->outputCount))+TEXT(" · ")+Cooldown(*R),18,Muted));
         if(Crafting)
         {
-            const auto A=overkill::Action::craft(Id); const auto P=Model().Combat.Preview(A);
+            const auto A=Model().Combat.CraftAction(Id); const auto P=Model().Combat.Preview(A);
+            Add(Detail,ActionOptions(overkill::Action::craft(Id)));
             if(P.result.ok)Add(Detail,Text(Payable(P),20,Gold));
             Add(Detail,Text(P.result.ok?TEXT("Ready to use"):T(P.result.reason),20,P.result.ok?Paper:Gold));
             Add(Detail,Button(TEXT("Use recipe"),[this,Id](){Stage->Control(FString::Printf(TEXT("craft:%llu"),Id));},P.result.ok));
-            Add(Detail,Text(R->kind==overkill::Kind::Utility?TEXT("This Utility resolves immediately. It does not create a saved Utility part."):TEXT("Crafted parts go to your reserve. Install Shield parts, select ammunition, then Lock and load."),18,Muted));
+            Add(Detail,Text(R->kind==overkill::Kind::Utility?TEXT("This Utility resolves immediately. It does not create a saved Utility part."):R->automaticOutput?TEXT("The immediate Shield output is installed automatically. Any later delivery follows the recipe effect above."):TEXT("Crafted parts go to your reserve. Install Shield parts, select ammunition, then Lock and load."),18,Muted));
         }
         else if(C.phase!=overkill::CityPhase::Fight && Copy.storage!=overkill::MemoryKind::Borrowed && overkill::upgradeUtilityMemoryBonus(C.fight)>0)
         {
@@ -424,34 +442,133 @@ TSharedRef<SWidget> SFoundryCampaignUI::Memory(bool Crafting)
     Add(V,Button(TEXT("Close"),[this](){Model().Close();}),0); return V;
 }
 
+TSharedRef<SWidget> SFoundryCampaignUI::ActionOptions(const overkill::Action& Base)
+{
+    auto V=SNew(SVerticalBox);auto& Combat=Model().Combat;
+    for(const auto& Choice:Combat.Drafts.choices(Combat.Rules,Combat.State,Base))
+    {
+        Add(V,Text(T(Choice.label),19,Gold),5);
+        if(!Choice.detail.empty())Add(V,Text(T(Choice.detail),16,Muted),5);
+        const auto Selected=Combat.Drafts.selected(Base,Choice.key);
+        auto Options=SNew(SWrapBox).UseAllottedSize(true).InnerSlotPadding(FVector2D(6,6));
+        for(const auto& Option:Choice.options)
+        {
+            const bool DefaultZero=Selected.empty() && Option.value==0 && (Choice.field==foundry_controls::Field::Amount||Choice.field==foundry_controls::Field::Discount||Choice.field==foundry_controls::Field::PartChoice);
+            const bool Picked=DefaultZero||std::find(Selected.begin(),Selected.end(),Option.value)!=Selected.end();
+            const FString Tip=Option.recipe.empty()?TEXT(""):Model().ItemDescription(Option.recipe);
+            Options->AddSlot()[Button(T(Option.label),[this,Base,Choice,Value=Option.value](){Model().Combat.Drafts.choose(Base,Choice,Value);++Model().ViewRevision;},true,Picked,Tip)];
+        }
+        Add(V,Options,6);
+        if(Choice.options.empty())Add(V,Text(TEXT("No eligible choice is available in the current fight."),17,Muted),6);
+        if(Choice.maximum>1)Add(V,Text(FString::Printf(TEXT("Selected %d / %d · click a selected item to remove it."),static_cast<int32>(Selected.size()),Choice.maximum),16,Muted),6);
+        for(const auto Id:Selected)for(const auto& Option:Choice.options)if(Option.value==Id&&!Option.recipe.empty())
+            Add(V,Text(T(Option.label)+TEXT(" — ")+Model().ItemDescription(Option.recipe),17),6);
+    }
+    return V;
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::PartDetail()
+{
+    auto V=SNew(SVerticalBox);const auto& S=Model().Combat.State;
+    const overkill::Part* Part=nullptr;for(const auto& P:S.parts)if(P.id==Model().FocusPart){Part=&P;break;}
+    if(!Part){Add(V,Heading(TEXT("This part has already been used")));Add(V,Button(TEXT("Return to parts"),[this](){Model().Drawer=TEXT("parts");++Model().ViewRevision;}));return V;}
+    Add(V,Heading(T(Part->output)));Add(V,Text(Kind(Part->kind)+FString::Printf(TEXT(" · physical part %llu"),Part->id),18,Muted));
+    Add(V,Text(Supplies(S.materials)+FString::Printf(TEXT(" · %d Heat · %d installed Shield"),S.heat,overkill::Rules::shield(S,true)),19,Gold));
+    auto Detail=SNew(SVerticalBox);Add(Detail,Text(Model().ItemDescription(Part->recipe),21));
+    auto Base=Part->kind==overkill::Kind::Shield?overkill::Action::install(Part->id):overkill::Action{};
+    if(Part->kind!=overkill::Kind::Shield){Base.type=overkill::ActionType::Activate;Base.subject=Part->id;}
+    Add(Detail,ActionOptions(Base));
+    const auto Built=Model().Combat.PartAction(Part->id);const auto Preview=Model().Combat.Preview(Built);
+    Add(Detail,Text(Payable(Preview),21,Gold));
+    if(Preview.result.ok)Add(Detail,Text(Model().Combat.PreviewText(Built),19));
+    V->AddSlot().FillHeight(1)[Scroll(TEXT("part-detail"),Detail)];
+    const auto Id=Part->id;
+    Add(V,Button(Part->kind==overkill::Kind::Shield?TEXT("Install Shield"):Part->kind==overkill::Kind::Magnet?TEXT("Fit Magnet for next collection"):TEXT("Use modifier"),[this,Id](){const auto Before=Model().Store.revision();Stage->Control(FString::Printf(TEXT("part:%llu"),Id));if(Model().Store.revision()!=Before){Model().Drawer=TEXT("parts");++Model().ViewRevision;}},Preview.result.ok));
+    Add(V,Button(TEXT("Back to parts"),[this](){Model().Drawer=TEXT("parts");++Model().ViewRevision;}),0);return V;
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::TurnChoices()
+{
+    auto V=SNew(SVerticalBox);Add(V,Heading(TEXT("End Turn choices")));
+    Add(V,Text(TEXT("Choose each part's optional payment before enemy actions begin. The preview includes the full turn."),20,Muted));
+    auto Detail=SNew(SVerticalBox);Add(Detail,ActionOptions(overkill::Action::endTurn()));
+    const auto Built=Model().Combat.EndAction();const auto Preview=Model().Combat.Preview(Built);
+    Add(Detail,Text(Payable(Preview),20,Gold));Add(Detail,Text(Model().Combat.PreviewText(Built),20));
+    V->AddSlot().FillHeight(1)[Scroll(TEXT("turn-detail"),Detail)];
+    Add(V,Button(TEXT("End Turn with these choices"),[this](){Stage->Control(TEXT("end"));},Preview.result.ok));
+    Add(V,Button(TEXT("Back to preparation"),[this](){Model().Close();}),0);return V;
+}
+
+TSharedRef<SWidget> SFoundryCampaignUI::CollectionChoice()
+{
+    auto V=SNew(SVerticalBox);Add(V,Heading(TEXT("Heavy Magnet Lift · leave two gathered units")));
+    if(Model().bPrecisionModal){const TCHAR* Labels[]={TEXT("Miss"),TEXT("Good"),TEXT("Perfect")};Add(V,Text(FString(TEXT("Precision: "))+Labels[FMath::Clamp(Model().PrecisionResult,0,2)]+TEXT(". The measured result is fixed."),22,Gold));}
+    Add(V,Text(TEXT("Choose what stays in the pile. Compare your resulting supplies below; nothing is collected until you choose."),19,Muted));
+    auto List=SNew(SVerticalBox);
+    for(std::size_t I=0;I<Model().CollectionOptions.size();++I)
+    {
+        const auto& Option=Model().CollectionOptions[I];auto Card=SNew(SVerticalBox);
+        Add(Card,Text(TEXT("Leave: ")+Materials(Option.action.discarded),20,Gold));
+        Add(Card,Text(TEXT("Your supplies after collection: ")+Supplies(Option.preview.state.materials),18));
+        Add(Card,Button(TEXT("Keep this haul"),[this,I](){const bool Measured=Model().bPrecisionModal;const int32 Result=Model().PrecisionResult;if(Model().CommitCollectionChoice(static_cast<int32>(I))&&Measured)SavedPrecisionCue(Stage.Get(),Result,TEXT("discard"));}),0);
+        Add(List,Box(Card,FMargin(12)));
+    }
+    V->AddSlot().FillHeight(1)[Scroll(TEXT("collection-options"),List)];
+    if(!Model().bPrecisionModal)Add(V,Button(TEXT("Back without collecting"),[this](){Model().CancelCollectionChoice();}),0);
+    return Box(V);
+}
+
 TSharedRef<SWidget> SFoundryCampaignUI::Parts()
 {
     const auto& S=Model().Combat.State;auto V=SNew(SVerticalBox);
     Add(V,Heading(TEXT("Assemble the next shot")));
-    Add(V,Text(TEXT("Select reserve Ammo and Spread parts for the bullet. Click Shield parts to install or remove them. Installed Shield protects automatically."),19,Muted));
+    Add(V,Text(TEXT("Select Ammo and Spread parts in firing order. Inspect Shield, Magnet and Modifier parts before using them. Installed Shield protects automatically."),19,Muted));
     auto Reserve=SNew(SVerticalBox), Installed=SNew(SVerticalBox), Bullet=SNew(SVerticalBox);
     Add(Reserve,Text(TEXT("Reserve"),23,Gold));Add(Installed,Text(TEXT("Installed Shield"),23,Gold));Add(Bullet,Text(TEXT("Selected / loaded bullet"),23,Gold));
     for(const auto& P:S.parts)
     {
+        if(P.place==overkill::Place::Loaded||P.place==overkill::Place::Payment)continue;
         const bool Selected=std::find(Model().Combat.Selection.begin(),Model().Combat.Selection.end(),P.id)!=Model().Combat.Selection.end();
         FString Name=T(P.output)+TEXT(" · ")+Kind(P.kind);
         if(P.place==overkill::Place::Installed)Name+=FString::Printf(TEXT(" · %d left"),P.shield);
         if(P.createdRound<S.round)Name+=TEXT(" · saved");
-        const auto Id=P.id;auto Column=P.place==overkill::Place::Installed?Installed:P.place==overkill::Place::Loaded?Bullet:Reserve;
+        const auto Id=P.id;auto Column=P.place==overkill::Place::Installed?Installed:Reserve;
         FString Tip=Model().ItemDescription(P.recipe);
-        if(P.kind==overkill::Kind::Shield)Tip+=TEXT("\n")+Payable(Model().Combat.Preview(P.place==overkill::Place::Installed?overkill::Action::remove(Id):overkill::Action::install(Id)));
-        Add(Column,Button((Selected?TEXT("✓ "):TEXT(""))+Name,[this,Id](){Stage->Control(FString::Printf(TEXT("part:%llu"),Id));},true,Selected,Tip),7);
-        if(Selected)Add(Bullet,Text(T(P.output),18),6);
-        if(P.place==overkill::Place::Loaded && P.kind==overkill::Kind::Spread)
-            Add(Bullet,Button(TEXT("Spread → ")+Model().Combat.NameFor(Model().Combat.SpreadTargets.FindRef(Id)),[this,Id](){Stage->Control(FString::Printf(TEXT("spread:%llu"),Id));}));
+        if(P.kind==overkill::Kind::Shield)Tip+=TEXT("\n")+Payable(Model().Combat.Preview(Model().Combat.PartAction(Id)));
+        const bool Inspect=P.place==overkill::Place::Reserve&&(P.kind==overkill::Kind::Shield||P.kind==overkill::Kind::Magnet||P.kind==overkill::Kind::Modifier);
+        Add(Column,Button((Selected?TEXT("✓ "):TEXT(""))+Name,[this,Id,Inspect](){if(Inspect){Model().FocusPart=Id;Model().Drawer=TEXT("part-choice");++Model().ViewRevision;}else Stage->Control(FString::Printf(TEXT("part:%llu"),Id));},P.place!=overkill::Place::Payment&&P.place!=overkill::Place::Loaded,Selected,Tip),7);
     }
+    int32 LoadedIndex=0;
+    for(const auto Id:foundry_controls::loadedDisplayOrder(S))
+    {
+        const auto It=std::find_if(S.parts.begin(),S.parts.end(),[Id](const auto& P){return P.id==Id;});
+        if(It==S.parts.end())continue;
+        const auto& P=*It;
+        const FString Name=P.place==overkill::Place::Payment
+            ?T(P.output)+TEXT(" · reserved payment for ")+Model().Combat.NameFor(P.reservedBy)
+            :FString::Printf(TEXT("%d · "),++LoadedIndex)+T(P.output)+TEXT(" · ")+Kind(P.kind);
+        Add(Bullet,Button(Name,[](){},false,false,Model().ItemDescription(P.recipe)),7);
+    }
+    if(S.bullet.empty())for(std::size_t I=0;I<Model().Combat.Selection.size();++I)
+    {
+        const auto Id=Model().Combat.Selection[I];auto Row=SNew(SHorizontalBox);
+        Row->AddSlot().FillWidth(1).VAlign(VAlign_Center)[Text(FString::Printf(TEXT("%d · "),static_cast<int32>(I+1))+Model().Combat.NameFor(Id),18)];
+        Row->AddSlot().AutoWidth()[Button(TEXT("↑"),[this,I](){std::swap(Model().Combat.Selection[I],Model().Combat.Selection[I-1]);++Model().ViewRevision;},I>0)];
+        Row->AddSlot().AutoWidth()[Button(TEXT("↓"),[this,I](){std::swap(Model().Combat.Selection[I],Model().Combat.Selection[I+1]);++Model().ViewRevision;},I+1<Model().Combat.Selection.size())];
+        Add(Bullet,Row,6);
+    }
+    const auto Base=S.bullet.empty()?overkill::Action::load(Model().Combat.Selection):overkill::Action::fire(Model().Combat.Target);
+    Add(Bullet,ActionOptions(Base));
+    const auto Built=Model().Combat.Configured(Base);const auto Quote=Model().Combat.Preview(Built);
+    Add(Bullet,Text(Payable(Quote),18,Gold));
+    if(!S.bullet.empty())Add(Bullet,Text(Model().Combat.PreviewText(Built),18));
     auto H=SNew(SHorizontalBox);
     H->AddSlot().FillWidth(1).Padding(0,0,15,0)[Scroll(TEXT("reserve"),Reserve)];
     H->AddSlot().FillWidth(1).Padding(0,0,15,0)[Scroll(TEXT("shield"),Installed)];
     H->AddSlot().FillWidth(1)[Scroll(TEXT("bullet"),Bullet)];
     V->AddSlot().FillHeight(1)[H];
     auto Buttons=SNew(SHorizontalBox);
-    Buttons->AddSlot().FillWidth(1).Padding(0,0,10,0)[Button(TEXT("Lock and load"),[this](){Stage->Control(TEXT("load"));},Model().Combat.Preview(overkill::Action::load(Model().Combat.Selection)).result.ok)];
+    Buttons->AddSlot().FillWidth(1).Padding(0,0,10,0)[Button(TEXT("Lock and load"),[this](){Stage->Control(TEXT("load"));},Model().Combat.Preview(Model().Combat.LoadAction()).result.ok)];
     Buttons->AddSlot().FillWidth(1).Padding(0,0,10,0)[Button(TEXT("Unload"),[this](){Stage->Control(TEXT("unload"));},!S.bullet.empty())];
     Buttons->AddSlot().FillWidth(1)[Button(Stage->IsActionView()?TEXT("Return to aiming"):TEXT("Return to preparation"),[this](){Model().Close();})];
     Add(V,Buttons,0);return V;
@@ -461,6 +578,8 @@ TSharedRef<SWidget> SFoundryCampaignUI::Combat(bool ActionView)
 {
     if(!ActionView && Model().Drawer==TEXT("recipes"))return Box(Memory(true));
     if(!ActionView && Model().Drawer==TEXT("parts"))return Box(Parts());
+    if(!ActionView && Model().Drawer==TEXT("part-choice"))return Box(PartDetail());
+    if(!ActionView && Model().Drawer==TEXT("turn-choices"))return Box(TurnChoices());
     const auto& S=Model().Combat.State;auto V=SNew(SVerticalBox);
     auto Enemies=SNew(SHorizontalBox);
     int32 EnemyNumber=0;
@@ -472,7 +591,7 @@ TSharedRef<SWidget> SFoundryCampaignUI::Combat(bool ActionView)
         Add(Info,Text(FString::Printf(TEXT("%d · "),EnemyNumber)+T(E.name),19,Model().Combat.Target==Id?Gold:Paper),3);
         Add(Info,Text(FString::Printf(TEXT("%d / %d HP · %d Armor · %d Shield"),E.hp,E.maxHp,E.armor,E.shield),16),3);
         Add(Info,Text(T(overkill::Rules::intentText(E,S.round)),17,Gold),0);
-        const FString Note=(E.definition!="C1-R01" && E.definition!="C1-R02")?TEXT("Temporary model. Name, status and committed intent describe this robot's actual rules."):TEXT("Select as the main target. Fire preview uses its actual defenses.");
+        const FString Note=TEXT("Select as the main target. Fire preview uses its current defenses and status.");
         Enemies->AddSlot().FillWidth(1).Padding(5,0)[SNew(SButton).IsEnabled(!Stage->IsPresentationBusy()).ContentPadding(14).ButtonColorAndOpacity(Panel).ToolTipText(FText::FromString(Note)).OnClicked_Lambda([this,Id](){Stage->Control(FString::Printf(TEXT("target:%llu"),Id));return FReply::Handled().SetUserFocus(SharedThis(this),EFocusCause::SetDirectly);})[Info]];
     }
     V->AddSlot().AutoHeight().HAlign(HAlign_Right)[SNew(SBox).WidthOverride(1100)[Enemies]];
@@ -486,8 +605,9 @@ TSharedRef<SWidget> SFoundryCampaignUI::Combat(bool ActionView)
         auto Row=SNew(SHorizontalBox);
         for(int32 I=0;I<5;++I) Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(Material[I],[this,I](){Model().Combat.Steering=I;++Model().ViewRevision;},true,Model().Combat.Steering==I)];
         Row->AddSlot().FillWidth(1.5f).Padding(0,0,8,0)[Button(TEXT("Collect  ·  C"),[this](){Stage->Control(TEXT("collect"));})];
+        const auto PrecisionOptions=foundry_controls::collectionOptions(Model().Combat.Rules,S,Model().Combat.Steering,0);
         const auto PrecisionPreview=Model().Combat.Preview(overkill::Action::collect(Model().Combat.Steering,0));
-        Row->AddSlot().FillWidth(1.5f)[Button(TEXT("Precision  ·  P"),[this](){Stage->Control(TEXT("precision"));},PrecisionPreview.result.ok,false,T(PrecisionPreview.result.reason))];
+        Row->AddSlot().FillWidth(1.5f)[Button(TEXT("Precision  ·  P"),[this](){Stage->Control(TEXT("precision"));},!PrecisionOptions.empty(),false,PrecisionOptions.empty()?T(PrecisionPreview.result.reason):TEXT(""))];
         Add(Controls,Row,0);
     }
     else
@@ -497,15 +617,16 @@ TSharedRef<SWidget> SFoundryCampaignUI::Combat(bool ActionView)
         Add(Controls,Text(Model().Combat.PreviewText(Fire),18,P.result.ok?Paper:Muted));
         auto Row=SNew(SHorizontalBox);
         Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(TEXT("Recipes"),[this](){Model().Drawer=TEXT("recipes");++Model().ViewRevision;})];
-        Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(FString::Printf(TEXT("Parts · %llu loaded"),static_cast<uint64>(S.bullet.size())),[this](){Model().Drawer=TEXT("parts");++Model().ViewRevision;})];
+        Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(S.bullet.empty()?TEXT("Parts / assembly"):TEXT("Parts / shot choices"),[this](){Model().Drawer=TEXT("parts");++Model().ViewRevision;})];
         Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(TEXT("Shop"),[this](){Nav(TEXT("shop"));})];
         if(Stage->IsActionView())
         {
             Row->AddSlot().FillWidth(1).Padding(0,0,8,0)[Button(TEXT("Unload  ·  U"),[this](){Stage->Control(TEXT("unload"));},!S.bullet.empty())];
             Row->AddSlot().FillWidth(1.2f).Padding(0,0,8,0)[Button(TEXT("Fire  ·  Space"),[this](){Stage->Control(TEXT("fire"));},P.result.ok,true)];
         }
-        else Row->AddSlot().FillWidth(1.4f).Padding(0,0,8,0)[Button(TEXT("Lock and load  ·  L"),[this](){Stage->Control(TEXT("load"));},Model().Combat.Preview(overkill::Action::load(Model().Combat.Selection)).result.ok,true)];
-        Row->AddSlot().FillWidth(1.2f)[Button(TEXT("End Turn  ·  Enter"),[this](){Stage->Control(TEXT("end"));},Model().Combat.Preview(overkill::Action::endTurn()).result.ok,false,Model().Combat.PreviewText(overkill::Action::endTurn()))];
+        else Row->AddSlot().FillWidth(1.4f).Padding(0,0,8,0)[Button(TEXT("Lock and load  ·  L"),[this](){Stage->Control(TEXT("load"));},Model().Combat.Preview(Model().Combat.LoadAction()).result.ok,true)];
+        const bool TurnOptions=!Model().Combat.Drafts.choices(Model().Combat.Rules,S,overkill::Action::endTurn()).empty();
+        Row->AddSlot().FillWidth(1.2f)[Button(TurnOptions?TEXT("End Turn choices"):TEXT("End Turn  ·  Enter"),[this](){Stage->Control(TEXT("end"));},TurnOptions||Model().Combat.Preview(Model().Combat.EndAction()).result.ok,false,Model().Combat.PreviewText(Model().Combat.EndAction()))];
         Add(Controls,Row,0);
     }
     Add(V,Box(Controls,FMargin(20,14)),0);return V;

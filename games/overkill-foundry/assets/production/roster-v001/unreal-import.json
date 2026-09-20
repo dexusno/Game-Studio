@@ -1,0 +1,1153 @@
+{
+  "version": "cinderwall-roster-v001",
+  "engine": "5.8.2-56702186+++UE5+Release-5.8",
+  "mode": "import",
+  "units": "centimetres",
+  "conversion": "(x,-y,z)*100",
+  "robots": {
+    "CableBinder": {
+      "source_id": "C1-R04",
+      "asset": "/Game/Cinderwall/Robots/SK_CableBinder.SK_CableBinder",
+      "bounds_cm": [
+        226.50001525878906,
+        185.4759979248047,
+        251.09525960683823
+      ],
+      "materials": [
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_soot",
+        "M_CW_iron",
+        "M_CW_copper",
+        "M_CW_ochre",
+        "M_CW_cool"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_patina.MI_CW_patina",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_cool.MI_CW_cool"
+      ],
+      "action_clips": {
+        "spray": "CB_spray",
+        "foul": "CB_foul",
+        "punch": "CB_punch"
+      }
+    },
+    "PressureCask": {
+      "source_id": "C1-R05",
+      "asset": "/Game/Cinderwall/Robots/SK_PressureCask.SK_PressureCask",
+      "bounds_cm": [
+        187.12000274658203,
+        164.0,
+        233.99999898672104
+      ],
+      "materials": [
+        "M_CW_oxide",
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_optic",
+        "M_CW_copper",
+        "M_CW_ceramic",
+        "M_CW_ochre",
+        "M_CW_soot"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_oxide.MI_CW_oxide",
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_optic.MI_CW_optic",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_ceramic.MI_CW_ceramic",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot"
+      ],
+      "action_clips": {
+        "attack": "PC_attack",
+        "pressurize": "PC_pressurize"
+      }
+    },
+    "CoilNest": {
+      "source_id": "C1-R07",
+      "asset": "/Game/Cinderwall/Robots/SK_CoilNest.SK_CoilNest",
+      "bounds_cm": [
+        244.47865295410156,
+        242.0000228881836,
+        220.00000047683716
+      ],
+      "materials": [
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_cool",
+        "M_CW_patina",
+        "M_CW_ochre"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_cool.MI_CW_cool",
+        "/Game/Cinderwall/Materials/MI_CW_patina.MI_CW_patina",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre"
+      ],
+      "action_clips": {
+        "deploy": "CN_deploy",
+        "attack": "CN_attack"
+      }
+    },
+    "KnucklePress": {
+      "source_id": "C1-R08",
+      "asset": "/Game/Cinderwall/Robots/SK_KnucklePress.SK_KnucklePress",
+      "bounds_cm": [
+        225.78677368164062,
+        200.00000762939453,
+        242.49999898672104
+      ],
+      "materials": [
+        "M_CW_ochre",
+        "M_CW_edge",
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_copper",
+        "M_CW_ceramic",
+        "M_CW_oxide",
+        "M_CW_optic"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_ceramic.MI_CW_ceramic",
+        "/Game/Cinderwall/Materials/MI_CW_oxide.MI_CW_oxide",
+        "/Game/Cinderwall/Materials/MI_CW_optic.MI_CW_optic"
+      ],
+      "action_clips": {
+        "brace": "KP_brace",
+        "double_punch": "KP_double_punch",
+        "slam": "KP_slam"
+      }
+    },
+    "RedlinePursuer": {
+      "source_id": "C1-O01",
+      "asset": "/Game/Cinderwall/Robots/SK_RedlinePursuer.SK_RedlinePursuer",
+      "bounds_cm": [
+        241.1999969482422,
+        183.00001525878906,
+        248.89999389648438
+      ],
+      "materials": [
+        "M_CW_oxide",
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_ochre",
+        "M_CW_optic"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_oxide.MI_CW_oxide",
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_optic.MI_CW_optic"
+      ],
+      "action_clips": {
+        "strike": "RP_strike",
+        "triple_strike": "RP_triple_strike"
+      }
+    },
+    "FoilWarden": {
+      "source_id": "C1-O02",
+      "asset": "/Game/Cinderwall/Robots/SK_FoilWarden.SK_FoilWarden",
+      "bounds_cm": [
+        215.07001876831055,
+        186.22124481201172,
+        282.49999898672104
+      ],
+      "materials": [
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_iron",
+        "M_CW_copper",
+        "M_CW_soot",
+        "M_CW_ochre",
+        "M_CW_cool",
+        "M_CW_ceramic"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_patina.MI_CW_patina",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_cool.MI_CW_cool",
+        "/Game/Cinderwall/Materials/MI_CW_ceramic.MI_CW_ceramic"
+      ],
+      "action_clips": {
+        "attack_9": "FW_attack_9",
+        "gain_drive": "FW_gain_drive",
+        "attack_12": "FW_attack_12"
+      }
+    },
+    "SplitChassis": {
+      "source_id": "C1-O03",
+      "asset": "/Game/Cinderwall/Robots/SK_SplitChassis.SK_SplitChassis",
+      "bounds_cm": [
+        224.4000244140625,
+        237.00001525878906,
+        239.99998474121094
+      ],
+      "materials": [
+        "M_CW_iron",
+        "M_CW_soot",
+        "M_CW_oxide",
+        "M_CW_ember",
+        "M_CW_patina",
+        "M_CW_edge",
+        "M_CW_copper",
+        "M_CW_optic"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_oxide.MI_CW_oxide",
+        "/Game/Cinderwall/Materials/MI_CW_ember.MI_CW_ember",
+        "/Game/Cinderwall/Materials/MI_CW_patina.MI_CW_patina",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_optic.MI_CW_optic"
+      ],
+      "action_clips": {
+        "double_strike": "SC_double_strike",
+        "thermal_runaway": "SC_thermal_runaway",
+        "triple_strike": "SC_triple_strike",
+        "death_release": "SC_death_release"
+      }
+    },
+    "GatebreakerPrime": {
+      "source_id": "C1-B01",
+      "asset": "/Game/Cinderwall/Robots/SK_GatebreakerPrime.SK_GatebreakerPrime",
+      "bounds_cm": [
+        299.00001525878906,
+        298.0,
+        376.49999898672104
+      ],
+      "materials": [
+        "M_CW_iron",
+        "M_CW_edge",
+        "M_CW_oxide",
+        "M_CW_furnace",
+        "M_CW_copper",
+        "M_CW_soot",
+        "M_CW_ochre",
+        "M_CW_optic"
+      ],
+      "material_interfaces": [
+        "/Game/Cinderwall/Materials/MI_CW_iron.MI_CW_iron",
+        "/Game/Cinderwall/Materials/MI_CW_edge.MI_CW_edge",
+        "/Game/Cinderwall/Materials/MI_CW_oxide.MI_CW_oxide",
+        "/Game/Cinderwall/Materials/MI_CW_furnace.MI_CW_furnace",
+        "/Game/Cinderwall/Materials/MI_CW_copper.MI_CW_copper",
+        "/Game/Cinderwall/Materials/MI_CW_soot.MI_CW_soot",
+        "/Game/Cinderwall/Materials/MI_CW_ochre.MI_CW_ochre",
+        "/Game/Cinderwall/Materials/MI_CW_optic.MI_CW_optic"
+      ],
+      "action_clips": {
+        "phase_one_strike": "GP_phase_one_strike",
+        "recover": "GP_recover",
+        "quad_strike": "GP_quad_strike",
+        "charge": "GP_charge",
+        "blast": "GP_blast"
+      }
+    }
+  },
+  "clips": {
+    "CB_idle": {
+      "asset": "/Game/Cinderwall/Animations/CB_idle.CB_idle",
+      "duration_s": 2.0,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 1.96789419569539,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/CB_hit_light.CB_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 4.230125668217387,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/CB_hit_medium.CB_hit_medium",
+      "duration_s": 0.5,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 11.227983616135404,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/CB_hit_heavy.CB_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 26.71124012600982,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_death": {
+      "asset": "/Game/Cinderwall/Animations/CB_death.CB_death",
+      "duration_s": 2.0,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 135.47057127107314,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_escape": {
+      "asset": "/Game/Cinderwall/Animations/CB_escape.CB_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 398.6611312722282,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_spray": {
+      "asset": "/Game/Cinderwall/Animations/CB_spray.CB_spray",
+      "duration_s": 0.8666666746139526,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 20.192336686607725,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_foul": {
+      "asset": "/Game/Cinderwall/Animations/CB_foul.CB_foul",
+      "duration_s": 1.100000023841858,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 30.80584714215569,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "CB_punch": {
+      "asset": "/Game/Cinderwall/Animations/CB_punch.CB_punch",
+      "duration_s": 0.8999999761581421,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 58.59932824718614,
+      "muzzle_reference_cm": [
+        -120.00001035630703,
+        75.99999904632571,
+        111.00000143051147
+      ]
+    },
+    "PC_idle": {
+      "asset": "/Game/Cinderwall/Animations/PC_idle.PC_idle",
+      "duration_s": 2.0,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 1.5703905016553144,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/PC_hit_light.PC_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 4.585915183725752,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/PC_hit_medium.PC_hit_medium",
+      "duration_s": 0.5,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 11.879449990000301,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/PC_hit_heavy.PC_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 28.60132285332522,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_death": {
+      "asset": "/Game/Cinderwall/Animations/PC_death.PC_death",
+      "duration_s": 2.0,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 147.69785645859966,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_escape": {
+      "asset": "/Game/Cinderwall/Animations/PC_escape.PC_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 398.66215771537526,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_attack": {
+      "asset": "/Game/Cinderwall/Animations/PC_attack.PC_attack",
+      "duration_s": 0.9333333373069763,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 15.69727137416045,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "PC_pressurize": {
+      "asset": "/Game/Cinderwall/Animations/PC_pressurize.PC_pressurize",
+      "duration_s": 1.2666666507720947,
+      "bones": 11,
+      "maximum_sampled_bone_motion_cm": 13.427499852958704,
+      "muzzle_reference_cm": [
+        -98.00000190734863,
+        1.5987211554602254e-14,
+        124.00000095367433
+      ]
+    },
+    "CN_idle": {
+      "asset": "/Game/Cinderwall/Animations/CN_idle.CN_idle",
+      "duration_s": 2.0,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 1.885576188765774,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/CN_hit_light.CN_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 5.498276776818709,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/CN_hit_medium.CN_hit_medium",
+      "duration_s": 0.5,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 16.04295836689944,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/CN_hit_heavy.CN_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 39.14972966690627,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_death": {
+      "asset": "/Game/Cinderwall/Animations/CN_death.CN_death",
+      "duration_s": 2.0,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 144.34652277452196,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_escape": {
+      "asset": "/Game/Cinderwall/Animations/CN_escape.CN_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 398.66020693437224,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_deploy": {
+      "asset": "/Game/Cinderwall/Animations/CN_deploy.CN_deploy",
+      "duration_s": 1.2999999523162842,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 39.69279615050674,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "CN_attack": {
+      "asset": "/Game/Cinderwall/Animations/CN_attack.CN_attack",
+      "duration_s": 0.8666666746139526,
+      "bones": 14,
+      "maximum_sampled_bone_motion_cm": 11.460303371738656,
+      "muzzle_reference_cm": [
+        -141.99999570846558,
+        1.1546319456101628e-14,
+        81.99999928474428
+      ]
+    },
+    "KP_idle": {
+      "asset": "/Game/Cinderwall/Animations/KP_idle.KP_idle",
+      "duration_s": 2.0,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 1.951610153002754,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/KP_hit_light.KP_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 4.463875431975269,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/KP_hit_medium.KP_hit_medium",
+      "duration_s": 0.5,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 11.621125558763794,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/KP_hit_heavy.KP_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 28.38925361932719,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_death": {
+      "asset": "/Game/Cinderwall/Animations/KP_death.KP_death",
+      "duration_s": 2.0,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 125.52886060942268,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_escape": {
+      "asset": "/Game/Cinderwall/Animations/KP_escape.KP_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 398.6654425095666,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_brace": {
+      "asset": "/Game/Cinderwall/Animations/KP_brace.KP_brace",
+      "duration_s": 1.100000023841858,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 29.21816016451024,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_double_punch": {
+      "asset": "/Game/Cinderwall/Animations/KP_double_punch.KP_double_punch",
+      "duration_s": 1.0,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 51.953428278774425,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "KP_slam": {
+      "asset": "/Game/Cinderwall/Animations/KP_slam.KP_slam",
+      "duration_s": 1.100000023841858,
+      "bones": 12,
+      "maximum_sampled_bone_motion_cm": 51.60030848351341,
+      "muzzle_reference_cm": [
+        -140.00000059604645,
+        75.99999904632573,
+        126.99999809265137
+      ]
+    },
+    "RP_idle": {
+      "asset": "/Game/Cinderwall/Animations/RP_idle.RP_idle",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 2.416388788416678,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/RP_hit_light.RP_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 5.097857009533333,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/RP_hit_medium.RP_hit_medium",
+      "duration_s": 0.5,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 15.463226441004892,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/RP_hit_heavy.RP_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 38.04504584758418,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_death": {
+      "asset": "/Game/Cinderwall/Animations/RP_death.RP_death",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 138.85483383924173,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_escape": {
+      "asset": "/Game/Cinderwall/Animations/RP_escape.RP_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 398.65830733450434,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_strike": {
+      "asset": "/Game/Cinderwall/Animations/RP_strike.RP_strike",
+      "duration_s": 0.800000011920929,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 11.680666870606862,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "RP_triple_strike": {
+      "asset": "/Game/Cinderwall/Animations/RP_triple_strike.RP_triple_strike",
+      "duration_s": 0.9666666388511658,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 10.949104125281533,
+      "muzzle_reference_cm": [
+        -138.99999856948853,
+        61.0000014305115,
+        150.99999904632568
+      ]
+    },
+    "FW_idle": {
+      "asset": "/Game/Cinderwall/Animations/FW_idle.FW_idle",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 1.866258290046061,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/FW_hit_light.FW_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 5.447634006724455,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/FW_hit_medium.FW_hit_medium",
+      "duration_s": 0.5,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 15.352881036154562,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/FW_hit_heavy.FW_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 37.92189047136174,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_death": {
+      "asset": "/Game/Cinderwall/Animations/FW_death.FW_death",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 137.81999405503362,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_escape": {
+      "asset": "/Game/Cinderwall/Animations/FW_escape.FW_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 398.6669517511731,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_attack_9": {
+      "asset": "/Game/Cinderwall/Animations/FW_attack_9.FW_attack_9",
+      "duration_s": 0.9333333373069763,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 40.14145687240761,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_attack_12": {
+      "asset": "/Game/Cinderwall/Animations/FW_attack_12.FW_attack_12",
+      "duration_s": 1.100000023841858,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 54.717469285640206,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "FW_gain_drive": {
+      "asset": "/Game/Cinderwall/Animations/FW_gain_drive.FW_gain_drive",
+      "duration_s": 1.2000000476837158,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 14.123860994858147,
+      "muzzle_reference_cm": [
+        -171.00000083446503,
+        -60.00000238418576,
+        169.00000572204593
+      ]
+    },
+    "SC_idle": {
+      "asset": "/Game/Cinderwall/Animations/SC_idle.SC_idle",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 1.8254620047461814,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/SC_hit_light.SC_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 4.763101572685888,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/SC_hit_medium.SC_hit_medium",
+      "duration_s": 0.5,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 12.29926207533198,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/SC_hit_heavy.SC_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 30.04747164349804,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_death": {
+      "asset": "/Game/Cinderwall/Animations/SC_death.SC_death",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 231.54346417353668,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_escape": {
+      "asset": "/Game/Cinderwall/Animations/SC_escape.SC_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 398.66388226413125,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_double_strike": {
+      "asset": "/Game/Cinderwall/Animations/SC_double_strike.SC_double_strike",
+      "duration_s": 0.9333333373069763,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 12.566615299878963,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_triple_strike": {
+      "asset": "/Game/Cinderwall/Animations/SC_triple_strike.SC_triple_strike",
+      "duration_s": 1.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 11.23320808871767,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_thermal_runaway": {
+      "asset": "/Game/Cinderwall/Animations/SC_thermal_runaway.SC_thermal_runaway",
+      "duration_s": 1.2000000476837158,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 11.75999601165703,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "SC_death_release": {
+      "asset": "/Game/Cinderwall/Animations/SC_death_release.SC_death_release",
+      "duration_s": 2.0,
+      "bones": 13,
+      "maximum_sampled_bone_motion_cm": 125.8095121552745,
+      "muzzle_reference_cm": [
+        -110.00000238418579,
+        56.99999928474429,
+        155.9999942779541
+      ]
+    },
+    "GP_idle": {
+      "asset": "/Game/Cinderwall/Animations/GP_idle.GP_idle",
+      "duration_s": 2.0,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 2.4968572523874375,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_hit_light": {
+      "asset": "/Game/Cinderwall/Animations/GP_hit_light.GP_hit_light",
+      "duration_s": 0.3333333432674408,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 4.893262426346216,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_hit_medium": {
+      "asset": "/Game/Cinderwall/Animations/GP_hit_medium.GP_hit_medium",
+      "duration_s": 0.5,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 12.331309610483938,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_hit_heavy": {
+      "asset": "/Game/Cinderwall/Animations/GP_hit_heavy.GP_hit_heavy",
+      "duration_s": 0.699999988079071,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 29.793733862400114,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_death": {
+      "asset": "/Game/Cinderwall/Animations/GP_death.GP_death",
+      "duration_s": 2.0,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 141.3519383403463,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_escape": {
+      "asset": "/Game/Cinderwall/Animations/GP_escape.GP_escape",
+      "duration_s": 1.0666667222976685,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 398.67462984765194,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_phase_one_strike": {
+      "asset": "/Game/Cinderwall/Animations/GP_phase_one_strike.GP_phase_one_strike",
+      "duration_s": 1.100000023841858,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 56.81538542157424,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_recover": {
+      "asset": "/Game/Cinderwall/Animations/GP_recover.GP_recover",
+      "duration_s": 1.4666666984558105,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 60.4933507241838,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_quad_strike": {
+      "asset": "/Game/Cinderwall/Animations/GP_quad_strike.GP_quad_strike",
+      "duration_s": 1.2666666507720947,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 43.156272411011464,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_charge": {
+      "asset": "/Game/Cinderwall/Animations/GP_charge.GP_charge",
+      "duration_s": 1.2999999523162842,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 55.383706228182774,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    },
+    "GP_blast": {
+      "asset": "/Game/Cinderwall/Animations/GP_blast.GP_blast",
+      "duration_s": 1.2000000476837158,
+      "bones": 16,
+      "maximum_sampled_bone_motion_cm": 75.4434212717413,
+      "muzzle_reference_cm": [
+        -174.99999776482582,
+        111.00000143051153,
+        162.99999952316284
+      ]
+    }
+  },
+  "source_report_sha256": "778bba3a2e694807f18a77093b097a9bf77edb4bb4921ad4259a19aafd83c5a3",
+  "source_files": {
+    "meshes/CableBinder.fbx": "4dc863d6d557cf0a7978165ee7a0dbea89225f5ade8782253478ca195b19cef6",
+    "animations/CB_idle.fbx": "c057dbc6e350562d7c2c8d3f50b5b006bd55c02a48a8b633dc04016813e8db54",
+    "animations/CB_hit_light.fbx": "d29a79541b923ec2133c8d42f76c2a7478dd3aa182684a6424d31177cb45b080",
+    "animations/CB_hit_medium.fbx": "b1aa84c89cf8d77ac74ddfb68e789fd2c9801ca178157bd9fab0b6488e31b377",
+    "animations/CB_hit_heavy.fbx": "728a5f515b5e89d53c1b31beedae778a3fbdda0c79e54fc07b20477c43146100",
+    "animations/CB_death.fbx": "1804d4828564a0efb7f2bfe0eba29dae88d282a79d53b6b0a824de96fbe2253d",
+    "animations/CB_escape.fbx": "5551c9397a13669d03a2f998fa78908ba5fded40e9efbcfbc70916c0422a98e2",
+    "animations/CB_spray.fbx": "d67b8085f137a7863839b6fcfb0eb0a067a8ec12c3bd2a53f1868cebb164a348",
+    "animations/CB_foul.fbx": "99da64c5879e02ffa2e8798d306ca6b4bb914d494fedd7ce6a2004704e586cd2",
+    "animations/CB_punch.fbx": "3f10433c4a4b982a805ad1642492768611941a318f480a4bc92c7d552f89cb11",
+    "meshes/PressureCask.fbx": "bac6d206b2834f386c732d1bd732dadcdbd265118a3d88617fd0865408f1e7c9",
+    "animations/PC_idle.fbx": "e078c5ea31efad0a3df6dcf42aa36a3b5cb98a719e4293064e6ad3278a4d0620",
+    "animations/PC_hit_light.fbx": "a1baf209c387c0cd03650ac428d80cf3c0958a941d881bac9f17fe7125679dc0",
+    "animations/PC_hit_medium.fbx": "4624a981efb569ccb9e407a7d4d3282a9c493a90115bc6e9e1523675133438bb",
+    "animations/PC_hit_heavy.fbx": "21a7e24c58fbdd77be00758d3aed0237587f54dddc4b83d2eafde2917cf36f87",
+    "animations/PC_death.fbx": "9cd3541d399f2ce906a97cb23b01e649917405f0eb3323234ab45c2da5ea257f",
+    "animations/PC_escape.fbx": "cfcb6c04c2986c0f469231c13bc68ff07218285181dc992be316ae60868a3dee",
+    "animations/PC_attack.fbx": "11ac34a98e90b68bfc46ebb5c13740035e15ba5ce26bacdf78993bc5c17d3f19",
+    "animations/PC_pressurize.fbx": "795165dcc2335ce451d0b063867bf79a591247475d145756caecf026f6a62722",
+    "meshes/CoilNest.fbx": "2f5bf67843fcd9a369b793ddc486be238d6b6473860e6674184506cde4cc71d2",
+    "animations/CN_idle.fbx": "8d21e913c1f01aca0680a3c00b7947b390c8bafca76c0cccf49853469ace3f71",
+    "animations/CN_hit_light.fbx": "f3183fa3c898f70b140c3c74658c680834baa78745952d9a99c87f037aea8de5",
+    "animations/CN_hit_medium.fbx": "9aae894225c61def2d283789fc5681ac8528ddb3ba8b227411674b5582766c67",
+    "animations/CN_hit_heavy.fbx": "4446aea7b72d1cc9049040d61ad525a8c66b4283516ceae7638100a7847786bd",
+    "animations/CN_death.fbx": "6127b04770cd3a45ad1b07b1ed475c0a32e5335029ac5b7c0b3bcd99b7181a34",
+    "animations/CN_escape.fbx": "aac3fc31955adebe83c2f4ce0817e5485c361a425a14ae0fc783548cf443ca85",
+    "animations/CN_deploy.fbx": "06c5beda93719f195739c62e1384a5365c7eaf330acdac1555d6c98eb9268ba1",
+    "animations/CN_attack.fbx": "7c0133bcb18be105198268a658fe7e3c28ba8c457733d3958c08a2074ce98bd2",
+    "meshes/KnucklePress.fbx": "6e04acc9a1dc66f33e86c4d0702c33683c4eebc9ac14f8221877c48e4e7f4ae5",
+    "animations/KP_idle.fbx": "3af1da67da54269032a7a8d4c038a4c8fb524f3a71b63a424b2e78fbcd540b36",
+    "animations/KP_hit_light.fbx": "5de7229b3f53a9f6901fa21d512bcd1dac6e2ed7a938c0d8293cef87db2fb1cd",
+    "animations/KP_hit_medium.fbx": "50a7fbfae346af00e519e97e0b6ce1692130a627f15a5a9bad586a9a55eadeed",
+    "animations/KP_hit_heavy.fbx": "da54789104990d5c1658e529b08bc3dc8e6f3da764b6e6ac86b2926e41e106ba",
+    "animations/KP_death.fbx": "1f26279b90ba4594e63971afa9352c3cc6ac1cbe8af68c98f6d5d6cddb65601f",
+    "animations/KP_escape.fbx": "c03f31151a119f4ee0082e90b4883e86f17b532d4c9a26f107897eb38da9e46a",
+    "animations/KP_brace.fbx": "571e7468b0911fb44172648a6a88396494ddc8a54a915552dcbe7ff6be9b0088",
+    "animations/KP_double_punch.fbx": "2bfb0ae2a7edc2189be3ace6e1e98a723dfb6bebf90ce807d945af242e0d0458",
+    "animations/KP_slam.fbx": "744138eac4fdcee155feca2f95fa58ba1ffb45667e264db034f475937429a38c",
+    "meshes/RedlinePursuer.fbx": "bd8e063cd0cd0f6f60a5256fd42c3018b134eae740c3f16eb0d253a6879c346d",
+    "animations/RP_idle.fbx": "0bc32169894885fa4cc6eaf4dda52203fb43963d0cd90fc0b21cbc9dcaea8dce",
+    "animations/RP_hit_light.fbx": "5f49a377a2f1e2a7b46f94ecd3ad1acd5a642784aefc123b5ce91a88c8e08150",
+    "animations/RP_hit_medium.fbx": "9c01cc50dc72567401b3dbd662c64ff643a2f4e1782d3e6ad981fa2dcfb36480",
+    "animations/RP_hit_heavy.fbx": "c7c93e8f968a4721cf28fca15f64db79ce2a49aff1b7e86472a83758589f7dc6",
+    "animations/RP_death.fbx": "6af8c09ea0e404c4520d2ab1eb218a1844740f4da9619e1c41a753fddad3ff74",
+    "animations/RP_escape.fbx": "3ffe6067e4c4367c0ba413b5dd8a931e41405f9d92eeaf54ffabbd514e3bb54b",
+    "animations/RP_strike.fbx": "2506a41c7ca4b4df1e25e0b24a480ad850e9f66bd3b42d27e4e4f49ba1ac1311",
+    "animations/RP_triple_strike.fbx": "965687ebdbd8e7fdfd8424bef5c2eae716af268e139bc79e08789ed873258b9d",
+    "meshes/FoilWarden.fbx": "f53e455e08d76388404f546880b8cae2de7532e05e3382c34d6dc5e22fc9ade2",
+    "animations/FW_idle.fbx": "d4b0b1495688432a61eb3e5ddc29d8fe0e8a9f359835bce070eb2b1459f9583b",
+    "animations/FW_hit_light.fbx": "99f5bd40b8fbb2a0a8b62144a218e2d14633ddfb676fe5798c452f10130087ad",
+    "animations/FW_hit_medium.fbx": "dc4c2f768cfd4915d0a312877a181a5424033c904cf63ab116f65173a64694bf",
+    "animations/FW_hit_heavy.fbx": "4a6198e75902eaf4c75924274bde46c7c7dda6bfb0e4cf00fde41d5ab80d3825",
+    "animations/FW_death.fbx": "dff4cc21623d9db53752003df02e6946705ace8bdffdfc23bdae6f789487d90b",
+    "animations/FW_escape.fbx": "1d7a5a3f5b9bc2e07e4e5ea57b89238f961c304211e706efe37bca110e95545e",
+    "animations/FW_attack_9.fbx": "1a800d598e58ed270b70fe85bce774c4bb5c7db2da426a4cc18da0fb09e7d983",
+    "animations/FW_attack_12.fbx": "62b150a09e78f890eeade0cd96ef11d65b2d338b276847c2a85c48c83f3638e1",
+    "animations/FW_gain_drive.fbx": "19864422e38f3702106a6cb19554a944d6dda7c1067a4231c1093128a945f6c1",
+    "meshes/SplitChassis.fbx": "c28dcfbe7ffb3c8de4afb763a7fe1be27536f0647149a75964cce4447482a074",
+    "animations/SC_idle.fbx": "05ce05dfb05fa6f5d5ce62e3b0c796df9bfbb8f833c19489d342b1ce17438ac3",
+    "animations/SC_hit_light.fbx": "e6e238fc1d8e591622c6dafdd18aca1967bcb05f38b987fc1fa82407c8fa6f4e",
+    "animations/SC_hit_medium.fbx": "724a1335de0e97659296652eb9df32f5c3348b1ab3aa6b91ef93497d5a173965",
+    "animations/SC_hit_heavy.fbx": "cb3093cb7194ad17ae0c3afc905bb465d771cfc13e9c6354662091ecf43b07ed",
+    "animations/SC_death.fbx": "d7d9f4f8a727d2a8b10f1b8bb9b4edbd48d380e0ce468da133ee3bf24f1f6d85",
+    "animations/SC_escape.fbx": "97fe32bcf1ef82a4dd02a1086ac6ce3858b3da4175255e411fe71a411353f4ff",
+    "animations/SC_double_strike.fbx": "5e6bd5cfcd9a1698ebdbce86d93aa03314c0a7b3bda5065ab6341178d9477553",
+    "animations/SC_triple_strike.fbx": "a99b458f5572345887ebb4c2b0934d82349258b24f5fb9e3254d95a943d08c26",
+    "animations/SC_thermal_runaway.fbx": "f8424c7fc7f8de365b8801357418482f6736f8aee303f3cefb6988e6c3a42443",
+    "animations/SC_death_release.fbx": "100524007d42cef0e85cbf03ad3f1dbde099c3c010d72d4b6ddf5cc6e765e91d",
+    "meshes/GatebreakerPrime.fbx": "2835d87ac82bb1b1641174e5e92b57a71f41c22494d8220614367a22d8358c3a",
+    "animations/GP_idle.fbx": "9004edf221d00c726463f2513522e4679024ddfd916542821d5e8ec2a4d560f9",
+    "animations/GP_hit_light.fbx": "8eaa6c6b61cc554bdf212c8a48a1aabd2563aef1a7dde020d0b9a175ea183073",
+    "animations/GP_hit_medium.fbx": "a1da32d2531ff127e3e735e8d93265f018fa4352a16062e59b346a51d36510e7",
+    "animations/GP_hit_heavy.fbx": "bbf3e0433ed13d085940ece4cef49009bd90b262c3b2d0dc770f847dc98b43c4",
+    "animations/GP_death.fbx": "171f6022f970f63a1363189355f060b347b6d1130156157c8893d911d7c3735a",
+    "animations/GP_escape.fbx": "2e5225900737cc55f4bbab12d18b1eb3cb804898a09913a16c8026c445b04520",
+    "animations/GP_phase_one_strike.fbx": "974501b8f88df288cb6e26014b623a17d1564abd7270b47b54862bf3065a154d",
+    "animations/GP_recover.fbx": "d220abaee0ceeaf6bce48f71886be9c23a826633e2a01ebebba5c9257b18366c",
+    "animations/GP_quad_strike.fbx": "12be1000a258c33c524e8078096944bb1a116d334d7904a421f80f6b9bac5020",
+    "animations/GP_charge.fbx": "17d7050a8c3a04babdf35705aa0c9f2bcaeaa2ea3837d8aabb91a388942d2177",
+    "animations/GP_blast.fbx": "89a42dab604ef60c62025c326f470d9df194b727c3adb383f9064e09879035f2"
+  },
+  "limits": "Import/compressed-pose checks only; no runtime gameplay or human approval."
+}

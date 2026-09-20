@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'SceneryArt', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
+    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'MaraArt', 'SceneryArt', 'RosterArt', 'RosterVerify', 'RosterProbe', 'ArtProbe', 'CampaignProbe', 'Audio', 'AudioProbe', 'Teaching', 'Run', 'Smoke', 'Fixture', 'Package')]
     [string]$Action = 'Build',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development',
@@ -28,7 +28,7 @@ $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskLog = Join-Path $taskLogs "$Action-$taskStamp.log"
 
 function Invoke-FoundryProcess([string]$Executable, [string[]]$Arguments) {
-    $taskVerifyBinary = $Action -in @('CampaignProbe', 'ArtProbe', 'Smoke', 'Fixture')
+    $taskVerifyBinary = $Action -in @('CampaignProbe', 'ArtProbe', 'RosterProbe', 'Smoke', 'Fixture')
     $taskModulePath = Join-Path $taskProjectDir 'Binaries/Win64/UnrealEditor-OverkillFoundry.dll'
     if ($taskVerifyBinary) { $taskModuleBefore = (Get-FileHash -LiteralPath $taskModulePath -Algorithm SHA256).Hash }
     # ArgumentList is joined by Windows Start-Process; quote each path safely.
@@ -130,6 +130,22 @@ switch ($Action) {
         $taskScript = Join-Path $taskProjectDir 'Tools/import_scenery_v002.py'
         Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
         if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_SCENERY_V002_READY' -Quiet)) { throw "Scenery import did not report success: $taskLog" }
+    }
+    'RosterArt' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_roster_v001.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ROSTER_READY' -Quiet)) { throw "Roster import did not report success: $taskLog" }
+    }
+    'RosterProbe' {
+        Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryRosterProbe', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ROSTER_PROBE_COMPLETE ok=1' -Quiet)) { throw "Rendered roster probe did not report success: $taskLog" }
+    }
+    'RosterVerify' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_roster_v001.py'
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-FoundryRosterVerify', '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ROSTER_VERIFIED' -Quiet)) { throw "Roster reload verification did not report success: $taskLog" }
     }
     'MaraArt' {
         $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'

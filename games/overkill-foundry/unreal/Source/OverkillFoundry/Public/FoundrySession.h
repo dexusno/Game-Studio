@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "overkill/core.hpp"
+#include "FoundryRecipeControls.h"
 #include <functional>
 
 // Presentation selection and a read model around the one authoritative rules core.
@@ -14,6 +15,9 @@ public:
     overkill::State State;
     std::vector<overkill::Id> Selection;
     TMap<uint64, uint64> SpreadTargets;
+#if FOUNDRY_WITH_CAMPAIGN
+    foundry_controls::Drafts Drafts;
+#endif
     uint64 Target = 0;
     int32 Steering = 3;
     int32 Precision = -1;
@@ -32,6 +36,11 @@ public:
     bool Submit(const overkill::Action& Action, const FString& Description);
     bool Control(const FString& Command);
     overkill::Action FireAction() const;
+    overkill::Action CraftAction(uint64 Copy) const;
+    overkill::Action PartAction(uint64 Part) const;
+    overkill::Action LoadAction() const;
+    overkill::Action EndAction() const;
+    overkill::Action Configured(overkill::Action Base) const;
     overkill::Preview Preview(const overkill::Action& Action) const;
     FString PreviewText(const overkill::Action& Action) const;
     FString DescribePart(const overkill::Part& Part) const;

@@ -45,6 +45,8 @@ public:
 #endif
 private:
     void SpawnRobots();
+    void SpawnMissingRobots();
+    bool HasTerminalPresentation() const;
     void PresentCommittedEvents();
     void PresentEvents(const std::vector<overkill::Event>& Events);
     void ResetActionPresentation();
@@ -52,6 +54,7 @@ private:
     FVector RobotPosition(int32 Index) const;
     void FrameRoster();
     void TickArtProbe(float DeltaSeconds);
+    void TickRosterProbe(float DeltaSeconds);
     void CaptureNamed(const FString& Name);
     void TickCampaignProbe(float DeltaSeconds);
     UPROPERTY() TObjectPtr<ACameraActor> PreparationCamera;
@@ -80,6 +83,13 @@ private:
     bool bWasTitle = true;
     bool bWideRoster = false;
     bool bArtProbe = false;
+    bool bRosterProbe = false;
+    bool bRosterProbeOk = true;
+    float RosterElapsed = 0;
+    int32 RosterCase = 0;
+    int32 RosterStep = 0;
+    int32 RosterExpectedHits = 0;
+    FString RosterExpectedHash;
     bool bArtProbeOk = true;
     float ArtElapsed = 0;
     int32 ArtStep = 0;

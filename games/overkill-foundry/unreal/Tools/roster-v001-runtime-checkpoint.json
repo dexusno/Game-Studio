@@ -1,0 +1,2563 @@
+{
+  "schema": 1,
+  "checkpoint": "Original ten-enemy roster rendered integration",
+  "recorded_at": "2026-09-20T16:58:17.364945+00:00",
+  "engine": "Unreal 5.8.2 CL56702186",
+  "compiler": "MSVC 14.44.35228",
+  "sdk": "Windows 10.0.22621.0",
+  "base_commit": "8972c90ed50f8b4f0a666da511dc18d6168dd6c7",
+  "source_graph_lf_sha256": "819d9d6056cd5c04681be9d7afdebc476118af6dd3b56ebbdc69aeaa277e00bf",
+  "source_graph_encoding": "SHA256 of compact JSON ordered [repository-relative path, LF-normalized SHA256] pairs",
+  "sources": [
+    {
+      "path": "games/overkill-foundry/assets/production/cinderwall-v001/asset-report.json",
+      "bytes": 25654,
+      "sha256": "f1a74dd42703441e68cf070bc2e40557f46496ef48e53dd576d37a1e07b5843b",
+      "sha256_lf": "5c24f555a6b170698c8d6421bf61edff826d1f97000cbe47bbf105912baf3f98"
+    },
+    {
+      "path": "games/overkill-foundry/assets/production/roster-v001/asset-report.json",
+      "bytes": 42194,
+      "sha256": "778bba3a2e694807f18a77093b097a9bf77edb4bb4921ad4259a19aafd83c5a3",
+      "sha256_lf": "c44410b2cf51e25195f6e7439cbb51c569eff07e35976029a2de02a3e1b13ef7"
+    },
+    {
+      "path": "games/overkill-foundry/assets/production/roster-v001/unreal-import.json",
+      "bytes": 42308,
+      "sha256": "bc1350646adf7f78b65d1835f9b3ef8cd0afd7aba25845aa0b37552ad0826a59",
+      "sha256_lf": "f1902f67e022e9c0737ea19716323239bd06df621bff4d0765759f79ffb02f14"
+    },
+    {
+      "path": "games/overkill-foundry/assets/production/roster-v001/unreal-reload-verification.json",
+      "bytes": 42335,
+      "sha256": "5bc350d2990479a8e2cb33ca9e87e2a3946b7a084623f5ece10816a8434052ea",
+      "sha256_lf": "5af0b377a7231378de5cf32c44a2bca6e65a211e45e19e9d3b417189d5180a34"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign.cpp",
+      "bytes": 31250,
+      "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+      "sha256_lf": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_upgrades.cpp",
+      "bytes": 19009,
+      "sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+      "sha256_lf": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/core.cpp",
+      "bytes": 44641,
+      "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb",
+      "sha256_lf": "27972173c2c2f62c35baa32aac65e495c60f102b85d09fe77ac4e1f570c9a3c9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/recipe_effects.inl",
+      "bytes": 52894,
+      "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+      "sha256_lf": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrade_effects.inl",
+      "bytes": 37125,
+      "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+      "sha256_lf": "1f74d51a227c17d62f6715941286b1e46f684755324d0bdda3aea3d81803b5a9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/campaign_session.hpp",
+      "bytes": 1565,
+      "sha256": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5",
+      "sha256_lf": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/save_store.hpp",
+      "bytes": 1241,
+      "sha256": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d",
+      "sha256_lf": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/campaign_session.cpp",
+      "bytes": 3999,
+      "sha256": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+      "sha256_lf": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/windows_save_store.cpp",
+      "bytes": 8175,
+      "sha256": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+      "sha256_lf": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7"
+    },
+    {
+      "path": "games/overkill-foundry/tools/generate_roster_visuals.py",
+      "bytes": 3146,
+      "sha256": "e3fb070b233f7c01005325a8ebd824b752def03a408655415376dfeaf0b10489",
+      "sha256_lf": "e3fb070b233f7c01005325a8ebd824b752def03a408655415376dfeaf0b10489"
+    },
+    {
+      "path": "games/overkill-foundry/tools/unreal.ps1",
+      "bytes": 14042,
+      "sha256": "f6a549505f60dfa8bf7e4df95f3b5dc90389a26180ea179d8f0ffab39170fb6c",
+      "sha256_lf": "f6a549505f60dfa8bf7e4df95f3b5dc90389a26180ea179d8f0ffab39170fb6c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry.Target.cs",
+      "bytes": 360,
+      "sha256": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079",
+      "sha256_lf": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+      "bytes": 4043,
+      "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+      "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryArtProbe.cpp",
+      "bytes": 8717,
+      "sha256": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7",
+      "sha256_lf": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp",
+      "bytes": 9933,
+      "sha256": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+      "sha256_lf": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 16564,
+      "sha256": "13ac2e332444feba43c5f5642f66cb1b95b0c0caa2baa20989d096f890023f15",
+      "sha256_lf": "13ac2e332444feba43c5f5642f66cb1b95b0c0caa2baa20989d096f890023f15"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+      "bytes": 11752,
+      "sha256": "03bf3a32c65892e88d7e504ce539dfe71b3b079d6e3ef13e31d1f3bee989cf86",
+      "sha256_lf": "03bf3a32c65892e88d7e504ce539dfe71b3b079d6e3ef13e31d1f3bee989cf86"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 55637,
+      "sha256": "ff2f91824773681cbdb921475da3f3de2d08eb9ba0e4d61658e06a9ce3d4aa62",
+      "sha256_lf": "ff2f91824773681cbdb921475da3f3de2d08eb9ba0e4d61658e06a9ce3d4aa62"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryDebugHUD.cpp",
+      "bytes": 16091,
+      "sha256": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4",
+      "sha256_lf": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 34177,
+      "sha256": "d552196749d5671bc217d316d87b0a8f88e587e8eaa1b360d6237337377abd9f",
+      "sha256_lf": "d552196749d5671bc217d316d87b0a8f88e587e8eaa1b360d6237337377abd9f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryMara.cpp",
+      "bytes": 13312,
+      "sha256": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982",
+      "sha256_lf": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecision.cpp",
+      "bytes": 7451,
+      "sha256": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d",
+      "sha256_lf": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControlProbe.cpp",
+      "bytes": 11085,
+      "sha256": "c6501b5937061bb41f77552fc7c555e60dd7303e5e8bcaf5c81aed85043cdce2",
+      "sha256_lf": "c6501b5937061bb41f77552fc7c555e60dd7303e5e8bcaf5c81aed85043cdce2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControls.cpp",
+      "bytes": 10811,
+      "sha256": "3be2891fc574379f05a286fbd41d2fa5b5d3febfee4719ac17ca9294cdeb32b3",
+      "sha256_lf": "3be2891fc574379f05a286fbd41d2fa5b5d3febfee4719ac17ca9294cdeb32b3"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp",
+      "bytes": 18186,
+      "sha256": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f",
+      "sha256_lf": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterData.inl",
+      "bytes": 12712,
+      "sha256": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5",
+      "sha256_lf": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterProbe.cpp",
+      "bytes": 17210,
+      "sha256": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7",
+      "sha256_lf": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundrySession.cpp",
+      "bytes": 13054,
+      "sha256": "2d38a5423f07dfcc5c452257119e143c0b373a141b731e193f9bc2935e1b2754",
+      "sha256_lf": "2d38a5423f07dfcc5c452257119e143c0b373a141b731e193f9bc2935e1b2754"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/OverkillFoundry.cpp",
+      "bytes": 127,
+      "sha256": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208",
+      "sha256_lf": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaign.cpp",
+      "bytes": 64,
+      "sha256": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a",
+      "sha256_lf": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSerialization.cpp",
+      "bytes": 78,
+      "sha256": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4",
+      "sha256_lf": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSession.cpp",
+      "bytes": 76,
+      "sha256": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2",
+      "sha256_lf": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignUpgrades.cpp",
+      "bytes": 73,
+      "sha256": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e",
+      "sha256_lf": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCatalogue.cpp",
+      "bytes": 113,
+      "sha256": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72",
+      "sha256_lf": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCityContent.cpp",
+      "bytes": 68,
+      "sha256": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462",
+      "sha256_lf": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCore.cpp",
+      "bytes": 110,
+      "sha256": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938",
+      "sha256_lf": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRobots.cpp",
+      "bytes": 110,
+      "sha256": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c",
+      "sha256_lf": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRoute.cpp",
+      "bytes": 61,
+      "sha256": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2",
+      "sha256_lf": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSaveStore.cpp",
+      "bytes": 119,
+      "sha256": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e",
+      "sha256_lf": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSerialization.cpp",
+      "bytes": 117,
+      "sha256": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92",
+      "sha256_lf": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedUpgrades.cpp",
+      "bytes": 64,
+      "sha256": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533",
+      "sha256_lf": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryAudio.h",
+      "bytes": 1382,
+      "sha256": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+      "sha256_lf": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 2204,
+      "sha256": "a981c0a9cae165fce0232f1a5ddd9ad204b484d8fd0c9596922994b4492d9322",
+      "sha256_lf": "a981c0a9cae165fce0232f1a5ddd9ad204b484d8fd0c9596922994b4492d9322"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaignUI.h",
+      "bytes": 172,
+      "sha256": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4",
+      "sha256_lf": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryHost.h",
+      "bytes": 4630,
+      "sha256": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f",
+      "sha256_lf": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryMara.h",
+      "bytes": 2734,
+      "sha256": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd",
+      "sha256_lf": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecision.h",
+      "bytes": 645,
+      "sha256": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421",
+      "sha256_lf": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControlProbe.h",
+      "bytes": 201,
+      "sha256": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0",
+      "sha256_lf": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControls.h",
+      "bytes": 1934,
+      "sha256": "9627cc117b533d4b7826126da1d32c9e4078f44cf7ab641d91f3d71c0170dd52",
+      "sha256_lf": "9627cc117b533d4b7826126da1d32c9e4078f44cf7ab641d91f3d71c0170dd52"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h",
+      "bytes": 3501,
+      "sha256": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3",
+      "sha256_lf": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundrySession.h",
+      "bytes": 1860,
+      "sha256": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a",
+      "sha256_lf": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundryEditor.Target.cs",
+      "bytes": 374,
+      "sha256": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d",
+      "sha256_lf": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/import_roster_v001.py",
+      "bytes": 9004,
+      "sha256": "9e86e606c5faf530129ecea250fab969ee356bbde0463d6d844cb724be8c99a5",
+      "sha256_lf": "9e86e606c5faf530129ecea250fab969ee356bbde0463d6d844cb724be8c99a5"
+    }
+  ],
+  "binaries": [
+    {
+      "file": "UnrealEditor-OverkillFoundry.dll",
+      "bytes": 2424832,
+      "sha256": "4905bff67301b67cd0537c67aca8a5a104b8b0dfb871b256e079995049a984c6"
+    },
+    {
+      "file": "OverkillFoundry.exe",
+      "bytes": 221507584,
+      "sha256": "a9cf9ecce61ec331ba4297f7aa34ce4dafcaf1e0811a29029cbce67ccd583b51"
+    }
+  ],
+  "logs": [
+    {
+      "file": "Build-20260920-184357.log",
+      "bytes": 7906,
+      "sha256": "4147e8d5743b05fdd30d1830cdc2ad495bc000109fe0b73f8d381c8dc7b1f1f6"
+    },
+    {
+      "file": "BuildGame-20260920-184402.log",
+      "bytes": 7635,
+      "sha256": "0210de534b40eb915ea9b96275fdbeff27d5571b117594fcb08c12a867963869"
+    },
+    {
+      "file": "CampaignProbe-20260920-184423.log",
+      "bytes": 213900,
+      "sha256": "3bc2fabca320a802227c2c6efc9e592e53f030abd1855aa3f17bd5094e769e24"
+    },
+    {
+      "file": "CampaignProbe-20260920-184423.log.binary.json",
+      "bytes": 292,
+      "sha256": "2fc96aeb000f123162062fbc56133e06806d075f66cf19201eb882bed4a63341"
+    },
+    {
+      "file": "Fixture-20260920-184544.log",
+      "bytes": 149023,
+      "sha256": "35e5cc67b327b52056501a7835343898c1d2b904654e58455cfcf6e9ff3d8950"
+    },
+    {
+      "file": "Fixture-20260920-184544.log.binary.json",
+      "bytes": 286,
+      "sha256": "17ae5aa2dccc23c94f3ce8ab6fa62c3c7e20d2d50c1e4515d8d733b906bdac6f"
+    },
+    {
+      "file": "RosterProbe-20260920-184928.log",
+      "bytes": 755964,
+      "sha256": "b3dd2059a535d1e218eccfa34255f1ab159ba38bde92ebecd4346faa13d4c71c"
+    },
+    {
+      "file": "RosterProbe-20260920-184928.log.binary.json",
+      "bytes": 290,
+      "sha256": "0755e6d2f13be8d92560db88e7aa21b6bb73df9d3840bb6c91002c0be02ec68c"
+    }
+  ],
+  "captures": [
+    {
+      "file": "roster-00-C1-R01-attack-ready.png",
+      "bytes": 1858792,
+      "sha256": "ea03668ab5193aaa9fc2575272ee3c99e3f2cd4567bbfc3256056d3fc034b005"
+    },
+    {
+      "file": "roster-00-C1-R01-attack-early.png",
+      "bytes": 1876468,
+      "sha256": "c28b073e3cbf890605be69cdea6f198dfe4f824c753e1f06613d33a940910061"
+    },
+    {
+      "file": "roster-00-C1-R01-attack-action.png",
+      "bytes": 1909616,
+      "sha256": "9fcf65601b0d8fb7db109714968c6a72f7196582edd85fa2744f1b69ea9c6c52"
+    },
+    {
+      "file": "roster-01-C1-R02-charge-ready.png",
+      "bytes": 1940846,
+      "sha256": "4886d3de71644b60313c2b8405afd0af5800818b1e541adc240fae1f29d86f71"
+    },
+    {
+      "file": "roster-01-C1-R02-charge-early.png",
+      "bytes": 1940827,
+      "sha256": "c44b01a1bba746b1080f5a01afb0e8d8d035eea50c1eb090e7c9847733a7fcb6"
+    },
+    {
+      "file": "roster-01-C1-R02-charge-action.png",
+      "bytes": 1941423,
+      "sha256": "9b63d102e5fb6937adcf995f92193a661f1ac3c745c88a6d0670aceaa0ef7894"
+    },
+    {
+      "file": "roster-02-C1-R02-blast-ready.png",
+      "bytes": 1943321,
+      "sha256": "b94e202634497eaf4cec6af4b7386adb63c736d44e0668b52d8cd2c77b91129a"
+    },
+    {
+      "file": "roster-02-C1-R02-blast-early.png",
+      "bytes": 1941998,
+      "sha256": "c6f66967efe1cb56dfd416c6dd0939cea2770f37df4cc153d87a51cf9cde6b0d"
+    },
+    {
+      "file": "roster-02-C1-R02-blast-action.png",
+      "bytes": 1945276,
+      "sha256": "b9bd4bd00ebd615487e2aa00c2caed99b680e92f6d414fa87502a0272592ea8a"
+    },
+    {
+      "file": "roster-03-C1-R04-spray-ready.png",
+      "bytes": 1948634,
+      "sha256": "8a586066f8e2eea5d43a663bf4fc8cf5efa1445a2dacfd04a8fe1669ed61a6e1"
+    },
+    {
+      "file": "roster-03-C1-R04-spray-early.png",
+      "bytes": 1947723,
+      "sha256": "b08645c832a4e2cd7632ed145d0926ef472276e221ff376695bda45c84c474e8"
+    },
+    {
+      "file": "roster-03-C1-R04-spray-action.png",
+      "bytes": 1949833,
+      "sha256": "2e0fa0dc72d07df8143a8c93425a7e53603bdd6b623dd7b69c1cef9e4e451a30"
+    },
+    {
+      "file": "roster-04-C1-R04-foul-ready.png",
+      "bytes": 1949307,
+      "sha256": "731b5b8879ada053a25e30b652b96fde2e4683d6365afff5b4995c062527c0ed"
+    },
+    {
+      "file": "roster-04-C1-R04-foul-early.png",
+      "bytes": 1949632,
+      "sha256": "1755a3b1a5c9b1f061a264ed9e34367f03e98f41df2c53e8b24f093cb3073be7"
+    },
+    {
+      "file": "roster-04-C1-R04-foul-action.png",
+      "bytes": 1948605,
+      "sha256": "b9b26976924d5ebf8d816f6a0368c30afe72604bc0bd24681ceb931bcf867c02"
+    },
+    {
+      "file": "roster-05-C1-R04-punch-ready.png",
+      "bytes": 1949942,
+      "sha256": "6ffd702884ec006a494d689c5e04b0df0d115d3c244d2cfaa8cfe6d88a605e5f"
+    },
+    {
+      "file": "roster-05-C1-R04-punch-early.png",
+      "bytes": 1949754,
+      "sha256": "cd1637140c5e3a296da9990128443e3f11d644d23706d34c314592f87d731aa7"
+    },
+    {
+      "file": "roster-05-C1-R04-punch-action.png",
+      "bytes": 1949093,
+      "sha256": "677fa61283cdd44aa86145fcd931fc23c335b33fc483427afa886926cfae5905"
+    },
+    {
+      "file": "roster-06-C1-R05-attack-ready.png",
+      "bytes": 1946036,
+      "sha256": "1f9e3f0ff5a6ad0d876bbabe519ca97ba12b32ae3ce64b4d37e79c0bce5b408a"
+    },
+    {
+      "file": "roster-06-C1-R05-attack-early.png",
+      "bytes": 1944671,
+      "sha256": "920bb45aa3a6f35b181542e0b62d426e0f2bc7b68be0e9f80f49be6912a587e0"
+    },
+    {
+      "file": "roster-06-C1-R05-attack-action.png",
+      "bytes": 1946144,
+      "sha256": "7730740a24aacfcc35452bfcc00dfdd3b092dfd824fcd0e71f0890b7858fd943"
+    },
+    {
+      "file": "roster-07-C1-R05-pressurize-ready.png",
+      "bytes": 1945871,
+      "sha256": "7f60b8f26023ee324196da76de23e573c414a0b78e7327b4c8bc75fd6fa821a2"
+    },
+    {
+      "file": "roster-07-C1-R05-pressurize-early.png",
+      "bytes": 1946491,
+      "sha256": "58a2d904b3ae3fdb8925360edb6e39e3597d1becd1f9af2f4829a1cc91052f63"
+    },
+    {
+      "file": "roster-07-C1-R05-pressurize-action.png",
+      "bytes": 1946883,
+      "sha256": "025f6808a4aeffd12167adc132a56e597eff109fb031154809450e5025ea4276"
+    },
+    {
+      "file": "roster-08-C1-R07-deploy-ready.png",
+      "bytes": 1944874,
+      "sha256": "d6fff088ca07ae8fc6c5f1953bd4f222206d5b35633b51399f5fd43fddb3c97d"
+    },
+    {
+      "file": "roster-08-C1-R07-deploy-early.png",
+      "bytes": 1945065,
+      "sha256": "dea591e13ae3335546eac47f1451f2ef346698811f5a29ee433a7e9dce1b3d51"
+    },
+    {
+      "file": "roster-08-C1-R07-deploy-action.png",
+      "bytes": 1958039,
+      "sha256": "fdb29dff21c34dbf3973f5494a8e1d50773731de80f0f8c47a70b0535c313c0d"
+    },
+    {
+      "file": "roster-09-C1-R07-attack-ready.png",
+      "bytes": 1943689,
+      "sha256": "bdc5529a310810fd2eeb39410b80b5b149929991da85c9850cf5fe351a8ee428"
+    },
+    {
+      "file": "roster-09-C1-R07-attack-early.png",
+      "bytes": 1945555,
+      "sha256": "ae416ac79f8f2393df6f1300ff78daddf5ed5410c40a480691065f3ad4bbd0ea"
+    },
+    {
+      "file": "roster-09-C1-R07-attack-action.png",
+      "bytes": 1942182,
+      "sha256": "4149051f9c126c109d972dca8a28ead08ab650ebd9ed53cb8212a761425e7bdf"
+    },
+    {
+      "file": "roster-10-C1-R08-brace-ready.png",
+      "bytes": 1943435,
+      "sha256": "b114cbd1d412fd4fd117193c7db6740c17a52ebb7a2c1fafca232f663ef544c8"
+    },
+    {
+      "file": "roster-10-C1-R08-brace-early.png",
+      "bytes": 1940795,
+      "sha256": "a03a7920d91c386963ee1ec252be48f4fe138248800425a7df13973bf38e32cb"
+    },
+    {
+      "file": "roster-10-C1-R08-brace-action.png",
+      "bytes": 1943966,
+      "sha256": "f048d0a24e060d99e43bf101e25ae68713216f6c16f530ea8172514fc516b29b"
+    },
+    {
+      "file": "roster-11-C1-R08-double_punch-ready.png",
+      "bytes": 1943411,
+      "sha256": "3b123c3cf9788ca23aa75250f589821447e2cbd8961f3a39bbe9c1d83c9e325f"
+    },
+    {
+      "file": "roster-11-C1-R08-double_punch-early.png",
+      "bytes": 1944089,
+      "sha256": "f446ca81b40ef05578bcf8233f8f282afc11c5343e2ac2421ed5e10c9cb677a5"
+    },
+    {
+      "file": "roster-11-C1-R08-double_punch-action.png",
+      "bytes": 1954395,
+      "sha256": "bd64af9a07e64dd20aacc71e1bac22fad4e394730bff85c99250ed5a1d53937a"
+    },
+    {
+      "file": "roster-12-C1-R08-slam-ready.png",
+      "bytes": 1944164,
+      "sha256": "b3408f9a70621bf090de0a4a1f7cfe20b8c52881c667362ddc9857dc3d0af90b"
+    },
+    {
+      "file": "roster-12-C1-R08-slam-early.png",
+      "bytes": 1944056,
+      "sha256": "1b09275e5b7050b3ac2c16e5cac5c29596949fcf0e705d0e121c54cd1ed1a19c"
+    },
+    {
+      "file": "roster-12-C1-R08-slam-action.png",
+      "bytes": 1942280,
+      "sha256": "f0735d95a930b810b25ad6b4e22486bd7fde465bc1688b05344fe1ccea46eee7"
+    },
+    {
+      "file": "roster-13-C1-O01-strike-ready.png",
+      "bytes": 1945877,
+      "sha256": "62be12e25b0e60c59717a9c84ef7fdc6a2b999b9f93b124d9d907b661f93e22a"
+    },
+    {
+      "file": "roster-13-C1-O01-strike-early.png",
+      "bytes": 1946186,
+      "sha256": "47c487440f3da6835e3d759d44da50d2dfdd9e6ac897449cc257670d9f626090"
+    },
+    {
+      "file": "roster-13-C1-O01-strike-action.png",
+      "bytes": 1946598,
+      "sha256": "409dc6fd460973f6f86d2906bbd6d3b472fb740bbc4894761d3c48f09084f607"
+    },
+    {
+      "file": "roster-14-C1-O01-triple_strike-ready.png",
+      "bytes": 1945962,
+      "sha256": "d478f92b429917d87850f672af5903eb95601705c063b662744a0d8de94b4856"
+    },
+    {
+      "file": "roster-14-C1-O01-triple_strike-early.png",
+      "bytes": 1945871,
+      "sha256": "255160fde08c2a8f0a765963783f60eaf9f48f948b7206b9363b33186c911d6b"
+    },
+    {
+      "file": "roster-14-C1-O01-triple_strike-action.png",
+      "bytes": 1952231,
+      "sha256": "f8f0371c2f7d87f07e9afb7afa9cf9b92f64ad355bd5f2890eb10ec9b32993ea"
+    },
+    {
+      "file": "roster-15-C1-O02-attack_9-ready.png",
+      "bytes": 1948158,
+      "sha256": "b3b5bcfa1a466bdb5436f2c4b86f9a27eaa56fc0924b8364034683c14202a45c"
+    },
+    {
+      "file": "roster-15-C1-O02-attack_9-early.png",
+      "bytes": 1947975,
+      "sha256": "5a06bc3a3832698de3119a86e0b214c63f0983eabe5f88062de1d7ce19665bb0"
+    },
+    {
+      "file": "roster-15-C1-O02-attack_9-action.png",
+      "bytes": 1947276,
+      "sha256": "f1474cfa375e0deabdac1f738dbb3134b5e2d23276d96ab91eda33a699fe2799"
+    },
+    {
+      "file": "roster-16-C1-O02-gain_drive-ready.png",
+      "bytes": 1949516,
+      "sha256": "e50bfe53bfdfcacdd732f2382373f10b5a50b51ae8aac42fb82568b4dfccf9d9"
+    },
+    {
+      "file": "roster-16-C1-O02-gain_drive-early.png",
+      "bytes": 1948275,
+      "sha256": "f63141b9e042bbe9df3a3b845c879457e2c8f8c608d7e4b7ef467b4ae7ad1cb3"
+    },
+    {
+      "file": "roster-16-C1-O02-gain_drive-action.png",
+      "bytes": 1952702,
+      "sha256": "65076dfb11bf3fa59fc560de01abb07cb858ddb0b72b90ba4ed47a77005c5bd9"
+    },
+    {
+      "file": "roster-17-C1-O02-attack_12-ready.png",
+      "bytes": 1949970,
+      "sha256": "b93eca51006343fa95d1144d5df313a869b07c81158008e4f18853e3bf82de82"
+    },
+    {
+      "file": "roster-17-C1-O02-attack_12-early.png",
+      "bytes": 1949161,
+      "sha256": "a93e70e1d61e2d67307d518ea85b93660640b1c6b3dbcd967d735576b2b4fe58"
+    },
+    {
+      "file": "roster-17-C1-O02-attack_12-action.png",
+      "bytes": 1947048,
+      "sha256": "6b41c6a96d6dadf22e886eee00806c401f4a8f26fb27001e4bfd27c43cea1f02"
+    },
+    {
+      "file": "roster-18-C1-O03-double_strike-ready.png",
+      "bytes": 1938140,
+      "sha256": "255c6d349be02a47396c5efba4b39277fc15247b421ba8e657da41f982f2b538"
+    },
+    {
+      "file": "roster-18-C1-O03-double_strike-early.png",
+      "bytes": 1935784,
+      "sha256": "859f8ce9200db831cbe0cf3f4dd786e691e80dae4f27841312a026fdb00eb493"
+    },
+    {
+      "file": "roster-18-C1-O03-double_strike-action.png",
+      "bytes": 1950820,
+      "sha256": "12fecd4ab9ec2131b052bf0a0790d68cf3f91935cde0efe7d8584d7b3cd322db"
+    },
+    {
+      "file": "roster-19-C1-O03-thermal_runaway-ready.png",
+      "bytes": 1937429,
+      "sha256": "a59c8871e1c9e44c5402e065d40bc79fc24e3145abdb2c1593bb59f5a7194a12"
+    },
+    {
+      "file": "roster-19-C1-O03-thermal_runaway-early.png",
+      "bytes": 1936517,
+      "sha256": "dc7df5c66b0cdd0e32a61f77e1ebe1327098b229ffa08ed123c45bbd1ec634a7"
+    },
+    {
+      "file": "roster-19-C1-O03-thermal_runaway-action.png",
+      "bytes": 1937668,
+      "sha256": "aec154b2c59ceb296b6882f0df2b494dbc099790071bed0ce7a84c0bd7ef7637"
+    },
+    {
+      "file": "roster-20-C1-O03-triple_strike-ready.png",
+      "bytes": 1937407,
+      "sha256": "8eddc0545743f4d925ede9c11cfd8682b197f097e5f62c1aa465aaf9ad794e53"
+    },
+    {
+      "file": "roster-20-C1-O03-triple_strike-early.png",
+      "bytes": 1937189,
+      "sha256": "4b11a067c0acb7d672f5b312f13328739dfb7ab6a8f9ef0dbf33219676fa698a"
+    },
+    {
+      "file": "roster-20-C1-O03-triple_strike-action.png",
+      "bytes": 1950669,
+      "sha256": "126ff221206b0abf97ef6548dc91ffd9d96c81300cfef2851f5c9749beeda529"
+    },
+    {
+      "file": "roster-21-C1-B01-phase_one_strike-ready.png",
+      "bytes": 1953358,
+      "sha256": "2ee512e50d386d63fbf7b7f8077bf12d64fbfdbc1b06c9c7490bfb84f02025a8"
+    },
+    {
+      "file": "roster-21-C1-B01-phase_one_strike-early.png",
+      "bytes": 1951054,
+      "sha256": "79edb8c73ad01c484a8bc97024c84f06bfc43eb9443395b0dfef07bc22df7077"
+    },
+    {
+      "file": "roster-21-C1-B01-phase_one_strike-action.png",
+      "bytes": 1955142,
+      "sha256": "82d27b88a117874c6c942e21026ee9b7057d897b7b0e2b7af47cd22894abb221"
+    },
+    {
+      "file": "roster-22-C1-B01-recover-ready.png",
+      "bytes": 1956149,
+      "sha256": "fb10b6728dc4a24495622db47e7314abe637b8135056d9e61d0d981aa42be850"
+    },
+    {
+      "file": "roster-22-C1-B01-recover-early.png",
+      "bytes": 1945836,
+      "sha256": "7eda991542678040046b6c36424656fb87f71c18a8550d4b4698f1b72a50fcd5"
+    },
+    {
+      "file": "roster-22-C1-B01-recover-action.png",
+      "bytes": 1949440,
+      "sha256": "ccc2a74512f437786bf357a30340b6f7934d13458ef8da1871986a0d239248da"
+    },
+    {
+      "file": "roster-23-C1-B01-quad_strike-ready.png",
+      "bytes": 1954037,
+      "sha256": "84b0fc12886dafea0174a488d51fd63e3d3a209f43eda99cfd431cb27cf9c9c1"
+    },
+    {
+      "file": "roster-23-C1-B01-quad_strike-early.png",
+      "bytes": 1952949,
+      "sha256": "ad35c698ff94e4dd6947b5f5831ef6926e8cfab3d9ecc14a068f6a7fabc2d8e7"
+    },
+    {
+      "file": "roster-23-C1-B01-quad_strike-action.png",
+      "bytes": 1962991,
+      "sha256": "cfdeabb470246dd077830bb171bb2f81438fc70f061eeda66b395451f1aa7c69"
+    },
+    {
+      "file": "roster-24-C1-B01-charge-ready.png",
+      "bytes": 1957057,
+      "sha256": "d945bd4c62ee8172c85e31ccce0dc62e3a459520f30d49743fd3eb609fea39a4"
+    },
+    {
+      "file": "roster-24-C1-B01-charge-early.png",
+      "bytes": 1951761,
+      "sha256": "59403fa82078e956c8dd8d7746dcd641f058c5e7abdb8578c1b0bd8fafb695b1"
+    },
+    {
+      "file": "roster-24-C1-B01-charge-action.png",
+      "bytes": 1950998,
+      "sha256": "a470ecb958fd7910de564911006f1966d0b9bc182b95482d4c2f4c8a034f8336"
+    },
+    {
+      "file": "roster-25-C1-B01-blast-ready.png",
+      "bytes": 1953197,
+      "sha256": "dd7ccffd0dc422bf3728fc6ccccceec4a6fabc30f00271fcde4c4a81223f2e1c"
+    },
+    {
+      "file": "roster-25-C1-B01-blast-early.png",
+      "bytes": 1951373,
+      "sha256": "6585f75833b6838bd1ad63356960ca49202d1d408233c9dcb8c96544b214dd4d"
+    },
+    {
+      "file": "roster-25-C1-B01-blast-action.png",
+      "bytes": 1953733,
+      "sha256": "bc4a406ec551b65e67e23a630218492361c8eeb9334f209b5bb734b2ec86c15b"
+    },
+    {
+      "file": "roster-26-C1-R01-hit_medium-ready.png",
+      "bytes": 1951677,
+      "sha256": "a3d5525138ba512cabd0a462fdef80a0662858a54f039ca4b7c6927d28ade122"
+    },
+    {
+      "file": "roster-26-C1-R01-hit_medium-early.png",
+      "bytes": 1945489,
+      "sha256": "796b528c431ff87acc960034beff6f0b480390f404c5c04d84e59dc26a291b3e"
+    },
+    {
+      "file": "roster-26-C1-R01-hit_medium-action.png",
+      "bytes": 1947135,
+      "sha256": "360d9f4044c44e113086014b0466927b81b39678e437f8eb481f14dac9ae2e29"
+    },
+    {
+      "file": "roster-27-C1-R01-hit_heavy-ready.png",
+      "bytes": 1949729,
+      "sha256": "221e01d5d4e6262cc10457826d19ecf4dcddeeed084df523bacf2ab3f6e2370e"
+    },
+    {
+      "file": "roster-27-C1-R01-hit_heavy-early.png",
+      "bytes": 1949968,
+      "sha256": "69eeddc98c6065164a6dd55abf499ce327d7ccd4e1275c7d2dc286ad89be62ea"
+    },
+    {
+      "file": "roster-27-C1-R01-hit_heavy-action.png",
+      "bytes": 1947041,
+      "sha256": "fb7554ee3ef3d91cb7dd6b591260586ae6cd2cf5cfd2d2ca9740a9987bd098fa"
+    },
+    {
+      "file": "roster-28-C1-R01-death-ready.png",
+      "bytes": 1950881,
+      "sha256": "b33e11c88eec9077adbe50a799889dde2aab9e086dffc96745fe7ab67826584e"
+    },
+    {
+      "file": "roster-28-C1-R01-death-early.png",
+      "bytes": 1950649,
+      "sha256": "1a1da1279fe306453ca973681ae74a7ee1771ff0c68a1493d6b1a08804366c27"
+    },
+    {
+      "file": "roster-28-C1-R01-death-action.png",
+      "bytes": 1941721,
+      "sha256": "bf193ee2b074f2373080541c51ad914f1bdb8a842412707598f5f0014032cfe4"
+    },
+    {
+      "file": "roster-28-C1-R01-death-late.png",
+      "bytes": 1947354,
+      "sha256": "f50e395810e20b4f5277afe65e3e6a509ffb0bcf4d70b240230a9bd08d5445fc"
+    },
+    {
+      "file": "roster-29-C1-R01-escape-ready.png",
+      "bytes": 1949732,
+      "sha256": "94ca7bbef2743768ef352238b5eabc095ff8c8967631d40806dd1db2a0992295"
+    },
+    {
+      "file": "roster-29-C1-R01-escape-early.png",
+      "bytes": 1945627,
+      "sha256": "3a8bf0307831624ca1cce8729df2bccd2caa7374f08b00dfd19bceef255f2400"
+    },
+    {
+      "file": "roster-29-C1-R01-escape-action.png",
+      "bytes": 1945089,
+      "sha256": "da89167d67226f31bdcf67e4843efb1d3b188eaa18da15955cbd890a14e65ecf"
+    },
+    {
+      "file": "roster-30-C1-R02-hit_light-ready.png",
+      "bytes": 1954463,
+      "sha256": "75a7da2ca9df1198bf6b3db400c3873f89510a72b1bb3d3a2274e51ffd3e19a8"
+    },
+    {
+      "file": "roster-30-C1-R02-hit_light-early.png",
+      "bytes": 1953712,
+      "sha256": "2052c6ad162e044e67f86fd3540325a577edea913b52974f391683f6c3a93cb3"
+    },
+    {
+      "file": "roster-30-C1-R02-hit_light-action.png",
+      "bytes": 1944858,
+      "sha256": "6659f2790489e60130885ffafe18c986601f9e38a5f4c6ac7ef99b4f0ab03d71"
+    },
+    {
+      "file": "roster-31-C1-R02-hit_medium-ready.png",
+      "bytes": 1955938,
+      "sha256": "5bf701b6e5c1a9d874ed8c3a0cd55dfb05f7fa08cdb5484c25f74883b8447187"
+    },
+    {
+      "file": "roster-31-C1-R02-hit_medium-early.png",
+      "bytes": 1956499,
+      "sha256": "7e6603efe555d4e46f84575c2400888fbe2c41ebf1748c74aa399dbbc1962a06"
+    },
+    {
+      "file": "roster-31-C1-R02-hit_medium-action.png",
+      "bytes": 1944126,
+      "sha256": "e288f5ded777558afc2423816fa4c55fdbed727656bc83788fbd93df2652b0a3"
+    },
+    {
+      "file": "roster-32-C1-R02-hit_heavy-ready.png",
+      "bytes": 1957081,
+      "sha256": "d4be19d88f08f4639e3f22ebf3e07e8aabd56d700bf41f4a8edbe632e18ced24"
+    },
+    {
+      "file": "roster-32-C1-R02-hit_heavy-early.png",
+      "bytes": 1953358,
+      "sha256": "619391d0667d0ba9bd0000c3ef905d0629a938b68ebac241fdf0c98336a65361"
+    },
+    {
+      "file": "roster-32-C1-R02-hit_heavy-action.png",
+      "bytes": 1941945,
+      "sha256": "867b34a46f1aafe4b0dbe5ea139da70defd878fd90148d00429d1738cb1216dd"
+    },
+    {
+      "file": "roster-33-C1-R02-death-ready.png",
+      "bytes": 1950761,
+      "sha256": "fc716d39dff9a1dca84bca0078fbcc25474d1b87fa4834f70f04840b000303a7"
+    },
+    {
+      "file": "roster-33-C1-R02-death-early.png",
+      "bytes": 1944839,
+      "sha256": "f112725066d375faa5969d90c51684047004bdd900a064c79cf0a9c0aa357009"
+    },
+    {
+      "file": "roster-33-C1-R02-death-action.png",
+      "bytes": 1951446,
+      "sha256": "2d7726f35350dcf54e74d5761d7493d7cd67f02cf5591bee976bef6800ebe30e"
+    },
+    {
+      "file": "roster-33-C1-R02-death-late.png",
+      "bytes": 1986235,
+      "sha256": "c13d97479e511f4f9b1d51153c188f325d25b037b9961489f9576352e3483273"
+    },
+    {
+      "file": "roster-34-C1-R02-escape-ready.png",
+      "bytes": 1944318,
+      "sha256": "11475b4c49b81b8d8c0670d4dac7eee5daa491ace22c91af28592d7314fd08fa"
+    },
+    {
+      "file": "roster-34-C1-R02-escape-early.png",
+      "bytes": 1944363,
+      "sha256": "01cfa97c88bfd85c64b9d3cdd9f99d6a1ae2c0cd5d75c3ffcf3d934d292585b6"
+    },
+    {
+      "file": "roster-34-C1-R02-escape-action.png",
+      "bytes": 1940320,
+      "sha256": "1c771381f94383848be6e66cc0d2cdd06013f269393555e11d70969833f95e53"
+    },
+    {
+      "file": "roster-35-C1-R04-hit_light-ready.png",
+      "bytes": 1950601,
+      "sha256": "e91304704aba43938355624c77f61586d89c2de2bea57aee4f55b444b8ac7ea2"
+    },
+    {
+      "file": "roster-35-C1-R04-hit_light-early.png",
+      "bytes": 1951505,
+      "sha256": "b9b642dc9f7da98fdc7f153b5e2492b5ed13142633d48554f2197fca0ce7de69"
+    },
+    {
+      "file": "roster-35-C1-R04-hit_light-action.png",
+      "bytes": 1948099,
+      "sha256": "ab81f0724779a76acc5af3178d83e167adc427854415dd1e57d650a891fe0b3b"
+    },
+    {
+      "file": "roster-36-C1-R04-hit_medium-ready.png",
+      "bytes": 1951182,
+      "sha256": "e1d09af6cbaabff664b37162763e916312bcfae56985e17ba9fedd1f3692b82a"
+    },
+    {
+      "file": "roster-36-C1-R04-hit_medium-early.png",
+      "bytes": 1946704,
+      "sha256": "23c78fa73a6aaa25fee6932cc8f708ad989de9d9b9953a8da9c2eefb555cc3a3"
+    },
+    {
+      "file": "roster-36-C1-R04-hit_medium-action.png",
+      "bytes": 1946040,
+      "sha256": "954f26d0627d682b0690e8f52a61d2ef227fc237360a6b5a8c665485802ae040"
+    },
+    {
+      "file": "roster-37-C1-R04-hit_heavy-ready.png",
+      "bytes": 1951647,
+      "sha256": "2e4b8ee06c3c36eb21ee9ae053082ded351b3bd64fc715010a228107e96b9c76"
+    },
+    {
+      "file": "roster-37-C1-R04-hit_heavy-early.png",
+      "bytes": 1948698,
+      "sha256": "1bb028605e5d221e57a968e366e2ae68b3cdb186c13f1879d187b0a16d6ed02d"
+    },
+    {
+      "file": "roster-37-C1-R04-hit_heavy-action.png",
+      "bytes": 1945703,
+      "sha256": "aa0521aba255b92b74841baee5460f21be9e5156febdc23b2061f487dc2398f8"
+    },
+    {
+      "file": "roster-38-C1-R04-death-ready.png",
+      "bytes": 1947678,
+      "sha256": "019820d50f8f6ae961bc51a7a9152e52606659e44da8450bbdbe251b92929f73"
+    },
+    {
+      "file": "roster-38-C1-R04-death-early.png",
+      "bytes": 1949273,
+      "sha256": "d8f0dc5acc5ed083ed2059b04bc3a0b5bf6018fff4ffe3afc147e0cf7498ac07"
+    },
+    {
+      "file": "roster-38-C1-R04-death-action.png",
+      "bytes": 1936961,
+      "sha256": "14f1a1fb74d97c92c812b103cec8575de2a8c665eb510cc5a4df09146af2eb2d"
+    },
+    {
+      "file": "roster-38-C1-R04-death-late.png",
+      "bytes": 1958988,
+      "sha256": "06967c297e722f48ecfd39263ac082ccc4b4aeed9e2a7574e8747dc11f7a26f3"
+    },
+    {
+      "file": "roster-39-C1-R04-escape-ready.png",
+      "bytes": 1948274,
+      "sha256": "3ca9141c480a710d6e303c0adbc5d2661b9f523dcd22fb31384bc774f6034f90"
+    },
+    {
+      "file": "roster-39-C1-R04-escape-early.png",
+      "bytes": 1948345,
+      "sha256": "06ef5f504376842ff957003dda82c0f9cc9e5483c48739b3cb3d36e128249e1d"
+    },
+    {
+      "file": "roster-39-C1-R04-escape-action.png",
+      "bytes": 1936062,
+      "sha256": "4d5bcc1511aedb86fe941bfb75ad9cc10893f34ea9ea30aada6b4507639230f8"
+    },
+    {
+      "file": "roster-40-C1-R05-hit_light-ready.png",
+      "bytes": 1948857,
+      "sha256": "c38afc420d39572ed9c7b15e4fe0001b90d9f10bea8064f9c94edd7b50680f15"
+    },
+    {
+      "file": "roster-40-C1-R05-hit_light-early.png",
+      "bytes": 1940925,
+      "sha256": "1b568310263f81f14cef84874bda71e758b978dae04cbb86b60929dccc5cd511"
+    },
+    {
+      "file": "roster-40-C1-R05-hit_light-action.png",
+      "bytes": 1942572,
+      "sha256": "b589ee6d966d5760081f9530a6f44ea32c52f81455b904feb726aaf1229332b9"
+    },
+    {
+      "file": "roster-41-C1-R05-hit_medium-ready.png",
+      "bytes": 1948435,
+      "sha256": "3f39ef9cb0c84f0c752046648eb7c136e91442801e8a884496c33036264e5680"
+    },
+    {
+      "file": "roster-41-C1-R05-hit_medium-early.png",
+      "bytes": 1950355,
+      "sha256": "a68a3e14c59aef04ea04dba85495fb9d1dab961b306a13a98b8b861fc682e2d9"
+    },
+    {
+      "file": "roster-41-C1-R05-hit_medium-action.png",
+      "bytes": 1943366,
+      "sha256": "d969c458c95c6e7d0f6b0ce5132f76a8b6e40d962d7f5d675006cc5ae8dd68ce"
+    },
+    {
+      "file": "roster-42-C1-R05-hit_heavy-ready.png",
+      "bytes": 1949003,
+      "sha256": "401c15d3a83d46872bba534fdbcae5d674c2b334338184c0be542522e013e635"
+    },
+    {
+      "file": "roster-42-C1-R05-hit_heavy-early.png",
+      "bytes": 1943716,
+      "sha256": "2871f0e22f8d1b7d6de4c2f0c18370fe430c52b9a72ad6e273b3cc02a7d47fee"
+    },
+    {
+      "file": "roster-42-C1-R05-hit_heavy-action.png",
+      "bytes": 1940242,
+      "sha256": "fb1662d575b818ef1862f4ffe87a88d7e4188efaada1a197e7857eaeeec0549a"
+    },
+    {
+      "file": "roster-43-C1-R05-death-ready.png",
+      "bytes": 1945581,
+      "sha256": "5b4dada24a17412263c3e334640a7008d46586b2eaf964ec02b208ad8cc9a8de"
+    },
+    {
+      "file": "roster-43-C1-R05-death-early.png",
+      "bytes": 1950596,
+      "sha256": "9a82f61c4a93e70311833c891d1a96b48f2ac4694e3d7ba7c6dfedcdb75c94f4"
+    },
+    {
+      "file": "roster-43-C1-R05-death-action.png",
+      "bytes": 1937485,
+      "sha256": "bee75af7e3db276797737b8803c6ded8a393b1cca681c375392ff9a30eb5d7d2"
+    },
+    {
+      "file": "roster-43-C1-R05-death-late.png",
+      "bytes": 1964154,
+      "sha256": "b1703a3076e814730c9cc6a080f59f0b9225e9d2bec5783fe3cdfa863af0db7c"
+    },
+    {
+      "file": "roster-44-C1-R05-escape-ready.png",
+      "bytes": 1944533,
+      "sha256": "c4299262ed9106505d050f8778bfd91f5b3790408bc748c5e77551bd71f07ece"
+    },
+    {
+      "file": "roster-44-C1-R05-escape-early.png",
+      "bytes": 1945740,
+      "sha256": "765d3971c3efbedc9bb503ff7797c769b57732f5708311a6abb238c26592ecbf"
+    },
+    {
+      "file": "roster-44-C1-R05-escape-action.png",
+      "bytes": 1936951,
+      "sha256": "a8ce86c89625346df867175e52d4a95d51c5c3075fac2ae38536e6acb8a875d0"
+    },
+    {
+      "file": "roster-45-C1-R07-hit_light-ready.png",
+      "bytes": 1947982,
+      "sha256": "2483a6b8674844df6fa045aa73077fedd12d8f02c1c1129b3122fc0fa23254bd"
+    },
+    {
+      "file": "roster-45-C1-R07-hit_light-early.png",
+      "bytes": 1941865,
+      "sha256": "91b99a5ae0e8d43ead5bb3be8b294563dee5fea1281545139cf42fdfe973cee9"
+    },
+    {
+      "file": "roster-45-C1-R07-hit_light-action.png",
+      "bytes": 1942697,
+      "sha256": "2a18ee0527850ed51d87886a8507387275dc468999d29d12b8ab5b016c6b9e2b"
+    },
+    {
+      "file": "roster-46-C1-R07-hit_medium-ready.png",
+      "bytes": 1947786,
+      "sha256": "e939185b92b994bae616aed0c1248738c333facb951d886eb0f5cb2aa1989cda"
+    },
+    {
+      "file": "roster-46-C1-R07-hit_medium-early.png",
+      "bytes": 1945220,
+      "sha256": "4ff2c89b356fb154bc86d6181f5cf2b3a97c4ad432134222e744fc70b4617b3e"
+    },
+    {
+      "file": "roster-46-C1-R07-hit_medium-action.png",
+      "bytes": 1942148,
+      "sha256": "3d8f7b051adebab39352930740f4242bbb94144e28fc5e598f4421a39cec6f67"
+    },
+    {
+      "file": "roster-47-C1-R07-hit_heavy-ready.png",
+      "bytes": 1949183,
+      "sha256": "1abd60866568a188acc7264cde93660e4055f5cb7cea0d642d2a2806e16cb390"
+    },
+    {
+      "file": "roster-47-C1-R07-hit_heavy-early.png",
+      "bytes": 1955317,
+      "sha256": "4179551d5941ef000881e3d3de9ae0f7da29f57b0f295d49386618f1affca732"
+    },
+    {
+      "file": "roster-47-C1-R07-hit_heavy-action.png",
+      "bytes": 1940469,
+      "sha256": "04d8e85f95a940cdd9d11b6c55cf5dfc07b822d8c9db3458b1d59175a7021e09"
+    },
+    {
+      "file": "roster-48-C1-R07-death-ready.png",
+      "bytes": 1942713,
+      "sha256": "f4335b4f70cc2382e02ac7140182f382fe16b3886534ed5a10b7cf72a307582e"
+    },
+    {
+      "file": "roster-48-C1-R07-death-early.png",
+      "bytes": 1952374,
+      "sha256": "54e9da20d8d0a93245a64b6ccde1c9fc031945373a48c75af86348cdb1c2dbbb"
+    },
+    {
+      "file": "roster-48-C1-R07-death-action.png",
+      "bytes": 1934745,
+      "sha256": "60bbbbae89064f207a9195cb7ce618bb2addda015a07efdcac3944493fcad365"
+    },
+    {
+      "file": "roster-48-C1-R07-death-late.png",
+      "bytes": 1968839,
+      "sha256": "1fe7bab602fd766a85b9aeadda947c02d42363e37ed3653736203a4d9c012a28"
+    },
+    {
+      "file": "roster-49-C1-R07-escape-ready.png",
+      "bytes": 1941832,
+      "sha256": "a912d282d3657b63e9e3ead87611c7c1627750a7c4c981371a8236ab96a1eab9"
+    },
+    {
+      "file": "roster-49-C1-R07-escape-early.png",
+      "bytes": 1944359,
+      "sha256": "02c9489645593f53573390f12a524d214031c8ad25b81899c2ceb843e25c5131"
+    },
+    {
+      "file": "roster-49-C1-R07-escape-action.png",
+      "bytes": 1935514,
+      "sha256": "1b65eb4cfd3ea9d43a16c2f0b58eb59fdab37b066baa12aedad8b22c9a4374c6"
+    },
+    {
+      "file": "roster-50-C1-R08-hit_light-ready.png",
+      "bytes": 1947542,
+      "sha256": "5f7a7138cd597de09e19fe7a3c60aa93973679f4dbcf9be14db8b31642ad3bc2"
+    },
+    {
+      "file": "roster-50-C1-R08-hit_light-early.png",
+      "bytes": 1948834,
+      "sha256": "6019deae3558175a954e0e68f4d6d7e3ec4753d7df09ae4666ce8eadad39d5cf"
+    },
+    {
+      "file": "roster-50-C1-R08-hit_light-action.png",
+      "bytes": 1941011,
+      "sha256": "353988a1e6cad0c3ff8ad9e7a30e32b9fc5d4c1f888722074d88e85430464790"
+    },
+    {
+      "file": "roster-51-C1-R08-hit_medium-ready.png",
+      "bytes": 1949738,
+      "sha256": "16e1b7188c9da8fb645ea694e9079911d66fe18fc3e6e7dd18425650f28f0fea"
+    },
+    {
+      "file": "roster-51-C1-R08-hit_medium-early.png",
+      "bytes": 1948782,
+      "sha256": "ff6afd6a166b18f78dcd1e521db0679a2034cc0cbf528d73906369ca1c20e9c6"
+    },
+    {
+      "file": "roster-51-C1-R08-hit_medium-action.png",
+      "bytes": 1938320,
+      "sha256": "8573d0805248b9dd786cc4f4c265f05bce48419370db443403a2a4387ed8c243"
+    },
+    {
+      "file": "roster-52-C1-R08-hit_heavy-ready.png",
+      "bytes": 1947774,
+      "sha256": "68561aae65a01fc53f5fc12c5ffb415037c5dadf890dbcaa4cea7d1df5e3a20e"
+    },
+    {
+      "file": "roster-52-C1-R08-hit_heavy-early.png",
+      "bytes": 1943465,
+      "sha256": "b9a576e546f8fe7f3b896b3c100b956f3a922ab12a6d93fe8cbc1328c352a760"
+    },
+    {
+      "file": "roster-52-C1-R08-hit_heavy-action.png",
+      "bytes": 1937794,
+      "sha256": "e421e0d772f9dd263ee10e9886d53122af1c479443457a4ee6b6a73d2d12b7cb"
+    },
+    {
+      "file": "roster-53-C1-R08-death-ready.png",
+      "bytes": 1944054,
+      "sha256": "69c0f6e61f832708a691e4e34507793f5f08e70fad44f41812f6ac49869ed302"
+    },
+    {
+      "file": "roster-53-C1-R08-death-early.png",
+      "bytes": 1942282,
+      "sha256": "e902ee56d7d05f8b4d3e19cdbaf2686e30c5cf279d64fc902d1c4e3a15f41d13"
+    },
+    {
+      "file": "roster-53-C1-R08-death-action.png",
+      "bytes": 1940720,
+      "sha256": "51c3c9c3d80ae5f06f1c346efd19111224d65eb91a80bd857076700357deb24e"
+    },
+    {
+      "file": "roster-53-C1-R08-death-late.png",
+      "bytes": 1971162,
+      "sha256": "106f2701a63137998e625d139070cda842f2dd0f380f0f06a7d84442dfd93640"
+    },
+    {
+      "file": "roster-54-C1-R08-escape-ready.png",
+      "bytes": 1942351,
+      "sha256": "77b075705bbc7825e03b201b17bcd243316e19cfb8fb93587bb50258abdd9a6d"
+    },
+    {
+      "file": "roster-54-C1-R08-escape-early.png",
+      "bytes": 1939230,
+      "sha256": "6d1ab1fd0ca297d92cfe3954ace6c6c25db4d0abaf1bfa61820ecc7d1eb91468"
+    },
+    {
+      "file": "roster-54-C1-R08-escape-action.png",
+      "bytes": 1934899,
+      "sha256": "320e72b9ac452a714104b6c3e001c9c7084116f130f8994ad18456c5e7721686"
+    },
+    {
+      "file": "roster-55-C1-O01-hit_light-ready.png",
+      "bytes": 1944799,
+      "sha256": "d3aa36f361f442239ffc9dbc09547b2351541366b7498e6dc713e131c5801f8c"
+    },
+    {
+      "file": "roster-55-C1-O01-hit_light-early.png",
+      "bytes": 1941422,
+      "sha256": "488970f07773fb73503cad54f52cefaedf9c3b44c193ee784f72b6f1edfd529b"
+    },
+    {
+      "file": "roster-55-C1-O01-hit_light-action.png",
+      "bytes": 1941202,
+      "sha256": "c02505033a2f970ebcd6f9967848aaf674815ff04d8eba6cb477da0ebe2ff09c"
+    },
+    {
+      "file": "roster-56-C1-O01-hit_medium-ready.png",
+      "bytes": 1947178,
+      "sha256": "25ce02dad7d15accddc1d067a47843ee5b632ea5f7a553f4875c5f58b39e1534"
+    },
+    {
+      "file": "roster-56-C1-O01-hit_medium-early.png",
+      "bytes": 1940949,
+      "sha256": "558bf251196c46372d79408143159a3bf546b150761f50c3a53395f608bf3dde"
+    },
+    {
+      "file": "roster-56-C1-O01-hit_medium-action.png",
+      "bytes": 1939339,
+      "sha256": "2c6d4856b294b333accb945809d2cfef6a4753dee0fe5ac1d0fdf8cd4471acb8"
+    },
+    {
+      "file": "roster-57-C1-O01-hit_heavy-ready.png",
+      "bytes": 1945227,
+      "sha256": "9ecd932a3678676e853f737dddef36aa72e5a01f885364ffd2602e15da03af6f"
+    },
+    {
+      "file": "roster-57-C1-O01-hit_heavy-early.png",
+      "bytes": 1951219,
+      "sha256": "ad4108bbf612fa68b66f351c32caebde2a600c1014f5898c25fda5ad2eebf1b2"
+    },
+    {
+      "file": "roster-57-C1-O01-hit_heavy-action.png",
+      "bytes": 1940131,
+      "sha256": "c18aca919ad5db2ee23113caf36d86ca2197598ca902743fedf46108e22df6cd"
+    },
+    {
+      "file": "roster-58-C1-O01-death-ready.png",
+      "bytes": 1943280,
+      "sha256": "da587cb83f7061adb48d6047d7e7c0f26dbe3cd50bfddaacf5f79f2ec7f153fd"
+    },
+    {
+      "file": "roster-58-C1-O01-death-early.png",
+      "bytes": 1952474,
+      "sha256": "368cf062394ce78c5c07d9358ee18b9c833cb6153a38f26c0d3517ad7e58964d"
+    },
+    {
+      "file": "roster-58-C1-O01-death-action.png",
+      "bytes": 1941316,
+      "sha256": "0d40da8d4125cbbb07e77261da83feb8000afcc16ca786b555798ef62a0b82bb"
+    },
+    {
+      "file": "roster-58-C1-O01-death-late.png",
+      "bytes": 1962830,
+      "sha256": "dcde6dfb36513f4a8e8b6e0c33c6433f367f9b0e658119a0c50224c2781c542f"
+    },
+    {
+      "file": "roster-59-C1-O01-escape-ready.png",
+      "bytes": 1943267,
+      "sha256": "59fbd3fde3b28311169e4b18a250e91f893a521b1bd49f31de5eae0bd9dbb7cc"
+    },
+    {
+      "file": "roster-59-C1-O01-escape-early.png",
+      "bytes": 1942270,
+      "sha256": "53ca76aa0be631726569e7664d1d6b7137a2877b8bc8502e0dd79128c75b54b6"
+    },
+    {
+      "file": "roster-59-C1-O01-escape-action.png",
+      "bytes": 1935055,
+      "sha256": "726c8d9ba8c7a899f739fdb4b2f0026796b0b13cecacfc39fe3d3a101422eae8"
+    },
+    {
+      "file": "roster-60-C1-O02-hit_light-ready.png",
+      "bytes": 1947852,
+      "sha256": "518a9501a95a9f2d7246948af065af6636a14d24da4a30357717a9e08552c69e"
+    },
+    {
+      "file": "roster-60-C1-O02-hit_light-early.png",
+      "bytes": 1947484,
+      "sha256": "ba8969e86d23bc6f6577fcbcc38344921906a4e91336654b3c4709a20e187a8e"
+    },
+    {
+      "file": "roster-60-C1-O02-hit_light-action.png",
+      "bytes": 1945706,
+      "sha256": "23f94cccbd9cb244dc10046f2989e5706d02750330e1c7c8f33ec526655e204e"
+    },
+    {
+      "file": "roster-61-C1-O02-hit_medium-ready.png",
+      "bytes": 1946337,
+      "sha256": "02bda1ded95f67b9c68b8850a165ea9ab7e8ef385c2a4c8e07ffbe041181a1df"
+    },
+    {
+      "file": "roster-61-C1-O02-hit_medium-early.png",
+      "bytes": 1945502,
+      "sha256": "6fa4091f279b780d540736b3b562e97db577c09370d9dcf6f7f53f62f02bc79c"
+    },
+    {
+      "file": "roster-61-C1-O02-hit_medium-action.png",
+      "bytes": 1945210,
+      "sha256": "144dd35053d704f780f28bddea4088eed37242c7e9ac4341164d0a774a957ec2"
+    },
+    {
+      "file": "roster-62-C1-O02-hit_heavy-ready.png",
+      "bytes": 1948393,
+      "sha256": "4a3c3252efaf34dea639138c528efea091ccde24b2e0a8833bfb56356792348e"
+    },
+    {
+      "file": "roster-62-C1-O02-hit_heavy-early.png",
+      "bytes": 1950332,
+      "sha256": "4f32aba5af7c0d0bce813e84fb6c2e58e25590e77f9c0df5d516eb94d8d729a7"
+    },
+    {
+      "file": "roster-62-C1-O02-hit_heavy-action.png",
+      "bytes": 1943405,
+      "sha256": "f28d2dc29763b2564ee698d6ea350e050da3d38676b5d3cf6db71aa292198362"
+    },
+    {
+      "file": "roster-63-C1-O02-death-ready.png",
+      "bytes": 1947249,
+      "sha256": "cdec1ef57feacdec92ee2f157255dbf3d10d88aa0b98b9dfe8ac362127aefc71"
+    },
+    {
+      "file": "roster-63-C1-O02-death-early.png",
+      "bytes": 1954290,
+      "sha256": "eb540cfbfb0ab34af18ffd9b2aeb5a7bf5e54bda19746b744319a18ab95822a3"
+    },
+    {
+      "file": "roster-63-C1-O02-death-action.png",
+      "bytes": 1939734,
+      "sha256": "9845d0a7d5466f472de5ff7461a1cef908cbbad078e3293163c76c2bf6adc801"
+    },
+    {
+      "file": "roster-63-C1-O02-death-late.png",
+      "bytes": 1957382,
+      "sha256": "b6b12df6a3e4c6f7d1f07dd512c4e8088aa8b34ef3a25b9c2124fb19d4130103"
+    },
+    {
+      "file": "roster-64-C1-O02-escape-ready.png",
+      "bytes": 1945642,
+      "sha256": "4e85e03dbcbfd04d2dd05fb42b71fd62a0d358daa83545bbffa6eafa3a8aa60a"
+    },
+    {
+      "file": "roster-64-C1-O02-escape-early.png",
+      "bytes": 1945232,
+      "sha256": "baf84f0de132e913a77df6bc5a60df483ae287a3a6b34efa3933dfdf60a36da5"
+    },
+    {
+      "file": "roster-64-C1-O02-escape-action.png",
+      "bytes": 1938209,
+      "sha256": "c65d8a04b10bc50eed1fbbf5312523c515b41e8b77aeaa29c7fa4cd206b1551f"
+    },
+    {
+      "file": "roster-65-C1-O03-hit_light-ready.png",
+      "bytes": 1939729,
+      "sha256": "47bfe0367eeda96f6e40c1ada5b41a4261ff1b398079c09f9592f6000275784d"
+    },
+    {
+      "file": "roster-65-C1-O03-hit_light-early.png",
+      "bytes": 1942253,
+      "sha256": "a3d2d03fd1b08653a597193082739d186d7c56ca645b35c1ab16b116b9fdd8fe"
+    },
+    {
+      "file": "roster-65-C1-O03-hit_light-action.png",
+      "bytes": 1933620,
+      "sha256": "b70af166efea6f2aa7a8f4fafc75d8cccb4201f9cb894ee87214b64f23af4e5e"
+    },
+    {
+      "file": "roster-66-C1-O03-hit_medium-ready.png",
+      "bytes": 1942768,
+      "sha256": "c93cc61ace090031367da90e8bd6ee54c36a957110cc2e42075116558fc0f8dc"
+    },
+    {
+      "file": "roster-66-C1-O03-hit_medium-early.png",
+      "bytes": 1941687,
+      "sha256": "881602ad285165c099bb140864548eec120684eca1fefad663a73b712bf5e8ec"
+    },
+    {
+      "file": "roster-66-C1-O03-hit_medium-action.png",
+      "bytes": 1932644,
+      "sha256": "0f3068dc315fbcab6fab5c80d7712630a3a1f06a4d1298a8d56f1755b39e0ae4"
+    },
+    {
+      "file": "roster-67-C1-O03-hit_heavy-ready.png",
+      "bytes": 1941879,
+      "sha256": "1860175b1181c60233c2f004aa530bfbdf37d47340d5ecc8ce05f51c18d08573"
+    },
+    {
+      "file": "roster-67-C1-O03-hit_heavy-early.png",
+      "bytes": 1945584,
+      "sha256": "c5f1555517fa4d7a5beb489e6d478087a821270167b519a08f86ce891bc17b22"
+    },
+    {
+      "file": "roster-67-C1-O03-hit_heavy-action.png",
+      "bytes": 1932920,
+      "sha256": "3b45f0530a87f51aad6dba6dfee8afec35f47c89c0465969179a1b4475bd755d"
+    },
+    {
+      "file": "roster-68-C1-O03-death-ready.png",
+      "bytes": 1944310,
+      "sha256": "91c96dc9039b42c5598ce1119bae49e63eeee2d13059c211326937d2d9192ec9"
+    },
+    {
+      "file": "roster-68-C1-O03-death-early.png",
+      "bytes": 1928894,
+      "sha256": "63bf96e04962e1aa7050b6148784d8fca50df090ebbaf8038124ed13cd6bf78f"
+    },
+    {
+      "file": "roster-68-C1-O03-death-action.png",
+      "bytes": 1940674,
+      "sha256": "f5a02251b0b7cc0f5395cbdc2bcc5d4fbc94e7e3b9af258bfc1982dbc1f1be9b"
+    },
+    {
+      "file": "roster-68-C1-O03-death-late.png",
+      "bytes": 1967904,
+      "sha256": "35eb39c85ce06e4c3a9f6c6c084883e7abd202ce809ff974ff6972e50145e9c4"
+    },
+    {
+      "file": "roster-69-C1-O03-escape-ready.png",
+      "bytes": 1935372,
+      "sha256": "7544cc41f3e784d3204650aec16b181ec12f2000ffaaed48a913af49819c874e"
+    },
+    {
+      "file": "roster-69-C1-O03-escape-early.png",
+      "bytes": 1931881,
+      "sha256": "1412969e3a5cb809a6cbc5d266a0988d90348637139553eb180af84ae1d41f95"
+    },
+    {
+      "file": "roster-69-C1-O03-escape-action.png",
+      "bytes": 1929408,
+      "sha256": "79586361a24a60a0358eb68973a104f77d33c9fc64ad2a3dcb0349c7b6097b12"
+    },
+    {
+      "file": "roster-70-C1-B01-hit_light-ready.png",
+      "bytes": 1957259,
+      "sha256": "8c005ba67e3dc40534e6c4b3ccd4744aabeeab6e0d9fa146d7571342c0a73417"
+    },
+    {
+      "file": "roster-70-C1-B01-hit_light-early.png",
+      "bytes": 1954022,
+      "sha256": "553487c1471e2c2946b18123075974e94492da85e029bed55ef232bfe75b5efb"
+    },
+    {
+      "file": "roster-70-C1-B01-hit_light-action.png",
+      "bytes": 1951921,
+      "sha256": "ac19929cf7510441121cc73e2abfb579158251ebdcea6dd2986ca6048e509404"
+    },
+    {
+      "file": "roster-71-C1-B01-hit_medium-ready.png",
+      "bytes": 1958521,
+      "sha256": "554ed64059e467b1edbc8ca4b2e64f5823bc33ec561c31024b2746b61d020410"
+    },
+    {
+      "file": "roster-71-C1-B01-hit_medium-early.png",
+      "bytes": 1950999,
+      "sha256": "f6909904063342bacbb0c10d1022965de8ff1c2a6af11a5600094782300d51fc"
+    },
+    {
+      "file": "roster-71-C1-B01-hit_medium-action.png",
+      "bytes": 1949618,
+      "sha256": "704791abbaa2ac8127541c9cb3c162cd3b8bfd27c4506507ae81fdd0785f7041"
+    },
+    {
+      "file": "roster-72-C1-B01-hit_heavy-ready.png",
+      "bytes": 1960139,
+      "sha256": "e729ea99f6211e72f570275960990bb6c269f027410046eb15f2cffff046d044"
+    },
+    {
+      "file": "roster-72-C1-B01-hit_heavy-early.png",
+      "bytes": 1955265,
+      "sha256": "18f819e0a2e28d27d6020e25b689624095a490cc7e16126148e907c6b310e56a"
+    },
+    {
+      "file": "roster-72-C1-B01-hit_heavy-action.png",
+      "bytes": 1949125,
+      "sha256": "6c38c1fa3c931023a89b6e15f69379e5b335dedb76d3d0c697531e8a26512185"
+    },
+    {
+      "file": "roster-73-C1-B01-death-ready.png",
+      "bytes": 1959989,
+      "sha256": "6cacd8e04dfa43fc479d6f8d28dff9098d356c6c67c9a76798a5991e27f12522"
+    },
+    {
+      "file": "roster-73-C1-B01-death-early.png",
+      "bytes": 1957444,
+      "sha256": "e3eaa838212322b575272ee5a13740ad9151ad22aee31f0dc7a90c6d2fb4725b"
+    },
+    {
+      "file": "roster-73-C1-B01-death-action.png",
+      "bytes": 1941882,
+      "sha256": "8426bbeaa8124a39371d02d07ae45c40899a7a6603656439fa25fe9772495e35"
+    },
+    {
+      "file": "roster-73-C1-B01-death-late.png",
+      "bytes": 2014647,
+      "sha256": "5040287c7ebb75702342408491c61f0f3863d0f0cc4ba781fe3d70e1eb7377a3"
+    },
+    {
+      "file": "roster-74-C1-B01-escape-ready.png",
+      "bytes": 1953335,
+      "sha256": "47c4aae784842c66cc868a5f0b5834393667b321c8475671a901e9a5f5a663a3"
+    },
+    {
+      "file": "roster-74-C1-B01-escape-early.png",
+      "bytes": 1952694,
+      "sha256": "0430e2a85a248137b319f3e7ea534af154981982c5de5708e58b3db0cd79d765"
+    },
+    {
+      "file": "roster-74-C1-B01-escape-action.png",
+      "bytes": 1943074,
+      "sha256": "6b918fa4687b8d10052859dcd85f79c441cf050a6a3a1aeb634f601088b23e82"
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-ready.png",
+      "bytes": 1947917,
+      "sha256": "436c1747b73aded89ff0ef2f9c735022d664cbfaafd8a52fa5ed4884c76eb13a"
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-early.png",
+      "bytes": 1949547,
+      "sha256": "23196595045863ff673c17b7411dc0d4bce4733fd64a9e994800319889d10253"
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-action.png",
+      "bytes": 1948035,
+      "sha256": "168c00d9b75dc938d67b2a1baa1b671d35d039adc9cb05f66b212136111b0494"
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-late.png",
+      "bytes": 1945878,
+      "sha256": "ad44406a1b071191c72b42a283e3b853a3fc39dd94c901bde31ba9d65f03fe5e"
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-ready.png",
+      "bytes": 1945403,
+      "sha256": "e2813ccdc772eaaf82e646feff6c65755d1f561f79420d5982fa357fa9c9a154"
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-early.png",
+      "bytes": 1944313,
+      "sha256": "473bd4017178dcf6c70ebb52874b251f43bb4d8617690b95bce49046ea8f1c24"
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-action.png",
+      "bytes": 1947485,
+      "sha256": "44386d88eda495aebc212f9f46d7952caf36c4be59931b0469bdf4a0418d29ff"
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-late.png",
+      "bytes": 1941351,
+      "sha256": "f0c17cabb7ce757c80ccdcbd937b4994668982020c6719152616385e6d381758"
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-terminal-lock.png",
+      "bytes": 1969520,
+      "sha256": "8f1a4f11913fc95b76f4c6dec3d3f65a33ad06b5adee5d951267218551c1bc0a"
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-ready.png",
+      "bytes": 1931138,
+      "sha256": "4aa16ba9367bcce7339b9caf8f4eb211d63ad031f233f035aab00c0b3c0b100d"
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-early.png",
+      "bytes": 1935394,
+      "sha256": "89f46cf01cc89d02c0662b676682d2f228f93c70f49b5d169eac595e3635286a"
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-action.png",
+      "bytes": 1944329,
+      "sha256": "13a2ac41c79e2a36c3b07a2b63980db1bf5989c341707c2d5ad15dc0c0819b6e"
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-late.png",
+      "bytes": 1946002,
+      "sha256": "72a8f38438168712d8bcc6a11f27449822cf4858d075a06aa2e28b2fb8bf4dbd"
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-terminal-lock.png",
+      "bytes": 1966177,
+      "sha256": "1ced4c39ed5bf2c0af20ad0906ab9a0a8dc75bfc95123d21e3069dcc25902640"
+    },
+    {
+      "file": "roster-78-C1-R07-cancelled_summon_reconciles-ready.png",
+      "bytes": 1931700,
+      "sha256": "8eb597d686207079b2346bf6f83ca5f61a67d883fda21a2020ac05126830844b"
+    },
+    {
+      "file": "roster-78-C1-R07-cancelled_summon_reconciles-early.png",
+      "bytes": 1934858,
+      "sha256": "d78314c212667e9154d544e4b01681a3c3f1f60eadd3bb27841339deafeae4e7"
+    },
+    {
+      "file": "roster-78-C1-R07-cancelled_summon_reconciles-action.png",
+      "bytes": 1944986,
+      "sha256": "fe6523aae4ee3a0bb136e0b55cbc8988f495a555c7a43e359e385bf1a46523a2"
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-ready.png",
+      "bytes": 1623532,
+      "sha256": "3a8d7ad1dfc146a434baa374e5a79f59a78cd05bf6c032923e560e163b105ee8"
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-early.png",
+      "bytes": 1630115,
+      "sha256": "d7adbf431717c39a657600e90539ed5ff8b6afbe92e34c44f4127360701e90c7"
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-action.png",
+      "bytes": 1641977,
+      "sha256": "104d93a06feba2394e84f7ca351855f7887e57231d6e6ab20b588454d5adcc1b"
+    }
+  ],
+  "results": {
+    "roster": {
+      "ok": true,
+      "cases": 80,
+      "passed_checks": 1144,
+      "failed_checks": 0,
+      "capture_count": 255,
+      "all_source_and_binary_identities_unchanged": true
+    },
+    "actions": 26,
+    "reachable_nonlethal_hit_bands": 29,
+    "deaths": 10,
+    "escapes": 10,
+    "regression_and_plate_cases": 5,
+    "meshes": 10,
+    "clips": 87,
+    "case_inventory": [
+      {
+        "index": 0,
+        "definition": "C1-R01",
+        "asset": "SK_RivetMite",
+        "action": "attack",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 7
+      },
+      {
+        "index": 1,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "charge",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 2,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "blast",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 24
+      },
+      {
+        "index": 3,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "spray",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 4,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "foul",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 22
+      },
+      {
+        "index": 5,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "punch",
+        "mode": 0,
+        "controlled_cursor": 2,
+        "max_hp": 22
+      },
+      {
+        "index": 6,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "attack",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 7,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "pressurize",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 24
+      },
+      {
+        "index": 8,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "deploy",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 9,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "attack",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 28
+      },
+      {
+        "index": 10,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "brace",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 11,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "double_punch",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 28
+      },
+      {
+        "index": 12,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "slam",
+        "mode": 0,
+        "controlled_cursor": 2,
+        "max_hp": 28
+      },
+      {
+        "index": 13,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "strike",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 14,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "triple_strike",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 52
+      },
+      {
+        "index": 15,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "attack_9",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 16,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "gain_drive",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 44
+      },
+      {
+        "index": 17,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "attack_12",
+        "mode": 0,
+        "controlled_cursor": 2,
+        "max_hp": 44
+      },
+      {
+        "index": 18,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "double_strike",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 19,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "thermal_runaway",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 48
+      },
+      {
+        "index": 20,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "triple_strike",
+        "mode": 0,
+        "controlled_cursor": 2,
+        "max_hp": 48
+      },
+      {
+        "index": 21,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "phase_one_strike",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 22,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "recover",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 23,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "quad_strike",
+        "mode": 0,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 24,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "charge",
+        "mode": 0,
+        "controlled_cursor": 1,
+        "max_hp": 92
+      },
+      {
+        "index": 25,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "blast",
+        "mode": 0,
+        "controlled_cursor": 2,
+        "max_hp": 92
+      },
+      {
+        "index": 26,
+        "definition": "C1-R01",
+        "asset": "SK_RivetMite",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 7
+      },
+      {
+        "index": 27,
+        "definition": "C1-R01",
+        "asset": "SK_RivetMite",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 7
+      },
+      {
+        "index": 28,
+        "definition": "C1-R01",
+        "asset": "SK_RivetMite",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 7
+      },
+      {
+        "index": 29,
+        "definition": "C1-R01",
+        "asset": "SK_RivetMite",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 7
+      },
+      {
+        "index": 30,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 31,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 32,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 33,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 34,
+        "definition": "C1-R02",
+        "asset": "SK_BreachRam",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 35,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 36,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 37,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 38,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 39,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 40,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 41,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 42,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 43,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 44,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 45,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 46,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 47,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 48,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 49,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 50,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 51,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 52,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 53,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 54,
+        "definition": "C1-R08",
+        "asset": "SK_KnucklePress",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 55,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 56,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 57,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 58,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 59,
+        "definition": "C1-O01",
+        "asset": "SK_RedlinePursuer",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 52
+      },
+      {
+        "index": 60,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 61,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 62,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 63,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 64,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 65,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 66,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 67,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 68,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 69,
+        "definition": "C1-O03",
+        "asset": "SK_SplitChassis",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 48
+      },
+      {
+        "index": 70,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "hit_light",
+        "mode": 1,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 71,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "hit_medium",
+        "mode": 2,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 72,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "hit_heavy",
+        "mode": 3,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 73,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "death",
+        "mode": 4,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 74,
+        "definition": "C1-B01",
+        "asset": "SK_GatebreakerPrime",
+        "action": "escape",
+        "mode": 5,
+        "controlled_cursor": 0,
+        "max_hp": 92
+      },
+      {
+        "index": 75,
+        "definition": "C1-O02",
+        "asset": "SK_FoilWarden",
+        "action": "tiles_3_to_0",
+        "mode": 6,
+        "controlled_cursor": 0,
+        "max_hp": 44
+      },
+      {
+        "index": 76,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "attack_then_burn_death",
+        "mode": 7,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      },
+      {
+        "index": 77,
+        "definition": "C1-R04",
+        "asset": "SK_CableBinder",
+        "action": "one_spray_hit_then_counter_death",
+        "mode": 8,
+        "controlled_cursor": 0,
+        "max_hp": 22
+      },
+      {
+        "index": 78,
+        "definition": "C1-R07",
+        "asset": "SK_CoilNest",
+        "action": "cancelled_summon_reconciles",
+        "mode": 9,
+        "controlled_cursor": 0,
+        "max_hp": 28
+      },
+      {
+        "index": 79,
+        "definition": "C1-R05",
+        "asset": "SK_PressureCask",
+        "action": "utility_kill_holds_result",
+        "mode": 10,
+        "controlled_cursor": 0,
+        "max_hp": 24
+      }
+    ],
+    "campaign": {
+      "ok": true,
+      "prepared_checks": 29,
+      "position": 2,
+      "hp": 68,
+      "revision": 42,
+      "receipts": 40,
+      "hash": "094b2bc9ddab1a68",
+      "captures": 16,
+      "physical_input": false
+    },
+    "fixture": {
+      "ok": true,
+      "events": 84,
+      "ordered_lines": 85,
+      "hash": "965951ac6f2b9563"
+    }
+  },
+  "scope_limits": [
+    "Prepared state/cursor/boss-phase/ammunition fixtures, not an earned full-city playthrough.",
+    "Case79 tests real Utility Stage::Control and presentation busy lifecycle in technical mode, not a rendered campaign Rewards widget. Its capture set shows collapse; fade/final cleanup are log and source evidence.",
+    "No physical input, packaging, performance, listening, human visual approval or final benchmark-quality claim.",
+    "Close wall, empty apron, limited visible city depth, missing operator and simple impact effects remain visual work.",
+    "This exact archived core has the separately reproduced duplicate terminal-notification defect. Tested campaign reward dispatch remains once; its subsequent fix is outside this checkpoint."
+  ],
+  "prior_failures": [
+    {
+      "log": "RosterProbe-20260920-182636.log",
+      "result": "Crash: new skeletal-mesh material assignments had not survived save. Importer corrected to retain edited structs, then fresh-process reload verified."
+    },
+    {
+      "log": "RosterProbe-20260920-183007.log",
+      "result": "79 cases, 1131 passing checks and one test-only failure. A changed current target made helper-hidden assertion inspect the dying parent; test changed to stable formation ID."
+    }
+  ],
+  "import_logs": [
+    "RosterArt-20260920-182853.log",
+    "RosterVerify-20260920-182940.log"
+  ],
+  "archive": "unreal/Saved/Validation/roster-v001-runtime-20260920-1843",
+  "earlier_archive": "unreal/Saved/Validation/roster-v001-runtime-20260920-1825",
+  "reproduce": [
+    "python games/overkill-foundry/tools/generate_roster_visuals.py --check",
+    "games/overkill-foundry/tools/unreal.ps1 -Action RosterArt",
+    "games/overkill-foundry/tools/unreal.ps1 -Action RosterVerify",
+    "games/overkill-foundry/tools/unreal.ps1 -Action Build",
+    "games/overkill-foundry/tools/unreal.ps1 -Action BuildGame",
+    "games/overkill-foundry/tools/unreal.ps1 -Action RosterProbe"
+  ]
+}

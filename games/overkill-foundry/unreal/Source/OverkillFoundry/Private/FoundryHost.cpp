@@ -152,9 +152,10 @@ void AFoundryStage::BeginPlay()
     }
     bSmokeTest = FParse::Param(FCommandLine::Get(), TEXT("FoundrySmoke"));
     bArtProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryArtProbe"));
+    bRosterProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryRosterProbe"));
     bCampaignProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryCampaignProbe"));
 #if FOUNDRY_WITH_CAMPAIGN
-    bTechnicalMode = bSmokeTest || bArtProbe || FParse::Param(FCommandLine::Get(), TEXT("FoundryTeaching"));
+    bTechnicalMode = bSmokeTest || bArtProbe || bRosterProbe || FParse::Param(FCommandLine::Get(), TEXT("FoundryTeaching"));
     if (!bTechnicalMode)
     {
         FString SavePath = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Campaign/profile.ofsave"));
@@ -268,7 +269,7 @@ void AFoundryStage::BeginPlay()
         }
     }
     SetActionView(false, true);
-    if (bArtProbe) Session->bShowPanels = false;
+    if (bArtProbe || bRosterProbe) Session->bShowPanels = false;
     UE_LOG(LogFoundryHost, Display, TEXT("Host P13 ready. Cinderwall-v001 shared-core Mara teaching encounter. Smoke=%d ArtProbe=%d"), bSmokeTest, bArtProbe);
 }
 
@@ -281,18 +282,36 @@ void AFoundryStage::SpawnRobots()
     {
         if (Enemy.dead || Enemy.escaped) continue;
         const bool bRam = Enemy.definition == "C1-R02";
-        const FVector Position = bTechnicalMode ? (bRam ? FVector(460, -180, 1.5) : FVector(100, 200, 1.5)) : RobotPosition(Index);
+        const FVector Position = bTechnicalMode && !bRosterProbe ? (bRam ? FVector(460, -180, 1.5) : FVector(100, 200, 1.5)) : RobotPosition(Index);
         AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(Position, FRotator::ZeroRotator);
-        Robot->Initialize(Enemy.id, bRam, Enemy.maxHp);
-        if (!bRam && Enemy.definition != "C1-R01")
-        {
-            Robot->SetActorScale3D(FVector(.85 + .08 * (Index % 3), 1, 1.25));
-            UE_LOG(LogFoundryHost, Display, TEXT("TEMPORARY_ROBOT_MODEL id=%llu definition=%s name=%s"), Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()), UTF8_TO_TCHAR(Enemy.name.c_str()));
-        }
+        Robot->Initialize(Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()), Enemy.maxHp, Enemy.tiles, Enemy.robotAction == "blast");
         Robots.Add(Robot);
         ++Index;
     }
     FrameRoster();
+}
+
+void AFoundryStage::SpawnMissingRobots()
+{
+    int32 Index = 0;
+    for (const auto& Enemy : Session->State.enemies)
+    {
+        const int32 PositionIndex = Index++;
+        if (Enemy.dead || Enemy.escaped) continue;
+        bool Exists = false;
+        for (const AFoundryRobot* Robot : Robots) if (IsValid(Robot) && Robot->GetCoreId() == Enemy.id) { Exists = true; break; }
+        if (Exists) continue;
+        auto* Robot = GetWorld()->SpawnActor<AFoundryRobot>(RobotPosition(PositionIndex), FRotator::ZeroRotator);
+        Robot->Initialize(Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()), Enemy.maxHp, Enemy.tiles, Enemy.robotAction == "blast");
+        const auto Pending = [&](const std::vector<overkill::Event>& Events)
+        {
+            for (const auto& Event : Events) if (Event.type == "robot_deployed" && Event.target == Enemy.id) return true;
+            return false;
+        };
+        if (Pending(Session->CommittedEvents) || Pending(QueuedEvents)) Robot->AwaitReveal();
+        Robots.Add(Robot);
+        UE_LOG(LogFoundryHost, Display, TEXT("CAMPAIGN_ROBOT_SPAWN id=%llu definition=%s"), Enemy.id, UTF8_TO_TCHAR(Enemy.definition.c_str()));
+    }
 }
 
 FVector AFoundryStage::RobotPosition(int32 Index) const
@@ -333,20 +352,8 @@ void AFoundryStage::RefreshCampaignWorld()
         SetActionView(!Session->State.bullet.empty(), true);
     }
     if(const auto* C=Campaign->Current(); C && C->phase==overkill::CityPhase::Fight)
-    {
-        int32 Index=0;
-        for(const auto& Enemy:Session->State.enemies)
-        {
-            const int32 PositionIndex=Index++;
-            if(Enemy.dead || Enemy.escaped)continue;
-            bool Exists=false;for(const AFoundryRobot* Robot:Robots)if(IsValid(Robot)&&Robot->GetCoreId()==Enemy.id){Exists=true;break;}
-            if(Exists)continue;
-            auto* Robot=GetWorld()->SpawnActor<AFoundryRobot>(RobotPosition(PositionIndex),FRotator::ZeroRotator);
-            Robot->Initialize(Enemy.id,Enemy.definition=="C1-R02",Enemy.maxHp);Robots.Add(Robot);
-            UE_LOG(LogFoundryHost,Display,TEXT("CAMPAIGN_ROBOT_SPAWN id=%llu definition=%s"),Enemy.id,UTF8_TO_TCHAR(Enemy.definition.c_str()));
-        }
-    }
-    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->SetActorHiddenInGame(Campaign->Page == TEXT("title"));
+        SpawnMissingRobots();
+    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->SetSceneHidden(Campaign->Page == TEXT("title"));
     if (Campaign->Page == TEXT("title") && !bWasTitle)
     {
         ResetActionPresentation();
@@ -378,10 +385,30 @@ void AFoundryStage::PresentCommittedEvents()
 void AFoundryStage::PresentEvents(const std::vector<overkill::Event>& Events)
 {
     if(Audio) Audio->Present(Events);
+    SpawnMissingRobots();
     TSet<uint64> Died;
+    TSet<uint64> DeathReleasing;
+    TSet<uint64> SummonParents;
+    TSet<uint64> SummonSources;
+    TMap<uint64, int32> CommittedHits;
     TSet<uint64> NamedActionParents;
     for (const auto& Event : Events) if (Event.type == "enemy_death") Died.Add(Event.target);
+    if (!Died.IsEmpty())
+    {
+        // Utility/support kills need the same complete death/fade window as a
+        // main shot. Keep the current viewpoint; only presentation/input waits.
+        ReturnCameraAfter = FMath::Max(ReturnCameraAfter, 2.25f);
+#if FOUNDRY_WITH_CAMPAIGN
+        if (Campaign) ++Campaign->ViewRevision;
+#endif
+    }
     for (const auto& Event : Events) if (Event.type.rfind("robot_action:", 0) == 0) NamedActionParents.Add(Event.parent);
+    for (const auto& Event : Events)
+    {
+        if (Event.type == "death_release") DeathReleasing.Add(Event.subject);
+        if (Event.type == "robot_deployed") { SummonParents.Add(Event.parent); SummonSources.Add(Event.subject); }
+        if (Event.type == "player_damage") ++CommittedHits.FindOrAdd(Event.parent);
+    }
     for (const auto& Event : Events)
     {
         UE_LOG(LogFoundryHost, Verbose, TEXT("PRESENT_EVENT id=%llu type=%s action_view=%d transition=%.3f time=%.3f"), Event.id, UTF8_TO_TCHAR(Event.type.c_str()), bActionView, CameraTransitionRemaining, GetWorld()->GetTimeSeconds());
@@ -398,22 +425,42 @@ void AFoundryStage::PresentEvents(const std::vector<overkill::Event>& Events)
         {
             if (!IsValid(Robot)) continue;
             const uint64 Id = Robot->GetCoreId();
-            if (Event.type == "enemy_death" && Event.target == Id) Robot->Die(Event.id);
-            else if (Died.Contains(Id)) continue; // Death wins over every reaction in this committed action.
+            if (Event.type == "robot_deployed" && Event.target == Id)
+            {
+                float Delay = DeathReleasing.Contains(Event.subject) ? .42f : .66f;
+                for (const AFoundryRobot* Source : Robots) if (IsValid(Source) && Source->GetCoreId() == Event.subject) Delay += Source->GetTerminalDelay();
+                Robot->RevealAfter(Delay);
+            }
+            if (Event.type == "enemy_death" && Event.target == Id) Robot->Die(Event.id, DeathReleasing.Contains(Id), SummonSources.Contains(Id));
+            // Suppress redundant flinches before a death, but preserve an enemy
+            // action that actually happened before Burn or a counter killed it.
+            else if (Died.Contains(Id) && (Event.type == "hit" || Event.type == "status_damage")) continue;
             else if ((Event.type == "hit" || Event.type == "status_damage") && Event.target == Id) Robot->Hit(Event.amount, Event.secondary, Event.id);
-            else if (Event.type.rfind("robot_action:", 0) == 0 && Event.subject == Id) Robot->NamedAction(UTF8_TO_TCHAR(Event.type.substr(13).c_str()), Event.id);
+            else if (Event.type.rfind("robot_action:", 0) == 0 && Event.subject == Id)
+                Robot->NamedAction(UTF8_TO_TCHAR(Event.type.substr(13).c_str()), Event.id, CommittedHits.FindRef(Event.parent), SummonParents.Contains(Event.parent));
             else if (Event.type == "enemy_action" && Event.subject == Id && !NamedActionParents.Contains(Event.id)) Robot->EnemyAction(Event.amount, Event.id);
             else if (Event.type == "enemy_escape" && Event.subject == Id) Robot->Escape(Event.id);
         }
     }
+    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot))
+        for (const auto& Enemy : Session->State.enemies) if (Enemy.id == Robot->GetCoreId()) Robot->SetTiles(Enemy.tiles);
 }
 
 void AFoundryStage::PlayPresentationCue(const FString& Cue) { if (Audio) Audio->PlayCue(FName(*Cue)); }
 
 void AFoundryStage::ResetActionPresentation()
 {
+    // Discarding cosmetic events on menu/restart must not strand a real helper
+    // behind an animation reveal that can no longer be delivered.
+    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->CompletePendingReveal();
     QueuedEvents.clear();
     CameraTransitionRemaining = ReturnCameraAfter = 0;
+}
+
+bool AFoundryStage::HasTerminalPresentation() const
+{
+    for (const AFoundryRobot* Robot : Robots) if (IsValid(Robot) && Robot->IsTerminal()) return true;
+    return false;
 }
 
 void AFoundryStage::AimAtSelectedTarget()
@@ -540,11 +587,16 @@ void AFoundryStage::Tick(float DeltaSeconds)
     else if (ReturnCameraAfter > 0.0f)
     {
         ReturnCameraAfter -= DeltaSeconds;
-        if (ReturnCameraAfter <= 0.0f) SetActionView(false);
+        if (ReturnCameraAfter <= 0.0f)
+        {
+            if (HasTerminalPresentation()) ReturnCameraAfter = .10f;
+            else SetActionView(false);
+        }
     }
     PresentCommittedEvents();
     AimAtSelectedTarget();
     if (bArtProbe) TickArtProbe(DeltaSeconds);
+    if (bRosterProbe) TickRosterProbe(DeltaSeconds);
     if (bCampaignProbe) TickCampaignProbe(DeltaSeconds);
     if (!bSmokeTest) return;
     SmokeElapsed += DeltaSeconds;

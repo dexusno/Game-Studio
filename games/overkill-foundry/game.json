@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes 246 recipe paths, ten robots and native P08 with bounded authored/independent coverage. Two haul compositions remain held. Reviewed baseline 5 is committed/integrated/pushed as ed8935d: 400 sensitivity runs, 392 completions, eight held-rule stops, all 400 exact replays. Baseline 4 retains two earned build witnesses. Frozen camera/scenery graph implements Lock and load to interactive 16C, Fire to same-turn preparation and enemy cosmetics after camera arrival. Final Editor/Game, rendered campaign, native input and exact parity pass; finite independent review passes with 13 inspected frames and all 50 source/45 capture identities matched. All 19 scenery bounds pass, but visual depth remains below the owner benchmark. Eight original roster sources/72 clips pass 365 FBX checks and source visual inspection, with Unreal import/runtime integration pending. Advanced recipe controls, runtime obligation proof gaps, operator/scene/FX refinement, packaging/performance and human tests/approval remain open. Stage remains prototype; no old-game pipeline reused.",
+  "budget_note": "Owner-authorized complete Mara/Cinderwall MVP; timeline unconstrained and zero budgets unset. Stage remains prototype. Reviewed runner baseline5 and camera checkpoint are committed/integrated/pushed; 400 sensitivity runs retain392 completions/eight owner-held stops and exact replay. Partial runtime proof checkpoint8972c90 binds133/665 historical obligations with532 explicit gaps. All ten distinct enemy meshes/87clips pass a frozen80-case rendered probe with1144checks/255captures and finite independent review. Native advanced recipe-choice checks pass declared prepared paths; three observed UI corrections pass final native rechecks, strict3090 helper assertions/246 paths, CampaignProbe30 checks and85-line parity. Profile selection, retained Collection browsing and the defeat AI presentation remain to finish. A reproduced duplicate terminal-notification fix passes native regression but rules-version/save compatibility awaits the owner. Two haul compositions remain unanswered. Operator, city-depth/FX finish, full rendered city, runtime proof gaps, package/performance and human play/visual approval remain open. No new purchases or future campaigns are authorized.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T15:58:49+00:00",
-      "record_sha256": "5e6177224760686138c8f02f27d9e1d163ca23f51729ed56de2c6f26999f2570",
+      "captured_at": "2026-09-20T17:37:24+00:00",
+      "record_sha256": "36604b8485d6215b1ffca56f4e28159d09dcdf456919b5c8ae17c29ef8991cf6",
       "files": {
-        "games/overkill-foundry/STATUS.md": "f7fce275c2652ed5321fe26035cc73aaf537062dbd06052d6f41561c2931f091",
+        "games/overkill-foundry/STATUS.md": "ecfe123c9e3c4c5af766d88593f860db6aeee52f9e8fed64e226435dd6fe30a8",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",

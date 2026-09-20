@@ -17,7 +17,9 @@ ROOT = "/Game/Cinderwall"
 REPORT = json.loads((SOURCE / "asset-report.json").read_text(encoding="utf-8"))
 PROOF = json.loads((SOURCE / "interchange-verification.json").read_text(encoding="utf-8"))
 TOOLS, EDIT = u.AssetToolsHelpers.get_asset_tools(), u.EditorAssetLibrary
+VERIFY_ONLY = "-FoundryRosterVerify" in u.SystemLibrary.get_command_line()
 evidence = {"version": REPORT["version"], "engine": u.SystemLibrary.get_engine_version(),
+            "mode": "fresh-process reload verification" if VERIFY_ONLY else "import",
             "units": "centimetres", "conversion": "(x,-y,z)*100", "robots": {}, "clips": {},
             "source_report_sha256": hashlib.sha256((SOURCE / "asset-report.json").read_bytes()).hexdigest(),
             "source_files": PROOF["files"], "limits": "Import/compressed-pose checks only; no runtime gameplay or human approval."}
@@ -63,9 +65,11 @@ def import_file(file, folder, name, opts):
 
 
 for name, info in REPORT["robots"].items():
-    products = import_file(SOURCE / "meshes" / (name + ".fbx"), "Robots", "SK_" + name, options())
+    products = [EDIT.load_asset(ROOT + "/Robots/SK_" + name)] if VERIFY_ONLY else import_file(SOURCE / "meshes" / (name + ".fbx"), "Robots", "SK_" + name, options())
     mesh = next(asset for asset in products if isinstance(asset, u.SkeletalMesh))
-    slots = mesh.get_editor_property("materials")
+    # Unreal Array iteration returns struct copies. Keep those edited copies in
+    # a Python list before assigning the entire materials array back to the mesh.
+    slots = list(mesh.get_editor_property("materials"))
     for slot in slots:
         label = str(slot.get_editor_property("imported_material_slot_name"))
         if not label.startswith("M_CW_") or label not in info["materials"]:
@@ -73,9 +77,19 @@ for name, info in REPORT["robots"].items():
         path = ROOT + "/Materials/MI_CW_" + label[len("M_CW_"):]
         if not EDIT.does_asset_exist(path):
             raise RuntimeError("Original Cinderwall material missing: " + path)
-        slot.set_editor_property("material_interface", EDIT.load_asset(path))
-    mesh.set_editor_property("materials", slots)
-    EDIT.save_loaded_asset(mesh)
+        if not VERIFY_ONLY:
+            slot.set_editor_property("material_interface", EDIT.load_asset(path))
+    if not VERIFY_ONLY:
+        mesh.set_editor_property("materials", slots)
+        EDIT.save_loaded_asset(mesh)
+    material_paths = []
+    for slot in mesh.get_editor_property("materials"):
+        label = str(slot.get_editor_property("imported_material_slot_name"))
+        material = slot.get_editor_property("material_interface")
+        expected_material = ROOT + "/Materials/MI_CW_" + label[len("M_CW_"):]
+        if material is None or material.get_path_name().split(".")[0] != expected_material:
+            raise RuntimeError("Saved roster material assignment missing: " + name + " / " + label)
+        material_paths.append(material.get_path_name())
     bounds = mesh.get_imported_bounds().box_extent
     actual = [bounds.x * 2, bounds.y * 2, bounds.z * 2]
     expected = [v * 100 for v in info["rest_bounds_m"]]
@@ -83,12 +97,14 @@ for name, info in REPORT["robots"].items():
         raise RuntimeError("Roster scale changed: " + name + str(actual) + str(expected))
     evidence["robots"][name] = {"source_id": info["source_id"], "asset": mesh.get_path_name(),
                                  "bounds_cm": actual, "materials": [str(s.get_editor_property("imported_material_slot_name")) for s in slots],
+                                 "material_interfaces": material_paths,
                                  "action_clips": info["action_clips"]}
     for clip_name, clip_info in REPORT["clips"].items():
         if not clip_name.startswith(info["prefix"]):
             continue
-        products = import_file(SOURCE / "animations" / (clip_name + ".fbx"), "Animations", clip_name,
-                               options(True, mesh.get_editor_property("skeleton")))
+        products = [EDIT.load_asset(ROOT + "/Animations/" + clip_name)] if VERIFY_ONLY else import_file(
+            SOURCE / "animations" / (clip_name + ".fbx"), "Animations", clip_name,
+            options(True, mesh.get_editor_property("skeleton")))
         clip = next(asset for asset in products if isinstance(asset, u.AnimSequence))
         duration = clip.get_play_length()
         if abs(duration - clip_info["duration_s"]) > .04:
@@ -121,5 +137,6 @@ EDIT.save_directory(ROOT + "/Robots", only_if_is_dirty=True, recursive=True)
 EDIT.save_directory(ROOT + "/Animations", only_if_is_dirty=True, recursive=True)
 saved = PROJECT / "Saved/ArtImport"
 saved.mkdir(parents=True, exist_ok=True)
-(saved / "roster-v001-import.json").write_text(json.dumps(evidence, indent=2), encoding="utf-8")
-u.log("FOUNDRY_ROSTER_READY " + str(saved / "roster-v001-import.json"))
+output = saved / ("roster-v001-verify.json" if VERIFY_ONLY else "roster-v001-import.json")
+output.write_text(json.dumps(evidence, indent=2), encoding="utf-8")
+u.log(("FOUNDRY_ROSTER_VERIFIED " if VERIFY_ONLY else "FOUNDRY_ROSTER_READY ") + str(output))

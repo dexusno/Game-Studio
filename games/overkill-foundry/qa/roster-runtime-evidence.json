@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "reviewed_utc": "2026-09-20T16:59:18.164772+00:00",
+  "archive": "unreal/Saved/Validation/roster-v001-runtime-20260920-1843",
+  "base_commit": "8972c90ed50f8b4f0a666da511dc18d6168dd6c7",
+  "identity_before_sha256": "fc6286c4a3bdb33c5e16c26918d9c3a852785580656596b8c41aa87bd8cbfbd5",
+  "identity_after_sha256": "fc6286c4a3bdb33c5e16c26918d9c3a852785580656596b8c41aa87bd8cbfbd5",
+  "run_summary_sha256": "7c6be0b032f303b489909bc05f708874d5be003811eb720e6904bdb0b03d7fe7",
+  "log": "RosterProbe-20260920-184928.log",
+  "log_sha256": "b3dd2059a535d1e218eccfa34255f1ab159ba38bde92ebecd4346faa13d4c71c",
+  "binaries": {
+    "UnrealEditor-OverkillFoundry.dll": "4905bff67301b67cd0537c67aca8a5a104b8b0dfb871b256e079995049a984c6",
+    "OverkillFoundry.exe": "a9cf9ecce61ec331ba4297f7aa34ce4dafcaf1e0811a29029cbce67ccd583b51"
+  },
+  "source_copies_verified": 72,
+  "source_and_binary_records_unchanged": true,
+  "captured_images_hash_verified": 255,
+  "reviewed_frame_count": 28,
+  "reviewed_frames": [
+    {
+      "file": "roster-03-C1-R04-spray-ready.png",
+      "sha256": "8a586066f8e2eea5d43a663bf4fc8cf5efa1445a2dacfd04a8fe1669ed61a6e1",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-06-C1-R05-attack-ready.png",
+      "sha256": "1f9e3f0ff5a6ad0d876bbabe519ca97ba12b32ae3ce64b4d37e79c0bce5b408a",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-08-C1-R07-deploy-action.png",
+      "sha256": "fdb29dff21c34dbf3973f5494a8e1d50773731de80f0f8c47a70b0535c313c0d",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-10-C1-R08-brace-ready.png",
+      "sha256": "b114cbd1d412fd4fd117193c7db6740c17a52ebb7a2c1fafca232f663ef544c8",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-13-C1-O01-strike-ready.png",
+      "sha256": "62be12e25b0e60c59717a9c84ef7fdc6a2b999b9f93b124d9d907b661f93e22a",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-15-C1-O02-attack_9-ready.png",
+      "sha256": "b3b5bcfa1a466bdb5436f2c4b86f9a27eaa56fc0924b8364034683c14202a45c",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-18-C1-O03-double_strike-ready.png",
+      "sha256": "255c6d349be02a47396c5efba4b39277fc15247b421ba8e657da41f982f2b538",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-21-C1-B01-phase_one_strike-ready.png",
+      "sha256": "2ee512e50d386d63fbf7b7f8077bf12d64fbfdbc1b06c9c7490bfb84f02025a8",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-ready.png",
+      "sha256": "436c1747b73aded89ff0ef2f9c735022d664cbfaafd8a52fa5ed4884c76eb13a",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-early.png",
+      "sha256": "23196595045863ff673c17b7411dc0d4bce4733fd64a9e994800319889d10253",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-action.png",
+      "sha256": "168c00d9b75dc938d67b2a1baa1b671d35d039adc9cb05f66b212136111b0494",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-75-C1-O02-tiles_3_to_0-late.png",
+      "sha256": "ad44406a1b071191c72b42a283e3b853a3fc39dd94c901bde31ba9d65f03fe5e",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-08-C1-R07-deploy-early.png",
+      "sha256": "dea591e13ae3335546eac47f1451f2ef346698811f5a29ee433a7e9dce1b3d51",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-68-C1-O03-death-early.png",
+      "sha256": "63bf96e04962e1aa7050b6148784d8fca50df090ebbaf8038124ed13cd6bf78f",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-68-C1-O03-death-action.png",
+      "sha256": "f5a02251b0b7cc0f5395cbdc2bcc5d4fbc94e7e3b9af258bfc1982dbc1f1be9b",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-68-C1-O03-death-late.png",
+      "sha256": "35eb39c85ce06e4c3a9f6c6c084883e7abd202ce809ff974ff6972e50145e9c4",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-action.png",
+      "sha256": "44386d88eda495aebc212f9f46d7952caf36c4be59931b0469bdf4a0418d29ff",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-76-C1-R05-attack_then_burn_death-terminal-lock.png",
+      "sha256": "8f1a4f11913fc95b76f4c6dec3d3f65a33ad06b5adee5d951267218551c1bc0a",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-action.png",
+      "sha256": "13a2ac41c79e2a36c3b07a2b63980db1bf5989c341707c2d5ad15dc0c0819b6e",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-77-C1-R04-one_spray_hit_then_counter_death-terminal-lock.png",
+      "sha256": "1ced4c39ed5bf2c0af20ad0906ab9a0a8dc75bfc95123d21e3069dcc25902640",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-ready.png",
+      "sha256": "3a8d7ad1dfc146a434baa374e5a79f59a78cd05bf6c032923e560e163b105ee8",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-early.png",
+      "sha256": "d7adbf431717c39a657600e90539ed5ff8b6afbe92e34c44f4127360701e90c7",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-79-C1-R05-utility_kill_holds_result-action.png",
+      "sha256": "104d93a06feba2394e84f7ca351855f7887e57231d6e6ab20b588454d5adcc1b",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-73-C1-B01-death-late.png",
+      "sha256": "5040287c7ebb75702342408491c61f0f3863d0f0cc4ba781fe3d70e1eb7377a3",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-78-C1-R07-cancelled_summon_reconciles-action.png",
+      "sha256": "fe6523aae4ee3a0bb136e0b55cbc8988f495a555c7a43e359e385bf1a46523a2",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-23-C1-B01-quad_strike-action.png",
+      "sha256": "cfdeabb470246dd077830bb171bb2f81438fc70f061eeda66b395451f1aa7c69",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-01-C1-R02-charge-action.png",
+      "sha256": "9b63d102e5fb6937adcf995f92193a661f1ac3c745c88a6d0670aceaa0ef7894",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "file": "roster-00-C1-R01-attack-action.png",
+      "sha256": "9fcf65601b0d8fb7db109714968c6a72f7196582edd85fa2744f1b69ea9c6c52",
+      "width": 1600,
+      "height": 900
+    }
+  ],
+  "controlled_probe": {
+    "cases": 80,
+    "checks_passed": 1144,
+    "checks_failed": 0,
+    "exit_code": 0,
+    "all_case_results": 80,
+    "special_cases": {
+      "68": {
+        "final_hash": "3c49d783120bc896",
+        "expected_hits": 0,
+        "recorded_actor_array_size": 2
+      },
+      "75": {
+        "final_hash": "71a1e6946091267e",
+        "expected_hits": 0,
+        "recorded_actor_array_size": 1
+      },
+      "76": {
+        "final_hash": "9123d08f1993db33",
+        "expected_hits": 1,
+        "recorded_actor_array_size": 1
+      },
+      "77": {
+        "final_hash": "fd639dfd59051374",
+        "expected_hits": 1,
+        "recorded_actor_array_size": 1
+      },
+      "78": {
+        "final_hash": "5fefdfb837197e1b",
+        "expected_hits": 0,
+        "recorded_actor_array_size": 2
+      },
+      "79": {
+        "final_hash": "6b2aea1a307a12bf",
+        "expected_hits": 0,
+        "recorded_actor_array_size": 1
+      }
+    }
+  },
+  "import_metadata": {
+    "original_new_robots": 8,
+    "original_new_clips": 72,
+    "generated_total_meshes": 10,
+    "generated_total_clips": 87,
+    "frozen_generator_check_exit_code": 0,
+    "saved_material_and_robot_records_identical": true,
+    "clip_asset_duration_bones_socket_records_identical": true,
+    "sampled_motion_values_not_byte_identical": true,
+    "fresh_process_import_not_reexecuted_by_reviewer": true
+  },
+  "observed_later_working_source_changes": [
+    "core/src/core.cpp"
+  ],
+  "limits": [
+    "Author-operated controlled runtime fixtures; independent source/frame/log inspection, no new live launch.",
+    "Development editor-module run; standalone Game executable hashed but not independently executed or packaged.",
+    "No natural campaign, hardware input, audio listening, performance or human/F.I.S.T. visual approval.",
+    "Case79 has collapse frames only; its later dissolve/cleanup are recorded log/assertion plus source evidence.",
+    "Case75 one-plate intermediate state is logged, not a separate inspected frame.",
+    "Known duplicate core terminal notifications remain in frozen source; later fixes excluded."
+  ],
+  "portable_checkpoint": {
+    "path": "unreal/Tools/roster-v001-runtime-checkpoint.json",
+    "sha256": "296d5d52f446da604f15424c471141449c9222fd06aeb870c1066b73de4bf417",
+    "source_graph_lf_sha256": "819d9d6056cd5c04681be9d7afdebc476118af6dd3b56ebbdc69aeaa277e00bf",
+    "all_sources_binaries_logs_captures_match_archive": true,
+    "case_inventory_matches_80_log_entries": true
+  },
+  "prior_failed_run": {
+    "log": "unreal/Saved/Validation/roster-v001-runtime-20260920-1825/RosterProbe-20260920-183007.log",
+    "sha256": "51f1009449ea5c2f513fa029df68650c2a982a54788161d05c7c46f15e8c24a6",
+    "passed_checks": 1131,
+    "failed_checks": 1,
+    "status": "retained failed; not relabelled"
+  }
+}

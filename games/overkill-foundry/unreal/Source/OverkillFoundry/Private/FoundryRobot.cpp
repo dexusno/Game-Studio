@@ -10,6 +10,7 @@
 #include "Engine/World.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Materials/MaterialInterface.h"
+#include "FoundryRosterData.inl"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFoundryRobot, Log, All);
 
@@ -38,29 +39,30 @@ AFoundryRobot::AFoundryRobot()
     SteamMesh->SetVisibility(false);
 }
 
-void AFoundryRobot::Initialize(uint64 Id, bool bInRam, int32 InMaxHp)
+void AFoundryRobot::Initialize(uint64 Id, const FString& InDefinition, int32 InMaxHp, int32 Tiles, bool bInitiallyCharged)
 {
     CoreId = Id;
-    bRam = bInRam;
+    Definition = InDefinition;
+    bRam = Definition == TEXT("C1-R02");
     MaxHp = InMaxHp;
-    const FString Asset = bRam ? TEXT("SK_BreachRam") : TEXT("SK_RivetMite");
-    USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(nullptr, *FString::Printf(TEXT("/Game/Cinderwall/Robots/%s.%s"), *Asset, *Asset));
-    checkf(Mesh, TEXT("Run tools/unreal.ps1 Art before the Cinderwall encounter"));
-    Body->SetSkeletalMeshAsset(Mesh);
-    const FString Prefix = bRam ? TEXT("BR_") : TEXT("RM_");
-    for (const TCHAR* Name : {TEXT("idle"), TEXT("hit_light"), TEXT("hit_medium"), TEXT("hit_heavy"), TEXT("death"), TEXT("escape"), TEXT("attack")})
+    FString Asset;
+    for (const auto& Row : FoundryVisualData::Robots) if (Definition == Row.Definition)
     {
-        const FString Suffix = FString(Name) == TEXT("attack") ? (bRam ? TEXT("attack_blast") : TEXT("attack_rivet")) : FString(Name);
-        const FString ClipName = Prefix + Suffix;
+        Asset = Row.Asset;
+        ExpectedMaterialSlots = Row.MaterialSlots;
+        break;
+    }
+    checkf(!Asset.IsEmpty(), TEXT("Enabled enemy has no original visual: %s"), *Definition);
+    USkeletalMesh* Mesh = LoadObject<USkeletalMesh>(nullptr, *FString::Printf(TEXT("/Game/Cinderwall/Robots/%s.%s"), *Asset, *Asset));
+    checkf(Mesh, TEXT("Missing %s; run tools/unreal.ps1 Art and RosterArt"), *Asset);
+    Body->SetSkeletalMeshAsset(Mesh);
+    for (const auto& Row : FoundryVisualData::Clips)
+    {
+        if (Definition != Row.Definition) continue;
+        const FString ClipName = Row.Asset;
         UAnimSequence* Clip = LoadObject<UAnimSequence>(nullptr, *FString::Printf(TEXT("/Game/Cinderwall/Animations/%s.%s"), *ClipName, *ClipName));
         checkf(Clip, TEXT("Missing animation %s"), *ClipName);
-        Clips.Add(Name, Clip);
-    }
-    if (bRam)
-    {
-        UAnimSequence* Clip = LoadObject<UAnimSequence>(nullptr, TEXT("/Game/Cinderwall/Animations/BR_charge.BR_charge"));
-        check(Clip);
-        Clips.Add(TEXT("charge"), Clip);
+        Clips.Add(Row.Key, Clip);
     }
     for (int32 Index = 0; Index < Body->GetNumMaterials(); ++Index)
     {
@@ -87,7 +89,10 @@ void AFoundryRobot::Initialize(uint64 Id, bool bInRam, int32 InMaxHp)
     checkf(Body->DoesSocketExist(TEXT("muzzle")) && Body->DoesSocketExist(TEXT("core")) && Body->DoesSocketExist(TEXT("intent")) && Muzzle.X < -50, TEXT("Cinderwall socket/facing check failed"));
     UE_LOG(LogFoundryRobot, Display, TEXT("ART_ROBOT id=%llu asset=%s bounds_cm=%s bones=%d muzzle_local=%s dissolve_slots=%d"),
         CoreId, *Asset, *Bounds.ToString(), Mesh->GetRefSkeleton().GetNum(), *Muzzle.ToString(), Materials.Num());
+    checkf(Materials.Num() == ExpectedMaterialSlots, TEXT("Original robot material inventory changed"));
     Play(TEXT("idle"));
+    SetTiles(Tiles);
+    if (bInitiallyCharged && Clips.Contains(TEXT("charge"))) { bCharged = true; HoldCharge(); }
 }
 
 bool AFoundryRobot::AreMaterialsSolid() const
@@ -97,7 +102,56 @@ bool AFoundryRobot::AreMaterialsSolid() const
         float Value = -1;
         if (!Material->GetScalarParameterValue(FMaterialParameterInfo(TEXT("Dissolve")), Value) || !FMath::IsNearlyZero(Value)) return false;
     }
-    return Materials.Num() == (bRam ? 8 : 7);
+    return Materials.Num() == ExpectedMaterialSlots && ExpectedMaterialSlots > 0;
+}
+
+FString AFoundryRobot::GetVisualAssetName() const { return Body->GetSkeletalMeshAsset()->GetName(); }
+
+bool AFoundryRobot::HasAction(const FString& Name) const
+{
+    return Clips.Contains(bRam && Name == TEXT("blast") ? TEXT("attack") : Name);
+}
+
+void AFoundryRobot::SetTiles(int32 Tiles)
+{
+    if (Definition != TEXT("C1-O02") || Tiles == VisibleTiles) return;
+    VisibleTiles = FMath::Clamp(Tiles, 0, 3);
+    for (int32 Index = 0; Index < 3; ++Index)
+    {
+        const FName Bone(*FString::Printf(TEXT("tile_%d"), Index));
+        if (Index < VisibleTiles) Body->UnHideBoneByName(Bone);
+        else Body->HideBoneByName(Bone, PBO_None);
+    }
+    UE_LOG(LogFoundryRobot, Display, TEXT("ART_TILES id=%llu remaining=%d committed_state_only=1"), CoreId, VisibleTiles);
+}
+
+int32 AFoundryRobot::GetVisibleTileCount() const
+{
+    if (Definition != TEXT("C1-O02")) return 0;
+    int32 Count = 0;
+    for (int32 Index = 0; Index < 3; ++Index)
+        if (!Body->IsBoneHiddenByName(FName(*FString::Printf(TEXT("tile_%d"), Index)))) ++Count;
+    return Count;
+}
+
+void AFoundryRobot::UpdateVisibility() { SetActorHiddenInGame(bSceneHidden || bAwaitingReveal || RevealRemaining > 0); }
+void AFoundryRobot::SetSceneHidden(bool bInSceneHidden) { bSceneHidden = bInSceneHidden; UpdateVisibility(); }
+void AFoundryRobot::AwaitReveal() { bAwaitingReveal = true; UpdateVisibility(); }
+void AFoundryRobot::RevealAfter(float Seconds)
+{
+    bAwaitingReveal = false;
+    RevealRemaining = Seconds;
+    UpdateVisibility();
+    UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUMMON_WAIT id=%llu seconds=%.3f already_committed=1"), CoreId, Seconds);
+}
+
+void AFoundryRobot::CompletePendingReveal()
+{
+    if (!bAwaitingReveal && RevealRemaining <= 0) return;
+    bAwaitingReveal = false;
+    RevealRemaining = 0;
+    UpdateVisibility();
+    UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUMMON_RECONCILE id=%llu committed_state_only=1"), CoreId);
 }
 
 FBox AFoundryRobot::GetBodyBounds() const { return Body->Bounds.GetBox(); }
@@ -108,11 +162,11 @@ void AFoundryRobot::Play(const FString& Clip, uint64 EventId)
 {
     UAnimSequence* Sequence = Clips.FindChecked(Clip);
     Cue = Clip;
+    ClipAsset = Sequence->GetName();
+    CueEventId = EventId;
     Elapsed = 0;
     Duration = Sequence->GetPlayLength();
-    bDisplayCueFired = false;
-    bContactFired = false;
-    bSteamFired = false;
+    DisplayedCues.Empty();
     Body->bPauseAnims = false;
     Body->PlayAnimation(Sequence, Clip == TEXT("idle"));
     Body->SetPlayRate(1);
@@ -123,20 +177,21 @@ void AFoundryRobot::EnemyAction(int32 Move, uint64 EventId)
 {
     if (bTerminal) return;
     if (Move == 1 && bRam) { bCharged = true; Play(TEXT("charge"), EventId); }
-    else if (Move == 0) { bCharged = false; Play(TEXT("attack"), EventId); }
+    else if (Move == 0 && Clips.Contains(TEXT("attack"))) { bCharged = false; CommittedHits = 1; Play(TEXT("attack"), EventId); }
     else if (Move == 2) { bCharged = false; Play(TEXT("idle"), EventId); }
 }
 
-void AFoundryRobot::NamedAction(const FString& ActionName, uint64 EventId)
+void AFoundryRobot::NamedAction(const FString& ActionName, uint64 EventId, int32 InCommittedHits, bool bInCommittedSummon)
 {
     if (bTerminal) return;
     UE_LOG(LogFoundryRobot, Display, TEXT("ART_NAMED_ACTION id=%llu event=%llu action=%s"), CoreId, EventId, *ActionName);
-    if (bRam && ActionName == TEXT("charge")) { bCharged = true; Play(TEXT("charge"), EventId); }
-    else if ((bRam && ActionName == TEXT("blast")) || (!bRam && ActionName == TEXT("attack")))
-    { bCharged = false; Play(TEXT("attack"), EventId); }
-    else if (ActionName == TEXT("recover")) { bCharged = false; Play(TEXT("idle"), EventId); }
-    // Escape is driven by its committed enemy_escape event; other robot actions
-    // require their own art adapter and are not silently mapped to these two rigs.
+    if (ActionName == TEXT("escape")) return; // Its terminal event owns cleanup.
+    const FString Clip = bRam && ActionName == TEXT("blast") ? TEXT("attack") : ActionName;
+    checkf(Clips.Contains(Clip), TEXT("Unmapped authored robot action: %s / %s"), *Definition, *ActionName);
+    CommittedHits = InCommittedHits;
+    bCommittedSummon = bInCommittedSummon;
+    bCharged = ActionName == TEXT("charge");
+    Play(Clip, EventId);
 }
 
 void AFoundryRobot::Hit(int32 HpLoss, int32 ShieldLoss, uint64 EventId)
@@ -151,16 +206,32 @@ void AFoundryRobot::Hit(int32 HpLoss, int32 ShieldLoss, uint64 EventId)
     }
     const FString Band = 100 * Effective < 5LL * MaxHp ? TEXT("light") : (100 * Effective < 20LL * MaxHp ? TEXT("medium") : TEXT("heavy"));
     UE_LOG(LogFoundryRobot, Display, TEXT("ART_REACTION id=%llu event=%llu effective_loss=%lld max_hp=%d band=%s"), CoreId, EventId, Effective, MaxHp, *Band);
-    Play(TEXT("hit_") + Band, EventId); // Replaces short reactions; no growing queue.
+    if (Cue != TEXT("idle") && Cue != TEXT("charge_hold") && !Cue.StartsWith(TEXT("hit_")) && Elapsed < Duration)
+    {
+        // A counter-hit must not erase a committed multi-hit attack. Keep at
+        // most its strongest short reaction, then play it after that action.
+        if (PendingReaction.IsEmpty() || Band == TEXT("heavy") || (Band == TEXT("medium") && PendingReaction != TEXT("hit_heavy")))
+            PendingReaction = TEXT("hit_") + Band;
+    }
+    else Play(TEXT("hit_") + Band, EventId);
     Flash(TEXT("core"), false, .5f);
 }
 
-void AFoundryRobot::Die(uint64 EventId)
+void AFoundryRobot::Die(uint64 EventId, bool bDeathRelease, bool bInCommittedSummon)
 {
     if (bTerminal) return;
     bTerminal = true;
     bCharged = false;
-    Play(TEXT("death"), EventId);
+    bCommittedSummon = bInCommittedSummon;
+    DeathEventId = EventId;
+    const FString DeathClip = bDeathRelease && Clips.Contains(TEXT("death_release")) ? TEXT("death_release") : TEXT("death");
+    PendingReaction.Empty();
+    if (Cue != TEXT("idle") && Cue != TEXT("charge_hold") && !Cue.StartsWith(TEXT("hit_")) && CueEventId && Elapsed < Duration)
+    {
+        PendingDeath = DeathClip;
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_TERMINAL_QUEUED id=%llu event=%llu after=%s seconds=%.3f core_targetability=ended"), CoreId, EventId, *Cue, Duration - Elapsed);
+    }
+    else Play(DeathClip, EventId);
     UE_LOG(LogFoundryRobot, Display, TEXT("ART_DEATH id=%llu event=%llu core_targetability=ended dissolve_slots=%d cleanup_seconds=2"), CoreId, EventId, Materials.Num());
 }
 
@@ -205,10 +276,56 @@ void AFoundryRobot::Flash(FName Socket, bool bBeam, float Strength)
     FlashRemaining = .20f;
 }
 
+void AFoundryRobot::DisplayCue(const FString& Name, int32 HitIndex)
+{
+    const bool bHit = Name.Contains(TEXT("display_committed_hit")) || Name == TEXT("fouling_cable_spark");
+    if (bHit)
+    {
+        if (HitIndex >= CommittedHits) return;
+        Flash(TEXT("muzzle"), true, bRam || Definition == TEXT("C1-B01") ? 2.f : .65f);
+        ++PresentedHits;
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_MUZZLE id=%llu event=%llu clip=%s time=%.3f hit_index=%d committed_hits=%d socket=muzzle world=%s cosmetic_only=1"),
+            CoreId, CueEventId, *ClipAsset, Elapsed, HitIndex, CommittedHits, *Body->GetSocketLocation(TEXT("muzzle")).ToString());
+    }
+    else if (Name == TEXT("steam_vent") || Name == TEXT("thermal_vent"))
+    {
+        SteamRemaining = .45f;
+        SteamMesh->SetVisibility(true);
+        SteamMaterial->SetScalarParameterValue(TEXT("Dissolve"), 0);
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_STEAM id=%llu time=%.3f cosmetic_only=1"), CoreId, Elapsed);
+    }
+    else if (Name == TEXT("display_committed_summon") || Name == TEXT("display_committed_death_spawn"))
+    {
+        if (!bCommittedSummon) return;
+        Flash(TEXT("muzzle"), false, 1.2f);
+        ++PresentedSummons;
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUMMON_CUE id=%llu event=%llu time=%.3f creates_gameplay_enemy=0"), CoreId, CueEventId, Elapsed);
+    }
+    else if (Name == TEXT("core_burst_cosmetic")) Flash(TEXT("core"), false, 2);
+    else if (Name == TEXT("collapse_contact"))
+    {
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_COLLAPSE_CONTACT id=%llu time=%.3f"), CoreId, Elapsed);
+    }
+    else if (Name != TEXT("dissolve_start_all_components") && Name != TEXT("destroy_actor_and_fx") && Name != TEXT("despawn_without_death_fx"))
+    {
+        Flash(TEXT("core"), false, .8f);
+        UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUPPORT_CUE id=%llu event=%llu kind=%s time=%.3f cosmetic_only=1"), CoreId, CueEventId, *Name, Elapsed);
+    }
+}
+
 void AFoundryRobot::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     Elapsed += DeltaSeconds;
+    if (RevealRemaining > 0)
+    {
+        RevealRemaining = FMath::Max(0.f, RevealRemaining - DeltaSeconds);
+        if (RevealRemaining <= 0)
+        {
+            UpdateVisibility();
+            UE_LOG(LogFoundryRobot, Display, TEXT("ART_SUMMON_REVEAL id=%llu"), CoreId);
+        }
+    }
     if (FlashRemaining > 0)
     {
         FlashRemaining = FMath::Max(0.f, FlashRemaining - DeltaSeconds);
@@ -219,21 +336,25 @@ void AFoundryRobot::Tick(float DeltaSeconds)
     {
         SteamRemaining = FMath::Max(0.f, SteamRemaining - DeltaSeconds);
         const float Progress = 1 - SteamRemaining / .45f;
-        SteamMesh->SetRelativeLocation(FVector(55, 0, 230 + Progress * 80));
+        SteamMesh->SetWorldLocation(Body->GetSocketLocation(TEXT("core")) + FVector(55, 0, 80 + Progress * 80));
         SteamMesh->SetRelativeScale3D(FVector(.18f + Progress * .6f, .18f + Progress * .6f, .25f + Progress * .9f));
         SteamMaterial->SetScalarParameterValue(TEXT("Dissolve"), Progress);
         if (SteamRemaining <= 0) SteamMesh->SetVisibility(false);
     }
     const float Glow = bCharged ? 2.3f + .4f * FMath::Sin(GetWorld()->GetTimeSeconds() * 8) : 1.f;
     for (UMaterialInstanceDynamic* Material : Materials) Material->SetScalarParameterValue(TEXT("Glow"), Glow);
-    if (Cue == TEXT("death"))
+    // Metadata only schedules display. It never calls the rules engine.
+    for (int32 Index = 0; Index < UE_ARRAY_COUNT(FoundryVisualData::Cues); ++Index)
     {
-        if (!bDisplayCueFired && Elapsed >= .20f) { Flash(TEXT("core"), false, 2); bDisplayCueFired = true; }
-        if (!bContactFired && Elapsed >= (bRam ? .85f : .60f))
+        const auto& Row = FoundryVisualData::Cues[Index];
+        if (ClipAsset == Row.Asset && Elapsed >= Row.At && !DisplayedCues.Contains(Index))
         {
-            bContactFired = true;
-            UE_LOG(LogFoundryRobot, Display, TEXT("ART_COLLAPSE_CONTACT id=%llu time=%.3f"), CoreId, Elapsed);
+            DisplayedCues.Add(Index);
+            DisplayCue(Row.Event, Row.HitIndex);
         }
+    }
+    if (Cue == TEXT("death") || Cue == TEXT("death_release"))
+    {
         const float Dissolve = FMath::Clamp((Elapsed - 1.10f) / .90f, 0.f, 1.f);
         for (UMaterialInstanceDynamic* Material : Materials) Material->SetScalarParameterValue(TEXT("Dissolve"), Dissolve);
         if (!bDissolveLogged && Dissolve > 0)
@@ -252,23 +373,21 @@ void AFoundryRobot::Tick(float DeltaSeconds)
         return;
     }
     if (Cue == TEXT("escape") && Elapsed >= Duration) { Destroy(); return; }
-    if (Cue == TEXT("attack") && !bDisplayCueFired && Elapsed >= (bRam ? .30f : .33f))
+    if (Cue != TEXT("idle") && Cue != TEXT("charge_hold") && Elapsed >= Duration)
     {
-        Flash(TEXT("muzzle"), true, bRam ? 2.f : .65f);
-        bDisplayCueFired = true;
-        UE_LOG(LogFoundryRobot, Display, TEXT("ART_MUZZLE id=%llu clip=%s time=%.3f socket=muzzle world=%s cosmetic_only=1"), CoreId, bRam ? TEXT("BR_attack_blast") : TEXT("RM_attack_rivet"), Elapsed, *Body->GetSocketLocation(TEXT("muzzle")).ToString());
-    }
-    if (bRam && Cue == TEXT("attack") && !bSteamFired && Elapsed >= .45f)
-    {
-        SteamRemaining = .45f;
-        SteamMesh->SetVisibility(true);
-        SteamMaterial->SetScalarParameterValue(TEXT("Dissolve"), 0);
-        bSteamFired = true;
-        UE_LOG(LogFoundryRobot, Display, TEXT("ART_STEAM id=%llu time=%.3f cosmetic_only=1"), CoreId, Elapsed);
-    }
-    if (Cue == TEXT("charge") && Elapsed >= Duration) HoldCharge();
-    else if ((Cue.StartsWith(TEXT("hit_")) || Cue == TEXT("attack")) && Elapsed >= Duration)
-    {
-        if (bCharged) HoldCharge(); else Play(TEXT("idle"));
+        if (!PendingDeath.IsEmpty())
+        {
+            const FString Death = PendingDeath;
+            PendingDeath.Empty();
+            Play(Death, DeathEventId);
+        }
+        else if (!PendingReaction.IsEmpty())
+        {
+            const FString Reaction = PendingReaction;
+            PendingReaction.Empty();
+            Play(Reaction);
+        }
+        else if (bCharged) HoldCharge();
+        else Play(TEXT("idle"));
     }
 }

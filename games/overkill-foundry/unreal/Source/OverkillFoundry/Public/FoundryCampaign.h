@@ -19,11 +19,15 @@ public:
     FString Page = TEXT("title"), ReturnPage, Drawer, Message;
     bool bDiagnostic = false, bSaveUnavailable = false, bCanResumeInMemory = false;
     bool bPrecisionModal = false;
+    bool bCollectionChoice = false;
+    std::vector<foundry_controls::CollectionOption> CollectionOptions;
+    std::string CollectionChoiceHash;
     uint64 PrecisionAttempt = 0;
     overkill::Id PrecisionChoice = 0;
     int32 PrecisionSteering = 0, PrecisionResult = -1;
     uint64 ViewRevision = 1, SceneRevision = 0;
     overkill::Id FocusRecipe = 0;
+    overkill::Id FocusPart = 0;
     FString SavePath;
 
     const overkill::Campaign* Current() const;
@@ -35,6 +39,9 @@ public:
     bool BeginPrecision(overkill::Id RetryChoice = 0);
     void CancelPrecision(uint64 Attempt);
     bool FinishPrecision(uint64 Attempt, int32 Result);
+    bool BeginCollectionChoice(int32 Result = -1);
+    bool CommitCollectionChoice(int32 Index);
+    void CancelCollectionChoice();
     overkill::Action PrecisionAction(int32 Result) const;
     void LeaveFailedPrecision();
     void Navigate(const FString& Destination);

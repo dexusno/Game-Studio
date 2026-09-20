@@ -1,0 +1,1065 @@
+{
+  "schema": 1,
+  "checkpoint": "Advanced recipe action controls",
+  "recorded_at": "2026-09-20T19:34:47.004806+02:00",
+  "engine": "5.8.2-56702186+++UE5+Release-5.8",
+  "compiler": "14.44.35228",
+  "sdk": "10.0.22621.0",
+  "core_digest": "b915b36ef05991e865abed40e9ebcd6fe82db70e8bf20556ad47633a5e32f2cf",
+  "source_graph_lf_sha256": "1a8e1415197d65b993336250e8acf080198b48f72dcf5ace6ae994fe3e3dcd46",
+  "graph_algorithm": "SHA256 of sorted path + space + LF-normalized SHA256 + newline records",
+  "sources": [
+    {
+      "path": "games/overkill-foundry/core/include/overkill/campaign.hpp",
+      "bytes": 6370,
+      "sha256": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+      "sha256_lf": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/city_content.hpp",
+      "bytes": 1431,
+      "sha256": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+      "sha256_lf": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/core.hpp",
+      "bytes": 14023,
+      "sha256": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+      "sha256_lf": "78a704bde6c11504513fc2346c1010c011a18f4fabb70cf800fbdf9cad376d83"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/robots.hpp",
+      "bytes": 2566,
+      "sha256": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+      "sha256_lf": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/route.hpp",
+      "bytes": 1849,
+      "sha256": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+      "sha256_lf": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66"
+    },
+    {
+      "path": "games/overkill-foundry/core/include/overkill/upgrades.hpp",
+      "bytes": 2568,
+      "sha256": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+      "sha256_lf": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign.cpp",
+      "bytes": 31250,
+      "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+      "sha256_lf": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_serialization.cpp",
+      "bytes": 18101,
+      "sha256": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+      "sha256_lf": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/campaign_upgrades.cpp",
+      "bytes": 19009,
+      "sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+      "sha256_lf": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue.cpp",
+      "bytes": 848,
+      "sha256": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+      "sha256_lf": "f10c38191a41b8624b1f5df2fb90decf9c0595b5afe3acd01a71028f2b92dca0"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/catalogue_data.inc",
+      "bytes": 34550,
+      "sha256": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+      "sha256_lf": "6d66bab5b4dd81a04686f6479509ba1e0febcb2922e68c4aff5126ab1e7e75fe"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.cpp",
+      "bytes": 2254,
+      "sha256": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+      "sha256_lf": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/city_content.generated.inc",
+      "bytes": 89519,
+      "sha256": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+      "sha256_lf": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/core.cpp",
+      "bytes": 44641,
+      "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb",
+      "sha256_lf": "27972173c2c2f62c35baa32aac65e495c60f102b85d09fe77ac4e1f570c9a3c9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/recipe_effects.inl",
+      "bytes": 52894,
+      "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+      "sha256_lf": "c0b414980b0e81c295b1b9f5c19c84e66f19244214db0aebce1121ab83431d45"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/robots.cpp",
+      "bytes": 16029,
+      "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+      "sha256_lf": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/route.cpp",
+      "bytes": 16099,
+      "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+      "sha256_lf": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/serialization.cpp",
+      "bytes": 17652,
+      "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+      "sha256_lf": "98581a102ab4ad1115855f79bdcde0157bc4ab3d8ff5e2dceb785de34a0129be"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrade_effects.inl",
+      "bytes": 37125,
+      "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+      "sha256_lf": "1f74d51a227c17d62f6715941286b1e46f684755324d0bdda3aea3d81803b5a9"
+    },
+    {
+      "path": "games/overkill-foundry/core/src/upgrades.cpp",
+      "bytes": 4476,
+      "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+      "sha256_lf": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/campaign_session.hpp",
+      "bytes": 1565,
+      "sha256": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5",
+      "sha256_lf": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/include/overkill/save_store.hpp",
+      "bytes": 1241,
+      "sha256": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d",
+      "sha256_lf": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/campaign_session.cpp",
+      "bytes": 3999,
+      "sha256": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+      "sha256_lf": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5"
+    },
+    {
+      "path": "games/overkill-foundry/platform/src/windows_save_store.cpp",
+      "bytes": 8175,
+      "sha256": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+      "sha256_lf": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7"
+    },
+    {
+      "path": "games/overkill-foundry/presentation/precision.hpp",
+      "bytes": 2504,
+      "sha256": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b",
+      "sha256_lf": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+    },
+    {
+      "path": "games/overkill-foundry/tools/unreal.ps1",
+      "bytes": 14042,
+      "sha256": "f6a549505f60dfa8bf7e4df95f3b5dc90389a26180ea179d8f0ffab39170fb6c",
+      "sha256_lf": "f6a549505f60dfa8bf7e4df95f3b5dc90389a26180ea179d8f0ffab39170fb6c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultEngine.ini",
+      "bytes": 776,
+      "sha256": "42c7b953a62d542fc201f080bb23d36e32d811765339bbc5c2276609355f4af0",
+      "sha256_lf": "71ed0bf8a39ca275cde061613851b106bcd98b1eaa7895249e8dfb506c14e913"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultGame.ini",
+      "bytes": 561,
+      "sha256": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202",
+      "sha256_lf": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultInput.ini",
+      "bytes": 168,
+      "sha256": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9",
+      "sha256_lf": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/OverkillFoundry.uproject",
+      "bytes": 583,
+      "sha256": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129",
+      "sha256_lf": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry.Target.cs",
+      "bytes": 360,
+      "sha256": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079",
+      "sha256_lf": "4af133c8cecac8aa13728473751b6f1ae88c6efa4884ed13cf144d24e049c079"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/OverkillFoundry.Build.cs",
+      "bytes": 4043,
+      "sha256": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d",
+      "sha256_lf": "2259081ee1b701f600d185f3c2c487ce3126a25b1b4f5381d2ef4e83d7a5e76d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryArtProbe.cpp",
+      "bytes": 8717,
+      "sha256": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7",
+      "sha256_lf": "b970014457d4c945ce3fed77347bfc8f37f459699d106b01299d1ab598205fa7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryAudio.cpp",
+      "bytes": 9933,
+      "sha256": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07",
+      "sha256_lf": "0d8b796767ca47e60a51effb856e5fe79089ad265206d296037b9a11c0624d07"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaign.cpp",
+      "bytes": 16564,
+      "sha256": "13ac2e332444feba43c5f5642f66cb1b95b0c0caa2baa20989d096f890023f15",
+      "sha256_lf": "13ac2e332444feba43c5f5642f66cb1b95b0c0caa2baa20989d096f890023f15"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignProbe.cpp",
+      "bytes": 11752,
+      "sha256": "03bf3a32c65892e88d7e504ce539dfe71b3b079d6e3ef13e31d1f3bee989cf86",
+      "sha256_lf": "03bf3a32c65892e88d7e504ce539dfe71b3b079d6e3ef13e31d1f3bee989cf86"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "bytes": 56471,
+      "sha256": "c822dd921a3e2c772470d272152ae8f95520457d42dd69e4be5664c799e0c104",
+      "sha256_lf": "c822dd921a3e2c772470d272152ae8f95520457d42dd69e4be5664c799e0c104"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryDebugHUD.cpp",
+      "bytes": 16091,
+      "sha256": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4",
+      "sha256_lf": "862d31561c6b7e00dc1c42054bc6a897f7f542cc3bbf08042bf4a5f1578b32d4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryHost.cpp",
+      "bytes": 34177,
+      "sha256": "d552196749d5671bc217d316d87b0a8f88e587e8eaa1b360d6237337377abd9f",
+      "sha256_lf": "d552196749d5671bc217d316d87b0a8f88e587e8eaa1b360d6237337377abd9f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryMara.cpp",
+      "bytes": 13312,
+      "sha256": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982",
+      "sha256_lf": "c0e9c2809e1997832227b7c9e6f58a7580f7e7cb92519b8f204d38e973750982"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryPrecision.cpp",
+      "bytes": 7451,
+      "sha256": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d",
+      "sha256_lf": "d718da8a3ed83e885d2bd3b41cbe6fb71355fb6df4d150f41715a1b81433ee4d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControlProbe.cpp",
+      "bytes": 11280,
+      "sha256": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa",
+      "sha256_lf": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControls.cpp",
+      "bytes": 11103,
+      "sha256": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6",
+      "sha256_lf": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRobot.cpp",
+      "bytes": 18186,
+      "sha256": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f",
+      "sha256_lf": "f7886818f4e798a9bb2a9435f50ef87a6d38f046d18d2d992f38b6ce35e81f0f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterData.inl",
+      "bytes": 12712,
+      "sha256": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5",
+      "sha256_lf": "84c550818290dee11bfff2551141713f08bbb348c828aefedd5d487b1e3732d5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRosterProbe.cpp",
+      "bytes": 17210,
+      "sha256": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7",
+      "sha256_lf": "50efb2c4ff143f5ee33c9af5818d047c1507a20dbd12e1aa05ef76e7b98897d7"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundrySession.cpp",
+      "bytes": 13054,
+      "sha256": "2d38a5423f07dfcc5c452257119e143c0b373a141b731e193f9bc2935e1b2754",
+      "sha256_lf": "2d38a5423f07dfcc5c452257119e143c0b373a141b731e193f9bc2935e1b2754"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/OverkillFoundry.cpp",
+      "bytes": 127,
+      "sha256": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208",
+      "sha256_lf": "146d9125a1d399ca965687f6c58c49870b37c780b15b6a3c6b61d9098336f208"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaign.cpp",
+      "bytes": 64,
+      "sha256": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a",
+      "sha256_lf": "ffc7de91403093c438397e11abbbde9553cd0d167f425f477cf1fe6e86d3d11a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSerialization.cpp",
+      "bytes": 78,
+      "sha256": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4",
+      "sha256_lf": "1ee7d173695177063e18f4c7c7ab0cba0fa60aaf1e7964b4fce579f2514793f4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignSession.cpp",
+      "bytes": 76,
+      "sha256": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2",
+      "sha256_lf": "5767c17f4f15e3d3340a2d78473fb6e5a5abc402c844027bc4cd2caa58568fc2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCampaignUpgrades.cpp",
+      "bytes": 73,
+      "sha256": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e",
+      "sha256_lf": "6bba092422edf62511c632053191d6d6ec21befcb8b1683ec753bbaf00a85a6e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCatalogue.cpp",
+      "bytes": 113,
+      "sha256": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72",
+      "sha256_lf": "78f7d3b4964ed2d9170b609df66540ca158bc7fe82f6eb28782b501c2d817d72"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCityContent.cpp",
+      "bytes": 68,
+      "sha256": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462",
+      "sha256_lf": "31d27d134fa1eca72bc55ce530b72e6b888146ebd14e6f73af3f7bc782050462"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedCore.cpp",
+      "bytes": 110,
+      "sha256": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938",
+      "sha256_lf": "ec103f766101b678691cea894eade52f3913dc5d28c15e8353a4ad738408c938"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRobots.cpp",
+      "bytes": 110,
+      "sha256": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c",
+      "sha256_lf": "76ddc1742b63e4d8abf85d597d1ac1ef188f284ffb26f2b42aa9e00f9fe9b41c"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedRoute.cpp",
+      "bytes": 61,
+      "sha256": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2",
+      "sha256_lf": "a93b15d61ff1f9067b2692daf4e57800a5b8a9c76fa83f931924b64581397ed2"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSaveStore.cpp",
+      "bytes": 119,
+      "sha256": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e",
+      "sha256_lf": "6a2d9951609d9c40a3473f547d8eb988eea3f6fce149caaeb2e4b007e006105e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedSerialization.cpp",
+      "bytes": 117,
+      "sha256": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92",
+      "sha256_lf": "7fd00df49c646d251c4977080911141d8be484f0b520b97eca6fc2b2320b1e92"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/SharedUpgrades.cpp",
+      "bytes": 64,
+      "sha256": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533",
+      "sha256_lf": "9a92a5f5ee9afeac98bee0d39dae7ad5292b1324029f29c909356d6ea0cf4533"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryAudio.h",
+      "bytes": 1382,
+      "sha256": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd",
+      "sha256_lf": "8895f4251f985f3b5afa210a24f2f76c5ebbbb5c7c0114e730e7b43a485436dd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaign.h",
+      "bytes": 2204,
+      "sha256": "a981c0a9cae165fce0232f1a5ddd9ad204b484d8fd0c9596922994b4492d9322",
+      "sha256_lf": "a981c0a9cae165fce0232f1a5ddd9ad204b484d8fd0c9596922994b4492d9322"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryCampaignUI.h",
+      "bytes": 172,
+      "sha256": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4",
+      "sha256_lf": "1254aa5d7c47fafa025d13229d7f4c2d0193ca5d6c852e405c38bf0678e457e4"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryHost.h",
+      "bytes": 4630,
+      "sha256": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f",
+      "sha256_lf": "8fc97d0af09488cf60d7ac13dbea8851d802c2ce9915a866e5b6bc019962699f"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryMara.h",
+      "bytes": 2734,
+      "sha256": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd",
+      "sha256_lf": "5d642b2e756a11acc88ccc9d7720e339b28bdda61e156b54d90d24d9a70a34fd"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryPrecision.h",
+      "bytes": 645,
+      "sha256": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421",
+      "sha256_lf": "a684fdc00932661e18b9c5940f115a0329f7eed44470700ae1b0294bdfb72421"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControlProbe.h",
+      "bytes": 201,
+      "sha256": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0",
+      "sha256_lf": "4bc26830885e93f689b904517c9a5506764dcfa24e1b5b047521e586779bbff0"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControls.h",
+      "bytes": 2168,
+      "sha256": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d",
+      "sha256_lf": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRobot.h",
+      "bytes": 3501,
+      "sha256": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3",
+      "sha256_lf": "0343cf26321d318b212053d871fe6ac4c338b3c81a9b647488558d1806d339c3"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundrySession.h",
+      "bytes": 1860,
+      "sha256": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a",
+      "sha256_lf": "f5644b7958321385c0653b10ff629316debceb4ee1389e88fd0d65f44aa2ca0a"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundryEditor.Target.cs",
+      "bytes": 374,
+      "sha256": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d",
+      "sha256_lf": "f3becf39adc184d8ba99e622988539f89c11d353d093fbb4db428664431f434d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/CMakeLists.txt",
+      "bytes": 1660,
+      "sha256": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e",
+      "sha256_lf": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/capture_checkpoint.py",
+      "bytes": 6272,
+      "sha256": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5",
+      "sha256_lf": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/main.cpp",
+      "bytes": 9732,
+      "sha256": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32",
+      "sha256_lf": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/CMakeLists.txt",
+      "bytes": 288,
+      "sha256": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b",
+      "sha256_lf": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/main.cpp",
+      "bytes": 9405,
+      "sha256": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3",
+      "sha256_lf": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3"
+    }
+  ],
+  "artifacts": [
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Build-20260920-192030.log",
+      "archive": "logs/Build-20260920-192030.log",
+      "bytes": 12117,
+      "sha256": "7b1b7e3c8e8547b662cf9da4e631e0c7380d83f052d2a692dced1c20d4a39a16"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/BuildGame-20260920-192257.log",
+      "archive": "logs/BuildGame-20260920-192257.log",
+      "bytes": 11765,
+      "sha256": "f6f2a96ca8014bea02a8bd9dbd4dbbd57306f394bbdcf1485ef8a67f022e7794"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/CampaignProbe-20260920-192454.log",
+      "archive": "logs/CampaignProbe-20260920-192454.log",
+      "bytes": 214217,
+      "sha256": "d7bfcb3ea5b47cc23f9b680c3e02489cc8144cea6608b95c5369aec8db354889"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/CampaignProbe-20260920-192454.log.binary.json",
+      "archive": "logs/CampaignProbe-20260920-192454.log.binary.json",
+      "bytes": 292,
+      "sha256": "bb7b37525e523229029b86f7ac6f7697ba6c3df8baa3ddbd8585ecf5bbb79985"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Fixture-20260920-192703.log",
+      "archive": "logs/Fixture-20260920-192703.log",
+      "bytes": 148941,
+      "sha256": "a3d28742678214f4bbe55acf28e7f4d72eca3fe579e0b6a21d543782f52bcda5"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Fixture-20260920-192703.log.binary.json",
+      "archive": "logs/Fixture-20260920-192703.log.binary.json",
+      "bytes": 286,
+      "sha256": "b64f328eaa26d5b4aae95078062c2572d9d6ee1d15ad63e0f2a6e53382e33034"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-185422.log",
+      "archive": "logs/Run-20260920-185422.log",
+      "bytes": 135598,
+      "sha256": "55c691c775d2f82164b1bb4e1795dcf2c6479eac8afb5dd1a6e4b0118149ad8c"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-185422.log.binary.json",
+      "archive": "logs/Run-20260920-185422.log.binary.json",
+      "bytes": 195,
+      "sha256": "802ab3d8d3722c93891c9a3feee21182f47675edc6cf224099185555d96b5918"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-185738.log",
+      "archive": "logs/Run-20260920-185738.log",
+      "bytes": 138951,
+      "sha256": "76fe319ae8e745474deef0baf4c088b729ef55d0326f03a89c1d5d531b30874e"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-185738.log.binary.json",
+      "archive": "logs/Run-20260920-185738.log.binary.json",
+      "bytes": 195,
+      "sha256": "94899e10a4c45851d164dc569d9d836b5e4c92c6bcae7ebb0abf6749da07527d"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-190937.log",
+      "archive": "logs/Run-20260920-190937.log",
+      "bytes": 132767,
+      "sha256": "645135b0954bedaf07df3b61e8cd8e0f351bc8a97c5ba67df92544d4706e2b99"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-190937.log.binary.json",
+      "archive": "logs/Run-20260920-190937.log.binary.json",
+      "bytes": 195,
+      "sha256": "9b0bba5883dad4320b6c6f92663a2296c08937a655ade261f620ed717666dacd"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-191054.log",
+      "archive": "logs/Run-20260920-191054.log",
+      "bytes": 147970,
+      "sha256": "6877ebf9c16d63a8d41f5347ab85067a3b9305eb5409cddaa3a23fb8925de00e"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-191054.log.binary.json",
+      "archive": "logs/Run-20260920-191054.log.binary.json",
+      "bytes": 195,
+      "sha256": "a7516cf1e73fc83484626d21c5545f01212ddba1db731a2c068a7cbbd05bdcbd"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192749.log",
+      "archive": "logs/Run-20260920-192749.log",
+      "bytes": 132112,
+      "sha256": "133e4c00016c5bebd837e97f6cd30685d46bc602da71528a26598e1ec2d56097"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192749.log.binary.json",
+      "archive": "logs/Run-20260920-192749.log.binary.json",
+      "bytes": 193,
+      "sha256": "627b59c0a18c41d6ef37a52d9fb0e05b482accb5f02d97029fbc6a45a3c8c864"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192903.log",
+      "archive": "logs/Run-20260920-192903.log",
+      "bytes": 132720,
+      "sha256": "82ccfecdf4098c3a6571fc25445d51a26be2950a918736df176331e431e82e95"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192903.log.binary.json",
+      "archive": "logs/Run-20260920-192903.log.binary.json",
+      "bytes": 195,
+      "sha256": "915851587a001730e30e044f1d096c54f07c099cd2c52250ab69e8ca3efc4128"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192949.log",
+      "archive": "logs/Run-20260920-192949.log",
+      "bytes": 136625,
+      "sha256": "bf97c6a209f6e90ee2c22f1ab103804705df6fee7e2139974c840619a5c65697"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/BuildLogs/Run-20260920-192949.log.binary.json",
+      "archive": "logs/Run-20260920-192949.log.binary.json",
+      "bytes": 195,
+      "sha256": "3b53b730ed40f89a81ccf0a6e3524ede9a64aa6c4a0f8edf890f503a2aa512bd"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-action.png",
+      "archive": "captures/campaign-action.png",
+      "bytes": 1088356,
+      "sha256": "991303f97ffc924661d9add1d365db32a1b7ce9d89cd490de7c633ddcf620bc5"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-action-settled.png",
+      "archive": "captures/campaign-action-settled.png",
+      "bytes": 1099640,
+      "sha256": "570f57c57add7833d8f7f4c46cd167196e7a33ca21311fb6964583ceab588e76"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-collection.png",
+      "archive": "captures/campaign-collection.png",
+      "bytes": 785050,
+      "sha256": "67811802e205268444e0ea4ad51ba34e1e17ba8a14c227cc409d89b181c16452"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-enemy-turn.png",
+      "archive": "captures/campaign-enemy-turn.png",
+      "bytes": 830420,
+      "sha256": "e8a4d47138dd5448610ec558e7505670dfc7245b61244ced1de2a21c96254459"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-locked-and-loaded.png",
+      "archive": "captures/campaign-locked-and-loaded.png",
+      "bytes": 890575,
+      "sha256": "07c642c0954042ec6c9c0e734247bea60bd6d11ca855adc1895379f0c7421b57"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-mayor.png",
+      "archive": "captures/campaign-mayor.png",
+      "bytes": 278514,
+      "sha256": "0b4fa4c41f2922018a4c1e694352de34313cd58c52811024902e6ac911dd5039"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-next-route.png",
+      "archive": "captures/campaign-next-route.png",
+      "bytes": 265518,
+      "sha256": "f68906ab49a37e2fb3c1b542c9353bd825d4ca04dfe7f3009e14a7fd4d0cea59"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-parts.png",
+      "archive": "captures/campaign-parts.png",
+      "bytes": 310300,
+      "sha256": "f4fff1be69f53ba6212e79dbb5296dfd01855cca8bdd6421314352bf35101358"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-recipe-reward.png",
+      "archive": "captures/campaign-recipe-reward.png",
+      "bytes": 273203,
+      "sha256": "2eaaa5673df26c855e29836d0f1009060cfdeb81b83d25403a1fb7cd58447a21"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-recipes.png",
+      "archive": "captures/campaign-recipes.png",
+      "bytes": 298833,
+      "sha256": "56eba68bbc4d0ce60434b21c3f50d7c5d18598d7143837fed9399d28802ffbf5"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-reloaded.png",
+      "archive": "captures/campaign-reloaded.png",
+      "bytes": 893531,
+      "sha256": "944b0c0635cedc54433d027a21d6cae76d64efe5f16e1dbcf21bdc9873ab96cc"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-route.png",
+      "archive": "captures/campaign-route.png",
+      "bytes": 249315,
+      "sha256": "05f6a52ea6a18aae64437bb7224025bd7a98a5f9019628358783606169c6622d"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-shop.png",
+      "archive": "captures/campaign-shop.png",
+      "bytes": 260914,
+      "sha256": "cb718e20fb003f89e444f7cf60dac147023e6a7a332598faff158fd235aa5e6e"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-skip-confirm.png",
+      "archive": "captures/campaign-skip-confirm.png",
+      "bytes": 293624,
+      "sha256": "038cb7c2c8e5ee1235c7f801765a86a4fb20e0fb84314a25074562705ed23bd7"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-title.png",
+      "archive": "captures/campaign-title.png",
+      "bytes": 872845,
+      "sha256": "d82a5bb3352f8906a80901fc9d37a553b338e3a92fdaffc8f84a6acb05b97e10"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Screenshots/campaign-victory.png",
+      "archive": "captures/campaign-victory.png",
+      "bytes": 272763,
+      "sha256": "419f931688d9e30daece006f725f682e6cddeff48ca49ecdb395edb0c65601f8"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-fixture-origins.json",
+      "archive": "native/final-fixture-origins.json",
+      "bytes": 1320,
+      "sha256": "2f3e6b7ddf9437b6937345fec0c3a8acdea9f36ba668b4a5a823a188de058fd3"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-evidence.json",
+      "archive": "native/final-native-evidence.json",
+      "bytes": 8089,
+      "sha256": "a944f012f435d5ba329ace7f7035f1ea2ff3efe54d49ac3e4f5ed8833071eeb7"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-loaded-firing-order.jpg",
+      "archive": "native/final-native-loaded-firing-order.jpg",
+      "bytes": 107716,
+      "sha256": "89c1125caa7b281a0be94222158df700f6e58d5ac9792a692a5eb2d88bd6a531"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-new-recipe-scroll-top.jpg",
+      "archive": "native/final-native-new-recipe-scroll-top.jpg",
+      "bytes": 125827,
+      "sha256": "a172f7b1028c60b885898975b0df7214a6992646abc966a0f3d81870858cb821"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-scroll-before-selection.jpg",
+      "archive": "native/final-native-scroll-before-selection.jpg",
+      "bytes": 121221,
+      "sha256": "9f09f5c24b4a9141561f8d88920df12645cc165106f61d2ea1688a0644aecd1e"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-spent-mould-no-selector.jpg",
+      "archive": "native/final-native-spent-mould-no-selector.jpg",
+      "bytes": 123092,
+      "sha256": "4aea628fab59d7a737e6e3611aa5c5413a5e19525b7c215baee4edf32967afa3"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-utility-death-hold.jpg",
+      "archive": "native/final-native-utility-death-hold.jpg",
+      "bytes": 116565,
+      "sha256": "2ea2ecfcd6facd3a4702f82c8f9c0b5139a46e00e512f841c24d80e8eb46dd88"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-utility-kill-ready.jpg",
+      "archive": "native/final-native-utility-kill-ready.jpg",
+      "bytes": 117888,
+      "sha256": "6797d95a6f8b4058b5538c137eb3f2e1ed8bda3ccd98691ceeb3cd6d09bb103b"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/final-native-utility-rewards-after-deaths.jpg",
+      "archive": "native/final-native-utility-rewards-after-deaths.jpg",
+      "bytes": 66679,
+      "sha256": "30f1c25398d4f6981f40b2d3f3f3f7471d641f77428834ce5d5a50cbf8444537"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-advanced-fire-return-same-round.jpg",
+      "archive": "native/native-advanced-fire-return-same-round.jpg",
+      "bytes": 133029,
+      "sha256": "dd550ecca87c88a5097f8fb1da15c7f137ba46b3f9cba0bd2bbe250607e1caa7"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-advanced-fire.jpg",
+      "archive": "native/native-advanced-fire.jpg",
+      "bytes": 130048,
+      "sha256": "33d8debb4697b248c29b11c2a0f7db7537a15f5d969a063d1144b95b0f681bbf"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-advanced-loaded-16c.jpg",
+      "archive": "native/native-advanced-loaded-16c.jpg",
+      "bytes": 136819,
+      "sha256": "b2d04ff2a4c88e2d0232dbcbf11aa2585f87ee4b49561e8f3c2c697b03558c12"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-advanced-ready-to-fire.jpg",
+      "archive": "native/native-advanced-ready-to-fire.jpg",
+      "bytes": 145805,
+      "sha256": "0c4230b264235ac254c4586d545661895b2fa3938b602494f6337becebf67aa0"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-bullet-reordered-reservation.jpg",
+      "archive": "native/native-bullet-reordered-reservation.jpg",
+      "bytes": 125150,
+      "sha256": "fb3739b6e97e42bd35cc400fe38004f9a614d22bc84afcb768c658ecc76169fe"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-discount-committed.jpg",
+      "archive": "native/native-discount-committed.jpg",
+      "bytes": 110946,
+      "sha256": "97a758fab2ed5b54250cfe76f72e0c0e5e667cdaaf828dd9cdf0305b4f08df97"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-discount-two-allocations.jpg",
+      "archive": "native/native-discount-two-allocations.jpg",
+      "bytes": 110499,
+      "sha256": "a0904d91a9cf69cce65cd548649109602ed2d9fbf5c99cd0a44c30ab1fe82b75"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-discount-zero-payable.jpg",
+      "archive": "native/native-discount-zero-payable.jpg",
+      "bytes": 109831,
+      "sha256": "77791d4d9ca4f24c63f9f48fc71be9a645a9c8de0a0a78391419279090726872"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-fine-mould-crafted.jpg",
+      "archive": "native/native-fine-mould-crafted.jpg",
+      "bytes": 119130,
+      "sha256": "aa7dce822b8f6b557a34b01efb54245cc1f888940d0ea6b75699713add352b62"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-fine-mould-output-two.jpg",
+      "archive": "native/native-fine-mould-output-two.jpg",
+      "bytes": 112019,
+      "sha256": "069ff5d143753098be87419631b71c16e7f55d637be93df4c8e84b31da9b905f"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-committed-retry.jpg",
+      "archive": "native/native-heavy-committed-retry.jpg",
+      "bytes": 95817,
+      "sha256": "602c170684b98e2a9cf51d95b5c1d09512e59739ab955383bcca7a38e7c7bbec"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-escape-blocked.jpg",
+      "archive": "native/native-heavy-escape-blocked.jpg",
+      "bytes": 127269,
+      "sha256": "3d47eae0c1f0eb9eeaca96784929da299ca1e8df9e2280ad677a8ae8751065fb"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-final-supplies.jpg",
+      "archive": "native/native-heavy-final-supplies.jpg",
+      "bytes": 127411,
+      "sha256": "c9b07f8b92399825ed2b45607427e33a5f126de0d5d6061affad676d888a6bbf"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-focus-away-fixed.jpg",
+      "archive": "native/native-heavy-focus-away-fixed.jpg",
+      "bytes": 127659,
+      "sha256": "7f2124712ecad5941a86c5da035cc527a0f567a06536a901f21b83bde0b3f796"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-measured-discard.jpg",
+      "archive": "native/native-heavy-measured-discard.jpg",
+      "bytes": 127605,
+      "sha256": "d5b34d94ef67e34248c6d27cf2926088b86da16282ec0aaf63b5af4b362aae40"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-precision-ready.jpg",
+      "archive": "native/native-heavy-precision-ready.jpg",
+      "bytes": 120169,
+      "sha256": "094691e2ba9ff30f59f005d30646dc4d4da854cbcbf44779d523c5d30bcbe8af"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-heavy-ready.jpg",
+      "archive": "native/native-heavy-ready.jpg",
+      "bytes": 131935,
+      "sha256": "3d3cf15835984fc03cd2250d6ceba260168bc9caabf3d97c1f95f531e0b11a3a"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-holdfast-next-round.jpg",
+      "archive": "native/native-holdfast-next-round.jpg",
+      "bytes": 139288,
+      "sha256": "452e5d1ef03443c44714c6dc23ed0e34442b686b686070d1493f9625d0373e8d"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-holdfast-pay-three.jpg",
+      "archive": "native/native-holdfast-pay-three.jpg",
+      "bytes": 87456,
+      "sha256": "938f2797f5b88b1796507a8196218a781586bd95883f80dd78406403ee4705a1"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-material-choices-crafted.jpg",
+      "archive": "native/native-material-choices-crafted.jpg",
+      "bytes": 116109,
+      "sha256": "aa31999c62ff3e22949fa3f04f985cbaa78ce8092d054c53fb1311786c027efc"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-material-choices-payable.jpg",
+      "archive": "native/native-material-choices-payable.jpg",
+      "bytes": 121892,
+      "sha256": "f3dd16e860c860b479a87f4701ab3d61b96d09f0fe6e2ca1a57d7add481d7d2c"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-material-choices-required.jpg",
+      "archive": "native/native-material-choices-required.jpg",
+      "bytes": 126614,
+      "sha256": "9381e5c6e98ea2fdec60625d3c7cbc526614d3864afdad0b175eb0a8bd6f3160"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-multi-sacrifice-committed.jpg",
+      "archive": "native/native-multi-sacrifice-committed.jpg",
+      "bytes": 117339,
+      "sha256": "11688b756ff55140545a3f01bab7ae8026cd993c1fbf26993a9c3d570f2e1598"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-multi-sacrifice-materials.jpg",
+      "archive": "native/native-multi-sacrifice-materials.jpg",
+      "bytes": 116222,
+      "sha256": "138667b57c390285780a135c9fb3375290e19832c45a583642eae30a39534cf5"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-optional-shield-payment-committed.jpg",
+      "archive": "native/native-optional-shield-payment-committed.jpg",
+      "bytes": 115617,
+      "sha256": "bdabe4240ade466afd4b0f2d6c719d38c73c47942afaa389c6c696942277beac"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-optional-shield-payment-five.jpg",
+      "archive": "native/native-optional-shield-payment-five.jpg",
+      "bytes": 101625,
+      "sha256": "7d0d57e209f14132ced3b57b9a6cc6b28c4e950ce364cf3b94ee4f31fea4e991"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-optional-shield-payment-zero.jpg",
+      "archive": "native/native-optional-shield-payment-zero.jpg",
+      "bytes": 100794,
+      "sha256": "d64defec049961ceadd2907615d1b3aa404a7d4d93dfb05f447dfdb9f4558885"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-pass-evidence.json",
+      "archive": "native/native-pass-evidence.json",
+      "bytes": 30095,
+      "sha256": "a89a0aaa42ee3418e67cde9ebf1937d72bf2c1077e52d8ca1e0c1592f43c7c18"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-per-part-targets-selected.jpg",
+      "archive": "native/native-per-part-targets-selected.jpg",
+      "bytes": 108254,
+      "sha256": "fb1f4b48ee3d9cbd06322c649f66fb649b79c816cda46fca66bf9db6a25592ee"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-sacrifice-committed.jpg",
+      "archive": "native/native-sacrifice-committed.jpg",
+      "bytes": 120826,
+      "sha256": "d2dd6ecbecc59a1cefbd846758dade630b24d2e01f61f595ac5234fe63ed2f34"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-sacrifice-selected.jpg",
+      "archive": "native/native-sacrifice-selected.jpg",
+      "bytes": 96156,
+      "sha256": "58ae1a13bab725d3034bdc070f5b2d6cc59ce15592370ad7e811c1ac6b99d764"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-transfer-committed.jpg",
+      "archive": "native/native-transfer-committed.jpg",
+      "bytes": 114003,
+      "sha256": "fabfb9b8584dc0482a5d7c8bc95ea97a0591e154236839495e1acd9a1e0a30aa"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-transfer-targets-selected.jpg",
+      "archive": "native/native-transfer-targets-selected.jpg",
+      "bytes": 113408,
+      "sha256": "74d2d0d146690316d9b3e3aff1a24298f89f77a2acc4a1dea77c7e552eba29ea"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-variable-payment-installed.jpg",
+      "archive": "native/native-variable-payment-installed.jpg",
+      "bytes": 116216,
+      "sha256": "aa12cc232e22d73d37ddff7d74abe46a50aed68b098ad48dbd3eb307693431b0"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-variable-payment-required.jpg",
+      "archive": "native/native-variable-payment-required.jpg",
+      "bytes": 95422,
+      "sha256": "b14e567ff3d148ca68efc2c65e58967b6bac705166f325320657701224cf74ca"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Validation/recipe-controls-native-20260920-1845/native-variable-payment-selected.jpg",
+      "archive": "native/native-variable-payment-selected.jpg",
+      "bytes": 96878,
+      "sha256": "6e3f8d310eaa08d26e6520ebe1245b50090a1394a304156a45195511b03602c9"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Binaries/Win64/UnrealEditor-OverkillFoundry.dll",
+      "archive": "binaries/UnrealEditor-OverkillFoundry.dll",
+      "bytes": 2429440,
+      "sha256": "d8cdfb1fd618a67ad542de10d2bd4b953093d9b447bea4eaf373795a2be3027a"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Binaries/Win64/OverkillFoundry.exe",
+      "archive": "binaries/OverkillFoundry.exe",
+      "bytes": 221512192,
+      "sha256": "26b2674b60df1ca325e22045b79dcac0de9bdfa35e8660771f6918417aebeec7"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Parity/core-fixture.jsonl",
+      "archive": "parity/core-fixture.jsonl",
+      "bytes": 11083,
+      "sha256": "dce5d0611e298195c84d4bde9b20504d2bb0cc897edcd17260542f245b181fc1"
+    },
+    {
+      "source": "games/overkill-foundry/unreal/Saved/Parity/recipe-controls-native-fixture.jsonl",
+      "archive": "parity/recipe-controls-native-fixture.jsonl",
+      "bytes": 11083,
+      "sha256": "dce5d0611e298195c84d4bde9b20504d2bb0cc897edcd17260542f245b181fc1"
+    },
+    {
+      "source": ".local/overkill-foundry/recipe-control-tests/Testing/Temporary/LastTest.log",
+      "archive": "tests/LastTest.log",
+      "bytes": 1302,
+      "sha256": "adab2111f724d54d1a0d435cd070dd61d506b316e243c77329af73fc9ff93673"
+    }
+  ],
+  "scope": "Identity only. See README for tested behavior and attribution. Prepared saves are not earned progression, and source tests are not native input or visual acceptance.",
+  "core_source": {
+    "explicit_snapshot": true,
+    "path": "games/overkill-foundry/unreal/Saved/Validation/roster-v001-runtime-20260920-1843/source/core"
+  },
+  "baseline_source": "games/overkill-foundry/unreal/Saved/Validation/roster-v001-runtime-20260920-1843/source",
+  "source_delta_from_baseline": [
+    {
+      "path": "games/overkill-foundry/presentation/precision.hpp",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "2b9deef48dc7001dbb5112abdb05cc85617f010ebfe36c0917dedbc38f89481b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultEngine.ini",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "71ed0bf8a39ca275cde061613851b106bcd98b1eaa7895249e8dfb506c14e913"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultGame.ini",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "32abf1f69f4bb2e3847bf9f12e73fe3b2fa3610b1dfd1f2096f79473aae74202"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Config/DefaultInput.ini",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "5df0623e24134bf69b1914a0c629d10299228013f80dd7f5e7bac6cb1a3af0f9"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/OverkillFoundry.uproject",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "ffaebe251097078dd6521de3cb31cc42f4df493be0a0dcd446085f2ebff75129"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryCampaignUI.cpp",
+      "before_sha256_lf": "ff2f91824773681cbdb921475da3f3de2d08eb9ba0e4d61658e06a9ce3d4aa62",
+      "after_sha256_lf": "c822dd921a3e2c772470d272152ae8f95520457d42dd69e4be5664c799e0c104"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControlProbe.cpp",
+      "before_sha256_lf": "c6501b5937061bb41f77552fc7c555e60dd7303e5e8bcaf5c81aed85043cdce2",
+      "after_sha256_lf": "bab35c3f185111307f0e3695250164bfdee9dd9b927291b2cd8351019d6341fa"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Private/FoundryRecipeControls.cpp",
+      "before_sha256_lf": "3be2891fc574379f05a286fbd41d2fa5b5d3febfee4719ac17ca9294cdeb32b3",
+      "after_sha256_lf": "dac6c05755fc22f98897ca76f03eb45fc84200b6793277c7409b1248732fb4d6"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Source/OverkillFoundry/Public/FoundryRecipeControls.h",
+      "before_sha256_lf": "9627cc117b533d4b7826126da1d32c9e4078f44cf7ab641d91f3d71c0170dd52",
+      "after_sha256_lf": "798050075cfc6a36a9163f20c9f9117477b3bdd8662e08452ad3d81e7a15709d"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/CMakeLists.txt",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "3f287a9bf071d202a95e89c6ee2031b41d4a8d192e33711aef7aa5871d34726e"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/capture_checkpoint.py",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "316dda99f5ab98a7a0d494559a0e090b9e90c9cbdbf7989413a213e8256fd9c5"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/recipe-control-tests/main.cpp",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "908d13e2f7ef4d0861ef2e9f8a1ed4ba66ae7885e773ef2af2b72f99f39b2c32"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/CMakeLists.txt",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "732928ce5ca5a35accbeeb52178d41c5e2449d98fafe522eb834096aeff7aa1b"
+    },
+    {
+      "path": "games/overkill-foundry/unreal/Tools/ui-fixtures/main.cpp",
+      "before_sha256_lf": null,
+      "after_sha256_lf": "6b0d04bf817a822d0da88caafc9789b2d06bfe3c78a8c4e89713e0faf23a83b3"
+    }
+  ]
+}
