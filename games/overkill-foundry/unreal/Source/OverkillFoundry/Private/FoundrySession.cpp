@@ -20,6 +20,7 @@ void FFoundrySession::Restart()
     Target = State.enemies.empty() ? 0 : State.enemies.front().id;
     InventoryPage = 0;
     RecentEvents.Empty();
+    CommittedEvents.clear();
     Message = TEXT("Mara / Mite + Ram technical encounter. Choose steering, then Collect.");
     LastAction = TEXT("restart");
     UE_LOG(LogFoundryCore, Display, TEXT("New technical encounter seed=%llu hash=%s"), Seed, *Text(overkill::stateHash(State)));
@@ -53,6 +54,7 @@ bool FFoundrySession::Submit(const overkill::Action& Action, const FString& Desc
         return false;
     }
     Message = Description + TEXT(" committed.");
+    CommittedEvents.insert(CommittedEvents.end(), Result.events.begin(), Result.events.end());
     for (const auto& Event : Result.events)
     {
         const FString Json = Text(overkill::eventJson(Event));

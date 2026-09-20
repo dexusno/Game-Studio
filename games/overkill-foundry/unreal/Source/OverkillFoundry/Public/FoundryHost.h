@@ -11,6 +11,7 @@
 class ACameraActor;
 class UMaterialInterface;
 class UStaticMesh;
+class AFoundryRobot;
 
 // Technical presentation adapter. All combat rules live in the shared core.
 UCLASS()
@@ -29,17 +30,27 @@ public:
     const FFoundrySession& GetSession() const { return *Session; }
     void Control(const FString& Command);
 private:
+    void SpawnRobots();
+    void PresentCommittedEvents();
+    void TickArtProbe(float DeltaSeconds);
+    void CaptureNamed(const FString& Name);
     void AddShape(const TCHAR* Label, UStaticMesh* Mesh, const FVector& Location,
                   const FVector& Scale, const FLinearColor& Color, const FRotator& Rotation = FRotator::ZeroRotator);
     UPROPERTY() TObjectPtr<ACameraActor> PreparationCamera;
     UPROPERTY() TObjectPtr<ACameraActor> ActionCamera;
     UPROPERTY() TObjectPtr<UMaterialInterface> StageMaterial;
+    UPROPERTY() TArray<TObjectPtr<AFoundryRobot>> Robots;
     bool bActionView = false;
     bool bSmokeTest = false;
     float SmokeElapsed = 0.0f;
     int32 SmokeStep = 0;
     TUniquePtr<FFoundrySession> Session;
     float ReturnCameraAfter = 0.0f;
+    bool bArtProbe = false;
+    bool bArtProbeOk = true;
+    float ArtElapsed = 0;
+    int32 ArtStep = 0;
+    TSet<FString> ArtCaptures;
 };
 
 UCLASS()

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(OverkillExpandedReview LANGUAGES CXX)
+add_executable(expanded_probes probes.cpp ../../core/src/core.cpp ../../core/src/serialization.cpp ../../core/src/catalogue.cpp ../../core/src/robots.cpp)
+target_include_directories(expanded_probes PRIVATE ../../core/include)
+target_compile_features(expanded_probes PRIVATE cxx_std_17)
+if(MSVC)
+  target_compile_options(expanded_probes PRIVATE /W4 /WX /permissive-)
+endif()

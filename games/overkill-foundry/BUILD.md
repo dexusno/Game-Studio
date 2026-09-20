@@ -1,6 +1,6 @@
 # Overkill Foundry — build and run
 
-Fresh implementation: an engine-independent C++17 core and a new Unreal 5.8.2 host. Current rules/content are `of-core-0.2` / `cinderwall-staged-0.1`, snapshot schema 2. This is a working technical encounter and storage foundation; the full-city MVP and standalone package are not delivered.
+Fresh implementation: an engine-independent C++17 core and a new Unreal 5.8.2 host. Current rules/content are `of-core-0.3` / `cinderwall-recipes-0.2`, fight snapshot schema 3 and campaign schema 1. The complete recipe dispatch, Cinderwall robot/route modules and campaign transaction caller now build; permanent upgrades, graphical campaign integration, full-city balancing and the standalone package remain incomplete.
 
 ## Prerequisites
 
@@ -12,28 +12,42 @@ Run from the repository root in PowerShell:
 
 ```powershell
 python -X utf8 games/overkill-foundry/tools/compile_content.py --check --self-test
+python -X utf8 games/overkill-foundry/content/compile_recipe_effects.py --check
+python -X utf8 games/overkill-foundry/tools/compile_city_content.py --check
 & games/overkill-foundry/tools/core.ps1 -Action test
 & games/overkill-foundry/tools/core.ps1 -Action fixture
+& games/overkill-foundry/qa/expanded/run.ps1
 & games/overkill-foundry/tools/test_storage.ps1
 & games/overkill-foundry/qa/storage/run_probes.ps1
 & games/overkill-foundry/tools/unreal.ps1 -Action Build
 & games/overkill-foundry/tools/unreal.ps1 -Action BuildGame
 & games/overkill-foundry/tools/unreal.ps1 -Action Content
+& games/overkill-foundry/tools/unreal.ps1 -Action Art
+& games/overkill-foundry/tools/unreal.ps1 -Action ArtProbe
 & games/overkill-foundry/tools/unreal.ps1 -Action Fixture
 & games/overkill-foundry/tools/unreal.ps1 -Action Run
 ```
 
 Core binaries are `core/build/Release/overkill_runner.exe` and `overkill_core_tests.exe`, relative to this game. `--fixture` produces deterministic JSONL events and a final state hash. It does not run a city or balance policy. The same `core.cpp` and `serialization.cpp` are compiled by Unreal; the core has no Unreal types or presentation calculations. The action helper supplies valid suggestions, not every possible assembly. No arbitrary part/shot/storage cap is introduced.
 
-The full manifest contains 246 recipes, 127 ordinary upgrades, 25 Mayor gifts, 10 robots, 10 formations, 207 physical output types and 3 authored Mysteries. Only 19 recipe definitions are currently staged in the runtime. `compile_content.py --check --release` intentionally fails with **665 unsupported operations**; `runtime-support.json` is empty. See [content/README.md](content/README.md) for evidence-linked enablement. Do not trim the final pool or bypass this gate.
+The full manifest contains 246 recipes, 127 ordinary upgrades, 25 Mayor gifts, 10 robots, 10 formations, 207 physical output types and 3 authored Mysteries. All 246 recipe IDs have explicit runtime dispatch; [recipe-effects.md](content/recipe-effects.md) distinguishes registration from semantic coverage and documents typed player choices. `compile_content.py --check --release` intentionally fails with **665 unbound operations**; `runtime-support.json` is empty. See [content/README.md](content/README.md) for evidence-linked enablement. Do not trim the final pool or bypass this gate. Manifest SHA-256 after the SH121–123 rarity fix: `d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9`.
 
-Unreal project: `unreal/OverkillFoundry.uproject`. `Content` reproducibly generates the Technical map/material. The HUD supports mouse recipes/parts/targets, keyboard Collect/Load/Unload/Fire/End Turn, recorded Precision-result selection and same-seed restart. This is a debugging adapter, not the final UI or Precision minigame. Engine BasicShapes remain temporary references. Build products, generated Technical content, raw captures and logs are ignored.
+Unreal project: `unreal/OverkillFoundry.uproject`. `Content` reproducibly generates the Technical map/material; `Art` imports the original Cinderwall assets. The HUD supports mouse recipes/parts/targets, keyboard Collect/Load/Unload/Fire/End Turn, recorded Precision-result selection and same-seed restart. This is a debugging adapter, not the final UI or Precision minigame. Build products, generated Technical/Cinderwall content, raw captures and logs are ignored.
 
-[art-source/README.md](art-source/README.md) documents reproducible original Breach Ram/Rivet Mite/stage sources and compact PBR textures. Generated Blender/FBX/GLB files live under ignored `.local/overkill-foundry/art/cinderwall-v001`. The verified foundation does **not** import those assets into the encounter yet. A new worktree must regenerate these outputs or use the exact existing local directory; Git does not carry ignored art/builds.
+[art-source/README.md](art-source/README.md) documents reproducible original Breach Ram/Rivet Mite/stage sources and compact PBR textures. Generated Blender/FBX/GLB files live under ignored `.local/overkill-foundry/art/cinderwall-v001`. [The importer/playback contract](unreal/Tools/README.md) records actual engine conversion and verification. A new worktree must regenerate these outputs or use the exact existing local directory; Git does not carry ignored art/builds.
 
-The Windows storage envelope is a separate platform target, documented in [platform/README.md](platform/README.md). Snapshot serialization and tested file replacement do not implement campaign Continue, receipts or reward transactions by themselves. Callers must reconcile after a failed commit, because the replacement may already have succeeded.
+The Windows storage envelope and new `CampaignSession` are separate platform targets, documented in [platform/README.md](platform/README.md). The caller evaluates rules on a copy, commits campaign/profile/receipts together and reconciles the exact receipt after an ambiguous failure. Continue restores the original pre-start fight state. P08 effect callbacks remain explicit dependencies; a missing callback rejects acquisition instead of silently granting an inert upgrade.
 
-## Verification record
+## Expanded increment, 20 September 2026
+
+- Authored suites: 443 legacy assertions, 2,055 recipe assertions across all 246 dispatch paths, 2,462 robot assertions through the real Engine, 141,003 route assertions over 1,000 choice paths and 773 campaign assertions. Route paths are not combat/balance simulations. Campaign fixtures use controlled upgrade payloads and terminal Ammo, not production upgrade implementations.
+- [Independent expanded QA](qa/expanded-review.md) passes 43 semantic groups after five reproduced findings were corrected; source-heading audit independently checks 606 recipe rarities and the 207-entry Regular pool. The report also distinguishes two author-found interaction fixes. Finite coverage does not prove all combinations, balance or game feel.
+- The platform's two CTest suites pass. The campaign caller passes 135 assertions and 12 actual process exits covering purchase, core claim and Continue. Final author executable SHA-256: `bef5183c3a24954d239d1f58332e60280bcb386c5daf27e9d5424abecedfc70a`. Its independent caller review is next; the existing storage report covers the envelope only.
+- Original assets render as 47 stage actors sharing 18 meshes, two rigs, 15 moving clips and 27 PBR textures. `ArtProbe-20260920-142656.log` passes eight legal shots, victory at 52 HP, reaction bands, collapse/dissolve, cleanup at 2.011/2.010 seconds and restart restoring all 15 material slots. Captures `art-ram-blast.png` and `art-restart-hud.png` were inspected; placeholder gun, debug panels, repetitive scenery and black background gaps remain visual defects.
+- Rendered teaching parity at `Fixture-20260920-142742.log` matches all 85 JSONL lines with the native runner, final state `37978146880e1302`, transcript SHA-256 `feb692e05ed1ba47fdd9b0a3985f61dfd73b355f79d151a4825da4caa76451cd`. This rendered build predates the final SH085 choice repair, which is covered by native tests; rebuild before claiming the repaired effect in Unreal.
+- Corresponding Unreal Editor/Game builds: `Build-20260920-142615.log`, `BuildGame-20260920-142639.log`; module DLL SHA-256 `a6a64bdfecc983320bedc282f5d6197ff7475e3e8e86acf85182253cbd067d54`, Game EXE SHA-256 `bf7efe305c98ed053e237dfde060dde08c6bead5cce824b9002f7356c78cd804`. This is not a shipping package.
+
+## Historical foundation verification (`b1e3590`)
 
 20 September, branch `codex/overkill-foundry-mvp`, based on `dcb72a6`; reviewed source identities are in [qa/foundation-review.md](qa/foundation-review.md) and [qa/storage-review.md](qa/storage-review.md).
 

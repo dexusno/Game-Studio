@@ -1,8 +1,18 @@
 # Overkill Foundry — quality and playtesting
 
-The first shared-core fight, fresh rendered Unreal action adapter and separate Windows storage envelope have been executed. The complete city, campaign saves/Continue, final visuals, full-city balance runs, standalone package and human approval remain pending.
+The complete recipe dispatch, robot/route modules, campaign transactions and Windows save caller have authored runtime tests. Independent recipe review and rendered Ram/Mite integration have passed their bounded checks. Permanent upgrades, the complete graphical city, final visuals, full-city balance runs, standalone package and human approval remain pending.
 
-## Verified foundation, 20 September 2026
+## Expanded increment, 20 September 2026
+
+Current rules/content: `of-core-0.3` / `cinderwall-recipes-0.2`, fight schema 3 and campaign schema 1. [Independent expanded review](qa/expanded-review.md) passes 43 semantic groups with exact frozen identities and source-derived metadata checks. Five independently reproduced defects were fixed: detached MA059/MA086 sources, post-lethal SH087 support processing, untouched generated-Shield copy eligibility, and SH085's ignored chosen Shield payment. Two related author-found fixes (MA102 source presence and per-part MA093 Heat payments) also received independent checks. The original 15 runtime probes still pass unchanged after the new production linkage was added.
+
+Author evidence is separate: 2,055 recipe assertions exercise all 246 dispatch paths and selected interactions; 2,462 robot assertions use the actual Engine; 141,003 route assertions cover 1,000 complete choice paths; 773 campaign assertions cover fixed offers, costs/rollback, Mystery boundaries, defeat and T11–T13/T18–T22. Those route paths do not simulate combat. Campaign tests deliberately substitute test-only upgrade payloads and terminal ammunition, so they cannot establish P08 correctness or full-city balance.
+
+The new Windows campaign caller passes 135 assertions and 12 actual process exits across purchase, core claim and Continue commits, including exact-receipt reconciliation and concurrent writers. Independent campaign/caller review is underway. The previous independent storage report covers the unchanged envelope implementation, not this new caller. No hardware power-loss claim is made.
+
+Actual Unreal asset integration renders the original Ram/Mite rigs, 15 clips, 47 stage actors and PBR surfaces. The legal action probe passes eight shots, reaction bands, both deaths/dissolves, actor cleanup and restart. The teaching transcript matches all 85 native lines, hash `37978146880e1302`. [BUILD.md](BUILD.md) distinguishes its exact rendered build from the later native SH085 repair. The placeholder gun, debug HUD and scene composition remain below the selected visual bar. No physical-input retest or human approval was inferred from scripted animation checks.
+
+## Historical foundation, 20 September 2026 (`b1e3590`)
 
 Acceptance contract: [MVP-IMPLEMENTATION-PLAN.md](design/MVP-IMPLEMENTATION-PLAN.md). Technical increment: `of-core-0.2` / `cinderwall-staged-0.1`, snapshot schema 2, 19 staged recipes and a controlled Mite/Ram pair. Final eligibility remains the complete Cinderwall manifest. Passing a staged subset does not enable that pool.
 
@@ -25,10 +35,10 @@ Original Ram/Mite/stage exports pass 81 art structure/interchange checks with si
 | T01–T04 | Controlled core tests pass. T03 uses the named rescue hook; actual upgrade acquisition remains pending. |
 | T05–T06 | Exact cases use Noor/later-city Mayors outside this MVP. Shared ordered Shield conversion and Mara-applicable interactions still need implementation. |
 | T07–T10 | Controlled retention, delayed Shield, cooldown and escape tests pass. Eligible retention upgrades and complete roster behavior need integration. |
-| T11–T14 | Campaign transactions, original fight-entry restart and reward exchange remain pending. Storage envelope tests alone do not pass these cases. |
+| T11–T14 | Authored campaign/session tests pass, including original-entry rollback, atomic exchange and actual process exits. Independent caller review is next; real P08 payloads and graphical replay remain outstanding. |
 | T15–T16 | Exact Noor/late-Mayor cases are outside this MVP; preserve specifications. |
 | T17 | Exact later-city Heat Mayor pair is outside this MVP. Shared acquisition-order hooks still require eligible-content checks. |
-| T18–T22 | Mystery and individual reward/reopen/skip/exchange persistence remain pending. |
+| T18–T22 | Authored campaign tests pass Mystery count/salvage/no-restock, individual claims, inner Skip, main confirmation/cancel and atomic full-memory exchange. P08 payloads, independent campaign QA and graphical replay remain outstanding. |
 
 ## Human playtests
 
@@ -36,6 +46,6 @@ No human has played or visually approved this implementation. Record build/date,
 
 ## Known limits and next checks
 
-Only staged effects and a two-enemy fixture are executable. Full recipes/upgrades/robots, city, Mayor, offers, shops, rewards, profile/Collection and Continue are not implemented. The action suggestion helper is not an exhaustive enumeration of assemblies. Durable storage has no campaign caller yet. The current Precision control supplies a recorded outcome rather than a minigame. Robot graphics and HUD remain technical; final audio/FX/animation coverage, focus/resolution tests, packaged launch and performance checks are outstanding.
+The full 246-recipe dispatch and ten-robot module are executable, with finite semantic coverage. P08's 152 upgrade effects and campaign integration remain incomplete; missing callbacks reject acquisition. Campaign/route/shop/reward/profile/Continue code is not connected to the Unreal UI. The action suggestion helper is not an exhaustive enumeration of assemblies. The current Precision control supplies a recorded outcome rather than a minigame. Visuals/HUD remain technical; final audio/FX/animation coverage, focus/resolution tests, packaged launch and performance checks are outstanding.
 
-Continue with first-encounter art integration and the source-driven effect/campaign packages, preserving the final content boundary. Independent reviews must use the actual changed build; this foundation review cannot certify subsequent behavior. Fun and balance remain unvalidated.
+Continue with independent campaign review, P08 and the original Mara gun/rear-claw visual pass, preserving the final content boundary. Reviews must use the actual changed build; historical checks do not certify subsequent behavior. Fun and balance remain unvalidated.

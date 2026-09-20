@@ -13595,7 +13595,7 @@
       "mercenary": "Shared",
       "name": "Calibrated Jaws",
       "output_text": "1 Precision Coupler",
-      "rarity": "Legendary",
+      "rarity": "Rare",
       "source": {
         "exact_text": "| SH121 | Calibrated Jaws | 1 Precision Coupler | Magnet | 1 Copper + 1 Glass | 2 | Choose Iron, Copper, Carbon or Glass when crafted. Next round's haul gains 1 extra unit of that material with any handling result. If you use the manual grab next round and achieve Perfect, gain 2 more units of that material. |",
         "line": 401,
@@ -13617,7 +13617,7 @@
       "mercenary": "Shared",
       "name": "Clean Separation",
       "output_text": "1 Sorting Gate",
-      "rarity": "Legendary",
+      "rarity": "Rare",
       "source": {
         "exact_text": "| SH122 | Clean Separation | 1 Sorting Gate | Magnet | 1 Iron + 1 Copper + 1 Glass | 2 | Choose two different materials from Iron, Copper, Carbon and Glass when crafted, naming a first and second. Next round's haul gains 1 extra unit of the first with any handling result. On a Perfect manual grab next round, gain 1 more of the first and 2 of the second. |",
         "line": 402,
@@ -13638,7 +13638,7 @@
       "mercenary": "Shared",
       "name": "Chip Finder",
       "output_text": "1 Chip Sieve",
-      "rarity": "Legendary",
+      "rarity": "Rare",
       "source": {
         "exact_text": "| SH123 | Chip Finder | 1 Chip Sieve | Magnet | 1 Copper + 1 Glass | 2 | Next round's haul gains 1 extra Glass with any handling result. On a Perfect manual grab next round, also recover 2 extra Circuit from the pile. This does not make Circuit exclusive to timing rewards. |",
         "line": 403,
@@ -14954,7 +14954,7 @@
     "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
     "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
     "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
-    "tools/compile_content.py": "5e47ddeede1e723d830653d629c0571d237e9e9b6bef81fbd5f4e159309a230f"
+    "tools/compile_content.py": "d21bc9fb13116d12f78b6bd3455160193abe8aef9f3de7623f07230736112ca9"
   },
   "statuses": {
     "FX01": {

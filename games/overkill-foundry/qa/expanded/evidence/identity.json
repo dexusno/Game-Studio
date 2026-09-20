@@ -1,0 +1,23 @@
+{
+  "utc": "2026-09-20T12:34:10.8085711Z",
+  "git_head": "b1e359050812bffb3551e08b8a410fed5fd1ca41",
+  "platform": "Windows x64 Release / MSVC 19.44.35228 / SDK 10.0.26100.0",
+  "executable_sha256": "94215d5ce0862e5c6ff34007432bdf24d71eb246aa6a6d97f976c6e51975b989",
+  "source_unchanged_during_run": true,
+  "runtime_exit": 0,
+  "metadata_exit": 0,
+  "source_sha256": {
+    "core/include/overkill/core.hpp": "529790907046d36de3912ab5946b1993028b853809d5b6269ddf487d29d2c1cd",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/src/core.cpp": "0356e55180df4e4f3b5235c9cbf2023f5996343e6e4f7a609de2b10841537946",
+    "core/src/serialization.cpp": "5f2092ffd17e24987bd60ac2b848c6707dc409461c498b5a757c2e7fd9ac4500",
+    "core/src/recipe_effects.inl": "e6f45237878529d4afc4e5e7af4e153d10873c95ff6d805c3f60853da7ba3f22",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "qa/expanded/probes.cpp": "b172d73be17327a50314c0d4f789898798f4fbfcc3fff2012f644272b3a5bb4e",
+    "qa/expanded/CMakeLists.txt": "3de1cadec27a2c6efa72469279f0b7711e45f816f9f2e3c2986e6a2c7958335d",
+    "qa/expanded/source_metadata.py": "33d71c0b4d9b263a1fde789f99f8e77e97c613b73ff822134523240cac45e571"
+  }
+}

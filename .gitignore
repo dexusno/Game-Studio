@@ -44,5 +44,6 @@ steam_appid.txt
 *.pdb
 *.sln
 games/overkill-foundry/unreal/Content/Technical/
+games/overkill-foundry/unreal/Content/Cinderwall/
 .DS_Store
 Thumbs.db

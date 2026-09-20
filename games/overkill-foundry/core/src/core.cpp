@@ -1,4 +1,5 @@
 #include "overkill/core.hpp"
+#include "overkill/robots.hpp"
 #include <algorithm>
 #include <iomanip>
 #include <limits>
@@ -20,6 +21,7 @@ bool alive(const Enemy& e) { return !e.dead && !e.escaped && e.hp > 0; }
 bool supported(const Effect& e) {
     const bool immediate=e.timing==Timing::Use || e.timing==Timing::Install || e.timing==Timing::AfterHit || e.timing==Timing::Activate;
     switch(e.op) {
+    case Op::Catalogue: return (e.amount>=1&&e.amount<=126)||(e.amount>=1001&&e.amount<=1120);
     case Op::FlatDamage: case Op::PercentDamage: return e.timing==Timing::Assembly || e.timing==Timing::Activate;
     case Op::AttackIntentBonus: case Op::SpreadPercent: return e.timing==Timing::Assembly;
     case Op::ShieldValue: case Op::BurnWard: return e.timing==Timing::Install;
@@ -53,6 +55,18 @@ struct Engine {
     const Rules& rules;
     std::vector<Event> events;
     Id root = 0;
+#include "recipe_effects.inl"
+    Amount attackBudget = -1, attackFlatRemaining = 0;
+    bool inEnemyAttack = false;
+    Amount attackLost = 0, attackAbsorbed = 0;
+    RobotCallbacks callbacks() {
+        return { [this](const std::string& type,Id subject,Id target,Amount amount,Amount secondary,Id parent){return emit(type,subject,target,amount,secondary,parent);},
+            [this](Amount amount,Id source,Id parent,bool bypass){playerDamage(amount,source,parent,bypass);},
+            [this](RobotStatus kind,Amount amount,Id source,Id parent){
+                if(auto* b=binding("SH064",BindingClock::Round); b && b->amount>0 && kind<=RobotStatus::Weaken){b->amount=0;emit("status_prevented",source,0,amount,static_cast<Amount>(kind),parent);return;}
+                switch(kind){case RobotStatus::Burn:s.burn=add(s.burn,amount);break;case RobotStatus::Corrosion:s.corrosion=add(s.corrosion,amount);break;case RobotStatus::Mark:s.mark=add(s.mark,amount);break;case RobotStatus::Weaken:s.weaken=add(s.weaken,amount);break;case RobotStatus::RecipeFouling:s.recipeFouling=std::min(2,add(s.recipeFouling,amount));s.foulingRound=s.round+1;break;case RobotStatus::ShieldLeak:s.shieldLeak=add(s.shieldLeak,amount);s.shieldLeakRound=s.round+1;break;}
+                emit("player_status",source,0,amount,static_cast<Amount>(kind),parent); } };
+    }
     Id emit(const std::string& type, Id subject = 0, Id target = 0, Amount amount = 0, Amount secondary = 0, Id parent = 0) {
         const Id id = s.nextEvent++;
         events.push_back({id, parent ? parent : root, subject, target, type, amount, secondary});
@@ -66,59 +80,33 @@ struct Engine {
             emit(s.kills > 0 ? "victory" : "escape_complete");
         }
     }
-    void playerDamage(Amount amount, Id source, Id parent, bool bypass = false) {
-        const Amount absorbed = bypass ? 0 : Rules::spendShield(s, amount);
-        const Amount lost = std::min(s.hp, amount - absorbed);
-        s.hp -= lost;
-        const Id hit = emit("player_damage", source, 0, lost, absorbed, parent);
-        if (s.hp == 0 && s.reserveHeartPump) {
-            s.reserveHeartPump = false;
-            s.hp = std::max(1, s.maxHp / 4);
-            emit("reserve_heart_pump", 0, 0, s.hp, 0, hit);
-        }
-        if (s.hp == 0) { s.phase = Phase::Defeat; emit("defeat", 0, 0, 0, 0, hit); }
+    void playerDamage(Amount amount,Id source,Id parent,bool bypass=false) {
+        if(inEnemyAttack&&!bypass){if(s.mark>0){amount=add(amount,s.mark);s.mark=0;}const auto reduced=std::min(amount,attackFlatRemaining);amount-=reduced;attackFlatRemaining-=reduced;}
+        const Amount absorbed=bypass?0:Rules::spendShield(s,amount);Amount lost=amount-absorbed;if(lost>0)lost=hpPrevention(lost);lost=std::min(s.hp,lost);s.hp-=lost;s.hpLostRound=add(s.hpLostRound,lost);
+        if(inEnemyAttack){attackLost=add(attackLost,lost);attackAbsorbed=add(attackAbsorbed,absorbed);}
+        const Id hit=emit("player_damage",source,0,lost,absorbed,parent);
+        if(s.hp==0&&s.reserveHeartPump){s.reserveHeartPump=false;s.hp=std::max(1,s.maxHp/4);emit("reserve_heart_pump",0,0,s.hp,0,hit);}
+        if(s.hp==0){s.phase=Phase::Defeat;emit("defeat",0,0,0,0,hit);}
     }
-    void enemyDamage(Id target, Amount amount, bool direct, bool bypass = false, Id source = 0) {
-        auto* e = byId(s.enemies, target);
-        if (!e || !alive(*e)) { emit("hit_lost", source, target); return; }
-        Amount damage = direct && !bypass ? std::max(0, amount - e->armor) : amount;
-        if (direct && e->tiles > 0 && damage > 0) { --e->tiles; damage = std::min(damage, 1); }
-        const Amount shieldLoss = bypass ? 0 : std::min(e->shield, damage);
-        e->shield -= shieldLoss;
-        const Amount hpLoss = std::min(e->hp, damage - shieldLoss);
-        e->hp -= hpLoss;
-        const Amount recoil = direct && shieldLoss + hpLoss > 0 ? e->mesh : 0;
-        const Id hit = emit(direct ? "hit" : "status_damage", source, target, hpLoss, shieldLoss);
-        if (e->hp == 0) { e->dead = true; ++s.kills; emit("enemy_death", source, target, 0, 0, hit); }
-        // Capture the response before death, then resolve it ahead of payloads and sibling hits.
-        if (recoil > 0) { const auto response = emit("recoil", target, 0, recoil, 0, hit); playerDamage(recoil, target, response); }
+    void enemyDamage(Id target,Amount amount,bool direct,bool bypass=false,Id source=0,Amount shieldBypass=0) {
+        auto* e=byId(s.enemies,target);if(!e||!alive(*e)){emit("hit_lost",source,target);return;}
+        Amount damage=direct&&!bypass?std::max(0,amount-e->armor):amount;if(direct&&e->tiles>0&&damage>0){--e->tiles;damage=std::min(damage,1);}
+        const Amount redirected=bypass?damage:std::min(damage,shieldBypass);const Amount shieldLoss=std::min(e->shield,damage-redirected);e->shield-=shieldLoss;
+        const Amount hpLoss=std::min(e->hp,damage-shieldLoss);e->hp-=hpLoss;e->hpLostFight=add(e->hpLostFight,hpLoss);const Amount recoil=direct&&shieldLoss+hpLoss>0?e->mesh:0;
+        const Id hit=emit(direct?"hit":"status_damage",source,target,hpLoss,shieldLoss);
+        if(hpLoss>0)onRobotHpLoss(s,target,callbacks());e=byId(s.enemies,target);
+        if(e&&e->hp==0){e->dead=true;++s.kills;emit("enemy_death",source,target,0,0,hit);onRobotDeath(s,target,callbacks());}
+        if(recoil>0){const auto response=emit("recoil",target,0,recoil,0,hit);playerDamage(recoil,target,response);}
+        if(s.phase!=Phase::Defeat&&direct&&hpLoss>0)if(auto* b=binding("MA100",BindingClock::Round,target);b&&b->count<4){++b->count;status(target,3,2);}
     }
-    void pay(const std::vector<Effect>& effects, Timing timing, Part* part = nullptr) {
-        Amount hp = 0, heatCost = 0;
-        for (const auto& e : effects) if (e.timing == timing) {
-            if (e.op == Op::HpCost) hp = add(hp, e.amount);
-            if (e.op == Op::HeatCost) heatCost = add(heatCost, e.amount);
-        }
-        require(s.hp > hp, "Own HP cost must leave at least 1 HP.");
-        require(s.heat >= heatCost, "Not enough Heat for this action.");
-        s.hp -= hp; s.heat -= heatCost;
-        if (part) { part->paidHp = hp; part->paidHeat = heatCost; }
-        if (hp) emit("hp_cost", part ? part->id : 0, 0, hp);
-        if (heatCost) emit("heat_cost", part ? part->id : 0, 0, heatCost);
+    void pay(const std::vector<Effect>& list,Timing timing,Part* part=nullptr) {
+        Amount hp=0,heatCost=0;for(const auto& f:list)if(f.timing==timing){if(f.op==Op::HpCost)hp=add(hp,f.amount);if(f.op==Op::HeatCost)heatCost=add(heatCost,f.amount);}
+        payment(hp,heatCost,0,timing!=Timing::Use,part);
     }
-    Id shieldPart(Amount value, const std::string& source, bool installed) {
-        Part p;
-        p.id = s.nextId++; p.recipe = source; p.output = "Shield";
-        p.resaleReference = "generated:shield:" + std::to_string(value);
-        p.kind = Kind::Shield; p.createdRound = s.round; p.originalValue = value;
-        p.effects = {{Op::ShieldValue, Timing::Install, value, 0}};
-        s.parts.push_back(p);
-        emit("part_created", p.id, 0, value);
-        if (installed) install(p.id);
-        return p.id;
-    }
+    Id shieldPart(Amount value,const std::string& source,bool installed) {if(value==0)return 0;return receive(plain(Kind::Shield,value,source),installed);}
     void schedule(DeliveryKind kind, Amount amount, const std::string& source) {
         if(kind==DeliveryKind::Haul) {
+            auto& boost=bind(source,BindingClock::Collection,amount);boost.round=s.round+1;
             for(auto& delivery:s.deliveries) if(delivery.kind==kind && delivery.source==source && delivery.dueRound==s.round+1) {
                 delivery.amount=amount; emit("delivery_refreshed",delivery.id,0,amount,delivery.dueRound); return;
             }
@@ -171,158 +159,85 @@ struct Engine {
             else {*old={source,activatedFlat,activatedPercent};}
         }
     }
-    void install(Id id) {
-        auto* part = byId(s.parts, id);
-        require(part && part->kind == Kind::Shield && part->place == Place::Reserve, "Select a reserved Shield part.");
-        if (!part->everInstalled) {
-            pay(part->effects, Timing::Install, part);
-            Amount value = 0;
-            for (const auto& e : part->effects) if (e.op == Op::ShieldValue && e.timing == Timing::Install) value = add(value,e.amount);
-            part->shield = value; part->originalValue = value;
-            part->everInstalled = true; part->firstInstallRound = s.round; part->bindingOrder = s.nextOrder++;
-            part->place = Place::Installed; part->installOrder = s.nextOrder++;
-            // Copy the hook list before payloads can append to the physical inventory.
-            const auto list = part->effects; const auto source = part->recipe;
-            emit("first_install", id, 0, value);
-            effects(list, Timing::Install, 0, s.heat, source);
-        } else {
-            part->place = Place::Installed; part->installOrder = s.nextOrder++;
-            emit("reinstall", id, 0, part->shield);
-        }
+    void install(Id id,const Action& action=Action{}) {
+        auto* pointer=byId(s.parts,id);require(pointer&&pointer->kind==Kind::Shield&&pointer->place==Place::Reserve,"Select a reserved Shield part.");
+        Part part=*pointer;
+        if(!part.everInstalled){
+            pay(part.effects,Timing::Install,&part);Amount value=0;
+            if(catalogue(part.effects))value=catalogueShield(part,action);else for(const auto& f:part.effects)if(f.op==Op::ShieldValue&&f.timing==Timing::Install)value=add(value,f.amount);
+            if(auto* b=binding("SH035",BindingClock::Round)){value=add(value,b->amount);b->amount=0;}
+            part.shield=value;part.originalValue=value;part.everInstalled=true;part.firstInstallRound=s.round;part.bindingOrder=s.nextOrder++;part.place=Place::Installed;part.installOrder=s.nextOrder++;++s.firstInstallsRound;
+            *byId(s.parts,id)=part;emit("first_install",id,0,value);effects(part.effects,Timing::Install,action.target,s.heat,part.recipe);
+            if(catalogue(part.effects))catalogueInstalled(part,action);
+            for(const auto& b:part.attachments)if(b.heat&&b.dueRound==s.round)heat(b.heat);
+        }else{pointer->place=Place::Installed;pointer->installOrder=s.nextOrder++;emit("reinstall",id,0,pointer->shield);}
     }
-    void craft(Id id) {
-        auto* copy = byId(s.memory, id);
-        require(copy != nullptr, "This recipe is not in memory.");
-        const auto* recipe = rules.recipe(copy->recipe);
-        require(recipe != nullptr, "This recipe has no verified runtime implementation.");
-        require(copy->cooldown == 0, "This recipe is cooling.");
-        require(recipe->cooldown > 0 || copy->usedRound != s.round, "This copy has already been used this round.");
-        for (std::size_t i=0; i<5; ++i) require(s.materials[i] >= recipe->cost[i], "Not enough materials.");
-        pay(recipe->effects, Timing::Use);
-        for (std::size_t i=0; i<5; ++i) s.materials[i] -= recipe->cost[i];
-        copy->cooldown = recipe->cooldown; copy->usedRound = s.round; ++copy->usesThisRound;
-        emit("recipe_used", id);
-        if (recipe->kind != Kind::Utility && !recipe->automaticOutput) {
-            Part p; p.id = s.nextId++; p.recipe = recipe->id; p.output = recipe->output;
-            p.resaleReference = recipe->id; p.kind = recipe->kind; p.effects = recipe->effects; p.createdRound = s.round;
-            s.parts.push_back(p); emit("part_created", p.id);
-        }
-        effects(recipe->effects, Timing::Use, 0, s.heat, recipe->id);
+    Part recipePart(const Recipe& recipe,const Action& a) {
+        Part p;p.recipe=recipe.id;p.output=recipe.output;p.resaleReference=recipe.id;p.kind=recipe.kind;p.effects=recipe.effects;p.rarity=recipe.rarity;p.materialBasis=recipe.cost;p.choices=a.choices;
+        if(recipe.id=="MA038"){p.resaleReference="warm-rivet";p.materialBasis={1,0,1,0,0};}
+        return p;
+    }
+    void craft(const Action& a) {
+        auto* copy=byId(s.memory,a.subject);require(copy,"This recipe is not in memory.");const auto* recipe=rules.recipe(copy->recipe);require(recipe,"This recipe has no verified runtime implementation.");
+        require(copy->cooldown==0,"This recipe is cooling.");require(recipe->cooldown>0||copy->usedRound!=s.round,"This copy has already been used this round.");craftOptions(*recipe,a);if(recipe->kind==Kind::Ammo&&binding("SH103",BindingClock::Round))require(a.amount>=0&&a.amount<recipe->outputCount,"Choose one crafted Ammo output for Fine Mould.");
+        Materials cost=recipe->cost;Binding* saver=binding("SH070",BindingClock::Round);if(saver&&saver->amount>0&&cost[0]>=2){--cost[0];saver->amount=0;}
+        if(recipe->kind==Kind::Ammo&&s.recipeFouling>0&&s.foulingRound==s.round)cost[0]=add(cost[0],1);
+        for(std::size_t i=0;i<5;++i)require(s.materials[i]>=cost[i],"Not enough materials.");pay(recipe->effects,Timing::Use);
+        for(std::size_t i=0;i<5;++i){s.materials[i]-=cost[i];s.spentThisRound[i]=add(s.spentThisRound[i],cost[i]);}
+        if(recipe->kind==Kind::Ammo&&s.recipeFouling>0&&s.foulingRound==s.round)--s.recipeFouling;
+        copy=byId(s.memory,a.subject);copy->cooldown=recipe->cooldown;copy->usedRound=s.round;++copy->usesThisRound;emit("recipe_used",a.subject);
+        if(auto* b=binding("MA069",BindingClock::Round))if(std::find(b->seen.begin(),b->seen.end(),recipe->id)==b->seen.end())b->seen.push_back(recipe->id);
+        if(recipe->kind!=Kind::Utility&&!recipe->automaticOutput){for(Amount i=0;i<recipe->outputCount;++i){const Id id=receive(recipePart(*recipe,a));if(recipe->kind==Kind::Ammo)if(auto* b=binding("SH103",BindingClock::Round);b&&b->amount>0&&i==a.amount){attach(*byId(s.parts,id),"SH103",b->amount,0,0);b->amount=0;}}}
+        effects(recipe->effects,Timing::Use,a.target,s.heat,recipe->id);
+        if(catalogue(recipe->effects)&&(recipe->kind==Kind::Utility||recipe->automaticOutput))catalogueUtility(*recipe,a);
     }
     void unload() {
         for (Id id : s.bullet) if (auto* p = byId(s.parts,id)) p->place = Place::Reserve;
+        for(auto& p:s.parts)if(p.place==Place::Payment){p.place=Place::Reserve;p.reservedBy=0;}
         s.bullet.clear(); emit("unload");
     }
-    void fire(const Action& action) {
-        require(!s.bullet.empty(), "Load a nonempty bullet first.");
-        const auto* target = byId(s.enemies,action.target);
-        require(target && alive(*target), "Select a living main target.");
-        const bool attacking = target->intent.move == Move::Attack;
-        const Amount heatAtFire = s.heat;
-        Amount base = s.nextFlat, percent = s.nextPercent;
-        for(const auto& bonus:s.shotBonuses){base=add(base,bonus.flat);percent=add(percent,bonus.percent);}
-        std::vector<Part> fired;
-        std::vector<Effect> combinedCosts;
-        std::vector<std::pair<Id,Amount>> spreads;
-        std::set<Id> spreadIds;
-        for (const Id id : s.bullet) {
-            const auto* p = byId(s.parts,id);
-            require(p && p->place == Place::Loaded, "Loaded part is missing.");
-            fired.push_back(*p);
-            for (const auto& effect : p->effects) {
-                if (effect.timing != Timing::Assembly) continue;
-                combinedCosts.push_back(effect);
-                if (effect.op == Op::FlatDamage) base = add(base,effect.amount);
-                if (effect.op == Op::AttackIntentBonus && attacking) base = add(base,effect.amount);
-                if (effect.op == Op::PercentDamage) percent = add(percent,effect.amount);
-                if (effect.op == Op::SpreadPercent) {
-                    const auto match = std::find_if(action.spreadTargets.begin(),action.spreadTargets.end(),[id](const SpreadTarget& a){ return a.part == id; });
-                    require(match != action.spreadTargets.end(), "Choose another enemy for every spreading part.");
-                    const auto* other = byId(s.enemies,match->enemy);
-                    require(other && alive(*other) && other->id != action.target, "Spread target must be another living enemy.");
-                    spreadIds.insert(id); spreads.emplace_back(other->id,effect.amount);
-                }
-            }
-        }
-        require(spreadIds.size() == action.spreadTargets.size(), "Duplicate or unused spread targeting.");
-        pay(combinedCosts, Timing::Assembly);
-        if (s.hotBarrel) base = add(base,heatAtFire/2);
-        const Amount shot = std::max(0, checked(static_cast<std::int64_t>(base) + static_cast<std::int64_t>(base)*percent/100) - s.weaken);
-        const Amount main = add(shot,target->mark);
-        byId(s.enemies,action.target)->mark = 0;
-        s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[&](const Part& p){ return p.place == Place::Loaded; }),s.parts.end());
-        s.bullet.clear(); ++s.shots; s.nextFlat = 0; s.nextPercent = 0; s.shotBonuses.clear();
-        emit("fire", 0, action.target, shot, heatAtFire);
-        enemyDamage(action.target, main, true);
-        if (s.phase == Phase::Defeat) return;
-        for (const auto& p : fired) effects(p.effects,Timing::AfterHit,action.target,heatAtFire,p.recipe);
-        for (const auto& spread : spreads) {
-            if (s.phase == Phase::Defeat) break;
-            enemyDamage(spread.first,checked(static_cast<std::int64_t>(shot)*spread.second/100),true);
-        }
-        if (s.phase != Phase::Defeat) terminal();
-    }
+    void fire(const Action& action) {completeFire(action);}
     void commitIntents() {
-        for (auto& e : s.enemies) if (alive(e)) {
-            if (e.departureRound > 0 && s.round >= e.departureRound) e.intent = {Move::Escape,0,0};
-            else if (!e.pattern.empty()) e.intent = e.pattern[static_cast<std::size_t>(e.patternCursor) % e.pattern.size()];
-            emit("intent", e.id, 0, static_cast<Amount>(e.intent.move), e.intent.damage);
+        for(Id id:living()) {if(commitRobotIntent(s,id,callbacks()))continue;auto* e=byId(s.enemies,id);
+            if(e->departureRound>0&&s.round>=e->departureRound)e->intent={Move::Escape,0,0};
+            else if(!e->pattern.empty())e->intent=e->pattern[static_cast<std::size_t>(e->patternCursor)%e->pattern.size()];
+            emit("intent",e->id,0,static_cast<Amount>(e->intent.move),e->intent.damage);
         }
     }
-    void endTurn() {
-        unload(); s.nextFlat = 0; s.nextPercent = 0; s.shotBonuses.clear();
-        emit("end_turn", 0, 0, s.round);
-        if (s.burn > 0) {
-            const bool ward=!s.burnWardSpent && std::any_of(s.parts.begin(),s.parts.end(),[&](const Part& p){
-                return p.place==Place::Installed && p.firstInstallRound==s.round && std::any_of(p.effects.begin(),p.effects.end(),[](const Effect& f){return f.op==Op::BurnWard;});
-            });
-            const Amount tick=s.burn--;
-            if(!ward)playerDamage(tick,0,root);else {s.burnWardSpent=true;emit("burn_prevented",0,0,tick);}
+    void endTurn(const Action& choice) {
+        unload();endTurnHooks(choice);s.bindings.erase(std::remove_if(s.bindings.begin(),s.bindings.end(),[](const Binding& b){return b.clock==BindingClock::Shot;}),s.bindings.end());
+        s.nextFlat=s.nextPercent=0;s.shotBonuses.clear();emit("end_turn",0,0,s.round);
+        if(s.shieldLeak>0&&s.shieldLeakRound==s.round){const Amount lost=Rules::spendShield(s,s.shieldLeak,true);emit("shield_leak",0,0,lost);s.shieldLeak=0;}
+        if(s.recipeFouling>0&&s.foulingRound==s.round)s.recipeFouling=0;
+        if(s.burn>0){const bool ward=!s.burnWardSpent&&std::any_of(s.parts.begin(),s.parts.end(),[&](const Part& p){return p.place==Place::Installed&&p.firstInstallRound==s.round&&std::any_of(p.effects.begin(),p.effects.end(),[](const Effect& f){return f.op==Op::BurnWard;});});const auto tick=s.burn--;if(!ward)playerDamage(tick,0,root);else{s.burnWardSpent=true;emit("burn_prevented",0,0,tick);}}
+        if(s.phase==Phase::Defeat)return;s.weaken=std::max(0,s.weaken-1);
+        const auto actors=living();Amount shelter=0;
+        for(Id id:actors){auto* e=byId(s.enemies,id);if(!e||!alive(*e)||e->bornRound>=s.round)continue;
+            if(e->corrosion>0){const auto tick=e->corrosion--;enemyDamage(id,tick,false,true);}e=byId(s.enemies,id);if(!e||!alive(*e))continue;
+            const auto intent=e->intent;const auto shieldBefore=Rules::shield(s);const bool burned=e->burn>0;
+            if(intent.move==Move::Attack){const Amount total=checked(static_cast<std::int64_t>(std::max(0,add(intent.damage,e->drive)-e->weaken))*intent.hits+s.mark);const auto reduced=attackReduction(id,total);attackFlatRemaining=total-reduced;attackLost=attackAbsorbed=0;inEnemyAttack=true;}
+            if(!executeRobotIntent(s,id,callbacks())){const auto event=emit("enemy_action",id,0,static_cast<Amount>(intent.move));if(intent.move==Move::Escape){byId(s.enemies,id)->escaped=true;emit("enemy_escape",id);}else if(intent.move==Move::Attack){e=byId(s.enemies,id);const auto damage=std::max(0,add(intent.damage,e->drive)-e->weaken);for(Amount hit=0;hit<intent.hits&&s.phase!=Phase::Defeat;++hit)playerDamage(damage,id,event);}++byId(s.enemies,id)->patternCursor;}
+            inEnemyAttack=false;if(s.phase==Phase::Defeat)return;if(intent.move==Move::Attack)afterEnemyAttack(id,attackLost,attackAbsorbed,shieldBefore,burned);if(s.phase==Phase::Defeat)return;
+            e=byId(s.enemies,id);if(e&&alive(*e)&&e->burn>0){const auto tick=e->burn;if(e->burnHoldTicks>0)--e->burnHoldTicks;else --e->burn;enemyDamage(id,tick,false);if(active("MA090")&&shelter<6){shieldPart(2,"MA090",true);shelter+=2;}}
+            finishRobotTurn(s,id,callbacks());
         }
-        if (s.phase == Phase::Defeat) return;
-        s.weaken = std::max(0,s.weaken-1);
-        std::vector<Id> actors; for (const auto& e : s.enemies) if (alive(e) && e.bornRound < s.round) actors.push_back(e.id);
-        for (Id id : actors) {
-            auto* e = byId(s.enemies,id); if (!e || !alive(*e)) continue;
-            if (e->corrosion > 0) { const auto tick = e->corrosion--; enemyDamage(id,tick,false,true); }
-            e = byId(s.enemies,id); if (!e || !alive(*e)) continue;
-            const auto intent = e->intent;
-            const auto action = emit("enemy_action",id,0,static_cast<Amount>(intent.move));
-            if (intent.move == Move::Escape) { e->escaped = true; emit("enemy_escape",id); continue; }
-            if (intent.move == Move::Attack) {
-                const Amount damage = std::max(0,add(intent.damage,e->drive)-e->weaken);
-                for (Amount hit=0; hit<intent.hits && s.phase != Phase::Defeat; ++hit) playerDamage(damage,id,action);
-            }
-            if (s.phase == Phase::Defeat) return;
-            e = byId(s.enemies,id);
-            if (alive(*e) && e->burn > 0) { const auto tick=e->burn--; enemyDamage(id,tick,false); }
-            ++e->patternCursor;
-        }
-        terminal(); if (s.phase == Phase::Victory || s.phase == Phase::Escaped || s.phase == Phase::Defeat) return;
-        Amount available = Rules::shield(s), retained=0;
-        for (Amount allowance : s.retentionAllowances) {
-            const auto actual = std::min(available,allowance); available -= actual; retained = add(retained,actual);
-            emit("shield_retained",0,0,actual);
-        }
-        s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[](const Part& p){ return p.place == Place::Installed || p.place == Place::Fitted; }),s.parts.end());
-        s.protection.clear(); if (retained) s.protection.push_back({s.nextId++,s.nextOrder++,retained});
-        for (auto& e : s.enemies) if (alive(e)) e.weaken = std::max(0,e.weaken-1);
-        for (auto& copy : s.memory) { if (copy.usedRound != s.round) copy.cooldown = std::max(0,copy.cooldown-1); copy.usesThisRound = 0; }
-        s.heat = std::max(0,s.heat-2); s.burnWardSpent = false;
-        ++s.round;
-        if (s.corrosion > 0) { const auto tick=s.corrosion--; playerDamage(tick,0,root,true); }
-        if (s.phase == Phase::Defeat) return;
-        std::vector<Delivery> pending;
-        for (const auto& delivery : s.deliveries) {
-            if (delivery.dueRound > s.round) { pending.push_back(delivery); continue; }
-            emit("delivery",delivery.id,0,delivery.amount);
-            if (delivery.kind == DeliveryKind::ShieldPart) shieldPart(delivery.amount,delivery.source,true);
-            if (delivery.kind == DeliveryKind::Heat) heat(delivery.amount);
-            if (delivery.kind == DeliveryKind::Haul) s.haulBonus = add(s.haulBonus,delivery.amount);
-        }
-        s.deliveries = std::move(pending);
-        s.phase = Phase::Collection; commitIntents();
+        terminal();if(s.phase==Phase::Victory||s.phase==Phase::Escaped||s.phase==Phase::Defeat)return;
+        preReset();terminal();if(s.phase==Phase::Victory||s.phase==Phase::Defeat)return;
+        bool skipHeat=false;for(const auto& p:hooks())if(code(p.recipe)==1015)skipHeat=true;
+        Amount restoreHeat=0;for(const auto& b:s.bindings)if(b.source=="MA102"&&b.clock==BindingClock::Round&&installedBinding(b))restoreHeat=std::max(restoreHeat,b.amount);
+        Amount available=Rules::shield(s),retained=0;for(Amount allowance:s.retentionAllowances){const auto actual=std::min(available,allowance);available-=actual;retained=add(retained,actual);emit("shield_retained",0,0,actual);}
+        s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[](const Part& p){return p.place==Place::Installed||p.place==Place::Fitted;}),s.parts.end());s.protection.clear();if(retained)s.protection.push_back({s.nextId++,s.nextOrder++,retained});
+        for(auto& e:s.enemies)if(alive(e))e.weaken=std::max(0,e.weaken-1);
+        for(auto& c:s.memory){if(c.usedRound!=s.round)c.cooldown=std::max(0,c.cooldown-1);c.usesThisRound=0;}
+        if(!skipHeat)s.heat=std::max(0,s.heat-2);s.heat=std::max(s.heat,restoreHeat);s.burnWardSpent=false;
+        previousHeatPaid=s.partHeatPaidRound;s.partHeatPaidRound=0;s.previousEnemyAttackHp=s.enemyAttackHpRound;s.enemyAttackHpRound=0;s.hpLostRound=0;s.heatPaidRound=0;s.sacrificesRound=0;s.firstInstallsRound=0;s.spentThisRound={};++s.round;
+        if(s.corrosion>0){const auto tick=s.corrosion--;playerDamage(tick,0,root,true);}if(s.phase==Phase::Defeat)return;
+        s.bindings.erase(std::remove_if(s.bindings.begin(),s.bindings.end(),[&](const Binding& b){return b.clock==BindingClock::Round||b.clock==BindingClock::EndPhase||(b.clock==BindingClock::Collection&&b.round<s.round);}),s.bindings.end());
+        auto deliveries=std::move(s.deliveries);s.deliveries.clear();const Amount beforeStartHeat=s.heat;
+        for(const auto& d:deliveries){if(d.dueRound>s.round){s.deliveries.push_back(d);continue;}emit("delivery",d.id,0,d.amount);if(d.kind==DeliveryKind::ShieldPart)shieldPart(d.amount,d.source,true);if(d.kind==DeliveryKind::Heat)heat(d.amount);if(d.kind==DeliveryKind::Haul&&!binding(d.source,BindingClock::Collection))s.haulBonus=add(s.haulBonus,d.amount);extendedDelivery(d,beforeStartHeat);if(s.phase==Phase::Defeat)return;}
+        if(active("MA056"))heat(1);terminal();if(s.phase==Phase::Victory||s.phase==Phase::Defeat)return;s.phase=Phase::Collection;commitIntents();
     }
+
 };
 Effect fx(Op op, Timing timing, Amount n, Amount threshold = 0) { return {op,timing,n,threshold}; }
 } // namespace
@@ -358,6 +273,7 @@ Rules::Rules(std::vector<Recipe> recipes): recipes_(std::move(recipes)) {
         for (const auto& e:r.effects) {
             require(e.amount>=0 && e.threshold>=0,"Negative effect quantity.");
             require(supported(e),"Unsupported effect opcode or timing.");
+            if(e.op==Op::Catalogue)require(e.amount==r.catalogueCode&&e.amount==Engine::code(r.id),"Catalogue effect identity mismatch.");
             bool reachable=e.timing==Timing::Use;
             if(!r.automaticOutput) {
                 reachable=reachable || (e.timing==Timing::Install && r.kind==Kind::Shield);
@@ -425,7 +341,13 @@ Amount Rules::spendShield(State& s,Amount amount,bool installedOnly) {
 Result Rules::apply(State& state,const Action& action) const {
     State candidate=state;
     try { auto result=execute(candidate,action); if(result.ok) state=std::move(candidate); return result; }
-    catch(const Invalid& e) { return {false,e.what(),{}}; }
+    catch(const std::exception& e) { return {false,e.what(),{}}; }
+}
+Result Rules::grantPart(State& state,const std::string& id,bool installed) const {
+    State candidate=state;try{const auto* r=recipe(id);require(r&&r->kind!=Kind::Utility&&!r->automaticOutput,"Recipe has no directly grantable physical output.");Engine e{candidate,*this,{},0};e.root=e.emit("part_grant");e.receive(e.recipePart(*r,Action{}),installed);state=std::move(candidate);return {true,{},std::move(e.events)};}catch(const Invalid& error){return {false,error.what(),{}};}
+}
+Result Rules::grantPlainPart(State& state,Kind kind,Amount value,const std::string& source,bool installed) const {
+    State candidate=state;try{require((kind==Kind::Ammo||kind==Kind::Shield)&&value>=0,"Plain grant needs Ammo or Shield and nonnegative value.");Engine e{candidate,*this,{},0};e.root=e.emit("part_grant");e.receive(e.plain(kind,value,source),installed);state=std::move(candidate);return {true,{},std::move(e.events)};}catch(const Invalid& error){return {false,error.what(),{}};}
 }
 Preview Rules::preview(const State& state,const Action& action) const { Preview p; p.state=state; p.result=apply(p.state,action); return p; }
 Result Rules::execute(State& s,const Action& a) const {
@@ -438,18 +360,15 @@ Result Rules::execute(State& s,const Action& a) const {
         require(a.precision>=-1 && a.precision<=2,"Invalid Precision result.");
         require(a.precision<0 || !s.precisionSpent,"Precision has already been used this fight.");
         Materials haul{3,2,1,1,1}; haul[static_cast<std::size_t>(a.steering)]+=2;
-        const Amount haulBonus=s.haulBonus;
-        if(a.precision>=0) { s.precisionSpent=true; haul[static_cast<std::size_t>(a.steering)]+=a.precision; }
-        const std::array<std::size_t,8> mixBag{{0,0,0,1,1,2,3,4}};
-        for(Amount i=0;i<s.haulBonus;++i) ++haul[mixBag[s.rng.below(Domain::Collection,8)]];
-        s.haulBonus=0; for(std::size_t i=0;i<5;++i) s.materials[i]=add(s.materials[i],haul[i]);
+        if(a.precision>=0)s.precisionSpent=true;
+        e.collectionEffects(haul,a); for(std::size_t i=0;i<5;++i) s.materials[i]=add(s.materials[i],haul[i]);
         s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[&](const Part& p){return p.kind==Kind::Magnet && p.createdRound<s.round;}),s.parts.end());
-        s.phase=Phase::Preparation; e.emit("collected",0,0,10+std::max(0,a.precision)+haulBonus);
+        s.phase=Phase::Preparation;Amount gathered=0;for(Amount n:haul)gathered=add(gathered,n);e.emit("collected",0,0,gathered);
     } else {
         require(s.phase==Phase::Preparation,"Collect this round's materials first.");
         switch(a.type) {
-        case ActionType::Craft: e.craft(a.subject); break;
-        case ActionType::Install: e.install(a.subject); break;
+        case ActionType::Craft: e.craft(a); break;
+        case ActionType::Install: e.install(a.subject,a); break;
         case ActionType::Remove: {
             auto* p=byId(s.parts,a.subject); require(p && p->place==Place::Installed,"Select an installed part.");
             p->place=Place::Reserve; e.emit("part_removed",p->id,0,p->shield); break;
@@ -458,17 +377,19 @@ Result Rules::execute(State& s,const Action& a) const {
             require(s.bullet.empty(),"Unload the current bullet before changing it.");
             require(!a.parts.empty(),"A bullet needs at least one part."); std::set<Id> seen;
             for(Id id:a.parts) { auto* p=byId(s.parts,id); require(p && p->place==Place::Reserve && (p->kind==Kind::Ammo || p->kind==Kind::Spread),"Select reserved bullet parts."); require(seen.insert(id).second,"A physical part can only be loaded once."); p->place=Place::Loaded; }
-            s.bullet=a.parts; e.emit("loaded",0,0,checked(static_cast<std::int64_t>(a.parts.size()))); break;
+            std::size_t paymentIndex=0;
+            for(Id id:a.parts){const auto* p=byId(s.parts,id);if(p->kind==Kind::Spread)require(!e.active("MA067",BindingClock::Shot),"Barrel Weight cannot combine with spreading parts.");if(Engine::code(p->recipe)==110){require(paymentIndex<a.sacrifices.size(),"Reserve one unused Shield part for each Full-Spread Outlet.");auto* paid=byId(s.parts,a.sacrifices[paymentIndex++]);require(paid&&paid->place==Place::Reserve&&Engine::unused(*paid)&&paid->kind==Kind::Shield,"Choose an unused Shield payment.");paid->place=Place::Payment;paid->reservedBy=id;}}
+            require(paymentIndex==a.sacrifices.size(),"Unused sacrifice selection.");s.bullet=a.parts; e.emit("loaded",0,0,checked(static_cast<std::int64_t>(a.parts.size()))); break;
         }
         case ActionType::Unload: e.unload(); break;
         case ActionType::Fire: e.fire(a); break;
-        case ActionType::EndTurn: e.endTurn(); break;
+        case ActionType::EndTurn: e.endTurn(a); break;
         case ActionType::Activate: {
             auto* p=byId(s.parts,a.subject); require(p && p->place==Place::Reserve && (p->kind==Kind::Magnet || p->kind==Kind::Modifier),"Select a reserved planning part.");
             require(p->kind!=Kind::Magnet || p->createdRound==s.round,"Magnet parts must be fitted in their crafting round.");
             const auto part=*p; e.pay(part.effects,Timing::Activate);
             s.parts.erase(std::remove_if(s.parts.begin(),s.parts.end(),[&](const Part& x){return x.id==a.subject;}),s.parts.end());
-            e.effects(part.effects,Timing::Activate,a.target,s.heat,part.recipe); e.emit("part_used",part.id); break;
+            e.effects(part.effects,Timing::Activate,a.target,s.heat,part.recipe);if(Engine::catalogue(part.effects))e.catalogueActivate(part,a);for(const auto& b:part.attachments)if(b.heat&&b.dueRound==s.round)e.heat(b.heat); e.emit("part_used",part.id); break;
         }
         default: throw Invalid("Unsupported action.");
         }
@@ -494,6 +415,7 @@ std::vector<Action> Rules::legalActions(const State& s) const {
 }
 std::string Rules::intentText(const Enemy& e,Amount round) {
     std::string result;
+    const auto robotText=robotIntentText(e,round);if(!robotText.empty())return robotText;
     if(e.intent.move==Move::Attack)result="Attack "+std::to_string(std::max(0,e.intent.damage+e.drive-e.weaken))+(e.intent.hits>1?" x "+std::to_string(e.intent.hits):"");
     else if(e.intent.move==Move::Charge)result="Charge — Blast 18 next turn";
     else if(e.intent.move==Move::Escape)result="Escape";

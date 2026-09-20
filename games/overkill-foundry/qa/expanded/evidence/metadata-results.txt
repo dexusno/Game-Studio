@@ -1,0 +1,3 @@
+PASS 606 rarity metadata entries against actual source headings, including suffixed headings
+PASS SH121-123 Rare, SH124-126 Legendary, and exact 207-ID Regular offer pool
+manifest_sha256=d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9

@@ -5,7 +5,7 @@ public class OverkillFoundry : ModuleRules
 {
     public OverkillFoundry(ReadOnlyTargetRules Target) : base(Target)
     {
-        // The two shared-core translation units must compile without Unreal's
+        // The shared-core translation units must compile without Unreal's
         // PCH/macros and without unity-combining their anonymous namespaces.
         PCHUsage = PCHUsageMode.NoPCHs;
         bUseUnity = false;

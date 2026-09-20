@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build', 'BuildGame', 'Content', 'Run', 'Smoke', 'Fixture', 'Package')]
+    [ValidateSet('Build', 'BuildGame', 'Content', 'Art', 'ArtProbe', 'Run', 'Smoke', 'Fixture', 'Package')]
     [string]$Action = 'Build',
     [ValidateSet('Development', 'Shipping')]
     [string]$Configuration = 'Development',
@@ -51,6 +51,17 @@ switch ($Action) {
         $taskArgs = @("`"$taskProject`"", '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', "`"-abslog=$taskLog`"")
         $taskProc = Start-Process -FilePath $taskEditor -ArgumentList $taskArgs -WorkingDirectory $taskProjectDir -WindowStyle Normal -PassThru
         Write-Output "Interactive host PID=$($taskProc.Id)"
+    }
+    'Art' {
+        $taskCmdEditor = Join-Path (Split-Path $taskEditor) 'UnrealEditor-Cmd.exe'
+        $taskScript = Join-Path $taskProjectDir 'Tools/import_cinderwall.py'
+        # Static-mesh build settings only rebuild render bounds with rendering enabled.
+        Invoke-FoundryProcess $taskCmdEditor @($taskProject, '-run=pythonscript', "-script=$taskScript", '-unattended', '-nop4', '-nosplash', '-AllowCommandletRendering', '-asyncStaticMeshCompilation=0', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_CINDERWALL_READY' -Quiet)) { throw "Cinderwall import did not report success: $taskLog" }
+    }
+    'ArtProbe' {
+        Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundryArtProbe', "-abslog=$taskLog")
+        if (-not (Select-String -LiteralPath $taskLog -SimpleMatch 'FOUNDRY_ART_PROBE_COMPLETE ok=1' -Quiet)) { throw "Rendered art probe did not report success: $taskLog" }
     }
     'Smoke' {
         Invoke-FoundryProcess $taskEditor @($taskProject, '-game', '-windowed', "-ResX=$Width", "-ResY=$Height", '-nosplash', '-nosound', '-FoundrySmoke', "-abslog=$taskLog")

@@ -1,0 +1,12 @@
+Internal ctest changing into directory: <game>/core/build
+Test project <game>/core/build
+    Start 1: core_contracts
+1/3 Test #1: core_contracts ...................   Passed    0.08 sec
+    Start 3: robot_contracts
+2/3 Test #3: robot_contracts ..................   Passed    0.03 sec
+    Start 4: recipe_contracts
+3/3 Test #4: recipe_contracts .................   Passed    0.09 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   0.21 sec

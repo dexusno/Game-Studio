@@ -1,5 +1,6 @@
 #include "FoundryHost.h"
 #include "FoundrySession.h"
+#include "FoundryRobot.h"
 
 #include "Camera/CameraActor.h"
 #include "Camera/CameraComponent.h"
@@ -15,6 +16,8 @@
 #include "Engine/PointLight.h"
 #include "Engine/SkyLight.h"
 #include "Engine/StaticMesh.h"
+#include "Engine/StaticMeshActor.h"
+#include "StaticMeshResources.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
@@ -103,6 +106,23 @@ void AFoundryStage::BeginPlay()
         ensureAlwaysMsgf(Result.ok && bWritten, TEXT("Shared core fixture failed."));
     }
     bSmokeTest = FParse::Param(FCommandLine::Get(), TEXT("FoundrySmoke"));
+    bArtProbe = FParse::Param(FCommandLine::Get(), TEXT("FoundryArtProbe"));
+    int32 StageActorCount = 0;
+    TSet<UStaticMesh*> StageMeshes;
+    for (TActorIterator<AStaticMeshActor> Actor(GetWorld()); Actor; ++Actor)
+    {
+        if (!Actor->ActorHasTag(TEXT("CinderwallGenerated"))) continue;
+        ++StageActorCount;
+        UStaticMesh* Mesh = Actor->GetStaticMeshComponent()->GetStaticMesh();
+        StageMeshes.Add(Mesh);
+        if (Mesh->GetName().Contains(TEXT("SM_CW_deck_")))
+        {
+            const FVector Extent = Mesh->GetRenderData()->Bounds.BoxExtent;
+            checkf(FMath::IsNearlyEqual(Extent.X, 98.0, 1.0) && FMath::IsNearlyEqual(Extent.Y, 98.0, 1.0), TEXT("Cinderwall render geometry is not centimetre scale"));
+        }
+    }
+    checkf(StageActorCount == 47 && StageMeshes.Num() == 18, TEXT("Run Art to rebuild the complete Cinderwall map"));
+    UE_LOG(LogFoundryHost, Display, TEXT("ART_STAGE placements=%d shared_meshes=%d"), StageActorCount, StageMeshes.Num());
     UStaticMesh* Cube = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
     UStaticMesh* Cylinder = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
     UStaticMesh* Sphere = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Sphere.Sphere"));
@@ -112,44 +132,23 @@ void AFoundryStage::BeginPlay()
     const FLinearColor Iron(0.15f, 0.21f, 0.24f);
     const FLinearColor Brass(0.48f, 0.22f, 0.065f);
     const FLinearColor Dark(0.04f, 0.065f, 0.08f);
-    AddShape(TEXT("Deck"), Cube, FVector(0, 0, -38), FVector(26, 12, 0.75), Iron);
-    AddShape(TEXT("BackWall"), Cube, FVector(0, -510, 260), FVector(28, 0.55, 6), Dark);
-    for (int32 Index = 0; Index < 8; ++Index)
-    {
-        const double X = -1100.0 + 320.0 * Index;
-        AddShape(*FString::Printf(TEXT("WallRib%d"), Index), Cube, FVector(X, -455, 290), FVector(0.55, 0.8, 6.2), Iron);
-        AddShape(*FString::Printf(TEXT("DeckStrip%d"), Index), Cube, FVector(X, 0, 1), FVector(0.08, 11, 0.06), Brass);
-    }
-    // These original primitive assemblies are labels for future art, not enemy content.
+    // The cannon remains a clearly provisional host prop; this art package contains
+    // the robots and stage, not Mara's production gun. Stage meshes live in the map.
     AddShape(TEXT("RigBase"), Cylinder, FVector(-300, 0, 50), FVector(2.8, 2.8, 1), Dark);
     AddShape(TEXT("RigBody"), Cube, FVector(-300, 0, 145), FVector(2.2, 1.8, 1.5), Brass);
     AddShape(TEXT("RigBarrel"), Cylinder, FVector(-150, 0, 180), FVector(0.72, 0.72, 2.6), Iron, FRotator(90, 0, 0));
     AddShape(TEXT("RigRing"), Cylinder, FVector(-35, 0, 180), FVector(0.97, 0.97, 0.22), Brass, FRotator(90, 0, 0));
-    AddShape(TEXT("RearClawMast"), Cube, FVector(-820, 120, 205), FVector(0.38, 0.5, 4.3), Iron);
-    AddShape(TEXT("RearClawArm"), Cube, FVector(-700, 120, 420), FVector(2.8, 0.45, 0.4), Brass);
-    AddShape(TEXT("RearClawCable"), Cylinder, FVector(-575, 120, 340), FVector(0.055, 0.055, 1.6), Dark);
-    AddShape(TEXT("RearClawLeft"), Cube, FVector(-600, 120, 270), FVector(0.15, 0.25, 0.7), Brass, FRotator(0, 0, -25));
-    AddShape(TEXT("RearClawRight"), Cube, FVector(-550, 120, 270), FVector(0.15, 0.25, 0.7), Brass, FRotator(0, 0, 25));
-    AddShape(TEXT("ScrapBin"), Cube, FVector(-610, 70, 22), FVector(3.2, 2.8, 0.42), Iron);
-    AddShape(TEXT("ScrapA"), Cube, FVector(-675, 30, 70), FVector(0.62, 0.64, 0.68), Brass, FRotator(10, 22, 30));
-    AddShape(TEXT("ScrapB"), Cylinder, FVector(-570, 70, 60), FVector(0.7, 0.7, 0.5), Iron, FRotator(24, 12, 45));
-    AddShape(TEXT("TargetBase"), Cube, FVector(430, 20, 45), FVector(2.6, 2.0, 0.9), Dark);
-    AddShape(TEXT("TargetBody"), Sphere, FVector(430, 20, 145), FVector(2.7, 2.1, 2.4), Iron);
-    AddShape(TEXT("TargetRam"), Cube, FVector(295, 20, 150), FVector(0.55, 2.35, 1.35), Brass);
-    AddShape(TEXT("TargetCore"), Sphere, FVector(430, 132, 165), FVector(0.58, 0.22, 0.58), FLinearColor(0.8f, 0.22f, 0.035f));
-    AddShape(TEXT("MiteBody"), Sphere, FVector(160, 80, 65), FVector(0.95, 0.8, 0.7), Brass);
-    AddShape(TEXT("MiteLeftLeg"), Cube, FVector(160, 30, 30), FVector(1.2, 0.12, 0.15), Iron, FRotator(0, -30, 0));
-    AddShape(TEXT("MiteRightLeg"), Cube, FVector(160, 125, 30), FVector(1.2, 0.12, 0.15), Iron, FRotator(0, 30, 0));
+    SpawnRobots();
 
     ADirectionalLight* Key = GetWorld()->SpawnActor<ADirectionalLight>(FVector::ZeroVector, FRotator(-40, 35, 0));
-    Key->GetLightComponent()->SetIntensity(4.0f);
+    Key->GetLightComponent()->SetIntensity(5.0f);
     Key->GetLightComponent()->SetLightColor(FLinearColor(1.0f, 0.80f, 0.57f));
     APointLight* Warm = GetWorld()->SpawnActor<APointLight>(FVector(-300, 230, 420), FRotator::ZeroRotator);
-    Warm->PointLightComponent->SetIntensity(70000.0f);
+    Warm->PointLightComponent->SetIntensity(100000.0f);
     Warm->PointLightComponent->SetAttenuationRadius(1250.0f);
     Warm->PointLightComponent->SetLightColor(FLinearColor(1.0f, 0.38f, 0.10f));
     APointLight* Cool = GetWorld()->SpawnActor<APointLight>(FVector(650, -240, 380), FRotator::ZeroRotator);
-    Cool->PointLightComponent->SetIntensity(90000.0f);
+    Cool->PointLightComponent->SetIntensity(150000.0f);
     Cool->PointLightComponent->SetAttenuationRadius(1300.0f);
     Cool->PointLightComponent->SetLightColor(FLinearColor(0.20f, 0.60f, 1.0f));
     ASkyLight* Fill = GetWorld()->SpawnActor<ASkyLight>();
@@ -157,28 +156,68 @@ void AFoundryStage::BeginPlay()
     Fill->GetLightComponent()->SetRealTimeCaptureEnabled(false);
     Fill->GetLightComponent()->RecaptureSky();
 
-    const FVector PrepareLocation(0, 1920, 695);
-    const FVector PrepareFocus(-40, 30, 170);
+    const FVector PrepareLocation(-60, 2400, 700);
+    const FVector PrepareFocus(-60, -60, 225);
     PreparationCamera = GetWorld()->SpawnActor<ACameraActor>(PrepareLocation, (PrepareFocus - PrepareLocation).Rotation());
     PreparationCamera->GetCameraComponent()->SetFieldOfView(52.0f);
-    const FVector ActionLocation(-650, 700, 370);
-    const FVector ActionFocus(340, 15, 145);
+    const FVector ActionLocation(-540, 940, 345);
+    const FVector ActionFocus(260, -20, 140);
     ActionCamera = GetWorld()->SpawnActor<ACameraActor>(ActionLocation, (ActionFocus - ActionLocation).Rotation());
-    ActionCamera->GetCameraComponent()->SetFieldOfView(61.0f);
+    ActionCamera->GetCameraComponent()->SetFieldOfView(50.0f);
     SetActionView(false, true);
-    UE_LOG(LogFoundryHost, Display, TEXT("Host P13 ready. Shared-core Mara teaching encounter. Smoke=%d"), bSmokeTest);
+    if (bArtProbe) Session->bShowPanels = false;
+    UE_LOG(LogFoundryHost, Display, TEXT("Host P13 ready. Cinderwall-v001 shared-core Mara teaching encounter. Smoke=%d ArtProbe=%d"), bSmokeTest, bArtProbe);
+}
+
+void AFoundryStage::SpawnRobots()
+{
+    for (AFoundryRobot* Robot : Robots) if (IsValid(Robot)) Robot->Destroy();
+    Robots.Empty();
+    for (const auto& Enemy : Session->State.enemies)
+    {
+        if (Enemy.dead || Enemy.escaped) continue;
+        const bool bRam = Enemy.definition == "C1-R02";
+        AFoundryRobot* Robot = GetWorld()->SpawnActor<AFoundryRobot>(bRam ? FVector(360, -65, 1.5) : FVector(130, 20, 1.5), FRotator::ZeroRotator);
+        Robot->Initialize(Enemy.id, bRam, Enemy.maxHp);
+        Robots.Add(Robot);
+    }
+}
+
+void AFoundryStage::PresentCommittedEvents()
+{
+    if (!Session || Session->CommittedEvents.empty()) return;
+    TSet<uint64> Died;
+    TSet<uint64> NamedActionParents;
+    for (const auto& Event : Session->CommittedEvents) if (Event.type == "enemy_death") Died.Add(Event.target);
+    for (const auto& Event : Session->CommittedEvents) if (Event.type.rfind("robot_action:", 0) == 0) NamedActionParents.Add(Event.parent);
+    for (const auto& Event : Session->CommittedEvents)
+    {
+        for (AFoundryRobot* Robot : Robots)
+        {
+            if (!IsValid(Robot)) continue;
+            const uint64 Id = Robot->GetCoreId();
+            if (Event.type == "enemy_death" && Event.target == Id) Robot->Die(Event.id);
+            else if (Died.Contains(Id)) continue; // Death wins over every reaction in this committed action.
+            else if ((Event.type == "hit" || Event.type == "status_damage") && Event.target == Id) Robot->Hit(Event.amount, Event.secondary, Event.id);
+            else if (Event.type.rfind("robot_action:", 0) == 0 && Event.subject == Id) Robot->NamedAction(UTF8_TO_TCHAR(Event.type.substr(13).c_str()), Event.id);
+            else if (Event.type == "enemy_action" && Event.subject == Id && !NamedActionParents.Contains(Event.id)) Robot->EnemyAction(Event.amount, Event.id);
+            else if (Event.type == "enemy_escape" && Event.subject == Id) Robot->Escape(Event.id);
+        }
+    }
+    Session->CommittedEvents.clear();
 }
 
 void AFoundryStage::Control(const FString& Command)
 {
     if (!Session) return;
     const bool bCommitted = Session->Control(Command);
+    PresentCommittedEvents();
     if (bCommitted && (Command == TEXT("fire") || Command == TEXT("end")))
     {
         SetActionView(true);
-        ReturnCameraAfter = 1.25f;
+        ReturnCameraAfter = 2.25f;
     }
-    if (Command == TEXT("restart")) { ReturnCameraAfter = 0.0f; SetActionView(false); }
+    if (Command == TEXT("restart")) { SpawnRobots(); ReturnCameraAfter = 0.0f; SetActionView(false); }
 }
 
 void AFoundryStage::SetActionView(bool bAction, bool bInstant)
@@ -195,6 +234,11 @@ void AFoundryStage::SetActionView(bool bAction, bool bInstant)
 void AFoundryStage::CaptureView()
 {
     const FString Name = bActionView ? TEXT("host-action.png") : TEXT("host-preparation.png");
+    CaptureNamed(Name);
+}
+
+void AFoundryStage::CaptureNamed(const FString& Name)
+{
     const FString ScreenshotPath = FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("Screenshots"), Name));
     FScreenshotRequest::RequestScreenshot(ScreenshotPath, true, false);
     UE_LOG(LogFoundryHost, Display, TEXT("Rendered screenshot requested: %s"), *ScreenshotPath);
@@ -208,19 +252,8 @@ void AFoundryStage::Tick(float DeltaSeconds)
         ReturnCameraAfter -= DeltaSeconds;
         if (ReturnCameraAfter <= 0.0f) SetActionView(false);
     }
-    if (Session)
-    {
-        TInlineComponentArray<UStaticMeshComponent*> Shapes(this);
-        for (UStaticMeshComponent* Shape : Shapes)
-        {
-            const bool bRam = Shape->GetName().StartsWith(TEXT("Target"));
-            const bool bMite = Shape->GetName().StartsWith(TEXT("Mite"));
-            if (!bRam && !bMite) continue;
-            const size_t Index = bRam ? 1 : 0;
-            const auto& Enemy = Session->State.enemies[Index];
-            Shape->SetVisibility(!Enemy.dead && !Enemy.escaped);
-        }
-    }
+    PresentCommittedEvents();
+    if (bArtProbe) TickArtProbe(DeltaSeconds);
     if (!bSmokeTest) return;
     SmokeElapsed += DeltaSeconds;
     if (SmokeStep == 0 && SmokeElapsed >= 4.0f) { CaptureView(); ++SmokeStep; }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(OverkillFoundationReview LANGUAGES CXX)
-add_executable(foundation_probes foundation_probes.cpp ../core/src/core.cpp ../core/src/serialization.cpp)
+add_executable(foundation_probes foundation_probes.cpp ../core/src/core.cpp ../core/src/serialization.cpp ../core/src/catalogue.cpp ../core/src/robots.cpp)
 target_include_directories(foundation_probes PRIVATE ../core/include)
 target_compile_features(foundation_probes PRIVATE cxx_std_17)
 if(MSVC)

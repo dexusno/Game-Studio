@@ -61,7 +61,7 @@
     "start_cores": 0,
     "start_credits": 100
   },
-  "catalogue_snapshot_sha256": "0568404e3c8145490d10821c3666d1ce36c35854d9b83c6c4a105627475dd4c9",
+  "catalogue_snapshot_sha256": "9815f1e542c9623a3e103b1bb527592a010bc50ec47d77f4e670b828b9f9b06c",
   "content_version": "cinderwall-v1",
   "copy_selectors": {
     "recipe:SH071": {
@@ -754,6 +754,9 @@
         "recipe:SH106",
         "recipe:SH107",
         "recipe:SH108",
+        "recipe:SH121",
+        "recipe:SH122",
+        "recipe:SH123",
         "upgrade:MAU-02",
         "upgrade:MAU-03",
         "upgrade:MAU-04",
@@ -7901,7 +7904,10 @@
         "recipe:SH105",
         "recipe:SH106",
         "recipe:SH107",
-        "recipe:SH108"
+        "recipe:SH108",
+        "recipe:SH121",
+        "recipe:SH122",
+        "recipe:SH123"
       ],
       "source": {
         "json_pointer": "/upgrades/88",
@@ -8208,7 +8214,10 @@
         "recipe:SH105",
         "recipe:SH106",
         "recipe:SH107",
-        "recipe:SH108"
+        "recipe:SH108",
+        "recipe:SH121",
+        "recipe:SH122",
+        "recipe:SH123"
       ],
       "source": {
         "json_pointer": "/upgrades/100",
@@ -8670,7 +8679,10 @@
         "recipe:SH105",
         "recipe:SH106",
         "recipe:SH107",
-        "recipe:SH108"
+        "recipe:SH108",
+        "recipe:SH121",
+        "recipe:SH122",
+        "recipe:SH123"
       ],
       "source": {
         "json_pointer": "/upgrades/146",
@@ -11192,7 +11204,10 @@
         "SH105",
         "SH106",
         "SH107",
-        "SH108"
+        "SH108",
+        "SH121",
+        "SH122",
+        "SH123"
       ],
       "choices": 3,
       "kind": "recipe",
@@ -11411,7 +11426,10 @@
         "SH105",
         "SH106",
         "SH107",
-        "SH108"
+        "SH108",
+        "SH121",
+        "SH122",
+        "SH123"
       ],
       "choices": 3,
       "kind": "recipe",
@@ -11574,7 +11592,10 @@
         "SH105",
         "SH106",
         "SH107",
-        "SH108"
+        "SH108",
+        "SH121",
+        "SH122",
+        "SH123"
       ],
       "choices": 3,
       "kind": "recipe",
@@ -19306,7 +19327,10 @@
         "SH105",
         "SH106",
         "SH107",
-        "SH108"
+        "SH108",
+        "SH121",
+        "SH122",
+        "SH123"
       ],
       "rarity_weights": {
         "Common": 65,
@@ -20703,7 +20727,7 @@
     "design/data/character-mayor-upgrades.json": "ce25fb2affeac77071857c3c77c93c15669c01a0d4c2b8af970b60cc473ba62c",
     "design/data/part-resale-bases.json": "ddaa6bc2f31a01155beb3916edc6a0312701e2cd9e5a79b7bed8b72d38f8c0bf",
     "design/data/shared-upgrades.json": "55fedb38faf9320f5f632f079f92759f052317ab0796d6d452c32c1e6afb89d6",
-    "tools/compile_content.py": "5e47ddeede1e723d830653d629c0571d237e9e9b6bef81fbd5f4e159309a230f"
+    "tools/compile_content.py": "d21bc9fb13116d12f78b6bd3455160193abe8aef9f3de7623f07230736112ca9"
   },
   "starter_recipe_ids": [
     "MA001",

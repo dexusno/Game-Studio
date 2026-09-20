@@ -1,0 +1,11 @@
+{
+  "utc": "2026-09-20T12:35:19.7816356Z",
+  "ctest_exit": 0,
+  "fixture_exit": 0,
+  "sha256": {
+    "overkill_core_tests.exe": "ff612d04da59cde6073b7b3ee33a0a17db6ef37fac753ddefd4f833c26fcc94d",
+    "overkill_recipe_tests.exe": "c38323406bee641512d9d69fc5f0ec0c62d8c7b5231ad086b9f5dbb3ae155f4a",
+    "overkill_robot_tests.exe": "6e778e1ca858bfe83c907ac6cf4250d23a2bfcb19507b1ce67b750a5c4f5909f",
+    "overkill_runner.exe": "3adfbd999c157b5a3fe7c14ef20782cd19e105128d94aa7da6042d692b3309da"
+  }
+}

@@ -98,7 +98,7 @@ void AFoundryHUD::DrawHUD()
 
     Rect(0, 0, 1600, 132, Panel);
     Label(TEXT("OVERKILL FOUNDRY  /  MARA AT CINDERWALL"), 24, 18, Gold, 1.2f);
-    Label(TEXT("P13 technical combat adapter - placeholder graphics - city and campaign pending"), 720, 22, Dim);
+    Label(TEXT("Cinderwall-v001 early art integration - debug HUD - city and campaign pending"), 720, 22, Dim);
     Label(FString::Printf(TEXT("ROUND %d     HP %d / %d     SHIELD %d     HEAT %d     CREDITS %d"), State.round, State.hp, State.maxHp, overkill::Rules::shield(State), State.heat, State.credits), 24, 53, White, 1.15f);
     Label(FString::Printf(TEXT("IRON %d     COPPER %d     CARBON %d     GLASS %d     CIRCUIT %d"), State.materials[0], State.materials[1], State.materials[2], State.materials[3], State.materials[4]), 24, 91, Gold);
     Label(TEXT("H panels  |  1 / 2 cameras  |  F9 capture  |  Esc exit"), 1030, 92, Dim);

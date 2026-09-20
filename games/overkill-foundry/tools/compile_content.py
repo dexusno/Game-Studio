@@ -79,8 +79,9 @@ def parse_recipes():
     result = {}
     rarity = None
     for n, line in enumerate((GAME / relative).read_text(encoding="utf-8").splitlines(), 1):
-        if line in {"### " + r for r in ("Base",) + RARITIES}:
-            rarity = line[4:]
+        heading = re.fullmatch(r"### (Base|Common|Uncommon|Rare|Legendary)(?:\s+[—–-]\s+.+)?", line)
+        if heading:
+            rarity = heading.group(1)
         if not re.match(r"^\| (SH|MA|IV|AD|NO)\d{3} \|", line):
             continue
         c = cells(line)
@@ -99,6 +100,7 @@ def parse_recipes():
             "effect": effect, "source": source_ref(relative, n, line),
         }
     require(len(result) == 606, f"Expected current 606-row source contract, got {len(result)}")
+    require(all(result[f"SH{n}"]["rarity"] == "Rare" for n in (121, 122, 123)), "Manual-grab enhancement subsection must retain its printed Rare tier")
     return result
 
 

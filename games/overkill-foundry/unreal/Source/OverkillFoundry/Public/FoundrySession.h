@@ -21,6 +21,8 @@ public:
     FString Message;
     TArray<FString> RecentEvents;
     FString LastAction;
+    // Consumed once by the cosmetic adapter; previews never append here.
+    std::vector<overkill::Event> CommittedEvents;
 
     void Restart();
     bool Submit(const overkill::Action& Action, const FString& Description);
