@@ -94,17 +94,26 @@ double Policy::simpleValue(const State& s)const{
     // attackers instead would make eliminating those attackers look costly.
     const auto shield=Rules::shield(s);value-=std::max<double>(0,announced(s)-shield)*hpWeight()*0.82;
     if(ownedUpgrade(s,"MY3-03")||ownedUpgrade(s,"UGS-123"))value+=std::min<double>(shield,6)*0.25;
+    double bonusOpportunity=0;
     for(const auto& e:s.enemies)if(alive(e)){
-        value-=e.hp+e.shield*0.75;
+        const auto healthValue=e.hp+e.shield*0.75;
+        value-=healthValue+e.tiles*2.0;
         if(e.bornRound<s.round)value-=e.intent.move==Move::Attack?std::max(0,e.intent.damage+e.drive-e.weaken)*e.intent.hits*0.45:1;
         // Pending damage helps remove this body's remaining HP. Surplus Mark,
         // Burn and Corrosion must not make preserving a nearly dead enemy worth
         // more than killing it. Weaken is already included in current threat.
-        value+=std::min(e.hp*0.9,e.burn*0.65+e.corrosion*0.75+e.mark*0.4);
+        // Mark and shot bonuses cannot add damage through a remaining tile:
+        // the next direct hit spends those bonuses while stripping the tile.
+        const auto pending=std::min(e.hp*0.9,e.burn*0.65+e.corrosion*0.75+(e.tiles>0?0:e.mark*0.4));
+        value+=pending;
+        if(e.tiles==0)bonusOpportunity=std::max(bonusOpportunity,healthValue*0.9-pending);
     }
     value-=s.burn*1.2+s.corrosion*1.5+s.weaken*0.4+s.mark*0.6;
     for(const auto& c:s.memory)value-=std::min(c.cooldown,4)*0.12;
-    for(const auto& b:s.shotBonuses)value+=b.flat*0.5+b.percent*0.025;
+    double bonusValue=0;for(const auto& b:s.shotBonuses)bonusValue+=b.flat*0.5+b.percent*0.025;
+    // Stored statuses and a stored shot bonus share the same damage opportunity;
+    // valuing them independently can make consuming both on a kill look costly.
+    value+=std::min(bonusValue,std::max(0.0,bonusOpportunity));
     for(const auto& d:s.deliveries){if(d.kind==DeliveryKind::Material)value+=sumMaterials(d.materials)*0.6;else if(d.kind==DeliveryKind::ShieldPart)value+=d.amount*0.22;else if(d.kind==DeliveryKind::Heat)value+=d.amount*0.3;else if(d.kind==DeliveryKind::PartCopy)value+=d.parts.size()*2;}
     for(const auto& b:s.bindings)if(b.clock==BindingClock::Collection)value+=1.4+std::max(0,b.amount)*0.3;
     return value;

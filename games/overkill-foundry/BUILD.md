@@ -1,6 +1,6 @@
 # Overkill Foundry — build and run
 
-**Runner evaluation update:** [baseline-4](core/runner/BASELINE-4.md) records199 completions and one policy timeout over200 fresh paired Auto cities, all200 exact replays/78,756 commands and two acquired/used combinations. [Independent runner QA](qa/city-runner-review.md) pins the unchanged evaluated source. The Foil Warden stall is retained for the next policy-only repair; no game caps or balance claims follow from this batch.
+**Runner evaluation update:** [baseline-5](core/runner/BASELINE-5.md) records all 400 preregistered sensitivity runs: 392 city completions, eight explicit UGS-141 held-rule stops, and no defeats, timeouts or policy errors. Every trace replays exactly, covering 150,218 commands. [Independent runner QA](qa/city-runner-review.md) passes 32 groups and preserves the unchanged 30-source graph; root independently checks all planned policy/mode/seed combinations and outcome totals. [Baseline-4](core/runner/BASELINE-4.md) remains unchanged with its 199 completions, retained timeout and two actually earned build combinations. These synthetic Precision assumptions do not establish human difficulty or graphical acceptance.
 
 ## Live campaign, audio and Precision checkpoint — 20 September
 

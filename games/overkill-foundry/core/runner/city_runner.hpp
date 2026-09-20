@@ -7,7 +7,7 @@
 #include <vector>
 
 namespace overkill::runner {
-inline constexpr const char* PolicyVersion="baseline-4";
+inline constexpr const char* PolicyVersion="baseline-5";
 struct Options { std::uint64_t seed=1;std::string policy="aggressive",precision="auto",trace;double timeoutSeconds=30;std::size_t searchBudget=1200; };
 struct FightRecord {std::string encounter,kind,outcome;Amount hpStart=0,hpEnd=0,rounds=0,shots=0,kills=0;std::vector<std::string> recipes,upgrades,choices;};
 struct RunRecord {std::uint64_t seed=0;std::string policy,precision,outcome,reason,hash,trace;Amount hp=0,position=0;std::size_t actions=0,previews=0;double seconds=0;std::int64_t income=0,spending=0,healing=0,hpLost=0,hpPaid=0;Materials spent{},gained{};std::vector<FightRecord> fights;std::vector<std::string> choices;};

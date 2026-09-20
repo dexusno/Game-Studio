@@ -1,5 +1,55 @@
 # Independent city-runner review
 
+## Baseline-5 follow-up — complete
+
+**2026-09-20 — finite independent recheck passed; unchanged graph released for the preregistered 400 sensitivity cases, seeds 121–170 × two policies × four Precision modes.** No evaluation seed from that batch was accessed by this review. The integration owner retains batch acceptance. Baseline-4's frozen evidence remains unchanged below; its subsequently discovered seed 57 policy stall prompted this separate increment.
+
+The [30-file source capture](city-runner/evidence/baseline5-source-identity.json), taken at `2026-09-20T15:23:51.5273960Z` above revision `3e63131e5127cc7f054ef24d62a1451adfa22ef6`, matches both its frozen copy and live sources after execution. Only the runner header, policy, README and author tests differ from the reviewed baseline-4 graph; its two historical result records were added. **Rules, campaign and trace decoder are unchanged.** [Execution identity](city-runner/evidence/baseline5-execution-identity.json) records all harness/executable/evidence hashes.
+
+- Author executable: `462c641183d6fbada187fe339e451ff14de6b90ecc4e152e69afdb0d6b9c9079`.
+- Independent executable: `af6d7566ce1f3dbe2f670620b9b9a7ce7c46e177482ae025aac0d0433fc85b74`.
+- Policy source: `ab1365fad02c8cf90cafbd56ecaa6fcfa557411d7a99293e12c625328f61a5fe`; header: `8077496b2aebbd12a79c583c12fd8089729652c95bbd20bfbda95d9baa42f723`.
+- Windows 11 x64 build 26200, MSVC 19.44.35228.0, SDK 10.0.26100.0; strict Release `/W4 /WX /permissive-` build passed. Only headless CLI/typed actions were used.
+
+### Changed scoring and recovery
+
+The author found baseline-4's aggressive Auto seed 57 stopped at a Foil Warden while retaining Ballistic Starter's first-shot bonus. Independently loading that exact stopped trace confirms round 436, Warden 44 HP / 3 tiles / Mark 366, and 360 physical parts. Baseline-5 now completes that encounter in **19 legal commands / four shots**, without added resources or altered game rules. The three previous baseline-2 stopped states still complete in **16 / 6 / 9 commands**. These diagnostic resumptions end at rewards; they are not four additional full-city runs.
+
+Source inspection confirms the repair values current finite tile depletion, gives blocked Mark/shot bonuses no next-hit credit through tiles, and limits stored shot bonuses to the remaining damage opportunity shared with statuses. It does not inspect future intent draws, preview End Turn, impose a game cap or change authoritative tile behavior. **Eighty valid hidden future-combat/RNG variants** across the four retained states and **twenty current concealed-Mystery/future-RNG variants** preserve the decisions and caller bytes. The earlier separate observation and atomic-invalid-action groups also pass. This is selected invariance coverage, not a redacted observation API or proof of all hidden-state combinations.
+
+### Executed cases and classification
+
+| New independent CLI case | Outcome / exit | Commands | HP | Final state hash |
+| --- | --- | ---: | ---: | --- |
+| Aggressive / Auto / seed 57 | city_complete /0 | 363 | 73 | `cff3620920a6964c` |
+| Defensive / Auto / seed 57 | city_complete /0 | 347 | 79 | `c8a03ca699bddf1f` |
+| Aggressive / Auto / seed 2, preview budget1 | defeat /0 | 34 | 0 | `ef1d139df91bc451` |
+| Defensive / Auto / seed 2, 0.000001-second watchdog | policy_timeout /2 | 0 | 80 | `30038de7e7f89700` |
+| Aggressive / Expert / historical seed 53 | blocked_rule /2 | 185 | 74 | `b7e1f4a8becdc82c` |
+
+All HP ledgers reconcile. Both new seed 57 full traces byte-match the author's frozen regression traces. The seed 53 control naturally acquires UGS-141 and reaches its held base-haul composition, returning the explicit owner-decision reason. Its rejected command emits zero events and retains the prior state hash; the complete trace also byte-matches the author's separate control (`ef64ebe24650912a94bb2873127d588dc3ee46af485048a23ed27f95d5e8b9b3`). This verifies a real held result separately from defeat and timeout, without inventing a composition rule. A controlled two-drawback fixture additionally verifies whole-state rollback. Its initial setup omitted the campaign ever-acquired ledger after core-only acquisition; [the initial diagnostic](city-runner/evidence/baseline5-initial-results.txt) is retained. Correcting that QA fixture resolves its failure; no production defect or repair is claimed.
+
+The five fresh traces plus eleven author regression traces (aggressive1/2/3/7/9/57; defensive1/2/3/13/57) pass both replay implementations. The separate decoder independently reapplies **5,162 commands**, ordered events and full final serialized bytes across **16 artifacts**, including duplicate selected cases. **19 replay/legacy groups, six unchanged policy groups and seven new policy groups pass.** [Complete execution](city-runner/evidence/baseline5-results.txt) and [compact run evidence](city-runner/evidence/baseline5-runs.json) preserve results. Twelve original/corrupted-trace integrity checks pass, and falsely relabeling a baseline-5 trace as baseline-4 is rejected.
+
+All three synthetic Precision distributions were separately checked against the selected beta JSON through 10,000 public policy samples each:
+
+| Model | Canonical Miss / Good / Perfect percentages | Observed counts |
+| --- | --- | --- |
+| Learning | 55 /35 /10 | 5,466 /3,547 /987 |
+| Practised | 20 /45 /35 | 2,013 /4,500 /3,487 |
+| Expert | 5 /25 /70 | 522 /2,451 /7,027 |
+
+Each category is within 1.5 percentage points of its declared rate; same-seed decisions are deterministic and an already-spent attempt is not resampled. Auto submits ordinary collection with no timing measurement and leaves the manual opportunity unspent. These are synthetic assumptions, not observed human timing distributions.
+
+No remaining defect was found in this finite scope. Naturally occurring `unsupported_choice` and `policy_error` outcomes were not forced; held-rule classification above does not claim coverage of every unsupported decision. Shallow search, omitted economic optimizations, owner-held rules and human/graphical limits remain. The author's 30,090 assertions are separate evidence. The 400-case batch was released after final source identity verification; its results are outside this report.
+
+Reproduction uses the preserved ignored snapshot and a separate build directory:
+
+```powershell
+& games/overkill-foundry/qa/city-runner/build.ps1 -SourceRoot games/overkill-foundry/qa/city-runner/build/baseline-5 -BuildName native-baseline-5
+python -X utf8 games/overkill-foundry/qa/city-runner/baseline5_review.py --runner games/overkill-foundry/qa/city-runner/build/native-baseline-5/Release/review_city_runner.exe --probe games/overkill-foundry/qa/city-runner/build/native-baseline-5/Release/city_runner_probes.exe --legacy-policy-probe games/overkill-foundry/qa/city-runner/build/native-baseline-5/Release/city_runner_baseline3_probes.exe --policy-probe games/overkill-foundry/qa/city-runner/build/native-baseline-5/Release/city_runner_baseline5_probes.exe --game games/overkill-foundry --output games/overkill-foundry/qa/city-runner/build/selected-baseline-5 --evidence games/overkill-foundry/qa/city-runner/evidence
+```
+
 ## Baseline-4 follow-up — complete
 
 **2026-09-20 — finite independent recheck passed. CR-03 and CR-04 are closed on this candidate.** The reviewed freeze is ready for the already-authorized fresh paired Auto seeds 21–120; the integration owner retains batch acceptance. The earlier baseline-2 and baseline-3 results below remain historical evidence, including the reproduced stall. This is not acceptance of balance, all policy choices or hundreds of completed runs.

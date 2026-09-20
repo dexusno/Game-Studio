@@ -1,0 +1,221 @@
+{
+  "beta_sha256": "39ca65256ee02de8288b1610bb0cffb053d64920fcd64a9e1ac748909894887b",
+  "selected_models": {
+    "Learning": [
+      55,
+      35,
+      10
+    ],
+    "Practised": [
+      20,
+      45,
+      35
+    ],
+    "Expert": [
+      5,
+      25,
+      70
+    ]
+  },
+  "fresh_runs": [
+    {
+      "seed": 57,
+      "policy": "aggressive",
+      "policy_version": "baseline-5",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 73,
+      "position": 13,
+      "actions": 363,
+      "previews": 6871,
+      "seconds": 0.316,
+      "income": 250,
+      "spending": 345,
+      "healing": 13,
+      "hp_lost": 20,
+      "hp_paid": 0,
+      "state_hash": "cff3620920a6964c",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-5\\case-0\\aggressive-auto-57.oftrace",
+      "materials_spent": [
+        114,
+        36,
+        28,
+        22,
+        5
+      ],
+      "materials_gained": [
+        141,
+        58,
+        33,
+        31,
+        31
+      ],
+      "trace_sha256": "15269eab977b7bfc529debd4f0215a5bbece9920d32eac52dbf0e3af1c07907b",
+      "exit": 0
+    },
+    {
+      "seed": 57,
+      "policy": "defensive",
+      "policy_version": "baseline-5",
+      "precision": "auto",
+      "outcome": "city_complete",
+      "reason": "",
+      "hp": 79,
+      "position": 13,
+      "actions": 347,
+      "previews": 6838,
+      "seconds": 0.276,
+      "income": 160,
+      "spending": 175,
+      "healing": 12,
+      "hp_lost": 13,
+      "hp_paid": 0,
+      "state_hash": "c8a03ca699bddf1f",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-5\\case-1\\defensive-auto-57.oftrace",
+      "materials_spent": [
+        99,
+        37,
+        25,
+        22,
+        7
+      ],
+      "materials_gained": [
+        121,
+        49,
+        28,
+        26,
+        26
+      ],
+      "trace_sha256": "c52b775636696dacdb1bb320e54237ef2f8f56c931e8fb28975dad534c2051cf",
+      "exit": 0
+    },
+    {
+      "seed": 2,
+      "policy": "aggressive",
+      "policy_version": "baseline-5",
+      "precision": "auto",
+      "outcome": "defeat",
+      "reason": "",
+      "hp": 0,
+      "position": 1,
+      "actions": 34,
+      "previews": 20,
+      "seconds": 0.007,
+      "income": 0,
+      "spending": 75,
+      "healing": 0,
+      "hp_lost": 80,
+      "hp_paid": 0,
+      "state_hash": "ef1d139df91bc451",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-5\\case-2\\aggressive-auto-2.oftrace",
+      "materials_spent": [
+        0,
+        0,
+        10,
+        0,
+        0
+      ],
+      "materials_gained": [
+        46,
+        20,
+        14,
+        10,
+        10
+      ],
+      "trace_sha256": "af4cf4137c304ef67f7b7e6b377e7ddd92e065de2090d582dd0c9fb0cdadbb36",
+      "exit": 0
+    },
+    {
+      "seed": 2,
+      "policy": "defensive",
+      "policy_version": "baseline-5",
+      "precision": "auto",
+      "outcome": "policy_timeout",
+      "reason": "Runner wall-clock watchdog; no in-game action or turn cap.",
+      "hp": 80,
+      "position": 1,
+      "actions": 0,
+      "previews": 0,
+      "seconds": 0.002,
+      "income": 0,
+      "spending": 0,
+      "healing": 0,
+      "hp_lost": 0,
+      "hp_paid": 0,
+      "state_hash": "30038de7e7f89700",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-5\\case-3\\defensive-auto-2.oftrace",
+      "materials_spent": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "materials_gained": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "trace_sha256": "5b1bee05627de33ef73fc97754079e99875046852ec5aa18b12f0d014f7777a5",
+      "exit": 2
+    },
+    {
+      "seed": 53,
+      "policy": "aggressive",
+      "policy_version": "baseline-5",
+      "precision": "expert",
+      "outcome": "blocked_rule",
+      "reason": "The authored combined base-haul composition awaits the owner decision.",
+      "hp": 74,
+      "position": 8,
+      "actions": 185,
+      "previews": 2936,
+      "seconds": 0.094,
+      "income": 160,
+      "spending": 225,
+      "healing": 4,
+      "hp_lost": 10,
+      "hp_paid": 0,
+      "state_hash": "b7e1f4a8becdc82c",
+      "trace": "games\\overkill-foundry\\qa\\city-runner\\build\\selected-baseline-5\\case-4\\aggressive-expert-53.oftrace",
+      "materials_spent": [
+        59,
+        19,
+        9,
+        7,
+        8
+      ],
+      "materials_gained": [
+        75,
+        27,
+        17,
+        13,
+        14
+      ],
+      "trace_sha256": "ef64ebe24650912a94bb2873127d588dc3ee46af485048a23ed27f95d5e8b9b3",
+      "exit": 2
+    }
+  ],
+  "author_traces": {
+    "aggressive-auto-1.oftrace": "88e58100dea180fe513f3bfbf3b19d004f1114d03580284a11cf56de4c505df8",
+    "aggressive-auto-2.oftrace": "1c6a59ff7ed0fcb31810c3b407a61e2cc8035916aa6a8ed2332ab5001709b819",
+    "aggressive-auto-3.oftrace": "9bc7e0674c045436f04347ed0a9eaf957e5b2e98c649ec97fa0743e1d1dd0260",
+    "aggressive-auto-7.oftrace": "41618ec9172a5307d54405ca717e1968d9c94ed4d30f9cd89a79550669802410",
+    "aggressive-auto-9.oftrace": "ea0743e85cdad25c53aa0070443afba56fad9de8fde53ed9888da87689e9eea5",
+    "aggressive-auto-57.oftrace": "15269eab977b7bfc529debd4f0215a5bbece9920d32eac52dbf0e3af1c07907b",
+    "defensive-auto-1.oftrace": "154a12f7652d3a792471e5eb8b727208a135a7dddc839a867b5892ec8c8b5d43",
+    "defensive-auto-2.oftrace": "d06a049af7534ab41ffd34a1379ed8949b7a6282a1e63c0ce7ed84afdab996cf",
+    "defensive-auto-3.oftrace": "742e4ffc25f96bf9e68fb283284120b4d6844c8ce878953eb8b435f7c36b75e4",
+    "defensive-auto-13.oftrace": "efb7dc9e2b80d8c4502f347400455f2f83da91f99730f574c06830300c270bb8",
+    "defensive-auto-57.oftrace": "c52b775636696dacdb1bb320e54237ef2f8f56c931e8fb28975dad534c2051cf"
+  },
+  "prior_stopped_traces": {
+    "aggressive-auto-7.oftrace": "0724c680bba295e5b20c2a07b34be56e0d9d8f5561f8aea8a8e40e1985f4733c",
+    "aggressive-auto-9.oftrace": "3e0586dc1ed55269d1b43242a8c4365446695d99b9a67b9e9fb234d3eea4f3fa",
+    "defensive-auto-13.oftrace": "25a574d311744beb7b79dd8e49ecc520c7682cb4240a8c7b2b7e3757c10d8c33",
+    "aggressive-auto-57.oftrace": "dfff08ebb97d87ee0fd4728fa7f9af1ee7f2405610831c05ca6e509024ef427d"
+  }
+}

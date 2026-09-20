@@ -14,7 +14,7 @@
     "human_hours": 0,
     "cash_usd": 0
   },
-  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes246 recipe paths, ten robots and native P08 with finite authored/independent coverage. Two haul compositions remain held. Baseline-4 passes independent exact replay/retained-state review; fresh paired200 Auto runs retain199 completions/one policy timeout and200 exact replays. Earned Heat/Burn and cold-Shield combinations both complete cities with actual trigger evidence; one visible-tile policy valuation repair is next. The40 development outcomes remain separate. Live campaign UI, original Mara/Ram/Mite,23 original sound cues and real Precision input now build/run in Unreal5.8.2. Owner requires16C on Lock and load; that corrected camera flow and full advanced recipe controls are next. New scenery source is verified but not yet imported. Final roster visuals, broader balance/human assessment, package/performance and human approval remain open. Stage remains prototype; no old-game pipeline reused.",
+  "budget_note": "Owner-authorized complete Mara Cinderwall MVP; timeline unconstrained and zero budgets unset. Shared C++17 core executes 246 recipe paths, ten robots and native P08 with finite authored/independent coverage. Two haul compositions remain held. Baseline-4 retains 199 completions and one policy timeout across 200 paired Auto runs, all replayed; earned Heat/Burn and cold-Shield combinations complete cities. Baseline-5 repairs finite-defense valuation, passes independent review and finishes the preregistered 400-case Precision sensitivity matrix with 392 completions, eight explicit held-rule stops and all 400 exact replays. Runtime obligation evidence is being audited without waiving gaps. Live campaign UI, original Mara/Ram/Mite, 23 original sound cues and real Precision work in Unreal 5.8.2. Owner-corrected Lock and load to 16C passes rendered flow; native/framing checks continue. New scenery imports and passes all 19 bounds checks, but visual depth still needs refinement. Advanced recipe controls, remaining roster art/actions, package/performance, human tests and explicit visual approval remain open. Stage remains prototype; no old-game pipeline reused.",
   "context": {
     "entrypoint": "games/overkill-foundry/STATUS.md",
     "read_first": [
@@ -45,10 +45,10 @@
     ],
     "checkpoint": {
       "schema_version": 1,
-      "captured_at": "2026-09-20T15:13:10+00:00",
-      "record_sha256": "524bea318f21cd1ceb2bde19e4dcae140a4cd3cc01b91a975fedffabd08cbdcf",
+      "captured_at": "2026-09-20T15:47:13+00:00",
+      "record_sha256": "7855d936f2efbe977b1bf4e24347aabc0443cb51ba3826cfe30ff85ce36d59ac",
       "files": {
-        "games/overkill-foundry/STATUS.md": "168310e4abfd5fe898987850eaddd42e7d1563dbd338a8dfb1cdfb296594de69",
+        "games/overkill-foundry/STATUS.md": "9861e798ba588f3be86374251097f6fae32e5d39d726db3502103417008373db",
         "games/overkill-foundry/BRIEF.md": "a28f9c0eba1da1db1a1a148dba72112581b9b1323210d38d742d11b1b1813302",
         "games/overkill-foundry/DECISIONS.md": "f9238a15d33d6dd6fa892fcecb5d5ad0dd1bf83a37473089a6911b57eac11b9f",
         "games/overkill-foundry/design/REDESIGN-PLAN.md": "ac440e104e57228ac9b74150690dd8be2f583345547bc764b24ceb9a04e8e18f",
