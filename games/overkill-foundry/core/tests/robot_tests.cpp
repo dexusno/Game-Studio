@@ -361,9 +361,21 @@ void integrationContracts() {
 
 int main() {
     try {
-        registryAndFactories(); binderPackets(); pressureAndOfficers(); braceAndLockedSupport(); finiteSummonsAndDeathIdentity(); recoveryJointAndEscapes();
+        registryAndFactories();
+        std::cout << "PASS registryAndFactories: formation identities and Mite/Ram actions\n";
+        binderPackets();
+        std::cout << "PASS binderPackets: fixed introduction and saved seeded variants\n";
+        pressureAndOfficers();
+        std::cout << "PASS pressureAndOfficers: Drive, multi-hit actions and final death\n";
+        braceAndLockedSupport();
+        std::cout << "PASS braceAndLockedSupport: temporary Armor, Leak and committed Nest action\n";
+        finiteSummonsAndDeathIdentity();
+        std::cout << "PASS finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores\n";
+        recoveryJointAndEscapes();
+        std::cout << "PASS recoveryJointAndEscapes: boss threshold and explicit departure clocks\n";
 #ifdef OVERKILL_ROBOT_INTEGRATION
         integrationContracts();
+        std::cout << "PASS integrationContracts: actual Engine defense, status, spawning and replay\n";
         std::cout << "Cinderwall robot module + Engine integration: " << assertions << " assertions passed.\n";
 #else
         std::cout << "Cinderwall robot module: " << assertions << " assertions passed (mocked Engine callbacks; integration not established).\n";

@@ -1,0 +1,16 @@
+PASS SH050 duplicate named modifiers refresh
+PASS different named percentage modifiers combine
+PASS identical SH008 Magnet copies refresh one next-haul bonus
+PASS SH006 removed source does not ward Burn
+PASS unknown effect opcode is rejected before content use
+PASS unsupported valid effect timing is rejected
+PASS effect clock unreachable for the recipe kind is rejected
+PASS lethal first spread recoil prevents later spread and ordinary heal
+PASS lethal main recoil stops after-hit healing
+PASS saved depleted Shield survives serialization and next-round reinstall
+PASS cooling in blocked round permits use and restarts its exemption
+PASS enemy Weaken reduces each hit and decays during a nonattack
+PASS Armor and Tiles apply per direct hit; Burn uses Shield before HP
+PASS forty rounds of legal stockpiling permit forty-part assemblies and repeated Fire
+PASS preview, snapshot reload and replay preserve RNG and event sequence
+Independent cases: 15 passed, 0 failed.

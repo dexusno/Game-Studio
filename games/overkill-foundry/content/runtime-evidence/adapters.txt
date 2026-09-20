@@ -1,0 +1,13 @@
+PASS adapter Blueprint Annex: shared Uncommon offer and four empty memory slots
+PASS adapter Archive Cache: three fixed sequential offers and idempotent acceptance
+PASS adapter Utility memory: typed capacity, copy movement and fight restriction
+PASS adapter Carbon Copier: saved exact-source exchange and cancellation
+PASS adapter Borrowed Schematic: fixed choices, separate slot, Continue and cleanup
+PASS adapter normal offers: two offers, fourth options and Light-Touch in both acquisition orders
+PASS adapter Reward Reveal: pure preview matches the actual future reward
+PASS adapter Route Pass: saved preview, one charge and no repeated replacement
+PASS adapter Spectrometer: once-only replacement preserves Collection knowledge
+PASS adapter purchase listeners: prior entitlement hears purchase and new item does not
+PASS adapter Mystery information: Safe Survey and category-only Badge queries
+PASS adapter Subscription: deferred choices refresh when physical copies become eligible
+PASS 255 production campaign-upgrade assertions; controlled shop grants and terminal ammo, not city balance.

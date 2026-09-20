@@ -1,0 +1,41 @@
+[
+  {
+    "actual_exit_code": 0,
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "games/overkill-foundry/tools/capture_runtime_support.py",
+      "--check",
+      "--self-test"
+    ],
+    "expected_exit_code": 0,
+    "output": "PASS linkage validator rejects invented fixture\nPASS linkage validator rejects stale implementation\nPASS linkage validator rejects stale evidence\nPASS linkage validator rejects wrong manifest\nPASS linkage validator rejects wrong build\nPASS linkage validator rejects empty handler\nPASS linkage validator rejects unknown operation\nRuntime linkage: 133/665 bound; 532 explicitly unbound. Release remains gated.\n"
+  },
+  {
+    "actual_exit_code": 0,
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "games/overkill-foundry/tools/compile_content.py",
+      "--check",
+      "--self-test"
+    ],
+    "expected_exit_code": 0,
+    "output": "{\n  \"result\": \"structural content checks passed\",\n  \"manifest_sha256\": \"d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9\",\n  \"counts\": {\n    \"source_recipes\": 606,\n    \"source_upgrades\": 288,\n    \"source_robots\": 42,\n    \"eligible_recipes\": 246,\n    \"starters\": 12,\n    \"ordinary_upgrades\": 127,\n    \"mayor_gifts\": 25,\n    \"robots\": 10,\n    \"formations\": 10,\n    \"mysteries\": 3,\n    \"statuses\": 12,\n    \"physical_part_types\": 207,\n    \"runtime_operations_required\": 665\n  },\n  \"checks\": {\n    \"exhaustive_category_schedules\": 560,\n    \"offer_states_checked\": 6160\n  },\n  \"runtime_support_claim\": \"None from these checks; use --release with verified shared-core evidence.\",\n  \"negative_fixtures_rejected\": [\n    \"trimmed eligible pool\",\n    \"trimmed shop offer pool\",\n    \"unknown nested output\",\n    \"paired Mites\",\n    \"Regular Legendary leakage\",\n    \"Mayor shop leakage\",\n    \"ordinary boss alternative\",\n    \"unpriced physical output\",\n    \"missing required runtime binding\"\n  ]\n}\n"
+  },
+  {
+    "actual_exit_code": 1,
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      "games/overkill-foundry/tools/compile_content.py",
+      "--check",
+      "--release"
+    ],
+    "expected_exit_code": 1,
+    "output": "CONTENT VALIDATION FAILED: Unsupported release operations: 532; first: core.city-completion, core.collect-and-precision, core.collection-discovery, core.core-and-part-sales, core.physical-parts, core.profile-and-unlocks, mystery:C1-M-PATROL, part:plain-ammo-1\n"
+  }
+]

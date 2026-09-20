@@ -1,7 +1,2134 @@
 {
+  "bindings": {
+    "ability:hot-barrel": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::zero base gun damage and retained Mara Hot Barrel per shot"
+      ]
+    },
+    "core.action-validation": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "Rules, execute",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "campaign::campaign identity: stale run commands and incompatible phase or formation reject",
+        "core::content rejects unknown opcode and unsupported timing before play",
+        "core::preview and rejected loaded Fire preserve all authoritative state",
+        "foundation::effect clock unreachable for the recipe kind is rejected",
+        "foundation::unknown effect opcode is rejected before content use",
+        "foundation::unsupported valid effect timing is rejected"
+      ]
+    },
+    "core.choice-persistence": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "serialize, deserialize",
+      "implementation": {
+        "path": "core/src/serialization.cpp",
+        "sha256": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b"
+      },
+      "tests": [
+        "p08-campaign::C-U13 cancel staged exchange keeps paid ownership and all seeded candidates",
+        "p08::U25 nested first-turn choices serialize and preview without replay",
+        "recipes::expanded snapshot preserves choices and rejects unsafe persisted indices/counters",
+        "upgrades::native same-seed event and snapshot parity through saved choices"
+      ]
+    },
+    "core.cooldown-clocks": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "craft, endTurn",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T09 cooldown 1 blocks following full round; cooling permits reuse",
+        "core::independent duplicate recipe copies and atomic material/HP costs",
+        "p08::U06 Ammo stamp excludes None and is independent per physical copy",
+        "p08::U07 Utility stamp does not waive HP or reset another copy",
+        "p08::U31 Cooling Authorization is free but never refreshes None-use flags"
+      ]
+    },
+    "core.deterministic-streams": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "seeded, below",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::separate seeded RNG domains and repeatable full action/event replay",
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "route::route schedules: 1000 seeded complete choices, gates and immutable encounter identities",
+        "upgrades::native same-seed event and snapshot parity through saved choices"
+      ]
+    },
+    "core.end-turn": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "endTurn",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::Burn ignores Armor and Tiles; Corrosion kills before a committed attack",
+        "expanded::SH115 refresh replaces scheduled duration without stacking old deliveries",
+        "p08::U11 named retention sums but cannot create Shield",
+        "p08::U12 Shield reader and spender use binding order before real retention",
+        "p08::U24 turn-start grants precede Pulse recoil even with later acquisition",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "core.event-order": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire, preReset",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::lethal support recoil stops later burn-reduction payload",
+        "foundation::lethal first spread recoil prevents later spread and ordinary heal",
+        "p08::U23 lethal Utility Arc recoil interrupts healing and later damage siblings",
+        "p08::U29 Vent payment protects before recoil and combined affordability stays atomic",
+        "upgrades::Fire reaction clocks merge physical bindings with upgrade acquisition"
+      ]
+    },
+    "core.fight-entry-restart": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "campaign::campaign Continue: original entry, purchase rollback and persistent discoveries",
+        "campaign::campaign Patrol: encounter entry, Continue and internal-checkpoint rejection",
+        "p08-campaign::C-U04 Borrowed choice is extra, deterministic on Continue, uncopyable and removed at victory",
+        "p08-campaign::C-U08 real license charge and midfight purchase roll back on Continue"
+      ]
+    },
+    "core.fight-outcome": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "terminal",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "campaign::campaign defeat: no loot, advancement or Continue checkpoint",
+        "core::T02 lethal killing-hit recoil takes precedence over victory",
+        "core::T03 Reserve Heart Pump intercepts lethal recoil before final death",
+        "core::T10 four full escape warning rounds and no departure attack",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "core.installation-history": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "install",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T04 first-install Heat cost and depletion survive remove/reinstall",
+        "core::installation payment atomicity and one-time Boiler Jacket Heat",
+        "core::installed Shield payment order and reinstall priority",
+        "expanded::first-bound SH060 zeroing precedes later MA055 Shield reading after reinstall",
+        "expanded::variable first-install Heat payment remains paid after save and reinstall"
+      ]
+    },
+    "core.integer-damage": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "enemyDamage, playerDamage",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::combined integer percentages, separate spread hits and lost dead-target hits",
+        "foundation::different named percentage modifiers combine",
+        "p08::U10 Alignment adds before percentage and only on first Fire that turn",
+        "recipes::HP-first Shield prevention and total attack reduction obey whole-attack facts",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "core.load-unload-fire": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::no fixed bullet or Shield part cap",
+        "core::preview and rejected loaded Fire preserve all authoritative state",
+        "expanded::SH110 reserved sacrifice cancels without consuming or firing its effect",
+        "expanded::combined Fire costs cannot borrow a later spread kill Heat refund",
+        "p08::U33 Plain Slug return is a Fire trigger rather than paid production"
+      ]
+    },
+    "core.memory-exchange": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "adapters::adapter Carbon Copier: saved exact-source exchange and cancellation",
+        "campaign::campaign memory: saved pending exchange, cancellation and atomic replacement",
+        "p08-campaign::C-U02 exact recipe copy requires different exchange and is once-owned after decline",
+        "p08-campaign::C-U03 Utility memory is empty capacity and cannot store Ammo",
+        "p08-campaign::C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations"
+      ]
+    },
+    "core.nested-choice-transactions": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "p08-campaign::C-U01 three acquisition recipe offers preserve exchange cursor without victory payout",
+        "p08-campaign::C-U06 nested upgrade acquisition acknowledges parent before forced copy choice",
+        "p08-campaign::C-U10 actual process exits preserve acquisition plus nested offers atomically",
+        "p08-campaign::C-U11 actual process exits preserve nested memory exchange atomically"
+      ]
+    },
+    "core.recipe-copies": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "copyLater, printedCopy",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "adapters::adapter Carbon Copier: saved exact-source exchange and cancellation",
+        "expanded::copied generated SH026 Shield remains a pure grant without generator recursion",
+        "expanded::copy retains source identity and resale while dropping attached bonuses",
+        "p08-campaign::C-U02 exact recipe copy requires different exchange and is once-owned after decline",
+        "p08::U30 generated Shield bonus never changes original value or printed-only copies"
+      ]
+    },
+    "core.reward-claims": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "campaign::campaign memory: saved pending exchange, cancellation and atomic replacement",
+        "campaign::campaign persistence: empty rewards, abandonment and corrupt snapshot rejection",
+        "campaign::campaign rewards: owned cores, fixed choices, cancellation and once-only advance",
+        "p08-campaign::C-U07 ever-acquired exhaustion pays Compass30 only after fifth victory"
+      ]
+    },
+    "core.shield-payments": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "spendShield",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::installed Shield payment order and reinstall priority",
+        "expanded::SH085 spends the chosen amount while preserving remaining protection",
+        "expanded::Shield Leak drains installed parts but preserves direct upgrade protection",
+        "p08::U12 Shield reader and spender use binding order before real retention"
+      ]
+    },
+    "core.shop-transactions": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "campaign::campaign Continue: original entry, purchase rollback and persistent discoveries",
+        "campaign::campaign purchase: fixed inventory, idempotent receipt and unaffordable rejection",
+        "p08-campaign::C-U09 shop discount does not discount its own acquisition or replay",
+        "p08-campaign::C-U10 actual process exits preserve acquisition plus nested offers atomically"
+      ]
+    },
+    "formation:C1-F-BINDER": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-CASK": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-CHASSIS": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-GATEBREAKER": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-MITE-RAM": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-NEST": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-PRESS": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-PURSUER": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-RAM": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "formation:C1-F-WARDEN": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::binderPackets: fixed introduction and saved seeded variants",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "mystery:C1-M-EXCHANGE": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "campaign::campaign Night Exchange: finite stock, fixed tiers and noncombat completion",
+        "p08-campaign::C-U05 Surveyor decline and exhausted pool keep one normal Mystery credit",
+        "p08-campaign::C-U06 nested upgrade acquisition acknowledges parent before forced copy choice"
+      ]
+    },
+    "mystery:C1-M-TECH": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "campaign::campaign Technician: fixed offers, refusal and combined nonlethal costs",
+        "p08-campaign::C-U14 Technician plus Risky Calibration validates combined16HP before commit"
+      ]
+    },
+    "recipe:MA001": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "effects, heat",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::zero base gun damage and retained Mara Hot Barrel per shot",
+        "p08::U36 Mara capacity and decay exceptions never discount explicit payments"
+      ]
+    },
+    "recipe:MA003": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "install, pay, effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T04 first-install Heat cost and depletion survive remove/reinstall",
+        "core::installation payment atomicity and one-time Boiler Jacket Heat",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA014": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, catalogueInstalled",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA066 refreshes one delayed bonus and first installation does not repeat it",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA016": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, catalogueInstalled",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::source removal does not cancel already committed MA016 Shield delivery",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA017": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "install, pay, effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T04 first-install Heat cost and depletion survive remove/reinstall",
+        "core::installation payment atomicity and one-time Boiler Jacket Heat",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA019": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "pay, effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::independent duplicate recipe copies and atomic material/HP costs",
+        "p08::U07 Utility stamp does not waive HP or reset another copy"
+      ]
+    },
+    "recipe:MA038": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire, afterAmmo",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "p08::U03 permanent tuning is per copy and first physical output only",
+        "p08::U05 Trial Fabricator copies committed first output without recursion",
+        "p08::U17 Momentum uses producing-copy identity, one shot and consecutive turns"
+      ]
+    },
+    "recipe:MA048": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, endTurnHooks",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA048 optional payment occurs at EndTurn and all choices validate atomically",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA059": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, attackReduction",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA059 independent physical parts each supply one first-attack reduction",
+        "expanded::removed MA059 cannot reduce an enemy attack",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA079": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueInstalled, extendedDelivery",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA079 distinguishes prior part payments and later Utility costs",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA086": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueInstalled, attackReduction",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA086 halves once after flat reduction with two physical source parts",
+        "expanded::removed MA086 cannot halve its chosen enemy attack",
+        "recipes::HP-first Shield prevention and total attack reduction obey whole-attack facts",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA096": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, payment",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::variable first-install Heat payment remains paid after save and reinstall",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:MA115": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, afterEnemyAttack",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA115 physical copies share24 restoration across whole attacks",
+        "recipes::Refuge Walls share restoration and Kiln Seals retain greatest remembered Heat"
+      ]
+    },
+    "recipe:SH001": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::independent duplicate recipe copies and atomic material/HP costs",
+        "core::no fixed bullet or Shield part cap",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH002": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "recipePart, install",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T01 installed Shield absorbs recoil across repeated shots without refill",
+        "core::installed Shield payment order and reinstall priority",
+        "core::no fixed bullet or Shield part cap",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:SH003": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::independent duplicate recipe copies and atomic material/HP costs",
+        "core::no fixed bullet or Shield part cap",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH004": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::authored Mite/Ram complete fight, multiple shots, saved Shield and integer Armor",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH005": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "core::T09 cooldown 1 blocks following full round; cooling permits reuse",
+        "core::combined integer percentages, separate spread hits and lost dead-target hits",
+        "core::main-target Burn never copied by Split Outlet"
+      ]
+    },
+    "recipe:SH006": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "install, endTurn",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::removed Insulating Pad cannot prevent Burn or rearm in another round",
+        "foundation::SH006 removed source does not ward Burn",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:SH007": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "effects, craft",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T09 cooldown 1 blocks following full round; cooling permits reuse",
+        "p08::U31 Cooling Authorization is free but never refreshes None-use flags",
+        "upgrades::Use counts, cooling consequences and recipe healing attribution"
+      ]
+    },
+    "recipe:SH008": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "effects, schedule",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::identical Magnet copies refresh the next haul",
+        "core::one collection per round, Precision once per fight, Magnet next-haul scope",
+        "foundation::identical SH008 Magnet copies refresh one next-haul bonus"
+      ]
+    },
+    "recipe:SH010": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "ammoFlat, beforeAmmo, completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "recipes::conditional Ammo snapshots, percentages, prehit order, independent saved copies",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH011": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "ammoFlat, beforeAmmo, completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "recipes::conditional Ammo snapshots, percentages, prehit order, independent saved copies",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH012": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "ammoFlat, beforeAmmo, completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "recipes::conditional Ammo snapshots, percentages, prehit order, independent saved copies",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH013": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::main-target Burn never copied by Split Outlet",
+        "recipes::every Ammo's main damage in a controlled source-derived reference state"
+      ]
+    },
+    "recipe:SH017": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "ammoFlat, afterAmmo",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "recipes::every Ammo's main damage in a controlled source-derived reference state",
+        "recipes::later killed-target support hit is lost without undoing earlier committed hits"
+      ]
+    },
+    "recipe:SH024": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueActivate, attackReduction",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA086 halves once after flat reduction with two physical source parts",
+        "recipes::HP-first Shield prevention and total attack reduction obey whole-attack facts"
+      ]
+    },
+    "recipe:SH026": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "craft, effects, schedule",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::T08 next-round fresh Shield survives old reset and source removal",
+        "expanded::copied generated SH026 Shield remains a pure grant without generator recursion",
+        "p08::U30 generated Shield bonus never changes original value or printed-only copies"
+      ]
+    },
+    "recipe:SH036": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueActivate, attach",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::copy retains source identity and resale while dropping attached bonuses"
+      ]
+    },
+    "recipe:SH050": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "pay, effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "foundation::SH050 duplicate named modifiers refresh",
+        "foundation::different named percentage modifiers combine",
+        "p08::U10 Alignment adds before percentage and only on first Fire that turn"
+      ]
+    },
+    "recipe:SH060": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueShield, preReset",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::first-bound SH060 zeroing precedes later MA055 Shield reading after reinstall",
+        "recipes::all Shield installation values have a source-derived reference result"
+      ]
+    },
+    "recipe:SH074": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "effects",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::Quick Patch's fight healing cap is shared by duplicates",
+        "p08::U15 first recipe healing excludes acquisition healing"
+      ]
+    },
+    "recipe:SH085": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueActivate",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::SH085 spends the chosen amount while preserving remaining protection",
+        "recipes::Pressure Release honors optional chosen Shield amount without forced maximum"
+      ]
+    },
+    "recipe:SH101": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueUtility, sacrifice, materialLater",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::SH101 optional zero sacrifice and duplicate reservation validate atomically",
+        "p08::U34 sacrifice upgrades count individual payments but exclude Fire"
+      ]
+    },
+    "recipe:SH115": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "catalogueUtility",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::SH115 refresh replaces scheduled duration without stacking old deliveries"
+      ]
+    },
+    "recipe:SH121": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "craftOptions, collectionEffects",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::all six manual-grab enhancements honor auto/miss/Perfect outcome scopes",
+        "expanded::finite pile requests clamp each named Perfect bonus separately",
+        "expanded::same named amplifier refreshes and doubles only unmodified Precision bundle",
+        "recipes::finite stock preserves baseline when Precision or named bonus stock is missing"
+      ]
+    },
+    "recipe:SH124": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "craftOptions, collectionEffects",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::all six manual-grab enhancements honor auto/miss/Perfect outcome scopes",
+        "expanded::finite pile requests clamp each named Perfect bonus separately",
+        "expanded::same named amplifier refreshes and doubles only unmodified Precision bundle",
+        "recipes::finite stock preserves baseline when Precision or named bonus stock is missing"
+      ]
+    },
+    "recipe:SH125": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "craftOptions, collectionEffects",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::all six manual-grab enhancements honor auto/miss/Perfect outcome scopes",
+        "expanded::finite pile requests clamp each named Perfect bonus separately",
+        "expanded::same named amplifier refreshes and doubles only unmodified Precision bundle",
+        "recipes::finite stock preserves baseline when Precision or named bonus stock is missing"
+      ]
+    },
+    "robot:C1-B01": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "commitRobotIntent, onRobotHpLoss, finishRobotTurn",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "expanded::boss postaction Burn threshold schedules next-round Recover",
+        "expanded::boss preaction Corrosion threshold cancels pending attack and stops phase-one scaling",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks"
+      ]
+    },
+    "robot:C1-O02": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "commitRobotIntent, executeRobotIntent",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death"
+      ]
+    },
+    "robot:C1-R01": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation, commitRobotIntent, executeRobotIntent",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "campaign::campaign rewards: owned cores, fixed choices, cancellation and once-only advance",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "robot:C1-R02": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallFormation, commitRobotIntent, executeRobotIntent",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "campaign::campaign rewards: owned cores, fixed choices, cancellation and once-only advance",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::registryAndFactories: formation identities and Mite/Ram actions"
+      ]
+    },
+    "route:C1-MARA-ROUTE": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "makeCinderwallRoute, selectRouteOffer, completeRouteNode, validateRoute",
+      "implementation": {
+        "path": "core/src/route.cpp",
+        "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+      },
+      "tests": [
+        "route::route replacements: 100 Safe Survey paths, deterministic previews and Officer progression",
+        "route::route schedules: 1000 seeded complete choices, gates and immutable encounter identities"
+      ]
+    },
+    "status:FX01": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "enemyDamage",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::Burn ignores Armor and Tiles; Corrosion kills before a committed attack",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "status:FX02": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "executeRobotIntent",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks"
+      ]
+    },
+    "status:FX05": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "enemyDamage",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "core::Burn ignores Armor and Tiles; Corrosion kills before a committed attack",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "status:FX08": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "callbacks, craft, endTurn",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "expanded::Fouling consumes only Ammo recipe uses and expires at affected EndTurn",
+        "expanded::Shield Leak drains installed parts but preserves direct upgrade protection",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "status:FX09": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "callbacks, craft, endTurn",
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "sha256": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb"
+      },
+      "tests": [
+        "expanded::Fouling consumes only Ammo recipe uses and expires at affected EndTurn",
+        "expanded::Shield Leak drains installed parts but preserves direct upgrade protection",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "status:FX13": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "spawnMite, onRobotDeath",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "expanded::Nest committed Attack stays Attack after player kills the live Mite",
+        "expanded::Split Chassis death-spawn has a new target and cannot attack in creation round",
+        "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+        "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay"
+      ]
+    },
+    "status:FX15": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "onRobotHpLoss",
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "sha256": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380"
+      },
+      "tests": [
+        "expanded::boss postaction Burn threshold schedules next-round Recover",
+        "expanded::boss preaction Corrosion threshold cancels pending attack and stops phase-one scaling",
+        "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+        "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks"
+      ]
+    },
+    "status:target-paint": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completeFire",
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "sha256": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b"
+      },
+      "tests": [
+        "expanded::MA120 echo uses original predefence shot value and current Shield once",
+        "recipes::HP-first Shield prevention and total attack reduction obey whole-attack facts",
+        "upgrades::prehit and per-hit reactions, final-death interruption and status novelty"
+      ]
+    },
+    "upgrade:MAU-01": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U36 Mara capacity and decay exceptions never discount explicit payments",
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:MAU-02": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "upgradeHeatCap, upgradeHeatDecay",
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+      },
+      "tests": [
+        "p08::U36 Mara capacity and decay exceptions never discount explicit payments",
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:MAU-03": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "paidBeforeEffect",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U13 Vent Fan counts actual Heat payment, once, and excludes decay",
+        "p08::U29 Vent payment protects before recoil and combined affordability stays atomic",
+        "upgrades::canonical grants qualify Slug listeners and preserve paid event identity"
+      ]
+    },
+    "upgrade:MAU-04": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "upgradeHeatCap, upgradeHeatDecay",
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+      },
+      "tests": [
+        "p08::U36 Mara capacity and decay exceptions never discount explicit payments",
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:MY1-02": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, grow",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:MY1-05": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, grow",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:MY1-06": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter Blueprint Annex: shared Uncommon offer and four empty memory slots",
+        "upgrades::source-typed offers pause, persist and resume in acquired order"
+      ]
+    },
+    "upgrade:MY1-09": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "discountedCost, resolvedUseUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U18 Toolhead claims after three earlier Uses and free Use is not paid",
+        "p08::U19 Toolhead cannot invent ingredients or waive remaining HP cost",
+        "upgrades::opening production counts and true paid-use discount qualification"
+      ]
+    },
+    "upgrade:MY1-10": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "equipmentAction",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U31 Cooling Authorization is free but never refreshes None-use flags",
+        "upgrades::equipment cooling and actual-material Use milestones"
+      ]
+    },
+    "upgrade:MY1-12": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "apply",
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "sha256": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9"
+      },
+      "tests": [
+        "adapters::adapter Route Pass: saved preview, one charge and no repeated replacement",
+        "route::route replacements: 100 Safe Survey paths, deterministic previews and Officer progression"
+      ]
+    },
+    "upgrade:MY1-21": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload, extraRecipeUse",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U08 Batch Permit changes only selected None copy on turn one",
+        "p08::U25 nested first-turn choices serialize and preview without replay"
+      ]
+    },
+    "upgrade:MY1-23": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload, producedUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U25 nested first-turn choices serialize and preview without replay",
+        "upgrades::Mayor opening choices and named encounter gates"
+      ]
+    },
+    "upgrade:MY3-03": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "drainUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U11 named retention sums but cannot create Shield",
+        "p08::U12 Shield reader and spender use binding order before real retention",
+        "upgrades::payment clocks, defense and real shared retention"
+      ]
+    },
+    "upgrade:UGS-001": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload, fightBonus",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U09 Ballistic Starter survives zero-shot turns and expires after one Fire",
+        "upgrades::main shot clocks, Armor bypass and source-copy momentum"
+      ]
+    },
+    "upgrade:UGS-009": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "producedUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U04 cold-start production allowance excludes free grants and Utilities",
+        "upgrades::opening production counts and true paid-use discount qualification"
+      ]
+    },
+    "upgrade:UGS-019": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "playerLostUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U22 counterbattery responds to each actual attack hit",
+        "upgrades::prehit and per-hit reactions, final-death interruption and status novelty"
+      ]
+    },
+    "upgrade:UGS-032": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter Carbon Copier: saved exact-source exchange and cancellation",
+        "p08-campaign::C-U02 exact recipe copy requires different exchange and is once-owned after decline",
+        "p08::U26 copying eligibility requires permanent memory and delegates saved selection"
+      ]
+    },
+    "upgrade:UGS-035": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload, fireUpgradeBonus",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::finite fight lease, Officer awakenings and pending vouchers"
+      ]
+    },
+    "upgrade:UGS-036": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::victory healing, growth and kill-qualified Credits"
+      ]
+    },
+    "upgrade:UGS-038": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "sacrificedUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U34 sacrifice upgrades count individual payments but exclude Fire",
+        "upgrades::sacrifice clocks and lethal upgrade recoil interrupt the original effect"
+      ]
+    },
+    "upgrade:UGS-044": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "afterFireUpgrade",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U33 Plain Slug return is a Fire trigger rather than paid production",
+        "upgrades::canonical grants qualify Slug listeners and preserve paid event identity"
+      ]
+    },
+    "upgrade:UGS-055": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "resolvedUseUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U20 five-material threshold uses actual payment after discounts",
+        "upgrades::Use counts, cooling consequences and recipe healing attribution"
+      ]
+    },
+    "upgrade:UGS-056": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "sacrificedUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U34 sacrifice upgrades count individual payments but exclude Fire",
+        "upgrades::sacrifice clocks and lethal upgrade recoil interrupt the original effect"
+      ]
+    },
+    "upgrade:UGS-057": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "prepareOffers, previewRouteReplacement",
+      "implementation": {
+        "path": "core/src/route.cpp",
+        "sha256": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9"
+      },
+      "tests": [
+        "adapters::adapter Mystery information: Safe Survey and category-only Badge queries",
+        "route::route replacements: 100 Safe Survey paths, deterministic previews and Officer progression"
+      ]
+    },
+    "upgrade:UGS-064": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, grow",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:UGS-066": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "resolvedUseUpgrades, allDamage",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U18 Toolhead claims after three earlier Uses and free Use is not paid",
+        "p08::U23 lethal Utility Arc recoil interrupts healing and later damage siblings",
+        "upgrades::Use counts, cooling consequences and recipe healing attribution"
+      ]
+    },
+    "upgrade:UGS-069": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acceptedRecipePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08-campaign::C-U01 three acquisition recipe offers preserve exchange cursor without victory payout",
+        "upgrades::one victory screen shares acceptance allowances across nested offers",
+        "upgrades::reward-copy provenance and independently spent physical coupons"
+      ]
+    },
+    "upgrade:UGS-072": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload, otherUpgradePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter purchase listeners: prior entitlement hears purchase and new item does not",
+        "upgrades::campaign entitlements survive skipped shops and consume together"
+      ]
+    },
+    "upgrade:UGS-073": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload, otherUpgradePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter purchase listeners: prior entitlement hears purchase and new item does not",
+        "upgrades::campaign entitlements survive skipped shops and consume together"
+      ]
+    },
+    "upgrade:UGS-074": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::victory healing, growth and kill-qualified Credits"
+      ]
+    },
+    "upgrade:UGS-075": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "upgradeShopPrice",
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+      },
+      "tests": [
+        "p08-campaign::C-U09 shop discount does not discount its own acquisition or replay",
+        "p08::U27 shop reductions are product-scoped and sale bonus floors per core"
+      ]
+    },
+    "upgrade:UGS-076": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "turnStartPayload, allDamage",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U24 turn-start grants precede Pulse recoil even with later acquisition",
+        "upgrades::collection choice persists, fixed Precision retry and periodic grants"
+      ]
+    },
+    "upgrade:UGS-089": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter Archive Cache: three fixed sequential offers and idempotent acceptance",
+        "p08-campaign::C-U01 three acquisition recipe offers preserve exchange cursor without victory payout",
+        "p08-campaign::C-U13 cancel staged exchange keeps paid ownership and all seeded candidates"
+      ]
+    },
+    "upgrade:UGS-090": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::Mayor opening choices and named encounter gates"
+      ]
+    },
+    "upgrade:UGS-097": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload, fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::Mystery outcomes and exact nonstacking entry shipment"
+      ]
+    },
+    "upgrade:UGS-100": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "upgradeUtilityMemoryBonus",
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "sha256": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1"
+      },
+      "tests": [
+        "adapters::adapter Utility memory: typed capacity, copy movement and fight restriction",
+        "p08-campaign::C-U03 Utility memory is empty capacity and cannot store Ammo",
+        "p08-campaign::C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations"
+      ]
+    },
+    "upgrade:UGS-106": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "recipeHealed",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U15 first recipe healing excludes acquisition healing",
+        "upgrades::Use counts, cooling consequences and recipe healing attribution"
+      ]
+    },
+    "upgrade:UGS-108": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "keepLoadedUpgrade",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::end-turn supplies and installed/reserve distinction"
+      ]
+    },
+    "upgrade:UGS-113": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08-campaign::C-U05 Surveyor decline and exhausted pool keep one normal Mystery credit",
+        "p08-campaign::C-U06 nested upgrade acquisition acknowledges parent before forced copy choice",
+        "upgrades::Mystery outcomes and exact nonstacking entry shipment"
+      ]
+    },
+    "upgrade:UGS-120": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, grow",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::exact eligible set, acquisition atomicity, stats and queries"
+      ]
+    },
+    "upgrade:UGS-123": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "drainUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U11 named retention sums but cannot create Shield",
+        "p08::U12 Shield reader and spender use binding order before real retention",
+        "upgrades::payment clocks, defense and real shared retention"
+      ]
+    },
+    "upgrade:UGS-131": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "otherUpgradePayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter Reward Reveal: pure preview matches the actual future reward",
+        "upgrades::Mystery outcomes and exact nonstacking entry shipment"
+      ]
+    },
+    "upgrade:UGS-132": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload, fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::Mystery outcomes and exact nonstacking entry shipment"
+      ]
+    },
+    "upgrade:UGS-133": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "adapters::adapter Borrowed Schematic: fixed choices, separate slot, Continue and cleanup",
+        "p08-campaign::C-U04 Borrowed choice is extra, deterministic on Continue, uncopyable and removed at victory"
+      ]
+    },
+    "upgrade:UGS-136": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "resolvedUseUpgrades",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U18 Toolhead claims after three earlier Uses and free Use is not paid",
+        "p08::U21 paid Utility counter continues between turns",
+        "upgrades::Use counts, cooling consequences and recipe healing attribution"
+      ]
+    },
+    "upgrade:UGS-139": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "fireUpgradeBonus",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U10 Alignment adds before percentage and only on first Fire that turn"
+      ]
+    },
+    "upgrade:UGS-140": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "producedUpgrades, addOutput",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08::U28 Opening Laminator saves its bonus and fixed resale reference",
+        "p08::U30 generated Shield bonus never changes original value or printed-only copies",
+        "upgrades::physical paid production, committed copies and immutable resale"
+      ]
+    },
+    "upgrade:UGS-144": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, assignedCooldown",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08-campaign::C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations",
+        "p08::U06 Ammo stamp excludes None and is independent per physical copy",
+        "p08::U07 Utility stamp does not waive HP or reset another copy"
+      ]
+    },
+    "upgrade:UGS-145": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "acquirePayload, assignedCooldown",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08-campaign::C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations",
+        "p08::U06 Ammo stamp excludes None and is independent per physical copy",
+        "p08::U07 Utility stamp does not waive HP or reset another copy"
+      ]
+    },
+    "upgrade:UGS-146": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload, fightStartPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "upgrades::finite fight lease, Officer awakenings and pending vouchers"
+      ]
+    },
+    "upgrade:UGS-149": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "revealedMysteryCategory",
+      "implementation": {
+        "path": "core/src/campaign_upgrades.cpp",
+        "sha256": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7"
+      },
+      "tests": [
+        "adapters::adapter Mystery information: Safe Survey and category-only Badge queries",
+        "route::route replacements: 100 Safe Survey paths, deterministic previews and Officer progression"
+      ]
+    },
+    "upgrade:UGS-150": {
+      "evidence": {
+        "path": "content/runtime-evidence/results.json",
+        "sha256": "93d22967306e4974f435ec71253864dd95d2af3ee4e2ef107d147b047d045646"
+      },
+      "handler": "completionPayload",
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "sha256": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c"
+      },
+      "tests": [
+        "p08-campaign::C-U07 ever-acquired exhaustion pays Compass30 only after fifth victory",
+        "upgrades::post-victory offer filters and carried periodic clocks"
+      ]
+    }
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "notice": "Partial evidence map. Registration and action-path smoke are not full semantic coverage. See runtime-evidence/coverage.json for every residual obligation.",
   "schema_version": 1,
-  "manifest_sha256": null,
-  "verified_build": null,
-  "bindings": {},
-  "note": "No runtime support is claimed by P00. A content binding requires implementation and passed shared-core fixture evidence; descriptive source text is not executable support."
+  "verified_build": "MSVC-x64-Release/overkill_core.lib/e071b631023020f3e880c2a691306c1c21de9ad65fde25c12a90d124c8657a33"
 }

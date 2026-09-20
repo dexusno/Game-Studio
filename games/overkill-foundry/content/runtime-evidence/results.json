@@ -1,0 +1,1527 @@
+{
+  "capture_tool_sha256": "fcd818aab97b4809859a58b61369c89b294968a5f9714aa83f9cefed1818cd66",
+  "captured_utc": "2026-09-20T16:23:59.338716+00:00",
+  "cmake_version": "cmake version 3.31.6-msvc6",
+  "commands": [
+    [
+      "<cmake>",
+      "-S",
+      "core/build/runtime-linkage/project",
+      "-B",
+      "core/build/runtime-linkage/native",
+      "-G",
+      "Visual Studio 17 2022",
+      "-A",
+      "x64"
+    ],
+    [
+      "<cmake>",
+      "--build",
+      "core/build/runtime-linkage/native",
+      "--config",
+      "Release",
+      "--parallel",
+      "4"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_core.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_recipes.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_upgrades.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_robots.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_route.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_campaign.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_adapters.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_foundation.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_expanded.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_p08.exe"
+    ],
+    [
+      "core/build/runtime-linkage/native/bin/Release/runtime_p08_campaign.exe"
+    ]
+  ],
+  "configuration": "Visual Studio 17 2022 x64 Release",
+  "execution_kind": "New execution of unchanged independent probes and reporting-only author suites against current rules; historic QA reviews are not rewritten.",
+  "git_head": "5647174d6fde6d7c6bd54cdd1dfff023d1048bba",
+  "library": {
+    "path": "core/build/runtime-linkage/native/core-runtime/Release/overkill_core.lib",
+    "sha256": "e071b631023020f3e880c2a691306c1c21de9ad65fde25c12a90d124c8657a33"
+  },
+  "manifest_sha256": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+  "schema_version": 1,
+  "source_sha256": {
+    "content/cinderwall.manifest.json": "d56bf01290f16567cd7009a64f4d49f825454a7149fbf6a922a695a4b71deab9",
+    "core/CMakeLists.txt": "1f13de717ca12b13a96c0b1de2ba2298d03394104a59b0b0b1cffe35268a72b9",
+    "core/include/overkill/campaign.hpp": "a292131db6bae28cd8fdd2a7fd98d6ec4bd8fa5470dfc7cf4104da4bda18e62d",
+    "core/include/overkill/city_content.hpp": "e776c4455fde80989ab07b587b36a0d63bef07fdf0b7c5e2974ab4bf33824b9b",
+    "core/include/overkill/core.hpp": "09a28aecdebbaf5d0b92d2ee8751d2c84b5f6db2c8c5198ef9248741f61a89d0",
+    "core/include/overkill/robots.hpp": "de647c5d57671d783a81eb9ab54a581f0cd3ecceaa507099b0adf10d222e1287",
+    "core/include/overkill/route.hpp": "35da7a47d15fe1e493133f8841b365252755572b03c9f091f67fdf5a0e8ebb66",
+    "core/include/overkill/upgrades.hpp": "0be2acfcfdc828ae18959c247809fed0feb9f118854c87e49c616132e83e3e0b",
+    "core/src/campaign.cpp": "fe17e523714416f0abc096546bf91f6550265760567fb3bb2a9fddc89144fad9",
+    "core/src/campaign_serialization.cpp": "12e7d37b8c2c2444c8cff4aa9d1dfee33fa2938da288fdc3fb8fd6a287b9693a",
+    "core/src/campaign_upgrades.cpp": "b91e03a1c67bec561c3d418a806131f7ae85636cdaa89b3790a7cc8118ca83d7",
+    "core/src/catalogue.cpp": "f96b2824c863f7a8e11caf859f56c7af7c7fe5032e9be6569c52bf411246dd2b",
+    "core/src/catalogue_data.inc": "3c599f270a974191800c1e10477927232addd5c605ac663825ff21fd368c5784",
+    "core/src/city_content.cpp": "f7974a9f36b5c9605bbacd72b910a36e60bb90f50f0e21fcfe62f1323adc3933",
+    "core/src/city_content.generated.inc": "205dc5bae8e095cb493d1436d781722370d04a730da82d78ded09801bd635665",
+    "core/src/core.cpp": "c7d46a6475a78da59a78b70086e616e9aeed7e267418a8c07ed2b6b5c85d1adb",
+    "core/src/recipe_effects.inl": "84387bd3581d4258ce9377dea46836b665a83f77f7eb7db16302359c7642610b",
+    "core/src/robots.cpp": "04128cf381f76558e491ba873544c6196d4e31c2f573aee13836b9ca063a5380",
+    "core/src/route.cpp": "ff78bd1014a9099035760d3607391bf9e0c64d4e4f73b32c407c5208115fd3d9",
+    "core/src/serialization.cpp": "00ebe77516c89e122e8323252bd675ef9cb0496cd55b9bcb3c9f5f047d8b6f3b",
+    "core/src/upgrade_effects.inl": "11c299f880240be7bfdce6d9fa1fbaff5743df1348be2d7d76635719e26bef8c",
+    "core/src/upgrades.cpp": "973ed8e30e78e286f0e113f5a2bd1994f08c21844f78d102d959554686e41fa1",
+    "core/tests/campaign_tests.cpp": "762eedf12c47588e411da339fc032433f832d7862e1307671bd7521208c10894",
+    "core/tests/campaign_upgrade_tests.cpp": "605c51bc18d359d89a6be3c1ea0c8afe40979a1838d061a56f8679090f02b43c",
+    "core/tests/core_tests.cpp": "5e26f4586e1ba086a80896c8a3630c911a163f66e1bb5b2efc50d4826ccf4d22",
+    "core/tests/recipe_tests.cpp": "4cf92acfa2457a8d80f17219a14c6bbd916daa55595a77e3f89f0041a7d7d4ff",
+    "core/tests/robot_tests.cpp": "e98d2a269febdcf3b797a3fcaade4ff9465128317595fea100bb6171849c5429",
+    "core/tests/route_tests.cpp": "e89f2e5240aa61f226d0133dc7441db0a71d4a5924ade5933a5bbab13ba29d9b",
+    "core/tests/upgrade_tests.cpp": "c9a1f1c0a77f4525b1ceea9a0bf92093bdb3b08358c30d760a6913c838e5a74c",
+    "platform/include/overkill/campaign_session.hpp": "b6a16ae225d9aacd5f6c8526e654e36b577c822d6ecd98253d9302ec04dad6c5",
+    "platform/include/overkill/save_store.hpp": "c7bd1659638d6fcb9124aca52790d418b6fe5032b181f9fdc7bac10acea8d99d",
+    "platform/src/campaign_session.cpp": "4dfe4208bfa7d23041315901cf822c5f539715dbe00dbe57d9ae9b293ccb39c5",
+    "platform/src/windows_save_store.cpp": "5ea6c9b32d8432bb8793e18c5623ac3b987508fb193bf1708346cfbf666e22a7",
+    "qa/expanded/probes.cpp": "b172d73be17327a50314c0d4f789898798f4fbfcc3fff2012f644272b3a5bb4e",
+    "qa/foundation_probes.cpp": "8358148bb42e9f1b60e20d7cbb0aea419cfc3640d3b0e30de24d686645349b0e",
+    "qa/upgrades/campaign/probes.cpp": "a2dbeb240ff56e7f60495426d48719f22291d5d1eea868af8689920ccdf95fd9",
+    "qa/upgrades/probes.cpp": "836a88a7d9dbe9c2e7b97cad19ee4a5e7bb5502abd7b327c7c263e4d49bd265e"
+  },
+  "source_unchanged_during_run": true,
+  "strict_targets": "Shared core and four independent probe executables use /W4 /WX /permissive-; author fixtures retain their existing compiler settings.",
+  "targets": [
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_core.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/core.txt",
+      "log_sha256": "468f2a22ef5b11928668f7f5dc50411adc445ae6ec3fe9273533d7ebe2927e14",
+      "named_fixtures": 26,
+      "sha256": "e30ced0dc7c87292d8da604bb115f65ba0d6dee9284f731bf1081e597dc6260e",
+      "suite": "core",
+      "test_source": "core/tests/core_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_recipes.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/recipes.txt",
+      "log_sha256": "bd82e630f4f77740ce7e81a93d9c1308079a495aee13acc698a0c31c6ddcdb58",
+      "named_fixtures": 19,
+      "sha256": "e2fdfe0be1275c18439a7e677c9c08da32319a9d6d6afc67bd6327f870c57b94",
+      "suite": "recipes",
+      "test_source": "core/tests/recipe_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_upgrades.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/upgrades.txt",
+      "log_sha256": "3fcba6b1b471f6932dcecae4114369ade7cdd4d09d267e6cc02eafbe963c8304",
+      "named_fixtures": 31,
+      "sha256": "94816df45424f160ce524afd05513997cc0220a1867355fffdf256576cb338b4",
+      "suite": "upgrades",
+      "test_source": "core/tests/upgrade_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_robots.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/robots.txt",
+      "log_sha256": "aaed23b1048cec460e66cd3b54a84fc069b575f874a6f8c863e6d67e6ba6eaf8",
+      "named_fixtures": 7,
+      "sha256": "c70b4327a92e6ddbdc67e87eba78d0f030df3c6192a9ebdbaf7a9c6d1f5ee243",
+      "suite": "robots",
+      "test_source": "core/tests/robot_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_route.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/route.txt",
+      "log_sha256": "b0fec34a7d37aa9b4cb80bb993dcf71fb4a07095aba07d29a373f6edb4906412",
+      "named_fixtures": 2,
+      "sha256": "9879e8fa6a45e5dd9dd8534fbf8d2f204b108105c5603be1aa49ed86fe10b7dd",
+      "suite": "route",
+      "test_source": "core/tests/route_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_campaign.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/campaign.txt",
+      "log_sha256": "c40d1c252c0b7efa2da6522dd966aa7c6c93462a8bd428d651ccceacac6f2bb8",
+      "named_fixtures": 11,
+      "sha256": "8eb31adc6875b26114f6b7ccfed86b4f8842ebb0c2f798561947c8dcff356b88",
+      "suite": "campaign",
+      "test_source": "core/tests/campaign_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_adapters.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/adapters.txt",
+      "log_sha256": "f15ac02d924ed79aebef952e5a27f40bf9eb3fe90c161635a817a2a46267d2db",
+      "named_fixtures": 12,
+      "sha256": "12508bd68132de2c62b06d26c602e5722b7cb102d8c5b4e3af0edc6fe12ad785",
+      "suite": "adapters",
+      "test_source": "core/tests/campaign_upgrade_tests.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_foundation.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/foundation.txt",
+      "log_sha256": "25b2c8170b6078ff6241f2516224cd1de2dc40663544712c83a8975e6509440d",
+      "named_fixtures": 15,
+      "sha256": "ce8891e88ac62e7695a3042608ccdbb1c16eab5c340963205b3a82297a477b1a",
+      "suite": "foundation",
+      "test_source": "qa/foundation_probes.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_expanded.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/expanded.txt",
+      "log_sha256": "16d7be3d00677f30e2ee2c7a66429b9495d36bd95104f2b7881ddf78834a1086",
+      "named_fixtures": 43,
+      "sha256": "360489ff67e8cf5608326f883309a3ce0b2cd49b6179f0414fad23de970857af",
+      "suite": "expanded",
+      "test_source": "qa/expanded/probes.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_p08.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/p08.txt",
+      "log_sha256": "1ccc5b3298192d89fb3aa3ea0fda3075ad6ba6ddb892cf7d662429c01bd28c0c",
+      "named_fixtures": 36,
+      "sha256": "d14b0d3ad42eab93bc99400bda0c84b85d893489f381808e0783b75a6213163c",
+      "suite": "p08",
+      "test_source": "qa/upgrades/probes.cpp"
+    },
+    {
+      "executable": "core/build/runtime-linkage/native/bin/Release/runtime_p08_campaign.exe",
+      "exit_code": 0,
+      "log": "content/runtime-evidence/p08-campaign.txt",
+      "log_sha256": "1ed003a570334a68e6040a8563137b7e2de05459196a05e522376c88371ccc80",
+      "named_fixtures": 15,
+      "sha256": "276e04859ba30a46bd384a566f92fdfec606c8ad2834ea73987bcf2f12158ca4",
+      "suite": "p08-campaign",
+      "test_source": "qa/upgrades/campaign/probes.cpp"
+    }
+  ],
+  "tests": [
+    {
+      "id": "core::authored Mite/Ram complete fight, multiple shots, saved Shield and integer Armor",
+      "name": "authored Mite/Ram complete fight, multiple shots, saved Shield and integer Armor",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T01 installed Shield absorbs recoil across repeated shots without refill",
+      "name": "T01 installed Shield absorbs recoil across repeated shots without refill",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T02 lethal killing-hit recoil takes precedence over victory",
+      "name": "T02 lethal killing-hit recoil takes precedence over victory",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T03 Reserve Heart Pump intercepts lethal recoil before final death",
+      "name": "T03 Reserve Heart Pump intercepts lethal recoil before final death",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T04 first-install Heat cost and depletion survive remove/reinstall",
+      "name": "T04 first-install Heat cost and depletion survive remove/reinstall",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::installation payment atomicity and one-time Boiler Jacket Heat",
+      "name": "installation payment atomicity and one-time Boiler Jacket Heat",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::installed Shield payment order and reinstall priority",
+      "name": "installed Shield payment order and reinstall priority",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T07 retention allowances allocate one shared remaining balance",
+      "name": "T07 retention allowances allocate one shared remaining balance",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T08 next-round fresh Shield survives old reset and source removal",
+      "name": "T08 next-round fresh Shield survives old reset and source removal",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T09 cooldown 1 blocks following full round; cooling permits reuse",
+      "name": "T09 cooldown 1 blocks following full round; cooling permits reuse",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::independent duplicate recipe copies and atomic material/HP costs",
+      "name": "independent duplicate recipe copies and atomic material/HP costs",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::zero base gun damage and retained Mara Hot Barrel per shot",
+      "name": "zero base gun damage and retained Mara Hot Barrel per shot",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::combined integer percentages, separate spread hits and lost dead-target hits",
+      "name": "combined integer percentages, separate spread hits and lost dead-target hits",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::main-target Burn never copied by Split Outlet",
+      "name": "main-target Burn never copied by Split Outlet",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::T10 four full escape warning rounds and no departure attack",
+      "name": "T10 four full escape warning rounds and no departure attack",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::Burn ignores Armor and Tiles; Corrosion kills before a committed attack",
+      "name": "Burn ignores Armor and Tiles; Corrosion kills before a committed attack",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::one collection per round, Precision once per fight, Magnet next-haul scope",
+      "name": "one collection per round, Precision once per fight, Magnet next-haul scope",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::Quick Patch's fight healing cap is shared by duplicates",
+      "name": "Quick Patch's fight healing cap is shared by duplicates",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::removed Insulating Pad cannot prevent Burn or rearm in another round",
+      "name": "removed Insulating Pad cannot prevent Burn or rearm in another round",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::same named Modifiers refresh; different names combine",
+      "name": "same named Modifiers refresh; different names combine",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::identical Magnet copies refresh the next haul",
+      "name": "identical Magnet copies refresh the next haul",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::content rejects unknown opcode and unsupported timing before play",
+      "name": "content rejects unknown opcode and unsupported timing before play",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::preview and rejected loaded Fire preserve all authoritative state",
+      "name": "preview and rejected loaded Fire preserve all authoritative state",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::no fixed bullet or Shield part cap",
+      "name": "no fixed bullet or Shield part cap",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::versioned state roundtrip includes loaded parts, schedule, RNG and installation history",
+      "name": "versioned state roundtrip includes loaded parts, schedule, RNG and installation history",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "core::separate seeded RNG domains and repeatable full action/event replay",
+      "name": "separate seeded RNG domains and repeatable full action/event replay",
+      "result": "passed",
+      "suite": "core"
+    },
+    {
+      "id": "recipes::full246 exact catalogue registrations and source costs",
+      "name": "full246 exact catalogue registrations and source costs",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::every Ammo's main damage in a controlled source-derived reference state",
+      "name": "every Ammo's main damage in a controlled source-derived reference state",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::conditional Ammo snapshots, percentages, prehit order, independent saved copies",
+      "name": "conditional Ammo snapshots, percentages, prehit order, independent saved copies",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::all Utility uses and required choices execute without omitted operation",
+      "name": "all Utility uses and required choices execute without omitted operation",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::all Shield installation values have a source-derived reference result",
+      "name": "all Shield installation values have a source-derived reference result",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::all planning Modifiers and Magnet effects have a complete action path",
+      "name": "all planning Modifiers and Magnet effects have a complete action path",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::all physical spread parts validate costs, own targets and resolution",
+      "name": "all physical spread parts validate costs, own targets and resolution",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::finite stock preserves baseline when Precision or named bonus stock is missing",
+      "name": "finite stock preserves baseline when Precision or named bonus stock is missing",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::fixed Shield recasting and copying preserve generated identity while dropping later bonuses",
+      "name": "fixed Shield recasting and copying preserve generated identity while dropping later bonuses",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::first-install shot check expires on an unsuccessful or removed-source next shot",
+      "name": "first-install shot check expires on an unsuccessful or removed-source next shot",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::part-only Mara costs exclude Utility costs and copying/Use are separate events",
+      "name": "part-only Mara costs exclude Utility costs and copying/Use are separate events",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::prehit changes cannot rewrite ordinary Fire-condition snapshots",
+      "name": "prehit changes cannot rewrite ordinary Fire-condition snapshots",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::HP-first Shield prevention and total attack reduction obey whole-attack facts",
+      "name": "HP-first Shield prevention and total attack reduction obey whole-attack facts",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::Refuge Walls share restoration and Kiln Seals retain greatest remembered Heat",
+      "name": "Refuge Walls share restoration and Kiln Seals retain greatest remembered Heat",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::later killed-target support hit is lost without undoing earlier committed hits",
+      "name": "later killed-target support hit is lost without undoing earlier committed hits",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::expanded snapshot preserves choices and rejects unsafe persisted indices/counters",
+      "name": "expanded snapshot preserves choices and rejects unsafe persisted indices/counters",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::combined Fire affordability precedes each physical part's payment trigger",
+      "name": "combined Fire affordability precedes each physical part's payment trigger",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::Pressure Release honors optional chosen Shield amount without forced maximum",
+      "name": "Pressure Release honors optional chosen Shield amount without forced maximum",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "recipes::source IDs present in tested execution, no metadata-only omission",
+      "name": "source IDs present in tested execution, no metadata-only omission",
+      "result": "passed",
+      "suite": "recipes"
+    },
+    {
+      "id": "upgrades::exact eligible set, acquisition atomicity, stats and queries",
+      "name": "exact eligible set, acquisition atomicity, stats and queries",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::entry sources, explicit turn starts, saved selection and preview",
+      "name": "entry sources, explicit turn starts, saved selection and preview",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::physical paid production, committed copies and immutable resale",
+      "name": "physical paid production, committed copies and immutable resale",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::payment clocks, defense and real shared retention",
+      "name": "payment clocks, defense and real shared retention",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::main shot clocks, Armor bypass and source-copy momentum",
+      "name": "main shot clocks, Armor bypass and source-copy momentum",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::acquisition selection rejects nonmatching copies and resumes once",
+      "name": "acquisition selection rejects nonmatching copies and resumes once",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::Mayor opening choices and named encounter gates",
+      "name": "Mayor opening choices and named encounter gates",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::physical selected copies, calibration cooldown and momentum",
+      "name": "physical selected copies, calibration cooldown and momentum",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::opening production counts and true paid-use discount qualification",
+      "name": "opening production counts and true paid-use discount qualification",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::Fire counts distinguish supports, valid Fires, source age and next shot",
+      "name": "Fire counts distinguish supports, valid Fires, source age and next shot",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::prehit and per-hit reactions, final-death interruption and status novelty",
+      "name": "prehit and per-hit reactions, final-death interruption and status novelty",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::Use counts, cooling consequences and recipe healing attribution",
+      "name": "Use counts, cooling consequences and recipe healing attribution",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::end-turn supplies and installed/reserve distinction",
+      "name": "end-turn supplies and installed/reserve distinction",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::collection choice persists, fixed Precision retry and periodic grants",
+      "name": "collection choice persists, fixed Precision retry and periodic grants",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::independent regressions: persistent first-shot and recoil before Suture",
+      "name": "independent regressions: persistent first-shot and recoil before Suture",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::printed recipe copies drop later upgrade values, keep grant provenance",
+      "name": "printed recipe copies drop later upgrade values, keep grant provenance",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::equipment cooling and actual-material Use milestones",
+      "name": "equipment cooling and actual-material Use milestones",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::victory healing, growth and kill-qualified Credits",
+      "name": "victory healing, growth and kill-qualified Credits",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::campaign entitlements survive skipped shops and consume together",
+      "name": "campaign entitlements survive skipped shops and consume together",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::finite fight lease, Officer awakenings and pending vouchers",
+      "name": "finite fight lease, Officer awakenings and pending vouchers",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::reward-copy provenance and independently spent physical coupons",
+      "name": "reward-copy provenance and independently spent physical coupons",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::one victory screen shares acceptance allowances across nested offers",
+      "name": "one victory screen shares acceptance allowances across nested offers",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::source-typed offers pause, persist and resume in acquired order",
+      "name": "source-typed offers pause, persist and resume in acquired order",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::post-victory offer filters and carried periodic clocks",
+      "name": "post-victory offer filters and carried periodic clocks",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::Mystery outcomes and exact nonstacking entry shipment",
+      "name": "Mystery outcomes and exact nonstacking entry shipment",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::sacrifice clocks and lethal upgrade recoil interrupt the original effect",
+      "name": "sacrifice clocks and lethal upgrade recoil interrupt the original effect",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::novel enemy debuff types exclude extra present stacks",
+      "name": "novel enemy debuff types exclude extra present stacks",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::canonical grants qualify Slug listeners and preserve paid event identity",
+      "name": "canonical grants qualify Slug listeners and preserve paid event identity",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::Fire reaction clocks merge physical bindings with upgrade acquisition",
+      "name": "Fire reaction clocks merge physical bindings with upgrade acquisition",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::committed Trial copy preserves earlier crafting attachment",
+      "name": "committed Trial copy preserves earlier crafting attachment",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "upgrades::native same-seed event and snapshot parity through saved choices",
+      "name": "native same-seed event and snapshot parity through saved choices",
+      "result": "passed",
+      "suite": "upgrades"
+    },
+    {
+      "id": "robots::registryAndFactories: formation identities and Mite/Ram actions",
+      "name": "registryAndFactories: formation identities and Mite/Ram actions",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::binderPackets: fixed introduction and saved seeded variants",
+      "name": "binderPackets: fixed introduction and saved seeded variants",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::pressureAndOfficers: Drive, multi-hit actions and final death",
+      "name": "pressureAndOfficers: Drive, multi-hit actions and final death",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+      "name": "braceAndLockedSupport: temporary Armor, Leak and committed Nest action",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+      "name": "finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+      "name": "recoveryJointAndEscapes: boss threshold and explicit departure clocks",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "robots::integrationContracts: actual Engine defense, status, spawning and replay",
+      "name": "integrationContracts: actual Engine defense, status, spawning and replay",
+      "result": "passed",
+      "suite": "robots"
+    },
+    {
+      "id": "route::route schedules: 1000 seeded complete choices, gates and immutable encounter identities",
+      "name": "route schedules: 1000 seeded complete choices, gates and immutable encounter identities",
+      "result": "passed",
+      "suite": "route"
+    },
+    {
+      "id": "route::route replacements: 100 Safe Survey paths, deterministic previews and Officer progression",
+      "name": "route replacements: 100 Safe Survey paths, deterministic previews and Officer progression",
+      "result": "passed",
+      "suite": "route"
+    },
+    {
+      "id": "campaign::campaign purchase: fixed inventory, idempotent receipt and unaffordable rejection",
+      "name": "campaign purchase: fixed inventory, idempotent receipt and unaffordable rejection",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign Continue: original entry, purchase rollback and persistent discoveries",
+      "name": "campaign Continue: original entry, purchase rollback and persistent discoveries",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign rewards: owned cores, fixed choices, cancellation and once-only advance",
+      "name": "campaign rewards: owned cores, fixed choices, cancellation and once-only advance",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign memory: saved pending exchange, cancellation and atomic replacement",
+      "name": "campaign memory: saved pending exchange, cancellation and atomic replacement",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign persistence: empty rewards, abandonment and corrupt snapshot rejection",
+      "name": "campaign persistence: empty rewards, abandonment and corrupt snapshot rejection",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign missing executor: acquisition rejects without an inert grant",
+      "name": "campaign missing executor: acquisition rejects without an inert grant",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign Night Exchange: finite stock, fixed tiers and noncombat completion",
+      "name": "campaign Night Exchange: finite stock, fixed tiers and noncombat completion",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign Technician: fixed offers, refusal and combined nonlethal costs",
+      "name": "campaign Technician: fixed offers, refusal and combined nonlethal costs",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign Patrol: encounter entry, Continue and internal-checkpoint rejection",
+      "name": "campaign Patrol: encounter entry, Continue and internal-checkpoint rejection",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign defeat: no loot, advancement or Continue checkpoint",
+      "name": "campaign defeat: no loot, advancement or Continue checkpoint",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "campaign::campaign identity: stale run commands and incompatible phase or formation reject",
+      "name": "campaign identity: stale run commands and incompatible phase or formation reject",
+      "result": "passed",
+      "suite": "campaign"
+    },
+    {
+      "id": "adapters::adapter Blueprint Annex: shared Uncommon offer and four empty memory slots",
+      "name": "adapter Blueprint Annex: shared Uncommon offer and four empty memory slots",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Archive Cache: three fixed sequential offers and idempotent acceptance",
+      "name": "adapter Archive Cache: three fixed sequential offers and idempotent acceptance",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Utility memory: typed capacity, copy movement and fight restriction",
+      "name": "adapter Utility memory: typed capacity, copy movement and fight restriction",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Carbon Copier: saved exact-source exchange and cancellation",
+      "name": "adapter Carbon Copier: saved exact-source exchange and cancellation",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Borrowed Schematic: fixed choices, separate slot, Continue and cleanup",
+      "name": "adapter Borrowed Schematic: fixed choices, separate slot, Continue and cleanup",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter normal offers: two offers, fourth options and Light-Touch in both acquisition orders",
+      "name": "adapter normal offers: two offers, fourth options and Light-Touch in both acquisition orders",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Reward Reveal: pure preview matches the actual future reward",
+      "name": "adapter Reward Reveal: pure preview matches the actual future reward",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Route Pass: saved preview, one charge and no repeated replacement",
+      "name": "adapter Route Pass: saved preview, one charge and no repeated replacement",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Spectrometer: once-only replacement preserves Collection knowledge",
+      "name": "adapter Spectrometer: once-only replacement preserves Collection knowledge",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter purchase listeners: prior entitlement hears purchase and new item does not",
+      "name": "adapter purchase listeners: prior entitlement hears purchase and new item does not",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Mystery information: Safe Survey and category-only Badge queries",
+      "name": "adapter Mystery information: Safe Survey and category-only Badge queries",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "adapters::adapter Subscription: deferred choices refresh when physical copies become eligible",
+      "name": "adapter Subscription: deferred choices refresh when physical copies become eligible",
+      "result": "passed",
+      "suite": "adapters"
+    },
+    {
+      "id": "foundation::SH050 duplicate named modifiers refresh",
+      "name": "SH050 duplicate named modifiers refresh",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::different named percentage modifiers combine",
+      "name": "different named percentage modifiers combine",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::identical SH008 Magnet copies refresh one next-haul bonus",
+      "name": "identical SH008 Magnet copies refresh one next-haul bonus",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::SH006 removed source does not ward Burn",
+      "name": "SH006 removed source does not ward Burn",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::unknown effect opcode is rejected before content use",
+      "name": "unknown effect opcode is rejected before content use",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::unsupported valid effect timing is rejected",
+      "name": "unsupported valid effect timing is rejected",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::effect clock unreachable for the recipe kind is rejected",
+      "name": "effect clock unreachable for the recipe kind is rejected",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::lethal first spread recoil prevents later spread and ordinary heal",
+      "name": "lethal first spread recoil prevents later spread and ordinary heal",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::lethal main recoil stops after-hit healing",
+      "name": "lethal main recoil stops after-hit healing",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::saved depleted Shield survives serialization and next-round reinstall",
+      "name": "saved depleted Shield survives serialization and next-round reinstall",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::cooling in blocked round permits use and restarts its exemption",
+      "name": "cooling in blocked round permits use and restarts its exemption",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::enemy Weaken reduces each hit and decays during a nonattack",
+      "name": "enemy Weaken reduces each hit and decays during a nonattack",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::Armor and Tiles apply per direct hit; Burn uses Shield before HP",
+      "name": "Armor and Tiles apply per direct hit; Burn uses Shield before HP",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::forty rounds of legal stockpiling permit forty-part assemblies and repeated Fire",
+      "name": "forty rounds of legal stockpiling permit forty-part assemblies and repeated Fire",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "foundation::preview, snapshot reload and replay preserve RNG and event sequence",
+      "name": "preview, snapshot reload and replay preserve RNG and event sequence",
+      "result": "passed",
+      "suite": "foundation"
+    },
+    {
+      "id": "expanded::removed MA059 cannot reduce an enemy attack",
+      "name": "removed MA059 cannot reduce an enemy attack",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::removed MA086 cannot halve its chosen enemy attack",
+      "name": "removed MA086 cannot halve its chosen enemy attack",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::first-bound SH060 zeroing precedes later MA055 Shield reading after reinstall",
+      "name": "first-bound SH060 zeroing precedes later MA055 Shield reading after reinstall",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::source removal does not cancel already committed MA016 Shield delivery",
+      "name": "source removal does not cancel already committed MA016 Shield delivery",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::next-shot SH062 check expires when removed and does not rearm",
+      "name": "next-shot SH062 check expires when removed and does not rearm",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH094 reacts once per attack rather than once per hit",
+      "name": "SH094 reacts once per attack rather than once per hit",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA108 requires a fully Shield-blocked attack",
+      "name": "MA108 requires a fully Shield-blocked attack",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::copy retains source identity and resale while dropping attached bonuses",
+      "name": "copy retains source identity and resale while dropping attached bonuses",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::copied generated SH026 Shield remains a pure grant without generator recursion",
+      "name": "copied generated SH026 Shield remains a pure grant without generator recursion",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH118 copied stored-momentum part starts fresh age",
+      "name": "SH118 copied stored-momentum part starts fresh age",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH110 reserved sacrifice cancels without consuming or firing its effect",
+      "name": "SH110 reserved sacrifice cancels without consuming or firing its effect",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::variable first-install Heat payment remains paid after save and reinstall",
+      "name": "variable first-install Heat payment remains paid after save and reinstall",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::own HP cost cannot borrow later shield/refund and failed Use is atomic",
+      "name": "own HP cost cannot borrow later shield/refund and failed Use is atomic",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA093 and MA101 count paid part activations but exclude Utility Use",
+      "name": "MA093 and MA101 count paid part activations but exclude Utility Use",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::lethal support recoil stops later burn-reduction payload",
+      "name": "lethal support recoil stops later burn-reduction payload",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH043 bypass redirects actual post-Armor shot damage",
+      "name": "SH043 bypass redirects actual post-Armor shot damage",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA042 prehit Burn consumption and MA091 kill transfer follow placement order",
+      "name": "MA042 prehit Burn consumption and MA091 kill transfer follow placement order",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::Split Chassis death-spawn has a new target and cannot attack in creation round",
+      "name": "Split Chassis death-spawn has a new target and cannot attack in creation round",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::Nest committed Attack stays Attack after player kills the live Mite",
+      "name": "Nest committed Attack stays Attack after player kills the live Mite",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::boss preaction Corrosion threshold cancels pending attack and stops phase-one scaling",
+      "name": "boss preaction Corrosion threshold cancels pending attack and stops phase-one scaling",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::boss postaction Burn threshold schedules next-round Recover",
+      "name": "boss postaction Burn threshold schedules next-round Recover",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::Fouling consumes only Ammo recipe uses and expires at affected EndTurn",
+      "name": "Fouling consumes only Ammo recipe uses and expires at affected EndTurn",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::Shield Leak drains installed parts but preserves direct upgrade protection",
+      "name": "Shield Leak drains installed parts but preserves direct upgrade protection",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::all six manual-grab enhancements honor auto/miss/Perfect outcome scopes",
+      "name": "all six manual-grab enhancements honor auto/miss/Perfect outcome scopes",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::finite pile requests clamp each named Perfect bonus separately",
+      "name": "finite pile requests clamp each named Perfect bonus separately",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::same named amplifier refreshes and doubles only unmodified Precision bundle",
+      "name": "same named amplifier refreshes and doubles only unmodified Precision bundle",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::runtime rarity agrees with Common and suffixed manual-grab source headings",
+      "name": "runtime rarity agrees with Common and suffixed manual-grab source headings",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA102 highest remembered Heat only includes installed source parts",
+      "name": "MA102 highest remembered Heat only includes installed source parts",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA086 halves once after flat reduction with two physical source parts",
+      "name": "MA086 halves once after flat reduction with two physical source parts",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA059 independent physical parts each supply one first-attack reduction",
+      "name": "MA059 independent physical parts each supply one first-attack reduction",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA066 refreshes one delayed bonus and first installation does not repeat it",
+      "name": "MA066 refreshes one delayed bonus and first installation does not repeat it",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA079 distinguishes prior part payments and later Utility costs",
+      "name": "MA079 distinguishes prior part payments and later Utility costs",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA048 optional payment occurs at EndTurn and all choices validate atomically",
+      "name": "MA048 optional payment occurs at EndTurn and all choices validate atomically",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA115 physical copies share24 restoration across whole attacks",
+      "name": "MA115 physical copies share24 restoration across whole attacks",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA060 refresh holds two Burn decays and snapshots preserve the clock",
+      "name": "MA060 refresh holds two Burn decays and snapshots preserve the clock",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA120 echo uses original predefence shot value and current Shield once",
+      "name": "MA120 echo uses original predefence shot value and current Shield once",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH115 refresh replaces scheduled duration without stacking old deliveries",
+      "name": "SH115 refresh replaces scheduled duration without stacking old deliveries",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH101 optional zero sacrifice and duplicate reservation validate atomically",
+      "name": "SH101 optional zero sacrifice and duplicate reservation validate atomically",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH070 discounts the first eligible next-round Utility Use only",
+      "name": "SH070 discounts the first eligible next-round Utility Use only",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::preview and canonical snapshot reproduce complex Fire without mutation",
+      "name": "preview and canonical snapshot reproduce complex Fire without mutation",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::MA093 counts two paid physical spread parts despite named spread refresh",
+      "name": "MA093 counts two paid physical spread parts despite named spread refresh",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::combined Fire costs cannot borrow a later spread kill Heat refund",
+      "name": "combined Fire costs cannot borrow a later spread kill Heat refund",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "expanded::SH085 spends the chosen amount while preserving remaining protection",
+      "name": "SH085 spends the chosen amount while preserving remaining protection",
+      "result": "passed",
+      "suite": "expanded"
+    },
+    {
+      "id": "p08::U01 calibration acquisition is nonlethal, atomic, once and reloadable",
+      "name": "U01 calibration acquisition is nonlethal, atomic, once and reloadable",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U02 acquisition maxHP does not repeat on reload or fight start",
+      "name": "U02 acquisition maxHP does not repeat on reload or fight start",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U03 permanent tuning is per copy and first physical output only",
+      "name": "U03 permanent tuning is per copy and first physical output only",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U04 cold-start production allowance excludes free grants and Utilities",
+      "name": "U04 cold-start production allowance excludes free grants and Utilities",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U05 Trial Fabricator copies committed first output without recursion",
+      "name": "U05 Trial Fabricator copies committed first output without recursion",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U06 Ammo stamp excludes None and is independent per physical copy",
+      "name": "U06 Ammo stamp excludes None and is independent per physical copy",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U07 Utility stamp does not waive HP or reset another copy",
+      "name": "U07 Utility stamp does not waive HP or reset another copy",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U08 Batch Permit changes only selected None copy on turn one",
+      "name": "U08 Batch Permit changes only selected None copy on turn one",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U09 Ballistic Starter survives zero-shot turns and expires after one Fire",
+      "name": "U09 Ballistic Starter survives zero-shot turns and expires after one Fire",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U10 Alignment adds before percentage and only on first Fire that turn",
+      "name": "U10 Alignment adds before percentage and only on first Fire that turn",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U11 named retention sums but cannot create Shield",
+      "name": "U11 named retention sums but cannot create Shield",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U12 Shield reader and spender use binding order before real retention",
+      "name": "U12 Shield reader and spender use binding order before real retention",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U13 Vent Fan counts actual Heat payment, once, and excludes decay",
+      "name": "U13 Vent Fan counts actual Heat payment, once, and excludes decay",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U14 later Suture heal cannot finance own HP cost",
+      "name": "U14 later Suture heal cannot finance own HP cost",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U15 first recipe healing excludes acquisition healing",
+      "name": "U15 first recipe healing excludes acquisition healing",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U16 cooldown tie selects memory position rather than smallest ID",
+      "name": "U16 cooldown tie selects memory position rather than smallest ID",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U17 Momentum uses producing-copy identity, one shot and consecutive turns",
+      "name": "U17 Momentum uses producing-copy identity, one shot and consecutive turns",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U18 Toolhead claims after three earlier Uses and free Use is not paid",
+      "name": "U18 Toolhead claims after three earlier Uses and free Use is not paid",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U19 Toolhead cannot invent ingredients or waive remaining HP cost",
+      "name": "U19 Toolhead cannot invent ingredients or waive remaining HP cost",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U20 five-material threshold uses actual payment after discounts",
+      "name": "U20 five-material threshold uses actual payment after discounts",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U21 paid Utility counter continues between turns",
+      "name": "U21 paid Utility counter continues between turns",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U22 counterbattery responds to each actual attack hit",
+      "name": "U22 counterbattery responds to each actual attack hit",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U23 lethal Utility Arc recoil interrupts healing and later damage siblings",
+      "name": "U23 lethal Utility Arc recoil interrupts healing and later damage siblings",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U24 turn-start grants precede Pulse recoil even with later acquisition",
+      "name": "U24 turn-start grants precede Pulse recoil even with later acquisition",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U25 nested first-turn choices serialize and preview without replay",
+      "name": "U25 nested first-turn choices serialize and preview without replay",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U26 copying eligibility requires permanent memory and delegates saved selection",
+      "name": "U26 copying eligibility requires permanent memory and delegates saved selection",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U27 shop reductions are product-scoped and sale bonus floors per core",
+      "name": "U27 shop reductions are product-scoped and sale bonus floors per core",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U28 Opening Laminator saves its bonus and fixed resale reference",
+      "name": "U28 Opening Laminator saves its bonus and fixed resale reference",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U29 Vent payment protects before recoil and combined affordability stays atomic",
+      "name": "U29 Vent payment protects before recoil and combined affordability stays atomic",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U30 generated Shield bonus never changes original value or printed-only copies",
+      "name": "U30 generated Shield bonus never changes original value or printed-only copies",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U31 Cooling Authorization is free but never refreshes None-use flags",
+      "name": "U31 Cooling Authorization is free but never refreshes None-use flags",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U32 chosen-resource return is capped by actual payment and consumed once",
+      "name": "U32 chosen-resource return is capped by actual payment and consumed once",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U33 Plain Slug return is a Fire trigger rather than paid production",
+      "name": "U33 Plain Slug return is a Fire trigger rather than paid production",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U34 sacrifice upgrades count individual payments but exclude Fire",
+      "name": "U34 sacrifice upgrades count individual payments but exclude Fire",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U35 seeded material discount persists and reduces only eligible actual ingredient",
+      "name": "U35 seeded material discount persists and reduces only eligible actual ingredient",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08::U36 Mara capacity and decay exceptions never discount explicit payments",
+      "name": "U36 Mara capacity and decay exceptions never discount explicit payments",
+      "result": "passed",
+      "suite": "p08"
+    },
+    {
+      "id": "p08-campaign::C-U01 three acquisition recipe offers preserve exchange cursor without victory payout",
+      "name": "C-U01 three acquisition recipe offers preserve exchange cursor without victory payout",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U02 exact recipe copy requires different exchange and is once-owned after decline",
+      "name": "C-U02 exact recipe copy requires different exchange and is once-owned after decline",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U03 Utility memory is empty capacity and cannot store Ammo",
+      "name": "C-U03 Utility memory is empty capacity and cannot store Ammo",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U04 Borrowed choice is extra, deterministic on Continue, uncopyable and removed at victory",
+      "name": "C-U04 Borrowed choice is extra, deterministic on Continue, uncopyable and removed at victory",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U05 Surveyor decline and exhausted pool keep one normal Mystery credit",
+      "name": "C-U05 Surveyor decline and exhausted pool keep one normal Mystery credit",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U06 nested upgrade acquisition acknowledges parent before forced copy choice",
+      "name": "C-U06 nested upgrade acquisition acknowledges parent before forced copy choice",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U07 ever-acquired exhaustion pays Compass30 only after fifth victory",
+      "name": "C-U07 ever-acquired exhaustion pays Compass30 only after fifth victory",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U08 real license charge and midfight purchase roll back on Continue",
+      "name": "C-U08 real license charge and midfight purchase roll back on Continue",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U09 shop discount does not discount its own acquisition or replay",
+      "name": "C-U09 shop discount does not discount its own acquisition or replay",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations",
+      "name": "C-U12 moving Utility slots preserves physical copy tags and rejects fight/capacity violations",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U13 cancel staged exchange keeps paid ownership and all seeded candidates",
+      "name": "C-U13 cancel staged exchange keeps paid ownership and all seeded candidates",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U14 Technician plus Risky Calibration validates combined16HP before commit",
+      "name": "C-U14 Technician plus Risky Calibration validates combined16HP before commit",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U15 two earned deferred subscriptions remain usable after one copy becomes ineligible",
+      "name": "C-U15 two earned deferred subscriptions remain usable after one copy becomes ineligible",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U10 actual process exits preserve acquisition plus nested offers atomically",
+      "name": "C-U10 actual process exits preserve acquisition plus nested offers atomically",
+      "result": "passed",
+      "suite": "p08-campaign"
+    },
+    {
+      "id": "p08-campaign::C-U11 actual process exits preserve nested memory exchange atomically",
+      "name": "C-U11 actual process exits preserve nested memory exchange atomically",
+      "result": "passed",
+      "suite": "p08-campaign"
+    }
+  ],
+  "verified_build": "MSVC-x64-Release/overkill_core.lib/e071b631023020f3e880c2a691306c1c21de9ad65fde25c12a90d124c8657a33"
+}

@@ -1,0 +1,33 @@
+PASS exact eligible set, acquisition atomicity, stats and queries
+PASS entry sources, explicit turn starts, saved selection and preview
+PASS physical paid production, committed copies and immutable resale
+PASS payment clocks, defense and real shared retention
+PASS main shot clocks, Armor bypass and source-copy momentum
+PASS acquisition selection rejects nonmatching copies and resumes once
+PASS Mayor opening choices and named encounter gates
+PASS physical selected copies, calibration cooldown and momentum
+PASS opening production counts and true paid-use discount qualification
+PASS Fire counts distinguish supports, valid Fires, source age and next shot
+PASS prehit and per-hit reactions, final-death interruption and status novelty
+PASS Use counts, cooling consequences and recipe healing attribution
+PASS end-turn supplies and installed/reserve distinction
+PASS collection choice persists, fixed Precision retry and periodic grants
+PASS independent regressions: persistent first-shot and recoil before Suture
+PASS printed recipe copies drop later upgrade values, keep grant provenance
+PASS equipment cooling and actual-material Use milestones
+PASS victory healing, growth and kill-qualified Credits
+PASS campaign entitlements survive skipped shops and consume together
+PASS finite fight lease, Officer awakenings and pending vouchers
+PASS reward-copy provenance and independently spent physical coupons
+PASS one victory screen shares acceptance allowances across nested offers
+PASS source-typed offers pause, persist and resume in acquired order
+PASS post-victory offer filters and carried periodic clocks
+PASS Mystery outcomes and exact nonstacking entry shipment
+PASS sacrifice clocks and lethal upgrade recoil interrupt the original effect
+PASS novel enemy debuff types exclude extra present stacks
+PASS canonical grants qualify Slug listeners and preserve paid event identity
+PASS Fire reaction clocks merge physical bindings with upgrade acquisition
+PASS committed Trial copy preserves earlier crafting attachment
+PASS native same-seed event and snapshot parity through saved choices
+Remaining core author assertions: MY1-12 MY1-14 UGS-057 UGS-141 UGS-149
+1130 assertions; 147 explicitly covered upgrade IDs; 0 failures

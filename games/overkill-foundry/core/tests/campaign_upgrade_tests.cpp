@@ -39,12 +39,14 @@ int main(){try{
         auto c=start(rules,1,"MY1-06");check(c.fight.upgrades.size()==1 && c.upgradeOffers.size()==1,"Mayor acquisition did not create one saved nested offer.");
         check(c.upgradeOffers[0].candidates[0].size()==3,"Blueprint Annex lost its three choices.");for(const auto& id:c.upgradeOffers[0].candidates[0])check(id.substr(0,2)=="SH" && cityItem(rules.content().recipes,id)->rarity==2,"Mayor recipe filter changed.");
         roundtrip(c);pick(c,rules);check(c.fight.memory.size()==13 && upgradeGeneralMemoryBonus(c.fight)==4 && c.upgradeOffers.empty(),"Mayor memory/recipe result failed.");roundtrip(c);
+        std::cout<<"PASS adapter Blueprint Annex: shared Uncommon offer and four empty memory slots\n";
     }
     {
         auto c=start(rules,2);buy(c,rules,ProductKind::Upgrade,"UGS-089");const auto fixed=c.upgradeOffers[0].candidates;check(fixed.size()==3,"Archive Cache lacks three sequential offers.");roundtrip(c);
         auto a=command(c,CampaignActionType::ResolveUpgradeOffer,c.upgradeOffers[0].id,fixed[0][0]);run(c,rules,a);const auto saved=serializeCampaign(c);
         check(rules.apply(c,a).replayed && serializeCampaign(c)==saved,"Nested-offer receipt granted twice.");a.decline=true;check(!rules.apply(c,a).ok && serializeCampaign(c)==saved,"Changed decline payload reused a receipt.");
         check(c.upgradeOffers[0].index==1 && c.upgradeOffers[0].candidates==fixed,"Nested advancement rerolled candidates.");pick(c,rules);roundtrip(c);pick(c,rules);check(c.fight.memory.size()==15 && c.upgradeOffers.empty() && c.fight.upgradeRequests.empty(),"Archive Cache stopped before all choices.");
+        std::cout<<"PASS adapter Archive Cache: three fixed sequential offers and idempotent acceptance\n";
     }
     {
         auto c=start(rules,3);fullMemory(c);buy(c,rules,ProductKind::Upgrade,"UGS-100");buy(c,rules,ProductKind::Recipe,"SH074");
@@ -55,6 +57,7 @@ int main(){try{
         check(utility!=0,"Missing existing Utility fixture copy.");run(c,rules,command(c,CampaignActionType::MoveRecipeCopy,utility,"utility"));
         check(rules.hasFreeMemory(c,"SH001"),"Moving an existing Utility failed to free a general slot.");roundtrip(c);enter(c,rules);
         const auto during=serializeCampaign(c);check(!rules.apply(c,command(c,CampaignActionType::MoveRecipeCopy,utility,"general")).ok && serializeCampaign(c)==during,"Memory slots were rearranged during a fight.");
+        std::cout<<"PASS adapter Utility memory: typed capacity, copy movement and fight restriction\n";
     }
     {
         auto c=start(rules,4);fullMemory(c);const auto source=c.fight.memory[0].id;const auto definition=c.fight.memory[0].recipe;const auto other=c.fight.memory[1].id;buy(c,rules,ProductKind::Upgrade,"UGS-032");
@@ -62,11 +65,13 @@ int main(){try{
         run(c,rules,command(c,CampaignActionType::CancelUpgradeExchange,c.upgradeOffers[0].id));check(c.upgradeOffers[0].selected.empty() && c.fight.memory.size()==20,"Cancelling exchange acquired or abandoned the payload.");a.sequence=c.nextTransaction;run(c,rules,a);
         a.sequence=c.nextTransaction;a.exchange=source;const auto before=serializeCampaign(c);check(!rules.apply(c,a).ok && serializeCampaign(c)==before,"Carbon Copier exchanged its own selected source.");
         a.exchange=other;run(c,rules,a);check(c.fight.memory.size()==20 && c.fight.memory.back().recipe==definition && c.fight.memory.back().cooldown==0 && c.upgradeOffers.empty(),"Ready-copy exchange failed.");roundtrip(c);
+        std::cout<<"PASS adapter Carbon Copier: saved exact-source exchange and cancellation\n";
     }
     {
         auto c=start(rules,5);buy(c,rules,ProductKind::Upgrade,"UGS-133");enter(c,rules);check(c.upgradeOffers.size()==1,"Borrowed fight-start offer absent.");const auto choices=c.upgradeOffers[0].candidates;
         for(const auto& id:choices[0])check(id.substr(0,2)=="SH" && cityItem(rules.content().recipes,id)->rarity==1,"Borrowed filter changed.");pick(c,rules);check(c.fight.memory.back().storage==MemoryKind::Borrowed && c.fight.memory.size()==13,"Borrowed slot not separate.");roundtrip(c);
         run(c,rules,command(c,CampaignActionType::Continue));check(c.upgradeOffers[0].candidates==choices && c.fight.memory.size()==12,"Continue retained or rerolled borrowed acquisition.");pick(c,rules);win(c,rules,fights);check(c.fight.memory.size()==12,"Borrowed copy survived fight completion.");roundtrip(c);
+        std::cout<<"PASS adapter Borrowed Schematic: fixed choices, separate slot, Continue and cleanup\n";
     }
     for(bool reverse:{false,true}){
         auto c=start(rules,reverse?7:6);buy(c,rules,ProductKind::Upgrade,reverse?"UGS-101":"UGS-031");buy(c,rules,ProductKind::Upgrade,reverse?"UGS-031":"UGS-101");buy(c,rules,ProductKind::Upgrade,"UGS-148");enter(c,rules);win(c,rules,fights);
@@ -74,29 +79,34 @@ int main(){try{
         check(count==2,"Double Regular reward lost an independent offer.");roundtrip(c);run(c,rules,command(c,CampaignActionType::OpenRecipes,selected));run(c,rules,command(c,CampaignActionType::ClaimReward,selected,marked));
         check(std::any_of(c.fight.memory.back().tags.begin(),c.fight.memory.back().tags.end(),[](const RecipeTag& t){return t.kind==RecipeTagKind::LightTouch;}),"Marked acceptance failed to tag its physical copy.");roundtrip(c);
     }
+    std::cout<<"PASS adapter normal offers: two offers, fourth options and Light-Touch in both acquisition orders\n";
     {
         auto c=start(rules,8);buy(c,rules,ProductKind::Upgrade,"UGS-131");enter(c,rules);win(c,rules,fights);check(c.revealNextReward,"Post-fight stock did not reveal upcoming information.");leaveRewards(c,rules);
         RouteOffer next;for(const auto& o:routeOffers(c.route))if(o.kind==EncounterKind::Regular && !rules.revealedRecipe(c,o).empty()){next=o;break;}
         check(next.id!=0,"Fixture has no shared upcoming option.");const auto before=serializeCampaign(c);const auto shown=rules.revealedRecipe(c,next);check(rules.revealedRecipe(c,next)==shown && serializeCampaign(c)==before,"Reward information query changed state.");
         run(c,rules,command(c,CampaignActionType::EnterOffer,next.id));win(c,rules,fights);bool found=false;for(const auto& r:c.rewards)if(r.kind==RewardKind::Recipe && r.normalOffer)found=std::find(r.choices.begin(),r.choices.end(),shown)!=r.choices.end();check(found,"Preview did not match the actual next reward.");
+        std::cout<<"PASS adapter Reward Reveal: pure preview matches the actual future reward\n";
     }
     {
         auto c=start(rules,9);const auto offer=routeOffers(c.route).front();const auto rng=c.route.rng.state;
         run(c,rules,command(c,CampaignActionType::PreviewRouteReplacement,offer.id));const auto saved=c.routePreviews.front();check(ownedUpgrade(c.fight,"MY1-12")->charges==3 && c.route.rng.state==rng,"Route preview spent a charge or RNG.");roundtrip(c);
         run(c,rules,command(c,CampaignActionType::ReplaceRouteOffer,offer.id));check(ownedUpgrade(c.fight,"MY1-12")->charges==2 && routeOffers(c.route).front().formation==saved.formation,"Route commitment did not install the preview.");
         const auto before=serializeCampaign(c);check(!rules.apply(c,command(c,CampaignActionType::ReplaceRouteOffer,offer.id)).ok && serializeCampaign(c)==before,"A route pass rerolled its spent option.");roundtrip(c);
+        std::cout<<"PASS adapter Route Pass: saved preview, one charge and no repeated replacement\n";
     }
     {
         auto c=start(rules,10,"MY1-14");enter(c,rules);win(c,rules,fights);Id reward=0;for(const auto& r:c.rewards)if(r.kind==RewardKind::Recipe)reward=r.id;
         run(c,rules,command(c,CampaignActionType::OpenRecipes,reward));const auto seen=c.profile.recipes;run(c,rules,command(c,CampaignActionType::RerollRecipeReward,reward));
         for(const auto& id:seen)check(std::find(c.profile.recipes.begin(),c.profile.recipes.end(),id)!=c.profile.recipes.end(),"Reward replacement erased Collection knowledge.");roundtrip(c);
         const auto before=serializeCampaign(c);check(!rules.apply(c,command(c,CampaignActionType::RerollRecipeReward,reward)).ok && serializeCampaign(c)==before,"Spectrometer rolled twice for one victory.");
+        std::cout<<"PASS adapter Spectrometer: once-only replacement preserves Collection knowledge\n";
     }
     {
         auto c=start(rules,11);buy(c,rules,ProductKind::Upgrade,"UGS-073");enter(c,rules);win(c,rules,fights);leaveRewards(c,rules);c.fight.hp=50;
         buy(c,rules,ProductKind::Upgrade,"UGS-072");check(c.fight.hp==53,"Prior buyer entitlement did not heal on upgrade purchase.");
         check(upgradeCounter(*ownedUpgrade(c.fight,"UGS-072"),"disabled")==0,"New Shop Embargo heard its own past purchase.");
         buy(c,rules,ProductKind::Recipe,"SH001");check(upgradeCounter(*ownedUpgrade(c.fight,"UGS-072"),"disabled")==1,"Existing Shop Embargo missed a later purchase.");roundtrip(c);
+        std::cout<<"PASS adapter purchase listeners: prior entitlement hears purchase and new item does not\n";
     }
     {
         auto c=start(rules,12);buy(c,rules,ProductKind::Upgrade,"UGS-057");buy(c,rules,ProductKind::Upgrade,"UGS-149");check(c.route.safeMysteries,"Safe Signal Survey did not bind route generation.");
@@ -106,6 +116,7 @@ int main(){try{
             std::string error;check(selectRouteOffer(c.route,routeOffers(c.route).front().id,error),error);check(completeRouteNode(c.route,error),error);
         }
         roundtrip(c);
+        std::cout<<"PASS adapter Mystery information: Safe Survey and category-only Badge queries\n";
     }
     {
         auto c=start(rules,13,"MY1-13");const auto* source=ownedUpgrade(c.fight,"MY1-13");check(source!=nullptr,"Missing subscription source.");
@@ -115,6 +126,7 @@ int main(){try{
         auto a=command(c,CampaignActionType::ResolveUpgradeOffer,c.upgradeOffers.front().id);a.target=c.fight.memory.back().id;a.material=0;run(c,rules,a);
         check(c.upgradeOffers.size()==1 && c.upgradeOffers[0].deferred && c.upgradeOffers[0].copies.empty(),"Second entitlement was trapped on the already subscribed copy.");roundtrip(c);
         buy(c,rules,ProductKind::Recipe,"SH002");a=command(c,CampaignActionType::ResolveUpgradeOffer,c.upgradeOffers.front().id);a.target=c.fight.memory.back().id;a.material=1;run(c,rules,a);check(c.upgradeOffers.empty(),"Retained subscription could not resolve later.");roundtrip(c);
+        std::cout<<"PASS adapter Subscription: deferred choices refresh when physical copies become eligible\n";
     }
     std::cout<<"PASS "<<checks<<" production campaign-upgrade assertions; controlled shop grants and terminal ammo, not city balance.\n";return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL after "<<checks<<": "<<e.what()<<'\n';return 1;}}

@@ -71,6 +71,7 @@ int main(){try{
         buy.quantity=2;check(!rules.apply(c,buy).ok && serializeCampaign(c)==committed,"Reused operation identity changed payload.");
         Id expensive=0;for(const auto& item:c.shop)if(item.kind==ProductKind::Upgrade)expensive=item.id;
         check(expensive!=0 && !rules.apply(c,command(c,CampaignActionType::Buy,expensive)).ok && serializeCampaign(c)==committed,"Unaffordable purchase changed campaign.");
+        std::cout<<"PASS campaign purchase: fixed inventory, idempotent receipt and unaffordable rejection\n";
     }
     {
         auto c=start(rules);auto buy=command(c,CampaignActionType::Buy,product(c,ProductKind::Material));buy.quantity=2;run(c,rules,buy);
@@ -84,6 +85,7 @@ int main(){try{
         check(c.fight.materials[0]==2 && c.fight.credits==92 && c.fight.upgrades[0].charges==1 && c.shopGeneration==stock,"Continue leaked abandoned inventory/charge/stock state.");
         check(c.profile.recipes==seen,"Continue lost profile discoveries.");roundtrip(c);
         run(c,rules,command(c,CampaignActionType::Continue));check(stateHash(c.fight)==entryHash,"Repeated Continue duplicated entry effects.");
+        std::cout<<"PASS campaign Continue: original entry, purchase rollback and persistent discoveries\n";
     }
     {
         auto c=withRewards(rules,fights);check(c.fight.materials==Materials{} && c.fight.parts.empty() && c.entry.empty() && c.shopGeneration==2,"Result boundary failed clearing/restock/checkpoint.");
@@ -101,6 +103,7 @@ int main(){try{
         auto buy=command(c,CampaignActionType::Buy,product(c,ProductKind::Material));buy.quantity=2;c.fight.credits=50;
         for(auto& p:c.shop)if(p.id==buy.subject)p.price=10;run(c,rules,buy);roundtrip(c);
         check(c.fight.materials[0]==2 && c.fight.credits==30,"T11 bought supplies lost after result.");
+        std::cout<<"PASS campaign rewards: owned cores, fixed choices, cancellation and once-only advance\n";
     }
     {
         auto c=withRewards(rules,fights,7);while(c.fight.memory.size()<20)c.fight.memory.push_back({c.fight.nextId++,"SH001",0,0,0});
@@ -113,6 +116,7 @@ int main(){try{
         check(c.fight.memory.size()==20 && c.fight.memory.back().recipe==choices[1] && entry(c,rid).claim==ClaimState::Claimed,"Atomic memory exchange failed.");
         run(c,rules,command(c,CampaignActionType::ClaimReward,reward(c,RewardKind::Cores)));run(c,rules,command(c,CampaignActionType::RequestAdvance));
         check(c.phase==CityPhase::Between && !c.skipConfirmation,"Empty reward set requested discard confirmation.");roundtrip(c);
+        std::cout<<"PASS campaign memory: saved pending exchange, cancellation and atomic replacement\n";
     }
     {
         auto c=withRewards(rules,fights,11);run(c,rules,command(c,CampaignActionType::RequestAdvance));run(c,rules,command(c,CampaignActionType::ConfirmAdvance));
@@ -121,10 +125,12 @@ int main(){try{
         const auto good=serializeCampaign(c);auto bad=good;bad[bad.size()/2]^=1;const auto prior=campaignHash(c);std::string error;
         check(!deserializeCampaign(bad,c,error) && campaignHash(c)==prior,"Corrupt campaign changed live state.");
         auto unsupported=good;unsupported[7]='2';check(!deserializeCampaign(unsupported,c,error),"Unsupported campaign envelope accepted.");
+        std::cout<<"PASS campaign persistence: empty rewards, abandonment and corrupt snapshot rejection\n";
     }
     {
         CampaignRules missing(fights);auto c=missing.newGame(1,"missing-upgrade-hook");const auto before=serializeCampaign(c);
         check(!missing.apply(c,command(c,CampaignActionType::ChooseMayor,0,c.mayorOffers[0])).ok && serializeCampaign(c)==before,"Missing upgrade hook silently granted inert item.");
+        std::cout<<"PASS campaign missing executor: acquisition rejects without an inert grant\n";
     }
     {
         auto c=mysteryFixture(rules,"C1-M-EXCHANGE");const auto generation=c.shopGeneration,position=c.route.position,money=c.fight.credits;
@@ -136,6 +142,7 @@ int main(){try{
         check(c.phase==CityPhase::Between && c.route.position==position+1 && c.shopGeneration==generation && c.fight.credits==money+10,"T18 noncombat Mystery applied combat restock/reward or missed salvage.");
         check(rules.apply(c,leave).replayed && serializeCampaign(c)==bytes,"Repeated Mystery completion duplicated salvage/progress.");
         open=command(c,CampaignActionType::OpenShop);open.eventShop=true;check(!rules.apply(c,open).ok && serializeCampaign(c)==bytes,"Closed Mystery merchant reopened.");
+        std::cout<<"PASS campaign Night Exchange: finite stock, fixed tiers and noncombat completion\n";
     }
     {
         auto c=mysteryFixture(rules,"C1-M-TECH");check(c.rewards.size()==1 && c.rewards[0].choices.size()==3,"Calibration lacks fixed choices.");
@@ -149,6 +156,7 @@ int main(){try{
         const auto offer=c.rewards[0].choices[0];const auto old=serializeCampaign(c);
         check(!costRules.apply(c,command(c,CampaignActionType::AcceptCalibration,0,offer)).ok && serializeCampaign(c)==old,"Calibration ignored item cost after its own eight HP.");
         c.fight.hp=23;run(c,costRules,command(c,CampaignActionType::AcceptCalibration,0,offer));check(c.fight.hp==1 && c.fight.upgrades.size()==2,"Combined legal calibration costs were not atomic.");roundtrip(c);
+        std::cout<<"PASS campaign Technician: fixed offers, refusal and combined nonlethal costs\n";
     }
     {
         auto c=mysteryFixture(rules,"C1-M-PATROL");const auto position=c.route.position,stock=c.shopGeneration;
@@ -156,11 +164,13 @@ int main(){try{
         const auto hash=stateHash(c.fight);roundtrip(c);run(c,rules,command(c,CampaignActionType::Continue));check(stateHash(c.fight)==hash && c.shopGeneration==stock,"Patrol Continue rerolled/restocked entry.");
         Campaign internal;std::string error;check(deserializeCampaign(c.entry,internal,error),error);const auto bytes=serializeCampaign(internal);
         check(!rules.apply(internal,command(internal,CampaignActionType::OpenShop)).ok && serializeCampaign(internal)==bytes,"Internal checkpoint was treated as playable state.");
+        std::cout<<"PASS campaign Patrol: encounter entry, Continue and internal-checkpoint rejection\n";
     }
     {
         auto c=start(rules);enterRam(c,rules);c.fight.hp=1;combat(c,rules,Action::collect(0));combat(c,rules,Action::endTurn());
         if(c.phase==CityPhase::Fight){combat(c,rules,Action::collect(0));combat(c,rules,Action::endTurn());}
         check(c.phase==CityPhase::Defeated && c.route.position==1 && c.rewards.empty() && c.entry.empty() && c.cores.empty(),"Defeat granted loot, progressed or retained a Continue checkpoint.");roundtrip(c);
+        std::cout<<"PASS campaign defeat: no loot, advancement or Continue checkpoint\n";
     }
     {
         auto old=start(rules,9);auto queued=command(old,CampaignActionType::Buy,product(old,ProductKind::Material));
@@ -174,6 +184,7 @@ int main(){try{
         invalid=fresh;auto& node=invalid.route.nodes[0];const auto selected=node.selected;
         std::size_t chosen=0,other=0;for(std::size_t i=0;i<node.offers.size();++i){if(node.offers[i].id==selected)chosen=i;else other=i;}
         std::swap(node.offers[chosen].formation,node.offers[other].formation);rejectedSnapshot(invalid);
+        std::cout<<"PASS campaign identity: stale run commands and incompatible phase or formation reject\n";
     }
     std::cout<<"PASS "<<checks<<" campaign/offer/receipt assertions. Uses controlled test-only upgrade payloads and terminal ammo; no full-city balance, P08 or disk-durability claim.\n";return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL "<<e.what()<<'\n';return 1;}}

@@ -1,0 +1,2096 @@
+{
+  "schema_version": 1,
+  "method": [
+    "All 665 manifest obligations receive a bound or unbound decision. This is a partial evidence audit, not a release waiver.",
+    "Bindings are manual clause-to-handler assessments and require actual named passing fixture output. Selectors only identify one printed fixture name; they never mint passing IDs.",
+    "Shared parameterized handlers are accepted for mechanisms tested across representative inputs. Per-content side effects and branches are not inferred from registration, a suite total, an ID mention or an action merely succeeding.",
+    "Recipe reference-damage/install-value and all-ID action-path groups provide partial observations. Unlinked clauses stay unbound.",
+    "All 207 physical output obligations remain unbound pending a named materialization/copy/canonical resale/lifetime matrix. This does not assert those outputs are broken.",
+    "Owner-held base-haul deductions/composition remain unresolved. No composition defaults, game rules, eligible pools, runner code or gate logic are changed.",
+    "New executions of independent source files are author-operated linkage evidence. Historical independent reviews remain unchanged; an independent review of these linkage decisions is still required.",
+    "Controlled fixtures include explicit arena state, test-only callback payloads and terminal ammunition. They are evidence for the stated mechanisms, not normal balance, visual quality or human acceptance.",
+    "The independent bounded semantic sample reviewed twelve selected obligations and identified five insufficient links (SH043, SH070, MA102, UGS-116, UGS-142). Those five remain unbound; the original138 candidate is archived separately. Fixture logs, binaries and executed source hashes are unchanged."
+  ],
+  "bindings": [
+    {
+      "operations": [
+        "recipe:SH001",
+        "recipe:SH003"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "recipes::every Ammo's main damage",
+        "core::no fixed bullet or Shield part cap",
+        "core::independent duplicate recipe copies"
+      ],
+      "coverage": "Printed damage, paid independent recipe uses, physical loading and consumption."
+    },
+    {
+      "operations": [
+        "recipe:SH002"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "recipePart",
+          "install"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "core::T01 installed Shield",
+        "core::installed Shield payment order",
+        "core::no fixed bullet or Shield part cap"
+      ],
+      "coverage": "Printed Shield, automatic protection, depletion, installation order and save/reinstall behavior."
+    },
+    {
+      "operations": [
+        "recipe:SH004"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "recipes::every Ammo's main damage",
+        "core::authored Mite/Ram complete fight"
+      ],
+      "coverage": "Attack-intent bonus and charge-turn damage in the authored fight and controlled reference shot."
+    },
+    {
+      "operations": [
+        "recipe:SH005"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "core::combined integer percentages",
+        "core::main-target Burn never copied",
+        "core::T09 cooldown"
+      ],
+      "coverage": "50% independent spread, target selection, lost dead-target hits, main-only payloads and numeric cooldown."
+    },
+    {
+      "operations": [
+        "recipe:SH006"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "install",
+          "endTurn"
+        ]
+      },
+      "fixtures": [
+        "core::removed Insulating Pad",
+        "foundation::SH006 removed source",
+        "recipes::all Shield installation values"
+      ],
+      "coverage": "Four Shield and installed-source first Burn-tick protection; removal and old reinstallation cannot rearm."
+    },
+    {
+      "operations": [
+        "recipe:SH007"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "effects",
+          "craft"
+        ]
+      },
+      "fixtures": [
+        "core::T09 cooldown",
+        "upgrades::Use counts, cooling consequences",
+        "p08::U31 "
+      ],
+      "coverage": "Numeric cooling on all cooling copies and no refresh of no-cooldown Use flags."
+    },
+    {
+      "operations": [
+        "recipe:SH008"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "effects",
+          "schedule"
+        ]
+      },
+      "fixtures": [
+        "core::one collection per round",
+        "core::identical Magnet copies",
+        "foundation::identical SH008"
+      ],
+      "coverage": "One next-round extra haul bundle; same-name refresh, saved schedule and one ordinary collection."
+    },
+    {
+      "operations": [
+        "recipe:SH010",
+        "recipe:SH011",
+        "recipe:SH012"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "ammoFlat",
+          "beforeAmmo",
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "recipes::every Ammo's main damage",
+        "recipes::conditional Ammo snapshots"
+      ],
+      "coverage": "Shield/no-Shield and quarter-HP conditions, prehit Shield removal, and immutable ordinary Fire snapshots."
+    },
+    {
+      "operations": [
+        "recipe:SH013"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "effects"
+        ]
+      },
+      "fixtures": [
+        "recipes::every Ammo's main damage",
+        "core::main-target Burn never copied"
+      ],
+      "coverage": "Four main-shot damage and Burn 2 applied only to the surviving main target."
+    },
+    {
+      "operations": [
+        "recipe:SH017"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "ammoFlat",
+          "afterAmmo"
+        ]
+      },
+      "fixtures": [
+        "recipes::every Ammo's main damage",
+        "recipes::later killed-target support hit"
+      ],
+      "coverage": "Five main damage, separately selected four-damage support hit, and no retarget after the chosen target dies."
+    },
+    {
+      "operations": [
+        "recipe:SH024"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueActivate",
+          "attackReduction"
+        ]
+      },
+      "fixtures": [
+        "recipes::HP-first Shield prevention",
+        "expanded::MA086 halves once"
+      ],
+      "coverage": "Flat six applies to whole attack total before Shield and percentage reduction."
+    },
+    {
+      "operations": [
+        "recipe:SH026"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "craft",
+          "effects",
+          "schedule"
+        ]
+      },
+      "fixtures": [
+        "core::T08 next-round fresh Shield",
+        "expanded::copied generated SH026",
+        "p08::U30 "
+      ],
+      "coverage": "Use creates immediate four and independent next-round six; source removal/save and printed-only copying do not replay the generator."
+    },
+    {
+      "operations": [
+        "recipe:SH036"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueActivate",
+          "attach"
+        ]
+      },
+      "fixtures": [
+        "expanded::copy retains source identity"
+      ],
+      "coverage": "One reserve Ammo attachment contributes four on its original part, survives storage, and is removed from printed-only copies."
+    },
+    {
+      "operations": [
+        "recipe:SH050"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "pay",
+          "effects"
+        ]
+      },
+      "fixtures": [
+        "foundation::SH050 duplicate named",
+        "foundation::different named percentage",
+        "p08::U10 "
+      ],
+      "coverage": "Four-HP activation cost, next-shot sixty percent with integer flooring, same-name refresh and distinct-name combination."
+    },
+    {
+      "operations": [
+        "recipe:SH060"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "preReset"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::first-bound SH060 zeroing"
+      ],
+      "coverage": "Sixteen initial Shield and binding-ordered loss of all remaining Shield before later readers."
+    },
+    {
+      "operations": [
+        "recipe:SH074"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "effects"
+        ]
+      },
+      "fixtures": [
+        "core::Quick Patch's fight healing cap",
+        "p08::U15 "
+      ],
+      "coverage": "Four actual healing, shared eight-per-fight cap across duplicate copies, and upgrade attribution."
+    },
+    {
+      "operations": [
+        "recipe:SH085"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueActivate"
+        ]
+      },
+      "fixtures": [
+        "expanded::SH085 spends",
+        "recipes::Pressure Release honors"
+      ],
+      "coverage": "Explicit zero/four choice and invalid costs, oldest-installed Shield allocation and twice-paid next-shot bonus."
+    },
+    {
+      "operations": [
+        "recipe:SH101"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueUtility",
+          "sacrifice",
+          "materialLater"
+        ]
+      },
+      "fixtures": [
+        "expanded::SH101 optional zero",
+        "p08::U34 "
+      ],
+      "coverage": "Zero/one/two physical sacrifices, atomic duplicate/invalid choices, individual sacrifice events and next-round material delivery."
+    },
+    {
+      "operations": [
+        "recipe:SH115"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueUtility"
+        ]
+      },
+      "fixtures": [
+        "expanded::SH115 refresh replaces"
+      ],
+      "coverage": "Three next-turn grants of eighteen; duplicate and mid-duration refresh replace old schedules and expire."
+    },
+    {
+      "operations": [
+        "recipe:SH121",
+        "recipe:SH124",
+        "recipe:SH125"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "craftOptions",
+          "collectionEffects"
+        ]
+      },
+      "fixtures": [
+        "expanded::all six manual-grab",
+        "expanded::finite pile requests",
+        "expanded::same named amplifier",
+        "recipes::finite stock preserves"
+      ],
+      "coverage": "Handling-result base bonuses, Perfect-only bonuses, separate finite availability, and unmodified Precision bundle/nonstacking amplification."
+    },
+    {
+      "operations": [
+        "recipe:MA001"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "effects",
+          "heat"
+        ]
+      },
+      "fixtures": [
+        "core::zero base gun damage",
+        "p08::U36 "
+      ],
+      "coverage": "Recipe Heat grants respect current capacity; Heat feeds the shared Hot Barrel calculation."
+    },
+    {
+      "operations": [
+        "recipe:MA003",
+        "recipe:MA017"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "install",
+          "pay",
+          "effects"
+        ]
+      },
+      "fixtures": [
+        "core::T04 first-install Heat",
+        "core::installation payment atomicity",
+        "recipes::all Shield installation values"
+      ],
+      "coverage": "First-install gain/payment, printed Shield, atomic affordability, saved depletion and no reinstall repayment or gain."
+    },
+    {
+      "operations": [
+        "recipe:MA014"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "catalogueInstalled"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::MA066 refreshes one delayed"
+      ],
+      "coverage": "Five Shield and first-install two Heat; remove/reinstall cannot repeat either first-install Heat or the attached delayed gain."
+    },
+    {
+      "operations": [
+        "recipe:MA016"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "catalogueInstalled"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::source removal does not cancel"
+      ],
+      "coverage": "Immediate five Shield and a separate next-turn five after reset, preserved when source is removed."
+    },
+    {
+      "operations": [
+        "recipe:MA019"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "pay",
+          "effects"
+        ]
+      },
+      "fixtures": [
+        "core::independent duplicate recipe copies",
+        "p08::U07 "
+      ],
+      "coverage": "Nonlethal three HP pays before five Heat; no cooling coupon waives the HP cost."
+    },
+    {
+      "operations": [
+        "recipe:MA038"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire",
+          "afterAmmo"
+        ]
+      },
+      "fixtures": [
+        "p08::U03 ",
+        "p08::U05 ",
+        "p08::U17 "
+      ],
+      "coverage": "Two physical four-damage Warm Rivets, independent firing, source-copy attribution and one postimpact Heat per fired part."
+    },
+    {
+      "operations": [
+        "recipe:MA048"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "endTurnHooks"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::MA048 optional payment"
+      ],
+      "coverage": "Ten Shield and EndTurn choice: atomic optional three-Heat payments schedule twelve or four next-round Shield."
+    },
+    {
+      "operations": [
+        "recipe:MA059"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "attackReduction"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::removed MA059",
+        "expanded::MA059 independent physical"
+      ],
+      "coverage": "Seven Shield and one flat-five whole-attack reduction per installed physical source; removed parts are inactive."
+    },
+    {
+      "operations": [
+        "recipe:MA079"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueInstalled",
+          "extendedDelivery"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::MA079 distinguishes"
+      ],
+      "coverage": "Twelve Shield, first-install tracking and next-turn Heat based only on later physical-part Heat payments."
+    },
+    {
+      "operations": [
+        "recipe:MA086"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueInstalled",
+          "attackReduction"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "recipes::HP-first Shield prevention",
+        "expanded::removed MA086",
+        "expanded::MA086 halves once"
+      ],
+      "coverage": "Chosen enemy whole-attack halving after flat reductions, installed-source requirement and no duplicate halving."
+    },
+    {
+      "operations": [
+        "recipe:MA096"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "payment"
+        ]
+      },
+      "fixtures": [
+        "recipes::all Shield installation values",
+        "expanded::variable first-install Heat"
+      ],
+      "coverage": "Chosen paid Heat controls committed Shield; invalid amount rejects and saved reinstallation cannot pay again."
+    },
+    {
+      "operations": [
+        "recipe:MA115"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "catalogueShield",
+          "afterEnemyAttack"
+        ]
+      },
+      "fixtures": [
+        "recipes::Refuge Walls share",
+        "expanded::MA115 physical copies"
+      ],
+      "coverage": "Initial twenty-four per copy and one shared twenty-four restoration allowance across complete attacks."
+    },
+    {
+      "operations": [
+        "upgrade:MAU-01"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload"
+        ]
+      },
+      "fixtures": [
+        "p08::U36 ",
+        "upgrades::exact eligible set"
+      ],
+      "coverage": "Fresh entry Heat, capacity without filling it, real cap fourteen, ordinary decay one and undiscounted explicit Heat costs."
+    },
+    {
+      "operations": [
+        "upgrade:MAU-03"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "paidBeforeEffect"
+        ]
+      },
+      "fixtures": [
+        "p08::U13 ",
+        "p08::U29 ",
+        "upgrades::canonical grants qualify"
+      ],
+      "coverage": "Actual Heat payment threshold and once-per-turn Shield, decay exclusion, aggregate affordability and payment-before-recoil protection."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-02",
+        "upgrade:MY1-05",
+        "upgrade:UGS-064",
+        "upgrade:UGS-120"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acquirePayload",
+          "grow"
+        ]
+      },
+      "fixtures": [
+        "upgrades::exact eligible set"
+      ],
+      "coverage": "Acquisition-only stated maximum/current HP increments, canonical snapshots and atomic repeated-acquisition rejection."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-06"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acquirePayload"
+        ]
+      },
+      "fixtures": [
+        "adapters::adapter Blueprint Annex",
+        "upgrades::source-typed offers"
+      ],
+      "coverage": "Four empty general memory slots plus one fixed shared Uncommon acquisition offer, saved/resumed once."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-09"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "discountedCost",
+          "resolvedUseUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U18 ",
+        "p08::U19 ",
+        "upgrades::opening production counts"
+      ],
+      "coverage": "Earlier three material-paid Uses qualify a chosen raw-material discount; no invented ingredients, no HP waiver and zero-cost Use is not paid."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-10"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "equipmentAction"
+        ]
+      },
+      "fixtures": [
+        "p08::U31 ",
+        "upgrades::equipment cooling"
+      ],
+      "coverage": "Once-per-fight free numeric cooldown clearing; invalid None copy and repeat use reject without refreshing no-cooldown flags."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-21"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload",
+          "extraRecipeUse"
+        ]
+      },
+      "fixtures": [
+        "p08::U08 ",
+        "p08::U25 "
+      ],
+      "coverage": "Saved exact-copy choice, two fully paid turn-one None Uses, other copies/later turns unchanged, nested preview/reload parity."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-23"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload",
+          "producedUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U25 ",
+        "upgrades::Mayor opening choices"
+      ],
+      "coverage": "Selected first Ammo output plus five or Shield output plus seven, once per fight, costs retained and nested choice saved."
+    },
+    {
+      "operations": [
+        "upgrade:MY3-03",
+        "upgrade:UGS-123"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "drainUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U11 ",
+        "p08::U12 ",
+        "upgrades::payment clocks, defense"
+      ],
+      "coverage": "Six-plus-three real retention allowances share actual post-reader/payment remainder and never preserve reusable old part payloads."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-001"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload",
+          "fightBonus"
+        ]
+      },
+      "fixtures": [
+        "p08::U09 ",
+        "upgrades::main shot clocks"
+      ],
+      "coverage": "First valid main-shot six survives idle turns and is consumed once."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-009"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "producedUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U04 ",
+        "upgrades::opening production counts"
+      ],
+      "coverage": "First three paid matching outputs on opening turn, first physical batch output only; free grants and Utilities excluded."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-019"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "playerLostUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U22 ",
+        "upgrades::prehit and per-hit"
+      ],
+      "coverage": "Each damaging enemy attack hit triggers two direct damage, including Shield removal, through the shared reaction authority."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-032"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acquirePayload"
+        ]
+      },
+      "fixtures": [
+        "p08::U26 ",
+        "p08-campaign::C-U02 ",
+        "adapters::adapter Carbon Copier"
+      ],
+      "coverage": "One exact ready permanent copy, different-source exchange, saved cancellation/decline, borrowed exclusion and once-owned acquisition."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-035"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload",
+          "fireUpgradeBonus"
+        ]
+      },
+      "fixtures": [
+        "upgrades::finite fight lease"
+      ],
+      "coverage": "First two main shots gain three during exactly five fights; escape consumes charge and sixth fight is normal."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-036"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::victory healing, growth"
+      ],
+      "coverage": "Victory-only heal per complete five stored copies, capped at four; escape does not heal."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-038",
+        "upgrade:UGS-056"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "sacrificedUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U34 ",
+        "upgrades::sacrifice clocks"
+      ],
+      "coverage": "Physical sacrifice counters, first-two direct hits and every-third Glass; Fire excluded and lethal recoil interrupts later effects."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-044"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "afterFireUpgrade"
+        ]
+      },
+      "fixtures": [
+        "p08::U33 ",
+        "upgrades::canonical grants qualify"
+      ],
+      "coverage": "Once-per-turn canonical Slug Fire return, including granted Slugs, with no loading/unloading refund."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-055"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "resolvedUseUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U20 ",
+        "upgrades::Use counts, cooling consequences"
+      ],
+      "coverage": "Actual postdiscount material threshold, first two qualifying Uses and fresh three-Shield outputs."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-066"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "resolvedUseUpgrades",
+          "allDamage"
+        ]
+      },
+      "fixtures": [
+        "p08::U23 ",
+        "upgrades::Use counts, cooling consequences",
+        "p08::U18 "
+      ],
+      "coverage": "Third resource-paid Utility triggers three direct damage per living enemy; shared paid-Use qualification and final-death interruption."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-069"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acceptedRecipePayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::one victory screen",
+        "upgrades::reward-copy provenance",
+        "p08-campaign::C-U01 "
+      ],
+      "coverage": "Six Credits once across nested offers of one victory; acquisition offers, generated copies and shop purchases are excluded."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-072",
+        "upgrade:UGS-073"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload",
+          "otherUpgradePayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::campaign entitlements survive",
+        "adapters::adapter purchase listeners"
+      ],
+      "coverage": "Victory escrow/warranty entitlements, accumulated skipped-shop redemption, once-only purchase and pre-purchase listener capture."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-074"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::victory healing, growth"
+      ],
+      "coverage": "Eight healing at exactly half HP, with above-half and escape exclusions."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-075"
+      ],
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "symbols": [
+          "upgradeShopPrice"
+        ]
+      },
+      "fixtures": [
+        "p08::U27 ",
+        "p08-campaign::C-U09 "
+      ],
+      "coverage": "Scoped twenty-percent floor/minimum price and real purchases; parts excluded and acquisition never discounts its own price."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-076"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "turnStartPayload",
+          "allDamage"
+        ]
+      },
+      "fixtures": [
+        "p08::U24 ",
+        "upgrades::collection choice persists"
+      ],
+      "coverage": "Start-of-turn two direct damage from turn two, after grants regardless of acquisition order, with real recoil."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-089"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acquirePayload"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U01 ",
+        "p08-campaign::C-U13 ",
+        "adapters::adapter Archive Cache"
+      ],
+      "coverage": "Three fixed sequential normal acquisition offers, independent decline/exchange, paid ownership and nested exact-once receipt."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-090"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::Mayor opening choices"
+      ],
+      "coverage": "Boss entry heals twelve; Regular and Officer entry do not."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-097",
+        "upgrade:UGS-132"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload",
+          "fightStartPayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::Mystery outcomes"
+      ],
+      "coverage": "Noncombat-only healing and one nonstacking named Slug/Shield shipment at next entry, consumed on delivery."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-100"
+      ],
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "symbols": [
+          "upgradeUtilityMemoryBonus"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U03 ",
+        "p08-campaign::C-U12 ",
+        "adapters::adapter Utility memory"
+      ],
+      "coverage": "Two initially empty Utility-only slots, exact physical-copy movement, tagged history, invalid kinds/capacity/fight movement rejected."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-106"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "recipeHealed"
+        ]
+      },
+      "fixtures": [
+        "p08::U15 ",
+        "upgrades::Use counts, cooling consequences"
+      ],
+      "coverage": "First actual recipe heal gains three, once per fight; acquisition maximum-HP healing is excluded."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-108"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "keepLoadedUpgrade"
+        ]
+      },
+      "fixtures": [
+        "upgrades::end-turn supplies"
+      ],
+      "coverage": "One first unfired assembly remains loaded; next EndTurn unloads through normal part lifetime rules."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-113"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U05 ",
+        "p08-campaign::C-U06 ",
+        "upgrades::Mystery outcomes"
+      ],
+      "coverage": "Once-per-city Common upgrade replacement, normal Credits on decline/exhaustion, no premature Credit grant, nested child acquisition resumes."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-131"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "otherUpgradePayload"
+        ]
+      },
+      "fixtures": [
+        "adapters::adapter Reward Reveal",
+        "upgrades::Mystery outcomes"
+      ],
+      "coverage": "Post-stock information request consumes no reward RNG; repeated pure preview agrees with the actual later reward."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-133"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fightStartPayload"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U04 ",
+        "adapters::adapter Borrowed Schematic"
+      ],
+      "coverage": "Fixed shared Common borrowed choices, temporary extra slot, deterministic Continue, permanent-copy exclusion and fight cleanup."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-136"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "resolvedUseUpgrades"
+        ]
+      },
+      "fixtures": [
+        "p08::U18 ",
+        "p08::U21 ",
+        "upgrades::Use counts, cooling consequences"
+      ],
+      "coverage": "Every fourth material-paid Utility count carries across rounds; zero-material Uses are excluded and grants are five Shield."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-139"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "fireUpgradeBonus"
+        ]
+      },
+      "fixtures": [
+        "p08::U10 "
+      ],
+      "coverage": "First main-shot one is added before percentage calculation, spent once per turn and renewed next turn."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-140"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "producedUpgrades",
+          "addOutput"
+        ]
+      },
+      "fixtures": [
+        "p08::U28 ",
+        "p08::U30 ",
+        "upgrades::physical paid production"
+      ],
+      "coverage": "First paid Shield output gains four; saved physical bonus and immutable resale survive, printed-only copies drop the later bonus."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-144",
+        "upgrade:UGS-145"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "acquirePayload",
+          "assignedCooldown"
+        ]
+      },
+      "fixtures": [
+        "p08::U06 ",
+        "p08::U07 ",
+        "p08-campaign::C-U12 "
+      ],
+      "coverage": "Independent selected physical numeric-copy coupons, normal later cooldowns, None exclusion, full HP costs and saved tag history."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-146"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload",
+          "fightStartPayload"
+        ]
+      },
+      "fixtures": [
+        "upgrades::finite fight lease"
+      ],
+      "coverage": "Chosen latest two-unit shipment replaces prior pending material and is delivered once."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-150"
+      ],
+      "implementation": {
+        "path": "core/src/upgrade_effects.inl",
+        "symbols": [
+          "completionPayload"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U07 ",
+        "upgrades::post-victory offer filters"
+      ],
+      "coverage": "Fifth-victory once-per-campaign Uncommon shared claim; no early/repeated reward and real exhausted-pool thirty Credits."
+    },
+    {
+      "operations": [
+        "upgrade:MY1-12"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "adapters::adapter Route Pass",
+        "route::route replacements"
+      ],
+      "coverage": "Three-charge route pass delegates deterministic legal alternatives; saved preview does not spend and one commitment cannot reroll."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-149"
+      ],
+      "implementation": {
+        "path": "core/src/campaign_upgrades.cpp",
+        "symbols": [
+          "revealedMysteryCategory"
+        ]
+      },
+      "fixtures": [
+        "adapters::adapter Mystery information",
+        "route::route replacements"
+      ],
+      "coverage": "Badge reveals only the authored category without mutating current route state."
+    },
+    {
+      "operations": [
+        "ability:hot-barrel"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "core::zero base gun damage"
+      ],
+      "coverage": "Main shot receives floor(Heat/2) on repeated Fires, without consuming Heat, with zero gun base damage."
+    },
+    {
+      "operations": [
+        "route:C1-MARA-ROUTE"
+      ],
+      "implementation": {
+        "path": "core/src/route.cpp",
+        "symbols": [
+          "makeCinderwallRoute",
+          "selectRouteOffer",
+          "completeRouteNode",
+          "validateRoute"
+        ]
+      },
+      "fixtures": [
+        "route::route schedules",
+        "route::route replacements"
+      ],
+      "coverage": "Seeded legal twelve-position schedules, category/district gates, fixed selections, encounter identity, repeat rejection and route replacement."
+    },
+    {
+      "operations": [
+        "robot:C1-R01",
+        "robot:C1-R02"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "makeCinderwallFormation",
+          "commitRobotIntent",
+          "executeRobotIntent"
+        ]
+      },
+      "fixtures": [
+        "robots::registryAndFactories",
+        "robots::finiteSummonsAndDeathIdentity",
+        "robots::integrationContracts",
+        "campaign::campaign rewards"
+      ],
+      "coverage": "Mite7/attack5 and Ram24/Armor3/Charge-Blast18, newborn clocks, ordered actions and actual unique core claims."
+    },
+    {
+      "operations": [
+        "robot:C1-O02"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "commitRobotIntent",
+          "executeRobotIntent"
+        ]
+      },
+      "fixtures": [
+        "robots::pressureAndOfficers",
+        "robots::integrationContracts"
+      ],
+      "coverage": "Warden44, three finite Tiles, Attack9/Drive2/Attack12 cycle and actual Engine tile depletion."
+    },
+    {
+      "operations": [
+        "robot:C1-B01"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "commitRobotIntent",
+          "onRobotHpLoss",
+          "finishRobotTurn"
+        ]
+      },
+      "fixtures": [
+        "robots::recoveryJointAndEscapes",
+        "robots::integrationContracts",
+        "expanded::boss preaction",
+        "expanded::boss postaction"
+      ],
+      "coverage": "Boss92/threshold46, phase-one scaling, same/next-action Recover timing, phase-two attacks, no artificial survival and saved clocks."
+    },
+    {
+      "operations": [
+        "formation:C1-F-MITE-RAM",
+        "formation:C1-F-RAM",
+        "formation:C1-F-CASK",
+        "formation:C1-F-PRESS",
+        "formation:C1-F-BINDER",
+        "formation:C1-F-NEST",
+        "formation:C1-F-PURSUER",
+        "formation:C1-F-WARDEN",
+        "formation:C1-F-CHASSIS",
+        "formation:C1-F-GATEBREAKER"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "makeCinderwallFormation"
+        ]
+      },
+      "fixtures": [
+        "robots::registryAndFactories",
+        "robots::binderPackets",
+        "robots::pressureAndOfficers",
+        "robots::braceAndLockedSupport",
+        "robots::finiteSummonsAndDeathIdentity",
+        "robots::recoveryJointAndEscapes",
+        "robots::integrationContracts"
+      ],
+      "coverage": "Factory composition/identity and initial intent coverage across every allowed formation. Full body effects retain separate robot obligations."
+    },
+    {
+      "operations": [
+        "status:FX01",
+        "status:FX05"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "enemyDamage"
+        ]
+      },
+      "fixtures": [
+        "robots::integrationContracts",
+        "core::Burn ignores Armor"
+      ],
+      "coverage": "Actual Armor subtraction, positive-after-defense finite Tile consumption, zero-hit exclusion and damage-over-time bypass."
+    },
+    {
+      "operations": [
+        "status:FX02"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "executeRobotIntent"
+        ]
+      },
+      "fixtures": [
+        "robots::pressureAndOfficers",
+        "robots::recoveryJointAndEscapes"
+      ],
+      "coverage": "Drive affects each attack hit and immediate preview; boss transition clears only named scaling."
+    },
+    {
+      "operations": [
+        "status:FX08",
+        "status:FX09"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "callbacks",
+          "craft",
+          "endTurn"
+        ]
+      },
+      "fixtures": [
+        "robots::integrationContracts",
+        "expanded::Fouling consumes",
+        "expanded::Shield Leak drains"
+      ],
+      "coverage": "Next-turn Leak and Ammo-only capped Fouling, actual affordability, expiry and direct-upgrade Shield exclusion."
+    },
+    {
+      "operations": [
+        "status:FX13"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "spawnMite",
+          "onRobotDeath"
+        ]
+      },
+      "fixtures": [
+        "robots::braceAndLockedSupport",
+        "robots::finiteSummonsAndDeathIdentity",
+        "robots::integrationContracts",
+        "expanded::Nest committed",
+        "expanded::Split Chassis"
+      ],
+      "coverage": "Finite supply, live-helper limit, locked actions, newborn next-round action and separate one-time death/core identities."
+    },
+    {
+      "operations": [
+        "status:FX15"
+      ],
+      "implementation": {
+        "path": "core/src/robots.cpp",
+        "symbols": [
+          "onRobotHpLoss"
+        ]
+      },
+      "fixtures": [
+        "robots::recoveryJointAndEscapes",
+        "robots::integrationContracts",
+        "expanded::boss preaction",
+        "expanded::boss postaction"
+      ],
+      "coverage": "Living threshold cancels next unperformed action, one Recover, pre/post-action DOT cases and lethal bypass."
+    },
+    {
+      "operations": [
+        "status:target-paint"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "upgrades::prehit and per-hit",
+        "recipes::HP-first Shield prevention",
+        "expanded::MA120 echo uses"
+      ],
+      "coverage": "Enemy Mark benefits the later main hit and clears; player Mark adds once to the whole enemy attack before reductions."
+    },
+    {
+      "operations": [
+        "core.action-validation"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "Rules",
+          "execute"
+        ]
+      },
+      "fixtures": [
+        "core::content rejects unknown",
+        "core::preview and rejected loaded",
+        "foundation::unknown effect opcode",
+        "foundation::unsupported valid effect",
+        "foundation::effect clock unreachable",
+        "campaign::campaign identity"
+      ],
+      "coverage": "Typed phase/ID/kind/timing validation and atomic rejected actions preserve state, IDs and RNG."
+    },
+    {
+      "operations": [
+        "core.choice-persistence"
+      ],
+      "implementation": {
+        "path": "core/src/serialization.cpp",
+        "symbols": [
+          "serialize",
+          "deserialize"
+        ]
+      },
+      "fixtures": [
+        "recipes::expanded snapshot preserves",
+        "p08::U25 ",
+        "upgrades::native same-seed",
+        "p08-campaign::C-U13 "
+      ],
+      "coverage": "Choice/cursor/payment state serializes canonically, rejects unsafe persisted fields and resumes without reroll/replay."
+    },
+    {
+      "operations": [
+        "core.cooldown-clocks"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "craft",
+          "endTurn"
+        ]
+      },
+      "fixtures": [
+        "core::T09 cooldown",
+        "core::independent duplicate recipe",
+        "p08::U06 ",
+        "p08::U07 ",
+        "p08::U31 "
+      ],
+      "coverage": "Numeric next-full-round cooldowns, independent physical-copy counters, no-cooldown limits and explicit clearing."
+    },
+    {
+      "operations": [
+        "core.deterministic-streams"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "seeded",
+          "below"
+        ]
+      },
+      "fixtures": [
+        "core::separate seeded RNG",
+        "robots::binderPackets",
+        "route::route schedules",
+        "upgrades::native same-seed"
+      ],
+      "coverage": "Separate domains, committed per-body packets, immutable route draws and same-seed action/event/state replay."
+    },
+    {
+      "operations": [
+        "core.end-turn"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "endTurn"
+        ]
+      },
+      "fixtures": [
+        "core::Burn ignores Armor",
+        "robots::integrationContracts",
+        "p08::U11 ",
+        "p08::U12 ",
+        "p08::U24 ",
+        "expanded::SH115 refresh replaces"
+      ],
+      "coverage": "Ordered enemy actions, DOT, installed-source callbacks, reset/retention, delivery and turn-start grants."
+    },
+    {
+      "operations": [
+        "core.event-order"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire",
+          "preReset"
+        ]
+      },
+      "fixtures": [
+        "foundation::lethal first spread recoil",
+        "expanded::lethal support recoil",
+        "p08::U23 ",
+        "p08::U29 ",
+        "upgrades::Fire reaction clocks"
+      ],
+      "coverage": "Immutable causal event resolution, ordered physical/upgrade reactions, aggregate payment validation and final-death interruption."
+    },
+    {
+      "operations": [
+        "core.fight-outcome"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "terminal"
+        ]
+      },
+      "fixtures": [
+        "core::T02 lethal killing-hit",
+        "core::T03 Reserve Heart",
+        "core::T10 four full escape",
+        "robots::integrationContracts",
+        "campaign::campaign defeat"
+      ],
+      "coverage": "Final-death precedence, explicit rescue primitive, escape without kill, death-spawn before victory and terminal campaign cleanup."
+    },
+    {
+      "operations": [
+        "core.integer-damage"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "enemyDamage",
+          "playerDamage"
+        ]
+      },
+      "fixtures": [
+        "core::combined integer percentages",
+        "foundation::different named percentage",
+        "recipes::HP-first Shield prevention",
+        "robots::integrationContracts",
+        "p08::U10 "
+      ],
+      "coverage": "Combined integer percentages and one floor, separate hits, Armor/Tiles/Shield and whole-attack reduction."
+    },
+    {
+      "operations": [
+        "core.installation-history"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "install"
+        ]
+      },
+      "fixtures": [
+        "core::T04 first-install Heat",
+        "core::installation payment atomicity",
+        "core::installed Shield payment order",
+        "expanded::variable first-install Heat",
+        "expanded::first-bound SH060 zeroing"
+      ],
+      "coverage": "Committed first-install costs and hook order, saved depletion, new protection priority and no refill/rearm."
+    },
+    {
+      "operations": [
+        "core.load-unload-fire"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "completeFire"
+        ]
+      },
+      "fixtures": [
+        "core::preview and rejected loaded",
+        "core::no fixed bullet or Shield",
+        "expanded::SH110 reserved sacrifice",
+        "expanded::combined Fire costs",
+        "p08::U33 "
+      ],
+      "coverage": "Physical load reservation, cancellation, actual Fire consumption, uncapped assembly and aggregate costs before refunds."
+    },
+    {
+      "operations": [
+        "core.shield-payments"
+      ],
+      "implementation": {
+        "path": "core/src/core.cpp",
+        "symbols": [
+          "spendShield"
+        ]
+      },
+      "fixtures": [
+        "core::installed Shield payment order",
+        "expanded::SH085 spends",
+        "p08::U12 ",
+        "expanded::Shield Leak drains"
+      ],
+      "coverage": "Available installed Shield, oldest-install order, explicit chosen amount, shared remaining balance and direct Shield exclusions."
+    },
+    {
+      "operations": [
+        "core.fight-entry-restart"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign Continue",
+        "campaign::campaign Patrol",
+        "p08-campaign::C-U08 ",
+        "p08-campaign::C-U04 "
+      ],
+      "coverage": "Original-entry restart restores inventory, charges, seeded choices and purchases while keeping profile discoveries."
+    },
+    {
+      "operations": [
+        "core.memory-exchange"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign memory",
+        "adapters::adapter Carbon Copier",
+        "p08-campaign::C-U02 ",
+        "p08-campaign::C-U03 ",
+        "p08-campaign::C-U12 "
+      ],
+      "coverage": "Saved full-memory exchange, cancellation, exact physical source and slot-kind/capacity constraints."
+    },
+    {
+      "operations": [
+        "core.nested-choice-transactions"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "p08-campaign::C-U01 ",
+        "p08-campaign::C-U06 ",
+        "p08-campaign::C-U10 ",
+        "p08-campaign::C-U11 "
+      ],
+      "coverage": "Parent acknowledgment before nested choices; exact-once acquisition and exchange across real process exits."
+    },
+    {
+      "operations": [
+        "core.reward-claims"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign rewards",
+        "campaign::campaign memory",
+        "campaign::campaign persistence",
+        "p08-campaign::C-U07 "
+      ],
+      "coverage": "Independent fixed rewards, core ownership without auto-sale, Back/cancel/confirm semantics and durable claim receipts."
+    },
+    {
+      "operations": [
+        "core.shop-transactions"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign purchase",
+        "campaign::campaign Continue",
+        "p08-campaign::C-U09 ",
+        "p08-campaign::C-U10 "
+      ],
+      "coverage": "Fixed stock, price/payment/ownership atomically, same-payload idempotence, changed/stale command rejection and process-exit recovery."
+    },
+    {
+      "operations": [
+        "mystery:C1-M-EXCHANGE"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign Night Exchange",
+        "p08-campaign::C-U05 ",
+        "p08-campaign::C-U06 "
+      ],
+      "coverage": "Finite fixed merchant stock, authored tiers, one noncombat completion, no ordinary restock and saved replacement reward."
+    },
+    {
+      "operations": [
+        "mystery:C1-M-TECH"
+      ],
+      "implementation": {
+        "path": "core/src/campaign.cpp",
+        "symbols": [
+          "apply"
+        ]
+      },
+      "fixtures": [
+        "campaign::campaign Technician",
+        "p08-campaign::C-U14 "
+      ],
+      "coverage": "Three fixed eligible offers, free refusal, combined outer/inner nonlethal HP cost and saved nested acquisition."
+    },
+    {
+      "operations": [
+        "core.recipe-copies"
+      ],
+      "implementation": {
+        "path": "core/src/recipe_effects.inl",
+        "symbols": [
+          "copyLater",
+          "printedCopy"
+        ]
+      },
+      "fixtures": [
+        "expanded::copy retains source identity",
+        "expanded::copied generated SH026",
+        "p08::U30 ",
+        "p08-campaign::C-U02 ",
+        "adapters::adapter Carbon Copier"
+      ],
+      "coverage": "Physical printed-only copy preserves source/resale while removing later bonuses and resetting age; permanent recipe-copy exchange is exact, ready and once-only."
+    },
+    {
+      "operations": [
+        "upgrade:MAU-02",
+        "upgrade:MAU-04"
+      ],
+      "implementation": {
+        "path": "core/src/upgrades.cpp",
+        "symbols": [
+          "upgradeHeatCap",
+          "upgradeHeatDecay"
+        ]
+      },
+      "fixtures": [
+        "p08::U36 ",
+        "upgrades::exact eligible set"
+      ],
+      "coverage": "Fresh entry Heat, capacity without filling it, real cap fourteen, ordinary decay one and undiscounted explicit Heat costs."
+    },
+    {
+      "operations": [
+        "upgrade:UGS-057"
+      ],
+      "implementation": {
+        "path": "core/src/route.cpp",
+        "symbols": [
+          "prepareOffers",
+          "previewRouteReplacement"
+        ]
+      },
+      "fixtures": [
+        "adapters::adapter Mystery information",
+        "route::route replacements"
+      ],
+      "coverage": "Production acquisition activates Safe Survey; generated and replacement Mysteries remain noncombat within their legal stage/category."
+    }
+  ],
+  "default_gaps": {
+    "recipe": {
+      "reason": "incomplete-semantic-fixture-link",
+      "missing_evidence": "The existing reference-value/action-path groups do not establish every printed effect, qualifying condition, payment, refresh and lifetime clause for this source ID. Add explicit outcome assertions for the unlinked clauses before binding."
+    },
+    "upgrade": {
+      "reason": "incomplete-upgrade-fixture-link",
+      "missing_evidence": "Acquisition/registration or one branch is exercised, but a complete named clause link for this upgrade's choices, counters, triggers, exclusions and lifetime has not been established. Broad covered-ID totals are excluded."
+    },
+    "part": {
+      "reason": "physical-output-lifecycle-proof-gap",
+      "missing_evidence": "No complete named matrix links this exact physical type's materialization, printed-only copying, immutable canonical resale and saved/used/fight-end lifetime. Generator presence and an executed parent recipe are insufficient."
+    },
+    "robot": {
+      "reason": "incomplete-robot-row-fixture-link",
+      "missing_evidence": "Pattern actions are exercised by module/Engine fixtures, but a complete named link for this body's authored numeric setup, all conditions and loot identity has not been established in this audit."
+    },
+    "formation": {
+      "reason": "formation-proof-gap",
+      "missing_evidence": "No sufficient named factory/composition link has been selected."
+    },
+    "status": {
+      "reason": "incomplete-status-mirror-fixture-link",
+      "missing_evidence": "Existing fixtures cover only part of this canonical status's timing, player/enemy mirror or expiry. Alias/field presence is not full support evidence."
+    },
+    "core": {
+      "reason": "incomplete-shared-contract-fixture-link",
+      "missing_evidence": "Existing controlled/legacy evidence has not been linked to the full current production operation. Do not replace this gap with a blanket suite pass."
+    },
+    "mystery": {
+      "reason": "incomplete-mystery-completion-link",
+      "missing_evidence": "Entry and Continue are exercised, but this Mystery's actual completion/reward/progression path lacks a complete current named link."
+    },
+    "route": {
+      "reason": "route-proof-gap",
+      "missing_evidence": "No sufficient named route link has been selected."
+    },
+    "ability": {
+      "reason": "ability-proof-gap",
+      "missing_evidence": "No sufficient named ability link has been selected."
+    }
+  },
+  "unbound_overrides": {
+    "core.collect-and-precision": {
+      "reason": "owner-held-composition",
+      "missing_evidence": "The executed normal/finite-pile/Precision fixtures pass, but upgradeBaseHaul deliberately rejects combined base loss above three and the UGS-141 +2 voucher. Owner has not selected the missing composition."
+    },
+    "upgrade:UGS-011": {
+      "reason": "owner-held-composition",
+      "missing_evidence": "Individual -2 is implemented; legal combinations with UGS-018/126 can require the unresolved -4/-6 base composition. Do not certify the full eligible interaction."
+    },
+    "upgrade:UGS-018": {
+      "reason": "owner-held-composition",
+      "missing_evidence": "Individual -2 and later Copper are implemented; combined -4/-6 base composition remains owner-held."
+    },
+    "upgrade:UGS-126": {
+      "reason": "owner-held-composition",
+      "missing_evidence": "Individual -2 loan and later width are tested; combined -4/-6 base composition with UGS-011/018 remains owner-held."
+    },
+    "upgrade:UGS-141": {
+      "reason": "owner-held-composition",
+      "missing_evidence": "The +2 base-material voucher intentionally rejects delivery until the owner chooses its composition. Registration or saved voucher state is not executable delivery support."
+    },
+    "recipe:SH066": {
+      "reason": "unproved-variable-shield-payment",
+      "missing_evidence": "Existing reader/spender fixtures prove the nine-Shield case only. Chosen payment and nonmultiple remainder behavior below nine are not proved; no source interpretation or rule change is made here."
+    },
+    "recipe:SH009": {
+      "reason": "unproved-conditional-payload",
+      "missing_evidence": "Eight-damage reference and printed-copy preservation pass; the three-other-Ammo +2 branch lacks an explicit linked expected result."
+    },
+    "recipe:SH062": {
+      "reason": "incomplete-next-shot-fixture",
+      "missing_evidence": "Removal/no-rearm and reaction order are tested, but exact fresh seven-Shield output and all fail/expiry branches are not fully linked."
+    },
+    "recipe:SH087": {
+      "reason": "incomplete-burn-transfer-fixture",
+      "missing_evidence": "Main fourteen and lethal-recoil interruption are tested; the surviving support-hit amount and rounded half-Burn consumption still need explicit expected outcomes."
+    },
+    "recipe:SH094": {
+      "reason": "incomplete-attack-count-fixture",
+      "missing_evidence": "One counter per multi-hit attack is tested, but the second/third-attack allowance boundary is not explicitly linked."
+    },
+    "recipe:SH102": {
+      "reason": "incomplete-copy-selector-fixture",
+      "missing_evidence": "Common generated Shield copying passes; wrong rarity/kind/used-part exclusion and the full selector contract are not fully linked."
+    },
+    "recipe:SH110": {
+      "reason": "incomplete-spread-fixture",
+      "missing_evidence": "Shield reservation/unload cancellation is tested. Actual sacrifice at Fire, full-damage all-target spread and Weaken payload still need exact assertions."
+    },
+    "recipe:SH118": {
+      "reason": "incomplete-copy-selector-fixture",
+      "missing_evidence": "Printed-only properties, generated identity and age reset pass; complete allowed/excluded rarity/kind/unused selector boundaries are not fully linked."
+    },
+    "recipe:SH122": {
+      "reason": "incomplete-material-vector-fixture",
+      "missing_evidence": "Total bonuses and saved choices are tested; the exact ordered first/second material vector and invalid same-choice behavior are not fully linked."
+    },
+    "recipe:SH123": {
+      "reason": "incomplete-material-vector-fixture",
+      "missing_evidence": "Handling totals are tested, but separate ordinary Glass and Perfect Circuit outputs need exact named expected vectors."
+    },
+    "recipe:SH126": {
+      "reason": "incomplete-generated-output-fixture",
+      "missing_evidence": "Auto/miss/Perfect material totals and two generated parts are observed. Exact ten-damage/ten-Shield identities and each lifecycle are not fully linked."
+    },
+    "recipe:MA041": {
+      "reason": "incomplete-spread-payload-fixture",
+      "missing_evidence": "Physical four-Heat payments and one 50% spread are asserted; the exact extra-target Burn payload lacks a complete linked outcome."
+    },
+    "recipe:MA060": {
+      "reason": "incomplete-refresh-fixture",
+      "missing_evidence": "Six damage, Burn three and two held decays pass; an actual repeated application refreshing the two-tick clock is not proved by the fixture named refresh."
+    },
+    "recipe:MA093": {
+      "reason": "incomplete-trigger-cap-fixture",
+      "missing_evidence": "Two physical payments and Utility exclusion pass. Third-trigger limit and reactivation without renewing allowances still need exact assertions."
+    },
+    "recipe:MA108": {
+      "reason": "incomplete-counterattack-fixture",
+      "missing_evidence": "Partial Shield block is correctly a negative case. Positive ten-damage/Burn-three retaliation and once-only allowance are not fully linked."
+    },
+    "recipe:MA120": {
+      "reason": "incomplete-delayed-hit-cap-fixture",
+      "missing_evidence": "Predefense half-value/current Shield and no echo recursion are tested. The thirty-damage cap and disappeared-target boundary remain unlinked."
+    },
+    "upgrade:MAU-05": {
+      "reason": "incomplete-healing-cap-fixture",
+      "missing_evidence": "Nonlethal payment and lethal-recoil interruption pass. The six actual HP fight cap and full-HP turn opportunity consumption need explicit linked assertions."
+    },
+    "upgrade:UGS-015": {
+      "reason": "incomplete-license-lifetime-fixture",
+      "missing_evidence": "Committed physical copy and Continue restoring the entry charge are tested. All three fights, spent visibility and fourth-fight no-copy need a complete named lifetime link."
+    },
+    "upgrade:UGS-017": {
+      "reason": "query-without-sale-integration-proof",
+      "missing_evidence": "The pure per-core floored price query is asserted, but actual production core-sale attribution and exclusions are not linked by a named current transaction fixture."
+    },
+    "upgrade:UGS-039": {
+      "reason": "incomplete-selected-output-fixture",
+      "missing_evidence": "Nonlethal acquisition, saved selection and selected Ammo batch output are tested. The selected Shield's actual +2 output branch is not explicitly linked."
+    },
+    "upgrade:UGS-071": {
+      "reason": "incomplete-acquisition-plus-hit-fixture",
+      "missing_evidence": "Acquisition +4 maximum/current HP is tested; actual first enemy hit reduction and no later hit reduction are not explicitly linked."
+    },
+    "upgrade:UGS-085": {
+      "reason": "incomplete-shop-eligibility-fixture",
+      "missing_evidence": "Once-only acquisition Credits are asserted. The undiscounted purchase price must exceed100 condition and valid discounted combination lack a linked production purchase test."
+    },
+    "upgrade:UGS-148": {
+      "reason": "incomplete-coupon-cost-selection-fixture",
+      "missing_evidence": "Seeded marked option and tie ordering are asserted; largest-cost non-tie selection and all first-paying-Use boundaries remain unlinked."
+    },
+    "core.city-completion": {
+      "reason": "historic-current-link-gap",
+      "missing_evidence": "City clears/replays exist in frozen runner evidence; the legacy named campaign completion probe uses the pre-P08 Campaign.upgrades API. This audit does not rewrite it or relabel a city batch as a named semantic fixture."
+    },
+    "core.profile-and-unlocks": {
+      "reason": "historic-current-link-gap",
+      "missing_evidence": "Historic unlock/defeat probes and current city runs exist, but a complete compatible named current profile/unlock lifecycle link is not emitted by the selected suites."
+    },
+    "core.collection-discovery": {
+      "reason": "partial-profile-observation",
+      "missing_evidence": "Continue and reward replacement preserve observed discoveries, but full seeing/acquiring/Collection-category discovery semantics have no complete current named fixture link."
+    },
+    "core.core-and-part-sales": {
+      "reason": "sale-lifecycle-proof-gap",
+      "missing_evidence": "Queries and controlled-hook sale events are insufficient proof of current production core/part sale values, eligibility, per-entity identity and exact-once receipts."
+    },
+    "core.physical-parts": {
+      "reason": "physical-output-lifecycle-proof-gap",
+      "missing_evidence": "Representative factories, copying and reservation are tested; complete generated-type identity, canonical resale and lifetime proof remains unlinked across the 207 required output types."
+    },
+    "recipe:SH076": {
+      "reason": "incomplete-recast-selector-fixture",
+      "missing_evidence": "The fourteen-damage capped generated identity is asserted. A fixed Shield below the cap and rejection of variable-Shield or used sources are not fully linked; generic copying does not prove the recast selector."
+    },
+    "recipe:MA066": {
+      "reason": "incomplete-delayed-bonus-window-fixture",
+      "missing_evidence": "One next-round activation, same-name refresh and no reinstallation replay are asserted. Fire delivery and exclusion of activation-round or too-late use are not linked to explicit outcomes."
+    },
+    "upgrade:MY1-08": {
+      "reason": "incomplete-refund-cap-fixture",
+      "missing_evidence": "Saved choice, actual one/two-unit refunds and once-only use pass. No linked payment above three proves the stated three-unit cap or reaction-before-refund timing."
+    },
+    "upgrade:UGS-049": {
+      "reason": "incomplete-armor-trigger-fixture",
+      "missing_evidence": "A two-Armor hit and the following Mark benefit prove positive timing and one turn allowance. The no-Armor/other-defense exclusion and zero actual reduction case remain unlinked."
+    },
+    "upgrade:UGS-094": {
+      "reason": "incomplete-periodic-cooldown-selection-fixture",
+      "missing_evidence": "Third-turn tie-breaking is proved. Unequal remaining counters, all-ready no-op and later sixth/ninth-turn opportunities are not explicitly asserted by the selected fixtures."
+    },
+    "recipe:SH043": {
+      "reason": "incomplete-bypass-cap-and-use-fixture",
+      "missing_evidence": "The linked Armor/Shield case proves three actual damage bypassed. It does not cross the printed twelve-damage cap or fire a second shot to prove the one-shot allowance. Independent bounded linkage review identified this gap."
+    },
+    "recipe:SH070": {
+      "reason": "incomplete-discount-eligibility-fixture",
+      "missing_evidence": "Activation-round exclusion and first/second eligible next-round Uses pass. No preceding one-Iron Use proves it is skipped without consuming the at-least-two-Iron discount. Independent bounded linkage review identified this gap."
+    },
+    "recipe:MA102": {
+      "reason": "incomplete-retained-heat-cap-fixture",
+      "missing_evidence": "Highest installed source and restoration timing pass at Heat eight and three. No initial Heat above eight proves the distinct up-to-eight snapshot cap; Mara can hold fourteen. Independent bounded linkage review identified this gap."
+    },
+    "upgrade:UGS-116": {
+      "reason": "incomplete-per-turn-renewal-fixture",
+      "missing_evidence": "Seeded choice, snapshot persistence and first/second matching Uses pass in round one. No linked round-two Use proves the material discount renews each turn rather than only once per fight. Independent bounded linkage review identified this gap."
+    },
+    "upgrade:UGS-142": {
+      "reason": "incomplete-victory-failure-gate-fixture",
+      "missing_evidence": "Two failed attempts followed by Victory produce one consumed next-entry voucher. Zero-failure victory and failed-but-Escaped cases are not asserted, so the qualifying gate remains unproved. Independent bounded linkage review identified this gap."
+    }
+  }
+}

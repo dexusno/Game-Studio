@@ -43,6 +43,7 @@ int main(){try{
         auto corrupt=a;corrupt.nodes[0].offers[0].encounterSeed^=1;check(!validateRoute(corrupt,error),"Accepted rerolled encounter identity.");
     }
     check(schedules.size()>400,"Schedule sampling did not exercise expected variety.");check(kinds.size()==4,"Missing category coverage.");check(firstOfficers==std::set<std::string>{"C1-F-PURSUER"},"Preferred first Officer changed.");
+    std::cout<<"PASS route schedules: 1000 seeded complete choices, gates and immutable encounter identities\n";
     for(std::uint64_t seed=0;seed<100;++seed){
         auto route=makeCinderwallRoute(seed);route.safeMysteries=true;std::string error;std::set<std::string> observedOfficers;Amount passes=3;
         while(route.position<=12){
@@ -61,5 +62,6 @@ int main(){try{
         }
         check(observedOfficers.size()==3,"Route pass skipped Officer progression.");
     }
+    std::cout<<"PASS route replacements: 100 Safe Survey paths, deterministic previews and Officer progression\n";
     std::cout<<"PASS "<<checks<<" route assertions over 1,000 complete choice paths; "<<schedules.size()<<" schedules observed. This is route validation, not combat simulation.\n";return 0;
 }catch(const std::exception& e){std::cerr<<"FAIL "<<e.what()<<'\n';return 1;}}

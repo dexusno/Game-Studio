@@ -1,0 +1,44 @@
+PASS removed MA059 cannot reduce an enemy attack
+PASS removed MA086 cannot halve its chosen enemy attack
+PASS first-bound SH060 zeroing precedes later MA055 Shield reading after reinstall
+PASS source removal does not cancel already committed MA016 Shield delivery
+PASS next-shot SH062 check expires when removed and does not rearm
+PASS SH094 reacts once per attack rather than once per hit
+PASS MA108 requires a fully Shield-blocked attack
+PASS copy retains source identity and resale while dropping attached bonuses
+PASS copied generated SH026 Shield remains a pure grant without generator recursion
+PASS SH118 copied stored-momentum part starts fresh age
+PASS SH110 reserved sacrifice cancels without consuming or firing its effect
+PASS variable first-install Heat payment remains paid after save and reinstall
+PASS own HP cost cannot borrow later shield/refund and failed Use is atomic
+PASS MA093 and MA101 count paid part activations but exclude Utility Use
+PASS lethal support recoil stops later burn-reduction payload
+PASS SH043 bypass redirects actual post-Armor shot damage
+PASS MA042 prehit Burn consumption and MA091 kill transfer follow placement order
+PASS Split Chassis death-spawn has a new target and cannot attack in creation round
+PASS Nest committed Attack stays Attack after player kills the live Mite
+PASS boss preaction Corrosion threshold cancels pending attack and stops phase-one scaling
+PASS boss postaction Burn threshold schedules next-round Recover
+PASS Fouling consumes only Ammo recipe uses and expires at affected EndTurn
+PASS Shield Leak drains installed parts but preserves direct upgrade protection
+PASS all six manual-grab enhancements honor auto/miss/Perfect outcome scopes
+PASS finite pile requests clamp each named Perfect bonus separately
+PASS same named amplifier refreshes and doubles only unmodified Precision bundle
+PASS runtime rarity agrees with Common and suffixed manual-grab source headings
+PASS MA102 highest remembered Heat only includes installed source parts
+PASS MA086 halves once after flat reduction with two physical source parts
+PASS MA059 independent physical parts each supply one first-attack reduction
+PASS MA066 refreshes one delayed bonus and first installation does not repeat it
+PASS MA079 distinguishes prior part payments and later Utility costs
+PASS MA048 optional payment occurs at EndTurn and all choices validate atomically
+PASS MA115 physical copies share24 restoration across whole attacks
+PASS MA060 refresh holds two Burn decays and snapshots preserve the clock
+PASS MA120 echo uses original predefence shot value and current Shield once
+PASS SH115 refresh replaces scheduled duration without stacking old deliveries
+PASS SH101 optional zero sacrifice and duplicate reservation validate atomically
+PASS SH070 discounts the first eligible next-round Utility Use only
+PASS preview and canonical snapshot reproduce complex Fire without mutation
+PASS MA093 counts two paid physical spread parts despite named spread refresh
+PASS combined Fire costs cannot borrow a later spread kill Heat refund
+PASS SH085 spends the chosen amount while preserving remaining protection
+Expanded independent groups: 43 passed, 0 failed.

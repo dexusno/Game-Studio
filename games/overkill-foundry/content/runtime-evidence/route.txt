@@ -1,0 +1,3 @@
+PASS route schedules: 1000 seeded complete choices, gates and immutable encounter identities
+PASS route replacements: 100 Safe Survey paths, deterministic previews and Officer progression
+PASS 146303 route assertions over 1,000 complete choice paths; 464 schedules observed. This is route validation, not combat simulation.

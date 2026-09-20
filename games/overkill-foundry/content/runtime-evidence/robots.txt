@@ -1,0 +1,8 @@
+PASS registryAndFactories: formation identities and Mite/Ram actions
+PASS binderPackets: fixed introduction and saved seeded variants
+PASS pressureAndOfficers: Drive, multi-hit actions and final death
+PASS braceAndLockedSupport: temporary Armor, Leak and committed Nest action
+PASS finiteSummonsAndDeathIdentity: bounded supply, newborn delay and unique cores
+PASS recoveryJointAndEscapes: boss threshold and explicit departure clocks
+PASS integrationContracts: actual Engine defense, status, spawning and replay
+Cinderwall robot module + Engine integration: 2462 assertions passed.

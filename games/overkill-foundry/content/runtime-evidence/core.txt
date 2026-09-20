@@ -1,0 +1,27 @@
+PASS authored Mite/Ram complete fight, multiple shots, saved Shield and integer Armor
+PASS T01 installed Shield absorbs recoil across repeated shots without refill
+PASS T02 lethal killing-hit recoil takes precedence over victory
+PASS T03 Reserve Heart Pump intercepts lethal recoil before final death
+PASS T04 first-install Heat cost and depletion survive remove/reinstall
+PASS installation payment atomicity and one-time Boiler Jacket Heat
+PASS installed Shield payment order and reinstall priority
+PASS T07 retention allowances allocate one shared remaining balance
+PASS T08 next-round fresh Shield survives old reset and source removal
+PASS T09 cooldown 1 blocks following full round; cooling permits reuse
+PASS independent duplicate recipe copies and atomic material/HP costs
+PASS zero base gun damage and retained Mara Hot Barrel per shot
+PASS combined integer percentages, separate spread hits and lost dead-target hits
+PASS main-target Burn never copied by Split Outlet
+PASS T10 four full escape warning rounds and no departure attack
+PASS Burn ignores Armor and Tiles; Corrosion kills before a committed attack
+PASS one collection per round, Precision once per fight, Magnet next-haul scope
+PASS Quick Patch's fight healing cap is shared by duplicates
+PASS removed Insulating Pad cannot prevent Burn or rearm in another round
+PASS same named Modifiers refresh; different names combine
+PASS identical Magnet copies refresh the next haul
+PASS content rejects unknown opcode and unsupported timing before play
+PASS preview and rejected loaded Fire preserve all authoritative state
+PASS no fixed bullet or Shield part cap
+PASS versioned state roundtrip includes loaded parts, schedule, RNG and installation history
+PASS separate seeded RNG domains and repeatable full action/event replay
+All 443 behavioral assertions passed. No complete-city, durable-save, graphical, balance or human-quality claim.
