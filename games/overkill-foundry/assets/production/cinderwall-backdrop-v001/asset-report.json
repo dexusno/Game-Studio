@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "asset": "Cinderwall distant-city matte painting v001",
+  "created_on": "2026-09-20",
+  "generator": "OpenAI built-in image_gen tool",
+  "generation_output": "exec-f3f25b09-994a-496e-a5b3-7673f086e9d8.png",
+  "prompt": "art-source/backdrop_v001_prompt.txt",
+  "image": {
+    "path": "assets/production/cinderwall-backdrop-v001/cinderwall-distant-city.png",
+    "sha256": "dd665e14c19e06d2c079a4e067653299fe04a28c24cebe786229eb86352979d4",
+    "bytes": 2048829,
+    "width": 2172,
+    "height": 724
+  },
+  "modifications": "None; original generated PNG copied unchanged into project.",
+  "purpose": "Distant world-space matte behind the existing dimensional foreground; not a gameplay screenshot.",
+  "review": "Root inspected full image: industrial silhouette depth, cool haze and restrained warm windows. Engine composition and owner visual approval still pending.",
+  "licence": "AI-generated art under applicable platform terms; studio distribution licence unset; no external input assets."
+}

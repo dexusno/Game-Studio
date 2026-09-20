@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "asset": "Cinderwall curved distant-city card v001",
+  "creator": "Game Studio / Codex",
+  "generator": "Blender 5.2.1 LTS",
+  "mesh": "CinderwallBackdropV001.fbx",
+  "sha256": "7f8a96dc8676990d42a961c93c6ab2eecd8e9f71240b70beceb8336ac7a8e54c",
+  "vertices": 122,
+  "triangles": 120,
+  "radius_m": 200.0,
+  "world_azimuth_start_deg": -122.0,
+  "world_azimuth_sweep_deg": 124.0,
+  "height_m": 144.2805514981979,
+  "bounds_m": [
+    -105.98385284664096,
+    -6.979899340500194,
+    -73.2258867790629,
+    199.99986461449538,
+    199.96953903127826,
+    71.05466471913499
+  ],
+  "fbx_reimport_bounds_m": [
+    -105.98387145996094,
+    -6.979881763458252,
+    -73.22588348388672,
+    199.99986267089844,
+    199.96954345703125,
+    71.0546646118164
+  ],
+  "fbx_reimport_passed": true,
+  "image": "assets/production/cinderwall-backdrop-v001/cinderwall-distant-city.png",
+  "camera_contract": "World-space geometry remains fixed during the 16B/16C transition; no camera-facing billboard."
+}
